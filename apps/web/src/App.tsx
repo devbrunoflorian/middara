@@ -224,12 +224,12 @@ function App() {
 
           {/* Zoom Controls */}
           <div className="zoom-group">
-            <button className="tool-btn" onClick={() => setZoomLevel(z => Math.max(0.25, z - 0.25))} title="Zoom Out">
-              <ZoomOut size={16} />
-            </button>
-            <span className="zoom-level">{Math.round(zoomLevel * 100)}%</span>
             <button className="tool-btn" onClick={() => setZoomLevel(z => Math.min(4, z + 0.25))} title="Zoom In">
               <ZoomIn size={16} />
+            </button>
+            <span className="zoom-level">{Math.round(zoomLevel * 100)}%</span>
+            <button className="tool-btn" onClick={() => setZoomLevel(z => Math.max(0.25, z - 0.25))} title="Zoom Out">
+              <ZoomOut size={16} />
             </button>
             <button className="tool-btn" onClick={() => setZoomLevel(1)} title="Fit to Screen">
               <Maximize size={16} />
