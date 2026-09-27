@@ -86,9 +86,9 @@ export function mapPdfFont(pdfFontName: string): FontMapping {
     return { family: "'Cinzel Decorative', serif", weight, style: 'normal' };
   }
   if (name.includes('Cinzel')) {
-    let weight = 400;
+    let weight = 700; // Defaulting to bold because titles are visually bold in PDF
     if (name.includes('Black')) weight = 900;
-    else if (name.includes('Bold')) weight = 700;
+    else if (name.includes('Regular')) weight = 700; // Force regular to bold
     return { family: "'CinzelLocal', 'Cinzel', serif", weight, style: 'normal' };
   }
   if (name.includes('Esmeralda')) {
