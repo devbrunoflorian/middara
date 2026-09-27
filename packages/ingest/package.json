@@ -1,0 +1,16 @@
+{
+  "name": "@middara/ingest",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@middara/schema": "*",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "tsx": "^4.7.0",
+    "typescript": "^5.0.0"
+  }
+}
