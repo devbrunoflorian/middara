@@ -32,10 +32,10 @@ Este documento serve como um log evolutivo de problemas de renderização encont
 - Evitar Headers horizontais absolutos num cenário de PDF view. Use layouts Flexbox robustos onde o PDF container ocupe a viewport descontando o menu lateral (Sidebar Vertical) ou crie overlays ocultáveis.
 
 ## 4. Altura dos Títulos (Desalinhamento Vertical / "Mais Alto")
-**Problema:** Títulos em fontes decorativas (como `Cinzel` ou `Esmeralda`) ficam renderizados mais altos que no PDF original, muitas vezes não centralizando perfeitamente nas faixas/ribbons de fundo.
-**Causa:** O PyMuPDF extrai a BBox baseada estritamente nos "pixels tintados" (inked pixels). No entanto, o navegador alinha o CSS baseado na "em-box" da fonte. Fontes decorativas possuem *ascenders* e *descenders* internos enormes (para acomodar acentos e swashes). Quando o CSS aplica `line-height: 1` e `align-items: baseline`, a em-box da fonte "empurra" o texto visual para cima dentro da BBox.
+**Problema:** Títulos em fontes decorativas (especialmente `Esmeralda`) ficam renderizados mais altos que no PDF original, muitas vezes não centralizando perfeitamente nas faixas/ribbons de fundo.
+**Causa:** O PyMuPDF extrai a BBox baseada estritamente nos "pixels tintados" (inked pixels). No entanto, o navegador alinha o CSS baseado na "em-box" da fonte. Fontes decorativas como a Esmeralda possuem *ascenders* e *descenders* internos enormes (para acomodar acentos e swashes). Quando o CSS aplica `line-height: 1` e `align-items: baseline`, a em-box da fonte "empurra" o texto visual para cima dentro da BBox. A fonte `Cinzel`, por outro lado, possui métricas mais rígidas (por ser all-caps) e normalmente já se alinha perfeitamente sem necessidade de hack.
 **Solução Ideal:**
-- Para fontes de título identificadas (`Cinzel`, `Esmeralda`), aplicar um deslocamento vertical direto no span usando `transform: translateY(X%)` (ex: `12%` a `15%`). Isso força a em-box do navegador a descer, alinhando os pixels tintados de volta ao centro da BBox original sem quebrar o layout das outras fontes do corpo do texto (como `Optima`).
+- Para fontes de título problemáticas (`Esmeralda`), aplicar um deslocamento vertical direto no span usando `transform: translateY(X%)` (ex: `12%` a `15%`). Isso força a em-box do navegador a descer, alinhando os pixels tintados de volta ao centro da BBox original sem quebrar o layout das outras fontes do corpo do texto (como `Optima`) e sem desalinhar a fonte `Cinzel`.
 *(Implementado no `PageRenderer.tsx` na definição do `spanStyle`).*
 
 ## Fluxo Base de Revisão (QA Diário)
