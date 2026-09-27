@@ -433,6 +433,12 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   line, lineKey, scale, blockOriginX, blockOriginY, blockW, targetPage, 
   onNavigate, isAdmin, isSelected, override, onClick 
 }) => {
+  // Hide ghosts by default, only show in admin if selected or via some UI toggle. 
+  // For now, we'll hide them unless they are actively selected in Admin.
+  if ((line as any).suspectedGhost && !isSelected) {
+    return null;
+  }
+
   const lineY = (line.bbox[1] - blockOriginY) * scale;
   const lineX = (line.bbox[0] - blockOriginX) * scale;
   const lineH = (line.bbox[3] - line.bbox[1]) * scale;
