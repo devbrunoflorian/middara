@@ -31,6 +31,13 @@ Este documento serve como um log evolutivo de problemas de renderização encont
 **Solução Ideal:** 
 - Evitar Headers horizontais absolutos num cenário de PDF view. Use layouts Flexbox robustos onde o PDF container ocupe a viewport descontando o menu lateral (Sidebar Vertical) ou crie overlays ocultáveis.
 
+## 4. Altura dos Títulos (Desalinhamento Vertical / "Mais Alto")
+**Problema:** Títulos em fontes decorativas (como `Cinzel` ou `Esmeralda`) ficam renderizados mais altos que no PDF original, muitas vezes não centralizando perfeitamente nas faixas/ribbons de fundo.
+**Causa:** O PyMuPDF extrai a BBox baseada estritamente nos "pixels tintados" (inked pixels). No entanto, o navegador alinha o CSS baseado na "em-box" da fonte. Fontes decorativas possuem *ascenders* e *descenders* internos enormes (para acomodar acentos e swashes). Quando o CSS aplica `line-height: 1` e `align-items: baseline`, a em-box da fonte "empurra" o texto visual para cima dentro da BBox.
+**Solução Ideal:**
+- Para fontes de título identificadas (`Cinzel`, `Esmeralda`), aplicar um deslocamento vertical direto no span usando `transform: translateY(X%)` (ex: `12%` a `15%`). Isso força a em-box do navegador a descer, alinhando os pixels tintados de volta ao centro da BBox original sem quebrar o layout das outras fontes do corpo do texto (como `Optima`).
+*(Implementado no `PageRenderer.tsx` na definição do `spanStyle`).*
+
 ## Fluxo Base de Revisão (QA Diário)
 Sempre que resolvermos um bug visual específico:
 1. Identificar se é uma anomalia isolada de 1 página, ou uma quebra sistêmica (regra de fonte/layout).

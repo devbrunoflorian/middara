@@ -488,6 +488,8 @@ const LineRenderer: React.FC<LineRendererProps> = ({
               fontVariantLigatures: 'none',
               fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
               letterSpacing: '-0.015em',
+              transform: (seg.font.includes('Cinzel') || seg.font.includes('Esmeralda')) ? 'translateY(12%)' : 'none',
+              display: 'inline-block',
             }}
           >
             {seg.text}
@@ -506,6 +508,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
 
         const mapped = mapPdfFont(span.font);
         const isPUA = !!span.displayOverride;
+        const isTitleFont = mapped.family.includes('Cinzel') || mapped.family.includes('Esmeralda');
         const spanStyle: React.CSSProperties = {
           fontFamily: isPUA ? "'EsmeraldaPro-PUA', 'EsmeraldaPro', serif" : mapped.family,
           fontSize: `${span.size * scale}px`,
@@ -516,6 +519,8 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           fontVariantLigatures: 'none',
           fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
           letterSpacing: '-0.015em',
+          transform: isTitleFont ? 'translateY(12%)' : 'none',
+          display: 'inline-block',
         };
 
         return (
