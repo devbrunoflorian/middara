@@ -1,0 +1,171 @@
+/* ═══════════════════════════════════════════════
+   @font-face declarations – Middara Original Fonts
+   All files served from /fonts/ (public directory)
+   ═══════════════════════════════════════════════ */
+
+/* ── Optima LT Std ── */
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Roman.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Demi.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Bold Italic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Medium Italic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Black Italic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Extra Black.otf') format('opentype');
+  font-weight: 950;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OptimaLTStd';
+  src: url('/fonts/Optima LT Std Extra Black Italic.otf') format('opentype');
+  font-weight: 950;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ── Adobe Garamond Pro ── */
+@font-face {
+  font-family: 'AGaramondPro';
+  src: url('/fonts/AGaramondPro-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AGaramondPro';
+  src: url('/fonts/AGaramondPro-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AGaramondPro';
+  src: url('/fonts/AGaramondPro-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AGaramondPro';
+  src: url('/fonts/AGaramondPro-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ── Esmeralda Pro ── */
+@font-face {
+  font-family: 'EsmeraldaPro';
+  src: url('/fonts/esmeralda-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 
+  Custom Hybrid Font for Titles 
+  The designer merged Cinzel (caps) and Esmeralda (lowercase) in the same word.
+*/
+@font-face {
+  font-family: 'MiddaraHybrid';
+  src: url('/fonts/esmeralda-regular.ttf') format('truetype');
+  unicode-range: U+0061-007A, U+00E0-00FF; /* a-z and lowercase accents */
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MiddaraHybrid';
+  src: url('/fonts/Cinzel-Regular.otf') format('opentype');
+  unicode-range: U+0020-0040, U+0041-005A, U+00C0-00DF; /* A-Z, punctuation, uppercase accents */
+  font-display: swap;
+}
+
+/* ── Cinzel (local OTF files, higher priority than Google Fonts) ── */
+@font-face {
+  font-family: 'CinzelLocal';
+  src: url('/fonts/Cinzel-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CinzelLocal';
+  src: url('/fonts/Cinzel-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CinzelLocal';
+  src: url('/fonts/Cinzel-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Esmeralda Pro with PUA (Derived) ── */
+@font-face {
+  font-family: 'EsmeraldaPro-PUA';
+  src: url('/fonts/EsmeraldaPro-PUA.ttf?v=2') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

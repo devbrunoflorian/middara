@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg-dark: #121212;
+  --bg-toolbar: rgba(25, 25, 25, 0.75);
+  --bg-hover: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --text-main: #ffffff;
+  --text-muted: #a0a0a0;
+  --accent: #4ade80;
+  --accent-hover: #22c55e;
+  --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow: hidden;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* =========================================
+   PREMIUM GLASSMORPHISM SIDEBAR
+   ========================================= */
+.pdf-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 48px;
+  background: var(--bg-toolbar);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-left: 1px solid var(--border-color); /* changed to left border since it's on the right */
+  z-index: 1000;
+  padding: 16px 0;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.3); /* shadow direction adjusted */
+  flex-shrink: 0;
+}
+
+.toolbar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-icon {
+  color: var(--accent);
+}
+
+.brand h1 {
+  display: none;
+}
+
+.divider {
+  width: 20px;
+  height: 1px;
+  background: var(--border-color);
+}
+
+/* Tool Buttons */
+.tool-group, .zoom-group, .pagination-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid var(--border-color);
+  gap: 4px;
+  width: 36px;
+}
+
+.tool-btn, .nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tool-btn:hover, .nav-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-main);
+}
+
+.tool-btn.active {
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
+}
+
+/* Pagination */
+.page-input-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.page-input {
+  width: 26px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 4px;
+  padding: 4px 0;
+  text-align: center;
+  font-size: 11px;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.2s;
+}
+
+.page-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.page-total {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+/* Zoom */
+.zoom-level {
+  font-size: 9px;
+  width: 100%;
+  text-align: center;
+  color: var(--text-main);
+  font-variant-numeric: tabular-nums;
+  margin: 4px 0;
+}
+
+/* Right Section (Search & Admin) */
+.search-bar {
+  display: none; /* Hide search bar for sidebar space */
+}
+
+.admin-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.admin-toggle span {
+  display: none;
+}
+
+.admin-toggle:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.admin-toggle.active {
+  background: #ef4444; /* Red for admin */
+  border-color: #ef4444;
+  color: white;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+
+/* =========================================
+   MAIN VIEWER AREA
+   ========================================= */
+.viewer-main {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  background-color: #1a1a1a;
+  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Single page mode: center the page */
+.viewer-main.single {
+  display: grid;
+  place-items: center;
+  padding: 40px;
+}
+
+/* Scroll mode: vertical stack */
+.viewer-main.scroll {
+  display: block;
+  padding: 40px 0;
+}
+
+.scroll-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 40px 60px;
+}
+
+.scroll-page-wrapper {
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.scroll-page-label {
+  position: absolute;
+  top: -28px;
+  left: 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Floating Navigation Arrows (Single Page Mode) */
+.floating-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(25, 25, 25, 0.4);
+  backdrop-filter: blur(4px);
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 500;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-arrow:hover {
+  background: rgba(25, 25, 25, 0.8);
+  color: white;
+  transform: translateY(-50%) scale(1.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
+}
+
+.left-arrow { left: 32px; }
+.right-arrow { right: 32px; }
+
+/* Page Wrapper */
+.page-wrapper {
+  position: relative;
+  transition: transform 0.2s ease-out;
+  box-shadow: var(--shadow-premium);
+  border-radius: 4px; /* subtle rounding on the PDF page */
+  overflow: hidden; /* ensures background image rounds too */
+}
+
+/* Loading State */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  border-top-color: var(--accent);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
