@@ -419,6 +419,11 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
               ))}
             </select>
             <button
+              className={`rse-tool-btn ${toolWeight >= 600 ? 'active' : ''}`}
+              onClick={() => setToolWeight(w => w >= 600 ? 400 : 700)}
+              title="Bold"
+            ><strong>B</strong></button>
+            <button
               className={`rse-tool-btn ${toolStyle === 'italic' ? 'active' : ''}`}
               onClick={() => setToolStyle(s => s === 'italic' ? 'normal' : 'italic')}
               title="Italic"
