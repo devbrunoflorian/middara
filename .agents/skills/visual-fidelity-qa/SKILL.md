@@ -35,8 +35,15 @@ Este documento serve como um log evolutivo de problemas de renderização encont
 **Problema:** Títulos em fontes decorativas (especialmente `Esmeralda`) ficam renderizados mais altos que no PDF original, muitas vezes não centralizando perfeitamente nas faixas/ribbons de fundo.
 **Causa:** O PyMuPDF extrai a BBox baseada estritamente nos "pixels tintados" (inked pixels). No entanto, o navegador alinha o CSS baseado na "em-box" da fonte. Fontes decorativas como a Esmeralda possuem *ascenders* e *descenders* internos enormes (para acomodar acentos e swashes). Quando o CSS aplica `line-height: 1` e `align-items: baseline`, a em-box da fonte "empurra" o texto visual para cima dentro da BBox. A fonte `Cinzel`, por outro lado, possui métricas mais rígidas (por ser all-caps) e normalmente já se alinha perfeitamente sem necessidade de hack.
 **Solução Ideal:**
-- Para fontes de título problemáticas (`Esmeralda`), aplicar um deslocamento vertical direto no span usando `transform: translateY(X%)` (ex: `12%` a `15%`). Isso força a em-box do navegador a descer, alinhando os pixels tintados de volta ao centro da BBox original sem quebrar o layout das outras fontes do corpo do texto (como `Optima`) e sem desalinhar a fonte `Cinzel`.
+- Para fontes de título problemáticas (`Esmeralda`), aplicar um deslocamento vertical direto no span usando `transform: translateY(X%)` (ex: `12%` a `15%`). Isso força a em-box do navegador a descer, alinhando os pixels tintados de volta ao centro da BBox original sem quebrar o layout das outras fontes do corpo do texto (como `Optima`) e sem desalinhar a fonte `Cinzel`. Note que usar `transform` exige `display: inline-block`, o que não deve ser vazado para fontes normais, ou você quebrará o engine de ligatures e colapso de linha!
 *(Implementado no `PageRenderer.tsx` na definição do `spanStyle`).*
+
+## 5. Textos "Fantasmas" e Distorcidos Sobre Imagens (Microscopic Vector Artifacts)
+**Problema:** Textos começam a "aparecer" grosseiramente e quebrando em cima das imagens das cartas e capas de livros (ex: "Adventure Book" brotando em cima da capa).
+**Causa:** O PDF original (gerado no InDesign/Illustrator) muitas vezes deixa um "texto vetorial invisível" ou microscópico (ex: `size: 2.9px`) jogado para trás das imagens ou como metadado para Leitores de Tela. O PyMuPDF é impiedoso e extrai esse texto fantasma. Se o navegador renderiza isso num `span`, dependendo da sua regra global de CSS (como vazar um `display: inline-block` ou aplicar um weight bruto), o navegador tenta forçar um `font-size` mínimo humano (10px~12px) dentro de uma bounding box minúscula (`bbox`), o que espalha o texto violentamente na tela.
+**Solução Ideal:**
+- Filtro de ruído no motor de renderização: Ignorar hardcoded qualquer `span` que tenha `size < 4.0`. Se o tamanho nativo da fonte no PDF for menor que 4 pontos, não é conteúdo humano legível, é lixo vetorial do InDesign.
+*(Implementado no `PageRenderer.tsx` filtrando `span.size < 4.0`).*
 
 ## Fluxo Base de Revisão (QA Diário)
 Sempre que resolvermos um bug visual específico:

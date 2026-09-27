@@ -86,9 +86,9 @@ export function mapPdfFont(pdfFontName: string): FontMapping {
     return { family: "'Cinzel Decorative', serif", weight, style: 'normal' };
   }
   if (name.includes('Cinzel')) {
-    let weight = 700; // Defaulting to bold because titles are visually bold in PDF
+    let weight = 400;
     if (name.includes('Black')) weight = 900;
-    else if (name.includes('Regular')) weight = 700; // Force regular to bold
+    else if (name.includes('Bold')) weight = 700;
     return { family: "'CinzelLocal', 'Cinzel', serif", weight, style: 'normal' };
   }
   if (name.includes('Esmeralda')) {
@@ -489,7 +489,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
               fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
               letterSpacing: '-0.015em',
               transform: (seg.font.includes('Esmeralda')) ? 'translateY(12%)' : 'none',
-              display: 'inline-block',
+              display: (seg.font.includes('Esmeralda')) ? 'inline-block' : 'inline',
             }}
           >
             {seg.text}
@@ -504,6 +504,9 @@ const LineRenderer: React.FC<LineRendererProps> = ({
       {line.spans.map((span, si) => {
         if (span.font?.includes('Webdings') || span.font?.includes('Wingdings') || span.font?.includes('ZapfDingbats')) {
           return null;
+        }
+        if (span.size < 4.0) {
+          return null; // Hide microscopic vector text artifacts embedded in images
         }
 
         const mapped = mapPdfFont(span.font);
@@ -520,7 +523,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
           letterSpacing: '-0.015em',
           transform: isTitleFont ? 'translateY(12%)' : 'none',
-          display: 'inline-block',
+          display: isTitleFont ? 'inline-block' : 'inline',
         };
 
         return (
