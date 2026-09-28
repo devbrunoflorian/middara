@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './RichSpanEditor.css'; // We'll keep the same CSS file for the modal for now
 
 export interface BlockOverride {

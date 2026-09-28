@@ -11,6 +11,7 @@ import { Books } from './collections/Books'
 import { Chapters } from './collections/Chapters'
 import { Pages } from './collections/Pages'
 import { RulebookBlocks } from './collections/Blocks'
+import { Translations } from './collections/Translations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +24,7 @@ export default buildConfig({
     },
   },
   cors: '*',
-  collections: [Users, Media, Books, Chapters, Pages, RulebookBlocks],
+  collections: [Users, Media, Books, Chapters, Pages, RulebookBlocks, Translations],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -33,6 +34,7 @@ export default buildConfig({
     client: {
       url: process.env.DATABASE_URL || '',
     },
+    push: true,
   }),
   sharp,
   plugins: [],

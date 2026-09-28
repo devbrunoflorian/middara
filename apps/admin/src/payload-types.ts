@@ -73,6 +73,7 @@ export interface Config {
     chapters: Chapter;
     pages: Page;
     'rulebook-blocks': RulebookBlock;
+    translations: Translation;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     chapters: ChaptersSelect<false> | ChaptersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'rulebook-blocks': RulebookBlocksSelect<false> | RulebookBlocksSelect<true>;
+    translations: TranslationsSelect<false> | TranslationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -240,6 +242,26 @@ export interface RulebookBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translations".
+ */
+export interface Translation {
+  id: number;
+  spanKey: string;
+  language: string;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -285,6 +307,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'rulebook-blocks';
         value: number | RulebookBlock;
+      } | null)
+    | ({
+        relationTo: 'translations';
+        value: number | Translation;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -421,6 +447,17 @@ export interface RulebookBlocksSelect<T extends boolean = true> {
       };
   readingOrder?: T;
   content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translations_select".
+ */
+export interface TranslationsSelect<T extends boolean = true> {
+  spanKey?: T;
+  language?: T;
+  data?: T;
   updatedAt?: T;
   createdAt?: T;
 }

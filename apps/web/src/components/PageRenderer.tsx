@@ -155,6 +155,65 @@ function getOverridesKey(lang: string) {
   return `middara-lines-v2-${lang}`;
 }
 
+async function fetchOverridesFromPayload(lang: string): Promise<Map<string, SpanOverride> | null> {
+  try {
+    const res = await fetch(`http://localhost:3000/api/translations?where[language][equals]=${lang}&limit=5000`);
+    if (res.ok) {
+      const data = await res.json();
+      const map = new Map<string, SpanOverride>();
+      data.docs.forEach((doc: any) => {
+        map.set(doc.spanKey, { spanKey: doc.spanKey, segments: doc.data, bbox: [0,0,0,0] });
+      });
+      return map;
+    }
+  } catch (err) {
+    console.warn('Failed to fetch from payload:', err);
+  }
+  return null;
+}
+
+async function saveOverrideToPayload(override: SpanOverride, lang: string): Promise<boolean> {
+  try {
+    const check = await fetch(`http://localhost:3000/api/translations?where[spanKey][equals]=${override.spanKey}`);
+    const checkData = await check.json();
+    if (checkData.docs.length > 0) {
+      const id = checkData.docs[0].id;
+      const res = await fetch(`http://localhost:3000/api/translations/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: override.segments })
+      });
+      return res.ok;
+    } else {
+      const res = await fetch(`http://localhost:3000/api/translations`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ spanKey: override.spanKey, language: lang, data: override.segments })
+      });
+      return res.ok;
+    }
+  } catch {
+    return false;
+  }
+}
+
+async function deleteOverrideFromPayload(spanKey: string): Promise<boolean> {
+  try {
+    const check = await fetch(`http://localhost:3000/api/translations?where[spanKey][equals]=${spanKey}`);
+    const checkData = await check.json();
+    if (checkData.docs.length > 0) {
+      const id = checkData.docs[0].id;
+      const res = await fetch(`http://localhost:3000/api/translations/${id}`, {
+        method: 'DELETE'
+      });
+      return res.ok;
+    }
+    return true; // didn't exist anyway
+  } catch {
+    return false;
+  }
+}
+
 function loadOverrides(lang: string): Map<string, SpanOverride> {
   try {
     const raw = localStorage.getItem(getOverridesKey(lang));
@@ -197,9 +256,16 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   const [selectedSpan, setSelectedSpan] = useState<SelectedSpanInfo | null>(null);
   const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => loadOverrides(language));
   const [draftOverride, setDraftOverride] = useState<Segment[] | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    setOverrides(loadOverrides(language));
+    fetchOverridesFromPayload(language).then((serverMap) => {
+      if (serverMap) {
+        setOverrides(serverMap);
+      } else {
+        setOverrides(loadOverrides(language));
+      }
+    });
   }, [language]);
 
   const contentsMap = useMemo(() => {
@@ -257,21 +323,38 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
     setDraftOverride(segments);
   }, []);
 
-  const handleSaveOverride = useCallback((override: SpanOverride | null) => {
+  const handleSaveOverride = useCallback(async (override: SpanOverride | null) => {
     if (!override && !selectedSpan) return;
-    setOverrides(prev => {
-      const next = new Map(prev);
-      if (override) {
-        next.set(override.spanKey, override);
-      } else if (selectedSpan) {
-        next.delete(selectedSpan.spanKey);
+    
+    // Optimistic update
+    const nextMap = new Map(overrides);
+    if (override) {
+      nextMap.set(override.spanKey, override);
+    } else if (selectedSpan) {
+      nextMap.delete(selectedSpan.spanKey);
+    }
+    setOverrides(nextMap);
+
+    // Save to server
+    if (override) {
+      const success = await saveOverrideToPayload(override, language);
+      if (!success) {
+        setToastMessage("Falha ao salvar no servidor! Rascunho salvo apenas localmente no seu navegador.");
+        setTimeout(() => setToastMessage(null), 5000);
+        saveOverridesToStorage(language, nextMap);
+      } else {
+        setToastMessage("Salvo com sucesso no Payload CMS!");
+        setTimeout(() => setToastMessage(null), 3000);
+        saveOverridesToStorage(language, nextMap); // keep cache sync
       }
-      saveOverridesToStorage(language, next);
-      return next;
-    });
+    } else if (selectedSpan) {
+      await deleteOverrideFromPayload(selectedSpan.spanKey);
+      saveOverridesToStorage(language, nextMap);
+    }
+
     setSelectedSpan(null);
     setDraftOverride(null);
-  }, [language, selectedSpan]);
+  }, [language, selectedSpan, overrides]);
 
   const handleCloseEditor = useCallback(() => {
     setSelectedSpan(null);
@@ -290,6 +373,11 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   return (
     <div className="page-renderer" style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center', overflowX: 'auto' }}>
       <div ref={containerRef} className="page-container" style={containerStyle}>
+        {toastMessage && (
+          <div style={{ position: 'fixed', top: '20px', right: '20px', background: 'red', color: 'white', padding: '10px', borderRadius: '5px', zIndex: 9999 }}>
+            {toastMessage}
+          </div>
+        )}
         {pageData.backgroundUrl && (
           <img
             src={pageData.backgroundUrl}
@@ -380,7 +468,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
   return (
     <div className="block-container" style={blockStyle}>
-      {block.lines.map((line, lIdx) => {
+      {block.lines.map((line) => {
         const lineKey = `page_${pageNumber}_block_${blockIdx}_line_${line.id}`;
         let currentOverride = overrides.get(lineKey);
         
@@ -396,11 +484,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
           <LineRenderer
             key={line.id}
             line={line}
-            lineKey={lineKey}
             scale={scale}
             blockOriginX={blockX}
             blockOriginY={blockY}
-            blockW={blockW}
             targetPage={contentsMap?.get(line.id)}
             onNavigate={onNavigate}
             isAdmin={isAdmin}
@@ -416,11 +502,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
 interface LineRendererProps {
   line: LineData;
-  lineKey: string;
   scale: number;
   blockOriginX: number;
   blockOriginY: number;
-  blockW: number;
   targetPage?: number;
   onNavigate?: (pageNum: number) => void;
   isAdmin: boolean;
@@ -430,7 +514,7 @@ interface LineRendererProps {
 }
 
 const LineRenderer: React.FC<LineRendererProps> = ({ 
-  line, lineKey, scale, blockOriginX, blockOriginY, blockW, targetPage, 
+  line, scale, blockOriginX, blockOriginY, targetPage, 
   onNavigate, isAdmin, isSelected, override, onClick 
 }) => {
   // Hide ghosts by default, only show in admin if selected or via some UI toggle. 
@@ -445,9 +529,6 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   
   // Original width of the text itself
   const lineW = (line.bbox[2] - line.bbox[0]) * scale;
-  
-  // The available width from the start of the line to the right edge of the block
-  const availableW = (blockOriginX + blockW - line.bbox[0]) * scale;
 
   const hoverClass = isAdmin ? `span-editable ${isSelected ? 'span-selected' : ''}` : '';
 
