@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { RichSpanEditor, type SpanOverride, type Segment } from './RichSpanEditor';
 import './PageRenderer.css';
+import './Toast.css';
 
 /* ─────────────────────────────────────────────
    Types – match the exact JSON DOM structure
@@ -256,7 +257,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   const [selectedSpan, setSelectedSpan] = useState<SelectedSpanInfo | null>(null);
   const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => loadOverrides(language));
   const [draftOverride, setDraftOverride] = useState<Segment[] | null>(null);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     fetchOverridesFromPayload(language).then((serverMap) => {
@@ -324,8 +326,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   }, []);
 
   const handleSaveOverride = useCallback(async (override: SpanOverride | null) => {
-    if (!override && !selectedSpan) return;
+    if ((!override && !selectedSpan) || isSaving) return;
     
+    setIsSaving(true);
     // Optimistic update
     const nextMap = new Map(overrides);
     if (override) {
@@ -339,12 +342,12 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
     if (override) {
       const success = await saveOverrideToPayload(override, language);
       if (!success) {
-        setToastMessage("Falha ao salvar no servidor! Rascunho salvo apenas localmente no seu navegador.");
-        setTimeout(() => setToastMessage(null), 5000);
+        setToast({ message: "Falha ao salvar no servidor. Rascunho local mantido.", type: 'error' });
+        setTimeout(() => setToast(null), 5000);
         saveOverridesToStorage(language, nextMap);
       } else {
-        setToastMessage("Salvo com sucesso no Payload CMS!");
-        setTimeout(() => setToastMessage(null), 3000);
+        setToast({ message: "Salvo no Payload", type: 'success' });
+        setTimeout(() => setToast(null), 3000);
         saveOverridesToStorage(language, nextMap); // keep cache sync
       }
     } else if (selectedSpan) {
@@ -352,9 +355,10 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
       saveOverridesToStorage(language, nextMap);
     }
 
+    setIsSaving(false);
     setSelectedSpan(null);
     setDraftOverride(null);
-  }, [language, selectedSpan, overrides]);
+  }, [language, selectedSpan, overrides, isSaving]);
 
   const handleCloseEditor = useCallback(() => {
     setSelectedSpan(null);
@@ -373,9 +377,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   return (
     <div className="page-renderer" style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center', overflowX: 'auto' }}>
       <div ref={containerRef} className="page-container" style={containerStyle}>
-        {toastMessage && (
-          <div style={{ position: 'fixed', top: '20px', right: '20px', background: 'red', color: 'white', padding: '10px', borderRadius: '5px', zIndex: 9999 }}>
-            {toastMessage}
+        {toast && (
+          <div className={`toast-notification toast-${toast.type}`}>
+            {toast.message}
           </div>
         )}
         {pageData.backgroundUrl && (
