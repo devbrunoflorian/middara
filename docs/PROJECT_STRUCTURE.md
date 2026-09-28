@@ -22,8 +22,8 @@ Embora desenhado inicialmente para 3 apps, hoje o repositório opera de fato com
 ```
 Middara Rulebook App/
 ├── apps/
-│   ├── admin/       # Backend (Payload CMS 3.x + Next.js App Router). Banco Postgres. Servidor da API REST.
-│   ├── api/         # [DEPRECIADO] Código legado (Express + Drizzle + SQLite). Não usado.
+│   ├── admin/       # Backend (Payload CMS 3.x + Next.js App Router). Banco SQLite local (`apps-admin.db`). Atua simultaneamente como Painel Admin visual e **Servidor da API REST/GraphQL**.
+│   ├── api/         # [DEPRECIADO] Código legado (Express + Drizzle). Mantido apenas para histórico. NÂO USAR.
 │   └── web/         # Frontend SPA (React + Vite). Consome API do admin e renderiza o livro.
 ├── packages/
 │   ├── ingest/      # Scripts Python de extração de PDF (PyMuPDF) e scripts TS construtores do DOM.
@@ -42,8 +42,14 @@ Middara Rulebook App/
 - **Frontend Renderer (Web):**
   - **Onde:** `apps/web`
   - **Comando:** `npm run dev -w apps/web`
-  - **Porta:** `:8080` (geralmente; pode variar se ocupada).
-  - **Propósito:** O app em React (Vite) que renderiza a interface WYSIWYG, onde as páginas ganham vida, leem os blocos do `/api` e salvam traduções usando os botões da UI.
+  - **Porta:** `:8080` (React/Vite).
+  - **Propósito:** O aplicativo cliente. Ele **não** tem banco de dados próprio. Ele consome as rotas REST expostas pelo `apps/admin` (ex: `http://localhost:3000/api/translations`) para renderizar a interface WYSIWYG, onde as páginas ganham vida e salvam as edições.
+
+### Como as 3 coisas se entrelaçam?
+- O `apps/api` está **morto**. Não se entrelaça em nada. O Payload (`apps/admin`) absorveu seu papel.
+- O `apps/admin` e o `apps/web` funcionam numa arquitetura **Headless Client-Server**:
+  - O `admin` (porta 3000) é o cérebro e o banco de dados (SQLite). Ele expõe endpoints estritos.
+  - O `web` (porta 8080) é apenas uma "casca visual" burra que consome a porta 3000 via chamadas `fetch()`. Se o `admin` cair, o `web` continua rodando mas com erro de "Failed to fetch" ao tentar salvar ou carregar dados dinâmicos.
 
 ---
 
@@ -53,10 +59,10 @@ O ciclo de vida do texto, desde o PDF até a tela do navegador com a tradução 
 1. **PDF Original** → O script `packages/ingest/extract_pdf.py` varre com PyMuPDF e despeja dicionários crus, com as bounding boxes, fontes (PUA inclusos) e tamanho exato de cada letra.
 2. **Construção do DOM** → `packages/ingest/build_dom.ts` lê esse cru, agrupa letras em Spans, Spans em Linhas e Linhas em Blocos baseados na proximidade de Y e caixas de colisão.
 3. **Payload CMS** → Os blocos em inglês caem nativamente na coleção `rulebook-blocks` como itens inalteráveis (Single Source of Truth do conteúdo base inglês).
-4. **API REST** → O Frontend (`web`), no start da página, puxa a listagem estática do layout e chama `GET /api/translations?where[language]...` para buscar as traduções preexistentes.
-5. **Editor** → Ao clicar em um Bloco, o `RichSpanEditor` abre os *Runs* (segmentos visuais formatados) originais em inglês (se não houver tradução) ou a versão traduzida (caso o override já exista).
-6. **Save no Payload** → O `web` envia o JSON formatado em `POST /api/translations` (ou `PATCH`). O fluxo original do bloco (`rulebook-blocks`) não é machucado.
-7. **Renderização** → O `SpanBlock` do frontend detecta se existe um "override". Se existir, abandona as linhas estáticas em inglês e cospe uma tag `<div style="white-space: pre-wrap">` contendo os *Runs* flexíveis um ao lado do outro, permitindo que as quebras de linha fluam naturalmente.
+4. **API REST** → O Frontend (`web`), no start da página, puxa a listagem estática do layout e chama `GET /api/translations?where[language]...` no `admin` para buscar as traduções preexistentes em cache de memória (ou faz fallback pro `localStorage` se a API estiver fora do ar).
+5. **Editor** → Ao clicar em um trecho específico de texto (Span), o `RichSpanEditor` intercepta o evento. A granularidade agora é a nível de linha/span (e não mais bloco inteiro).
+6. **Save no Payload** → O `web` envia o JSON formatado dos segmentos daquele Span via `POST /api/translations` (ou `PATCH` caso já exista) para a porta 3000. O fluxo original do bloco (`rulebook-blocks`) **nunca é machucado**.
+7. **Renderização** → O `PageRenderer` do frontend detecta se existe um "override" mapeado para aquela `spanKey`. Se existir, ele injeta os segmentos traduzidos perfeitamente por cima da imagem estática do PDF.
 
 ---
 
@@ -67,10 +73,10 @@ A coleção `Translations` (onde ficam as sobreposições em PT-BR) não carrega
 {
   slug: 'translations',
   fields: [
-    { name: 'blockId', type: 'text', required: true, unique: true }, // ex: "page_2_block_4"
+    { name: 'spanKey', type: 'text', required: true, unique: true }, // ex: "page_6_block_87_line_line_108_0"
     { name: 'language', type: 'text', required: true, defaultValue: 'pt-BR' },
     { 
-      name: 'runs', 
+      name: 'data', 
       type: 'json', // JSON puro. Contém um array estrito da interface Segment:
                     // Array<{ text, font, size, color, weight, style }>
       required: true 
