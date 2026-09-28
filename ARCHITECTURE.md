@@ -1,5 +1,6 @@
 # Middara Rulebook App — Arquitetura Técnica
 
+> **Aviso:** Este documento descreve a **visão-alvo** (Postgres, Next, arquitetura completa original). Para a realidade de desenvolvimento atual, veja `docs/PROJECT_STRUCTURE.md`.
 > PDF de referência: `Rulebook 1.2` — 102 páginas, formato quadrado 820×820pt, InDesign 18.2.
 > Objetivo: leitor digital multiplataforma (Web/Desktop/Mobile), fiel ao PDF original (tipografia, texturas, vetores, ilustrações), 100% data-driven a partir de um banco editável, com sync OTA de erratas.
 

@@ -1,5 +1,6 @@
 # Estrutura do Projeto: Middara Rulebook App
 
+> **Aviso:** Este documento descreve a **realidade atual** do projeto em desenvolvimento. Para a visão-alvo da arquitetura, veja `ARCHITECTURE.md` na raiz do repositório.
 ## Estado Atual
 **O que já funciona ponta a ponta hoje:**
 - Extração bruta de PDF (`packages/ingest/extract_pdf.py`).
@@ -12,7 +13,7 @@
 **O que ainda NÃO funciona:**
 - Reflow em mobile (o renderer desenha o DOM estático extraído, sem flexbox dinâmico).
 - Exportação dos blocos traduzidos de volta para um novo PDF imprimível.
-- As 92 páginas restantes (estamos rodando as páginas 1-10 ingeridas e homologadas).
+- As 92 páginas restantes (estamos rodando as páginas 1-10 ingeridas e homologadas; a Fase 2 contemplará as páginas 11 a 102).
 
 ---
 
@@ -60,9 +61,9 @@ O ciclo de vida do texto, desde o PDF até a tela do navegador com a tradução 
 2. **Construção do DOM** → `packages/ingest/build_dom.ts` lê esse cru, agrupa letras em Spans, Spans em Linhas e Linhas em Blocos baseados na proximidade de Y e caixas de colisão.
 3. **Payload CMS** → Os blocos em inglês caem nativamente na coleção `rulebook-blocks` como itens inalteráveis (Single Source of Truth do conteúdo base inglês).
 4. **API REST** → O Frontend (`web`), no start da página, puxa a listagem estática do layout e chama `GET /api/translations?where[language]...` no `admin` para buscar as traduções preexistentes em cache de memória (ou faz fallback pro `localStorage` se a API estiver fora do ar).
-5. **Editor** → Ao clicar em um trecho específico de texto (Span), o `RichSpanEditor` intercepta o evento. A granularidade agora é a nível de linha/span (e não mais bloco inteiro).
-6. **Save no Payload** → O `web` envia o JSON formatado dos segmentos daquele Span via `POST /api/translations` (ou `PATCH` caso já exista) para a porta 3000. O fluxo original do bloco (`rulebook-blocks`) **nunca é machucado**.
-7. **Renderização** → O `PageRenderer` do frontend detecta se existe um "override" mapeado para aquela `spanKey`. Se existir, ele injeta os segmentos traduzidos perfeitamente por cima da imagem estática do PDF.
+5. **Editor e Granularidade (TextUnit)** → A unidade de tradução arquiteturalmente definida é o **parágrafo (TextUnit)**. A linha continua sendo o dado-base extraído do PDF, mas o agrupamento ocorre por heurística determinística na ingestão (linhas consecutivas, mesma coluna, fonte/tamanho/cor próximos) e, devido às falhas naturais de qualquer heurística, o **agrupamento manual (merge/split) no admin com gravação no banco é obrigatório**. Modificações salvam as edições. Traduções costumam ser maiores que o inglês e a tradução por IA precisa de contexto (o parágrafo todo).
+6. **Save no Payload** → O `web` envia o JSON formatado via `POST /api/translations` (ou `PATCH` caso já exista) para a porta 3000.
+7. **Renderização** → O `PageRenderer` do frontend detecta se existe um "override". Se existir, ele injeta os segmentos traduzidos.
 
 ---
 
@@ -96,7 +97,7 @@ Documentações que os agentes/IA devem ler e respeitar obrigatoriamente neste p
 - **04 Arquitetura:** Overview do repo como monorepo Pnpm, e limites entre `ingest`, `admin` e `web`.
 - **05 Validacao QA:** O roteiro de como provar e validar que uma conversão (física ou traduzida) deu certo visualmente.
 - **06 Comportamento IA:** Regras rígidas de conduta: não usar placeholders, não esconder falhas, comprovar visualmente, pedir autorização antes de reestruturar.
-- **07 Fantasmas:** A heurística de limpeza de texto vetorial invisível enterrado em Z-Index negativo e PDFs sujos gerados no InDesign.
+- **07 Fantasmas:** Como detectar texto duplicado ou resíduos vetoriais escondidos (z-index). Baseia-se no cálculo de intersecção/sobreposição com imagens de conteúdo (ignorando texturas de fundo de página inteira), sem deletá-los automaticamente.
 - **08 Raio de Alcance:** "O que quebra lá, quebra aqui". Um fix global na renderização afeta dezenas de páginas. Modificar estilos base requer QA abrangente.
-- **09 Granularidade do Editor:** O texto não pode perder a formatação rica ao ser traduzido. O fluxo deve preservar runs de texto negrito/itálico de fontes exóticas dentro do Block layout wrapper.
-- **10 Métricas Verticais:** Como compensar os recuos naturais, entrelinhas estouradas de fontes PUA, garantindo sobreposição exata sem cortar o texto original em inglês.
+- **09 Granularidade do Editor:** A unidade de tradução definitiva é o **Bloco/parágrafo (TextUnit)**, não Span ou Linha. Tentativas anteriores (como span-level ou merge dinâmico que quebrou) devem ser ignoradas. Linha é base para ingestão; parágrafo é contexto para IA e reflow visual de idiomas mais longos.
+- **10 Métricas Verticais:** Como consertar a métrica `OS/2 win` do arquivo `.ttf` (usando script Python e `fontTools` para forçar `USE_TYPO_METRICS`), resolvendo na causa-raiz o problema de títulos inflados. Não usar offsets como `translateY`.
