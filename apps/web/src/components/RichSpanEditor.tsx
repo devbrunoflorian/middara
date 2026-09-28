@@ -190,8 +190,15 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   }, [selMin, selMax, chars]);
 
   // Apply current tool settings to selected range
-  const applyToSelection = useCallback(() => {
+  const applyToSelection = useCallback((overrides?: Partial<{font: string, weight: number, style: 'normal'|'italic', color: string, size: number, ligatures: boolean}>) => {
     if (selMin === null || selMax === null) return;
+    
+    const finalFont = overrides?.font ?? toolFont;
+    const finalWeight = overrides?.weight ?? toolWeight;
+    const finalStyle = overrides?.style ?? toolStyle;
+    const finalColor = overrides?.color ?? toolColor;
+    const finalSize = overrides?.size ?? toolSize;
+    const finalLigatures = overrides?.ligatures ?? toolLigatures;
 
     // Build new segments by splitting at selection boundaries
     const newSegments: Segment[] = [];
@@ -209,12 +216,12 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       else if (segStart >= selMin && segEnd <= selMax) {
         newSegments.push({
           ...seg,
-          font: toolFont,
-          weight: toolWeight,
-          style: toolStyle,
-          color: toolColor,
-          size: toolSize,
-          disableLigatures: !toolLigatures,
+          font: finalFont,
+          weight: finalWeight,
+          style: finalStyle,
+          color: finalColor,
+          size: finalSize,
+          disableLigatures: !finalLigatures,
         });
       }
       // Partial overlap
@@ -231,12 +238,12 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         const overlapEnd = Math.min(seg.text.length, selMax - segStart);
         newSegments.push({
           text: seg.text.slice(overlapStart, overlapEnd),
-          font: toolFont,
-          weight: toolWeight,
-          style: toolStyle,
-          color: toolColor,
-          size: toolSize,
-          disableLigatures: !toolLigatures,
+          font: finalFont,
+          weight: finalWeight,
+          style: finalStyle,
+          color: finalColor,
+          size: finalSize,
+          disableLigatures: !finalLigatures,
         });
         // After selection
         if (segEnd > selMax) {
@@ -408,37 +415,37 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         {/* Toolbar */}
         <div className="rse-toolbar">
           <div className="rse-toolbar-row">
-            <select value={toolFont} onChange={e => setToolFont(e.target.value)} title="Font Family">
+            <select value={toolFont} onChange={e => { setToolFont(e.target.value); applyToSelection({font: e.target.value}); }} title="Font Family">
               {AVAILABLE_FONTS.map(f => (
                 <option key={f.value} value={f.value}>{f.label}</option>
               ))}
             </select>
-            <select value={toolWeight} onChange={e => setToolWeight(Number(e.target.value))} title="Weight">
+            <select value={toolWeight} onChange={e => { setToolWeight(Number(e.target.value)); applyToSelection({weight: Number(e.target.value)}); }} title="Weight">
               {FONT_WEIGHTS.map(w => (
                 <option key={w} value={w}>{w}</option>
               ))}
             </select>
             <button
               className={`rse-tool-btn ${toolWeight >= 600 ? 'active' : ''}`}
-              onClick={() => setToolWeight(w => w >= 600 ? 400 : 700)}
+              onClick={() => { const w = toolWeight >= 600 ? 400 : 700; setToolWeight(w); applyToSelection({weight: w}); }}
               title="Bold"
             ><strong>B</strong></button>
             <button
               className={`rse-tool-btn ${toolStyle === 'italic' ? 'active' : ''}`}
-              onClick={() => setToolStyle(s => s === 'italic' ? 'normal' : 'italic')}
+              onClick={() => { const s = toolStyle === 'italic' ? 'normal' : 'italic'; setToolStyle(s); applyToSelection({style: s}); }}
               title="Italic"
             ><em>I</em></button>
             <button
               className={`rse-tool-btn ${toolLigatures ? 'active' : ''}`}
-              onClick={() => setToolLigatures(!toolLigatures)}
+              onClick={() => { setToolLigatures(!toolLigatures); applyToSelection({ligatures: !toolLigatures}); }}
               title="Ligatures (ct, st, etc)"
               style={{ fontFamily: 'EsmeraldaPro' }}
             >fi</button>
-            <input type="color" value={toolColor} onChange={e => setToolColor(e.target.value)} title="Color" className="rse-color-input" />
-            <input type="number" value={toolSize} onChange={e => setToolSize(Number(e.target.value))} min={4} max={72} step={0.5} className="rse-size-input" title="Size (pt)" />
+            <input type="color" value={toolColor} onChange={e => { setToolColor(e.target.value); applyToSelection({color: e.target.value}); }} title="Color" className="rse-color-input" />
+            <input type="number" value={toolSize} onChange={e => { setToolSize(Number(e.target.value)); applyToSelection({size: Number(e.target.value)}); }} min={4} max={72} step={0.5} className="rse-size-input" title="Size (pt)" />
           </div>
           <div className="rse-toolbar-row">
-            <button className="rse-tool-btn" onClick={applyToSelection} disabled={!hasSelection}>
+            <button className="rse-tool-btn" onClick={() => applyToSelection()} disabled={!hasSelection}>
               🎨 Apply to Selection
             </button>
             <button className="rse-tool-btn" onClick={selectAll}>Select All</button>
