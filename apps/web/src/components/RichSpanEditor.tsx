@@ -75,17 +75,6 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const [selStart, setSelStart] = useState<number | null>(null);
   const [selEnd, setSelEnd] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  // Normalize font name for the dropdown options
-  const mapFontNameForDropdown = useCallback((font: string) => {
-    if (font.includes('Optima')) return 'OptimaLTStd';
-    if (font.includes('Garamond')) return 'AGaramondPro';
-    if (font.includes('Decorative')) return 'Cinzel Decorative';
-    if (font.includes('Cinzel')) return 'CinzelLocal';
-    if (font.includes('EsmeraldaPro-PUA')) return 'EsmeraldaPro-PUA';
-    if (font.includes('Esmeralda')) return 'EsmeraldaPro';
-    return font;
-  }, []);
-
   // Current tool settings
   const [toolFont, setToolFont] = useState(() => {
     if (originalFont.includes('Optima')) return 'OptimaLTStd';
@@ -160,7 +149,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   useEffect(() => {
     if (selMin !== null && selMin < chars.length) {
       const c = chars[selMin];
-      setToolFont(mapFontNameForDropdown(c.font));
+      setToolFont(c.font);
       setToolWeight(c.weight);
       setToolStyle(c.style);
       setToolColor(c.color);
