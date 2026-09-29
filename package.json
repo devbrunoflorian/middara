@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:api": "npm run dev -w apps/api",
+    "dev:api": "npm run dev -w apps/admin",
     "dev:web": "npm run dev -w apps/web",
     "dev": "npm run dev:api & npm run dev:web"
   },

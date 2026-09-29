@@ -31,10 +31,13 @@ def extract_page_dom(pdf_path, output_dir, page_num):
             "lines": []
         }
         
+        max_line_width = max(l["bbox"][2] - l["bbox"][0] for l in b["lines"])
+        
         for j, l in enumerate(b["lines"]):
             line_data = {
                 "id": f"line_{i}_{j}",
                 "bbox": l["bbox"],
+                "availableWidth": max_line_width,
                 "spans": []
             }
             

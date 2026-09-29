@@ -36,6 +36,7 @@ export interface SpanOverride {
   spanKey: string;
   segments: Segment[];
   bbox: [number, number, number, number];
+  textAlign?: 'left' | 'center' | 'right' | 'justify';
 }
 
 interface RichSpanEditorProps {
@@ -90,6 +91,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const [toolColor, setToolColor] = useState(originalColor);
   const [toolSize, setToolSize] = useState(originalSize);
   const [toolLigatures, setToolLigatures] = useState(true);
+  const [textAlign, setTextAlign] = useState<'left' | 'center' | 'right' | 'justify'>(existingOverride?.textAlign || 'left');
   // Text editing
   const [isEditingText, setIsEditingText] = useState(false);
   const [editText, setEditText] = useState('');
@@ -365,14 +367,14 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setSelEnd(null);
   }, [editText, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
 
-  // Save handler
   const handleSave = useCallback(() => {
     onSave({
       spanKey,
       segments,
       bbox,
+      textAlign,
     });
-  }, [onSave, spanKey, segments, bbox]);
+  }, [onSave, spanKey, segments, bbox, textAlign]);
 
   // Reset to original
   const handleReset = useCallback(() => {
@@ -441,6 +443,12 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
               title="Ligatures (ct, st, etc)"
               style={{ fontFamily: 'EsmeraldaPro' }}
             >fi</button>
+            <div className="rse-toolbar-divider" style={{ width: '1px', background: '#ccc', margin: '0 8px' }} />
+            <button className={`rse-tool-btn ${textAlign === 'left' ? 'active' : ''}`} onClick={() => setTextAlign('left')} title="Align Left">⫷</button>
+            <button className={`rse-tool-btn ${textAlign === 'center' ? 'active' : ''}`} onClick={() => setTextAlign('center')} title="Align Center">≡</button>
+            <button className={`rse-tool-btn ${textAlign === 'right' ? 'active' : ''}`} onClick={() => setTextAlign('right')} title="Align Right">⫸</button>
+            <button className={`rse-tool-btn ${textAlign === 'justify' ? 'active' : ''}`} onClick={() => setTextAlign('justify')} title="Justify">▤</button>
+            <div className="rse-toolbar-divider" style={{ width: '1px', background: '#ccc', margin: '0 8px' }} />
             <input type="color" value={toolColor} onChange={e => { setToolColor(e.target.value); applyToSelection({color: e.target.value}); }} title="Color" className="rse-color-input" />
             <input type="number" value={toolSize} onChange={e => { setToolSize(Number(e.target.value)); applyToSelection({size: Number(e.target.value)}); }} min={4} max={72} step={0.5} className="rse-size-input" title="Size (pt)" />
           </div>

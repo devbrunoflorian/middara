@@ -472,8 +472,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
   return (
     <div className="block-container" style={blockStyle}>
-      {block.lines.map((line) => {
-        const lineKey = `page_${pageNumber}_block_${blockIdx}_line_${line.id}`;
+      {block.lines.map((line, lIdx) => {
+        const lineId = line.id !== undefined ? line.id : lIdx;
+        const lineKey = `page_${pageNumber}_block_${blockIdx}_line_${lineId}`;
         let currentOverride = overrides.get(lineKey);
         
         if (selectedSpanKey === lineKey && draftOverride) {
@@ -486,7 +487,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
         return (
           <LineRenderer
-            key={line.id}
+            key={lineId}
             line={line}
             scale={scale}
             blockOriginX={blockX}
@@ -531,8 +532,9 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   const lineX = (line.bbox[0] - blockOriginX) * scale;
   const lineH = (line.bbox[3] - line.bbox[1]) * scale;
   
-  // Original width of the text itself
-  const lineW = (line.bbox[2] - line.bbox[0]) * scale;
+  // Use availableWidth (column width) if available, otherwise fallback to exact text width
+  const rawWidth = (line as any).availableWidth || (line.bbox[2] - line.bbox[0]);
+  const lineW = rawWidth * scale;
 
   const hoverClass = isAdmin ? `span-editable ${isSelected ? 'span-selected' : ''}` : '';
 
@@ -563,7 +565,13 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     return (
       <div 
         className={`realbox ${hoverClass}`} 
-        style={lineStyle}
+        style={{
+          ...lineStyle,
+          whiteSpace: 'pre-wrap',
+          textAlign: override.textAlign || 'left',
+          display: 'block',
+          fontSize: 0,
+        }}
         onClick={handleClick}
       >
         {override.segments.map((seg, segIdx) => (
@@ -575,7 +583,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
               fontWeight: seg.weight,
               fontStyle: seg.style,
               color: seg.color,
-              whiteSpace: 'pre',
+              whiteSpace: 'pre-wrap',
               fontVariantLigatures: 'none',
               fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
               letterSpacing: '-0.015em',
