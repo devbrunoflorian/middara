@@ -529,12 +529,17 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   }
 
   const lineY = (line.bbox[1] - blockOriginY) * scale;
-  const lineX = (line.bbox[0] - blockOriginX) * scale;
   const lineH = (line.bbox[3] - line.bbox[1]) * scale;
   
-  // Use availableWidth (column width) if available, otherwise fallback to exact text width
+  // Use availableWidth/X (column bounds) if available, otherwise fallback to exact text bounds
+  const rawX = (line as any).availableX !== undefined ? (line as any).availableX : line.bbox[0];
   const rawWidth = (line as any).availableWidth || (line.bbox[2] - line.bbox[0]);
+  
+  const lineX = (rawX - blockOriginX) * scale;
   const lineW = rawWidth * scale;
+  
+  const originalX = (line.bbox[0] - blockOriginX) * scale;
+  const textOffset = Math.max(0, originalX - lineX);
 
   const hoverClass = isAdmin ? `span-editable ${isSelected ? 'span-selected' : ''}` : '';
 
@@ -597,7 +602,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   }
 
   return (
-    <div style={lineStyle} onClick={handleClick} className={`${hoverClass} ${targetPage ? 'contents-link' : ''}`}>
+    <div style={{...lineStyle, paddingLeft: `${textOffset}px`, boxSizing: 'border-box'}} onClick={handleClick} className={`${hoverClass} ${targetPage ? 'contents-link' : ''}`}>
       {line.spans.map((span, si) => {
         if (span.font?.includes('Webdings') || span.font?.includes('Wingdings') || span.font?.includes('ZapfDingbats')) {
           return null;
