@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
-import { RichSpanEditor, type SpanOverride } from './RichSpanEditor';
+import { RichSpanEditor, type SpanOverride, type TextAlignment } from './RichSpanEditor';
 import './PageRenderer.css';
 import './Toast.css';
 
@@ -22,9 +22,16 @@ export interface LineData {
   spans: SpanData[];
 }
 
+export interface LayoutFrame {
+  x: number;
+  width: number;
+  textAlign?: TextAlignment;
+}
+
 export interface Block {
   id: string;
   bbox: [number, number, number, number];
+  layoutFrame?: LayoutFrame;
   content?: string;
   lines?: LineData[];
   font?: string;
@@ -152,7 +159,18 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
       style = mapped.style;
       size = 13;
   }
-  return { spanKey: blockKey, text, font, family: mapPdfFont(font).family, weight, style, color, size, bbox: block.bbox };
+  return {
+    spanKey: blockKey,
+    text,
+    font,
+    family: mapPdfFont(font).family,
+    weight,
+    style,
+    color,
+    size,
+    bbox: block.bbox,
+    textAlign: block.layoutFrame?.textAlign || 'left',
+  };
 }
 
 /* ─────────────────────────────────────────────
@@ -260,6 +278,7 @@ interface SelectedSpanInfo {
   color: string;
   size: number;
   bbox: [number, number, number, number];
+  textAlign: TextAlignment;
 }
 
 interface PageRendererProps {
@@ -318,19 +337,23 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   }, [pageData, onNavigate]);
 
   useEffect(() => {
+    const stage = containerRef.current;
+    if (!stage || !pageData) return;
+
     const updateScale = () => {
-      if (containerRef.current && pageData) {
-        const stage = containerRef.current;
-        if (stage) {
-          const padding = 60;
-          const availableWidth = stage.clientWidth - padding;
-          const availableHeight = stage.clientHeight - padding;
-          const scaleX = availableWidth / pageData.width;
-          const scaleY = availableHeight / pageData.height;
-          setScale(Math.min(scaleX, scaleY) * zoomLevel);
-        }
-      }
+      // Measure the stage's outer box. clientWidth/clientHeight shrink when
+      // scrollbars appear, which can feed back into the scale and oscillate.
+      const { width, height } = stage.getBoundingClientRect();
+      const availableWidth = Math.max(1, width - 48);
+      const availableHeight = Math.max(1, height - 48);
+      const fitScale = Math.min(
+        availableWidth / pageData.width,
+        availableHeight / pageData.height,
+      );
+      const nextScale = fitScale * zoomLevel;
+      setScale(current => Math.abs(current - nextScale) < 0.0001 ? current : nextScale);
     };
+
     updateScale();
     window.addEventListener('resize', updateScale);
     return () => window.removeEventListener('resize', updateScale);
@@ -457,6 +480,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
           originalColor={selectedSpan.color}
           originalWeight={selectedSpan.weight}
           originalStyle={selectedSpan.style}
+          originalTextAlign={selectedSpan.textAlign}
           bbox={selectedSpan.bbox}
           pageNumber={pageData.page_number}
           onClose={handleCloseEditor}
@@ -527,10 +551,10 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   const overflowClass = isOverflowing ? 'block-overflow' : '';
 
   if (currentOverride && currentOverride.segments.length > 0) {
-    // Determine the available width/X based on the first line to align with column bounds
+    // Use a translation frame when supplied; otherwise keep the source-derived fallback.
     const firstLine = block.lines[0];
-    const rawX = (firstLine as any).availableX !== undefined ? (firstLine as any).availableX : blockX;
-    const rawWidth = (firstLine as any).availableWidth || blockW;
+    const rawX = block.layoutFrame?.x ?? ((firstLine as any).availableX !== undefined ? (firstLine as any).availableX : blockX);
+    const rawWidth = block.layoutFrame?.width ?? (firstLine as any).availableWidth ?? blockW;
     const blockLineX = (rawX - blockX) * scale;
     const blockLineW = rawWidth * scale;
 
@@ -545,7 +569,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             top: `0px`,
             width: `${blockLineW}px`,
             whiteSpace: 'pre-wrap',
-            textAlign: currentOverride.textAlign || 'left',
+            textAlign: currentOverride.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
             display: 'block',
             fontSize: 0,
             cursor: isAdmin ? 'text' : 'default',
@@ -651,12 +675,13 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   };
 
   const handleClick = (e: React.MouseEvent) => {
-    if (targetPage && onNavigate) {
+    if (isAdmin) {
+      // In admin mode, clicking a contents entry selects its block for editing.
+      // Let the event bubble to the block's click handler instead of navigating.
+      onClick();
+    } else if (targetPage && onNavigate) {
       e.stopPropagation();
       onNavigate(targetPage);
-    } else if (isAdmin) {
-      // Do not stop propagation, let the block catch the click
-      onClick();
     }
   };
 

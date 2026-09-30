@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { PageRenderer, type PageData } from './components/PageRenderer';
+import { PageRenderer, type Block, type LayoutFrame, type PageData } from './components/PageRenderer';
 import { 
   ChevronLeft, ChevronRight, Edit3, 
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
@@ -15,12 +15,22 @@ async function loadPageData(pageNum: number): Promise<PageData> {
     const res = await fetch(`/pages/page_${pageStr}/page_${pageStr}_dom.json`);
     if (res.ok) {
       const data = await res.json();
+      let pageFrames: Record<string, LayoutFrame> = {};
+      if (pageNum === 2) {
+        try {
+          const frameResponse = await fetch(`/pages/page_${pageStr}/layout_frames.json`);
+          if (frameResponse.ok) pageFrames = await frameResponse.json();
+        } catch {}
+      }
       return {
         page_number: pageNum,
         width: data.width || 820.35,
         height: data.height || 820.35,
         images: [],
-        blocks: data.blocks || [],
+        blocks: (data.blocks || []).map((block: Block) => ({
+          ...block,
+          layoutFrame: pageFrames[block.id] || block.layoutFrame,
+        })),
         backgroundUrl: `/pages/page_${pageStr}/background.webp`
       };
     }
@@ -97,7 +107,8 @@ function App() {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (document.activeElement?.tagName === 'INPUT') return;
+      const target = e.target;
+      if (target instanceof Element && target.closest('input, textarea, select, [contenteditable="true"], [role="textbox"]')) return;
       if (viewMode !== 'single') return;
 
       if (e.key === 'ArrowRight' || e.key === 'PageDown') {

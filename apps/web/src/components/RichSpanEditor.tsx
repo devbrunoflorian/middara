@@ -32,11 +32,13 @@ export interface Segment {
   disableLigatures?: boolean;
 }
 
+export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
+
 export interface SpanOverride {
   spanKey: string;
   segments: Segment[];
   bbox: [number, number, number, number];
-  textAlign?: 'left' | 'center' | 'right' | 'justify';
+  textAlign?: TextAlignment;
 }
 
 interface RichSpanEditorProps {
@@ -47,6 +49,7 @@ interface RichSpanEditorProps {
   originalColor: string;
   originalWeight: number;
   originalStyle: 'normal' | 'italic';
+  originalTextAlign?: TextAlignment;
   bbox: [number, number, number, number];
   pageNumber: number;
   onClose: () => void;
@@ -63,6 +66,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   originalColor,
   originalWeight,
   originalStyle,
+  originalTextAlign = 'left',
   bbox,
   pageNumber,
   onClose,
@@ -91,12 +95,16 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const [toolColor, setToolColor] = useState(originalColor);
   const [toolSize, setToolSize] = useState(originalSize);
   const [toolLigatures, setToolLigatures] = useState(true);
-  const [textAlign, setTextAlign] = useState<'left' | 'center' | 'right' | 'justify'>(existingOverride?.textAlign || 'left');
+  const [textAlign, setTextAlign] = useState<TextAlignment>(existingOverride?.textAlign || originalTextAlign);
   // Text editing
   const [isEditingText, setIsEditingText] = useState(false);
   const [editText, setEditText] = useState('');
 
   const charGridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setTextAlign(existingOverride?.textAlign || originalTextAlign);
+  }, [spanKey, existingOverride?.textAlign, originalTextAlign]);
 
   // Initialize segments from existing override or original span
   useEffect(() => {

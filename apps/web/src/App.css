@@ -202,6 +202,8 @@ body, html {
    ========================================= */
 .viewer-main {
   flex: 1;
+  min-width: 0;
+  min-height: 0;
   overflow: auto;
   position: relative;
   background-color: #1a1a1a;
@@ -213,6 +215,8 @@ body, html {
 .viewer-main.single {
   display: flex;
   padding: 40px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* Scroll mode: vertical stack */
@@ -280,11 +284,11 @@ body, html {
 /* Page Wrapper */
 .page-wrapper {
   position: relative;
-  transition: transform 0.2s ease-out;
-  box-shadow: var(--shadow-premium);
-  border-radius: 4px; /* subtle rounding on the PDF page */
-  overflow: hidden; /* ensures background image rounds too */
-  margin: auto;
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* Loading State */

@@ -18,6 +18,14 @@ O painel do `RichSpanEditor` deixou de ser `position: fixed` sobre a página e p
 
 As chaves atuais dos blocos foram mantidas para preservar os rascunhos existentes. Esta etapa não altera o extrator, a ordem dos blocos nem o formato persistido.
 
+### Zoom, scroll e edição do índice
+
+O ajuste de escala é recalculado em eventos definidos: quando o zoom muda, quando o editor abre/fecha e quando a janela é redimensionada. Ele mede o retângulo externo de `.page-stage`, evitando medidas de `clientWidth/clientHeight` que mudam com a presença das barras de rolagem. Não há observador contínuo recalculando a escala a partir do próprio conteúdo ampliado. O zoom continua sendo um multiplicador do ajuste automático. Em ampliações maiores que a área visível, a página começa pelo canto superior esquerdo do viewport rolável para que as bordas não fiquem inacessíveis; quando cabe, as margens automáticas a mantêm centralizada.
+
+Em visualização de página única, `.page-wrapper` e `.viewer-main` ficam limitados ao espaço disponível da janela. A rolagem horizontal e vertical fica dentro de `.page-stage`, que conserva uma altura visível fixa; assim, a barra horizontal deve continuar acessível no limite inferior do viewport enquanto o usuário rola a página verticalmente, sem precisar chegar ao fim do conteúdo.
+
+No modo admin, as setas e Page Up/Down não acionam a navegação de páginas quando o foco está em `input`, `textarea`, `select` ou em conteúdo editável. Isso permite mover o cursor no texto sem trocar de página. Links internos do índice também passam a selecionar o bloco para edição no admin; fora dele, continuam navegando para a página de destino.
+
 ### Quebras de linha
 
 O `:root` do app define `line-height: 145%`. O `.realbox` não declarava a própria altura de linha, então o preview traduzido herdava o valor global. Em tamanhos de fonte menores que o padrão do app, cada `Enter` deixava um vão grande demais.
@@ -51,3 +59,5 @@ O modo `Edit Text` atualizava somente o `textarea`; o renderer só recebia o con
 - `.agents/skills/layout-debugging/SKILL.md`: conservar o fluxo do texto no bloco real e diagnosticar sobreposição no renderer.
 
 Verificações executadas: `npm run build -w apps/web` e `npm run lint -w apps/web` passaram. O lint ainda reporta avisos existentes em componentes não alterados; o build ainda reporta que `/texture.png` não foi encontrada durante o build.
+
+Para as correções de zoom e atalhos de edição deste save point, `npm run build -w apps/web` passou em 2026-09-30. O build mantém o aviso já conhecido sobre `/texture.png`. O usuário confirmou visualmente que, ampliada, a barra horizontal continua acessível enquanto rola verticalmente; esse comportamento fica cravado. Ainda falta a confirmação visual do zoom sem deriva e da seleção dos links do índice no modo admin.
