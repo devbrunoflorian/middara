@@ -1,9 +1,9 @@
 # Handoff: continue the Rulebook App translation and extraction work
 
 - **Last updated:** 2026-09-30
-- **Working branch observed during read-through:** `fix/pixel-render/overflow` at `a57f2de` (`more docs`), tracking `origin/fix/pixel-render/overflow`.
+- **Working branch:** `fix/pixel-render/overflow`; page 2 save point is `310bd82` (`feat: finalize page 2 translation fidelity pilot`), one local commit ahead of `origin/fix/pixel-render/overflow` at the last check.
 - **Master observed during read-through:** local `master` and `origin/master` at `f7e89ab` (`docs: record master promotion and recovery refs`). The feature branch is one documentation commit ahead; refs do **not** currently match.
-- **Working tree at handoff update:** page 2 credit units, title-offset candidate, PT reset/unsaved-exit guard, documentation, and preserved `icebox/` snapshots are uncommitted. Inspect `git status --short --branch` before continuing.
+- **Working tree at handoff update:** the read-only full-book fidelity scanner, its audit report, page matrix, and handoff updates are in progress/uncommitted. Inspect `git status --short --branch` before continuing.
 - **Runtime:** Vite remains available at `http://localhost:8080/`. Payload was restarted via npm on port 3000 and now returns HTTP 200. The local ignored `apps/admin/.env` sets `DATABASE_URL=file:./apps-admin.db`. This is the existing current-schema database; the tracked legacy `middara.db` is not used by Payload.
 
 This is the current continuation guide. Read it first, then follow the linked source documents; do not infer implementation approval from audit findings or plans written by a previous assistant.
@@ -22,10 +22,11 @@ The actual runtime is a React/Vite viewer over page artwork and extracted JSON. 
 4. [`2026-09-30-preview-fidelity-and-credit-units.md`](2026-09-30-preview-fidelity-and-credit-units.md) — confirmed cause of live-preview fidelity loss and revised page 2 plan for separate credit label/body targets.
 5. [`2026-09-30-implement-preview-credit-pilot.md`](2026-09-30-implement-preview-credit-pilot.md) — implementation, browser QA, corrections, and remaining persistence limitation for the current pilot.
 6. [`2026-09-30-payload-save-reset-safety.md`](2026-09-30-payload-save-reset-safety.md) — database correction, API CRUD proof, legacy-record handling, and PT reset/close guard.
-7. [`2026-09-30-heading-baseline-audit.md`](2026-09-30-heading-baseline-audit.md) — title baseline cause and candidate Esmeralda offset; browser visual QA is still pending.
-8. [`2026-09-30-page2-credit-units.md`](2026-09-30-page2-credit-units.md) — expansion to all 17 audited page 2 credit categories; visual validation remains pending.
+7. [`2026-09-30-heading-baseline-audit.md`](2026-09-30-heading-baseline-audit.md) — title baseline cause and candidate Esmeralda offset; the user later approved the page 2 result as impeccable.
+8. [`2026-09-30-page2-credit-units.md`](2026-09-30-page2-credit-units.md) — expansion to all 17 audited page 2 credit categories; covered by the user's page 2 approval.
 9. [`2026-09-30-page2-overflow-and-title-alternates.md`](2026-09-30-page2-overflow-and-title-alternates.md) — hide overflow marks outside Admin, align translated Esmeralda/PUA headings through the block override path, add a no-blue Discord link to the Portuguese Special Thanks credit, and record the PUA/bold Payload probe.
 10. [`2026-09-30-book-wide-english-fidelity-audit.md`](2026-09-30-book-wide-english-fidelity-audit.md) — page-2 lessons, non-uniform audit method, page statuses, and plan for the other 101 pages.
+11. [`2026-09-30-book-fidelity-scan.md`](2026-09-30-book-fidelity-scan.md) and [`book-fidelity-page-matrix.csv`](book-fidelity-page-matrix.csv) — first full 102-page machine screen, evidence, font-risk queue, and limits; this is the current audit status.
 11. [Visual reference rule](../../.agents/rules/references/README.md) — canonical PDF path and required comparison practice.
 12. [`../architecture/text-layout-frames.md`](../architecture/text-layout-frames.md) — accepted page 2 dialogue-frame pilot and layout data contract.
 13. [`../architecture/sample-layout-audit.md`](../architecture/sample-layout-audit.md) and [`../architecture/sample-key-impact.md`](../architecture/sample-key-impact.md) — reproducible sample findings and existing-key collisions.
@@ -81,10 +82,10 @@ The page 2 frontend pilot has been implemented and previously visually inspected
 
 **Verification complete:** final `npm run build -w apps/web` passed; lint completed with existing warnings and no errors; `git diff --check` passed. A read-only DB check confirmed seven current-schema rows, no temporary probe record, and the two legacy rows remain untouched. Automated browser access to the saved-blocked local origin is unavailable, so current UI changes have not been visually verified.
 
-**Next priority:** the user has approved page 2. Before expanding translation, follow [`2026-09-30-book-wide-english-fidelity-audit.md`](2026-09-30-book-wide-english-fidelity-audit.md): commit the approved work and audit English fidelity across all pages without assuming uniform defects. Start with the five-page validation sample and only then run the read-only 102-page screening. A machine-screened page is not visually approved.
+**Next priority:** page 2 save point is committed as `310bd82`. The read-only machine screen of all 102 PDF/JSON page pairs is complete: compared span text/style/bboxes match, but 61 pages use fonts dependent on remote or system fallback and 32 contain PUA symbols. See the scan report and matrix; these counts are candidates, not confirmed errors. Validate the heterogeneous app-render sample (pages 3, 4, 6, 13, 15, 24, 101) against the PDF at the same scale, then fix only proven shared causes and recheck all pages using them. App-origin browser access remains blocked by saved preferences; do not bypass it through CDP/Playwright or another surface. No page is visually approved by the scanner alone. Do not expand translation to a page until its English source status is visually approved or an explicit exception is recorded.
 
 ## Git state and recovery references
 
-At the read-through snapshot, `fix/pixel-render/overflow` and its remote are at `a57f2de`; local `master` and `origin/master` are at `f7e89ab`. They do not match. Do not force-update or push either branch unless asked. Historical preservation refs from the earlier user-requested master replacement are documented in [`2026-09-30-promote-overflow-to-master.md`](2026-09-30-promote-overflow-to-master.md).
+At the last branch check, `fix/pixel-render/overflow` was at `310bd82` and one commit ahead of its remote. Local `master` and `origin/master` remain at the earlier recorded `f7e89ab`; do not force-update or push either branch unless asked. Historical preservation refs from the earlier user-requested master replacement are documented in [`2026-09-30-promote-overflow-to-master.md`](2026-09-30-promote-overflow-to-master.md).
 
 Previous handoff snapshots and their reasons are indexed in [`../../icebox/README.md`](../../icebox/README.md). Failed PNPM bootstrap artifacts are preserved at [`../../icebox/2026-09-30-pnpm-install-prompt-artifacts/README.md`](../../icebox/2026-09-30-pnpm-install-prompt-artifacts/README.md). The pre-update handoff/index/skill copies are at [`../../icebox/2026-09-30-handoff-before-persistence-credit-update/README.md`](../../icebox/2026-09-30-handoff-before-persistence-credit-update/README.md); the earlier pre-pilot copy remains at [`../../icebox/2026-09-30-handoff-before-preview-credit-pilot/README.md`](../../icebox/2026-09-30-handoff-before-preview-credit-pilot/README.md).

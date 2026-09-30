@@ -32,4 +32,4 @@ Preservar os demais arquivos não commitados da sessão anterior. Não migrar ne
 - `git diff --check`: passou.
 - O browser permaneceu indisponível para inspeção do agente; a aprovação visual deste estado foi dada pelo usuário, não por screenshot automatizado.
 - Os estilos PUA/negrito têm prova de persistência na API e ficam incluídos no `data.segments`; a persistência foi verificada com um registro de teste descartável, não com alteração dos rascunhos existentes.
-- **Commit:** QA e aprovação concluídos; commit solicitado pelo usuário está sendo executado em seguida. Ainda não foi feito push.
+- **Commit:** incluído no save point local `310bd82` (`feat: finalize page 2 translation fidelity pilot`) em `fix/pixel-render/overflow`. Não foi feito push.

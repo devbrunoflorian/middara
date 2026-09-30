@@ -7,6 +7,7 @@ This folder records work by task, including the goal, method, files changed, evi
 ## Tasks
 
 - [2026-09-30 — Auditoria de fidelidade inglesa do livro](2026-09-30-book-wide-english-fidelity-audit.md): transformar a página 2 em critérios verificáveis e uma fila não-uniforme para revisar todas as 102 páginas antes de expandir a tradução.
+- [2026-09-30 — Resultados da triagem de fidelidade inglesa](2026-09-30-book-fidelity-scan.md): comparação read-only de spans PDF/JSON em todas as páginas, limites da prova, famílias tipográficas em risco e próxima fila visual; ver também a [matriz por página](book-fidelity-page-matrix.csv).
 
 - [2026-09-30 — Overflow fora do Admin e títulos com alternates](2026-09-30-page2-overflow-and-title-alternates.md): corrigir a visibilidade do diagnóstico vermelho e investigar alinhamento/persistência de estilos nos glifos alternativos da página 2.
 

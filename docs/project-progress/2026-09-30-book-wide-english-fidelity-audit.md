@@ -1,6 +1,6 @@
 # Tarefa: transformar a auditoria da página 2 em processo para o livro inteiro
 
-- **Status:** iniciado antes do commit da entrega de página 2; fase de descoberta e verificação automatizada por planejar/executar em lotes.
+- **Status:** entrega de página 2 commitada; triagem automatizada read-only de 102 páginas concluída; validação visual do app e correções globais ainda abertas.
 - **Data:** 2026-09-30.
 - **Objetivo do usuário:** antes de ampliar a tradução, tornar o texto-base em inglês fiel ao PDF nas 102 páginas (página 2 + as outras 101), sem projetar defeitos de uma página para todas.
 
@@ -61,12 +61,20 @@ Cada achado recebe uma categoria: (a) renderer comum, (b) extração comum, (c) 
 
 Manter uma matriz versionada em `docs/project-progress/` com status atual por página e apontar para relatórios de lotes/achados. Nenhuma página é considerada pronta para tradução PT sem estado `visually-approved` ou exceção explícita do usuário documentada.
 
-## Fase imediata
+## Fase 1 concluída: save point e scanner
 
-1. Commitar a entrega já aprovada da página 2 e este plano antes de iniciar a auditoria geral, conforme solicitação.
-2. Fazer a primeira rodada em cinco páginas, aproveitando as análises existentes de 2/3/101 e incluindo 4 e uma página escolhida por sinais estruturais. Produzir inventário, não alterações em lote.
-3. Validar os sinais e o formato da matriz. Só depois executar o scanner read-only nas 102 páginas.
-4. Classificar anomalias e preparar a fila visual/por classe; corrigir o inglês por página ou por regra comprovadamente comum.
+1. A entrega aprovada da página 2 e este plano foram registrados antes do commit `310bd82` em `fix/pixel-render/overflow`. Não houve push.
+2. Foi criado [`scripts/audit_book_fidelity.py`](../../scripts/audit_book_fidelity.py), ferramenta somente leitura que compara spans das 102 páginas do PDF com os 102 JSONs publicados.
+3. A primeira execução está registrada em [`2026-09-30-book-fidelity-scan.md`](2026-09-30-book-fidelity-scan.md); a matriz linha a linha está em [`book-fidelity-page-matrix.csv`](book-fidelity-page-matrix.csv).
+4. A comparação reportou zero divergências de texto/estilo e bbox, mas destacou 61 páginas com fontes remotas/sistema, 32 páginas com PUA e uma página com Identity-H. Nenhuma página foi aprovada visualmente pelo scanner.
+5. Foram renderizadas páginas-fonte representativas para entender os sinais; ainda falta comparar os renders do app na mesma escala. Nenhum JSON, rascunho ou registro de banco foi alterado.
+
+## Próxima fase
+
+1. Validar visualmente no app as classes assinaladas: símbolos dependentes de Webdings/Wingdings, `CinzelDecorative`, `Aristelle` mapeada para Inter, e conteúdo complexo em múltiplas colunas/imagens.
+2. Usar um lote-piloto heterogêneo: páginas 3, 4, 6, 13, 15, 24 e 101; página 2 é controle aprovado pelo usuário para as mudanças recentes.
+3. Distinguir discrepância da extração, do mapeamento de fonte e do frame/unidade editável. Corrigir uma regra compartilhada apenas com evidência e verificar outras páginas da mesma classe; preservar exceções específicas.
+4. Depois do piloto, trabalhar por lotes até que cada página tenha status visual ou uma exceção explícita. Não iniciar/expandir tradução em página sem status `visually-approved` ou exceção acordada.
 
 ## Limitações atuais
 
