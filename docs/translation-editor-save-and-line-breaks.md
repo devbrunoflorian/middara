@@ -24,6 +24,10 @@ O `:root` do app define `line-height: 145%`. O `.realbox` não declarava a próp
 
 O `.realbox` agora usa `line-height: 1`, a mesma proporção já usada nas linhas originais. Uma quebra manual continua sendo uma quebra de linha; não deve criar um espaçamento de parágrafo implícito.
 
+### Prévia durante a edição do texto
+
+O modo `Edit Text` atualizava somente o `textarea`; o renderer só recebia o conteúdo novo depois de clicar em `Confirm`. Agora, enquanto esse modo está aberto, cada alteração envia um segmento provisório ao `PageRenderer`, que atualiza o `.realbox` na posição e na largura reais do bloco. `Confirm` aplica o texto ao rascunho do editor; `Cancel` descarta o texto provisório e restaura a prévia anterior. Isso permite avaliar quebras e encaixe sem depender da caixa pequena do editor.
+
 ### Salvamento e sincronização
 
 - O app grava em `localStorage` antes de tentar o Payload.
@@ -44,5 +48,6 @@ O `.realbox` agora usa `line-height: 1`, a mesma proporção já usada nas linha
 - `.agents/rules/03-motor-de-renderizacao.md`: altura de linha própria para o preview de texto do PDF.
 - `.agents/rules/08-raio-de-alcance-de-regras-globais.md`: manter a alteração visual escopada a `.realbox` e conferir o alcance global.
 - `.agents/skills/visual-fidelity-qa/SKILL.md`: validar o comportamento no render real da página 2 após o teste visual.
+- `.agents/skills/layout-debugging/SKILL.md`: conservar o fluxo do texto no bloco real e diagnosticar sobreposição no renderer.
 
 Verificações executadas: `npm run build -w apps/web` e `npm run lint -w apps/web` passaram. O lint ainda reporta avisos existentes em componentes não alterados; o build ainda reporta que `/texture.png` não foi encontrada durante o build.

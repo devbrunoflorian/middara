@@ -24,8 +24,9 @@ To support this without breaking browser rendering, we map special characters to
 
 ## Documentation Index
 - `docs/architecture_v3_constraints.md`: Deep dive into the block-level rendering and constraint-based editor architecture.
-- `docs/translation-editor-save-and-line-breaks.md`: Save point for the docked block editor, explicit line-height, and local-first draft persistence.
+- `docs/translation-editor-save-and-line-breaks.md`: Save point for the docked editor, live text preview, line-height, and local-first draft persistence.
 - `docs/payload-database-recovery.md`: Payload database diagnosis, clone-only API verification, and the safe migration checkpoint.
+- `icebox/README.md`: Index and archival policy for superseded versions and retired project items.
 - `docs/QA/`: Spot checks and transcription analyses for specific pages.
 
 ---

@@ -115,15 +115,26 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   }, [existingOverride, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle]);
 
   useEffect(() => {
-    if (onDraftChange && segments.length > 0) {
+    const previewSegments = isEditingText
+      ? [{
+          text: editText,
+          font: toolFont,
+          size: toolSize,
+          color: toolColor,
+          weight: toolWeight,
+          style: toolStyle,
+        }]
+      : segments;
+
+    if (onDraftChange && previewSegments.length > 0) {
       onDraftChange({
         spanKey,
-        segments,
+        segments: previewSegments,
         textAlign,
         bbox
       });
     }
-  }, [segments, textAlign, onDraftChange, spanKey, bbox]);
+  }, [segments, textAlign, onDraftChange, spanKey, bbox, isEditingText, editText, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
 
   // Flatten segments to characters with their style info
   const chars = useMemo(() => {
