@@ -52,6 +52,29 @@
   z-index: 1000 !important;
 }
 
+.block-editable {
+  outline: 1px dashed transparent;
+  transition: outline 0.1s;
+  cursor: text;
+}
+
+.block-editable:hover {
+  outline: 2px dashed #007bff !important;
+  background-color: rgba(0, 123, 255, 0.05);
+  z-index: 999 !important;
+}
+
+.block-selected {
+  outline: 2px solid #007bff !important;
+  background-color: rgba(0, 123, 255, 0.1) !important;
+  z-index: 1000 !important;
+}
+
+.block-overflow .realbox {
+  border-bottom: 2px solid #ff6b6b !important;
+  box-shadow: 0 4px 6px -1px rgba(255, 107, 107, 0.4);
+}
+
 .edited-content {
   display: flex;
   flex-direction: column;

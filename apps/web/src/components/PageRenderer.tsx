@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
-import { RichSpanEditor, type SpanOverride, type Segment } from './RichSpanEditor';
+import { RichSpanEditor, type SpanOverride } from './RichSpanEditor';
 import './PageRenderer.css';
 import './Toast.css';
 
@@ -118,7 +118,7 @@ function segFontToCSS(f: string): string {
   return `'${f}', serif`;
 }
 
-function extractLineInfo(lineKey: string, line: LineData): SelectedSpanInfo {
+function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
   let text = '';
   let font = '';
   let size = 0;
@@ -126,19 +126,25 @@ function extractLineInfo(lineKey: string, line: LineData): SelectedSpanInfo {
   let weight = 400;
   let style: 'normal' | 'italic' = 'normal';
   
-  for (const span of line.spans) {
-    if (!font && span.font && !span.font.includes('Dingbat') && span.text.trim()) {
-      font = span.font;
-      size = span.size;
-      color = span.color || '#231f20';
-      const mapped = mapPdfFont(font);
-      weight = mapped.weight;
-      style = mapped.style;
+  const lines = block.lines || [];
+  for (const line of lines) {
+    if ((line as any).suspectedGhost) continue;
+    for (const span of line.spans) {
+      if (!font && span.font && !span.font.includes('Dingbat') && span.text.trim()) {
+        font = span.font;
+        size = span.size;
+        color = span.color || '#231f20';
+        const mapped = mapPdfFont(font);
+        weight = mapped.weight;
+        style = mapped.style;
+      }
+      text += span.displayOverride || span.text;
     }
-    text += span.displayOverride || span.text;
   }
   
-  // Do not trim inside if there are spaces, but trim the end result
+  // Collapse newlines inside the block text to form a flowing paragraph
+  text = text.replace(/\n/g, ' ').replace(/ +/g, ' ').trim();
+  
   if (!font) {
       const mapped = mapPdfFont('AGaramondPro');
       font = 'AGaramondPro';
@@ -146,7 +152,7 @@ function extractLineInfo(lineKey: string, line: LineData): SelectedSpanInfo {
       style = mapped.style;
       size = 13;
   }
-  return { spanKey: lineKey, text, font, family: mapPdfFont(font).family, weight, style, color, size, bbox: line.bbox };
+  return { spanKey: blockKey, text, font, family: mapPdfFont(font).family, weight, style, color, size, bbox: block.bbox };
 }
 
 /* ─────────────────────────────────────────────
@@ -256,7 +262,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   const [scale, setScale] = useState(1);
   const [selectedSpan, setSelectedSpan] = useState<SelectedSpanInfo | null>(null);
   const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => loadOverrides(language));
-  const [draftOverride, setDraftOverride] = useState<Segment[] | null>(null);
+  const [draftOverride, setDraftOverride] = useState<SpanOverride | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -321,8 +327,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
     setDraftOverride(null);
   }, [isAdmin]);
 
-  const handleDraftChange = useCallback((segments: Segment[]) => {
-    setDraftOverride(segments);
+  const handleDraftChange = useCallback((draft: SpanOverride) => {
+    setDraftOverride(draft);
   }, []);
 
   const handleSaveOverride = useCallback(async (override: SpanOverride | null) => {
@@ -406,8 +412,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
               isAdmin={isAdmin}
               contentsMap={contentsMap}
               onNavigate={onNavigate}
-              onLineClick={handleSpanClick}
-              selectedSpanKey={selectedSpan?.spanKey || null}
+              onBlockClick={handleSpanClick}
+              selectedBlockKey={selectedSpan?.spanKey || null}
               overrides={overrides}
               draftOverride={draftOverride}
             />
@@ -444,16 +450,18 @@ interface SpanBlockProps {
   isAdmin: boolean;
   contentsMap?: Map<string, number>;
   onNavigate?: (pageNum: number) => void;
-  onLineClick: (info: SelectedSpanInfo) => void;
-  selectedSpanKey: string | null;
+  onBlockClick: (info: SelectedSpanInfo) => void;
+  selectedBlockKey: string | null;
   overrides: Map<string, SpanOverride>;
-  draftOverride: Segment[] | null;
+  draftOverride: SpanOverride | null;
 }
 
 const SpanBlock: React.FC<SpanBlockProps> = ({ 
   block, blockIdx, pageNumber, scale, isAdmin, contentsMap, 
-  onNavigate, onLineClick, selectedSpanKey, overrides, draftOverride 
+  onNavigate, onBlockClick, selectedBlockKey, overrides, draftOverride 
 }) => {
+  const blockRef = useRef<HTMLDivElement>(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
   if (!block.lines || block.lines.length === 0) return null;
 
   const blockX = block.bbox[0];
@@ -470,20 +478,78 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     zIndex: block.zIndex || 10,
   };
 
+  const blockKey = `page_${pageNumber}_block_${blockIdx}`;
+  
+  let currentOverride = overrides.get(blockKey);
+  if (selectedBlockKey === blockKey && draftOverride) {
+    currentOverride = draftOverride;
+  }
+
+  // Effect to measure height and set overflowing state for the live preview indicator
+  useEffect(() => {
+    if (currentOverride && blockRef.current) {
+      const actualHeight = blockRef.current.scrollHeight;
+      setIsOverflowing(actualHeight > blockH * scale + 2); // 2px tolerance
+    } else {
+      setIsOverflowing(false);
+    }
+  }, [currentOverride, scale, blockH]);
+
+  const blockHoverClass = isAdmin ? `block-editable ${selectedBlockKey === blockKey ? 'block-selected' : ''}` : '';
+  const overflowClass = isOverflowing ? 'block-overflow' : '';
+
+  if (currentOverride && currentOverride.segments.length > 0) {
+    // Determine the available width/X based on the first line to align with column bounds
+    const firstLine = block.lines[0];
+    const rawX = (firstLine as any).availableX !== undefined ? (firstLine as any).availableX : blockX;
+    const rawWidth = (firstLine as any).availableWidth || blockW;
+    const blockLineX = (rawX - blockX) * scale;
+    const blockLineW = rawWidth * scale;
+
+    return (
+      <div className={`block-container ${blockHoverClass} ${overflowClass}`} style={blockStyle} onClick={() => isAdmin && onBlockClick(extractBlockInfo(blockKey, block))}>
+        <div 
+          ref={blockRef}
+          className={`realbox`} 
+          style={{
+            position: 'absolute',
+            left: `${blockLineX}px`,
+            top: `0px`,
+            width: `${blockLineW}px`,
+            whiteSpace: 'pre-wrap',
+            textAlign: currentOverride.textAlign || 'left',
+            display: 'block',
+            fontSize: 0,
+            cursor: isAdmin ? 'text' : 'default',
+          }}
+        >
+          {currentOverride.segments.map((seg, segIdx) => (
+            <span
+              key={segIdx}
+              style={{
+                fontFamily: segFontToCSS(seg.font),
+                fontSize: `${seg.size * scale}px`,
+                fontWeight: seg.weight,
+                fontStyle: seg.style,
+                color: seg.color,
+                whiteSpace: 'pre-wrap',
+                fontVariantLigatures: 'none',
+                fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
+                letterSpacing: '-0.015em',
+              }}
+            >
+              {seg.text}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="block-container" style={blockStyle}>
+    <div className={`block-container ${blockHoverClass}`} style={blockStyle} onClick={() => isAdmin && onBlockClick(extractBlockInfo(blockKey, block))}>
       {block.lines.map((line, lIdx) => {
         const lineId = line.id !== undefined ? line.id : lIdx;
-        const lineKey = `page_${pageNumber}_block_${blockIdx}_line_${lineId}`;
-        let currentOverride = overrides.get(lineKey);
-        
-        if (selectedSpanKey === lineKey && draftOverride) {
-          currentOverride = {
-            spanKey: lineKey,
-            bbox: line.bbox,
-            segments: draftOverride,
-          };
-        }
 
         return (
           <LineRenderer
@@ -494,10 +560,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             blockOriginY={blockY}
             targetPage={contentsMap?.get(line.id)}
             onNavigate={onNavigate}
-            isAdmin={isAdmin}
-            isSelected={selectedSpanKey === lineKey}
-            override={currentOverride}
-            onClick={() => onLineClick(extractLineInfo(lineKey, line))}
+            isAdmin={false} // Click is handled at block level now
+            isSelected={false}
+            onClick={() => {}}
           />
         );
       })}
@@ -558,10 +623,11 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   };
 
   const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
     if (targetPage && onNavigate) {
+      e.stopPropagation();
       onNavigate(targetPage);
     } else if (isAdmin) {
+      // Do not stop propagation, let the block catch the click
       onClick();
     }
   };

@@ -52,7 +52,7 @@ interface RichSpanEditorProps {
   onClose: () => void;
   onSave: (override: SpanOverride | null) => void;
   existingOverride?: SpanOverride | null;
-  onDraftChange?: (segments: Segment[]) => void;
+  onDraftChange?: (draft: SpanOverride) => void;
 }
 
 export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
@@ -116,9 +116,14 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
   useEffect(() => {
     if (onDraftChange && segments.length > 0) {
-      onDraftChange(segments);
+      onDraftChange({
+        spanKey,
+        segments,
+        textAlign,
+        bbox
+      });
     }
-  }, [segments, onDraftChange]);
+  }, [segments, textAlign, onDraftChange, spanKey, bbox]);
 
   // Flatten segments to characters with their style info
   const chars = useMemo(() => {
@@ -408,10 +413,15 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         {/* Header */}
         <div className="rse-header">
           <div>
-            <h3>✏️ Rich Span Editor</h3>
+            <h3>✏️ Rich Block Editor</h3>
             <span className="rse-subtitle">Page {pageNumber} · <code>{spanKey}</code></span>
           </div>
-          <button className="rse-close" onClick={onClose}>✕</button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <span style={{ fontSize: '12px', color: '#666', fontStyle: 'italic' }}>
+              Live preview active
+            </span>
+            <button className="rse-close" onClick={onClose}>✕</button>
+          </div>
         </div>
 
         {/* Toolbar */}
