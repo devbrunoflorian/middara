@@ -88,6 +88,28 @@
   box-shadow: 0 4px 6px -1px rgba(255, 107, 107, 0.4);
 }
 
+.credit-field {
+  box-sizing: border-box;
+}
+
+.credit-edit-field {
+  cursor: text;
+  outline: 1px dashed transparent;
+  transition: outline-color 0.1s, background-color 0.1s;
+}
+
+.credit-edit-field:hover {
+  outline: 2px dashed #007bff;
+  background-color: rgba(0, 123, 255, 0.05);
+  z-index: 1001;
+}
+
+.credit-field-selected {
+  outline: 2px solid #007bff;
+  background-color: rgba(0, 123, 255, 0.08);
+  z-index: 1002;
+}
+
 .edited-content {
   display: flex;
   flex-direction: column;

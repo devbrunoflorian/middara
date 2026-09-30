@@ -52,10 +52,11 @@ interface RichSpanEditorProps {
   originalTextAlign?: TextAlignment;
   bbox: [number, number, number, number];
   pageNumber: number;
+  language: 'en' | 'pt-BR';
   onClose: () => void;
   onSave: (override: SpanOverride | null) => void;
   existingOverride?: SpanOverride | null;
-  onDraftChange?: (draft: SpanOverride) => void;
+  onDraftChange?: (draft: SpanOverride | null) => void;
 }
 
 export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
@@ -69,13 +70,29 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   originalTextAlign = 'left',
   bbox,
   pageNumber,
+  language,
   onClose,
   onSave,
   existingOverride,
   onDraftChange,
 }) => {
+  const baseSegments = useMemo<Segment[]>(() => {
+    if (existingOverride && existingOverride.segments.length > 0) {
+      return existingOverride.segments;
+    }
+    return [{
+      text: originalText,
+      font: originalFont,
+      size: originalSize,
+      color: originalColor,
+      weight: originalWeight,
+      style: originalStyle,
+    }];
+  }, [existingOverride, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle]);
+  const baseTextAlign = existingOverride?.textAlign ?? originalTextAlign;
+
   // Segments = the array of styled character runs
-  const [segments, setSegments] = useState<Segment[]>([]);
+  const [segments, setSegments] = useState<Segment[]>(baseSegments);
   // Selection range (character indices into the flattened text)
   const [selStart, setSelStart] = useState<number | null>(null);
   const [selEnd, setSelEnd] = useState<number | null>(null);
@@ -95,7 +112,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const [toolColor, setToolColor] = useState(originalColor);
   const [toolSize, setToolSize] = useState(originalSize);
   const [toolLigatures, setToolLigatures] = useState(true);
-  const [textAlign, setTextAlign] = useState<TextAlignment>(existingOverride?.textAlign || originalTextAlign);
+  const [textAlign, setTextAlign] = useState<TextAlignment>(baseTextAlign);
   // Text editing
   const [isEditingText, setIsEditingText] = useState(false);
   const [editText, setEditText] = useState('');
@@ -103,46 +120,13 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const charGridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setTextAlign(existingOverride?.textAlign || originalTextAlign);
-  }, [spanKey, existingOverride?.textAlign, originalTextAlign]);
+    setTextAlign(baseTextAlign);
+  }, [spanKey, baseTextAlign]);
 
   // Initialize segments from existing override or original span
   useEffect(() => {
-    if (existingOverride && existingOverride.segments.length > 0) {
-      setSegments(existingOverride.segments);
-    } else {
-      setSegments([{
-        text: originalText,
-        font: originalFont,
-        size: originalSize,
-        color: originalColor,
-        weight: originalWeight,
-        style: originalStyle,
-      }]);
-    }
-  }, [existingOverride, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle]);
-
-  useEffect(() => {
-    const previewSegments = isEditingText
-      ? [{
-          text: editText,
-          font: toolFont,
-          size: toolSize,
-          color: toolColor,
-          weight: toolWeight,
-          style: toolStyle,
-        }]
-      : segments;
-
-    if (onDraftChange && previewSegments.length > 0) {
-      onDraftChange({
-        spanKey,
-        segments: previewSegments,
-        textAlign,
-        bbox
-      });
-    }
-  }, [segments, textAlign, onDraftChange, spanKey, bbox, isEditingText, editText, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
+    setSegments(baseSegments);
+  }, [spanKey, baseSegments]);
 
   // Flatten segments to characters with their style info
   const chars = useMemo(() => {
@@ -165,6 +149,43 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
   // Full text from segments
   const fullText = useMemo(() => chars.map(c => c.char).join(''), [chars]);
+
+  const segmentsChanged = JSON.stringify(segments) !== JSON.stringify(baseSegments);
+  const textChanged = isEditingText && editText !== fullText;
+  const hasDraftChanges = segmentsChanged || textChanged || textAlign !== baseTextAlign;
+
+  const requestClose = useCallback(() => {
+    if (language === 'pt-BR' && hasDraftChanges && !window.confirm('Há alterações de tradução não salvas. Quer sair e descartá-las?')) {
+      return;
+    }
+    onClose();
+  }, [language, hasDraftChanges, onClose]);
+
+  useEffect(() => {
+    if (!onDraftChange) return;
+    if (!hasDraftChanges) {
+      onDraftChange(null);
+      return;
+    }
+
+    const previewSegments = isEditingText && editText !== fullText
+      ? [{
+          text: editText,
+          font: toolFont,
+          size: toolSize,
+          color: toolColor,
+          weight: toolWeight,
+          style: toolStyle,
+        }]
+      : segments;
+
+    onDraftChange({
+      spanKey,
+      segments: previewSegments,
+      textAlign,
+      bbox
+    });
+  }, [segments, textAlign, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, editText, fullText, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
 
   // Selection helpers
   const hasSelection = selStart !== null && selEnd !== null && selStart !== selEnd;
@@ -377,31 +398,40 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   }, [fullText]);
 
   const handleConfirmEditText = useCallback(() => {
-    // Replace all segments with one segment using current tool settings
-    setSegments([{
-      text: editText,
-      font: toolFont,
-      size: toolSize,
-      color: toolColor,
-      weight: toolWeight,
-      style: toolStyle,
-    }]);
+    // A no-op confirmation must not flatten existing styled runs.
+    if (editText !== fullText) {
+      setSegments([{
+        text: editText,
+        font: toolFont,
+        size: toolSize,
+        color: toolColor,
+        weight: toolWeight,
+        style: toolStyle,
+      }]);
+    }
     setIsEditingText(false);
     setSelStart(null);
     setSelEnd(null);
-  }, [editText, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
+  }, [editText, fullText, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
 
   const handleSave = useCallback(() => {
+    if (!hasDraftChanges) {
+      onClose();
+      return;
+    }
     onSave({
       spanKey,
       segments,
       bbox,
       textAlign,
     });
-  }, [onSave, spanKey, segments, bbox, textAlign]);
+  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign]);
 
   // Reset to original
   const handleReset = useCallback(() => {
+    if (language === 'pt-BR' && !window.confirm('Resetar esta tradução em português? O rascunho salvo desta unidade será removido.')) {
+      return;
+    }
     setSegments([{
       text: originalText,
       font: originalFont,
@@ -413,7 +443,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setSelStart(null);
     setSelEnd(null);
     onSave(null);
-  }, [originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, onSave]);
+  }, [language, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, onSave]);
 
   const fontToCSS = (f: string) => {
     if (f.includes('Optima') || f === 'OptimaLTStd') return "'OptimaLTStd', serif";
@@ -427,7 +457,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   };
 
   return (
-    <div className="rse-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+    <div className="rse-overlay" onClick={(e) => { if (e.target === e.currentTarget) requestClose(); }}>
       <div className="rse-panel">
         {/* Header */}
         <div className="rse-header">
@@ -439,7 +469,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             <span style={{ fontSize: '12px', color: '#666', fontStyle: 'italic' }}>
               Live preview active
             </span>
-            <button className="rse-close" onClick={onClose}>✕</button>
+            <button className="rse-close" onClick={requestClose}>✕</button>
           </div>
         </div>
 

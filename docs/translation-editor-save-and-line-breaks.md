@@ -61,3 +61,7 @@ O modo `Edit Text` atualizava somente o `textarea`; o renderer só recebia o con
 Verificações executadas: `npm run build -w apps/web` e `npm run lint -w apps/web` passaram. O lint ainda reporta avisos existentes em componentes não alterados; o build ainda reporta que `/texture.png` não foi encontrada durante o build.
 
 Para as correções de zoom e atalhos de edição deste save point, `npm run build -w apps/web` passou em 2026-09-30. O build mantém o aviso já conhecido sobre `/texture.png`. O usuário confirmou visualmente que, ampliada, a barra horizontal continua acessível enquanto rola verticalmente; esse comportamento fica cravado. Ainda falta a confirmação visual do zoom sem deriva e da seleção dos links do índice no modo admin.
+
+## Follow-up — Payload persistence restored (2026-09-30)
+
+Correction to the earlier pending limitation above: Payload is now configured locally to use the ignored current-schema `apps-admin.db`; the legacy `middara.db` remains untouched. API create/read/update/delete passed with a disposable PT test key and the test row was removed. This proves the endpoint path and DB schema can persist records, but no real translation draft was saved/reloaded through the UI because automated browser access to the local origin is blocked by a saved site preference. Two old PT line-level records remain recoverable in the legacy DB. Detailed record: [`project-progress/2026-09-30-payload-save-reset-safety.md`](project-progress/2026-09-30-payload-save-reset-safety.md).
