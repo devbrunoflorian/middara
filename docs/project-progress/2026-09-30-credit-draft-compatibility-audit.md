@@ -1,6 +1,6 @@
 # Task: static audit of translation-draft compatibility
 
-- **Status:** in progress; source review only.
+- **Status:** in progress; not yet started; the user's master-promotion request took priority.
 - **Branch:** `fix/pixel-render/overflow`
 - **Starting commit:** `c3d192e` (`docs: record project handoff publication`)
 
@@ -21,7 +21,7 @@ This audit can prove source-level key isolation and write behavior. It cannot pr
 
 ## Results
 
-Pending source review.
+No source files were inspected for this audit yet. The task record and method were prepared, then the user requested promotion of the feature branch to master. Resume the static review only after this promotion task is closed.
 
 ## Next step
 

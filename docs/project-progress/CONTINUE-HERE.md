@@ -3,7 +3,7 @@
 - **Last updated:** 2026-09-30
 - **Working branch:** `fix/pixel-render/overflow`
 - **Code baseline:** `a8eae78` — `Fix viewer scroll and add translation frame pilot`
-- **Current status:** sample audits and key-impact dry run are complete. The page 2 credit editor proof has not started because browser-local draft compatibility could not be inspected. Local dev servers were restarted after the user's PC reboot and are ready.
+- **Current status:** sample audits and key-impact dry run are complete. `fix/pixel-render/overflow` is now the local and remote `master`; the former master tips are preserved in backup branches. The page 2 credit editor proof has not started because browser-local draft compatibility could not be inspected. Local dev servers were restarted after the user's PC reboot and are ready.
 
 This is the current continuation guide. Read it first, then follow the linked source documents; do not infer implementation approval from audit findings or from plans written by a previous assistant.
 
@@ -83,6 +83,6 @@ No browser storage was read/exported, no local draft was modified, and the curre
 
 ## Working-tree and change status
 
-At last inspection the current branch is `fix/pixel-render/overflow` at baseline `a8eae78`. This continuation/documentation work is in an uncommitted working tree. Existing uncommitted changes are analysis/reporting/scripts and docs/icebox organization; no `apps/` source edits are currently listed by `git status`. Do not commit or push unless the user explicitly requests it in the active session. Inspect `git status --short --branch` before continuing because the working tree can change.
+At the last promotion check, local/remote `master` and `fix/pixel-render/overflow` all pointed to `0d0b4b6`. The old remote tip `da77930` is preserved at `backup/remote-master-before-overflow-reset-20260930`; the former remote-tracking tip `9dd0b7b` is preserved at `backup/origin-master-before-upstream-rewrite-20260930`; the divergent local tip `cb4df27` is preserved locally at `backup/local-master-before-overflow-reset-20260930`. The underlying code baseline for the layout pilot is `a8eae78`. Do not commit or push unless the user explicitly requests it in the active session. Inspect `git status --short --branch` before continuing because the working tree can change.
 
 The task-by-task evidence and archival reasons are in `docs/project-progress/` and `icebox/`; keep active documentation in its normal location and archive only superseded versions with a reason in the item's icebox README.
