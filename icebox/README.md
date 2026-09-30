@@ -23,3 +23,4 @@ This folder holds previous versions and retired project items. Active files rema
 
 - [Layout policy before key-impact link](2026-09-30-key-impact-layout-policy-before/README.md): prior text-layout policy before linking the translation-key impact report.
 - [Temporary audit-output ignore snapshot](2026-09-30-tmp-audit-ignore-before/README.md): previous ignore rules before marking regenerable `tmp/` audit outputs as local-only.
+- [Handoff before credit compatibility audit](2026-09-30-handoff-before-credit-compatibility-audit/README.md): preserves the post-promotion handoff before recording source-level draft-key compatibility findings.
