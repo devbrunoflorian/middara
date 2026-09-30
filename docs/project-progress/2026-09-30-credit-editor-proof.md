@@ -65,4 +65,4 @@ Do not migrate Payload keys, batch-extract the 102 pages, overwrite browser draf
 
 ## Next step
 
-To continue the draft-safety check, the user must either enable the saved permission for the local app in Codex/browser settings, or provide the relevant local-draft key names and counts through a safe manual inspection. Then resume this task record. Do not implement or activate the split credit units until old draft compatibility is addressed. If a concrete page 2 proof is later built, request visual confirmation before generalizing to pages 3 or 101.
+Continue with the read-only source compatibility audit in [`2026-09-30-credit-draft-compatibility-audit.md`](2026-09-30-credit-draft-compatibility-audit.md). Do not implement or activate the split credit units until source-level compatibility and draft-preservation behavior are addressed. If a concrete page 2 proof is later built, request visual confirmation before generalizing to pages 3 or 101.

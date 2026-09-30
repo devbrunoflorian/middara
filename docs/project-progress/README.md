@@ -15,3 +15,5 @@ For new work, add a dated task record before implementation, update it as findin
 - [2026-09-30 — Translation-key impact dry run](2026-09-30-translation-key-dry-run.md): completed read-only mapping from 253 representative semantic units to current editor keys, before any integration or migration.
 - [2026-09-30 — Page 2 credit editor proof](2026-09-30-credit-editor-proof.md): local app servers are running; draft inspection remains blocked by the browser's saved access setting, and no integration has started.
 - [2026-09-30 — Project continuation handoff](2026-09-30-project-handoff.md): consolidated the current project state into a required developer/agent handoff and recorded the post-reboot server restart.
+- [2026-09-30 — Credit draft compatibility audit](2026-09-30-credit-draft-compatibility-audit.md): read-only source trace to determine whether new semantic credit keys can preserve existing drafts without browser storage access.
+- [2026-09-30 — Promote overflow branch to master](2026-09-30-promote-overflow-to-master.md): user-requested replacement of remote `master` with the current feature branch, preserving the old master commit for recovery.
