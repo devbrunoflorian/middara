@@ -2,7 +2,7 @@
 
 **Status:** the page 2 dialogue-frame pilot and fixed viewer scrollport were visually approved by the user. Generalizing frame extraction remains pending; selection-outline polish is documented for later.
 
-## Decision being proposed
+## Data contract for the sample pilot
 
 The bounding box of printed glyphs is evidence about where the source text was painted. It is not automatically the width available to a translated paragraph.
 
@@ -14,6 +14,8 @@ The data model and renderer must keep these concepts separate:
 - **Vertical budget:** separate from horizontal frame width. A wider frame may reduce wrapping; it does not authorize overlapping the next paragraph or artwork.
 
 The editor should permit natural reflow across the full intended frame while retaining the source typography and alignment where appropriate. It should not expand across a neighboring column, illustration, caption, or other protected region. A real vertical overflow remains visible and must be resolved or explicitly accepted; it must not be hidden by clipping.
+
+The sample extractor represents the concepts separately: a `region` carries observed `sourceBounds`; an editable `unit` carries its semantic kind, source-block lineage, source ink bbox, and unmodified `sourceLines`; each source line retains baseline, line bbox, and style-bearing span runs. A `layoutFrame` is deliberately absent from these sample regions until it is inferred from page design evidence. Structured values such as a credit's bold `label`/regular `body` or an index row's `pageReference` are conveniences derived from those runs, not replacements for the original runs. This is an audit model only; the serialized production schema and translation keys remain undecided.
 
 ## Evidence from page 2
 
@@ -38,6 +40,18 @@ The read-only audit also confirmed three separate follow-up problems. They are r
 
 These findings make the implementation order explicit: prove a non-destructive frame on page 2 first, then address mixed styles and semantic splitting as distinct work, and only then generalize extraction to multi-column and index pages.
 
+## Read-only sample extraction results
+
+The reproducible analyzer is [`scripts/audit_layout_sample.py`](../../scripts/audit_layout_sample.py). It reads the source PDF and writes a machine-readable audit snapshot to `tmp/layout-sample/`; it never overwrites the page JSON consumed by the app. The current measured results are recorded in [`sample-layout-audit.md`](sample-layout-audit.md).
+
+- **Page 2 credits:** 3 visual columns and 17 category candidates split at bold labels ending in `:`. All 17 retain their source line boxes and styled runs, with a separately derived bold label and regular body.
+- **Page 3 contents:** 39 label units pair with 39 page-reference lines at a measured baseline delta of 0.49–0.55 pt. “Summary of Components” maps to 4 and “Choosing a Game Mode” maps to 8. Dotted leaders are vector artwork, not editable text.
+- **Page 101 index:** 3 independent column blocks yield 74, 74, and 49 baseline groups. Of 197 candidate rows, 192 have numeric references (including ranges and comma-separated lists). Four rows appear to be section headings without references. One row, “Values”, has the nonnumeric right-edge text “Back” in the source PDF and is explicitly flagged for human review.
+
+These counts validate a sample-level segmentation approach, not the final production output. Stable translation keys remain a separate migration concern: splitting a legacy multi-entry block cannot silently reuse its old key for multiple new units. Before app integration, prepare a dry-run mapping that preserves old drafts and reports ambiguous legacy blocks.
+
+The read-only key-impact dry run is documented in [`sample-key-impact.md`](sample-key-impact.md). It maps all 253 sample units to current editor keys with unique bbox containment and matching source lineage. Eleven of the 46 touched keys fan out to multiple proposed units (1 on page 2, 7 on page 3, and 3 on page 101). A local read-only query found no records for these 46 keys in `apps-admin.db`; this does not cover browser-local drafts or any other deployed database. Do not activate the split units under those legacy keys.
+
 ## Why the prior clustering idea is insufficient
 
 Clustering based only on the min/max X of each block's ink repeats the same mistake: centered titles, short last lines, and short dialogue lines have smaller ink bounds even when they share a wider column. A strict margin match can also split members of the same region. The cluster should describe a layout region; it cannot be inferred solely by comparing painted glyph extents.
@@ -54,12 +68,12 @@ Clustering based only on the min/max X of each block's ink repeats the same mist
 
 ## Validation plan before batch extraction
 
-1. Create a read-only geometry audit for page 2 showing source ink bounds beside proposed frames for body paragraphs, the centered dialogue, and the three-column credits.
-2. Prototype the dialogue with a `585.63 pt` frame centered around the body column. Compare it to the original PDF and confirm the Portuguese text no longer wraps at the source ink width or collides with the next paragraph.
-3. Audit page 3 headings and contents entries to ensure a shared frame does not merge separate semantic blocks or their page references.
-4. Audit a true narrow-wrap case next to artwork and a multi-column/index page. Preserve narrower frames only where the visual design requires them.
+1. **Done for the representative sample:** record source geometry and units for the page 2 credits, page 3 contents, and page 101 index using `python scripts/audit_layout_sample.py --report docs/architecture/sample-layout-audit.md`.
+2. **Done for the first rendering pilot:** use a `585.63 pt` frame for the page 2 centered dialogue. The user confirmed the live text uses the broader frame and that the blue outline still points to the original source bounds.
+3. **Next:** integrate the sample units behind optional sidecar metadata without changing the current page JSON, then visually inspect the credits, page 3 row/page pairing, and page 101 index entries in the app.
+4. Confirm a true narrow-wrap case next to artwork and preserve narrower frames only where the PDF visibly requires them.
 5. Preserve all existing block keys and saved translations while testing the frame as non-destructive metadata. Do not regenerate all 102 pages or migrate Payload keys during this proof.
-6. Ask for visual approval on these representative pages. The page 2 dialogue pilot has been approved; remaining representative cases still need review before promoting the generalized extraction into a project rule/skill and processing small batches.
+6. Ask for visual approval on the remaining representative cases. Only after the credits, page 3, and page 101 behavior is approved should the serialized model be generalized and processed in small batches.
 
 ## Acceptance criteria
 
@@ -72,7 +86,7 @@ Clustering based only on the min/max X of each block's ink repeats the same mist
 
 ## Pilot state
 
-The first renderer prototype is stored in `apps/web/public/pages/page_002/layout_frames.json`, keyed by extracted block ID. `App.tsx` overlays this optional metadata at load time, and `SpanBlock` uses it only for replacement text. The source DOM JSON, array order, block keys, and saved translation schema remain untouched. The editor takes the frame's center alignment as its default; a saved user override still takes precedence.
+The first renderer prototype is stored in `apps/web/public/pages/page_002/layout_frames.json`, keyed by extracted block ID. `App.tsx` overlays this optional metadata at load time, and `SpanBlock` uses it only for replacement text. The source DOM JSON, array order, block keys, and saved translation schema remain untouched. The editor takes the frame's center alignment as its default; a saved user override still takes precedence. `scripts/audit_layout_sample.py` adds an audit-only sample model for semantic units and lineage; it does not feed the app yet.
 
 This is a one-block pilot, not the final extraction algorithm. The user approved the live page 2 result, including keeping the blue source outline visible while editing. No 102-page extraction, database change, or translation-key migration is part of the pilot.
 

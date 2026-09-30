@@ -2,6 +2,9 @@
 
 Esta skill não é sobre código — é sobre como a IA (Gemini ou qualquer outra) deve se comportar trabalhando neste projeto especificamente, porque ele tem um risco real de "parecer certo mas não estar": dado complexo, layout denso, 102 páginas, e um usuário que não vai conferir célula por célula do JSON manualmente.
 
+## Regra 0 — Toda tarefa tem registro de progresso obrigatório
+Antes de implementar ou investigar de forma substancial, abra ou atualize um registro em `docs/project-progress/`. Registre objetivo, método previsto e critério de verificação. Durante o trabalho, documente ações, achados e correções; ao concluir ou trocar de tarefa, registre resultado, verificações, limites e próximo passo. Essa obrigação continua valendo quando a tarefa se desdobra automaticamente em outra. Não finalize uma tarefa sem atualizar seu registro.
+
 ## Regra 1 — Testar pequeno antes de rodar grande, sempre
 Nunca rodar uma operação nas 102 páginas de uma vez sem antes validar em uma amostra pequena (1 página de teste, depois 5-10). Isso vale para extração, para geração de componentes, para qualquer script em lote.
 
