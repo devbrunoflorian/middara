@@ -1,16 +1,15 @@
 /* ─────────────────────────────────────────────
-   RichSpanEditor – Full overlay editor styles
+   RichSpanEditor – Docked editing panel
    ───────────────────────────────────────────── */
 
 .rse-overlay {
-  position: fixed;
-  top: 60px; /* Below the top navbar */
-  right: 0;
-  width: 420px;
-  height: calc(100vh - 60px);
-  z-index: 10000;
+  position: relative;
+  width: min(420px, 40vw);
+  min-width: 280px;
+  height: 100%;
+  flex: 0 0 auto;
   display: flex;
-  pointer-events: none; /* Let clicks pass through the invisible part if any */
+  min-height: 0;
 }
 
 .rse-panel {
@@ -20,11 +19,17 @@
   height: 100%;
   border-radius: 0;
   border-left: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.5);
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.35);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  pointer-events: auto; /* Re-enable clicks for the panel itself */
+}
+
+@media (max-width: 700px) {
+  .rse-overlay {
+    width: 45vw;
+    min-width: 240px;
+  }
 }
 
 /* Header */

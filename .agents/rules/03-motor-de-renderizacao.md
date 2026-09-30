@@ -17,6 +17,9 @@ Curvas ornamentais complexas (florões, bordas decorativas desenhadas em Bézier
 ## Fontes no renderer
 Toda fonte usada num bloco de texto deve estar disponível via `@font-face` **antes** do primeiro render daquela página — evitar FOUT (flash of unstyled text) em algo que precisa parecer um livro premium. Pré-carregar as fontes da página atual e da próxima (prefetch) no modo fidelidade.
 
+### Quebras de linha em previews traduzidos
+O preview de tradução deve declarar `line-height` unitário no próprio `.realbox`, em vez de herdar uma porcentagem global do app. Um `line-height: 145%` global pode ser herdado como um valor computado fixo mesmo quando o tamanho da fonte do PDF é reduzido; quebras explícitas passam então a abrir espaços verticais grandes. Use `line-height: 1` para manter a métrica já usada pelas linhas originais do renderer e confira que cada `Enter` acrescenta somente uma linha-base.
+
 ## Validação obrigatória antes de considerar uma página "pronta"
 Renderizar a página no modo fidelidade e comparar lado a lado com o render de referência do PDF original (gerado na extração). Isso não é opcional nem "depois eu confero" — é parte do Definition of Done de qualquer página migrada.
 

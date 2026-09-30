@@ -21,6 +21,8 @@ Qualquer decisão de modelagem deve proteger esse princípio: **o banco é a fon
 
 6. **Fonte é uma string livre no schema (`fontFamily`), resolvida para arquivo real na camada de design tokens**, não uma referência direta a caminho de arquivo. Isso permite trocar o arquivo de fonte (ex: subset → fonte completa licenciada) sem migrar dado nenhum.
 
+7. **Rascunhos de tradução devem ser locais primeiro e sincronizados sem perda.** Grave o estado local antes da chamada remota. Ao carregar dados do servidor, combine-os com os rascunhos locais; uma resposta vazia do servidor não pode apagar traduções ainda não sincronizadas. Consultas de tradução devem restringir `spanKey` e `language` juntas. Se a unicidade atual do schema impedir a mesma chave em mais de um idioma, não atualize silenciosamente o registro de outro idioma: registre a limitação e trate a mudança de schema como uma migração explícita.
+
 ## O que não fazer
 - Não modelar página como HTML/JSON de layout específico de uma plataforma (ex: um JSON já pensado pra React). O schema é agnóstico de renderer — quem decide como desenhar é o `PageRenderer` de cada plataforma, lendo o mesmo dado.
 - Não misturar dado de conteúdo com dado de apresentação de forma irreversível (ex: não "achatar" cor + fonte + texto numa string de HTML pronta). Cada propriedade (posição, cor, fonte, texto) fica separada e tipada.

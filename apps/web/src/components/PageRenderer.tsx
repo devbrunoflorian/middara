@@ -181,14 +181,18 @@ async function fetchOverridesFromPayload(lang: string): Promise<Map<string, Span
 
 async function saveOverrideToPayload(override: SpanOverride, lang: string): Promise<boolean> {
   try {
-    const check = await fetch(`http://localhost:3000/api/translations?where[spanKey][equals]=${override.spanKey}`);
+    const query = new URLSearchParams({
+      'where[and][0][spanKey][equals]': override.spanKey,
+      'where[and][1][language][equals]': lang,
+    });
+    const check = await fetch(`http://localhost:3000/api/translations?${query}`);
     const checkData = await check.json();
     if (checkData.docs.length > 0) {
       const id = checkData.docs[0].id;
       const res = await fetch(`http://localhost:3000/api/translations/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: override.segments })
+        body: JSON.stringify({ language: lang, data: override.segments })
       });
       return res.ok;
     } else {
@@ -204,9 +208,13 @@ async function saveOverrideToPayload(override: SpanOverride, lang: string): Prom
   }
 }
 
-async function deleteOverrideFromPayload(spanKey: string): Promise<boolean> {
+async function deleteOverrideFromPayload(spanKey: string, lang: string): Promise<boolean> {
   try {
-    const check = await fetch(`http://localhost:3000/api/translations?where[spanKey][equals]=${spanKey}`);
+    const query = new URLSearchParams({
+      'where[and][0][spanKey][equals]': spanKey,
+      'where[and][1][language][equals]': lang,
+    });
+    const check = await fetch(`http://localhost:3000/api/translations?${query}`);
     const checkData = await check.json();
     if (checkData.docs.length > 0) {
       const id = checkData.docs[0].id;
@@ -234,7 +242,12 @@ function loadOverrides(lang: string): Map<string, SpanOverride> {
 
 function saveOverridesToStorage(lang: string, map: Map<string, SpanOverride>) {
   const arr = Array.from(map.values());
-  localStorage.setItem(getOverridesKey(lang), JSON.stringify(arr));
+  try {
+    localStorage.setItem(getOverridesKey(lang), JSON.stringify(arr));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 interface SelectedSpanInfo {
@@ -269,7 +282,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   useEffect(() => {
     fetchOverridesFromPayload(language).then((serverMap) => {
       if (serverMap) {
-        setOverrides(serverMap);
+        const merged = loadOverrides(language);
+        serverMap.forEach((override, key) => merged.set(key, override));
+        setOverrides(merged);
       } else {
         setOverrides(loadOverrides(language));
       }
@@ -305,11 +320,11 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   useEffect(() => {
     const updateScale = () => {
       if (containerRef.current && pageData) {
-        const parent = containerRef.current.parentElement;
-        if (parent) {
+        const stage = containerRef.current;
+        if (stage) {
           const padding = 60;
-          const availableWidth = parent.clientWidth - padding;
-          const availableHeight = parent.clientHeight - padding;
+          const availableWidth = stage.clientWidth - padding;
+          const availableHeight = stage.clientHeight - padding;
           const scaleX = availableWidth / pageData.width;
           const scaleY = availableHeight / pageData.height;
           setScale(Math.min(scaleX, scaleY) * zoomLevel);
@@ -319,7 +334,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
     updateScale();
     window.addEventListener('resize', updateScale);
     return () => window.removeEventListener('resize', updateScale);
-  }, [pageData, zoomLevel]);
+  }, [pageData, zoomLevel, selectedSpan]);
 
   const handleSpanClick = useCallback((info: SelectedSpanInfo) => {
     if (!isAdmin) return;
@@ -343,22 +358,33 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
       nextMap.delete(selectedSpan.spanKey);
     }
     setOverrides(nextMap);
+    const savedLocally = saveOverridesToStorage(language, nextMap);
 
-    // Save to server
     if (override) {
       const success = await saveOverrideToPayload(override, language);
       if (!success) {
-        setToast({ message: "Falha ao salvar no servidor. Rascunho local mantido.", type: 'error' });
+        setToast({
+          message: savedLocally
+            ? "Rascunho salvo neste navegador; não sincronizado com o servidor."
+            : "Falha ao salvar no navegador e no servidor.",
+          type: savedLocally ? 'success' : 'error',
+        });
         setTimeout(() => setToast(null), 5000);
-        saveOverridesToStorage(language, nextMap);
       } else {
         setToast({ message: "Salvo no Payload", type: 'success' });
         setTimeout(() => setToast(null), 3000);
-        saveOverridesToStorage(language, nextMap); // keep cache sync
       }
     } else if (selectedSpan) {
-      await deleteOverrideFromPayload(selectedSpan.spanKey);
-      saveOverridesToStorage(language, nextMap);
+      const deletedOnServer = await deleteOverrideFromPayload(selectedSpan.spanKey, language);
+      setToast({
+        message: deletedOnServer
+          ? "Rascunho removido do Payload."
+          : savedLocally
+            ? "Rascunho removido deste navegador; servidor não sincronizado."
+            : "Falha ao remover o rascunho.",
+        type: deletedOnServer || savedLocally ? 'success' : 'error',
+      });
+      setTimeout(() => setToast(null), 5000);
     }
 
     setIsSaving(false);
@@ -374,15 +400,15 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   const containerStyle: React.CSSProperties = {
     width: `${pageData.width * scale}px`,
     height: `${pageData.height * scale}px`,
-    marginLeft: selectedSpan ? '20px' : 'auto',
-    marginRight: selectedSpan ? '440px' : 'auto',
-    transition: 'margin 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
+    margin: 'auto',
+    transition: 'width 0.2s ease, height 0.2s ease',
     flexShrink: 0,
   };
 
   return (
-    <div className="page-renderer" style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center', overflowX: 'auto' }}>
-      <div ref={containerRef} className="page-container" style={containerStyle}>
+    <div className={`page-renderer ${selectedSpan ? 'editor-open' : ''}`} style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'stretch', overflow: 'hidden' }}>
+      <div ref={containerRef} className="page-stage">
+      <div className="page-container" style={containerStyle}>
         {toast && (
           <div className={`toast-notification toast-${toast.type}`}>
             {toast.message}
@@ -419,6 +445,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
             />
           );
         })}
+      </div>
       </div>
 
       {isAdmin && selectedSpan && (
@@ -462,7 +489,6 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 }) => {
   const blockRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
-  if (!block.lines || block.lines.length === 0) return null;
 
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
@@ -494,6 +520,8 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
       setIsOverflowing(false);
     }
   }, [currentOverride, scale, blockH]);
+
+  if (!block.lines || block.lines.length === 0) return null;
 
   const blockHoverClass = isAdmin ? `block-editable ${selectedBlockKey === blockKey ? 'block-selected' : ''}` : '';
   const overflowClass = isOverflowing ? 'block-overflow' : '';
