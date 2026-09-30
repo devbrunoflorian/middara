@@ -1,6 +1,6 @@
 # Task: durable project handoff and mandatory reading rule
 
-- **Status:** complete; handoff and mandatory reading rule are ready for commit/push.
+- **Status:** complete; handoff and mandatory reading rule are committed and pushed.
 - **Branch:** `fix/pixel-render/overflow`
 - **Baseline:** `a8eae78` (`Fix viewer scroll and add translation frame pilot`)
 
@@ -40,4 +40,4 @@ Resume `2026-09-30-credit-editor-proof.md` after reading [`CONTINUE-HERE.md`](CO
 
 ## Commit/push state
 
-User requested a commit and previously authorized pushing. Commit and push are pending final staged-file review and successful repository checks.
+Committed as `85d9641` (`docs: add project handoff and extraction audit`) and pushed to `origin/fix/pixel-render/overflow`. The commit contains documentation, audit scripts/reports, project rules, icebox snapshots, and the `tmp/` ignore entry; it does not contain app source or production page JSON.
