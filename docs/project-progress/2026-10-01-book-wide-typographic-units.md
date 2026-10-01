@@ -253,3 +253,10 @@ Não declarar a fidelidade tipográfica visual de todas as páginas completa: o 
 
 - `ce21a8b feat: support source-aware typography editing` e `82907c2 fix: restore verified page 63 glyphs` foram criados localmente, separados por responsabilidade. Nenhum force/rebase foi feito; a branch ainda não foi empurrada depois desses commits.
 - Próximo commit agrupará as unidades tipográficas/pictográficas já validadas, manifests, scanners e o registro consolidado. `git diff --cached --check` será exigido antes de cada commit; `npm run build -w apps/web`, os scanners e o `py_compile` já passaram após o conjunto completo de implementação.
+
+#### Commits desta rodada publicados (01/10/2026)
+
+- `ce21a8b feat: support source-aware typography editing` — suporte do renderer/editor a unidades por linha e runs inline.
+- `82907c2 fix: restore verified page 63 glyphs` — restauração de marcadores Wingdings/Zapf localizada na p. 63.
+- `1d05ff9 feat: apply audited typography units across the book` — 392 alvos por linha, separações inline 18/11 pt manifestadas e scanners/relatórios.
+- Push normal concluído para `origin/codex/book-visual-batch-audit`; o branch avançou de `720f9f7` para `1d05ff9`. Nenhum force push. A revisão completa da fidelidade inglesa continua ativa.

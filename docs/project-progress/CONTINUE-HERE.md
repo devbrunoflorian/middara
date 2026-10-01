@@ -1,6 +1,6 @@
 # Handoff: continue the Rulebook App translation and extraction work
 
-> **Checkpoint atualizado em 2026-10-01 — branch de tarefa baseada em `33ee49f`.** `codex/book-visual-batch-audit` já tem o commit `720f9f7` publicado em `origin`; o trabalho descrito abaixo está em novas alterações locais. O usuário agora autorizou commits separados e push normal destes incrementos.
+> **Checkpoint atualizado em 2026-10-01 — branch de tarefa baseada em `33ee49f`.** Os commits desta rodada foram separados e publicados em `origin/codex/book-visual-batch-audit`: `ce21a8b`, `82907c2` e `1d05ff9`. O último commit atualiza este handoff; nenhum force-push foi usado.
 
 **Tarefa ativa:** cumprir a instrução do usuário de levar a fidelidade de estilo das outras 101 páginas até o fim, com trabalho aplicado e evidência — sem encerrar em inventário. Começar pela hierarquia tipográfica: pesos, itálicos, caps/alternates, fontes e tamanhos; cada tamanho é limite de unidade e bboxes diferentes não devem ser fundidos. Não generalizar um patch por semelhança: PDF + span exato + fundo do app formam a prova por alvo.
 
@@ -8,11 +8,11 @@
 
 O inventário ainda encontra 1.295 blocos com múltiplos tamanhos em 91 páginas e 2.052 chaves antigas cujo impacto deve ser preservado/revisado. Um filtro estrito isolou 234 padrões simples em 59 páginas; depois das exclusões por ghosts, duplicatas, conteúdo microscópico/pictográfico e dos tracers p. 3/4, 181 foram aplicados. Restam 1.099 blocos mistos fora dessa classe simples, que exigem classificação por padrão (p. ex. heading com múltiplos níveis, texto sobre artwork, linhas/tamanhos na mesma baseline), não processamento manual cego. Próxima ação: agrupar os blocos restantes por forma estrutural, validar uma fatia de cada classe contra PDF/app, aplicar em lotes manifestados e continuar estilos inline, glyphs e geometria. O objetivo vigente é alinhar visual e estruturalmente as 102 páginas inglesas ao PDF antes de expandir a tradução. A figura composta p. 15 exige tratamento próprio como artwork localizada. Ao fechar a fidelidade inglesa, revisar `.agents/rules/` e `.agents/skills/` contra o fluxo e resultados reais: preservar princípios úteis, adaptar instruções obsoletas/incompatíveis e documentar o porquê. Depois, organizar glossário e drafts por página e avançar sem nova confirmação, conforme autorização do usuário.
 
-O inventário 102/102 ainda casa 23.584 spans; scanner de unidades: 11.220 candidatas e 2.052 blocos com impacto potencial de key. O dry-run p. 101 continua com 197 entradas (74/74/49), ainda não aprovado para produção. Nenhum push. Runtime: Vite `http://127.0.0.1:8080/`, Payload `http://127.0.0.1:3000/admin`.
+O inventário 102/102 ainda casa 23.584 spans; scanner de unidades: 11.220 candidatas e 2.052 blocos com impacto potencial de key. O dry-run p. 101 continua com 197 entradas (74/74/49), ainda não aprovado para produção. Os commits desta rodada foram empurrados sem force para `origin/codex/book-visual-batch-audit`. Runtime: Vite `http://127.0.0.1:8080/`, Payload `http://127.0.0.1:3000/admin`.
 
 
 - **Last updated:** 2026-10-01
-- **Working branch:** `codex/book-visual-batch-audit`, from `33ee49f`; remote branch already pointed to `720f9f7` before this commit request. Commit/push now authorized; publish only the new local commits with a normal push. Do not rewrite remote history.
+- **Working branch:** `codex/book-visual-batch-audit`, based on `33ee49f`, now published through `1d05ff9`. No force push or history rewrite.
 - **Previous visual review:** pages 4, 5, 6, 7 and 13 visually reviewed; p. 2 was approved by the user. Page 101 had only a fit-to-screen pass, so its 197 rows remain `needs-visual`. Details in linked dated task reports and `book-fidelity-page-matrix.csv`.
 - **Runtime:** Vite is running at `http://127.0.0.1:8080/` (explicit IPv4 bind for the user's existing browser URL); Payload is running at `http://127.0.0.1:3000/admin`. Both responded HTTP 200, as did the local Webdings font and page 13 JSON. The local ignored `apps/admin/.env` sets `DATABASE_URL=file:./apps-admin.db`. This is the existing current-schema database; the tracked legacy `middara.db` is not used by Payload.
 
