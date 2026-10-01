@@ -1,88 +1,104 @@
 # Handoff: continue the Rulebook App translation and extraction work
 
-- **Last updated:** 2026-09-30
-- **Working branch:** `fix/pixel-render/overflow`
-- **Code baseline:** `a8eae78` — `Fix viewer scroll and add translation frame pilot`
-- **Current status:** sample audits and key-impact dry run are complete. `fix/pixel-render/overflow` is now the local and remote `master`; the former master tips are preserved in backup branches. The page 2 credit editor proof has not started because browser-local draft compatibility could not be inspected. Local dev servers were restarted after the user's PC reboot and are ready.
+> **Checkpoint atualizado em 2026-10-01 — página 13 concluída nesta rodada.** A página 13 recebeu `renderWeightOverride: 700` em seis headings, restaurou `Adventure Mode Continued` cuja marca `suspectedGhost` era falsa, e corrigiu o excesso pintado da última linha esquerda (`renderScaleX: 0.9671`) para respeitar o gutter de ~14,8 pt. Build passou; comparação app/PDF feita em Fit e 200%, sem leitura de drafts/storage. Relatório: [`2026-10-01-page13-fullpage-visual-audit.md`](2026-10-01-page13-fullpage-visual-audit.md). Matriz p. 13: `visual-reviewed`. A skill agora inclui o princípio do eixo `x₀` por coluna e a verificação de caixa pintada vs. bbox. As alterações p. 13 estão documentadas e ainda não commitadas neste checkpoint; sem push. Próxima ação segura: revisar diff e criar commit local após ler o relatório.
 
-This is the current continuation guide. Read it first, then follow the linked source documents; do not infer implementation approval from audit findings or from plans written by a previous assistant.
+**Próximo passo de escala:** instrumentalizar imagens/diffs PDF↔app das 102 páginas em lotes e agrupar anomalias por evidência estrutural, revisando visualmente sinalizações e exemplares antes de qualquer correção em lote. Não reproduzir cegamente as correções locais p. 2/4/13. O usuário confirmou que o título de página 13 também estava faltando e explicou explicitamente a divisão `x₀`, com esquerda em x− e direita em x+.
+
+
+- **Last updated:** 2026-10-01
+- **Working branch:** `fix/pixel-render/overflow`; page 2 save point is `310bd82` (`feat: finalize page 2 translation fidelity pilot`). Latest completed implementation checkpoint: `20439b1` (`fix: restore page 4 fidelity and card text`). The branch is ahead of origin and has not been pushed.
+- **Master observed during read-through:** local `master` and `origin/master` remain at `f7e89ab` (`docs: record master promotion and recovery refs`). The feature branch is ten commits ahead; refs do **not** currently match.
+- **Working tree at handoff update:** pages 4, 5, 6, 7 and 101 are visually reviewed. Page 7 closed at `134c37d`; page 6 full-page QA/five-backing correction at `3179d16`; the page 101 index audit at `471753c`; page 4 full visual fidelity at `20439b1`. A new, pre-inspection task record is open for page 13 at [`2026-10-01-page13-fullpage-visual-audit.md`](2026-10-01-page13-fullpage-visual-audit.md). Browser `http://localhost:8080/` is available with user-authorized access; do not inspect drafts/storage. Earlier 6/101 sampling evidence is in [`2026-09-30-next-visual-sample-pages-6-101.md`](2026-09-30-next-visual-sample-pages-6-101.md).
+- **Runtime:** Vite is running at `http://127.0.0.1:8080/` (explicit IPv4 bind for the user's existing browser URL); Payload is running at `http://127.0.0.1:3000/admin`. Both responded HTTP 200, as did the local Webdings font and page 13 JSON. The local ignored `apps/admin/.env` sets `DATABASE_URL=file:./apps-admin.db`. This is the existing current-schema database; the tracked legacy `middara.db` is not used by Payload.
+
+This is the current continuation guide. Read it first, then follow the linked source documents; do not infer implementation approval from audit findings or plans written by a previous assistant.
 
 ## Product goal
 
-The user wants to translate the Middara rulebook in the app, while preserving the printed page's visual hierarchy and making translation units practical to edit. The product goal is to make translation progress possible soon; perfect automatic PDF reconstruction is not a prerequisite for every page. Changes must nevertheless preserve existing translations/drafts and must be visually checked against the PDF for each representative layout before being generalized.
+The user wants to translate the Middara rulebook in the app while preserving the printed page's visual hierarchy and making translation units practical to edit. The immediate product goal is to make real translation progress; perfect automatic PDF reconstruction is not a prerequisite for every page. Changes must preserve existing translations/drafts and be checked against the PDF on representative layouts before generalization.
 
-The app renders editable HTML over page artwork extracted from the source PDF. PyMuPDF's raw blocks are extraction artifacts, not reliable semantic paragraphs, credits, table rows, or index entries. Printed glyph bounds describe where the original ink appears; they do not automatically describe the usable width for a replacement translation.
+The actual runtime is a React/Vite viewer over page artwork and extracted JSON. Payload provides translation persistence. The source PDF is still the production of truth for visual text/layout; PyMuPDF blocks are extraction artifacts, not semantic paragraphs, credit categories, contents entries, or index rows.
 
 ## Required reading and operating rules
 
-Read in this order before resuming implementation:
+1. [`README.md`](README.md) — task history and status index.
+2. [`.agents/rules/00-README.md`](../../.agents/rules/00-README.md), [rule 06](../../.agents/rules/06-comportamento-esperado-da-ia.md), and [rule 13](../../.agents/rules/13-registro-de-progresso-por-tarefa.md) — project instructions, evidence standards, small-sample policy, and mandatory task documentation.
+3. [`2026-09-30-project-readthrough.md`](2026-09-30-project-readthrough.md) — confirmed current structure, data flow, documentation drift, and code facts from the broad read-through.
+4. [`2026-09-30-preview-fidelity-and-credit-units.md`](2026-09-30-preview-fidelity-and-credit-units.md) — confirmed cause of live-preview fidelity loss and revised page 2 plan for separate credit label/body targets.
+5. [`2026-09-30-implement-preview-credit-pilot.md`](2026-09-30-implement-preview-credit-pilot.md) — implementation, browser QA, corrections, and remaining persistence limitation for the current pilot.
+6. [`2026-09-30-payload-save-reset-safety.md`](2026-09-30-payload-save-reset-safety.md) — database correction, API CRUD proof, legacy-record handling, and PT reset/close guard.
+7. [`2026-09-30-heading-baseline-audit.md`](2026-09-30-heading-baseline-audit.md) — title baseline cause and candidate Esmeralda offset; the user later approved the page 2 result as impeccable.
+8. [`2026-09-30-page2-credit-units.md`](2026-09-30-page2-credit-units.md) — expansion to all 17 audited page 2 credit categories; covered by the user's page 2 approval.
+9. [`2026-09-30-page2-overflow-and-title-alternates.md`](2026-09-30-page2-overflow-and-title-alternates.md) — hide overflow marks outside Admin, align translated Esmeralda/PUA headings through the block override path, add a no-blue Discord link to the Portuguese Special Thanks credit, and record the PUA/bold Payload probe.
+10. [`2026-09-30-book-wide-english-fidelity-audit.md`](2026-09-30-book-wide-english-fidelity-audit.md) — page-2 lessons, non-uniform audit method, page statuses, and plan for the other 101 pages.
+11. [`2026-09-30-book-fidelity-scan.md`](2026-09-30-book-fidelity-scan.md) and [`book-fidelity-page-matrix.csv`](book-fidelity-page-matrix.csv) — first full 102-page machine screen, evidence, font-risk queue, and limits; this is the current audit status.
+12. [`2026-09-30-local-font-assets.md`](2026-09-30-local-font-assets.md) — completed local font integration, Aristelle-to-PDF comparison, build result, and remaining font/license limits.
+13. [`2026-09-30-pilot-visual-review-pages-4-13.md`](2026-09-30-pilot-visual-review-pages-4-13.md) — earlier read-only preparation for PDF↔app visual comparison of columns/images and PUA; current outcome is recorded in the page 4/13/15 audit and scan addendum.
+13. [Visual reference rule](../../.agents/rules/references/README.md) — canonical PDF path and required comparison practice.
+14. [`../architecture/text-layout-frames.md`](../architecture/text-layout-frames.md) — accepted page 2 dialogue-frame pilot and layout data contract.
+15. [`../architecture/sample-layout-audit.md`](../architecture/sample-layout-audit.md) and [`../architecture/sample-key-impact.md`](../architecture/sample-key-impact.md) — reproducible sample findings and existing-key collisions.
+16. [`2026-09-30-credit-editor-proof.md`](2026-09-30-credit-editor-proof.md) and [`2026-09-30-credit-draft-compatibility-audit.md`](2026-09-30-credit-draft-compatibility-audit.md) — proof scope and static key-compatibility findings.
+17. [`2026-09-30-layout-sample-audit.md`](2026-09-30-layout-sample-audit.md), [`2026-09-30-translation-key-dry-run.md`](2026-09-30-translation-key-dry-run.md), and [`2026-09-30-translation-editor-save-point.md`](2026-09-30-translation-editor-save-point.md) — methods and earlier approved work.
+18. For persistence, read [`../translation-editor-save-and-line-breaks.md`](../translation-editor-save-and-line-breaks.md) and [`../payload-database-recovery.md`](../payload-database-recovery.md). Read [`../../icebox/README.md`](../../icebox/README.md) before replacing or retiring project material.
 
-1. [`../project-progress/README.md`](README.md) — task history and status index.
-2. [`../../.agents/rules/00-README.md`](../../.agents/rules/00-README.md), [`../../.agents/rules/06-comportamento-esperado-da-ia.md`](../../.agents/rules/06-comportamento-esperado-da-ia.md), and [`../../.agents/rules/13-registro-de-progresso-por-tarefa.md`](../../.agents/rules/13-registro-de-progresso-por-tarefa.md) — project instructions, evidence standards, small-sample policy, and mandatory task documentation.
-3. [`../architecture/text-layout-frames.md`](../architecture/text-layout-frames.md) — accepted page 2 translation-frame pilot and layout data contract.
-4. [`../architecture/sample-layout-audit.md`](../architecture/sample-layout-audit.md) and [`../architecture/sample-key-impact.md`](../architecture/sample-key-impact.md) — reproducible sample findings and existing-key collisions.
-5. [`2026-09-30-credit-editor-proof.md`](2026-09-30-credit-editor-proof.md) — current blocker, browser-permission denials, server state, and the task's safety limits.
-6. [`2026-09-30-layout-sample-audit.md`](2026-09-30-layout-sample-audit.md), [`2026-09-30-translation-key-dry-run.md`](2026-09-30-translation-key-dry-run.md), and [`2026-09-30-translation-editor-save-point.md`](2026-09-30-translation-editor-save-point.md) — methods and earlier approved work.
-7. For saving/persistence, read [`../translation-editor-save-and-line-breaks.md`](../translation-editor-save-and-line-breaks.md) and [`../payload-database-recovery.md`](../payload-database-recovery.md). Read [`../../icebox/README.md`](../../icebox/README.md) before replacing or retiring project material.
+**Documentation warning:** `docs/PROJECT_STRUCTURE.md` and portions of `.agents/rules/01–10` contain older or aspirational claims. In particular, the current extraction entry point is `scripts/extract_dom.py`, not `packages/ingest/extract_pdf.py` / `build_dom.ts`; the live viewer loads 102 page JSON files rather than only pages 1–10. Verify claims against current code and the read-through record before relying on them. `ARCHITECTURE.md` explicitly describes a target architecture rather than current implementation.
 
-For PDF/layout work, use the available `pdf:pdf`, `layout-debugging`, and `visual-fidelity-qa` skills where applicable. The source PDF supplied for this project is `C:\Users\bruno\Downloads\Rulebook 1p2 Final Version 05-19-23 Optimized.pdf`; confirm that it exists before relying on it.
+## Accepted decisions and confirmed evidence
 
-## Accepted decisions and facts
+- Translation should happen at semantic editable-unit level, with source line/span style and geometry retained as lineage. One raw PyMuPDF block is not guaranteed to be one semantic unit.
+- Preserve source ink `bbox` separately from a translation layout frame. Frame width, alignment, indentation, vertical budget, and source typography are distinct properties.
+- The user visually approved the page 2 dialogue-frame pilot: replacement text uses a broader measured frame (~585.63 pt), while the blue selection outline identifies original printed text during editing. This approves that single pilot only.
+- Mixed style runs must survive in units like page 2 credits. A bold `Label:` and regular body belong to one credit category/editor unit; replacing the text with one tool-styled run loses that distinction in the current editor.
+- The page 2 PDF audit identifies 17 credit categories in three columns. Each now has separate label/body targets. `Playtesters` retains its existing semantic key; six middle-column units share one legacy block and remain behind the legacy-key fallback.
+- Page 3 contents labels and numeric page references are separate data from vector dotted leaders. Pair an entry by baseline without making leaders editable text.
+- Page 101 index rows must first be separated by column, then grouped by baseline. Equal baseline does not join entries from different columns.
+- The source-render pilot found 62 identical outlined Webdings `U+F07E` glyphs across 31 pages; the renderer had been suppressing them. A narrow fix now renders them with local Webdings plus red fill/white stroke. The app was visually reviewed on pages 4, 13, and 15 after the user authorized local browser access; full family validation across its 31 pages remains open. Do not generalize solely from span similarity.
+- **Page 4/13/15 sample results:** page 4 is now fully visual-reviewed and committed at `20439b1`: 14 headings have a page-local render weight override; the three tilted Combatant cards use a transparent patch clipped to verified PDF image transforms, while 210 source lines remain available in Admin. `Nightingale Arsen` is part of the artwork and appears once. Page 13's earlier measurement showed ~14.8 pt between the paragraph and `IMPORTANT`; the issue is being revalidated against the current app under a new task record. On page 15, duplicate title/intro overlays are hidden while the A–G labels remain crisp vectors because their raster copy is darker/less legible. The composite remains English-only until an image-localization pass. Details and prior findings: [`2026-09-30-feedback-audit-pages-4-13-15.md`](2026-09-30-feedback-audit-pages-4-13-15.md) and [`2026-10-01-page4-fullpage-visual-audit.md`](2026-10-01-page4-fullpage-visual-audit.md).
+- **Page 6 sample result (committed in `b91c6fe`):** the viewer ignores extracted image placements; hidden-card masks and their short labels were therefore lost while PUA question marks rendered as dark glyphs. A page-specific source-PDF patch restores only transformed card-image polygons and audited text bboxes, plus the visible `EXIT` label that the vector renderer duplicates/truncates. It appears only in English outside Admin. Its raster text is not translated/editable; hide in Admin preserves editing targets, and a localized card asset is still required before editing those labels in PT. Do not generalize this mask. See the page 6/101 task record.
+- **Page 101 sample result:** three-column structure, baseline order, leaders and reference numbers appear consistent in the first fit-to-screen pass; `Values / Back` is present in the source PDF too. The 197 entries were not checked individually at reading scale, so status stays `needs-visual`.
+- Every substantial task requires a dated record in `docs/project-progress/`, updated with method, evidence, corrections, verification, limitations, and next step. Update its index. Archive replaced project material in `icebox/` with a reason.
+- Keep translation progress ahead of generalized extractor sophistication. Validate one page/unit, then a small sample. Do not run the full extractor across 102 pages as the next step.
+- The active Payload API passed HTTP 200 and isolated CRUD on a temporary PT key; the temporary key was deleted. A read-only SQLite check confirmed seven rows in `apps-admin.db`, zero probe rows, and two unchanged rows in legacy `middara.db`; no draft text was read.
+- `middara.db` contains two legacy PT rows for page 2 at old line-bbox keys, mapping to lines 4 and 5 of narrative block 12. They were intentionally left in the tracked legacy database and were not flattened/migrated. The user accepts reconstructing the page 2 draft if necessary.
+- Payload still declares `spanKey` globally unique while language is separate; preserve language-qualified keys and account for that schema constraint in future key designs.
+- PT editor Reset, closing with unsaved changes, and selecting another block with unsaved changes now request confirmation. Browser visual QA is pending because saved site-access settings block automated access to the local origin; do not use alternate surfaces to bypass it.
+- Large `EsmeraldaPro` headings now have a narrowly scoped 12% downward visual-offset candidate applied to both source spans and translated block overrides, including PUA-font segments. The extractor drops PyMuPDF span `origin`/baseline; this remains a heuristic and requires the user's visual check before calibration is accepted.
+- Overflow outlines are now gated on Admin mode. The Portuguese Special Thanks body links “Canal Beta do Discord” through sidecar metadata while inheriting the segment's styling; external navigation is suppressed in Admin mode.
+- Payload round-trip on a disposable key confirmed PUA glyph/font and bold weight survive; the temporary row was deleted. Actual editor/browser persistence and visual checks remain user-confirmation items.
 
-- Translation should happen at semantic editable-unit level, with source line/span style and geometry preserved as lineage. One raw PyMuPDF block is not guaranteed to be one sentence or semantic unit.
-- Preserve source `bbox`/ink bounds separately from a translation layout frame. Frame width, alignment, indentation, vertical budget, and source typography are different properties.
-- The user visually approved the page 2 dialogue frame pilot: replacement text uses a broader measured frame (~585.63 pt) while the blue selection outline continues to identify the original printed text during editing. This approves that single pilot, not an automatic rule for every page.
-- Style runs must remain available when an editable unit contains mixed styles. On page 2 credits, a bold `Label:` and regular body are parts of one category/editor unit; flattening to the first span's style is not acceptable.
-- Page 3 contents labels and their numeric page references are separate data from vector dotted leaders. They should be paired by baseline for an entry without making the leaders editable text.
-- Page 101 index rows must first be separated by column, then grouped by baseline. Equal baseline does not mean two columns form one entry.
-- Every substantial task needs a dated record in `docs/project-progress/` opened/updated before work. Record method, findings, failures/corrections, verification, limitations, files, and next action. Update this index and the current task record.
-- Keep the app's translation goal ahead of generalized extractor sophistication. Validate one page/unit, then a small sample; do not regenerate all 102 pages as the next move.
+## Current implementation shape
 
-## Evidence already produced (read-only sample)
+- **Viewer:** `apps/web` React 19 + TypeScript + Vite. It loads `/pages/page_NNN/page_NNN_dom.json` and page backgrounds. Page 2 alone loads optional `layout_frames.json` and `credit_units.json` metadata; the sidecar may assign several semantic units to one source block. Runtime currently sets the page `images` collection to an empty array.
+- **Translation backend/admin:** `apps/admin` Payload CMS v3 + Next.js + SQLite adapter, usually port 3000. `Translations` stores `spanKey`, `language`, and JSON segment data; current schema's `spanKey` unique constraint is global.
+- **Renderer/editor:** `PageRenderer.tsx` positions source lines absolutely. Current legacy editor key is `page_${pageNumber}_block_${blockIdx}`, tied to the DOM array index. For page 2 credits, that legacy key stays active if present; otherwise each of 17 label/body pairs uses language-qualified semantic keys. A no-op editor open does not replace original lines. Changed text uses `.realbox`; page 2 block_12 has a measured centered frame and line-height pilot. Rich text selection can style character ranges, while genuinely changed “Edit Text” still replaces the text with the chosen current style.
+- **Override format:** loader accepts legacy segment arrays and a version-2 envelope (`segments`, `textAlign`); writes use the envelope. Payload API persistence was verified with a disposable new key; user-facing save/reload has not been checked in the blocked browser session.
+- **Persistence:** language-specific `localStorage` map under `middara-lines-v2-${lang}` is loaded first; Payload is fetched and merged over local values for duplicate keys. Saving optimistically updates the local map, then attempts Payload and preserves the local draft if server save fails.
+- **Extraction:** `scripts/extract_dom.py` directly reads PyMuPDF dict blocks, treats non-page-sized images as content, uses PyMuPDF dict enumeration as an image z-order proxy for ghost overlap, not `get_bboxlog()` paint-order proof, heuristically merges vertically adjacent blocks, and assigns each merged block's union of glyph line bounds as `availableX`/`availableWidth`. The heuristic is not a validated semantic segmentation algorithm and has hard-coded input/output paths; do not batch-run it.
+- **Audit scripts:** `scripts/audit_layout_sample.py` and `scripts/audit_translation_key_impact.py` are read-only sample/dry-run tools writing under ignored `tmp/layout-sample/`; their outputs do not feed production rendering.
+- **Other packages:** `packages/schema` defines a Zod book/page/block target schema but is not the viewer's direct source of page data. `packages/ingest` currently has a TypeScript Payload ingester; it is not the current PDF extractor. `apps/api` is a separate legacy Drizzle schema and is not the active runtime.
 
-The analyzer `scripts/audit_layout_sample.py` reads the source PDF and writes audit outputs under `tmp/layout-sample/`; it does not overwrite production page JSON. Current sample findings:
+## Sample audit results (read-only)
 
-| Page | Candidate units | Main evidence | Current key risk |
+| Page | Candidate units | Evidence | Current key risk |
 |---|---:|---|---|
-| 2 | 17 credit categories | Split at bold labels ending in `:`; all 17 preserve source lines and styled runs; three visual columns | Six middle-column categories map to legacy key `page_2_block_16` |
-| 3 | 39 contents labels | All 39 page-reference lines paired by baseline (delta 0.49–0.55 pt); dotted leaders are vector artwork | Seven legacy keys fan out; “Summary of Components” and “Choosing a Game Mode” share `page_3_block_1` |
-| 101 | 197 index rows | Three independent columns with 74/74/49 baseline groups; 192 numeric refs parsed; one right-edge anomaly (`Values` / `Back`) flagged | Existing column keys fan out to 74/74/49 proposed rows |
+| 2 | 17 credit categories | Split at bold labels ending in `:`; all preserve source lines and styled runs; three visual columns | Six middle-column categories map to legacy key `page_2_block_16` |
+| 3 | 39 contents labels | All 39 reference lines paired by baseline (delta 0.49–0.55 pt); leaders are vector artwork | Seven legacy keys fan out; first two entries share `page_3_block_1` |
+| 101 | 197 index rows | Three independent columns with 74/74/49 baseline groups; 192 numeric refs parsed; one anomaly (`Values` / `Back`) flagged | Existing column keys fan out to 74/74/49 rows |
 
-The key-impact script `scripts/audit_translation_key_impact.py` maps all 253 sample units uniquely to 46 current keys, using at least 98% unique bbox containment and a source-lineage cross-check. Eleven keys fan out: one on page 2, seven on page 3, and three on page 101. The read-only query found zero matching records for these 46 keys in the local current-schema SQLite snapshot `apps/admin/apps-admin.db`. **This does not prove that browser `localStorage`, another local database, or a deployed database has no drafts.**
+All 253 sample units mapped uniquely to 46 current keys by at least 98% unique bbox containment plus lineage cross-check. Eleven keys fan out. A read-only query found zero matching records for these 46 keys in one local current-schema SQLite snapshot. This does not prove browser `localStorage`, another database, or a deployed database has no drafts.
 
-These are sample/audit results, not production extraction or activation. The full mapping is `tmp/layout-sample/key-impact-map.json`.
+## Current priority and safe next action
 
-## Current task: page 2 credit editor proof
+The page 2 frontend pilot remains the visually approved unit-level credit/dialogue proof; do not reopen drafts as part of fidelity review. Page 5 is visually reviewed without a confirmed mismatch. Page 7 is visually reviewed after two page-local fixes: its note now appears once, and all 20 `U+274F` boxes are restored without changing the global Zapf mapping.
 
-The next useful product-sized proof is to edit a single page 2 credit category (label and body retaining bold/regular styling), then verify that neighboring categories and saved text are unchanged. Do not start with a batch rewrite or a key migration.
+**Verification for recent page 7/6 changes:** page 7: `npm run build -w apps/web` passed; lint completed without errors and with seven existing React warnings; `git diff --check` passed. Page 6: the reproducible overlay generator completed with 19 image placements, 2 white vector backings, 3 dark backings and 16 text blocks; Chrome at `http://localhost:8080/` was reloaded and compared with the source PDF at Fit-to-Screen (100%) and reading zoom (175–225%). Drafts and browser storage were not opened. No React/TypeScript changed in the page 6 follow-up.
 
-The proof is currently blocked at the draft-safety check. The user explicitly allowed local app inspection, and settings screenshots/reporting indicated local browsing is allowed, but the normal Codex in-app browser API repeatedly returned:
+**Next priority:** the page 13 full-page visual audit is recorded before inspection. Follow [`2026-10-01-page13-fullpage-visual-audit.md`](2026-10-01-page13-fullpage-visual-audit.md) and its linked user feedback. Then continue through other `machine-screened`/`needs-visual` rows based on structure/evidence. Use an English render; inspect PDF and app separately; compare at matching scale; update each row only with evidence. The user authorized local browser access; do not inspect saved browser storage or drafts. Font/PUA/image flags remain candidates, not confirmed errors. Do not expand translation to a page until its English source status is visually reviewed or an explicit exception is recorded. The page 4/6 image patches and page 7 Zapf restoration are page-specific, not recipes to copy. The page 4 Combatant card microtext still requires a localization treatment before translating those card faces. Remaining font work includes obtaining exact `Wingdings3` and `ZapfDingbatsStd` families and confirming redistribution terms before public release.
 
-> `A saved user permission setting blocks this action`
+**Deferred user request:** after the current fidelity sample is complete, inspect the other team's `glossary.md` and recommend a maintained location for the shared glossary and per-page translation drafts. The user explicitly asked not to start this yet.
 
-The tool expressly prohibited reaching the same page using another browser surface, raw CDP/commands, an indirect request, or policy circumvention. A full PC reboot did not change that permission result. Do not keep retrying without a material permission-state change and do not alter the firewall; the denial is a Browser Use policy gate, not evidence of a network failure.
+## Git state and recovery references
 
-After the reboot, both app processes were absent. They have since been started separately and confirmed ready:
+At the last implementation check, `fix/pixel-render/overflow` was at `20439b1`. The page 4 full-page audit and corrections are committed; the page 13 task record is open before inspection and contains only planned checks. No push was made. Local `master` and `origin/master` remain at the earlier recorded `f7e89ab`; do not force-update or push either branch unless asked. Historical preservation refs from the earlier user-requested master replacement are documented in [`2026-09-30-promote-overflow-to-master.md`](2026-09-30-promote-overflow-to-master.md).
 
-- `npm run dev:api` — Next/Payload at `http://localhost:3000`, current terminal session `65763`.
-- `npm run dev:web` — Vite at `http://localhost:8080/`, current terminal session `51794`.
-- `Get-NetTCPConnection` confirmed listeners on ports 3000 and 8080 (`::` and `::1`, respectively).
-
-These session IDs are temporary. If the machine/app sessions restart, check listeners before starting duplicate processes. On Windows, start the API and Vite scripts separately; the root `npm run dev` script's `&` separator did not reliably start both workspaces in this shell.
-
-No browser storage was read/exported, no local draft was modified, and the current credit-proof task has not modified app source, production page JSON, Payload, or the database. The server startup is an environment action only.
-
-## Safe continuation plan
-
-1. Keep this task in progress. Do not implement, activate, or migrate split credit units while the existing draft compatibility path is unknown.
-2. Resume the read-only check only if normal in-app browser access becomes available under the platform's saved permission. If it remains blocked, stop and ask for a user-provided screenshot or only the relevant local-draft key names/counts. Never request/upload unrelated storage contents.
-3. Before any editor integration, write down the compatibility contract: retain the old combined key/value untouched and recoverable; use stable unique keys for new category units; do not auto-split old translated prose; provide a reversible way to view/recover legacy content.
-4. Implement a page 2 proof behind a narrow scope/sidecar, preserving source lines, style runs, and current unrelated keys. Keep layout frame separate from source ink geometry. Avoid changing the 102-page production extraction.
-5. Verify the build and focused behavior if code changes are made. Present the concrete page 2 app state for visual review before expanding to page 3 or 101.
-6. Only after visual approval and a safe versioning/compatibility decision should the next sample be considered. Migrations need a dry run, explicit mapping, collision report, and recovery plan; no migration is currently approved or performed.
-
-## Working-tree and change status
-
-At the last promotion check, local/remote `master` and `fix/pixel-render/overflow` all pointed to `0d0b4b6`. The old remote tip `da77930` is preserved at `backup/remote-master-before-overflow-reset-20260930`; the former remote-tracking tip `9dd0b7b` is preserved at `backup/origin-master-before-upstream-rewrite-20260930`; the divergent local tip `cb4df27` is preserved locally at `backup/local-master-before-overflow-reset-20260930`. The underlying code baseline for the layout pilot is `a8eae78`. Do not commit or push unless the user explicitly requests it in the active session. Inspect `git status --short --branch` before continuing because the working tree can change.
-
-The task-by-task evidence and archival reasons are in `docs/project-progress/` and `icebox/`; keep active documentation in its normal location and archive only superseded versions with a reason in the item's icebox README.
+Previous handoff snapshots and their reasons are indexed in [`../../icebox/README.md`](../../icebox/README.md). Failed PNPM bootstrap artifacts are preserved at [`../../icebox/2026-09-30-pnpm-install-prompt-artifacts/README.md`](../../icebox/2026-09-30-pnpm-install-prompt-artifacts/README.md). The pre-update handoff/index/skill copies are at [`../../icebox/2026-09-30-handoff-before-persistence-credit-update/README.md`](../../icebox/2026-09-30-handoff-before-persistence-credit-update/README.md); the earlier pre-pilot copy remains at [`../../icebox/2026-09-30-handoff-before-preview-credit-pilot/README.md`](../../icebox/2026-09-30-handoff-before-preview-credit-pilot/README.md).

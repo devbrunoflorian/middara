@@ -14,18 +14,21 @@ export interface SpanData {
   flags: number;
   bbox: [number, number, number, number];
   displayOverride?: string;
+  renderWeightOverride?: number;
 }
 
 export interface LineData {
   id: string;
   bbox: [number, number, number, number];
   spans: SpanData[];
+  renderScaleX?: number;
 }
 
 export interface LayoutFrame {
   x: number;
   width: number;
   textAlign?: TextAlignment;
+  lineHeight?: number;
 }
 
 export interface Block {
@@ -40,6 +43,28 @@ export interface Block {
   isBold?: boolean;
   isItalic?: boolean;
   zIndex?: number;
+  creditUnit?: CreditUnitDefinition;
+  creditUnits?: CreditUnitDefinition[];
+}
+
+export interface CreditFieldDefinition {
+  id: string;
+  lineIds: string[];
+  bbox: [number, number, number, number];
+  frame: LayoutFrame;
+  links?: CreditLinkDefinition[];
+}
+
+export interface CreditLinkDefinition {
+  language: 'en' | 'pt-BR';
+  text: string;
+  href: string;
+}
+
+export interface CreditUnitDefinition {
+  id: string;
+  label: CreditFieldDefinition;
+  body: CreditFieldDefinition;
 }
 
 export interface ImageData {
@@ -49,6 +74,15 @@ export interface ImageData {
   blendMode?: string;
 }
 
+export interface PageFidelityOverlay {
+  url: string;
+  bbox: [number, number, number, number];
+  widthPx: number;
+  heightPx: number;
+  language: 'en' | 'pt-BR';
+  hideInAdmin?: boolean;
+}
+
 export interface PageData {
   page_number: number;
   width: number;
@@ -56,6 +90,7 @@ export interface PageData {
   backgroundUrl?: string;
   blocks: Block[];
   images: ImageData[];
+  fidelityOverlays?: PageFidelityOverlay[];
 }
 
 /* ─────────────────────────────────────────────
@@ -65,6 +100,7 @@ interface FontMapping {
   family: string;
   weight: number;
   style: 'normal' | 'italic';
+  variantCaps?: 'small-caps';
 }
 
 export function mapPdfFont(pdfFontName: string): FontMapping {
@@ -97,16 +133,25 @@ export function mapPdfFont(pdfFontName: string): FontMapping {
     let weight = 400;
     if (name.includes('Black')) weight = 900;
     else if (name.includes('Bold')) weight = 700;
-    return { family: "'CinzelLocal', 'Cinzel', serif", weight, style: 'normal' };
+    return { family: "'CinzelLocal', 'Cinzel', serif", weight, style: 'normal', variantCaps: 'small-caps' };
   }
   if (name.includes('Esmeralda')) {
     return { family: "'EsmeraldaPro', 'Georgia', serif", weight: 400, style: 'normal' };
   }
   if (name.includes('Aristelle')) {
-    return { family: "'Inter', 'Helvetica', sans-serif", weight: 400, style: 'normal' };
+    return { family: "'AristelleSans', sans-serif", weight: 400, style: 'normal' };
   }
-  if (name.includes('Webdings') || name.includes('Wingdings') || name.includes('ZapfDingbats')) {
-    return { family: "'Webdings', sans-serif", weight: 400, style: 'normal' };
+  if (name.includes('Wingdings3')) {
+    return { family: "'Wingdings 3', sans-serif", weight: 400, style: 'normal' };
+  }
+  if (name.includes('Wingdings')) {
+    return { family: "'WingdingsLocal', sans-serif", weight: 400, style: 'normal' };
+  }
+  if (name.includes('Webdings')) {
+    return { family: "'WebdingsLocal', sans-serif", weight: 400, style: 'normal' };
+  }
+  if (name.includes('ZapfDingbats')) {
+    return { family: "'Zapf Dingbats', sans-serif", weight: 400, style: 'normal' };
   }
   if (name.includes('AdobeHebrew')) {
     return { family: "'OptimaLTStd', 'Optima', serif", weight: 400, style: 'normal' };
@@ -121,8 +166,108 @@ function segFontToCSS(f: string): string {
   if (f.includes('Decorative')) return "'Cinzel Decorative', serif";
   if (f === 'EsmeraldaPro-PUA') return "'EsmeraldaPro-PUA', 'EsmeraldaPro', serif";
   if (f.includes('Esmeralda') || f === 'EsmeraldaPro') return "'EsmeraldaPro', serif";
+  if (f.includes('Aristelle')) return "'AristelleSans', sans-serif";
+  if (f.includes('Webdings')) return "'WebdingsLocal', sans-serif";
+  if (f.includes('Wingdings3')) return "'Wingdings 3', sans-serif";
+  if (f.includes('Wingdings')) return "'WingdingsLocal', sans-serif";
+  if (f.includes('ZapfDingbats')) return "'Zapf Dingbats', sans-serif";
   if (f === 'Inter') return "'Inter', sans-serif";
   return `'${f}', serif`;
+}
+
+function renderCreditSegments(
+  segments: SpanOverride['segments'],
+  links: CreditLinkDefinition[] | undefined,
+  language: 'en' | 'pt-BR',
+  scale: number,
+  isAdmin: boolean,
+): React.ReactNode[] {
+  const fullText = segments.map(segment => segment.text).join('');
+  const ranges: { start: number; end: number; href: string }[] = [];
+  for (const link of links ?? []) {
+    if (link.language !== language || !link.text) continue;
+    let searchFrom = 0;
+    while (searchFrom < fullText.length) {
+      const start = fullText.indexOf(link.text, searchFrom);
+      if (start < 0) break;
+      ranges.push({ start, end: start + link.text.length, href: link.href });
+      searchFrom = start + link.text.length;
+    }
+  }
+  ranges.sort((a, b) => a.start - b.start);
+
+  const pieces: { segment: SpanOverride['segments'][number]; text: string; href?: string }[] = [];
+  let globalOffset = 0;
+  segments.forEach(segment => {
+    const points = new Set<number>([0, segment.text.length]);
+    for (const range of ranges) {
+      const start = Math.max(0, range.start - globalOffset);
+      const end = Math.min(segment.text.length, range.end - globalOffset);
+      if (start < end) {
+        points.add(start);
+        points.add(end);
+      }
+    }
+    const sortedPoints = [...points].sort((a, b) => a - b);
+    for (let i = 0; i < sortedPoints.length - 1; i++) {
+      const start = sortedPoints[i];
+      const end = sortedPoints[i + 1];
+      if (start === end) continue;
+      const absoluteStart = globalOffset + start;
+      const matchingRange = ranges.find(range => absoluteStart >= range.start && absoluteStart < range.end);
+      pieces.push({ segment, text: segment.text.slice(start, end), href: matchingRange?.href });
+    }
+    globalOffset += segment.text.length;
+  });
+
+  const groups: { href?: string; pieces: typeof pieces }[] = [];
+  for (const piece of pieces) {
+    const last = groups[groups.length - 1];
+    if (last && last.href === piece.href) last.pieces.push(piece);
+    else groups.push({ href: piece.href, pieces: [piece] });
+  }
+
+  const renderPiece = (piece: typeof pieces[number], key: string) => (
+    <span key={key} style={{
+      fontFamily: segFontToCSS(piece.segment.font),
+      fontSize: `${piece.segment.size * scale}px`,
+      fontWeight: piece.segment.weight,
+      fontStyle: piece.segment.style,
+      color: piece.segment.color,
+      whiteSpace: 'pre-wrap',
+      fontVariantLigatures: 'none',
+      fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
+      letterSpacing: '-0.015em',
+    }}>{piece.text}</span>
+  );
+
+  return groups.map((group, groupIndex) => {
+    const content = group.pieces.map((piece, pieceIndex) => renderPiece(piece, `${groupIndex}-${pieceIndex}`));
+    if (!group.href) return <React.Fragment key={groupIndex}>{content}</React.Fragment>;
+    const suppressNavigation = (event: React.MouseEvent<HTMLAnchorElement>) => {
+      if (isAdmin) event.preventDefault();
+    };
+    return (
+      <a
+        key={groupIndex}
+        href={group.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ color: 'inherit', textDecoration: 'none', cursor: isAdmin ? 'text' : 'pointer' }}
+        onClick={suppressNavigation}
+        onAuxClick={suppressNavigation}
+      >
+        {content}
+      </a>
+    );
+  });
+}
+
+function needsEsmeraldaHeadingDrop(font: string, size: number, sourceBBoxHeight: number): boolean {
+  return font.includes('EsmeraldaPro') &&
+    !font.includes('Identity-H') &&
+    size >= 25 &&
+    sourceBBoxHeight >= size * 1.25;
 }
 
 function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
@@ -142,7 +287,7 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
         size = span.size;
         color = span.color || '#231f20';
         const mapped = mapPdfFont(font);
-        weight = mapped.weight;
+        weight = span.renderWeightOverride ?? mapped.weight;
         style = mapped.style;
       }
       text += span.displayOverride || span.text;
@@ -187,7 +332,15 @@ async function fetchOverridesFromPayload(lang: string): Promise<Map<string, Span
       const data = await res.json();
       const map = new Map<string, SpanOverride>();
       data.docs.forEach((doc: any) => {
-        map.set(doc.spanKey, { spanKey: doc.spanKey, segments: doc.data, bbox: [0,0,0,0] });
+        const stored = doc.data;
+        const segments = Array.isArray(stored) ? stored : stored?.segments;
+        if (!Array.isArray(segments)) return;
+        map.set(doc.spanKey, {
+          spanKey: doc.spanKey,
+          segments,
+          bbox: [0, 0, 0, 0],
+          textAlign: Array.isArray(stored) ? undefined : stored?.textAlign,
+        });
       });
       return map;
     }
@@ -205,19 +358,24 @@ async function saveOverrideToPayload(override: SpanOverride, lang: string): Prom
     });
     const check = await fetch(`http://localhost:3000/api/translations?${query}`);
     const checkData = await check.json();
+    const data = {
+      schemaVersion: 2,
+      segments: override.segments,
+      textAlign: override.textAlign,
+    };
     if (checkData.docs.length > 0) {
       const id = checkData.docs[0].id;
       const res = await fetch(`http://localhost:3000/api/translations/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ language: lang, data: override.segments })
+        body: JSON.stringify({ language: lang, data })
       });
       return res.ok;
     } else {
       const res = await fetch(`http://localhost:3000/api/translations`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ spanKey: override.spanKey, language: lang, data: override.segments })
+        body: JSON.stringify({ spanKey: override.spanKey, language: lang, data })
       });
       return res.ok;
     }
@@ -268,6 +426,55 @@ function saveOverridesToStorage(lang: string, map: Map<string, SpanOverride>) {
   }
 }
 
+function extractCreditFieldInfo(
+  spanKey: string,
+  block: Block,
+  field: CreditFieldDefinition,
+): SelectedSpanInfo {
+  const selectedIds = new Set(field.lineIds);
+  const lines = (block.lines || []).filter(line => selectedIds.has(line.id));
+  let font = '';
+  let size = 0;
+  let color = '#231f20';
+  let weight = 400;
+  let style: 'normal' | 'italic' = 'normal';
+  let text = '';
+
+  for (const line of lines) {
+    for (const span of line.spans) {
+      if (!font && span.font && !span.font.includes('Dingbat') && span.text.trim()) {
+        font = span.font;
+        size = span.size;
+        color = span.color || '#231f20';
+        const mapped = mapPdfFont(font);
+        weight = span.renderWeightOverride ?? mapped.weight;
+        style = mapped.style;
+      }
+      text += span.displayOverride || span.text;
+    }
+  }
+
+  text = text.replace(/\n/g, ' ').replace(/ +/g, ' ').trim();
+  if (!font) {
+    font = 'OptimaLTStd';
+    size = 10;
+    weight = 400;
+  }
+
+  return {
+    spanKey,
+    text,
+    font,
+    family: mapPdfFont(font).family,
+    weight,
+    style,
+    color,
+    size,
+    bbox: field.bbox,
+    textAlign: field.frame.textAlign || 'left',
+  };
+}
+
 interface SelectedSpanInfo {
   spanKey: string;
   text: string;
@@ -294,12 +501,15 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   const [scale, setScale] = useState(1);
   const [selectedSpan, setSelectedSpan] = useState<SelectedSpanInfo | null>(null);
   const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => loadOverrides(language));
+  const [overridesLoadedLanguage, setOverridesLoadedLanguage] = useState<string | null>(null);
   const [draftOverride, setDraftOverride] = useState<SpanOverride | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
+    let active = true;
     fetchOverridesFromPayload(language).then((serverMap) => {
+      if (!active) return;
       if (serverMap) {
         const merged = loadOverrides(language);
         serverMap.forEach((override, key) => merged.set(key, override));
@@ -307,8 +517,11 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
       } else {
         setOverrides(loadOverrides(language));
       }
+      setOverridesLoadedLanguage(language);
     });
+    return () => { active = false; };
   }, [language]);
+  const overridesReady = overridesLoadedLanguage === language;
 
   const contentsMap = useMemo(() => {
     const map = new Map<string, number>();
@@ -361,11 +574,19 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
 
   const handleSpanClick = useCallback((info: SelectedSpanInfo) => {
     if (!isAdmin) return;
+    if (selectedSpan?.spanKey === info.spanKey) return;
+    if (
+      language === 'pt-BR' &&
+      draftOverride &&
+      !window.confirm('Há alterações de tradução não salvas. Quer descartá-las e abrir outro texto?')
+    ) {
+      return;
+    }
     setSelectedSpan(info);
     setDraftOverride(null);
-  }, [isAdmin]);
+  }, [isAdmin, language, draftOverride, selectedSpan]);
 
-  const handleDraftChange = useCallback((draft: SpanOverride) => {
+  const handleDraftChange = useCallback((draft: SpanOverride | null) => {
     setDraftOverride(draft);
   }, []);
 
@@ -464,7 +685,36 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
               onBlockClick={handleSpanClick}
               selectedBlockKey={selectedSpan?.spanKey || null}
               overrides={overrides}
+              overridesReady={overridesReady}
               draftOverride={draftOverride}
+              language={language}
+            />
+          );
+        })}
+        {pageData.fidelityOverlays?.map((overlay) => {
+          if (overlay.language !== language || (overlay.hideInAdmin && isAdmin)) return null;
+          const [x0, y0, x1, y1] = overlay.bbox;
+          return (
+            <img
+              key={overlay.url}
+              src={overlay.url}
+              alt=""
+              aria-hidden="true"
+              width={overlay.widthPx}
+              height={overlay.heightPx}
+              loading="eager"
+              decoding="async"
+              draggable={false}
+              style={{
+                position: 'absolute',
+                left: `${x0 * scale}px`,
+                top: `${y0 * scale}px`,
+                width: `${(x1 - x0) * scale}px`,
+                height: `${(y1 - y0) * scale}px`,
+                zIndex: 10000,
+                pointerEvents: 'none',
+                userSelect: 'none',
+              }}
             />
           );
         })}
@@ -483,6 +733,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
           originalTextAlign={selectedSpan.textAlign}
           bbox={selectedSpan.bbox}
           pageNumber={pageData.page_number}
+          language={language}
           onClose={handleCloseEditor}
           onSave={handleSaveOverride}
           onDraftChange={handleDraftChange}
@@ -504,12 +755,14 @@ interface SpanBlockProps {
   onBlockClick: (info: SelectedSpanInfo) => void;
   selectedBlockKey: string | null;
   overrides: Map<string, SpanOverride>;
+  overridesReady: boolean;
   draftOverride: SpanOverride | null;
+  language: 'en' | 'pt-BR';
 }
 
 const SpanBlock: React.FC<SpanBlockProps> = ({ 
   block, blockIdx, pageNumber, scale, isAdmin, contentsMap, 
-  onNavigate, onBlockClick, selectedBlockKey, overrides, draftOverride 
+  onNavigate, onBlockClick, selectedBlockKey, overrides, overridesReady, draftOverride, language
 }) => {
   const blockRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -529,7 +782,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   };
 
   const blockKey = `page_${pageNumber}_block_${blockIdx}`;
-  
+
   let currentOverride = overrides.get(blockKey);
   if (selectedBlockKey === blockKey && draftOverride) {
     currentOverride = draftOverride;
@@ -545,10 +798,31 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     }
   }, [currentOverride, scale, blockH]);
 
+  const creditUnits = block.creditUnits ?? (block.creditUnit ? [block.creditUnit] : []);
+  if (creditUnits.length > 0 && overridesReady && !overrides.has(blockKey)) {
+    return (
+      <CreditUnitBlock
+        block={block}
+        units={creditUnits}
+        pageNumber={pageNumber}
+        scale={scale}
+        isAdmin={isAdmin}
+        onBlockClick={onBlockClick}
+        selectedBlockKey={selectedBlockKey}
+        overrides={overrides}
+        draftOverride={draftOverride}
+        language={language}
+      />
+    );
+  }
+
   if (!block.lines || block.lines.length === 0) return null;
 
   const blockHoverClass = isAdmin ? `block-editable ${selectedBlockKey === blockKey ? 'block-selected' : ''}` : '';
-  const overflowClass = isOverflowing ? 'block-overflow' : '';
+  const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
+  const esmeraldaHeadingSource = block.lines
+    ?.flatMap(line => line.spans)
+    .find(span => needsEsmeraldaHeadingDrop(span.font, span.size, span.bbox[3] - span.bbox[1]));
 
   if (currentOverride && currentOverride.segments.length > 0) {
     // Use a translation frame when supplied; otherwise keep the source-derived fallback.
@@ -570,6 +844,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             width: `${blockLineW}px`,
             whiteSpace: 'pre-wrap',
             textAlign: currentOverride.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
+            lineHeight: block.layoutFrame?.lineHeight ?? 1,
             display: 'block',
             fontSize: 0,
             cursor: isAdmin ? 'text' : 'default',
@@ -583,11 +858,17 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
                 fontSize: `${seg.size * scale}px`,
                 fontWeight: seg.weight,
                 fontStyle: seg.style,
+                fontVariantCaps: mapPdfFont(seg.font).variantCaps,
                 color: seg.color,
                 whiteSpace: 'pre-wrap',
                 fontVariantLigatures: 'none',
                 fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
                 letterSpacing: '-0.015em',
+                ...(esmeraldaHeadingSource && needsEsmeraldaHeadingDrop(
+                  seg.font,
+                  seg.size,
+                  esmeraldaHeadingSource.bbox[3] - esmeraldaHeadingSource.bbox[1],
+                ) ? { display: 'inline-block', transform: 'translateY(12%)' } : {}),
               }}
             >
               {seg.text}
@@ -622,6 +903,153 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   );
 };
 
+interface CreditUnitBlockProps {
+  block: Block;
+  units: CreditUnitDefinition[];
+  pageNumber: number;
+  scale: number;
+  isAdmin: boolean;
+  onBlockClick: (info: SelectedSpanInfo) => void;
+  selectedBlockKey: string | null;
+  overrides: Map<string, SpanOverride>;
+  draftOverride: SpanOverride | null;
+  language: 'en' | 'pt-BR';
+}
+
+const CreditUnitBlock: React.FC<CreditUnitBlockProps> = ({
+  block, units, pageNumber, scale, isAdmin, onBlockClick, selectedBlockKey,
+  overrides, draftOverride, language,
+}) => {
+  const blockX = block.bbox[0];
+  const blockY = block.bbox[1];
+  const blockW = block.bbox[2] - block.bbox[0];
+  const blockH = block.bbox[3] - block.bbox[1];
+  const blockStyle: React.CSSProperties = {
+    position: 'absolute',
+    left: `${blockX * scale}px`,
+    top: `${blockY * scale}px`,
+    width: `${blockW * scale}px`,
+    height: `${blockH * scale}px`,
+    zIndex: block.zIndex || 10,
+  };
+
+  return (
+    <div className="block-container" style={blockStyle}>
+      {units.flatMap(unit => (['label', 'body'] as const).map(fieldName => {
+        const field = unit[fieldName];
+        const spanKey = `page_${pageNumber}_credit_${unit.id}_${field.id}__${language}`;
+        const override = selectedBlockKey === spanKey && draftOverride
+          ? draftOverride
+          : overrides.get(spanKey) || null;
+        return (
+          <CreditField
+            key={spanKey}
+            block={block}
+            field={field}
+            spanKey={spanKey}
+            scale={scale}
+            isAdmin={isAdmin}
+            selected={selectedBlockKey === spanKey}
+            override={override}
+            language={language}
+            onBlockClick={onBlockClick}
+          />
+        );
+      }))}
+    </div>
+  );
+};
+
+interface CreditFieldProps {
+  block: Block;
+  field: CreditFieldDefinition;
+  spanKey: string;
+  scale: number;
+  isAdmin: boolean;
+  selected: boolean;
+  override: SpanOverride | null;
+  language: 'en' | 'pt-BR';
+  onBlockClick: (info: SelectedSpanInfo) => void;
+}
+
+const CreditField: React.FC<CreditFieldProps> = ({
+  block, field, spanKey, scale, isAdmin, selected, override, language, onBlockClick,
+}) => {
+  const previewRef = useRef<HTMLDivElement>(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const blockX = block.bbox[0];
+  const blockY = block.bbox[1];
+  const fieldX = field.frame.x;
+  const fieldY = field.bbox[1];
+  const fieldHeight = field.bbox[3] - field.bbox[1];
+  const fieldStyle: React.CSSProperties = {
+    position: 'absolute',
+    left: `${(fieldX - blockX) * scale}px`,
+    top: `${(fieldY - blockY) * scale}px`,
+    width: `${field.frame.width * scale}px`,
+    minHeight: `${fieldHeight * scale}px`,
+  };
+
+  useEffect(() => {
+    const preview = previewRef.current;
+    if (override && preview) {
+      setIsOverflowing(preview.scrollHeight > fieldHeight * scale + 2);
+    } else {
+      setIsOverflowing(false);
+    }
+  }, [override, fieldHeight, scale]);
+
+  const lines = (block.lines || []).filter(line => field.lineIds.includes(line.id));
+  const sourceClass = isAdmin ? 'credit-edit-field' : '';
+  const selectedClass = selected ? 'credit-field-selected' : '';
+  const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
+
+  const handleClick = (event: React.MouseEvent) => {
+    if (!isAdmin) return;
+    event.stopPropagation();
+    onBlockClick(extractCreditFieldInfo(spanKey, block, field));
+  };
+
+  return (
+    <div
+      className={`credit-field ${sourceClass} ${selectedClass} ${overflowClass}`}
+      style={fieldStyle}
+      onClick={handleClick}
+    >
+      {override && override.segments.length > 0 ? (
+        <div
+          ref={previewRef}
+          className="realbox"
+          style={{
+            position: 'relative',
+            width: '100%',
+            whiteSpace: 'pre-wrap',
+            textAlign: override.textAlign ?? field.frame.textAlign ?? 'left',
+            lineHeight: field.frame.lineHeight ?? 1,
+            display: 'block',
+            fontSize: 0,
+          }}
+        >
+          {renderCreditSegments(override.segments, field.links, language, scale, isAdmin)}
+        </div>
+      ) : (
+        lines.map(line => (
+          <LineRenderer
+            key={line.id}
+            line={line}
+            scale={scale}
+            blockOriginX={fieldX}
+            blockOriginY={fieldY}
+            isAdmin={false}
+            isSelected={false}
+            onClick={() => {}}
+          />
+        ))
+      )}
+    </div>
+  );
+};
+
 interface LineRendererProps {
   line: LineData;
   scale: number;
@@ -639,6 +1067,15 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   line, scale, blockOriginX, blockOriginY, targetPage, 
   onNavigate, isAdmin, isSelected, override, onClick 
 }) => {
+  // Some composite source illustrations (for example page 15's inset encounter
+  // diagram) already contain these words in the background artwork. Keep the
+  // extracted text available for Admin selection, but avoid painting it twice
+  // in the English source view. A localized asset is still required before
+  // translating text that is baked into that illustration.
+  if ((line as any).rasterizedDuplicate && !isSelected && !override) {
+    return null;
+  }
+
   // Hide ghosts by default, only show in admin if selected or via some UI toggle. 
   // For now, we'll hide them unless they are actively selected in Admin.
   if ((line as any).suspectedGhost && !isSelected) {
@@ -672,6 +1109,10 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     cursor: targetPage ? 'pointer' : (isAdmin ? 'text' : undefined),
     textAlign: 'left',
     lineHeight: 1, // Fix overlap from custom font metrics
+    ...(line.renderScaleX && !override ? {
+      transform: `scaleX(${line.renderScaleX})`,
+      transformOrigin: 'left top',
+    } : {}),
   };
 
   const handleClick = (e: React.MouseEvent) => {
@@ -686,6 +1127,9 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   };
 
   if (override && override.segments.length > 0) {
+    const sourceHasEsmeraldaHeading = line.spans.some(span =>
+      needsEsmeraldaHeadingDrop(span.font, span.size, span.bbox[3] - span.bbox[1]),
+    );
     return (
       <div 
         className={`realbox ${hoverClass}`} 
@@ -706,11 +1150,15 @@ const LineRenderer: React.FC<LineRendererProps> = ({
               fontSize: `${seg.size * scale}px`,
               fontWeight: seg.weight,
               fontStyle: seg.style,
+              fontVariantCaps: mapPdfFont(seg.font).variantCaps,
               color: seg.color,
               whiteSpace: 'pre-wrap',
               fontVariantLigatures: 'none',
               fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
               letterSpacing: '-0.015em',
+              ...(sourceHasEsmeraldaHeading && needsEsmeraldaHeadingDrop(seg.font, seg.size, lineH / scale)
+                ? { display: 'inline-block', transform: 'translateY(12%)' }
+                : {}),
             }}
           >
             {seg.text}
@@ -723,25 +1171,43 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   return (
     <div style={{...lineStyle, paddingLeft: `${textOffset}px`, boxSizing: 'border-box'}} onClick={handleClick} className={`${hoverClass} ${targetPage ? 'contents-link' : ''}`}>
       {line.spans.map((span, si) => {
-        if (span.font?.includes('Webdings') || span.font?.includes('Wingdings') || span.font?.includes('ZapfDingbats')) {
+        // The source PDF paints Webdings U+F07E twice at the same bbox: a
+        // 2pt white stroke and a red fill. PyMuPDF's text dict keeps only the
+        // white pass, so reconstruct that one known glyph from its trace data.
+        const isOutlinedImportantGlyph = span.font?.includes('Webdings') && span.text === '\uF07E';
+        if (
+          (span.font?.includes('Webdings') && !isOutlinedImportantGlyph) ||
+          span.font?.includes('Wingdings') ||
+          span.font?.includes('ZapfDingbats')
+        ) {
           return null;
         }
-        if (span.size < 4.0) {
+        if (span.size < 4.0 && !(line as any).renderTinyText) {
           return null; // Hide microscopic vector text artifacts embedded in images
         }
 
         const mapped = mapPdfFont(span.font);
         const isPUA = !!span.displayOverride;
+        const spanHeight = span.bbox[3] - span.bbox[1];
+        const shouldDropEsmeraldaHeading = needsEsmeraldaHeadingDrop(span.font, span.size, spanHeight);
         const spanStyle: React.CSSProperties = {
           fontFamily: isPUA ? "'EsmeraldaPro-PUA', 'EsmeraldaPro', serif" : mapped.family,
           fontSize: `${span.size * scale}px`,
-          fontWeight: mapped.weight,
+          fontWeight: span.renderWeightOverride ?? mapped.weight,
           fontStyle: mapped.style,
-          color: span.color || '#231f20',
+          fontVariantCaps: mapped.variantCaps,
+          color: isOutlinedImportantGlyph ? '#b91d23' : (span.color || '#231f20'),
           whiteSpace: 'pre',
           fontVariantLigatures: 'none',
           fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
           letterSpacing: '-0.015em',
+          ...(isOutlinedImportantGlyph ? {
+            WebkitTextStroke: `${2 * scale}px #ffffff`,
+            paintOrder: 'stroke fill',
+          } : {}),
+          // Large Esmeralda headings have unusually tall PDF ink boxes. Nudge
+          // only their visible glyphs down; this leaves surrounding line geometry intact.
+          ...(shouldDropEsmeraldaHeading ? { display: 'inline-block', transform: 'translateY(12%)' } : {}),
         };
 
         return (

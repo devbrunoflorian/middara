@@ -28,6 +28,7 @@ The user says to treat the current `fix/pixel-render/overflow` version as the ma
   - Divergent local master: `backup/local-master-before-overflow-reset-20260930` -> `cb4df271fa7d82d7425ded0faba1fbed1c2dfdb1` (kept local; not published because those commits were not on the requested feature branch).
 - Used `git push --force-with-lease` expecting remote `master` to remain at the reviewed SHA `da7793...`; GitHub accepted the update. `master`, `fix/pixel-render/overflow`, and both remote refs now point to `0d0b4b6f6377b56fbeeb455bddd6099e56e4838e`.
 - Moved the local `master` pointer to the same feature-branch commit after preserving its prior pointer.
+- After recording the recovery refs and audit status, documentation-only commit `f7e89ab` was fast-forwarded to both branches. Final verification shows local/remote `master` and `fix/pixel-render/overflow` all at `f7e89ab0aaf8e86c66d8e5d863a3f4d0bcdd34bd`.
 
 The database change on the former remote tip was not merged into the active `master`; it remains accessible through the remote backup branch. This matches the user's instruction to replace the active master contents while keeping recovery points.
 

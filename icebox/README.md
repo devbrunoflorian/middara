@@ -23,3 +23,16 @@ This folder holds previous versions and retired project items. Active files rema
 
 - [Layout policy before key-impact link](2026-09-30-key-impact-layout-policy-before/README.md): prior text-layout policy before linking the translation-key impact report.
 - [Temporary audit-output ignore snapshot](2026-09-30-tmp-audit-ignore-before/README.md): previous ignore rules before marking regenerable `tmp/` audit outputs as local-only.
+- [Handoff before credit compatibility audit](2026-09-30-handoff-before-credit-compatibility-audit/README.md): preserves the post-promotion handoff before recording source-level draft-key compatibility findings.
+
+- [Stale handoff before project read-through](2026-09-30-stale-handoff-before-project-readthrough/README.md): snapshot of a continuation handoff whose branch pointers and extraction architecture no longer matched repository state.
+
+- [Handoff before preview/credit plan](2026-09-30-handoff-before-preview-credit-plan/README.md): preserves the continuation guide before documenting the live-preview regression and revised credit-field plan.
+- [Layout frames before preview and credit pilot](2026-09-30-layout-frames-before-preview-credit-pilot/README.md): preserves the page 2 frame metadata before adding the measured paragraph frame and line-height pilot.
+- [Rules index before visual reference](2026-09-30-rules-index-before-visual-reference/README.md): preserves the project-rules index before adding the canonical PDF visual-reference entry.
+- [Handoff before preview/credit pilot](2026-09-30-handoff-before-preview-credit-pilot/README.md): preserves the prior continuation guide before recording implementation, browser QA, API availability, and the visual reference.
+
+- [PNPM dependency-bootstrap prompt artifacts](2026-09-30-pnpm-install-prompt-artifacts/README.md): preserve the generated `allowBuilds` placeholders and untracked lockfile from the failed PNPM 11 bootstrap; active workspace configuration was restored.
+
+- [Page 2 credit sidecar v1](2026-09-30-credit-units-v1-before-expansion/README.md): preserves the Playtesters-only mapping before adding multiple credit categories per source block.
+- [Handoff and visual-fidelity notes before persistence/credit update](2026-09-30-handoff-before-persistence-credit-update/README.md): snapshots the handoff, both indexes, and stale title-fidelity guidance before recording verified persistence and the multi-unit credit renderer.

@@ -1,0 +1,3 @@
+# Stale continuation handoff archived before project read-through
+
+This snapshot preserves the previous `docs/project-progress/CONTINUE-HERE.md`, which claimed that `fix/pixel-render/overflow` and `master` pointed to the same current commit and described `a8eae78` as the code baseline. Read-only inspection on 2026-09-30 found the active branch at `a57f2de` and local/remote `master` at `f7e89ab`; the project has also advanced beyond that code baseline. The active handoff was corrected to reflect observed refs and to flag stale structural documentation. Restore this snapshot only to inspect its historical wording; do not use it as current project state.

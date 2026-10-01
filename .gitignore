@@ -19,6 +19,32 @@ tmp/
 test_redact.pdf
 .system_generated/
 public/
+# Track only the user-supplied font files added for the viewer. Other public
+# build/runtime assets remain ignored by the repository-wide public/ rule.
+!apps/web/public/
+apps/web/public/*
+!apps/web/public/fonts/
+apps/web/public/fonts/*
+!apps/web/public/fonts/AristelleSans-Regular.ttf
+!apps/web/public/fonts/CinzelDecorative-Regular.ttf
+!apps/web/public/fonts/CinzelDecorative-Bold.ttf
+!apps/web/public/fonts/CinzelDecorative-Black.ttf
+!apps/web/public/fonts/Webdings-Regular.ttf
+!apps/web/public/fonts/Wingdings-Regular.ttf
+!apps/web/public/pages/
+apps/web/public/pages/*
+!apps/web/public/pages/page_004/
+apps/web/public/pages/page_004/*
+!apps/web/public/pages/page_004/fidelity-overlay-combatant-cards.png
+!apps/web/public/pages/page_004/fidelity_overlays.json
+!apps/web/public/pages/page_006/
+apps/web/public/pages/page_006/*
+!apps/web/public/pages/page_006/fidelity-overlay-hidden-cards.png
+!apps/web/public/pages/page_006/fidelity_overlays.json
+!apps/web/public/pages/page_007/
+apps/web/public/pages/page_007/*
+!apps/web/public/pages/page_007/fidelity-overlay-component-checkboxes.svg
+!apps/web/public/pages/page_007/fidelity_overlays.json
 _archive/
 test_fonts*.html
 script.py

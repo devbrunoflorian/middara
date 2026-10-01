@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { PageRenderer, type Block, type LayoutFrame, type PageData } from './components/PageRenderer';
+import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, type PageData, type PageFidelityOverlay } from './components/PageRenderer';
 import { 
   ChevronLeft, ChevronRight, Edit3, 
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
@@ -16,10 +16,25 @@ async function loadPageData(pageNum: number): Promise<PageData> {
     if (res.ok) {
       const data = await res.json();
       let pageFrames: Record<string, LayoutFrame> = {};
+      let pageCreditUnits: Record<string, CreditUnitDefinition | CreditUnitDefinition[]> = {};
       if (pageNum === 2) {
         try {
           const frameResponse = await fetch(`/pages/page_${pageStr}/layout_frames.json`);
           if (frameResponse.ok) pageFrames = await frameResponse.json();
+        } catch {}
+        try {
+          const creditResponse = await fetch(`/pages/page_${pageStr}/credit_units.json`);
+          if (creditResponse.ok) pageCreditUnits = await creditResponse.json();
+        } catch {}
+      }
+      let fidelityOverlays: PageFidelityOverlay[] = [];
+      if (pageNum === 4 || pageNum === 6 || pageNum === 7) {
+        try {
+          const overlayResponse = await fetch(`/pages/page_${pageStr}/fidelity_overlays.json`);
+          if (overlayResponse.ok) {
+            const overlayData = await overlayResponse.json();
+            fidelityOverlays = overlayData.overlays || [];
+          }
         } catch {}
       }
       return {
@@ -27,10 +42,20 @@ async function loadPageData(pageNum: number): Promise<PageData> {
         width: data.width || 820.35,
         height: data.height || 820.35,
         images: [],
-        blocks: (data.blocks || []).map((block: Block) => ({
-          ...block,
-          layoutFrame: pageFrames[block.id] || block.layoutFrame,
-        })),
+        fidelityOverlays,
+        blocks: (data.blocks || []).map((block: Block) => {
+          const sidecarUnits = pageCreditUnits[block.id];
+          const creditUnits = Array.isArray(sidecarUnits)
+            ? sidecarUnits
+            : sidecarUnits
+              ? [sidecarUnits]
+              : block.creditUnits ?? (block.creditUnit ? [block.creditUnit] : undefined);
+          return {
+            ...block,
+            layoutFrame: pageFrames[block.id] || block.layoutFrame,
+            creditUnits,
+          };
+        }),
         backgroundUrl: `/pages/page_${pageStr}/background.webp`
       };
     }
@@ -49,7 +74,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [zoomLevel, setZoomLevel] = useState<number>(1);
+  // Start at 200% relative to the measured fit scale; Fit to Screen resets this multiplier to 100%.
+  const [zoomLevel, setZoomLevel] = useState<number>(2);
   const [viewMode, setViewMode] = useState<'single' | 'scroll'>('single');
   const [pageInput, setPageInput] = useState<string>('1');
   const [language, setLanguage] = useState<'en' | 'pt-BR'>('en');
