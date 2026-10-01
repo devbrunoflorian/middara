@@ -45,6 +45,11 @@ Este documento serve como um log evolutivo de problemas de renderização encont
 - Filtro de ruído no motor de renderização: Ignorar hardcoded qualquer `span` que tenha `size < 4.0`. Se o tamanho nativo da fonte no PDF for menor que 4 pontos, não é conteúdo humano legível, é lixo vetorial do InDesign.
 *(Implementado no `PageRenderer.tsx` filtrando `span.size < 4.0`).*
 
+## 6. Arte composta de cartas e texto sobre artwork (Ex: Página 6)
+**Problema confirmado:** cartas ocultas são desenhadas no PDF com múltiplas imagens/máscaras e labels por cima. O viewer atual ignora `page.images`; as caixas ficam brancas e o glifo `?` é refeito com a fonte web, divergindo das interrogações brancas e dos textos impressos.
+**Correção de amostra:** `scripts/build_page_006_card_overlay.py` recorta pixels do PDF somente dentro das colocações transformadas de imagem e das bboxes textuais auditadas, e o `PageRenderer` usa o patch na página 6 somente em EN/não-Admin. Os recortes retangular e por componentes foram rejeitados: um comeu parágrafo vizinho e outro perdeu rótulos pequenos.
+**Limite:** texto rasterizado nesse patch não é editável nem traduzível; o overlay some em Admin. Para qualquer nova composição, inspecionar assets/máscaras, ordem e texto ao redor; testar o recorte em contexto; não propagar filtros de fantasma, thresholds ou retângulos sem prova.
+
 ## Fluxo Base de Revisão (QA Diário)
 Sempre que resolvermos um bug visual específico:
 1. Identificar se é uma anomalia isolada de 1 página, ou uma quebra sistêmica (regra de fonte/layout).

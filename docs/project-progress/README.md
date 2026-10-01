@@ -6,6 +6,8 @@ This folder records work by task, including the goal, method, files changed, evi
 
 ## Tasks
 
+- [2026-09-30 — Amostra visual e patch inglês: páginas 6 e 101](2026-09-30-next-visual-sample-pages-6-101.md): restaurar a composição das cartas da página 6 por máscaras locais derivadas do PDF; confirmar no app e registrar que a inspeção estrutural da página 101 não é aprovação linha a linha.
+- [2026-09-30 — Próxima auditoria visual: página 5](2026-09-30-next-visual-audit-page-5.md): plano iniciado a partir da matriz; inspecionar composição com muitas imagens, estilos mistos e fontes de risco sem presumir as causas da página 6.
 - [2026-09-30 — Feedback visual e auditoria das páginas 4/13/15](2026-09-30-feedback-audit-pages-4-13-15.md): implementar small caps em headings, restaurar texto vetorial dos cards e ocultar overlays duplicados na figura composta; build passou; aguarda validação visual e registra a colisão não confirmada da página 13.
 - [2026-09-30 — Triagem estendida por amostragem](2026-09-30-extended-fidelity-sample.md): triagem read-only das páginas 3, 6, 15, 24 e 101; confirmou conteúdo legítimo em cartões, encontrou um possível falso positivo que oculta o marcador da página 15 e delimitou as próximas capturas do app.
 - [2026-09-30 — Auditoria visual das páginas 4/13 e zoom inicial](2026-09-30-page4-13-visual-review-and-initial-zoom.md): verificar candidatos a fantasma nos componentes da página 4, confirmar os raios da página 13 e iniciar o viewer em 200% mantendo Fit to Screen em 100%.

@@ -47,3 +47,12 @@ A contenção em uma imagem de conteúdo continua sendo apenas um **sinal candid
 - **Contraste e tratamento também contam:** texto no fundo não é automaticamente equivalente ao overlay vetorial. Se os pixels rasterizados forem escuros, borrados, translúcidos ou tiverem cor/estilo diferente do texto legível no PDF, preserve o overlay vetorial ou limpe o fundo localmente. Caso testemunha: legenda A–G do diagrama composto na página 15, cujo raster ficou escuro quando o vetor claro foi suprimido.
 
 Caso testemunha registrado em `docs/project-progress/2026-09-30-feedback-audit-pages-4-13-15.md`: página 4 (texto pequeno de cartas Combatant ausente do fundo e falsamente suprimido) e página 15 (figura composta com texto embutido no fundo mais overlay extraído).
+
+## Adendo confirmado — fundos de cartas ocultas na página 6 (2026-09-30)
+
+Na página 6, as imagens e máscaras dos baralhos aparecem como várias colocações separadas, e a lista de imagens do JSON não é renderizada pelo viewer atual (`images: []`). Por isso, remover ou remapear somente os spans `?` não restaura as faces pretas nem os rótulos impressos.
+
+- Um retângulo da região cortou o parágrafo adjacente. Uma máscara por componentes grandes restaurou as silhuetas, mas omitiu texto miúdo. Ambas foram descartadas.
+- A correção inglesa usa, só na página 6, pixels do render do PDF original recortados pelas geometrias transformadas das imagens do baralho e por bboxes confirmadas de texto curto sobre artwork. O gerador é `scripts/build_page_006_card_overlay.py` e o resultado está separado em `fidelity_overlays.json` + PNG.
+- O overlay final aparece apenas em EN/não-Admin; Admin o oculta para manter os spans de edição acessíveis. Como letras impressas dentro das cartas estão rasterizadas nessa camada, o overlay não é uma solução de tradução: antes de editar esses rótulos em PT será preciso recompor arte e texto em camadas localizadas.
+- Este caso **não** autoriza crop retangular, máscara por limiar de componentes ou rasterização local em outras páginas. Para cada caso novo, medir imagem/máscara, texto vizinho, ordem de pintura e escala, e comparar a página completa com o PDF antes/depois.

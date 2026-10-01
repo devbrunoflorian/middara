@@ -72,6 +72,15 @@ export interface ImageData {
   blendMode?: string;
 }
 
+export interface PageFidelityOverlay {
+  url: string;
+  bbox: [number, number, number, number];
+  widthPx: number;
+  heightPx: number;
+  language: 'en' | 'pt-BR';
+  hideInAdmin?: boolean;
+}
+
 export interface PageData {
   page_number: number;
   width: number;
@@ -79,6 +88,7 @@ export interface PageData {
   backgroundUrl?: string;
   blocks: Block[];
   images: ImageData[];
+  fidelityOverlays?: PageFidelityOverlay[];
 }
 
 /* ─────────────────────────────────────────────
@@ -676,6 +686,33 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
               overridesReady={overridesReady}
               draftOverride={draftOverride}
               language={language}
+            />
+          );
+        })}
+        {pageData.fidelityOverlays?.map((overlay) => {
+          if (overlay.language !== language || (overlay.hideInAdmin && isAdmin)) return null;
+          const [x0, y0, x1, y1] = overlay.bbox;
+          return (
+            <img
+              key={overlay.url}
+              src={overlay.url}
+              alt=""
+              aria-hidden="true"
+              width={overlay.widthPx}
+              height={overlay.heightPx}
+              loading="eager"
+              decoding="async"
+              draggable={false}
+              style={{
+                position: 'absolute',
+                left: `${x0 * scale}px`,
+                top: `${y0 * scale}px`,
+                width: `${(x1 - x0) * scale}px`,
+                height: `${(y1 - y0) * scale}px`,
+                zIndex: 10000,
+                pointerEvents: 'none',
+                userSelect: 'none',
+              }}
             />
           );
         })}

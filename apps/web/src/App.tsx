@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, type PageData } from './components/PageRenderer';
+import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, type PageData, type PageFidelityOverlay } from './components/PageRenderer';
 import { 
   ChevronLeft, ChevronRight, Edit3, 
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
@@ -27,11 +27,22 @@ async function loadPageData(pageNum: number): Promise<PageData> {
           if (creditResponse.ok) pageCreditUnits = await creditResponse.json();
         } catch {}
       }
+      let fidelityOverlays: PageFidelityOverlay[] = [];
+      if (pageNum === 6) {
+        try {
+          const overlayResponse = await fetch(`/pages/page_${pageStr}/fidelity_overlays.json`);
+          if (overlayResponse.ok) {
+            const overlayData = await overlayResponse.json();
+            fidelityOverlays = overlayData.overlays || [];
+          }
+        } catch {}
+      }
       return {
         page_number: pageNum,
         width: data.width || 820.35,
         height: data.height || 820.35,
         images: [],
+        fidelityOverlays,
         blocks: (data.blocks || []).map((block: Block) => {
           const sidecarUnits = pageCreditUnits[block.id];
           const creditUnits = Array.isArray(sidecarUnits)
