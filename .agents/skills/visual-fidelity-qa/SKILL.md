@@ -53,6 +53,9 @@ Este documento serve como um log evolutivo de problemas de renderização encont
 ## 7. Duplicação raster/HTML e glifos suprimidos (Ex: Página 7)
 Um texto que sobrevive dentro de um Form XObject pode aparecer no background e no HTML ao mesmo tempo. Confirme os mesmos pixels na bbox antes de marcar somente a linha HTML com `rasterizedDuplicate`; preserve o bloco/override para edição. Para pictogramas suprimidos pelo renderer, confira se o background os contém. A página 7 precisou restaurar 20 caixas `U+274F` com um SVG transparente baseado nos bboxes auditados; a camada é page-local, não recebe eventos e não autoriza mudar o mapeamento global Zapf. Compare forma, posição e vizinhança ampliadas e depois a página inteira.
 
+### Revisão de overlay mascarado: artefatos fora dos placements de imagem (Ex: página 6)
+Uma máscara baseada apenas em `get_image_rects()` pode restaurar as imagens e ainda deixar paths/backings do PDF visíveis ao redor delas. Se o fundo mostrar formas que não existem no PDF final, compare `get_drawings()`/sequência de pintura além da lista de imagens; acrescente somente as geometrias e estilos confirmados ao overlay local. Confira texto vizinho para evitar cobri-lo e recarregue a página/asset antes da aprovação para excluir cache antigo.
+
 ## Fluxo Base de Revisão (QA Diário)
 Sempre que resolvermos um bug visual específico:
 1. Identificar se é uma anomalia isolada de 1 página, ou uma quebra sistêmica (regra de fonte/layout).

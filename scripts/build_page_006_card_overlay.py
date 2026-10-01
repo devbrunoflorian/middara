@@ -1,8 +1,9 @@
 """Build the page 6 English fidelity patch from the source PDF.
 
 This restores PDF-rendered card pixels over the viewer's imperfect image/text
-recomposition. The mask is constrained to embedded image placements and known
-card-label blocks; it must not be generalized to other pages without a new QA.
+recomposition. The mask is constrained to embedded image placements, audited
+card-label blocks, and five confirmed vector backings; do not generalize it to
+other pages without a new visual audit.
 """
 
 from __future__ import annotations
@@ -27,6 +28,19 @@ SIDECAR_PATH = PAGE_DIR / "fidelity_overlays.json"
 # excluded by the maximum rectangle area.
 CARD_REGION_PT = (545.0, 185.0, 795.0, 420.0)
 MAX_IMAGE_AREA_PT2 = 16_000.0
+# White-filled vector backings left visible in the extracted background even
+# though the source PDF's final composition covers them with card artwork.
+# Keep these two confirmed paths local to this audited card group.
+CARD_VECTOR_BACKING_BBOXES_PT = (
+    (586.34, 253.64, 630.42, 313.20),
+    (607.79, 360.89, 649.12, 414.64),
+)
+CARD_DARK_BACKING_BBOXES_PT = (
+    (609.00, 191.10, 728.90, 298.00),
+    (636.20, 245.30, 756.10, 352.20),
+    (666.40, 298.00, 786.30, 404.90),
+)
+CARD_DARK_FILL = (0.13669031858444214, 0.12195010483264923, 0.1252918243408203)
 PATCHED_TEXT_BLOCK_IDS = {
     "block_10", "block_94", "block_95", "block_96", "block_98",
     "block_235", "block_239", "block_243", "block_250", "block_254",
@@ -76,6 +90,43 @@ def main() -> None:
             ]
             draw.polygon(corners, fill=255)
             placements += 1
+
+    vector_backings = []
+    for drawing in page.get_drawings():
+        fill = drawing.get("fill")
+        rect = drawing["rect"]
+        if fill is None or not all(abs(channel - 1.0) < 1e-6 for channel in fill):
+            continue
+        for expected in CARD_VECTOR_BACKING_BBOXES_PT:
+            if all(abs(actual - target) <= 0.05 for actual, target in zip(rect, expected)):
+                draw.rectangle(tuple(value * scale for value in expected), fill=255)
+                vector_backings.append(expected)
+
+    if len(vector_backings) != len(CARD_VECTOR_BACKING_BBOXES_PT):
+        raise ValueError(
+            f"Expected {len(CARD_VECTOR_BACKING_BBOXES_PT)} white vector backings, "
+            f"found {len(vector_backings)}"
+        )
+
+    dark_backings = []
+    for drawing in page.get_drawings():
+        fill = drawing.get("fill")
+        rect = drawing["rect"]
+        if fill is None or not all(
+            abs(channel - target) < 1e-5
+            for channel, target in zip(fill, CARD_DARK_FILL)
+        ):
+            continue
+        for expected in CARD_DARK_BACKING_BBOXES_PT:
+            if all(abs(actual - target) <= 0.05 for actual, target in zip(rect, expected)):
+                draw.rectangle(tuple(value * scale for value in expected), fill=255)
+                dark_backings.append(expected)
+
+    if len(dark_backings) != len(CARD_DARK_BACKING_BBOXES_PT):
+        raise ValueError(
+            f"Expected {len(CARD_DARK_BACKING_BBOXES_PT)} dark card backings, "
+            f"found {len(dark_backings)}"
+        )
 
     text_blocks = 0
     for block in page_data["blocks"]:
@@ -130,7 +181,9 @@ def main() -> None:
     )
     print(
         f"Wrote {OVERLAY_PATH} ({overlay.width}x{overlay.height}) and "
-        f"{SIDECAR_PATH}; PDF placements={placements}, text blocks={text_blocks}, "
+        f"{SIDECAR_PATH}; PDF placements={placements}, "
+        f"vector backings={len(vector_backings)}, "
+        f"dark backings={len(dark_backings)}, text blocks={text_blocks}, "
         f"bbox_pt={bbox_pt}"
     )
 
