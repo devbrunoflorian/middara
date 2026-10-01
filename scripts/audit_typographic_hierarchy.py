@@ -74,7 +74,7 @@ def main() -> None:
         page = json.loads(path.read_text(encoding="utf-8"))
         page_spans = page_lines = page_mixed = 0
         page_bold_flags = page_italic_flags = 0
-        page_weight_overrides = page_display_overrides = 0
+        page_weight_overrides = page_display_overrides = page_pictogram_overrides = 0
         page_optical_candidates = page_optical_overrides = page_unresolved_optical = 0
         page_pua_spans = 0
         for block_index, block in enumerate(page.get("blocks", [])):
@@ -127,6 +127,9 @@ def main() -> None:
                     page_italic_flags += italic_flag
                     page_weight_overrides += bool(override_weight)
                     page_display_overrides += bool(span.get("displayOverride"))
+                    page_pictogram_overrides += bool(
+                        span.get("pictogramDisplayOverride") or span.get("pictogramSvgPath")
+                    )
                     page_optical_candidates += optical_scan_candidate
                     page_optical_overrides += optical_scan_candidate and bool(override_weight)
                     page_unresolved_optical += optical_heading_candidate
@@ -208,6 +211,9 @@ def main() -> None:
             "italicFlagSpans": page_italic_flags,
             "renderWeightOverrides": page_weight_overrides,
             "displayOverrides": page_display_overrides,
+            "pictogramOverrides": page_pictogram_overrides,
+            "typographicUnits": sum(len(block.get("typographicUnits", [])) for block in page.get("blocks", [])),
+            "typographicSpanUnits": sum(len(block.get("typographicSpanUnits", [])) for block in page.get("blocks", [])),
             "puaSpans": page_pua_spans,
             "cinzelOpticalScanCandidates": page_optical_candidates,
             "confirmedCinzelOpticalOverrides": page_optical_overrides,
