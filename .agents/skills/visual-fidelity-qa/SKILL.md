@@ -50,6 +50,9 @@ Este documento serve como um log evolutivo de problemas de renderização encont
 **Correção de amostra:** `scripts/build_page_006_card_overlay.py` recorta pixels do PDF somente dentro das colocações transformadas de imagem e das bboxes textuais auditadas, e o `PageRenderer` usa o patch na página 6 somente em EN/não-Admin. Os recortes retangular e por componentes foram rejeitados: um comeu parágrafo vizinho e outro perdeu rótulos pequenos.
 **Limite:** texto rasterizado nesse patch não é editável nem traduzível; o overlay some em Admin. Para qualquer nova composição, inspecionar assets/máscaras, ordem e texto ao redor; testar o recorte em contexto; não propagar filtros de fantasma, thresholds ou retângulos sem prova.
 
+## 7. Duplicação raster/HTML e glifos suprimidos (Ex: Página 7)
+Um texto que sobrevive dentro de um Form XObject pode aparecer no background e no HTML ao mesmo tempo. Confirme os mesmos pixels na bbox antes de marcar somente a linha HTML com `rasterizedDuplicate`; preserve o bloco/override para edição. Para pictogramas suprimidos pelo renderer, confira se o background os contém. A página 7 precisou restaurar 20 caixas `U+274F` com um SVG transparente baseado nos bboxes auditados; a camada é page-local, não recebe eventos e não autoriza mudar o mapeamento global Zapf. Compare forma, posição e vizinhança ampliadas e depois a página inteira.
+
 ## Fluxo Base de Revisão (QA Diário)
 Sempre que resolvermos um bug visual específico:
 1. Identificar se é uma anomalia isolada de 1 página, ou uma quebra sistêmica (regra de fonte/layout).
