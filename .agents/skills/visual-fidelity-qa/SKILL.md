@@ -15,16 +15,10 @@ Este documento serve como um log evolutivo de problemas de renderização encont
 - Aplique uma leve correção global no `letter-spacing` (ex: `-0.015em`) para comprimir fisicamente o texto e simular o Tracking real que existia no PDF.
 *(Implementado no `PageRenderer.tsx` no `spanStyle`).*
 
-## 2. Negritos Sumiram ou não Renderizam (Ex: Página 4)
-**Problema:** Os subtítulos ou palavras-chave de uma página, que claramente estão em negrito no arquivo PDF original, estão renderizando com espessura de fonte "Regular" no front-end.
-**Causa:** Isso ocorre por um de dois motivos na extração do PyMuPDF:
-1. O PDF usa a fonte original mas apenas embute o "Bold" no nome e o script de extração ignorou isso (ex: `AGaramondPro-Bold` foi parseado só como `AGaramondPro`).
-2. O PDF usa uma flag de `flags: 16` ou `flags: 20` (Bold) que o frontend não está respeitando na hora de definir o `fontWeight`.
-**Solução Ideal / Check:**
-- Inspecionar o `page_xxx_dom.json` correspondente.
-- Verificar o nome extraído da fonte (`font` property) no objeto Span do JSON.
-- Garantir que o nome da família de fonte declarado no `@font-face` engloba a palavra `Bold` ou que o React Engine aplica o `fontWeight: 'bold'` com base na flag extraída.
-*(Atenção! Próximo alvo: Corrigir isso na página 4).*
+## 2. Peso visual de headings (confirmado na página 4)
+**Problema:** Os 14 headings de tópico da página 4 pareciam regulares no app, embora o render PDF os mostre com peso mais forte.
+**Causa:** Os spans usam `Cinzel-Regular`, 12 pt e flags 4; o renderer mapeava isso corretamente para peso 400 com base nos metadados, mas o resultado visual ainda ficava mais leve que a referência. Nome de fonte e flags não substituem a comparação visual.
+**Correção confirmada:** os 14 spans daquela página usam `renderWeightOverride: 700`, mantendo `font: Cinzel-Regular` intacto como proveniência. A página inteira foi comparada após a mudança. Esse campo é opt-in por span: não aplicar peso 700 a toda Cinzel, a toda small caps, nem a outras páginas sem confirmar o PDF.
 
 ## 3. Barras de Ferramentas / Controles Sobrepondo o Render
 **Problema:** Botões fixos do layout (Header, Setas de navegação grandes) atrapalhando a leitura limpa da página (O clássico TOC do "cortando o single view").
@@ -41,9 +35,7 @@ Este documento serve como um log evolutivo de problemas de renderização encont
 ## 5. Textos "Fantasmas" e Distorcidos Sobre Imagens (Microscopic Vector Artifacts)
 **Problema:** Textos começam a "aparecer" grosseiramente e quebrando em cima das imagens das cartas e capas de livros (ex: "Adventure Book" brotando em cima da capa).
 **Causa:** O PDF original (gerado no InDesign/Illustrator) muitas vezes deixa um "texto vetorial invisível" ou microscópico (ex: `size: 2.9px`) jogado para trás das imagens ou como metadado para Leitores de Tela. O PyMuPDF é impiedoso e extrai esse texto fantasma. Se o navegador renderiza isso num `span`, dependendo da sua regra global de CSS (como vazar um `display: inline-block` ou aplicar um weight bruto), o navegador tenta forçar um `font-size` mínimo humano (10px~12px) dentro de uma bounding box minúscula (`bbox`), o que espalha o texto violentamente na tela.
-**Solução Ideal:**
-- Filtro de ruído no motor de renderização: Ignorar hardcoded qualquer `span` que tenha `size < 4.0`. Se o tamanho nativo da fonte no PDF for menor que 4 pontos, não é conteúdo humano legível, é lixo vetorial do InDesign.
-*(Implementado no `PageRenderer.tsx` filtrando `span.size < 4.0`).*
+**Regra operacional atual:** o renderer ainda filtra spans menores que 4 pt por padrão, mas tamanho pequeno é só um sinal, não prova de lixo. A página 4 tem texto legítimo de 1,58–2,25 pt em três cartas inclinadas. Como o extrator remove esse texto do fundo e o renderer não preserva direção/matriz das linhas, a versão inglesa usa pixels originais mascarados pelos polígonos transformados dos cards; as 210 linhas permanecem nos dados com `rasterizedDuplicate` e podem ser inspecionadas em Admin. Antes de suprimir ou reconstruir conteúdo menor que 4 pt, compare fonte, fundo final, direção/ordem de pintura e screenshot do app.
 
 ## 6. Arte composta de cartas e texto sobre artwork (Ex: Página 6)
 **Problema confirmado:** cartas ocultas são desenhadas no PDF com múltiplas imagens/máscaras e labels por cima. O viewer atual ignora `page.images`; as caixas ficam brancas e o glifo `?` é refeito com a fonte web, divergindo das interrogações brancas e dos textos impressos.

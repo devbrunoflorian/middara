@@ -14,6 +14,7 @@ export interface SpanData {
   flags: number;
   bbox: [number, number, number, number];
   displayOverride?: string;
+  renderWeightOverride?: number;
 }
 
 export interface LineData {
@@ -285,7 +286,7 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
         size = span.size;
         color = span.color || '#231f20';
         const mapped = mapPdfFont(font);
-        weight = mapped.weight;
+        weight = span.renderWeightOverride ?? mapped.weight;
         style = mapped.style;
       }
       text += span.displayOverride || span.text;
@@ -445,7 +446,7 @@ function extractCreditFieldInfo(
         size = span.size;
         color = span.color || '#231f20';
         const mapped = mapPdfFont(font);
-        weight = mapped.weight;
+        weight = span.renderWeightOverride ?? mapped.weight;
         style = mapped.style;
       }
       text += span.displayOverride || span.text;
@@ -1187,7 +1188,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
         const spanStyle: React.CSSProperties = {
           fontFamily: isPUA ? "'EsmeraldaPro-PUA', 'EsmeraldaPro', serif" : mapped.family,
           fontSize: `${span.size * scale}px`,
-          fontWeight: mapped.weight,
+          fontWeight: span.renderWeightOverride ?? mapped.weight,
           fontStyle: mapped.style,
           fontVariantCaps: mapped.variantCaps,
           color: isOutlinedImportantGlyph ? '#b91d23' : (span.color || '#231f20'),

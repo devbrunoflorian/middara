@@ -28,7 +28,7 @@ async function loadPageData(pageNum: number): Promise<PageData> {
         } catch {}
       }
       let fidelityOverlays: PageFidelityOverlay[] = [];
-      if (pageNum === 6 || pageNum === 7) {
+      if (pageNum === 4 || pageNum === 6 || pageNum === 7) {
         try {
           const overlayResponse = await fetch(`/pages/page_${pageStr}/fidelity_overlays.json`);
           if (overlayResponse.ok) {

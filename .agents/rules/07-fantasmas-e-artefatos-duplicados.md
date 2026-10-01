@@ -57,6 +57,13 @@ Na página 6, as imagens e máscaras dos baralhos aparecem como várias colocaç
 - O overlay final aparece apenas em EN/não-Admin; Admin o oculta para manter os spans de edição acessíveis. Como letras impressas dentro das cartas estão rasterizadas nessa camada, o overlay não é uma solução de tradução: antes de editar esses rótulos em PT será preciso recompor arte e texto em camadas localizadas.
 - Este caso **não** autoriza crop retangular, máscara por limiar de componentes ou rasterização local em outras páginas. Para cada caso novo, medir imagem/máscara, texto vizinho, ordem de pintura e escala, e comparar a página completa com o PDF antes/depois.
 
+## Adendo confirmado — texto oblíquo em cards de Combatant (página 4, 2026-10-01)
+
+- A página 4 contém três cards de Combatant inclinados aproximadamente 10°. `background.webp` conserva a arte dos cards, mas o extrator retirou seus operadores de texto. `get_texttrace()` registra `dir ≈ (0.9848, -0.1736)` para os microspans; a saída atual do renderer usa apenas o bbox axis-aligned e, portanto, pinta essas linhas horizontalmente. O texto estava presente, mas a carta parecia deformada.
+- Para a fidelidade inglesa, `scripts/build_page_004_combatant_overlay.py` recorta o render oficial pelos três polígonos derivados de `get_image_rects(..., transform=True)`. Só as 210 linhas pequenas cujos centros caem na região validada recebem `rasterizedDuplicate`; o patch é EN-only e some em Admin, preservando as linhas selecionáveis nos dados. Esse comportamento foi comparado com a página completa depois de recarregar o asset.
+- Texto pequeno pode ser conteúdo legível, e um bbox dentro da imagem não distingue sozinho texto raster, vetor transformado ou elemento duplicado. Verifique a direção da linha, asset final e sequência de pintura. Este patch é específico às geometrias das cartas da página 4; não generalize xrefs, máscaras ou o escopo de `renderTinyText` para outras páginas.
+- Limite futuro: mudar o conteúdo desses microspans em PT não pode usar o patch inglês; precisa de arte de carta localizada ou suporte a transformações de texto por linha antes de aprovar o preview traduzido.
+
 ## Adendo confirmado — texto remanescente e glifos omitidos na página 7 (2026-10-01)
 
 - A página 7 confirmou outra consequência da extração parcial de Form XObjects: a linha “Hidden Decks included in the itemized lists.” sobreviveu no `background.webp` e também foi pintada pelo HTML. A correção foi marcar só `line_32_1` com `rasterizedDuplicate: true`; não esconder o bloco todo nem remover a chave editável. Antes de aplicar esse marcador em outra página, compare a linha do PDF, a região exata do background e a saída do app.
