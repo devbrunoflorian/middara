@@ -21,6 +21,7 @@ export interface LineData {
   id: string;
   bbox: [number, number, number, number];
   spans: SpanData[];
+  renderScaleX?: number;
 }
 
 export interface LayoutFrame {
@@ -1108,6 +1109,10 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     cursor: targetPage ? 'pointer' : (isAdmin ? 'text' : undefined),
     textAlign: 'left',
     lineHeight: 1, // Fix overlap from custom font metrics
+    ...(line.renderScaleX && !override ? {
+      transform: `scaleX(${line.renderScaleX})`,
+      transformOrigin: 'left top',
+    } : {}),
   };
 
   const handleClick = (e: React.MouseEvent) => {

@@ -1,5 +1,10 @@
 # Handoff: continue the Rulebook App translation and extraction work
 
+> **Checkpoint atualizado em 2026-10-01 — página 13 concluída nesta rodada.** A página 13 recebeu `renderWeightOverride: 700` em seis headings, restaurou `Adventure Mode Continued` cuja marca `suspectedGhost` era falsa, e corrigiu o excesso pintado da última linha esquerda (`renderScaleX: 0.9671`) para respeitar o gutter de ~14,8 pt. Build passou; comparação app/PDF feita em Fit e 200%, sem leitura de drafts/storage. Relatório: [`2026-10-01-page13-fullpage-visual-audit.md`](2026-10-01-page13-fullpage-visual-audit.md). Matriz p. 13: `visual-reviewed`. A skill agora inclui o princípio do eixo `x₀` por coluna e a verificação de caixa pintada vs. bbox. As alterações p. 13 estão documentadas e ainda não commitadas neste checkpoint; sem push. Próxima ação segura: revisar diff e criar commit local após ler o relatório.
+
+**Próximo passo de escala:** instrumentalizar imagens/diffs PDF↔app das 102 páginas em lotes e agrupar anomalias por evidência estrutural, revisando visualmente sinalizações e exemplares antes de qualquer correção em lote. Não reproduzir cegamente as correções locais p. 2/4/13. O usuário confirmou que o título de página 13 também estava faltando e explicou explicitamente a divisão `x₀`, com esquerda em x− e direita em x+.
+
+
 - **Last updated:** 2026-10-01
 - **Working branch:** `fix/pixel-render/overflow`; page 2 save point is `310bd82` (`feat: finalize page 2 translation fidelity pilot`). Latest completed implementation checkpoint: `20439b1` (`fix: restore page 4 fidelity and card text`). The branch is ahead of origin and has not been pushed.
 - **Master observed during read-through:** local `master` and `origin/master` remain at `f7e89ab` (`docs: record master promotion and recovery refs`). The feature branch is ten commits ahead; refs do **not** currently match.
