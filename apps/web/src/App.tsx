@@ -63,7 +63,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [zoomLevel, setZoomLevel] = useState<number>(1);
+  // Start at 200% relative to the measured fit scale; Fit to Screen resets this multiplier to 100%.
+  const [zoomLevel, setZoomLevel] = useState<number>(2);
   const [viewMode, setViewMode] = useState<'single' | 'scroll'>('single');
   const [pageInput, setPageInput] = useState<string>('1');
   const [language, setLanguage] = useState<'en' | 'pt-BR'>('en');

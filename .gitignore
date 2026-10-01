@@ -19,6 +19,18 @@ tmp/
 test_redact.pdf
 .system_generated/
 public/
+# Track only the user-supplied font files added for the viewer. Other public
+# build/runtime assets remain ignored by the repository-wide public/ rule.
+!apps/web/public/
+apps/web/public/*
+!apps/web/public/fonts/
+apps/web/public/fonts/*
+!apps/web/public/fonts/AristelleSans-Regular.ttf
+!apps/web/public/fonts/CinzelDecorative-Regular.ttf
+!apps/web/public/fonts/CinzelDecorative-Bold.ttf
+!apps/web/public/fonts/CinzelDecorative-Black.ttf
+!apps/web/public/fonts/Webdings-Regular.ttf
+!apps/web/public/fonts/Wingdings-Regular.ttf
 _archive/
 test_fonts*.html
 script.py

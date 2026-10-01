@@ -6,6 +6,11 @@ This folder records work by task, including the goal, method, files changed, evi
 
 ## Tasks
 
+- [2026-09-30 — Feedback visual e auditoria das páginas 4/13/15](2026-09-30-feedback-audit-pages-4-13-15.md): implementar small caps em headings, restaurar texto vetorial dos cards e ocultar overlays duplicados na figura composta; build passou; aguarda validação visual e registra a colisão não confirmada da página 13.
+- [2026-09-30 — Triagem estendida por amostragem](2026-09-30-extended-fidelity-sample.md): triagem read-only das páginas 3, 6, 15, 24 e 101; confirmou conteúdo legítimo em cartões, encontrou um possível falso positivo que oculta o marcador da página 15 e delimitou as próximas capturas do app.
+- [2026-09-30 — Auditoria visual das páginas 4/13 e zoom inicial](2026-09-30-page4-13-visual-review-and-initial-zoom.md): verificar candidatos a fantasma nos componentes da página 4, confirmar os raios da página 13 e iniciar o viewer em 200% mantendo Fit to Screen em 100%.
+- [2026-09-30 — Piloto de revisão visual das páginas 4 e 13](2026-09-30-pilot-visual-review-pages-4-13.md): preparar comparação PDF↔app em layouts de colunas/imagens e PUA; manter aprovação visual pendente até obter o render do app.
+- [2026-09-30 — Integração de fontes locais fornecidas](2026-09-30-local-font-assets.md): comparar Aristelle Sans com a fonte incorporada ao PDF, adicionar seis fontes locais e mapear cada família sem confundir Wingdings3/Zapf Dingbats.
 - [2026-09-30 — Auditoria de fidelidade inglesa do livro](2026-09-30-book-wide-english-fidelity-audit.md): transformar a página 2 em critérios verificáveis e uma fila não-uniforme para revisar todas as 102 páginas antes de expandir a tradução.
 - [2026-09-30 — Resultados da triagem de fidelidade inglesa](2026-09-30-book-fidelity-scan.md): comparação read-only de spans PDF/JSON em todas as páginas, limites da prova, famílias tipográficas em risco e próxima fila visual; ver também a [matriz por página](book-fidelity-page-matrix.csv).
 

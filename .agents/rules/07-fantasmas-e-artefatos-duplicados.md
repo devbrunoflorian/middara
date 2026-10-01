@@ -34,3 +34,16 @@ Isso é mais barato e mais confiável do que o atalho de tamanho (`size < 7.0`),
 
 ## Por que isso importa mais do que parece
 Esse padrão (corrigir o sintoma que aparece na tela agora, sem generalizar a causa) já consumiu várias rodadas de correção nesta sessão. Sempre que aparecer um bug "parecido mas não igual" a um já resolvido, é sinal de que a correção anterior foi de sintoma, não de causa — voltar e generalizar, não empilhar mais um filtro específico.
+
+## Adendo confirmado — texto dentro de artwork e Form XObjects (2026-09-30)
+
+A contenção em uma imagem de conteúdo continua sendo apenas um **sinal candidato**. Ela não prova que a imagem cobre o texto no PDF final nem que o texto esteja rasterizado no asset usado pelo app.
+
+- A extração atual usa a ordem dos blocos de `get_text("dict")` como aproximação de z-order. Quando um caso importa, confirme a sequência real com `Page.get_bboxlog()`/`get_texttrace()` e compare o PDF renderizado com o `background.webp` e a saída do app.
+- `scripts/extract_backgrounds_webp.py` apaga operadores de texto do fluxo principal e tenta modificar alguns streams retornados por `get_images(True)`, mas não percorre recursivamente todos os Form XObjects. Assim, um texto pode persistir na imagem de fundo e ser desenhado de novo pelo overlay HTML. Também pode haver texto legítimo em forms/cartas que não aparece no fundo depois da limpeza do fluxo principal.
+- O filtro de tamanho menor que 4 pt em `PageRenderer` é uma segunda decisão automática independente. Não o use como prova de artefato. Pictogramas e conteúdo legítimo de cartas podem estar abaixo desse limite; uma correção pontual pode carregar metadado explícito como `renderTinyText` somente depois de confirmar a região no PDF e no fundo.
+- Antes de alterar uma rule `suspectedGhost`, prove duas coisas separadas: (1) se os pixels/texto estão presentes no asset de fundo final e (2) se o trecho é desenhado por cima ou por baixo da imagem no PDF. Não regenere um lote inteiro para consertar um caso: teste uma única página e confira que textos não extraídos (p.ex. rótulos de mapa) foram preservados.
+- Se texto estiver embutido numa figura composta (mini página, cartas, mapa e legenda), classifique a região como composição visual. A fidelidade inglesa pode depender da imagem; a localização futura exige um plano próprio para limpar só o texto ou criar uma imagem localizada. Não aplique `suspectedGhost` para esconder texto rasterizado nem remova todos os textos de um Form sem inventariar o que o Form contém.
+- **Contraste e tratamento também contam:** texto no fundo não é automaticamente equivalente ao overlay vetorial. Se os pixels rasterizados forem escuros, borrados, translúcidos ou tiverem cor/estilo diferente do texto legível no PDF, preserve o overlay vetorial ou limpe o fundo localmente. Caso testemunha: legenda A–G do diagrama composto na página 15, cujo raster ficou escuro quando o vetor claro foi suprimido.
+
+Caso testemunha registrado em `docs/project-progress/2026-09-30-feedback-audit-pages-4-13-15.md`: página 4 (texto pequeno de cartas Combatant ausente do fundo e falsamente suprimido) e página 15 (figura composta com texto embutido no fundo mais overlay extraído).

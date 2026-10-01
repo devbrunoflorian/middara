@@ -88,6 +88,7 @@ interface FontMapping {
   family: string;
   weight: number;
   style: 'normal' | 'italic';
+  variantCaps?: 'small-caps';
 }
 
 export function mapPdfFont(pdfFontName: string): FontMapping {
@@ -120,16 +121,25 @@ export function mapPdfFont(pdfFontName: string): FontMapping {
     let weight = 400;
     if (name.includes('Black')) weight = 900;
     else if (name.includes('Bold')) weight = 700;
-    return { family: "'CinzelLocal', 'Cinzel', serif", weight, style: 'normal' };
+    return { family: "'CinzelLocal', 'Cinzel', serif", weight, style: 'normal', variantCaps: 'small-caps' };
   }
   if (name.includes('Esmeralda')) {
     return { family: "'EsmeraldaPro', 'Georgia', serif", weight: 400, style: 'normal' };
   }
   if (name.includes('Aristelle')) {
-    return { family: "'Inter', 'Helvetica', sans-serif", weight: 400, style: 'normal' };
+    return { family: "'AristelleSans', sans-serif", weight: 400, style: 'normal' };
   }
-  if (name.includes('Webdings') || name.includes('Wingdings') || name.includes('ZapfDingbats')) {
-    return { family: "'Webdings', sans-serif", weight: 400, style: 'normal' };
+  if (name.includes('Wingdings3')) {
+    return { family: "'Wingdings 3', sans-serif", weight: 400, style: 'normal' };
+  }
+  if (name.includes('Wingdings')) {
+    return { family: "'WingdingsLocal', sans-serif", weight: 400, style: 'normal' };
+  }
+  if (name.includes('Webdings')) {
+    return { family: "'WebdingsLocal', sans-serif", weight: 400, style: 'normal' };
+  }
+  if (name.includes('ZapfDingbats')) {
+    return { family: "'Zapf Dingbats', sans-serif", weight: 400, style: 'normal' };
   }
   if (name.includes('AdobeHebrew')) {
     return { family: "'OptimaLTStd', 'Optima', serif", weight: 400, style: 'normal' };
@@ -144,6 +154,11 @@ function segFontToCSS(f: string): string {
   if (f.includes('Decorative')) return "'Cinzel Decorative', serif";
   if (f === 'EsmeraldaPro-PUA') return "'EsmeraldaPro-PUA', 'EsmeraldaPro', serif";
   if (f.includes('Esmeralda') || f === 'EsmeraldaPro') return "'EsmeraldaPro', serif";
+  if (f.includes('Aristelle')) return "'AristelleSans', sans-serif";
+  if (f.includes('Webdings')) return "'WebdingsLocal', sans-serif";
+  if (f.includes('Wingdings3')) return "'Wingdings 3', sans-serif";
+  if (f.includes('Wingdings')) return "'WingdingsLocal', sans-serif";
+  if (f.includes('ZapfDingbats')) return "'Zapf Dingbats', sans-serif";
   if (f === 'Inter') return "'Inter', sans-serif";
   return `'${f}', serif`;
 }
@@ -804,6 +819,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
                 fontSize: `${seg.size * scale}px`,
                 fontWeight: seg.weight,
                 fontStyle: seg.style,
+                fontVariantCaps: mapPdfFont(seg.font).variantCaps,
                 color: seg.color,
                 whiteSpace: 'pre-wrap',
                 fontVariantLigatures: 'none',
@@ -1012,6 +1028,15 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   line, scale, blockOriginX, blockOriginY, targetPage, 
   onNavigate, isAdmin, isSelected, override, onClick 
 }) => {
+  // Some composite source illustrations (for example page 15's inset encounter
+  // diagram) already contain these words in the background artwork. Keep the
+  // extracted text available for Admin selection, but avoid painting it twice
+  // in the English source view. A localized asset is still required before
+  // translating text that is baked into that illustration.
+  if ((line as any).rasterizedDuplicate && !isSelected && !override) {
+    return null;
+  }
+
   // Hide ghosts by default, only show in admin if selected or via some UI toggle. 
   // For now, we'll hide them unless they are actively selected in Admin.
   if ((line as any).suspectedGhost && !isSelected) {
@@ -1082,6 +1107,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
               fontSize: `${seg.size * scale}px`,
               fontWeight: seg.weight,
               fontStyle: seg.style,
+              fontVariantCaps: mapPdfFont(seg.font).variantCaps,
               color: seg.color,
               whiteSpace: 'pre-wrap',
               fontVariantLigatures: 'none',
@@ -1102,10 +1128,18 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   return (
     <div style={{...lineStyle, paddingLeft: `${textOffset}px`, boxSizing: 'border-box'}} onClick={handleClick} className={`${hoverClass} ${targetPage ? 'contents-link' : ''}`}>
       {line.spans.map((span, si) => {
-        if (span.font?.includes('Webdings') || span.font?.includes('Wingdings') || span.font?.includes('ZapfDingbats')) {
+        // The source PDF paints Webdings U+F07E twice at the same bbox: a
+        // 2pt white stroke and a red fill. PyMuPDF's text dict keeps only the
+        // white pass, so reconstruct that one known glyph from its trace data.
+        const isOutlinedImportantGlyph = span.font?.includes('Webdings') && span.text === '\uF07E';
+        if (
+          (span.font?.includes('Webdings') && !isOutlinedImportantGlyph) ||
+          span.font?.includes('Wingdings') ||
+          span.font?.includes('ZapfDingbats')
+        ) {
           return null;
         }
-        if (span.size < 4.0) {
+        if (span.size < 4.0 && !(line as any).renderTinyText) {
           return null; // Hide microscopic vector text artifacts embedded in images
         }
 
@@ -1118,11 +1152,16 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           fontSize: `${span.size * scale}px`,
           fontWeight: mapped.weight,
           fontStyle: mapped.style,
-          color: span.color || '#231f20',
+          fontVariantCaps: mapped.variantCaps,
+          color: isOutlinedImportantGlyph ? '#b91d23' : (span.color || '#231f20'),
           whiteSpace: 'pre',
           fontVariantLigatures: 'none',
           fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
           letterSpacing: '-0.015em',
+          ...(isOutlinedImportantGlyph ? {
+            WebkitTextStroke: `${2 * scale}px #ffffff`,
+            paintOrder: 'stroke fill',
+          } : {}),
           // Large Esmeralda headings have unusually tall PDF ink boxes. Nudge
           // only their visible glyphs down; this leaves surrounding line geometry intact.
           ...(shouldDropEsmeraldaHeading ? { display: 'inline-block', transform: 'translateY(12%)' } : {}),
