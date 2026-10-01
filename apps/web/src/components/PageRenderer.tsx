@@ -13,6 +13,7 @@ export interface SpanData {
   color: string;
   flags: number;
   bbox: [number, number, number, number];
+  origin?: [number, number];
   displayOverride?: string;
   renderWeightOverride?: number;
 }
@@ -20,6 +21,7 @@ export interface SpanData {
 export interface LineData {
   id: string;
   bbox: [number, number, number, number];
+  dir?: [number, number];
   spans: SpanData[];
   renderScaleX?: number;
 }
@@ -33,6 +35,8 @@ export interface LayoutFrame {
 
 export interface Block {
   id: string;
+  /** Stable semantic editor key for newly split units; legacy blocks keep their index-based key. */
+  editorKey?: string;
   bbox: [number, number, number, number];
   layoutFrame?: LayoutFrame;
   content?: string;
@@ -781,7 +785,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     zIndex: block.zIndex || 10,
   };
 
-  const blockKey = `page_${pageNumber}_block_${blockIdx}`;
+  const blockKey = block.editorKey
+    ? `${block.editorKey}__${language}`
+    : `page_${pageNumber}_block_${blockIdx}`;
 
   let currentOverride = overrides.get(blockKey);
   if (selectedBlockKey === blockKey && draftOverride) {
@@ -1095,6 +1101,27 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   const originalX = (line.bbox[0] - blockOriginX) * scale;
   const textOffset = Math.max(0, originalX - lineX);
 
+  const sourceText = line.spans.map(span => span.text).join('');
+  const overrideText = override?.segments.map(segment => segment.text).join('') ?? '';
+  const sourceVisualChars = line.spans.flatMap(span => {
+    const sourceChars = Array.from(span.text);
+    const displayChars = Array.from((span as any).displayOverride ?? span.text);
+    return sourceChars.length === displayChars.length ? displayChars : sourceChars;
+  });
+  const preserveSourceAlternates = !!override && overrideText === sourceText && sourceVisualChars.join('') !== sourceText;
+  let sourceCharIndex = 0;
+  const previewSegments = preserveSourceAlternates
+    ? override!.segments.map(segment => {
+        const chars = Array.from(segment.text);
+        const text = chars.map(char => {
+          const sourceChar = sourceVisualChars[sourceCharIndex];
+          sourceCharIndex += 1;
+          return sourceChar ?? char;
+        }).join('');
+        return { ...segment, text };
+      })
+    : override?.segments;
+
   const hoverClass = isAdmin ? `span-editable ${isSelected ? 'span-selected' : ''}` : '';
 
   const lineStyle: React.CSSProperties = {
@@ -1126,7 +1153,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     }
   };
 
-  if (override && override.segments.length > 0) {
+  if (override && previewSegments && previewSegments.length > 0) {
     const sourceHasEsmeraldaHeading = line.spans.some(span =>
       needsEsmeraldaHeadingDrop(span.font, span.size, span.bbox[3] - span.bbox[1]),
     );
@@ -1142,11 +1169,14 @@ const LineRenderer: React.FC<LineRendererProps> = ({
         }}
         onClick={handleClick}
       >
-        {override.segments.map((seg, segIdx) => (
+        {previewSegments.map((seg, segIdx) => (
           <span
             key={segIdx}
             style={{
-              fontFamily: segFontToCSS(seg.font),
+              fontFamily: Array.from(seg.text).some(char => {
+                const codepoint = char.codePointAt(0) ?? 0;
+                return codepoint >= 0xE000 && codepoint <= 0xF8FF;
+              }) ? "'EsmeraldaPro-PUA', 'EsmeraldaPro', serif" : segFontToCSS(seg.font),
               fontSize: `${seg.size * scale}px`,
               fontWeight: seg.weight,
               fontStyle: seg.style,

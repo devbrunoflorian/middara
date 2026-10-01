@@ -6,6 +6,14 @@ This folder records work by task, including the goal, method, files changed, evi
 
 ## Tasks
 
+- [2026-10-01 — Hierarquia tipográfica e unidades editáveis nas 102 páginas](2026-10-01-book-wide-typographic-units.md): aplicados 407 pesos locais em 94 páginas, recuperados 52 headings falsamente marcados ghost em 42 páginas e resolvidos alternates exatos em 13 títulos Esmeralda 30 pt; 373/380 candidatos Cinzel confirmados, com sete fragmentos de arte ainda fora do patch. Ver [matriz tipográfica por página](book-typographic-style-status-2026-10-01.csv). Permanecem validação visual por classe/página, revisão de pictogramas, 1.295 blocos mistos candidatos e 2.052 keys que exigem revisão antes de resegmentação.
+- [Hierarquia tipográfica recorrente do livro](../architecture/book-typographic-hierarchy.md): referência viva dos níveis observados, limites para não generalizar peso/alternates e critérios estruturais para unidades.
+- [2026-10-01 — Detector de texto duplicado sobre artwork](2026-10-01-ghost-text-detector.md): corrigir regiões visivelmente duplicadas das p. 56/74; scanner read-only percorreu 102 páginas e sinalizou baixa precisão antes de qualquer supressão em lote.
+- [2026-10-01 — Inventário tipográfico e hierarquia textual](2026-10-01-typography-hierarchy-inventory.md): inventariar 23.584 spans de 102 páginas; 1.295 blocos têm tamanhos mistos e aguardam revisão visual/compatibilidade antes de resegmentação.
+- [2026-10-01 — Captura comparativa PDF/app (redirecionada)](2026-10-01-book-visual-batch-pipeline.md): runtime local validado; piloto de diff genérico encerrado em favor de verificações focadas em tipografia, geometria e texto duplicado sobre artwork.
+- [2026-10-01 — Auditoria de tipografia da página 3](2026-10-01-page3-typography-audit.md): aplicar e conferir override de peso 700 nos dez títulos principais da página Contents; build passou, leaders e vizinhos preservados.
+- [2026-10-01 — Auditoria das unidades do cabeçalho da página 1](2026-10-01-page1-header-units-audit.md): separar `RULEBOOK` e `Version 1.2 – May 2023`, preservar a key legada do título, implementar fronteira de tamanho no extrator e provar seleção independente no Admin sem tocar drafts.
+
 - [2026-09-30 — Amostra visual e patch inglês: páginas 6 e 101](2026-09-30-next-visual-sample-pages-6-101.md): restaurar a composição das cartas da página 6 por máscaras locais derivadas do PDF; confirmar no app e registrar que a inspeção estrutural da página 101 não é aprovação linha a linha.
 - [2026-09-30 — Auditoria visual inglesa: página 5](2026-09-30-next-visual-audit-page-5.md): comparação do quadro inteiro e de regiões ampliadas; nenhum defeito visual confirmado e nenhuma correção generalizada aplicada.
 - [2026-09-30–10-01 — Auditoria visual inglesa: página 7](2026-09-30-next-visual-audit-page-7.md): corrigir uma linha HTML duplicada sobre o background e recompor 20 caixas Zapf Dingbats localmente, com QA visual e sem mudança global de fonte.
