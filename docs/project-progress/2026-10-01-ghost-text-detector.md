@@ -1,6 +1,6 @@
 # Detector de texto duplicado sobre artwork
 
-- **Status:** correção visual localizada aplicada e comparada nas p. 56/74; scanner de 102 páginas implementado como triagem, precisão ainda insuficiente para mutação em lote.
+- **Status:** correções visuais localizadas aplicadas nas p. 56/74; triagem de 102 páginas ainda tem precisão insuficiente para mutação. Novo relatório agrupado em 488 regiões (480 pendentes de revisão visual).
 - **Data/base:** 2026-10-01, branch `codex/book-visual-batch-audit`, criada de `master` atualizada em `33ee49f`.
 - **Escopo inicial:** casos visuais das páginas 56 e 74, com controles nas páginas 4, 6, 7, 13 e 15.
 
@@ -25,13 +25,15 @@ Regra 7 e auditorias anteriores mostram que falsos positivos são possíveis: te
 - **Candidato:** sobreposição ou similaridade textual sem prova visual conclusiva; permanece sem mutação e vai para revisão.
 - **Texto legítimo:** aparece como conteúdo vetorial não coberto no PDF ou como legenda externa à imagem; preservar mesmo se estiver perto de artwork.
 - Não generalizar correção de um tipo de carta para outras famílias de conteúdo. O lote encontra candidatos, revisão decide.
+- O usuário aprovou que só uma marca explicitamente revisada ou uma duplicata textual exata, na mesma região e dentro de um padrão já validado, pode ser suprimida automaticamente. `suspectedGhost`, overlap, pintura depois da imagem e similaridade aproximada isolados permanecem sinais candidatos.
+- Candidatos sem conclusão ficam visíveis e numa fila de revisão em lotes. Uma página com candidato ainda ambíguo não pode ser certificada como fiel.
 
 ## Limites de segurança
 
 - O script deverá ser read-only sobre PDF, JSON e banco. Resultados intermediários somente em `tmp/` ignorado.
 - Não consultar nem modificar drafts, `localStorage` ou valores de tradução.
 - Não gerar, retocar ou substituir artwork/imagens na v1.
-- Sem push. A branch pode conter alterações locais para revisão; nenhuma supressão em lote será aplicada sem evidência e QA.
+- O usuário autorizou commits separados e push normal nesta branch; nenhum force-push. A autorização não reduz a exigência de evidência/QA antes de cada supressão.
 
 ## Evidência, correções e resultados
 
@@ -42,8 +44,9 @@ Regra 7 e auditorias anteriores mostram que falsos positivos são possíveis: te
 - Adicionei `scripts/audit_artwork_text_overlays.py`, scanner read-only sobre 102 PDF/JSON, saída em `tmp/ghost-audit/all-pages.csv`. Resultado: 5.088 linhas candidatas em 78 páginas; 24 páginas sem candidato. Controles: p. 4 523, p. 6 111, p. 7 zero, p. 13 27, p. 15 48, p. 56 90 e p. 74 241. O grande volume e hits sobre painéis de fundo demonstram baixa precisão: não usar esses números para ocultar texto automaticamente.
 - `textPaintedAfterImage` também tem estados `false/unknown`; mesmo o estado `true` gerou falsos positivos em parágrafos próximos a imagens compostas (p. 56). O CSV é uma fila de triagem, não um classificador concluído. A melhoria seguinte precisa classificar grupos/limites reais de artwork e correlacionar o raster presente com o conteúdo textual antes de reduzir a fila.
 - `scripts/apply_audited_artwork_text_suppressions.py` registra/aplica apenas as caixas visuais confirmadas das p. 56/74. Nenhum artwork foi editado ou gerado. Não consultei drafts, localStorage ou valores de tradução.
+- O passe agrupado de 2026-10-01 em `scripts/audit_artwork_text_overlays.py --regions-out ...` preservou 5.088 linhas candidatas/78 páginas e as agrupou em 488 regiões de artwork; 480 grupos ainda têm linha sem confirmação explícita. Tracer controle p. 13: quatro grupos seguem `needs-visual-review`; p. 56: 13 grupos, dos quais dois têm apenas linhas já marcadas `rasterizedDuplicate`; p. 74: nove grupos, oito pendentes. O agrupamento reduz a unidade de revisão sem atribuir verdade automática. `py_compile` e `git diff --check` passaram.
 - `npm run build -w apps/web` passou na verificação final e as quatro ferramentas Python passaram `py_compile`; `git diff --check` passou. Vite mantém o aviso conhecido de `/texture.png` (fica para resolução em runtime). Capturas headless finais p. 56/74 confirmaram nomes únicos e conteúdo necessário preservado. Artefatos comparativos estão em `tmp/ghost-audit/` (ignorado pelo Git).
 
 ## Próximo passo
 
-Não generalizar os retângulos das p. 56/74. Melhorar o scanner para produzir grupos por imagem/região com uma fila menor e evidência visual; revisar primeiro as páginas com maior densidade de imagens/candidatos. Em tarefa separada, inventariar tipografia/hierarquia e regras de espaçamento. Manter artwork intocado na v1, sem push.
+Não generalizar os retângulos das p. 56/74. Criar comparações visuais compactas por grupo (PDF, background e bboxes dos candidatos), revisar em lotes com positivos/controles e registrar decisão por região. A matriz por página continua sendo uma triagem, não aprovação integral do livro. Manter artwork intocado na v1.
