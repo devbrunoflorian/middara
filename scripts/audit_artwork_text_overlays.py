@@ -144,11 +144,63 @@ def inspect_page(pdf_page: pymupdf.Page, page_json: dict) -> list[dict]:
     return candidates
 
 
+def summarize_regions(candidates: list[dict]) -> list[dict]:
+    """Group line-level signals into artwork review batches, never verdicts."""
+    groups: dict[tuple[int, int, str], list[dict]] = {}
+    for row in candidates:
+        key = (int(row["page"]), int(row["imageSeq"]), str(row["imageBBox"]))
+        groups.setdefault(key, []).append(row)
+
+    summaries = []
+    for (page, image_seq, image_bbox), rows in sorted(groups.items()):
+        confirmed = sum(row["alreadyRasterizedDuplicate"] for row in rows)
+        suspected = sum(row["suspectedGhost"] for row in rows)
+        painted_after = sum(row["textPaintedAfterImage"] is True for row in rows)
+        painted_before = sum(row["textPaintedAfterImage"] is False for row in rows)
+        unknown_order = len(rows) - painted_after - painted_before
+        examples = []
+        seen = set()
+        for row in rows:
+            text = " ".join(str(row["text"]).split())
+            if text and text.casefold() not in seen:
+                examples.append(text[:100])
+                seen.add(text.casefold())
+            if len(examples) == 5:
+                break
+
+        summaries.append({
+            "page": page,
+            "regionId": f"p{page:03d}-imgseq{image_seq}",
+            "imageSeq": image_seq,
+            "imageBBox": image_bbox,
+            "candidateLineCount": len(rows),
+            "confirmedDuplicateLineCount": confirmed,
+            "suspectedGhostLineCount": suspected,
+            "textPaintedAfterImageCount": painted_after,
+            "textPaintedBeforeImageCount": painted_before,
+            "textPaintOrderUnknownCount": unknown_order,
+            "maxImageCoverageOfText": max(row["imageCoverageOfText"] for row in rows),
+            "maxBBoxIoU": max(row["bboxIoU"] for row in rows),
+            "reviewStatus": (
+                "all-candidate-lines-explicitly-confirmed"
+                if confirmed == len(rows)
+                else "needs-visual-review"
+            ),
+            "textExamples": " | ".join(examples),
+        })
+    return summaries
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pdf", required=True, type=Path)
     parser.add_argument("--json-dir", required=True, type=Path, help="Directory containing page_NNN/page_NNN_dom.json")
     parser.add_argument("--out", required=True, type=Path, help="CSV output path, preferably under ignored tmp/")
+    parser.add_argument(
+        "--regions-out",
+        type=Path,
+        help="Optional grouped review queue CSV; summaries are signals, not automatic classifications",
+    )
     parser.add_argument("--pages", help="Optional comma-separated 1-based page numbers")
     args = parser.parse_args()
 
@@ -176,6 +228,23 @@ def main() -> None:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
         writer.writerows(results)
+    region_path = args.regions_out
+    if region_path is not None:
+        region_path.parent.mkdir(parents=True, exist_ok=True)
+        region_rows = summarize_regions(results)
+        region_fields = [
+            "page", "regionId", "imageSeq", "imageBBox", "candidateLineCount",
+            "confirmedDuplicateLineCount", "suspectedGhostLineCount",
+            "textPaintedAfterImageCount", "textPaintedBeforeImageCount",
+            "textPaintOrderUnknownCount", "maxImageCoverageOfText", "maxBBoxIoU",
+            "reviewStatus", "textExamples",
+        ]
+        with region_path.open("w", newline="", encoding="utf-8-sig") as handle:
+            writer = csv.DictWriter(handle, fieldnames=region_fields)
+            writer.writeheader()
+            writer.writerows(region_rows)
+        print(f"Artwork review regions: {len(region_rows)}")
+        print(f"Region CSV: {region_path.resolve()}")
     print(f"Pages scanned: {len(selected) if selected is not None else document.page_count}")
     print(f"Image-overlap candidates: {len(results)}")
     for page_number in (56, 74):
