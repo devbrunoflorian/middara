@@ -69,7 +69,7 @@ def main() -> None:
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--scale", type=float, default=2.0, help="PDF render pixels per PDF point")
     parser.add_argument("--pad-pt", type=float, default=4.0, help="Context around each span in source PDF points")
-    parser.add_argument("--max-per-page", type=int, default=60)
+    parser.add_argument("--max-per-page", type=int, default=0, help="Optional cap for visual strips and CSV rows per page; default is unlimited")
     args = parser.parse_args()
 
     doc = pymupdf.open(args.pdf)
@@ -93,7 +93,8 @@ def main() -> None:
         pad_x, pad_y = round(args.pad_pt * scale_x), round(args.pad_pt * scale_y)
         strips = []
         candidates = span_rows(page_json, page_number)
-        candidates = candidates[:args.max_per_page]
+        if args.max_per_page > 0:
+            candidates = candidates[:args.max_per_page]
         for row in candidates:
             x0, y0, x1, y1 = row["bbox"]
             pixel_bbox = (
@@ -127,16 +128,19 @@ def main() -> None:
             strips.append(strip)
 
         if strips:
-            width = max(strip.width for strip in strips)
-            height = sum(strip.height for strip in strips)
-            sheet = Image.new("RGB", (width, height), "#d8d8d8")
-            y = 0
-            for strip in strips:
-                sheet.paste(strip, (0, y))
-                y += strip.height
-            out_image = args.out_dir / f"page-{page_number:03d}-pictograms.png"
-            sheet.save(out_image)
-            print(f"Page {page_number}: {len(strips)} spans -> {out_image}")
+            rows_per_sheet = 20
+            for part, start in enumerate(range(0, len(strips), rows_per_sheet), start=1):
+                chunk = strips[start:start + rows_per_sheet]
+                width = max(strip.width for strip in chunk)
+                height = sum(strip.height for strip in chunk)
+                sheet = Image.new("RGB", (width, height), "#d8d8d8")
+                y = 0
+                for strip in chunk:
+                    sheet.paste(strip, (0, y))
+                    y += strip.height
+                out_image = args.out_dir / f"page-{page_number:03d}-pictograms-{part:02d}.png"
+                sheet.save(out_image)
+            print(f"Page {page_number}: {len(strips)} spans in {(len(strips) + rows_per_sheet - 1) // rows_per_sheet} strips files")
         else:
             print(f"Page {page_number}: no local pictogram spans")
 
