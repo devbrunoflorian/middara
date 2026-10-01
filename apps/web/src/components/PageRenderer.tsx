@@ -15,6 +15,11 @@ export interface SpanData {
   bbox: [number, number, number, number];
   origin?: [number, number];
   displayOverride?: string;
+  /** Per-span replacement for symbol-font encodings that need a Unicode cmap codepoint. */
+  pictogramDisplayOverride?: string;
+  pictogramFontOverride?: string;
+  /** Minimal SVG path for a source-confirmed glyph missing from the app's fonts. */
+  pictogramSvgPath?: string;
   renderWeightOverride?: number;
 }
 
@@ -49,6 +54,8 @@ export interface Block {
   zIndex?: number;
   creditUnit?: CreditUnitDefinition;
   creditUnits?: CreditUnitDefinition[];
+  typographicUnits?: TypographicUnitDefinition[];
+  typographicSpanUnits?: TypographicSpanUnitDefinition[];
 }
 
 export interface CreditFieldDefinition {
@@ -69,6 +76,24 @@ export interface CreditUnitDefinition {
   id: string;
   label: CreditFieldDefinition;
   body: CreditFieldDefinition;
+}
+
+export interface TypographicUnitDefinition {
+  id: string;
+  field: CreditFieldDefinition;
+}
+
+export interface TypographicSpanUnitDefinition {
+  id: string;
+  /** `lineId:spanIndex` references identify a contiguous same-size run. */
+  spanRefs: string[];
+}
+
+interface InlineSpanUnitRenderState {
+  spanKey: string;
+  override: SpanOverride | null;
+  selected: boolean;
+  info: SelectedSpanInfo;
 }
 
 export interface ImageData {
@@ -804,6 +829,24 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     }
   }, [currentOverride, scale, blockH]);
 
+  const typographicUnits = block.typographicUnits ?? [];
+  if (typographicUnits.length > 0 && overridesReady && !overrides.has(blockKey)) {
+    return (
+      <TypographicUnitBlock
+        block={block}
+        units={typographicUnits}
+        pageNumber={pageNumber}
+        scale={scale}
+        isAdmin={isAdmin}
+        onBlockClick={onBlockClick}
+        selectedBlockKey={selectedBlockKey}
+        overrides={overrides}
+        draftOverride={draftOverride}
+        language={language}
+      />
+    );
+  }
+
   const creditUnits = block.creditUnits ?? (block.creditUnit ? [block.creditUnit] : []);
   if (creditUnits.length > 0 && overridesReady && !overrides.has(blockKey)) {
     return (
@@ -823,6 +866,22 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   }
 
   if (!block.lines || block.lines.length === 0) return null;
+
+  const inlineSpanUnits = block.typographicSpanUnits ?? [];
+  const inlineSpanStates = new Map<string, InlineSpanUnitRenderState>();
+  for (const unit of inlineSpanUnits) {
+    const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
+    const override = selectedBlockKey === spanKey && draftOverride
+      ? draftOverride
+      : overrides.get(spanKey) || null;
+    const state = {
+      spanKey,
+      override,
+      selected: selectedBlockKey === spanKey,
+      info: extractInlineSpanUnitInfo(spanKey, block, unit),
+    };
+    for (const spanRef of unit.spanRefs) inlineSpanStates.set(spanRef, state);
+  }
 
   const blockHoverClass = isAdmin ? `block-editable ${selectedBlockKey === blockKey ? 'block-selected' : ''}` : '';
   const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
@@ -899,9 +958,11 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             blockOriginY={blockY}
             targetPage={contentsMap?.get(line.id)}
             onNavigate={onNavigate}
-            isAdmin={false} // Click is handled at block level now
+            isAdmin={isAdmin && inlineSpanUnits.length > 0}
             isSelected={false}
             onClick={() => {}}
+            inlineSpanStates={inlineSpanStates}
+            onInlineSpanClick={state => onBlockClick(state.info)}
           />
         );
       })}
@@ -962,6 +1023,94 @@ const CreditUnitBlock: React.FC<CreditUnitBlockProps> = ({
           />
         );
       }))}
+    </div>
+  );
+};
+
+interface TypographicUnitBlockProps {
+  block: Block;
+  units: TypographicUnitDefinition[];
+  pageNumber: number;
+  scale: number;
+  isAdmin: boolean;
+  onBlockClick: (info: SelectedSpanInfo) => void;
+  selectedBlockKey: string | null;
+  overrides: Map<string, SpanOverride>;
+  draftOverride: SpanOverride | null;
+  language: 'en' | 'pt-BR';
+}
+
+function extractInlineSpanUnitInfo(
+  spanKey: string,
+  block: Block,
+  unit: TypographicSpanUnitDefinition,
+): SelectedSpanInfo {
+  const selected = new Set(unit.spanRefs);
+  const spans = (block.lines || []).flatMap(line => line.spans.flatMap((span, index) =>
+    selected.has(`${line.id}:${index}`) ? [span] : [],
+  ));
+  const first = spans.find(span => span.text.trim() && !span.font.includes('Dingbat')) ?? spans[0];
+  const font = first?.font || 'OptimaLTStd';
+  const mapped = mapPdfFont(font);
+  const text = spans.map(span => span.displayOverride || span.text).join('').replace(/\n/g, ' ').replace(/ +/g, ' ').trim();
+  const boxes = spans.map(span => span.bbox);
+  const bbox: [number, number, number, number] = boxes.length ? [
+    Math.min(...boxes.map(box => box[0])), Math.min(...boxes.map(box => box[1])),
+    Math.max(...boxes.map(box => box[2])), Math.max(...boxes.map(box => box[3])),
+  ] : [...block.bbox] as [number, number, number, number];
+  return {
+    spanKey,
+    text,
+    font,
+    family: mapped.family,
+    weight: first?.renderWeightOverride ?? mapped.weight,
+    style: mapped.style,
+    color: first?.color || '#231f20',
+    size: first?.size || 10,
+    bbox,
+    textAlign: 'left',
+  };
+}
+
+const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
+  block, units, pageNumber, scale, isAdmin, onBlockClick, selectedBlockKey,
+  overrides, draftOverride, language,
+}) => {
+  const blockX = block.bbox[0];
+  const blockY = block.bbox[1];
+  const blockW = block.bbox[2] - block.bbox[0];
+  const blockH = block.bbox[3] - block.bbox[1];
+  const blockStyle: React.CSSProperties = {
+    position: 'absolute',
+    left: `${blockX * scale}px`,
+    top: `${blockY * scale}px`,
+    width: `${blockW * scale}px`,
+    height: `${blockH * scale}px`,
+    zIndex: block.zIndex || 10,
+  };
+
+  return (
+    <div className="block-container" style={blockStyle}>
+      {units.map(unit => {
+        const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
+        const override = selectedBlockKey === spanKey && draftOverride
+          ? draftOverride
+          : overrides.get(spanKey) || null;
+        return (
+          <CreditField
+            key={spanKey}
+            block={block}
+            field={unit.field}
+            spanKey={spanKey}
+            scale={scale}
+            isAdmin={isAdmin}
+            selected={selectedBlockKey === spanKey}
+            override={override}
+            language={language}
+            onBlockClick={onBlockClick}
+          />
+        );
+      })}
     </div>
   );
 };
@@ -1067,11 +1216,13 @@ interface LineRendererProps {
   isSelected: boolean;
   override?: SpanOverride;
   onClick: () => void;
+  inlineSpanStates?: Map<string, InlineSpanUnitRenderState>;
+  onInlineSpanClick?: (state: InlineSpanUnitRenderState) => void;
 }
 
 const LineRenderer: React.FC<LineRendererProps> = ({ 
   line, scale, blockOriginX, blockOriginY, targetPage, 
-  onNavigate, isAdmin, isSelected, override, onClick 
+  onNavigate, isAdmin, isSelected, override, onClick, inlineSpanStates, onInlineSpanClick,
 }) => {
   // Some composite source illustrations (for example page 15's inset encounter
   // diagram) already contain these words in the background artwork. Keep the
@@ -1201,14 +1352,15 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   return (
     <div style={{...lineStyle, paddingLeft: `${textOffset}px`, boxSizing: 'border-box'}} onClick={handleClick} className={`${hoverClass} ${targetPage ? 'contents-link' : ''}`}>
       {line.spans.map((span, si) => {
+        const inlineUnit = inlineSpanStates?.get(`${line.id}:${si}`);
         // The source PDF paints Webdings U+F07E twice at the same bbox: a
         // 2pt white stroke and a red fill. PyMuPDF's text dict keeps only the
         // white pass, so reconstruct that one known glyph from its trace data.
         const isOutlinedImportantGlyph = span.font?.includes('Webdings') && span.text === '\uF07E';
         if (
           (span.font?.includes('Webdings') && !isOutlinedImportantGlyph) ||
-          span.font?.includes('Wingdings') ||
-          span.font?.includes('ZapfDingbats')
+          (span.font?.includes('Wingdings') && !span.pictogramDisplayOverride) ||
+          (span.font?.includes('ZapfDingbats') && !span.pictogramSvgPath)
         ) {
           return null;
         }
@@ -1221,7 +1373,11 @@ const LineRenderer: React.FC<LineRendererProps> = ({
         const spanHeight = span.bbox[3] - span.bbox[1];
         const shouldDropEsmeraldaHeading = needsEsmeraldaHeadingDrop(span.font, span.size, spanHeight);
         const spanStyle: React.CSSProperties = {
-          fontFamily: isPUA ? "'EsmeraldaPro-PUA', 'EsmeraldaPro', serif" : mapped.family,
+          fontFamily: isPUA
+            ? "'EsmeraldaPro-PUA', 'EsmeraldaPro', serif"
+            : span.pictogramFontOverride
+              ? `'${span.pictogramFontOverride}', sans-serif`
+              : mapped.family,
           fontSize: `${span.size * scale}px`,
           fontWeight: span.renderWeightOverride ?? mapped.weight,
           fontStyle: mapped.style,
@@ -1240,13 +1396,65 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           ...(shouldDropEsmeraldaHeading ? { display: 'inline-block', transform: 'translateY(12%)' } : {}),
         };
 
+        const inlineOverrideSegments = inlineUnit?.override?.segments ?? [];
+        const inlineOverrideText = inlineOverrideSegments.map(segment => segment.text).join('');
+        const sourceDisplayChars = Array.from(span.displayOverride ?? span.text);
+        const preserveInlineDisplayOverride = inlineOverrideText === span.text
+          && sourceDisplayChars.length === Array.from(span.text).length
+          && sourceDisplayChars.join('') !== span.text;
+        let inlineSourceCharIndex = 0;
+        const spanContent = inlineOverrideSegments.length
+          ? inlineOverrideSegments.map((segment, segmentIndex) => {
+            const segmentText = preserveInlineDisplayOverride
+              ? Array.from(segment.text).map(() => sourceDisplayChars[inlineSourceCharIndex++] ?? '').join('')
+              : segment.text;
+            return (
+            <span
+              key={segmentIndex}
+              style={{
+                fontFamily: Array.from(segment.text).some(char => {
+                  const codepoint = char.codePointAt(0) ?? 0;
+                  return codepoint >= 0xE000 && codepoint <= 0xF8FF;
+                }) ? "'EsmeraldaPro-PUA', 'EsmeraldaPro', serif" : segFontToCSS(segment.font),
+                fontSize: `${segment.size * scale}px`,
+                fontWeight: segment.weight,
+                fontStyle: segment.style,
+                fontVariantCaps: mapPdfFont(segment.font).variantCaps,
+                color: segment.color,
+                whiteSpace: 'pre',
+                fontVariantLigatures: 'none',
+                fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
+                letterSpacing: '-0.015em',
+              }}
+            >
+              {segmentText}
+            </span>
+          );
+          })
+          : span.pictogramSvgPath ? (
+            <svg
+              aria-hidden="true"
+              width="0.917em"
+              height="1em"
+              viewBox="0 0 917 1000"
+              style={{ display: 'inline-block', verticalAlign: 'baseline', overflow: 'visible' }}
+            >
+              <path d={span.pictogramSvgPath} fill="currentColor" />
+            </svg>
+          ) : isPUA ? span.displayOverride : span.pictogramDisplayOverride ?? span.text;
+
         return (
           <span
             key={si}
-            style={spanStyle}
-            aria-label={isPUA ? span.text : undefined}
+            className={inlineUnit ? `span-editable ${inlineUnit.selected ? 'span-selected' : ''}` : undefined}
+            style={{ ...spanStyle, ...(inlineUnit && isAdmin ? { cursor: 'text' } : {}) }}
+            onClick={inlineUnit && isAdmin ? event => {
+              event.stopPropagation();
+              onInlineSpanClick?.(inlineUnit);
+            } : undefined}
+            aria-label={isPUA ? span.text : span.pictogramDisplayOverride ? 'Decorative item marker' : span.pictogramSvgPath ? 'Decorative level marker' : undefined}
           >
-            {isPUA ? span.displayOverride : span.text}
+            {spanContent}
           </span>
         );
       })}
