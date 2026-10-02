@@ -6,7 +6,7 @@ This is the current evidence-based style guide for reproducing English text in t
 
 | Role | Repeated source pattern | Viewer rule |
 |---|---|---|
-| Large decorative page title | `EsmeraldaPro`, 30 pt; selected characters may use alternates | Resolve each alternate by the source PDF glyph ID. Apply only at this family/size, per character. Keep source text and geometry intact. |
+| Large decorative page title | `EsmeraldaPro`, 30 pt; selected characters may use alternates | Resolve each alternate by the source PDF glyph ID. Give the edit frame the usable negative space across its heading band; the short ink bbox is not the frame. Keep page ornaments, neighboring content and centering clear. Apply alternates only at this family/size, per character. |
 | Large section heading | Often `Cinzel-Regular` around 18 pt; a `Continued` run may be 11 pt on the same visual heading | Keep different sizes as separate editable units. Give each run its PDF position and weight; the size difference is part of the hierarchy. |
 | Section/topic heading | Repeated `Cinzel-Regular`, 12 pt, often extracted in title case with small-caps flags | The renderer's regular face can look too light despite matching PDF metadata. Apply 700 only to exact headings visually confirmed against the PDF. |
 | Contents subheading | `OptimaLTStd-Bold`, commonly 9 pt and all caps | Use its bundled bold face and preserve capitalization, baseline and neighboring vector leaders. |
@@ -24,6 +24,7 @@ These recurring roles are supported by the source-PDF comparison on pages 2–13
 5. Separate geometry from style. Preserve source text bbox, baseline and column/frame bounds; correct local overflow or alignment only after measuring the page region and neighbor clearance.
 6. Exclude raster duplicates, ghost candidates, tiny vector text and card artwork from heading inference until the PDF and the app background are compared.
 7. A size/style difference creates a distinct editable target but does not by itself authorize a new block/frame. Keep deliberate rich-text runs in the same reading flow, and make independent lines/positions independently selectable. The 2026-10-02 style-unit matrix found 1,076 legacy mixed-size blocks: 850 also mix sizes inline; only 226 have size changes confined across lines, and those still include tables, card text and tiny labels. No class is a safe automatic split rule.
+8. Editorial page titles in `EsmeraldaPro` at exactly 30 pt are the documented wide-frame exception: allow the title to use the available horizontal space across its heading band, bounded by the page/title ornaments and neighboring content. Do not make a tiny frame from the visible glyph bbox. Preserve the original centered anchor and let the localized title wrap/use a second line when the band has room; keep other size/style runs (such as the small version line on p. 1) in separate edit targets. This is a role-specific rule, not permission to widen 30 pt text found inside cards or artwork.
 
 ## Verification record
 
