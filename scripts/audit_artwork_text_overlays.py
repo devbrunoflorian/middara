@@ -58,10 +58,12 @@ def page_lines(page_json: dict) -> list[dict]:
 def inspect_page(pdf_page: pymupdf.Page, page_json: dict) -> list[dict]:
     page_area = pdf_page.rect.get_area()
     image_ops = []
+    all_image_ops = []
     for seqno, (kind, bbox) in enumerate(pdf_page.get_bboxlog()):
         if "image" not in kind:
             continue
         image_rect = rect(bbox)
+        all_image_ops.append((seqno, kind, image_rect))
         area = image_rect.get_area()
         # Full-page scans/backgrounds are not useful evidence of local artwork.
         # Page-sized and broad page-panel raster layers are backdrops, not
@@ -94,15 +96,35 @@ def inspect_page(pdf_page: pymupdf.Page, page_json: dict) -> list[dict]:
                 trace_norm = normalize(trace_text)
                 span_norms = [normalize(part) for part in line["span_texts"]]
                 textual_match = any(
-                    len(part) >= 4
-                    and (part == trace_norm or part in trace_norm or trace_norm in part
-                         or SequenceMatcher(None, part, trace_norm).ratio() >= 0.90)
+                    (
+                        part == trace_norm
+                        and coverage >= 0.60
+                    )
+                    or (
+                        len(part) >= 4
+                        and (
+                            part in trace_norm
+                            or trace_norm in part
+                            or SequenceMatcher(None, part, trace_norm).ratio() >= 0.90
+                        )
+                    )
                     for part in span_norms
                 )
                 if textual_match:
                     matching_traces.append((seqno, trace_text))
         text_seq = max((item[0] for item in matching_traces), default=-1)
         trace_text = " ".join(item[1] for item in matching_traces)
+        # This records later image bboxes intersecting a line after its last
+        # matched text draw. It is not a pixel-occlusion test: transparent or
+        # clipped images can overlap geometrically without covering the text.
+        later_image_coverages = []
+        if text_seq >= 0:
+            for image_seq, _, image_rect in all_image_ops:
+                if image_seq <= text_seq:
+                    continue
+                coverage, _ = overlap_metrics(line_rect, image_rect)
+                if coverage >= 0.50:
+                    later_image_coverages.append(coverage)
 
         line_candidates = []
         for image_seq, image_kind, image_rect in image_ops:
@@ -125,6 +147,8 @@ def inspect_page(pdf_page: pymupdf.Page, page_json: dict) -> list[dict]:
                 "bboxIoU": round(iou, 4),
                 "lastTextSeq": text_seq,
                 "textPaintedAfterImage": text_seq > image_seq if text_seq >= 0 else "unknown",
+                "laterImageOpsAfterTextCount": len(later_image_coverages),
+                "maxLaterImageCoverageOfText": round(max(later_image_coverages, default=0.0), 4),
                 "traceText": " ".join(trace_text.split())[:260],
                 "signalsOnly": "candidate; content/bbox/order signals; visual confirmation required",
             })
@@ -158,6 +182,7 @@ def summarize_regions(candidates: list[dict]) -> list[dict]:
         painted_after = sum(row["textPaintedAfterImage"] is True for row in rows)
         painted_before = sum(row["textPaintedAfterImage"] is False for row in rows)
         unknown_order = len(rows) - painted_after - painted_before
+        later_image_overlap = sum(row["laterImageOpsAfterTextCount"] > 0 for row in rows)
         examples = []
         seen = set()
         for row in rows:
@@ -179,6 +204,7 @@ def summarize_regions(candidates: list[dict]) -> list[dict]:
             "textPaintedAfterImageCount": painted_after,
             "textPaintedBeforeImageCount": painted_before,
             "textPaintOrderUnknownCount": unknown_order,
+            "linesWithLaterImageOverlap": later_image_overlap,
             "maxImageCoverageOfText": max(row["imageCoverageOfText"] for row in rows),
             "maxBBoxIoU": max(row["bboxIoU"] for row in rows),
             "reviewStatus": (
@@ -222,6 +248,7 @@ def main() -> None:
         "page", "block_index", "block_id", "line_index", "line_id", "text", "bbox",
         "suspectedGhost", "alreadyRasterizedDuplicate", "imageSeq", "imageBBox",
         "imageCoverageOfText", "bboxIoU", "lastTextSeq", "textPaintedAfterImage",
+        "laterImageOpsAfterTextCount", "maxLaterImageCoverageOfText",
         "traceText", "signalsOnly",
     ]
     with args.out.open("w", newline="", encoding="utf-8-sig") as handle:
@@ -236,7 +263,8 @@ def main() -> None:
             "page", "regionId", "imageSeq", "imageBBox", "candidateLineCount",
             "confirmedDuplicateLineCount", "suspectedGhostLineCount",
             "textPaintedAfterImageCount", "textPaintedBeforeImageCount",
-            "textPaintOrderUnknownCount", "maxImageCoverageOfText", "maxBBoxIoU",
+            "textPaintOrderUnknownCount", "linesWithLaterImageOverlap",
+            "maxImageCoverageOfText", "maxBBoxIoU",
             "reviewStatus", "textExamples",
         ]
         with region_path.open("w", newline="", encoding="utf-8-sig") as handle:
