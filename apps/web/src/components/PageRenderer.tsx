@@ -1090,11 +1090,12 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
 
   return (
     <div className="block-container" style={blockStyle}>
-      {units.map(unit => {
+      {units.map((unit, unitIndex) => {
         const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
         const override = selectedBlockKey === spanKey && draftOverride
           ? draftOverride
           : overrides.get(spanKey) || null;
+        const nextFieldY = units[unitIndex + 1]?.field.bbox[1];
         return (
           <CreditField
             key={spanKey}
@@ -1106,6 +1107,7 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
             selected={selectedBlockKey === spanKey}
             override={override}
             language={language}
+            nextFieldY={nextFieldY}
             onBlockClick={onBlockClick}
           />
         );
@@ -1123,11 +1125,12 @@ interface CreditFieldProps {
   selected: boolean;
   override: SpanOverride | null;
   language: 'en' | 'pt-BR';
+  nextFieldY?: number;
   onBlockClick: (info: SelectedSpanInfo) => void;
 }
 
 const CreditField: React.FC<CreditFieldProps> = ({
-  block, field, spanKey, scale, isAdmin, selected, override, language, onBlockClick,
+  block, field, spanKey, scale, isAdmin, selected, override, language, nextFieldY, onBlockClick,
 }) => {
   const previewRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -1136,6 +1139,9 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const fieldX = field.frame.x;
   const fieldY = field.bbox[1];
   const fieldHeight = field.bbox[3] - field.bbox[1];
+  const neighborHeight = nextFieldY !== undefined && nextFieldY > fieldY
+    ? nextFieldY - fieldY
+    : fieldHeight;
   const fieldStyle: React.CSSProperties = {
     position: 'absolute',
     left: `${(fieldX - blockX) * scale}px`,
@@ -1147,11 +1153,13 @@ const CreditField: React.FC<CreditFieldProps> = ({
   useEffect(() => {
     const preview = previewRef.current;
     if (override && preview) {
-      setIsOverflowing(preview.scrollHeight > fieldHeight * scale + 2);
+      // A unit can fit its own ink bbox and still run into the next typography unit.
+      // Bound it by the next field's start when one exists; keep 1px for browser rounding.
+      setIsOverflowing(preview.scrollHeight > neighborHeight * scale + 1);
     } else {
       setIsOverflowing(false);
     }
-  }, [override, fieldHeight, scale]);
+  }, [override, neighborHeight, scale]);
 
   const lines = (block.lines || []).filter(line => field.lineIds.includes(line.id));
   const sourceClass = isAdmin ? 'credit-edit-field' : '';
