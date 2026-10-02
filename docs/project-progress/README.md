@@ -6,6 +6,7 @@ This folder records work by task, including the goal, method, files changed, evi
 
 ## Tasks
 
+- [2026-10-02 — Tradução estruturada das 102 páginas](2026-10-02-all-pages-translation-grill-me.md): decisões EN→PT, skill/glossário, transcripts PDF das 102 páginas e drafts semânticos EN/PT das p. 3–7 e 13; o gate inglês continua e faltam os previews PT.
 - [Roadmap — editor visual de molduras de texto](../roadmap/translation-layout-editor.md): requisitos entrevistados e decisões de produto para layout EN/PT, modo Admin, controles de frame, salvamento e segurança; deliberadamente futuro, sem implementação.
 - [2026-10-02 — Entrevista do editor de layout de texto](2026-10-02-translation-layout-editor-grill-me.md): decisões, descobertas do código e limites registrados via `Grill Me`; sem implementação.
 - [2026-10-01 — Política de renderização e classificação de ghosts](2026-10-01-ghost-render-classification.md): `suspectedGhost` deixa de suprimir sozinho; 48 textos duplicados dos painéis da p. 16 foram confirmados por PDF e marcados por ID; ficam dois spans `55` ambíguos; Admin mostra estado confirmado.
@@ -60,3 +61,4 @@ For new work, add a dated task record before implementation, update it as findin
 - [2026-09-30 — Piloto de preview fiel e campos de crédito](2026-09-30-implement-preview-credit-pilot.md): corrigir no-op visual do editor e validar label/body como campos independentes na página 2; persistência no Payload ainda pendente.
 
 - [2026-09-30 — Unidades independentes dos créditos da página 2](2026-09-30-page2-credit-units.md): ampliar o piloto Playtesters para as 17 categorias mantendo labels, corpos e fallback de chave legada.
+- [2026-10-02 — Extração direta do PDF e drafts de tradução](2026-10-02-all-pages-translation-grill-me.md): skill/glossário, transcripts rastreáveis em Markdown para 102 páginas, drafts semânticos EN/PT nas p. 3–7 e 13, e scanner inicial de copyfit (184 unidades); mantém gate de fidelidade EN e preview PT pendente.
