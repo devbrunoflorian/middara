@@ -146,6 +146,7 @@ def find_candidates(page: dict[str, Any]) -> list[dict[str, Any]]:
 def main() -> None:
     files = sorted(PAGE_ROOT.glob("page_*/page_*_dom.json"))
     rows: list[dict[str, Any]] = []
+    top_rows: list[dict[str, Any]] = []
     errors: list[dict[str, str]] = []
     pages_with_candidates = set()
     for path in files:
@@ -157,18 +158,24 @@ def main() -> None:
             continue
         if candidates:
             pages_with_candidates.add(int(page.get("page_number", 0)))
-            rows.extend(candidates[:5])
+            rows.extend(candidates)
+            top_rows.extend(candidates[:5])
 
     OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
-    with (OUTPUT_ROOT / "gutter-candidates.csv").open("w", newline="", encoding="utf-8-sig") as handle:
+    with (OUTPUT_ROOT / "gutter-candidates-all.csv").open("w", newline="", encoding="utf-8-sig") as handle:
         writer = csv.DictWriter(handle, fieldnames=FIELDS)
         writer.writeheader()
         writer.writerows(rows)
+    with (OUTPUT_ROOT / "gutter-candidates.csv").open("w", newline="", encoding="utf-8-sig") as handle:
+        writer = csv.DictWriter(handle, fieldnames=FIELDS)
+        writer.writeheader()
+        writer.writerows(top_rows)
     summary = {
         "pages_found": len(files),
         "pages_with_parse_errors": len({error["file"] for error in errors}),
         "pages_with_candidates": len(pages_with_candidates),
-        "candidate_rows_top5_per_page": len(rows),
+        "candidate_rows_all": len(rows),
+        "candidate_rows_top5_per_page": len(top_rows),
         "parameters": {
             "min_gutter_pt": MIN_GUTTER_PT,
             "outer_margin_pt": OUTER_MARGIN_PT,
