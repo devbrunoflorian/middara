@@ -133,6 +133,7 @@
 ## Notas de copyfit e termos
 
 - **Expansão por caractere (rascunho):** título +5%; Rulebook +6%, Adventure Book −11%, Diagram Book −8%, Crawl Book +11%, Bounty Book +7%, Plastic Figures +2%, Custom Dice −12%, Adventurer Cards −6%, Combatant Cards −6%, Discipline Cards +12%, Familiar Cards +11%, Item Cards +11%, Combatant Loot Cards +15%, Monster Loot Cards +19,5%. Nenhum bloco passa de 20%; nenhum ainda passou por preview PT.
+- **Headings:** o scanner marca 13 dos 14 rótulos de seção acima de 20% por caracteres (principalmente por serem curtos); nenhum dos 15 blocos descritivos passa o limiar. Isso não indica overflow nos headings: medir cada moldura no preview e preservar fonte/peso.
 - **Termos locais a harmonizar:** `Livro de Aventura`, `Diagramas`, `Recompensa`, `Cenário`, `Dados personalizados`, `Carta(s) de Combatente`, `Árvore(s) de Disciplinas`, `Familiar`, `Nível`, `Saque de Combatente`, `Saque de Monstro`, `Derrotar/Derrotado` e `Modo Aventura` não estão definidos assim no glossário fornecido.
 - **Nomes preservados:** Crawl, Assemblage, Cruor, Martial, Sanctus e Subterfuge permanecem em inglês até uma decisão de terminologia aprovada.
 - **Preview PT:** pendente; medir os parágrafos nas caixas das duas colunas, principalmente Item Cards e Combatant Loot Cards. Preservar tamanho e peso dos headings.

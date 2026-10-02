@@ -109,6 +109,7 @@
 ## Notas de copyfit e termos
 
 - **Expansão por bloco:** Initiative Cards +13%; Story Cards −2%; Exalted Esper Cards +10%; Abraxis Cards −6%; Quick Reference Cards −2%; Tiles −11%; Terrain tokens −10%; Combatant tokens +13%; Effect tokens +3%; Special Effect tokens +7%; Ability tokens +17%; Damage tokens −10%. Nenhum bloco ultrapassa o alerta de 20%; isso ainda não confirma que caiba nas caixas.
+- **Headings:** 8 dos 12 títulos curtos superam 20% no sinal por caracteres; os 12 blocos descritivos ficam abaixo. Revisar largura no preview sem diminuir a hierarquia tipográfica.
 - **Revisão de termos:** `Fichas de Terreno`, `Carta(s) de Iniciativa`, `Trilha de Iniciativa`, `Carta de Combatente`, `Carta(s) de Habilidade`, `Modo Aventura`, `História`, `Derrotada` e `Dano` são propostas locais, não entradas equivalentes no glossário oficial. Harmonizar com o time antes de incorporá-las ao glossário.
 - **Termos preservados provisoriamente:** `Crawl`, `Exalted Esper`, `Assemblage` e `Abraxis` são nomes de modo/conteúdo até haver decisão terminológica aprovada.
 - **Expansion check:** executar a medição por bloco após o preview. A contagem de caracteres serve como alerta; não certifica encaixe.

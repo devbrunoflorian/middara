@@ -79,5 +79,6 @@
 - **Revisar com o glossário/equipe:** `Ponto de Vigor`, `Fase de Renovação`, `Fichas de Encontro`, `Trilha de Iniciativa`, `Urgência`, `Modo Aventureiro`, `Pacote`, `Cartas Ocultas` e `Decodificador de Revelação Vermelha` são propostas locais. Para Standups apliquei o termo oficial `Miniatura de Papel` e acrescentei “de papelão” para conservar o material citado no original.
 - **Anomalias preservadas:** o PDF chama o modo da direita `Adventurer Mode` (não `Adventure Mode`) e traz `Red Reveal Recoder` no corpo, embora o título seja `Red Reveal Decoder`. A minuta mantém a diferença visível para decisão editorial, sem corrigir silenciosamente o EN.
 - **Expansão por caractere:** as oito descrições variam de −11,5% a +15,5%; nenhuma cruza o alerta de 20%. O preview ainda precisa confirmar o encaixe.
+- **Headings:** 6 dos 8 nomes de componentes passam 20% no sinal por caracteres; os 8 blocos descritivos ficam abaixo. São rótulos curtos, então medir largura no preview e preservar a hierarquia.
 - **Copyfit:** preview PT pendente. Medir cada descrição nas caixas das colunas; a descrição de Hidden Card Decks e Cardboard Figure Standups merece atenção especial.
 - **Arte:** instruções e nomes impressos nos baralhos/cartas/tokens desenhados são texto rasterizado da arte e requerem localização de imagem, separada desta minuta.

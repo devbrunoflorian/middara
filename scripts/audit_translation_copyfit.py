@@ -58,7 +58,11 @@ def paired_units(path: Path) -> list[Unit]:
             continue
         english = plain_text(text[english_marker.end() : portuguese_marker.start()])
         next_paragraph = text.find("\n\n", portuguese_marker.end(), next_english)
-        portuguese_end = next_english if next_paragraph < 0 else next_paragraph
+        next_unit_start = text.rfind("\n", 0, next_english) + 1
+        boundaries = [next_unit_start]
+        if next_paragraph >= 0:
+            boundaries.append(next_paragraph)
+        portuguese_end = min(boundaries)
         portuguese = plain_text(text[portuguese_marker.end() : portuguese_end])
         if not english or not portuguese:
             continue
