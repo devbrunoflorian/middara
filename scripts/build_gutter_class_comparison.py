@@ -33,6 +33,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pages", nargs="+", type=int, default=list(PAGES), help="page numbers to include")
     parser.add_argument("--output", type=Path, help="output PNG path (defaults to an ignored tmp/ghost-audit file)")
+    parser.add_argument("--image-source", choices=("viewer", "source-pdf"), default="viewer", help="base image used for the overlay")
     args = parser.parse_args()
     with CANDIDATE_CSV.open(encoding="utf-8-sig", newline="") as handle:
         all_rows = list(csv.DictReader(handle))
@@ -41,7 +42,11 @@ def main() -> None:
     for page_number in args.pages:
         page_key = f"{page_number:03}"
         dom_path = PAGE_ROOT / f"page_{page_key}" / f"page_{page_key}_dom.json"
-        screenshot_path = INPUT_ROOT / f"p{page_key}-gutter-viewer-base.png"
+        screenshot_path = (
+            INPUT_ROOT / f"p{page_key}-gutter-viewer-base.png"
+            if args.image_source == "viewer"
+            else ROOT / "tmp" / "pdfs" / f"source-page-{page_key}.png"
+        )
         data = json.loads(dom_path.read_text(encoding="utf-8"))
         page_image = Image.open(screenshot_path).convert("RGB")
         draw = ImageDraw.Draw(page_image, "RGBA")
@@ -72,7 +77,7 @@ def main() -> None:
     for index, (page_number, image) in enumerate(page_panels):
         x = (index % columns) * panel_width
         y = (index // columns) * (panel_height + header_height)
-        sheet_draw.text((x + 12, y + 8), f"PAGE {page_number} — candidate corridors, segment limited to detected y range", fill=(25, 25, 25), font=font(19))
+        sheet_draw.text((x + 12, y + 8), f"PAGE {page_number} — {args.image_source}; candidate y range only", fill=(25, 25, 25), font=font(19))
         sheet.paste(image, (x, y + header_height))
 
     output_path = args.output or OUTPUT_PATH
