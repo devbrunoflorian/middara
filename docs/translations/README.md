@@ -17,6 +17,7 @@ The existing 20% value is a review threshold, not an automatic pass/fail for lay
 ## Files
 
 - [`glossary.md`](glossary.md): project copy of the official glossary from `C:\Users\bruno\Middara\Rulebook 1.2\.agents\rules\glossary.md`.
+- [`glossary-candidates.md`](glossary-candidates.md): provisional, non-authoritative candidates and cross-page terminology conflicts found in the current drafts; requires team review before standardization.
 - [`references/page-2-voice-reference.md`](references/page-2-voice-reference.md): read-only scope and caveats for using the database translation on page 2.
 - [`pages/page-003.md`](pages/page-003.md): 40 Contents entries extracted from the PDF, paired to page numbers by baseline, and translated as a PT-BR draft after the existing EN visual review; PT preview remains pending.
 - [`pages/page-004.md`](pages/page-004.md): the page title and 14 component descriptions translated after the documented EN visual review; the artwork/card text is reserved for localization, and PT preview is pending.
