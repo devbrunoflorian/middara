@@ -19,6 +19,17 @@ TARGETS = {
     "line_70_0": ("Conviction:", (234.3693, 315.2414, 301.3713, 328.2108)),
     "line_70_2": ("Casting:", (234.3693, 329.5141, 281.2437, 342.4835)),
     "line_71_0": ("Nightingale Arsen", (234.3693, 189.9513, 448.2168, 229.2635)),
+    # The eight stat values are printed in the card artwork; their live PDF
+    # text layer doubles each number when the card image is already visible.
+    "line_65_0": ("6", (220.1922, 442.7010, 224.5217, 453.0746)),
+    "line_65_1": ("3", (250.8451, 442.7010, 255.1746, 453.0746)),
+    "line_65_2": ("5", (281.4980, 442.7010, 285.8275, 453.0746)),
+    "line_65_3": ("2", (312.1508, 442.7006, 316.4803, 453.0742)),
+    "line_65_4": ("2", (342.8036, 442.7010, 347.1331, 453.0746)),
+    "line_27_2": ("12", (526.1915, 442.7871, 534.4177, 453.1607)),
+    "line_27_1": ("7", (559.0229, 442.7871, 563.3524, 453.1607)),
+    "line_27_0": ("6", (588.9439, 442.7871, 593.2734, 453.1607)),
+    "line_5_0": ("ADVENTURER", (556.8343, 124.5558, 613.1876, 134.9294)),
 }
 
 
@@ -50,18 +61,18 @@ def main() -> None:
     for line in found.values():
         line["rasterizedDuplicate"] = True
         line["rasterizedDuplicateReason"] = (
-            "the exact card text is present in the viewer background; this HTML copy visibly doubles it"
+            "the exact card text or stat value is printed in the viewer's character-card artwork; this HTML copy doubles it"
         )
         line["rasterizedDuplicateEvidence"] = {
             "auditId": AUDIT_ID,
             "sourcePdfPage": 25,
-            "region": "Nightingale Arsen Adventurer card title, Ambitious ability and Conviction/Casting labels",
-            "rule": "hide only the eight tested line IDs; retain ADVENTURER label, icons, stats and Admin spans",
+            "region": "whole Nightingale Arsen character-sheet image, including title, Adventurer label, abilities, Conviction/Casting and stat values",
+            "rule": "hide only the exact text/value lines inside the user-identified sheet blocks; retain curved stat names, icons, callouts and Admin spans",
             "evidenceRef": EVIDENCE_REF,
         }
 
     DOM_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Page 25: marked {len(found)} exact Adventurer-card text copies")
+    print(f"Page 25: marked {len(found)} exact Adventurer-card text/value copies")
 
 
 if __name__ == "__main__":
