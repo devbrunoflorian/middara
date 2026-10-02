@@ -40,7 +40,16 @@
               ],
               "renderWeightOverride": 700
             }
-          ]
+          ],
+          "rasterizedDuplicate": true,
+          "rasterizedDuplicateReason": "the PDF-cleaned background has no title pixels here; this exact source-PDF pixel overlay reproduces the published heading instead of the two misaligned HTML passes",
+          "rasterizedDuplicateEvidence": {
+            "auditId": "page50-flanking-title-pdf-pixel-overlay-v1",
+            "sourcePdfPage": 50,
+            "region": "Flanking and Backstab title band above the rules text",
+            "rule": "hide only the two exact HTML passes backed by a title-local source-PDF pixel overlay",
+            "evidenceRef": "docs/project-progress/2026-10-02-page50-flanking-title-tracer.md"
+          }
         }
       ]
     },
@@ -1789,7 +1798,16 @@
               ],
               "renderWeightOverride": 700
             }
-          ]
+          ],
+          "rasterizedDuplicate": true,
+          "rasterizedDuplicateReason": "the PDF-cleaned background has no title pixels here; this exact source-PDF pixel overlay reproduces the published heading instead of the two misaligned HTML passes",
+          "rasterizedDuplicateEvidence": {
+            "auditId": "page50-flanking-title-pdf-pixel-overlay-v1",
+            "sourcePdfPage": 50,
+            "region": "Flanking and Backstab title band above the rules text",
+            "rule": "hide only the two exact HTML passes backed by a title-local source-PDF pixel overlay",
+            "evidenceRef": "docs/project-progress/2026-10-02-page50-flanking-title-tracer.md"
+          }
         }
       ]
     },
