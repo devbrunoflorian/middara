@@ -1,40 +1,36 @@
 # Ghost text review batch: page 20
 
-- **Status:** tracer localizado concluído; a página segue **não certificada** porque 37 regiões candidatas ainda não receberam disposição individual.
-- **Data:** 2026-10-01.
+- **Status:** investigation ongoing; page 20 remains uncertified. No Loot-title suppressions are active after the provisional change was withdrawn.
+- **Date:** 2026-10-01.
 - **Branch:** `codex/book-visual-batch-audit`.
 - **Source PDF:** `C:\Users\bruno\Downloads\Rulebook 1p2 Final Version 05-19-23 Optimized.pdf`.
 - **Criteria:** [`2026-10-01-grill-me-fidelity-acceptance.md`](2026-10-01-grill-me-fidelity-acceptance.md) and [Rule 07](../../.agents/rules/07-fantasmas-e-artefatos-duplicados.md).
 
-## Goal and method
+## Why no page-wide decision is safe
 
-Exercise the ghost-review method on a dense page without treating a whole page or image as one class. Review the final source PDF, extracted page background, candidate bboxes, and English viewer. Require one confirmed positive and a hard counterexample before making a narrow change. Preserve ambiguous lines and keep every suppression reversible and auditable.
+The page has 37 candidate image regions and 100 extracted lines. These are screening results, not 37 proven ghosts. The book's background extraction removes text from the page content stream but only tries to clean some image/Form streams; text inside nested Forms may remain in `background.webp`. A matching title in the background therefore does not prove that the HTML viewer alone added it.
 
-## Confirmed positive: Loot card titles
+## Loot-title hypothesis reviewed and withdrawn
 
-The card artwork prints `Item Loot`, `Monster Loot`, or `Unique Loot`; the same title also appeared as an HTML line at the corresponding bbox. PDF/background crop `tmp/ghost-audit/page20-hires/p020-imgseq828.jpg` and the earlier 400% browser capture support the duplicate classification. The exact allowlist contains 12 line IDs across four repeated rows:
+Twelve occurrences of `Item Loot`, `Monster Loot`, and `Unique Loot` were provisionally flagged as duplicates. This was too strong a conclusion. Offline PyMuPDF inspection of the source PDF's `get_texttrace()` and `get_bboxlog()` shows the same title text painted as `fill-text` after the relevant card image/Form. For example, `Monster Loot` is trace sequence 840 after image/path events 837–839; `Unique Loot` is trace sequence 1565 after card image event 1556; and `Item Loot` is trace sequence 1754 after image event 1750. This proves that the vector titles are part of the published PDF composition.
 
-`line_538_0`, `line_1073_0`, `line_1126_0`, `line_1137_0`, `line_1147_0`, `line_1162_0`, `line_1173_0`, `line_1183_0`, `line_1198_0`, `line_1209_0`, `line_1219_0`, `line_1234_0`.
+The earlier high-zoom viewer observation was not a side-by-side comparison against the same source-PDF crop, so it cannot establish that the app is less faithful than the PDF. I removed the provisional `rasterizedDuplicate` metadata from these 12 lines and reverted the page-20 allowlist from `scripts/apply_audited_artwork_text_suppressions.py`. The titles remain available as source text. This is an explicit correction to the earlier report and commit, not a confirmed fix.
 
-Only these 12 lines in `apps/web/public/pages/page_020/page_020_dom.json` are marked `rasterizedDuplicate`. Each carries an evidence record with source page, region, rule, audit ID, and this report as evidence reference. The normal viewer capture after the change shows one title per card and retains row/category labels, levels, and visible values. It did not reveal loss of adjacent text.
+## Hard counterexample and other open regions
 
-## Hard counterexample and limits
-
-Coin values can contain coincident spans with different color passes. `line_471_0` (`10`, candidate image sequence 672) remains unmarked; the crop shows one printed value and cannot justify removing either pass. This is a control against expanding the title-specific fix to numbers, all text in cards, or the 37-region candidate set.
-
-The 37 page-level candidate regions / 100 extracted lines are not all classified. This tracer resolves only the 12 repeated Loot titles. Other title/body overlaps, vector text, and ambiguous color passes still need per-region decisions; p. 20 remains open and uncertified.
+Coin values can contain coincident spans with different color passes. `line_471_0` (`10`, candidate image sequence 672) remains untouched; the crop shows one printed value and does not establish that either pass should be removed. Other candidate areas include the repeated Item Loot card bodies, small card values and version labels, as well as Monster/Unique card titles. Each needs evidence at the exact occurrence; no decision propagates to the full card or region.
 
 ## Implementation and verification
 
-- `scripts/apply_audited_artwork_text_suppressions.py` now has an exact page-20 line-ID/text manifest and a `--page` option. Applying page 20 twice was idempotent by SHA-256; assertions confirmed exactly 12 audited IDs and that `line_471_0` stays untouched.
-- The normal viewer showed one title per Loot card after the change. The updated production build passed with `npm run build -w apps/web`; existing unresolved `/texture.png` build warning remains.
-- `python -m py_compile scripts/apply_audited_artwork_text_suppressions.py` and `git diff --check` passed.
-- Admin-mode visibility/marking is not signed off in this tracer. Inspection found that `PageRenderer` only passed `isAdmin` to source lines in blocks with inline typographic units, so ordinary source lines could not display the Admin marker. The prop is now passed to every line, and confirmed spans receive a stronger red outline/background and high stacking order. The local Chrome session raised an unwanted debugging banner; browser control was released at the user's request before a post-fix visual check. Build passes, but Admin appearance still needs browser confirmation.
+- The p. 20 JSON is restored so none of the 12 Loot-title lines carry the provisional suppression marker. The reusable suppression script no longer includes a page-20 rule.
+- `PageRenderer` now passes the Admin state to every source line. Previously it only passed Admin state to lines in blocks with inline typographic units, preventing ordinary confirmed spans from receiving the Admin marker. The confirmed marker's outline/background contrast and stacking order were also strengthened.
+- `npm run build -w apps/web`, `python -m py_compile scripts/apply_audited_artwork_text_suppressions.py`, and `git diff --check` passed. The existing unresolved `/texture.png` build warning remains.
+- The Admin indicator still needs visual confirmation in the viewer. The browser session displayed Chrome's debugger banner; it was released at the user's request. Do not reopen it during the user's series time.
 
 ## Reusable finding
 
-An image can contain readable title text while the extracted PDF text layer paints the same title again. A repeated card layout can provide enough repeated examples to confirm only the exact title lines. Matching bboxes, image overlap, font, color, or `suspectedGhost` status are screening signals, not proof. A same-page hard counterexample may share geometry while needing preservation; therefore the disposition belongs to an exact line occurrence with evidence, not to an entire card class or region.
+For each suspected overlap, answer these separately: (1) what pixels survive in the app background; (2) what the final PDF actually paints and in what order; and (3) whether the rendered app differs from the PDF. Form/XObject text makes the first answer insufficient. A screenshot of the app by itself, a bbox overlap, or a positive example without a hard counterexample does not authorize suppression.
 
 ## Next action
 
-Resume without broadening this fix: visually verify Admin markers once the browser session is available, then review remaining page-20 candidates in small class-based batches against PDF and viewer. Record each region as `confirmed duplicate`, `legitimate vector`, or `ambiguous`. Do not certify p. 20 or generalize its rules while unresolved candidates remain. For the book-wide queue, continue the 480-region review batch process in [`2026-10-01-ghost-text-detector.md`](2026-10-01-ghost-text-detector.md); 454 groups still await visual disposition after 26 representative sheets were calibrated.
+Without Chrome, continue read-only classification of page-20 candidates using PDF `get_bboxlog()`/`get_texttrace()`, background crops, and exact span IDs. Record `source-PDF paint evidence` as a screening status, not a final `confirmed duplicate` decision. Leave data unchanged until a later same-scale PDF/viewer comparison proves the rendered app adds or alters text. Then continue the 480-region book-wide queue in [`2026-10-01-ghost-text-detector.md`](2026-10-01-ghost-text-detector.md); 454 groups still await visual disposition after 26 representative sheets were calibrated.
