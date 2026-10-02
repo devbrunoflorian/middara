@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import argparse
 import json
 from pathlib import Path
 
@@ -29,18 +30,22 @@ def font(size: int) -> ImageFont.ImageFont:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--pages", nargs="+", type=int, default=list(PAGES), help="page numbers to include")
+    parser.add_argument("--output", type=Path, help="output PNG path (defaults to an ignored tmp/ghost-audit file)")
+    args = parser.parse_args()
     with CANDIDATE_CSV.open(encoding="utf-8-sig", newline="") as handle:
         all_rows = list(csv.DictReader(handle))
 
     page_panels = []
-    for page_number in PAGES:
+    for page_number in args.pages:
         page_key = f"{page_number:03}"
         dom_path = PAGE_ROOT / f"page_{page_key}" / f"page_{page_key}_dom.json"
         screenshot_path = INPUT_ROOT / f"p{page_key}-gutter-viewer-base.png"
         data = json.loads(dom_path.read_text(encoding="utf-8"))
         page_image = Image.open(screenshot_path).convert("RGB")
         draw = ImageDraw.Draw(page_image, "RGBA")
-        page_rows = [row for row in all_rows if int(row["page"]) == page_number][:3]
+        page_rows = [row for row in all_rows if int(row["page"]) == page_number][:5]
         sx = page_image.width / float(data["width"])
         sy = page_image.height / float(data["height"])
 
@@ -60,17 +65,22 @@ def main() -> None:
 
     panel_width, panel_height = page_panels[0][1].size
     header_height = 54
-    sheet = Image.new("RGB", (panel_width * 2, (panel_height + header_height) * 2), "white")
+    columns = 2
+    rows = (len(page_panels) + columns - 1) // columns
+    sheet = Image.new("RGB", (panel_width * columns, (panel_height + header_height) * rows), "white")
     sheet_draw = ImageDraw.Draw(sheet)
     for index, (page_number, image) in enumerate(page_panels):
-        x = (index % 2) * panel_width
-        y = (index // 2) * (panel_height + header_height)
+        x = (index % columns) * panel_width
+        y = (index // columns) * (panel_height + header_height)
         sheet_draw.text((x + 12, y + 8), f"PAGE {page_number} — candidate corridors, segment limited to detected y range", fill=(25, 25, 25), font=font(19))
         sheet.paste(image, (x, y + header_height))
 
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    sheet.save(OUTPUT_PATH)
-    print(f"Contact sheet: {OUTPUT_PATH}")
+    output_path = args.output or OUTPUT_PATH
+    if not output_path.is_absolute():
+        output_path = ROOT / output_path
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    sheet.save(output_path)
+    print(f"Contact sheet: {output_path}")
 
 
 if __name__ == "__main__":
