@@ -23,6 +23,7 @@ These recurring roles are supported by the source-PDF comparison on pages 2–13
 4. Resolve decorative alternates per character from the embedded source glyph sequence. Do not search ordinary body text or substitute a matching letter throughout the book.
 5. Separate geometry from style. Preserve source text bbox, baseline and column/frame bounds; correct local overflow or alignment only after measuring the page region and neighbor clearance.
 6. Exclude raster duplicates, ghost candidates, tiny vector text and card artwork from heading inference until the PDF and the app background are compared.
+7. A size/style difference creates a distinct editable target but does not by itself authorize a new block/frame. Keep deliberate rich-text runs in the same reading flow, and make independent lines/positions independently selectable. The 2026-10-02 style-unit matrix found 1,076 legacy mixed-size blocks: 850 also mix sizes inline; only 226 have size changes confined across lines, and those still include tables, card text and tiny labels. No class is a safe automatic split rule.
 
 ## Verification record
 
@@ -30,6 +31,7 @@ These recurring roles are supported by the source-PDF comparison on pages 2–13
 - Exact-source review has applied local optical weight to 407 confirmed spans across the current corpus. The current manifest covers the reusable Cinzel candidate class; a smaller set of page-specific overrides predates that manifest.
 - The 30 pt Esmeralda audit found 16 editorial title spans; 13 contain PDF-selected alternates, now represented by `displayOverride` without changing source text or bbox.
 - Reproducible inputs and reports: [`audit_typographic_hierarchy.py`](../../scripts/audit_typographic_hierarchy.py), [`audit_font_asset_coverage.py`](../../scripts/audit_font_asset_coverage.py), and `tmp/typography-audit/` / `tmp/font-asset-audit/` outputs.
+- Style-unit split triage: [`audit_style_unit_separation.py`](../../scripts/audit_style_unit_separation.py); its CSV/summary in ignored `tmp/ghost-audit/style-unit-separation/` are candidate maps, not approvals.
 
 ## Remaining known limits
 
