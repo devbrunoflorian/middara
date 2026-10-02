@@ -15,9 +15,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PAGE_DIR = ROOT / "apps/web/public/pages"
 
-# (x0, y0, x1, y1) in source PDF points. These cover the photographed card
-# faces only; surrounding explanatory text stays as live page text.
+# (x0, y0, x1, y1) in source PDF points. These cover only audited raster
+# artwork; surrounding explanatory text stays as live page text. Page 16's
+# region is the embedded miniature Adventure Book page, whose printed text
+# survives in a nested PDF form in background.webp.
 AUDITED_REGIONS = {
+    16: [
+        (80.0, 98.0, 490.0, 660.0),  # embedded "Bombing the Sickles" page
+    ],
     56: [
         (482.0, 160.0, 586.0, 301.0),
         (585.0, 160.0, 688.0, 303.0),
@@ -33,6 +38,12 @@ AUDITED_REGIONS = {
 # card text itself. Preserve the vector labels while suppressing duplicated
 # card copy around them.
 EXCLUDED_MARKER_BBOXES = {
+    16: [
+        (476.2434, 172.5366, 483.2454, 183.2646),  # D callout, mini-page
+        (231.7111, 172.2480, 237.7141, 182.9760),  # C callout, mini-page
+        (351.9911, 445.5312, 358.9931, 456.2592),  # G callout, mini-page
+        (353.2149, 422.4461, 357.7149, 433.1741),  # E callout, mini-page
+    ],
     74: [
         (171.3, 284.3, 178.3, 295.0),  # G
         (113.8, 324.6, 118.3, 335.4),  # F
@@ -61,29 +72,46 @@ def main() -> None:
         data = json.loads(path.read_text(encoding="utf-8"))
         changed = []
         reason = f"text already embedded in audited page {page_number} card artwork"
+        if page_number == 16:
+            reason = (
+                "text already embedded in page 16 miniature Adventure Book artwork; "
+                "keep overlay selectable for editing"
+            )
         for block_index, block in enumerate(data.get("blocks", [])):
             for line_index, line in enumerate(block.get("lines", [])):
                 # Make reruns idempotent and remove flags from an earlier
                 # geometry revision of this same audit only.
-                if line.get("rasterizedDuplicateReason") == reason:
+                if page_number == 16 and line.get("rasterizedDuplicateReason") == reason:
                     line.pop("rasterizedDuplicate", None)
                     line.pop("rasterizedDuplicateReason", None)
                 excluded = any(
                     bbox_matches(line["bbox"], marker)
                     for marker in EXCLUDED_MARKER_BBOXES.get(page_number, [])
                 )
-                if not excluded and any(center_in_region(line["bbox"], box) for box in regions):
+                line_text = "".join(span.get("text", "") for span in line.get("spans", [])).strip()
+                inside_region = any(center_in_region(line["bbox"], box) for box in regions)
+                if page_number == 16:
+                    should_mark = (
+                        line_text
+                        and not line.get("suspectedGhost")
+                        and not excluded
+                        and inside_region
+                    )
+                else:
+                    # Preserve the previously audited page 56/74 manifest
+                    # behavior; only page 16 adds the confirmed ghost-safe gate.
+                    should_mark = not excluded and inside_region
+                if should_mark:
                     line["rasterizedDuplicate"] = True
                     line["rasterizedDuplicateReason"] = reason
-                    changed.append((block_index, line_index, "".join(
-                        span.get("text", "") for span in line.get("spans", [])
-                    ).strip()))
+                    changed.append((block_index, line_index, line_text))
         path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         total += len(changed)
         print(f"Page {page_number}: marked {len(changed)} lines")
         for block_index, line_index, text in changed:
             if text:
-                print(f"  block[{block_index}].line[{line_index}]: {text[:110]}")
+                safe_text = text.encode("ascii", "backslashreplace").decode("ascii")
+                print(f"  block[{block_index}].line[{line_index}]: {safe_text[:110]}")
     print(f"Total lines marked: {total}")
 
 
