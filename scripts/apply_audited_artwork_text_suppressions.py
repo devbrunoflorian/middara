@@ -8,6 +8,7 @@ PDF and equal-scale app/PDF crops; do not generalize these boxes to other pages.
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -53,6 +54,24 @@ EXCLUDED_MARKER_BBOXES = {
     ],
 }
 
+# Page 16's source PDF shows unreadable red fill in these 48 reward/totem text
+# panels, while the viewer draws the extracted readable sentences over it.
+# The line IDs are from page_016_dom.json and were checked against the PDF and
+# the normal-view screenshot. Keep the two coincident "55" spans unclassified.
+AUDITED_PAGE16_PANEL_LINE_IDS = {
+    "line_64_0", "line_64_1", "line_85_0", "line_85_1",
+    "line_110_0", "line_110_1", "line_137_0", "line_137_1",
+    "line_158_0", "line_158_1", "line_158_2", "line_158_3", "line_158_4",
+    "line_163_0", "line_163_1", "line_163_2", "line_163_3", "line_163_4",
+    "line_163_5", "line_163_6", "line_163_7", "line_163_8", "line_163_9",
+    "line_163_10", "line_163_11", "line_163_12", "line_163_13",
+    "line_166_0", "line_166_1", "line_166_2", "line_166_3", "line_166_4",
+    "line_166_5", "line_166_6", "line_169_0", "line_169_1", "line_169_2",
+    "line_169_3", "line_169_4", "line_169_5", "line_169_6", "line_169_7",
+    "line_169_8", "line_169_9", "line_172_0", "line_172_1", "line_172_2",
+    "line_172_3",
+}
+
 
 def center_in_region(bbox: list[float], region: tuple[float, ...]) -> bool:
     x0, y0, x1, y1 = bbox
@@ -65,9 +84,11 @@ def bbox_matches(a: list[float], b: tuple[float, ...], tolerance: float = 1.2) -
     return all(abs(x - y) <= tolerance for x, y in zip(a, b))
 
 
-def main() -> None:
+def main(page_numbers: set[int] | None = None) -> None:
     total = 0
     for page_number, regions in AUDITED_REGIONS.items():
+        if page_numbers is not None and page_number not in page_numbers:
+            continue
         path = PAGE_DIR / f"page_{page_number:03d}" / f"page_{page_number:03d}_dom.json"
         data = json.loads(path.read_text(encoding="utf-8"))
         changed = []
@@ -81,9 +102,14 @@ def main() -> None:
             for line_index, line in enumerate(block.get("lines", [])):
                 # Make reruns idempotent and remove flags from an earlier
                 # geometry revision of this same audit only.
-                if page_number == 16 and line.get("rasterizedDuplicateReason") == reason:
+                if page_number == 16 and (
+                    line.get("rasterizedDuplicateReason") == reason
+                    or (line.get("rasterizedDuplicateEvidence") or {}).get("auditId")
+                    in {"page16-hidden-text-panels-v1", "page16-miniature-duplicate-v1"}
+                ):
                     line.pop("rasterizedDuplicate", None)
                     line.pop("rasterizedDuplicateReason", None)
+                    line.pop("rasterizedDuplicateEvidence", None)
                 excluded = any(
                     bbox_matches(line["bbox"], marker)
                     for marker in EXCLUDED_MARKER_BBOXES.get(page_number, [])
@@ -91,6 +117,21 @@ def main() -> None:
                 line_text = "".join(span.get("text", "") for span in line.get("spans", [])).strip()
                 inside_region = any(center_in_region(line["bbox"], box) for box in regions)
                 if page_number == 16:
+                    if line.get("id") in AUDITED_PAGE16_PANEL_LINE_IDS:
+                        line["rasterizedDuplicate"] = True
+                        line["rasterizedDuplicateReason"] = (
+                            "readable HTML text is absent from the final PDF render; "
+                            "the verified panel contains only scrambled red artwork text"
+                        )
+                        line["rasterizedDuplicateEvidence"] = {
+                            "auditId": "page16-hidden-text-panels-v1",
+                            "sourcePdfPage": 16,
+                            "region": "reward and totem hidden-text panels in the embedded mini-page",
+                            "rule": "suppress only extracted readable lines absent from the final PDF render",
+                            "evidenceRef": "docs/project-progress/2026-10-01-ghost-review-page16.md",
+                        }
+                        changed.append((block_index, line_index, line_text))
+                        continue
                     should_mark = (
                         line_text
                         and not line.get("suspectedGhost")
@@ -104,6 +145,14 @@ def main() -> None:
                 if should_mark:
                     line["rasterizedDuplicate"] = True
                     line["rasterizedDuplicateReason"] = reason
+                    if page_number == 16:
+                        line["rasterizedDuplicateEvidence"] = {
+                            "auditId": "page16-miniature-duplicate-v1",
+                            "sourcePdfPage": 16,
+                            "region": "embedded Bombing the Sickles continuation page",
+                            "rule": "omit only text already preserved in the verified miniature artwork",
+                            "evidenceRef": "docs/project-progress/2026-10-01-ghost-review-page16.md",
+                        }
                     changed.append((block_index, line_index, line_text))
         path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         total += len(changed)
@@ -116,4 +165,13 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--page",
+        type=int,
+        action="append",
+        choices=sorted(AUDITED_REGIONS),
+        help="apply only the explicitly audited page (repeatable); defaults to all audit pages",
+    )
+    args = parser.parse_args()
+    main(set(args.page) if args.page else None)

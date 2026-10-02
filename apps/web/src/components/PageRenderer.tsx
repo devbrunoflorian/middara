@@ -309,7 +309,6 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
   
   const lines = block.lines || [];
   for (const line of lines) {
-    if ((line as any).suspectedGhost) continue;
     for (const span of line.spans) {
       if (!font && span.font && !span.font.includes('Dingbat') && span.text.trim()) {
         font = span.font;
@@ -1229,13 +1228,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   // extracted text available for Admin selection, but avoid painting it twice
   // in the English source view. A localized asset is still required before
   // translating text that is baked into that illustration.
-  if ((line as any).rasterizedDuplicate && !isSelected && !override) {
-    return null;
-  }
-
-  // Hide ghosts by default, only show in admin if selected or via some UI toggle. 
-  // For now, we'll hide them unless they are actively selected in Admin.
-  if ((line as any).suspectedGhost && !isSelected) {
+  if ((line as any).rasterizedDuplicate && !isAdmin) {
     return null;
   }
 
@@ -1274,6 +1267,9 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     : override?.segments;
 
   const hoverClass = isAdmin ? `span-editable ${isSelected ? 'span-selected' : ''}` : '';
+  const confirmedGhostClass = isAdmin && (line as any).rasterizedDuplicate ? 'ghost-confirmed' : '';
+  const ghostStatusLabel = confirmedGhostClass ? 'Confirmed duplicate: text is preserved for editing but hidden in normal reading.' : undefined;
+  const lineClassName = [hoverClass, confirmedGhostClass, targetPage ? 'contents-link' : ''].filter(Boolean).join(' ');
 
   const lineStyle: React.CSSProperties = {
     position: 'absolute',
@@ -1310,7 +1306,10 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     );
     return (
       <div 
-        className={`realbox ${hoverClass}`} 
+        className={`realbox ${lineClassName}`}
+        data-ghost-status={confirmedGhostClass ? 'confirmed-duplicate' : undefined}
+        title={ghostStatusLabel}
+        aria-description={ghostStatusLabel}
         style={{
           ...lineStyle,
           whiteSpace: 'pre-wrap',
@@ -1350,7 +1349,14 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   }
 
   return (
-    <div style={{...lineStyle, paddingLeft: `${textOffset}px`, boxSizing: 'border-box'}} onClick={handleClick} className={`${hoverClass} ${targetPage ? 'contents-link' : ''}`}>
+    <div
+      style={{...lineStyle, paddingLeft: `${textOffset}px`, boxSizing: 'border-box'}}
+      onClick={handleClick}
+      className={lineClassName}
+      data-ghost-status={confirmedGhostClass ? 'confirmed-duplicate' : undefined}
+      title={ghostStatusLabel}
+      aria-description={ghostStatusLabel}
+    >
       {line.spans.map((span, si) => {
         const inlineUnit = inlineSpanStates?.get(`${line.id}:${si}`);
         // The source PDF paints Webdings U+F07E twice at the same bbox: a
