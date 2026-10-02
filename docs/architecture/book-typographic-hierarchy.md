@@ -17,7 +17,7 @@ These recurring roles are supported by the source-PDF comparison on pages 2–13
 
 ## Structural invariants
 
-1. Different PDF font sizes always start separate editable units, including `Rulebook` and the smaller version line on page 1 and `Adventure Mode`/`Continued` on page 13.
+1. Different PDF font sizes/weights/faces always start separate edit targets. Put runs on independent lines/positions in separate boxes; keep deliberately inline runs (such as `Adventure Mode` / `Continued`) independently editable inside their shared baseline, without flattening them into one style. On p. 1, `Rulebook` (17.85 pt Cinzel) and `VERSION 1.2 - MAY 2023` (7 pt Optima Bold) have distinct source blocks and language-specific renderer keys; the viewer renders them separately. Their ink bboxes overlap vertically by 1.921 pt due to font metrics, but the screenshot shows no visible glyph collision, so bbox intersection is not an automatic merge/split decision.
 2. Equal font sizes do not prove shared semantics. Split by column (`x₀` gutter), independent cards/art, baseline, indentation, paragraph gap and hierarchy; retain inline emphasis inside a unit where the source shows one reading flow.
 3. Treat PDF font name and flags as provenance signals, not visual truth. The Cinzel heading case proved that source labels can say regular while the printed result needs a stronger viewer face.
 4. Resolve decorative alternates per character from the embedded source glyph sequence. Do not search ordinary body text or substitute a matching letter throughout the book.
