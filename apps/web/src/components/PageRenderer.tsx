@@ -957,7 +957,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             blockOriginY={blockY}
             targetPage={contentsMap?.get(line.id)}
             onNavigate={onNavigate}
-            isAdmin={isAdmin && inlineSpanUnits.length > 0}
+            isAdmin={isAdmin}
             isSelected={false}
             onClick={() => {}}
             inlineSpanStates={inlineSpanStates}
@@ -1283,6 +1283,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     cursor: targetPage ? 'pointer' : (isAdmin ? 'text' : undefined),
     textAlign: 'left',
     lineHeight: 1, // Fix overlap from custom font metrics
+    ...(confirmedGhostClass ? { zIndex: 5000 } : {}),
     ...(line.renderScaleX && !override ? {
       transform: `scaleX(${line.renderScaleX})`,
       transformOrigin: 'left top',

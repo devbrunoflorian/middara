@@ -67,8 +67,10 @@
 
 /* Confirmed raster duplicates stay available to inspect/edit in Admin only. */
 .ghost-confirmed {
-  outline: 1px dashed #d12f37 !important;
-  background-color: rgba(209, 47, 55, 0.08);
+  outline: 2px dashed #d12f37 !important;
+  outline-offset: 1px;
+  background-color: rgba(209, 47, 55, 0.24) !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
 }
 
 .block-editable {
