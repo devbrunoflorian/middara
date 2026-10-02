@@ -704,6 +704,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
             <SpanBlock
               key={block.id}
               block={block}
+              allBlocks={pageData.blocks}
               blockIdx={bIdx}
               pageNumber={pageData.page_number}
               scale={scale}
@@ -774,6 +775,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
 
 interface SpanBlockProps {
   block: Block;
+  allBlocks: Block[];
   blockIdx: number;
   pageNumber: number;
   scale: number;
@@ -788,8 +790,8 @@ interface SpanBlockProps {
   language: 'en' | 'pt-BR';
 }
 
-const SpanBlock: React.FC<SpanBlockProps> = ({ 
-  block, blockIdx, pageNumber, scale, isAdmin, contentsMap, 
+const SpanBlock: React.FC<SpanBlockProps> = ({
+  block, allBlocks, blockIdx, pageNumber, scale, isAdmin, contentsMap,
   onNavigate, onBlockClick, selectedBlockKey, overrides, overridesReady, draftOverride, language
 }) => {
   const blockRef = useRef<HTMLDivElement>(null);
@@ -833,6 +835,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     return (
       <TypographicUnitBlock
         block={block}
+        nextComponentY={findNextSameColumnComponentY(allBlocks, block)}
         units={typographicUnits}
         pageNumber={pageNumber}
         scale={scale}
@@ -1028,6 +1031,7 @@ const CreditUnitBlock: React.FC<CreditUnitBlockProps> = ({
 
 interface TypographicUnitBlockProps {
   block: Block;
+  nextComponentY?: number;
   units: TypographicUnitDefinition[];
   pageNumber: number;
   scale: number;
@@ -1037,6 +1041,19 @@ interface TypographicUnitBlockProps {
   overrides: Map<string, SpanOverride>;
   draftOverride: SpanOverride | null;
   language: 'en' | 'pt-BR';
+}
+
+function findNextSameColumnComponentY(blocks: Block[], block: Block): number | undefined {
+  const x = block.typographicUnits?.[0]?.field.frame.x;
+  if (x === undefined) return undefined;
+  return blocks
+    .filter(candidate => candidate.id !== block.id
+      && Boolean(candidate.typographicUnits?.length)
+      && Math.abs((candidate.typographicUnits?.[0]?.field.frame.x ?? Infinity) - x) <= 2
+      && candidate.bbox[1] >= block.bbox[3])
+    .reduce<number | undefined>((nearest, candidate) =>
+      nearest === undefined || candidate.bbox[1] < nearest ? candidate.bbox[1] : nearest,
+    undefined);
 }
 
 function extractInlineSpanUnitInfo(
@@ -1072,9 +1089,10 @@ function extractInlineSpanUnitInfo(
 }
 
 const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
-  block, units, pageNumber, scale, isAdmin, onBlockClick, selectedBlockKey,
+  block, nextComponentY, units, pageNumber, scale, isAdmin, onBlockClick, selectedBlockKey,
   overrides, draftOverride, language,
 }) => {
+  const [leadingUnitPushPt, setLeadingUnitPushPt] = useState(0);
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
   const blockW = block.bbox[2] - block.bbox[0];
@@ -1087,6 +1105,18 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
     height: `${blockH * scale}px`,
     zIndex: block.zIndex || 10,
   };
+  const firstFieldY = units[0]?.field.bbox[1];
+  const secondFieldY = units[1]?.field.bbox[1];
+  const handleLeadingUnitMeasure = useCallback((heightPx: number) => {
+    if (firstFieldY === undefined || secondFieldY === undefined || !scale) return;
+    const requiredPushPt = Math.max(0, heightPx / scale - (secondFieldY - firstFieldY));
+    const clearancePt = 8;
+    const availablePushPt = nextComponentY === undefined
+      ? 0
+      : Math.max(0, nextComponentY - block.bbox[3] - clearancePt);
+    const pushPt = requiredPushPt <= availablePushPt ? requiredPushPt : 0;
+    setLeadingUnitPushPt(current => Math.abs(current - pushPt) < 0.01 ? current : pushPt);
+  }, [block.bbox, firstFieldY, nextComponentY, scale, secondFieldY]);
 
   return (
     <div className="block-container" style={blockStyle}>
@@ -1107,7 +1137,9 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
             selected={selectedBlockKey === spanKey}
             override={override}
             language={language}
-            nextFieldY={nextFieldY}
+            nextFieldY={nextFieldY !== undefined ? nextFieldY + leadingUnitPushPt : undefined}
+            topOffsetPt={unitIndex > 0 ? leadingUnitPushPt : 0}
+            onPreviewMeasure={unitIndex === 0 ? handleLeadingUnitMeasure : undefined}
             onBlockClick={onBlockClick}
           />
         );
@@ -1126,11 +1158,14 @@ interface CreditFieldProps {
   override: SpanOverride | null;
   language: 'en' | 'pt-BR';
   nextFieldY?: number;
+  topOffsetPt?: number;
+  onPreviewMeasure?: (heightPx: number) => void;
   onBlockClick: (info: SelectedSpanInfo) => void;
 }
 
 const CreditField: React.FC<CreditFieldProps> = ({
-  block, field, spanKey, scale, isAdmin, selected, override, language, nextFieldY, onBlockClick,
+  block, field, spanKey, scale, isAdmin, selected, override, language, nextFieldY,
+  topOffsetPt = 0, onPreviewMeasure, onBlockClick,
 }) => {
   const previewRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -1145,7 +1180,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const fieldStyle: React.CSSProperties = {
     position: 'absolute',
     left: `${(fieldX - blockX) * scale}px`,
-    top: `${(fieldY - blockY) * scale}px`,
+    top: `${(fieldY - blockY + topOffsetPt) * scale}px`,
     width: `${field.frame.width * scale}px`,
     minHeight: `${fieldHeight * scale}px`,
   };
@@ -1156,10 +1191,11 @@ const CreditField: React.FC<CreditFieldProps> = ({
       // A unit can fit its own ink bbox and still run into the next typography unit.
       // Bound it by the next field's start when one exists; keep 1px for browser rounding.
       setIsOverflowing(preview.scrollHeight > neighborHeight * scale + 1);
+      onPreviewMeasure?.(preview.scrollHeight);
     } else {
       setIsOverflowing(false);
     }
-  }, [override, neighborHeight, scale]);
+  }, [onPreviewMeasure, override, neighborHeight, scale]);
 
   const lines = (block.lines || []).filter(line => field.lineIds.includes(line.id));
   const sourceClass = isAdmin ? 'credit-edit-field' : '';
