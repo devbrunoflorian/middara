@@ -1624,7 +1624,16 @@
                 671.8568725585938
               ]
             }
-          ]
+          ],
+          "rasterizedDuplicate": true,
+          "rasterizedDuplicateReason": "Nightingale Arsen is already legible in the p. 37 stat-card background; the extracted HTML copy visibly doubles the name",
+          "rasterizedDuplicateEvidence": {
+            "auditId": "page37-nightingale-name-background-text-v1",
+            "sourcePdfPage": 37,
+            "region": "name within the Nightingale stamina-bar art at lower left",
+            "rule": "suppress only the printed name; surrounding Example prose remains live",
+            "evidenceRef": "docs/project-progress/2026-10-02-user-visual-ghost-audit-pages-20-43.md"
+          }
         }
       ]
     },
