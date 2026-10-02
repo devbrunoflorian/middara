@@ -1,5 +1,16 @@
 # Skill: Textos Fantasmas e Artefatos Duplicados do InDesign
 
+## Política operacional vigente (decisões do usuário, 2026-10-01)
+
+- `suspectedGhost`, tamanho, sobreposição, ordem de pintura e similaridade são sinais para triagem; **nenhum deles esconde texto por si só**. Candidatos sem decisão ficam visíveis e editáveis até revisão.
+- Somente uma linha/span com duplicação confirmada por comparação com o PDF pode receber a marca explícita `rasterizedDuplicate` (ou metadado confirmado equivalente) e ser omitida da renderização normal. A decisão é por span confirmado; não propagar à região inteira por associação.
+- Antes de generalizar uma regra de lote, validar um positivo e um contraexemplo difícil, e aplicá-la somente a candidatos que correspondam exatamente à classe comprovada. Cobertura de uma página por imagem não prova duplicação.
+- A classificação confirmada é reversível: remover o marcador se nova evidência provar erro. Isto é uma salvaguarda, não substitui prevenção por evidência.
+- Preservar cada span e a justificativa auditável. No Admin, deixar a origem acessível e explicitamente identificada como duplicata confirmada; na leitura normal, busca, exportação e futura fila de tradução, mantê-la oculta/excluída. Para cada supressão, registrar página/região, texto, bbox, regra e referência à comparação do PDF.
+- A v1 acompanha a aparência do PDF publicado. Defeitos que já existam na arte-fonte vão para uma fila separada de limpeza futura; texto legível embutido em imagem sem duplicação no viewer também é trabalho de localização de artwork, não fantasma.
+
+Estas decisões estão detalhadas em [`docs/project-progress/2026-10-01-grill-me-fidelity-acceptance.md`](../../docs/project-progress/2026-10-01-grill-me-fidelity-acceptance.md). As instruções históricas abaixo sobre heurísticas servem para entender a descoberta do bug, mas não autorizam ocultar `suspectedGhost` automaticamente.
+
 ## O bug, na sua forma real (não na versão simplificada que foi "resolvida")
 PDFs gerados por InDesign/Illustrator frequentemente deixam **texto vetorial esquecido por baixo de imagens** — versões antigas de rótulos, texto de posicionamento do designer, camadas de acessibilidade, ou simplesmente lixo de revisão que nunca foi apagado. O extrator (PyMuPDF/pdfplumber) lê esse texto como se fosse conteúdo real, porque tecnicamente ele está lá no PDF.
 
@@ -20,7 +31,7 @@ Um bloco de texto é candidato a "fantasma/leftover" quando:
 1. Pra cada bloco de texto, verificar sobreposição de bbox com blocos de imagem de z-index maior na mesma página. Se a cobertura for >80% da área do texto, marcar como `suspectedGhost: true` no JSON de extração — não decidir sozinho se apaga, só marcar.
 2. Rodar uma checagem de duplicata textual por página (mesmo texto normalizado, bounding boxes próximas) e marcar os pares como candidatos.
 3. **Nunca decidir automaticamente "isso é lixo, deleto"** — marcar e deixar pra revisão humana no lote de QA (Skill 05). Apagar automaticamente é arriscado igual "consertar às cegas": pode ser um efeito de sombra/profundidade legítimo do design, não necessariamente erro.
-4. No `PageRenderer`, blocos marcados `suspectedGhost` não renderizam por padrão, mas ficam disponíveis no modo Admin/QA pra inspeção (não deleta o dado, só não exibe).
+4. O `PageRenderer` não suprime `suspectedGhost` automaticamente. Depois da revisão, marcar somente os spans confirmados; manter o dado de origem e a evidência, ocultar na leitura normal e identificá-lo no Admin.
 
 ## Atualização — por que a heurística original não deu pra implementar como escrita
 Na tentativa real de implementação, as duas pernas da heurística original falharam por motivos estruturais legítimos (não preguiça):

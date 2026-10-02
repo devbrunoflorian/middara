@@ -19,6 +19,16 @@ const AVAILABLE_FONTS = [
 
 const FONT_WEIGHTS = [400, 500, 600, 700, 900, 950];
 
+const editorFontForSource = (font: string) => {
+  if (font.includes('Optima')) return 'OptimaLTStd';
+  if (font.includes('Garamond')) return 'AGaramondPro';
+  if (font.includes('Decorative')) return 'Cinzel Decorative';
+  if (font.includes('Cinzel')) return 'CinzelLocal';
+  if (font.includes('EsmeraldaPro-PUA')) return 'EsmeraldaPro-PUA';
+  if (font.includes('Esmeralda')) return 'EsmeraldaPro';
+  return font;
+};
+
 /* ─────────────────────────────────────────────
    Types
    ───────────────────────────────────────────── */
@@ -98,15 +108,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const [selEnd, setSelEnd] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   // Current tool settings
-  const [toolFont, setToolFont] = useState(() => {
-    if (originalFont.includes('Optima')) return 'OptimaLTStd';
-    if (originalFont.includes('Garamond')) return 'AGaramondPro';
-    if (originalFont.includes('Decorative')) return 'Cinzel Decorative';
-    if (originalFont.includes('Cinzel')) return 'CinzelLocal';
-    if (originalFont.includes('EsmeraldaPro-PUA')) return 'EsmeraldaPro-PUA';
-    if (originalFont.includes('Esmeralda')) return 'EsmeraldaPro';
-    return originalFont;
-  });
+  const [toolFont, setToolFont] = useState(() => editorFontForSource(originalFont));
   const [toolWeight, setToolWeight] = useState(originalWeight);
   const [toolStyle, setToolStyle] = useState<'normal' | 'italic'>(originalStyle);
   const [toolColor, setToolColor] = useState(originalColor);
@@ -122,6 +124,19 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   useEffect(() => {
     setTextAlign(baseTextAlign);
   }, [spanKey, baseTextAlign]);
+
+  useEffect(() => {
+    setToolFont(editorFontForSource(originalFont));
+    setToolWeight(originalWeight);
+    setToolStyle(originalStyle);
+    setToolColor(originalColor);
+    setToolSize(originalSize);
+    setToolLigatures(true);
+    setSelStart(null);
+    setSelEnd(null);
+    setIsEditingText(false);
+    setEditText('');
+  }, [spanKey, originalFont, originalWeight, originalStyle, originalColor, originalSize]);
 
   // Initialize segments from existing override or original span
   useEffect(() => {

@@ -2133,7 +2133,8 @@
                 85.21219635009766,
                 182.05279541015625,
                 101.38819122314453
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -3546,7 +3547,7 @@
           ],
           "availableWidth": 301.84678649902344,
           "availableX": 86.17320251464844,
-          "suspectedGhost": true,
+          "suspectedGhost": false,
           "spans": [
             {
               "text": "Other Important Rules ",
@@ -3559,7 +3560,8 @@
                 56.69243621826172,
                 321.161376953125,
                 80.95643615722656
-              ]
+              ],
+              "renderWeightOverride": 700
             },
             {
               "text": "Continued",
@@ -3572,8 +3574,23 @@
                 63.524436950683594,
                 388.0199890136719,
                 78.3524398803711
-              ]
+              ],
+              "renderWeightOverride": 700
             }
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p72-other-important-rules-continued-heading",
+          "spanRefs": [
+            "line_94_0:0"
+          ]
+        },
+        {
+          "id": "p72-other-important-rules-continued-continued",
+          "spanRefs": [
+            "line_94_0:1"
           ]
         }
       ]

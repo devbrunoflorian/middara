@@ -37,7 +37,8 @@
                 87.2129898071289,
                 329.6028137207031,
                 103.38898468017578
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -625,7 +626,8 @@
                 302.976806640625,
                 237.04922485351562,
                 319.1528015136719
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -786,7 +788,8 @@
                 375.06341552734375,
                 386.4371337890625,
                 391.2394104003906
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -1170,7 +1173,8 @@
                 474.8193054199219,
                 147.8892059326172,
                 490.99530029296875
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -3968,7 +3972,8 @@
                 529.7207641601562,
                 539.4425048828125,
                 545.896728515625
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         },
@@ -4696,6 +4701,70 @@
             }
           ]
         }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p70-block-59-first-size-12pt",
+          "field": {
+            "id": "p70-block-59-first-size-12pt-field",
+            "lineIds": [
+              "line_59_0"
+            ],
+            "bbox": [
+              415.8424987792969,
+              529.7207641601562,
+              539.4425048828125,
+              545.896728515625
+            ],
+            "frame": {
+              "x": 415.8424987792969,
+              "width": 321.1736755371094,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
+        },
+        {
+          "id": "p70-block-59-remaining-size-10pt",
+          "field": {
+            "id": "p70-block-59-remaining-size-10pt-field",
+            "lineIds": [
+              "line_59_2",
+              "line_59_3",
+              "line_59_4",
+              "line_59_5",
+              "line_59_6",
+              "line_59_7",
+              "line_59_8",
+              "line_59_9",
+              "line_59_10",
+              "line_59_11",
+              "line_59_12",
+              "line_59_13",
+              "line_59_14",
+              "line_59_15",
+              "line_59_16",
+              "line_59_17",
+              "line_59_18",
+              "line_59_19",
+              "line_59_20",
+              "line_59_21",
+              "line_59_22"
+            ],
+            "bbox": [
+              415.8424987792969,
+              552.2427368164062,
+              730.98291015625,
+              792.6327514648438
+            ],
+            "frame": {
+              "x": 415.8424987792969,
+              "width": 321.1736755371094,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
+        }
       ]
     },
     {
@@ -4719,7 +4788,7 @@
           ],
           "availableWidth": 301.84678649902344,
           "availableX": 86.17320251464844,
-          "suspectedGhost": true,
+          "suspectedGhost": false,
           "spans": [
             {
               "text": "Other Important Rules ",
@@ -4732,7 +4801,8 @@
                 56.69243621826172,
                 321.161376953125,
                 80.95643615722656
-              ]
+              ],
+              "renderWeightOverride": 700
             },
             {
               "text": "Continued",
@@ -4745,8 +4815,23 @@
                 63.524436950683594,
                 388.0199890136719,
                 78.3524398803711
-              ]
+              ],
+              "renderWeightOverride": 700
             }
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p70-other-important-rules-continued-heading",
+          "spanRefs": [
+            "line_62_0:0"
+          ]
+        },
+        {
+          "id": "p70-other-important-rules-continued-continued",
+          "spanRefs": [
+            "line_62_0:1"
           ]
         }
       ]

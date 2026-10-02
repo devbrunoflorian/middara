@@ -37,7 +37,8 @@
                 87.9453353881836,
                 475.4591064453125,
                 102.7733383178711
-              ]
+              ],
+              "renderWeightOverride": 700
             },
             {
               "text": "\n",
@@ -1692,7 +1693,8 @@
                 635.8806762695312,
                 589.5951538085938,
                 650.7086791992188
-              ]
+              ],
+              "renderWeightOverride": 700
             },
             {
               "text": "\n",
@@ -2055,7 +2057,8 @@
                 86.9679946899414,
                 151.59722900390625,
                 103.14398956298828
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -2471,7 +2474,8 @@
                 357.84210205078125,
                 354.2640686035156,
                 374.0180969238281
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -3365,7 +3369,8 @@
                 620.7539672851562,
                 163.05722045898438,
                 636.929931640625
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -4031,7 +4036,7 @@
           ],
           "availableWidth": 278.0137939453125,
           "availableX": 86.11810302734375,
-          "suspectedGhost": true,
+          "suspectedGhost": false,
           "spans": [
             {
               "text": "Reading Encounters ",
@@ -4044,7 +4049,8 @@
                 56.35393524169922,
                 297.2742919921875,
                 80.61793518066406
-              ]
+              ],
+              "renderWeightOverride": 700
             },
             {
               "text": "Continued",
@@ -4057,8 +4063,23 @@
                 63.185935974121094,
                 364.13189697265625,
                 78.0139389038086
-              ]
+              ],
+              "renderWeightOverride": 700
             }
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p19-reading-encounters-continued-heading",
+          "spanRefs": [
+            "line_54_0:0"
+          ]
+        },
+        {
+          "id": "p19-reading-encounters-continued-continued",
+          "spanRefs": [
+            "line_54_0:1"
           ]
         }
       ]

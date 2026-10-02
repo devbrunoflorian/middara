@@ -24,7 +24,7 @@
           ],
           "availableWidth": 311.31541442871094,
           "availableX": 86.17320251464844,
-          "suspectedGhost": true,
+          "suspectedGhost": false,
           "spans": [
             {
               "text": "Intelligent Combatants ",
@@ -37,7 +37,8 @@
                 56.69243621826172,
                 330.6312255859375,
                 80.95643615722656
-              ]
+              ],
+              "renderWeightOverride": 700
             },
             {
               "text": "Continued",
@@ -50,8 +51,23 @@
                 63.524436950683594,
                 397.4886169433594,
                 78.3524398803711
-              ]
+              ],
+              "renderWeightOverride": 700
             }
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p60-intelligent-combatants-continued-heading",
+          "spanRefs": [
+            "line_8_0:0"
+          ]
+        },
+        {
+          "id": "p60-intelligent-combatants-continued-continued",
+          "spanRefs": [
+            "line_8_0:1"
           ]
         }
       ]
@@ -90,7 +106,8 @@
                 271.41693115234375,
                 642.9644165039062,
                 295.6809387207031
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -1215,6 +1232,55 @@
             }
           ]
         }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p60-block-16-first-size-9pt",
+          "field": {
+            "id": "p60-block-16-first-size-9pt-field",
+            "lineIds": [
+              "line_16_0"
+            ],
+            "bbox": [
+              439.3700866699219,
+              573.2103271484375,
+              559.1950073242188,
+              585.1103515625
+            ],
+            "frame": {
+              "x": 439.3700866699219,
+              "width": 273.1854553222656,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
+        },
+        {
+          "id": "p60-block-16-remaining-size-10pt",
+          "field": {
+            "id": "p60-block-16-remaining-size-10pt-field",
+            "lineIds": [
+              "line_16_1",
+              "line_16_2",
+              "line_16_3",
+              "line_16_4",
+              "line_16_5",
+              "line_16_6"
+            ],
+            "bbox": [
+              439.3749694824219,
+              584.09033203125,
+              712.5555419921875,
+              651.1103515625
+            ],
+            "frame": {
+              "x": 439.3700866699219,
+              "width": 273.1854553222656,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
+        }
       ]
     },
     {
@@ -1743,7 +1809,8 @@
                 97.2121353149414,
                 229.04400634765625,
                 113.38813018798828
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -2613,7 +2680,8 @@
                 358.9585876464844,
                 139.6212158203125,
                 378.13458251953125
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }

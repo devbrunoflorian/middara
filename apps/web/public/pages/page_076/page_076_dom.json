@@ -37,7 +37,8 @@
                 87.21219635009766,
                 195.62789916992188,
                 103.38819122314453
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         },
@@ -1294,7 +1295,8 @@
                 485.4248046875,
                 194.9322967529297,
                 501.6007995605469
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -1982,7 +1984,8 @@
                 523.4448852539062,
                 308.27655029296875,
                 538.9476928710938
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         },
@@ -2568,7 +2571,8 @@
                 87.21219635009766,
                 476.9383850097656,
                 103.38819122314453
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         },
@@ -3968,7 +3972,8 @@
                 371.5823059082031,
                 550.3892211914062,
                 387.75830078125
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         }
@@ -5205,6 +5210,50 @@
             }
           ]
         }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p76-block-78-first-size-12.66pt",
+          "field": {
+            "id": "p76-block-78-first-size-12.66pt-field",
+            "lineIds": [
+              "line_78_0"
+            ],
+            "bbox": [
+              626.888916015625,
+              663.0289306640625,
+              663.1781005859375,
+              680.2745971679688
+            ],
+            "frame": {
+              "x": 614.82861328125,
+              "width": 57.623779296875,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
+        },
+        {
+          "id": "p76-block-78-remaining-size-9.5pt",
+          "field": {
+            "id": "p76-block-78-remaining-size-9.5pt-field",
+            "lineIds": [
+              "line_78_1"
+            ],
+            "bbox": [
+              614.82861328125,
+              675.903076171875,
+              672.452392578125,
+              688.8372802734375
+            ],
+            "frame": {
+              "x": 614.82861328125,
+              "width": 57.623779296875,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
+        }
       ]
     },
     {
@@ -5268,7 +5317,7 @@
           ],
           "availableWidth": 372.99969482421875,
           "availableX": 85.88189697265625,
-          "suspectedGhost": true,
+          "suspectedGhost": false,
           "spans": [
             {
               "text": "Special Assemblage Disciplines ",
@@ -5281,7 +5330,8 @@
                 56.69243621826172,
                 392.0259094238281,
                 80.95643615722656
-              ]
+              ],
+              "renderWeightOverride": 700
             },
             {
               "text": "Continued",
@@ -5294,8 +5344,23 @@
                 63.524436950683594,
                 458.881591796875,
                 78.3524398803711
-              ]
+              ],
+              "renderWeightOverride": 700
             }
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p76-special-assemblage-disciplines-continued-heading",
+          "spanRefs": [
+            "line_81_0:0"
+          ]
+        },
+        {
+          "id": "p76-special-assemblage-disciplines-continued-continued",
+          "spanRefs": [
+            "line_81_0:1"
           ]
         }
       ]

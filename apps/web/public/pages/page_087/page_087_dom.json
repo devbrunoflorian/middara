@@ -37,7 +37,8 @@
                 91.64310455322266,
                 287.2440185546875,
                 107.81909942626953
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         },
@@ -346,7 +347,8 @@
                 213.81631469726562,
                 262.2492370605469,
                 229.99232482910156
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         },
@@ -813,7 +815,8 @@
                 360.8241882324219,
                 207.69720458984375,
                 377.00018310546875
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         },
@@ -1045,6 +1048,56 @@
               ]
             }
           ]
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p87-block-15-first-size-12pt",
+          "field": {
+            "id": "p87-block-15-first-size-12pt-field",
+            "lineIds": [
+              "line_15_0"
+            ],
+            "bbox": [
+              86.17320251464844,
+              360.8241882324219,
+              207.69720458984375,
+              377.00018310546875
+            ],
+            "frame": {
+              "x": 86.17320251464844,
+              "width": 321.33070373535156,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
+        },
+        {
+          "id": "p87-block-15-remaining-size-10pt",
+          "field": {
+            "id": "p87-block-15-remaining-size-10pt-field",
+            "lineIds": [
+              "line_15_2",
+              "line_15_3",
+              "line_15_4",
+              "line_15_5",
+              "line_15_6",
+              "line_15_7",
+              "line_15_8"
+            ],
+            "bbox": [
+              86.17320251464844,
+              383.2261962890625,
+              406.6831359863281,
+              466.9061584472656
+            ],
+            "frame": {
+              "x": 86.17320251464844,
+              "width": 321.33070373535156,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
         }
       ]
     },
@@ -4446,7 +4499,7 @@
           ],
           "availableWidth": 157.0913848876953,
           "availableX": 85.88189697265625,
-          "suspectedGhost": true,
+          "suspectedGhost": false,
           "spans": [
             {
               "text": "Variants ",
@@ -4459,7 +4512,8 @@
                 56.69243621826172,
                 176.11590576171875,
                 80.95643615722656
-              ]
+              ],
+              "renderWeightOverride": 700
             },
             {
               "text": "Continued",
@@ -4472,8 +4526,23 @@
                 63.524436950683594,
                 242.97328186035156,
                 78.3524398803711
-              ]
+              ],
+              "renderWeightOverride": 700
             }
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p87-variants-continued-heading",
+          "spanRefs": [
+            "line_36_0:0"
+          ]
+        },
+        {
+          "id": "p87-variants-continued-continued",
+          "spanRefs": [
+            "line_36_0:1"
           ]
         }
       ]

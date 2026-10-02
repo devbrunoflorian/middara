@@ -26,6 +26,7 @@ To support this without breaking browser rendering, we map special characters to
 - `docs/architecture_v3_constraints.md`: Deep dive into the block-level rendering and constraint-based editor architecture.
 - `docs/architecture/text-layout-frames.md`: Accepted page 2 frame pilot separating printed ink bounds from translation space, with audit findings and the plan for generalization.
 - `docs/project-progress/CONTINUE-HERE.md`: mandatory handoff for developers and AI agents resuming project work.
+- `docs/project-progress/2026-10-01-book-wide-typographic-units.md`: active plan to identify editable typography units and style hierarchy across all 102 pages before geometry audits.
 - `docs/project-progress/README.md`: Per-task work log with methods, results, corrections, checks, and next steps.
 - `docs/translation-editor-save-and-line-breaks.md`: Save point for the docked editor, live text preview, line-height, and local-first draft persistence.
 - `docs/payload-database-recovery.md`: Payload database diagnosis, clone-only API verification, and the safe migration checkpoint.

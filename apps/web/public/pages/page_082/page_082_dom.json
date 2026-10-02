@@ -37,7 +37,8 @@
                 91.41690826416016,
                 280.56390380859375,
                 107.59290313720703
-              ]
+              ],
+              "renderWeightOverride": 700
             },
             {
               "text": "Variation",
@@ -63,7 +64,8 @@
                 91.41690826416016,
                 354.4359130859375,
                 107.59290313720703
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         },
@@ -451,6 +453,56 @@
               ]
             }
           ]
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p82-block-8-first-size-12pt",
+          "field": {
+            "id": "p82-block-8-first-size-12pt-field",
+            "lineIds": [
+              "line_8_0"
+            ],
+            "bbox": [
+              85.76909637451172,
+              91.41690826416016,
+              354.4359130859375,
+              107.59290313720703
+            ],
+            "frame": {
+              "x": 85.76909637451172,
+              "width": 321.57202911376953,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
+        },
+        {
+          "id": "p82-block-8-remaining-size-10pt",
+          "field": {
+            "id": "p82-block-8-remaining-size-10pt-field",
+            "lineIds": [
+              "line_8_2",
+              "line_8_3",
+              "line_8_4",
+              "line_8_5",
+              "line_8_6",
+              "line_8_7",
+              "line_8_8"
+            ],
+            "bbox": [
+              85.76909637451172,
+              115.81890869140625,
+              407.34112548828125,
+              193.8389129638672
+            ],
+            "frame": {
+              "x": 85.76909637451172,
+              "width": 321.57202911376953,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
         }
       ]
     },
@@ -1906,7 +1958,8 @@
                 435.464111328125,
                 144.71188354492188,
                 451.6401062011719
-              ]
+              ],
+              "renderWeightOverride": 700
             }
           ]
         },
@@ -2043,6 +2096,52 @@
               ]
             }
           ]
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p82-block-30-first-size-12pt",
+          "field": {
+            "id": "p82-block-30-first-size-12pt-field",
+            "lineIds": [
+              "line_30_0"
+            ],
+            "bbox": [
+              85.76909637451172,
+              435.464111328125,
+              144.71188354492188,
+              451.6401062011719
+            ],
+            "frame": {
+              "x": 85.76909637451172,
+              "width": 321.33069610595703,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
+        },
+        {
+          "id": "p82-block-30-remaining-size-10pt",
+          "field": {
+            "id": "p82-block-30-remaining-size-10pt-field",
+            "lineIds": [
+              "line_30_2",
+              "line_30_3",
+              "line_30_4"
+            ],
+            "bbox": [
+              85.76909637451172,
+              459.8661193847656,
+              393.08905029296875,
+              493.8861083984375
+            ],
+            "frame": {
+              "x": 85.76909637451172,
+              "width": 321.33069610595703,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
         }
       ]
     },
@@ -3501,7 +3600,7 @@
           ],
           "availableWidth": 424.91070556640625,
           "availableX": 85.88189697265625,
-          "suspectedGhost": true,
+          "suspectedGhost": false,
           "spans": [
             {
               "text": "Alternate, Variations, and Loot LVL ",
@@ -3514,7 +3613,8 @@
                 56.69243621826172,
                 443.9342346191406,
                 80.95643615722656
-              ]
+              ],
+              "renderWeightOverride": 700
             },
             {
               "text": "Continued",
@@ -3527,8 +3627,23 @@
                 63.524436950683594,
                 510.7926025390625,
                 78.3524398803711
-              ]
+              ],
+              "renderWeightOverride": 700
             }
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p82-alternate-variations-and-loot-lvl-continued-heading",
+          "spanRefs": [
+            "line_43_0:0"
+          ]
+        },
+        {
+          "id": "p82-alternate-variations-and-loot-lvl-continued-continued",
+          "spanRefs": [
+            "line_43_0:1"
           ]
         }
       ]
