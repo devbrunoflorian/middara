@@ -36,6 +36,13 @@ Aplicar o fluxo por regiões a uma página densa inteira, com controle do PDF or
 - Algumas linhas numéricas contêm dois spans com o mesmo texto e bbox, um preto e outro branco. A sequência parece reproduzir duas passagens do PDF (possível tratamento de contorno), mas a estrutura HTML usa spans irmãos em fluxo; isso pode ser uma inconsistência tipográfica compartilhada e não deve ser confundido com duas palavras independentes.
 - As folhas PDF/background não conseguem distinguir arte tipográfica desenhada dentro de Form XObjects de uma cópia raster real. O screenshot de leitura não é suficiente para decidir se remover o overlay deixa a página mais fiel. Nenhuma linha foi suprimida nem JSON alterado.
 
+## Retomada após a entrevista sobre fantasmas (2026-10-01)
+
+- As cinco folhas de contato (`tmp/ghost-audit/page20-contact/`) e uma captura read-only do viewer inglês em 200–400% mostram as cartas repetidas e seus rótulos, mas não alinham prova suficiente para classificar os 37 grupos. Nenhum dado da p. 20 foi alterado.
+- Aplicar decisões aceitas: spans ambíguos ficam visíveis e a página não pode ser certificada; decidir por span/região; cores coincidentes podem ser passes intencionais; comparar o render final do PDF com o viewer; validar positivo e contraexemplo difícil antes de propagar um padrão; guardar página, região, texto, bbox, regra e referência de evidência por supressão.
+- A p. 16 produziu o primeiro tracer após essa política: 48 overlays legíveis foram confirmados como ausentes do PDF final e sobrepostos a painéis vermelhos na arte; dois spans co-localizados `55` ficaram pendentes. Isso orienta o método, mas não autoriza aplicar a regra da p. 16 às cartas de loot.
+- Próxima ação: reconstruir a decisão das 37 regiões de forma visível e por classe de carta, usando render PDF, background e viewer alinhados; não usar `3x ABSOLUTE DIFF` como critério. Manter itens ambíguos sem mutação e documentar um controle negativo difícil antes de qualquer lote.
+
 ## Próxima verificação
 
 O scanner book-wide apontou 514 grupos de spans com bboxes coincidentes em 94 páginas, incluindo 56 grupos na página 16 e 25 na página 20. A revisão localizada da p. 16 foi fechada no tracer [`2026-10-01-ghost-review-page16.md`](2026-10-01-ghost-review-page16.md); retomar agora o lote da p. 20. Não alterar a página 20 até resolver separadamente sobreposição de cor/contorno e texto rasterizado; se o padrão de spans coincidentes for global, abrir um tracer tipográfico antes de mudar o renderer.

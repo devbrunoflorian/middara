@@ -10,6 +10,18 @@
 2. **Casos ambíguos:** manter visíveis, registrar numa fila conjunta de revisão e continuar o trabalho seguro em paralelo. Agrupar decisões para revisão em lotes em vez de interromper o progresso a cada ocorrência.
 3. **Portão de conclusão:** um candidato ambíguo ainda sem decisão permanece como pendência; a página não pode ser marcada fiel enquanto houver essa pendência. A fila deve guardar evidência suficiente (página, texto, bbox, recorte PDF/fundo/app quando disponível e razão da incerteza).
 
+4. **PDF fonte com arte defeituosa:** a fidelidade da v1 acompanha o PDF publicado; defeitos já existentes na arte são registrados em fila separada para possível limpeza futura. Não corrigir a imagem-fonte durante a auditoria de fantasmas.
+5. **Texto dentro de imagem sem duplicação no viewer:** não classificar como fantasma. Registrar separadamente como conteúdo de artwork a localizar no futuro.
+6. **Spans coincidentes com cores diferentes:** comparar o render final e o viewer; podem formar uma única aparência intencional (contorno/passagens de estilo). Só suprimir a passagem especificamente provada como indevida.
+7. **Cobertura final da página:** se o texto vetorial está ausente do render final do PDF, mas aparece como texto HTML no viewer, isso confirma a duplicação mesmo sem uma cópia raster legível equivalente. Sobreposição geométrica isolada não basta.
+8. **Generalização em lote:** validar um exemplo positivo e um contraexemplo difícil antes de aplicar uma regra a todos os candidatos que correspondem exatamente à classe. Candidatos fora da classe validada continuam na fila.
+9. **Unidade da decisão:** classificar e suprimir spans confirmados individualmente; a descoberta de um fantasma num grupo não autoriza ocultar os demais spans da região.
+10. **Dados e renderização:** conservar o span de origem e sua classificação/justificativa; ocultar somente na renderização normal e mantê-lo acessível no Admin com identificação explícita de fantasma confirmado. Excluí-lo também de leitura normal, busca, exportação e fila futura de tradução; preservar o registro de auditoria.
+11. **Correção de classificação:** a supressão deve ser reversível se evidência posterior provar erro. Essa é uma salvaguarda residual, não o método de qualidade: prevenção por evidência e validação do contraexemplo é o objetivo principal declarado pelo usuário.
+12. **Evidência por ocorrência:** cada supressão registra página/região, texto e bbox do span, regra aplicada e referência à comparação com o PDF. Screenshots individuais são úteis quando esclarecem ambiguidade, mas não são requisito para cada span se o registro estruturado identifica a prova reproduzível.
+
+Essas respostas foram obtidas em Grill Me específico sobre textos fantasmas (2026-10-01). A matriz aceita continua conservadora: confirmação visual e regra de classe exata precedem a supressão; qualquer aproximação, candidato ambíguo ou sinal heurístico permanece sem mutação.
+
 Essas escolhas consolidam feedbacks anteriores: tamanho de fonte diferente define fronteira de edição; manter peso, itálico, fonte, alternates e bbox provenientes do PDF; medir eixo/gutter `x₀` em layouts de colunas; arte composta fica intacta na v1. As correções são locais e manifestadas quando a evidência não autoriza regra geral.
 
 ## Tracer executado: fila por região de artwork

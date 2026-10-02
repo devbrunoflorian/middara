@@ -52,3 +52,7 @@ Regra 7 e auditorias anteriores mostram que falsos positivos são possíveis: te
 ## Próximo passo
 
 Não generalizar os retângulos das p. 56/74. Revisar as folhas restantes em lotes por classe de layout e registrar decisão por linha/região com positivos/controles. A matriz por página e os crops são triagem, não aprovação integral do livro. Manter artwork intocado na v1.
+
+## Política de classificação consolidada (2026-10-01)
+
+A entrevista Grill Me e o tracer de renderização em [`2026-10-01-ghost-render-classification.md`](2026-10-01-ghost-render-classification.md) substituem a antiga prática contraditória de ocultar `suspectedGhost` por padrão. Suspeita, overlap, ordem de pintura e semelhança são candidatos; só a marca explícita e auditável `rasterizedDuplicate` suprime na leitura normal. A p. 16 confirmou 48 linhas adicionais nos painéis embaralhados (202 no inset contando as 154 anteriores), mantendo dois spans de número coincidentes em revisão. No Admin, duplicatas confirmadas continuam visíveis/selecionáveis com identificação. P. 20 segue sem decisão e não herda a regra p. 16.
