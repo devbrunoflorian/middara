@@ -14,6 +14,9 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGE_ROOT = ROOT / "apps" / "web" / "public" / "pages"
 OUTPUT_ROOT = ROOT / "tmp" / "ghost-audit" / "reflow-clearance"
 MIN_CLEARANCE_PT = 8.0
+FOOTER_MAX_TOP_OFFSET_PT = 55.0
+FOOTER_MAX_HEIGHT_PT = 20.0
+FOOTER_MIN_WIDTH_PT = 500.0
 CSV_FIELDS = [
     "page",
     "block_id",
@@ -78,6 +81,10 @@ def find_obstacles(
     if source_box is None:
         return []
     component_bottom = source_box[3]
+    try:
+        page_height = float(page.get("height", 0))
+    except (TypeError, ValueError):
+        page_height = 0.0
     obstacles: list[dict[str, Any]] = []
 
     for candidate in page.get("blocks", []):
@@ -104,9 +111,17 @@ def find_obstacles(
             continue
         if image_box[3] <= component_bottom:
             continue
+        image_height = image_box[3] - image_box[1]
+        image_width = image_box[2] - image_box[0]
+        is_page_footer = (
+            page_height > 0
+            and image_box[1] >= page_height - FOOTER_MAX_TOP_OFFSET_PT
+            and 0 < image_height <= FOOTER_MAX_HEIGHT_PT
+            and image_width >= FOOTER_MIN_WIDTH_PT
+        )
         obstacle_y = max(component_bottom, image_box[1])
         obstacles.append({
-            "type": "image",
+            "type": "footer" if is_page_footer else "image",
             "id": f"image_{image_index}",
             "bbox": image_box,
             "y": obstacle_y,
@@ -192,7 +207,7 @@ def build_inventory() -> tuple[list[dict[str, Any]], dict[str, Any]]:
         "classification_counts": dict(sorted(status_counts.items())),
         "pages_by_classification": {key: sorted(values) for key, values in sorted(pages_by_status.items())},
         "min_clearance_pt": MIN_CLEARANCE_PT,
-        "classification_note": "clearance-candidate means geometric room exists; it is not text-fit, visual, or page approval",
+        "classification_note": "clearance-candidate means geometric room exists; it is not text-fit, visual, or page approval; repeated page-footer images are treated as page boundaries",
         "errors": errors,
     }
     return rows, summary
