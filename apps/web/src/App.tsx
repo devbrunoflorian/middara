@@ -42,6 +42,9 @@ async function loadPageData(pageNum: number): Promise<PageData> {
         width: data.width || 820.35,
         height: data.height || 820.35,
         images: [],
+        layoutObstacles: (data.images || [])
+          .filter((image: { role?: string }) => image.role === 'content')
+          .map((image: { bbox: [number, number, number, number] }) => image.bbox),
         fidelityOverlays,
         blocks: (data.blocks || []).map((block: Block) => {
           const sidecarUnits = pageCreditUnits[block.id];

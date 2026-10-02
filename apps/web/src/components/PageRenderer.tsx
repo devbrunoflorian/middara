@@ -119,6 +119,7 @@ export interface PageData {
   backgroundUrl?: string;
   blocks: Block[];
   images: ImageData[];
+  layoutObstacles?: [number, number, number, number][];
   fidelityOverlays?: PageFidelityOverlay[];
 }
 
@@ -705,6 +706,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
               key={block.id}
               block={block}
               allBlocks={pageData.blocks}
+              layoutObstacles={pageData.layoutObstacles ?? []}
               blockIdx={bIdx}
               pageNumber={pageData.page_number}
               scale={scale}
@@ -776,6 +778,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
 interface SpanBlockProps {
   block: Block;
   allBlocks: Block[];
+  layoutObstacles: [number, number, number, number][];
   blockIdx: number;
   pageNumber: number;
   scale: number;
@@ -791,7 +794,7 @@ interface SpanBlockProps {
 }
 
 const SpanBlock: React.FC<SpanBlockProps> = ({
-  block, allBlocks, blockIdx, pageNumber, scale, isAdmin, contentsMap,
+  block, allBlocks, layoutObstacles, blockIdx, pageNumber, scale, isAdmin, contentsMap,
   onNavigate, onBlockClick, selectedBlockKey, overrides, overridesReady, draftOverride, language
 }) => {
   const blockRef = useRef<HTMLDivElement>(null);
@@ -835,7 +838,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     return (
       <TypographicUnitBlock
         block={block}
-        nextComponentY={findNextSameColumnComponentY(allBlocks, block)}
+        nextComponentY={findNextSameColumnComponentY(allBlocks, layoutObstacles, block)}
         units={typographicUnits}
         pageNumber={pageNumber}
         scale={scale}
@@ -1043,17 +1046,34 @@ interface TypographicUnitBlockProps {
   language: 'en' | 'pt-BR';
 }
 
-function findNextSameColumnComponentY(blocks: Block[], block: Block): number | undefined {
-  const x = block.typographicUnits?.[0]?.field.frame.x;
-  if (x === undefined) return undefined;
-  return blocks
+function findNextSameColumnComponentY(
+  blocks: Block[],
+  layoutObstacles: [number, number, number, number][],
+  block: Block,
+): number | undefined {
+  const frames = block.typographicUnits?.map(unit => unit.field.frame) ?? [];
+  if (frames.length === 0) return undefined;
+  const x0 = Math.min(...frames.map(frame => frame.x));
+  const x1 = Math.max(...frames.map(frame => frame.x + frame.width));
+  const nextTextY = blocks
     .filter(candidate => candidate.id !== block.id
-      && Boolean(candidate.typographicUnits?.length)
-      && Math.abs((candidate.typographicUnits?.[0]?.field.frame.x ?? Infinity) - x) <= 2
+      // Treat every later text block whose ink intersects this component's frame as an obstacle.
+      // This includes legacy blocks and indented text, not only typographic-unit siblings.
+      && candidate.bbox[0] < x1
+      && candidate.bbox[2] > x0
       && candidate.bbox[1] >= block.bbox[3])
     .reduce<number | undefined>((nearest, candidate) =>
       nearest === undefined || candidate.bbox[1] < nearest ? candidate.bbox[1] : nearest,
     undefined);
+  const nextArtworkY = layoutObstacles
+    .filter(([imageX0, , imageX1, imageY1]) => imageX0 < x1 && imageX1 > x0 && imageY1 > block.bbox[3])
+    .reduce<number | undefined>((nearest, image) => {
+      const obstacleY = Math.max(block.bbox[3], image[1]);
+      return nearest === undefined || obstacleY < nearest ? obstacleY : nearest;
+    }, undefined);
+  if (nextTextY === undefined) return nextArtworkY;
+  if (nextArtworkY === undefined) return nextTextY;
+  return Math.min(nextTextY, nextArtworkY);
 }
 
 function extractInlineSpanUnitInfo(
