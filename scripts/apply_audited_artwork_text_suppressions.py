@@ -21,8 +21,6 @@ PAGE_DIR = ROOT / "apps/web/public/pages"
 # region is the embedded miniature Adventure Book page, whose printed text
 # survives in a nested PDF form in background.webp.
 AUDITED_REGIONS = {
-    # Page 20 uses an exact line-ID manifest below; no rectangle is authorized.
-    20: [],
     16: [
         (80.0, 98.0, 490.0, 660.0),  # embedded "Bombing the Sickles" page
     ],
@@ -74,21 +72,6 @@ AUDITED_PAGE16_PANEL_LINE_IDS = {
     "line_172_3",
 }
 
-AUDITED_PAGE20_LOOT_TITLE_LINES = {
-    "line_538_0": "Monster Loot",
-    "line_1073_0": "Unique Loot",
-    "line_1126_0": "Item Loot",
-    "line_1137_0": "Monster Loot",
-    "line_1147_0": "Unique Loot",
-    "line_1162_0": "Item Loot",
-    "line_1173_0": "Monster Loot",
-    "line_1183_0": "Unique Loot",
-    "line_1198_0": "Item Loot",
-    "line_1209_0": "Monster Loot",
-    "line_1219_0": "Unique Loot",
-    "line_1234_0": "Item Loot",
-}
-
 
 def center_in_region(bbox: list[float], region: tuple[float, ...]) -> bool:
     x0, y0, x1, y1 = bbox
@@ -110,8 +93,6 @@ def main(page_numbers: set[int] | None = None) -> None:
         data = json.loads(path.read_text(encoding="utf-8"))
         changed = []
         reason = f"text already embedded in audited page {page_number} card artwork"
-        if page_number == 20:
-            reason = "Loot card title already embedded in audited page 20 card artwork"
         if page_number == 16:
             reason = (
                 "text already embedded in page 16 miniature Adventure Book artwork; "
@@ -129,38 +110,12 @@ def main(page_numbers: set[int] | None = None) -> None:
                     line.pop("rasterizedDuplicate", None)
                     line.pop("rasterizedDuplicateReason", None)
                     line.pop("rasterizedDuplicateEvidence", None)
-                if page_number == 20 and (
-                    line.get("rasterizedDuplicateEvidence") or {}
-                ).get("auditId") == "page20-loot-card-titles-v1":
-                    line.pop("rasterizedDuplicate", None)
-                    line.pop("rasterizedDuplicateReason", None)
-                    line.pop("rasterizedDuplicateEvidence", None)
                 excluded = any(
                     bbox_matches(line["bbox"], marker)
                     for marker in EXCLUDED_MARKER_BBOXES.get(page_number, [])
                 )
                 line_text = "".join(span.get("text", "") for span in line.get("spans", [])).strip()
                 inside_region = any(center_in_region(line["bbox"], box) for box in regions)
-                if page_number == 20:
-                    expected_text = AUDITED_PAGE20_LOOT_TITLE_LINES.get(line.get("id"))
-                    if expected_text is not None:
-                        if line_text != expected_text:
-                            raise ValueError(
-                                f"Unexpected text for {line.get('id')}: {line_text!r}"
-                            )
-                        line["rasterizedDuplicate"] = True
-                        line["rasterizedDuplicateReason"] = (
-                            "the card artwork already prints this title; the viewer HTML pass duplicates it"
-                        )
-                        line["rasterizedDuplicateEvidence"] = {
-                            "auditId": "page20-loot-card-titles-v1",
-                            "sourcePdfPage": 20,
-                            "region": "Item Loot, Monster Loot, and Unique Loot card title areas",
-                            "rule": "suppress only the exact title line confirmed both in card artwork and as a duplicate viewer overlay",
-                            "evidenceRef": "docs/project-progress/2026-10-01-ghost-review-batch-page20.md",
-                        }
-                        changed.append((block_index, line_index, line_text))
-                    continue
                 if page_number == 16:
                     if line.get("id") in AUDITED_PAGE16_PANEL_LINE_IDS:
                         line["rasterizedDuplicate"] = True
