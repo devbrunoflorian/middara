@@ -158,7 +158,7 @@
 
 ## Raw line 014 (block 1, line 13)
 
-**EN source:** Example 1: Nightingale wants to Attack the Cave Sickle that is at Elevation 1. Since she’s
+**EN source:** Example 1: Nightingale wants to Attack the Cave Sickle that is at Elevation1. Since she’s
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -167,7 +167,6 @@
 **PDF span runs:**
 - `Example 1:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `104.53, 229.60, 155.10, 241.52`
 - `Nightingale wants to Attack the Cave Sickle that is at Elevation` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `155.10, 229.62, 422.53, 241.52`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `422.53, 229.60, 425.31, 241.52`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `425.31, 230.52, 430.31, 241.25`
 - `. Since she’s` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.31, 229.62, 484.97, 241.52`
 
@@ -256,7 +255,7 @@
 
 ## Raw line 022 (block 1, line 21)
 
-**EN source:** There are 4 levels of Elevation. 4 is the highest and 1 is the lowest. Figures may move
+**EN source:** There are 4levels of Elevation. 4 is the highest and 1 is the lowest. Figures may move
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -265,7 +264,6 @@
 **PDF span runs:**
 - `There are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.53, 301.29, 147.42, 313.19`
 - `4` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `147.42, 302.19, 152.42, 312.92`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `152.42, 302.21, 154.92, 312.92`
 - `levels of Elevation.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `154.92, 301.29, 237.93, 313.19`
 - `4` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `237.93, 302.19, 242.94, 312.92`
 - `is the highest and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `242.94, 301.29, 323.54, 313.19`
@@ -274,7 +272,7 @@
 
 ## Raw line 023 (block 1, line 22)
 
-**EN source:** between an Elevation change of 1 without penalty. For an Elevation change of 2,
+**EN source:** between an Elevation change of 1without penalty. For an Elevation change of 2,
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -283,7 +281,6 @@
 **PDF span runs:**
 - `between an Elevation change of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.53, 312.29, 244.17, 324.19`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `244.17, 313.19, 249.17, 323.92`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `249.17, 312.27, 251.95, 324.19`
 - `without penalty. For an Elevation change of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `251.95, 312.29, 440.25, 324.19`
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `440.25, 313.19, 445.26, 323.92`
 - `,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `445.26, 312.29, 450.82, 324.19`
@@ -531,17 +528,6 @@
 
 ## Raw line 044 (block 3, line 43)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `338.67, 506.77, 341.67, 522.95`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `338.67, 506.77, 341.67, 522.95`
-
-## Raw line 045 (block 3, line 44)
-
 **EN source:** Sometimes, certain Terrain will have a Current. The direction of the Current will be shown in
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -551,7 +537,7 @@
 **PDF span runs:**
 - `Sometimes, certain Terrain will have a Current. The direction of the Current will be shown in` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 520.30, 485.32, 532.20`
 
-## Raw line 046 (block 3, line 45)
+## Raw line 045 (block 3, line 44)
 
 **EN source:** the Encounter Setup Diagram.
 
@@ -562,7 +548,7 @@
 **PDF span runs:**
 - `the Encounter Setup Diagram.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 531.30, 220.90, 543.20`
 
-## Raw line 047 (block 3, line 46)
+## Raw line 046 (block 3, line 45)
 
 **EN source:** Any figure that ends their turn in Terrain with a Current will move the amount of spaces
 
@@ -573,7 +559,7 @@
 **PDF span runs:**
 - `Any figure that ends their turn in Terrain with a Current will move the amount of spaces` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 545.13, 463.85, 557.03`
 
-## Raw line 048 (block 3, line 47)
+## Raw line 047 (block 3, line 46)
 
 **EN source:** specified in the Special Encounter Rules in the direction of the Current. Figures will not move
 
@@ -586,7 +572,7 @@
 - `not` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `446.51, 556.09, 460.59, 567.97`
 - `move` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `460.59, 556.13, 489.80, 568.03`
 
-## Raw line 049 (block 3, line 48)
+## Raw line 048 (block 3, line 47)
 
 **EN source:** around other figures or Obstructing Terrain.
 
@@ -597,7 +583,7 @@
 **PDF span runs:**
 - `around other figures or Obstructing Terrain.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 567.13, 275.29, 579.03`
 
-## Raw line 050 (block 3, line 49)
+## Raw line 049 (block 3, line 48)
 
 **EN source:** If the figure cannot move for any reason, then the figure is dealt IRREDUCIBLE DMG equal to
 
@@ -610,7 +596,7 @@
 - `IRREDUCIBLE DMG` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `361.78, 581.87, 442.28, 592.59`
 - `equal to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `442.28, 580.97, 482.86, 592.87`
 
-## Raw line 051 (block 3, line 50)
+## Raw line 050 (block 3, line 49)
 
 **EN source:** the spaces it was not able to move. If a Current Pushes figures to the Encounter's edge, the
 
@@ -621,7 +607,7 @@
 **PDF span runs:**
 - `the spaces it was not able to move. If a Current Pushes figures to the Encounter's edge, the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 591.97, 476.28, 603.87`
 
-## Raw line 052 (block 3, line 51)
+## Raw line 051 (block 3, line 50)
 
 **EN source:** figure cannot move and instead is dealt IRREDUCIBLE DMG.
 
@@ -634,7 +620,7 @@
 - `IRREDUCIBLE DMG` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `258.03, 603.87, 338.53, 614.59`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `338.53, 602.97, 341.31, 614.87`
 
-## Raw line 053 (block 3, line 52)
+## Raw line 052 (block 3, line 51)
 
 **EN source:** Figures that Passively are not affected by a specific type of Terrain also ignore Currents within
 
@@ -645,7 +631,7 @@
 **PDF span runs:**
 - `Figures that Passively are not affected by a specific type of Terrain also ignore Currents within` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 616.80, 487.69, 628.70`
 
-## Raw line 054 (block 3, line 53)
+## Raw line 053 (block 3, line 52)
 
 **EN source:** that type of Terrain.
 
@@ -656,7 +642,7 @@
 **PDF span runs:**
 - `that type of Terrain.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 627.80, 171.93, 639.70`
 
-## Raw line 055 (block 3, line 54)
+## Raw line 054 (block 3, line 53)
 
 **EN source:** Some Tokens are affected by Currents while others are not. See Table 10: Current Effects
 
@@ -668,7 +654,7 @@
 - `Some Tokens are affected by Currents while others are not. See` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 641.63, 358.41, 653.53`
 - `Table 10: Current Effects` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `358.41, 641.51, 471.74, 653.46`
 
-## Raw line 056 (block 3, line 55)
+## Raw line 055 (block 3, line 54)
 
 **EN source:** Pg. 100 for a quick way of determining if the token in question is moved by Currents.
 
@@ -679,7 +665,7 @@
 **PDF span runs:**
 - `Pg. 100 for a quick way of determining if the token in question is moved by Currents.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 652.63, 451.73, 664.53`
 
-## Raw line 057 (block 3, line 56)
+## Raw line 056 (block 3, line 55)
 
 **EN source:** Since tokens don't have turns, they are always moved at the end of every round.
 
@@ -692,7 +678,7 @@
 - `end` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `345.49, 666.42, 361.79, 678.30`
 - `of every round.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `361.79, 666.46, 430.03, 678.36`
 
-## Raw line 058 (block 3, line 57)
+## Raw line 057 (block 3, line 56)
 
 **EN source:** Example 2: Zeke ended his turn adjacent to the Animate in the river. After ending his turn,
 
@@ -704,7 +690,7 @@
 - `Example 2:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `86.53, 680.44, 137.10, 692.36`
 - `Zeke ended his turn adjacent to the Animate in the river. After ending his turn,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `137.10, 680.46, 474.91, 692.36`
 
-## Raw line 059 (block 3, line 58)
+## Raw line 058 (block 3, line 57)
 
 **EN source:** Zeke is moved down the river an amount of spaces equal to what is listed in the Encounter
 
@@ -715,7 +701,7 @@
 **PDF span runs:**
 - `Zeke is moved down the river an amount of spaces equal to what is listed in the Encounter` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 691.46, 478.08, 703.36`
 
-## Raw line 060 (block 3, line 59)
+## Raw line 059 (block 3, line 58)
 
 **EN source:** Special Rules. In this Example, it’s only 1 space. If it was any more, the Current would send
 
@@ -728,7 +714,7 @@
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `256.24, 703.37, 261.24, 714.10`
 - `space. If it was any more, the Current would send` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `261.24, 702.47, 479.74, 714.37`
 
-## Raw line 061 (block 3, line 60)
+## Raw line 060 (block 3, line 59)
 
 **EN source:** him over the edge of the waterfall, Defeating him. Since this movement moves him out of a
 
@@ -739,7 +725,7 @@
 **PDF span runs:**
 - `him over the edge of the waterfall, Defeating him. Since this movement moves him out of a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 713.47, 480.77, 725.37`
 
-## Raw line 062 (block 3, line 61)
+## Raw line 061 (block 3, line 60)
 
 **EN source:** space adjacent to an Animate, the Animate gets to make a Break Attack against Zeke.
 
@@ -750,7 +736,7 @@
 **PDF span runs:**
 - `space adjacent to an Animate, the Animate gets to make a Break Attack against Zeke.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 724.47, 454.24, 736.37`
 
-## Raw line 063 (block 3, line 62)
+## Raw line 062 (block 3, line 61)
 
 **EN source:** If Remi ended her turn here, the Current could not move her since she is blocked by the
 
@@ -761,9 +747,9 @@
 **PDF span runs:**
 - `If Remi ended her turn here, the Current could not move her since she is blocked by the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 738.30, 466.64, 750.20`
 
-## Raw line 064 (block 3, line 63)
+## Raw line 063 (block 3, line 62)
 
-**EN source:** Animate. Instead, she would bounce off the Animate and be dealt 1 IRREDUCIBLE DMG for
+**EN source:** Animate. Instead, she would bounce off the Animate and be dealt 1IRREDUCIBLE DMG for
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -772,11 +758,10 @@
 **PDF span runs:**
 - `Animate. Instead, she would bounce off the Animate and be dealt` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 749.30, 371.18, 761.20`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `371.18, 750.21, 376.18, 760.93`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `376.18, 749.30, 378.96, 761.20`
 - `IRREDUCIBLE DMG` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `378.96, 750.21, 459.47, 760.93`
 - `for` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `459.47, 749.30, 476.70, 761.20`
 
-## Raw line 065 (block 3, line 64)
+## Raw line 064 (block 3, line 63)
 
 **EN source:** the space she was unable to move. Additionally, since Remi did not move, she would not
 
@@ -787,7 +772,7 @@
 **PDF span runs:**
 - `the space she was unable to move. Additionally, since Remi did not move, she would not` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 760.30, 472.42, 772.20`
 
-## Raw line 066 (block 3, line 65)
+## Raw line 065 (block 3, line 64)
 
 **EN source:** provoke a Break Attack from the Animate.
 
@@ -797,9 +782,8 @@
 
 **PDF span runs:**
 - `provoke a Break Attack from the Animate.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.53, 771.30, 268.69, 783.20`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `268.69, 771.28, 271.47, 783.20`
 
-## Raw line 067 (block 3, line 66)
+## Raw line 066 (block 3, line 65)
 
 **EN source:** Example 2
 
@@ -810,7 +794,7 @@
 **PDF span runs:**
 - `Example 2` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `605.76, 761.84, 657.30, 776.26`
 
-## Raw line 068 (block 4, line 67)
+## Raw line 067 (block 4, line 66)
 
 **EN source:** X
 
@@ -821,7 +805,7 @@
 **PDF span runs:**
 - `X` — `OptimaLTStd-Bold` 32.41 pt; PDF flags `20`; bbox `667.35, 594.93, 687.15, 633.57`
 
-## Raw line 069 (block 5, line 68)
+## Raw line 068 (block 5, line 67)
 
 **EN source:** Tiles and Terrain Continued
 
@@ -833,7 +817,7 @@
 - `Tiles and Terrain` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `86.53, 56.69, 264.53, 80.96`
 - `Continued` — `Cinzel-Regular` 11.00 pt; PDF flags `4`; bbox `264.53, 63.52, 331.39, 78.35`
 
-## Raw line 070 (block 6, line 69)
+## Raw line 069 (block 6, line 68)
 
 **EN source:** ELEVATION 3
 
@@ -844,7 +828,7 @@
 **PDF span runs:**
 - `ELEVATION 3` — `OptimaLTStd-Bold` 6.00 pt; PDF flags `20`; bbox `596.96, 106.09, 633.31, 113.24`
 
-## Raw line 071 (block 6, line 70)
+## Raw line 070 (block 6, line 69)
 
 **EN source:** ELEVATION 1
 
@@ -855,7 +839,7 @@
 **PDF span runs:**
 - `ELEVATION 1` — `OptimaLTStd-Bold` 6.00 pt; PDF flags `20`; bbox `547.26, 105.86, 585.28, 113.02`
 
-## Raw line 072 (block 7, line 71)
+## Raw line 071 (block 7, line 70)
 
 **EN source:** Example 1
 
@@ -866,7 +850,7 @@
 **PDF span runs:**
 - `Example 1` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `605.76, 378.03, 657.30, 392.45`
 
-## Raw line 073 (block 8, line 72)
+## Raw line 072 (block 8, line 71)
 
 **EN source:** 22
 
@@ -877,7 +861,7 @@
 **PDF span runs:**
 - `22` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 074 (block 8, line 73)
+## Raw line 073 (block 8, line 72)
 
 **EN source:** 22
 

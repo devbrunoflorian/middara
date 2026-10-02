@@ -128,7 +128,6 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `103.84, 197.89, 149.46, 212.30`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `149.45, 199.47, 152.23, 211.39`
 
 ## Raw line 011 (block 2, line 10)
 
@@ -140,7 +139,6 @@
 
 **PDF span runs:**
 - `In the example below, the Encounter’s Special Encounter Rules` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.84, 210.49, 375.06, 222.39`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `375.06, 210.37, 377.84, 222.32`
 
 ## Raw line 012 (block 2, line 11)
 
@@ -168,7 +166,7 @@
 
 ## Raw line 014 (block 3, line 13)
 
-**EN source:** to the Obstructing Terrain token on Tile UM1 may make a
+**EN source:** to the Obstructing Terraintoken on Tile UM1 may make a
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -177,7 +175,6 @@
 **PDF span runs:**
 - `to the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.84, 249.16, 131.08, 261.06`
 - `Obstructing Terrain` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `131.08, 249.12, 214.79, 261.00`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `214.79, 249.04, 217.57, 260.99`
 - `token on` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `217.57, 249.16, 258.15, 261.06`
 - `Tile` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `258.15, 249.14, 274.27, 261.06`
 - `UM1` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `274.27, 249.04, 302.06, 260.99`
@@ -198,7 +195,7 @@
 
 ## Raw line 016 (block 3, line 15)
 
-**EN source:** Terrain token into any unoccupied adjacent space.”
+**EN source:** Terraintoken into any unoccupied adjacent space.”
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -206,7 +203,6 @@
 
 **PDF span runs:**
 - `Terrain` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `103.84, 271.12, 134.03, 283.00`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `134.03, 271.04, 136.81, 282.99`
 - `token into any unoccupied adjacent space.”` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `136.81, 271.16, 326.34, 283.06`
 
 ## Raw line 017 (block 4, line 16)
@@ -376,7 +372,7 @@
 
 ## Raw line 031 (block 8, line 30)
 
-**EN source:** Any amount of equipping/un-equipping/taking is allowed for 1 SP.
+**EN source:** Any amount of equipping/un-equipping/taking is allowed for 1SP.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -385,7 +381,6 @@
 **PDF span runs:**
 - `Any amount of equipping/un-equipping/taking is allowed for` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 686.69, 349.34, 698.59`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `349.34, 687.59, 354.35, 698.32`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `354.35, 687.61, 356.85, 698.32`
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `356.85, 687.59, 366.35, 698.32`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `366.35, 686.69, 369.13, 698.59`
 

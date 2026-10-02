@@ -57,7 +57,7 @@
 
 ## Raw line 005 (block 4, line 4)
 
-**EN source:** CONVICTION: * *
+**EN source:** CONVICTION: **
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -66,7 +66,6 @@
 **PDF span runs:**
 - `CONVICTION:` — `OptimaLTStd-Bold` 7.00 pt; PDF flags `20`; bbox `91.81, 372.52, 140.82, 384.19`
 - `*` — `OptimaLTStd-Black` 12.00 pt; PDF flags `20`; bbox `143.51, 371.19, 149.51, 385.56`
-- `` — `OptimaLTStd-Black` 12.00 pt; PDF flags `20`; bbox `149.51, 371.19, 154.90, 385.56`
 - `*` — `OptimaLTStd-Black` 12.00 pt; PDF flags `20`; bbox `154.90, 371.19, 160.90, 385.56`
 
 ## Raw line 006 (block 5, line 5)
@@ -272,7 +271,7 @@
 
 ## Raw line 024 (block 15, line 23)
 
-**EN source:** then the Force Value will always be equal to 6 plus the
+**EN source:** then the Force Value will always be equal to 6 plusthe
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -282,7 +281,6 @@
 - `then the Force Value will always be equal to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `173.01, 476.07, 365.02, 487.97`
 - `6` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `365.02, 476.05, 373.36, 487.97`
 - `plus` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `373.36, 476.07, 391.15, 487.97`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `391.15, 476.05, 393.93, 487.97`
 - `the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `393.93, 476.07, 410.05, 487.97`
 
 ## Raw line 025 (block 15, line 24)
@@ -538,17 +536,6 @@
 
 ## Raw line 046 (block 18, line 45)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `411.23, 748.25, 414.01, 760.15`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `411.23, 748.25, 414.01, 760.15`
-
-## Raw line 047 (block 18, line 46)
-
 **EN source:** Icon bonus to Defense on their equipped Core and Armor
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -558,9 +545,8 @@
 **PDF span runs:**
 - `Icon bonus to Defense on their equipped` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `173.01, 758.25, 344.20, 770.15`
 - `Core and Armor` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `344.00, 758.21, 410.59, 770.09`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `410.59, 758.25, 413.37, 770.15`
 
-## Raw line 048 (block 18, line 47)
+## Raw line 047 (block 18, line 46)
 
 **EN source:** Items.
 
@@ -571,7 +557,7 @@
 **PDF span runs:**
 - `Items.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `173.01, 769.25, 197.57, 781.15`
 
-## Raw line 049 (block 19, line 48)
+## Raw line 048 (block 19, line 47)
 
 **EN source:** Value:
 
@@ -583,7 +569,7 @@
 - `Value` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `86.17, 284.38, 112.99, 298.79`
 - `:` — `AGaramondPro-Regular` 10.00 pt; PDF flags `4`; bbox `112.99, 285.99, 117.99, 298.70`
 
-## Raw line 050 (block 20, line 49)
+## Raw line 049 (block 20, line 48)
 
 **EN source:** H
 
@@ -594,7 +580,7 @@
 **PDF span runs:**
 - `H` — `OptimaLTStd-Bold` 4.00 pt; PDF flags `20`; bbox `118.59, 552.21, 123.53, 557.88`
 
-## Raw line 051 (block 21, line 50)
+## Raw line 050 (block 21, line 49)
 
 **EN source:** E
 
@@ -605,7 +591,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 4.00 pt; PDF flags `20`; bbox `122.22, 551.45, 125.44, 556.59`
 
-## Raw line 052 (block 22, line 51)
+## Raw line 051 (block 22, line 50)
 
 **EN source:** A
 
@@ -616,7 +602,7 @@
 **PDF span runs:**
 - `A` — `OptimaLTStd-Bold` 4.00 pt; PDF flags `20`; bbox `125.02, 551.10, 128.05, 556.05`
 
-## Raw line 053 (block 23, line 52)
+## Raw line 052 (block 23, line 51)
 
 **EN source:** L
 
@@ -627,7 +613,7 @@
 **PDF span runs:**
 - `L` — `OptimaLTStd-Bold` 4.00 pt; PDF flags `20`; bbox `127.97, 551.15, 130.33, 556.06`
 
-## Raw line 054 (block 24, line 53)
+## Raw line 053 (block 24, line 52)
 
 **EN source:** T
 
@@ -638,7 +624,7 @@
 **PDF span runs:**
 - `T` — `OptimaLTStd-Bold` 4.00 pt; PDF flags `20`; bbox `129.60, 551.39, 132.84, 556.54`
 
-## Raw line 055 (block 25, line 54)
+## Raw line 054 (block 25, line 53)
 
 **EN source:** H
 
@@ -649,7 +635,7 @@
 **PDF span runs:**
 - `H` — `OptimaLTStd-Bold` 4.00 pt; PDF flags `20`; bbox `131.75, 552.21, 136.69, 557.88`
 
-## Raw line 056 (block 26, line 55)
+## Raw line 055 (block 26, line 54)
 
 **EN source:** Scaling Icons
 
@@ -660,7 +646,7 @@
 **PDF span runs:**
 - `Scaling Icons` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `86.81, 85.21, 182.05, 101.39`
 
-## Raw line 057 (block 27, line 56)
+## Raw line 056 (block 27, line 55)
 
 **EN source:** Some Icons, numbers, or Combat Dice have the *
 
@@ -672,7 +658,7 @@
 - `Some Icons, numbers, or Combat Dice have the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.81, 108.73, 295.35, 120.63`
 - `*` — `OptimaLTStd-Bold` 23.00 pt; PDF flags `20`; bbox `295.35, 104.74, 310.81, 132.16`
 
-## Raw line 058 (block 28, line 57)
+## Raw line 057 (block 28, line 56)
 
 **EN source:** image on it. This
 
@@ -683,7 +669,7 @@
 **PDF span runs:**
 - `image on it. This` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `309.65, 108.73, 382.94, 120.63`
 
-## Raw line 059 (block 28, line 58)
+## Raw line 058 (block 28, line 57)
 
 **EN source:** means that this is a Scaling Icon. A Combatant Card might contain Scaling
 
@@ -694,7 +680,7 @@
 **PDF span runs:**
 - `means that this is a Scaling Icon. A Combatant Card might contain Scaling` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.80, 119.73, 407.99, 131.63`
 
-## Raw line 060 (block 28, line 59)
+## Raw line 059 (block 28, line 58)
 
 **EN source:** Icons. Scaling Icons represent Icons of any type whose value is dependent
 
@@ -705,7 +691,7 @@
 **PDF span runs:**
 - `Icons. Scaling Icons represent Icons of any type whose value is dependent` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.80, 130.73, 406.90, 142.63`
 
-## Raw line 061 (block 28, line 60)
+## Raw line 060 (block 28, line 59)
 
 **EN source:** on another figure's card. Both COMMAND
 
@@ -719,7 +705,7 @@
 - `figure's card. Both` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `134.60, 141.73, 218.52, 153.63`
 - `COMMAND` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `218.53, 142.60, 269.31, 153.38`
 
-## Raw line 062 (block 28, line 61)
+## Raw line 061 (block 28, line 60)
 
 **EN source:** COMMAND Combatants and INTELLIGENT
 
@@ -732,7 +718,7 @@
 - `Combatants and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `269.31, 141.73, 344.90, 153.63`
 - `INTELLIGENT` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `344.90, 142.60, 399.90, 153.38`
 
-## Raw line 063 (block 28, line 62)
+## Raw line 062 (block 28, line 61)
 
 **EN source:** INTELLIGENT
 
@@ -742,9 +728,8 @@
 
 **PDF span runs:**
 - `INTELLIGENT` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `344.90, 142.60, 399.90, 153.38`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `399.90, 141.73, 402.68, 153.63`
 
-## Raw line 064 (block 28, line 63)
+## Raw line 063 (block 28, line 62)
 
 **EN source:** Combatants might use Scaling Icons. Meaning, both allies and opponents
 
@@ -755,7 +740,7 @@
 **PDF span runs:**
 - `Combatants might use Scaling Icons. Meaning, both allies and opponents` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.81, 152.73, 404.74, 164.63`
 
-## Raw line 065 (block 28, line 64)
+## Raw line 064 (block 28, line 63)
 
 **EN source:** might get stronger as an Adventure progresses.
 
@@ -766,7 +751,7 @@
 **PDF span runs:**
 - `might get stronger as an Adventure progresses.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.81, 163.73, 285.58, 175.63`
 
-## Raw line 066 (block 29, line 65)
+## Raw line 065 (block 29, line 64)
 
 **EN source:** COMMAND
 
@@ -777,7 +762,7 @@
 **PDF span runs:**
 - `COMMAND` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `86.81, 181.27, 137.59, 192.05`
 
-## Raw line 067 (block 29, line 66)
+## Raw line 066 (block 29, line 65)
 
 **EN source:** COMMAND Combatants that come into play via an Adventure Mechanic,
 
@@ -789,7 +774,7 @@
 - `COMMAND` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `86.81, 181.27, 137.59, 192.05`
 - `Combatants that come into play via an Adventure Mechanic,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `137.59, 180.40, 403.71, 192.30`
 
-## Raw line 068 (block 29, line 67)
+## Raw line 067 (block 29, line 66)
 
 **EN source:** (such as a hidden character in an Adventure) might contain Scaling Icons.
 
@@ -800,7 +785,7 @@
 **PDF span runs:**
 - `(such as a hidden character in an Adventure) might contain Scaling Icons.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.81, 191.40, 405.18, 203.30`
 
-## Raw line 069 (block 29, line 68)
+## Raw line 068 (block 29, line 67)
 
 **EN source:** Meanwhile, COMMAND
 
@@ -812,7 +797,7 @@
 - `Meanwhile,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.81, 202.40, 140.54, 214.30`
 - `COMMAND` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `140.54, 203.27, 191.32, 214.05`
 
-## Raw line 070 (block 29, line 69)
+## Raw line 069 (block 29, line 68)
 
 **EN source:** COMMAND Combatants brought into an Encounter via a
 
@@ -824,7 +809,7 @@
 - `COMMAND` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `140.54, 203.27, 191.32, 214.05`
 - `Combatants brought into an Encounter via a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `191.32, 202.40, 386.41, 214.30`
 
-## Raw line 071 (block 29, line 70)
+## Raw line 070 (block 29, line 69)
 
 **EN source:** Discipline or Ability learned by an Adventurer (such as SUMMONING
 
@@ -836,7 +821,7 @@
 - `Discipline or Ability learned by an Adventurer (such as` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.81, 213.40, 324.34, 225.30`
 - `SUMMONING` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `324.34, 214.30, 385.85, 225.03`
 
-## Raw line 072 (block 29, line 71)
+## Raw line 071 (block 29, line 70)
 
 **EN source:** from ASSEMBLAGE) will typically always use Scaling Icons.
 
@@ -849,7 +834,7 @@
 - `ASSEMBLAGE` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `109.59, 225.30, 164.15, 236.03`
 - `) will typically always use Scaling Icons.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `164.15, 224.40, 336.52, 236.30`
 
-## Raw line 073 (block 30, line 72)
+## Raw line 072 (block 30, line 71)
 
 **EN source:** COMMAND
 
@@ -860,7 +845,7 @@
 **PDF span runs:**
 - `COMMAND` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `86.81, 241.94, 139.84, 252.72`
 
-## Raw line 074 (block 30, line 73)
+## Raw line 073 (block 30, line 72)
 
 **EN source:** COMMAND Combatants use the below special rules to determine their
 
@@ -872,7 +857,7 @@
 - `COMMAND` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `86.81, 241.94, 139.84, 252.72`
 - `Combatants use the below special rules to determine their` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `139.84, 241.07, 392.04, 252.97`
 
-## Raw line 075 (block 30, line 74)
+## Raw line 074 (block 30, line 73)
 
 **EN source:** Scaling Icon values. Depending on the Stat or Value in question, the rules
 
@@ -883,7 +868,7 @@
 **PDF span runs:**
 - `Scaling Icon values. Depending on the Stat or Value in question, the rules` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.81, 252.07, 404.70, 263.97`
 
-## Raw line 076 (block 30, line 75)
+## Raw line 075 (block 30, line 74)
 
 **EN source:** for how to determine these values is as followed:
 
@@ -894,7 +879,7 @@
 **PDF span runs:**
 - `for how to determine these values is as followed:` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.81, 263.07, 296.42, 274.97`
 
-## Raw line 077 (block 31, line 76)
+## Raw line 076 (block 31, line 75)
 
 **EN source:** CASTING: - *
 
@@ -906,7 +891,7 @@
 - `CASTING: -` — `OptimaLTStd-Bold` 7.00 pt; PDF flags `20`; bbox `100.00, 421.08, 137.95, 432.74`
 - `*` — `OptimaLTStd-Black` 12.00 pt; PDF flags `20`; bbox `140.65, 419.75, 146.65, 434.12`
 
-## Raw line 078 (block 32, line 77)
+## Raw line 077 (block 32, line 76)
 
 **EN source:** *
 
@@ -917,9 +902,9 @@
 **PDF span runs:**
 - `*` — `OptimaLTStd-Black` 9.81 pt; PDF flags `20`; bbox `111.56, 668.84, 116.47, 680.60`
 
-## Raw line 079 (block 32, line 78)
+## Raw line 078 (block 32, line 77)
 
-**EN source:** * *
+**EN source:** **
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -927,12 +912,11 @@
 
 **PDF span runs:**
 - `*` — `OptimaLTStd-Black` 9.81 pt; PDF flags `20`; bbox `90.87, 668.44, 95.78, 680.20`
-- `` — `OptimaLTStd-Black` 9.81 pt; PDF flags `20`; bbox `95.78, 668.44, 101.13, 680.20`
 - `*` — `OptimaLTStd-Black` 9.81 pt; PDF flags `20`; bbox `101.13, 668.44, 106.04, 680.20`
 
-## Raw line 080 (block 32, line 79)
+## Raw line 079 (block 32, line 78)
 
-**EN source:** \|
+**EN source:** \\|
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -941,7 +925,7 @@
 **PDF span runs:**
 - `\|` — `OptimaLTStd-Bold` 5.72 pt; PDF flags `20`; bbox `118.10, 669.58, 124.75, 676.40`
 
-## Raw line 081 (block 32, line 80)
+## Raw line 080 (block 32, line 79)
 
 **EN source:** FU: HEAL 2
 
@@ -952,7 +936,7 @@
 **PDF span runs:**
 - `FU: HEAL 2` — `OptimaLTStd-Bold` 5.72 pt; PDF flags `20`; bbox `132.93, 669.58, 163.79, 676.40`
 
-## Raw line 082 (block 33, line 81)
+## Raw line 081 (block 33, line 80)
 
 **EN source:** INTELLIGENT
 
@@ -963,7 +947,7 @@
 **PDF span runs:**
 - `INTELLIGENT` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `434.98, 109.56, 492.23, 120.34`
 
-## Raw line 083 (block 33, line 82)
+## Raw line 082 (block 33, line 81)
 
 **EN source:** INTELLIGENT Combatants might also use Scaling Icon rules when an Ability
 
@@ -975,7 +959,7 @@
 - `INTELLIGENT` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `434.98, 109.56, 492.23, 120.34`
 - `Combatants might also use Scaling Icon rules when an Ability` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `492.23, 108.69, 760.14, 120.59`
 
-## Raw line 084 (block 33, line 83)
+## Raw line 083 (block 33, line 82)
 
 **EN source:** says so (such as Summoning an OPPOSING ESPER) or when a Special
 
@@ -990,7 +974,7 @@
 - `OPPOSING ESPER` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `572.71, 120.59, 645.71, 131.32`
 - `) or when a Special` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `645.71, 119.69, 731.12, 131.59`
 
-## Raw line 085 (block 33, line 84)
+## Raw line 084 (block 33, line 83)
 
 **EN source:** Encounter Rule specifically says so.
 
@@ -1001,7 +985,7 @@
 **PDF span runs:**
 - `Encounter Rule specifically says so.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `434.97, 130.69, 589.73, 142.59`
 
-## Raw line 086 (block 34, line 85)
+## Raw line 085 (block 34, line 84)
 
 **EN source:** When an INTELLIGENT
 
@@ -1013,7 +997,7 @@
 - `When an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `434.97, 147.36, 477.21, 159.26`
 - `INTELLIGENT` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `477.22, 148.22, 534.47, 159.01`
 
-## Raw line 087 (block 34, line 86)
+## Raw line 086 (block 34, line 85)
 
 **EN source:** INTELLIGENT Combatant Card would use Scaling Icons, the
 
@@ -1025,7 +1009,7 @@
 - `INTELLIGENT` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `477.22, 148.22, 534.47, 159.01`
 - `Combatant Card would use Scaling Icons, the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `534.47, 147.36, 733.33, 159.26`
 
-## Raw line 088 (block 34, line 87)
+## Raw line 087 (block 34, line 86)
 
 **EN source:** corresponding card they should reference to determine their stats will always
 
@@ -1036,7 +1020,7 @@
 **PDF span runs:**
 - `corresponding card they should reference to determine their stats will always` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `434.97, 158.36, 767.94, 170.26`
 
-## Raw line 089 (block 34, line 88)
+## Raw line 088 (block 34, line 87)
 
 **EN source:** be listed in the Special Encounter Rule, The Rulebook, or on the Ability in
 
@@ -1047,7 +1031,7 @@
 **PDF span runs:**
 - `be listed in the Special Encounter Rule, The Rulebook, or on the Ability in` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `434.97, 169.36, 754.13, 181.26`
 
-## Raw line 090 (block 34, line 89)
+## Raw line 089 (block 34, line 88)
 
 **EN source:** question. See Opposing Espers Pg. 76.
 
@@ -1062,7 +1046,7 @@
 - `76` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `586.53, 180.34, 597.65, 192.26`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `597.65, 180.36, 600.43, 192.26`
 
-## Raw line 091 (block 35, line 90)
+## Raw line 090 (block 35, line 89)
 
 **EN source:** Other Important Rules Continued
 
@@ -1074,7 +1058,7 @@
 - `Other Important Rules` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `86.17, 56.69, 321.16, 80.96`
 - `Continued` — `Cinzel-Regular` 11.00 pt; PDF flags `4`; bbox `321.16, 63.52, 388.02, 78.35`
 
-## Raw line 092 (block 36, line 91)
+## Raw line 091 (block 36, line 90)
 
 **EN source:** FU: PULL 3, FORCE *
 
@@ -1085,9 +1069,8 @@
 **PDF span runs:**
 - `FU: PULL 3, FORCE` — `OptimaLTStd-Bold` 7.84 pt; PDF flags `20`; bbox `87.78, 480.24, 158.18, 489.59`
 - `*` — `OptimaLTStd-Black` 16.80 pt; PDF flags `20`; bbox `158.18, 477.86, 166.58, 497.99`
-- `` — `OptimaLTStd-Bold` 7.84 pt; PDF flags `20`; bbox `165.74, 480.24, 167.92, 489.59`
 
-## Raw line 093 (block 37, line 92)
+## Raw line 092 (block 37, line 91)
 
 **EN source:** Note: Scaling Icons are used sparingly in Middara.
 
@@ -1099,7 +1082,7 @@
 - `Note:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `508.68, 678.55, 535.91, 690.47`
 - `Scaling Icons are used sparingly in Middara.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `535.91, 678.57, 728.64, 690.47`
 
-## Raw line 094 (block 37, line 93)
+## Raw line 093 (block 37, line 92)
 
 **EN source:** Typically, the only cards using these rules are
 
@@ -1110,7 +1093,7 @@
 **PDF span runs:**
 - `Typically, the only cards using these rules are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `508.68, 689.57, 705.43, 701.47`
 
-## Raw line 095 (block 37, line 94)
+## Raw line 094 (block 37, line 93)
 
 **EN source:** allied Combatants brought to the table via Abilities
 
@@ -1121,7 +1104,7 @@
 **PDF span runs:**
 - `allied Combatants brought to the table via Abilities` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `508.68, 700.57, 729.53, 712.47`
 
-## Raw line 096 (block 37, line 95)
+## Raw line 095 (block 37, line 94)
 
 **EN source:** such as Summoning who should get stronger as a
 
@@ -1134,7 +1117,7 @@
 - `Summoning` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `542.96, 711.45, 595.02, 723.40`
 - `who should get stronger as a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `595.02, 711.57, 723.23, 723.47`
 
-## Raw line 097 (block 37, line 96)
+## Raw line 096 (block 37, line 95)
 
 **EN source:** corresponding Adventurer gets stronger.
 
@@ -1145,7 +1128,7 @@
 **PDF span runs:**
 - `corresponding Adventurer gets stronger.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `508.68, 722.57, 684.49, 734.47`
 
-## Raw line 098 (block 38, line 97)
+## Raw line 097 (block 38, line 96)
 
 **EN source:** Occasionally, there will be monsters or antagonists in
 
@@ -1156,7 +1139,7 @@
 **PDF span runs:**
 - `Occasionally, there will be monsters or antagonists in` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `508.68, 739.24, 741.18, 751.14`
 
-## Raw line 099 (block 38, line 98)
+## Raw line 098 (block 38, line 97)
 
 **EN source:** an Adventure that participate in Encounters that also
 
@@ -1167,7 +1150,7 @@
 **PDF span runs:**
 - `an Adventure that participate in Encounters that also` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `508.68, 750.24, 735.83, 762.14`
 
-## Raw line 100 (block 38, line 99)
+## Raw line 099 (block 38, line 98)
 
 **EN source:** need to get stronger based on their own allies. These
 
@@ -1178,7 +1161,7 @@
 **PDF span runs:**
 - `need to get stronger based on their own allies. These` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `508.68, 761.24, 736.36, 773.14`
 
-## Raw line 101 (block 38, line 100)
+## Raw line 100 (block 38, line 99)
 
 **EN source:** Combatants might also use these rules.
 
@@ -1189,7 +1172,7 @@
 **PDF span runs:**
 - `Combatants might also use these rules.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `508.68, 772.24, 678.19, 784.14`
 
-## Raw line 102 (block 38, line 101)
+## Raw line 101 (block 38, line 100)
 
 **EN source:** 72
 
@@ -1200,7 +1183,7 @@
 **PDF span runs:**
 - `72` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 103 (block 38, line 102)
+## Raw line 102 (block 38, line 101)
 
 **EN source:** 72
 

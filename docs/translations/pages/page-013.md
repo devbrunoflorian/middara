@@ -8,10 +8,10 @@
 
 ## Título — runs separados
 
-**EN (18 pt):** Adventure Mode  
+**EN (18 pt):** Adventure Mode<br>
 **PT-BR (rascunho):** Modo Aventura
 
-**EN (11 pt):** Continued  
+**EN (11 pt):** Continued<br>
 **PT-BR (rascunho):** Continuação
 
 **DTP:** conservar a diferença de tamanho entre `Modo Aventura` e `Continuação`, mesmo que a tradução ocupe outra largura.
@@ -108,11 +108,11 @@
 
 **PT-BR (rascunho):** **Por exemplo:** a Loja contém os seguintes Itens à venda:
 
-- **EN:** ALL MUNDANE AND COMMON ITEMS  
+- **EN:** ALL MUNDANE AND COMMON ITEMS<br>
   **PT-BR:** TODOS OS ITENS MUNDANOS E COMUNS
-- **EN:** ALL UPGRADES PLAYERS HAVE UNLOCKED  
+- **EN:** ALL UPGRADES PLAYERS HAVE UNLOCKED<br>
   **PT-BR:** TODOS OS APRIMORAMENTOS DESBLOQUEADOS
-- **EN:** 1 RANDOM COMMON UNIQUE ITEM (LIMIT 1)  
+- **EN:** 1 RANDOM COMMON UNIQUE ITEM (LIMIT 1)<br>
   **PT-BR:** 1 ITEM ÚNICO COMUM ALEATÓRIO (LIMITE: 1)
 
 **EN:** Most Stores will contain 1 random Unique Item. In this case, for the random Unique Item, shuffle all Common Unique Items and draw from the bottom. Unique Items are not redrawn and will remain in the Store throughout the entirety of any given Story Round. No other Unique Items will be available for purchase until the next named Story Round, even if the party decides to purchase this Item. This Item will also not be available during an Encounter when drawing a random Unique Item of the same Tier.

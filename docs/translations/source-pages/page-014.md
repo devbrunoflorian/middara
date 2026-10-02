@@ -95,7 +95,7 @@
 
 ## Raw line 008 (block 1, line 7)
 
-**EN source:** Adventurers or Adventurers with more Damage tokens than half of
+**EN source:** Adventurers or Adventurers with moreDamage tokens than half of
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -104,7 +104,6 @@
 **PDF span runs:**
 - `Adventurers or Adventurers with` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.17, 221.97, 245.35, 233.87`
 - `more` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `245.35, 221.85, 268.08, 233.80`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `268.08, 221.97, 270.86, 233.87`
 - `Damage` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `270.86, 221.93, 309.75, 233.81`
 - `tokens than half of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `309.75, 221.97, 392.02, 233.87`
 
@@ -181,7 +180,7 @@
 
 ## Raw line 014 (block 2, line 13)
 
-**EN source:** IMPORTANT: Adventurers do not Gain SP during the Refresh
+**EN source:** IMPORTANT:Adventurers do not Gain SP during the Refresh
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -189,7 +188,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `121.68, 288.25, 184.28, 300.23`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `184.28, 288.29, 187.06, 300.21`
 - `Adventurers do not Gain` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `187.06, 288.31, 295.64, 300.21`
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `295.64, 289.21, 305.15, 299.94`
 - `during the Refresh` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `305.15, 288.31, 389.07, 300.21`
@@ -222,7 +220,7 @@
 
 ## Raw line 017 (block 3, line 16)
 
-**EN source:** For example, if Rook decides to spend 1 SP to DODGE an Attack
+**EN source:** For example, if Rook decides to spend 1 SPto DODGE an Attack
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -231,7 +229,6 @@
 **PDF span runs:**
 - `For example, if Rook decides to spend` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `111.69, 332.65, 278.53, 344.55`
 - `1 SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `278.52, 333.55, 295.53, 344.28`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `295.53, 333.57, 298.04, 344.28`
 - `to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `298.04, 332.65, 309.16, 344.55`
 - `DODGE` — `OptimaLTStd-Bold` 8.00 pt; PDF flags `20`; bbox `309.16, 334.47, 338.49, 344.01`
 - `an Attack` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `338.49, 332.65, 384.07, 344.55`
@@ -251,7 +248,6 @@
 - `SP` — `OptimaLTStd-Bold` 8.00 pt; PDF flags `20`; bbox `339.86, 345.47, 348.31, 355.01`
 - `on his` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `348.31, 343.65, 380.00, 355.55`
 - `1st` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `380.00, 344.55, 391.50, 355.28`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `391.50, 343.65, 394.28, 355.55`
 
 ## Raw line 019 (block 3, line 18)
 
@@ -278,7 +274,7 @@
 
 ## Raw line 021 (block 4, line 20)
 
-**EN source:** IMPORTANT: Ability tokens are not removed during this Phase.
+**EN source:** IMPORTANT:Ability tokensare not removed during this Phase.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -286,10 +282,8 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `121.68, 383.93, 184.28, 395.91`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `184.28, 383.97, 187.06, 395.89`
 - `Ability` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `187.06, 383.95, 217.54, 395.83`
 - `tokens` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `217.54, 383.99, 245.33, 395.89`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `245.33, 383.95, 248.11, 395.83`
 - `are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `248.11, 383.99, 264.22, 395.89`
 - `not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `264.22, 383.97, 278.67, 395.89`
 - `removed during this Phase.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `278.67, 383.99, 397.92, 395.89`
@@ -492,7 +486,7 @@
 
 ## Raw line 039 (block 9, line 38)
 
-**EN source:** Read the Encounter Intro aloud.
+**EN source:** Read the Encounter Introaloud.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -500,7 +494,6 @@
 
 **PDF span runs:**
 - `Read the Encounter Intro` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 605.01, 192.88, 616.91`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `192.88, 604.97, 195.66, 616.85`
 - `aloud.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `195.66, 605.01, 225.68, 616.91`
 
 ## Raw line 040 (block 10, line 39)
@@ -609,7 +602,7 @@
 
 ## Raw line 049 (block 14, line 48)
 
-**EN source:** Encounter tokens, and figures. The Setup box itemizes every component
+**EN source:** Encounter tokens, and figures.The Setup box itemizes every component
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -618,7 +611,6 @@
 **PDF span runs:**
 - `Encounter` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `415.84, 227.48, 462.15, 239.36`
 - `tokens, and figures.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.15, 227.52, 545.52, 239.42`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `545.52, 227.48, 548.30, 239.36`
 - `The Setup box itemizes every component` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `548.30, 227.52, 728.35, 239.42`
 
 ## Raw line 050 (block 14, line 49)
@@ -634,7 +626,6 @@
 - `F` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `609.63, 239.42, 614.13, 250.14`
 - `in the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `614.13, 238.52, 644.15, 250.42`
 - `Encounter Example` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `644.15, 238.40, 727.88, 250.35`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `727.88, 238.52, 730.66, 250.42`
 
 ## Raw line 051 (block 14, line 50)
 
@@ -819,7 +810,7 @@
 
 ## Raw line 067 (block 21, line 66)
 
-**EN source:** IMPORTANT: Make sure you read the Rewards before cleaning up
+**EN source:** IMPORTANT:Make sure you read the Rewards before cleaning up
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -827,7 +818,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `437.18, 473.38, 499.78, 485.36`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `499.78, 473.42, 502.56, 485.34`
 - `Make sure you read the Rewards before cleaning up` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `502.56, 473.44, 728.94, 485.34`
 
 ## Raw line 068 (block 21, line 67)

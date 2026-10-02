@@ -73,11 +73,10 @@
 **PDF span runs:**
 - `Adventurers and Command Combatants may use the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `107.71, 141.35, 336.57, 153.25`
 - `COUNTER` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `336.58, 142.25, 379.08, 152.98`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `379.08, 141.35, 381.86, 153.25`
 
 ## Raw line 006 (block 1, line 5)
 
-**EN source:** Ability for 2 SP. However, if they successfully Dodged the Attack
+**EN source:** Ability for2 SP. However, if they successfully Dodged the Attack
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -85,7 +84,6 @@
 
 **PDF span runs:**
 - `Ability for` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `107.71, 152.35, 150.51, 164.25`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `150.52, 153.27, 153.02, 163.98`
 - `2 SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `153.02, 153.25, 170.03, 163.98`
 - `. However, if they successfully Dodged the Attack` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `170.03, 152.35, 385.81, 164.25`
 
@@ -100,11 +98,10 @@
 **PDF span runs:**
 - `being Countered, they may reduce the cost of the Counter by` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `107.72, 163.35, 372.91, 175.25`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `372.91, 164.25, 377.91, 174.98`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `377.91, 163.33, 380.69, 175.25`
 
 ## Raw line 008 (block 1, line 7)
 
-**EN source:** SP. Some Items and Disciplines also have the COUNTER Tag listed
+**EN source:** SP.Some Items and Disciplines also have the COUNTER Tag listed
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -113,7 +110,6 @@
 **PDF span runs:**
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `107.72, 175.25, 117.22, 185.98`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `117.22, 174.35, 120.00, 186.25`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `120.00, 175.25, 122.50, 185.98`
 - `Some Items and Disciplines also have the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `122.50, 174.35, 303.26, 186.25`
 - `COUNTER` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `303.26, 175.25, 345.77, 185.98`
 - `Tag listed` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `345.77, 174.35, 390.72, 186.25`
@@ -131,7 +127,6 @@
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `278.54, 186.25, 288.04, 196.98`
 - `cost on a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `288.04, 185.35, 332.51, 197.25`
 - `COUNTER` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `332.51, 186.25, 375.02, 196.98`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `375.02, 185.35, 377.80, 197.25`
 
 ## Raw line 010 (block 1, line 9)
 
@@ -232,7 +227,7 @@
 
 ## Raw line 018 (block 2, line 17)
 
-**EN source:** Attack Action targeting the Attacker.
+**EN source:** Attack Actiontargeting the Attacker.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -240,7 +235,6 @@
 
 **PDF span runs:**
 - `Attack Action` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `107.71, 290.02, 165.52, 301.92`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `165.52, 290.00, 168.30, 301.92`
 - `targeting the Attacker.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `168.30, 290.02, 261.48, 301.92`
 
 ## Raw line 019 (block 3, line 18)
@@ -284,7 +278,7 @@
 
 ## Raw line 022 (block 3, line 21)
 
-**EN source:** Attacks granted by the COUNTER Ability, the figure whose turn it
+**EN source:** Attacks granted by the COUNTER Ability,the figure whose turn it
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -294,7 +288,6 @@
 - `Attacks granted by the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `107.71, 339.69, 205.60, 351.59`
 - `COUNTER` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `205.61, 340.59, 248.11, 351.32`
 - `Ability,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `248.11, 339.69, 280.73, 351.59`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `280.73, 339.67, 283.51, 351.59`
 - `the figure whose turn it` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `283.51, 339.69, 385.60, 351.59`
 
 ## Raw line 023 (block 3, line 22)
@@ -322,7 +315,7 @@
 
 ## Raw line 025 (block 4, line 24)
 
-**EN source:** IMPORTANT: Choosing to Counter or using an Ability that
+**EN source:** IMPORTANT:Choosing to Counter or using an Ability that
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -330,7 +323,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `123.39, 378.64, 185.99, 390.62`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `185.99, 378.68, 188.77, 390.60`
 - `Choosing to Counter or using an Ability that` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `188.77, 378.70, 380.73, 390.60`
 
 ## Raw line 026 (block 4, line 25)
@@ -404,7 +396,7 @@
 
 ## Raw line 032 (block 5, line 31)
 
-**EN source:** IMPORTANT: A figure may not Counter a Break Attack they
+**EN source:** IMPORTANT:A figure may not Counter a Break Attack they
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -412,7 +404,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `123.39, 464.48, 185.99, 476.46`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `185.99, 464.52, 188.77, 476.44`
 - `A figure may` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `188.77, 464.54, 246.26, 476.44`
 - `not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `246.26, 464.52, 260.71, 476.44`
 - `Counter a Break Attack they` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `260.71, 464.54, 386.31, 476.44`
@@ -454,7 +445,7 @@
 
 ## Raw line 036 (block 8, line 35)
 
-**EN source:** Example: Rook is Attacked by an adjacent Cave Sickle. The Cave
+**EN source:** Example:Rookis Attacked by an adjacent Cave Sickle. The Cave
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -462,14 +453,12 @@
 
 **PDF span runs:**
 - `Example:` — `OptimaLTStd-Bold` 11.00 pt; PDF flags `20`; bbox `428.32, 264.67, 471.71, 277.78`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `471.71, 265.59, 474.49, 277.51`
 - `Rook` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `474.49, 265.61, 496.72, 277.51`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `496.72, 265.49, 499.50, 277.44`
 - `is Attacked by an adjacent Cave Sickle. The Cave` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `499.50, 265.61, 711.64, 277.51`
 
 ## Raw line 037 (block 8, line 36)
 
-**EN source:** Sickle rolls a 10, which hits Rook for 1 PHYSICAL DMG. However,
+**EN source:** Sickle rolls a 10, which hits Rook for 1PHYSICAL DMG. However,
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -480,7 +469,6 @@
 - `10` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `485.28, 276.59, 496.40, 288.51`
 - `, which hits Rook for` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `496.40, 276.61, 588.19, 288.51`
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `588.15, 276.59, 593.71, 288.51`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `593.71, 276.61, 596.49, 288.51`
 - `PHYSICAL DMG` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `596.46, 276.59, 669.54, 288.51`
 - `. However,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `669.54, 276.61, 719.10, 288.51`
 
@@ -626,7 +614,6 @@
 
 **PDF span runs:**
 - `FINESSE : WHITE` — `OptimaLTStd-Bold` 4.10 pt; PDF flags `20`; bbox `461.59, 230.72, 492.80, 235.60`
-- `` — `OptimaLTStd` 5.36 pt; PDF flags `4`; bbox `492.80, 229.57, 494.29, 235.95`
 
 ## Raw line 050 (block 16, line 49)
 
@@ -638,7 +625,6 @@
 
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 4.10 pt; PDF flags `20`; bbox `474.63, 238.71, 492.21, 243.56`
-- `` — `OptimaLTStd` 4.42 pt; PDF flags `4`; bbox `495.10, 239.95, 496.33, 245.21`
 
 ## Raw line 051 (block 16, line 50)
 
@@ -650,7 +636,6 @@
 
 **PDF span runs:**
 - `COUNTER` — `OptimaLTStd-Bold` 4.10 pt; PDF flags `20`; bbox `471.44, 245.28, 490.80, 250.17`
-- `` — `OptimaLTStd-Bold` 3.78 pt; PDF flags `20`; bbox `490.80, 245.57, 491.85, 250.08`
 
 ## Raw line 052 (block 17, line 51)
 

@@ -162,17 +162,6 @@
 
 ## Raw line 014 (block 8, line 13)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `404.50, 296.87, 407.28, 308.77`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `404.50, 296.87, 407.28, 308.77`
-
-## Raw line 015 (block 8, line 14)
-
 **EN source:** Every Ability has a Condition. Condition Tags let players know under
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -182,7 +171,7 @@
 **PDF span runs:**
 - `Every Ability has a Condition. Condition Tags let players know under` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 307.87, 382.93, 319.77`
 
-## Raw line 016 (block 8, line 15)
+## Raw line 015 (block 8, line 14)
 
 **EN source:** what circumstances the Ability can be used. Stamina Points and Symbols
 
@@ -193,7 +182,7 @@
 **PDF span runs:**
 - `what circumstances the Ability can be used. Stamina Points and Symbols` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 318.87, 401.29, 330.77`
 
-## Raw line 017 (block 8, line 16)
+## Raw line 016 (block 8, line 15)
 
 **EN source:** required to perform an Ability are also Conditions. Any Conditions or
 
@@ -204,7 +193,7 @@
 **PDF span runs:**
 - `required to perform an Ability are also Conditions. Any Conditions or` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 329.87, 385.95, 341.77`
 
-## Raw line 018 (block 8, line 17)
+## Raw line 017 (block 8, line 16)
 
 **EN source:** costs must be met before an Ability can be used.
 
@@ -215,7 +204,7 @@
 **PDF span runs:**
 - `costs must be met before an Ability can be used.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 340.87, 294.22, 352.77`
 
-## Raw line 019 (block 9, line 18)
+## Raw line 018 (block 9, line 17)
 
 **EN source:** See Condition Tags Pg. 90.
 
@@ -228,7 +217,7 @@
 - `Condition Tags` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `103.95, 357.42, 168.13, 369.37`
 - `Pg. 90.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `168.13, 357.54, 200.93, 369.44`
 
-## Raw line 020 (block 10, line 19)
+## Raw line 019 (block 10, line 18)
 
 **EN source:** Tags
 
@@ -239,7 +228,7 @@
 **PDF span runs:**
 - `Tags` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `415.84, 98.26, 447.99, 114.44`
 
-## Raw line 021 (block 11, line 20)
+## Raw line 020 (block 11, line 19)
 
 **EN source:** Tags are special rules that are summed up using a shorthand set of words.
 
@@ -250,9 +239,9 @@
 **PDF span runs:**
 - `Tags are special rules that are summed up using a shorthand set of words.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 121.78, 733.73, 133.68`
 
-## Raw line 022 (block 11, line 21)
+## Raw line 021 (block 11, line 20)
 
-**EN source:** They are always listed in CAPS. (i.e FLIGHT, RELENTLESS).
+**EN source:** They are always listed in CAPS. (i.eFLIGHT, RELENTLESS).
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -263,13 +252,12 @@
 - `CAPS` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `523.84, 133.69, 545.14, 144.41`
 - `. (` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `545.14, 132.78, 553.48, 144.68`
 - `i.e` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `553.48, 132.76, 564.04, 144.68`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `564.04, 132.78, 566.82, 144.68`
 - `FLIGHT` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `566.82, 132.76, 601.27, 144.68`
 - `,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `601.27, 132.78, 606.83, 144.68`
 - `RELENTLESS` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `606.83, 132.76, 661.28, 144.68`
 - `).` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `661.28, 132.78, 669.62, 144.68`
 
-## Raw line 023 (block 12, line 22)
+## Raw line 022 (block 12, line 21)
 
 **EN source:** Tags do a variety of different things for Adventurers. Some Tags have no
 
@@ -280,7 +268,7 @@
 **PDF span runs:**
 - `Tags do a variety of different things for Adventurers. Some Tags have no` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 149.45, 722.95, 161.35`
 
-## Raw line 024 (block 12, line 23)
+## Raw line 023 (block 12, line 22)
 
 **EN source:** effect unless something else references them. Others have their own
 
@@ -291,7 +279,7 @@
 **PDF span runs:**
 - `effect unless something else references them. Others have their own` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 160.45, 710.40, 172.35`
 
-## Raw line 025 (block 12, line 24)
+## Raw line 024 (block 12, line 23)
 
 **EN source:** special rules and Abilities.
 
@@ -302,7 +290,7 @@
 **PDF span runs:**
 - `special rules and Abilities.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 171.45, 531.09, 183.35`
 
-## Raw line 026 (block 13, line 25)
+## Raw line 025 (block 13, line 24)
 
 **EN source:** The Tags listed in the top right corner of Item Cards are considered
 
@@ -313,7 +301,7 @@
 **PDF span runs:**
 - `The Tags listed in the top right corner of Item Cards are considered` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 188.12, 703.22, 200.02`
 
-## Raw line 027 (block 13, line 26)
+## Raw line 026 (block 13, line 25)
 
 **EN source:** Passive, and always in effect.
 
@@ -324,7 +312,7 @@
 **PDF span runs:**
 - `Passive, and always in effect.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 199.12, 541.98, 211.02`
 
-## Raw line 028 (block 14, line 27)
+## Raw line 027 (block 14, line 26)
 
 **EN source:** See Tags Pg. 92-94.
 
@@ -337,7 +325,7 @@
 - `Tags` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `433.63, 215.67, 452.32, 227.62`
 - `Pg. 92-94.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `452.32, 215.79, 499.57, 227.69`
 
-## Raw line 029 (block 15, line 28)
+## Raw line 028 (block 15, line 27)
 
 **EN source:** Symbols
 
@@ -348,18 +336,7 @@
 **PDF span runs:**
 - `Symbols` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `415.84, 239.01, 472.76, 255.18`
 
-## Raw line 030 (block 16, line 29)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `415.84, 279.54, 418.62, 291.44`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 279.54, 418.62, 291.44`
-
-## Raw line 031 (block 17, line 30)
+## Raw line 029 (block 17, line 28)
 
 **EN source:** The 4 Symbols listed above are produced by rolling the custom dice in
 
@@ -372,7 +349,7 @@
 - `4` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `434.29, 330.79, 439.30, 341.51`
 - `Symbols listed above are produced by rolling the custom dice in` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `439.30, 329.88, 721.22, 341.78`
 
-## Raw line 032 (block 17, line 31)
+## Raw line 030 (block 17, line 29)
 
 **EN source:** the game. Different dice will produce different Symbols that can be spent
 
@@ -383,7 +360,7 @@
 **PDF span runs:**
 - `the game. Different dice will produce different Symbols that can be spent` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 340.88, 733.20, 352.78`
 
-## Raw line 033 (block 17, line 32)
+## Raw line 031 (block 17, line 30)
 
 **EN source:** to use Abilities. Unless otherwise stated, there is no limit to how many times
 
@@ -394,7 +371,7 @@
 **PDF span runs:**
 - `to use Abilities. Unless otherwise stated, there is no limit to how many times` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 351.88, 728.18, 363.78`
 
-## Raw line 034 (block 17, line 33)
+## Raw line 032 (block 17, line 31)
 
 **EN source:** Abilities that use Symbols as a Condition can be used, so long as you have the
 
@@ -405,7 +382,7 @@
 **PDF span runs:**
 - `Abilities that use Symbols as a Condition can be used, so long as you have the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 362.88, 731.21, 374.78`
 
-## Raw line 035 (block 17, line 34)
+## Raw line 033 (block 17, line 32)
 
 **EN source:** Symbols to spend.
 
@@ -416,7 +393,7 @@
 **PDF span runs:**
 - `Symbols to spend.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 373.88, 492.20, 385.78`
 
-## Raw line 036 (block 18, line 35)
+## Raw line 034 (block 18, line 33)
 
 **EN source:** Some Abilities that use Symbols as a Condition might have multiple Symbols
 
@@ -427,7 +404,7 @@
 **PDF span runs:**
 - `Some Abilities that use Symbols as a Condition might have multiple Symbols` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 391.55, 725.52, 403.45`
 
-## Raw line 037 (block 18, line 36)
+## Raw line 035 (block 18, line 34)
 
 **EN source:** printed. (
 
@@ -438,18 +415,7 @@
 **PDF span runs:**
 - `printed. (` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 403.55, 454.54, 418.45`
 
-## Raw line 038 (block 18, line 37)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `466.63, 403.55, 469.41, 415.45`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `466.63, 403.55, 469.41, 415.45`
-
-## Raw line 039 (block 18, line 38)
+## Raw line 036 (block 18, line 35)
 
 **EN source:** ) In these cases, the Ability would cost 1 Book and 1 Shield to
 
@@ -464,7 +430,7 @@
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `686.92, 404.46, 691.93, 415.18`
 - `Shield to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `691.66, 403.55, 732.32, 415.45`
 
-## Raw line 040 (block 18, line 39)
+## Raw line 037 (block 18, line 36)
 
 **EN source:** use once. In other cases, there may be too many to fit on the card, so instead
 
@@ -475,7 +441,7 @@
 **PDF span runs:**
 - `use once. In other cases, there may be too many to fit on the card, so instead` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 415.55, 725.48, 427.45`
 
-## Raw line 041 (block 18, line 40)
+## Raw line 038 (block 18, line 37)
 
 **EN source:** they will be printed with numbers in them. For example, ( 3 ) means that an
 
@@ -488,7 +454,7 @@
 - `3` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `21`; bbox `653.60, 427.52, 658.61, 438.24`
 - `) means that an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `661.60, 427.55, 728.24, 439.45`
 
-## Raw line 042 (block 18, line 41)
+## Raw line 039 (block 18, line 38)
 
 **EN source:** Adventurer must spend 3 Books to use that Ability.
 
@@ -501,7 +467,7 @@
 - `3` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `511.14, 440.46, 516.15, 451.18`
 - `Books to use that Ability.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `515.88, 439.55, 616.85, 451.45`
 
-## Raw line 043 (block 19, line 42)
+## Raw line 040 (block 19, line 39)
 
 **EN source:** IMPORTANT:
 
@@ -513,9 +479,9 @@
 - `` — `Webdings` 10.00 pt; PDF flags `0`; bbox `421.51, 468.75, 431.51, 478.75`
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `431.51, 467.50, 494.11, 479.48`
 
-## Raw line 044 (block 19, line 43)
+## Raw line 041 (block 19, line 40)
 
-**EN source:** IMPORTANT: Normally, Symbols may only be spent during an
+**EN source:** IMPORTANT:Normally, Symbols may only be spent during an
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -523,12 +489,11 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `431.51, 467.50, 494.11, 479.48`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `494.11, 467.54, 496.89, 479.46`
 - `Normally, Symbols may` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `496.89, 467.56, 601.80, 479.46`
 - `only` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `601.80, 467.54, 620.58, 479.46`
 - `be spent during an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `620.58, 467.56, 706.18, 479.46`
 
-## Raw line 045 (block 19, line 44)
+## Raw line 042 (block 19, line 41)
 
 **EN source:** Attack Action, although some Abilities allow players to spend Symbols
 
@@ -539,7 +504,7 @@
 **PDF span runs:**
 - `Attack Action, although some Abilities allow players to spend Symbols` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.51, 478.56, 726.24, 490.46`
 
-## Raw line 046 (block 19, line 45)
+## Raw line 043 (block 19, line 42)
 
 **EN source:** during rolls other than Attack rolls.
 
@@ -550,7 +515,7 @@
 **PDF span runs:**
 - `during rolls other than Attack rolls.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.51, 489.56, 573.25, 501.46`
 
-## Raw line 047 (block 20, line 46)
+## Raw line 044 (block 20, line 43)
 
 **EN source:** Icons, Conditions, Tags and Symbols
 
@@ -561,7 +526,7 @@
 **PDF span runs:**
 - `Icons, Conditions, Tags and Symbols` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `86.03, 56.93, 448.02, 81.19`
 
-## Raw line 048 (block 21, line 47)
+## Raw line 045 (block 21, line 44)
 
 **EN source:** 30
 
@@ -572,7 +537,7 @@
 **PDF span runs:**
 - `30` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 049 (block 21, line 48)
+## Raw line 046 (block 21, line 45)
 
 **EN source:** 30
 

@@ -216,17 +216,6 @@
 
 ## Raw line 019 (block 8, line 18)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `423.57, 703.00, 425.21, 710.84`
-
-**PDF span runs:**
-- `` — `OptimaLTStd-Black` 6.54 pt; PDF flags `20`; bbox `423.57, 703.00, 425.21, 710.84`
-
-## Raw line 020 (block 8, line 19)
-
 **EN source:** PER ENCOUNTER
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -234,10 +223,9 @@
 **Line bbox:** `437.58, 700.78, 516.52, 711.43`
 
 **PDF span runs:**
-- `` — `OptimaLTStd-Black` 6.54 pt; PDF flags `20`; bbox `437.58, 703.00, 439.22, 710.84`
 - `PER ENCOUNTER` — `OptimaLTStd-DemiBold` 9.00 pt; PDF flags `20`; bbox `439.87, 700.78, 516.52, 711.43`
 
-## Raw line 021 (block 9, line 20)
+## Raw line 020 (block 9, line 19)
 
 **EN source:** ✜ STATUS
 
@@ -249,7 +237,7 @@
 - `✜` — `ZapfDingbatsStd` 9.00 pt; PDF flags `4`; bbox `471.81, 747.55, 481.10, 756.55`
 - `STATUS` — `OptimaLTStd-DemiBold` 9.00 pt; PDF flags `20`; bbox `481.10, 746.94, 513.91, 757.59`
 
-## Raw line 022 (block 10, line 21)
+## Raw line 021 (block 10, line 20)
 
 **EN source:** EXHAUST
 
@@ -260,7 +248,7 @@
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 9.00 pt; PDF flags `20`; bbox `120.69, 724.44, 161.99, 735.09`
 
-## Raw line 023 (block 11, line 22)
+## Raw line 022 (block 11, line 21)
 
 **EN source:** ➤FLIP
 
@@ -272,7 +260,7 @@
 - `➤` — `ZapfDingbatsStd` 9.00 pt; PDF flags `4`; bbox `134.46, 758.55, 142.71, 767.55`
 - `FLIP` — `OptimaLTStd-DemiBold` 9.00 pt; PDF flags `20`; bbox `143.61, 757.94, 161.97, 768.59`
 
-## Raw line 024 (block 12, line 23)
+## Raw line 023 (block 12, line 22)
 
 **EN source:** ✘DISCARD
 
@@ -284,7 +272,7 @@
 - `✘` — `ZapfDingbatsStd` 9.00 pt; PDF flags `4`; bbox `114.54, 691.55, 120.64, 700.55`
 - `DISCARD` — `OptimaLTStd-DemiBold` 9.00 pt; PDF flags `20`; bbox `121.54, 690.94, 163.66, 701.59`
 
-## Raw line 025 (block 13, line 24)
+## Raw line 024 (block 13, line 23)
 
 **EN source:** Condition Tags
 
@@ -295,7 +283,7 @@
 **PDF span runs:**
 - `Condition Tags` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `332.66, 601.34, 487.28, 625.60`
 
-## Raw line 026 (block 14, line 25)
+## Raw line 025 (block 14, line 24)
 
 **EN source:** 90
 
@@ -306,7 +294,7 @@
 **PDF span runs:**
 - `90` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 027 (block 14, line 26)
+## Raw line 026 (block 14, line 25)
 
 **EN source:** 90
 

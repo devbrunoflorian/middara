@@ -75,7 +75,7 @@
 
 ## Raw line 006 (block 2, line 5)
 
-**EN source:** stack with the -1 TO THE ATK ROLL from spaces containing Allies. It costs 2
+**EN source:** stack with the -1TO THE ATK ROLL from spaces containing Allies. It costs 2
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -84,11 +84,9 @@
 **PDF span runs:**
 - `stack with the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.84, 642.12, 148.87, 654.02`
 - `-1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `148.84, 642.10, 157.73, 654.02`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `157.73, 642.12, 160.51, 654.02`
 - `TO THE ATK ROLL` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `160.49, 643.02, 235.86, 653.75`
 - `from spaces containing Allies. It costs` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `235.83, 642.12, 399.32, 654.02`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `399.28, 642.10, 404.84, 654.02`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `404.84, 642.12, 407.62, 654.02`
 
 ## Raw line 007 (block 3, line 6)
 
@@ -99,7 +97,6 @@
 **Line bbox:** `97.47, 653.12, 401.80, 665.02`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `97.47, 653.12, 100.25, 665.02`
 - `MOVEMENT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `100.25, 654.02, 150.26, 664.75`
 - `to leave a Hindering space. Abilities that place Hindering` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `150.26, 653.12, 401.80, 665.02`
 
@@ -116,7 +113,7 @@
 
 ## Raw line 009 (block 4, line 8)
 
-**EN source:** WATER: Figures in Water may not DODGE. It costs 2
+**EN source:** WATER:Figures in Water may not DODGE. It costs 2
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -124,12 +121,10 @@
 
 **PDF span runs:**
 - `WATER:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `86.84, 681.69, 118.36, 692.42`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `118.36, 681.71, 120.86, 692.42`
 - `Figures in Water may not` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `120.86, 680.79, 230.78, 692.69`
 - `DODGE` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `230.78, 681.69, 263.79, 692.42`
 - `. It costs` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `263.79, 680.79, 301.59, 692.69`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `301.59, 680.77, 307.15, 692.69`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `307.15, 680.79, 309.93, 692.69`
 
 ## Raw line 010 (block 4, line 9)
 
@@ -140,9 +135,7 @@
 **Line bbox:** `320.55, 680.79, 376.12, 692.69`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `320.55, 680.79, 323.33, 692.69`
 - `MOVEMENT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `323.33, 681.69, 373.34, 692.42`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `373.34, 680.79, 376.12, 692.69`
 
 ## Raw line 011 (block 4, line 10)
 
@@ -179,7 +172,7 @@
 
 ## Raw line 014 (block 5, line 13)
 
-**EN source:** MUCK: Figures in Muck must spend an additional Stamina Point (SP) on
+**EN source:** MUCK:Figures in Muck must spend an additional Stamina Point (SP) on
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -187,7 +180,6 @@
 
 **PDF span runs:**
 - `MUCK:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `86.84, 731.36, 115.85, 742.09`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `115.85, 731.38, 118.35, 742.09`
 - `Figures in Muck must spend an additional Stamina Point (` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `118.35, 730.46, 365.43, 742.36`
 - `SP)` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `365.43, 730.44, 379.32, 742.36`
 - `on` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `379.32, 730.46, 396.00, 742.36`
@@ -220,7 +212,7 @@
 
 ## Raw line 017 (block 6, line 16)
 
-**EN source:** OBSTRUCTING: Figures may not move through or into spaces that are
+**EN source:** OBSTRUCTING:Figures may not move through or into spaces that are
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -228,7 +220,6 @@
 
 **PDF span runs:**
 - `OBSTRUCTING:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `416.18, 593.35, 481.69, 604.08`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `481.69, 593.37, 484.19, 604.08`
 - `Figures may not move through or into spaces that are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `484.19, 592.45, 714.66, 604.35`
 
 ## Raw line 018 (block 6, line 17)
@@ -338,7 +329,7 @@
 
 ## Raw line 027 (block 7, line 26)
 
-**EN source:** DANGEROUS: Figures that end a turn in, end their movement in, or leave
+**EN source:** DANGEROUS:Figures that end a turn in, end their movement in, or leave
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -346,7 +337,6 @@
 
 **PDF span runs:**
 - `DANGEROUS:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `416.18, 709.02, 474.24, 719.75`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `474.24, 709.04, 476.74, 719.75`
 - `Figures that end a turn in, end their movement in, or leave` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `476.74, 708.12, 729.33, 720.02`
 
 ## Raw line 028 (block 7, line 27)
@@ -506,7 +496,7 @@
 
 ## Raw line 042 (block 14, line 41)
 
-**EN source:** All tokens other than Obstructing Terrain tokens can be moved onto.
+**EN source:** All tokens other than ObstructingTerrain tokens can be moved onto.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -515,7 +505,6 @@
 **PDF span runs:**
 - `All tokens other than` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.89, 182.68, 179.16, 194.58`
 - `Obstructing` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `179.16, 182.64, 229.90, 194.52`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `229.90, 182.68, 232.68, 194.58`
 - `Terrain` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `232.68, 182.64, 261.97, 194.52`
 - `tokens can be moved onto.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `261.97, 182.68, 384.01, 194.58`
 
@@ -534,11 +523,10 @@
 - `Loot` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `277.51, 193.64, 295.73, 205.52`
 - `tokens, and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `295.73, 193.68, 350.76, 205.58`
 - `Objective` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `350.76, 193.64, 392.46, 205.52`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `392.46, 193.68, 395.24, 205.58`
 
 ## Raw line 044 (block 14, line 43)
 
-**EN source:** Tokens do not block Line of Sight and can all occupy the same space as
+**EN source:** Tokens do notblock Line of Sight and can all occupy the same space as
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -547,7 +535,6 @@
 **PDF span runs:**
 - `Tokens do` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.89, 204.68, 133.14, 216.58`
 - `not` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `133.14, 204.56, 147.59, 216.51`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `147.59, 204.64, 150.37, 216.52`
 - `block Line of Sight and can all occupy the same space as` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `150.37, 204.68, 397.89, 216.58`
 
 ## Raw line 045 (block 14, line 44)
@@ -585,40 +572,7 @@
 **PDF span runs:**
 - `Terrain Tokens` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `86.89, 246.83, 191.94, 263.00`
 
-## Raw line 048 (block 16, line 47)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `187.67, 315.10, 196.67, 331.27`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `187.67, 315.10, 196.67, 331.27`
-
-## Raw line 049 (block 17, line 48)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `241.20, 315.10, 250.20, 331.27`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `241.20, 315.10, 250.20, 331.27`
-
-## Raw line 050 (block 18, line 49)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `294.73, 315.10, 303.73, 331.27`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `294.73, 315.10, 303.73, 331.27`
-
-## Raw line 051 (block 19, line 50)
+## Raw line 048 (block 19, line 47)
 
 **EN source:** Terrain tokens are used to place different Terrain types on Tiles. These
 
@@ -630,7 +584,7 @@
 - `Terrain` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `86.89, 339.92, 116.18, 351.80`
 - `tokens are used to place different Terrain types on Tiles. These` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `116.18, 339.96, 385.10, 351.86`
 
-## Raw line 052 (block 19, line 51)
+## Raw line 049 (block 19, line 48)
 
 **EN source:** tokens can be moved on to and interacted with by Adventurers and
 
@@ -641,7 +595,7 @@
 **PDF span runs:**
 - `tokens can be moved on to and interacted with by Adventurers and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.89, 350.96, 377.97, 362.86`
 
-## Raw line 053 (block 19, line 52)
+## Raw line 050 (block 19, line 49)
 
 **EN source:** Combatants as if they were printed on the Tile.
 
@@ -654,7 +608,7 @@
 - `Tile` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `269.19, 361.94, 284.76, 373.86`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `284.76, 361.96, 287.54, 373.86`
 
-## Raw line 054 (block 20, line 53)
+## Raw line 051 (block 20, line 50)
 
 **EN source:** The different Terrain types and the rules associated with them are listed in the
 
@@ -665,7 +619,7 @@
 **PDF span runs:**
 - `The different Terrain types and the rules associated with them are listed in the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.89, 378.63, 401.08, 390.53`
 
-## Raw line 055 (block 20, line 54)
+## Raw line 052 (block 20, line 51)
 
 **EN source:** Diagram below.
 
@@ -676,7 +630,7 @@
 **PDF span runs:**
 - `Diagram below.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.89, 389.63, 152.12, 401.53`
 
-## Raw line 056 (block 21, line 55)
+## Raw line 053 (block 21, line 52)
 
 **EN source:** Tiles and Terrain
 
@@ -687,7 +641,7 @@
 **PDF span runs:**
 - `Tiles and Terrain` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `86.17, 56.69, 259.68, 80.96`
 
-## Raw line 057 (block 22, line 56)
+## Raw line 054 (block 22, line 53)
 
 **EN source:** BLUE
 
@@ -698,7 +652,7 @@
 **PDF span runs:**
 - `BLUE` — `OptimaLTStd-ExtraBlack` 4.31 pt; PDF flags `4`; bbox `218.02, 158.38, 229.45, 163.66`
 
-## Raw line 058 (block 23, line 57)
+## Raw line 055 (block 23, line 54)
 
 **EN source:** R
 
@@ -709,7 +663,7 @@
 **PDF span runs:**
 - `R` — `OptimaLTStd-Black` 3.50 pt; PDF flags `20`; bbox `259.67, 157.47, 263.82, 162.27`
 
-## Raw line 059 (block 24, line 58)
+## Raw line 056 (block 24, line 55)
 
 **EN source:** E
 
@@ -720,7 +674,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Black` 3.50 pt; PDF flags `20`; bbox `262.23, 158.65, 265.45, 163.20`
 
-## Raw line 060 (block 25, line 59)
+## Raw line 057 (block 25, line 56)
 
 **EN source:** D
 
@@ -731,18 +685,7 @@
 **PDF span runs:**
 - `D` — `OptimaLTStd-Black` 3.50 pt; PDF flags `20`; bbox `264.42, 159.33, 268.08, 164.06`
 
-## Raw line 061 (block 26, line 60)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `267.70, 159.90, 268.98, 164.16`
-
-**PDF span runs:**
-- `` — `OptimaLTStd-Black` 3.50 pt; PDF flags `20`; bbox `267.70, 159.90, 268.98, 164.16`
-
-## Raw line 062 (block 27, line 61)
+## Raw line 058 (block 27, line 57)
 
 **EN source:** L
 
@@ -753,7 +696,7 @@
 **PDF span runs:**
 - `L` — `OptimaLTStd-Black` 3.50 pt; PDF flags `20`; bbox `268.98, 159.99, 270.74, 164.19`
 
-## Raw line 063 (block 28, line 62)
+## Raw line 059 (block 28, line 58)
 
 **EN source:** O
 
@@ -764,7 +707,7 @@
 **PDF span runs:**
 - `O` — `OptimaLTStd-Black` 3.50 pt; PDF flags `20`; bbox `270.56, 159.55, 274.27, 164.17`
 
-## Raw line 064 (block 29, line 63)
+## Raw line 060 (block 29, line 59)
 
 **EN source:** O
 
@@ -775,7 +718,7 @@
 **PDF span runs:**
 - `O` — `OptimaLTStd-Black` 3.50 pt; PDF flags `20`; bbox `273.29, 158.49, 277.66, 163.50`
 
-## Raw line 065 (block 30, line 64)
+## Raw line 061 (block 30, line 60)
 
 **EN source:** T
 
@@ -786,7 +729,7 @@
 **PDF span runs:**
 - `T` — `OptimaLTStd-Black` 3.50 pt; PDF flags `20`; bbox `276.01, 157.44, 279.87, 162.03`
 
-## Raw line 066 (block 31, line 65)
+## Raw line 062 (block 31, line 61)
 
 **EN source:** EXIT
 
@@ -799,7 +742,7 @@
 - `X` — `CinzelDecorative-Black` 12.92 pt; PDF flags `20`; bbox `168.83, 139.63, 178.81, 157.07`
 - `IT` — `Cinzel-Black` 12.92 pt; PDF flags `20`; bbox `178.68, 139.71, 192.97, 156.22`
 
-## Raw line 067 (block 32, line 66)
+## Raw line 063 (block 32, line 62)
 
 **EN source:** GREEN
 
@@ -810,7 +753,7 @@
 **PDF span runs:**
 - `GREEN` — `OptimaLTStd-ExtraBlack` 4.31 pt; PDF flags `4`; bbox `175.10, 152.63, 190.23, 157.91`
 
-## Raw line 068 (block 33, line 67)
+## Raw line 064 (block 33, line 63)
 
 **EN source:** Y
 
@@ -821,7 +764,7 @@
 **PDF span runs:**
 - `Y` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `311.16, 159.14, 314.31, 163.84`
 
-## Raw line 069 (block 34, line 68)
+## Raw line 065 (block 34, line 64)
 
 **EN source:** E
 
@@ -832,7 +775,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `309.18, 158.57, 312.31, 163.22`
 
-## Raw line 070 (block 35, line 69)
+## Raw line 066 (block 35, line 65)
 
 **EN source:** L
 
@@ -843,7 +786,7 @@
 **PDF span runs:**
 - `L` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `307.18, 157.77, 310.79, 162.41`
 
-## Raw line 071 (block 36, line 70)
+## Raw line 067 (block 36, line 66)
 
 **EN source:** L
 
@@ -854,7 +797,7 @@
 **PDF span runs:**
 - `L` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `305.44, 156.83, 309.33, 161.40`
 
-## Raw line 072 (block 37, line 71)
+## Raw line 068 (block 37, line 67)
 
 **EN source:** O
 
@@ -865,7 +808,7 @@
 **PDF span runs:**
 - `O` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `302.82, 154.85, 308.12, 160.14`
 
-## Raw line 073 (block 38, line 72)
+## Raw line 069 (block 38, line 68)
 
 **EN source:** W
 
@@ -876,7 +819,7 @@
 **PDF span runs:**
 - `W` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `300.54, 152.10, 306.07, 157.38`
 
-## Raw line 074 (block 39, line 73)
+## Raw line 070 (block 39, line 69)
 
 **EN source:** Y
 
@@ -887,7 +830,7 @@
 **PDF span runs:**
 - `Y` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `317.68, 130.09, 320.84, 134.78`
 
-## Raw line 075 (block 40, line 74)
+## Raw line 071 (block 40, line 70)
 
 **EN source:** E
 
@@ -898,7 +841,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `319.68, 130.70, 322.81, 135.36`
 
-## Raw line 076 (block 41, line 75)
+## Raw line 072 (block 41, line 71)
 
 **EN source:** L
 
@@ -909,7 +852,7 @@
 **PDF span runs:**
 - `L` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `321.20, 131.51, 324.81, 136.15`
 
-## Raw line 077 (block 42, line 76)
+## Raw line 073 (block 42, line 72)
 
 **EN source:** L
 
@@ -920,7 +863,7 @@
 **PDF span runs:**
 - `L` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `322.66, 132.53, 326.55, 137.10`
 
-## Raw line 078 (block 43, line 77)
+## Raw line 074 (block 43, line 73)
 
 **EN source:** O
 
@@ -931,7 +874,7 @@
 **PDF span runs:**
 - `O` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `323.87, 133.79, 329.17, 139.08`
 
-## Raw line 079 (block 44, line 78)
+## Raw line 075 (block 44, line 74)
 
 **EN source:** W
 
@@ -942,7 +885,7 @@
 **PDF span runs:**
 - `W` — `OptimaLTStd-Black` 3.59 pt; PDF flags `20`; bbox `325.93, 136.54, 331.45, 141.82`
 
-## Raw line 080 (block 45, line 79)
+## Raw line 076 (block 45, line 75)
 
 **EN source:** Terrain Types
 
@@ -953,7 +896,7 @@
 **PDF span runs:**
 - `Terrain Types` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `341.38, 440.11, 478.16, 464.38`
 
-## Raw line 081 (block 46, line 80)
+## Raw line 077 (block 46, line 76)
 
 **EN source:** 21
 
@@ -964,7 +907,7 @@
 **PDF span runs:**
 - `21` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `758.29, 775.72, 770.15, 787.98`
 
-## Raw line 082 (block 46, line 81)
+## Raw line 078 (block 46, line 77)
 
 **EN source:** 21
 

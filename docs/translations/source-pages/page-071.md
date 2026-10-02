@@ -126,7 +126,6 @@
 - `Large Based Figures are only affected by Terrain (` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.17, 180.40, 313.67, 192.30`
 - `except` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `313.67, 180.38, 345.22, 192.30`
 - `Obstructing` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `345.22, 180.28, 397.45, 192.23`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `397.45, 180.38, 400.23, 192.30`
 
 ## Raw line 011 (block 1, line 10)
 
@@ -150,7 +149,6 @@
 
 **PDF span runs:**
 - `type of Terrain. Exceptions are listed on the Terrain in question. See` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.17, 202.40, 391.13, 214.30`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `391.13, 202.28, 393.91, 214.23`
 
 ## Raw line 013 (block 1, line 12)
 
@@ -384,7 +382,6 @@
 **PDF span runs:**
 - `spaces that would not result in their entire base occupying` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.17, 381.58, 357.32, 393.48`
 - `Dangerous` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `357.32, 381.54, 404.05, 393.42`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `404.05, 381.58, 406.83, 393.48`
 
 ## Raw line 033 (block 1, line 32)
 
@@ -458,17 +455,6 @@
 
 ## Raw line 039 (block 3, line 38)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `404.35, 462.06, 407.35, 478.24`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `404.35, 462.06, 407.35, 478.24`
-
-## Raw line 040 (block 3, line 39)
-
 **EN source:** No Value can be reduced below 0. This includes Attack rolls, Damage,
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -480,7 +466,7 @@
 - `0` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `227.42, 474.49, 232.43, 485.21`
 - `. This includes Attack rolls, Damage,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `232.43, 473.59, 391.31, 485.49`
 
-## Raw line 041 (block 3, line 40)
+## Raw line 040 (block 3, line 39)
 
 **EN source:** Range, or any other number. If an Effect, Ability, or Action would reduce
 
@@ -491,7 +477,7 @@
 **PDF span runs:**
 - `Range, or any other number. If an Effect, Ability, or Action would reduce` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.18, 484.59, 401.95, 496.49`
 
-## Raw line 042 (block 3, line 41)
+## Raw line 041 (block 3, line 40)
 
 **EN source:** a value below 0, that value is 0 instead.
 
@@ -506,7 +492,7 @@
 - `0` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `213.97, 496.49, 218.97, 507.21`
 - `instead.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `218.97, 495.59, 260.66, 507.49`
 
-## Raw line 043 (block 4, line 42)
+## Raw line 042 (block 4, line 41)
 
 **EN source:** Rounding Numbers
 
@@ -517,7 +503,7 @@
 **PDF span runs:**
 - `Rounding Numbers` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `86.17, 518.24, 215.93, 534.41`
 
-## Raw line 044 (block 5, line 43)
+## Raw line 043 (block 5, line 42)
 
 **EN source:** Anytime you must cut a number in half, you always round up to the
 
@@ -528,7 +514,7 @@
 **PDF span runs:**
 - `Anytime you must cut a number in half, you always round up to the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 540.76, 379.73, 552.66`
 
-## Raw line 045 (block 5, line 44)
+## Raw line 044 (block 5, line 43)
 
 **EN source:** nearest whole number. This could be Damage, Gold, or any other number
 
@@ -539,7 +525,7 @@
 **PDF span runs:**
 - `nearest whole number. This could be Damage, Gold, or any other number` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 551.76, 406.78, 563.66`
 
-## Raw line 046 (block 5, line 45)
+## Raw line 045 (block 5, line 44)
 
 **EN source:** in the game.
 
@@ -550,7 +536,7 @@
 **PDF span runs:**
 - `in the game.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 562.76, 139.52, 574.66`
 
-## Raw line 047 (block 6, line 46)
+## Raw line 046 (block 6, line 45)
 
 **EN source:** Companions
 
@@ -561,18 +547,7 @@
 **PDF span runs:**
 - `Companions` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `86.17, 585.41, 167.40, 601.59`
 
-## Raw line 048 (block 7, line 47)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `404.20, 595.41, 407.20, 611.59`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `404.20, 595.41, 407.20, 611.59`
-
-## Raw line 049 (block 7, line 48)
+## Raw line 047 (block 7, line 46)
 
 **EN source:** Companions represent characters in the story that help out the players in
 
@@ -583,7 +558,7 @@
 **PDF span runs:**
 - `Companions represent characters in the story that help out the players in` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 608.93, 399.96, 620.83`
 
-## Raw line 050 (block 7, line 49)
+## Raw line 048 (block 7, line 47)
 
 **EN source:** the Adventure Mode. Typically, these will be found in the Hidden Card
 
@@ -595,7 +570,7 @@
 - `the Adventure Mode. Typically, these will be found in the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 619.93, 334.28, 631.83`
 - `Hidden Card` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `334.28, 619.91, 393.02, 631.83`
 
-## Raw line 051 (block 7, line 50)
+## Raw line 049 (block 7, line 48)
 
 **EN source:** deck. These cards do not count against an Adventurer's Item limits, but an
 
@@ -606,7 +581,7 @@
 **PDF span runs:**
 - `deck. These cards do not count against an Adventurer's Item limits, but an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 630.93, 405.32, 642.83`
 
-## Raw line 052 (block 7, line 51)
+## Raw line 050 (block 7, line 49)
 
 **EN source:** Adventurer is limited to having only 1 Companion equipped. Companions
 
@@ -619,7 +594,7 @@
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `242.77, 642.83, 247.77, 653.56`
 - `Companion equipped. Companions` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `247.77, 641.93, 407.27, 653.83`
 
-## Raw line 053 (block 7, line 52)
+## Raw line 051 (block 7, line 50)
 
 **EN source:** can not be Stored in the Pack, but they may be Stored in the Party Stash.
 
@@ -630,7 +605,7 @@
 **PDF span runs:**
 - `can not be Stored in the Pack, but they may be Stored in the Party Stash.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 652.93, 397.32, 664.83`
 
-## Raw line 054 (block 8, line 53)
+## Raw line 052 (block 8, line 51)
 
 **EN source:** Thematically, Companions are doing their own thing to protect the
 
@@ -641,7 +616,7 @@
 **PDF span runs:**
 - `Thematically, Companions are doing their own thing to protect the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 669.60, 374.81, 681.50`
 
-## Raw line 055 (block 8, line 54)
+## Raw line 053 (block 8, line 52)
 
 **EN source:** Adventurer they are attached to. Because of this, Companion cards are
 
@@ -652,7 +627,7 @@
 **PDF span runs:**
 - `Adventurer they are attached to. Because of this, Companion cards are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 680.60, 391.85, 692.50`
 
-## Raw line 056 (block 8, line 55)
+## Raw line 054 (block 8, line 53)
 
 **EN source:** not affected by Disciplines or Effects that might prevent them from being
 
@@ -663,7 +638,7 @@
 **PDF span runs:**
 - `not affected by Disciplines or Effects that might prevent them from being` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 691.60, 399.88, 703.50`
 
-## Raw line 057 (block 8, line 56)
+## Raw line 055 (block 8, line 54)
 
 **EN source:** used by the Adventurer they are attached to. This means that Companions
 
@@ -674,7 +649,7 @@
 **PDF span runs:**
 - `used by the Adventurer they are attached to. This means that Companions` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 702.60, 404.58, 714.50`
 
-## Raw line 058 (block 8, line 57)
+## Raw line 056 (block 8, line 55)
 
 **EN source:** cards may still be used even while an Adventurer is Paralyzed or in
 
@@ -686,9 +661,8 @@
 - `cards may still be used even while an Adventurer is` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 713.60, 308.81, 725.50`
 - `Paralyzed` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `308.81, 713.56, 350.50, 725.44`
 - `or in` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `350.50, 713.60, 373.29, 725.50`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `373.29, 713.56, 376.07, 725.44`
 
-## Raw line 059 (block 8, line 58)
+## Raw line 057 (block 8, line 56)
 
 **EN source:** Conduit Form.
 
@@ -700,7 +674,7 @@
 - `Conduit` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `86.17, 724.56, 120.38, 736.44`
 - `Form.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `120.38, 724.60, 147.71, 736.50`
 
-## Raw line 060 (block 9, line 59)
+## Raw line 058 (block 9, line 57)
 
 **EN source:** Re-Rolling Dice
 
@@ -711,18 +685,7 @@
 **PDF span runs:**
 - `Re-Rolling Dice` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `415.84, 87.21, 520.81, 103.39`
 
-## Raw line 061 (block 10, line 60)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `733.87, 97.21, 736.87, 113.39`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `733.87, 97.21, 736.87, 113.39`
-
-## Raw line 062 (block 10, line 61)
+## Raw line 059 (block 10, line 58)
 
 **EN source:** When using an Ability that re-rolls a roll, or a specific die, you must use
 
@@ -733,7 +696,7 @@
 **PDF span runs:**
 - `When using an Ability that re-rolls a roll, or a specific die, you must use` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 108.73, 727.09, 120.63`
 
-## Raw line 063 (block 10, line 62)
+## Raw line 060 (block 10, line 59)
 
 **EN source:** this Ability during when the roll or die in question is rolled. You may not
 
@@ -744,7 +707,7 @@
 **PDF span runs:**
 - `this Ability during when the roll or die in question is rolled. You may not` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 119.73, 728.50, 131.63`
 
-## Raw line 064 (block 10, line 63)
+## Raw line 061 (block 10, line 60)
 
 **EN source:** wait until a later step of the occurring Action. Once this roll or die has
 
@@ -755,7 +718,7 @@
 **PDF span runs:**
 - `wait until a later step of the occurring Action. Once this roll or die has` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 130.73, 719.87, 142.63`
 
-## Raw line 065 (block 10, line 64)
+## Raw line 062 (block 10, line 61)
 
 **EN source:** been chosen and re-rolled, the new value must be kept. Alternatively, if
 
@@ -766,7 +729,7 @@
 **PDF span runs:**
 - `been chosen and re-rolled, the new value must be kept. Alternatively, if` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 141.73, 724.51, 153.63`
 
-## Raw line 066 (block 10, line 65)
+## Raw line 063 (block 10, line 62)
 
 **EN source:** you choose not to re-roll the roll or specific die, you may not choose to
 
@@ -777,7 +740,7 @@
 **PDF span runs:**
 - `you choose not to re-roll the roll or specific die, you may not choose to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 152.73, 724.41, 164.63`
 
-## Raw line 067 (block 10, line 66)
+## Raw line 064 (block 10, line 63)
 
 **EN source:** do so after the step of the Action or effect of the roll has been resolved.
 
@@ -788,7 +751,7 @@
 **PDF span runs:**
 - `do so after the step of the Action or effect of the roll has been resolved.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 163.73, 722.72, 175.63`
 
-## Raw line 068 (block 10, line 67)
+## Raw line 065 (block 10, line 64)
 
 **EN source:** There is no limit to the amount of times a die or roll may be re-rolled.
 
@@ -799,7 +762,7 @@
 **PDF span runs:**
 - `There is no limit to the amount of times a die or roll may be re-rolled.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 174.73, 714.09, 186.63`
 
-## Raw line 069 (block 11, line 68)
+## Raw line 066 (block 11, line 65)
 
 **EN source:** Forced Movement
 
@@ -810,18 +773,7 @@
 **PDF span runs:**
 - `Forced Movement` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `415.84, 191.72, 535.27, 207.89`
 
-## Raw line 070 (block 12, line 69)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `733.87, 201.72, 736.87, 217.89`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `733.87, 201.72, 736.87, 217.89`
-
-## Raw line 071 (block 12, line 70)
+## Raw line 067 (block 12, line 66)
 
 **EN source:** Some Abilities may refer to "Forced Movement". Forced Movement is
 
@@ -832,7 +784,7 @@
 **PDF span runs:**
 - `Some Abilities may refer to "Forced Movement". Forced Movement is` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 213.24, 713.62, 225.14`
 
-## Raw line 072 (block 12, line 71)
+## Raw line 068 (block 12, line 67)
 
 **EN source:** defined as any Movement a Combatant makes that they had no choice
 
@@ -845,7 +797,7 @@
 - `no` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `676.07, 224.22, 687.19, 236.14`
 - `choice` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `687.19, 224.24, 721.47, 236.14`
 
-## Raw line 073 (block 12, line 72)
+## Raw line 069 (block 12, line 68)
 
 **EN source:** in making. This includes being moved via Push, Pull, Command, or via
 
@@ -856,7 +808,7 @@
 **PDF span runs:**
 - `in making. This includes being moved via Push, Pull, Command, or via` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 235.24, 722.88, 247.14`
 
-## Raw line 074 (block 12, line 73)
+## Raw line 070 (block 12, line 69)
 
 **EN source:** Terrain Effects or Special Encounter Rules such as Currents. Additionally,
 
@@ -867,7 +819,7 @@
 **PDF span runs:**
 - `Terrain Effects or Special Encounter Rules such as Currents. Additionally,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 246.24, 728.93, 258.14`
 
-## Raw line 075 (block 12, line 74)
+## Raw line 071 (block 12, line 70)
 
 **EN source:** it's possible for a Combatant to use an Ability that moves them an amount
 
@@ -878,7 +830,7 @@
 **PDF span runs:**
 - `it's possible for a Combatant to use an Ability that moves them an amount` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 257.24, 735.93, 269.14`
 
-## Raw line 076 (block 12, line 75)
+## Raw line 072 (block 12, line 71)
 
 **EN source:** of spaces as part of the Ability text. If this Movement is not listed as
 
@@ -889,7 +841,7 @@
 **PDF span runs:**
 - `of spaces as part of the Ability text. If this Movement is not listed as` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 268.24, 706.48, 280.14`
 
-## Raw line 077 (block 12, line 76)
+## Raw line 073 (block 12, line 72)
 
 **EN source:** optional (i.e "you may") or as "up to" an amount of spaces, this is also
 
@@ -900,7 +852,7 @@
 **PDF span runs:**
 - `optional (i.e "you may") or as "up to" an amount of spaces, this is also` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 279.24, 715.49, 291.14`
 
-## Raw line 078 (block 12, line 77)
+## Raw line 074 (block 12, line 73)
 
 **EN source:** considered Forced Movement. Movement made via a Move Action
 
@@ -911,7 +863,7 @@
 **PDF span runs:**
 - `considered Forced Movement. Movement made via a Move Action` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 290.24, 705.38, 302.14`
 
-## Raw line 079 (block 12, line 78)
+## Raw line 075 (block 12, line 74)
 
 **EN source:** or Symbol Ability controlled by the combatant is always considered
 
@@ -922,7 +874,7 @@
 **PDF span runs:**
 - `or Symbol Ability controlled by the combatant is always considered` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 301.24, 708.82, 313.14`
 
-## Raw line 080 (block 12, line 79)
+## Raw line 076 (block 12, line 75)
 
 **EN source:** Voluntary.
 
@@ -933,7 +885,7 @@
 **PDF span runs:**
 - `Voluntary.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 312.24, 462.17, 324.14`
 
-## Raw line 081 (block 13, line 80)
+## Raw line 077 (block 13, line 76)
 
 **EN source:** Other Important Rules Continued
 
@@ -945,7 +897,7 @@
 - `Other Important Rules` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `86.17, 56.69, 321.16, 80.96`
 - `Continued` — `Cinzel-Regular` 11.00 pt; PDF flags `4`; bbox `321.16, 63.52, 388.02, 78.35`
 
-## Raw line 082 (block 14, line 81)
+## Raw line 078 (block 14, line 77)
 
 **EN source:** 71
 
@@ -956,7 +908,7 @@
 **PDF span runs:**
 - `71` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `758.29, 775.72, 770.15, 787.98`
 
-## Raw line 083 (block 14, line 82)
+## Raw line 079 (block 14, line 78)
 
 **EN source:** 71
 

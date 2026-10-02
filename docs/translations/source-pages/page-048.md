@@ -293,18 +293,7 @@
 
 ## Raw line 025 (block 7, line 24)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `608.23, 633.98, 611.95, 641.96`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 6.70 pt; PDF flags `4`; bbox `608.23, 633.98, 611.95, 641.96`
-
-## Raw line 026 (block 7, line 25)
-
-**EN source:** Your Attacks Gain:
+**EN source:** Your AttacksGain:
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -312,10 +301,9 @@
 
 **PDF span runs:**
 - `Your Attacks` — `OptimaLTStd` 6.70 pt; PDF flags `4`; bbox `561.21, 640.69, 596.48, 648.66`
-- `` — `OptimaLTStd-Bold` 6.70 pt; PDF flags `20`; bbox `596.48, 640.67, 598.34, 648.66`
 - `Gain:` — `OptimaLTStd` 6.70 pt; PDF flags `4`; bbox `598.34, 640.69, 616.23, 648.66`
 
-## Raw line 027 (block 7, line 26)
+## Raw line 026 (block 7, line 25)
 
 **EN source:** +1 PHYSICAL DMG
 
@@ -326,7 +314,7 @@
 **PDF span runs:**
 - `+1 PHYSICAL DMG` — `OptimaLTStd-Bold` 6.70 pt; PDF flags `20`; bbox `558.46, 650.25, 617.12, 658.24`
 
-## Raw line 028 (block 8, line 27)
+## Raw line 027 (block 8, line 26)
 
 **EN source:** EXHAUST
 
@@ -337,7 +325,7 @@
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 6.27 pt; PDF flags `20`; bbox `577.84, 661.42, 604.71, 668.84`
 
-## Raw line 029 (block 8, line 28)
+## Raw line 028 (block 8, line 27)
 
 **EN source:** When making a
 
@@ -348,7 +336,7 @@
 **PDF span runs:**
 - `When making a` — `OptimaLTStd` 6.70 pt; PDF flags `4`; bbox `533.10, 671.01, 580.78, 678.99`
 
-## Raw line 030 (block 8, line 29)
+## Raw line 029 (block 8, line 28)
 
 **EN source:** Attack, if you have
 
@@ -357,10 +345,9 @@
 **Line bbox:** `587.11, 671.01, 646.20, 679.95`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 6.70 pt; PDF flags `4`; bbox `587.11, 671.97, 588.97, 679.95`
 - `Attack, if you have` — `OptimaLTStd` 6.70 pt; PDF flags `5`; bbox `588.97, 671.01, 646.20, 678.99`
 
-## Raw line 031 (block 8, line 30)
+## Raw line 030 (block 8, line 29)
 
 **EN source:** a 2-handed Weapon equipped, you may
 
@@ -373,7 +360,7 @@
 - `2` — `OptimaLTStd-Bold` 6.70 pt; PDF flags `20`; bbox `534.79, 678.66, 538.52, 686.65`
 - `-handed Weapon equipped, you may` — `OptimaLTStd` 6.70 pt; PDF flags `4`; bbox `538.52, 678.67, 649.72, 687.61`
 
-## Raw line 032 (block 8, line 31)
+## Raw line 031 (block 8, line 30)
 
 **EN source:** re-roll any dice in your Combat Dice Pool.
 
@@ -384,7 +371,7 @@
 **PDF span runs:**
 - `re-roll any dice in your Combat Dice Pool.` — `OptimaLTStd` 6.70 pt; PDF flags `4`; bbox `526.40, 686.34, 649.17, 694.31`
 
-## Raw line 033 (block 9, line 32)
+## Raw line 032 (block 9, line 31)
 
 **EN source:** Hammer Helm
 
@@ -395,7 +382,7 @@
 **PDF span runs:**
 - `Hammer Helm` — `Cinzel-Regular` 11.49 pt; PDF flags `4`; bbox `544.65, 599.99, 630.92, 615.48`
 
-## Raw line 034 (block 10, line 33)
+## Raw line 033 (block 10, line 32)
 
 **EN source:** MARTIAL • LVL 1
 
@@ -406,7 +393,7 @@
 **PDF span runs:**
 - `MARTIAL • LVL 1` — `OptimaLTStd-Bold` 6.70 pt; PDF flags `20`; bbox `561.58, 618.68, 613.82, 626.67`
 
-## Raw line 035 (block 11, line 34)
+## Raw line 034 (block 11, line 33)
 
 **EN source:** Abilities that start Actions
 
@@ -417,7 +404,7 @@
 **PDF span runs:**
 - `Abilities that start Actions` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `85.89, 88.28, 271.31, 104.45`
 
-## Raw line 036 (block 12, line 35)
+## Raw line 035 (block 12, line 34)
 
 **EN source:** Some Abilities will use Tags to let players perform Actions, such as the
 
@@ -428,7 +415,7 @@
 **PDF span runs:**
 - `Some Abilities will use Tags to let players perform Actions, such as the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.89, 111.80, 388.43, 123.70`
 
-## Raw line 037 (block 12, line 36)
+## Raw line 036 (block 12, line 35)
 
 **EN source:** Move, Attack, or Spell Actions. Tags that start Actions and also require
 
@@ -439,7 +426,7 @@
 **PDF span runs:**
 - `Move, Attack, or Spell Actions. Tags that start Actions and also require` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.89, 122.80, 387.75, 134.70`
 
-## Raw line 038 (block 12, line 37)
+## Raw line 037 (block 12, line 36)
 
 **EN source:** specific Icons on equipped Weapons (such as the
 
@@ -450,7 +437,7 @@
 **PDF span runs:**
 - `specific Icons on equipped Weapons (such as the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.89, 133.80, 300.08, 145.70`
 
-## Raw line 039 (block 12, line 38)
+## Raw line 038 (block 12, line 37)
 
 **EN source:** ATK or
 
@@ -459,25 +446,22 @@
 **Line bbox:** `308.90, 133.80, 341.87, 145.70`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `308.90, 134.72, 311.40, 145.43`
 - `ATK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `311.40, 134.70, 327.42, 145.43`
 - `or` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `327.42, 133.80, 341.87, 145.70`
 
-## Raw line 040 (block 12, line 39)
+## Raw line 039 (block 12, line 38)
 
-**EN source:** ATK Tag),
+**EN source:** ATKTag),
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
 **Line bbox:** `350.68, 133.80, 394.60, 145.70`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `350.68, 134.72, 353.19, 145.43`
 - `ATK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `353.19, 134.70, 369.20, 145.43`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `369.20, 134.72, 371.70, 145.43`
 - `Tag),` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `371.70, 133.80, 394.60, 145.70`
 
-## Raw line 041 (block 12, line 40)
+## Raw line 040 (block 12, line 39)
 
 **EN source:** can only be used if the Adventurer has an equipped Weapon with the
 
@@ -488,7 +472,7 @@
 **PDF span runs:**
 - `can only be used if the Adventurer has an equipped Weapon with the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.90, 144.80, 386.80, 156.70`
 
-## Raw line 042 (block 12, line 41)
+## Raw line 041 (block 12, line 40)
 
 **EN source:** matching Icon. See Tags Pg. 92-93 to determine if your Ability starts an
 
@@ -501,7 +485,7 @@
 - `Tags` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `170.75, 155.68, 189.44, 167.63`
 - `Pg. 92-93 to determine if your Ability starts an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `189.44, 155.80, 392.87, 167.70`
 
-## Raw line 043 (block 12, line 42)
+## Raw line 042 (block 12, line 41)
 
 **EN source:** Action. Abilities that start Actions cannot be used during another Action
 
@@ -512,7 +496,7 @@
 **PDF span runs:**
 - `Action. Abilities that start Actions cannot be used during another Action` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.90, 166.80, 396.62, 178.70`
 
-## Raw line 044 (block 12, line 43)
+## Raw line 043 (block 12, line 42)
 
 **EN source:** without ending the current Action first.
 
@@ -523,7 +507,7 @@
 **PDF span runs:**
 - `without ending the current Action first.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.90, 177.80, 252.28, 189.70`
 
-## Raw line 045 (block 13, line 44)
+## Raw line 044 (block 13, line 43)
 
 **EN source:** War Axe
 
@@ -533,6 +517,17 @@
 
 **PDF span runs:**
 - `War Axe` — `Cinzel-Regular` 6.31 pt; PDF flags `4`; bbox `297.23, 226.17, 324.33, 234.67`
+
+## Raw line 045 (block 14, line 44)
+
+**EN source:** 30
+
+**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+
+**Line bbox:** `270.68, 238.87, 279.73, 249.07`
+
+**PDF span runs:**
+- `30` — `Cinzel-Regular` 7.57 pt; PDF flags `4`; bbox `270.68, 238.87, 279.73, 249.07`
 
 ## Raw line 046 (block 14, line 45)
 
@@ -547,17 +542,6 @@
 
 ## Raw line 047 (block 14, line 46)
 
-**EN source:** 30
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `270.68, 238.87, 279.73, 249.07`
-
-**PDF span runs:**
-- `30` — `Cinzel-Regular` 7.57 pt; PDF flags `4`; bbox `270.68, 238.87, 279.73, 249.07`
-
-## Raw line 048 (block 14, line 47)
-
 **EN source:** AXE • WAR AXE
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -567,7 +551,7 @@
 **PDF span runs:**
 - `AXE • WAR AXE` — `OptimaLTStd-Bold` 3.78 pt; PDF flags `20`; bbox `330.63, 239.05, 359.21, 243.56`
 
-## Raw line 049 (block 15, line 48)
+## Raw line 048 (block 15, line 47)
 
 **EN source:** 2
 
@@ -578,7 +562,7 @@
 **PDF span runs:**
 - `2` — `Cinzel-Regular` 6.31 pt; PDF flags `4`; bbox `274.25, 265.15, 278.14, 273.65`
 
-## Raw line 050 (block 16, line 49)
+## Raw line 049 (block 16, line 48)
 
 **EN source:** +1 PHYSICAL DMG
 
@@ -587,12 +571,11 @@
 **Line bbox:** `274.20, 371.57, 312.85, 376.82`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 4.42 pt; PDF flags `4`; bbox `274.20, 371.57, 275.43, 376.82`
 - `+` — `OptimaLTStd-Bold` 3.78 pt; PDF flags `20`; bbox `275.25, 371.82, 277.54, 376.33`
 - `1` — `OptimaLTStd-Bold` 4.10 pt; PDF flags `20`; bbox `277.54, 371.85, 279.82, 376.73`
 - `PHYSICAL DMG` — `OptimaLTStd-Bold` 3.78 pt; PDF flags `20`; bbox `279.82, 372.14, 312.85, 376.65`
 
-## Raw line 051 (block 16, line 50)
+## Raw line 050 (block 16, line 49)
 
 **EN source:** +1 PHYSICAL DMG
 
@@ -601,12 +584,11 @@
 **Line bbox:** `318.34, 371.82, 352.78, 378.71`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 4.42 pt; PDF flags `4`; bbox `318.34, 373.46, 319.57, 378.71`
 - `+` — `OptimaLTStd-Bold` 3.78 pt; PDF flags `21`; bbox `319.39, 371.82, 321.69, 376.33`
 - `1` — `OptimaLTStd-Bold` 4.10 pt; PDF flags `21`; bbox `321.69, 371.85, 323.97, 376.73`
 - `PHYSICAL DMG` — `OptimaLTStd-Bold` 3.78 pt; PDF flags `21`; bbox `323.97, 372.14, 352.78, 376.65`
 
-## Raw line 052 (block 17, line 51)
+## Raw line 051 (block 17, line 50)
 
 **EN source:** EXHAUST
 
@@ -617,7 +599,7 @@
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 4.10 pt; PDF flags `20`; bbox `304.35, 340.25, 321.93, 345.10`
 
-## Raw line 053 (block 17, line 52)
+## Raw line 052 (block 17, line 51)
 
 **EN source:** When determining the Damage of an Attack,
 
@@ -628,7 +610,7 @@
 **PDF span runs:**
 - `When determining the Damage of an Attack,` — `OptimaLTStd` 4.42 pt; PDF flags `4`; bbox `268.39, 346.55, 354.51, 351.80`
 
-## Raw line 054 (block 18, line 53)
+## Raw line 053 (block 18, line 52)
 
 **EN source:** this Attack Gains:
 
@@ -639,7 +621,7 @@
 **PDF span runs:**
 - `this Attack Gains:` — `OptimaLTStd` 4.42 pt; PDF flags `4`; bbox `294.27, 352.22, 328.63, 357.48`
 
-## Raw line 055 (block 19, line 54)
+## Raw line 054 (block 19, line 53)
 
 **EN source:** +1 PHYSICAL DMG
 
@@ -648,10 +630,9 @@
 **Line bbox:** `294.85, 359.65, 331.96, 364.94`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 4.42 pt; PDF flags `4`; bbox `294.85, 359.69, 296.08, 364.94`
 - `+1 PHYSICAL DMG` — `OptimaLTStd-Bold` 4.10 pt; PDF flags `20`; bbox `296.08, 359.65, 331.96, 364.86`
 
-## Raw line 056 (block 20, line 55)
+## Raw line 055 (block 20, line 54)
 
 **EN source:** XP:5+
 
@@ -662,7 +643,7 @@
 **PDF span runs:**
 - `XP:5+` — `Cinzel-Regular` 5.27 pt; PDF flags `4`; bbox `215.94, 229.34, 223.04, 244.32`
 
-## Raw line 057 (block 21, line 56)
+## Raw line 056 (block 21, line 55)
 
 **EN source:** EXHAUST
 
@@ -673,7 +654,7 @@
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 5.75 pt; PDF flags `20`; bbox `179.87, 304.76, 186.67, 329.40`
 
-## Raw line 058 (block 21, line 57)
+## Raw line 057 (block 21, line 56)
 
 **EN source:** Make a
 
@@ -684,7 +665,7 @@
 **PDF span runs:**
 - `Make a` — `OptimaLTStd` 6.15 pt; PDF flags `4`; bbox `170.56, 260.71, 177.87, 281.89`
 
-## Raw line 059 (block 21, line 58)
+## Raw line 058 (block 21, line 57)
 
 **EN source:** ATK. This Attack has -1 to the
 
@@ -693,13 +674,12 @@
 **Line bbox:** `169.68, 287.70, 177.89, 368.75`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 6.15 pt; PDF flags `4`; bbox `169.68, 287.70, 177.00, 289.40`
 - `ATK.` — `OptimaLTStd-Bold` 6.15 pt; PDF flags `20`; bbox `170.56, 289.40, 177.89, 303.76`
 - `This Attack has` — `OptimaLTStd` 6.15 pt; PDF flags `4`; bbox `170.56, 303.76, 177.88, 344.83`
 - `-1` — `OptimaLTStd-Bold` 6.15 pt; PDF flags `20`; bbox `170.56, 344.83, 177.89, 350.29`
 - `to the` — `OptimaLTStd` 6.15 pt; PDF flags `4`; bbox `170.56, 350.29, 177.88, 368.75`
 
-## Raw line 060 (block 21, line 59)
+## Raw line 059 (block 21, line 58)
 
 **EN source:** Attack Roll.
 
@@ -710,7 +690,7 @@
 **PDF span runs:**
 - `Attack Roll.` — `OptimaLTStd` 6.15 pt; PDF flags `4`; bbox `163.53, 298.56, 170.85, 329.20`
 
-## Raw line 061 (block 22, line 60)
+## Raw line 060 (block 22, line 59)
 
 **EN source:** False Idol
 
@@ -721,7 +701,7 @@
 **PDF span runs:**
 - `False Idol` — `Cinzel-Regular` 10.54 pt; PDF flags `4`; bbox `207.84, 285.06, 222.04, 342.69`
 
-## Raw line 062 (block 23, line 61)
+## Raw line 061 (block 23, line 60)
 
 **EN source:** “It is easier to fool people, than to convince
 
@@ -732,7 +712,7 @@
 **PDF span runs:**
 - `“It is easier to fool people, than to convince` — `AGaramondPro-BoldItalic` 6.15 pt; PDF flags `22`; bbox `142.51, 260.30, 149.86, 368.23`
 
-## Raw line 063 (block 23, line 62)
+## Raw line 062 (block 23, line 61)
 
 **EN source:** them they have been fooled."
 
@@ -743,7 +723,7 @@
 **PDF span runs:**
 - `them they have been fooled."` — `AGaramondPro-BoldItalic` 6.15 pt; PDF flags `22`; bbox `136.36, 278.07, 143.71, 348.98`
 
-## Raw line 064 (block 24, line 63)
+## Raw line 063 (block 24, line 62)
 
 **EN source:** SUBTERFUGE • LVL 2
 
@@ -754,9 +734,9 @@
 **PDF span runs:**
 - `SUBTERFUGE • LVL 2` — `OptimaLTStd-Bold` 6.15 pt; PDF flags `20`; bbox `196.95, 283.98, 204.28, 345.32`
 
-## Raw line 065 (block 25, line 64)
+## Raw line 064 (block 25, line 63)
 
-**EN source:** Example: Using the Ability on False Idol, an Adventurer Exhausts
+**EN source:** Example:Using the Ability on False Idol, an Adventurer Exhausts
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -764,12 +744,11 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `97.79, 392.47, 143.33, 406.88`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `143.33, 393.94, 146.11, 405.89`
 - `Using the Ability on` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `146.11, 394.06, 234.68, 405.96`
 - `False Idol` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `234.68, 393.94, 276.06, 405.89`
 - `, an Adventurer Exhausts` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `276.06, 394.06, 384.26, 405.96`
 
-## Raw line 066 (block 25, line 65)
+## Raw line 065 (block 25, line 64)
 
 **EN source:** the Discipline Card and makes a
 
@@ -780,7 +759,7 @@
 **PDF span runs:**
 - `the Discipline Card and makes a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `97.79, 405.06, 240.62, 416.96`
 
-## Raw line 067 (block 25, line 66)
+## Raw line 066 (block 25, line 65)
 
 **EN source:** ATK. This Attack Action requires
 
@@ -789,11 +768,10 @@
 **Line bbox:** `249.44, 405.06, 390.62, 416.96`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `249.44, 405.06, 252.22, 416.96`
 - `ATK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `252.22, 405.97, 268.23, 416.69`
 - `. This Attack Action requires` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `268.23, 405.06, 390.62, 416.96`
 
-## Raw line 068 (block 25, line 67)
+## Raw line 067 (block 25, line 66)
 
 **EN source:** the Adventurer to have a
 
@@ -804,7 +782,7 @@
 **PDF span runs:**
 - `the Adventurer to have a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `97.79, 416.06, 205.57, 427.96`
 
-## Raw line 069 (block 25, line 68)
+## Raw line 068 (block 25, line 67)
 
 **EN source:** Icon on an equipped Weapon. Since
 
@@ -815,7 +793,7 @@
 **PDF span runs:**
 - `Icon on an equipped Weapon. Since` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `214.39, 416.06, 377.07, 427.96`
 
-## Raw line 070 (block 25, line 69)
+## Raw line 069 (block 25, line 68)
 
 **EN source:** the the Adventurer in this example has War Axe equipped, they are
 
@@ -828,7 +806,7 @@
 - `War Axe` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `265.46, 427.02, 301.17, 438.90`
 - `equipped, they are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `301.17, 427.06, 387.32, 438.96`
 
-## Raw line 071 (block 25, line 70)
+## Raw line 070 (block 25, line 69)
 
 **EN source:** able to use this Ability because it has the
 
@@ -839,7 +817,7 @@
 **PDF span runs:**
 - `able to use this Ability because it has the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `97.79, 438.06, 275.29, 449.96`
 
-## Raw line 072 (block 25, line 71)
+## Raw line 071 (block 25, line 70)
 
 **EN source:** Icon.
 
@@ -850,7 +828,7 @@
 **PDF span runs:**
 - `Icon.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `284.11, 438.06, 311.35, 449.96`
 
-## Raw line 073 (block 26, line 72)
+## Raw line 072 (block 26, line 71)
 
 **EN source:** EXHAUSTED
 
@@ -861,7 +839,7 @@
 **PDF span runs:**
 - `EXHAUSTED` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `148.00, 234.06, 204.23, 245.98`
 
-## Raw line 074 (block 27, line 73)
+## Raw line 073 (block 27, line 72)
 
 **EN source:** Abilities that End Turns
 
@@ -872,7 +850,7 @@
 **PDF span runs:**
 - `Abilities that End Turns` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `85.89, 481.28, 249.32, 497.45`
 
-## Raw line 075 (block 28, line 74)
+## Raw line 074 (block 28, line 73)
 
 **EN source:** Some Abilities might instruct a figure to end the current turn under
 
@@ -883,7 +861,7 @@
 **PDF span runs:**
 - `Some Abilities might instruct a figure to end the current turn under` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.89, 504.80, 373.97, 516.70`
 
-## Raw line 076 (block 28, line 75)
+## Raw line 075 (block 28, line 74)
 
 **EN source:** specific circumstances, (e.g. Such as dealing Damage). If a figure uses an
 
@@ -896,7 +874,7 @@
 - `e.g.` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `190.80, 515.78, 209.14, 527.70`
 - `Such as dealing Damage). If a figure uses an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `209.14, 515.80, 401.25, 527.70`
 
-## Raw line 077 (block 28, line 76)
+## Raw line 076 (block 28, line 75)
 
 **EN source:** Ability that instructs them to end the turn they may no longer use Actions
 
@@ -907,7 +885,7 @@
 **PDF span runs:**
 - `Ability that instructs them to end the turn they may no longer use Actions` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.89, 526.80, 402.59, 538.70`
 
-## Raw line 078 (block 28, line 77)
+## Raw line 077 (block 28, line 76)
 
 **EN source:** or Abilities after resolving the circumstances in question. However, the
 
@@ -918,7 +896,7 @@
 **PDF span runs:**
 - `or Abilities after resolving the circumstances in question. However, the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.89, 537.80, 391.76, 549.70`
 
-## Raw line 079 (block 28, line 78)
+## Raw line 078 (block 28, line 77)
 
 **EN source:** current turn is only ended after any Actions or Abilities being made by
 
@@ -929,7 +907,7 @@
 **PDF span runs:**
 - `current turn is only ended after any Actions or Abilities being made by` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.89, 548.80, 389.92, 560.70`
 
-## Raw line 080 (block 28, line 79)
+## Raw line 079 (block 28, line 78)
 
 **EN source:** other figures that might be responding to the Action or Ability.
 
@@ -940,7 +918,7 @@
 **PDF span runs:**
 - `other figures that might be responding to the Action or Ability.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.89, 559.80, 354.36, 571.70`
 
-## Raw line 081 (block 29, line 80)
+## Raw line 080 (block 29, line 79)
 
 **EN source:** XP:9+
 
@@ -951,7 +929,7 @@
 **PDF span runs:**
 - `XP:9+` — `Cinzel-Regular` 5.80 pt; PDF flags `4`; bbox `164.95, 601.32, 181.98, 609.13`
 
-## Raw line 082 (block 30, line 81)
+## Raw line 081 (block 30, line 80)
 
 **EN source:** EXHAUST
 
@@ -962,7 +940,7 @@
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 6.32 pt; PDF flags `20`; bbox `248.20, 635.72, 275.31, 643.19`
 
-## Raw line 083 (block 31, line 82)
+## Raw line 082 (block 31, line 81)
 
 **EN source:** After resolving an Attack or Spell you made,
 
@@ -973,7 +951,7 @@
 **PDF span runs:**
 - `After resolving an Attack or Spell you made,` — `OptimaLTStd` 6.76 pt; PDF flags `4`; bbox `194.43, 645.78, 323.90, 653.83`
 
-## Raw line 084 (block 32, line 83)
+## Raw line 083 (block 32, line 82)
 
 **EN source:** cast a SPELL 6.
 
@@ -986,7 +964,7 @@
 - `SPELL 6` — `OptimaLTStd-Bold` 6.76 pt; PDF flags `20`; bbox `255.17, 653.88, 278.10, 661.94`
 - `.` — `OptimaLTStd-Bold` 5.80 pt; PDF flags `20`; bbox `278.10, 654.77, 281.32, 661.68`
 
-## Raw line 085 (block 32, line 84)
+## Raw line 084 (block 32, line 83)
 
 **EN source:** Deal your target MAGIC DMG equal to the
 
@@ -999,7 +977,7 @@
 - `MAGIC DMG` — `OptimaLTStd-Bold` 6.76 pt; PDF flags `20`; bbox `244.05, 662.42, 284.68, 670.48`
 - `equal to the` — `OptimaLTStd` 6.76 pt; PDF flags `4`; bbox `284.68, 662.43, 323.03, 670.48`
 
-## Raw line 086 (block 33, line 85)
+## Raw line 085 (block 33, line 84)
 
 **EN source:** amount of Damage the previous Attack or
 
@@ -1010,7 +988,7 @@
 **PDF span runs:**
 - `amount of Damage the previous Attack or` — `OptimaLTStd` 6.76 pt; PDF flags `4`; bbox `197.53, 670.55, 320.81, 678.59`
 
-## Raw line 087 (block 33, line 86)
+## Raw line 086 (block 33, line 85)
 
 **EN source:** Spell dealt. After dealing this Damage, end
 
@@ -1021,7 +999,7 @@
 **PDF span runs:**
 - `Spell dealt. After dealing this Damage, end` — `OptimaLTStd` 6.76 pt; PDF flags `4`; bbox `196.15, 678.66, 322.19, 686.71`
 
-## Raw line 088 (block 34, line 87)
+## Raw line 087 (block 34, line 86)
 
 **EN source:** your turn.
 
@@ -1032,7 +1010,7 @@
 **PDF span runs:**
 - `your turn.` — `OptimaLTStd` 6.76 pt; PDF flags `4`; bbox `244.00, 686.78, 272.45, 694.83`
 
-## Raw line 089 (block 35, line 88)
+## Raw line 088 (block 35, line 87)
 
 **EN source:** Abbadon's Subtlety
 
@@ -1043,7 +1021,7 @@
 **PDF span runs:**
 - `Abbadon's Subtlety` — `Cinzel-Regular` 11.59 pt; PDF flags `4`; bbox `196.47, 602.41, 319.99, 618.04`
 
-## Raw line 090 (block 36, line 89)
+## Raw line 089 (block 36, line 88)
 
 **EN source:** CRUOR • LVL 4
 
@@ -1054,9 +1032,9 @@
 **PDF span runs:**
 - `CRUOR • LVL 4` — `OptimaLTStd-Bold` 6.76 pt; PDF flags `20`; bbox `234.17, 621.95, 282.12, 630.02`
 
-## Raw line 091 (block 37, line 90)
+## Raw line 090 (block 37, line 89)
 
-**EN source:** Example: Abbadon's Subtlety ends the turn after dealing Damage.
+**EN source:** Example:Abbadon's Subtlety ends the turn after dealing Damage.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1064,11 +1042,10 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `99.79, 720.02, 145.33, 734.44`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `145.33, 721.50, 148.11, 733.45`
 - `Abbadon's Subtlety` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `148.11, 721.58, 232.30, 733.46`
 - `ends the turn after dealing Damage.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `232.30, 721.62, 391.80, 733.52`
 
-## Raw line 092 (block 37, line 91)
+## Raw line 091 (block 37, line 90)
 
 **EN source:** If this Damage was dealt, the target taking this damage could use
 
@@ -1079,7 +1056,7 @@
 **PDF span runs:**
 - `If this Damage was dealt, the target taking this damage could use` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `99.79, 732.62, 381.38, 744.52`
 
-## Raw line 093 (block 37, line 92)
+## Raw line 092 (block 37, line 91)
 
 **EN source:** any Actions or Abilities they have to prevent this damage, redirect
 
@@ -1090,7 +1067,7 @@
 **PDF span runs:**
 - `any Actions or Abilities they have to prevent this damage, redirect` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `99.79, 743.62, 384.55, 755.52`
 
-## Raw line 094 (block 37, line 93)
+## Raw line 093 (block 37, line 92)
 
 **EN source:** this damage, or otherwise finish reacting before the turn ends.
 
@@ -1101,9 +1078,9 @@
 **PDF span runs:**
 - `this damage, or otherwise finish reacting before the turn ends.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `99.79, 754.62, 365.45, 766.52`
 
-## Raw line 095 (block 38, line 94)
+## Raw line 094 (block 38, line 93)
 
-**EN source:** Example: Hammer Helm grants the Adventurer +1 PHYSICAL
+**EN source:** Example:Hammer Helm grants the Adventurer +1 PHYSICAL
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1111,12 +1088,11 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `429.74, 717.39, 475.28, 731.80`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `475.28, 718.87, 478.06, 730.82`
 - `Hammer Helm` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `478.06, 718.95, 542.49, 730.83`
 - `grants the Adventurer` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `542.49, 718.99, 639.45, 730.89`
 - `+1 PHYSICAL` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `639.45, 719.89, 696.20, 730.62`
 
-## Raw line 096 (block 38, line 95)
+## Raw line 095 (block 38, line 94)
 
 **EN source:** DMG to their Attacks. In addition, an Adventurer can Exhaust the
 
@@ -1128,7 +1104,7 @@
 - `DMG` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `429.74, 730.89, 451.75, 741.62`
 - `to their Attacks. In addition, an Adventurer can Exhaust the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `451.75, 729.99, 709.48, 741.89`
 
-## Raw line 097 (block 38, line 96)
+## Raw line 096 (block 38, line 95)
 
 **EN source:** Discipline to re-roll any dice in their Combat Dice Pool so long
 
@@ -1139,7 +1115,7 @@
 **PDF span runs:**
 - `Discipline to re-roll any dice in their Combat Dice Pool so long` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `429.74, 740.99, 704.79, 752.89`
 
-## Raw line 098 (block 38, line 97)
+## Raw line 097 (block 38, line 96)
 
 **EN source:** as they are making a
 
@@ -1150,7 +1126,7 @@
 **PDF span runs:**
 - `as they are making a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `429.74, 751.99, 520.87, 763.89`
 
-## Raw line 099 (block 38, line 98)
+## Raw line 098 (block 38, line 97)
 
 **EN source:** Attack and have a 2-Handed Weapon
 
@@ -1159,12 +1135,11 @@
 **Line bbox:** `529.69, 751.97, 696.47, 763.89`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `529.69, 752.91, 532.19, 763.62`
 - `Attack and have a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `532.19, 751.99, 611.62, 763.89`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `611.62, 751.97, 617.18, 763.89`
 - `-Handed Weapon` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `617.18, 751.99, 696.47, 763.89`
 
-## Raw line 100 (block 38, line 99)
+## Raw line 099 (block 38, line 98)
 
 **EN source:** equipped. While this card is Exhausted, the Adventurer still Gains
 
@@ -1175,9 +1150,9 @@
 **PDF span runs:**
 - `equipped. While this card is Exhausted, the Adventurer still Gains` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `429.74, 762.99, 713.77, 774.89`
 
-## Raw line 101 (block 38, line 100)
+## Raw line 100 (block 38, line 99)
 
-**EN source:** the bonus to PHYSICAL DMG from the Passive Ability.
+**EN source:** the bonus to PHYSICAL DMGfrom the Passive Ability.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1186,10 +1161,9 @@
 **PDF span runs:**
 - `the bonus to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `429.74, 773.99, 485.89, 785.89`
 - `PHYSICAL DMG` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `485.89, 774.89, 551.69, 785.62`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `551.69, 774.91, 554.19, 785.62`
 - `from the Passive Ability.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `554.19, 773.99, 658.39, 785.89`
 
-## Raw line 102 (block 39, line 101)
+## Raw line 101 (block 39, line 100)
 
 **EN source:** Using Abilities Continued
 
@@ -1201,7 +1175,7 @@
 - `Using Abilities` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `85.93, 56.93, 234.59, 81.19`
 - `Continued` — `Cinzel-Regular` 11.00 pt; PDF flags `4`; bbox `234.59, 63.76, 301.45, 78.59`
 
-## Raw line 103 (block 40, line 102)
+## Raw line 102 (block 40, line 101)
 
 **EN source:** 48
 
@@ -1212,7 +1186,7 @@
 **PDF span runs:**
 - `48` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 104 (block 40, line 103)
+## Raw line 103 (block 40, line 102)
 
 **EN source:** 48
 

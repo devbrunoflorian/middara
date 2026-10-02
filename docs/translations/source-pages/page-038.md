@@ -84,7 +84,7 @@
 
 ## Raw line 007 (block 2, line 6)
 
-**EN source:** IMPORTANT: Adventurers are limited to 1 Move Action per turn.
+**EN source:** IMPORTANT:Adventurers are limited to 1 Move Action per turn.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -92,7 +92,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `207.87, 268.28, 270.47, 280.26`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `270.47, 268.32, 273.25, 280.24`
 - `Adventurers are limited to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `272.95, 268.34, 379.27, 280.24`
 - `1` — `OptimaLTStd-Bold` 8.00 pt; PDF flags `20`; bbox `378.97, 270.17, 383.41, 279.70`
 - `Move Action per turn.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `383.17, 268.34, 474.08, 280.24`
@@ -117,7 +116,6 @@
 **Line bbox:** `163.61, 287.65, 170.28, 299.57`
 
 **PDF span runs:**
-- `` — `OptimaLTStd-Bold` 4.00 pt; PDF flags `20`; bbox `163.61, 293.18, 164.72, 297.95`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `164.72, 287.65, 170.28, 299.57`
 
 ## Raw line 010 (block 4, line 9)
@@ -201,7 +199,7 @@
 
 ## Raw line 017 (block 9, line 16)
 
-**EN source:** never give Items or Companions to other Adventurers. Any amount of equipping/un-equipping/taking is allowed for 1 SP.
+**EN source:** never give Items or Companions to other Adventurers. Any amount of equipping/un-equipping/taking is allowed for 1SP.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -210,7 +208,6 @@
 **PDF span runs:**
 - `never give Items or Companions to other Adventurers. Any amount of equipping/un-equipping/taking is allowed for` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `197.87, 355.50, 661.30, 367.40`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `661.00, 356.40, 666.00, 367.13`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `665.73, 356.42, 668.23, 367.13`
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `667.96, 356.40, 677.20, 367.13`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `676.93, 355.50, 679.71, 367.40`
 
@@ -285,7 +282,7 @@
 
 ## Raw line 024 (block 10, line 23)
 
-**EN source:** times as they have SP to do so.
+**EN source:** times as they have SPto do so.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -294,9 +291,7 @@
 **PDF span runs:**
 - `times as they have` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.18, 151.35, 167.45, 163.25`
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `167.44, 152.25, 176.95, 162.98`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `176.95, 151.33, 179.73, 163.25`
 - `to do so.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `179.73, 151.35, 216.98, 163.25`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `216.98, 151.33, 219.76, 163.25`
 
 ## Raw line 025 (block 11, line 24)
 
@@ -402,7 +397,6 @@
 **PDF span runs:**
 - `During the Dodge step of an Attack, roll the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `197.87, 411.63, 388.52, 423.53`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `388.52, 412.53, 415.69, 423.26`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `415.69, 412.55, 418.19, 423.26`
 
 ## Raw line 034 (block 15, line 33)
 
@@ -441,16 +435,14 @@
 
 ## Raw line 037 (block 15, line 36)
 
-**EN source:** is rolled, no additional Defense is added. See Dodge Pg. 52.
+**EN source:** is rolled, no additional Defense is added. SeeDodge Pg. 52.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
 **Line bbox:** `230.38, 424.51, 492.09, 438.53`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `230.38, 426.63, 233.16, 438.53`
 - `is rolled, no additional Defense is added. See` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `233.16, 424.63, 427.70, 436.53`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `21`; bbox `427.70, 425.53, 430.20, 436.26`
 - `Dodge` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `23`; bbox `430.20, 424.51, 459.29, 436.46`
 - `Pg. 52.` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `459.29, 424.63, 492.09, 436.53`
 
@@ -476,7 +468,6 @@
 **PDF span runs:**
 - `When building your Combat Dice Pool during an Attack or when determining the Force of a Spell, you may spend` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `197.87, 439.96, 690.67, 451.86`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `690.67, 440.86, 695.67, 451.59`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `695.67, 439.96, 698.45, 451.86`
 
 ## Raw line 040 (block 17, line 39)
 
@@ -491,7 +482,6 @@
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `244.01, 451.86, 253.51, 462.59`
 - `to add the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `253.51, 450.96, 302.43, 462.86`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `302.43, 451.86, 329.60, 462.59`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `329.60, 451.88, 332.10, 462.59`
 
 ## Raw line 041 (block 17, line 40)
 
@@ -535,7 +525,6 @@
 **Line bbox:** `222.04, 478.63, 479.93, 492.53`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `222.04, 480.63, 224.82, 492.53`
 - `is rolled during this Attack, the Attack automatically misses.` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `224.82, 478.63, 479.93, 490.53`
 
 ## Raw line 045 (block 19, line 44)
@@ -560,11 +549,10 @@
 **PDF span runs:**
 - `rolled on the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `394.94, 497.29, 455.53, 509.19`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `455.53, 498.20, 482.70, 508.92`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `482.70, 498.21, 485.20, 508.92`
 
 ## Raw line 047 (block 19, line 46)
 
-**EN source:** to add +1 to the Force of the Spell per
+**EN source:** to add +1 to the Force of the Spellper
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -575,7 +563,6 @@
 - `+` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `528.65, 497.27, 534.71, 509.19`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `534.71, 498.20, 539.72, 508.92`
 - `to the Force of the Spell` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `539.72, 497.29, 644.20, 509.19`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `644.20, 498.20, 646.70, 508.92`
 - `per` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `646.70, 497.29, 663.37, 509.19`
 
 ## Raw line 048 (block 19, line 47)
@@ -587,24 +574,20 @@
 **Line bbox:** `672.64, 497.29, 728.23, 510.19`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `672.64, 498.29, 675.42, 510.19`
 - `spent. If the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `675.42, 497.29, 728.23, 509.19`
 
 ## Raw line 049 (block 19, line 48)
 
-**EN source:** is rolled during this Spell, the Spell automatically fails to affect the target. Immediately deal 3 IRREDUCIBLE DMG to the
+**EN source:** is rolled during this Spell, the Spell automatically fails to affect the target. Immediately deal 3IRREDUCIBLE DMGto the
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
 **Line bbox:** `205.92, 508.29, 719.94, 522.19`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `205.92, 510.29, 208.70, 522.19`
 - `is rolled during this Spell, the Spell automatically fails to affect the target. Immediately deal` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `208.70, 508.29, 602.19, 520.19`
 - `3` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `21`; bbox `602.19, 509.20, 607.19, 519.92`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `5`; bbox `607.19, 509.21, 609.69, 519.92`
 - `IRREDUCIBLE DMG` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `21`; bbox `609.69, 509.20, 690.20, 519.92`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `5`; bbox `690.20, 509.21, 692.70, 519.92`
 - `to the` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `692.70, 508.29, 719.94, 520.19`
 
 ## Raw line 050 (block 19, line 49)
@@ -638,7 +621,6 @@
 **Line bbox:** `163.61, 541.02, 170.28, 552.94`
 
 **PDF span runs:**
-- `` — `OptimaLTStd-Bold` 4.00 pt; PDF flags `20`; bbox `163.61, 546.55, 164.72, 551.32`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `164.72, 541.02, 170.28, 552.94`
 
 ## Raw line 053 (block 21, line 52)
@@ -656,7 +638,7 @@
 
 ## Raw line 054 (block 21, line 53)
 
-**EN source:** any subsequent Counter by 1 SP. See Counter Pg. 49.
+**EN source:** any subsequent Counter by 1 SP.SeeCounter Pg. 49.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -666,9 +648,7 @@
 - `any subsequent Counter by` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `197.87, 547.62, 317.57, 559.52`
 - `1 SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `317.57, 548.53, 334.58, 559.25`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `334.58, 547.62, 337.36, 559.52`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `337.36, 548.53, 339.86, 559.25`
 - `See` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `339.86, 547.62, 354.86, 559.52`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `354.86, 548.53, 357.36, 559.25`
 - `Counter` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `357.36, 547.50, 392.43, 559.45`
 - `Pg. 49.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `392.43, 547.62, 425.23, 559.52`
 

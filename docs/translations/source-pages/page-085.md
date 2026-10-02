@@ -50,7 +50,7 @@
 
 ## Raw line 004 (block 1, line 3)
 
-**EN source:** Each Adventurer gets 4 dice: Give one Adventurer 2 WHITE
+**EN source:** Each Adventurer gets 4 dice: Give one Adventurer 2WHITE
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -61,7 +61,6 @@
 - `4` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `179.24, 154.23, 184.80, 166.15`
 - `dice: Give one Adventurer` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `184.80, 154.25, 303.26, 166.15`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `303.26, 154.23, 308.82, 166.15`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `308.82, 154.25, 311.60, 166.15`
 - `WHITE` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `311.60, 154.23, 346.05, 166.15`
 
 ## Raw line 005 (block 1, line 4)
@@ -77,7 +76,7 @@
 
 ## Raw line 006 (block 1, line 5)
 
-**EN source:** 2 PURPLE
+**EN source:** 2PURPLE
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -85,12 +84,11 @@
 
 **PDF span runs:**
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `86.79, 165.23, 92.35, 177.15`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `92.35, 165.25, 95.13, 177.15`
 - `PURPLE` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `95.13, 165.23, 132.92, 177.15`
 
 ## Raw line 007 (block 1, line 6)
 
-**EN source:** dice. Another gets 2 TEAL
+**EN source:** dice. Another gets 2TEAL
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -99,22 +97,19 @@
 **PDF span runs:**
 - `dice. Another gets` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `143.01, 165.25, 226.01, 177.15`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `226.01, 165.23, 231.57, 177.15`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `231.57, 165.25, 234.35, 177.15`
 - `TEAL` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `234.35, 165.23, 259.36, 177.15`
 
 ## Raw line 008 (block 1, line 7)
 
-**EN source:** and 2 ORANGE
+**EN source:** and 2ORANGE
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
 **Line bbox:** `269.45, 165.23, 343.92, 177.15`
 
 **PDF span runs:**
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `269.45, 165.23, 272.23, 177.15`
 - `and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `272.23, 165.25, 291.13, 177.15`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `291.13, 165.23, 296.69, 177.15`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `296.69, 165.25, 299.47, 177.15`
 - `ORANGE` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `299.47, 165.23, 343.92, 177.15`
 
 ## Raw line 009 (block 1, line 8)
@@ -130,7 +125,7 @@
 
 ## Raw line 010 (block 1, line 9)
 
-**EN source:** Another gets 2 GREEN
+**EN source:** Another gets 2GREEN
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -139,12 +134,11 @@
 **PDF span runs:**
 - `Another gets` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.79, 176.25, 143.48, 188.15`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `143.48, 176.23, 149.04, 188.15`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `149.04, 176.25, 151.82, 188.15`
 - `GREEN` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `151.82, 176.23, 186.27, 188.15`
 
 ## Raw line 011 (block 1, line 10)
 
-**EN source:** and 2 RED
+**EN source:** and 2RED
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -153,7 +147,6 @@
 **PDF span runs:**
 - `and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `196.36, 176.25, 218.04, 188.15`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `218.04, 176.23, 223.60, 188.15`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `223.60, 176.25, 226.38, 188.15`
 - `RED` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `226.38, 176.23, 248.05, 188.15`
 
 ## Raw line 012 (block 1, line 11)
@@ -195,7 +188,7 @@
 
 ## Raw line 015 (block 1, line 14)
 
-**EN source:** 5 Fate tokens. These may be tracked with Damage tokens and SP tokens
+**EN source:** 5Fate tokens. These may be tracked with Damage tokens and SP tokens
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -203,7 +196,6 @@
 
 **PDF span runs:**
 - `5` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `86.79, 198.23, 92.35, 210.15`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `92.35, 198.25, 95.13, 210.15`
 - `Fate` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `95.13, 198.21, 115.47, 210.09`
 - `tokens. These may be tracked with` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `115.47, 198.25, 265.40, 210.15`
 - `Damage` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `265.40, 198.21, 301.51, 210.09`
@@ -224,7 +216,7 @@
 
 ## Raw line 017 (block 2, line 16)
 
-**EN source:** The game takes place through a series of 5 Rounds. The goal of each
+**EN source:** The game takes place through a series of 5Rounds. The goal of each
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -233,7 +225,6 @@
 **PDF span runs:**
 - `The game takes place through a series of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.79, 225.92, 263.62, 237.82`
 - `5` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `263.62, 225.90, 269.18, 237.82`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `269.18, 225.92, 271.96, 237.82`
 - `Rounds` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `271.96, 225.88, 304.28, 237.76`
 - `. The goal of each` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `304.28, 225.92, 382.95, 237.82`
 
@@ -248,7 +239,6 @@
 **PDF span runs:**
 - `Round is for Adventurers to roll their dice and have the Symbols on all` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.79, 236.92, 391.33, 248.82`
 - `4` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `391.33, 236.90, 396.89, 248.82`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `396.89, 236.92, 399.67, 248.82`
 
 ## Raw line 019 (block 2, line 18)
 
@@ -316,7 +306,6 @@
 **PDF span runs:**
 - `If Adventurers can match their Symbols well enough to survive these` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.79, 314.26, 382.91, 326.16`
 - `5` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `382.91, 314.24, 388.47, 326.16`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `388.47, 314.26, 391.25, 326.16`
 
 ## Raw line 025 (block 4, line 24)
 
@@ -463,7 +452,7 @@
 
 ## Raw line 036 (block 8, line 35)
 
-**EN source:** may spend 1 of their 5 Fate tokens. For each Fate token they spend, they
+**EN source:** may spend 1 of their 5Fate tokens. For each Fate token they spend, they
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -474,7 +463,6 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `135.95, 474.59, 141.51, 486.51`
 - `of their` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `141.51, 474.61, 177.64, 486.51`
 - `5` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `177.64, 474.59, 183.20, 486.51`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `183.20, 474.61, 185.98, 486.51`
 - `Fate` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `185.98, 474.57, 203.54, 486.45`
 - `tokens. For each` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `203.54, 474.61, 279.05, 486.51`
 - `Fate` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `279.05, 474.57, 296.61, 486.45`
@@ -495,7 +483,7 @@
 
 ## Raw line 038 (block 9, line 37)
 
-**EN source:** If an Adventurer does not want to Lock In any of the dice they rolled, they
+**EN source:** If an Adventurer does not want to Lock Inany of the dice they rolled, they
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -504,13 +492,12 @@
 **PDF span runs:**
 - `If an Adventurer does not want to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.79, 502.28, 232.62, 514.18`
 - `Lock In` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `232.62, 502.16, 264.31, 514.11`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `264.31, 502.28, 267.09, 514.18`
 - `any` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `267.09, 502.26, 282.47, 514.18`
 - `of the dice they rolled, they` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `282.47, 502.28, 406.42, 514.18`
 
 ## Raw line 039 (block 9, line 38)
 
-**EN source:** may spend 1 Fate token to skip Locking In any of their dice.
+**EN source:** may spend 1Fate token to skipLocking In any of their dice.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -519,10 +506,8 @@
 **PDF span runs:**
 - `may spend` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.79, 513.28, 135.95, 525.18`
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `135.95, 513.26, 141.51, 525.18`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `141.51, 513.28, 144.29, 525.18`
 - `Fate` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `144.29, 513.24, 161.85, 525.12`
 - `token to skip` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `161.85, 513.28, 219.66, 525.18`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `219.66, 513.26, 222.44, 525.18`
 - `Locking In` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `222.44, 513.16, 267.66, 525.11`
 - `any of their dice.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `267.66, 513.28, 343.07, 525.18`
 
@@ -541,7 +526,7 @@
 
 ## Raw line 041 (block 10, line 40)
 
-**EN source:** decided to not Lock In any by spending 1 of their 5 Fate tokens, they will
+**EN source:** decided to not Lock In any by spending 1 of their 5Fate tokens, they will
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -554,7 +539,6 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `259.31, 540.93, 264.87, 552.85`
 - `of their` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `264.87, 540.95, 301.00, 552.85`
 - `5` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `301.00, 540.93, 306.56, 552.85`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `306.56, 540.95, 309.34, 552.85`
 - `Fate` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `309.34, 540.91, 326.90, 552.79`
 - `tokens, they will` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `326.90, 540.95, 403.05, 552.85`
 
@@ -585,7 +569,7 @@
 
 ## Raw line 044 (block 11, line 43)
 
-**EN source:** die they would like to Lock In. Fate tokens may be spent the same way as
+**EN source:** diethey would like to Lock In. Fate tokens may be spent the same way as
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -593,7 +577,6 @@
 
 **PDF span runs:**
 - `die` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.79, 579.62, 100.13, 591.52`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `100.13, 579.60, 102.91, 591.52`
 - `they would like to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `102.91, 579.62, 183.39, 591.52`
 - `Lock In` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `183.39, 579.50, 215.08, 591.45`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `215.08, 579.62, 220.64, 591.52`
@@ -737,11 +720,10 @@
 - `4` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `111.80, 706.60, 117.36, 718.52`
 - `of their dice, all other Adventurers with any` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `117.36, 706.62, 309.31, 718.52`
 - `non-Locked In` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `309.31, 706.60, 371.99, 718.52`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `371.99, 706.62, 374.77, 718.52`
 
 ## Raw line 055 (block 14, line 54)
 
-**EN source:** remaining dice must make 1 more roll and must Lock In all dice from this
+**EN source:** remaining dice must make 1 more roll and mustLock In all dice from this
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -754,7 +736,6 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `203.66, 717.60, 209.22, 729.52`
 - `more roll and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `209.22, 717.62, 273.13, 729.52`
 - `must` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `273.13, 717.58, 293.87, 729.46`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `293.87, 717.62, 296.65, 729.52`
 - `Lock In` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `296.65, 717.50, 328.34, 729.45`
 - `all dice from this` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `328.34, 717.62, 406.15, 729.52`
 
@@ -875,7 +856,6 @@
 **PDF span runs:**
 - `If an Adventurer matches the Abraxis card's Symbols exactly, they Gain` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `416.15, 170.92, 723.93, 182.82`
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `723.93, 170.90, 729.49, 182.82`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `729.49, 170.92, 732.27, 182.82`
 
 ## Raw line 065 (block 18, line 64)
 
@@ -912,7 +892,7 @@
 
 ## Raw line 068 (block 20, line 67)
 
-**EN source:** continues for a total of 5 Rounds. After the end of the fifth Round, rewards
+**EN source:** continues for a total of 5 Rounds. After the end of the fifthRound, rewards
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -922,7 +902,6 @@
 - `continues for a total of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `416.15, 231.93, 515.65, 243.83`
 - `5` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `515.65, 231.91, 521.21, 243.83`
 - `Rounds. After the end of the fifth` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `521.21, 231.93, 663.70, 243.83`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `663.70, 231.91, 666.48, 243.83`
 - `Round, rewards` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `666.48, 231.93, 736.88, 243.83`
 
 ## Raw line 069 (block 20, line 68)
@@ -987,7 +966,7 @@
 
 ## Raw line 074 (block 23, line 73)
 
-**EN source:** e W
+**EN source:** eW
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -995,7 +974,6 @@
 
 **PDF span runs:**
 - `e` — `AristelleSans-Regular` 11.11 pt; PDF flags `4`; bbox `563.61, 342.73, 569.20, 357.22`
-- `` — `AristelleSans-Regular` 11.11 pt; PDF flags `4`; bbox `569.09, 342.72, 573.02, 357.13`
 - `W` — `AristelleSans-Regular` 11.11 pt; PDF flags `4`; bbox `572.91, 342.70, 582.42, 357.27`
 
 ## Raw line 075 (block 24, line 74)
@@ -1034,7 +1012,7 @@
 
 ## Raw line 078 (block 27, line 77)
 
-**EN source:** 2  2
+**EN source:** 22
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1042,9 +1020,7 @@
 
 **PDF span runs:**
 - `2` — `OptimaLTStd-Bold` 7.41 pt; PDF flags `20`; bbox `563.44, 623.25, 567.56, 632.08`
-- `` — `OptimaLTStd` 7.41 pt; PDF flags `4`; bbox `569.45, 625.02, 573.27, 633.83`
 - `2` — `OptimaLTStd-Bold` 7.41 pt; PDF flags `20`; bbox `575.02, 623.39, 579.14, 632.22`
-- `` — `OptimaLTStd` 7.41 pt; PDF flags `4`; bbox `581.18, 625.95, 583.24, 634.76`
 
 ## Raw line 079 (block 28, line 78)
 
@@ -1089,7 +1065,6 @@
 
 **PDF span runs:**
 - `NAME` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `466.29, 671.13, 494.45, 683.05`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `494.45, 671.15, 497.23, 683.05`
 
 ## Raw line 083 (block 31, line 82)
 

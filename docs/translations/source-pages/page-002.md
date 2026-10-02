@@ -285,7 +285,6 @@
 
 **PDF span runs:**
 - `Producer:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `264.16, 529.55, 306.78, 541.47`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `306.78, 529.57, 312.34, 541.47`
 
 ## Raw line 026 (block 17, line 25)
 
@@ -308,7 +307,6 @@
 
 **PDF span runs:**
 - `Game Design:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `264.16, 556.22, 325.84, 568.14`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `325.84, 556.24, 331.40, 568.14`
 
 ## Raw line 028 (block 18, line 27)
 
@@ -386,7 +384,6 @@
 
 **PDF span runs:**
 - `Rulebook:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `264.16, 641.56, 308.07, 653.48`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `308.07, 641.58, 313.63, 653.48`
 
 ## Raw line 035 (block 20, line 34)
 
@@ -409,7 +406,6 @@
 
 **PDF span runs:**
 - `Project Management:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `264.16, 669.23, 357.33, 681.15`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `357.33, 669.25, 362.89, 681.15`
 
 ## Raw line 037 (block 21, line 36)
 
@@ -432,7 +428,6 @@
 
 **PDF span runs:**
 - `Cover Art:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `264.16, 695.90, 308.82, 707.82`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `308.82, 695.92, 314.38, 707.82`
 
 ## Raw line 039 (block 22, line 38)
 
@@ -455,7 +450,6 @@
 
 **PDF span runs:**
 - `Tile and Token Art:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `264.16, 721.57, 345.07, 733.49`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `345.07, 721.59, 350.63, 733.49`
 
 ## Raw line 041 (block 23, line 40)
 
@@ -478,7 +472,6 @@
 
 **PDF span runs:**
 - `Item Art:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `264.16, 747.24, 303.05, 759.16`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `303.05, 747.26, 308.61, 759.16`
 
 ## Raw line 043 (block 24, line 42)
 
@@ -512,7 +505,6 @@
 
 **PDF span runs:**
 - `Character Art:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `423.99, 529.56, 485.93, 541.48`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `485.93, 529.58, 491.49, 541.48`
 
 ## Raw line 046 (block 25, line 45)
 
@@ -557,7 +549,6 @@
 
 **PDF span runs:**
 - `3D Art:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `423.99, 576.39, 456.23, 588.31`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `456.23, 576.41, 461.79, 588.31`
 
 ## Raw line 050 (block 25, line 49)
 
@@ -602,7 +593,6 @@
 
 **PDF span runs:**
 - `Writing and Storyboard:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `423.99, 623.22, 529.72, 635.14`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `529.72, 623.24, 535.28, 635.14`
 
 ## Raw line 054 (block 25, line 53)
 
@@ -647,7 +637,6 @@
 
 **PDF span runs:**
 - `Editing and Proofreading:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `423.99, 670.05, 534.67, 681.97`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `534.67, 670.07, 540.23, 681.97`
 
 ## Raw line 058 (block 25, line 57)
 
@@ -703,7 +692,6 @@
 
 **PDF span runs:**
 - `Companion App Programming:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `423.99, 727.88, 558.57, 739.80`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `558.57, 727.90, 564.13, 739.80`
 
 ## Raw line 063 (block 25, line 62)
 
@@ -726,7 +714,6 @@
 
 **PDF span runs:**
 - `Companion App Sound:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `423.99, 752.71, 527.39, 764.63`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `527.39, 752.73, 532.95, 764.63`
 
 ## Raw line 065 (block 25, line 64)
 
@@ -760,7 +747,6 @@
 
 **PDF span runs:**
 - `Playtesters:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `583.82, 529.54, 632.97, 541.46`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `632.97, 529.56, 638.53, 541.46`
 
 ## Raw line 068 (block 26, line 67)
 
@@ -882,7 +868,6 @@
 
 **PDF span runs:**
 - `Community Contributors:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `583.82, 656.21, 696.08, 668.13`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `696.08, 656.23, 701.64, 668.13`
 
 ## Raw line 079 (block 27, line 78)
 
@@ -938,7 +923,6 @@
 
 **PDF span runs:**
 - `Special Thanks:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `583.82, 716.88, 649.78, 728.80`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `649.78, 716.90, 655.34, 728.80`
 
 ## Raw line 084 (block 28, line 83)
 

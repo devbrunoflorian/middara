@@ -101,7 +101,7 @@
 
 ## Raw line 008 (block 2, line 7)
 
-**EN source:** from a Poppet. Since Poppet's do not have Combat Dice, if a figure provokes a Break Attack from a Poppet they are dealt 1 MAGIC DMG.
+**EN source:** from a Poppet. Since Poppet's do not have Combat Dice, if a figure provokes a Break Attack from a Poppetthey are dealt 1MAGIC DMG.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -114,10 +114,8 @@
 - `Poppet's` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `265.84, 110.17, 302.82, 122.05`
 - `do not have Combat Dice, if a figure provokes a Break Attack from a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `302.82, 110.21, 601.65, 122.11`
 - `Poppet` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `601.65, 110.17, 631.96, 122.05`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `631.96, 110.09, 634.74, 122.04`
 - `they are dealt` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `634.74, 110.21, 695.87, 122.11`
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `695.87, 110.19, 701.43, 122.11`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `701.43, 110.21, 704.21, 122.11`
 - `MAGIC DMG` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `704.21, 110.19, 764.28, 122.11`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `764.28, 110.21, 769.84, 122.11`
 
@@ -228,7 +226,7 @@
 
 ## Raw line 017 (block 4, line 16)
 
-**EN source:** Roots count as figures with 6 HP, 10 Defense, and 6 Armor. Roots have RESISTANCE : PHYSICAL DMG and MAGICAL DAMAGE unless
+**EN source:** Roots count as figures with 6HP, 10 Defense, and 6 Armor. Roots have RESISTANCE : PHYSICAL DMG and MAGICAL DAMAGE unless
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -238,7 +236,6 @@
 - `Roots` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `173.29, 207.88, 197.27, 219.76`
 - `count as figures with` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `197.27, 207.92, 291.76, 219.82`
 - `6` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `291.76, 207.90, 297.32, 219.82`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `297.32, 207.92, 300.10, 219.82`
 - `HP` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `300.10, 207.90, 313.44, 219.82`
 - `,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `313.44, 207.92, 319.00, 219.82`
 - `10` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `319.00, 207.90, 330.12, 219.82`
@@ -254,7 +251,7 @@
 
 ## Raw line 018 (block 4, line 17)
 
-**EN source:** the source of the Damage is from an AXE. Roots have IMMUNITY : SPELLS, EFFECTS.
+**EN source:** the source of the Damage is from an AXE.Roots have IMMUNITY : SPELLS, EFFECTS.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -264,7 +261,6 @@
 - `the source of the Damage is from an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `173.29, 218.92, 332.11, 230.82`
 - `AXE` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `332.11, 218.90, 349.89, 230.82`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `349.89, 218.92, 352.67, 230.82`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `352.67, 218.90, 355.45, 230.82`
 - `Roots` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `355.45, 218.88, 379.43, 230.76`
 - `have` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `379.43, 218.92, 405.13, 230.82`
 - `IMMUNITY : SPELLS, EFFECTS` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `405.13, 218.40, 538.49, 230.82`
@@ -297,7 +293,6 @@
 
 **PDF span runs:**
 - `GREEN` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `173.29, 243.73, 204.96, 255.65`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `204.96, 243.75, 207.74, 255.65`
 
 ## Raw line 021 (block 4, line 20)
 
@@ -339,7 +334,6 @@
 - `Corpse Collector` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `431.85, 264.09, 506.00, 275.97`
 - `Combatant` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `506.00, 264.13, 553.24, 276.03`
 - `.` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `553.24, 264.09, 556.02, 275.97`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `556.02, 264.13, 558.80, 276.03`
 
 ## Raw line 024 (block 6, line 23)
 
@@ -358,7 +352,7 @@
 
 ## Raw line 025 (block 6, line 24)
 
-**EN source:** Tentacle token, they put the token on their card as a Special Effect. Figures may be affected by multiple Tentacle tokens. Figures with
+**EN source:** Tentacle token, they put the token on their card as a Special Effect. Figures may be affected by multiple Tentacletokens. Figures with
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -370,7 +364,6 @@
 - `Special Effect` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `399.07, 288.92, 455.93, 300.80`
 - `. Figures may be affected by multiple` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `455.93, 288.96, 616.99, 300.86`
 - `Tentacle` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `616.99, 288.92, 652.68, 300.80`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `652.68, 288.84, 655.46, 300.79`
 - `tokens. Figures with` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `655.46, 288.96, 743.65, 300.86`
 
 ## Raw line 026 (block 6, line 25)
@@ -442,7 +435,7 @@
 
 ## Raw line 031 (block 6, line 30)
 
-**EN source:** Tentacles cannot be moved by Currents and other Special Encounter Rules that would move figures or tokens on the board.
+**EN source:** Tentaclescannot be moved by Currents and other Special Encounter Rules that would move figures or tokens on the board.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -450,7 +443,6 @@
 
 **PDF span runs:**
 - `Tentacles` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `191.29, 352.43, 230.87, 364.31`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `230.87, 352.47, 233.65, 364.37`
 - `cannot` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `233.65, 352.35, 263.37, 364.30`
 - `be moved by Currents and other Special Encounter Rules that would move figures or tokens on the board.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `263.37, 352.47, 722.78, 364.37`
 
@@ -516,7 +508,6 @@
 **Line bbox:** `58.67, 39.97, 303.21, 56.15`
 
 **PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `58.67, 39.97, 61.67, 56.15`
 - `Table 9:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `58.67, 40.89, 100.29, 55.31`
 - `Combatant Tokens Continued` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `100.29, 39.97, 303.21, 56.15`
 

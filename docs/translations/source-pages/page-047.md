@@ -72,7 +72,7 @@
 
 ## Raw line 006 (block 2, line 5)
 
-**EN source:** 1.	 Condition Tags: Tags such as ✘DISCARD or
+**EN source:** 1.	Condition Tags: Tags such as ✘DISCARD or
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -80,7 +80,6 @@
 
 **PDF span runs:**
 - `1.` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `86.17, 160.62, 97.29, 172.54`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `97.29, 160.62, 104.17, 172.54`
 - `Condition Tags:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `104.17, 160.62, 173.40, 172.54`
 - `Tags such as` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `173.40, 160.64, 228.91, 172.54`
 - `✘` — `ZapfDingbatsStd` 9.00 pt; PDF flags `4`; bbox `234.02, 161.31, 240.11, 170.31`
@@ -89,7 +88,7 @@
 
 ## Raw line 007 (block 2, line 6)
 
-**EN source:** EXHAUST . See
+**EN source:** EXHAUST. See
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -97,7 +96,6 @@
 
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 9.00 pt; PDF flags `20`; bbox `317.09, 161.21, 358.38, 171.85`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `358.38, 160.29, 365.06, 172.54`
 - `. See` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `365.06, 160.64, 388.40, 172.54`
 
 ## Raw line 008 (block 2, line 7)
@@ -114,7 +112,7 @@
 
 ## Raw line 009 (block 3, line 8)
 
-**EN source:** 2.	 Stamina Point (SP) Cost: The amount of SP a player must spend.
+**EN source:** 2.	Stamina Point (SP) Cost: The amount of SP a player must spend.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -122,7 +120,6 @@
 
 **PDF span runs:**
 - `2.` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `86.17, 187.29, 97.29, 199.21`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `97.29, 187.29, 104.17, 199.21`
 - `Stamina Point (` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `104.17, 187.29, 170.40, 199.21`
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `170.40, 188.21, 179.91, 198.94`
 - `) Cost:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `179.91, 187.29, 208.25, 199.21`
@@ -154,7 +151,7 @@
 
 ## Raw line 012 (block 5, line 11)
 
-**EN source:** 3.	 Text Conditions: Any condition or requirement listed in the text of
+**EN source:** 3.	Text Conditions: Any condition or requirement listed in the text of
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -162,7 +159,6 @@
 
 **PDF span runs:**
 - `3.` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `86.17, 215.96, 97.29, 227.88`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `97.29, 215.96, 104.17, 227.88`
 - `Text Conditions:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `104.17, 215.96, 174.83, 227.88`
 - `Any condition or requirement listed in the text of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `174.83, 215.98, 389.94, 227.88`
 
@@ -179,7 +175,7 @@
 
 ## Raw line 014 (block 6, line 13)
 
-**EN source:** 4.	 Symbol Conditions: The symbols a player must spend. These Abilities
+**EN source:** 4.	Symbol Conditions: The symbols a player must spend. These Abilities
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -187,7 +183,6 @@
 
 **PDF span runs:**
 - `4.` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `86.17, 242.62, 97.29, 254.54`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `97.29, 242.62, 104.17, 254.54`
 - `Symbol Conditions:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `104.17, 242.62, 191.99, 254.54`
 - `The symbols a player must spend. These Abilities` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `191.99, 242.64, 403.48, 254.54`
 
@@ -780,7 +775,7 @@
 
 ## Raw line 066 (block 13, line 65)
 
-**EN source:** An ally within SOI Gains an Intervention
+**EN source:** An ally within SOIGains an Intervention
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -789,7 +784,6 @@
 **PDF span runs:**
 - `An ally within` — `OptimaLTStd` 6.61 pt; PDF flags `4`; bbox `527.08, 245.21, 568.99, 253.08`
 - `SOI` — `OptimaLTStd-Bold` 6.61 pt; PDF flags `20`; bbox `568.99, 245.20, 580.01, 253.08`
-- `` — `OptimaLTStd-Bold` 5.67 pt; PDF flags `20`; bbox `580.01, 246.07, 581.59, 252.83`
 - `Gains an` — `OptimaLTStd` 6.61 pt; PDF flags `4`; bbox `581.59, 245.21, 606.95, 253.08`
 - `Intervention` — `OptimaLTStd-Italic` 6.61 pt; PDF flags `6`; bbox `606.95, 245.19, 644.91, 253.05`
 
@@ -808,7 +802,7 @@
 
 ## Raw line 068 (block 14, line 67)
 
-**EN source:** by 1 if the target is an ally other than
+**EN source:** by 1if the target is an ally other than
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -817,7 +811,6 @@
 **PDF span runs:**
 - `by` — `OptimaLTStd` 6.61 pt; PDF flags `4`; bbox `533.06, 260.33, 541.77, 268.20`
 - `1` — `OptimaLTStd-Bold` 6.61 pt; PDF flags `20`; bbox `541.77, 260.32, 545.44, 268.20`
-- `` — `OptimaLTStd-Bold` 5.67 pt; PDF flags `20`; bbox `545.45, 261.19, 547.02, 267.95`
 - `if the target is an ally other than` — `OptimaLTStd` 6.61 pt; PDF flags `4`; bbox `547.02, 260.33, 638.93, 268.20`
 
 ## Raw line 069 (block 15, line 68)
@@ -830,7 +823,6 @@
 
 **PDF span runs:**
 - `yourself.` — `OptimaLTStd` 6.61 pt; PDF flags `4`; bbox `573.00, 267.89, 597.15, 275.76`
-- `` — `OptimaLTStd-Bold` 5.67 pt; PDF flags `20`; bbox `597.15, 268.75, 598.72, 275.51`
 
 ## Raw line 070 (block 16, line 69)
 
@@ -889,7 +881,7 @@
 
 ## Raw line 075 (block 21, line 74)
 
-**EN source:** Example: The Discipline Intervention, depicted above, has an
+**EN source:** Example:The Discipline Intervention, depicted above, has an
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -897,7 +889,6 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `427.48, 312.37, 473.02, 326.78`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `473.02, 313.85, 475.80, 325.80`
 - `The Discipline` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `475.80, 313.97, 540.94, 325.87`
 - `Intervention,` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `540.94, 313.85, 597.44, 325.80`
 - `depicted above, has an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `597.44, 313.97, 702.25, 325.87`
@@ -973,7 +964,7 @@
 
 ## Raw line 081 (block 24, line 80)
 
-**EN source:** TIP: Knowing when to use Abilities can be the
+**EN source:** TIP:Knowing when to use Abilities can be the
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -982,7 +973,6 @@
 **PDF span runs:**
 - `TIP` — `OptimaLTStd-Bold` 11.00 pt; PDF flags `20`; bbox `528.38, 682.03, 544.27, 695.14`
 - `:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `544.27, 681.37, 547.39, 695.78`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `547.39, 682.85, 550.17, 694.80`
 - `Knowing when to use Abilities can be the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `550.17, 682.97, 731.26, 694.87`
 
 ## Raw line 082 (block 24, line 81)
@@ -998,7 +988,7 @@
 
 ## Raw line 083 (block 25, line 82)
 
-**EN source:** With the Item Upgrade Master Work, an
+**EN source:** With the Item UpgradeMaster Work, an
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1006,14 +996,13 @@
 
 **PDF span runs:**
 - `With the Item Upgrade` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `528.38, 710.64, 627.00, 722.54`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `627.00, 710.52, 629.78, 722.47`
 - `Master Work` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `629.78, 710.60, 684.31, 722.48`
 - `,` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `684.31, 710.52, 687.09, 722.47`
 - `an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `687.09, 710.64, 703.21, 722.54`
 
 ## Raw line 084 (block 25, line 83)
 
-**EN source:** Adventurer may add +1 TO THE ATK ROLL at any
+**EN source:** Adventurer may add +1TO THE ATK ROLL at any
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1023,7 +1012,6 @@
 - `Adventurer may add` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `528.38, 721.64, 618.30, 733.54`
 - `+` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `618.30, 721.62, 624.36, 733.54`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `624.36, 722.54, 629.36, 733.27`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `629.36, 721.64, 632.14, 733.54`
 - `TO THE ATK ROLL` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `632.14, 722.54, 705.07, 733.27`
 - `at any` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `705.07, 721.64, 736.57, 733.54`
 
@@ -1127,7 +1115,6 @@
 
 **PDF span runs:**
 - `+1 TO THE ATK ROLL.` — `OptimaLTStd-Bold` 5.76 pt; PDF flags `20`; bbox `438.47, 765.76, 494.51, 772.62`
-- `` — `OptimaLTStd` 6.20 pt; PDF flags `4`; bbox `494.51, 765.36, 496.23, 772.74`
 
 ## Raw line 094 (block 30, line 93)
 

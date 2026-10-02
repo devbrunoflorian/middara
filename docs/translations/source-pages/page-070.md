@@ -272,7 +272,6 @@
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `258.11, 399.49, 263.12, 410.21`
 - `of any given type of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `263.12, 398.59, 353.24, 410.49`
 - `Effect` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `353.24, 398.55, 376.76, 410.43`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `376.76, 398.59, 379.54, 410.49`
 
 ## Raw line 024 (block 9, line 23)
 
@@ -426,7 +425,6 @@
 
 **PDF span runs:**
 - `Protect the Smallest` — `Cinzel-Regular` 9.61 pt; PDF flags `4`; bbox `152.88, 569.83, 270.18, 582.33`
-- `` — `Cinzel-Regular` 10.12 pt; PDF flags `4`; bbox `270.18, 569.35, 272.80, 582.51`
 
 ## Raw line 037 (block 14, line 36)
 
@@ -452,7 +450,6 @@
 - `2` — `OptimaLTStd-Bold` 7.08 pt; PDF flags `20`; bbox `254.98, 580.89, 259.06, 589.03`
 - `would` — `OptimaLTStd` 8.10 pt; PDF flags `4`; bbox `259.06, 580.00, 286.47, 589.30`
 - `Determine Damage` — `OptimaLTStd-BoldItalic` 8.10 pt; PDF flags `22`; bbox `286.47, 579.91, 358.40, 589.24`
-- `` — `OptimaLTStd` 8.10 pt; PDF flags `4`; bbox `358.40, 580.00, 360.73, 589.30`
 
 ## Raw line 039 (block 14, line 38)
 
@@ -516,7 +513,6 @@
 - `2` — `OptimaLTStd-Bold` 7.00 pt; PDF flags `20`; bbox `265.92, 622.54, 269.81, 630.88`
 - `would` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `269.81, 619.80, 302.49, 631.70`
 - `Determine Damage` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `302.49, 619.68, 388.24, 631.63`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `388.24, 619.80, 391.02, 631.70`
 
 ## Raw line 044 (block 16, line 43)
 
@@ -532,7 +528,7 @@
 
 ## Raw line 045 (block 16, line 44)
 
-**EN source:** from a Spell made against them,  REDIRECT to yourself."
+**EN source:** from a Spell made against them,REDIRECT to yourself."
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -540,8 +536,6 @@
 
 **PDF span runs:**
 - `from a Spell made against them,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `98.65, 641.80, 237.02, 653.70`
-- `` — `OptimaLTStd` 8.00 pt; PDF flags `4`; bbox `237.02, 643.64, 239.24, 653.16`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `245.38, 641.80, 248.16, 653.70`
 - `REDIRECT` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `248.16, 641.78, 293.72, 653.70`
 - `to yourself.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `293.72, 641.80, 344.12, 653.70`
 - `"` — `OptimaLTStd` 8.00 pt; PDF flags `4`; bbox `344.12, 643.64, 349.01, 653.16`
@@ -994,14 +988,12 @@
 **Line bbox:** `495.03, 383.50, 517.86, 391.74`
 
 **PDF span runs:**
-- `` — `ZapfDingbatsStd` 5.87 pt; PDF flags `4`; bbox `495.03, 384.86, 496.72, 390.74`
 - `4 ATK` — `OptimaLTStd-Bold` 6.28 pt; PDF flags `20`; bbox `497.33, 384.28, 513.98, 391.51`
 - `.` — `OptimaLTStd` 6.28 pt; PDF flags `4`; bbox `513.98, 384.29, 515.79, 391.51`
-- `` — `OptimaLTStd` 7.18 pt; PDF flags `4`; bbox `515.79, 383.50, 517.86, 391.74`
 
 ## Raw line 085 (block 22, line 84)
 
-**EN source:** THEN: MOVE to be adjacent to the opponent
+**EN source:** THEN:MOVE to be adjacent to the opponent
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1009,7 +1001,6 @@
 
 **PDF span runs:**
 - `THEN:` — `OptimaLTStd-Bold` 6.28 pt; PDF flags `20`; bbox `461.19, 392.94, 480.01, 400.17`
-- `` — `OptimaLTStd` 7.18 pt; PDF flags `4`; bbox `480.01, 392.16, 482.07, 400.41`
 - `MOVE` — `OptimaLTStd-Bold` 6.28 pt; PDF flags `20`; bbox `482.07, 392.94, 500.53, 400.17`
 - `to be adjacent to the opponent` — `OptimaLTStd` 7.18 pt; PDF flags `4`; bbox `500.53, 392.16, 603.12, 400.41`
 
@@ -1038,7 +1029,7 @@
 
 ## Raw line 088 (block 22, line 87)
 
-**EN source:** ATK. FU: Infl ict Poison, FORCE 9.
+**EN source:** ATK.FU: Infl ict Poison,FORCE 9.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1047,11 +1038,9 @@
 **PDF span runs:**
 - `ATK` — `OptimaLTStd-Bold` 6.28 pt; PDF flags `20`; bbox `515.91, 408.97, 528.95, 416.20`
 - `.` — `OptimaLTStd` 6.28 pt; PDF flags `4`; bbox `528.95, 408.98, 530.76, 416.20`
-- `` — `OptimaLTStd` 7.18 pt; PDF flags `4`; bbox `530.76, 408.19, 532.83, 416.44`
 - `FU:` — `OptimaLTStd-Bold` 6.28 pt; PDF flags `20`; bbox `532.83, 408.97, 544.77, 416.20`
 - `Infl ict` — `OptimaLTStd` 7.18 pt; PDF flags `4`; bbox `544.77, 408.19, 565.04, 416.44`
 - `Poison,` — `OptimaLTStd-Italic` 7.18 pt; PDF flags `6`; bbox `565.04, 408.16, 588.17, 416.39`
-- `` — `OptimaLTStd` 7.18 pt; PDF flags `4`; bbox `588.17, 408.19, 590.23, 416.44`
 - `FORCE 9` — `OptimaLTStd-Bold` 6.28 pt; PDF flags `20`; bbox `590.23, 408.97, 615.92, 416.20`
 - `.` — `OptimaLTStd` 6.28 pt; PDF flags `4`; bbox `615.92, 408.98, 617.73, 416.20`
 
@@ -1159,17 +1148,6 @@
 
 ## Raw line 098 (block 25, line 97)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `734.02, 540.72, 737.02, 556.90`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `734.02, 540.72, 737.02, 556.90`
-
-## Raw line 099 (block 25, line 98)
-
 **EN source:** Due to the nature of boardgames, we have designed Middara around the
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -1179,7 +1157,7 @@
 **PDF span runs:**
 - `Due to the nature of boardgames, we have designed Middara around the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 552.24, 730.98, 564.14`
 
-## Raw line 100 (block 25, line 99)
+## Raw line 099 (block 25, line 98)
 
 **EN source:** practical idea of component limitations. Meaning, you will rarely be
 
@@ -1190,7 +1168,7 @@
 **PDF span runs:**
 - `practical idea of component limitations. Meaning, you will rarely be` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 563.24, 711.65, 575.14`
 
-## Raw line 101 (block 25, line 100)
+## Raw line 100 (block 25, line 99)
 
 **EN source:** required to use a component that you ran out of. However, Middara is
 
@@ -1201,7 +1179,7 @@
 **PDF span runs:**
 - `required to use a component that you ran out of. However, Middara is` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 574.24, 719.57, 586.14`
 
-## Raw line 102 (block 25, line 101)
+## Raw line 101 (block 25, line 100)
 
 **EN source:** also inspired by TableTop Miniature and Role Playing Games more than
 
@@ -1212,7 +1190,7 @@
 **PDF span runs:**
 - `also inspired by TableTop Miniature and Role Playing Games more than` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 585.24, 726.08, 597.14`
 
-## Raw line 103 (block 25, line 102)
+## Raw line 102 (block 25, line 101)
 
 **EN source:** anything else. Meaning, we purposely don't want to make our game
 
@@ -1223,7 +1201,7 @@
 **PDF span runs:**
 - `anything else. Meaning, we purposely don't want to make our game` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 596.24, 711.15, 608.14`
 
-## Raw line 104 (block 25, line 103)
+## Raw line 103 (block 25, line 102)
 
 **EN source:** arbitrarily limited.
 
@@ -1234,7 +1212,7 @@
 **PDF span runs:**
 - `arbitrarily limited.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 607.24, 492.96, 619.14`
 
-## Raw line 105 (block 25, line 104)
+## Raw line 104 (block 25, line 103)
 
 **EN source:** If you are instructed to Spawn a figure and all copies of that figure are
 
@@ -1245,7 +1223,7 @@
 **PDF span runs:**
 - `If you are instructed to Spawn a figure and all copies of that figure are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 621.07, 717.83, 632.97`
 
-## Raw line 106 (block 25, line 105)
+## Raw line 105 (block 25, line 104)
 
 **EN source:** already in play (and you do not have a Variation or Alternate version to
 
@@ -1258,7 +1236,7 @@
 - `Variation` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `583.67, 632.05, 623.59, 643.97`
 - `or Alternate version to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `623.59, 632.07, 724.25, 643.97`
 
-## Raw line 107 (block 25, line 106)
+## Raw line 106 (block 25, line 105)
 
 **EN source:** spawn), do not Spawn anything.
 
@@ -1269,7 +1247,7 @@
 **PDF span runs:**
 - `spawn), do not Spawn anything.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 643.07, 553.71, 654.97`
 
-## Raw line 108 (block 25, line 107)
+## Raw line 107 (block 25, line 106)
 
 **EN source:** Store Items and Disciplines are not limited by the components included
 
@@ -1280,7 +1258,7 @@
 **PDF span runs:**
 - `Store Items and Disciplines are not limited by the components included` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 656.90, 726.35, 668.80`
 
-## Raw line 109 (block 25, line 108)
+## Raw line 108 (block 25, line 107)
 
 **EN source:** in the game box. However, without additional components, or print and
 
@@ -1291,7 +1269,7 @@
 **PDF span runs:**
 - `in the game box. However, without additional components, or print and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 667.90, 728.34, 679.80`
 
-## Raw line 110 (block 25, line 109)
+## Raw line 109 (block 25, line 108)
 
 **EN source:** play options, you will naturally be limited to what's in the box. Unique
 
@@ -1302,7 +1280,7 @@
 **PDF span runs:**
 - `play options, you will naturally be limited to what's in the box. Unique` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 678.90, 723.56, 690.80`
 
-## Raw line 111 (block 25, line 110)
+## Raw line 110 (block 25, line 109)
 
 **EN source:** Items and Wandering Items are intended to be limited by the number of
 
@@ -1313,7 +1291,7 @@
 **PDF span runs:**
 - `Items and Wandering Items are intended to be limited by the number of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 689.90, 726.15, 701.80`
 
-## Raw line 112 (block 25, line 111)
+## Raw line 111 (block 25, line 110)
 
 **EN source:** copies included as they are thematically unique. While Relics do not
 
@@ -1324,9 +1302,9 @@
 **PDF span runs:**
 - `copies included as they are thematically unique. While Relics do not` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 700.90, 714.49, 712.80`
 
-## Raw line 113 (block 25, line 112)
+## Raw line 112 (block 25, line 111)
 
-**EN source:** have a component limit, Adventurers may not have more than 1 Relic of
+**EN source:** have a component limit, Adventurers may not have more than 1Relic of
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1337,11 +1315,10 @@
 - `not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `597.78, 711.88, 612.23, 723.80`
 - `have more than` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `612.23, 711.90, 684.61, 723.80`
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `684.61, 711.88, 690.17, 723.80`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `690.17, 711.90, 692.95, 723.80`
 - `Relic` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `692.95, 711.88, 714.62, 723.80`
 - `of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `714.62, 711.90, 728.52, 723.80`
 
-## Raw line 114 (block 25, line 113)
+## Raw line 113 (block 25, line 112)
 
 **EN source:** the same name equipped or in their Pack at the same time.
 
@@ -1354,7 +1331,7 @@
 - `or` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `526.99, 722.88, 536.44, 734.80`
 - `in their Pack at the same time.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `536.44, 722.90, 668.16, 734.80`
 
-## Raw line 115 (block 25, line 114)
+## Raw line 114 (block 25, line 113)
 
 **EN source:** Terrain and tokens of all types that do not say they are limited are
 
@@ -1365,7 +1342,7 @@
 **PDF span runs:**
 - `Terrain and tokens of all types that do not say they are limited are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 736.73, 698.98, 748.63`
 
-## Raw line 116 (block 25, line 115)
+## Raw line 115 (block 25, line 114)
 
 **EN source:** assumed to be infinite. We avoid, to the best of our Abilities, situations
 
@@ -1376,7 +1353,7 @@
 **PDF span runs:**
 - `assumed to be infinite. We avoid, to the best of our Abilities, situations` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 747.73, 721.08, 759.63`
 
-## Raw line 117 (block 25, line 116)
+## Raw line 116 (block 25, line 115)
 
 **EN source:** where this limitation will be violated. In the rare case it does, we
 
@@ -1387,7 +1364,7 @@
 **PDF span runs:**
 - `where this limitation will be violated. In the rare case it does, we` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 758.73, 696.77, 770.63`
 
-## Raw line 118 (block 25, line 117)
+## Raw line 117 (block 25, line 116)
 
 **EN source:** recommend doing what Role Players do, using any small object around
 
@@ -1398,7 +1375,7 @@
 **PDF span runs:**
 - `recommend doing what Role Players do, using any small object around` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 769.73, 725.12, 781.63`
 
-## Raw line 119 (block 25, line 118)
+## Raw line 118 (block 25, line 117)
 
 **EN source:** your home and your imagination.
 
@@ -1409,7 +1386,7 @@
 **PDF span runs:**
 - `your home and your imagination.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 780.73, 559.98, 792.63`
 
-## Raw line 120 (block 26, line 119)
+## Raw line 119 (block 26, line 118)
 
 **EN source:** Other Important Rules Continued
 
@@ -1421,7 +1398,7 @@
 - `Other Important Rules` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `86.17, 56.69, 321.16, 80.96`
 - `Continued` — `Cinzel-Regular` 11.00 pt; PDF flags `4`; bbox `321.16, 63.52, 388.02, 78.35`
 
-## Raw line 121 (block 27, line 120)
+## Raw line 120 (block 27, line 119)
 
 **EN source:** 70
 
@@ -1432,7 +1409,7 @@
 **PDF span runs:**
 - `70` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 122 (block 27, line 121)
+## Raw line 121 (block 27, line 120)
 
 **EN source:** 70
 

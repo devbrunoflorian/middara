@@ -258,7 +258,7 @@
 
 ## Raw line 022 (block 8, line 21)
 
-**EN source:** ALTERNATE: Cave Sickle \| LOOT LVL: Mundane
+**EN source:** ALTERNATE:Cave Sickle \\| LOOT LVL: Mundane
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -266,11 +266,9 @@
 
 **PDF span runs:**
 - `ALTERNATE:` — `OptimaLTStd-Bold` 5.45 pt; PDF flags `20`; bbox `214.79, 358.24, 244.59, 364.74`
-- `` — `OptimaLTStd` 5.45 pt; PDF flags `4`; bbox `244.59, 358.25, 246.10, 364.74`
 - `Cave Sickle` — `OptimaLTStd-Italic` 5.45 pt; PDF flags `6`; bbox `246.10, 358.23, 274.28, 364.71`
 - `\| LOOT LVL:` — `OptimaLTStd-Black` 5.45 pt; PDF flags `20`; bbox `274.28, 358.22, 305.55, 364.75`
 - `Mundane` — `OptimaLTStd-Italic` 5.45 pt; PDF flags `6`; bbox `305.55, 358.23, 328.07, 364.71`
-- `` — `OptimaLTStd` 5.45 pt; PDF flags `4`; bbox `328.07, 358.25, 329.59, 364.74`
 
 ## Raw line 023 (block 8, line 22)
 
@@ -327,7 +325,7 @@
 
 ## Raw line 027 (block 9, line 26)
 
-**EN source:** you haven't already attempted the Cave Sickle Queen Bounty.
+**EN source:** you haven't already attempted the Cave Sickle QueenBounty.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -338,7 +336,6 @@
 - `attempted` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `183.35, 416.22, 227.04, 428.10`
 - `the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `227.04, 416.26, 245.94, 428.16`
 - `Cave Sickle Queen` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `245.94, 416.14, 327.45, 428.09`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `327.45, 416.26, 330.23, 428.16`
 - `Bounty` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `330.23, 416.24, 361.35, 428.16`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `361.35, 416.26, 366.91, 428.16`
 
@@ -427,7 +424,6 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `408.23, 510.25, 413.79, 522.17`
 - `and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `413.79, 510.27, 435.47, 522.17`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `435.47, 510.25, 441.03, 522.17`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `441.03, 510.27, 443.81, 522.17`
 
 ## Raw line 035 (block 12, line 34)
 
@@ -741,18 +737,7 @@
 **PDF span runs:**
 - `4` — `OptimaLTStd-Bold` 16.00 pt; PDF flags `20`; bbox `337.93, 771.26, 346.82, 790.33`
 
-## Raw line 063 (block 31, line 62)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `364.52, 781.16, 370.08, 793.06`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `364.52, 781.16, 370.08, 793.06`
-
-## Raw line 064 (block 32, line 63)
+## Raw line 063 (block 32, line 62)
 
 **EN source:** Spawning Combatants Example
 
@@ -763,7 +748,7 @@
 **PDF span runs:**
 - `Spawning Combatants Example` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `258.59, 56.69, 561.35, 80.96`
 
-## Raw line 065 (block 33, line 64)
+## Raw line 064 (block 33, line 63)
 
 **EN source:** ALTERNATE EXAMPLE
 
@@ -774,7 +759,7 @@
 **PDF span runs:**
 - `ALTERNATE EXAMPLE` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `210.79, 97.85, 311.68, 109.77`
 
-## Raw line 066 (block 34, line 65)
+## Raw line 065 (block 34, line 64)
 
 **EN source:** If players had any Variations of Cave Sickles available (which they
 
@@ -785,7 +770,7 @@
 **PDF span runs:**
 - `If players had any Variations of Cave Sickles available (which they` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.86, 115.30, 747.13, 127.20`
 
-## Raw line 067 (block 34, line 66)
+## Raw line 066 (block 34, line 65)
 
 **EN source:** likely would if they also owned the expansion product, Cave Sickle
 
@@ -797,7 +782,7 @@
 - `likely would if they also owned the expansion product,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.86, 126.30, 702.20, 138.20`
 - `Cave Sickle` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `702.20, 126.18, 754.26, 138.13`
 
-## Raw line 068 (block 34, line 67)
+## Raw line 067 (block 34, line 66)
 
 **EN source:** Queen) they would include them alongside the Base Combatants as
 
@@ -811,7 +796,7 @@
 - `Base Combatants` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `668.39, 137.18, 742.90, 149.13`
 - `as` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `742.90, 137.30, 757.36, 149.20`
 
-## Raw line 069 (block 34, line 68)
+## Raw line 068 (block 34, line 67)
 
 **EN source:** Possible Spawns during ( B ) in the last example.
 
@@ -825,7 +810,7 @@
 - `B` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `21`; bbox `574.28, 147.83, 579.78, 158.56`
 - `) in the last example.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `582.87, 148.30, 675.13, 160.20`
 
-## Raw line 070 (block 35, line 69)
+## Raw line 069 (block 35, line 68)
 
 **EN source:** Combatant Cards with the Variation Tag are titled the same as their
 
@@ -838,9 +823,9 @@
 - `Variation` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `577.91, 164.95, 617.83, 176.87`
 - `Tag are titled the same as their` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `617.83, 164.97, 752.80, 176.87`
 
-## Raw line 071 (block 35, line 70)
+## Raw line 070 (block 35, line 69)
 
-**EN source:** counterparts (e.g. "Cave Sickle"). However, they will always have a
+**EN source:** counterparts (e.g. "Cave Sickle").However, they will always have a
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -851,10 +836,9 @@
 - `"` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `540.11, 175.95, 543.44, 187.87`
 - `Cave Sickle")` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `543.44, 175.85, 601.05, 187.80`
 - `.` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `601.05, 175.93, 603.83, 187.81`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `603.83, 175.95, 606.61, 187.87`
 - `However, they will always have a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `606.61, 175.97, 753.11, 187.87`
 
-## Raw line 072 (block 35, line 71)
+## Raw line 071 (block 35, line 70)
 
 **EN source:** subtitle that is some sort of indicator that they are thematically acting
 
@@ -865,7 +849,7 @@
 **PDF span runs:**
 - `subtitle that is some sort of indicator that they are thematically acting` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.86, 186.97, 761.87, 198.87`
 
-## Raw line 073 (block 35, line 72)
+## Raw line 072 (block 35, line 71)
 
 **EN source:** different from their Combatant counterpart. For example, the Cave
 
@@ -876,7 +860,7 @@
 **PDF span runs:**
 - `different from their Combatant counterpart. For example, the Cave` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.86, 197.97, 749.86, 209.87`
 
-## Raw line 074 (block 35, line 73)
+## Raw line 073 (block 35, line 72)
 
 **EN source:** Sickle below is a Burrowing Variation.
 
@@ -890,7 +874,7 @@
 - `Variation` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `586.30, 208.95, 626.22, 220.87`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `626.22, 208.97, 631.78, 220.87`
 
-## Raw line 075 (block 36, line 74)
+## Raw line 074 (block 36, line 73)
 
 **EN source:** BURROWING VARIATION
 
@@ -901,7 +885,7 @@
 **PDF span runs:**
 - `BURROWING VARIATION` — `Cinzel-Regular` 4.61 pt; PDF flags `4`; bbox `579.43, 252.25, 638.91, 258.46`
 
-## Raw line 076 (block 36, line 75)
+## Raw line 075 (block 36, line 74)
 
 **EN source:** Cave Sickle
 
@@ -912,7 +896,7 @@
 **PDF span runs:**
 - `Cave Sickle` — `EsmeraldaPro` 17.27 pt; PDF flags `4`; bbox `521.87, 232.05, 604.61, 255.58`
 
-## Raw line 077 (block 37, line 76)
+## Raw line 076 (block 37, line 75)
 
 **EN source:** INTE
 
@@ -923,7 +907,7 @@
 **PDF span runs:**
 - `INTE` — `OptimaLTStd-Black` 5.18 pt; PDF flags `20`; bbox `716.14, 225.53, 727.37, 231.74`
 
-## Raw line 078 (block 38, line 77)
+## Raw line 077 (block 38, line 76)
 
 **EN source:** TY
 
@@ -934,7 +918,7 @@
 **PDF span runs:**
 - `TY` — `OptimaLTStd-Bold` 4.32 pt; PDF flags `20`; bbox `722.38, 230.95, 727.41, 236.10`
 
-## Raw line 079 (block 39, line 78)
+## Raw line 078 (block 39, line 77)
 
 **EN source:** V
 
@@ -945,7 +929,7 @@
 **PDF span runs:**
 - `V` — `OptimaLTStd-Bold` 4.32 pt; PDF flags `20`; bbox `724.77, 235.56, 727.65, 240.71`
 
-## Raw line 080 (block 40, line 79)
+## Raw line 079 (block 40, line 78)
 
 **EN source:** Hive Mind
 
@@ -956,7 +940,7 @@
 **PDF span runs:**
 - `Hive Mind` — `Cinzel-Regular` 5.76 pt; PDF flags `4`; bbox `521.30, 255.62, 552.95, 263.38`
 
-## Raw line 081 (block 41, line 80)
+## Raw line 080 (block 41, line 79)
 
 **EN source:** 4
 
@@ -967,7 +951,7 @@
 **PDF span runs:**
 - `4` — `Cinzel-Regular` 4.03 pt; PDF flags `4`; bbox `547.06, 226.71, 549.55, 232.15`
 
-## Raw line 082 (block 41, line 81)
+## Raw line 081 (block 41, line 80)
 
 **EN source:** 5
 
@@ -978,7 +962,7 @@
 **PDF span runs:**
 - `5` — `Cinzel-Regular` 4.03 pt; PDF flags `4`; bbox `589.25, 226.71, 591.48, 232.15`
 
-## Raw line 083 (block 41, line 82)
+## Raw line 082 (block 41, line 81)
 
 **EN source:** 6
 
@@ -989,9 +973,9 @@
 **PDF span runs:**
 - `6` — `Cinzel-Regular` 4.03 pt; PDF flags `4`; bbox `631.15, 226.71, 633.69, 232.15`
 
-## Raw line 084 (block 42, line 83)
+## Raw line 083 (block 42, line 82)
 
-**EN source:** VARIATION: Cave Sickle (Group 4-6) \| LOOT LVL: Mundane
+**EN source:** VARIATION:Cave Sickle (Group 4-6) \\| LOOT LVL:Mundane
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -999,18 +983,15 @@
 
 **PDF span runs:**
 - `VARIATION:` — `OptimaLTStd-Bold` 5.45 pt; PDF flags `20`; bbox `544.67, 280.48, 575.26, 286.98`
-- `` — `OptimaLTStd` 5.45 pt; PDF flags `4`; bbox `575.26, 280.49, 576.78, 286.98`
 - `Cave Sickle` — `OptimaLTStd-Italic` 5.45 pt; PDF flags `6`; bbox `576.78, 280.47, 604.96, 286.94`
 - `(Group` — `OptimaLTStd` 5.45 pt; PDF flags `4`; bbox `604.96, 280.49, 621.62, 286.98`
 - `4-6` — `OptimaLTStd-Bold` 5.45 pt; PDF flags `20`; bbox `621.62, 280.48, 631.01, 286.98`
 - `)` — `OptimaLTStd` 5.45 pt; PDF flags `4`; bbox `631.01, 280.49, 634.04, 286.98`
 - `\|` — `OptimaLTStd-Black` 5.45 pt; PDF flags `20`; bbox `634.04, 280.46, 636.61, 286.99`
 - `LOOT LVL:` — `OptimaLTStd-Bold` 5.45 pt; PDF flags `20`; bbox `636.61, 280.48, 663.00, 286.98`
-- `` — `OptimaLTStd-Black` 5.45 pt; PDF flags `20`; bbox `663.00, 280.46, 664.36, 286.99`
 - `Mundane` — `OptimaLTStd-Italic` 5.45 pt; PDF flags `6`; bbox `664.36, 280.47, 686.88, 286.94`
-- `` — `OptimaLTStd` 5.45 pt; PDF flags `4`; bbox `686.88, 280.49, 688.40, 286.98`
 
-## Raw line 085 (block 42, line 84)
+## Raw line 084 (block 42, line 83)
 
 **EN source:** ADDITIONAL PREREQUISITES: This card is only ever used as a Variation after you've attempted the Bounty, The Cave Sickle Queen.
 
@@ -1023,7 +1004,7 @@
 - `This card is only ever used as a Variation after you've attempted the Bounty,` — `OptimaLTStd` 5.45 pt; PDF flags `4`; bbox `535.90, 287.50, 715.18, 293.98`
 - `The Cave Sickle Queen.` — `OptimaLTStd-BoldItalic` 5.45 pt; PDF flags `22`; bbox `715.18, 287.43, 771.43, 293.95`
 
-## Raw line 086 (block 43, line 85)
+## Raw line 085 (block 43, line 84)
 
 **EN source:** Variations always have the figure they might replace as well as their
 
@@ -1034,7 +1015,7 @@
 **PDF span runs:**
 - `Variations always have the figure they might replace as well as their` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.86, 307.16, 755.96, 319.06`
 
-## Raw line 087 (block 43, line 86)
+## Raw line 086 (block 43, line 85)
 
 **EN source:** Group on the back of their cards. The Burrowing Cave Sickle depicted
 
@@ -1045,7 +1026,7 @@
 **PDF span runs:**
 - `Group on the back of their cards. The Burrowing Cave Sickle depicted` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.86, 318.16, 765.90, 330.06`
 
-## Raw line 088 (block 43, line 87)
+## Raw line 087 (block 43, line 86)
 
 **EN source:** above is meant to be used as a possible replacement for Cave Sickle
 
@@ -1056,7 +1037,7 @@
 **PDF span runs:**
 - `above is meant to be used as a possible replacement for Cave Sickle` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.86, 329.16, 757.69, 341.06`
 
-## Raw line 089 (block 43, line 88)
+## Raw line 088 (block 43, line 87)
 
 **EN source:** Group 4-6.
 
@@ -1069,7 +1050,7 @@
 - `4-6` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `493.43, 340.14, 507.88, 352.06`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `507.88, 340.16, 510.66, 352.06`
 
-## Raw line 090 (block 44, line 89)
+## Raw line 089 (block 44, line 88)
 
 **EN source:** It's important to remember that since Variations are simply new AI of
 
@@ -1080,7 +1061,7 @@
 **PDF span runs:**
 - `It's important to remember that since Variations are simply new AI of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.86, 356.83, 760.01, 368.73`
 
-## Raw line 091 (block 44, line 90)
+## Raw line 090 (block 44, line 89)
 
 **EN source:** existing Combatants, that only Groups that aren't already in use can
 
@@ -1093,7 +1074,7 @@
 - `aren't` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `649.07, 367.81, 674.51, 379.73`
 - `already in use can` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `674.51, 367.83, 758.19, 379.73`
 
-## Raw line 092 (block 44, line 91)
+## Raw line 091 (block 44, line 90)
 
 **EN source:** be considered Possible Spawns.
 
@@ -1106,7 +1087,7 @@
 - `Possible Spawns` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `526.22, 378.79, 595.98, 390.67`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `595.98, 378.83, 601.54, 390.73`
 
-## Raw line 093 (block 45, line 92)
+## Raw line 092 (block 45, line 91)
 
 **EN source:** After shuffling all the cards, one is dealt! In this case, it would be all
 
@@ -1117,7 +1098,7 @@
 **PDF span runs:**
 - `After shuffling all the cards, one is dealt! In this case, it would be all` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.86, 395.50, 757.33, 407.40`
 
-## Raw line 094 (block 45, line 93)
+## Raw line 093 (block 45, line 92)
 
 **EN source:** the Base Combatants, Alternate Combatants, and Variations!
 
@@ -1132,7 +1113,7 @@
 - `Alternate Combatants` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `559.05, 407.38, 654.12, 419.33`
 - `, and Variations!` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `654.12, 407.50, 726.58, 419.40`
 
-## Raw line 095 (block 46, line 94)
+## Raw line 094 (block 46, line 93)
 
 **EN source:** Now, it's possible to not only get new and different figures (e.g.
 
@@ -1143,7 +1124,7 @@
 **PDF span runs:**
 - `Now, it's possible to not only get new and different figures (e.g.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.86, 424.17, 737.15, 436.07`
 
-## Raw line 096 (block 46, line 95)
+## Raw line 095 (block 46, line 94)
 
 **EN source:** Alternate Combatants), but to also spawn figures with randomized AI.
 
@@ -1155,7 +1136,7 @@
 - `Alternate Combatants` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `462.86, 436.05, 557.93, 448.00`
 - `), but to also spawn figures with randomized AI.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `557.93, 436.17, 766.26, 448.07`
 
-## Raw line 097 (block 47, line 96)
+## Raw line 096 (block 47, line 95)
 
 **EN source:** VARIATION EXAMPLE
 
@@ -1166,7 +1147,7 @@
 **PDF span runs:**
 - `VARIATION EXAMPLE` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `564.40, 97.85, 666.76, 109.77`
 
-## Raw line 098 (block 48, line 97)
+## Raw line 097 (block 48, line 96)
 
 **EN source:** Tip: There are many situations where you will never check
 
@@ -1178,7 +1159,7 @@
 - `Tip:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `487.56, 631.86, 506.47, 643.78`
 - `There are many situations where you will never check` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `506.47, 631.88, 740.63, 643.78`
 
-## Raw line 099 (block 48, line 98)
+## Raw line 098 (block 48, line 97)
 
 **EN source:** for Possible Spawns. For example, during Encounter Setup,
 
@@ -1189,7 +1170,7 @@
 **PDF span runs:**
 - `for Possible Spawns. For example, during Encounter Setup,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `487.56, 642.88, 742.14, 654.78`
 
-## Raw line 100 (block 48, line 99)
+## Raw line 099 (block 48, line 98)
 
 **EN source:** you will always Spawn what the setup depicts. Meaning,
 
@@ -1200,7 +1181,7 @@
 **PDF span runs:**
 - `you will always Spawn what the setup depicts. Meaning,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `487.56, 653.88, 733.32, 665.78`
 
-## Raw line 101 (block 48, line 100)
+## Raw line 100 (block 48, line 99)
 
 **EN source:** you'll never check for Alternate Combatants or Variations
 
@@ -1215,7 +1196,7 @@
 - `Alternate Combatants` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `583.98, 664.76, 679.05, 676.71`
 - `or Variations` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `679.05, 664.88, 738.16, 676.78`
 
-## Raw line 102 (block 48, line 101)
+## Raw line 101 (block 48, line 100)
 
 **EN source:** of Base Combatants.
 
@@ -1228,7 +1209,7 @@
 - `Base Combatants` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `498.68, 675.76, 573.19, 687.71`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `573.19, 675.88, 575.97, 687.78`
 
-## Raw line 103 (block 49, line 102)
+## Raw line 102 (block 49, line 101)
 
 **EN source:** Additionally, in situations where an Encounter's
 
@@ -1239,7 +1220,7 @@
 **PDF span runs:**
 - `Additionally, in situations where an Encounter's` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `487.56, 692.55, 694.90, 704.45`
 
-## Raw line 104 (block 49, line 103)
+## Raw line 103 (block 49, line 102)
 
 **EN source:** instructions specifically call out an Alternate Combatant
 
@@ -1250,9 +1231,8 @@
 **PDF span runs:**
 - `instructions specifically call out an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `487.56, 703.55, 639.30, 715.45`
 - `Alternate Combatant` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `639.30, 703.43, 733.26, 715.38`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `733.26, 703.55, 736.04, 715.45`
 
-## Raw line 105 (block 49, line 104)
+## Raw line 104 (block 49, line 103)
 
 **EN source:** by name. (E.g. the Encounter calls for you to Spawn a Cave
 
@@ -1264,7 +1244,7 @@
 - `by name. (E.g. the Encounter calls for you to Spawn a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `487.56, 714.55, 719.34, 726.45`
 - `Cave` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `719.34, 714.51, 743.44, 726.39`
 
-## Raw line 106 (block 49, line 105)
+## Raw line 105 (block 49, line 104)
 
 **EN source:** Sickle Warrior.) You would only ever check for Variations of
 
@@ -1276,7 +1256,7 @@
 - `Sickle Warrior.)` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `487.56, 725.51, 552.78, 737.39`
 - `You would only ever check for Variations of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `552.78, 725.55, 744.14, 737.45`
 
-## Raw line 107 (block 49, line 106)
+## Raw line 106 (block 49, line 105)
 
 **EN source:** Cave Sickle Warriors since Alternate Combatants can never
 
@@ -1288,7 +1268,7 @@
 - `Cave Sickle Warriors` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `487.56, 736.51, 574.90, 748.39`
 - `since Alternate Combatants can never` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `574.90, 736.55, 742.80, 748.45`
 
-## Raw line 108 (block 49, line 107)
+## Raw line 107 (block 49, line 106)
 
 **EN source:** be replaced by another Alternate Combatant.
 
@@ -1298,6 +1278,17 @@
 
 **PDF span runs:**
 - `be replaced by another Alternate Combatant.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `487.56, 747.55, 680.97, 759.45`
+
+## Raw line 108 (block 50, line 107)
+
+**EN source:** 84
+
+**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+
+**Line bbox:** `49.34, 775.72, 61.20, 787.98`
+
+**PDF span runs:**
+- `84` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
 ## Raw line 109 (block 50, line 108)
 
@@ -1310,7 +1301,7 @@
 **PDF span runs:**
 - `84` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 110 (block 50, line 109)
+## Raw line 110 (block 51, line 109)
 
 **EN source:** 84
 
@@ -1322,17 +1313,6 @@
 - `84` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
 ## Raw line 111 (block 51, line 110)
-
-**EN source:** 84
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `49.34, 775.72, 61.20, 787.98`
-
-**PDF span runs:**
-- `84` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
-
-## Raw line 112 (block 51, line 111)
 
 **EN source:** 84
 

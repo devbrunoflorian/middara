@@ -456,7 +456,7 @@
 
 ## Raw line 041 (block 40, line 40)
 
-**EN source:** x 3
+**EN source:** x3
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -464,12 +464,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `189.91, 218.73, 196.91, 235.42`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `196.91, 206.76, 204.42, 238.94`
 - `3` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `202.80, 213.20, 213.92, 237.04`
 
 ## Raw line 042 (block 41, line 41)
 
-**EN source:** x 3
+**EN source:** x3
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -477,12 +476,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `190.34, 575.76, 197.34, 592.44`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `197.34, 563.78, 204.84, 595.97`
 - `3` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `203.22, 570.23, 214.34, 594.07`
 
 ## Raw line 043 (block 42, line 42)
 
-**EN source:** x 3
+**EN source:** x3
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -490,12 +488,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `190.24, 393.20, 197.24, 409.89`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `197.24, 381.23, 204.75, 413.42`
 - `3` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `203.13, 387.68, 214.25, 411.52`
 
 ## Raw line 044 (block 43, line 43)
 
-**EN source:** x 4
+**EN source:** x4
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -503,12 +500,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `254.75, 218.73, 261.75, 235.42`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `261.75, 206.76, 269.26, 238.94`
 - `4` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `267.64, 213.20, 278.76, 237.04`
 
 ## Raw line 045 (block 44, line 44)
 
-**EN source:** x 4
+**EN source:** x4
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -516,12 +512,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `255.18, 575.76, 262.18, 592.44`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `262.18, 563.78, 269.68, 595.97`
 - `4` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `268.06, 570.23, 279.18, 594.07`
 
 ## Raw line 046 (block 45, line 45)
 
-**EN source:** x 4
+**EN source:** x4
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -529,12 +524,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `255.08, 393.20, 262.08, 409.89`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `262.08, 381.23, 269.59, 413.42`
 - `4` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `267.97, 387.68, 279.09, 411.52`
 
 ## Raw line 047 (block 46, line 46)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -542,12 +536,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `319.22, 218.73, 326.22, 235.42`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `326.22, 206.76, 333.72, 238.94`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `332.10, 213.20, 343.22, 237.04`
 
 ## Raw line 048 (block 47, line 47)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -555,12 +548,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `319.64, 575.76, 326.64, 592.44`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `326.64, 563.78, 334.15, 595.97`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `332.53, 570.23, 343.65, 594.07`
 
 ## Raw line 049 (block 48, line 48)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -568,12 +560,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `319.55, 393.20, 326.55, 409.89`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `326.55, 381.23, 334.05, 413.42`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `332.43, 387.68, 343.55, 411.52`
 
 ## Raw line 050 (block 49, line 49)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -581,12 +572,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `383.55, 218.73, 390.55, 235.42`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `390.55, 206.76, 398.05, 238.94`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `396.43, 213.20, 407.55, 237.04`
 
 ## Raw line 051 (block 50, line 50)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -594,12 +584,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `383.97, 575.76, 390.97, 592.44`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `390.97, 563.78, 398.48, 595.97`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `396.86, 570.23, 407.98, 594.07`
 
 ## Raw line 052 (block 51, line 51)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -607,12 +596,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `383.88, 393.20, 390.88, 409.89`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `390.88, 381.23, 398.38, 413.42`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `396.76, 387.68, 407.88, 411.52`
 
 ## Raw line 053 (block 52, line 52)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -620,12 +608,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `448.01, 218.73, 455.01, 235.42`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `455.01, 206.76, 462.51, 238.94`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `460.89, 213.20, 472.01, 237.04`
 
 ## Raw line 054 (block 53, line 53)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -633,12 +620,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `448.43, 575.76, 455.43, 592.44`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `455.43, 563.78, 462.94, 595.97`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `461.32, 570.23, 472.44, 594.07`
 
 ## Raw line 055 (block 54, line 54)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -646,12 +632,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `448.34, 393.20, 455.34, 409.89`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `455.34, 381.23, 462.85, 413.42`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `461.23, 387.68, 472.35, 411.52`
 
 ## Raw line 056 (block 55, line 55)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -659,12 +644,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `511.96, 218.73, 518.96, 235.42`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `518.96, 206.76, 526.46, 238.94`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `524.84, 213.20, 535.96, 237.04`
 
 ## Raw line 057 (block 56, line 56)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -672,12 +656,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `512.38, 575.76, 519.38, 592.44`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `519.38, 563.78, 526.89, 595.97`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `525.27, 570.23, 536.39, 594.07`
 
 ## Raw line 058 (block 57, line 57)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -685,12 +668,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `512.29, 393.20, 519.29, 409.89`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `519.29, 381.23, 526.79, 413.42`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `525.17, 387.68, 536.29, 411.52`
 
 ## Raw line 059 (block 58, line 58)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -698,12 +680,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `643.53, 218.73, 650.53, 235.42`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `650.53, 206.76, 658.04, 238.94`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `656.42, 213.20, 667.54, 237.04`
 
 ## Raw line 060 (block 58, line 59)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -711,7 +692,6 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `707.86, 218.73, 714.86, 235.42`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `714.86, 206.76, 722.37, 238.94`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `720.75, 213.20, 731.87, 237.04`
 
 ## Raw line 061 (block 59, line 60)
@@ -1118,7 +1098,7 @@
 
 ## Raw line 097 (block 83, line 96)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1126,7 +1106,6 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `577.31, 218.73, 584.31, 235.42`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `584.31, 206.76, 591.82, 238.94`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `590.20, 213.20, 601.32, 237.04`
 
 ## Raw line 098 (block 84, line 97)
@@ -1197,7 +1176,7 @@
 
 ## Raw line 104 (block 89, line 103)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1205,12 +1184,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `643.53, 393.67, 650.53, 410.35`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `650.53, 381.69, 658.04, 413.88`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `656.42, 388.14, 667.54, 411.98`
 
 ## Raw line 105 (block 89, line 104)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1218,7 +1196,6 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `707.86, 393.67, 714.86, 410.35`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `714.86, 381.69, 722.37, 413.88`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `720.75, 388.14, 731.87, 411.98`
 
 ## Raw line 106 (block 90, line 105)
@@ -1234,7 +1211,7 @@
 
 ## Raw line 107 (block 90, line 106)
 
-**EN source:** MONSTER UNIQUE
+**EN source:** MONSTERUNIQUE
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1242,7 +1219,6 @@
 
 **PDF span runs:**
 - `MONSTER` — `OptimaLTStd-Bold` 13.00 pt; PDF flags `20`; bbox `624.82, 275.01, 685.49, 290.51`
-- `` — `OptimaLTStd-Bold` 13.00 pt; PDF flags `20`; bbox `685.49, 275.01, 693.60, 290.51`
 - `UNIQUE` — `OptimaLTStd-Bold` 13.00 pt; PDF flags `20`; bbox `693.60, 275.01, 745.37, 290.51`
 
 ## Raw line 108 (block 90, line 107)
@@ -1374,7 +1350,7 @@
 
 ## Raw line 119 (block 95, line 118)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1382,7 +1358,6 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `577.31, 393.67, 584.31, 410.35`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `584.31, 381.69, 591.82, 413.88`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `590.20, 388.14, 601.32, 411.98`
 
 ## Raw line 120 (block 96, line 119)
@@ -1453,7 +1428,7 @@
 
 ## Raw line 126 (block 101, line 125)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1461,12 +1436,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `643.53, 575.46, 650.53, 592.15`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `650.53, 563.49, 658.04, 595.67`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `656.42, 569.94, 667.54, 593.78`
 
 ## Raw line 127 (block 101, line 126)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1474,7 +1448,6 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `707.86, 575.46, 714.86, 592.15`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `714.86, 563.49, 722.37, 595.67`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `720.75, 569.94, 731.87, 593.78`
 
 ## Raw line 128 (block 102, line 127)
@@ -1490,7 +1463,7 @@
 
 ## Raw line 129 (block 102, line 128)
 
-**EN source:** MONSTER UNIQUE
+**EN source:** MONSTERUNIQUE
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1498,7 +1471,6 @@
 
 **PDF span runs:**
 - `MONSTER` — `OptimaLTStd-Bold` 13.00 pt; PDF flags `20`; bbox `624.82, 456.80, 685.49, 472.30`
-- `` — `OptimaLTStd-Bold` 13.00 pt; PDF flags `20`; bbox `685.49, 456.80, 693.60, 472.30`
 - `UNIQUE` — `OptimaLTStd-Bold` 13.00 pt; PDF flags `20`; bbox `693.60, 456.80, 745.37, 472.30`
 
 ## Raw line 130 (block 102, line 129)
@@ -1630,7 +1602,7 @@
 
 ## Raw line 141 (block 107, line 140)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1638,7 +1610,6 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `577.31, 575.46, 584.31, 592.15`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `584.31, 563.49, 591.82, 595.67`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `590.20, 569.94, 601.32, 593.78`
 
 ## Raw line 142 (block 108, line 141)
@@ -1709,7 +1680,7 @@
 
 ## Raw line 148 (block 113, line 147)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1717,12 +1688,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `643.53, 745.30, 650.53, 761.98`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `650.53, 733.32, 658.04, 765.51`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `656.42, 739.77, 667.54, 763.61`
 
 ## Raw line 149 (block 113, line 148)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1730,7 +1700,6 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `707.86, 745.30, 714.86, 761.98`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `714.86, 733.32, 722.37, 765.51`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `720.75, 739.77, 731.87, 763.61`
 
 ## Raw line 150 (block 114, line 149)
@@ -1746,7 +1715,7 @@
 
 ## Raw line 151 (block 114, line 150)
 
-**EN source:** MONSTER UNIQUE
+**EN source:** MONSTERUNIQUE
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1754,7 +1723,6 @@
 
 **PDF span runs:**
 - `MONSTER` — `OptimaLTStd-Bold` 13.00 pt; PDF flags `20`; bbox `624.82, 626.64, 685.49, 642.14`
-- `` — `OptimaLTStd-Bold` 13.00 pt; PDF flags `20`; bbox `685.49, 626.64, 693.60, 642.14`
 - `UNIQUE` — `OptimaLTStd-Bold` 13.00 pt; PDF flags `20`; bbox `693.60, 626.64, 745.37, 642.14`
 
 ## Raw line 152 (block 114, line 151)
@@ -1886,7 +1854,7 @@
 
 ## Raw line 163 (block 119, line 162)
 
-**EN source:** x 1
+**EN source:** x1
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1894,7 +1862,6 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `577.31, 745.30, 584.31, 761.98`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `584.31, 733.32, 591.82, 765.51`
 - `1` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `590.20, 739.77, 601.32, 763.61`
 
 ## Raw line 164 (block 120, line 163)
@@ -2056,7 +2023,7 @@
 
 ## Raw line 178 (block 133, line 177)
 
-**EN source:** x 3
+**EN source:** x3
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2064,12 +2031,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `190.24, 745.83, 197.24, 762.52`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `197.24, 733.86, 204.75, 766.05`
 - `3` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `203.13, 740.31, 214.25, 764.15`
 
 ## Raw line 179 (block 133, line 178)
 
-**EN source:** x 4
+**EN source:** x4
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2077,12 +2043,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `255.08, 745.83, 262.08, 762.52`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `262.08, 733.86, 269.59, 766.05`
 - `4` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `267.97, 740.31, 279.09, 764.15`
 
 ## Raw line 180 (block 133, line 179)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2090,12 +2055,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `319.55, 745.83, 326.55, 762.52`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `326.55, 733.86, 334.05, 766.05`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `332.43, 740.31, 343.55, 764.15`
 
 ## Raw line 181 (block 133, line 180)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2103,12 +2067,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `383.88, 745.83, 390.88, 762.52`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `390.88, 733.86, 398.38, 766.05`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `396.76, 740.31, 407.88, 764.15`
 
 ## Raw line 182 (block 133, line 181)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2116,12 +2079,11 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `448.34, 745.83, 455.34, 762.52`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `455.34, 733.86, 462.85, 766.05`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `461.23, 740.31, 472.35, 764.15`
 
 ## Raw line 183 (block 133, line 182)
 
-**EN source:** x 5
+**EN source:** x5
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2129,7 +2091,6 @@
 
 **PDF span runs:**
 - `x` — `OptimaLTStd-Bold` 14.00 pt; PDF flags `20`; bbox `512.29, 745.83, 519.29, 762.52`
-- `` — `OptimaLTStd-Bold` 27.00 pt; PDF flags `20`; bbox `519.29, 733.86, 526.79, 766.05`
 - `5` — `OptimaLTStd-Bold` 20.00 pt; PDF flags `20`; bbox `525.17, 740.31, 536.29, 764.15`
 
 ## Raw line 184 (block 134, line 183)

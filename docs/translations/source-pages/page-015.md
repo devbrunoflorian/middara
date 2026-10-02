@@ -109,7 +109,6 @@
 
 **PDF span runs:**
 - `THE STARTING ZONE:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `579.53, 210.06, 670.39, 220.79`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `670.39, 209.14, 673.17, 221.06`
 
 ## Raw line 010 (block 3, line 9)
 
@@ -135,7 +134,7 @@
 
 ## Raw line 012 (block 3, line 11)
 
-**EN source:** Phase of Setup.
+**EN source:** Phaseof Setup.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -143,7 +142,6 @@
 
 **PDF span runs:**
 - `Phase` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `579.53, 242.16, 604.54, 254.06`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `604.54, 242.14, 607.32, 254.06`
 - `of Setup.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `607.32, 242.16, 645.12, 254.06`
 
 ## Raw line 013 (block 4, line 12)
@@ -844,7 +842,6 @@
 
 **PDF span runs:**
 - `TILES` — `OptimaLTStd-Bold` 7.01 pt; PDF flags `20`; bbox `199.06, 512.47, 215.83, 520.82`
-- `` — `OptimaLTStd` 6.31 pt; PDF flags `4`; bbox `215.83, 513.13, 217.58, 520.63`
 
 ## Raw line 076 (block 50, line 75)
 
@@ -878,7 +875,6 @@
 
 **PDF span runs:**
 - `TERRAIN` — `OptimaLTStd-Bold` 7.01 pt; PDF flags `20`; bbox `193.21, 539.55, 221.68, 547.90`
-- `` — `OptimaLTStd` 6.31 pt; PDF flags `4`; bbox `221.68, 540.21, 223.43, 547.71`
 
 ## Raw line 079 (block 52, line 78)
 
@@ -901,7 +897,6 @@
 
 **PDF span runs:**
 - `TOTEMS` — `OptimaLTStd-Bold` 7.01 pt; PDF flags `20`; bbox `313.83, 512.47, 340.32, 520.82`
-- `` — `OptimaLTStd` 6.31 pt; PDF flags `4`; bbox `340.32, 513.13, 342.08, 520.63`
 
 ## Raw line 081 (block 54, line 80)
 
@@ -979,7 +974,6 @@
 
 **PDF span runs:**
 - `LOOT` — `OptimaLTStd-Bold` 7.01 pt; PDF flags `20`; bbox `437.26, 512.47, 456.16, 520.82`
-- `` — `OptimaLTStd` 6.31 pt; PDF flags `4`; bbox `456.16, 513.13, 457.91, 520.63`
 
 ## Raw line 088 (block 57, line 87)
 
@@ -1002,7 +996,6 @@
 
 **PDF span runs:**
 - `EXITS` — `OptimaLTStd-Bold` 7.01 pt; PDF flags `20`; bbox `437.94, 531.85, 455.48, 540.19`
-- `` — `OptimaLTStd` 6.31 pt; PDF flags `4`; bbox `455.48, 532.50, 457.24, 540.00`
 
 ## Raw line 090 (block 58, line 89)
 
@@ -1036,7 +1029,6 @@
 
 **PDF span runs:**
 - `FIGURES` — `OptimaLTStd-Bold` 7.01 pt; PDF flags `20`; bbox `432.67, 558.93, 460.75, 567.27`
-- `` — `OptimaLTStd` 6.31 pt; PDF flags `4`; bbox `460.75, 559.58, 462.50, 567.08`
 
 ## Raw line 093 (block 59, line 92)
 
@@ -1139,7 +1131,7 @@
 
 ## Raw line 102 (block 65, line 101)
 
-**EN source:** CONTINUED 
+**EN source:** CONTINUED
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1147,7 +1139,6 @@
 
 **PDF span runs:**
 - `CONTINUED` — `OptimaLTStd-Bold` 5.61 pt; PDF flags `20`; bbox `466.60, 632.62, 500.30, 639.30`
-- `` — `OptimaLTStd` 5.61 pt; PDF flags `4`; bbox `500.30, 632.63, 501.86, 639.30`
 - `` — `Wingdings3` 5.61 pt; PDF flags `0`; bbox `501.86, 632.58, 506.80, 638.96`
 
 ## Raw line 103 (block 65, line 102)

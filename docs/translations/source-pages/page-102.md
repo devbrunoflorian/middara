@@ -81,7 +81,7 @@
 
 ## Raw line 007 (block 0, line 6)
 
-**EN source:** Example: If the figure had ORANGE
+**EN source:** Example:If the figure had ORANGE
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -89,10 +89,8 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `419.75, 693.90, 465.29, 708.31`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `465.29, 695.45, 468.07, 707.33`
 - `If the figure had` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `467.77, 695.49, 538.36, 707.39`
 - `ORANGE` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `538.36, 696.54, 574.79, 707.08`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `574.70, 694.81, 577.68, 707.60`
 
 ## Raw line 008 (block 0, line 7)
 
@@ -115,7 +113,6 @@
 
 **PDF span runs:**
 - `RED` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `419.75, 709.54, 436.46, 720.08`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `436.46, 707.81, 439.45, 720.60`
 
 ## Raw line 010 (block 0, line 9)
 
@@ -201,7 +198,6 @@
 
 **PDF span runs:**
 - `1  -  PURPLE` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `215.18, 639.04, 263.86, 649.59`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `263.86, 637.32, 266.84, 650.10`
 
 ## Raw line 017 (block 5, line 16)
 
@@ -213,7 +209,6 @@
 
 **PDF span runs:**
 - `2  -  WHITE` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `215.18, 655.48, 260.42, 666.02`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `260.42, 653.75, 263.40, 666.54`
 
 ## Raw line 018 (block 6, line 17)
 
@@ -225,7 +220,6 @@
 
 **PDF span runs:**
 - `3  -  ORANGE` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `215.18, 671.91, 269.75, 682.45`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `269.75, 670.18, 272.74, 682.97`
 
 ## Raw line 019 (block 7, line 18)
 
@@ -237,7 +231,6 @@
 
 **PDF span runs:**
 - `4  -  TEAL` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `215.18, 688.34, 251.74, 698.88`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `251.74, 686.61, 254.72, 699.40`
 
 ## Raw line 020 (block 8, line 19)
 
@@ -249,7 +242,6 @@
 
 **PDF span runs:**
 - `5  -  RED` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `215.18, 704.77, 249.59, 715.32`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `249.59, 703.05, 252.58, 715.83`
 
 ## Raw line 021 (block 9, line 20)
 
@@ -261,7 +253,6 @@
 
 **PDF span runs:**
 - `6  -  GREEN` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `215.18, 721.20, 260.90, 731.75`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `260.90, 719.48, 263.89, 732.26`
 
 ## Raw line 022 (block 10, line 21)
 
@@ -273,7 +264,6 @@
 
 **PDF span runs:**
 - `7  -  GREY` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `215.18, 737.63, 255.00, 748.18`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `255.00, 735.91, 257.99, 748.69`
 
 ## Raw line 023 (block 11, line 22)
 
@@ -285,7 +275,6 @@
 
 **PDF span runs:**
 - `8  -  BLUE` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `215.18, 754.06, 254.02, 764.61`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `254.02, 752.34, 257.01, 765.12`
 
 ## Raw line 024 (block 12, line 23)
 
@@ -329,7 +318,6 @@
 **Line bbox:** `459.79, 543.34, 515.89, 556.26`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `459.79, 544.36, 462.57, 556.26`
 - `SHIELD` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `462.57, 543.34, 515.89, 555.26`
 
 ## Raw line 028 (block 13, line 27)
@@ -341,7 +329,6 @@
 **Line bbox:** `526.03, 543.34, 560.37, 556.26`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `526.03, 544.36, 528.81, 556.26`
 - `BURST` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `528.81, 543.34, 560.37, 555.26`
 
 ## Raw line 029 (block 14, line 28)

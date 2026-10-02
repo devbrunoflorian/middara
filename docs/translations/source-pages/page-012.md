@@ -120,7 +120,6 @@
 
 **PDF span runs:**
 - `Mechanics come in different varieties.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `551.24, 232.18, 714.76, 244.08`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `714.76, 232.14, 720.32, 244.02`
 
 ## Raw line 011 (block 2, line 10)
 
@@ -134,7 +133,6 @@
 - `See` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `551.24, 243.14, 569.02, 255.02`
 - `Adventure Mechanics` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `569.02, 243.06, 663.19, 255.01`
 - `Pg. 10.` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `663.19, 243.14, 695.49, 255.02`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `695.49, 243.18, 698.27, 255.08`
 
 ## Raw line 012 (block 3, line 11)
 
@@ -844,7 +842,6 @@
 **Line bbox:** `321.86, 292.96, 350.95, 300.48`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 6.28 pt; PDF flags `4`; bbox `321.86, 293.00, 323.61, 300.47`
 - `SUCCESS` — `OptimaLTStd-Black` 6.28 pt; PDF flags `20`; bbox `323.61, 292.96, 350.95, 300.48`
 
 ## Raw line 076 (block 31, line 75)
@@ -869,7 +866,6 @@
 **Line bbox:** `321.86, 328.81, 335.82, 336.33`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 6.28 pt; PDF flags `4`; bbox `321.86, 328.84, 323.61, 336.31`
 - `FAIL` — `OptimaLTStd-Black` 6.28 pt; PDF flags `20`; bbox `323.61, 328.81, 335.82, 336.33`
 
 ## Raw line 078 (block 33, line 77)

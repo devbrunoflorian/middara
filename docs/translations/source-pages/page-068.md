@@ -133,7 +133,6 @@
 **PDF span runs:**
 - `To make a Skill Check, the Adventurer rolls` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.79, 264.29, 274.39, 276.19`
 - `2 PURPLE` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `274.39, 265.19, 313.40, 275.92`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `313.40, 263.60, 316.39, 276.39`
 
 ## Raw line 012 (block 3, line 11)
 
@@ -337,7 +336,6 @@
 
 **PDF span runs:**
 - `INTELLIGENT` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `323.01, 443.06, 378.02, 453.84`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `378.02, 442.19, 380.80, 454.09`
 
 ## Raw line 030 (block 5, line 29)
 
@@ -350,7 +348,6 @@
 **PDF span runs:**
 - `Combatant is required to make a Skill Check they will roll the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.79, 454.19, 354.49, 466.09`
 - `BLACK` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `354.49, 455.23, 381.20, 465.78`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `381.20, 453.51, 384.19, 466.29`
 
 ## Raw line 031 (block 5, line 30)
 
@@ -412,7 +409,7 @@
 
 ## Raw line 036 (block 6, line 35)
 
-**EN source:** INTELLIGENT Combatant will never Jump more
+**EN source:** INTELLIGENTCombatant will never Jump more
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -420,7 +417,6 @@
 
 **PDF span runs:**
 - `INTELLIGENT` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `182.48, 488.39, 237.49, 499.18`
-- `` — `OptimaLTStd-Black` 9.00 pt; PDF flags `20`; bbox `237.49, 488.39, 239.74, 499.18`
 - `Combatant will never Jump more` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `239.74, 487.53, 385.04, 499.43`
 
 ## Raw line 037 (block 6, line 36)
@@ -438,7 +434,7 @@
 
 ## Raw line 038 (block 6, line 37)
 
-**EN source:** Combatant’s Step would require a Jump of more than 2 spaces, then
+**EN source:** Combatant’sStep would require a Jump of more than 2 spaces, then
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -446,7 +442,6 @@
 
 **PDF span runs:**
 - `Combatant’s` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `92.46, 509.53, 145.45, 521.43`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `145.45, 509.51, 148.23, 521.43`
 - `Step would require a Jump of more than` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `148.23, 509.53, 323.00, 521.43`
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `323.00, 509.51, 328.56, 521.43`
 - `spaces, then` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `328.56, 509.53, 386.92, 521.43`
@@ -890,7 +885,7 @@
 
 ## Raw line 077 (block 20, line 76)
 
-**EN source:** IMPORTANT: If a figure fails a Jump Check that includes any Terrain
+**EN source:** IMPORTANT:If a figure fails a Jump Check that includes any Terrain
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -898,7 +893,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `431.82, 358.62, 494.42, 370.60`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `494.42, 358.66, 497.20, 370.58`
 - `If a figure fails a Jump Check that includes any Terrain` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `497.20, 358.68, 730.45, 370.58`
 
 ## Raw line 078 (block 20, line 77)
@@ -944,11 +938,10 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `429.42, 591.73, 474.96, 606.14`
-- `` — `AGaramondPro-Regular` 10.00 pt; PDF flags `4`; bbox `474.96, 593.34, 479.96, 606.05`
 
 ## Raw line 082 (block 21, line 81)
 
-**EN source:** If Zeke Jumps over A and then continues to Jump over B , he
+**EN source:** If Zeke Jumps over A and then continues to Jump over B, he
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -959,7 +952,6 @@
 - `A` — `OptimaLTStd-Bold` 8.00 pt; PDF flags `21`; bbox `513.99, 605.08, 519.33, 614.62`
 - `and then continues to Jump over` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `521.80, 604.32, 667.01, 616.22`
 - `B` — `OptimaLTStd-Bold` 8.00 pt; PDF flags `21`; bbox `669.42, 605.08, 674.31, 614.62`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `674.31, 603.26, 677.01, 616.22`
 - `, he` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `677.01, 604.32, 695.91, 616.22`
 
 ## Raw line 083 (block 21, line 82)

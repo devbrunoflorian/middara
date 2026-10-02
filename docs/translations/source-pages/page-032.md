@@ -201,7 +201,7 @@
 
 ## Raw line 018 (block 15, line 17)
 
-**EN source:** spend XP when given the opportunity to Shop and Train. See Buying Items
+**EN source:** spend XP when given the opportunity toShop and Train. See Buying Items
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -211,7 +211,6 @@
 - `spend` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.40, 113.79, 114.75, 125.69`
 - `XP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `114.75, 114.69, 125.25, 125.42`
 - `when given the opportunity to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `125.25, 113.79, 257.62, 125.69`
-- `` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `257.62, 113.67, 260.40, 125.62`
 - `Shop and Train` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `260.40, 113.77, 324.59, 125.69`
 - `. See` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `324.59, 113.79, 347.93, 125.69`
 - `Buying Items` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `347.93, 113.67, 407.57, 125.62`
@@ -243,7 +242,7 @@
 
 ## Raw line 021 (block 16, line 20)
 
-**EN source:** cost is increased by +1 XP for every other Discipline of the same level
+**EN source:** cost is increased by +1 XPfor every other Discipline of the same level
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -252,7 +251,6 @@
 **PDF span runs:**
 - `cost is increased by` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.40, 152.46, 172.92, 164.36`
 - `+1 XP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `172.92, 153.36, 196.38, 164.09`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `196.38, 152.44, 199.16, 164.36`
 - `for every other Discipline of the same level` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `199.16, 152.46, 386.76, 164.36`
 
 ## Raw line 022 (block 16, line 21)
@@ -309,7 +307,7 @@
 
 ## Raw line 026 (block 17, line 25)
 
-**EN source:** customize your Adventurer. Adventurers may learn LVL 1 Disciplines from
+**EN source:** customize your Adventurer. Adventurers may learnLVL1 Disciplines from
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -317,9 +315,7 @@
 
 **PDF span runs:**
 - `customize your Adventurer. Adventurers may learn` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `416.21, 113.79, 633.03, 125.69`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `633.03, 114.71, 635.53, 125.42`
 - `LVL` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `635.53, 114.69, 649.87, 125.42`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `649.87, 114.71, 652.37, 125.42`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `652.37, 114.69, 657.38, 125.42`
 - `Disciplines from` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `657.38, 113.79, 733.52, 125.69`
 
@@ -353,7 +349,7 @@
 
 ## Raw line 029 (block 17, line 28)
 
-**EN source:** Example: An Adventurer can only learn a Level 3 CRUOR Discipline
+**EN source:** Example:An Adventurer can only learn a Level 3CRUOR Discipline
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -361,16 +357,14 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `416.21, 150.86, 461.75, 165.27`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `461.75, 152.44, 464.53, 164.36`
 - `An Adventurer can only learn a Level` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `464.53, 152.46, 627.07, 164.36`
 - `3` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `627.07, 152.44, 632.63, 164.36`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `632.63, 152.46, 635.41, 164.36`
 - `CRUOR` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `635.41, 153.36, 666.91, 164.09`
 - `Discipline` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `666.91, 152.46, 719.16, 164.36`
 
 ## Raw line 030 (block 17, line 29)
 
-**EN source:** if they already have a LVL 1 and a LVL 2 CRUOR Discipline.
+**EN source:** if they already have a LVL1 and a LVL2CRUOR Discipline.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -379,13 +373,10 @@
 **PDF span runs:**
 - `if they already have a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `416.21, 163.46, 510.58, 175.36`
 - `LVL` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `510.58, 164.36, 524.92, 175.09`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `524.92, 164.38, 527.42, 175.09`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `527.42, 164.36, 532.43, 175.09`
 - `and a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `532.43, 163.46, 561.89, 175.36`
 - `LVL` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `561.89, 164.36, 576.22, 175.09`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `576.22, 164.38, 578.72, 175.09`
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `578.72, 164.36, 583.73, 175.09`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `583.73, 164.38, 586.23, 175.09`
 - `CRUOR` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `586.23, 164.36, 617.73, 175.09`
 - `Discipline.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `617.73, 163.46, 667.20, 175.36`
 
@@ -720,7 +711,7 @@
 
 ## Raw line 060 (block 29, line 59)
 
-**EN source:** IMPORTANT: An Adventurer may learn as many Disciplines as they can afford, however, they may not learn the same Discipline twice.
+**EN source:** IMPORTANT:An Adventurer may learn as many Disciplines as they can afford, however, they may not learn the same Discipline twice.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -728,7 +719,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `122.81, 206.95, 185.41, 218.93`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `185.41, 206.99, 188.19, 218.91`
 - `An Adventurer may learn as many Disciplines as they can afford, however, they may not learn the same Discipline twice.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `188.19, 207.01, 707.54, 218.91`
 
 ## Raw line 061 (block 30, line 60)

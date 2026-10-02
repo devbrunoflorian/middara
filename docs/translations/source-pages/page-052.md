@@ -49,7 +49,7 @@
 
 ## Raw line 004 (block 1, line 3)
 
-**EN source:** DODGE costs 1 SP. Intelligent Combatants do not DODGE unless they have
+**EN source:** DODGE costs 1SP. IntelligentCombatants do not DODGE unless they have
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -59,10 +59,8 @@
 - `DODGE` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `86.17, 138.13, 118.46, 148.86`
 - `costs` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `118.28, 137.23, 143.76, 149.13`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `143.56, 138.13, 148.56, 148.86`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `148.38, 137.21, 151.16, 149.13`
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `150.96, 138.13, 160.28, 148.86`
 - `. Intelligent` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `160.10, 137.23, 208.06, 149.13`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `208.06, 137.21, 210.84, 149.13`
 - `Combatants do not` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `210.84, 137.23, 295.33, 149.13`
 - `DODGE` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `295.33, 138.13, 328.34, 148.86`
 - `unless they have` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `328.34, 137.23, 404.62, 149.13`
@@ -91,7 +89,6 @@
 - `DODGE` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `181.56, 165.80, 213.49, 176.53`
 - `, they roll the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `213.22, 164.90, 268.75, 176.80`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `268.45, 165.80, 295.62, 176.53`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `295.62, 165.82, 298.12, 176.53`
 
 ## Raw line 007 (block 2, line 6)
 
@@ -139,7 +136,6 @@
 **Line bbox:** `272.59, 175.90, 375.43, 189.80`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `272.59, 177.90, 275.37, 189.80`
 - `is rolled, no additional` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `275.37, 175.90, 375.43, 187.80`
 
 ## Raw line 011 (block 2, line 10)
@@ -193,7 +189,7 @@
 
 ## Raw line 015 (block 4, line 14)
 
-**EN source:** IMPORTANT: Abilities and Dodge Upgrades can add bonuses during
+**EN source:** IMPORTANT:Abilities and Dodge Upgrades can add bonuses during
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -201,7 +197,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `101.84, 236.18, 164.44, 248.16`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `164.44, 236.22, 167.22, 248.14`
 - `Abilities and Dodge Upgrades can add bonuses during` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `167.22, 236.24, 399.99, 248.14`
 
 ## Raw line 016 (block 4, line 15)
@@ -226,7 +221,6 @@
 **Line bbox:** `214.73, 247.24, 398.23, 261.14`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `214.73, 249.24, 217.51, 261.14`
 - `is rolled, these Abilities provide no bonus.` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `217.51, 247.24, 398.23, 259.14`
 
 ## Raw line 018 (block 5, line 17)
@@ -266,7 +260,7 @@
 
 ## Raw line 021 (block 6, line 20)
 
-**EN source:** To EMPOWER an Attack, an Adventurer spends 1 SP when building their
+**EN source:** To EMPOWER an Attack, an Adventurer spends 1SP when building their
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -277,7 +271,6 @@
 - `EMPOWER` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `99.07, 324.61, 142.91, 335.34`
 - `an Attack, an Adventurer spends` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `142.91, 323.71, 286.69, 335.61`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `286.69, 324.61, 291.70, 335.34`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `291.70, 324.63, 294.20, 335.34`
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `294.20, 324.61, 303.70, 335.34`
 - `when building their` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `303.70, 323.71, 393.57, 335.61`
 
@@ -292,7 +285,6 @@
 **PDF span runs:**
 - `Combat Dice Pool to add the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 334.71, 214.12, 346.61`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `214.12, 335.61, 241.29, 346.34`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `241.29, 335.63, 243.80, 346.34`
 
 ## Raw line 023 (block 6, line 22)
 
@@ -318,7 +310,7 @@
 
 ## Raw line 025 (block 6, line 24)
 
-**EN source:** To EMPOWER a SPELL an Adventurer spends 1 SP when Determining the
+**EN source:** To EMPOWER a SPELL an Adventurer spends 1SP when Determining the
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -331,7 +323,6 @@
 - `SPELL` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `153.47, 361.28, 176.48, 372.01`
 - `an Adventurer spends` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `176.48, 360.38, 274.68, 372.28`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `274.68, 361.28, 279.68, 372.01`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `279.68, 361.30, 282.18, 372.01`
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `282.18, 361.28, 291.69, 372.01`
 - `when Determining the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `291.69, 360.38, 393.77, 372.28`
 
@@ -346,7 +337,6 @@
 **PDF span runs:**
 - `Force of a Spell to add the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.18, 373.38, 200.72, 385.28`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `200.71, 374.28, 227.88, 385.01`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `227.88, 374.30, 230.39, 385.01`
 
 ## Raw line 027 (block 6, line 26)
 
@@ -394,11 +384,10 @@
 **PDF span runs:**
 - `on the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 398.38, 116.19, 410.28`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `116.19, 399.28, 143.36, 410.01`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `143.36, 399.30, 145.87, 410.01`
 
 ## Raw line 031 (block 6, line 30)
 
-**EN source:** to add +1 to the Force of the Spell per
+**EN source:** to add +1 to the Force of the Spellper
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -409,7 +398,6 @@
 - `+` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `189.32, 398.36, 195.38, 410.28`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `195.38, 399.28, 200.38, 410.01`
 - `to the Force of the Spell` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `200.38, 398.38, 304.46, 410.28`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `304.36, 399.28, 306.86, 410.01`
 - `per` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `306.86, 398.38, 323.53, 410.28`
 
 ## Raw line 032 (block 6, line 31)
@@ -421,7 +409,6 @@
 **Line bbox:** `332.81, 398.38, 363.94, 411.28`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `332.81, 399.38, 335.59, 411.28`
 - `spent.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `335.59, 398.38, 363.94, 410.28`
 
 ## Raw line 033 (block 6, line 32)
@@ -457,7 +444,6 @@
 **Line bbox:** `261.94, 424.05, 379.59, 437.95`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `261.94, 426.05, 264.72, 437.95`
 - `Symbol does when rolled.` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `264.72, 424.05, 379.59, 435.95`
 
 ## Raw line 036 (block 7, line 35)
@@ -481,7 +467,6 @@
 **Line bbox:** `158.12, 441.38, 398.77, 455.28`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `158.12, 443.38, 160.90, 455.28`
 - `is rolled during an Attack, the Attack misses, regardless` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `160.90, 441.38, 398.77, 453.28`
 
 ## Raw line 038 (block 7, line 37)
@@ -516,7 +501,6 @@
 **Line bbox:** `151.03, 470.72, 396.14, 484.62`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `151.03, 472.72, 153.81, 484.62`
 - `is rolled during a Spell, the Spell fails to affect the target` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `153.81, 470.72, 396.14, 482.62`
 
 ## Raw line 041 (block 8, line 40)
@@ -543,7 +527,6 @@
 **PDF span runs:**
 - `Some Weapons also list the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.18, 500.06, 206.59, 511.96`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `206.59, 500.96, 233.40, 511.69`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `233.31, 499.38, 236.30, 512.16`
 
 ## Raw line 043 (block 9, line 42)
 
@@ -567,7 +550,6 @@
 **PDF span runs:**
 - `Casting Upgrade. Attacks made with a Weapon that has a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.18, 511.06, 335.42, 522.96`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `335.41, 511.96, 362.22, 522.69`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `362.13, 510.38, 365.12, 523.16`
 
 ## Raw line 045 (block 9, line 44)
 
@@ -602,7 +584,6 @@
 **PDF span runs:**
 - `with a Weapon that has a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.18, 533.06, 198.27, 544.96`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `198.26, 533.96, 225.07, 544.69`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `224.98, 532.38, 227.97, 545.16`
 
 ## Raw line 048 (block 9, line 47)
 
@@ -653,7 +634,7 @@
 
 ## Raw line 052 (block 11, line 51)
 
-**EN source:** IMPORTANT: Some Abilities might use the BLACK
+**EN source:** IMPORTANT:Some Abilities might use the BLACK
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -661,10 +642,8 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `101.84, 583.01, 164.44, 594.99`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `164.44, 583.05, 167.22, 594.97`
 - `Some Abilities might use the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `167.22, 583.07, 291.90, 594.97`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `291.90, 583.97, 318.71, 594.70`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `318.62, 582.39, 321.61, 595.17`
 
 ## Raw line 053 (block 11, line 52)
 
@@ -675,7 +654,6 @@
 **Line bbox:** `334.15, 583.07, 401.50, 596.17`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `334.15, 583.39, 337.13, 596.17`
 - `as part of their` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `337.03, 583.07, 401.50, 594.97`
 
 ## Raw line 054 (block 11, line 53)
@@ -700,7 +678,6 @@
 **PDF span runs:**
 - `and will specify what the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `91.85, 607.07, 202.28, 618.97`
 - `BLACK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `202.27, 607.97, 229.08, 618.70`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `228.99, 606.39, 231.98, 619.17`
 
 ## Raw line 056 (block 11, line 55)
 
@@ -711,7 +688,6 @@
 **Line bbox:** `244.52, 606.39, 270.19, 619.17`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `244.52, 606.39, 247.50, 619.17`
 - `does.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `247.40, 607.07, 270.19, 618.97`
 
 ## Raw line 057 (block 12, line 56)

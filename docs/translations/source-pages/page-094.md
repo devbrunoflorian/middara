@@ -62,7 +62,6 @@
 - `1x1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `297.18, 128.34, 316.08, 140.26`
 - `spaces` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `316.08, 128.36, 347.20, 140.26`
 - `if` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `347.20, 128.24, 353.31, 140.19`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `353.31, 128.36, 356.09, 140.26`
 
 ## Raw line 005 (block 0, line 4)
 
@@ -91,7 +90,6 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `330.72, 150.34, 336.28, 162.26`
 - `additional` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `336.28, 150.36, 385.20, 162.26`
 - `SP` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `385.20, 150.34, 395.76, 162.26`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `395.76, 150.36, 398.54, 162.26`
 
 ## Raw line 007 (block 0, line 6)
 
@@ -188,7 +186,7 @@
 
 ## Raw line 015 (block 0, line 14)
 
-**EN source:** moved into this Move Action/Ability and Dealt 6 IRREDUCIBLE DMG. If
+**EN source:** moved into this Move Action/Ability and Dealt 6IRREDUCIBLE DMG. If
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -197,7 +195,6 @@
 **PDF span runs:**
 - `moved into this Move Action/Ability and Dealt` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.17, 252.19, 284.31, 264.09`
 - `6` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `284.31, 252.17, 289.87, 264.09`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `289.87, 252.19, 292.65, 264.09`
 - `IRREDUCIBLE DMG` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `292.65, 252.17, 382.10, 264.09`
 - `. If` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `382.10, 252.19, 396.00, 264.09`
 
@@ -880,7 +877,6 @@
 
 **PDF span runs:**
 - `WEAPON TAGS:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `415.57, 285.52, 487.51, 297.44`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `487.51, 285.54, 490.29, 297.44`
 
 ## Raw line 074 (block 10, line 73)
 

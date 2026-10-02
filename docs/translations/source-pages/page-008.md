@@ -23,7 +23,6 @@
 - `The way` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 118.02, 124.70, 129.92`
 - `Middara` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `124.70, 117.90, 163.91, 129.85`
 - `is set up and played changes depending on the Game Mode the players decide to play. Regardless of what Game Mode is chosen,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `163.91, 118.02, 721.42, 129.92`
-- `` — `Cinzel-Regular` 10.00 pt; PDF flags `4`; bbox `721.42, 117.45, 723.92, 130.93`
 
 ## Raw line 002 (block 0, line 1)
 

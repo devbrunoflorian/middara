@@ -21,7 +21,6 @@
 
 **PDF span runs:**
 - `Spawning` — `Cinzel-Regular` 11.00 pt; PDF flags `4`; bbox `418.68, 87.95, 475.46, 102.77`
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `475.46, 86.97, 478.46, 103.15`
 
 ## Raw line 002 (block 1, line 1)
 
@@ -317,7 +316,7 @@
 
 ## Raw line 028 (block 4, line 27)
 
-**EN source:** IMPORTANT: If a player cannot Spawn a figure because the space
+**EN source:** IMPORTANT:If a player cannot Spawn a figure because the space
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -325,7 +324,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `434.35, 423.28, 496.95, 435.26`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `496.95, 423.32, 499.73, 435.24`
 - `If a player cannot Spawn a figure because the space` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `499.73, 423.34, 724.71, 435.24`
 
 ## Raw line 029 (block 4, line 28)
@@ -378,7 +376,7 @@
 
 ## Raw line 033 (block 5, line 32)
 
-**EN source:** IMPORTANT: When Spawning figures that are part of the same
+**EN source:** IMPORTANT:When Spawning figures that are part of the same
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -386,7 +384,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `434.35, 487.62, 496.95, 499.60`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `496.95, 487.66, 499.73, 499.58`
 - `When Spawning figures that are part of the same` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `499.73, 487.68, 711.29, 499.58`
 
 ## Raw line 034 (block 5, line 33)
@@ -455,7 +452,7 @@
 
 ## Raw line 039 (block 6, line 38)
 
-**EN source:** IMPORTANT: Combatants have a Loot LVL printed on the front
+**EN source:** IMPORTANT:Combatants have a Loot LVL printed on the front
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -463,7 +460,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `434.35, 562.46, 496.95, 574.44`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `496.95, 562.50, 499.73, 574.42`
 - `Combatants have a Loot` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `499.73, 562.52, 606.02, 574.42`
 - `LVL` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `606.02, 562.50, 621.95, 574.42`
 - `printed on the front` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `621.95, 562.52, 710.89, 574.42`
@@ -525,7 +521,6 @@
 
 **PDF span runs:**
 - `Spawning Story Combatants` — `Cinzel-Regular` 11.00 pt; PDF flags `4`; bbox `418.68, 635.88, 589.60, 650.71`
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `589.59, 634.90, 592.59, 651.08`
 
 ## Raw line 045 (block 8, line 44)
 
@@ -840,7 +835,7 @@
 
 ## Raw line 073 (block 12, line 72)
 
-**EN source:** the current Encounter being played.
+**EN source:** the current Encounterbeing played.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -848,7 +843,6 @@
 
 **PDF span runs:**
 - `the current Encounter` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 414.36, 178.98, 426.26`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `178.98, 414.32, 181.76, 426.20`
 - `being played.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `181.76, 414.36, 242.42, 426.26`
 
 ## Raw line 074 (block 12, line 73)
@@ -935,7 +929,6 @@
 **PDF span runs:**
 - `available to Spawn if the Encounter reveals another random` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.17, 487.20, 362.75, 499.10`
 - `Loot` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `362.75, 487.16, 380.97, 499.04`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `380.97, 487.20, 383.75, 499.10`
 
 ## Raw line 081 (block 12, line 80)
 
@@ -1101,18 +1094,7 @@
 **PDF span runs:**
 - `BLUE` — `OptimaLTStd-ExtraBlack` 4.31 pt; PDF flags `4`; bbox `175.52, 676.89, 186.82, 682.17`
 
-## Raw line 095 (block 16, line 94)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `193.60, 679.93, 199.60, 696.10`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `193.60, 679.93, 199.60, 696.10`
-
-## Raw line 096 (block 17, line 95)
+## Raw line 095 (block 17, line 94)
 
 **EN source:** EXIT
 
@@ -1125,7 +1107,7 @@
 - `X` — `CinzelDecorative-Black` 12.92 pt; PDF flags `20`; bbox `213.16, 663.89, 223.15, 681.33`
 - `IT` — `Cinzel-Black` 12.92 pt; PDF flags `20`; bbox `223.02, 663.97, 237.30, 680.48`
 
-## Raw line 097 (block 18, line 96)
+## Raw line 096 (block 18, line 95)
 
 **EN source:** RED
 
@@ -1136,18 +1118,7 @@
 **PDF span runs:**
 - `RED` — `OptimaLTStd-ExtraBlack` 4.31 pt; PDF flags `4`; bbox `225.32, 676.89, 234.57, 682.17`
 
-## Raw line 098 (block 19, line 97)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `241.35, 679.93, 247.35, 696.10`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `241.35, 679.93, 247.35, 696.10`
-
-## Raw line 099 (block 20, line 98)
+## Raw line 097 (block 20, line 96)
 
 **EN source:** EXIT
 
@@ -1160,7 +1131,7 @@
 - `X` — `CinzelDecorative-Black` 12.92 pt; PDF flags `20`; bbox `261.44, 663.89, 271.42, 681.33`
 - `IT` — `Cinzel-Black` 12.92 pt; PDF flags `20`; bbox `271.29, 663.97, 285.58, 680.48`
 
-## Raw line 100 (block 21, line 99)
+## Raw line 098 (block 21, line 97)
 
 **EN source:** GREEN
 
@@ -1171,18 +1142,7 @@
 **PDF span runs:**
 - `GREEN` — `OptimaLTStd-ExtraBlack` 4.31 pt; PDF flags `4`; bbox `267.71, 676.89, 282.84, 682.17`
 
-## Raw line 101 (block 22, line 100)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `291.07, 679.93, 297.07, 696.10`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `291.07, 679.93, 297.07, 696.10`
-
-## Raw line 102 (block 23, line 101)
+## Raw line 099 (block 23, line 98)
 
 **EN source:** EXIT
 
@@ -1195,7 +1155,7 @@
 - `X` — `CinzelDecorative-Black` 12.92 pt; PDF flags `20`; bbox `310.63, 663.89, 320.62, 681.33`
 - `IT` — `Cinzel-Black` 12.92 pt; PDF flags `20`; bbox `320.49, 663.97, 334.78, 680.48`
 
-## Raw line 103 (block 24, line 102)
+## Raw line 100 (block 24, line 99)
 
 **EN source:** YELLOW
 
@@ -1206,7 +1166,7 @@
 **PDF span runs:**
 - `YELLOW` — `OptimaLTStd-ExtraBlack` 4.31 pt; PDF flags `4`; bbox `313.94, 676.89, 332.04, 682.17`
 
-## Raw line 104 (block 25, line 103)
+## Raw line 101 (block 25, line 100)
 
 **EN source:** These tokens represent a way out of the Encounter. While not all
 
@@ -1217,7 +1177,7 @@
 **PDF span runs:**
 - `These tokens represent a way out of the Encounter. While not all` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 703.46, 364.81, 715.36`
 
-## Raw line 105 (block 25, line 104)
+## Raw line 102 (block 25, line 101)
 
 **EN source:** Encounters use them, many do. When an Adventurer ends their turn on
 
@@ -1228,7 +1188,7 @@
 **PDF span runs:**
 - `Encounters use them, many do. When an Adventurer ends their turn on` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 714.46, 394.46, 726.36`
 
-## Raw line 106 (block 25, line 105)
+## Raw line 103 (block 25, line 102)
 
 **EN source:** an Exit token, most Encounters will end. This will be listed as an End
 
@@ -1241,7 +1201,7 @@
 - `Exit` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `99.51, 725.42, 114.32, 737.30`
 - `token, most Encounters will end. This will be listed as an End` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `114.32, 725.46, 381.60, 737.36`
 
-## Raw line 107 (block 25, line 106)
+## Raw line 104 (block 25, line 103)
 
 **EN source:** Condition.
 
@@ -1252,7 +1212,7 @@
 **PDF span runs:**
 - `Condition.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 735.46, 131.76, 747.36`
 
-## Raw line 108 (block 26, line 107)
+## Raw line 105 (block 26, line 104)
 
 **EN source:** Reading Encounters Continued
 
@@ -1264,7 +1224,7 @@
 - `Reading Encounters` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `86.12, 56.35, 297.27, 80.62`
 - `Continued` — `Cinzel-Regular` 11.00 pt; PDF flags `4`; bbox `297.27, 63.19, 364.13, 78.01`
 
-## Raw line 109 (block 27, line 108)
+## Raw line 106 (block 27, line 105)
 
 **EN source:** 19
 
@@ -1275,7 +1235,7 @@
 **PDF span runs:**
 - `19` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `758.29, 775.72, 770.15, 787.98`
 
-## Raw line 110 (block 27, line 109)
+## Raw line 107 (block 27, line 106)
 
 **EN source:** 19
 

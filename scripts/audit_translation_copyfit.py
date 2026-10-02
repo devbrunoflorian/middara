@@ -41,6 +41,7 @@ class Unit:
 
 def plain_text(value: str) -> str:
     value = ICON_PLACEHOLDER.sub("", value)
+    value = re.sub(r"<br\s*/?>", " ", value, flags=re.IGNORECASE)
     value = MARKDOWN_DECORATION.sub("", value)
     value = re.sub(r"\s+", " ", value)
     return value.strip()

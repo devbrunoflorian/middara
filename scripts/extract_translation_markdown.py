@@ -62,10 +62,16 @@ def extract_page(page: pymupdf.Page, pdf_page_number: int) -> str:
         if block.get("type") != 0:
             continue
         for line in block.get("lines", []):
-            spans = [s for s in line.get("spans", []) if str(s.get("text", ""))]
+            spans = [
+                span
+                for span in line.get("spans", [])
+                if md_text(str(span.get("text", "")))
+            ]
             if not spans:
                 continue
-            raw_line = "".join(str(s.get("text", "")) for s in spans)
+            raw_line = md_text("".join(str(s.get("text", "")) for s in spans))
+            if not raw_line:
+                continue
             bbox = fmt_bbox(line.get("bbox", (0, 0, 0, 0)))
             out.extend(
                 [

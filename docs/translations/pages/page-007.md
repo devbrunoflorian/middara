@@ -16,43 +16,43 @@
 
 ## Coluna esquerda
 
-- ☐ **EN:** 1 Rulebook  
+- ☐ **EN:** 1 Rulebook<br>
   **PT-BR:** 1 Livro de Regras
-- ☐ **EN:** 1 Adventure Book  
+- ☐ **EN:** 1 Adventure Book<br>
   **PT-BR:** 1 Livro de Aventura
-- ☐ **EN:** 1 Crawl Book  
+- ☐ **EN:** 1 Crawl Book<br>
   **PT-BR:** 1 Livro Crawl
-- ☐ **EN:** 1 Diagram Book  
+- ☐ **EN:** 1 Diagram Book<br>
   **PT-BR:** 1 Livro de Diagramas
-- ☐ **EN:** 1 Bounty Book  
+- ☐ **EN:** 1 Bounty Book<br>
   **PT-BR:** 1 Livro de Recompensas
-- ☐ **EN:** 17 Dice  
+- ☐ **EN:** 17 Dice<br>
   **PT-BR:** 17 Dados
-- ☐ **EN:** 44 Miniatures  
+- ☐ **EN:** 44 Miniatures<br>
   **PT-BR:** 44 Miniaturas
-- ☐ **EN:** 27 Colored Base Clips  
+- ☐ **EN:** 27 Colored Base Clips<br>
   **PT-BR:** 27 Clipes Coloridos para Base
-- ☐ **EN:** 40 Standups  
+- ☐ **EN:** 40 Standups<br>
   **PT-BR:** 40 Miniaturas de Papel
-- ☐ **EN:** 36 Double-Sided Tiles  
+- ☐ **EN:** 36 Double-Sided Tiles<br>
   **PT-BR:** 36 Peças Dupla Face
-- ☐ **EN:** 380 Tokens  
+- ☐ **EN:** 380 Tokens<br>
   **PT-BR:** 380 Fichas
-- ☐ **EN:** 1 Red Reveal Decoder  
+- ☐ **EN:** 1 Red Reveal Decoder<br>
   **PT-BR:** 1 Decodificador de Revelação Vermelha
 
 ## Coluna central
 
-- ☐ **EN:** 10 Adventurer Tuck Bags  
+- ☐ **EN:** 10 Adventurer Tuck Bags<br>
   **PT-BR:** 10 Bolsas de Armazenamento de Aventureiro
-- ☐ **EN:** 101 Large Cards (5x6 Unique Sized)  
+- ☐ **EN:** 101 Large Cards (5x6 Unique Sized)<br>
   **PT-BR:** 101 Cartas Grandes (formato exclusivo 5 × 6)
   - **EN:** 4 Adventurers → **PT-BR:** 4 Aventureiros
   - **EN:** 7 Conduit Cards → **PT-BR:** 7 Cartas Conduit
   - **EN:** 6 Esper Summons → **PT-BR:** 6 Invocações Esper
   - **EN:** 38 Intelligent Combatants → **PT-BR:** 38 Combatentes Inteligentes
   - **EN:** 46 Hidden Cards → **PT-BR:** 46 Cartas Ocultas
-- ☐ **EN:** 370 Mini Cards (Mini American)  
+- ☐ **EN:** 370 Mini Cards (Mini American)<br>
   **PT-BR:** 370 Cartas Mini (formato Mini American)
   - **EN:** 4 Familiars → **PT-BR:** 4 Familiares
   - **EN:** 145 Disciplines → **PT-BR:** 145 Disciplinas
@@ -63,22 +63,22 @@
 
 ## Coluna direita
 
-- ☐ **EN:** 12 Tarot Cards  
+- ☐ **EN:** 12 Tarot Cards<br>
   **PT-BR:** 12 Cartas de Tarô
   - **EN:** 4 Quick Reference Cards → **PT-BR:** 4 Cartas de Consulta Rápida
   - **EN:** 4 Exalted Espers → **PT-BR:** 4 Espers Exaltados
   - **EN:** 4 Abraxis Cards → **PT-BR:** 4 Cartas de Abraxis
-- ☐ **EN:** 390 Item Cards (Standard Euro)  
+- ☐ **EN:** 390 Item Cards (Standard Euro)<br>
   **PT-BR:** 390 Cartas de Item (formato Standard Euro)
   - **EN:** 309 Store Items → **PT-BR:** 309 Itens da Loja
   - **EN:** 28 Unique Items → **PT-BR:** 28 Itens Únicos
   - **EN:** 25 Monster Loot Cards → **PT-BR:** 25 Cartas de Saque de Monstro
   - **EN:** 28 Hidden Cards → **PT-BR:** 28 Cartas Ocultas
-- ☐ **EN:** 1 Large Hidden Card Deck  
+- ☐ **EN:** 1 Large Hidden Card Deck<br>
   **PT-BR:** 1 Baralho Grande de Cartas Ocultas
-- ☐ **EN:** 1 Medium Hidden Card Deck  
+- ☐ **EN:** 1 Medium Hidden Card Deck<br>
   **PT-BR:** 1 Baralho Médio de Cartas Ocultas
-- ☐ **EN:** 1 Small Hidden Card Deck  
+- ☐ **EN:** 1 Small Hidden Card Deck<br>
   **PT-BR:** 1 Baralho Pequeno de Cartas Ocultas
 
 ## Nota de rodapé

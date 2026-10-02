@@ -35,7 +35,7 @@
 
 ## Raw line 003 (block 0, line 2)
 
-**EN source:** Combatant, or an Intelligent Combatant will determine what steps they
+**EN source:** Combatant, oranIntelligentCombatant will determine what steps they
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -43,11 +43,8 @@
 
 **PDF span runs:**
 - `Combatant, or` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 164.59, 147.86, 176.49`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `147.86, 164.57, 150.64, 176.49`
 - `an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `150.64, 164.59, 161.20, 176.49`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `161.20, 164.57, 163.98, 176.49`
 - `Intelligent` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `163.98, 164.59, 206.78, 176.49`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `206.78, 164.57, 209.56, 176.49`
 - `Combatant will determine what steps they` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `209.56, 164.59, 393.34, 176.49`
 
 ## Raw line 004 (block 0, line 3)
@@ -347,7 +344,6 @@
 **PDF span runs:**
 - `happens, it is important to remember that a figure’s turn is` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `433.92, 164.59, 684.76, 176.49`
 - `never` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `684.76, 164.57, 708.91, 176.49`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `708.91, 164.59, 711.69, 176.49`
 
 ## Raw line 030 (block 2, line 29)
 
@@ -669,8 +665,6 @@
 
 **PDF span runs:**
 - `Example 1:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `100.95, 571.08, 155.61, 585.49`
-- `` — `AGaramondPro-Italic` 12.00 pt; PDF flags `6`; bbox `155.61, 570.86, 158.61, 585.92`
-- `` — `AGaramondPro-Italic` 10.00 pt; PDF flags `6`; bbox `158.61, 572.69, 161.11, 585.24`
 
 ## Raw line 058 (block 3, line 57)
 
@@ -836,8 +830,6 @@
 
 **PDF span runs:**
 - `Example 2:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `100.95, 737.63, 155.61, 752.04`
-- `` — `AGaramondPro-Italic` 11.00 pt; PDF flags `6`; bbox `155.61, 738.33, 158.36, 752.14`
-- `` — `AGaramondPro-Regular` 10.00 pt; PDF flags `4`; bbox `158.36, 739.25, 160.86, 751.96`
 
 ## Raw line 073 (block 16, line 72)
 

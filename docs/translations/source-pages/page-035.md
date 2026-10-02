@@ -275,7 +275,6 @@
 
 **PDF span runs:**
 - `ADVENTURER PLAY AREA:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `112.67, 84.26, 222.05, 94.99`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `222.05, 83.34, 224.83, 95.26`
 
 ## Raw line 025 (block 16, line 24)
 
@@ -309,7 +308,6 @@
 
 **PDF span runs:**
 - `ASSIGNED COMBATANT:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `112.67, 122.93, 217.72, 133.66`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `217.72, 122.01, 220.50, 133.93`
 
 ## Raw line 028 (block 17, line 27)
 
@@ -343,7 +341,6 @@
 
 **PDF span runs:**
 - `TOKENS:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `112.67, 161.60, 151.41, 172.33`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `151.41, 160.68, 154.19, 172.60`
 
 ## Raw line 031 (block 18, line 30)
 
@@ -382,7 +379,6 @@
 
 **PDF span runs:**
 - `INITIATIVE TRACK:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `112.67, 200.27, 189.53, 211.00`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `189.53, 199.35, 192.31, 211.27`
 
 ## Raw line 034 (block 19, line 33)
 
@@ -416,7 +412,6 @@
 
 **PDF span runs:**
 - `DICE:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `112.67, 238.94, 135.67, 249.67`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `135.67, 238.02, 138.45, 249.94`
 
 ## Raw line 037 (block 20, line 36)
 
@@ -450,7 +445,6 @@
 
 **PDF span runs:**
 - `URGENCY TOKENS:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `442.52, 84.26, 522.93, 94.99`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `522.93, 83.34, 525.71, 95.26`
 
 ## Raw line 040 (block 21, line 39)
 
@@ -512,7 +506,6 @@
 
 **PDF span runs:**
 - `DAMAGE AND STAMINA POINT TOKENS:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `442.52, 144.93, 611.41, 155.66`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `611.41, 144.03, 614.19, 155.93`
 
 ## Raw line 045 (block 22, line 44)
 
@@ -527,7 +520,6 @@
 - `Damage` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `645.22, 154.99, 684.11, 166.87`
 - `and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `684.11, 155.03, 703.01, 166.93`
 - `SP` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `703.01, 155.01, 713.57, 166.93`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `713.57, 155.03, 716.35, 166.93`
 
 ## Raw line 046 (block 22, line 45)
 
@@ -574,7 +566,6 @@
 
 **PDF span runs:**
 - `COMBATANT LOOT DECK:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `442.52, 205.60, 552.12, 216.33`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `552.12, 204.70, 554.90, 216.60`
 
 ## Raw line 050 (block 23, line 49)
 

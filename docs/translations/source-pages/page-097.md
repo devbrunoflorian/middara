@@ -186,7 +186,7 @@
 
 ## Raw line 014 (block 2, line 13)
 
-**EN source:** Moved by an Ability (e.g. Push) must Un-Burrow instead. All subsequent movement caused by this Ability is resolved like normal.
+**EN source:** Moved by an Ability (e.g. Push) mustUn-Burrow instead. All subsequent movement caused by this Ability is resolved like normal.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -197,7 +197,6 @@
 - `e.g.` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `283.88, 166.62, 302.22, 178.54`
 - `Push)` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `302.22, 166.64, 328.35, 178.54`
 - `must` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `328.35, 166.62, 349.46, 178.54`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `349.46, 166.64, 352.24, 178.54`
 - `Un-Burrow` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `352.24, 166.60, 402.84, 178.48`
 - `instead. All subsequent movement caused by this Ability is resolved like normal.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `402.84, 166.64, 750.05, 178.54`
 
@@ -282,7 +281,7 @@
 
 ## Raw line 020 (block 2, line 19)
 
-**EN source:** they must Un-Burrow. They would also be subject to that Terrain's rules associated with being moved into it. (e.g. Damage if it's
+**EN source:** they mustUn-Burrow. They would also be subject to that Terrain's rules associated with being moved into it. (e.g. Damage if it's
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -291,7 +290,6 @@
 **PDF span runs:**
 - `they` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `191.29, 216.31, 212.41, 228.21`
 - `must` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `212.41, 216.29, 233.52, 228.21`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `233.52, 216.31, 236.30, 228.21`
 - `Un-Burrow` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `236.30, 216.27, 284.12, 228.15`
 - `. They would also be subject to that Terrain's rules associated with being moved into it. (` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `284.12, 216.31, 661.45, 228.21`
 - `e.g.` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `661.45, 216.29, 679.79, 228.21`
@@ -596,7 +594,7 @@
 
 ## Raw line 043 (block 6, line 42)
 
-**EN source:** Then, all figures on or adjacent to the token are dealt 3 PURPLE
+**EN source:** Then, all figures on or adjacent to the token are dealt 3PURPLE
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -605,9 +603,7 @@
 **PDF span runs:**
 - `Then, all figures on or adjacent to the token are dealt` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `173.29, 435.63, 403.50, 447.53`
 - `3` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `403.50, 435.61, 409.06, 447.53`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `408.96, 435.63, 411.74, 447.53`
 - `PURPLE` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `411.64, 435.61, 446.65, 447.53`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `446.65, 435.63, 449.43, 447.53`
 
 ## Raw line 044 (block 6, line 43)
 
@@ -618,7 +614,6 @@
 **Line bbox:** `461.98, 435.60, 751.70, 447.54`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `461.98, 435.64, 464.76, 447.54`
 - `of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `464.66, 435.64, 475.78, 447.54`
 - `IRREDUCIBLE DMG` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `475.78, 435.62, 568.01, 447.54`
 - `and any` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `568.01, 435.64, 607.85, 447.54`
@@ -811,7 +806,7 @@
 
 ## Raw line 059 (block 8, line 58)
 
-**EN source:** Renewal. For each token removed this way, HEAL 4 or remove an Effect. If at any time there are no Energy Tokens on the Font of Renewal,
+**EN source:** Renewal. For each token removed this way, HEAL 4or remove an Effect. If at any time there are no Energy Tokens on the Font of Renewal,
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -821,7 +816,6 @@
 - `Renewal` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `173.29, 588.93, 209.80, 600.81`
 - `. For each token removed this way,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `209.80, 588.97, 361.47, 600.87`
 - `HEAL 4` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `361.47, 588.95, 394.26, 600.87`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `394.26, 588.97, 397.04, 600.87`
 - `or` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `397.04, 588.85, 406.49, 600.80`
 - `remove an Effect. If at any time there are no` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `406.49, 588.97, 599.46, 600.87`
 - `Energy Tokens` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `599.46, 588.93, 660.70, 600.81`

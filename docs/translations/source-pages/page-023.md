@@ -87,7 +87,6 @@
 
 **PDF span runs:**
 - `TILE` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `113.65, 540.54, 130.65, 551.27`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `130.65, 539.64, 136.21, 551.54`
 
 ## Raw line 008 (block 6, line 7)
 
@@ -123,7 +122,6 @@
 
 **PDF span runs:**
 - `SPACES` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `113.65, 579.21, 143.24, 589.94`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `143.24, 578.31, 146.02, 590.21`
 
 ## Raw line 011 (block 7, line 10)
 
@@ -159,7 +157,6 @@
 
 **PDF span runs:**
 - `EDGE` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `113.65, 617.88, 136.65, 628.61`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `136.65, 616.98, 139.43, 628.88`
 
 ## Raw line 014 (block 8, line 13)
 
@@ -197,7 +194,6 @@
 
 **PDF span runs:**
 - `TERRAIN` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `441.20, 540.54, 477.70, 551.27`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `477.70, 539.64, 480.48, 551.54`
 
 ## Raw line 017 (block 9, line 16)
 
@@ -253,7 +249,6 @@
 
 **PDF span runs:**
 - `TILE NUMBER` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `441.20, 601.21, 498.20, 611.94`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `498.20, 600.31, 500.98, 612.21`
 
 ## Raw line 022 (block 10, line 21)
 
@@ -295,7 +290,7 @@
 
 ## Raw line 025 (block 10, line 24)
 
-**EN source:** Malum, Tile 1.
+**EN source:** Malum, Tile1.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -304,7 +299,6 @@
 **PDF span runs:**
 - `Malum,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `441.20, 644.31, 477.32, 656.21`
 - `Tile` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `477.32, 644.29, 492.89, 656.21`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `492.89, 644.31, 495.67, 656.21`
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `495.67, 644.29, 501.23, 656.21`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `501.23, 644.31, 504.01, 656.21`
 

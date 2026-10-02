@@ -176,7 +176,6 @@
 **Line bbox:** `103.95, 279.23, 175.83, 291.15`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.95, 279.25, 106.73, 291.15`
 - `New Story Flag:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `106.73, 279.23, 175.83, 291.15`
 
 ## Raw line 016 (block 5, line 15)
@@ -199,7 +198,6 @@
 **Line bbox:** `187.19, 293.06, 378.21, 304.98`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `187.19, 293.08, 189.97, 304.98`
 - `Experienced Guide` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `189.97, 293.06, 275.56, 304.98`
 - `on the Adventure Sheet.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `275.56, 293.08, 378.21, 304.98`
 
@@ -317,7 +315,7 @@
 
 ## Raw line 028 (block 9, line 27)
 
-**EN source:** SHOP AND TRAIN: During this Phase, players will create a Store
+**EN source:** SHOP AND TRAIN:During this Phase, players will create a Store
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -325,7 +323,6 @@
 
 **PDF span runs:**
 - `SHOP AND TRAIN:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `104.17, 440.06, 180.87, 450.79`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `180.87, 440.08, 183.37, 450.79`
 - `During this Phase, players will create a Store` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `183.37, 439.16, 377.40, 451.06`
 
 ## Raw line 029 (block 9, line 28)
@@ -402,7 +399,7 @@
 
 ## Raw line 035 (block 10, line 34)
 
-**EN source:** EXPLORE (SIDE QUESTS): During this Phase, players may select from a
+**EN source:** EXPLORE (SIDE QUESTS):During this Phase, players may select from a
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -410,7 +407,6 @@
 
 **PDF span runs:**
 - `EXPLORE (SIDE QUESTS):` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `104.17, 508.89, 206.51, 519.62`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `206.51, 508.91, 209.01, 519.62`
 - `During this Phase, players may select from a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `209.01, 507.99, 401.62, 519.89`
 
 ## Raw line 036 (block 10, line 35)
@@ -477,7 +473,6 @@
 **Line bbox:** `104.17, 573.99, 405.14, 587.89`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.17, 573.99, 106.95, 585.89`
 - `Note:` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `104.17, 575.87, 131.45, 587.82`
 - `A` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `131.45, 575.99, 140.90, 587.89`
 - `Bounty` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `140.90, 575.97, 172.02, 587.89`
@@ -509,7 +504,7 @@
 
 ## Raw line 044 (block 11, line 43)
 
-**EN source:** VENTURE FORTH: During this Phase, the players continue the
+**EN source:** VENTURE FORTH:During this Phase, the players continue the
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -517,7 +512,6 @@
 
 **PDF span runs:**
 - `VENTURE FORTH:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `104.17, 601.73, 178.03, 612.46`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `178.03, 601.75, 180.53, 612.46`
 - `During this Phase, the players continue the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `180.53, 600.83, 367.36, 612.73`
 
 ## Raw line 045 (block 11, line 44)
@@ -745,7 +739,7 @@
 
 ## Raw line 064 (block 17, line 63)
 
-**EN source:** The Store is the group of Item Cards that Adventurers are able to purchase
+**EN source:** The Store is the group ofItemCardsthat Adventurers are able to purchase
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -753,11 +747,8 @@
 
 **PDF span runs:**
 - `The Store is the group of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 184.80, 520.44, 196.70`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `520.44, 184.76, 523.22, 196.64`
 - `Item` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `523.22, 184.80, 542.11, 196.70`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `542.11, 184.76, 544.89, 196.64`
 - `Cards` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `544.89, 184.80, 569.34, 196.70`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `569.34, 184.76, 572.12, 196.64`
 - `that Adventurers are able to purchase` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `572.12, 184.80, 734.48, 196.70`
 
 ## Raw line 065 (block 17, line 64)
@@ -967,7 +958,7 @@
 
 ## Raw line 083 (block 23, line 82)
 
-**EN source:** IMPORTANT: Unique Items can only be acquired when you are
+**EN source:** IMPORTANT:Unique Items can only be acquired when you are
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -975,7 +966,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `431.51, 389.43, 494.11, 401.41`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `494.11, 389.47, 496.89, 401.39`
 - `Unique Items can only be acquired when you are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `496.89, 389.49, 712.73, 401.39`
 
 ## Raw line 084 (block 23, line 83)
@@ -1046,7 +1036,6 @@
 **PDF span runs:**
 - `Many Story Rounds include the opportunity to tackle a special` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 477.32, 686.16, 489.22`
 - `Bounty` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `686.16, 477.30, 717.28, 489.22`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `717.28, 477.32, 720.06, 489.22`
 
 ## Raw line 090 (block 25, line 89)
 
@@ -1074,7 +1063,6 @@
 - `Explore Phase` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `462.53, 499.20, 523.06, 511.15`
 - `of a named Story Round. Only one` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `523.06, 499.32, 678.68, 511.22`
 - `Bounty` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `678.68, 499.30, 709.80, 511.22`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `709.80, 499.32, 712.58, 511.22`
 
 ## Raw line 092 (block 25, line 91)
 
@@ -1245,7 +1233,7 @@
 
 ## Raw line 106 (block 31, line 105)
 
-**EN source:** IMPORTANT: Any rewards earned during a Bounty are kept by
+**EN source:** IMPORTANT:Any rewards earned during a Bounty are kept by
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1253,7 +1241,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `431.51, 747.11, 494.11, 759.09`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `494.11, 747.15, 496.89, 759.07`
 - `Any rewards earned during a Bounty are kept by` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `496.89, 747.17, 707.53, 759.07`
 
 ## Raw line 107 (block 31, line 106)

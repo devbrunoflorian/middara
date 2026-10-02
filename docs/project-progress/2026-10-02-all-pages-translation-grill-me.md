@@ -66,6 +66,7 @@ Fontes externas consultadas para copyfitting/localization: W3C, Microsoft locali
 - Na p. 13, o relatório destaca `Continued` (+22,2%), `ALL MUNDANE AND COMMON ITEMS` (+21,4%) e quatro headings localizados (`Flags`, `Story Rounds`, `Explore (Side Quests)`, `Bounties`). As decisões continuam dependentes de preview: o título não perde hierarquia; a lista e os headings serão medidos na moldura real.
 - Documentei a chamada do scanner no README e na skill `middara-translation-copyfit`. O CSV de execução fica em `tmp/` ignorado; não é artefato de produção.
 - A validação do modo CSV no stdout encontrou incompatibilidade da página de código padrão do PowerShell/Windows com setas Unicode. Ajustei o scanner para reconfigurar stdout em UTF-8; `--threshold 15` passou a reportar 184 unidades/84 alertas sem erro. A gravação UTF-8 em arquivo também gerou 184 linhas de unidade.
+- O primeiro `git diff --cached --check` do checkpoint encontrou linhas sem conteúdo úteis causadas por spans só de espaço no PDF, além de quebras Markdown marcadas com espaços finais. Corrigi o extrator para descartar spans/linhas vazios e representei as quebras necessárias como `<br>` nos dois drafts afetados. Regeneração concluída em 102/102 páginas; os 835 rótulos EN vazios desapareceram, os drafts voltaram a totalizar 184 unidades no scanner, e a checagem staged de whitespace passou. O commit principal já havia sido criado pela sequência do shell apesar do retorno não-zero da checagem; esta limpeza segue como commit corretivo independente.
 
 ### Próxima automação curta
 

@@ -330,7 +330,7 @@
 
 ## Raw line 028 (block 5, line 27)
 
-**EN source:** With her new Master Work Etherium
+**EN source:** With her new Master WorkEtherium
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -339,9 +339,7 @@
 **PDF span runs:**
 - `With her new` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `452.80, 725.81, 514.31, 737.71`
 - `Master Work` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `514.31, 725.69, 570.38, 737.64`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `570.38, 725.81, 573.16, 737.71`
 - `Etherium` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `573.16, 725.69, 612.80, 737.64`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `612.80, 725.81, 615.58, 737.71`
 
 ## Raw line 029 (block 5, line 28)
 
@@ -379,17 +377,6 @@
 
 ## Raw line 032 (block 7, line 31)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `399.50, 101.84, 402.50, 118.02`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `399.50, 101.84, 402.50, 118.02`
-
-## Raw line 033 (block 7, line 32)
-
 **EN source:** During the Shop and Train Phases of an Adventure, unlocked Item
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -401,7 +388,7 @@
 - `Shop and Train` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `130.04, 115.34, 197.01, 127.26`
 - `Phases of an Adventure, unlocked Item` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `197.01, 115.36, 366.73, 127.26`
 
-## Raw line 034 (block 7, line 33)
+## Raw line 033 (block 7, line 32)
 
 **EN source:** Upgrades may be purchased. Item Upgrades are attached to a
 
@@ -412,7 +399,7 @@
 **PDF span runs:**
 - `Upgrades may be purchased. Item Upgrades are attached to a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 126.36, 348.52, 138.26`
 
-## Raw line 035 (block 7, line 34)
+## Raw line 034 (block 7, line 33)
 
 **EN source:** corresponding Item Card and provide new Abilities to that Item.
 
@@ -423,7 +410,7 @@
 **PDF span runs:**
 - `corresponding Item Card and provide new Abilities to that Item.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 137.36, 357.98, 149.26`
 
-## Raw line 036 (block 8, line 35)
+## Raw line 035 (block 8, line 34)
 
 **EN source:** At the beginning of an Adventure players will have no Item Upgrades
 
@@ -434,7 +421,7 @@
 **PDF span runs:**
 - `At the beginning of an Adventure players will have no Item Upgrades` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 154.03, 380.06, 165.93`
 
-## Raw line 037 (block 8, line 36)
+## Raw line 036 (block 8, line 35)
 
 **EN source:** available to purchase. By Defeating opponents and drawing the Monster
 
@@ -445,7 +432,7 @@
 **PDF span runs:**
 - `available to purchase. By Defeating opponents and drawing the Monster` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 165.03, 394.01, 176.93`
 
-## Raw line 038 (block 8, line 37)
+## Raw line 037 (block 8, line 36)
 
 **EN source:** Loot Card, players will be able to unlock Item Upgrades.
 
@@ -456,7 +443,7 @@
 **PDF span runs:**
 - `Loot Card, players will be able to unlock Item Upgrades.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 176.03, 329.34, 187.93`
 
-## Raw line 039 (block 9, line 38)
+## Raw line 038 (block 9, line 37)
 
 **EN source:** Unlocking Item Upgrades
 
@@ -467,18 +454,7 @@
 **PDF span runs:**
 - `Unlocking Item Upgrades` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `81.13, 204.58, 255.79, 220.76`
 
-## Raw line 040 (block 10, line 39)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `399.50, 214.58, 402.50, 230.76`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `399.50, 214.58, 402.50, 230.76`
-
-## Raw line 041 (block 10, line 40)
+## Raw line 039 (block 10, line 38)
 
 **EN source:** All Monster Loot Cards have the MATERIAL Tag. Any card with this Tag
 
@@ -491,7 +467,7 @@
 - `MATERIAL` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `221.88, 229.00, 263.90, 239.73`
 - `Tag. Any card with this Tag` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `263.90, 228.10, 383.26, 240.00`
 
-## Raw line 042 (block 10, line 41)
+## Raw line 040 (block 10, line 39)
 
 **EN source:** may be traded in during the Shop and Train to perform 1 of 3 benefits:
 
@@ -508,7 +484,7 @@
 - `3` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `336.65, 240.00, 341.65, 250.73`
 - `benefits:` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `341.65, 239.10, 380.56, 251.00`
 
-## Raw line 043 (block 11, line 42)
+## Raw line 041 (block 11, line 40)
 
 **EN source:** •
 
@@ -519,7 +495,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 255.77, 89.97, 267.67`
 
-## Raw line 044 (block 11, line 43)
+## Raw line 042 (block 11, line 41)
 
 **EN source:** Gain 25 Gold.
 
@@ -532,7 +508,7 @@
 - `25` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `123.03, 255.75, 134.15, 267.67`
 - `Gold.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `134.15, 255.77, 164.17, 267.67`
 
-## Raw line 045 (block 12, line 44)
+## Raw line 043 (block 12, line 42)
 
 **EN source:** •
 
@@ -543,7 +519,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 272.44, 89.97, 284.34`
 
-## Raw line 046 (block 12, line 45)
+## Raw line 044 (block 12, line 43)
 
 **EN source:** Gain and equip any single Item Upgrade of your choice to an Item for
 
@@ -556,7 +532,7 @@
 - `any` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `169.17, 272.42, 184.55, 284.34`
 - `single Item Upgrade of your choice to an Item for` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `184.55, 272.44, 401.93, 284.34`
 
-## Raw line 047 (block 12, line 46)
+## Raw line 045 (block 12, line 44)
 
 **EN source:** free. (Even if it isn't unlocked.)
 
@@ -567,7 +543,7 @@
 **PDF span runs:**
 - `free. (Even if it isn't unlocked.)` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `99.13, 283.44, 229.45, 295.34`
 
-## Raw line 048 (block 13, line 47)
+## Raw line 046 (block 13, line 45)
 
 **EN source:** •
 
@@ -578,7 +554,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 300.11, 89.97, 312.01`
 
-## Raw line 049 (block 13, line 48)
+## Raw line 047 (block 13, line 46)
 
 **EN source:** Unlock a single Item Upgrade of your choice.
 
@@ -589,7 +565,7 @@
 **PDF span runs:**
 - `Unlock a single Item Upgrade of your choice.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `99.13, 300.11, 297.99, 312.01`
 
-## Raw line 050 (block 14, line 49)
+## Raw line 048 (block 14, line 47)
 
 **EN source:** Once an Item Upgrade has been unlocked, mark it on the Adventurer
 
@@ -600,7 +576,7 @@
 **PDF span runs:**
 - `Once an Item Upgrade has been unlocked, mark it on the Adventurer` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 316.78, 381.87, 328.68`
 
-## Raw line 051 (block 14, line 50)
+## Raw line 049 (block 14, line 48)
 
 **EN source:** Sheet. This Item Upgrade may be purchased during the current Shop and
 
@@ -612,7 +588,7 @@
 - `Sheet. This Item Upgrade may be purchased during the current` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 327.78, 352.09, 339.68`
 - `Shop and` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `352.09, 327.76, 395.45, 339.68`
 
-## Raw line 052 (block 14, line 51)
+## Raw line 050 (block 14, line 49)
 
 **EN source:** Train Phase and any future Shop and Train Phases of the Adventure.
 
@@ -626,7 +602,7 @@
 - `Shop and Train` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `198.30, 338.76, 265.27, 350.68`
 - `Phases of the Adventure.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `265.27, 338.78, 370.70, 350.68`
 
-## Raw line 053 (block 15, line 52)
+## Raw line 051 (block 15, line 50)
 
 **EN source:** Monster Loot Cards have Abilities that can be very useful to Adventurers.
 
@@ -637,7 +613,7 @@
 **PDF span runs:**
 - `Monster Loot Cards have Abilities that can be very useful to Adventurers.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 355.45, 395.73, 367.35`
 
-## Raw line 054 (block 15, line 53)
+## Raw line 052 (block 15, line 51)
 
 **EN source:** However, if they are traded in for any of the above benefits, the Party will
 
@@ -648,7 +624,7 @@
 **PDF span runs:**
 - `However, if they are traded in for any of the above benefits, the Party will` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 366.45, 397.71, 378.35`
 
-## Raw line 055 (block 15, line 54)
+## Raw line 053 (block 15, line 52)
 
 **EN source:** lose the card and must return it to the Monster Loot deck.
 
@@ -659,7 +635,7 @@
 **PDF span runs:**
 - `lose the card and must return it to the Monster Loot deck.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 377.45, 330.50, 389.35`
 
-## Raw line 056 (block 16, line 55)
+## Raw line 054 (block 16, line 53)
 
 **EN source:** The Cost of Item Upgrades
 
@@ -668,21 +644,9 @@
 **Line bbox:** `81.13, 394.12, 256.41, 416.77`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 394.12, 83.91, 406.02`
 - `The Cost of Item Upgrades` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `81.13, 400.60, 256.41, 416.77`
 
-## Raw line 057 (block 17, line 56)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `399.50, 410.60, 402.50, 426.77`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `399.50, 410.60, 402.50, 426.77`
-
-## Raw line 058 (block 17, line 57)
+## Raw line 055 (block 17, line 54)
 
 **EN source:** Once an Item Upgrade is Unlocked, the Item Upgrades with that name
 
@@ -693,7 +657,7 @@
 **PDF span runs:**
 - `Once an Item Upgrade is Unlocked, the Item Upgrades with that name` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 424.12, 388.59, 436.02`
 
-## Raw line 059 (block 17, line 58)
+## Raw line 056 (block 17, line 55)
 
 **EN source:** may be purchased by any Adventurer.
 
@@ -706,7 +670,7 @@
 - `any` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `175.38, 435.10, 190.76, 447.02`
 - `Adventurer.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `190.76, 435.12, 245.42, 447.02`
 
-## Raw line 060 (block 18, line 59)
+## Raw line 057 (block 18, line 56)
 
 **EN source:** The cost of applying an Item Upgrade to an Item varies depending on
 
@@ -717,7 +681,7 @@
 **PDF span runs:**
 - `The cost of applying an Item Upgrade to an Item varies depending on` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 451.79, 381.56, 463.69`
 
-## Raw line 061 (block 18, line 60)
+## Raw line 058 (block 18, line 57)
 
 **EN source:** the Tier of the Item being Upgraded. Unique Items do not cost more to
 
@@ -728,7 +692,7 @@
 **PDF span runs:**
 - `the Tier of the Item being Upgraded. Unique Items do not cost more to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 462.79, 386.33, 474.69`
 
-## Raw line 062 (block 18, line 61)
+## Raw line 059 (block 18, line 58)
 
 **EN source:** Upgrade than their non-Unique counterparts. Story and Monster Loot
 
@@ -739,7 +703,7 @@
 **PDF span runs:**
 - `Upgrade than their non-Unique counterparts. Story and Monster Loot` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 473.79, 381.69, 485.69`
 
-## Raw line 063 (block 18, line 62)
+## Raw line 060 (block 18, line 59)
 
 **EN source:** Items are considered to be Items in your current Loot LVL.
 
@@ -752,7 +716,7 @@
 - `LVL` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `311.03, 484.77, 326.96, 496.69`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `326.96, 484.79, 329.74, 496.69`
 
-## Raw line 064 (block 19, line 63)
+## Raw line 061 (block 19, line 60)
 
 **EN source:** The chart below lists the Gold cost to apply any Unlocked Item Upgrade
 
@@ -763,7 +727,7 @@
 **PDF span runs:**
 - `The chart below lists the Gold cost to apply any Unlocked Item Upgrade` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 501.46, 395.04, 513.36`
 
-## Raw line 065 (block 19, line 64)
+## Raw line 062 (block 19, line 61)
 
 **EN source:** to an Item by their Tier.
 
@@ -774,9 +738,9 @@
 **PDF span runs:**
 - `to an Item by their Tier.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 512.46, 179.88, 524.36`
 
-## Raw line 066 (block 20, line 65)
+## Raw line 063 (block 20, line 62)
 
-**EN source:** MUNDANE = 15 Gold.
+**EN source:** MUNDANE= 15 Gold.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -784,14 +748,13 @@
 
 **PDF span runs:**
 - `MUNDANE` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `196.55, 533.03, 242.61, 543.75`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `242.61, 532.11, 245.39, 544.03`
 - `=` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `245.39, 532.13, 254.23, 544.03`
 - `15` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `254.23, 532.11, 268.13, 544.03`
 - `Gold.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `268.13, 532.13, 295.37, 544.03`
 
-## Raw line 067 (block 21, line 66)
+## Raw line 064 (block 21, line 63)
 
-**EN source:** COMMON = 30 Gold.
+**EN source:** COMMON= 30 Gold.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -799,14 +762,13 @@
 
 **PDF span runs:**
 - `COMMON` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `197.58, 548.03, 241.58, 558.75`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `241.58, 547.11, 244.36, 559.03`
 - `=` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `244.36, 547.13, 253.20, 559.03`
 - `30` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `253.20, 547.11, 267.10, 559.03`
 - `Gold.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `267.10, 547.13, 294.34, 559.03`
 
-## Raw line 068 (block 22, line 67)
+## Raw line 065 (block 22, line 64)
 
-**EN source:** UNCOMMON = 50 Gold.
+**EN source:** UNCOMMON= 50 Gold.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -814,12 +776,11 @@
 
 **PDF span runs:**
 - `UNCOMMON` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `190.58, 563.03, 248.58, 573.75`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `248.58, 562.11, 251.36, 574.03`
 - `=` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `251.36, 562.13, 260.20, 574.03`
 - `50` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `260.20, 562.11, 274.10, 574.03`
 - `Gold.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `274.10, 562.13, 301.34, 574.03`
 
-## Raw line 069 (block 23, line 68)
+## Raw line 066 (block 23, line 65)
 
 **EN source:** RARE = 75 Gold.
 
@@ -833,7 +794,7 @@
 - `75` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `239.17, 577.11, 253.07, 589.03`
 - `Gold.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `253.07, 577.13, 283.09, 589.03`
 
-## Raw line 070 (block 24, line 69)
+## Raw line 067 (block 24, line 66)
 
 **EN source:** Equipping Item Upgrades
 
@@ -844,18 +805,7 @@
 **PDF span runs:**
 - `Equipping Item Upgrades` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `81.13, 600.27, 244.84, 616.45`
 
-## Raw line 071 (block 25, line 70)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `399.50, 610.27, 402.50, 626.45`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `399.50, 610.27, 402.50, 626.45`
-
-## Raw line 072 (block 25, line 71)
+## Raw line 068 (block 25, line 67)
 
 **EN source:** Item Upgrades with the WEAPON, ARMOR, or CORE Tag may only be
 
@@ -870,7 +820,7 @@
 - `CORE` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `274.29, 624.70, 300.29, 635.42`
 - `Tag may only be` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `300.29, 623.79, 375.50, 635.69`
 
-## Raw line 073 (block 25, line 72)
+## Raw line 069 (block 25, line 68)
 
 **EN source:** equipped to Items of the corresponding types. Item Upgrades with the
 
@@ -881,7 +831,7 @@
 **PDF span runs:**
 - `equipped to Items of the corresponding types. Item Upgrades with the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.13, 634.79, 383.92, 646.69`
 
-## Raw line 074 (block 25, line 73)
+## Raw line 070 (block 25, line 69)
 
 **EN source:** UNIVERSAL Tag may be equipped to any Weapon, Core, or Armor.
 
@@ -895,7 +845,7 @@
 - `any` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `237.15, 645.77, 252.53, 657.69`
 - `Weapon, Core, or Armor.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `252.53, 645.79, 363.49, 657.69`
 
-## Raw line 075 (block 26, line 74)
+## Raw line 071 (block 26, line 70)
 
 **EN source:** 1-Handed Weapons may only equip 1 Item Upgrade, while 2-Handed
 
@@ -911,7 +861,7 @@
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `337.67, 662.44, 343.23, 674.36`
 - `-Handed` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `343.23, 662.46, 383.80, 674.36`
 
-## Raw line 076 (block 26, line 75)
+## Raw line 072 (block 26, line 71)
 
 **EN source:** Weapons may equip 2.
 
@@ -924,7 +874,7 @@
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `172.16, 674.37, 177.17, 685.09`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `177.17, 673.46, 179.95, 685.36`
 
-## Raw line 077 (block 27, line 76)
+## Raw line 073 (block 27, line 72)
 
 **EN source:** Though they are attached to an Item, Item Upgrades and their Abilities
 
@@ -935,7 +885,7 @@
 **PDF span runs:**
 - `Though they are attached to an Item, Item Upgrades and their Abilities` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.14, 690.13, 385.70, 702.03`
 
-## Raw line 078 (block 27, line 77)
+## Raw line 074 (block 27, line 73)
 
 **EN source:** are used independently of the Item they are attached to. Meaning, if you
 
@@ -946,7 +896,7 @@
 **PDF span runs:**
 - `are used independently of the Item they are attached to. Meaning, if you` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.14, 701.13, 394.25, 713.03`
 
-## Raw line 079 (block 27, line 78)
+## Raw line 075 (block 27, line 74)
 
 **EN source:** Upgraded an Item with an Upgrade that had a Flip Ability, when used,
 
@@ -957,7 +907,7 @@
 **PDF span runs:**
 - `Upgraded an Item with an Upgrade that had a Flip Ability, when used,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.14, 712.13, 385.68, 724.03`
 
-## Raw line 080 (block 27, line 79)
+## Raw line 076 (block 27, line 75)
 
 **EN source:** that Flip Ability would only Flip the Upgrade and not the Item it was
 
@@ -968,7 +918,7 @@
 **PDF span runs:**
 - `that Flip Ability would only Flip the Upgrade and not the Item it was` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.14, 723.13, 377.17, 735.03`
 
-## Raw line 081 (block 27, line 80)
+## Raw line 077 (block 27, line 76)
 
 **EN source:** attached to.
 
@@ -979,7 +929,7 @@
 **PDF span runs:**
 - `attached to.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.14, 734.13, 131.54, 746.03`
 
-## Raw line 082 (block 28, line 81)
+## Raw line 078 (block 28, line 77)
 
 **EN source:** If any Ability references an Icon on an Item with an Upgrade, any Icon
 
@@ -990,7 +940,7 @@
 **PDF span runs:**
 - `If any Ability references an Icon on an Item with an Upgrade, any Icon` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.14, 750.80, 386.53, 762.70`
 
-## Raw line 083 (block 28, line 82)
+## Raw line 079 (block 28, line 78)
 
 **EN source:** bonuses on the Upgrade also apply to the Item in which you have
 
@@ -1001,7 +951,7 @@
 **PDF span runs:**
 - `bonuses on the Upgrade also apply to the Item in which you have` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.14, 761.80, 366.31, 773.70`
 
-## Raw line 084 (block 28, line 83)
+## Raw line 080 (block 28, line 79)
 
 **EN source:** Upgraded.
 
@@ -1012,7 +962,7 @@
 **PDF span runs:**
 - `Upgraded.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `81.14, 772.80, 129.37, 784.70`
 
-## Raw line 085 (block 29, line 84)
+## Raw line 081 (block 29, line 80)
 
 **EN source:** Item Upgrades
 
@@ -1023,7 +973,7 @@
 **PDF span runs:**
 - `Item Upgrades` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `79.37, 56.69, 221.84, 80.96`
 
-## Raw line 086 (block 30, line 85)
+## Raw line 082 (block 30, line 81)
 
 **EN source:** Great Hammer
 
@@ -1034,7 +984,7 @@
 **PDF span runs:**
 - `Great Hammer` — `Cinzel-Regular` 8.82 pt; PDF flags `4`; bbox `548.17, 138.80, 617.03, 150.69`
 
-## Raw line 087 (block 31, line 86)
+## Raw line 083 (block 31, line 82)
 
 **EN source:** 30
 
@@ -1045,7 +995,7 @@
 **PDF span runs:**
 - `30` — `Cinzel-Regular` 10.59 pt; PDF flags `4`; bbox `526.51, 156.56, 539.17, 170.84`
 
-## Raw line 088 (block 31, line 87)
+## Raw line 084 (block 31, line 83)
 
 **EN source:** 30
 
@@ -1056,7 +1006,7 @@
 **PDF span runs:**
 - `30` — `Cinzel-Regular` 10.59 pt; PDF flags `4`; bbox `526.51, 156.56, 539.17, 170.84`
 
-## Raw line 089 (block 31, line 88)
+## Raw line 085 (block 31, line 84)
 
 **EN source:** BLUNT • GREAT HAMMER • HEAVY
 
@@ -1067,7 +1017,7 @@
 **PDF span runs:**
 - `BLUNT • GREAT HAMMER • HEAVY` — `OptimaLTStd-Bold` 5.29 pt; PDF flags `20`; bbox `561.56, 156.82, 648.88, 163.13`
 
-## Raw line 090 (block 32, line 89)
+## Raw line 086 (block 32, line 85)
 
 **EN source:** 2
 
@@ -1078,7 +1028,7 @@
 **PDF span runs:**
 - `2` — `Cinzel-Regular` 8.82 pt; PDF flags `4`; bbox `531.51, 199.70, 536.95, 211.59`
 
-## Raw line 091 (block 33, line 90)
+## Raw line 087 (block 33, line 86)
 
 **EN source:** +1 PHYSICAL DMG
 
@@ -1087,12 +1037,11 @@
 **Line bbox:** `531.43, 342.18, 585.49, 349.53`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 6.18 pt; PDF flags `4`; bbox `531.43, 342.18, 533.15, 349.53`
 - `+` — `OptimaLTStd-Bold` 5.29 pt; PDF flags `20`; bbox `532.90, 342.54, 536.11, 348.85`
 - `1` — `OptimaLTStd-Bold` 5.74 pt; PDF flags `20`; bbox `536.11, 342.58, 539.30, 349.41`
 - `PHYSICAL DMG` — `OptimaLTStd-Bold` 5.29 pt; PDF flags `20`; bbox `539.30, 342.98, 585.49, 349.29`
 
-## Raw line 092 (block 33, line 91)
+## Raw line 088 (block 33, line 87)
 
 **EN source:** +1 PHYSICAL DMG
 
@@ -1101,12 +1050,11 @@
 **Line bbox:** `593.18, 342.54, 641.35, 352.18`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 6.18 pt; PDF flags `4`; bbox `593.18, 344.83, 594.90, 352.18`
 - `+` — `OptimaLTStd-Bold` 5.29 pt; PDF flags `21`; bbox `594.65, 342.54, 597.86, 348.85`
 - `1` — `OptimaLTStd-Bold` 5.74 pt; PDF flags `21`; bbox `597.86, 342.58, 601.05, 349.41`
 - `PHYSICAL DMG` — `OptimaLTStd-Bold` 5.29 pt; PDF flags `21`; bbox `601.05, 342.98, 641.35, 349.29`
 
-## Raw line 093 (block 34, line 92)
+## Raw line 089 (block 34, line 88)
 
 **EN source:** EXHAUST
 
@@ -1117,9 +1065,9 @@
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 5.74 pt; PDF flags `20`; bbox `573.60, 301.33, 598.19, 308.12`
 
-## Raw line 094 (block 35, line 93)
+## Raw line 090 (block 35, line 89)
 
-**EN source:** FU: Spend 1 SP to PUSH 1 against all adjacent
+**EN source:** FU: Spend 1 SPto PUSH 1against all adjacent
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1129,15 +1077,13 @@
 - `FU:` — `OptimaLTStd-Bold` 5.74 pt; PDF flags `20`; bbox `522.49, 310.52, 531.41, 317.36`
 - `Spend` — `OptimaLTStd` 6.18 pt; PDF flags `4`; bbox `531.41, 310.13, 551.32, 317.48`
 - `1 SP` — `OptimaLTStd-Bold` 5.74 pt; PDF flags `20`; bbox `551.32, 310.53, 562.16, 317.36`
-- `` — `OptimaLTStd-Bold` 5.29 pt; PDF flags `20`; bbox `562.16, 310.93, 563.63, 317.24`
 - `to` — `OptimaLTStd` 6.18 pt; PDF flags `4`; bbox `563.63, 310.13, 570.50, 317.48`
 - `PUSH 1` — `OptimaLTStd-Bold` 5.74 pt; PDF flags `20`; bbox `570.50, 310.53, 590.26, 317.36`
-- `` — `OptimaLTStd-Bold` 5.29 pt; PDF flags `20`; bbox `590.26, 310.93, 591.73, 317.24`
 - `against all adjacent` — `OptimaLTStd` 6.18 pt; PDF flags `4`; bbox `591.73, 310.13, 644.60, 317.48`
 
-## Raw line 095 (block 36, line 94)
+## Raw line 091 (block 36, line 90)
 
-**EN source:** opponents and Inflict Paralyze,
+**EN source:** opponentsand Inflict Paralyze,
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1145,12 +1091,11 @@
 
 **PDF span runs:**
 - `opponents` — `OptimaLTStd` 6.18 pt; PDF flags `4`; bbox `541.73, 317.19, 569.54, 324.54`
-- `` — `OptimaLTStd-Bold` 5.29 pt; PDF flags `20`; bbox `569.54, 317.99, 571.01, 324.30`
 - `and Inflict` — `OptimaLTStd` 6.18 pt; PDF flags `4`; bbox `571.01, 317.19, 599.50, 324.54`
 - `Paralyze` — `OptimaLTStd-Italic` 6.18 pt; PDF flags `6`; bbox `599.50, 317.17, 621.92, 324.50`
 - `,` — `OptimaLTStd` 6.18 pt; PDF flags `4`; bbox `621.92, 317.19, 623.64, 324.54`
 
-## Raw line 096 (block 37, line 95)
+## Raw line 092 (block 37, line 91)
 
 **EN source:** FORCE 7 + DIFFERENCE HIT.
 
@@ -1160,9 +1105,8 @@
 
 **PDF span runs:**
 - `FORCE 7 + DIFFERENCE HIT.` — `OptimaLTStd-Bold` 5.74 pt; PDF flags `20`; bbox `545.41, 324.20, 619.95, 331.48`
-- `` — `OptimaLTStd` 6.18 pt; PDF flags `4`; bbox `619.95, 324.25, 621.67, 331.60`
 
-## Raw line 097 (block 38, line 96)
+## Raw line 093 (block 38, line 92)
 
 **EN source:** Equipping Item Upgrades
 
@@ -1173,7 +1117,7 @@
 **PDF span runs:**
 - `Equipping Item Upgrades` — `Cinzel-Regular` 16.00 pt; PDF flags `4`; bbox `472.80, 91.84, 691.07, 113.41`
 
-## Raw line 098 (block 39, line 97)
+## Raw line 094 (block 39, line 93)
 
 **EN source:** Etherium
 
@@ -1184,7 +1128,7 @@
 **PDF span runs:**
 - `Etherium` — `Cinzel-Regular` 8.76 pt; PDF flags `4`; bbox `482.56, 395.72, 526.70, 407.53`
 
-## Raw line 099 (block 40, line 98)
+## Raw line 095 (block 40, line 94)
 
 **EN source:** UNIVERSAL UPGRADE
 
@@ -1195,7 +1139,7 @@
 **PDF span runs:**
 - `UNIVERSAL UPGRADE` — `OptimaLTStd-Bold` 5.26 pt; PDF flags `20`; bbox `497.90, 414.22, 551.94, 420.49`
 
-## Raw line 100 (block 41, line 99)
+## Raw line 096 (block 41, line 95)
 
 **EN source:** +1
 
@@ -1206,7 +1150,7 @@
 **PDF span runs:**
 - `+1` — `Cinzel-Regular` 8.76 pt; PDF flags `4`; bbox `540.88, 433.69, 548.54, 445.50`
 
-## Raw line 101 (block 41, line 100)
+## Raw line 097 (block 41, line 96)
 
 **EN source:** +1
 
@@ -1217,7 +1161,7 @@
 **PDF span runs:**
 - `+1` — `Cinzel-Regular` 8.76 pt; PDF flags `4`; bbox `540.88, 433.69, 548.54, 445.50`
 
-## Raw line 102 (block 42, line 101)
+## Raw line 098 (block 42, line 97)
 
 **EN source:** Master Work
 
@@ -1228,7 +1172,7 @@
 **PDF span runs:**
 - `Master Work` — `Cinzel-Regular` 8.76 pt; PDF flags `4`; bbox `647.10, 613.28, 709.42, 625.09`
 
-## Raw line 103 (block 43, line 102)
+## Raw line 099 (block 43, line 98)
 
 **EN source:** WEAPON UPGRADE
 
@@ -1239,7 +1183,7 @@
 **PDF span runs:**
 - `WEAPON UPGRADE` — `OptimaLTStd-Bold` 5.26 pt; PDF flags `20`; bbox `676.79, 631.78, 725.57, 638.05`
 
-## Raw line 104 (block 44, line 103)
+## Raw line 100 (block 44, line 99)
 
 **EN source:** EXHAUST
 
@@ -1250,7 +1194,7 @@
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 5.73 pt; PDF flags `20`; bbox `669.16, 730.52, 694.00, 737.30`
 
-## Raw line 105 (block 44, line 104)
+## Raw line 101 (block 44, line 100)
 
 **EN source:** When making an Attack, add
 
@@ -1261,7 +1205,7 @@
 **PDF span runs:**
 - `When making an Attack, add` — `OptimaLTStd` 6.13 pt; PDF flags `4`; bbox `640.04, 739.29, 716.73, 746.59`
 
-## Raw line 106 (block 45, line 105)
+## Raw line 102 (block 45, line 101)
 
 **EN source:** +1 TO THE ATK ROLL.
 
@@ -1271,9 +1215,8 @@
 
 **PDF span runs:**
 - `+1 TO THE ATK ROLL.` — `OptimaLTStd-Bold` 5.69 pt; PDF flags `20`; bbox `650.68, 747.04, 706.08, 753.83`
-- `` — `OptimaLTStd` 6.13 pt; PDF flags `4`; bbox `706.08, 746.65, 707.79, 753.95`
 
-## Raw line 107 (block 46, line 106)
+## Raw line 103 (block 46, line 102)
 
 **EN source:** 28
 
@@ -1284,7 +1227,7 @@
 **PDF span runs:**
 - `28` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 108 (block 46, line 107)
+## Raw line 104 (block 46, line 103)
 
 **EN source:** 28
 

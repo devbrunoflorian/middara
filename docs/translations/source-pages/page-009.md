@@ -24,7 +24,7 @@
 
 ## Raw line 002 (block 0, line 1)
 
-**EN source:** When playing the Crawl Mode, players start by choosing a Scenario. There are 5 different Scenarios in Unintentional Malum: Act 1, each with a Rank
+**EN source:** When playing the Crawl Mode, players start by choosing a Scenario. There are 5 different Scenarios in UnintentionalMalum: Act 1, each with a Rank
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -35,7 +35,6 @@
 - `5` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `424.77, 98.45, 430.33, 110.37`
 - `different Scenarios in` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.33, 98.47, 526.48, 110.37`
 - `Unintentional` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `526.48, 98.35, 587.06, 110.30`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `587.06, 98.45, 589.84, 110.37`
 - `Malum: Act 1` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `589.84, 98.35, 648.71, 110.30`
 - `, each with a Rank` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `648.71, 98.47, 731.34, 110.37`
 
@@ -167,7 +166,7 @@
 
 ## Raw line 013 (block 3, line 12)
 
-**EN source:** See Buying Items and Learning Disciplines Pg. 24.
+**EN source:** SeeBuying Items and Learning Disciplines Pg. 24.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -175,7 +174,6 @@
 
 **PDF span runs:**
 - `See` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 265.42, 101.17, 277.32`
-- `` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `101.17, 265.38, 103.95, 277.26`
 - `Buying Items and Learning Disciplines` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `103.95, 265.30, 270.51, 277.25`
 - `Pg. 24.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `270.51, 265.42, 303.31, 277.32`
 
@@ -361,7 +359,7 @@
 
 ## Raw line 030 (block 10, line 29)
 
-**EN source:** RESTORE ADVENTURERS: Each Adventurer Restores.
+**EN source:** RESTORE ADVENTURERS:Each Adventurer Restores.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -369,7 +367,6 @@
 
 **PDF span runs:**
 - `RESTORE ADVENTURERS:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `104.17, 542.21, 207.43, 552.94`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `207.43, 541.29, 210.21, 553.21`
 - `Each Adventurer Restores.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `210.21, 541.31, 327.11, 553.21`
 
 ## Raw line 031 (block 10, line 30)
@@ -436,7 +433,7 @@
 
 ## Raw line 036 (block 12, line 35)
 
-**EN source:** and XP on Disciplines as they would like. The Items that make up
+**EN source:** and XPon Disciplines as they would like. The Items that make up
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -445,7 +442,6 @@
 **PDF span runs:**
 - `and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.17, 596.65, 123.07, 608.55`
 - `XP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `123.07, 597.55, 133.58, 608.28`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `133.58, 596.63, 136.36, 608.55`
 - `on Disciplines as they would like. The Items that make up` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `136.36, 596.65, 386.83, 608.55`
 
 ## Raw line 037 (block 12, line 36)
@@ -487,7 +483,7 @@
 
 ## Raw line 040 (block 13, line 39)
 
-**EN source:** CONTINUE: Players continue to the next Encounter or
+**EN source:** CONTINUE:Players continue to the next Encounter or
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -495,7 +491,6 @@
 
 **PDF span runs:**
 - `CONTINUE:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `104.17, 636.22, 153.68, 646.95`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `153.68, 635.30, 156.46, 647.22`
 - `Players continue to the next Encounter or` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `156.46, 635.32, 338.84, 647.22`
 
 ## Raw line 041 (block 13, line 40)
@@ -579,17 +574,6 @@
 
 ## Raw line 048 (block 17, line 47)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `734.46, 577.11, 737.46, 593.28`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `734.46, 577.11, 737.46, 593.28`
-
-## Raw line 049 (block 17, line 48)
-
 **EN source:** If players would like to make the Crawl Mode provide a more in-depth
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -599,7 +583,7 @@
 **PDF span runs:**
 - `If players would like to make the Crawl Mode provide a more in-depth` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 590.63, 721.60, 602.53`
 
-## Raw line 050 (block 17, line 49)
+## Raw line 049 (block 17, line 48)
 
 **EN source:** experience, you can try playing the Epic Crawl Mode. In this mode, players
 
@@ -610,7 +594,7 @@
 **PDF span runs:**
 - `experience, you can try playing the Epic Crawl Mode. In this mode, players` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 601.63, 741.37, 613.53`
 
-## Raw line 051 (block 17, line 50)
+## Raw line 050 (block 17, line 49)
 
 **EN source:** will start a Rank 1 Scenario as a novice, and eventually end at the highest
 
@@ -623,7 +607,7 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `487.53, 612.61, 493.09, 624.53`
 - `Scenario as a novice, and eventually end at the highest` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `493.09, 612.63, 734.62, 624.53`
 
-## Raw line 052 (block 17, line 51)
+## Raw line 051 (block 17, line 50)
 
 **EN source:** Rank Scenario you own in your Middara collection.
 
@@ -634,7 +618,7 @@
 **PDF span runs:**
 - `Rank Scenario you own in your Middara collection.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 623.63, 643.67, 635.53`
 
-## Raw line 053 (block 17, line 52)
+## Raw line 052 (block 17, line 51)
 
 **EN source:** To play the Epic Crawl Mode, start a Rank 1 Scenario of your choice. After
 
@@ -647,7 +631,7 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `598.20, 637.44, 603.76, 649.36`
 - `Scenario of your choice. After` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `603.76, 637.46, 736.97, 649.36`
 
-## Raw line 054 (block 17, line 53)
+## Raw line 053 (block 17, line 52)
 
 **EN source:** completing it, keep all your Gold, Items, and XP. Then, perform a Buy Round
 
@@ -660,7 +644,7 @@
 - `XP` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `611.30, 648.44, 622.97, 660.36`
 - `. Then, perform a Buy Round` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `622.97, 648.46, 749.61, 660.36`
 
-## Raw line 055 (block 17, line 54)
+## Raw line 054 (block 17, line 53)
 
 **EN source:** where you purchase new items at the next Loot Level (Common for Rank
 
@@ -671,7 +655,7 @@
 **PDF span runs:**
 - `where you purchase new items at the next Loot Level (Common for Rank` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 659.46, 731.28, 671.36`
 
-## Raw line 056 (block 17, line 55)
+## Raw line 055 (block 17, line 54)
 
 **EN source:** 2) and spend XP to purchase new Disciplines. After spending XP and Gold,
 
@@ -687,7 +671,7 @@
 - `XP` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `680.30, 670.44, 691.97, 682.36`
 - `and Gold,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `691.97, 670.46, 740.89, 682.36`
 
-## Raw line 057 (block 17, line 56)
+## Raw line 056 (block 17, line 55)
 
 **EN source:** choose a Scenario from the next Rank up. Meaning, players may never play a
 
@@ -698,7 +682,7 @@
 **PDF span runs:**
 - `choose a Scenario from the next Rank up. Meaning, players may never play a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 681.46, 750.12, 693.36`
 
-## Raw line 058 (block 17, line 57)
+## Raw line 057 (block 17, line 56)
 
 **EN source:** Scenario of the same or lower Rank twice.
 
@@ -709,7 +693,7 @@
 **PDF span runs:**
 - `Scenario of the same or lower Rank twice.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 692.46, 597.44, 704.36`
 
-## Raw line 059 (block 17, line 58)
+## Raw line 058 (block 17, line 57)
 
 **EN source:** Players will never Gain XP or Gold listed in the corresponding Crawl
 
@@ -722,7 +706,7 @@
 - `XP` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `518.05, 706.27, 529.72, 718.19`
 - `or Gold listed in the corresponding Crawl` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `529.72, 706.29, 713.95, 718.19`
 
-## Raw line 060 (block 17, line 59)
+## Raw line 059 (block 17, line 58)
 
 **EN source:** Scenarios after the first Rank. If you’d like to pause your Epic Crawl run, you
 
@@ -733,7 +717,7 @@
 **PDF span runs:**
 - `Scenarios after the first Rank. If you’d like to pause your Epic Crawl run, you` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 717.29, 744.77, 729.19`
 
-## Raw line 061 (block 17, line 60)
+## Raw line 060 (block 17, line 59)
 
 **EN source:** can do so between Ranks. Use the normal rules from the Adventure Mode by
 
@@ -744,7 +728,7 @@
 **PDF span runs:**
 - `can do so between Ranks. Use the normal rules from the Adventure Mode by` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 728.29, 749.50, 740.19`
 
-## Raw line 062 (block 17, line 61)
+## Raw line 061 (block 17, line 60)
 
 **EN source:** storing your characters, Items, and Disciplines in a Tuck Bag. You can also use
 
@@ -755,7 +739,7 @@
 **PDF span runs:**
 - `storing your characters, Items, and Disciplines in a Tuck Bag. You can also use` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 739.29, 752.47, 751.19`
 
-## Raw line 063 (block 17, line 62)
+## Raw line 062 (block 17, line 61)
 
 **EN source:** an Adventure Sheet to keep track of the current party's Gold and XP.
 
@@ -768,7 +752,7 @@
 - `XP` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `694.92, 750.27, 706.59, 762.19`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `706.59, 750.29, 712.15, 762.19`
 
-## Raw line 064 (block 17, line 63)
+## Raw line 063 (block 17, line 62)
 
 **EN source:** If players are ever Defeated, they lose the Epic Crawl. If they win a Rank 4
 
@@ -779,9 +763,8 @@
 **PDF span runs:**
 - `If players are ever Defeated, they lose the Epic Crawl. If they win a Rank` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 764.12, 728.38, 776.02`
 - `4` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `728.38, 764.10, 733.94, 776.02`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `733.94, 764.12, 736.72, 776.02`
 
-## Raw line 065 (block 17, line 64)
+## Raw line 064 (block 17, line 63)
 
 **EN source:** Scenario (or a Rank 7 if you have expansions) you’ve won this Epic Crawl run!
 
@@ -794,7 +777,7 @@
 - `7` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `502.49, 775.10, 508.05, 787.02`
 - `if you have expansions) you’ve won this Epic Crawl run!` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `508.05, 775.12, 751.19, 787.02`
 
-## Raw line 066 (block 17, line 65)
+## Raw line 065 (block 17, line 64)
 
 **EN source:** 9
 

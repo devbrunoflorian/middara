@@ -258,7 +258,6 @@
 
 **PDF span runs:**
 - `below.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 464.76, 114.77, 476.66`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `114.77, 464.74, 117.55, 476.66`
 
 ## Raw line 023 (block 10, line 22)
 
@@ -270,7 +269,6 @@
 
 **PDF span runs:**
 - `ITEM LIMITS:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `86.17, 479.74, 145.62, 491.66`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `145.62, 479.76, 148.40, 491.66`
 
 ## Raw line 024 (block 11, line 23)
 
@@ -332,7 +330,7 @@
 
 ## Raw line 029 (block 12, line 28)
 
-**EN source:** IMPORTANT: Any Flipped, or Exhausted Items moved to your Pack
+**EN source:** IMPORTANT:Any Flipped, or Exhausted Items moved to your Pack
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -340,7 +338,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `101.84, 628.55, 164.44, 640.53`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `164.44, 628.59, 167.22, 640.51`
 - `Any Flipped, or Exhausted Items moved to your Pack` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `167.22, 628.61, 395.61, 640.51`
 
 ## Raw line 030 (block 12, line 29)
@@ -392,7 +389,7 @@
 
 ## Raw line 034 (block 13, line 33)
 
-**EN source:** IMPORTANT: An Adventurer is limited to 1 copy of any given Relic
+**EN source:** IMPORTANT:An Adventurer is limited to 1 copy of any given Relic
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -400,12 +397,10 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `101.84, 688.05, 164.44, 700.03`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `164.44, 688.09, 167.22, 700.01`
 - `An Adventurer is limited to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `167.22, 688.11, 285.43, 700.01`
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `285.43, 688.09, 290.99, 700.01`
 - `copy of any given` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `290.99, 688.11, 372.59, 700.01`
 - `Relic` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `372.59, 688.09, 394.26, 700.01`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `394.26, 688.11, 397.04, 700.01`
 
 ## Raw line 035 (block 13, line 34)
 
@@ -420,7 +415,7 @@
 
 ## Raw line 036 (block 13, line 35)
 
-**EN source:** not have more than 1 Relic of the same name equipped or in their Pack
+**EN source:** not have more than 1Relic of the same name equipped or in their Pack
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -430,7 +425,6 @@
 - `not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `91.84, 710.09, 106.29, 722.01`
 - `have more than` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `106.29, 710.11, 178.67, 722.01`
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `178.67, 710.09, 184.23, 722.01`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `184.23, 710.11, 187.01, 722.01`
 - `Relic` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `187.01, 710.09, 208.68, 722.01`
 - `of the same name equipped` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `208.68, 710.11, 333.73, 722.01`
 - `or` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `333.73, 710.09, 343.18, 722.01`
@@ -538,7 +532,7 @@
 
 ## Raw line 046 (block 16, line 45)
 
-**EN source:** IMPORTANT: During a Story Round, all Consumable Items that are
+**EN source:** IMPORTANT:During a Story Round, all Consumable Items that are
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -546,7 +540,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `431.51, 198.85, 494.11, 210.83`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `494.11, 198.89, 496.89, 210.81`
 - `During a Story Round,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `496.89, 198.91, 595.82, 210.81`
 - `all` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `595.82, 198.89, 606.38, 210.81`
 - `Consumable Items that are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `606.38, 198.91, 726.42, 210.81`
@@ -577,17 +570,6 @@
 
 ## Raw line 049 (block 18, line 48)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `734.17, 249.48, 736.95, 261.38`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `734.17, 249.48, 736.95, 261.38`
-
-## Raw line 050 (block 18, line 49)
-
 **EN source:** In Middara, Adventurers will Gain Gold and XP in a variety of ways such
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -601,7 +583,7 @@
 - `XP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `608.84, 261.38, 619.35, 272.11`
 - `in a variety of ways such` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `619.35, 260.48, 730.16, 272.38`
 
-## Raw line 051 (block 18, line 50)
+## Raw line 050 (block 18, line 49)
 
 **EN source:** as by Defeating opponents, collecting Loot, and completing Encounters.
 
@@ -612,7 +594,7 @@
 **PDF span runs:**
 - `as by Defeating opponents, collecting Loot, and completing Encounters.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 271.48, 728.04, 283.38`
 
-## Raw line 052 (block 18, line 51)
+## Raw line 051 (block 18, line 50)
 
 **EN source:** Gold and XP earned while playing will carry over from session to session.
 
@@ -625,7 +607,7 @@
 - `XP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `459.20, 283.38, 469.71, 294.11`
 - `earned while playing will carry over from session to session.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `469.71, 282.48, 733.53, 294.38`
 
-## Raw line 053 (block 18, line 52)
+## Raw line 052 (block 18, line 51)
 
 **EN source:** Players will track this on the Adventure Sheet included with the game.
 
@@ -636,7 +618,7 @@
 **PDF span runs:**
 - `Players will track this on the Adventure Sheet included with the game.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 293.48, 718.91, 305.38`
 
-## Raw line 054 (block 19, line 53)
+## Raw line 053 (block 19, line 52)
 
 **EN source:** When XP is Gained, each Adventurer in the party Gains the listed XP. XP
 
@@ -651,9 +633,8 @@
 - `XP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `696.00, 311.05, 706.50, 321.78`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `706.50, 310.15, 712.06, 322.05`
 - `XP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `712.06, 311.05, 722.56, 321.78`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `722.56, 310.15, 725.34, 322.05`
 
-## Raw line 055 (block 19, line 54)
+## Raw line 054 (block 19, line 53)
 
 **EN source:** is tracked individually and is not shared as a group. However, Gold is
 
@@ -664,7 +645,7 @@
 **PDF span runs:**
 - `is tracked individually and is not shared as a group. However, Gold is` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 321.15, 717.29, 333.05`
 
-## Raw line 056 (block 19, line 55)
+## Raw line 055 (block 19, line 54)
 
 **EN source:** shared as a party. Make sure you get along with your fellow players when
 
@@ -675,7 +656,7 @@
 **PDF span runs:**
 - `shared as a party. Make sure you get along with your fellow players when` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 332.15, 733.34, 344.05`
 
-## Raw line 057 (block 19, line 56)
+## Raw line 056 (block 19, line 55)
 
 **EN source:** purchasing Items!
 
@@ -686,7 +667,7 @@
 **PDF span runs:**
 - `purchasing Items!` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 343.15, 491.67, 355.05`
 
-## Raw line 058 (block 20, line 57)
+## Raw line 057 (block 20, line 56)
 
 **EN source:** For example, a reward for completing an Encounter may say the
 
@@ -697,7 +678,7 @@
 **PDF span runs:**
 - `For example, a reward for completing an Encounter may say the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 359.82, 693.02, 371.72`
 
-## Raw line 059 (block 20, line 58)
+## Raw line 058 (block 20, line 57)
 
 **EN source:** following:
 
@@ -708,9 +689,9 @@
 **PDF span runs:**
 - `following:` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 370.82, 459.08, 382.72`
 
-## Raw line 060 (block 21, line 59)
+## Raw line 059 (block 21, line 58)
 
-**EN source:** Each party member Gains 1 XP.
+**EN source:** Each party member Gains 1XP.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -719,11 +700,10 @@
 **PDF span runs:**
 - `Each party member Gains` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.51, 387.82, 535.24, 399.72`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `535.24, 388.72, 540.25, 399.45`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `540.25, 387.80, 543.03, 399.72`
 - `XP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `543.03, 388.72, 553.53, 399.45`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `553.53, 387.82, 556.31, 399.72`
 
-## Raw line 061 (block 22, line 60)
+## Raw line 060 (block 22, line 59)
 
 **EN source:** When an Adventurer finds Gold, the instructions will read something like
 
@@ -734,7 +714,7 @@
 **PDF span runs:**
 - `When an Adventurer finds Gold, the instructions will read something like` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 404.82, 733.03, 416.72`
 
-## Raw line 062 (block 22, line 61)
+## Raw line 061 (block 22, line 60)
 
 **EN source:** this:
 
@@ -745,7 +725,7 @@
 **PDF span runs:**
 - `this:` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 415.82, 433.63, 427.72`
 
-## Raw line 063 (block 23, line 62)
+## Raw line 062 (block 23, line 61)
 
 **EN source:** The party Gains 20 Gold.
 
@@ -758,7 +738,7 @@
 - `20` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `492.20, 431.47, 503.32, 443.39`
 - `Gold.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `503.32, 431.49, 530.56, 443.39`
 
-## Raw line 064 (block 24, line 63)
+## Raw line 063 (block 24, line 62)
 
 **EN source:** A reward for activating a Loot token may say:
 
@@ -771,7 +751,7 @@
 - `Loot` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `524.16, 448.45, 542.38, 460.33`
 - `token may say:` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `542.38, 448.49, 611.80, 460.39`
 
-## Raw line 065 (block 25, line 64)
+## Raw line 064 (block 25, line 63)
 
 **EN source:** Gain 10 Gold and 2 Mundane Consumables.
 
@@ -786,7 +766,7 @@
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `502.67, 464.14, 508.23, 476.06`
 - `Mundane Consumables.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `508.23, 464.16, 615.50, 476.06`
 
-## Raw line 066 (block 26, line 65)
+## Raw line 065 (block 26, line 64)
 
 **EN source:** In this case, the party would Gain 10 Gold and the specific Adventurer
 
@@ -799,7 +779,7 @@
 - `10` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `563.57, 480.81, 574.69, 492.73`
 - `Gold and the specific Adventurer` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `574.69, 480.83, 722.36, 492.73`
 
-## Raw line 067 (block 26, line 66)
+## Raw line 066 (block 26, line 65)
 
 **EN source:** that activated the Loot token would Gain the 2 Consumables.
 
@@ -814,7 +794,7 @@
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `609.72, 491.81, 615.28, 503.73`
 - `Consumables.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `615.28, 491.83, 678.64, 503.73`
 
-## Raw line 068 (block 27, line 67)
+## Raw line 067 (block 27, line 66)
 
 **EN source:** Buying Items and Learning Disciplines
 
@@ -825,9 +805,9 @@
 **PDF span runs:**
 - `Buying Items and Learning Disciplines` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `415.84, 508.81, 672.63, 524.99`
 
-## Raw line 069 (block 28, line 68)
+## Raw line 068 (block 28, line 67)
 
-**EN source:** During the game, Adventurers will be able to spend the Gold and XP
+**EN source:** During the game, Adventurers will be able to spend the Gold andXP
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -835,11 +815,9 @@
 
 **PDF span runs:**
 - `During the game, Adventurers will be able to spend the Gold and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 532.33, 696.90, 544.23`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `696.90, 532.31, 699.68, 544.23`
 - `XP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `699.68, 533.23, 710.19, 543.96`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `710.19, 532.33, 712.97, 544.23`
 
-## Raw line 070 (block 28, line 69)
+## Raw line 069 (block 28, line 68)
 
 **EN source:** they earned to buy Items and learn Disciplines. Adventurers may only
 
@@ -850,7 +828,7 @@
 **PDF span runs:**
 - `they earned to buy Items and learn Disciplines. Adventurers may only` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 543.33, 717.70, 555.23`
 
-## Raw line 071 (block 28, line 70)
+## Raw line 070 (block 28, line 69)
 
 **EN source:** buy Items and learn Disciplines when specifically instructed to. The most
 
@@ -861,7 +839,7 @@
 **PDF span runs:**
 - `buy Items and learn Disciplines when specifically instructed to. The most` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 554.33, 731.84, 566.23`
 
-## Raw line 072 (block 28, line 71)
+## Raw line 071 (block 28, line 70)
 
 **EN source:** common way Adventurers are able to do so is when they are given the
 
@@ -872,7 +850,7 @@
 **PDF span runs:**
 - `common way Adventurers are able to do so is when they are given the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 565.33, 720.38, 577.23`
 
-## Raw line 073 (block 28, line 72)
+## Raw line 072 (block 28, line 71)
 
 **EN source:** option to Shop and Train.
 
@@ -885,7 +863,7 @@
 - `Shop and Train` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `457.55, 576.31, 521.74, 588.23`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `521.74, 576.33, 524.52, 588.23`
 
-## Raw line 074 (block 29, line 73)
+## Raw line 073 (block 29, line 72)
 
 **EN source:** In Adventure Mode, this will typically occur during the Shop and Train
 
@@ -896,9 +874,8 @@
 **PDF span runs:**
 - `In Adventure Mode, this will typically occur during the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 593.00, 651.34, 604.90`
 - `Shop and Train` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `651.34, 592.98, 718.31, 604.90`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `718.31, 593.00, 721.09, 604.90`
 
-## Raw line 075 (block 29, line 74)
+## Raw line 074 (block 29, line 73)
 
 **EN source:** Phase of a Story Round. See Story Rounds Pg. 13.
 
@@ -911,7 +888,7 @@
 - `Story Rounds` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `538.68, 603.88, 596.67, 615.83`
 - `Pg. 13.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `596.67, 604.00, 632.25, 615.90`
 
-## Raw line 076 (block 30, line 75)
+## Raw line 075 (block 30, line 74)
 
 **EN source:** In Crawl Mode, Shop and Train is often listed as a reward when
 
@@ -924,7 +901,7 @@
 - `Shop and Train` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `485.58, 620.65, 549.77, 632.57`
 - `is often listed as a reward when` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `549.77, 620.67, 690.58, 632.57`
 
-## Raw line 077 (block 30, line 76)
+## Raw line 076 (block 30, line 75)
 
 **EN source:** completing an Encounter or Scenario. See Encounter Rewards Pg. 9.
 
@@ -937,7 +914,7 @@
 - `Encounter Rewards` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `598.69, 631.55, 682.57, 643.50`
 - `Pg. 9.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `682.57, 631.67, 712.59, 643.57`
 
-## Raw line 078 (block 31, line 77)
+## Raw line 077 (block 31, line 76)
 
 **EN source:** Regardless of which Game Mode you are playing, when learning
 
@@ -948,7 +925,7 @@
 **PDF span runs:**
 - `Regardless of which Game Mode you are playing, when learning` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 648.34, 697.15, 660.24`
 
-## Raw line 079 (block 31, line 78)
+## Raw line 078 (block 31, line 77)
 
 **EN source:** Disciplines, you may spend XP to learn from any of the available
 
@@ -961,7 +938,7 @@
 - `XP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `537.08, 660.24, 547.59, 670.97`
 - `to learn from any of the available` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `547.59, 659.34, 695.26, 671.24`
 
-## Raw line 080 (block 31, line 79)
+## Raw line 079 (block 31, line 78)
 
 **EN source:** Discipline Trees. In order to learn a Discipline of a higher Level (LVL) in
 
@@ -974,7 +951,7 @@
 - `LVL)` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `693.24, 671.24, 710.58, 681.97`
 - `in` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `710.58, 670.34, 724.48, 682.24`
 
-## Raw line 081 (block 31, line 80)
+## Raw line 080 (block 31, line 79)
 
 **EN source:** a Tree, you must already have learned a Discipline of the previous LVL in
 
@@ -987,7 +964,7 @@
 - `LVL` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `701.96, 682.24, 716.30, 692.97`
 - `in` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `716.30, 681.34, 730.20, 693.24`
 
-## Raw line 082 (block 31, line 81)
+## Raw line 081 (block 31, line 80)
 
 **EN source:** the same Tree.
 
@@ -998,7 +975,7 @@
 **PDF span runs:**
 - `the same Tree.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 692.34, 479.93, 704.24`
 
-## Raw line 083 (block 31, line 82)
+## Raw line 082 (block 31, line 81)
 
 **EN source:** Example:
 
@@ -1008,9 +985,8 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `415.84, 707.41, 461.38, 721.82`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `461.38, 708.99, 466.94, 720.91`
 
-## Raw line 084 (block 31, line 83)
+## Raw line 083 (block 31, line 82)
 
 **EN source:** To learn a LVL 2 Martial Discipline, you must have already learned a LVL 1
 
@@ -1023,9 +999,8 @@
 - `LVL 2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `460.97, 720.91, 482.82, 731.64`
 - `Martial Discipline, you must have already learned a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `482.82, 720.01, 710.39, 731.91`
 - `LVL 1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `710.39, 720.91, 732.23, 731.64`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `732.23, 720.01, 735.01, 731.91`
 
-## Raw line 085 (block 31, line 84)
+## Raw line 084 (block 31, line 83)
 
 **EN source:** Martial Discipline. You may always learn LVL 1 Disciplines from any Tree
 
@@ -1038,7 +1013,7 @@
 - `LVL 1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `593.46, 731.91, 615.31, 742.64`
 - `Disciplines from any Tree` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `615.31, 731.01, 729.80, 742.91`
 
-## Raw line 086 (block 31, line 85)
+## Raw line 085 (block 31, line 84)
 
 **EN source:** and there is no limit to the amount of Disciplines you may learn.
 
@@ -1049,7 +1024,7 @@
 **PDF span runs:**
 - `and there is no limit to the amount of Disciplines you may learn.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 742.01, 696.05, 753.91`
 
-## Raw line 087 (block 32, line 86)
+## Raw line 086 (block 32, line 85)
 
 **EN source:** IMPORTANT:
 
@@ -1061,9 +1036,9 @@
 - `` — `Webdings` 10.00 pt; PDF flags `0`; bbox `421.51, 762.70, 431.51, 772.70`
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `431.51, 761.45, 494.11, 773.43`
 
-## Raw line 088 (block 32, line 87)
+## Raw line 087 (block 32, line 86)
 
-**EN source:** IMPORTANT: An Adventurer may not learn the same
+**EN source:** IMPORTANT:An Adventurer may not learn the same
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1071,10 +1046,9 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `431.51, 761.45, 494.11, 773.43`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `494.11, 761.49, 496.89, 773.41`
 - `An Adventurer may not learn the same` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `496.89, 761.51, 667.58, 773.41`
 
-## Raw line 089 (block 32, line 88)
+## Raw line 088 (block 32, line 87)
 
 **EN source:** Discipline twice.
 
@@ -1085,7 +1059,7 @@
 **PDF span runs:**
 - `Discipline twice.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.51, 772.51, 497.10, 784.41`
 
-## Raw line 090 (block 33, line 89)
+## Raw line 089 (block 33, line 88)
 
 **EN source:** Adventurers and Items
 
@@ -1096,7 +1070,7 @@
 **PDF span runs:**
 - `Adventurers and Items` — `EsmeraldaPro` 30.00 pt; PDF flags `4`; bbox `268.97, 56.69, 552.14, 97.55`
 
-## Raw line 091 (block 34, line 90)
+## Raw line 090 (block 34, line 89)
 
 **EN source:** Setting up
 
@@ -1107,7 +1081,7 @@
 **PDF span runs:**
 - `Setting up` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `86.17, 113.88, 155.30, 130.06`
 
-## Raw line 092 (block 35, line 91)
+## Raw line 091 (block 35, line 90)
 
 **EN source:** Playing Adventurers
 
@@ -1118,7 +1092,7 @@
 **PDF span runs:**
 - `Playing Adventurers` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `86.17, 237.89, 226.18, 254.06`
 
-## Raw line 093 (block 36, line 92)
+## Raw line 092 (block 36, line 91)
 
 **EN source:** •
 
@@ -1129,7 +1103,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `98.37, 496.31, 107.21, 508.23`
 
-## Raw line 094 (block 36, line 93)
+## Raw line 093 (block 36, line 92)
 
 **EN source:** 2 HANDS OF WEAPONS +
 
@@ -1142,7 +1116,7 @@
 - `HANDS OF WEAPONS` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `124.71, 497.23, 216.23, 507.96`
 - `+` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `216.23, 496.33, 227.85, 508.23`
 
-## Raw line 095 (block 36, line 94)
+## Raw line 094 (block 36, line 93)
 
 **EN source:** 1 Weapon Upgrade per Hand
 
@@ -1154,7 +1128,7 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `116.37, 507.31, 121.93, 519.23`
 - `Weapon Upgrade per Hand` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `121.93, 507.33, 243.89, 519.23`
 
-## Raw line 096 (block 37, line 95)
+## Raw line 095 (block 37, line 94)
 
 **EN source:** •
 
@@ -1165,7 +1139,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `98.37, 523.98, 107.21, 535.90`
 
-## Raw line 097 (block 37, line 96)
+## Raw line 096 (block 37, line 95)
 
 **EN source:** 1 ARMOR + 1 Armor Upgrade
 
@@ -1180,7 +1154,7 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `168.83, 523.98, 174.39, 535.90`
 - `Armor Upgrade` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `174.39, 524.00, 243.91, 535.90`
 
-## Raw line 098 (block 38, line 97)
+## Raw line 097 (block 38, line 96)
 
 **EN source:** •
 
@@ -1191,7 +1165,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `98.37, 540.65, 107.21, 552.57`
 
-## Raw line 099 (block 38, line 98)
+## Raw line 098 (block 38, line 97)
 
 **EN source:** 1 CORE + 1 Core Upgrade
 
@@ -1206,7 +1180,7 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `159.83, 540.65, 165.39, 552.57`
 - `Core Upgrade` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `165.39, 540.67, 228.62, 552.57`
 
-## Raw line 100 (block 39, line 99)
+## Raw line 099 (block 39, line 98)
 
 **EN source:** •
 
@@ -1217,7 +1191,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `98.37, 557.32, 107.21, 569.24`
 
-## Raw line 101 (block 39, line 100)
+## Raw line 100 (block 39, line 99)
 
 **EN source:** 1 ACCESSORY
 
@@ -1229,7 +1203,7 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `116.37, 557.32, 124.71, 569.24`
 - `ACCESSORY` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `124.71, 558.24, 174.22, 568.97`
 
-## Raw line 102 (block 40, line 101)
+## Raw line 101 (block 40, line 100)
 
 **EN source:** •
 
@@ -1240,7 +1214,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `269.78, 496.31, 278.62, 508.23`
 
-## Raw line 103 (block 40, line 102)
+## Raw line 102 (block 40, line 101)
 
 **EN source:** 3 RELICS
 
@@ -1252,7 +1226,7 @@
 - `3` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `287.78, 496.31, 296.12, 508.23`
 - `RELICS` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `296.12, 497.23, 324.12, 507.96`
 
-## Raw line 104 (block 41, line 103)
+## Raw line 103 (block 41, line 102)
 
 **EN source:** •
 
@@ -1263,7 +1237,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `269.78, 512.98, 278.62, 524.90`
 
-## Raw line 105 (block 41, line 104)
+## Raw line 104 (block 41, line 103)
 
 **EN source:** 3 CONSUMABLES
 
@@ -1275,7 +1249,7 @@
 - `3` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `287.78, 512.98, 296.12, 524.90`
 - `CONSUMABLES` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `296.12, 513.90, 361.13, 524.63`
 
-## Raw line 106 (block 42, line 105)
+## Raw line 105 (block 42, line 104)
 
 **EN source:** •
 
@@ -1286,7 +1260,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `269.78, 529.65, 278.62, 541.57`
 
-## Raw line 107 (block 42, line 106)
+## Raw line 106 (block 42, line 105)
 
 **EN source:** 1 FAMILIAR
 
@@ -1298,7 +1272,7 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `287.78, 529.65, 296.12, 541.57`
 - `FAMILIAR` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `296.12, 530.57, 336.29, 541.30`
 
-## Raw line 108 (block 43, line 107)
+## Raw line 107 (block 43, line 106)
 
 **EN source:** •
 
@@ -1309,7 +1283,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `269.78, 546.32, 278.62, 558.24`
 
-## Raw line 109 (block 43, line 108)
+## Raw line 108 (block 43, line 107)
 
 **EN source:** 1 COMPANION
 
@@ -1321,7 +1295,7 @@
 - `1` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `287.78, 546.32, 296.12, 558.24`
 - `COMPANION` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `296.12, 547.24, 352.54, 557.97`
 
-## Raw line 110 (block 44, line 109)
+## Raw line 109 (block 44, line 108)
 
 **EN source:** 24
 
@@ -1332,7 +1306,7 @@
 **PDF span runs:**
 - `24` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 111 (block 44, line 110)
+## Raw line 110 (block 44, line 109)
 
 **EN source:** 24
 

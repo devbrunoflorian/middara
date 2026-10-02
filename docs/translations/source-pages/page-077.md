@@ -748,18 +748,7 @@
 **PDF span runs:**
 - `ADVENTURER` — `OptimaLTStd-Black` 3.07 pt; PDF flags `20`; bbox `563.24, 539.64, 583.49, 545.01`
 
-## Raw line 068 (block 60, line 67)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `556.20, 545.56, 557.77, 548.51`
-
-**PDF span runs:**
-- `` — `OptimaLTStd-Bold` 2.39 pt; PDF flags `20`; bbox `556.20, 545.56, 557.77, 548.51`
-
-## Raw line 069 (block 61, line 68)
+## Raw line 068 (block 61, line 67)
 
 **EN source:** Grand Physique  ✤PASSIVE
 
@@ -771,9 +760,8 @@
 - `Grand Physique` — `Cinzel-Regular` 3.42 pt; PDF flags `4`; bbox `452.74, 590.46, 484.93, 597.75`
 - `✤` — `ZapfDingbatsStd` 2.24 pt; PDF flags `4`; bbox `486.21, 591.33, 488.15, 593.71`
 - `PASSIVE` — `OptimaLTStd-DemiBold` 2.24 pt; PDF flags `20`; bbox `488.17, 590.41, 497.23, 593.80`
-- `` — `Cinzel-Regular` 3.42 pt; PDF flags `4`; bbox `498.91, 589.08, 501.00, 593.82`
 
-## Raw line 070 (block 61, line 69)
+## Raw line 069 (block 61, line 68)
 
 **EN source:** Rook's Advancement granted him an unearthly
 
@@ -784,7 +772,7 @@
 **PDF span runs:**
 - `Rook's Advancement granted him an unearthly` — `AGaramondPro-Italic` 2.90 pt; PDF flags `6`; bbox `453.06, 592.53, 504.58, 600.53`
 
-## Raw line 071 (block 61, line 70)
+## Raw line 070 (block 61, line 69)
 
 **EN source:** amount of stamina and strength.
 
@@ -795,7 +783,7 @@
 **PDF span runs:**
 - `amount of stamina and strength.` — `AGaramondPro-Italic` 2.90 pt; PDF flags `6`; bbox `453.32, 597.00, 488.33, 603.59`
 
-## Raw line 072 (block 61, line 71)
+## Raw line 071 (block 61, line 70)
 
 **EN source:** • Rook’s unmodified maximum HP is 14.
 
@@ -812,7 +800,7 @@
 - `14` — `OptimaLTStd-Bold` 2.39 pt; PDF flags `20`; bbox `498.77, 600.24, 501.67, 603.30`
 - `.` — `OptimaLTStd` 2.73 pt; PDF flags `4`; bbox `501.40, 599.80, 503.19, 603.17`
 
-## Raw line 073 (block 61, line 72)
+## Raw line 072 (block 61, line 71)
 
 **EN source:** • Rook may equip an additional Consumable.
 
@@ -825,7 +813,7 @@
 - `Rook` — `OptimaLTStd-Italic` 2.73 pt; PDF flags `6`; bbox `457.33, 606.59, 463.64, 610.34`
 - `may equip an additional Consumable.` — `OptimaLTStd` 2.73 pt; PDF flags `4`; bbox `463.36, 602.66, 509.87, 609.84`
 
-## Raw line 074 (block 61, line 73)
+## Raw line 073 (block 61, line 72)
 
 **EN source:** • Rook ignores the negative to
 
@@ -838,7 +826,7 @@
 - `Rook` — `OptimaLTStd-Italic` 2.73 pt; PDF flags `6`; bbox `457.63, 609.99, 463.93, 613.74`
 - `ignores the negative to` — `OptimaLTStd` 2.73 pt; PDF flags `4`; bbox `463.65, 607.62, 491.85, 613.25`
 
-## Raw line 075 (block 61, line 74)
+## Raw line 074 (block 61, line 73)
 
 **EN source:** from the
 
@@ -849,7 +837,7 @@
 **PDF span runs:**
 - `from the` — `OptimaLTStd` 2.73 pt; PDF flags `4`; bbox `495.91, 606.22, 508.29, 610.49`
 
-## Raw line 076 (block 61, line 75)
+## Raw line 075 (block 61, line 74)
 
 **EN source:** first instance of HEAVY he has equipped.
 
@@ -862,7 +850,7 @@
 - `HEAVY` — `OptimaLTStd-Bold` 2.39 pt; PDF flags `20`; bbox `476.82, 611.98, 484.61, 615.46`
 - `he has equipped.` — `OptimaLTStd` 2.73 pt; PDF flags `4`; bbox `484.34, 609.89, 505.50, 614.91`
 
-## Raw line 077 (block 62, line 76)
+## Raw line 076 (block 62, line 75)
 
 **EN source:** Conviction:
 
@@ -873,18 +861,7 @@
 **PDF span runs:**
 - `Conviction:` — `Cinzel-Regular` 3.42 pt; PDF flags `4`; bbox `455.19, 619.79, 479.28, 626.40`
 
-## Raw line 078 (block 62, line 77)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `482.77, 619.39, 484.01, 624.05`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 3.42 pt; PDF flags `4`; bbox `482.77, 619.39, 484.01, 624.05`
-
-## Raw line 079 (block 62, line 78)
+## Raw line 077 (block 62, line 76)
 
 **EN source:** Casting:
 
@@ -895,7 +872,7 @@
 **PDF span runs:**
 - `Casting:` — `Cinzel-Regular` 3.42 pt; PDF flags `4`; bbox `455.62, 625.45, 472.59, 631.45`
 
-## Raw line 080 (block 63, line 79)
+## Raw line 078 (block 63, line 77)
 
 **EN source:** Rook Lars
 
@@ -906,7 +883,7 @@
 **PDF span runs:**
 - `Rook Lars` — `EsmeraldaPro` 10.25 pt; PDF flags `4`; bbox `450.42, 562.53, 490.91, 579.79`
 
-## Raw line 081 (block 64, line 80)
+## Raw line 079 (block 64, line 78)
 
 **EN source:** H
 
@@ -917,7 +894,7 @@
 **PDF span runs:**
 - `H` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `677.21, 669.48, 679.14, 671.49`
 
-## Raw line 082 (block 65, line 81)
+## Raw line 080 (block 65, line 79)
 
 **EN source:** E
 
@@ -928,7 +905,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `678.33, 669.00, 679.77, 670.83`
 
-## Raw line 083 (block 66, line 82)
+## Raw line 081 (block 66, line 80)
 
 **EN source:** A
 
@@ -939,7 +916,7 @@
 **PDF span runs:**
 - `A` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `679.25, 668.60, 680.65, 670.49`
 
-## Raw line 084 (block 67, line 83)
+## Raw line 082 (block 67, line 81)
 
 **EN source:** L
 
@@ -950,7 +927,7 @@
 **PDF span runs:**
 - `L` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `680.38, 668.46, 681.34, 670.24`
 
-## Raw line 085 (block 68, line 84)
+## Raw line 083 (block 68, line 82)
 
 **EN source:** T
 
@@ -961,7 +938,7 @@
 **PDF span runs:**
 - `T` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `681.21, 668.46, 682.00, 670.16`
 
-## Raw line 086 (block 69, line 85)
+## Raw line 084 (block 69, line 83)
 
 **EN source:** H
 
@@ -972,7 +949,7 @@
 **PDF span runs:**
 - `H` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `681.99, 668.49, 683.47, 670.40`
 
-## Raw line 087 (block 70, line 86)
+## Raw line 085 (block 70, line 84)
 
 **EN source:** D
 
@@ -983,7 +960,7 @@
 **PDF span runs:**
 - `D` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `687.87, 667.18, 689.83, 669.17`
 
-## Raw line 088 (block 71, line 87)
+## Raw line 086 (block 71, line 85)
 
 **EN source:** E
 
@@ -994,7 +971,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `688.95, 666.65, 690.44, 668.47`
 
-## Raw line 089 (block 72, line 88)
+## Raw line 087 (block 72, line 86)
 
 **EN source:** F
 
@@ -1005,7 +982,7 @@
 **PDF span runs:**
 - `F` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `689.77, 666.28, 691.08, 668.12`
 
-## Raw line 090 (block 73, line 89)
+## Raw line 088 (block 73, line 87)
 
 **EN source:** E
 
@@ -1016,7 +993,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `690.64, 666.05, 691.75, 667.87`
 
-## Raw line 091 (block 74, line 90)
+## Raw line 089 (block 74, line 88)
 
 **EN source:** N
 
@@ -1027,7 +1004,7 @@
 **PDF span runs:**
 - `N` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `691.65, 665.95, 692.83, 667.69`
 
-## Raw line 092 (block 75, line 91)
+## Raw line 090 (block 75, line 89)
 
 **EN source:** S
 
@@ -1038,7 +1015,7 @@
 **PDF span runs:**
 - `S` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `692.81, 666.00, 693.77, 667.78`
 
-## Raw line 093 (block 76, line 92)
+## Raw line 091 (block 76, line 90)
 
 **EN source:** E
 
@@ -1049,7 +1026,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `693.49, 666.18, 694.73, 668.02`
 
-## Raw line 094 (block 77, line 93)
+## Raw line 092 (block 77, line 91)
 
 **EN source:** M
 
@@ -1060,7 +1037,7 @@
 **PDF span runs:**
 - `M` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `697.94, 665.51, 700.05, 667.52`
 
-## Raw line 095 (block 78, line 94)
+## Raw line 093 (block 78, line 92)
 
 **EN source:** O
 
@@ -1071,7 +1048,7 @@
 **PDF span runs:**
 - `O` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `698.96, 664.47, 700.96, 666.53`
 
-## Raw line 096 (block 79, line 95)
+## Raw line 094 (block 79, line 93)
 
 **EN source:** V
 
@@ -1082,7 +1059,7 @@
 **PDF span runs:**
 - `V` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `700.15, 663.91, 701.75, 665.84`
 
-## Raw line 097 (block 80, line 96)
+## Raw line 095 (block 80, line 94)
 
 **EN source:** E
 
@@ -1093,7 +1070,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `701.23, 663.63, 702.41, 665.45`
 
-## Raw line 098 (block 81, line 97)
+## Raw line 096 (block 81, line 95)
 
 **EN source:** M
 
@@ -1104,7 +1081,7 @@
 **PDF span runs:**
 - `M` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `702.31, 663.47, 703.65, 665.22`
 
-## Raw line 099 (block 82, line 98)
+## Raw line 097 (block 82, line 96)
 
 **EN source:** E
 
@@ -1115,7 +1092,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `703.63, 663.50, 704.58, 665.28`
 
-## Raw line 100 (block 83, line 99)
+## Raw line 098 (block 83, line 97)
 
 **EN source:** N
 
@@ -1126,7 +1103,7 @@
 **PDF span runs:**
 - `N` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `704.31, 663.67, 705.92, 665.64`
 
-## Raw line 101 (block 84, line 100)
+## Raw line 099 (block 84, line 98)
 
 **EN source:** T
 
@@ -1137,7 +1114,7 @@
 **PDF span runs:**
 - `T` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `705.32, 664.19, 706.87, 666.05`
 
-## Raw line 102 (block 85, line 101)
+## Raw line 100 (block 85, line 99)
 
 **EN source:** 6
 
@@ -1148,7 +1125,7 @@
 **PDF span runs:**
 - `6` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `699.48, 671.52, 701.89, 675.61`
 
-## Raw line 103 (block 86, line 102)
+## Raw line 101 (block 86, line 100)
 
 **EN source:** A
 
@@ -1159,7 +1136,7 @@
 **PDF span runs:**
 - `A` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `709.93, 662.07, 711.74, 663.98`
 
-## Raw line 104 (block 87, line 103)
+## Raw line 102 (block 87, line 101)
 
 **EN source:** R
 
@@ -1170,7 +1147,7 @@
 **PDF span runs:**
 - `R` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `710.92, 661.50, 712.50, 663.40`
 
-## Raw line 105 (block 88, line 104)
+## Raw line 103 (block 88, line 102)
 
 **EN source:** M
 
@@ -1181,7 +1158,7 @@
 **PDF span runs:**
 - `M` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `712.06, 661.03, 713.71, 662.98`
 
-## Raw line 106 (block 89, line 105)
+## Raw line 104 (block 89, line 103)
 
 **EN source:** O
 
@@ -1192,7 +1169,7 @@
 **PDF span runs:**
 - `O` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `713.69, 661.00, 714.88, 662.69`
 
-## Raw line 107 (block 90, line 106)
+## Raw line 105 (block 90, line 104)
 
 **EN source:** R
 
@@ -1203,7 +1180,7 @@
 **PDF span runs:**
 - `R` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `714.86, 661.08, 716.12, 662.93`
 
-## Raw line 108 (block 91, line 107)
+## Raw line 106 (block 91, line 105)
 
 **EN source:** 0
 
@@ -1214,7 +1191,7 @@
 **PDF span runs:**
 - `0` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `710.37, 669.03, 712.78, 673.12`
 
-## Raw line 109 (block 92, line 108)
+## Raw line 107 (block 92, line 106)
 
 **EN source:** COMBAT
 
@@ -1225,7 +1202,7 @@
 **PDF span runs:**
 - `COMBAT` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `725.59, 656.58, 731.54, 659.50`
 
-## Raw line 110 (block 93, line 109)
+## Raw line 108 (block 93, line 107)
 
 **EN source:** DICE
 
@@ -1236,7 +1213,7 @@
 **PDF span runs:**
 - `DICE` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `727.16, 658.25, 730.59, 660.60`
 
-## Raw line 111 (block 94, line 110)
+## Raw line 109 (block 94, line 108)
 
 **EN source:** P
 
@@ -1247,7 +1224,7 @@
 **PDF span runs:**
 - `P` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `683.50, 654.43, 685.31, 656.10`
 
-## Raw line 112 (block 95, line 111)
+## Raw line 110 (block 95, line 109)
 
 **EN source:** R
 
@@ -1258,7 +1235,7 @@
 **PDF span runs:**
 - `R` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `684.24, 653.63, 686.00, 655.49`
 
-## Raw line 113 (block 96, line 112)
+## Raw line 111 (block 96, line 110)
 
 **EN source:** E
 
@@ -1269,7 +1246,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `685.20, 653.11, 686.64, 654.93`
 
-## Raw line 114 (block 97, line 113)
+## Raw line 112 (block 97, line 111)
 
 **EN source:** S
 
@@ -1280,7 +1257,7 @@
 **PDF span runs:**
 - `S` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `686.07, 652.75, 687.31, 654.59`
 
-## Raw line 115 (block 98, line 114)
+## Raw line 113 (block 98, line 112)
 
 **EN source:** E
 
@@ -1291,7 +1268,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `686.99, 652.55, 688.02, 654.35`
 
-## Raw line 116 (block 99, line 115)
+## Raw line 114 (block 99, line 113)
 
 **EN source:** N
 
@@ -1302,7 +1279,7 @@
 **PDF span runs:**
 - `N` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `688.03, 652.50, 689.14, 654.19`
 
-## Raw line 117 (block 100, line 116)
+## Raw line 115 (block 100, line 114)
 
 **EN source:** C
 
@@ -1313,7 +1290,7 @@
 **PDF span runs:**
 - `C` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `689.16, 652.57, 690.49, 654.44`
 
-## Raw line 118 (block 101, line 117)
+## Raw line 116 (block 101, line 115)
 
 **EN source:** E
 
@@ -1324,7 +1301,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `690.09, 652.92, 691.45, 654.75`
 
-## Raw line 119 (block 102, line 118)
+## Raw line 117 (block 102, line 116)
 
 **EN source:** A
 
@@ -1335,7 +1312,7 @@
 **PDF span runs:**
 - `A` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `706.23, 648.59, 708.05, 650.50`
 
-## Raw line 120 (block 103, line 119)
+## Raw line 118 (block 103, line 117)
 
 **EN source:** G
 
@@ -1346,7 +1323,7 @@
 **PDF span runs:**
 - `G` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `707.19, 647.91, 708.97, 649.93`
 
-## Raw line 121 (block 104, line 120)
+## Raw line 119 (block 104, line 118)
 
 **EN source:** I
 
@@ -1357,7 +1334,7 @@
 **PDF span runs:**
 - `I` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `708.50, 647.67, 709.45, 649.43`
 
-## Raw line 122 (block 105, line 121)
+## Raw line 120 (block 105, line 119)
 
 **EN source:** L
 
@@ -1368,7 +1345,7 @@
 **PDF span runs:**
 - `L` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `709.21, 647.49, 710.16, 649.27`
 
-## Raw line 123 (block 106, line 122)
+## Raw line 121 (block 106, line 120)
 
 **EN source:** I
 
@@ -1379,7 +1356,7 @@
 **PDF span runs:**
 - `I` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `710.09, 647.45, 710.64, 649.17`
 
-## Raw line 124 (block 107, line 123)
+## Raw line 122 (block 107, line 121)
 
 **EN source:** T
 
@@ -1390,7 +1367,7 @@
 **PDF span runs:**
 - `T` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `710.65, 647.45, 711.61, 649.22`
 
-## Raw line 125 (block 108, line 124)
+## Raw line 123 (block 108, line 122)
 
 **EN source:** Y
 
@@ -1401,7 +1378,7 @@
 **PDF span runs:**
 - `Y` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `711.45, 647.59, 712.78, 649.47`
 
-## Raw line 126 (block 109, line 125)
+## Raw line 124 (block 109, line 123)
 
 **EN source:** P
 
@@ -1412,7 +1389,7 @@
 **PDF span runs:**
 - `P` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `716.04, 647.65, 717.90, 649.19`
 
-## Raw line 127 (block 110, line 126)
+## Raw line 125 (block 110, line 124)
 
 **EN source:** E
 
@@ -1423,7 +1400,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `716.58, 646.92, 718.34, 648.54`
 
-## Raw line 128 (block 111, line 127)
+## Raw line 126 (block 111, line 125)
 
 **EN source:** R
 
@@ -1434,7 +1411,7 @@
 **PDF span runs:**
 - `R` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `717.23, 646.15, 718.99, 648.00`
 
-## Raw line 129 (block 112, line 128)
+## Raw line 127 (block 112, line 126)
 
 **EN source:** C
 
@@ -1445,7 +1422,7 @@
 **PDF span runs:**
 - `C` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `718.15, 645.50, 719.79, 647.44`
 
-## Raw line 130 (block 113, line 129)
+## Raw line 128 (block 113, line 127)
 
 **EN source:** E
 
@@ -1456,7 +1433,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `719.19, 645.18, 720.44, 647.01`
 
-## Raw line 131 (block 114, line 130)
+## Raw line 129 (block 114, line 128)
 
 **EN source:** P
 
@@ -1467,7 +1444,7 @@
 **PDF span runs:**
 - `P` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `720.08, 644.97, 721.19, 646.78`
 
-## Raw line 132 (block 115, line 131)
+## Raw line 130 (block 115, line 129)
 
 **EN source:** T
 
@@ -1478,7 +1455,7 @@
 **PDF span runs:**
 - `T` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `721.17, 644.94, 721.97, 646.63`
 
-## Raw line 133 (block 116, line 132)
+## Raw line 131 (block 116, line 130)
 
 **EN source:** I
 
@@ -1489,7 +1466,7 @@
 **PDF span runs:**
 - `I` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `721.93, 644.96, 722.57, 646.69`
 
-## Raw line 134 (block 117, line 133)
+## Raw line 132 (block 117, line 131)
 
 **EN source:** O
 
@@ -1500,7 +1477,7 @@
 **PDF span runs:**
 - `O` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `722.39, 645.05, 724.01, 647.01`
 
-## Raw line 135 (block 118, line 134)
+## Raw line 133 (block 118, line 132)
 
 **EN source:** N
 
@@ -1511,7 +1488,7 @@
 **PDF span runs:**
 - `N` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `723.50, 645.57, 725.31, 647.59`
 
-## Raw line 136 (block 119, line 135)
+## Raw line 134 (block 119, line 133)
 
 **EN source:** S
 
@@ -1522,7 +1499,7 @@
 **PDF span runs:**
 - `S` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `727.40, 644.70, 729.18, 646.27`
 
-## Raw line 137 (block 120, line 136)
+## Raw line 135 (block 120, line 134)
 
 **EN source:** T
 
@@ -1533,7 +1510,7 @@
 **PDF span runs:**
 - `T` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `727.96, 643.97, 729.72, 645.72`
 
-## Raw line 138 (block 121, line 137)
+## Raw line 136 (block 121, line 135)
 
 **EN source:** R
 
@@ -1544,7 +1521,7 @@
 **PDF span runs:**
 - `R` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `728.75, 643.28, 730.42, 645.17`
 
-## Raw line 139 (block 122, line 138)
+## Raw line 137 (block 122, line 136)
 
 **EN source:** E
 
@@ -1555,7 +1532,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `729.67, 642.87, 731.04, 644.70`
 
-## Raw line 140 (block 123, line 139)
+## Raw line 138 (block 123, line 137)
 
 **EN source:** N
 
@@ -1566,7 +1543,7 @@
 **PDF span runs:**
 - `N` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `730.60, 642.48, 732.09, 644.40`
 
-## Raw line 141 (block 124, line 140)
+## Raw line 139 (block 124, line 138)
 
 **EN source:** G
 
@@ -1577,7 +1554,7 @@
 **PDF span runs:**
 - `G` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `732.08, 642.44, 733.19, 644.13`
 
-## Raw line 142 (block 125, line 141)
+## Raw line 140 (block 125, line 139)
 
 **EN source:** T
 
@@ -1588,7 +1565,7 @@
 **PDF span runs:**
 - `T` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `733.16, 642.49, 734.27, 644.31`
 
-## Raw line 143 (block 126, line 142)
+## Raw line 141 (block 126, line 140)
 
 **EN source:** H
 
@@ -1599,7 +1576,7 @@
 **PDF span runs:**
 - `H` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `733.92, 642.73, 735.59, 644.72`
 
-## Raw line 144 (block 127, line 143)
+## Raw line 142 (block 127, line 141)
 
 **EN source:** L
 
@@ -1610,7 +1587,7 @@
 **PDF span runs:**
 - `L` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `696.06, 650.67, 697.55, 652.49`
 
-## Raw line 145 (block 128, line 144)
+## Raw line 143 (block 128, line 142)
 
 **EN source:** O
 
@@ -1621,7 +1598,7 @@
 **PDF span runs:**
 - `O` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `697.05, 650.11, 698.68, 652.08`
 
-## Raw line 146 (block 129, line 145)
+## Raw line 144 (block 129, line 143)
 
 **EN source:** R
 
@@ -1632,7 +1609,7 @@
 **PDF span runs:**
 - `R` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `698.53, 649.97, 699.56, 651.74`
 
-## Raw line 147 (block 130, line 146)
+## Raw line 145 (block 130, line 144)
 
 **EN source:** E
 
@@ -1643,7 +1620,7 @@
 **PDF span runs:**
 - `E` — `OptimaLTStd-Bold` 1.42 pt; PDF flags `20`; bbox `699.58, 649.97, 700.46, 651.72`
 
-## Raw line 148 (block 131, line 147)
+## Raw line 146 (block 131, line 145)
 
 **EN source:** 1
 
@@ -1654,7 +1631,7 @@
 **PDF span runs:**
 - `1` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `684.67, 660.63, 687.08, 664.71`
 
-## Raw line 149 (block 131, line 148)
+## Raw line 147 (block 131, line 146)
 
 **EN source:** 1
 
@@ -1665,7 +1642,7 @@
 **PDF span runs:**
 - `1` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `695.69, 658.11, 698.11, 662.19`
 
-## Raw line 150 (block 131, line 149)
+## Raw line 148 (block 131, line 147)
 
 **EN source:** 6
 
@@ -1676,7 +1653,7 @@
 **PDF span runs:**
 - `6` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `706.72, 655.59, 709.13, 659.67`
 
-## Raw line 151 (block 131, line 150)
+## Raw line 149 (block 131, line 148)
 
 **EN source:** 2
 
@@ -1687,7 +1664,7 @@
 **PDF span runs:**
 - `2` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `717.75, 653.06, 720.16, 657.15`
 
-## Raw line 152 (block 131, line 151)
+## Raw line 150 (block 131, line 149)
 
 **EN source:** 2
 
@@ -1698,7 +1675,7 @@
 **PDF span runs:**
 - `2` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `728.78, 650.54, 731.19, 654.63`
 
-## Raw line 153 (block 132, line 152)
+## Raw line 151 (block 132, line 150)
 
 **EN source:** *
 
@@ -1709,7 +1686,7 @@
 **PDF span runs:**
 - `*` — `OptimaLTStd-Black` 8.17 pt; PDF flags `20`; bbox `722.00, 661.94, 728.17, 672.39`
 
-## Raw line 154 (block 132, line 153)
+## Raw line 152 (block 132, line 151)
 
 **EN source:** *
 
@@ -1720,7 +1697,7 @@
 **PDF span runs:**
 - `*` — `OptimaLTStd-Black` 8.17 pt; PDF flags `20`; bbox `732.63, 659.51, 738.79, 669.96`
 
-## Raw line 155 (block 133, line 154)
+## Raw line 153 (block 133, line 152)
 
 **EN source:** Gevaudan
 
@@ -1731,7 +1708,7 @@
 **PDF span runs:**
 - `Gevaudan` — `EsmeraldaPro` 10.65 pt; PDF flags `4`; bbox `580.20, 580.88, 626.29, 604.82`
 
-## Raw line 156 (block 134, line 155)
+## Raw line 154 (block 134, line 153)
 
 **EN source:** Unnaturally Swift
 
@@ -1742,7 +1719,7 @@
 **PDF span runs:**
 - `Unnaturally Swift` — `Cinzel-Regular` 3.55 pt; PDF flags `4`; bbox `583.87, 598.32, 621.73, 611.39`
 
-## Raw line 157 (block 135, line 156)
+## Raw line 155 (block 135, line 154)
 
 **EN source:** You may make a second MOVE during
 
@@ -1755,7 +1732,7 @@
 - `MOVE` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `614.59, 602.40, 622.27, 606.89`
 - `during` — `OptimaLTStd` 2.84 pt; PDF flags `4`; bbox `621.54, 599.99, 631.45, 605.38`
 
-## Raw line 158 (block 136, line 157)
+## Raw line 156 (block 136, line 155)
 
 **EN source:** your turn for 2 SP.
 
@@ -1768,7 +1745,7 @@
 - `2 SP` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `601.16, 609.12, 606.43, 613.06`
 - `.` — `OptimaLTStd` 2.84 pt; PDF flags `4`; bbox `605.48, 608.68, 607.00, 612.15`
 
-## Raw line 159 (block 137, line 158)
+## Raw line 157 (block 137, line 156)
 
 **EN source:** Ferocious
 
@@ -1779,7 +1756,7 @@
 **PDF span runs:**
 - `Ferocious` — `Cinzel-Regular` 3.55 pt; PDF flags `4`; bbox `586.50, 613.62, 607.77, 622.90`
 
-## Raw line 160 (block 138, line 159)
+## Raw line 158 (block 138, line 157)
 
 **EN source:** When you successfully Dodge an Attack,
 
@@ -1790,7 +1767,7 @@
 **PDF span runs:**
 - `When you successfully Dodge an Attack,` — `OptimaLTStd` 2.84 pt; PDF flags `4`; bbox `587.36, 610.62, 637.95, 625.31`
 
-## Raw line 161 (block 139, line 160)
+## Raw line 159 (block 139, line 158)
 
 **EN source:** Gain Courage.
 
@@ -1803,7 +1780,7 @@
 - `Courage` — `OptimaLTStd-Italic` 2.84 pt; PDF flags `6`; bbox `594.56, 621.17, 605.28, 626.74`
 - `.` — `OptimaLTStd` 2.84 pt; PDF flags `4`; bbox `604.47, 621.02, 605.99, 624.49`
 
-## Raw line 162 (block 140, line 161)
+## Raw line 160 (block 140, line 159)
 
 **EN source:** Critical Defense
 
@@ -1814,7 +1791,7 @@
 **PDF span runs:**
 - `Critical Defense` — `Cinzel-Regular` 3.55 pt; PDF flags `4`; bbox `589.13, 622.27, 622.90, 634.41`
 
-## Raw line 163 (block 141, line 162)
+## Raw line 161 (block 141, line 160)
 
 **EN source:** Your Attacks Gain:
 
@@ -1825,7 +1802,7 @@
 **PDF span runs:**
 - `Your Attacks Gain:` — `OptimaLTStd` 2.84 pt; PDF flags `4`; bbox `589.99, 628.25, 613.82, 636.82`
 
-## Raw line 164 (block 141, line 163)
+## Raw line 162 (block 141, line 161)
 
 **EN source:** FU: Gain a Dodge token
 
@@ -1834,13 +1811,12 @@
 **Line bbox:** `618.02, 621.90, 643.22, 630.22`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 2.32 pt; PDF flags `4`; bbox `618.02, 627.38, 619.26, 630.22`
 - `FU:` — `OptimaLTStd-Bold` 2.32 pt; PDF flags `20`; bbox `618.65, 626.57, 622.79, 630.08`
 - `Gain a` — `OptimaLTStd` 2.32 pt; PDF flags `4`; bbox `622.17, 624.79, 630.59, 629.27`
 - `Dodge` — `OptimaLTStd-Italic` 2.32 pt; PDF flags `6`; bbox `629.97, 623.28, 637.17, 627.47`
 - `token` — `OptimaLTStd` 2.32 pt; PDF flags `4`; bbox `636.56, 621.90, 643.22, 625.98`
 
-## Raw line 165 (block 142, line 164)
+## Raw line 163 (block 142, line 162)
 
 **EN source:** Agile
 
@@ -1851,7 +1827,7 @@
 **PDF span runs:**
 - `Agile` — `Cinzel-Regular` 3.55 pt; PDF flags `4`; bbox `591.87, 639.29, 603.70, 646.41`
 
-## Raw line 166 (block 142, line 165)
+## Raw line 164 (block 142, line 163)
 
 **EN source:** EXHAUST
 
@@ -1862,7 +1838,7 @@
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 2.32 pt; PDF flags `20`; bbox `606.98, 636.97, 617.98, 642.03`
 
-## Raw line 167 (block 142, line 166)
+## Raw line 165 (block 142, line 164)
 
 **EN source:** DODGE.
 
@@ -1873,7 +1849,7 @@
 **PDF span runs:**
 - `DODGE.` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `592.80, 643.46, 603.88, 648.72`
 
-## Raw line 168 (block 143, line 167)
+## Raw line 166 (block 143, line 165)
 
 **EN source:** Adrenaline
 
@@ -1884,7 +1860,7 @@
 **PDF span runs:**
 - `Adrenaline` — `Cinzel-Regular` 3.55 pt; PDF flags `4`; bbox `593.83, 645.11, 617.68, 654.98`
 
-## Raw line 169 (block 143, line 168)
+## Raw line 167 (block 143, line 166)
 
 **EN source:** EXHAUST
 
@@ -1895,7 +1871,7 @@
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 2.32 pt; PDF flags `20`; bbox `620.96, 642.79, 631.96, 647.85`
 
-## Raw line 170 (block 143, line 169)
+## Raw line 168 (block 143, line 167)
 
 **EN source:** COUNTER.
 
@@ -1906,7 +1882,7 @@
 **PDF span runs:**
 - `COUNTER.` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `594.76, 651.60, 607.71, 657.29`
 
-## Raw line 171 (block 144, line 170)
+## Raw line 169 (block 144, line 168)
 
 **EN source:** Vigilant
 
@@ -1917,7 +1893,7 @@
 **PDF span runs:**
 - `Vigilant` — `Cinzel-Regular` 3.55 pt; PDF flags `4`; bbox `595.79, 654.96, 614.01, 663.55`
 
-## Raw line 172 (block 144, line 171)
+## Raw line 170 (block 144, line 169)
 
 **EN source:** EXHAUST
 
@@ -1928,9 +1904,9 @@
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 2.32 pt; PDF flags `20`; bbox `617.29, 652.65, 628.29, 657.70`
 
-## Raw line 173 (block 144, line 172)
+## Raw line 171 (block 144, line 170)
 
-**EN source:** At any time, Gain PROVOKE 2 until end of turn.
+**EN source:** At any time, Gain PROVOKE 2until end of turn.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1939,10 +1915,9 @@
 **PDF span runs:**
 - `At any time, Gain` — `OptimaLTStd` 2.84 pt; PDF flags `4`; bbox `596.65, 657.70, 619.08, 665.95`
 - `PROVOKE 2` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `618.40, 655.00, 632.26, 660.90`
-- `` — `OptimaLTStd-Bold` 2.13 pt; PDF flags `20`; bbox `631.68, 655.18, 632.82, 657.79`
 - `until end of turn.` — `OptimaLTStd` 2.84 pt; PDF flags `4`; bbox `632.11, 649.99, 652.81, 657.85`
 
-## Raw line 174 (block 145, line 173)
+## Raw line 172 (block 145, line 171)
 
 **EN source:** Tail Blade
 
@@ -1953,9 +1928,9 @@
 **PDF span runs:**
 - `Tail Blade` — `Cinzel-Regular` 3.55 pt; PDF flags `4`; bbox `597.75, 662.88, 618.80, 672.12`
 
-## Raw line 175 (block 145, line 174)
+## Raw line 173 (block 145, line 172)
 
-**EN source:** ATK REACH 2
+**EN source:** ATKREACH 2
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1963,10 +1938,9 @@
 
 **PDF span runs:**
 - `ATK` — `OptimaLTStd-DemiBold` 2.32 pt; PDF flags `20`; bbox `622.05, 661.83, 627.57, 665.63`
-- `` — `Cinzel-Regular` 3.55 pt; PDF flags `4`; bbox `628.79, 660.16, 630.72, 665.02`
 - `REACH 2` — `OptimaLTStd-DemiBold` 2.32 pt; PDF flags `20`; bbox `631.44, 658.61, 641.75, 663.51`
 
-## Raw line 176 (block 145, line 175)
+## Raw line 174 (block 145, line 173)
 
 **EN source:** FU: PULL 2, FORCE 9 + X. Where X equals your
 
@@ -1980,7 +1954,7 @@
 - `X` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `636.55, 662.54, 638.69, 665.77`
 - `equals your` — `OptimaLTStd` 2.84 pt; PDF flags `4`; bbox `637.96, 658.73, 654.04, 665.53`
 
-## Raw line 177 (block 146, line 176)
+## Raw line 175 (block 146, line 174)
 
 **EN source:** highest LVL Discipline.
 
@@ -1993,7 +1967,7 @@
 - `LVL` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `607.81, 671.35, 613.70, 675.44`
 - `Discipline.` — `OptimaLTStd` 2.84 pt; PDF flags `4`; bbox `612.96, 668.14, 626.42, 674.34`
 
-## Raw line 178 (block 147, line 177)
+## Raw line 176 (block 147, line 175)
 
 **EN source:** 0
 
@@ -2004,7 +1978,7 @@
 **PDF span runs:**
 - `0` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `586.41, 643.22, 588.82, 647.31`
 
-## Raw line 179 (block 148, line 178)
+## Raw line 177 (block 148, line 176)
 
 **EN source:** 0
 
@@ -2015,7 +1989,7 @@
 **PDF span runs:**
 - `0` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `588.36, 651.79, 590.77, 655.88`
 
-## Raw line 180 (block 149, line 179)
+## Raw line 178 (block 149, line 177)
 
 **EN source:** 0
 
@@ -2026,7 +2000,7 @@
 **PDF span runs:**
 - `0` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `590.32, 660.36, 592.73, 664.45`
 
-## Raw line 181 (block 150, line 180)
+## Raw line 179 (block 150, line 178)
 
 **EN source:** 2
 
@@ -2037,7 +2011,7 @@
 **PDF span runs:**
 - `2` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `592.28, 668.92, 594.69, 673.01`
 
-## Raw line 182 (block 151, line 181)
+## Raw line 180 (block 151, line 179)
 
 **EN source:** ✤ PASSIVE
 
@@ -2049,7 +2023,7 @@
 - `✤` — `ZapfDingbatsStd` 2.31 pt; PDF flags `4`; bbox `581.87, 626.00, 584.70, 629.03`
 - `PASSIVE` — `OptimaLTStd-Bold` 2.31 pt; PDF flags `20`; bbox `579.65, 616.92, 584.37, 626.44`
 
-## Raw line 183 (block 152, line 182)
+## Raw line 181 (block 152, line 180)
 
 **EN source:** COMMAND
 
@@ -2060,7 +2034,7 @@
 **PDF span runs:**
 - `COMMAND` — `OptimaLTStd-Black` 3.20 pt; PDF flags `20`; bbox `697.78, 554.58, 716.21, 562.33`
 
-## Raw line 184 (block 153, line 183)
+## Raw line 182 (block 153, line 181)
 
 **EN source:** CONDUIT
 
@@ -2071,7 +2045,7 @@
 **PDF span runs:**
 - `CONDUIT` — `OptimaLTStd-Bold` 2.66 pt; PDF flags `20`; bbox `703.84, 557.68, 717.53, 563.74`
 
-## Raw line 185 (block 154, line 184)
+## Raw line 183 (block 154, line 182)
 
 **EN source:** CASTING: - *
 
@@ -2083,9 +2057,9 @@
 - `CASTING: -` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `625.20, 687.65, 639.00, 693.54`
 - `*` — `OptimaLTStd-Black` 4.26 pt; PDF flags `20`; bbox `639.18, 686.57, 642.39, 692.02`
 
-## Raw line 186 (block 154, line 185)
+## Raw line 184 (block 154, line 183)
 
-**EN source:** CONVICTION: * *
+**EN source:** CONVICTION: **
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2094,10 +2068,9 @@
 **PDF span runs:**
 - `CONVICTION:` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `597.83, 693.03, 615.45, 699.80`
 - `*` — `OptimaLTStd-Black` 4.26 pt; PDF flags `20`; bbox `615.63, 691.95, 618.85, 697.40`
-- `` — `OptimaLTStd-Black` 4.26 pt; PDF flags `20`; bbox `617.71, 691.52, 620.71, 696.92`
 - `*` — `OptimaLTStd-Black` 4.26 pt; PDF flags `20`; bbox `619.58, 691.05, 622.79, 696.50`
 
-## Raw line 187 (block 155, line 186)
+## Raw line 185 (block 155, line 184)
 
 **EN source:** *
 
@@ -2108,9 +2081,9 @@
 **PDF span runs:**
 - `*` — `OptimaLTStd-Black` 4.26 pt; PDF flags `20`; bbox `612.12, 685.93, 615.33, 691.38`
 
-## Raw line 188 (block 155, line 187)
+## Raw line 186 (block 155, line 185)
 
-**EN source:** * *
+**EN source:** **
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2118,12 +2091,11 @@
 
 **PDF span runs:**
 - `*` — `OptimaLTStd-Black` 4.26 pt; PDF flags `20`; bbox `603.32, 687.76, 606.54, 693.21`
-- `` — `OptimaLTStd-Black` 4.26 pt; PDF flags `20`; bbox `605.40, 687.24, 608.80, 692.74`
 - `*` — `OptimaLTStd-Black` 4.26 pt; PDF flags `20`; bbox `607.67, 686.77, 610.88, 692.22`
 
-## Raw line 189 (block 155, line 188)
+## Raw line 187 (block 155, line 186)
 
-**EN source:** \|
+**EN source:** \\|
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2132,7 +2104,7 @@
 **PDF span runs:**
 - `\|` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `614.96, 685.44, 618.43, 688.97`
 
-## Raw line 190 (block 155, line 189)
+## Raw line 188 (block 155, line 187)
 
 **EN source:** +1 ARMOR PIERCING
 
@@ -2143,7 +2115,7 @@
 **PDF span runs:**
 - `+1 ARMOR PIERCING` — `OptimaLTStd-Bold` 2.49 pt; PDF flags `20`; bbox `621.09, 679.08, 646.25, 687.57`
 
-## Raw line 191 (block 156, line 190)
+## Raw line 189 (block 156, line 188)
 
 **EN source:** Rook wants to Jump the gap and make an Attack against the Animate. To
 
@@ -2154,7 +2126,7 @@
 **PDF span runs:**
 - `Rook wants to Jump the gap and make an Attack against the Animate. To` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 240.44, 744.09, 252.34`
 
-## Raw line 192 (block 156, line 191)
+## Raw line 190 (block 156, line 189)
 
 **EN source:** Jump the following gap, Rook would normally need to make an Agility
 
@@ -2165,7 +2137,7 @@
 **PDF span runs:**
 - `Jump the following gap, Rook would normally need to make an Agility` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 251.44, 736.88, 263.34`
 
-## Raw line 193 (block 156, line 192)
+## Raw line 191 (block 156, line 190)
 
 **EN source:** 12 Check. (10 + 2 for every additional space after the first.) Rook's Agility
 
@@ -2179,7 +2151,7 @@
 - `10 + 2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `479.05, 263.34, 504.52, 274.07`
 - `for every additional space after the first.) Rook's Agility` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `504.52, 262.44, 744.68, 274.34`
 
-## Raw line 194 (block 156, line 193)
+## Raw line 192 (block 156, line 191)
 
 **EN source:** Skill has a value of 1, meaning that he'd need to roll an 11 or better to
 
@@ -2194,7 +2166,7 @@
 - `11` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `670.74, 274.34, 683.25, 285.07`
 - `or better to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `683.25, 273.44, 733.27, 285.34`
 
-## Raw line 195 (block 156, line 194)
+## Raw line 193 (block 156, line 192)
 
 **EN source:** succeed at the Jump Check.
 
@@ -2205,7 +2177,7 @@
 **PDF span runs:**
 - `succeed at the Jump Check.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 284.44, 552.78, 296.34`
 
-## Raw line 196 (block 157, line 195)
+## Raw line 194 (block 157, line 193)
 
 **EN source:** However, Rook is lucky enough to have the Conduit Summoning
 
@@ -2217,7 +2189,7 @@
 - `However, Rook is lucky enough to have the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 434.46, 620.30, 446.36`
 - `Conduit Summoning` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `620.30, 434.34, 712.44, 446.29`
 
-## Raw line 197 (block 157, line 196)
+## Raw line 195 (block 157, line 194)
 
 **EN source:** Discipline! Using Conduit Summoning Rook may spend 1 SP to swap his
 
@@ -2232,7 +2204,7 @@
 - `1 SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `674.99, 446.37, 692.00, 457.10`
 - `to swap his` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `692.00, 445.47, 745.62, 457.37`
 
-## Raw line 198 (block 157, line 197)
+## Raw line 196 (block 157, line 195)
 
 **EN source:** Adventurer Card for any Conduit Command Card that he has Earned.
 
@@ -2243,7 +2215,7 @@
 **PDF span runs:**
 - `Adventurer Card for any Conduit Command Card that he has Earned.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 456.47, 729.89, 468.37`
 
-## Raw line 199 (block 157, line 198)
+## Raw line 197 (block 157, line 196)
 
 **EN source:** Rook has previously been within SOI of a Gevaudan being killed,
 
@@ -2256,7 +2228,7 @@
 - `SOI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `574.27, 468.37, 589.26, 479.10`
 - `of a Gevaudan being killed,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `589.26, 467.47, 714.08, 479.37`
 
-## Raw line 200 (block 157, line 199)
+## Raw line 198 (block 157, line 197)
 
 **EN source:** meaning that Rook has earned the Gevaudan Command Conduit. Rook
 
@@ -2267,7 +2239,7 @@
 **PDF span runs:**
 - `meaning that Rook has earned the Gevaudan Command Conduit. Rook` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 478.47, 740.20, 490.37`
 
-## Raw line 201 (block 157, line 200)
+## Raw line 199 (block 157, line 198)
 
 **EN source:** decides that being an agile murder-puppy is a better idea than the oaf
 
@@ -2278,7 +2250,7 @@
 **PDF span runs:**
 - `decides that being an agile murder-puppy is a better idea than the oaf` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 489.47, 731.93, 501.37`
 
-## Raw line 202 (block 157, line 201)
+## Raw line 200 (block 157, line 199)
 
 **EN source:** that he is. Rook spends 1 SP and replaces his card with the Gevaudan
 
@@ -2291,7 +2263,7 @@
 - `1 SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `532.59, 501.37, 552.10, 512.10`
 - `and replaces his card with the Gevaudan` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `552.10, 500.47, 730.82, 512.37`
 
-## Raw line 203 (block 157, line 202)
+## Raw line 201 (block 157, line 200)
 
 **EN source:** Conduit Card.
 
@@ -2302,7 +2274,7 @@
 **PDF span runs:**
 - `Conduit Card.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 511.47, 494.24, 523.37`
 
-## Raw line 204 (block 158, line 203)
+## Raw line 202 (block 158, line 201)
 
 **EN source:** With his new Agility stat of 6, Rook now only needs a 6 or better to pass
 
@@ -2317,7 +2289,7 @@
 - `6` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `663.38, 712.40, 668.38, 723.13`
 - `or better to pass` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `668.38, 711.50, 742.30, 723.40`
 
-## Raw line 205 (block 158, line 204)
+## Raw line 203 (block 158, line 202)
 
 **EN source:** the Jump Check. After successfully Jumping the gap, Rook might want to
 
@@ -2328,7 +2300,7 @@
 **PDF span runs:**
 - `the Jump Check. After successfully Jumping the gap, Rook might want to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 722.50, 743.80, 734.40`
 
-## Raw line 206 (block 158, line 205)
+## Raw line 204 (block 158, line 203)
 
 **EN source:** Attack the Animate. However, since he is in his new Gevaudan Form, he
 
@@ -2339,7 +2311,7 @@
 **PDF span runs:**
 - `Attack the Animate. However, since he is in his new Gevaudan Form, he` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 733.50, 744.88, 745.40`
 
-## Raw line 207 (block 158, line 206)
+## Raw line 205 (block 158, line 204)
 
 **EN source:** would only be able to use Standard Actions and Abilities, or the Abilities
 
@@ -2350,7 +2322,7 @@
 **PDF span runs:**
 - `would only be able to use Standard Actions and Abilities, or the Abilities` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 744.50, 744.81, 756.40`
 
-## Raw line 208 (block 158, line 207)
+## Raw line 206 (block 158, line 205)
 
 **EN source:** printed on the Gevaudan. If Rook wanted to use the Abilities printed on
 
@@ -2361,7 +2333,7 @@
 **PDF span runs:**
 - `printed on the Gevaudan. If Rook wanted to use the Abilities printed on` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 755.50, 740.80, 767.40`
 
-## Raw line 209 (block 158, line 208)
+## Raw line 207 (block 158, line 206)
 
 **EN source:** his Item Cards or any Disciplines he's learned besides Conduit
 
@@ -2372,7 +2344,7 @@
 **PDF span runs:**
 - `his Item Cards or any Disciplines he's learned besides Conduit` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.87, 766.50, 701.92, 778.40`
 
-## Raw line 210 (block 158, line 209)
+## Raw line 208 (block 158, line 207)
 
 **EN source:** Summoning, he'd have to spend 1 SP to swap back!
 
@@ -2385,7 +2357,7 @@
 - `1 SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `572.18, 778.40, 589.19, 789.13`
 - `to swap back!` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `589.19, 777.50, 651.51, 789.40`
 
-## Raw line 211 (block 159, line 210)
+## Raw line 209 (block 159, line 208)
 
 **EN source:** A
 
@@ -2396,7 +2368,7 @@
 **PDF span runs:**
 - `A` — `OptimaLTStd-Bold` 10.79 pt; PDF flags `20`; bbox `596.96, 181.65, 604.16, 194.52`
 
-## Raw line 212 (block 160, line 211)
+## Raw line 210 (block 160, line 209)
 
 **EN source:** XP:5+
 
@@ -2407,7 +2379,7 @@
 **PDF span runs:**
 - `XP:5+` — `Cinzel-Regular` 5.78 pt; PDF flags `4`; bbox `514.51, 311.83, 530.92, 319.62`
 
-## Raw line 213 (block 161, line 212)
+## Raw line 211 (block 161, line 210)
 
 **EN source:** ASSEMBLAGE • LVL 2
 
@@ -2418,7 +2390,7 @@
 **PDF span runs:**
 - `ASSEMBLAGE • LVL 2` — `OptimaLTStd-Bold` 6.74 pt; PDF flags `20`; bbox `574.57, 332.40, 639.62, 340.43`
 
-## Raw line 214 (block 162, line 213)
+## Raw line 212 (block 162, line 211)
 
 **EN source:** ✤PASSIVE
 
@@ -2430,18 +2402,7 @@
 - `✤` — `ZapfDingbatsStd` 6.30 pt; PDF flags `4`; bbox `592.60, 346.36, 597.57, 352.66`
 - `PASSIVE` — `OptimaLTStd-DemiBold` 6.30 pt; PDF flags `20`; bbox `598.67, 345.93, 621.76, 353.39`
 
-## Raw line 215 (block 162, line 214)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `627.73, 347.64, 631.48, 355.66`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 6.74 pt; PDF flags `4`; bbox `627.73, 347.64, 631.48, 355.66`
-
-## Raw line 216 (block 162, line 215)
+## Raw line 213 (block 162, line 212)
 
 **EN source:** • Any time an opponent is Defeated within
 
@@ -2452,7 +2413,7 @@
 **PDF span runs:**
 - `• Any time an opponent is Defeated within` — `OptimaLTStd` 6.74 pt; PDF flags `4`; bbox `544.64, 355.35, 671.60, 363.37`
 
-## Raw line 217 (block 162, line 216)
+## Raw line 214 (block 162, line 213)
 
 **EN source:** SOI, Earn their CONDUIT card.
 
@@ -2466,7 +2427,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 6.74 pt; PDF flags `20`; bbox `605.31, 363.04, 637.14, 371.07`
 - `card.` — `OptimaLTStd` 6.74 pt; PDF flags `4`; bbox `637.14, 363.05, 653.62, 371.07`
 
-## Raw line 218 (block 163, line 217)
+## Raw line 215 (block 163, line 214)
 
 **EN source:** • 1 SP: At any time, replace your Adventurer
 
@@ -2479,7 +2440,7 @@
 - `1 SP` — `OptimaLTStd-Bold` 6.74 pt; PDF flags `20`; bbox `548.66, 373.47, 561.40, 381.50`
 - `: At any time, replace your Adventurer` — `OptimaLTStd` 6.74 pt; PDF flags `4`; bbox `561.40, 373.48, 673.53, 381.50`
 
-## Raw line 219 (block 163, line 218)
+## Raw line 216 (block 163, line 215)
 
 **EN source:** card with a CONDUIT that you have Earned.
 
@@ -2492,7 +2453,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 6.74 pt; PDF flags `20`; bbox `576.30, 381.17, 608.13, 389.21`
 - `that you have Earned.` — `OptimaLTStd` 6.74 pt; PDF flags `4`; bbox `608.13, 381.19, 675.16, 389.21`
 
-## Raw line 220 (block 164, line 219)
+## Raw line 217 (block 164, line 216)
 
 **EN source:** Or, replace your current CONDUIT with
 
@@ -2505,7 +2466,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 6.74 pt; PDF flags `20`; bbox `619.79, 388.88, 651.62, 396.91`
 - `with` — `OptimaLTStd` 6.74 pt; PDF flags `4`; bbox `651.62, 388.89, 669.98, 396.91`
 
-## Raw line 221 (block 165, line 220)
+## Raw line 218 (block 165, line 217)
 
 **EN source:** your Adventurer card.
 
@@ -2516,7 +2477,7 @@
 **PDF span runs:**
 - `your Adventurer card.` — `OptimaLTStd` 6.74 pt; PDF flags `4`; bbox `575.65, 396.59, 640.58, 404.61`
 
-## Raw line 222 (block 166, line 221)
+## Raw line 219 (block 166, line 218)
 
 **EN source:** Conduit Summoning
 
@@ -2527,7 +2488,7 @@
 **PDF span runs:**
 - `Conduit Summoning` — `Cinzel-Regular` 10.59 pt; PDF flags `4`; bbox `546.92, 312.92, 667.45, 327.20`
 
-## Raw line 223 (block 167, line 222)
+## Raw line 220 (block 167, line 219)
 
 **EN source:** Conduit Example
 
@@ -2538,7 +2499,7 @@
 **PDF span runs:**
 - `Conduit Example` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `503.45, 29.91, 673.64, 54.17`
 
-## Raw line 224 (block 168, line 223)
+## Raw line 221 (block 168, line 220)
 
 **EN source:** Conduit Summoning
 
@@ -2549,18 +2510,7 @@
 **PDF span runs:**
 - `Conduit Summoning` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `85.71, 58.21, 222.12, 74.39`
 
-## Raw line 225 (block 169, line 224)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `404.04, 69.21, 407.04, 85.39`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `404.04, 69.21, 407.04, 85.39`
-
-## Raw line 226 (block 169, line 225)
+## Raw line 222 (block 169, line 221)
 
 **EN source:** The Conduit Summoning Discipline allows an Adventurer to physically
 
@@ -2573,7 +2523,7 @@
 - `Conduit Summoning` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `104.16, 80.61, 193.52, 92.56`
 - `Discipline allows an Adventurer to physically` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `193.52, 80.73, 393.50, 92.63`
 
-## Raw line 227 (block 169, line 226)
+## Raw line 223 (block 169, line 222)
 
 **EN source:** take on the aspects of another creature by melding their souls for a brief
 
@@ -2584,7 +2534,7 @@
 **PDF span runs:**
 - `take on the aspects of another creature by melding their souls for a brief` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 91.73, 396.76, 103.63`
 
-## Raw line 228 (block 169, line 227)
+## Raw line 224 (block 169, line 223)
 
 **EN source:** moment. This grants the Adventurer access to many new and varied
 
@@ -2595,7 +2545,7 @@
 **PDF span runs:**
 - `moment. This grants the Adventurer access to many new and varied` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 102.73, 377.79, 114.63`
 
-## Raw line 229 (block 169, line 228)
+## Raw line 225 (block 169, line 224)
 
 **EN source:** Abilities at the detriment of losing their own.
 
@@ -2606,7 +2556,7 @@
 **PDF span runs:**
 - `Abilities at the detriment of losing their own.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 113.73, 277.35, 125.63`
 
-## Raw line 230 (block 169, line 229)
+## Raw line 226 (block 169, line 225)
 
 **EN source:** Middara contains Command Combatant Cards with the CONDUIT Tag.
 
@@ -2620,7 +2570,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `326.66, 128.30, 369.17, 139.03`
 - `Tag.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `369.17, 127.40, 391.33, 139.30`
 
-## Raw line 231 (block 169, line 230)
+## Raw line 227 (block 169, line 226)
 
 **EN source:** While an Adventurer has the Conduit Summoning Discipline, they will
 
@@ -2633,7 +2583,7 @@
 - `Conduit Summoning` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `211.13, 138.28, 303.27, 150.23`
 - `Discipline, they will` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `303.27, 138.40, 392.76, 150.30`
 
-## Raw line 232 (block 169, line 231)
+## Raw line 228 (block 169, line 227)
 
 **EN source:** passively Earn these CONDUIT Command Cards. To Earn a CONDUIT
 
@@ -2646,9 +2596,8 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `173.76, 150.30, 216.27, 161.03`
 - `Command Cards. To Earn a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `216.27, 149.40, 338.46, 161.30`
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `338.46, 150.30, 380.97, 161.03`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `380.97, 149.40, 383.75, 161.30`
 
-## Raw line 233 (block 169, line 232)
+## Raw line 229 (block 169, line 228)
 
 **EN source:** Command Card, an Adventurer with the Conduit Summoning Discipline
 
@@ -2661,7 +2610,7 @@
 - `Conduit Summoning` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `260.60, 160.28, 352.74, 172.23`
 - `Discipline` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `352.74, 160.40, 399.43, 172.30`
 
-## Raw line 234 (block 169, line 233)
+## Raw line 230 (block 169, line 229)
 
 **EN source:** must be within SOI of an opponent when they are Defeated. Since
 
@@ -2674,7 +2623,7 @@
 - `SOI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `152.40, 172.30, 167.40, 183.03`
 - `of an opponent when they are Defeated. Since` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `167.40, 171.40, 372.87, 183.30`
 
-## Raw line 235 (block 169, line 234)
+## Raw line 231 (block 169, line 230)
 
 **EN source:** thematically Conduit Summoning only works on wildlife and less
 
@@ -2687,7 +2636,7 @@
 - `Conduit Summoning` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `141.28, 182.28, 233.42, 194.23`
 - `only works on wildlife and less` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `233.42, 182.40, 369.48, 194.30`
 
-## Raw line 236 (block 169, line 235)
+## Raw line 232 (block 169, line 231)
 
 **EN source:** intelligent creatures; not all opponents have CONDUIT Command Cards
 
@@ -2700,7 +2649,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `276.48, 194.30, 318.99, 205.03`
 - `Command Cards` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `318.99, 193.40, 396.79, 205.30`
 
-## Raw line 237 (block 169, line 236)
+## Raw line 233 (block 169, line 232)
 
 **EN source:** to Earn. If the Defeated opponent is within SOI and they also have a
 
@@ -2713,7 +2662,7 @@
 - `SOI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `270.80, 205.30, 288.30, 216.03`
 - `and they also have a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `288.30, 204.40, 379.03, 216.30`
 
-## Raw line 238 (block 169, line 237)
+## Raw line 234 (block 169, line 233)
 
 **EN source:** corresponding CONDUIT Command Card, the Adventurer would put the
 
@@ -2726,7 +2675,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `150.17, 216.30, 192.68, 227.03`
 - `Command Card, the Adventurer would put the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `192.68, 215.40, 398.03, 227.30`
 
-## Raw line 239 (block 169, line 238)
+## Raw line 235 (block 169, line 234)
 
 **EN source:** CONDUIT Command Card beside the rest of their gear to signify that they
 
@@ -2738,7 +2687,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `85.71, 227.30, 128.21, 238.03`
 - `Command Card beside the rest of their gear to signify that they` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `128.21, 226.40, 402.76, 238.30`
 
-## Raw line 240 (block 169, line 239)
+## Raw line 236 (block 169, line 235)
 
 **EN source:** can now use Conduit Summoning to channel this creature's soul.
 
@@ -2751,7 +2700,7 @@
 - `Conduit Summoning` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `142.83, 237.28, 234.97, 249.23`
 - `to channel this creature's soul.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `234.97, 237.40, 365.96, 249.30`
 
-## Raw line 241 (block 169, line 240)
+## Raw line 237 (block 169, line 236)
 
 **EN source:** When Conduit Summoning is used, set aside the Adventurer Card and
 
@@ -2764,9 +2713,9 @@
 - `Conduit Summoning` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `114.60, 250.95, 203.96, 262.90`
 - `is used, set aside the Adventurer Card and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `203.96, 251.07, 389.42, 262.97`
 
-## Raw line 242 (block 169, line 241)
+## Raw line 238 (block 169, line 237)
 
-**EN source:** replace it with the CONDUIT Command Combatant Card of the player's
+**EN source:** replace it with the CONDUIT CommandCombatant Card of the player's
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2776,10 +2725,9 @@
 - `replace it with the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.70, 262.07, 166.29, 273.97`
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `166.30, 262.97, 211.30, 273.70`
 - `Command` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `211.30, 262.07, 256.31, 273.97`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `256.31, 262.97, 258.82, 273.70`
 - `Combatant Card of the player's` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `258.82, 262.07, 395.06, 273.97`
 
-## Raw line 243 (block 169, line 242)
+## Raw line 239 (block 169, line 238)
 
 **EN source:** choosing (meeting the requirement of being Earned). While in Conduit
 
@@ -2790,9 +2738,9 @@
 **PDF span runs:**
 - `choosing (meeting the requirement of being Earned). While in Conduit` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 273.07, 390.85, 284.97`
 
-## Raw line 244 (block 169, line 243)
+## Raw line 240 (block 169, line 239)
 
-**EN source:** Form, the Adventurer now uses the CONDUIT Command Combatant Card
+**EN source:** Form, the Adventurer now uses the CONDUIT CommandCombatant Card
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -2802,10 +2750,9 @@
 - `Form, the Adventurer now uses the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 284.07, 237.80, 295.97`
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `237.80, 284.97, 282.80, 295.70`
 - `Command` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `282.80, 284.07, 327.81, 295.97`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `327.81, 284.97, 330.32, 295.70`
 - `Combatant Card` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `330.32, 284.07, 403.68, 295.97`
 
-## Raw line 245 (block 169, line 244)
+## Raw line 241 (block 169, line 240)
 
 **EN source:** when Gaining SP, taking Actions, using Abilities, or making Skill Checks.
 
@@ -2818,7 +2765,7 @@
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `149.45, 295.97, 158.95, 306.70`
 - `, taking Actions, using Abilities, or making Skill Checks.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `158.95, 295.07, 400.36, 306.97`
 
-## Raw line 246 (block 169, line 245)
+## Raw line 242 (block 169, line 241)
 
 **EN source:** Meaning, the following rules apply:
 
@@ -2829,7 +2776,7 @@
 **PDF span runs:**
 - `Meaning, the following rules apply:` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 309.74, 238.44, 321.64`
 
-## Raw line 247 (block 169, line 246)
+## Raw line 243 (block 169, line 242)
 
 **EN source:** •
 
@@ -2840,7 +2787,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 321.01, 94.55, 332.91`
 
-## Raw line 248 (block 169, line 247)
+## Raw line 244 (block 169, line 243)
 
 **EN source:** You may not use or gain the benefit of Disciplines you have learned
 
@@ -2853,7 +2800,7 @@
 - `not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `143.24, 320.99, 157.69, 332.91`
 - `use or gain the benefit of Disciplines you have learned` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `157.69, 321.01, 397.20, 332.91`
 
-## Raw line 249 (block 169, line 248)
+## Raw line 245 (block 169, line 244)
 
 **EN source:** other than Conduit Summoning.
 
@@ -2866,7 +2813,7 @@
 - `Conduit Summoning` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `150.40, 331.89, 239.76, 343.84`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `239.76, 332.01, 242.54, 343.91`
 
-## Raw line 250 (block 169, line 249)
+## Raw line 246 (block 169, line 245)
 
 **EN source:** •
 
@@ -2877,7 +2824,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 345.28, 94.55, 357.18`
 
-## Raw line 251 (block 169, line 250)
+## Raw line 247 (block 169, line 246)
 
 **EN source:** Companions, Familiars, Espers, and other special cards persistently
 
@@ -2888,7 +2835,7 @@
 **PDF span runs:**
 - `Companions, Familiars, Espers, and other special cards persistently` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 345.28, 396.04, 357.18`
 
-## Raw line 252 (block 169, line 251)
+## Raw line 248 (block 169, line 247)
 
 **EN source:** granted by Disciplines or Items you've already used stay in play and
 
@@ -2899,7 +2846,7 @@
 **PDF span runs:**
 - `granted by Disciplines or Items you've already used stay in play and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 356.28, 397.94, 368.18`
 
-## Raw line 253 (block 169, line 252)
+## Raw line 249 (block 169, line 248)
 
 **EN source:** may be used while in your Conduit Form.
 
@@ -2910,7 +2857,7 @@
 **PDF span runs:**
 - `may be used while in your Conduit Form.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 367.28, 282.12, 379.18`
 
-## Raw line 254 (block 169, line 253)
+## Raw line 250 (block 169, line 249)
 
 **EN source:** •
 
@@ -2921,7 +2868,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 380.55, 94.55, 392.45`
 
-## Raw line 255 (block 169, line 254)
+## Raw line 251 (block 169, line 250)
 
 **EN source:** You may not use or gain the benefit of Items or Abilities on Items
 
@@ -2934,7 +2881,7 @@
 - `not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `143.24, 380.53, 157.69, 392.45`
 - `use or gain the benefit of Items or Abilities on Items` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `157.69, 380.55, 384.09, 392.45`
 
-## Raw line 256 (block 169, line 255)
+## Raw line 252 (block 169, line 251)
 
 **EN source:** that your Adventurer previously had equipped. (However, you'll still
 
@@ -2945,7 +2892,7 @@
 **PDF span runs:**
 - `that your Adventurer previously had equipped. (However, you'll still` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 391.55, 398.44, 403.45`
 
-## Raw line 257 (block 169, line 256)
+## Raw line 253 (block 169, line 252)
 
 **EN source:** reference them to determine the Scaling Icons *
 
@@ -2957,7 +2904,7 @@
 - `reference them to determine the Scaling Icons` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 402.55, 303.77, 414.45`
 - `*` — `OptimaLTStd-Bold` 23.00 pt; PDF flags `20`; bbox `303.76, 398.55, 319.22, 425.97`
 
-## Raw line 258 (block 170, line 257)
+## Raw line 254 (block 170, line 253)
 
 **EN source:** printed on your
 
@@ -2968,7 +2915,7 @@
 **PDF span runs:**
 - `printed on your` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `318.07, 402.55, 387.37, 414.45`
 
-## Raw line 259 (block 170, line 258)
+## Raw line 255 (block 170, line 254)
 
 **EN source:** chosen CONDUIT Command Card.)
 
@@ -2981,7 +2928,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `136.88, 414.45, 179.38, 425.17`
 - `Command Card.)` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `179.38, 413.55, 258.85, 425.45`
 
-## Raw line 260 (block 170, line 259)
+## Raw line 256 (block 170, line 255)
 
 **EN source:** •
 
@@ -2992,7 +2939,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 426.81, 94.55, 438.71`
 
-## Raw line 261 (block 170, line 260)
+## Raw line 257 (block 170, line 256)
 
 **EN source:** You may not use Abilities, Skills, or the Stamina Point Recovery value
 
@@ -3005,7 +2952,7 @@
 - `not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `143.24, 426.79, 157.69, 438.71`
 - `use Abilities, Skills, or the Stamina Point Recovery value` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `157.69, 426.81, 403.71, 438.71`
 
-## Raw line 262 (block 170, line 261)
+## Raw line 258 (block 170, line 257)
 
 **EN source:** printed on your Adventurer Card until you return to your original
 
@@ -3016,7 +2963,7 @@
 **PDF span runs:**
 - `printed on your Adventurer Card until you return to your original` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 437.81, 384.23, 449.71`
 
-## Raw line 263 (block 170, line 262)
+## Raw line 259 (block 170, line 258)
 
 **EN source:** Form.
 
@@ -3027,7 +2974,7 @@
 **PDF span runs:**
 - `Form.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 448.81, 128.26, 460.71`
 
-## Raw line 264 (block 170, line 263)
+## Raw line 260 (block 170, line 259)
 
 **EN source:** •
 
@@ -3038,7 +2985,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 462.08, 94.55, 473.98`
 
-## Raw line 265 (block 170, line 264)
+## Raw line 261 (block 170, line 260)
 
 **EN source:** Any Effect, Ability,or Damage tokens that were on the Adventurer
 
@@ -3055,7 +3002,7 @@
 - `Damage` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `194.77, 462.04, 230.88, 473.92`
 - `tokens that were on the Adventurer` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `230.88, 462.08, 386.88, 473.98`
 
-## Raw line 266 (block 170, line 265)
+## Raw line 262 (block 170, line 261)
 
 **EN source:** carry over to their new CONDUIT Command Card. This means that
 
@@ -3068,7 +3015,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `204.04, 473.98, 246.55, 484.71`
 - `Command Card. This means that` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `246.55, 473.08, 392.08, 484.98`
 
-## Raw line 267 (block 170, line 266)
+## Raw line 263 (block 170, line 262)
 
 **EN source:** you may use Effect and Ability tokens that are on your CONDUIT
 
@@ -3083,9 +3030,8 @@
 - `Ability` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `205.66, 484.04, 233.36, 495.92`
 - `tokens that are on your` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `233.36, 484.08, 337.67, 495.98`
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `337.67, 484.98, 380.18, 495.71`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `380.18, 484.08, 382.96, 495.98`
 
-## Raw line 268 (block 170, line 267)
+## Raw line 264 (block 170, line 263)
 
 **EN source:** Command Card.
 
@@ -3096,7 +3042,7 @@
 **PDF span runs:**
 - `Command Card.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.70, 495.08, 174.83, 506.98`
 
-## Raw line 269 (block 170, line 268)
+## Raw line 265 (block 170, line 264)
 
 **EN source:** •
 
@@ -3107,7 +3053,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 508.35, 94.55, 520.25`
 
-## Raw line 270 (block 170, line 269)
+## Raw line 266 (block 170, line 265)
 
 **EN source:** You may use Standard Actions and Abilities.
 
@@ -3118,7 +3064,7 @@
 **PDF span runs:**
 - `You may use Standard Actions and Abilities.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 508.35, 294.80, 520.25`
 
-## Raw line 271 (block 170, line 270)
+## Raw line 267 (block 170, line 266)
 
 **EN source:** •
 
@@ -3129,7 +3075,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 521.62, 94.55, 533.52`
 
-## Raw line 272 (block 170, line 271)
+## Raw line 268 (block 170, line 267)
 
 **EN source:** When making Skill Checks, you must use your new Conduit's listed
 
@@ -3142,7 +3088,7 @@
 - `must` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `243.40, 521.60, 264.51, 533.52`
 - `use your new Conduit's listed` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `264.51, 521.62, 397.18, 533.52`
 
-## Raw line 273 (block 170, line 272)
+## Raw line 269 (block 170, line 268)
 
 **EN source:** Skills.
 
@@ -3153,7 +3099,7 @@
 **PDF span runs:**
 - `Skills.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 532.62, 128.72, 544.52`
 
-## Raw line 274 (block 170, line 273)
+## Raw line 270 (block 170, line 269)
 
 **EN source:** •
 
@@ -3164,7 +3110,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 545.88, 94.55, 557.78`
 
-## Raw line 275 (block 170, line 274)
+## Raw line 271 (block 170, line 270)
 
 **EN source:** While in this new Form, you still count as an Adventurer for the
 
@@ -3175,7 +3121,7 @@
 **PDF span runs:**
 - `While in this new Form, you still count as an Adventurer for the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 545.88, 379.14, 557.78`
 
-## Raw line 276 (block 170, line 275)
+## Raw line 272 (block 170, line 271)
 
 **EN source:** purposes of Abilities or Special Rules and text listed in Encounters.
 
@@ -3186,7 +3132,7 @@
 **PDF span runs:**
 - `purposes of Abilities or Special Rules and text listed in Encounters.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 556.88, 391.81, 568.78`
 
-## Raw line 277 (block 170, line 276)
+## Raw line 273 (block 170, line 272)
 
 **EN source:** However, any Ability that references the specific Form you are in also
 
@@ -3197,7 +3143,7 @@
 **PDF span runs:**
 - `However, any Ability that references the specific Form you are in also` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 567.88, 404.43, 579.78`
 
-## Raw line 278 (block 170, line 277)
+## Raw line 274 (block 170, line 273)
 
 **EN source:** applies to you. If one Ability would conflict with another, rule in favor
 
@@ -3208,7 +3154,7 @@
 **PDF span runs:**
 - `applies to you. If one Ability would conflict with another, rule in favor` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 578.88, 406.43, 590.78`
 
-## Raw line 279 (block 170, line 278)
+## Raw line 275 (block 170, line 274)
 
 **EN source:** of the Form you are in. (For Example: As a Fragor, you are not affected
 
@@ -3219,7 +3165,7 @@
 **PDF span runs:**
 - `of the Form you are in. (For Example: As a Fragor, you are not affected` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 589.88, 405.95, 601.78`
 
-## Raw line 280 (block 170, line 279)
+## Raw line 276 (block 170, line 275)
 
 **EN source:** by Bulb tokens.)
 
@@ -3232,7 +3178,7 @@
 - `Bulb` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `116.87, 600.84, 136.69, 612.72`
 - `tokens.)` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `136.69, 600.88, 172.82, 612.78`
 
-## Raw line 281 (block 170, line 280)
+## Raw line 277 (block 170, line 276)
 
 **EN source:** •
 
@@ -3243,7 +3189,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 614.15, 94.55, 626.05`
 
-## Raw line 282 (block 170, line 281)
+## Raw line 278 (block 170, line 277)
 
 **EN source:** The Adventurer may Gain Items as normal. If an Adventurer is
 
@@ -3254,7 +3200,7 @@
 **PDF span runs:**
 - `The Adventurer may Gain Items as normal. If an Adventurer is` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 614.15, 371.03, 626.05`
 
-## Raw line 283 (block 170, line 282)
+## Raw line 279 (block 170, line 278)
 
 **EN source:** Defeated while under the effects of Conduit Summoning, they are
 
@@ -3268,7 +3214,7 @@
 - `,` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `346.29, 625.13, 349.07, 637.05`
 - `they are` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `349.07, 625.15, 389.08, 637.05`
 
-## Raw line 284 (block 170, line 283)
+## Raw line 280 (block 170, line 279)
 
 **EN source:** Defeated as normal.
 
@@ -3279,7 +3225,7 @@
 **PDF span runs:**
 - `Defeated as normal.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 636.15, 190.40, 648.05`
 
-## Raw line 285 (block 170, line 284)
+## Raw line 281 (block 170, line 280)
 
 **EN source:** •
 
@@ -3290,7 +3236,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 649.42, 94.55, 661.32`
 
-## Raw line 286 (block 170, line 285)
+## Raw line 282 (block 170, line 281)
 
 **EN source:** The Adventurer may stay as the chosen CONDUIT until they use the
 
@@ -3303,7 +3249,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `272.92, 650.32, 315.42, 661.05`
 - `until they use the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `315.42, 649.42, 394.91, 661.32`
 
-## Raw line 287 (block 170, line 286)
+## Raw line 283 (block 170, line 282)
 
 **EN source:** Discipline to swap their cards back, they are instructed to Restore, or
 
@@ -3316,7 +3262,7 @@
 - `Restore` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `353.32, 660.30, 385.95, 672.25`
 - `, or` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `385.95, 660.42, 403.18, 672.32`
 
-## Raw line 288 (block 170, line 287)
+## Raw line 284 (block 170, line 283)
 
 **EN source:** they are Defeated.
 
@@ -3327,7 +3273,7 @@
 **PDF span runs:**
 - `they are Defeated.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.70, 671.42, 185.39, 683.32`
 
-## Raw line 289 (block 170, line 288)
+## Raw line 285 (block 170, line 284)
 
 **EN source:** •
 
@@ -3338,7 +3284,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 684.69, 94.55, 696.59`
 
-## Raw line 290 (block 170, line 289)
+## Raw line 286 (block 170, line 285)
 
 **EN source:** An Adventurer may swap from one CONDUIT Form into another
 
@@ -3351,7 +3297,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `255.76, 685.59, 298.26, 696.32`
 - `Form into another` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `298.26, 684.69, 380.62, 696.59`
 
-## Raw line 291 (block 170, line 290)
+## Raw line 287 (block 170, line 286)
 
 **EN source:** CONDUIT Form.
 
@@ -3363,7 +3309,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `103.71, 696.59, 146.21, 707.32`
 - `Form.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `146.21, 695.69, 173.54, 707.59`
 
-## Raw line 292 (block 170, line 291)
+## Raw line 288 (block 170, line 287)
 
 **EN source:** •
 
@@ -3374,7 +3320,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 708.95, 94.55, 720.85`
 
-## Raw line 293 (block 170, line 292)
+## Raw line 289 (block 170, line 288)
 
 **EN source:** When swapping back to their Adventurer Card, any Effect, Ability,or
 
@@ -3389,7 +3335,7 @@
 - `Ability` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `355.93, 708.91, 383.63, 720.79`
 - `,or` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `383.63, 708.95, 398.08, 720.85`
 
-## Raw line 294 (block 170, line 293)
+## Raw line 290 (block 170, line 289)
 
 **EN source:** Damage tokens that were on their CONDUIT Command Card carry
 
@@ -3403,7 +3349,7 @@
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `252.08, 720.86, 294.59, 731.58`
 - `Command Card carry` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `294.59, 719.95, 392.94, 731.85`
 
-## Raw line 295 (block 170, line 294)
+## Raw line 291 (block 170, line 290)
 
 **EN source:** over back to their Adventurer Form.
 
@@ -3414,7 +3360,7 @@
 **PDF span runs:**
 - `over back to their Adventurer Form.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.70, 730.95, 256.03, 742.85`
 
-## Raw line 296 (block 170, line 295)
+## Raw line 292 (block 170, line 291)
 
 **EN source:** •
 
@@ -3425,9 +3371,9 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 744.22, 94.55, 756.12`
 
-## Raw line 297 (block 170, line 296)
+## Raw line 293 (block 170, line 292)
 
-**EN source:** Command Combatant Cards with the CONDUIT Tag otherwise follow
+**EN source:** Command Combatant Cards with the CONDUIT Tagotherwise follow
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -3437,10 +3383,9 @@
 - `Command Combatant Cards with the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 744.22, 266.55, 756.12`
 - `CONDUIT` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `266.54, 745.12, 309.05, 755.85`
 - `Tag` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `309.05, 744.22, 325.65, 756.12`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `325.65, 745.12, 328.15, 755.85`
 - `otherwise follow` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `328.15, 744.22, 402.51, 756.12`
 
-## Raw line 298 (block 170, line 297)
+## Raw line 294 (block 170, line 293)
 
 **EN source:** all the normal rules of a Command Combatant.
 
@@ -3451,7 +3396,7 @@
 **PDF span runs:**
 - `all the normal rules of a Command Combatant.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.70, 755.22, 306.55, 767.12`
 
-## Raw line 299 (block 170, line 298)
+## Raw line 295 (block 170, line 294)
 
 **EN source:** •
 
@@ -3462,7 +3407,7 @@
 **PDF span runs:**
 - `•` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.71, 768.49, 94.55, 780.39`
 
-## Raw line 300 (block 170, line 299)
+## Raw line 296 (block 170, line 295)
 
 **EN source:** The Adventurer's Initiative Card does not change when using Conduit
 
@@ -3474,7 +3419,7 @@
 - `The Adventurer's Initiative Card does not change when using` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.71, 768.49, 366.99, 780.39`
 - `Conduit` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `366.99, 768.37, 404.29, 780.32`
 
-## Raw line 301 (block 170, line 300)
+## Raw line 297 (block 170, line 296)
 
 **EN source:** Summoning. Instead, they will continue to use their original card.
 
@@ -3486,9 +3431,9 @@
 - `Summoning` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `103.71, 779.37, 155.77, 791.32`
 - `. Instead, they will continue to use their original card.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `155.77, 779.49, 388.65, 791.39`
 
-## Raw line 302 (block 171, line 301)
+## Raw line 298 (block 171, line 297)
 
-**EN source:** Special Assemblage Disciplines Continued
+**EN source:** Special Assemblage DisciplinesContinued
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -3496,10 +3441,9 @@
 
 **PDF span runs:**
 - `Special Assemblage Disciplines` — `Cinzel-Regular` 14.00 pt; PDF flags `4`; bbox `85.88, 35.60, 320.49, 54.47`
-- `` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `320.49, 31.69, 324.99, 55.96`
 - `Continued` — `Cinzel-Regular` 10.00 pt; PDF flags `4`; bbox `324.99, 39.50, 385.77, 52.98`
 
-## Raw line 303 (block 172, line 302)
+## Raw line 299 (block 172, line 298)
 
 **EN source:** 77
 
@@ -3510,7 +3454,7 @@
 **PDF span runs:**
 - `77` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `758.29, 775.72, 770.15, 787.98`
 
-## Raw line 304 (block 172, line 303)
+## Raw line 300 (block 172, line 299)
 
 **EN source:** 77
 

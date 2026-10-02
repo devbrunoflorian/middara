@@ -21,8 +21,6 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `415.70, 275.84, 461.24, 290.25`
-- `` — `AGaramondPro-BoldItalic` 12.00 pt; PDF flags `22`; bbox `461.24, 275.90, 464.12, 290.24`
-- `` — `AGaramondPro-Regular` 10.00 pt; PDF flags `4`; bbox `464.12, 277.46, 466.62, 290.17`
 
 ## Raw line 002 (block 0, line 1)
 
@@ -58,8 +56,6 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `99.95, 721.30, 145.49, 735.71`
-- `` — `AGaramondPro-BoldItalic` 12.00 pt; PDF flags `22`; bbox `145.49, 721.36, 148.37, 735.70`
-- `` — `AGaramondPro-Regular` 10.00 pt; PDF flags `4`; bbox `148.36, 722.92, 150.86, 735.63`
 
 ## Raw line 005 (block 1, line 4)
 
@@ -163,7 +159,6 @@
 **PDF span runs:**
 - `this movement. This Ability may only be used if` — `OptimaLTStd` 7.70 pt; PDF flags `4`; bbox `127.20, 297.04, 286.88, 306.20`
 - `Remi` — `OptimaLTStd-Italic` 7.70 pt; PDF flags `6`; bbox `286.88, 297.01, 303.74, 306.15`
-- `` — `OptimaLTStd` 7.70 pt; PDF flags `4`; bbox `303.74, 297.04, 305.88, 306.20`
 
 ## Raw line 013 (block 3, line 12)
 
@@ -397,7 +392,6 @@
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `166.36, 201.53, 171.37, 212.25`
 - `Movement Points to leave their space. This does` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `171.37, 200.63, 381.94, 212.53`
 - `not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `381.94, 200.61, 396.39, 212.53`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `396.39, 200.63, 399.17, 212.53`
 
 ## Raw line 032 (block 12, line 31)
 
@@ -574,17 +568,6 @@
 
 ## Raw line 047 (block 18, line 46)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `404.36, 355.43, 407.36, 371.60`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `404.36, 355.43, 407.36, 371.60`
-
-## Raw line 048 (block 18, line 47)
-
 **EN source:** Some Disciplines and Item Cards have Abilities that instruct you to Move.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -594,7 +577,7 @@
 **PDF span runs:**
 - `Some Disciplines and Item Cards have Abilities that instruct you to Move.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.88, 368.95, 405.77, 380.85`
 
-## Raw line 049 (block 18, line 48)
+## Raw line 048 (block 18, line 47)
 
 **EN source:** Any movement granted by these Abilities, does not count as the Move
 
@@ -607,7 +590,7 @@
 - `does not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `267.08, 379.93, 307.10, 391.85`
 - `count as the Move` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `307.10, 379.95, 389.12, 391.85`
 
-## Raw line 050 (block 18, line 49)
+## Raw line 049 (block 18, line 48)
 
 **EN source:** Action for the turn. These Abilities cannot be used during another Action.
 
@@ -622,7 +605,7 @@
 - `during` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `303.32, 390.91, 330.92, 402.79`
 - `another Action.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `330.92, 390.95, 400.03, 402.85`
 
-## Raw line 051 (block 19, line 50)
+## Raw line 050 (block 19, line 49)
 
 **EN source:** In addition, movement granted by these Abilities simply moves a
 
@@ -633,7 +616,7 @@
 **PDF span runs:**
 - `In addition, movement granted by these Abilities simply moves a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.88, 407.62, 365.95, 419.52`
 
-## Raw line 052 (block 19, line 51)
+## Raw line 051 (block 19, line 50)
 
 **EN source:** figure the amount of spaces listed regardless of the Negative Effects on
 
@@ -646,7 +629,7 @@
 - `Negative Effects` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `305.41, 418.58, 376.48, 430.46`
 - `on` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `376.48, 418.62, 390.38, 430.52`
 
-## Raw line 053 (block 19, line 52)
+## Raw line 052 (block 19, line 51)
 
 **EN source:** movement caused by Terrain or allies.
 
@@ -657,7 +640,7 @@
 **PDF span runs:**
 - `movement caused by Terrain or allies.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.88, 429.62, 250.87, 441.52`
 
-## Raw line 054 (block 20, line 53)
+## Raw line 053 (block 20, line 52)
 
 **EN source:** However, Obstructing Terrain and opposing figures still prevent an
 
@@ -668,7 +651,7 @@
 **PDF span runs:**
 - `However, Obstructing Terrain and opposing figures still prevent an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.88, 446.29, 373.03, 458.19`
 
-## Raw line 055 (block 20, line 54)
+## Raw line 054 (block 20, line 53)
 
 **EN source:** Adventurer from using Free Movement to move through their Space, and
 
@@ -679,7 +662,7 @@
 **PDF span runs:**
 - `Adventurer from using Free Movement to move through their Space, and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.88, 457.29, 399.77, 469.19`
 
-## Raw line 056 (block 20, line 55)
+## Raw line 055 (block 20, line 54)
 
 **EN source:** Dangerous Terrain would still Defeat an Adventurer under the normal
 
@@ -690,7 +673,7 @@
 **PDF span runs:**
 - `Dangerous Terrain would still Defeat an Adventurer under the normal` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.88, 468.29, 386.06, 480.19`
 
-## Raw line 057 (block 20, line 56)
+## Raw line 056 (block 20, line 55)
 
 **EN source:** circumstances.
 
@@ -701,7 +684,7 @@
 **PDF span runs:**
 - `circumstances.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.88, 479.29, 149.66, 491.19`
 
-## Raw line 058 (block 21, line 57)
+## Raw line 057 (block 21, line 56)
 
 **EN source:** Some of these Abilities might allow you to move Diagonally. Moving
 
@@ -712,7 +695,7 @@
 **PDF span runs:**
 - `Some of these Abilities might allow you to move Diagonally. Moving` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.88, 495.96, 383.50, 507.86`
 
-## Raw line 059 (block 21, line 58)
+## Raw line 058 (block 21, line 57)
 
 **EN source:** diagonally follows all the limitations associated with drawing Line of Sight
 
@@ -723,7 +706,7 @@
 **PDF span runs:**
 - `diagonally follows all the limitations associated with drawing Line of Sight` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `85.88, 506.96, 407.28, 518.86`
 
-## Raw line 060 (block 21, line 59)
+## Raw line 059 (block 21, line 58)
 
 **EN source:** diagonally. Meaning you must still move through 1 of the 2 orthogonal
 
@@ -738,7 +721,7 @@
 - `2` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `334.10, 517.94, 339.66, 529.86`
 - `orthogonal` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `339.66, 517.96, 391.91, 529.86`
 
-## Raw line 061 (block 21, line 60)
+## Raw line 060 (block 21, line 59)
 
 **EN source:** spaces and you are still blocked by Obstructing Terrain.
 
@@ -751,7 +734,7 @@
 - `Obstructing` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `238.74, 528.92, 289.48, 540.80`
 - `Terrain.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `289.48, 528.96, 323.74, 540.86`
 
-## Raw line 062 (block 22, line 61)
+## Raw line 061 (block 22, line 60)
 
 **EN source:** IMPORTANT:
 
@@ -763,9 +746,9 @@
 - `` — `Webdings` 10.00 pt; PDF flags `0`; bbox `91.55, 552.49, 101.55, 562.49`
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `101.55, 551.24, 164.15, 563.22`
 
-## Raw line 063 (block 22, line 62)
+## Raw line 062 (block 22, line 61)
 
-**EN source:** IMPORTANT: HEAVY only affects the movement points granted by the
+**EN source:** IMPORTANT:HEAVY only affects the movement points granted by the
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -773,11 +756,10 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `101.55, 551.24, 164.15, 563.22`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `164.15, 551.30, 166.93, 563.20`
 - `HEAVY` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `166.93, 552.20, 195.44, 562.93`
 - `only affects the movement points granted by the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `195.44, 551.30, 407.21, 563.20`
 
-## Raw line 064 (block 22, line 63)
+## Raw line 063 (block 22, line 62)
 
 **EN source:** MOVE Action. This means that HEAVY does not affect Free movement.
 
@@ -793,7 +775,7 @@
 - `not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `276.30, 562.28, 290.75, 574.20`
 - `affect Free movement.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `290.75, 562.30, 391.27, 574.20`
 
-## Raw line 065 (block 23, line 64)
+## Raw line 064 (block 23, line 63)
 
 **EN source:** B
 
@@ -804,7 +786,7 @@
 **PDF span runs:**
 - `B` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `441.05, 651.71, 446.55, 662.44`
 
-## Raw line 066 (block 24, line 65)
+## Raw line 065 (block 24, line 64)
 
 **EN source:** A
 
@@ -815,7 +797,7 @@
 **PDF span runs:**
 - `A` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `440.79, 623.74, 446.80, 634.46`
 
-## Raw line 067 (block 25, line 66)
+## Raw line 066 (block 25, line 65)
 
 **EN source:** C
 
@@ -826,7 +808,7 @@
 **PDF span runs:**
 - `C` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `440.79, 679.63, 446.80, 690.36`
 
-## Raw line 068 (block 26, line 67)
+## Raw line 067 (block 26, line 66)
 
 **EN source:** D
 
@@ -837,7 +819,7 @@
 **PDF span runs:**
 - `D` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `440.29, 719.90, 447.30, 730.63`
 
-## Raw line 069 (block 27, line 68)
+## Raw line 068 (block 27, line 67)
 
 **EN source:** Any gridded area is considered a space. Spaces that share a
 
@@ -848,7 +830,7 @@
 **PDF span runs:**
 - `Any gridded area is considered a space. Spaces that share a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `460.29, 619.77, 718.53, 631.67`
 
-## Raw line 070 (block 27, line 69)
+## Raw line 069 (block 27, line 68)
 
 **EN source:** corner or edge to a space with a figure are adjacent.
 
@@ -861,7 +843,7 @@
 - `adjacent` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `644.79, 630.65, 681.64, 642.60`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `681.64, 630.77, 684.42, 642.67`
 
-## Raw line 071 (block 28, line 70)
+## Raw line 070 (block 28, line 69)
 
 **EN source:** Spaces obstructed by red borders block Line of Sight and
 
@@ -872,7 +854,7 @@
 **PDF span runs:**
 - `Spaces obstructed by red borders block Line of Sight and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `460.29, 647.44, 706.70, 659.34`
 
-## Raw line 072 (block 28, line 71)
+## Raw line 071 (block 28, line 70)
 
 **EN source:** are not considered adjacent.
 
@@ -883,7 +865,7 @@
 **PDF span runs:**
 - `are not considered adjacent.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `460.29, 658.44, 582.56, 670.34`
 
-## Raw line 073 (block 29, line 72)
+## Raw line 072 (block 29, line 71)
 
 **EN source:** Areas that do not contain a grid are not considered spaces.
 
@@ -894,7 +876,7 @@
 **PDF span runs:**
 - `Areas that do not contain a grid are not considered spaces.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `460.29, 675.11, 715.40, 687.01`
 
-## Raw line 074 (block 29, line 73)
+## Raw line 073 (block 29, line 72)
 
 **EN source:** They cannot be moved into and are never considered
 
@@ -905,7 +887,7 @@
 **PDF span runs:**
 - `They cannot be moved into and are never considered` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `460.29, 686.11, 692.35, 698.01`
 
-## Raw line 075 (block 29, line 74)
+## Raw line 074 (block 29, line 73)
 
 **EN source:** adjacent.
 
@@ -916,7 +898,7 @@
 **PDF span runs:**
 - `adjacent.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `460.29, 697.11, 499.75, 709.01`
 
-## Raw line 076 (block 30, line 75)
+## Raw line 075 (block 30, line 74)
 
 **EN source:** Spaces with colored borders and Icons have Terrain Effects.
 
@@ -927,7 +909,7 @@
 **PDF span runs:**
 - `Spaces with colored borders and Icons have Terrain Effects.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `460.29, 713.78, 716.44, 725.68`
 
-## Raw line 077 (block 30, line 76)
+## Raw line 076 (block 30, line 75)
 
 **EN source:** See Terrain Pg. 21.
 
@@ -940,7 +922,7 @@
 - `Terrain` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `478.07, 724.66, 508.60, 736.61`
 - `Pg. 21.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `508.60, 724.78, 541.40, 736.68`
 
-## Raw line 078 (block 31, line 77)
+## Raw line 077 (block 31, line 76)
 
 **EN source:** A
 
@@ -951,7 +933,7 @@
 **PDF span runs:**
 - `A` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `667.45, 426.88, 673.45, 437.61`
 
-## Raw line 079 (block 32, line 78)
+## Raw line 078 (block 32, line 77)
 
 **EN source:** D
 
@@ -962,7 +944,7 @@
 **PDF span runs:**
 - `D` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `573.64, 567.55, 580.64, 578.28`
 
-## Raw line 080 (block 33, line 79)
+## Raw line 079 (block 33, line 78)
 
 **EN source:** C
 
@@ -973,7 +955,7 @@
 **PDF span runs:**
 - `C` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `574.85, 519.50, 580.85, 530.23`
 
-## Raw line 081 (block 34, line 80)
+## Raw line 080 (block 34, line 79)
 
 **EN source:** B
 
@@ -984,7 +966,7 @@
 **PDF span runs:**
 - `B` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `484.73, 519.93, 490.23, 530.66`
 
-## Raw line 082 (block 35, line 81)
+## Raw line 081 (block 35, line 80)
 
 **EN source:** The Move Action
 
@@ -995,7 +977,7 @@
 **PDF span runs:**
 - `The Move Action` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `85.88, 56.69, 252.63, 80.96`
 
-## Raw line 083 (block 36, line 82)
+## Raw line 082 (block 36, line 81)
 
 **EN source:** Adjacent Spaces
 
@@ -1006,7 +988,7 @@
 **PDF span runs:**
 - `Adjacent Spaces` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `495.77, 362.12, 654.24, 386.38`
 
-## Raw line 084 (block 37, line 83)
+## Raw line 083 (block 37, line 82)
 
 **EN source:** 39
 
@@ -1017,7 +999,7 @@
 **PDF span runs:**
 - `39` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `758.29, 775.72, 770.15, 787.98`
 
-## Raw line 085 (block 37, line 84)
+## Raw line 084 (block 37, line 83)
 
 **EN source:** 39
 

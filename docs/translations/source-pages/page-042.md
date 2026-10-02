@@ -68,7 +68,6 @@
 **PDF span runs:**
 - `For example, if an Adventurer were to draw Line of Sight through a diagonal where` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `350.69, 160.08, 709.16, 171.98`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `709.16, 160.98, 714.16, 171.71`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `714.16, 160.08, 716.94, 171.98`
 
 ## Raw line 006 (block 1, line 5)
 
@@ -107,7 +106,7 @@
 
 ## Raw line 009 (block 1, line 8)
 
-**EN source:** by the -1 TO THE ATK ROLL applied by the Hindering Terrain.
+**EN source:** by the -1TO THE ATK ROLL applied by the Hindering Terrain.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -117,7 +116,6 @@
 - `by the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `350.69, 204.08, 379.97, 215.98`
 - `-` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `379.97, 204.06, 383.30, 215.98`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `383.30, 204.98, 388.30, 215.71`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `388.30, 205.00, 390.80, 215.71`
 - `TO THE ATK ROLL` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `390.80, 204.98, 463.73, 215.71`
 - `applied by the Hindering Terrain.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `463.73, 204.08, 608.42, 215.98`
 
@@ -134,11 +132,10 @@
 - `Nightingale's Attack roll against the Cave Sickle will be subject to a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `396.23, 220.75, 690.76, 232.65`
 - `-` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `690.76, 220.73, 694.09, 232.65`
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `694.09, 221.65, 699.09, 232.38`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `699.09, 220.75, 701.87, 232.65`
 
 ## Raw line 011 (block 1, line 10)
 
-**EN source:** penalty if she chooses the unoccupied Hindering Terrain space, or a -2 penalty if she
+**EN source:** penalty if she chooses the unoccupied Hindering Terrain space, or a -2penalty if she
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -148,7 +145,6 @@
 - `penalty if she chooses the unoccupied Hindering Terrain space, or a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `350.69, 231.75, 644.89, 243.65`
 - `-` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `644.89, 231.73, 648.22, 243.65`
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `648.22, 232.65, 653.22, 243.38`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `653.22, 231.73, 656.00, 243.65`
 - `penalty if she` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `656.00, 231.75, 716.03, 243.65`
 
 ## Raw line 012 (block 1, line 11)
@@ -288,16 +284,14 @@
 
 ## Raw line 024 (block 4, line 23)
 
-**EN source:** ATKS unless
+**EN source:** ATKSunless
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
 **Line bbox:** `670.62, 599.10, 725.10, 611.00`
 
 **PDF span runs:**
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `670.62, 600.00, 673.12, 610.73`
 - `ATKS` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `672.63, 600.00, 693.14, 610.73`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `693.14, 600.02, 695.64, 610.73`
 - `unless` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `695.64, 599.10, 725.10, 611.00`
 
 ## Raw line 025 (block 4, line 24)
@@ -436,7 +430,7 @@
 
 ## Raw line 037 (block 7, line 36)
 
-**EN source:** IMPORTANT: If an Intelligent Combatant provokes a Break Attack from an
+**EN source:** IMPORTANT:If an Intelligent Combatant provokes a Break Attack from an
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -444,7 +438,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `371.98, 757.39, 434.58, 769.37`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `434.58, 757.45, 437.36, 769.35`
 - `If an Intelligent Combatant provokes a Break Attack from an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `437.36, 757.45, 696.60, 769.35`
 
 ## Raw line 038 (block 7, line 37)

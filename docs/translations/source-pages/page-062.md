@@ -116,7 +116,7 @@
 
 ## Raw line 010 (block 2, line 9)
 
-**EN source:** within SOI. If the AI Step of an Intelligent Combatant further specifies
+**EN source:** within SOI. If theAIStep of an Intelligent Combatant further specifies
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -126,9 +126,7 @@
 - `within` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 201.17, 116.19, 213.07`
 - `SOI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `116.19, 202.07, 131.19, 212.80`
 - `. If the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `131.19, 201.17, 158.43, 213.07`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `158.43, 201.15, 161.21, 213.07`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `161.21, 202.07, 170.21, 212.80`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `170.21, 201.15, 172.99, 213.07`
 - `Step of an Intelligent Combatant further specifies` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `172.99, 201.17, 384.75, 213.07`
 
 ## Raw line 011 (block 2, line 10)
@@ -188,7 +186,7 @@
 
 ## Raw line 016 (block 3, line 15)
 
-**EN source:** Example: An AI Step instructs a Cave Sickle to make a
+**EN source:** Example:AnAIStep instructs a Cave Sickle to make a
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -196,11 +194,8 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `86.17, 276.91, 131.71, 291.32`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `131.71, 278.49, 134.49, 290.41`
 - `An` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `134.49, 278.51, 146.72, 290.41`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `146.72, 278.49, 149.50, 290.41`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `149.50, 279.41, 158.50, 290.13`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `158.50, 278.49, 161.28, 290.41`
 - `Step instructs a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `161.28, 278.51, 228.53, 290.41`
 - `Cave Sickle` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `228.53, 278.39, 277.81, 290.34`
 - `to make a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `277.81, 278.51, 325.60, 290.41`
@@ -276,7 +271,7 @@
 
 ## Raw line 023 (block 5, line 22)
 
-**EN source:** If an Intelligent Combatant Card references “up to” in its AI Steps, then
+**EN source:** If an Intelligent Combatant Card references “up to” in itsAISteps, then
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -286,9 +281,7 @@
 - `If an Intelligent Combatant Card references “` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 372.08, 277.90, 383.98`
 - `up to` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `277.90, 371.96, 300.69, 383.91`
 - `” in its` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `300.69, 372.08, 328.48, 383.98`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `328.48, 372.06, 331.26, 383.98`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `331.26, 372.98, 340.26, 383.71`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `340.26, 372.06, 343.04, 383.98`
 - `Steps, then` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `343.04, 372.08, 392.51, 383.98`
 
 ## Raw line 024 (block 5, line 23)
@@ -315,7 +308,7 @@
 
 ## Raw line 026 (block 6, line 25)
 
-**EN source:** If an Intelligent Combatant Card references “within,” then the Combatant
+**EN source:** If anIntelligent CombatantCard references “within,” then the Combatant
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -323,9 +316,7 @@
 
 **PDF span runs:**
 - `If an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 410.75, 105.07, 422.65`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `105.07, 410.73, 107.85, 422.65`
 - `Intelligent Combatant` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `107.85, 410.75, 200.67, 422.65`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `200.67, 410.73, 203.45, 422.65`
 - `Card references “` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `203.45, 410.75, 277.90, 422.65`
 - `within,` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `277.90, 410.63, 308.28, 422.58`
 - `” then the Combatant` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `308.28, 410.75, 403.32, 422.65`
@@ -354,7 +345,7 @@
 
 ## Raw line 029 (block 6, line 28)
 
-**EN source:** Example: The Animate’s Intelligent Combatant Card says
+**EN source:** Example:The Animate’s Intelligent Combatant Card says
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -362,12 +353,11 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `86.17, 447.82, 131.71, 462.23`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `131.71, 449.40, 134.49, 461.32`
 - `The Animate’s Intelligent Combatant Card says` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `134.49, 449.42, 333.64, 461.32`
 
 ## Raw line 030 (block 7, line 29)
 
-**EN source:** “Move up to 2 spaces farther from the target.”
+**EN source:** “Move up to2 spaces farther from the target.”
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -376,7 +366,6 @@
 **PDF span runs:**
 - `“Move` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.17, 466.09, 117.60, 477.99`
 - `up to` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `117.60, 465.97, 140.39, 477.92`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `140.39, 466.09, 143.17, 477.99`
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `143.17, 466.99, 148.18, 477.72`
 - `spaces farther from the target.”` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `148.18, 466.09, 284.88, 477.99`
 
@@ -490,7 +479,7 @@
 
 ## Raw line 040 (block 10, line 39)
 
-**EN source:** IMPORTANT: Some Abilities that Adventurers control will use the
+**EN source:** IMPORTANT:Some Abilities that Adventurers control will use the
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -498,7 +487,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `101.84, 589.37, 164.44, 601.35`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `164.44, 589.41, 167.22, 601.33`
 - `Some Abilities that Adventurers control will use the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `167.22, 589.43, 389.55, 601.33`
 
 ## Raw line 041 (block 10, line 40)
@@ -573,7 +561,6 @@
 - `Nearest` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `296.16, 680.13, 328.57, 692.01`
 - `or` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `328.47, 680.17, 342.62, 692.07`
 - `Farthest,` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `342.52, 680.13, 377.90, 692.01`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `377.90, 680.17, 380.68, 692.07`
 
 ## Raw line 047 (block 12, line 46)
 
@@ -739,18 +726,7 @@
 
 ## Raw line 061 (block 17, line 60)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `734.46, 163.21, 737.46, 179.39`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `734.46, 163.21, 737.46, 179.39`
-
-## Raw line 062 (block 17, line 61)
-
-**EN source:** If an Intelligent Combatant Card references “Towards” in its AI Steps,
+**EN source:** If an Intelligent Combatant Card references “Towards” in itsAISteps,
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -760,12 +736,10 @@
 - `If an Intelligent Combatant Card references “` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 174.73, 607.72, 186.63`
 - `Towards` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `607.72, 174.61, 643.57, 186.56`
 - `” in its` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `643.57, 174.73, 671.36, 186.63`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `671.36, 174.71, 674.14, 186.63`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `674.14, 175.63, 683.14, 186.36`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `683.14, 174.71, 685.92, 186.63`
 - `Steps,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `685.92, 174.73, 713.71, 186.63`
 
-## Raw line 063 (block 17, line 62)
+## Raw line 062 (block 17, line 61)
 
 **EN source:** then the Combatant will only move into spaces that are closer to the
 
@@ -776,7 +750,7 @@
 **PDF span runs:**
 - `then the Combatant will only move into spaces that are closer to the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 185.73, 711.99, 197.63`
 
-## Raw line 064 (block 17, line 63)
+## Raw line 063 (block 17, line 62)
 
 **EN source:** destination listed in its AI. This movement does not necessarily need to be
 
@@ -789,7 +763,7 @@
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `514.94, 197.63, 523.94, 208.36`
 - `. This movement does not necessarily need to be` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `523.94, 196.73, 734.82, 208.63`
 
-## Raw line 065 (block 17, line 64)
+## Raw line 064 (block 17, line 63)
 
 **EN source:** in a straight line. If the destination is a space occupied by another figure,
 
@@ -800,7 +774,7 @@
 **PDF span runs:**
 - `in a straight line. If the destination is a space occupied by another figure,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 207.73, 730.84, 219.63`
 
-## Raw line 066 (block 17, line 65)
+## Raw line 065 (block 17, line 64)
 
 **EN source:** the destination becomes the nearest adjacent space to the figure.
 
@@ -811,9 +785,9 @@
 **PDF span runs:**
 - `the destination becomes the nearest adjacent space to the figure.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 218.73, 696.66, 230.63`
 
-## Raw line 067 (block 17, line 66)
+## Raw line 066 (block 17, line 65)
 
-**EN source:** If an Intelligent Combatant Card references “Away” in its AI Steps, then
+**EN source:** If an Intelligent Combatant Card references “Away” in itsAISteps, then
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -823,12 +797,10 @@
 - `If an Intelligent Combatant Card references “` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 230.98, 607.72, 242.88`
 - `Away` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `607.72, 230.86, 631.18, 242.81`
 - `” in its` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `631.18, 230.98, 658.97, 242.88`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `658.97, 230.96, 661.75, 242.88`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `661.75, 231.89, 670.75, 242.61`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `670.75, 230.96, 673.53, 242.88`
 - `Steps, then` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `673.53, 230.98, 723.00, 242.88`
 
-## Raw line 068 (block 17, line 67)
+## Raw line 067 (block 17, line 66)
 
 **EN source:** the Combatant will only move into spaces that are farther from the
 
@@ -839,7 +811,7 @@
 **PDF span runs:**
 - `the Combatant will only move into spaces that are farther from the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 241.98, 704.19, 253.88`
 
-## Raw line 069 (block 17, line 68)
+## Raw line 068 (block 17, line 67)
 
 **EN source:** destination listed in its AI. This movement does not necessarily need to be
 
@@ -852,7 +824,7 @@
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `514.94, 253.89, 523.94, 264.61`
 - `. This movement does not necessarily need to be` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `523.94, 252.98, 734.82, 264.88`
 
-## Raw line 070 (block 17, line 69)
+## Raw line 069 (block 17, line 68)
 
 **EN source:** in a straight line.
 
@@ -863,7 +835,7 @@
 **PDF span runs:**
 - `in a straight line.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 263.98, 490.35, 275.88`
 
-## Raw line 071 (block 17, line 70)
+## Raw line 070 (block 17, line 69)
 
 **EN source:** If an Intelligent Combatant's AI Step says to move “Towards” or “Away”
 
@@ -877,9 +849,8 @@
 - `” or “` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `671.02, 276.23, 694.35, 288.13`
 - `Away` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `694.35, 276.11, 717.81, 288.06`
 - `”` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `717.81, 276.23, 722.25, 288.13`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `722.25, 276.21, 725.03, 288.13`
 
-## Raw line 072 (block 17, line 71)
+## Raw line 071 (block 17, line 70)
 
 **EN source:** and there is more than one option available, they will always choose the
 
@@ -890,7 +861,7 @@
 **PDF span runs:**
 - `and there is more than one option available, they will always choose the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 287.23, 729.93, 299.13`
 
-## Raw line 073 (block 17, line 72)
+## Raw line 072 (block 17, line 71)
 
 **EN source:** option that is the most beneficial position possible for themselves.
 
@@ -901,7 +872,7 @@
 **PDF span runs:**
 - `option that is the most beneficial position possible for themselves.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 298.23, 698.79, 310.13`
 
-## Raw line 074 (block 18, line 73)
+## Raw line 073 (block 18, line 72)
 
 **EN source:** When determining or counting if a space is farther or closer when
 
@@ -912,7 +883,7 @@
 **PDF span runs:**
 - `When determining or counting if a space is farther or closer when` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 313.48, 701.47, 325.38`
 
-## Raw line 075 (block 18, line 74)
+## Raw line 074 (block 18, line 73)
 
 **EN source:** referencing “Towards” or “Away”, always use the rules for counting
 
@@ -927,7 +898,7 @@
 - `Away` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `530.73, 324.36, 554.19, 336.31`
 - `”, always use the rules for counting` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `554.19, 324.48, 707.66, 336.38`
 
-## Raw line 076 (block 18, line 75)
+## Raw line 075 (block 18, line 74)
 
 **EN source:** movement.
 
@@ -938,7 +909,7 @@
 **PDF span runs:**
 - `movement.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 335.48, 464.09, 347.38`
 
-## Raw line 077 (block 18, line 76)
+## Raw line 076 (block 18, line 75)
 
 **EN source:** “Then”
 
@@ -949,9 +920,9 @@
 **PDF span runs:**
 - `“Then”` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `415.99, 350.20, 463.05, 366.38`
 
-## Raw line 078 (block 19, line 77)
+## Raw line 077 (block 19, line 76)
 
-**EN source:** Sometimes, AI Steps have instructions to perform individual Abilities or
+**EN source:** Sometimes,AISteps have instructions to perform individual Abilities or
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -959,12 +930,10 @@
 
 **PDF span runs:**
 - `Sometimes,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 371.72, 465.44, 383.62`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `465.44, 371.70, 468.22, 383.62`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `468.22, 372.62, 477.22, 383.35`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `477.22, 371.70, 480.00, 383.62`
 - `Steps have instructions to perform individual Abilities or` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `480.00, 371.72, 723.03, 383.62`
 
-## Raw line 079 (block 19, line 78)
+## Raw line 078 (block 19, line 77)
 
 **EN source:** Actions separated by the word “THEN”. When this occurs, the current
 
@@ -977,7 +946,7 @@
 - `THEN` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `553.40, 383.62, 576.91, 394.35`
 - `”. When this occurs, the current` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `576.91, 382.72, 716.59, 394.62`
 
-## Raw line 080 (block 19, line 79)
+## Raw line 079 (block 19, line 78)
 
 **EN source:** Ability or Action being performed ends and a new line of instruction
 
@@ -988,7 +957,7 @@
 **PDF span runs:**
 - `Ability or Action being performed ends and a new line of instruction` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 393.72, 712.43, 405.62`
 
-## Raw line 081 (block 19, line 80)
+## Raw line 080 (block 19, line 79)
 
 **EN source:** begins.
 
@@ -999,9 +968,9 @@
 **PDF span runs:**
 - `begins.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 404.72, 449.34, 416.62`
 
-## Raw line 082 (block 19, line 81)
+## Raw line 081 (block 19, line 80)
 
-**EN source:** It’s possible that an AI Step cannot do all of the listed “THEN” steps in its
+**EN source:** It’s possible that anAIStep cannot do all of the listed “THEN” steps in its
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1009,18 +978,16 @@
 
 **PDF span runs:**
 - `It’s possible that an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.99, 418.39, 497.34, 430.29`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `497.34, 418.37, 500.12, 430.29`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `500.12, 419.29, 509.12, 430.02`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `509.12, 418.37, 511.90, 430.29`
 - `Step cannot do` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `511.90, 418.39, 576.38, 430.29`
 - `all` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `576.38, 418.37, 592.50, 430.29`
 - `of the listed “` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `592.50, 418.39, 649.75, 430.29`
 - `THEN` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `649.75, 419.29, 673.26, 430.02`
 - `” steps in its` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `673.26, 418.39, 727.73, 430.29`
 
-## Raw line 083 (block 19, line 82)
+## Raw line 082 (block 19, line 81)
 
-**EN source:** instructions. In these cases, it will skip the current “THEN” in the AI Step.
+**EN source:** instructions. In these cases, it will skip the current “THEN” in theAIStep.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1031,12 +998,10 @@
 - `THEN` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `636.64, 430.29, 660.15, 441.02`
 - `”` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `660.15, 429.37, 665.15, 441.29`
 - `in the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `665.15, 429.39, 692.39, 441.29`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `692.39, 429.37, 695.17, 441.29`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `695.17, 430.29, 704.17, 441.02`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `704.17, 429.37, 706.95, 441.29`
 - `Step.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `706.95, 429.39, 730.85, 441.29`
 
-## Raw line 084 (block 20, line 83)
+## Raw line 083 (block 20, line 82)
 
 **EN source:** IMPORTANT:
 
@@ -1048,9 +1013,9 @@
 - `` — `Webdings` 10.00 pt; PDF flags `0`; bbox `421.66, 452.76, 431.66, 462.76`
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `431.66, 451.51, 494.26, 463.49`
 
-## Raw line 085 (block 20, line 84)
+## Raw line 084 (block 20, line 83)
 
-**EN source:** IMPORTANT: Players must always check if the AI Step has
+**EN source:** IMPORTANT:Players must always check if theAIStep has
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1058,14 +1023,11 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `431.66, 451.51, 494.26, 463.49`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `494.26, 451.55, 497.04, 463.47`
 - `Players must always check if the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `497.04, 451.57, 634.65, 463.47`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `634.65, 451.55, 637.43, 463.47`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `637.43, 452.47, 646.43, 463.19`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `646.43, 451.55, 649.21, 463.47`
 - `Step has` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `649.21, 451.57, 687.56, 463.47`
 
-## Raw line 086 (block 20, line 85)
+## Raw line 085 (block 20, line 84)
 
 **EN source:** “CONTINUE DOWN” listed, even if the “THEN” instructions above it
 
@@ -1082,7 +1044,7 @@
 - `”` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `617.70, 462.55, 622.70, 474.47`
 - `instructions above it` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `622.70, 462.57, 714.73, 474.47`
 
-## Raw line 087 (block 20, line 86)
+## Raw line 086 (block 20, line 85)
 
 **EN source:** couldn’t be fulfilled.
 
@@ -1093,86 +1055,9 @@
 **PDF span runs:**
 - `couldn’t be fulfilled.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.65, 473.57, 514.12, 485.47`
 
-## Raw line 088 (block 20, line 87)
+## Raw line 087 (block 21, line 86)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `421.65, 484.57, 424.43, 496.47`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.65, 484.57, 424.43, 496.47`
-
-## Raw line 089 (block 20, line 88)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `421.65, 495.57, 424.43, 507.47`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.65, 495.57, 424.43, 507.47`
-
-## Raw line 090 (block 20, line 89)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `421.65, 506.57, 424.43, 518.47`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.65, 506.57, 424.43, 518.47`
-
-## Raw line 091 (block 20, line 90)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `421.65, 517.57, 424.43, 529.47`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.65, 517.57, 424.43, 529.47`
-
-## Raw line 092 (block 20, line 91)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `421.65, 528.57, 424.43, 540.47`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.65, 528.57, 424.43, 540.47`
-
-## Raw line 093 (block 20, line 92)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `421.65, 539.57, 424.43, 551.47`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.65, 539.57, 424.43, 551.47`
-
-## Raw line 094 (block 20, line 93)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `421.65, 550.57, 424.43, 562.47`
-
-**PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `421.65, 550.57, 424.43, 562.47`
-
-## Raw line 095 (block 21, line 94)
-
-**EN source:** Example: The Animate has an AI Step with the following
+**EN source:** Example:The Animate has anAIStep with the following
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1180,14 +1065,11 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `430.16, 570.97, 475.70, 585.38`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `475.70, 572.55, 478.48, 584.47`
 - `The Animate has an` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `478.48, 572.57, 563.25, 584.47`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `563.25, 572.55, 566.03, 584.47`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `566.03, 573.47, 575.03, 584.19`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `575.03, 572.55, 577.81, 584.47`
 - `Step with the following` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `577.81, 572.57, 679.97, 584.47`
 
-## Raw line 096 (block 21, line 95)
+## Raw line 088 (block 21, line 87)
 
 **EN source:** condition: “Is there an opponent within SOI?”
 
@@ -1202,7 +1084,7 @@
 - `?` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `620.11, 583.55, 624.55, 595.47`
 - `”` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `624.55, 583.57, 631.78, 595.47`
 
-## Raw line 097 (block 21, line 96)
+## Raw line 089 (block 21, line 88)
 
 **EN source:** Assuming this is true, the Animate will cast a Spell that inflicts
 
@@ -1213,7 +1095,7 @@
 **PDF span runs:**
 - `Assuming this is true, the Animate will cast a Spell that inflicts` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.16, 597.40, 698.81, 609.30`
 
-## Raw line 098 (block 21, line 97)
+## Raw line 090 (block 21, line 89)
 
 **EN source:** Darkness.
 
@@ -1225,7 +1107,7 @@
 - `Darkness` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `430.16, 608.36, 469.61, 620.24`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `469.61, 608.40, 475.17, 620.30`
 
-## Raw line 099 (block 22, line 98)
+## Raw line 091 (block 22, line 90)
 
 **EN source:** THEN, it will make a Ranged Attack prioritizing an opponent with
 
@@ -1237,7 +1119,7 @@
 - `THEN` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `430.16, 623.14, 453.67, 633.86`
 - `, it will make a Ranged Attack prioritizing an opponent with` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `453.67, 622.23, 713.79, 634.13`
 
-## Raw line 100 (block 22, line 99)
+## Raw line 092 (block 22, line 91)
 
 **EN source:** Darkness. If no Adventurers were Inflicted with Darkness, the
 
@@ -1251,7 +1133,7 @@
 - `Darkness` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `634.51, 633.19, 673.96, 645.07`
 - `, the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `673.96, 633.23, 695.64, 645.13`
 
-## Raw line 101 (block 22, line 100)
+## Raw line 093 (block 22, line 92)
 
 **EN source:** Animate would attack any opponent within Range 4.
 
@@ -1264,7 +1146,7 @@
 - `4` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `648.67, 645.14, 653.68, 655.86`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `653.68, 644.23, 656.46, 656.13`
 
-## Raw line 102 (block 23, line 101)
+## Raw line 094 (block 23, line 93)
 
 **EN source:** THEN, it will move towards the nearest opponent (Attempting to get
 
@@ -1276,7 +1158,7 @@
 - `THEN` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `430.16, 658.97, 453.67, 669.70`
 - `, it will move towards the nearest opponent (Attempting to get` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `453.67, 658.07, 722.14, 669.97`
 
-## Raw line 103 (block 23, line 102)
+## Raw line 095 (block 23, line 94)
 
 **EN source:** as close as possible.).
 
@@ -1287,7 +1169,7 @@
 **PDF span runs:**
 - `as close as possible.).` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.16, 669.07, 524.65, 680.97`
 
-## Raw line 104 (block 23, line 103)
+## Raw line 096 (block 23, line 95)
 
 **EN source:** The next THEN instruction explains that the Animate will Attack
 
@@ -1300,7 +1182,7 @@
 - `THEN` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `469.73, 683.81, 493.24, 694.53`
 - `instruction explains that the Animate will Attack` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `493.24, 682.90, 704.64, 694.80`
 
-## Raw line 105 (block 23, line 104)
+## Raw line 097 (block 23, line 96)
 
 **EN source:** an adjacent opponent. If there is no adjacent opponent for the
 
@@ -1311,7 +1193,7 @@
 **PDF span runs:**
 - `an adjacent opponent. If there is no adjacent opponent for the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.16, 693.90, 699.75, 705.80`
 
-## Raw line 106 (block 23, line 105)
+## Raw line 098 (block 23, line 97)
 
 **EN source:** Animate to Attack, it will do nothing. Since the Animate doesn’t
 
@@ -1322,9 +1204,9 @@
 **PDF span runs:**
 - `Animate to Attack, it will do nothing. Since the Animate doesn’t` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.16, 704.90, 706.23, 716.80`
 
-## Raw line 107 (block 23, line 106)
+## Raw line 099 (block 23, line 98)
 
-**EN source:** “CONTINUE DOWN” at the end of this AI Step, its activation would
+**EN source:** “CONTINUE DOWN” at the end of thisAIStep, its activation would
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1334,12 +1216,10 @@
 - `“` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.16, 715.90, 434.60, 727.80`
 - `CONTINUE DOWN` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `434.60, 716.81, 514.45, 727.53`
 - `” at the end of this` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `514.45, 715.90, 593.38, 727.80`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `593.38, 715.88, 596.16, 727.80`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `596.16, 716.81, 605.16, 727.53`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `605.16, 715.88, 607.94, 727.80`
 - `Step, its activation would` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `607.94, 715.90, 718.57, 727.80`
 
-## Raw line 108 (block 23, line 107)
+## Raw line 100 (block 23, line 99)
 
 **EN source:** end.
 
@@ -1350,7 +1230,7 @@
 **PDF span runs:**
 - `end.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `430.16, 726.90, 451.84, 738.80`
 
-## Raw line 109 (block 24, line 108)
+## Raw line 101 (block 24, line 100)
 
 **EN source:** IMPORTANT:
 
@@ -1362,9 +1242,9 @@
 - `` — `Webdings` 10.00 pt; PDF flags `0`; bbox `427.33, 745.11, 437.33, 755.11`
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `437.33, 743.86, 499.93, 755.84`
 
-## Raw line 110 (block 24, line 109)
+## Raw line 102 (block 24, line 101)
 
-**EN source:** IMPORTANT: Intelligent Combatants will always consider only the
+**EN source:** IMPORTANT:Intelligent Combatants will always consider only the
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1372,10 +1252,9 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `437.33, 743.86, 499.93, 755.84`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `499.93, 743.90, 502.71, 755.82`
 - `Intelligent Combatants will always consider only the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `502.71, 743.92, 730.11, 755.82`
 
-## Raw line 111 (block 24, line 110)
+## Raw line 103 (block 24, line 102)
 
 **EN source:** possible targets for an Action unless they specifically state otherwise.
 
@@ -1387,7 +1266,7 @@
 - `possible` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `427.33, 754.90, 462.35, 766.82`
 - `targets for an Action unless they specifically state otherwise.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `462.35, 754.92, 725.42, 766.82`
 
-## Raw line 112 (block 24, line 111)
+## Raw line 104 (block 24, line 103)
 
 **EN source:** For example, if an Attack would target the figure with the most
 
@@ -1398,7 +1277,7 @@
 **PDF span runs:**
 - `For example, if an Attack would target the figure with the most` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `427.33, 765.92, 697.98, 777.82`
 
-## Raw line 113 (block 24, line 112)
+## Raw line 105 (block 24, line 104)
 
 **EN source:** Damage, it will target the figure with the most Damage in Range.
 
@@ -1411,7 +1290,7 @@
 - `in Range` — `OptimaLTStd-Italic` 10.00 pt; PDF flags `6`; bbox `666.29, 776.88, 703.71, 788.76`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `703.71, 776.92, 709.27, 788.82`
 
-## Raw line 114 (block 25, line 113)
+## Raw line 106 (block 25, line 105)
 
 **EN source:** Is there an opponent within SOI?
 
@@ -1422,7 +1301,7 @@
 **PDF span runs:**
 - `Is there an opponent within SOI?` — `OptimaLTStd-Black` 8.50 pt; PDF flags `20`; bbox `470.15, 508.26, 597.05, 518.44`
 
-## Raw line 115 (block 25, line 114)
+## Raw line 107 (block 25, line 106)
 
 **EN source:** Cast a SPELL 6, prioritizing the opponent with the lowest
 
@@ -1435,7 +1314,7 @@
 - `SPELL 6` — `OptimaLTStd-Bold` 7.00 pt; PDF flags `20`; bbox `493.55, 518.18, 517.52, 526.52`
 - `, prioritizing the opponent with the lowest` — `OptimaLTStd` 8.00 pt; PDF flags `4`; bbox `517.60, 517.27, 665.06, 526.79`
 
-## Raw line 116 (block 25, line 115)
+## Raw line 108 (block 25, line 107)
 
 **EN source:** Conviction Value without Darkness. Inﬂ ict Darkness.
 
@@ -1447,9 +1326,8 @@
 - `Conviction Value without` — `OptimaLTStd` 8.00 pt; PDF flags `4`; bbox `470.15, 525.77, 560.43, 535.29`
 - `Darkness` — `OptimaLTStd-Italic` 8.00 pt; PDF flags `6`; bbox `560.43, 525.74, 591.97, 535.24`
 - `. Inﬂ ict Darkness.` — `OptimaLTStd` 8.00 pt; PDF flags `4`; bbox `591.81, 525.77, 656.32, 535.29`
-- `` — `OptimaLTStd-Bold` 7.00 pt; PDF flags `20`; bbox `656.32, 526.68, 658.26, 535.02`
 
-## Raw line 117 (block 25, line 116)
+## Raw line 109 (block 25, line 108)
 
 **EN source:** THEN: Make a
 
@@ -1461,7 +1339,7 @@
 - `THEN:` — `OptimaLTStd-Bold` 7.00 pt; PDF flags `20`; bbox `470.15, 536.60, 492.56, 544.94`
 - `Make a` — `OptimaLTStd` 8.00 pt; PDF flags `4`; bbox `492.56, 535.69, 520.00, 545.21`
 
-## Raw line 118 (block 25, line 117)
+## Raw line 110 (block 25, line 109)
 
 **EN source:** 4 ATK, prioritizing an opponent with Darkness.
 
@@ -1470,13 +1348,11 @@
 **Line bbox:** `528.82, 535.69, 693.20, 545.21`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 8.00 pt; PDF flags `4`; bbox `528.82, 535.69, 531.05, 545.21`
 - `4 ATK` — `OptimaLTStd-Bold` 7.00 pt; PDF flags `20`; bbox `531.05, 536.59, 549.46, 544.94`
 - `, prioritizing an opponent with Darkness` — `OptimaLTStd` 8.00 pt; PDF flags `4`; bbox `549.65, 535.69, 688.94, 545.21`
 - `.` — `OptimaLTStd-Bold` 7.00 pt; PDF flags `20`; bbox `689.03, 536.59, 690.98, 544.94`
-- `` — `OptimaLTStd` 8.00 pt; PDF flags `4`; bbox `690.98, 535.69, 693.20, 545.21`
 
-## Raw line 119 (block 25, line 118)
+## Raw line 111 (block 25, line 110)
 
 **EN source:** THEN: Move towards the nearest opponent.
 
@@ -1488,7 +1364,7 @@
 - `THEN:` — `OptimaLTStd-Bold` 7.00 pt; PDF flags `20`; bbox `470.15, 546.51, 490.62, 554.86`
 - `Move towards the nearest opponent.` — `OptimaLTStd` 8.00 pt; PDF flags `4`; bbox `490.61, 545.61, 621.67, 555.13`
 
-## Raw line 120 (block 25, line 119)
+## Raw line 112 (block 25, line 111)
 
 **EN source:** THEN: Make a
 
@@ -1499,9 +1375,8 @@
 **PDF span runs:**
 - `THEN:` — `OptimaLTStd-Bold` 6.96 pt; PDF flags `20`; bbox `470.15, 556.43, 491.64, 564.77`
 - `Make a` — `OptimaLTStd` 7.96 pt; PDF flags `4`; bbox `491.51, 555.52, 515.68, 565.04`
-- `` — `OptimaLTStd-Bold` 6.96 pt; PDF flags `20`; bbox `515.52, 556.43, 517.45, 564.77`
 
-## Raw line 121 (block 25, line 120)
+## Raw line 113 (block 25, line 112)
 
 **EN source:** ATK against the opponent with the most Damage.
 
@@ -1513,7 +1388,7 @@
 - `ATK` — `OptimaLTStd-Bold` 6.96 pt; PDF flags `20`; bbox `525.97, 556.43, 539.93, 564.77`
 - `against the opponent with the most Damage.` — `OptimaLTStd` 7.96 pt; PDF flags `4`; bbox `539.79, 555.52, 688.45, 565.04`
 
-## Raw line 122 (block 26, line 121)
+## Raw line 114 (block 26, line 113)
 
 **EN source:** Intelligent Combatants Continued
 
@@ -1525,7 +1400,7 @@
 - `Intelligent Combatants` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `86.17, 57.04, 330.63, 81.31`
 - `Continued` — `Cinzel-Regular` 11.00 pt; PDF flags `4`; bbox `330.63, 63.88, 397.49, 78.70`
 
-## Raw line 123 (block 27, line 122)
+## Raw line 115 (block 27, line 114)
 
 **EN source:** 62
 
@@ -1536,7 +1411,7 @@
 **PDF span runs:**
 - `62` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 124 (block 27, line 123)
+## Raw line 116 (block 27, line 115)
 
 **EN source:** 62
 

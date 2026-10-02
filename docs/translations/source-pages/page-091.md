@@ -143,7 +143,6 @@
 
 **PDF span runs:**
 - `BOSS:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `74.98, 578.10, 102.20, 590.02`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `102.20, 578.12, 107.76, 590.02`
 
 ## Raw line 012 (block 3, line 11)
 
@@ -308,11 +307,10 @@
 
 **PDF span runs:**
 - `FRAGILE:` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `74.98, 743.44, 114.75, 755.36`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `114.75, 743.46, 119.91, 755.36`
 
 ## Raw line 026 (block 5, line 25)
 
-**EN source:** When calculating the total *
+**EN source:** When calculating the total*
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -320,9 +318,7 @@
 
 **PDF span runs:**
 - `When calculating the total` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `74.98, 754.46, 183.92, 766.36`
-- `` — `OptimaLTStd` 28.00 pt; PDF flags `4`; bbox `183.72, 747.92, 191.50, 781.24`
 - `*` — `OptimaLTStd-Bold` 28.00 pt; PDF flags `20`; bbox `185.34, 747.86, 197.77, 781.24`
-- `` — `OptimaLTStd` 28.00 pt; PDF flags `4`; bbox `197.77, 747.92, 205.56, 781.24`
 
 ## Raw line 027 (block 6, line 26)
 

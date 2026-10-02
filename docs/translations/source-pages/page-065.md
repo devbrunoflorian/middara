@@ -35,7 +35,6 @@
 - `doesn’t` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `141.39, 598.88, 172.89, 610.80`
 - `add the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `172.89, 598.90, 210.69, 610.80`
 - `BLACK` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `210.69, 599.94, 237.40, 610.49`
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `237.40, 598.22, 240.39, 611.00`
 
 ## Raw line 003 (block 0, line 2)
 
@@ -91,7 +90,6 @@
 **Line bbox:** `129.64, 709.24, 202.93, 722.02`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.74 pt; PDF flags `4`; bbox `129.64, 709.24, 132.63, 722.02`
 - `7` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `132.29, 710.82, 137.29, 721.55`
 - `, and a` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `137.29, 709.92, 169.51, 721.82`
 - `PURPLE` — `OptimaLTStd-Bold` 8.85 pt; PDF flags `20`; bbox `169.50, 710.96, 202.93, 721.51`
@@ -105,17 +103,15 @@
 **Line bbox:** `215.67, 709.92, 353.97, 721.82`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `215.67, 709.92, 218.45, 721.82`
 - `3` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `218.44, 710.82, 223.44, 721.55`
 - `for a total of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `223.44, 709.92, 281.21, 721.82`
 - `10` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `281.19, 710.82, 291.20, 721.55`
 - `. It also rolls` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `291.20, 709.92, 346.20, 721.82`
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `346.18, 710.82, 351.19, 721.55`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `351.19, 709.92, 353.97, 721.82`
 
 ## Raw line 009 (block 2, line 8)
 
-**EN source:** , 2
+**EN source:** ,2
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -123,9 +119,7 @@
 
 **PDF span runs:**
 - `,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `363.23, 710.92, 366.01, 722.82`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `366.01, 710.92, 368.79, 722.82`
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `21`; bbox `368.77, 710.82, 373.78, 721.55`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `373.78, 709.92, 376.56, 721.82`
 
 ## Raw line 010 (block 2, line 9)
 
@@ -148,7 +142,6 @@
 
 **PDF span runs:**
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `86.74, 723.82, 91.74, 734.55`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `91.74, 722.92, 94.52, 734.82`
 
 ## Raw line 012 (block 2, line 11)
 
@@ -161,7 +154,6 @@
 **PDF span runs:**
 - `. The Attack beats` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.42, 722.92, 182.16, 734.82`
 - `Rook's` — `OptimaLTStd-BoldItalic` 10.00 pt; PDF flags `22`; bbox `182.16, 722.80, 210.96, 734.75`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `210.96, 722.92, 213.74, 734.82`
 
 ## Raw line 013 (block 2, line 12)
 
@@ -172,7 +164,6 @@
 **Line bbox:** `224.39, 722.92, 390.05, 735.82`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `224.39, 723.92, 227.17, 735.82`
 - `Defense Value by` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `227.17, 722.92, 304.44, 734.82`
 - `3` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `21`; bbox `304.44, 723.82, 309.45, 734.55`
 - `, resulting in a hit.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `309.45, 722.92, 390.05, 734.82`
@@ -198,7 +189,6 @@
 
 **PDF span runs:**
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `86.74, 753.49, 91.74, 764.22`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `91.74, 752.59, 94.52, 764.49`
 
 ## Raw line 016 (block 3, line 15)
 
@@ -211,11 +201,10 @@
 **PDF span runs:**
 - `and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `103.88, 752.59, 125.56, 765.49`
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `21`; bbox `125.56, 753.49, 130.56, 764.22`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `130.56, 752.59, 133.34, 764.49`
 
 ## Raw line 017 (block 3, line 16)
 
-**EN source:** to add +2 PHYSICAL DMG. Then, the Animate spends its
+**EN source:** to add +2PHYSICAL DMG. Then, the Animate spends its
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -224,7 +213,6 @@
 **PDF span runs:**
 - `to add` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `142.61, 752.59, 178.19, 764.49`
 - `+2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `178.19, 753.49, 188.65, 764.22`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `188.65, 753.51, 191.15, 764.22`
 - `PHYSICAL DMG` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `191.15, 753.49, 256.95, 764.22`
 - `.` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `256.95, 752.57, 262.51, 764.49`
 - `Then, the Animate spends its` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `262.51, 752.59, 388.42, 764.49`
@@ -239,26 +227,23 @@
 
 **PDF span runs:**
 - `1` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `86.74, 766.49, 91.74, 777.22`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `91.74, 765.59, 94.52, 777.49`
 
 ## Raw line 019 (block 3, line 18)
 
-**EN source:** to add +2 PHYSICAL DMG. This brings the total added Damage via
+**EN source:** to add +2 PHYSICAL DMG.This brings the total added Damage via
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
 **Line bbox:** `104.42, 765.57, 391.99, 779.49`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.42, 767.59, 107.20, 779.49`
 - `to add` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `107.20, 765.59, 137.22, 777.49`
 - `+2 PHYSICAL DMG.` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `21`; bbox `137.22, 766.49, 218.48, 777.22`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `21`; bbox `218.48, 765.57, 221.26, 777.49`
 - `This brings the total added Damage via` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `221.26, 765.59, 391.99, 777.49`
 
 ## Raw line 020 (block 3, line 19)
 
-**EN source:** symbols to +4 PHYSICAL DMG. ( G ). Including the difference rolled to hit,
+**EN source:** symbols to +4 PHYSICAL DMG.(G). Including the difference rolled to hit,
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -268,16 +253,13 @@
 - `symbols to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `86.74, 776.59, 135.65, 788.49`
 - `+4 PHYSICAL DMG` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `135.65, 777.49, 214.41, 788.22`
 - `.` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `214.41, 777.51, 216.91, 788.22`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `216.91, 776.59, 219.69, 788.49`
 - `(` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `219.69, 776.57, 223.02, 788.49`
-- `` — `OptimaLTStd-Bold` 8.00 pt; PDF flags `20`; bbox `223.02, 777.34, 224.76, 787.95`
 - `G` — `OptimaLTStd-Bold` 8.00 pt; PDF flags `21`; bbox `224.76, 777.34, 230.99, 786.88`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `5`; bbox `230.99, 775.52, 233.02, 788.49`
 - `). Including the difference rolled to hit,` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `233.02, 776.59, 402.00, 788.49`
 
 ## Raw line 021 (block 4, line 20)
 
-**EN source:** the total PHYSICAL DMG determined is 7. (A difference rolled of 3, and +4
+**EN source:** the total PHYSICAL DMGdetermined is 7. (A difference rolled of 3, and +4
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -286,7 +268,6 @@
 **PDF span runs:**
 - `the total` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `416.13, 585.91, 453.93, 597.81`
 - `PHYSICAL DMG` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `453.93, 586.80, 519.73, 597.53`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `519.72, 585.88, 522.50, 597.80`
 - `determined is` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `522.50, 585.90, 583.63, 597.80`
 - `7` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `583.63, 586.80, 588.64, 597.53`
 - `. (A difference rolled of` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `588.64, 585.90, 690.91, 597.80`
@@ -294,7 +275,6 @@
 - `, and` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `695.91, 585.90, 717.59, 597.80`
 - `+` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `717.59, 585.88, 726.43, 597.80`
 - `4` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `726.43, 586.80, 731.44, 597.53`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `731.44, 585.90, 734.22, 597.80`
 
 ## Raw line 022 (block 4, line 21)
 
@@ -402,7 +382,7 @@
 
 ## Raw line 030 (block 7, line 29)
 
-**EN source:** Animate continues its AI Step. The next “THEN” says to move 2 spaces
+**EN source:** Animate continues itsAIStep. The next “THEN” says to move 2 spaces
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -410,9 +390,7 @@
 
 **PDF span runs:**
 - `Animate continues its` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `416.12, 690.91, 508.94, 702.81`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `508.94, 690.89, 511.72, 702.81`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `511.73, 691.81, 520.73, 702.54`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `520.73, 690.89, 523.51, 702.81`
 - `Step. The next “` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `523.51, 690.91, 590.68, 702.81`
 - `THEN` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `590.68, 691.81, 614.18, 702.54`
 - `”` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `614.18, 690.89, 619.18, 702.81`
@@ -435,7 +413,7 @@
 
 ## Raw line 032 (block 8, line 31)
 
-**EN source:** J . Normally, moving out of a space adjacent to an opponent would
+**EN source:** J. Normally, moving out of a space adjacent to an opponent would
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -443,12 +421,11 @@
 
 **PDF span runs:**
 - `J` — `OptimaLTStd-Bold` 8.00 pt; PDF flags `20`; bbox `419.65, 714.67, 422.31, 724.20`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `422.31, 712.84, 426.12, 724.81`
 - `. Normally, moving out of a space adjacent to an opponent would` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `426.12, 712.91, 712.32, 724.81`
 
 ## Raw line 033 (block 8, line 32)
 
-**EN source:** provoke a Break Attack, but the AI Step instructions specifically state that
+**EN source:** provoke a Break Attack, but theAIStep instructions specifically state that
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -456,9 +433,7 @@
 
 **PDF span runs:**
 - `provoke a Break Attack, but the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `416.12, 723.91, 550.87, 735.81`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `550.87, 723.89, 553.65, 735.81`
 - `AI` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `553.66, 724.81, 562.66, 735.54`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `562.66, 723.89, 565.44, 735.81`
 - `Step instructions specifically state that` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `565.44, 723.91, 731.07, 735.81`
 
 ## Raw line 034 (block 8, line 33)

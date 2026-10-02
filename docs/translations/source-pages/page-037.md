@@ -43,7 +43,6 @@
 
 **PDF span runs:**
 - `2. Status Phase:` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `85.88, 121.66, 184.52, 137.84`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `184.52, 124.19, 190.08, 136.09`
 
 ## Raw line 004 (block 1, line 3)
 
@@ -168,7 +167,7 @@
 
 ## Raw line 014 (block 4, line 13)
 
-**EN source:** IMPORTANT: Adventurers do not Gain SP during the Refresh
+**EN source:** IMPORTANT:Adventurers do not Gain SP during the Refresh
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -176,7 +175,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `110.06, 252.37, 172.66, 264.35`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `172.65, 252.41, 175.43, 264.33`
 - `Adventurers do` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `175.43, 252.43, 243.43, 264.33`
 - `not` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `243.43, 252.41, 257.88, 264.33`
 - `Gain` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `257.88, 252.43, 284.56, 264.33`
@@ -333,11 +331,10 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `97.50, 716.85, 143.04, 731.26`
-- `` — `AGaramondPro-Regular` 10.00 pt; PDF flags `4`; bbox `143.04, 718.46, 148.04, 731.17`
 
 ## Raw line 028 (block 8, line 27)
 
-**EN source:** At the start of her Refresh Phase, Nightingale will Gain 3 SP up to
+**EN source:** At the start of her Refresh Phase, Nightingale will Gain 3SP up to
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -346,7 +343,6 @@
 **PDF span runs:**
 - `At the start of her Refresh Phase, Nightingale will Gain` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `97.50, 729.44, 323.62, 741.34`
 - `3` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `323.42, 730.35, 328.43, 741.07`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `328.25, 730.36, 330.75, 741.07`
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `330.57, 730.35, 342.22, 741.07`
 - `up to` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `342.04, 729.44, 366.26, 741.34`
 
@@ -367,7 +363,7 @@
 
 ## Raw line 030 (block 8, line 29)
 
-**EN source:** Recovery Bar depicts. If she would Gain SP over her maximum, she
+**EN source:** Recovery Bar depicts. If she would Gain SPover her maximum, she
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -376,7 +372,6 @@
 **PDF span runs:**
 - `Recovery Bar depicts. If she would Gain` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `97.50, 751.44, 264.96, 763.34`
 - `SP` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `264.76, 752.35, 274.09, 763.07`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `273.91, 751.42, 276.69, 763.34`
 - `over her maximum, she` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `276.49, 751.44, 376.71, 763.34`
 
 ## Raw line 031 (block 8, line 30)
@@ -468,7 +463,6 @@
 **PDF span runs:**
 - `Conviction Upgrade:` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `500.33, 451.89, 526.82, 455.29`
 - `WHITE` — `OptimaLTStd-Bold` 2.65 pt; PDF flags `20`; bbox `526.82, 452.07, 535.21, 455.23`
-- `` — `OptimaLTStd` 3.46 pt; PDF flags `4`; bbox `535.21, 451.33, 536.17, 455.45`
 
 ## Raw line 039 (block 15, line 38)
 
@@ -495,7 +489,7 @@
 
 ## Raw line 041 (block 15, line 40)
 
-**EN source:** half the PHYSICAL DMG dealt to you.
+**EN source:** half the PHYSICAL DMGdealt to you.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -504,7 +498,6 @@
 **PDF span runs:**
 - `half the` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `497.56, 465.14, 507.55, 468.54`
 - `PHYSICAL DMG` — `OptimaLTStd-Bold` 2.65 pt; PDF flags `20`; bbox `507.55, 465.32, 526.99, 468.48`
-- `` — `OptimaLTStd-Bold` 2.45 pt; PDF flags `20`; bbox `526.99, 465.51, 527.67, 468.42`
 - `dealt to you.` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `527.67, 465.14, 543.05, 468.53`
 
 ## Raw line 042 (block 16, line 41)
@@ -541,7 +534,6 @@
 **PDF span runs:**
 - `Conviction Upgrade:` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `615.84, 459.27, 642.33, 462.67`
 - `WHITE` — `OptimaLTStd-Bold` 2.65 pt; PDF flags `20`; bbox `642.33, 459.46, 650.72, 462.61`
-- `` — `OptimaLTStd` 3.46 pt; PDF flags `4`; bbox `650.72, 458.71, 651.68, 462.84`
 
 ## Raw line 045 (block 19, line 44)
 
@@ -610,7 +602,6 @@
 - `At any time, Gain` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `506.26, 244.02, 528.78, 247.42`
 - `+` — `OptimaLTStd-Bold` 2.45 pt; PDF flags `20`; bbox `528.78, 244.19, 530.26, 247.10`
 - `1 SP.` — `OptimaLTStd-Bold` 2.65 pt; PDF flags `20`; bbox `530.14, 244.20, 535.88, 247.36`
-- `` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `535.88, 244.02, 536.68, 247.42`
 
 ## Raw line 051 (block 22, line 50)
 
@@ -623,7 +614,6 @@
 **PDF span runs:**
 - `When you use this Ability, roll the` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `492.76, 247.28, 535.59, 250.68`
 - `BLACK` — `OptimaLTStd-Bold` 2.65 pt; PDF flags `20`; bbox `535.59, 247.47, 543.68, 250.62`
-- `` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `543.68, 247.28, 544.48, 250.68`
 
 ## Raw line 052 (block 22, line 51)
 
@@ -649,7 +639,7 @@
 
 ## Raw line 054 (block 22, line 53)
 
-**EN source:** is rolled, ➤FLIP this card.
+**EN source:** is rolled, ➤FLIPthis card.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -659,7 +649,6 @@
 - `is rolled,` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `508.14, 250.54, 519.32, 253.94`
 - `➤` — `ZapfDingbatsStd` 2.67 pt; PDF flags `4`; bbox `519.32, 250.90, 521.77, 253.56`
 - `FLIP` — `OptimaLTStd-Bold` 2.65 pt; PDF flags `20`; bbox `522.04, 250.73, 527.04, 253.88`
-- `` — `OptimaLTStd` 2.45 pt; PDF flags `4`; bbox `527.04, 250.92, 527.72, 253.83`
 - `this card.` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `527.72, 250.54, 538.98, 253.94`
 
 ## Raw line 055 (block 23, line 54)
@@ -729,7 +718,6 @@
 - `At any time, Gain` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `584.79, 215.33, 588.18, 237.85`
 - `+` — `OptimaLTStd-Bold` 2.45 pt; PDF flags `20`; bbox `585.10, 237.85, 588.02, 239.34`
 - `1 SP.` — `OptimaLTStd-Bold` 2.65 pt; PDF flags `20`; bbox `584.84, 239.21, 588.00, 244.96`
-- `` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `584.79, 244.96, 588.18, 245.75`
 
 ## Raw line 061 (block 26, line 60)
 
@@ -742,7 +730,6 @@
 **PDF span runs:**
 - `When you use this Ability, roll the` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `581.52, 201.84, 584.92, 244.66`
 - `BLACK` — `OptimaLTStd-Bold` 2.65 pt; PDF flags `20`; bbox `581.58, 244.66, 584.74, 252.76`
-- `` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `581.52, 252.76, 584.92, 253.55`
 
 ## Raw line 062 (block 26, line 61)
 
@@ -768,7 +755,7 @@
 
 ## Raw line 064 (block 26, line 63)
 
-**EN source:** is rolled, ➤FLIP this card.
+**EN source:** is rolled, ➤FLIPthis card.
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -778,7 +765,6 @@
 - `is rolled,` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `578.26, 217.21, 581.66, 228.40`
 - `➤` — `ZapfDingbatsStd` 2.67 pt; PDF flags `4`; bbox `578.64, 228.40, 581.31, 230.84`
 - `FLIP` — `OptimaLTStd-Bold` 2.65 pt; PDF flags `20`; bbox `578.32, 231.11, 581.48, 236.11`
-- `` — `OptimaLTStd` 2.45 pt; PDF flags `4`; bbox `578.37, 236.11, 581.28, 236.79`
 - `this card.` — `OptimaLTStd` 2.85 pt; PDF flags `4`; bbox `578.26, 236.79, 581.66, 248.05`
 
 ## Raw line 065 (block 27, line 64)
@@ -919,7 +905,7 @@
 
 ## Raw line 077 (block 30, line 76)
 
-**EN source:** IMPORTANT: Flipped cards do not Un-Flip until the players
+**EN source:** IMPORTANT:Flipped cards do not Un-Flip until the players
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -927,7 +913,6 @@
 
 **PDF span runs:**
 - `IMPORTANT:` — `OptimaLTStd-Black` 10.00 pt; PDF flags `20`; bbox `450.94, 629.65, 513.54, 641.63`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `513.54, 629.71, 516.32, 641.61`
 - `Flipped cards do not Un-Flip until the players` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `516.32, 629.71, 714.27, 641.61`
 
 ## Raw line 078 (block 30, line 77)

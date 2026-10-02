@@ -491,7 +491,7 @@
 
 ## Raw line 043 (block 3, line 42)
 
-**EN source:** EXHAUST Condition Tag. When a Command
+**EN source:** EXHAUSTCondition Tag. When a Command
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -499,7 +499,6 @@
 
 **PDF span runs:**
 - `EXHAUST` — `OptimaLTStd-DemiBold` 9.00 pt; PDF flags `20`; bbox `210.46, 490.37, 251.76, 501.01`
-- `` — `OptimaLTStd-DemiBold` 8.00 pt; PDF flags `20`; bbox `252.21, 491.78, 254.29, 501.25`
 - `Condition Tag. When a Command` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `254.69, 489.45, 398.16, 501.35`
 
 ## Raw line 044 (block 3, line 43)
@@ -626,7 +625,7 @@
 
 ## Raw line 055 (block 3, line 54)
 
-**EN source:** Command Combatants will always have a printed Standard
+**EN source:** Command Combatantswill always have a printed Standard
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -634,7 +633,6 @@
 
 **PDF span runs:**
 - `Command Combatants` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.17, 594.95, 201.29, 606.85`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `201.09, 595.85, 203.59, 606.58`
 - `will` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `203.59, 594.95, 222.49, 606.85`
 - `always` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `222.49, 594.93, 251.28, 606.85`
 - `have a printed Standard` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `251.28, 594.95, 358.68, 606.85`
@@ -648,9 +646,7 @@
 **Line bbox:** `367.50, 594.95, 389.07, 606.85`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `367.50, 594.95, 370.28, 606.85`
 - `ATK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `370.28, 595.85, 386.29, 606.58`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `386.29, 594.95, 389.07, 606.85`
 
 ## Raw line 057 (block 3, line 56)
 
@@ -665,18 +661,16 @@
 
 ## Raw line 058 (block 3, line 57)
 
-**EN source:** ATK that costs 2 SP. This is printed on the card using the Tag
+**EN source:** ATK that costs 2 SP.This is printed on the card using the Tag
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
 **Line bbox:** `124.66, 605.93, 383.06, 617.85`
 
 **PDF span runs:**
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `124.66, 605.95, 127.44, 617.85`
 - `ATK` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `127.44, 606.85, 143.45, 617.58`
 - `that costs` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `143.45, 605.95, 189.03, 617.85`
 - `2 SP.` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `189.03, 606.85, 207.38, 617.58`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `207.38, 605.93, 210.16, 617.85`
 - `This is printed on the card using the Tag` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `210.16, 605.95, 383.06, 617.85`
 
 ## Raw line 059 (block 3, line 58)
@@ -688,22 +682,19 @@
 **Line bbox:** `117.48, 618.95, 158.67, 630.85`
 
 **PDF span runs:**
-- `` — `ZapfDingbatsStd` 9.00 pt; PDF flags `4`; bbox `117.48, 619.63, 119.99, 628.63`
 - `ATK` — `OptimaLTStd-DemiBold` 9.00 pt; PDF flags `20`; bbox `119.99, 619.03, 136.92, 629.67`
 - `or` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `144.22, 618.95, 158.67, 630.85`
 
 ## Raw line 060 (block 3, line 59)
 
-**EN source:** ATK . This is the Attack Type and Range that should
+**EN source:** ATK. This is the Attack Type and Range that should
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
 **Line bbox:** `172.17, 618.11, 400.04, 630.85`
 
 **PDF span runs:**
-- `` — `ZapfDingbatsStd` 9.00 pt; PDF flags `4`; bbox `172.17, 619.63, 174.68, 628.63`
 - `ATK` — `OptimaLTStd-DemiBold` 9.00 pt; PDF flags `20`; bbox `174.68, 619.03, 191.61, 629.67`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `191.61, 618.11, 198.71, 630.85`
 - `. This is the Attack Type and Range that should` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `198.71, 618.95, 400.04, 630.85`
 
 ## Raw line 061 (block 3, line 60)
@@ -787,7 +778,7 @@
 
 ## Raw line 068 (block 3, line 67)
 
-**EN source:** Combatant on the board at any given time using an Ability. Command
+**EN source:** Combatant on the board at any given time using an Ability.Command
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -795,7 +786,6 @@
 
 **PDF span runs:**
 - `Combatant on the board at any given time using an Ability.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.18, 699.20, 345.57, 711.10`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `345.36, 700.10, 347.87, 710.83`
 - `Command` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `347.87, 699.20, 394.46, 711.10`
 
 ## Raw line 069 (block 3, line 68)
@@ -819,7 +809,6 @@
 
 **PDF span runs:**
 - `Adventure Mechanics are not limited to or contribute to this limitation.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.18, 721.20, 396.80, 733.10`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `396.39, 722.10, 398.89, 732.83`
 
 ## Raw line 071 (block 4, line 70)
 
@@ -834,7 +823,7 @@
 
 ## Raw line 072 (block 4, line 71)
 
-**EN source:** Command Combatants might have scaling Icons. Unless the
+**EN source:** Command Combatantsmight have scaling Icons. Unless the
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -842,7 +831,6 @@
 
 **PDF span runs:**
 - `Command Combatants` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `104.17, 736.45, 201.29, 748.35`
-- `` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `201.09, 737.36, 203.59, 748.08`
 - `might have scaling Icons. Unless the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `203.59, 736.45, 362.68, 748.35`
 
 ## Raw line 073 (block 4, line 72)
@@ -1197,17 +1185,6 @@
 
 ## Raw line 104 (block 13, line 103)
 
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `734.32, 381.41, 737.32, 397.59`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `734.32, 381.41, 737.32, 397.59`
-
-## Raw line 105 (block 13, line 104)
-
 **EN source:** At the start of each Encounter, players deal out each Intelligent Combatant
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
@@ -1217,7 +1194,7 @@
 **PDF span runs:**
 - `At the start of each Encounter, players deal out each Intelligent Combatant` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 394.93, 721.82, 406.83`
 
-## Raw line 106 (block 13, line 105)
+## Raw line 105 (block 13, line 104)
 
 **EN source:** Card that they will be using as evenly as possible among the players.
 
@@ -1228,7 +1205,7 @@
 **PDF span runs:**
 - `Card that they will be using as evenly as possible among the players.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 405.93, 696.76, 417.83`
 
-## Raw line 107 (block 14, line 106)
+## Raw line 106 (block 14, line 105)
 
 **EN source:** Intelligent Combatants with more than 3 copies of the same figure will have
 
@@ -1241,7 +1218,7 @@
 - `3` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `576.09, 423.50, 581.10, 434.23`
 - `copies of the same figure will have` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `580.92, 422.60, 728.76, 434.50`
 
-## Raw line 108 (block 14, line 107)
+## Raw line 107 (block 14, line 106)
 
 **EN source:** 2 or more copies of their Combatant Card. These cards will have a different
 
@@ -1253,7 +1230,7 @@
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `415.84, 434.50, 420.85, 445.23`
 - `or more copies of their Combatant Card. These cards will have a different` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `420.67, 433.60, 725.69, 445.50`
 
-## Raw line 109 (block 14, line 108)
+## Raw line 108 (block 14, line 107)
 
 **EN source:** set of Activation Numbers on each Combatant Card. In addition, these
 
@@ -1264,7 +1241,7 @@
 **PDF span runs:**
 - `set of Activation Numbers on each Combatant Card. In addition, these` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 444.60, 707.42, 456.50`
 
-## Raw line 110 (block 14, line 109)
+## Raw line 109 (block 14, line 108)
 
 **EN source:** Combatant Cards will have 2 or more different Initiative Cards with matching
 
@@ -1277,7 +1254,7 @@
 - `2` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `529.71, 456.50, 534.72, 467.23`
 - `or more different Initiative Cards with matching` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `534.54, 455.60, 734.98, 467.50`
 
-## Raw line 111 (block 14, line 110)
+## Raw line 110 (block 14, line 109)
 
 **EN source:** Activation Numbers.
 
@@ -1288,9 +1265,9 @@
 **PDF span runs:**
 - `Activation Numbers.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.85, 466.60, 503.53, 478.50`
 
-## Raw line 112 (block 14, line 111)
+## Raw line 111 (block 14, line 110)
 
-**EN source:** Example: 6 Cave Sickles start on the board during an Encounter. One player
+**EN source:** Example:6 Cave Sickles start on the board during an Encounter. One player
 
 **PT-BR draft:** _(pending semantic review and EN fidelity gate)_
 
@@ -1298,11 +1275,10 @@
 
 **PDF span runs:**
 - `Example:` — `AGaramondPro-Bold` 12.00 pt; PDF flags `20`; bbox `415.84, 481.67, 461.38, 496.09`
-- `` — `OptimaLTStd-Bold` 10.00 pt; PDF flags `20`; bbox `461.38, 483.25, 464.16, 495.17`
 - `6` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `463.96, 484.17, 468.97, 494.90`
 - `Cave Sickles start on the board during an Encounter. One player` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `468.79, 483.27, 736.14, 495.17`
 
-## Raw line 113 (block 14, line 112)
+## Raw line 112 (block 14, line 111)
 
 **EN source:** would manage the Combatant Card for Cave Sickles 1, 2, and 3, and another
 
@@ -1319,7 +1295,7 @@
 - `3` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `670.69, 495.17, 675.69, 505.90`
 - `, and another` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `675.51, 494.27, 733.14, 506.17`
 
-## Raw line 114 (block 14, line 113)
+## Raw line 113 (block 14, line 112)
 
 **EN source:** player would manage the card for Cave Sickles 4, 5, and 6. Since each Cave
 
@@ -1336,7 +1312,7 @@
 - `6` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `648.57, 506.17, 653.57, 516.90`
 - `. Since each Cave` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `653.39, 505.27, 729.07, 517.17`
 
-## Raw line 115 (block 14, line 114)
+## Raw line 114 (block 14, line 113)
 
 **EN source:** Sickle Group has a different Initiative Card, Cave Sickle 1, 2, and 3 will
 
@@ -1353,7 +1329,7 @@
 - `3` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `682.43, 517.17, 687.43, 527.90`
 - `will` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `687.25, 516.27, 708.13, 528.17`
 
-## Raw line 116 (block 14, line 115)
+## Raw line 115 (block 14, line 114)
 
 **EN source:** activate at a different time than Cave Sickle 4, 5, and 6.
 
@@ -1370,7 +1346,7 @@
 - `6` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `632.64, 528.17, 637.64, 538.90`
 - `.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `637.46, 527.27, 640.24, 539.17`
 
-## Raw line 117 (block 15, line 116)
+## Raw line 116 (block 15, line 115)
 
 **EN source:** Intelligent Combatant Turns
 
@@ -1381,18 +1357,7 @@
 **PDF span runs:**
 - `Intelligent Combatant Turns` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `415.84, 550.49, 618.52, 566.66`
 
-## Raw line 118 (block 16, line 117)
-
-**EN source:** 
-
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
-
-**Line bbox:** `734.03, 560.49, 737.03, 576.66`
-
-**PDF span runs:**
-- `` — `Cinzel-Regular` 12.00 pt; PDF flags `4`; bbox `734.03, 560.49, 737.03, 576.66`
-
-## Raw line 119 (block 16, line 118)
+## Raw line 117 (block 16, line 116)
 
 **EN source:** When an Intelligent Combatant's Initiative Card signals the start of their
 
@@ -1403,7 +1368,7 @@
 **PDF span runs:**
 - `When an Intelligent Combatant's Initiative Card signals the start of their` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 574.01, 725.12, 585.91`
 
-## Raw line 120 (block 16, line 119)
+## Raw line 118 (block 16, line 117)
 
 **EN source:** turn, go through the following steps for each Combatant represented by
 
@@ -1414,7 +1379,7 @@
 **PDF span runs:**
 - `turn, go through the following steps for each Combatant represented by` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 585.01, 724.94, 596.91`
 
-## Raw line 121 (block 16, line 120)
+## Raw line 119 (block 16, line 118)
 
 **EN source:** the Initiative Card, finishing the steps for the 1st figure before moving on
 
@@ -1427,7 +1392,7 @@
 - `1st` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `607.86, 596.91, 619.36, 607.64`
 - `figure before moving on` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `619.36, 596.01, 728.17, 607.91`
 
-## Raw line 122 (block 16, line 121)
+## Raw line 120 (block 16, line 119)
 
 **EN source:** to the next one.
 
@@ -1438,7 +1403,7 @@
 **PDF span runs:**
 - `to the next one.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `415.84, 607.01, 483.10, 618.91`
 
-## Raw line 123 (block 17, line 122)
+## Raw line 121 (block 17, line 120)
 
 **EN source:** 1.
 
@@ -1449,7 +1414,7 @@
 **PDF span runs:**
 - `1.` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `415.84, 624.58, 425.85, 635.31`
 
-## Raw line 124 (block 17, line 123)
+## Raw line 122 (block 17, line 121)
 
 **EN source:** START OF TURN PHASE:
 
@@ -1459,9 +1424,8 @@
 
 **PDF span runs:**
 - `START OF TURN PHASE:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `433.84, 624.58, 531.89, 635.31`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `531.89, 623.68, 537.45, 635.58`
 
-## Raw line 125 (block 17, line 124)
+## Raw line 123 (block 17, line 122)
 
 **EN source:** Resolve Abilities and Effects that occur at the start of a turn.
 
@@ -1472,7 +1436,7 @@
 **PDF span runs:**
 - `Resolve Abilities and Effects that occur at the start of a turn.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `433.84, 635.68, 691.24, 647.58`
 
-## Raw line 126 (block 18, line 125)
+## Raw line 124 (block 18, line 123)
 
 **EN source:** 2.
 
@@ -1483,7 +1447,7 @@
 **PDF span runs:**
 - `2.` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `415.84, 653.25, 425.85, 663.98`
 
-## Raw line 127 (block 18, line 126)
+## Raw line 125 (block 18, line 124)
 
 **EN source:** STATUS PHASE:
 
@@ -1493,10 +1457,8 @@
 
 **PDF span runs:**
 - `STATUS PHASE:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `433.84, 653.25, 496.88, 663.98`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `496.88, 653.27, 499.38, 663.98`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `499.38, 652.35, 502.16, 664.25`
 
-## Raw line 128 (block 18, line 127)
+## Raw line 126 (block 18, line 125)
 
 **EN source:** Any Effects and Abilities that have the ✜ STATUS Tag occur during
 
@@ -1510,7 +1472,7 @@
 - `STATUS` — `OptimaLTStd-DemiBold` 9.00 pt; PDF flags `20`; bbox `614.35, 663.42, 647.16, 674.07`
 - `Tag occur during` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `653.96, 663.35, 731.14, 675.25`
 
-## Raw line 129 (block 18, line 128)
+## Raw line 127 (block 18, line 126)
 
 **EN source:** this Phase. See Pg. 95 for a list of Effects.
 
@@ -1521,7 +1483,7 @@
 **PDF span runs:**
 - `this Phase. See Pg. 95 for a list of Effects.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `433.84, 674.35, 608.38, 686.25`
 
-## Raw line 130 (block 19, line 129)
+## Raw line 128 (block 19, line 127)
 
 **EN source:** 3.
 
@@ -1532,7 +1494,7 @@
 **PDF span runs:**
 - `3.` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `415.84, 691.92, 425.85, 702.65`
 
-## Raw line 131 (block 19, line 130)
+## Raw line 129 (block 19, line 128)
 
 **EN source:** ACTIVATION PHASE:
 
@@ -1542,10 +1504,8 @@
 
 **PDF span runs:**
 - `ACTIVATION PHASE:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `433.84, 691.92, 519.05, 702.65`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `519.05, 691.94, 521.55, 702.65`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `521.55, 691.02, 524.33, 702.92`
 
-## Raw line 132 (block 19, line 131)
+## Raw line 130 (block 19, line 129)
 
 **EN source:** Go through the Combatant's AI Steps one at a time until one of the
 
@@ -1556,7 +1516,7 @@
 **PDF span runs:**
 - `Go through the Combatant's AI Steps one at a time until one of the` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `433.85, 702.02, 723.07, 713.92`
 
-## Raw line 133 (block 19, line 132)
+## Raw line 131 (block 19, line 130)
 
 **EN source:** conditions is true. Then, perform the instructions listed under the true
 
@@ -1567,7 +1527,7 @@
 **PDF span runs:**
 - `conditions is true. Then, perform the instructions listed under the true` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `433.85, 713.02, 733.36, 724.92`
 
-## Raw line 134 (block 19, line 133)
+## Raw line 132 (block 19, line 131)
 
 **EN source:** condition.
 
@@ -1578,7 +1538,7 @@
 **PDF span runs:**
 - `condition.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `433.85, 724.02, 477.77, 735.92`
 
-## Raw line 135 (block 20, line 134)
+## Raw line 133 (block 20, line 132)
 
 **EN source:** 4.
 
@@ -1589,7 +1549,7 @@
 **PDF span runs:**
 - `4.` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `415.84, 741.59, 425.85, 752.32`
 
-## Raw line 136 (block 20, line 135)
+## Raw line 134 (block 20, line 133)
 
 **EN source:** END OF TURN PHASE:
 
@@ -1599,10 +1559,8 @@
 
 **PDF span runs:**
 - `END OF TURN PHASE:` — `OptimaLTStd-Bold` 9.00 pt; PDF flags `20`; bbox `433.84, 741.59, 525.04, 752.32`
-- `` — `OptimaLTStd` 9.00 pt; PDF flags `4`; bbox `525.04, 741.61, 527.54, 752.32`
-- `` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `527.54, 740.69, 530.32, 752.59`
 
-## Raw line 137 (block 20, line 136)
+## Raw line 135 (block 20, line 134)
 
 **EN source:** Resolve Abilities and Effects that occur at the end of a turn.
 
@@ -1613,7 +1571,7 @@
 **PDF span runs:**
 - `Resolve Abilities and Effects that occur at the end of a turn.` — `OptimaLTStd` 10.00 pt; PDF flags `4`; bbox `433.84, 751.69, 686.80, 763.59`
 
-## Raw line 138 (block 21, line 137)
+## Raw line 136 (block 21, line 135)
 
 **EN source:** Command Combatants
 
@@ -1624,7 +1582,7 @@
 **PDF span runs:**
 - `Command Combatants` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `86.53, 56.69, 309.31, 80.96`
 
-## Raw line 139 (block 22, line 138)
+## Raw line 137 (block 22, line 136)
 
 **EN source:** Intelligent Combatants
 
@@ -1635,7 +1593,7 @@
 **PDF span runs:**
 - `Intelligent Combatants` — `Cinzel-Regular` 18.00 pt; PDF flags `4`; bbox `415.84, 56.69, 655.80, 80.96`
 
-## Raw line 140 (block 23, line 139)
+## Raw line 138 (block 23, line 137)
 
 **EN source:** 58
 
@@ -1646,7 +1604,7 @@
 **PDF span runs:**
 - `58` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
 
-## Raw line 141 (block 23, line 140)
+## Raw line 139 (block 23, line 138)
 
 **EN source:** 58
 
