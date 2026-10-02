@@ -1305,18 +1305,6 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   
   const lineX = (rawX - blockOriginX) * scale;
   const lineW = rawWidth * scale;
-
-  // PyMuPDF retains vertical text as a tall, narrow line bbox. Reconstruct
-  // its original orientation from the source direction saved on the line.
-  // Rotating around the bbox center keeps the overlay aligned with card art.
-  const rotationDegrees = Number((line as any).renderRotationDegrees || 0);
-  const isQuarterTurn = Math.abs(rotationDegrees) === 90;
-  const renderLeft = isQuarterTurn
-    ? ((line.bbox[0] + line.bbox[2]) / 2 - blockOriginX) * scale - lineH / 2
-    : lineX;
-  const renderTop = isQuarterTurn
-    ? ((line.bbox[1] + line.bbox[3]) / 2 - blockOriginY) * scale - lineW / 2
-    : lineY;
   
   const originalX = (line.bbox[0] - blockOriginX) * scale;
   const textOffset = Math.max(0, originalX - lineX);
@@ -1346,17 +1334,13 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   const confirmedGhostClass = isAdmin && (line as any).rasterizedDuplicate ? 'ghost-confirmed' : '';
   const ghostStatusLabel = confirmedGhostClass ? 'Confirmed duplicate: text is preserved for editing but hidden in normal reading.' : undefined;
   const lineClassName = [hoverClass, confirmedGhostClass, targetPage ? 'contents-link' : ''].filter(Boolean).join(' ');
-  const lineTransforms = [
-    line.renderScaleX && !override ? `scaleX(${line.renderScaleX})` : '',
-    isQuarterTurn ? `rotate(${rotationDegrees}deg)` : '',
-  ].filter(Boolean);
 
   const lineStyle: React.CSSProperties = {
     position: 'absolute',
-    top: `${renderTop}px`,
-    left: `${renderLeft}px`,
-    height: `${isQuarterTurn ? lineW : lineH}px`,
-    width: `${isQuarterTurn ? lineH : lineW}px`,
+    top: `${lineY}px`,
+    left: `${lineX}px`,
+    height: `${lineH}px`,
+    width: `${lineW}px`,
     display: 'flex',
     alignItems: 'baseline',
     whiteSpace: 'pre',
@@ -1364,12 +1348,9 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     textAlign: 'left',
     lineHeight: 1, // Fix overlap from custom font metrics
     ...(confirmedGhostClass ? { zIndex: 5000 } : {}),
-    ...(lineTransforms.length ? {
-      transform: lineTransforms.join(' '),
+    ...(line.renderScaleX && !override ? {
+      transform: `scaleX(${line.renderScaleX})`,
       transformOrigin: 'left top',
-    } : {}),
-    ...(isQuarterTurn ? {
-      transformOrigin: 'center center',
     } : {}),
   };
 
