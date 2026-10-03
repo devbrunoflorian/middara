@@ -21,11 +21,14 @@ export interface SpanData {
   /** Minimal SVG path for a source-confirmed glyph missing from the app's fonts. */
   pictogramSvgPath?: string;
   renderWeightOverride?: number;
+  /** Browser-only glyph-size correction when PDF span metrics include oversized inline artifacts. */
+  renderSizeOverridePt?: number;
 }
 
 export interface LineData {
   id: string;
   bbox: [number, number, number, number];
+  renderTopOffsetPt?: number;
   dir?: [number, number];
   spans: SpanData[];
   renderScaleX?: number;
@@ -385,7 +388,7 @@ function sourceSegmentsFromSpans(spans: SpanData[]): Segment[] {
       return {
         text: span.displayOverride || span.text,
         font: span.font,
-        size: span.size,
+        size: span.renderSizeOverridePt ?? span.size,
         color: span.color || '#231f20',
         weight: span.renderWeightOverride ?? mapped.weight,
         style: mapped.style,
@@ -1381,7 +1384,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     return null;
   }
 
-  const lineY = (line.bbox[1] - blockOriginY) * scale;
+  const lineY = (line.bbox[1] + (line.renderTopOffsetPt ?? 0) - blockOriginY) * scale;
   const lineH = (line.bbox[3] - line.bbox[1]) * scale;
   
   // Use availableWidth/X (column bounds) if available, otherwise fallback to exact text bounds
@@ -1534,7 +1537,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
             : span.pictogramFontOverride
               ? `'${span.pictogramFontOverride}', sans-serif`
               : mapped.family,
-          fontSize: `${span.size * scale}px`,
+          fontSize: `${(span.renderSizeOverridePt ?? span.size) * scale}px`,
           fontWeight: span.renderWeightOverride ?? mapped.weight,
           fontStyle: mapped.style,
           fontVariantCaps: mapped.variantCaps,
