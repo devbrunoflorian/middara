@@ -4,6 +4,8 @@
 - **Decisões:** concluídas com o usuário em 2026-10-02 usando `Grill Me`.
 - **Ponto de partida previsto:** branch nova criada da branch publicada `codex/book-visual-batch-audit`, antes de qualquer implementação.
 
+O objetivo de saída posterior para impressão, viewer interativo e empacotamento desktop/mobile está documentado em [`final-output-print-and-app.md`](final-output-print-and-app.md). O editor de molduras continua subordinado à conclusão da tradução e à validação visual; ele não inicia a fase de exportação para gráfica.
+
 ## Problema e resultado pretendido
 
 O texto extraído do PDF tem uma bbox de tinta que descreve onde os glifos originais foram pintados. Essa bbox não é sempre a melhor moldura para compor uma tradução: linhas curtas, centralizadas e diagonais podem precisar de limites, posição, largura, altura e rotação próprios. Hoje a edição permite corrigir conteúdo/estilo, mas não diagramar livremente o frame da unidade na própria página.
