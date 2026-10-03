@@ -141,6 +141,7 @@ def apply_target(document: pymupdf.Document, target: dict[str, object], scale: f
             "widthPx": width_px,
             "heightPx": height_px,
             "language": "en",
+            "languageInvariant": True,
             "auditId": AUDIT_ID,
             "category": target["category"],
             "sourcePdfPage": page_number,

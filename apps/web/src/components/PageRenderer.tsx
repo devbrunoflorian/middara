@@ -136,6 +136,8 @@ export interface PageFidelityOverlay {
   widthPx: number;
   heightPx: number;
   language: 'en' | 'pt-BR';
+  /** Physical game components stay in their source language in every viewer language. */
+  languageInvariant?: boolean;
   hideInAdmin?: boolean;
 }
 
@@ -800,7 +802,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
           );
         })}
         {pageData.fidelityOverlays?.map((overlay) => {
-          if (overlay.language !== language || (overlay.hideInAdmin && isAdmin)) return null;
+          if ((!overlay.languageInvariant && overlay.language !== language) || (overlay.hideInAdmin && isAdmin)) return null;
           const [x0, y0, x1, y1] = overlay.bbox;
           return (
             <img
