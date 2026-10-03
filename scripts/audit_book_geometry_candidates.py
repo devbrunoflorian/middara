@@ -58,6 +58,11 @@ def filtered_content_images(data: dict[str, Any]) -> list[list[float]]:
         # Full-page textures and broad page rails are common decorative layers.
         if image_width >= width * 0.85 or image_height >= height * 0.82:
             continue
+        # Divider rules and flourishes are sometimes emitted as thin content
+        # images. They decorate a text frame but do not reduce its usable
+        # column width.
+        if image_width >= width * 0.30 and image_height <= height * 0.05:
+            continue
         key = tuple(round(value, 1) for value in bbox)
         if key in seen:
             continue

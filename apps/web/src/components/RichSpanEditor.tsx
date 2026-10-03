@@ -59,6 +59,7 @@ interface RichSpanEditorProps {
   originalColor: string;
   originalWeight: number;
   originalStyle: 'normal' | 'italic';
+  originalSegments?: Segment[];
   originalTextAlign?: TextAlignment;
   bbox: [number, number, number, number];
   pageNumber: number;
@@ -77,6 +78,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   originalColor,
   originalWeight,
   originalStyle,
+  originalSegments,
   originalTextAlign = 'left',
   bbox,
   pageNumber,
@@ -90,6 +92,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     if (existingOverride && existingOverride.segments.length > 0) {
       return existingOverride.segments;
     }
+    if (originalSegments && originalSegments.length > 0) return originalSegments;
     return [{
       text: originalText,
       font: originalFont,
@@ -98,7 +101,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       weight: originalWeight,
       style: originalStyle,
     }];
-  }, [existingOverride, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle]);
+  }, [existingOverride, originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle]);
   const baseTextAlign = existingOverride?.textAlign ?? originalTextAlign;
 
   // Segments = the array of styled character runs

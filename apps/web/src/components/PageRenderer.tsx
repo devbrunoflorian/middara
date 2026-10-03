@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
-import { RichSpanEditor, type SpanOverride, type TextAlignment } from './RichSpanEditor';
+import { RichSpanEditor, type Segment, type SpanOverride, type TextAlignment } from './RichSpanEditor';
 import './PageRenderer.css';
 import './Toast.css';
 
@@ -40,6 +40,8 @@ export interface LayoutFrame {
 
 export interface Block {
   id: string;
+  /** Preserve the block's stable legacy array index while omitting it from the page canvas. */
+  hiddenFromPage?: boolean;
   /** Stable semantic editor key for newly split units; legacy blocks keep their index-based key. */
   editorKey?: string;
   bbox: [number, number, number, number];
@@ -94,6 +96,31 @@ interface InlineSpanUnitRenderState {
   override: SpanOverride | null;
   selected: boolean;
   info: SelectedSpanInfo;
+}
+
+function buildInlineSpanStates(
+  block: Block,
+  pageNumber: number,
+  selectedBlockKey: string | null,
+  overrides: Map<string, SpanOverride>,
+  draftOverride: SpanOverride | null,
+  language: 'en' | 'pt-BR',
+): Map<string, InlineSpanUnitRenderState> {
+  const states = new Map<string, InlineSpanUnitRenderState>();
+  for (const unit of block.typographicSpanUnits ?? []) {
+    const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
+    const override = selectedBlockKey === spanKey && draftOverride
+      ? draftOverride
+      : overrides.get(spanKey) || null;
+    const state: InlineSpanUnitRenderState = {
+      spanKey,
+      override,
+      selected: selectedBlockKey === spanKey,
+      info: extractInlineSpanUnitInfo(spanKey, block, unit),
+    };
+    for (const spanRef of unit.spanRefs) states.set(spanRef, state);
+  }
+  return states;
 }
 
 export interface ImageData {
@@ -309,6 +336,7 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
   let style: 'normal' | 'italic' = 'normal';
   
   const lines = block.lines || [];
+  const sourceSegments = sourceSegmentsFromSpans(lines.flatMap(line => line.spans));
   for (const line of lines) {
     for (const span of line.spans) {
       if (!font && span.font && !span.font.includes('Dingbat') && span.text.trim()) {
@@ -344,7 +372,25 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
     size,
     bbox: block.bbox,
     textAlign: block.layoutFrame?.textAlign || 'left',
+    sourceSegments,
   };
+}
+
+function sourceSegmentsFromSpans(spans: SpanData[]): Segment[] {
+  return spans
+    .map(span => {
+      const mapped = mapPdfFont(span.font);
+      return {
+        text: span.displayOverride || span.text,
+        font: span.font,
+        size: span.size,
+        color: span.color || '#231f20',
+        weight: span.renderWeightOverride ?? mapped.weight,
+        style: mapped.style,
+        disableLigatures: true,
+      } satisfies Segment;
+    })
+    .filter(segment => segment.text.length > 0);
 }
 
 /* ─────────────────────────────────────────────
@@ -352,6 +398,41 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
    ───────────────────────────────────────────── */
 function getOverridesKey(lang: string) {
   return `middara-lines-v2-${lang}`;
+}
+
+function isPlainBlockKey(spanKey: string): boolean {
+  return /^page_\d+_block_\d+$/.test(spanKey);
+}
+
+function payloadSpanKey(spanKey: string, lang: string): string {
+  // Payload's spanKey is unique across languages. Legacy block records were
+  // stored without a language suffix, so qualify new PT-BR block records while
+  // leaving semantic/unit keys (which already carry their suffix) untouched.
+  return lang === 'pt-BR' && isPlainBlockKey(spanKey)
+    ? `${spanKey}__${lang}`
+    : spanKey;
+}
+
+function clientSpanKey(spanKey: string, lang: string): string {
+  const suffix = `__${lang}`;
+  return lang === 'pt-BR' && spanKey.endsWith(suffix) && isPlainBlockKey(spanKey.slice(0, -suffix.length))
+    ? spanKey.slice(0, -suffix.length)
+    : spanKey;
+}
+
+async function findPayloadTranslation(spanKey: string, lang: string): Promise<any | null> {
+  const candidateKeys = Array.from(new Set([payloadSpanKey(spanKey, lang), spanKey]));
+  for (const candidate of candidateKeys) {
+    const query = new URLSearchParams({
+      'where[and][0][spanKey][equals]': candidate,
+      'where[and][1][language][equals]': lang,
+    });
+    const response = await fetch(`http://localhost:3000/api/translations?${query}`);
+    if (!response.ok) continue;
+    const data = await response.json();
+    if (data.docs?.length > 0) return data.docs[0];
+  }
+  return null;
 }
 
 async function fetchOverridesFromPayload(lang: string): Promise<Map<string, SpanOverride> | null> {
@@ -364,8 +445,9 @@ async function fetchOverridesFromPayload(lang: string): Promise<Map<string, Span
         const stored = doc.data;
         const segments = Array.isArray(stored) ? stored : stored?.segments;
         if (!Array.isArray(segments)) return;
-        map.set(doc.spanKey, {
-          spanKey: doc.spanKey,
+        const uiSpanKey = clientSpanKey(doc.spanKey, lang);
+        map.set(uiSpanKey, {
+          spanKey: uiSpanKey,
           segments,
           bbox: [0, 0, 0, 0],
           textAlign: Array.isArray(stored) ? undefined : stored?.textAlign,
@@ -381,19 +463,15 @@ async function fetchOverridesFromPayload(lang: string): Promise<Map<string, Span
 
 async function saveOverrideToPayload(override: SpanOverride, lang: string): Promise<boolean> {
   try {
-    const query = new URLSearchParams({
-      'where[and][0][spanKey][equals]': override.spanKey,
-      'where[and][1][language][equals]': lang,
-    });
-    const check = await fetch(`http://localhost:3000/api/translations?${query}`);
-    const checkData = await check.json();
+    const existing = await findPayloadTranslation(override.spanKey, lang);
+    const storedSpanKey = payloadSpanKey(override.spanKey, lang);
     const data = {
       schemaVersion: 2,
       segments: override.segments,
       textAlign: override.textAlign,
     };
-    if (checkData.docs.length > 0) {
-      const id = checkData.docs[0].id;
+    if (existing) {
+      const id = existing.id;
       const res = await fetch(`http://localhost:3000/api/translations/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
@@ -404,7 +482,7 @@ async function saveOverrideToPayload(override: SpanOverride, lang: string): Prom
       const res = await fetch(`http://localhost:3000/api/translations`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ spanKey: override.spanKey, language: lang, data })
+        body: JSON.stringify({ spanKey: storedSpanKey, language: lang, data })
       });
       return res.ok;
     }
@@ -415,14 +493,9 @@ async function saveOverrideToPayload(override: SpanOverride, lang: string): Prom
 
 async function deleteOverrideFromPayload(spanKey: string, lang: string): Promise<boolean> {
   try {
-    const query = new URLSearchParams({
-      'where[and][0][spanKey][equals]': spanKey,
-      'where[and][1][language][equals]': lang,
-    });
-    const check = await fetch(`http://localhost:3000/api/translations?${query}`);
-    const checkData = await check.json();
-    if (checkData.docs.length > 0) {
-      const id = checkData.docs[0].id;
+    const existing = await findPayloadTranslation(spanKey, lang);
+    if (existing) {
+      const id = existing.id;
       const res = await fetch(`http://localhost:3000/api/translations/${id}`, {
         method: 'DELETE'
       });
@@ -462,6 +535,7 @@ function extractCreditFieldInfo(
 ): SelectedSpanInfo {
   const selectedIds = new Set(field.lineIds);
   const lines = (block.lines || []).filter(line => selectedIds.has(line.id));
+  const sourceSegments = sourceSegmentsFromSpans(lines.flatMap(line => line.spans));
   let font = '';
   let size = 0;
   let color = '#231f20';
@@ -501,6 +575,7 @@ function extractCreditFieldInfo(
     size,
     bbox: field.bbox,
     textAlign: field.frame.textAlign || 'left',
+    sourceSegments,
   };
 }
 
@@ -515,6 +590,7 @@ interface SelectedSpanInfo {
   size: number;
   bbox: [number, number, number, number];
   textAlign: TextAlignment;
+  sourceSegments?: Segment[];
 }
 
 interface PageRendererProps {
@@ -701,6 +777,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
         )}
 
         {pageData.blocks.map((block, bIdx) => {
+          if (block.hiddenFromPage) return null;
           return (
             <SpanBlock
               key={block.id}
@@ -761,6 +838,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
           originalColor={selectedSpan.color}
           originalWeight={selectedSpan.weight}
           originalStyle={selectedSpan.style}
+          originalSegments={selectedSpan.sourceSegments}
           originalTextAlign={selectedSpan.textAlign}
           bbox={selectedSpan.bbox}
           pageNumber={pageData.page_number}
@@ -804,12 +882,18 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   const blockY = block.bbox[1];
   const blockW = block.bbox[2] - block.bbox[0];
   const blockH = block.bbox[3] - block.bbox[1];
+  // A layout frame is the editable region inferred from the surrounding
+  // column, while block.bbox remains the source ink bounds. Render the
+  // container at the frame origin so Admin and the translated preview expose
+  // the same geometry without changing the source line coordinates.
+  const frameX = block.layoutFrame?.x ?? blockX;
+  const frameW = block.layoutFrame?.width ?? blockW;
 
   const blockStyle: React.CSSProperties = {
     position: 'absolute',
-    left: `${blockX * scale}px`,
+    left: `${frameX * scale}px`,
     top: `${blockY * scale}px`,
-    width: `${blockW * scale}px`,
+    width: `${frameW * scale}px`,
     height: `${blockH * scale}px`,
     zIndex: block.zIndex || 10,
   };
@@ -872,21 +956,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
   if (!block.lines || block.lines.length === 0) return null;
 
-  const inlineSpanUnits = block.typographicSpanUnits ?? [];
-  const inlineSpanStates = new Map<string, InlineSpanUnitRenderState>();
-  for (const unit of inlineSpanUnits) {
-    const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
-    const override = selectedBlockKey === spanKey && draftOverride
-      ? draftOverride
-      : overrides.get(spanKey) || null;
-    const state = {
-      spanKey,
-      override,
-      selected: selectedBlockKey === spanKey,
-      info: extractInlineSpanUnitInfo(spanKey, block, unit),
-    };
-    for (const spanRef of unit.spanRefs) inlineSpanStates.set(spanRef, state);
-  }
+  const inlineSpanStates = buildInlineSpanStates(
+    block, pageNumber, selectedBlockKey, overrides, draftOverride, language,
+  );
 
   const blockHoverClass = isAdmin ? `block-editable ${selectedBlockKey === blockKey ? 'block-selected' : ''}` : '';
   const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
@@ -899,7 +971,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     const firstLine = block.lines[0];
     const rawX = block.layoutFrame?.x ?? ((firstLine as any).availableX !== undefined ? (firstLine as any).availableX : blockX);
     const rawWidth = block.layoutFrame?.width ?? (firstLine as any).availableWidth ?? blockW;
-    const blockLineX = (rawX - blockX) * scale;
+    const blockLineX = (rawX - frameX) * scale;
     const blockLineW = rawWidth * scale;
 
     return (
@@ -959,7 +1031,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             key={lineId}
             line={line}
             scale={scale}
-            blockOriginX={blockX}
+            blockOriginX={frameX}
             blockOriginY={blockY}
             targetPage={contentsMap?.get(line.id)}
             onNavigate={onNavigate}
@@ -1089,6 +1161,7 @@ function extractInlineSpanUnitInfo(
   const font = first?.font || 'OptimaLTStd';
   const mapped = mapPdfFont(font);
   const text = spans.map(span => span.displayOverride || span.text).join('').replace(/\n/g, ' ').replace(/ +/g, ' ').trim();
+  const sourceSegments = sourceSegmentsFromSpans(spans);
   const boxes = spans.map(span => span.bbox);
   const bbox: [number, number, number, number] = boxes.length ? [
     Math.min(...boxes.map(box => box[0])), Math.min(...boxes.map(box => box[1])),
@@ -1105,6 +1178,7 @@ function extractInlineSpanUnitInfo(
     size: first?.size || 10,
     bbox,
     textAlign: 'left',
+    sourceSegments,
   };
 }
 
@@ -1113,6 +1187,9 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
   overrides, draftOverride, language,
 }) => {
   const [leadingUnitPushPt, setLeadingUnitPushPt] = useState(0);
+  const inlineSpanStates = buildInlineSpanStates(
+    block, pageNumber, selectedBlockKey, overrides, draftOverride, language,
+  );
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
   const blockW = block.bbox[2] - block.bbox[0];
@@ -1160,6 +1237,8 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
             nextFieldY={nextFieldY !== undefined ? nextFieldY + leadingUnitPushPt : undefined}
             topOffsetPt={unitIndex > 0 ? leadingUnitPushPt : 0}
             onPreviewMeasure={unitIndex === 0 ? handleLeadingUnitMeasure : undefined}
+            inlineSpanStates={inlineSpanStates}
+            onInlineSpanClick={state => onBlockClick(state.info)}
             onBlockClick={onBlockClick}
           />
         );
@@ -1180,12 +1259,14 @@ interface CreditFieldProps {
   nextFieldY?: number;
   topOffsetPt?: number;
   onPreviewMeasure?: (heightPx: number) => void;
+  inlineSpanStates?: Map<string, InlineSpanUnitRenderState>;
+  onInlineSpanClick?: (state: InlineSpanUnitRenderState) => void;
   onBlockClick: (info: SelectedSpanInfo) => void;
 }
 
 const CreditField: React.FC<CreditFieldProps> = ({
   block, field, spanKey, scale, isAdmin, selected, override, language, nextFieldY,
-  topOffsetPt = 0, onPreviewMeasure, onBlockClick,
+  topOffsetPt = 0, onPreviewMeasure, inlineSpanStates, onInlineSpanClick, onBlockClick,
 }) => {
   const previewRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -1258,9 +1339,11 @@ const CreditField: React.FC<CreditFieldProps> = ({
             scale={scale}
             blockOriginX={fieldX}
             blockOriginY={fieldY}
-            isAdmin={false}
+            isAdmin={isAdmin}
             isSelected={false}
             onClick={() => {}}
+            inlineSpanStates={inlineSpanStates}
+            onInlineSpanClick={onInlineSpanClick}
           />
         ))
       )}

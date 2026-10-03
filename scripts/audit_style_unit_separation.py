@@ -13,11 +13,13 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 PAGE_ROOT = ROOT / "apps" / "web" / "public" / "pages"
 OUTPUT_ROOT = ROOT / "tmp" / "ghost-audit" / "style-unit-separation"
+MIN_EDIT_SIZE = 6.0
 FIELDS = [
     "page", "block_id", "existing_edit_units", "line_count", "span_count",
     "distinct_sizes_pt", "distinct_fonts", "bold_span_count", "italic_span_count",
     "mixed_size_baselines", "mixed_font_baselines", "size_varies_across_lines", "mixed_bold_baselines",
-    "mixed_italic_baselines", "classification", "text_preview",
+    "mixed_italic_baselines", "editable_sizes_pt", "editable_mixed",
+    "size_boundary_units", "classification", "text_preview",
 ]
 
 
@@ -34,9 +36,13 @@ def style(span: dict[str, Any]) -> tuple[str, float, bool, bool]:
 def classify_block(block: dict[str, Any]) -> dict[str, Any]:
     lines = block.get("lines", [])
     span_lines = [[span for span in line.get("spans", []) if isinstance(span, dict)] for line in lines]
-    all_spans = [span for spans in span_lines for span in spans]
+    # Empty/whitespace-only extraction traces should not create an editable
+    # typography boundary. They are retained in source JSON for lineage but
+    # excluded from the content-bearing audit.
+    all_spans = [span for spans in span_lines for span in spans if str(span.get("text", "")).strip()]
     styles = [style(span) for span in all_spans]
     sizes = sorted({item[1] for item in styles})
+    editable_sizes = sorted({size for size in sizes if size >= MIN_EDIT_SIZE})
     fonts = sorted({item[0] for item in styles})
     line_sizes = [sorted({style(span)[1] for span in spans}) for spans in span_lines if spans]
     line_fonts = [sorted({style(span)[0] for span in spans}) for spans in span_lines if spans]
@@ -84,6 +90,9 @@ def classify_block(block: dict[str, Any]) -> dict[str, Any]:
         "size_varies_across_lines": varies_across_lines,
         "mixed_bold_baselines": mixed_bold,
         "mixed_italic_baselines": mixed_italic,
+        "editable_sizes_pt": ",".join(f"{value:g}" for value in editable_sizes),
+        "editable_mixed": len(editable_sizes) >= 2,
+        "size_boundary_units": bool(block.get("typographicSpanUnits")),
         "classification": classification,
         "text_preview": " ".join(text.split())[:110],
     }
@@ -125,6 +134,16 @@ def main() -> None:
             row["classification"] in {"inline_and_cross_line_size_mix", "same_baseline_mixed_sizes"}
             for row in rows
         ),
+        "editable_mixed_blocks": sum(bool(row["editable_mixed"]) for row in rows),
+        "editable_mixed_blocks_without_boundary_units": sum(
+            bool(row["editable_mixed"]) and not bool(row["size_boundary_units"]) for row in rows
+        ),
+        "mixed_source_blocks_only_tiny_traces": sum(
+            len(row["distinct_sizes_pt"].split(",")) > 1
+            and not bool(row["editable_mixed"])
+            for row in rows
+        ),
+        "minimum_editable_size_pt": MIN_EDIT_SIZE,
         "interpretation": "structural style signals for triage; no class is a safe automatic split decision",
         "style_signature": "font family, size rounded to 0.01 pt, PyMuPDF bold bit 16, italic bit 2",
         "errors": errors,

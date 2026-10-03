@@ -17,18 +17,21 @@ async function loadPageData(pageNum: number): Promise<PageData> {
       const data = await res.json();
       let pageFrames: Record<string, LayoutFrame> = {};
       let pageCreditUnits: Record<string, CreditUnitDefinition | CreditUnitDefinition[]> = {};
+      // Layout frames are page-local geometry sidecars. Load them for every
+      // page that has one, not only the original page-2 pilot, so the viewer,
+      // Admin outlines, and translated text all share the same frame.
+      try {
+        const frameResponse = await fetch(`/pages/page_${pageStr}/layout_frames.json`);
+        if (frameResponse.ok) pageFrames = await frameResponse.json();
+      } catch {}
       if (pageNum === 2) {
-        try {
-          const frameResponse = await fetch(`/pages/page_${pageStr}/layout_frames.json`);
-          if (frameResponse.ok) pageFrames = await frameResponse.json();
-        } catch {}
         try {
           const creditResponse = await fetch(`/pages/page_${pageStr}/credit_units.json`);
           if (creditResponse.ok) pageCreditUnits = await creditResponse.json();
         } catch {}
       }
       let fidelityOverlays: PageFidelityOverlay[] = [];
-      if (pageNum === 4 || pageNum === 6 || pageNum === 7 || pageNum === 16 || pageNum === 50) {
+      if (pageNum === 4 || pageNum === 5 || pageNum === 6 || pageNum === 7 || pageNum === 12 || pageNum === 15 || pageNum === 16 || pageNum === 50) {
         try {
           const overlayResponse = await fetch(`/pages/page_${pageStr}/fidelity_overlays.json`);
           if (overlayResponse.ok) {
