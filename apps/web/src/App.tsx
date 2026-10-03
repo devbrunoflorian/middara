@@ -30,16 +30,17 @@ async function loadPageData(pageNum: number): Promise<PageData> {
           if (creditResponse.ok) pageCreditUnits = await creditResponse.json();
         } catch {}
       }
+      // Overlay sidecars are page-local and optional.  Always probe for one so
+      // newly audited component/diagram pages are rendered without maintaining
+      // a stale hard-coded page allowlist here.
       let fidelityOverlays: PageFidelityOverlay[] = [];
-      if (pageNum === 4 || pageNum === 5 || pageNum === 6 || pageNum === 7 || pageNum === 12 || pageNum === 15 || pageNum === 16 || pageNum === 50) {
-        try {
-          const overlayResponse = await fetch(`/pages/page_${pageStr}/fidelity_overlays.json`);
-          if (overlayResponse.ok) {
-            const overlayData = await overlayResponse.json();
-            fidelityOverlays = overlayData.overlays || [];
-          }
-        } catch {}
-      }
+      try {
+        const overlayResponse = await fetch(`/pages/page_${pageStr}/fidelity_overlays.json`);
+        if (overlayResponse.ok) {
+          const overlayData = await overlayResponse.json();
+          fidelityOverlays = overlayData.overlays || [];
+        }
+      } catch {}
       return {
         page_number: pageNum,
         width: data.width || 820.35,
