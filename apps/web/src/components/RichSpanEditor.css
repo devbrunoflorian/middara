@@ -168,6 +168,13 @@
   font-weight: 600;
 }
 
+.rse-symbol-edit-hint {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 .rse-edit-text textarea {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -261,6 +268,17 @@
 .rse-char-selected {
   background: rgba(108, 99, 255, 0.35) !important;
   outline: 1px solid rgba(108, 99, 255, 0.6);
+}
+
+.rse-char-symbol {
+  min-width: 28px;
+}
+
+.rse-char-symbol img {
+  width: 26px;
+  height: 26px;
+  object-fit: cover;
+  clip-path: circle(50% at 50% 50%);
 }
 
 /* Alternates Picker */

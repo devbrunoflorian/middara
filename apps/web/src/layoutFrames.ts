@@ -1,0 +1,111 @@
+import type { LayoutFrame } from './components/PageRenderer';
+
+export type LayoutLanguage = 'en' | 'pt-BR';
+
+export interface LayoutFrameRecord {
+  unitKey: string;
+  pageNumber: number;
+  language: LayoutLanguage;
+  frame: LayoutFrame;
+}
+
+const STORAGE_PREFIX = 'middara-layout-frames-v1';
+const PAYLOAD_URL = 'http://localhost:3000/api/layout-frames';
+
+export function layoutFrameStorageKey(pageNumber: number, language: LayoutLanguage) {
+  return `${STORAGE_PREFIX}-${language}-page-${pageNumber}`;
+}
+
+export function layoutFrameRecordKey(unitKey: string, language: LayoutLanguage) {
+  return `${unitKey}::${language}`;
+}
+
+export function loadLocalLayoutFrames(pageNumber: number, language: LayoutLanguage): Map<string, LayoutFrame> {
+  try {
+    const raw = localStorage.getItem(layoutFrameStorageKey(pageNumber, language));
+    const records = raw ? JSON.parse(raw) as Record<string, LayoutFrame> : {};
+    return new Map(Object.entries(records));
+  } catch {
+    return new Map();
+  }
+}
+
+export function saveLocalLayoutFrames(
+  pageNumber: number,
+  language: LayoutLanguage,
+  frames: Map<string, LayoutFrame>,
+): boolean {
+  try {
+    localStorage.setItem(layoutFrameStorageKey(pageNumber, language), JSON.stringify(Object.fromEntries(frames)));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export async function fetchLayoutFrames(pageNumber: number, language: LayoutLanguage): Promise<Map<string, LayoutFrame> | null> {
+  try {
+    const query = new URLSearchParams({
+      'where[and][0][pageNumber][equals]': String(pageNumber),
+      'where[and][1][language][equals]': language,
+      limit: '500',
+    });
+    const response = await fetch(`${PAYLOAD_URL}?${query}`);
+    if (!response.ok) return null;
+    const result = await response.json();
+    const frames = new Map<string, LayoutFrame>();
+    for (const record of result.docs ?? []) {
+      if (record.unitKey && record.data && Number.isFinite(record.data.x) && Number.isFinite(record.data.width)) {
+        frames.set(record.unitKey, record.data as LayoutFrame);
+      }
+    }
+    return frames;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveLayoutFrame(record: LayoutFrameRecord): Promise<boolean> {
+  try {
+    const frameKey = layoutFrameRecordKey(record.unitKey, record.language);
+    const query = new URLSearchParams({ 'where[frameKey][equals]': frameKey, limit: '1' });
+    const lookup = await fetch(`${PAYLOAD_URL}?${query}`);
+    const existing = lookup.ok ? (await lookup.json()).docs?.[0] : null;
+    const payload = {
+      frameKey,
+      unitKey: record.unitKey,
+      pageNumber: record.pageNumber,
+      language: record.language,
+      data: record.frame,
+    };
+    const response = existing
+      ? await fetch(`${PAYLOAD_URL}/${existing.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+      : await fetch(PAYLOAD_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
+export async function deleteLayoutFrame(unitKey: string, language: LayoutLanguage): Promise<boolean> {
+  try {
+    const frameKey = layoutFrameRecordKey(unitKey, language);
+    const query = new URLSearchParams({ 'where[frameKey][equals]': frameKey, limit: '1' });
+    const lookup = await fetch(`${PAYLOAD_URL}?${query}`);
+    if (!lookup.ok) return false;
+    const existing = (await lookup.json()).docs?.[0];
+    if (!existing) return true;
+    const response = await fetch(`${PAYLOAD_URL}/${existing.id}`, { method: 'DELETE' });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}

@@ -1,0 +1,180 @@
+.admin-layout-frame-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 20001;
+  pointer-events: none;
+  color: #f8fafc;
+  font: 13px/1.4 Inter, system-ui, sans-serif;
+}
+
+.admin-layout-frame-outline {
+  position: fixed;
+  box-sizing: border-box;
+  border: 2px solid #00a6ff;
+  background: rgb(0 166 255 / 8%);
+  transform-origin: center;
+  pointer-events: auto;
+  cursor: move;
+  touch-action: none;
+  outline: none;
+}
+
+.admin-layout-source-ink-outline {
+  position: fixed;
+  box-sizing: border-box;
+  outline: 2px dashed #ffcc33;
+  outline-offset: 4px;
+  pointer-events: none;
+}
+
+.admin-layout-frame-outline:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.admin-layout-frame-caption {
+  position: absolute;
+  left: 0;
+  top: -23px;
+  padding: 2px 6px;
+  border-radius: 3px 3px 0 0;
+  background: #007acc;
+  color: #fff;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.admin-layout-frame-resize {
+  position: absolute;
+  right: -13px;
+  bottom: -13px;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  background: #007acc;
+  cursor: nwse-resize;
+  touch-action: none;
+  pointer-events: auto;
+}
+
+.admin-layout-frame-panel {
+  position: fixed;
+  top: 48px;
+  left: 48px;
+  width: 190px;
+  max-height: calc(100vh - 64px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #52606d;
+  border-radius: 8px;
+  background: #17212b;
+  box-shadow: 0 8px 28px rgb(0 0 0 / 35%);
+  pointer-events: auto;
+}
+
+.admin-layout-frame-panel > strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.admin-layout-frame-unit-key {
+  display: block;
+  margin: -4px 0 8px;
+  color: #94a3b8;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+.admin-layout-frame-panel p {
+  margin: 4px 0 0;
+  color: #cbd5e1;
+}
+
+.admin-layout-frame-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 8px;
+}
+
+.admin-layout-frame-fields label {
+  display: grid;
+  gap: 3px;
+  color: #cbd5e1;
+  font-size: 11px;
+}
+
+.admin-layout-frame-fields input {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  box-sizing: border-box;
+  padding: 3px 6px;
+  border: 1px solid #475569;
+  border-radius: 4px;
+  background: #0f1720;
+  color: #fff;
+  font: inherit;
+}
+
+.admin-layout-frame-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.admin-layout-frame-actions button {
+  min-height: 30px;
+  padding: 4px 8px;
+  border: 1px solid #536273;
+  border-radius: 4px;
+  background: #253444;
+  color: #fff;
+  cursor: pointer;
+}
+
+.admin-layout-frame-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-layout-frame-actions button:focus-visible,
+.admin-layout-frame-fields input:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+.admin-layout-frame-feedback {
+  min-height: 18px;
+  margin-top: 8px;
+  color: #a7f3d0;
+  font-size: 11px;
+}
+
+@media (max-width: 480px) {
+  .admin-layout-frame-panel {
+    top: auto;
+    bottom: 48px;
+    left: 8px;
+    width: min(280px, calc(100vw - 56px));
+  }
+}
+
+@media (forced-colors: active) {
+  .admin-layout-frame-outline {
+    border-color: Highlight;
+    background: transparent;
+    forced-color-adjust: none;
+  }
+
+  .admin-layout-frame-panel,
+  .admin-layout-frame-resize {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+    forced-color-adjust: auto;
+  }
+}

@@ -74,6 +74,7 @@ export interface Config {
     pages: Page;
     'rulebook-blocks': RulebookBlock;
     translations: Translation;
+    'layout-frames': LayoutFrame;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     'rulebook-blocks': RulebookBlocksSelect<false> | RulebookBlocksSelect<true>;
     translations: TranslationsSelect<false> | TranslationsSelect<true>;
+    'layout-frames': LayoutFramesSelect<false> | LayoutFramesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -262,6 +264,28 @@ export interface Translation {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "layout-frames".
+ */
+export interface LayoutFrame {
+  id: number;
+  frameKey: string;
+  unitKey: string;
+  pageNumber: number;
+  language: 'en' | 'pt-BR';
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -311,6 +335,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'translations';
         value: number | Translation;
+      } | null)
+    | ({
+        relationTo: 'layout-frames';
+        value: number | LayoutFrame;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -456,6 +484,19 @@ export interface RulebookBlocksSelect<T extends boolean = true> {
  */
 export interface TranslationsSelect<T extends boolean = true> {
   spanKey?: T;
+  language?: T;
+  data?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "layout-frames_select".
+ */
+export interface LayoutFramesSelect<T extends boolean = true> {
+  frameKey?: T;
+  unitKey?: T;
+  pageNumber?: T;
   language?: T;
   data?: T;
   updatedAt?: T;

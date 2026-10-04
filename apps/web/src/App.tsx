@@ -3,7 +3,7 @@ import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, 
 import { 
   ChevronLeft, ChevronRight, Edit3, 
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
-  BookOpen
+  BookOpen, Ruler, Move
 } from 'lucide-react';
 import './App.css';
 
@@ -80,6 +80,9 @@ async function loadPageData(pageNum: number): Promise<PageData> {
 function App() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isRulerVisible, setIsRulerVisible] = useState(false);
+  const [isLayoutMode, setIsLayoutMode] = useState(false);
+  const [isLayoutDirty, setIsLayoutDirty] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   // Start at 200% relative to the measured fit scale; Fit to Screen resets this multiplier to 100%.
   const [zoomLevel, setZoomLevel] = useState<number>(2);
@@ -95,8 +98,16 @@ function App() {
 
   const mainRef = useRef<HTMLDivElement>(null);
 
+  const acceptLeavingLayout = useCallback(() => {
+    if (isLayoutDirty && !window.confirm('Há alterações de moldura não salvas. Descartar e sair do modo de layout?')) return false;
+    setIsLayoutMode(false);
+    setIsLayoutDirty(false);
+    return true;
+  }, [isLayoutDirty]);
+
   // Navigate to a specific page (used by hyperlinks on Contents page)
   const navigateToPage = useCallback((pageNum: number) => {
+    if (pageNum !== currentPage && !acceptLeavingLayout()) return;
     if (pageNum >= 1 && pageNum <= TOTAL_PAGES) {
       setCurrentPage(pageNum);
       // If in scroll mode, scroll to that page
@@ -107,7 +118,7 @@ function App() {
         }, 100);
       }
     }
-  }, [viewMode]);
+  }, [viewMode, currentPage, acceptLeavingLayout]);
 
   // Single page loader
   useEffect(() => {
@@ -145,20 +156,20 @@ function App() {
       if (viewMode !== 'single') return;
 
       if (e.key === 'ArrowRight' || e.key === 'PageDown') {
-        setCurrentPage(p => Math.min(TOTAL_PAGES, p + 1));
+        navigateToPage(Math.min(TOTAL_PAGES, currentPage + 1));
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        setCurrentPage(p => Math.max(1, p - 1));
+        navigateToPage(Math.max(1, currentPage - 1));
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [viewMode]);
+  }, [viewMode, navigateToPage, currentPage]);
 
   const handlePageSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const num = parseInt(pageInput);
     if (!isNaN(num) && num >= 1 && num <= TOTAL_PAGES) {
-      setCurrentPage(num);
+      navigateToPage(num);
     } else {
       setPageInput(currentPage.toString());
     }
@@ -180,6 +191,9 @@ function App() {
               <PageRenderer 
                 pageData={pageData} 
                 isAdmin={isAdmin}
+                showRuler={isAdmin && isRulerVisible}
+                layoutMode={isAdmin && isLayoutMode}
+                onLayoutDirtyChange={setIsLayoutDirty}
                 zoomLevel={zoomLevel}
                 onNavigate={navigateToPage}
                 language={language}
@@ -202,6 +216,8 @@ function App() {
                   <PageRenderer 
                     pageData={scrollPages.get(num)!} 
                     isAdmin={isAdmin}
+                    showRuler={false}
+                    layoutMode={false}
                     zoomLevel={zoomLevel}
                     onNavigate={navigateToPage}
                     language={language}
@@ -228,14 +244,20 @@ function App() {
           <div className="tool-group">
             <button 
               className={`tool-btn ${viewMode === 'single' ? 'active' : ''}`}
-              onClick={() => setViewMode('single')}
+              onClick={() => {
+                if (viewMode !== 'single' && !acceptLeavingLayout()) return;
+                setViewMode('single');
+              }}
               title="Single Page View"
             >
               <Layout size={16} />
             </button>
             <button 
               className={`tool-btn ${viewMode === 'scroll' ? 'active' : ''}`}
-              onClick={() => setViewMode('scroll')}
+              onClick={() => {
+                if (viewMode !== 'scroll' && !acceptLeavingLayout()) return;
+                setViewMode('scroll');
+              }}
               title="Continuous Scroll"
             >
               <LayoutList size={16} />
@@ -246,7 +268,7 @@ function App() {
 
           {/* Pagination Controls */}
           <div className="pagination-group">
-            <button className="nav-btn" onClick={() => setCurrentPage(p => Math.max(1, p - 1))}>
+            <button className="nav-btn" onClick={() => navigateToPage(Math.max(1, currentPage - 1))}>
               <ChevronLeft size={16} />
             </button>
             <form onSubmit={handlePageSubmit} className="page-input-form">
@@ -259,7 +281,7 @@ function App() {
               />
               <span className="page-total">{TOTAL_PAGES}</span>
             </form>
-            <button className="nav-btn" onClick={() => setCurrentPage(p => Math.min(TOTAL_PAGES, p + 1))}>
+            <button className="nav-btn" onClick={() => navigateToPage(Math.min(TOTAL_PAGES, currentPage + 1))}>
               <ChevronRight size={16} />
             </button>
           </div>
@@ -284,7 +306,9 @@ function App() {
         <div className="toolbar-section bottom">
           <select 
             value={language} 
-            onChange={(e) => setLanguage(e.target.value as 'en' | 'pt-BR')}
+            onChange={(e) => {
+              if (e.target.value !== language && acceptLeavingLayout()) setLanguage(e.target.value as 'en' | 'pt-BR');
+            }}
             className="language-select"
             style={{ padding: '4px', borderRadius: '4px', border: '1px solid #444', background: '#333', color: '#fff', fontSize: '10px', width: '38px', appearance: 'none', textAlign: 'center' }}
             title="Language"
@@ -297,12 +321,45 @@ function App() {
 
           <button 
             className={`admin-toggle ${isAdmin ? 'active' : ''}`}
-            onClick={() => setIsAdmin(!isAdmin)}
+            onClick={() => {
+              if (isAdmin && !acceptLeavingLayout()) return;
+              const nextAdmin = !isAdmin;
+              setIsAdmin(nextAdmin);
+              setIsRulerVisible(nextAdmin);
+            }}
             title={isAdmin ? 'Exit Admin' : 'Enter Admin'}
           >
             <Edit3 size={16} />
             <span>Admin</span>
           </button>
+          {isAdmin && (
+            <button
+              className={`tool-btn ${isRulerVisible ? 'active' : ''}`}
+              onClick={() => setIsRulerVisible(visible => !visible)}
+              title={isRulerVisible ? 'Hide page ruler' : 'Show page ruler'}
+              aria-label={isRulerVisible ? 'Hide page ruler' : 'Show page ruler'}
+              aria-pressed={isRulerVisible}
+            >
+              <Ruler size={16} />
+            </button>
+          )}
+          {isAdmin && viewMode === 'single' && (
+            <button
+              className={`tool-btn ${isLayoutMode ? 'active' : ''}`}
+              onClick={() => {
+                if (isLayoutMode) {
+                  acceptLeavingLayout();
+                  return;
+                }
+                setIsLayoutMode(true);
+              }}
+              title={isLayoutMode ? 'Exit translation frame layout' : 'Edit translation frames'}
+              aria-label={isLayoutMode ? 'Exit translation frame layout' : 'Edit translation frames'}
+              aria-pressed={isLayoutMode}
+            >
+              <Move size={16} />
+            </button>
+          )}
         </div>
       </aside>
     </div>

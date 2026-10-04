@@ -12,6 +12,7 @@ import { Chapters } from './collections/Chapters'
 import { Pages } from './collections/Pages'
 import { RulebookBlocks } from './collections/Blocks'
 import { Translations } from './collections/Translations'
+import { LayoutFrames } from './collections/LayoutFrames'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,7 +25,7 @@ export default buildConfig({
     },
   },
   cors: '*',
-  collections: [Users, Media, Books, Chapters, Pages, RulebookBlocks, Translations],
+  collections: [Users, Media, Books, Chapters, Pages, RulebookBlocks, Translations, LayoutFrames],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

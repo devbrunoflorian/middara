@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import './RichSpanEditor.css';
 import puaMappingRaw from '../assets/pua_mapping.json';
+import { AdminSymbolPalette } from './AdminSymbolPalette';
+import { getSemanticSymbol, getSymbolEditorToken, SEMANTIC_SYMBOLS } from '../symbols/semanticSymbols';
 
 const PUA_MAPPING: Record<string, {name: string, pua_char: string, hex: string}[]> = puaMappingRaw;
 
@@ -40,6 +42,11 @@ export interface Segment {
   weight: number;
   style: 'normal' | 'italic';
   disableLigatures?: boolean;
+  /** Preserve PDF text outline effects on editable color runs. */
+  textStrokeWidthPt?: number;
+  textStrokeColor?: string;
+  /** Stable semantic symbol ID; `text` carries one object-replacement marker. */
+  symbolId?: string;
 }
 
 export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
@@ -68,6 +75,54 @@ interface RichSpanEditorProps {
   onSave: (override: SpanOverride | null) => void;
   existingOverride?: SpanOverride | null;
   onDraftChange?: (draft: SpanOverride | null) => void;
+  singleLine?: boolean;
+}
+
+interface EditorSnapshot {
+  segments: Segment[];
+  textAlign: TextAlignment;
+  isEditingText: boolean;
+  editText: string;
+  editSelectionStart: number;
+  editSelectionEnd: number;
+  selStart: number | null;
+  selEnd: number | null;
+  toolFont: string;
+  toolWeight: number;
+  toolStyle: 'normal' | 'italic';
+  toolColor: string;
+  toolSize: number;
+  toolLigatures: boolean;
+}
+
+const SYMBOL_OBJECT_MARKER = '\uFFFC';
+
+function editableTextForSegments(segments: Segment[], language: 'en' | 'pt-BR'): string {
+  return segments.map(segment => segment.symbolId
+    ? getSymbolEditorToken(segment.symbolId, language) ?? segment.text
+    : segment.text).join('');
+}
+
+function segmentsFromEditableText(text: string, style: Omit<Segment, 'text' | 'symbolId'>, language: 'en' | 'pt-BR'): Segment[] {
+  const symbols = SEMANTIC_SYMBOLS
+    .map(symbol => ({ symbol, token: symbol.editorTokens[language] }))
+    .sort((a, b) => b.token.length - a.token.length);
+  const segments: Segment[] = [];
+  let cursor = 0;
+  while (cursor < text.length) {
+    const match = symbols
+      .map(entry => ({ ...entry, index: text.indexOf(entry.token, cursor) }))
+      .filter(entry => entry.index >= 0)
+      .sort((a, b) => a.index - b.index)[0];
+    if (!match) {
+      segments.push({ ...style, text: text.slice(cursor) });
+      break;
+    }
+    if (match.index > cursor) segments.push({ ...style, text: text.slice(cursor, match.index) });
+    segments.push({ ...style, text: SYMBOL_OBJECT_MARKER, symbolId: match.symbol.id });
+    cursor = match.index + match.token.length;
+  }
+  return segments.length > 0 ? segments : [{ ...style, text: '' }];
 }
 
 export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
@@ -87,21 +142,29 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   onSave,
   existingOverride,
   onDraftChange,
+  singleLine = false,
 }) => {
+  const normalizeText = useCallback((text: string) => (
+    singleLine ? text.replace(/[\r\n]+/g, ' ').replace(/[\t ]+/g, ' ') : text
+  ), [singleLine]);
+
   const baseSegments = useMemo<Segment[]>(() => {
+    const normalizeSegments = (items: Segment[]) => singleLine
+      ? items.map(segment => ({ ...segment, text: normalizeText(segment.text) }))
+      : items;
     if (existingOverride && existingOverride.segments.length > 0) {
-      return existingOverride.segments;
+      return normalizeSegments(existingOverride.segments);
     }
-    if (originalSegments && originalSegments.length > 0) return originalSegments;
+    if (originalSegments && originalSegments.length > 0) return normalizeSegments(originalSegments);
     return [{
-      text: originalText,
+      text: normalizeText(originalText),
       font: originalFont,
       size: originalSize,
       color: originalColor,
       weight: originalWeight,
       style: originalStyle,
     }];
-  }, [existingOverride, originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle]);
+  }, [existingOverride, originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, normalizeText, singleLine]);
   const baseTextAlign = existingOverride?.textAlign ?? originalTextAlign;
 
   // Segments = the array of styled character runs
@@ -121,8 +184,94 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   // Text editing
   const [isEditingText, setIsEditingText] = useState(false);
   const [editText, setEditText] = useState('');
+  const [editTextBaseline, setEditTextBaseline] = useState('');
+  const [isSymbolPaletteOpen, setIsSymbolPaletteOpen] = useState(false);
+  const [symbolPaletteStatus, setSymbolPaletteStatus] = useState<string | null>(null);
+  const [undoHistory, setUndoHistory] = useState<EditorSnapshot[]>([]);
+  const [redoHistory, setRedoHistory] = useState<EditorSnapshot[]>([]);
 
   const charGridRef = useRef<HTMLDivElement>(null);
+  const editTextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const editSelectionRef = useRef({ start: 0, end: 0 });
+
+  const createSnapshot = useCallback((): EditorSnapshot => {
+    const textarea = editTextAreaRef.current;
+    return {
+      segments: segments.map(segment => ({ ...segment })),
+      textAlign,
+      isEditingText,
+      editText,
+      editSelectionStart: textarea?.selectionStart ?? editSelectionRef.current.start,
+      editSelectionEnd: textarea?.selectionEnd ?? editSelectionRef.current.end,
+      selStart,
+      selEnd,
+      toolFont,
+      toolWeight,
+      toolStyle,
+      toolColor,
+      toolSize,
+      toolLigatures,
+    };
+  }, [segments, textAlign, isEditingText, editText, selStart, selEnd, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures]);
+
+  const pushHistory = useCallback(() => {
+    const snapshot = createSnapshot();
+    setUndoHistory(history => [...history.slice(-49), snapshot]);
+    setRedoHistory([]);
+  }, [createSnapshot]);
+
+  const restoreSnapshot = useCallback((snapshot: EditorSnapshot) => {
+    setSegments(snapshot.segments.map(segment => ({ ...segment })));
+    setTextAlign(snapshot.textAlign);
+    setIsEditingText(snapshot.isEditingText);
+    setEditText(snapshot.editText);
+    setEditTextBaseline(snapshot.editText);
+    setSelStart(snapshot.selStart);
+    setSelEnd(snapshot.selEnd);
+    setToolFont(snapshot.toolFont);
+    setToolWeight(snapshot.toolWeight);
+    setToolStyle(snapshot.toolStyle);
+    setToolColor(snapshot.toolColor);
+    setToolSize(snapshot.toolSize);
+    setToolLigatures(snapshot.toolLigatures);
+    editSelectionRef.current = { start: snapshot.editSelectionStart, end: snapshot.editSelectionEnd };
+    requestAnimationFrame(() => {
+      const textarea = editTextAreaRef.current;
+      if (snapshot.isEditingText && textarea) {
+        textarea.focus();
+        textarea.setSelectionRange(snapshot.editSelectionStart, snapshot.editSelectionEnd);
+      }
+    });
+  }, []);
+
+  const undo = useCallback(() => {
+    if (undoHistory.length === 0) return;
+    const snapshot = undoHistory[undoHistory.length - 1];
+    setRedoHistory(history => [...history, createSnapshot()]);
+    setUndoHistory(history => history.slice(0, -1));
+    restoreSnapshot(snapshot);
+    setSymbolPaletteStatus(language === 'pt-BR' ? 'Ação desfeita.' : 'Action undone.');
+  }, [undoHistory, createSnapshot, restoreSnapshot, language]);
+
+  const redo = useCallback(() => {
+    if (redoHistory.length === 0) return;
+    const snapshot = redoHistory[redoHistory.length - 1];
+    setUndoHistory(history => [...history, createSnapshot()]);
+    setRedoHistory(history => history.slice(0, -1));
+    restoreSnapshot(snapshot);
+    setSymbolPaletteStatus(language === 'pt-BR' ? 'Ação refeita.' : 'Action redone.');
+  }, [redoHistory, createSnapshot, restoreSnapshot, language]);
+
+  const commitSegments = useCallback((next: Segment[]) => {
+    pushHistory();
+    setSegments(next);
+  }, [pushHistory]);
+
+  const changeTextAlign = useCallback((next: TextAlignment) => {
+    if (next === textAlign) return;
+    pushHistory();
+    setTextAlign(next);
+  }, [textAlign, pushHistory]);
 
   useEffect(() => {
     setTextAlign(baseTextAlign);
@@ -139,6 +288,12 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setSelEnd(null);
     setIsEditingText(false);
     setEditText('');
+    setEditTextBaseline('');
+    editSelectionRef.current = { start: 0, end: 0 };
+    setIsSymbolPaletteOpen(false);
+    setSymbolPaletteStatus(null);
+    setUndoHistory([]);
+    setRedoHistory([]);
   }, [spanKey, originalFont, originalWeight, originalStyle, originalColor, originalSize]);
 
   // Initialize segments from existing override or original span
@@ -148,7 +303,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
   // Flatten segments to characters with their style info
   const chars = useMemo(() => {
-    const result: { char: string; segIdx: number; font: string; weight: number; style: 'normal' | 'italic'; color: string; size: number }[] = [];
+    const result: { char: string; segIdx: number; font: string; weight: number; style: 'normal' | 'italic'; color: string; size: number; symbolId?: string }[] = [];
     segments.forEach((seg, segIdx) => {
       for (const ch of seg.text) {
         result.push({
@@ -159,17 +314,15 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
           style: seg.style,
           color: seg.color,
           size: seg.size,
+          symbolId: seg.symbolId,
         });
       }
     });
     return result;
   }, [segments]);
 
-  // Full text from segments
-  const fullText = useMemo(() => chars.map(c => c.char).join(''), [chars]);
-
   const segmentsChanged = JSON.stringify(segments) !== JSON.stringify(baseSegments);
-  const textChanged = isEditingText && editText !== fullText;
+  const textChanged = isEditingText && editText !== editTextBaseline;
   const hasDraftChanges = segmentsChanged || textChanged || textAlign !== baseTextAlign;
 
   const requestClose = useCallback(() => {
@@ -186,15 +339,14 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       return;
     }
 
-    const previewSegments = isEditingText && editText !== fullText
-      ? [{
-          text: editText,
+    const previewSegments = isEditingText && editText !== editTextBaseline
+      ? segmentsFromEditableText(editText, {
           font: toolFont,
           size: toolSize,
           color: toolColor,
           weight: toolWeight,
           style: toolStyle,
-        }]
+        }, language)
       : segments;
 
     onDraftChange({
@@ -203,7 +355,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       textAlign,
       bbox
     });
-  }, [segments, textAlign, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, editText, fullText, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
+  }, [segments, textAlign, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, editText, editTextBaseline, language, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
 
   // Selection helpers
   const hasSelection = selStart !== null && selEnd !== null && selStart !== selEnd;
@@ -302,6 +454,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         const overlapStart = Math.max(0, selMin - segStart);
         const overlapEnd = Math.min(seg.text.length, selMax - segStart);
         newSegments.push({
+          ...seg,
           text: seg.text.slice(overlapStart, overlapEnd),
           font: finalFont,
           weight: finalWeight,
@@ -326,15 +479,15 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     for (const seg of newSegments) {
       if (seg.text.length === 0) continue;
       const last = merged[merged.length - 1];
-      if (last && last.font === seg.font && last.weight === seg.weight && last.style === seg.style && last.color === seg.color && last.size === seg.size && last.disableLigatures === seg.disableLigatures) {
+      if (last && !last.symbolId && !seg.symbolId && last.font === seg.font && last.weight === seg.weight && last.style === seg.style && last.color === seg.color && last.size === seg.size && last.disableLigatures === seg.disableLigatures && last.textStrokeWidthPt === seg.textStrokeWidthPt && last.textStrokeColor === seg.textStrokeColor) {
         last.text += seg.text;
       } else {
         merged.push({ ...seg });
       }
     }
 
-    setSegments(merged);
-  }, [selMin, selMax, segments, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures]);
+    commitSegments(merged);
+  }, [selMin, selMax, segments, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures, commitSegments]);
 
   // Apply a specific PUA character (alternate) to the selected character
   const applyAlternate = useCallback((puaChar: string) => {
@@ -370,16 +523,16 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     for (const seg of newSegments) {
       if (seg.text.length === 0) continue;
       const last = merged[merged.length - 1];
-      if (last && last.font === seg.font && last.weight === seg.weight && last.style === seg.style && last.color === seg.color && last.size === seg.size) {
+      if (last && !last.symbolId && !seg.symbolId && last.font === seg.font && last.weight === seg.weight && last.style === seg.style && last.color === seg.color && last.size === seg.size && last.textStrokeWidthPt === seg.textStrokeWidthPt && last.textStrokeColor === seg.textStrokeColor) {
         last.text += seg.text;
       } else {
         merged.push({ ...seg });
       }
     }
 
-    setSegments(merged);
+    commitSegments(merged);
     setToolFont('EsmeraldaPro-PUA');
-  }, [selMin, selMax, segments]);
+  }, [selMin, selMax, segments, commitSegments]);
 
   // Select All shortcut
   const selectAll = useCallback(() => {
@@ -409,48 +562,126 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     return () => window.removeEventListener('mouseup', handleMouseUp);
   }, [handleMouseUp]);
 
+  const insertSemanticSymbol = useCallback((symbolId: string) => {
+    const symbol = getSemanticSymbol(symbolId);
+    const editorToken = getSymbolEditorToken(symbolId, language);
+    if (!symbol || !editorToken) return;
+
+    if (isEditingText) {
+      const textarea = editTextAreaRef.current;
+      const start = textarea?.selectionStart ?? editSelectionRef.current.start;
+      const end = textarea?.selectionEnd ?? editSelectionRef.current.end;
+      const insertionStart = Math.max(0, Math.min(start, editText.length));
+      const insertionEnd = Math.max(insertionStart, Math.min(end, editText.length));
+      const nextText = `${editText.slice(0, insertionStart)}${editorToken}${editText.slice(insertionEnd)}`;
+      pushHistory();
+      setEditText(nextText);
+      const caret = insertionStart + editorToken.length;
+      editSelectionRef.current = { start: caret, end: caret };
+      requestAnimationFrame(() => {
+        const currentTextarea = editTextAreaRef.current;
+        if (!currentTextarea) return;
+        currentTextarea.focus();
+        currentTextarea.setSelectionRange(caret, caret);
+      });
+      setSymbolPaletteStatus(language === 'pt-BR' ? `${symbol.labels['pt-BR']} inserido no texto.` : `${symbol.labels.en} inserted in text.`);
+      return;
+    }
+
+    if (selMin === null || selMax === null) {
+      setSymbolPaletteStatus(language === 'pt-BR' ? 'Selecione caracteres ou abra Editar Texto para escolher o cursor.' : 'Select characters or open Edit Text to choose a caret position.');
+      return;
+    }
+
+    const replacement: Segment = {
+      text: SYMBOL_OBJECT_MARKER,
+      symbolId,
+      font: toolFont,
+      size: toolSize,
+      color: toolColor,
+      weight: toolWeight,
+      style: toolStyle,
+    };
+    const nextSegments: Segment[] = [];
+    let index = 0;
+    let inserted = false;
+    for (const segment of segments) {
+      const segmentStart = index;
+      const segmentEnd = index + segment.text.length;
+      if (segmentEnd <= selMin || segmentStart >= selMax) {
+        nextSegments.push({ ...segment });
+      } else {
+        if (segmentStart < selMin) nextSegments.push({ ...segment, text: segment.text.slice(0, selMin - segmentStart) });
+        if (!inserted) {
+          nextSegments.push(replacement);
+          inserted = true;
+        }
+        if (segmentEnd > selMax) nextSegments.push({ ...segment, text: segment.text.slice(selMax - segmentStart) });
+      }
+      index = segmentEnd;
+    }
+    if (!inserted) return;
+    commitSegments(nextSegments);
+    setSelStart(selMin);
+    setSelEnd(selMin + 1);
+    setSymbolPaletteStatus(language === 'pt-BR' ? `${symbol.labels['pt-BR']} substituiu a seleção.` : `${symbol.labels.en} replaced the selection.`);
+  }, [isEditingText, editText, language, pushHistory, selMin, selMax, toolFont, toolSize, toolColor, toolWeight, toolStyle, segments, commitSegments]);
+
   // Text rewrite mode
   const handleStartEditText = useCallback(() => {
-    setEditText(fullText);
+    const readableText = editableTextForSegments(segments, language);
+    setEditText(readableText);
+    setEditTextBaseline(readableText);
+    editSelectionRef.current = { start: readableText.length, end: readableText.length };
     setIsEditingText(true);
-  }, [fullText]);
+  }, [segments, language]);
 
   const handleConfirmEditText = useCallback(() => {
+    const normalizedEditText = normalizeText(editText);
     // A no-op confirmation must not flatten existing styled runs.
-    if (editText !== fullText) {
-      setSegments([{
-        text: editText,
+    if (normalizedEditText !== editTextBaseline) {
+      commitSegments(segmentsFromEditableText(normalizedEditText, {
         font: toolFont,
         size: toolSize,
         color: toolColor,
         weight: toolWeight,
         style: toolStyle,
-      }]);
+      }, language));
     }
     setIsEditingText(false);
+    setEditTextBaseline(normalizedEditText);
     setSelStart(null);
     setSelEnd(null);
-  }, [editText, fullText, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
+  }, [editText, editTextBaseline, normalizeText, toolFont, toolSize, toolColor, toolWeight, toolStyle, language, commitSegments]);
 
   const handleSave = useCallback(() => {
     if (!hasDraftChanges) {
       onClose();
       return;
     }
+    const finalSegments = isEditingText && editText !== editTextBaseline
+      ? segmentsFromEditableText(normalizeText(editText), {
+          font: toolFont,
+          size: toolSize,
+          color: toolColor,
+          weight: toolWeight,
+          style: toolStyle,
+        }, language)
+      : segments;
     onSave({
       spanKey,
-      segments,
+      segments: finalSegments,
       bbox,
       textAlign,
     });
-  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign]);
+  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign, isEditingText, editText, editTextBaseline, normalizeText, toolFont, toolSize, toolColor, toolWeight, toolStyle, language]);
 
   // Reset to original
   const handleReset = useCallback(() => {
     if (language === 'pt-BR' && !window.confirm('Resetar esta tradução em português? O rascunho salvo desta unidade será removido.')) {
       return;
     }
-    setSegments([{
+    commitSegments([{
       text: originalText,
       font: originalFont,
       size: originalSize,
@@ -461,7 +692,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setSelStart(null);
     setSelEnd(null);
     onSave(null);
-  }, [language, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, onSave]);
+  }, [language, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, onSave, commitSegments]);
 
   const fontToCSS = (f: string) => {
     if (f.includes('Optima') || f === 'OptimaLTStd') return "'OptimaLTStd', serif";
@@ -521,10 +752,10 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
               style={{ fontFamily: 'EsmeraldaPro' }}
             >fi</button>
             <div className="rse-toolbar-divider" style={{ width: '1px', background: '#ccc', margin: '0 8px' }} />
-            <button className={`rse-tool-btn ${textAlign === 'left' ? 'active' : ''}`} onClick={() => setTextAlign('left')} title="Align Left">⫷</button>
-            <button className={`rse-tool-btn ${textAlign === 'center' ? 'active' : ''}`} onClick={() => setTextAlign('center')} title="Align Center">≡</button>
-            <button className={`rse-tool-btn ${textAlign === 'right' ? 'active' : ''}`} onClick={() => setTextAlign('right')} title="Align Right">⫸</button>
-            <button className={`rse-tool-btn ${textAlign === 'justify' ? 'active' : ''}`} onClick={() => setTextAlign('justify')} title="Justify">▤</button>
+            <button className={`rse-tool-btn ${textAlign === 'left' ? 'active' : ''}`} onClick={() => changeTextAlign('left')} title="Align Left">⫷</button>
+            <button className={`rse-tool-btn ${textAlign === 'center' ? 'active' : ''}`} onClick={() => changeTextAlign('center')} title="Align Center">≡</button>
+            <button className={`rse-tool-btn ${textAlign === 'right' ? 'active' : ''}`} onClick={() => changeTextAlign('right')} title="Align Right">⫸</button>
+            <button className={`rse-tool-btn ${textAlign === 'justify' ? 'active' : ''}`} onClick={() => changeTextAlign('justify')} title="Justify">▤</button>
             <div className="rse-toolbar-divider" style={{ width: '1px', background: '#ccc', margin: '0 8px' }} />
             <input type="color" value={toolColor} onChange={e => { setToolColor(e.target.value); applyToSelection({color: e.target.value}); }} title="Color" className="rse-color-input" />
             <input type="number" value={toolSize} onChange={e => { setToolSize(Number(e.target.value)); applyToSelection({size: Number(e.target.value)}); }} min={4} max={72} step={0.5} className="rse-size-input" title="Size (pt)" />
@@ -541,16 +772,30 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         {/* Text Rewrite Input */}
         {isEditingText && (
           <div className="rse-edit-text">
-            <label>Rewrite text:</label>
+            <label>{language === 'pt-BR' ? 'Editar texto:' : 'Rewrite text:'}</label>
+            <p className="rse-symbol-edit-hint">
+              {language === 'pt-BR'
+                ? 'Tokens entre ⟦colchetes⟧ representam símbolos especiais. A paleta pode inseri-los no cursor ou substituir texto selecionado.'
+                : 'Tokens inside ⟦brackets⟧ represent special symbols. The palette inserts at the caret or replaces selected text.'}
+            </p>
             <textarea
+              ref={editTextAreaRef}
               value={editText}
-              onChange={e => setEditText(e.target.value)}
-              rows={3}
+              onChange={e => {
+                setEditText(normalizeText(e.target.value));
+                editSelectionRef.current = { start: e.currentTarget.selectionStart, end: e.currentTarget.selectionEnd };
+              }}
+              onSelect={e => { editSelectionRef.current = { start: e.currentTarget.selectionStart, end: e.currentTarget.selectionEnd }; }}
+              onClick={e => { editSelectionRef.current = { start: e.currentTarget.selectionStart, end: e.currentTarget.selectionEnd }; }}
+              onKeyUp={e => { editSelectionRef.current = { start: e.currentTarget.selectionStart, end: e.currentTarget.selectionEnd }; }}
+              onBlur={e => { editSelectionRef.current = { start: e.currentTarget.selectionStart, end: e.currentTarget.selectionEnd }; }}
+              rows={singleLine ? 1 : 3}
+              wrap={singleLine ? 'off' : 'soft'}
               autoFocus
             />
             <div className="rse-edit-text-actions">
-              <button onClick={() => setIsEditingText(false)}>Cancel</button>
-              <button className="rse-apply" onClick={handleConfirmEditText}>Confirm</button>
+              <button onClick={() => { setIsEditingText(false); setEditText(editTextBaseline); }}> {language === 'pt-BR' ? 'Cancelar' : 'Cancel'}</button>
+              <button className="rse-apply" onClick={handleConfirmEditText}>{language === 'pt-BR' ? 'Confirmar' : 'Confirm'}</button>
             </div>
           </div>
         )}
@@ -564,7 +809,9 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
               return (
                 <span
                   key={idx}
-                  className={`rse-char ${isSelected ? 'rse-char-selected' : ''}`}
+                  className={`rse-char ${c.symbolId ? 'rse-char-symbol' : ''} ${isSelected ? 'rse-char-selected' : ''}`}
+                  aria-label={c.symbolId ? getSemanticSymbol(c.symbolId)?.labels[language] : c.char}
+                  title={c.symbolId ? getSemanticSymbol(c.symbolId)?.labels[language] : undefined}
                   style={{
                     fontFamily: fontToCSS(c.font),
                     fontWeight: c.weight,
@@ -574,7 +821,9 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
                   onMouseDown={() => handleCharMouseDown(idx)}
                   onMouseEnter={() => handleCharMouseEnter(idx)}
                 >
-                  {c.char === ' ' ? '\u00A0' : c.char}
+                  {c.symbolId ? (
+                    <img src={getSemanticSymbol(c.symbolId)?.assetUrl} alt="" aria-hidden="true" />
+                  ) : c.char === ' ' ? '\u00A0' : c.char}
                 </span>
               );
             })}
@@ -614,7 +863,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
           <div className="rse-segments-list">
             {segments.map((seg, i) => (
               <div key={i} className="rse-segment-chip">
-                <span className="rse-seg-text">"{seg.text.length > 20 ? seg.text.slice(0, 20) + '…' : seg.text}"</span>
+                <span className="rse-seg-text">"{seg.symbolId ? getSemanticSymbol(seg.symbolId)?.labels[language] ?? seg.symbolId : seg.text.length > 20 ? seg.text.slice(0, 20) + '…' : seg.text}"</span>
                 <span className="rse-seg-meta">{seg.font} · {seg.weight} · {seg.style} · {seg.color}</span>
               </div>
             ))}
@@ -629,6 +878,18 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
           </div>
         </div>
       </div>
+      <AdminSymbolPalette
+        language={language}
+        open={isSymbolPaletteOpen}
+        canInsert={isEditingText || hasSelection}
+        canUndo={undoHistory.length > 0}
+        canRedo={redoHistory.length > 0}
+        status={symbolPaletteStatus}
+        onOpenChange={setIsSymbolPaletteOpen}
+        onInsert={insertSemanticSymbol}
+        onUndo={undo}
+        onRedo={redo}
+      />
     </div>
   );
 };

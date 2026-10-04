@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { RichSpanEditor, type Segment, type SpanOverride, type TextAlignment } from './RichSpanEditor';
+import { AdminRuler } from './AdminRuler';
+import { AdminLayoutFrameEditor } from './AdminLayoutFrameEditor';
+import { deleteLayoutFrame, fetchLayoutFrames, loadLocalLayoutFrames, saveLayoutFrame, saveLocalLayoutFrames, type LayoutLanguage } from '../layoutFrames';
+import { getSemanticSymbol } from '../symbols/semanticSymbols';
 import './PageRenderer.css';
 import './Toast.css';
 
@@ -17,18 +21,39 @@ export interface SpanData {
   displayOverride?: string;
   /** Per-span replacement for symbol-font encodings that need a Unicode cmap codepoint. */
   pictogramDisplayOverride?: string;
+  /** Rendering-only text when source extraction includes a layout-control artifact. */
+  renderTextOverride?: string;
   pictogramFontOverride?: string;
   /** Minimal SVG path for a source-confirmed glyph missing from the app's fonts. */
   pictogramSvgPath?: string;
   renderWeightOverride?: number;
   /** Browser-only glyph-size correction when PDF span metrics include oversized inline artifacts. */
   renderSizeOverridePt?: number;
+  /** A duplicate PDF paint pass used only to draw the outline of a later fill pass. */
+  renderOnlyStrokePass?: boolean;
+  /** The source glyph is restored by a page fidelity overlay; retain its text in the DOM data. */
+  renderAsSourceOverlayDuplicate?: boolean;
+  /** Language(s) in which the source-overlay replacement should hide this glyph. */
+  renderSourceOverlayLanguage?: 'en' | 'pt-BR' | 'all';
+  /** Recreate the PDF's outlined text effect on the semantic fill span. */
+  renderTextStrokeWidthPt?: number;
+  renderTextStrokeColor?: string;
 }
 
 export interface LineData {
   id: string;
   bbox: [number, number, number, number];
   renderTopOffsetPt?: number;
+  /** Browser-only indentation when a filtered tiny leading glyph still occupies source advance. */
+  renderTextOffsetPt?: number;
+  /** Keep source PDF span advances/gaps in the English view for inline callout alignment. */
+  renderSourceSpanGeometry?: boolean;
+  /** Stop source-advance locking just after the last callout on this line. */
+  renderSourceGeometryThroughSpan?: number;
+  /** Limit suppression of rasterized source text to the overlay's language. */
+  rasterizedDuplicateLanguage?: 'en' | 'pt-BR' | 'all';
+  /** Keep the Admin duplicate marker off when it would spill beyond a tightly cropped source overlay. */
+  hideRasterizedDuplicateAdminMarker?: boolean;
   dir?: [number, number];
   spans: SpanData[];
   renderScaleX?: number;
@@ -37,6 +62,9 @@ export interface LineData {
 export interface LayoutFrame {
   x: number;
   width: number;
+  y?: number;
+  height?: number;
+  rotation?: number;
   textAlign?: TextAlignment;
   lineHeight?: number;
 }
@@ -47,6 +75,12 @@ export interface Block {
   hiddenFromPage?: boolean;
   /** Stable semantic editor key for newly split units; legacy blocks keep their index-based key. */
   editorKey?: string;
+  /** Source line indexes that render as fixed page furniture and stay outside rich-text editing. */
+  staticEditorLineIndexes?: number[];
+  /** Keep source-furniture visible but unavailable to Admin editing. */
+  adminReadOnly?: boolean;
+  /** Keep translated content on one line inside this page-specific text frame. */
+  noWrap?: boolean;
   bbox: [number, number, number, number];
   layoutFrame?: LayoutFrame;
   content?: string;
@@ -142,6 +176,8 @@ export interface PageFidelityOverlay {
   /** Physical game components stay in their source language in every viewer language. */
   languageInvariant?: boolean;
   hideInAdmin?: boolean;
+  /** Optional paint layer for source shapes that belong between the page background and editable text. */
+  zIndex?: number;
 }
 
 export interface PageData {
@@ -296,6 +332,10 @@ function renderCreditSegments(
       fontWeight: piece.segment.weight,
       fontStyle: piece.segment.style,
       color: piece.segment.color,
+      ...(piece.segment.textStrokeWidthPt ? {
+        WebkitTextStroke: `${piece.segment.textStrokeWidthPt * scale}px ${piece.segment.textStrokeColor || '#231f20'}`,
+        paintOrder: 'stroke fill',
+      } : {}),
       whiteSpace: 'pre-wrap',
       fontVariantLigatures: 'none',
       fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
@@ -332,6 +372,51 @@ function needsEsmeraldaHeadingDrop(font: string, size: number, sourceBBoxHeight:
     sourceBBoxHeight >= size * 1.25;
 }
 
+function staticEditorLineIndexes(block: Block): Set<number> {
+  return new Set(block.staticEditorLineIndexes ?? []);
+}
+
+function editableBlockLines(block: Block): LineData[] {
+  const staticIndexes = staticEditorLineIndexes(block);
+  return (block.lines ?? []).filter((_, index) => !staticIndexes.has(index));
+}
+
+function normalizeStaticEditorPrefix(block: Block, override: SpanOverride | null): SpanOverride | null {
+  if (!override || !block.lines || !block.staticEditorLineIndexes?.length) return override;
+
+  const fixedPrefix = block.staticEditorLineIndexes
+    .flatMap(index => block.lines?.[index]?.spans ?? [])
+    .filter(span => !span.renderOnlyStrokePass)
+    .map(span => span.displayOverride || span.text)
+    .join('');
+  if (!fixedPrefix) return override;
+
+  let remaining = fixedPrefix;
+  const segments: Segment[] = [];
+  for (const segment of override.segments) {
+    if (!remaining) {
+      segments.push(segment);
+      continue;
+    }
+    if (!segment.text) continue;
+    if (remaining.startsWith(segment.text)) {
+      remaining = remaining.slice(segment.text.length);
+      continue;
+    }
+    if (segment.text.startsWith(remaining)) {
+      segments.push({ ...segment, text: segment.text.slice(remaining.length) });
+      remaining = '';
+      continue;
+    }
+    // Old drafts may have been edited independently. Only remove a prefix
+    // when the complete source marker matches exactly at the start.
+    return override;
+  }
+
+  if (remaining) return override;
+  return { ...override, segments: segments.filter(segment => segment.text.length > 0) };
+}
+
 function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
   let text = '';
   let font = '';
@@ -340,10 +425,11 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
   let weight = 400;
   let style: 'normal' | 'italic' = 'normal';
   
-  const lines = block.lines || [];
+  const lines = editableBlockLines(block);
   const sourceSegments = sourceSegmentsFromSpans(lines.flatMap(line => line.spans));
   for (const line of lines) {
     for (const span of line.spans) {
+      if (span.renderOnlyStrokePass) continue;
       if (!font && span.font && !span.font.includes('Dingbat') && span.text.trim()) {
         font = span.font;
         size = span.size;
@@ -378,11 +464,13 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
     bbox: block.bbox,
     textAlign: block.layoutFrame?.textAlign || 'left',
     sourceSegments,
+    singleLine: block.noWrap ?? false,
   };
 }
 
 function sourceSegmentsFromSpans(spans: SpanData[]): Segment[] {
   return spans
+    .filter(span => !span.renderOnlyStrokePass)
     .map(span => {
       const mapped = mapPdfFont(span.font);
       return {
@@ -392,6 +480,8 @@ function sourceSegmentsFromSpans(spans: SpanData[]): Segment[] {
         color: span.color || '#231f20',
         weight: span.renderWeightOverride ?? mapped.weight,
         style: mapped.style,
+        textStrokeWidthPt: span.renderTextStrokeWidthPt,
+        textStrokeColor: span.renderTextStrokeColor,
         disableLigatures: true,
       } satisfies Segment;
     })
@@ -550,6 +640,7 @@ function extractCreditFieldInfo(
 
   for (const line of lines) {
     for (const span of line.spans) {
+      if (span.renderOnlyStrokePass) continue;
       if (!font && span.font && !span.font.includes('Dingbat') && span.text.trim()) {
         font = span.font;
         size = span.size;
@@ -596,18 +687,64 @@ interface SelectedSpanInfo {
   bbox: [number, number, number, number];
   textAlign: TextAlignment;
   sourceSegments?: Segment[];
+  singleLine?: boolean;
 }
 
 interface PageRendererProps {
   pageData: PageData;
   isAdmin: boolean;
+  showRuler?: boolean;
+  layoutMode?: boolean;
+  onLayoutDirtyChange?: (dirty: boolean) => void;
   zoomLevel?: number;
   onNavigate?: (pageNum: number) => void;
   language?: 'en' | 'pt-BR';
 }
 
-export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, zoomLevel = 1, onNavigate, language = 'en' }) => {
+function sourceLayoutFrame(block: Block): LayoutFrame {
+  const firstLine = editableBlockLines(block)[0] ?? block.lines?.[0];
+  return {
+    x: block.layoutFrame?.x ?? (firstLine as any)?.availableX ?? block.bbox[0],
+    y: block.bbox[1],
+    width: block.layoutFrame?.width ?? (firstLine as any)?.availableWidth ?? Math.max(1, block.bbox[2] - block.bbox[0]),
+    height: block.bbox[3] - block.bbox[1],
+    rotation: 0,
+    textAlign: block.layoutFrame?.textAlign,
+    lineHeight: block.layoutFrame?.lineHeight,
+  };
+}
+
+function frameUnitKey(pageNumber: number, block: Block, blockIndex: number): string {
+  return block.editorKey ?? `page_${pageNumber}_block_${blockIndex}`;
+}
+
+function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 'pt-BR'): React.ReactNode {
+  if (!segment.symbolId) return segment.text;
+  const symbol = getSemanticSymbol(segment.symbolId);
+  if (!symbol) return <span title={`Unmapped symbol: ${segment.symbolId}`}>◈</span>;
+  const imageSize = segment.size * scale * symbol.render.widthEm;
+  const verticalOffset = segment.size * scale * symbol.render.verticalAlignEm;
+  return Array.from(segment.text).map((_, index) => (
+    <img
+      key={`${symbol.id}-${index}`}
+      className="inline-semantic-symbol"
+      src={symbol.assetUrl}
+      alt={symbol.labels[language]}
+      role="img"
+      draggable={false}
+      style={{
+        width: `${imageSize}px`,
+        height: `${imageSize}px`,
+        verticalAlign: `-${verticalOffset}px`,
+        clipPath: symbol.render.mask === 'circle' ? 'circle(50% at 50% 50%)' : undefined,
+      }}
+    />
+  ));
+}
+
+export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, onNavigate, language = 'en' }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [pageElement, setPageElement] = useState<HTMLDivElement | null>(null);
   const [scale, setScale] = useState(1);
   const [selectedSpan, setSelectedSpan] = useState<SelectedSpanInfo | null>(null);
   const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => loadOverrides(language));
@@ -615,6 +752,13 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
   const [draftOverride, setDraftOverride] = useState<SpanOverride | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [layoutFrames, setLayoutFrames] = useState<Map<string, LayoutFrame>>(() => loadLocalLayoutFrames(pageData.page_number, language));
+  const [inheritedLayoutFrames, setInheritedLayoutFrames] = useState<Map<string, LayoutFrame>>(() => language === 'pt-BR' ? loadLocalLayoutFrames(pageData.page_number, 'en') : new Map());
+  const [layoutUnitKey, setLayoutUnitKey] = useState<string | null>(null);
+  const [layoutDraft, setLayoutDraft] = useState<LayoutFrame | null>(null);
+  const [layoutDirty, setLayoutDirty] = useState(false);
+  const [isSavingLayout, setIsSavingLayout] = useState(false);
+  const [layoutStatus, setLayoutStatus] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -632,6 +776,130 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
     return () => { active = false; };
   }, [language]);
   const overridesReady = overridesLoadedLanguage === language;
+
+  useEffect(() => {
+    let active = true;
+    const localOwn = loadLocalLayoutFrames(pageData.page_number, language);
+    const localEnglish = language === 'pt-BR' ? loadLocalLayoutFrames(pageData.page_number, 'en') : new Map<string, LayoutFrame>();
+    setLayoutFrames(localOwn);
+    setInheritedLayoutFrames(localEnglish);
+    setLayoutUnitKey(null);
+    setLayoutDraft(null);
+    setLayoutDirty(false);
+    setLayoutStatus(null);
+    onLayoutDirtyChange?.(false);
+
+    const load = async (frameLanguage: LayoutLanguage, local: Map<string, LayoutFrame>) => {
+      const remote = await fetchLayoutFrames(pageData.page_number, frameLanguage);
+      const merged = new Map(local);
+      remote?.forEach((frame, key) => merged.set(key, frame));
+      return merged;
+    };
+    const languages: LayoutLanguage[] = language === 'pt-BR' ? ['en', 'pt-BR'] : ['en'];
+    Promise.all(languages.map(lang => load(lang, lang === language ? localOwn : localEnglish))).then(results => {
+      if (!active) return;
+      if (language === 'en') setLayoutFrames(results[0]);
+      else {
+        setInheritedLayoutFrames(results[0]);
+        setLayoutFrames(results[1]);
+      }
+    });
+    return () => { active = false; };
+  }, [pageData.page_number, language, onLayoutDirtyChange]);
+
+  useEffect(() => {
+    onLayoutDirtyChange?.(layoutDirty);
+  }, [layoutDirty, onLayoutDirtyChange]);
+
+  useEffect(() => {
+    if (layoutMode) {
+      setSelectedSpan(null);
+      setDraftOverride(null);
+    } else if (layoutDirty) {
+      discardLayoutDraft();
+    }
+  }, [layoutMode]);
+
+  useEffect(() => {
+    if (!layoutDirty) return;
+    const warnBeforeClose = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = '';
+    };
+    window.addEventListener('beforeunload', warnBeforeClose);
+    return () => window.removeEventListener('beforeunload', warnBeforeClose);
+  }, [layoutDirty]);
+
+  const effectiveFrameFor = useCallback((unitKey: string, block: Block) => {
+    return layoutFrames.get(unitKey)
+      ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(unitKey) : undefined)
+      ?? sourceLayoutFrame(block);
+  }, [layoutFrames, inheritedLayoutFrames, language]);
+
+  const selectLayoutFrame = useCallback((unitKey: string, initialFrame: LayoutFrame) => {
+    if (layoutDirty && unitKey !== layoutUnitKey && !window.confirm('Há alterações de moldura não salvas. Descartar e selecionar outra?')) return;
+    const block = pageData.blocks.find((candidate, index) => frameUnitKey(pageData.page_number, candidate, index) === unitKey);
+    const saved = layoutFrames.get(unitKey)
+      ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(unitKey) : undefined)
+      ?? (block ? sourceLayoutFrame(block) : initialFrame);
+    setLayoutUnitKey(unitKey);
+    setLayoutDraft({ ...saved });
+    setLayoutDirty(false);
+    onLayoutDirtyChange?.(false);
+    setLayoutStatus(language === 'pt-BR' && !layoutFrames.has(unitKey) ? 'PT-BR herda a moldura EN até ser personalizada.' : null);
+  }, [layoutDirty, layoutUnitKey, pageData.blocks, pageData.page_number, layoutFrames, inheritedLayoutFrames, language, onLayoutDirtyChange]);
+
+  const changeLayoutDraft = useCallback((frame: LayoutFrame) => {
+    setLayoutDraft(frame);
+    setLayoutDirty(true);
+    onLayoutDirtyChange?.(true);
+    setLayoutStatus(null);
+  }, [onLayoutDirtyChange]);
+
+  const discardLayoutDraft = useCallback(() => {
+    if (!layoutUnitKey) return;
+    const block = pageData.blocks.find((candidate, index) => frameUnitKey(pageData.page_number, candidate, index) === layoutUnitKey);
+    const saved = layoutFrames.get(layoutUnitKey)
+      ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(layoutUnitKey) : undefined)
+      ?? (block ? sourceLayoutFrame(block) : null);
+    setLayoutDraft(saved ? { ...saved } : null);
+    setLayoutDirty(false);
+    onLayoutDirtyChange?.(false);
+    setLayoutStatus('Alterações descartadas.');
+  }, [layoutUnitKey, pageData.blocks, pageData.page_number, layoutFrames, inheritedLayoutFrames, language, onLayoutDirtyChange]);
+
+  const saveLayoutDraft = useCallback(async () => {
+    if (!layoutUnitKey || !layoutDraft || !layoutDirty || isSavingLayout) return;
+    setIsSavingLayout(true);
+    const next = new Map(layoutFrames);
+    next.set(layoutUnitKey, layoutDraft);
+    setLayoutFrames(next);
+    const savedLocally = saveLocalLayoutFrames(pageData.page_number, language, next);
+    const savedRemotely = await saveLayoutFrame({ unitKey: layoutUnitKey, pageNumber: pageData.page_number, language, frame: layoutDraft });
+    setLayoutDirty(false);
+    onLayoutDirtyChange?.(false);
+    setLayoutStatus(savedRemotely ? 'Sincronizado com Payload.' : savedLocally ? 'Salvo neste navegador; não sincronizado com Payload.' : 'Falha ao salvar localmente e no servidor.');
+    setIsSavingLayout(false);
+  }, [layoutUnitKey, layoutDraft, layoutDirty, isSavingLayout, layoutFrames, pageData.page_number, language, onLayoutDirtyChange]);
+
+  const resetLayoutToEnglish = useCallback(async () => {
+    if (!layoutUnitKey || language !== 'pt-BR' || !layoutFrames.has(layoutUnitKey) || isSavingLayout) return;
+    if (!window.confirm('Remover a moldura PT-BR e voltar a herdar a configuração inglesa?')) return;
+    setIsSavingLayout(true);
+    const next = new Map(layoutFrames);
+    next.delete(layoutUnitKey);
+    setLayoutFrames(next);
+    saveLocalLayoutFrames(pageData.page_number, language, next);
+    const removedRemotely = await deleteLayoutFrame(layoutUnitKey, language);
+    const inherited = inheritedLayoutFrames.get(layoutUnitKey)
+      ?? pageData.blocks.flatMap((block, index) => frameUnitKey(pageData.page_number, block, index) === layoutUnitKey ? [sourceLayoutFrame(block)] : [])[0]
+      ?? null;
+    setLayoutDraft(inherited ? { ...inherited } : null);
+    setLayoutDirty(false);
+    onLayoutDirtyChange?.(false);
+    setLayoutStatus(removedRemotely ? 'Moldura PT-BR removida; herdando EN.' : 'Herança aplicada neste navegador; remoção remota pendente.');
+    setIsSavingLayout(false);
+  }, [layoutUnitKey, language, layoutFrames, isSavingLayout, pageData.page_number, inheritedLayoutFrames, pageData.blocks, onLayoutDirtyChange]);
 
   const contentsMap = useMemo(() => {
     const map = new Map<string, number>();
@@ -759,10 +1027,31 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
     flexShrink: 0,
   };
 
+  const selectedSourceBlock = selectedSpan
+    ? pageData.blocks.find((block, index) => {
+        const blockKey = block.editorKey
+          ? `${block.editorKey}__${language}`
+          : `page_${pageData.page_number}_block_${index}`;
+        return blockKey === selectedSpan.spanKey;
+      })
+    : undefined;
+  const selectedExistingOverride = selectedSpan
+    ? selectedSourceBlock
+      ? normalizeStaticEditorPrefix(selectedSourceBlock, overrides.get(selectedSpan.spanKey) || null)
+      : overrides.get(selectedSpan.spanKey) || null
+    : null;
+
+  const selectedLayoutBlockIndex = layoutUnitKey
+    ? pageData.blocks.findIndex((block, index) => frameUnitKey(pageData.page_number, block, index) === layoutUnitKey)
+    : -1;
+  const selectedLayoutBlock = selectedLayoutBlockIndex >= 0 ? pageData.blocks[selectedLayoutBlockIndex] : null;
+  const selectedLayoutFrame = layoutDraft;
+  const selectedLayoutHasOwnFrame = !!layoutUnitKey && layoutFrames.has(layoutUnitKey);
+
   return (
     <div className={`page-renderer ${selectedSpan ? 'editor-open' : ''}`} style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'stretch', overflow: 'hidden' }}>
       <div ref={containerRef} className="page-stage">
-      <div className="page-container" style={containerStyle}>
+      <div ref={setPageElement} className="page-container" style={containerStyle}>
         {toast && (
           <div className={`toast-notification toast-${toast.type}`}>
             {toast.message}
@@ -796,6 +1085,13 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
               contentsMap={contentsMap}
               onNavigate={onNavigate}
               onBlockClick={handleSpanClick}
+              layoutMode={isAdmin && layoutMode}
+              layoutUnitKey={frameUnitKey(pageData.page_number, block, bIdx)}
+              layoutFrameForSelection={effectiveFrameFor(frameUnitKey(pageData.page_number, block, bIdx), block)}
+              layoutFrameOverride={(layoutUnitKey === frameUnitKey(pageData.page_number, block, bIdx) ? layoutDraft : undefined)
+                ?? layoutFrames.get(frameUnitKey(pageData.page_number, block, bIdx))
+                ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(frameUnitKey(pageData.page_number, block, bIdx)) : undefined)}
+              onSelectLayoutFrame={selectLayoutFrame}
               selectedBlockKey={selectedSpan?.spanKey || null}
               overrides={overrides}
               overridesReady={overridesReady}
@@ -824,7 +1120,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
                 top: `${y0 * scale}px`,
                 width: `${(x1 - x0) * scale}px`,
                 height: `${(y1 - y0) * scale}px`,
-                zIndex: 10000,
+                zIndex: overlay.zIndex ?? 10000,
                 pointerEvents: 'none',
                 userSelect: 'none',
               }}
@@ -832,6 +1128,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
           );
         })}
       </div>
+      {isAdmin && showRuler && <AdminRuler pageElement={pageElement} pageWidth={pageData.width} pageHeight={pageData.height} />}
       </div>
 
       {isAdmin && selectedSpan && (
@@ -851,7 +1148,31 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, z
           onClose={handleCloseEditor}
           onSave={handleSaveOverride}
           onDraftChange={handleDraftChange}
-          existingOverride={overrides.get(selectedSpan.spanKey) || null}
+          existingOverride={selectedExistingOverride}
+          singleLine={selectedSpan.singleLine}
+        />
+      )}
+      {isAdmin && layoutMode && (
+        <AdminLayoutFrameEditor
+          pageElement={pageElement}
+          pageWidth={pageData.width}
+          unitKey={layoutUnitKey}
+          sourceBbox={selectedLayoutBlock ? {
+            x: selectedLayoutBlock.bbox[0],
+            y: selectedLayoutBlock.bbox[1],
+            width: selectedLayoutBlock.bbox[2] - selectedLayoutBlock.bbox[0],
+            height: selectedLayoutBlock.bbox[3] - selectedLayoutBlock.bbox[1],
+          } : null}
+          frame={selectedLayoutFrame}
+          language={language}
+          hasOwnFrame={selectedLayoutHasOwnFrame}
+          isDirty={layoutDirty}
+          isSaving={isSavingLayout}
+          status={layoutStatus}
+          onChange={changeLayoutDraft}
+          onSave={saveLayoutDraft}
+          onDiscard={discardLayoutDraft}
+          onResetToEnglish={resetLayoutToEnglish}
         />
       )}
     </div>
@@ -869,6 +1190,11 @@ interface SpanBlockProps {
   contentsMap?: Map<string, number>;
   onNavigate?: (pageNum: number) => void;
   onBlockClick: (info: SelectedSpanInfo) => void;
+  layoutMode: boolean;
+  layoutUnitKey: string;
+  layoutFrameForSelection: LayoutFrame;
+  layoutFrameOverride?: LayoutFrame;
+  onSelectLayoutFrame: (unitKey: string, frame: LayoutFrame) => void;
   selectedBlockKey: string | null;
   overrides: Map<string, SpanOverride>;
   overridesReady: boolean;
@@ -878,7 +1204,8 @@ interface SpanBlockProps {
 
 const SpanBlock: React.FC<SpanBlockProps> = ({
   block, allBlocks, layoutObstacles, blockIdx, pageNumber, scale, isAdmin, contentsMap,
-  onNavigate, onBlockClick, selectedBlockKey, overrides, overridesReady, draftOverride, language
+  onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutFrameForSelection, layoutFrameOverride, onSelectLayoutFrame,
+  selectedBlockKey, overrides, overridesReady, draftOverride, language
 }) => {
   const blockRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -891,8 +1218,8 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   // column, while block.bbox remains the source ink bounds. Render the
   // container at the frame origin so Admin and the translated preview expose
   // the same geometry without changing the source line coordinates.
-  const frameX = block.layoutFrame?.x ?? blockX;
-  const frameW = block.layoutFrame?.width ?? blockW;
+  const frameX = block.layoutFrame?.x ?? (block.lines?.[0] as any)?.availableX ?? blockX;
+  const frameW = block.layoutFrame?.width ?? (block.lines?.[0] as any)?.availableWidth ?? blockW;
 
   const blockStyle: React.CSSProperties = {
     position: 'absolute',
@@ -907,20 +1234,35 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     ? `${block.editorKey}__${language}`
     : `page_${pageNumber}_block_${blockIdx}`;
 
-  let currentOverride = overrides.get(blockKey);
-  if (selectedBlockKey === blockKey && draftOverride) {
+  let currentOverride = block.adminReadOnly ? null : normalizeStaticEditorPrefix(block, overrides.get(blockKey) || null);
+  if (!block.adminReadOnly && selectedBlockKey === blockKey && draftOverride) {
     currentOverride = draftOverride;
   }
+
+  const translatedFrame = currentOverride ? layoutFrameOverride : undefined;
+  const translatedX = translatedFrame?.x ?? frameX;
+  const translatedY = translatedFrame?.y ?? blockY;
+  const translatedWidth = translatedFrame?.width ?? frameW;
+  const translatedHeight = translatedFrame?.height ?? blockH;
+  const translatedStyle: React.CSSProperties = translatedFrame ? {
+    ...blockStyle,
+    left: `${translatedX * scale}px`,
+    top: `${translatedY * scale}px`,
+    width: `${translatedWidth * scale}px`,
+    height: `${Math.max(1, translatedHeight) * scale}px`,
+    transform: `rotate(${translatedFrame.rotation ?? 0}deg)`,
+    transformOrigin: 'center center',
+  } : blockStyle;
 
   // Effect to measure height and set overflowing state for the live preview indicator
   useEffect(() => {
     if (currentOverride && blockRef.current) {
       const actualHeight = blockRef.current.scrollHeight;
-      setIsOverflowing(actualHeight > blockH * scale + 2); // 2px tolerance
+      setIsOverflowing(actualHeight > translatedHeight * scale + 2); // 2px tolerance
     } else {
       setIsOverflowing(false);
     }
-  }, [currentOverride, scale, blockH]);
+  }, [currentOverride, scale, translatedHeight, translatedWidth]);
 
   const typographicUnits = block.typographicUnits ?? [];
   if (typographicUnits.length > 0 && overridesReady && !overrides.has(blockKey)) {
@@ -965,7 +1307,15 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     block, pageNumber, selectedBlockKey, overrides, draftOverride, language,
   );
 
-  const blockHoverClass = isAdmin ? `block-editable ${selectedBlockKey === blockKey ? 'block-selected' : ''}` : '';
+  const blockCanEdit = isAdmin && !layoutMode && !block.adminReadOnly;
+  const blockCanSelectLayout = isAdmin && layoutMode && !block.adminReadOnly && !block.staticEditorLineIndexes?.length && !block.typographicUnits?.length && !block.creditUnits?.length && !block.creditUnit;
+  const blockHoverClass = blockCanSelectLayout
+    ? 'layout-frame-selectable'
+    : blockCanEdit ? `block-editable ${selectedBlockKey === blockKey ? 'block-selected' : ''}` : '';
+  const handleBlockClick = () => {
+    if (blockCanSelectLayout) onSelectLayoutFrame(layoutUnitKey, layoutFrameForSelection);
+    else if (blockCanEdit) onBlockClick(extractBlockInfo(blockKey, block));
+  };
   const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
   const esmeraldaHeadingSource = block.lines
     ?.flatMap(line => line.spans)
@@ -973,28 +1323,53 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
   if (currentOverride && currentOverride.segments.length > 0) {
     // Use a translation frame when supplied; otherwise keep the source-derived fallback.
-    const firstLine = block.lines[0];
-    const rawX = block.layoutFrame?.x ?? ((firstLine as any).availableX !== undefined ? (firstLine as any).availableX : blockX);
-    const rawWidth = block.layoutFrame?.width ?? (firstLine as any).availableWidth ?? blockW;
-    const blockLineX = (rawX - frameX) * scale;
+    const fixedLineIndexes = staticEditorLineIndexes(block);
+    const fixedLines = (block.lines ?? []).filter((_, index) => fixedLineIndexes.has(index));
+    const firstLine = editableBlockLines(block)[0] ?? block.lines[0];
+    const hasStaticEditorLines = fixedLines.length > 0;
+    const rawX = layoutFrameOverride?.x ?? (hasStaticEditorLines
+      ? firstLine.bbox[0]
+      : block.layoutFrame?.x ?? ((firstLine as any).availableX !== undefined ? (firstLine as any).availableX : blockX));
+    const sourceFrameRight = block.layoutFrame
+      ? block.layoutFrame.x + block.layoutFrame.width
+      : ((firstLine as any).availableX ?? rawX) + ((firstLine as any).availableWidth ?? blockW);
+    const rawWidth = hasStaticEditorLines
+      ? Math.max(0, sourceFrameRight - rawX)
+      : layoutFrameOverride?.width ?? block.layoutFrame?.width ?? (firstLine as any).availableWidth ?? blockW;
+    const renderOriginX = translatedFrame ? translatedX : frameX;
+    const renderOriginY = translatedFrame ? translatedY : blockY;
+    const blockLineX = (rawX - renderOriginX) * scale;
     const blockLineW = rawWidth * scale;
 
     return (
-      <div className={`block-container ${blockHoverClass} ${overflowClass}`} style={blockStyle} onClick={() => isAdmin && onBlockClick(extractBlockInfo(blockKey, block))}>
+      <div className={`block-container ${blockHoverClass} ${overflowClass}`} style={translatedStyle} onClick={handleBlockClick}>
+        {fixedLines.map(line => (
+          <LineRenderer
+            key={`static-${line.id}`}
+            line={line}
+            scale={scale}
+            blockOriginX={frameX}
+            blockOriginY={blockY}
+            isAdmin={false}
+            isSelected={false}
+            language={language}
+            onClick={() => {}}
+          />
+        ))}
         <div 
           ref={blockRef}
           className={`realbox`} 
           style={{
             position: 'absolute',
             left: `${blockLineX}px`,
-            top: `0px`,
+            top: `${((layoutFrameOverride?.y ?? blockY) - renderOriginY) * scale}px`,
             width: `${blockLineW}px`,
-            whiteSpace: 'pre-wrap',
-            textAlign: currentOverride.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
-            lineHeight: block.layoutFrame?.lineHeight ?? 1,
+            whiteSpace: block.noWrap ? 'pre' : 'pre-wrap',
+            textAlign: currentOverride.textAlign ?? layoutFrameOverride?.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
+            lineHeight: layoutFrameOverride?.lineHeight ?? block.layoutFrame?.lineHeight ?? 1,
             display: 'block',
             fontSize: 0,
-            cursor: isAdmin ? 'text' : 'default',
+            cursor: layoutMode ? 'move' : isAdmin ? 'text' : 'default',
           }}
         >
           {currentOverride.segments.map((seg, segIdx) => (
@@ -1007,7 +1382,11 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
                 fontStyle: seg.style,
                 fontVariantCaps: mapPdfFont(seg.font).variantCaps,
                 color: seg.color,
-                whiteSpace: 'pre-wrap',
+                ...(seg.textStrokeWidthPt ? {
+                  WebkitTextStroke: `${seg.textStrokeWidthPt * scale}px ${seg.textStrokeColor || '#231f20'}`,
+                  paintOrder: 'stroke fill',
+                } : {}),
+                whiteSpace: block.noWrap ? 'pre' : 'pre-wrap',
                 fontVariantLigatures: 'none',
                 fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
                 letterSpacing: '-0.015em',
@@ -1018,7 +1397,11 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
                 ) ? { display: 'inline-block', transform: 'translateY(12%)' } : {}),
               }}
             >
-              {seg.text}
+              {seg.symbolId
+                ? renderSegmentContent(seg, scale, language)
+                : block.noWrap
+                ? seg.text.replace(/[\r\n]+/g, ' ').replace(/[\t ]+/g, ' ')
+                : seg.text}
             </span>
           ))}
         </div>
@@ -1027,7 +1410,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   }
 
   return (
-    <div className={`block-container ${blockHoverClass}`} style={blockStyle} onClick={() => isAdmin && onBlockClick(extractBlockInfo(blockKey, block))}>
+    <div className={`block-container ${blockHoverClass}`} style={blockStyle} onClick={handleBlockClick}>
       {block.lines.map((line, lIdx) => {
         const lineId = line.id !== undefined ? line.id : lIdx;
 
@@ -1040,8 +1423,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             blockOriginY={blockY}
             targetPage={contentsMap?.get(line.id)}
             onNavigate={onNavigate}
-            isAdmin={isAdmin}
+            isAdmin={blockCanEdit}
             isSelected={false}
+            language={language}
             onClick={() => {}}
             inlineSpanStates={inlineSpanStates}
             onInlineSpanClick={state => onBlockClick(state.info)}
@@ -1346,6 +1730,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
             blockOriginY={fieldY}
             isAdmin={isAdmin}
             isSelected={false}
+            language={language}
             onClick={() => {}}
             inlineSpanStates={inlineSpanStates}
             onInlineSpanClick={onInlineSpanClick}
@@ -1365,6 +1750,7 @@ interface LineRendererProps {
   onNavigate?: (pageNum: number) => void;
   isAdmin: boolean;
   isSelected: boolean;
+  language: 'en' | 'pt-BR';
   override?: SpanOverride;
   onClick: () => void;
   inlineSpanStates?: Map<string, InlineSpanUnitRenderState>;
@@ -1373,14 +1759,17 @@ interface LineRendererProps {
 
 const LineRenderer: React.FC<LineRendererProps> = ({ 
   line, scale, blockOriginX, blockOriginY, targetPage, 
-  onNavigate, isAdmin, isSelected, override, onClick, inlineSpanStates, onInlineSpanClick,
+  onNavigate, isAdmin, isSelected, language, override, onClick, inlineSpanStates, onInlineSpanClick,
 }) => {
   // Some composite source illustrations (for example page 15's inset encounter
   // diagram) already contain these words in the background artwork. Keep the
   // extracted text available for Admin selection, but avoid painting it twice
   // in the English source view. A localized asset is still required before
   // translating text that is baked into that illustration.
-  if ((line as any).rasterizedDuplicate && !isAdmin) {
+  const rasterizedDuplicateLanguage = (line as any).rasterizedDuplicateLanguage as 'en' | 'pt-BR' | 'all' | undefined;
+  const duplicateIsVisible = (line as any).rasterizedDuplicate
+    && (!rasterizedDuplicateLanguage || rasterizedDuplicateLanguage === 'all' || rasterizedDuplicateLanguage === language);
+  if (duplicateIsVisible && !isAdmin) {
     return null;
   }
 
@@ -1393,8 +1782,24 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   
   const lineX = (rawX - blockOriginX) * scale;
   const lineW = rawWidth * scale;
+
+  // A few labels in the source PDF are set vertically. Keep their original
+  // text direction and rotate the horizontal HTML line into the measured PDF
+  // box. The offsets compensate for the rotated box's new top-left corner.
+  const verticalDirection = line.dir && Math.abs(line.dir[0]) < 0.001 && Math.abs(Math.abs(line.dir[1]) - 1) < 0.001
+    ? Math.sign(line.dir[1])
+    : 0;
+  const lineRotation = verticalDirection * 90;
+  const verticalLineStyle: React.CSSProperties = verticalDirection ? {
+    top: `${lineY + (verticalDirection < 0 ? lineH : 0)}px`,
+    left: `${lineX + (verticalDirection > 0 ? lineW : 0)}px`,
+    height: `${lineW}px`,
+    width: `${lineH}px`,
+    transform: `rotate(${lineRotation}deg)${line.renderScaleX && !override ? ` scaleX(${line.renderScaleX})` : ''}`,
+    transformOrigin: 'left top',
+  } : {};
   
-  const originalX = (line.bbox[0] - blockOriginX) * scale;
+  const originalX = (line.bbox[0] + (line.renderTextOffsetPt ?? 0) - blockOriginX) * scale;
   const textOffset = Math.max(0, originalX - lineX);
 
   const sourceText = line.spans.map(span => span.text).join('');
@@ -1419,7 +1824,8 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     : override?.segments;
 
   const hoverClass = isAdmin ? `span-editable ${isSelected ? 'span-selected' : ''}` : '';
-  const confirmedGhostClass = isAdmin && (line as any).rasterizedDuplicate ? 'ghost-confirmed' : '';
+  const confirmedGhostClass = isAdmin && duplicateIsVisible && (line as any).rasterizedDuplicate
+    && !(line as any).hideRasterizedDuplicateAdminMarker ? 'ghost-confirmed' : '';
   const ghostStatusLabel = confirmedGhostClass ? 'Confirmed duplicate: text is preserved for editing but hidden in normal reading.' : undefined;
   const lineClassName = [hoverClass, confirmedGhostClass, targetPage ? 'contents-link' : ''].filter(Boolean).join(' ');
 
@@ -1435,8 +1841,9 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     cursor: targetPage ? 'pointer' : (isAdmin ? 'text' : undefined),
     textAlign: 'left',
     lineHeight: 1, // Fix overlap from custom font metrics
+    ...verticalLineStyle,
     ...(confirmedGhostClass ? { zIndex: 5000 } : {}),
-    ...(line.renderScaleX && !override ? {
+    ...(!verticalDirection && line.renderScaleX && !override ? {
       transform: `scaleX(${line.renderScaleX})`,
       transformOrigin: 'left top',
     } : {}),
@@ -1465,6 +1872,8 @@ const LineRenderer: React.FC<LineRendererProps> = ({
         aria-description={ghostStatusLabel}
         style={{
           ...lineStyle,
+          paddingLeft: `${textOffset}px`,
+          boxSizing: 'border-box',
           whiteSpace: 'pre-wrap',
           textAlign: override.textAlign || 'left',
           display: 'block',
@@ -1485,6 +1894,10 @@ const LineRenderer: React.FC<LineRendererProps> = ({
               fontStyle: seg.style,
               fontVariantCaps: mapPdfFont(seg.font).variantCaps,
               color: seg.color,
+              ...(seg.textStrokeWidthPt ? {
+                WebkitTextStroke: `${seg.textStrokeWidthPt * scale}px ${seg.textStrokeColor || '#231f20'}`,
+                paintOrder: 'stroke fill',
+              } : {}),
               whiteSpace: 'pre-wrap',
               fontVariantLigatures: 'none',
               fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
@@ -1494,7 +1907,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
                 : {}),
             }}
           >
-            {seg.text}
+            {renderSegmentContent(seg, scale, language)}
           </span>
         ))}
       </div>
@@ -1512,15 +1925,43 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     >
       {line.spans.map((span, si) => {
         const inlineUnit = inlineSpanStates?.get(`${line.id}:${si}`);
+        const sourceAdvanceWidth = Math.max(0, span.bbox[2] - span.bbox[0]) * scale;
+        const previousSpan = si > 0 ? line.spans[si - 1] : undefined;
+        const sourceAdvanceGap = previousSpan
+          ? Math.max(0, span.bbox[0] - previousSpan.bbox[2]) * scale
+          : 0;
+        const useSourceGeometry = !override
+          && line.renderSourceSpanGeometry
+          && (line.renderSourceGeometryThroughSpan === undefined || si <= line.renderSourceGeometryThroughSpan);
+        const isUnsupportedSymbol =
+          (span.font?.includes('Webdings') && !(span.font?.includes('Webdings') && span.text === '\uF07E')) ||
+          (span.font?.includes('Wingdings') && !span.pictogramDisplayOverride) ||
+          (span.font?.includes('ZapfDingbats') && !span.pictogramSvgPath);
+        const isReplacedBySourceOverlay = span.renderAsSourceOverlayDuplicate
+          && (span.renderSourceOverlayLanguage === 'all' || span.renderSourceOverlayLanguage === language);
+        if (span.renderOnlyStrokePass || isReplacedBySourceOverlay) return null;
         // The source PDF paints Webdings U+F07E twice at the same bbox: a
         // 2pt white stroke and a red fill. PyMuPDF's text dict keeps only the
         // white pass, so reconstruct that one known glyph from its trace data.
         const isOutlinedImportantGlyph = span.font?.includes('Webdings') && span.text === '\uF07E';
-        if (
-          (span.font?.includes('Webdings') && !isOutlinedImportantGlyph) ||
-          (span.font?.includes('Wingdings') && !span.pictogramDisplayOverride) ||
-          (span.font?.includes('ZapfDingbats') && !span.pictogramSvgPath)
-        ) {
+        if (isUnsupportedSymbol && !isOutlinedImportantGlyph) {
+          // Some unsupported symbol fonts still occupy real source-PDF width.
+          // On explicitly audited lines, keep an invisible flex item so later
+          // editable words do not slide left into a tag or neighboring prose.
+          if (useSourceGeometry) {
+            return (
+              <span
+                key={si}
+                aria-hidden="true"
+                style={{
+                  flex: `0 0 ${sourceAdvanceWidth}px`,
+                  marginInlineStart: `${sourceAdvanceGap}px`,
+                  visibility: 'hidden',
+                  pointerEvents: 'none',
+                }}
+              />
+            );
+          }
           return null;
         }
         if (span.size < 4.0 && !(line as any).renderTinyText) {
@@ -1546,6 +1987,14 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           fontVariantLigatures: 'none',
           fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
           letterSpacing: '-0.015em',
+          ...(useSourceGeometry ? {
+            flex: `0 0 ${sourceAdvanceWidth}px`,
+            marginInlineStart: `${sourceAdvanceGap}px`,
+          } : {}),
+          ...(span.renderTextStrokeWidthPt ? {
+            WebkitTextStroke: `${span.renderTextStrokeWidthPt * scale}px ${span.renderTextStrokeColor || '#231f20'}`,
+            paintOrder: 'stroke fill',
+          } : {}),
           ...(isOutlinedImportantGlyph ? {
             WebkitTextStroke: `${2 * scale}px #ffffff`,
             paintOrder: 'stroke fill',
@@ -1580,6 +2029,10 @@ const LineRenderer: React.FC<LineRendererProps> = ({
                 fontStyle: segment.style,
                 fontVariantCaps: mapPdfFont(segment.font).variantCaps,
                 color: segment.color,
+                ...(segment.textStrokeWidthPt ? {
+                  WebkitTextStroke: `${segment.textStrokeWidthPt * scale}px ${segment.textStrokeColor || '#231f20'}`,
+                  paintOrder: 'stroke fill',
+                } : {}),
                 whiteSpace: 'pre',
                 fontVariantLigatures: 'none',
                 fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
@@ -1600,7 +2053,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
             >
               <path d={span.pictogramSvgPath} fill="currentColor" />
             </svg>
-          ) : isPUA ? span.displayOverride : span.pictogramDisplayOverride ?? span.text;
+          ) : span.renderTextOverride ?? (isPUA ? span.displayOverride : span.pictogramDisplayOverride ?? span.text);
 
         return (
           <span
