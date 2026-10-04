@@ -49,7 +49,8 @@ TARGETS: list[dict[str, object]] = [
     # Game-table setup and player-aid diagrams.
     {"page": 34, "name": "game-table-setup-components", "bbox": [80, 84, 740, 785], "category": "diagram"},
     {"page": 35, "name": "adventurer-play-area-components", "bbox": [112, 365, 732, 707], "category": "diagram"},
-    {"page": 36, "name": "initiative-track-round", "bbox": [150, 430, 670, 561.2], "category": "initiative-cards"},
+    # Match the existing 525px raster extent; keep the turn labels live below it.
+    {"page": 36, "name": "initiative-track-round", "bbox": [150, 430, 670, 561.25], "category": "initiative-cards"},
     {"page": 36, "name": "initiative-track-shuffle", "bbox": [176, 623, 642, 748], "category": "initiative-cards"},
     {"page": 37, "name": "exhaust-cards", "bbox": [475, 153, 678, 269.3], "category": "item-cards"},
     {"page": 37, "name": "flip-cards", "bbox": [475, 363, 678, 480.5], "category": "item-cards"},

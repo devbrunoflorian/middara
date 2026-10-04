@@ -36,6 +36,7 @@ To support this without breaking browser rendering, we map special characters to
 
 ## Documentation Index
 
+- `docs/project-progress/2026-10-04-page36-source-review.md`: source comparison of Initiative rules, cards and markers.
 - `docs/project-progress/2026-10-04-page35-source-review.md`: page 35 source review of setup legend hierarchy and symbols.
 - `docs/project-progress/2026-10-04-page34-source-review.md`: source comparison of the Game Table Setup diagram and surrounding live text.
 - `docs/project-progress/2026-10-04-page33-source-review.md`: page 33 source review of the Discipline card, alphabet markers and external legend.
