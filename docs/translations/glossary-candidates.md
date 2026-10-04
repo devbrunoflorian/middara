@@ -1,6 +1,6 @@
 # Glossary candidates from audited drafts
 
-This is a review queue, **not an addition to the official glossary**. The official glossary remains authoritative and unchanged. These proposals come from the current semantic drafts (pages 3–7 and 13); confirm them with the other translation team before treating any as project-wide terminology.
+This is a review queue, **not an addition to the official glossary**. The official glossary remains authoritative and unchanged. These proposals come from the current semantic drafts (pages 3–9 and 13); confirm them with the other translation team before treating any as project-wide terminology.
 
 | English term/concept | Current draft rendering | Pages | Review note |
 |---|---|---:|---|
