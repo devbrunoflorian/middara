@@ -36,6 +36,7 @@ To support this without breaking browser rendering, we map special characters to
 
 ## Documentation Index
 
+- `docs/project-progress/2026-10-04-page30-source-review.md`: next sequential source-PDF review, with live verification tracked separately.
 - `docs/project-progress/2026-10-04-page28-shared-artwork-followup.md`: page-local follow-up of shared English card artwork and transparent-window seams.
 - `docs/project-progress/2026-10-04-restart-recovery-and-live-qa.md`: restart recovery, parallel dev startup, database checks and the current visual-review gate.
 - `docs/project-progress/2026-10-04-page29-fixed-artwork.md`: source-confirmed artwork and numeric paint corrections with before/PDF/after evidence.

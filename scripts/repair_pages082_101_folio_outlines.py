@@ -1,4 +1,7 @@
-"""Restore exact dark-fill/gold-stroke folio paint on p.82–101.
+"""Restore exact dark-fill/gold-stroke folio paint on source-reviewed pages.
+
+The original filename and default p.82-101 batch are retained. Use --pages
+only for additional folios already compared with their own source PDF page.
 
 Each affected source PDF folio contains a gold type-1 stroke pass followed by a
 dark type-0 fill pass. The page DOM stores both passes as text spans, but the
@@ -44,13 +47,20 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--apply", action="store_true", help="write the verified stroke/fill mapping to p.82–101 DOM files")
     parser.add_argument("--pdf", type=Path, default=PDF)
+    parser.add_argument("--pages", type=int, nargs="+", help="explicit source-reviewed pages; defaults to the original p.82–101 batch")
     args = parser.parse_args()
     if not args.pdf.is_file():
         raise FileNotFoundError(args.pdf)
+    page_numbers = sorted(set(args.pages)) if args.pages else list(range(FIRST_PAGE, LAST_PAGE + 1))
+    if any(number < 1 or number > 102 for number in page_numbers):
+        parser.error("--pages must contain page numbers from 1 to 102")
+    audit_id = AUDIT_ID if args.pages is None else (
+        "2026-10-04-" + "-".join(f"p{number:03d}" for number in page_numbers) + "-folio-outline-v1"
+    )
 
     validated: list[tuple[int, Path, dict, list[dict], list[dict]]] = []
     with pymupdf.open(args.pdf) as document:
-        for page_number in range(FIRST_PAGE, LAST_PAGE + 1):
+        for page_number in page_numbers:
             path = ROOT / f"apps/web/public/pages/page_{page_number:03d}/page_{page_number:03d}_dom.json"
             dom = json.loads(path.read_text(encoding="utf-8"))
             if dom.get("page_number") != page_number:
@@ -110,21 +120,21 @@ def main() -> None:
                 changed = True
             span["renderOnlyStrokePass"] = True
             span["sourcePaintRole"] = "stroke-only"
-            span["sourcePaintAuditId"] = AUDIT_ID
+            span["sourcePaintAuditId"] = audit_id
         for span in dark_spans:
             if span.get("renderTextStrokeWidthPt") != STROKE_WIDTH or span.get("renderTextStrokeColor") != GOLD:
                 changed = True
             span["renderTextStrokeWidthPt"] = STROKE_WIDTH
             span["renderTextStrokeColor"] = GOLD
             span["sourcePaintRole"] = "fill-with-source-stroke"
-            span["sourcePaintAuditId"] = AUDIT_ID
+            span["sourcePaintAuditId"] = audit_id
         if changed:
             print(f"p.{page_number}: verified {len(gold_spans)} source outline/fill pair(s)")
             if args.apply:
                 path.write_text(json.dumps(dom, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     print(
-        f"Validated p.{FIRST_PAGE}–{LAST_PAGE} folios against source type-1/type-0 paint operators; "
+        f"Validated folios on pages {','.join(str(number) for number in page_numbers)} against source type-1/type-0 paint operators; "
         + ("changes applied" if args.apply else "dry run only")
     )
 
