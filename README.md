@@ -36,6 +36,7 @@ To support this without breaking browser rendering, we map special characters to
 
 ## Documentation Index
 
+- `docs/project-progress/2026-10-04-page34-source-review.md`: source comparison of the Game Table Setup diagram and surrounding live text.
 - `docs/project-progress/2026-10-04-page33-source-review.md`: page 33 source review of the Discipline card, alphabet markers and external legend.
 - `docs/project-progress/2026-10-04-page32-source-review.md`: page 32 source-PDF review of Discipline artwork and adjacent editable prose.
 - `docs/project-progress/2026-10-04-page31-source-review.md`: source-PDF review of page 31 and its confirmed corrections.
