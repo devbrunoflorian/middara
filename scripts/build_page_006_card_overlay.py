@@ -178,7 +178,6 @@ def main() -> None:
         "heightPx": overlay.height,
         "language": "en",
         "languageInvariant": True,
-        "hideInAdmin": True,
     }
     existing = next((item for item in overlays if item.get("url") == entry["url"]), None)
     if existing is None:
