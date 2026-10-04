@@ -10,6 +10,8 @@ O Rulebook App deve conseguir entregar dois produtos coerentes:
 1. um viewer web que preserve edição, hyperlinks, busca, áudio, voz e futuras animações;
 2. um PDF fechado, previsível e validado para uma gráfica.
 
+Um piloto separado de exportação de página individual já existe para investigar o caminho técnico. Seu processo e defeitos conhecidos estão em [`single-page-pdf-export.md`](single-page-pdf-export.md). Ele não altera a ordem do roadmap: terminar tradução e fidelidade vem antes da API de exportação ou da saída de gráfica.
+
 O PDF de impressão não será uma captura de tela do browser. Ele deve ser composto a partir do mesmo modelo de página, com texto vetorial, fontes incorporadas, imagens rasterizadas na resolução final e regiões de componentes preservadas como imagens completas do PDF original. As cartas, tokens e outros componentes físicos continuam em inglês; a tradução PT-BR se aplica ao texto explicativo editável ao redor deles.
 
 ## O que a pesquisa confirmou
@@ -73,6 +75,13 @@ Nenhum exportador deve reextrair o PDF nem inferir novamente quais cartas são i
 - componentes preservados como recortes originais;
 - PDF/X, perfil ICC/output intent e conversão de cor escolhidos por preset de gráfica;
 - relatório de preflight e prova rasterizada para comparação visual.
+
+**Piloto de página individual (não é saída final)**
+
+- usa o viewer e as traduções persistidas para imprimir uma página em PDF vetorial/raster;
+- é uma ferramenta de investigação manual; não há endpoint nem exportação de livro completo;
+- a primeira prova p. 2/PT-BR ainda tem uma borda preta à direita e embaixo e não está pronta para distribuição ou gráfica;
+- corrigir geometria de impressão e finalizar a revisão visual do livro antes de transformar o processo em API.
 
 ## Fases
 
@@ -142,6 +151,7 @@ Depois da tradução e da entrega impressa estarem estáveis:
 ## Riscos e decisões pendentes
 
 - Sem briefing da gráfica, não escolher agora entre PDF/X-1a e PDF/X-4 nem fixar um perfil ICC.
+- O piloto do browser não é CMYK e não certifica fontes/cores para gráfica; a página p. 2 também mantém uma faixa preta de impressão pendente.
 - A conversão de RGB para CMYK pode reduzir saturação e alterar pretos; a decisão deve ser validada por prova.
 - Transparências e blends podem exigir PDF/X-4 ou flattening controlado para X-1a.
 - Componentes em alta resolução têm custo de arquivo; a resolução será verificada no tamanho físico, não pela dimensão em pixels isolada.
