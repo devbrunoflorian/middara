@@ -7,7 +7,8 @@ This is a review queue, **not an addition to the official glossary**. The offici
 | Adventure Mode | `Modo Aventura`; `Modo Aventureiro` | 4–6, 13 | Inconsistent between drafts. **Recommendation:** standardize on `Modo Aventura`; the other wording changes the sense from a game mode to a person. |
 | Tier | `Nível`; `Categoria` | 4, 13 | Context-sensitive and not in the official glossary. Keep unresolved until the card/rules usage is agreed. |
 | Bounty | `Recompensa`; `Livro de Recompensas` | 4, 7, 13 | Same proposed root appears in the mode, heading, and book name; confirm the game's intended PT term. |
-| Crawl | `Modo Crawl`; `Livro Crawl` | 4–7 | Kept in English in compound names; confirm whether the proper mode/book name should remain untranslated. |
+| Crawl Mode / Epic Crawl Mode | `Modo Crawl`; `Modo Exploração`; `Modo de Exploração`; `Modo de Exploração Épica` | 4–9 | The official glossary has no entry. P. 8 Payload uses `Modo Exploração` as a heading and `Modo de Exploração` in body text; p. 8–9 drafts use the latter. Decide whether this is a translated descriptive mode or a proper game-mode name before standardizing. |
+| Rank | `Nível` | 9 | Not in the official glossary. Keep distinct from `Tier`/`Loot Level`; confirm whether `Rank` is best rendered as `Nível`, `Patamar`, or another rules term. |
 | Familiar | `Familiar`; `Carta de Familiar` | 4, 7 | Preserved as a game term; absent from the provided official glossary. |
 | Discipline Tree | `Árvore de Disciplinas` | 4 | Proposed label for the system structure; confirm capitalization and plural form. |
 | Terrain token | `Ficha de Terreno` | 5 | `Terrain` alone is officially `Terrenos`; confirm this compound before expanding it to other token families. |
