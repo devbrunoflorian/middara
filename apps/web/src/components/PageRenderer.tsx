@@ -1317,13 +1317,13 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     else if (blockCanEdit) onBlockClick(extractBlockInfo(blockKey, block));
   };
   const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
+  const fixedLineIndexes = staticEditorLineIndexes(block);
   const esmeraldaHeadingSource = block.lines
     ?.flatMap(line => line.spans)
     .find(span => needsEsmeraldaHeadingDrop(span.font, span.size, span.bbox[3] - span.bbox[1]));
 
   if (currentOverride && currentOverride.segments.length > 0) {
     // Use a translation frame when supplied; otherwise keep the source-derived fallback.
-    const fixedLineIndexes = staticEditorLineIndexes(block);
     const fixedLines = (block.lines ?? []).filter((_, index) => fixedLineIndexes.has(index));
     const firstLine = editableBlockLines(block)[0] ?? block.lines[0];
     const hasStaticEditorLines = fixedLines.length > 0;
@@ -1344,17 +1344,22 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     return (
       <div className={`block-container ${blockHoverClass} ${overflowClass}`} style={translatedStyle} onClick={handleBlockClick}>
         {fixedLines.map(line => (
-          <LineRenderer
+          <div
             key={`static-${line.id}`}
-            line={line}
-            scale={scale}
-            blockOriginX={frameX}
-            blockOriginY={blockY}
-            isAdmin={false}
-            isSelected={false}
-            language={language}
-            onClick={() => {}}
-          />
+            className="static-editor-line"
+            onClick={event => event.stopPropagation()}
+          >
+            <LineRenderer
+              line={line}
+              scale={scale}
+              blockOriginX={frameX}
+              blockOriginY={blockY}
+              isAdmin={false}
+              isSelected={false}
+              language={language}
+              onClick={() => {}}
+            />
+          </div>
         ))}
         <div 
           ref={blockRef}
@@ -1413,8 +1418,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     <div className={`block-container ${blockHoverClass}`} style={blockStyle} onClick={handleBlockClick}>
       {block.lines.map((line, lIdx) => {
         const lineId = line.id !== undefined ? line.id : lIdx;
+        const isFixedLine = fixedLineIndexes.has(lIdx);
 
-        return (
+        const renderedLine = (
           <LineRenderer
             key={lineId}
             line={line}
@@ -1423,7 +1429,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             blockOriginY={blockY}
             targetPage={contentsMap?.get(line.id)}
             onNavigate={onNavigate}
-            isAdmin={blockCanEdit}
+            isAdmin={blockCanEdit && !isFixedLine}
             isSelected={false}
             language={language}
             onClick={() => {}}
@@ -1431,6 +1437,16 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             onInlineSpanClick={state => onBlockClick(state.info)}
           />
         );
+
+        return isFixedLine ? (
+          <div
+            key={`static-${lineId}`}
+            className="static-editor-line"
+            onClick={event => event.stopPropagation()}
+          >
+            {renderedLine}
+          </div>
+        ) : renderedLine;
       })}
     </div>
   );
