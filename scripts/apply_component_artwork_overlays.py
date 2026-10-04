@@ -41,7 +41,9 @@ TARGETS: list[dict[str, object]] = [
     {"page": 32, "name": "martial-card", "bbox": [85, 456, 244, 566], "category": "discipline-cards"},
     {"page": 32, "name": "sanctus-card", "bbox": [579, 563, 739, 675], "category": "discipline-cards"},
     {"page": 32, "name": "subterfuge-card", "bbox": [85, 668, 244, 782], "category": "discipline-cards"},
-    {"page": 33, "name": "magic-staff-card", "bbox": [422, 58, 581, 289.3], "category": "item-cards"},
+    # p.33: 4x raster grid; source shadow ends at 287.840 pt and the external
+    # Example line starts at 289.393 pt. Do not stretch 926px into 231.3pt.
+    {"page": 33, "name": "magic-staff-card", "bbox": [422, 58, 581, 289.25], "category": "item-cards"},
     {"page": 33, "name": "deflection-core-card", "bbox": [569, 57, 729, 295], "category": "item-cards"},
     {"page": 33, "name": "quick-blow-card", "bbox": [311, 541, 511, 680], "category": "discipline-cards"},
     # Game-table setup and player-aid diagrams.
@@ -220,8 +222,6 @@ def apply_target(document: pymupdf.Document, target: dict[str, object], scale: f
             "region": name,
         })
         overlay_path.write_text(json.dumps(overlays, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    elif asset.exists():
-        asset.unlink()
 
     return {"page": page_number, "region": name, "category": target["category"], "bbox": bbox, "asset": str(asset.relative_to(ROOT))}
 
