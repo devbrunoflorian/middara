@@ -56,16 +56,51 @@ TARGETS: list[dict[str, object]] = [
     {"page": 46, "name": "encounter-action-map", "bbox": [114, 357, 363, 576], "category": "diagram"},
     {"page": 51, "name": "flanking-diagram-grid", "bbox": [78, 74.9, 743, 748], "category": "diagram"},
     {"page": 53, "name": "gore-shot-card", "bbox": [500, 529, 656, 625.8], "category": "discipline-cards"},
+    # Complete white die faces in the casting-spell walkthrough on p.54.
+    {"page": 54, "name": "white-die-three-casting-example", "bbox": [521.1083, 547.4208, 562.3623, 588.6758], "category": "component-icons"},
+    {"page": 54, "name": "white-die-seven-result", "bbox": [224.7117, 711.6334, 265.9657, 752.8884], "category": "component-icons"},
+    # These printed walkthrough panels and physical card are composite artwork;
+    # reconstructing their separately extracted labels/stats caused ghosts and
+    # missing icons in the browser, so restore each source region intact.
+    {"page": 54, "name": "animate-combatant-stat-panel", "bbox": [442.48, 91.14, 710.74, 171.07], "category": "combatant-cards"},
+    {"page": 54, "name": "zeke-combatant-and-magic-staff-panel", "bbox": [443.08, 178.59, 710.74, 443.34], "category": "combatant-cards"},
+    {"page": 54, "name": "gore-shot-card-walkthrough", "bbox": [149.511, 486.023, 341.259, 618.153], "category": "discipline-cards"},
+    # Standalone WHITE cubes in the live prose become dark silhouettes in the
+    # page background; restore only their source vector faces, not the words.
+    {"page": 54, "name": "white-die-casting-upgrade-inline", "bbox": [295.962, 681.212, 307.45, 694.471], "category": "component-icons"},
+    {"page": 54, "name": "white-die-conviction-inline", "bbox": [503.289, 518.211, 514.777, 531.47], "category": "component-icons"},
     {"page": 55, "name": "spell-like-combatant-panels", "bbox": [444, 105, 700, 440], "category": "combatant-cards"},
     {"page": 55, "name": "combat-dice-example", "bbox": [164, 405, 306, 450], "category": "diagram"},
     {"page": 55, "name": "conviction-dice-example", "bbox": [523, 488, 617, 531], "category": "diagram"},
     {"page": 56, "name": "combatant-type-tags", "bbox": [146, 168, 333, 216], "category": "combatant-cards"},
     {"page": 56, "name": "intelligent-combatant-tag-card", "bbox": [493, 644, 654, 720.8], "category": "combatant-cards"},
     {"page": 45, "name": "making-an-attack-combatant-and-item-panel", "bbox": [419, 100, 705, 458], "category": "combatant-cards"},
+    {"page": 45, "name": "combat-dice-roll-example", "bbox": [198.5, 555.5, 291.5, 603], "category": "diagram"},
     {"page": 47, "name": "intervention-card", "bbox": [478, 182, 667, 311], "category": "discipline-cards"},
     {"page": 47, "name": "master-work-card", "bbox": [406, 616, 527, 820], "category": "item-cards"},
     {"page": 57, "name": "item-loot-card", "bbox": [527, 621, 623, 759.8], "category": "item-cards"},
     {"page": 61, "name": "animate-combatant-card", "bbox": [94, 118, 520, 491], "category": "combatant-cards"},
+    # The walkthrough reuses the complete printed combatant-card panels. Keep
+    # the alphabet callouts and explanatory prose outside each exact card frame.
+    {"page": 64, "name": "animate-combatant-card-walkthrough", "bbox": [121.8599, 175.3343, 376.8359, 639.8613], "category": "combatant-cards"},
+    {"page": 64, "name": "rook-combatant-card-walkthrough", "bbox": [121.8599, 668.5843, 376.8359, 763.1213], "category": "combatant-cards"},
+    {"page": 64, "name": "damage-token-three-walkthrough", "bbox": [505.8264, 223.4737, 554.0663, 277.1137], "category": "tokens"},
+    {"page": 64, "name": "damage-token-one-walkthrough", "bbox": [588.7301, 220.6472, 644.8901, 281.1272], "category": "tokens"},
+    # The p.66 turn walkthrough reuses the physical Animate card inside its
+    # A-H callout layout. Keep the callout rail outside this measured frame.
+    {"page": 66, "name": "animate-combatant-card-turn-walkthrough", "bbox": [123.6841, 171.7073, 378.6601, 638.3613], "category": "combatant-cards"},
+    # Two inline p.66 letter tiles are absent from background.webp. Restore
+    # only the source badge and letter in the English layer; keep prose live.
+    {"page": 66, "name": "inline-callout-i-tile", "bbox": [507.4, 411.68, 517.4, 421.68], "category": "callout-markers", "languageInvariant": False},
+    {"page": 66, "name": "inline-callout-k-tile", "bbox": [502.53, 465.35, 512.53, 475.35], "category": "callout-markers", "languageInvariant": False},
+    # Restore the printed WHITE 6 die while keeping the example prose live.
+    {"page": 67, "name": "white-six-combat-die-roll", "bbox": [194.26, 411.67, 235.51, 452.93], "category": "component-icons"},
+    {"page": 67, "name": "white-six-die-second-roll", "bbox": [505.767, 469.665, 547.021, 510.92], "category": "component-icons"},
+    # This printed card header is an image plus separately extracted title/tag text.
+    {"page": 81, "name": "cave-sickle-variation-card-header", "bbox": [123.2, 234.3, 357.2, 294.0], "category": "combatant-cards"},
+    # The source's six WHITE die faces disappeared into the black page art in
+    # the app background; the color-row label remains separate/editable.
+    {"page": 102, "name": "white-dice-outcomes-row", "bbox": [285.88, 152.01, 568.84, 193.27], "category": "component-icons"},
     {"page": 74, "name": "nightingale-adventurer-card", "bbox": [37, 104, 419, 418], "category": "combatant-cards"},
     {"page": 74, "name": "magic-staff-card", "bbox": [443, 104, 583, 311], "category": "item-cards"},
     {"page": 74, "name": "cuirass-card", "bbox": [607, 104, 746, 311], "category": "item-cards"},
@@ -80,6 +115,54 @@ TARGETS: list[dict[str, object]] = [
     {"page": 83, "name": "loot-level-reference", "bbox": [190, 308, 349, 338], "category": "combatant-cards"},
     {"page": 83, "name": "loot-level-tag-strip", "bbox": [190, 383, 349, 419], "category": "combatant-cards"},
     {"page": 83, "name": "cave-sickle-card-pair", "bbox": [132, 457, 407, 561], "category": "combatant-cards"},
+    # Source-confirmed Combatant icon art that was flattened to blank circles in
+    # the browser background. Keep the crop tight so adjacent prose stays live.
+    {"page": 89, "name": "ranged-weapon-icon", "bbox": [117, 213.8, 147, 253], "category": "component-icons"},
+    {"page": 89, "name": "melee-ranged-weapon-icon", "bbox": [117, 312, 150, 342], "category": "component-icons"},
+    {"page": 89, "name": "one-hand-weapon-icon", "bbox": [114, 458, 147, 489], "category": "component-icons"},
+    {"page": 89, "name": "two-hand-weapon-icon", "bbox": [114, 573, 147, 604], "category": "component-icons"},
+    # Spawn-example monster tokens have separate extracted number glyphs;
+    # restore each complete physical token so its number and art stay together.
+    {"page": 84, "name": "spawn-token-cave-sickle-3", "bbox": [134.71, 235, 178.47, 278.74], "category": "tokens"},
+    {"page": 84, "name": "spawn-token-cave-sickle-warrior-1", "bbox": [109.85, 537.35, 153.61, 581.09], "category": "tokens"},
+    {"page": 84, "name": "spawn-token-cave-sickle-warrior-2", "bbox": [158.65, 537.35, 202.41, 581.09], "category": "tokens"},
+    {"page": 84, "name": "spawn-token-cave-sickle-4", "bbox": [134.71, 665.27, 178.47, 709.01], "category": "tokens"},
+    {"page": 84, "name": "spawn-token-final-3", "bbox": [178.11, 746.46, 221.87, 790.2], "category": "tokens"},
+    {"page": 84, "name": "spawn-token-final-1", "bbox": [225.61, 746.46, 269.37, 790.2], "category": "tokens"},
+    {"page": 84, "name": "spawn-token-final-2", "bbox": [273.12, 746.46, 316.88, 790.2], "category": "tokens"},
+    {"page": 84, "name": "spawn-token-final-4", "bbox": [320.62, 746.46, 364.39, 790.2], "category": "tokens"},
+    # The six Cave Sickle / prerequisite strips are printed components inside
+    # the spawn walkthrough. Include their attached green arrows where needed,
+    # but keep surrounding explanatory paragraphs outside each crop.
+    {"page": 84, "name": "cave-sickle-base-combatant-card", "bbox": [179.16, 229, 439.88, 276], "category": "combatant-cards"},
+    {"page": 84, "name": "cave-sickle-alternate-prerequisite-card", "bbox": [99.5, 344, 438.3, 376], "category": "combatant-cards"},
+    {"page": 84, "name": "cave-sickle-variation-card", "bbox": [498.45, 221.9, 759.17, 264.5], "category": "combatant-cards"},
+    {"page": 84, "name": "cave-sickle-variation-prerequisite-card", "bbox": [443.85, 263, 782.61, 298], "category": "combatant-cards"},
+    {"page": 84, "name": "cave-sickle-warrior-card", "bbox": [209, 541, 436.48, 575], "category": "combatant-cards"},
+    {"page": 84, "name": "cave-sickle-follow-up-combatant-card", "bbox": [179.16, 667.31, 439.88, 710], "category": "combatant-cards"},
+    # White inline symbols on the brown rule-page background were rasterized
+    # as dark silhouettes in the app background. Restore only the symbol
+    # shapes from the source PDF; these crops contain no translatable prose.
+    {"page": 92, "name": "arcane-shield-symbol", "bbox": [312.35, 263.6, 321.8, 275], "category": "component-icons"},
+    {"page": 92, "name": "arcane-book-symbol", "bbox": [328.4, 263.6, 340, 275], "category": "component-icons"},
+    {"page": 93, "name": "nimble-skull-symbol", "bbox": [603, 115.2, 614.6, 126.8], "category": "component-icons"},
+    {"page": 93, "name": "nimble-shield-symbol", "bbox": [651.5, 115.2, 662, 126.8], "category": "component-icons"},
+    {"page": 93, "name": "protection-book-symbol", "bbox": [579.75, 165, 588.9, 179], "category": "component-icons"},
+    {"page": 93, "name": "incorporeal-square-symbol", "bbox": [141.5, 332, 153, 345], "category": "component-icons"},
+    {"page": 93, "name": "incorporeal-shield-symbol", "bbox": [172.5, 332, 183.7, 345], "category": "component-icons"},
+    {"page": 93, "name": "redirect-arrow-symbol", "bbox": [413, 368, 424.8, 381], "category": "component-icons"},
+    # Inline dice, shields, and skulls in the p.38 ability table were lost or
+    # changed to pale silhouettes by the browser background raster. Preserve
+    # only each original glyph so the surrounding rule text remains live.
+    {"page": 38, "name": "dodge-black-die-symbol", "bbox": [418.19, 411.4, 428.84, 424.0], "category": "component-icons"},
+    {"page": 38, "name": "dodge-defense-shield-symbol", "bbox": [473.78, 411.4, 483.14, 424.0], "category": "component-icons"},
+    {"page": 38, "name": "dodge-skull-symbol", "bbox": [222.32, 424.3, 230.4, 437.0], "category": "component-icons"},
+    {"page": 38, "name": "empower-attack-black-die-symbol", "bbox": [332.1, 450.7, 342.76, 463.2], "category": "component-icons"},
+    {"page": 38, "name": "empower-attack-skull-symbol", "bbox": [213.98, 478.3, 222.04, 491.0], "category": "component-icons"},
+    {"page": 38, "name": "empower-spell-sp-symbol", "bbox": [385.66, 496.9, 394.94, 509.6], "category": "component-icons"},
+    {"page": 38, "name": "empower-spell-black-die-symbol", "bbox": [485.2, 496.9, 495.86, 509.6], "category": "component-icons"},
+    {"page": 38, "name": "empower-spell-sp-spent-symbol", "bbox": [663.37, 496.9, 672.65, 509.6], "category": "component-icons"},
+    {"page": 38, "name": "empower-spell-skull-symbol", "bbox": [197.86, 508.0, 205.92, 522.3], "category": "component-icons"},
     # Reference tables on p.100 retain fragments of their source text in the
     # background raster. Restore the complete source regions to prevent a
     # second HTML copy from showing through around their beige table fills.
@@ -129,8 +212,8 @@ def apply_target(document: pymupdf.Document, target: dict[str, object], scale: f
             "bbox": bbox,
             "widthPx": width_px,
             "heightPx": height_px,
-            "language": "en",
-            "languageInvariant": True,
+            "language": str(target.get("language", "en")),
+            "languageInvariant": bool(target.get("languageInvariant", True)),
             "auditId": AUDIT_ID,
             "category": target["category"],
             "sourcePdfPage": page_number,

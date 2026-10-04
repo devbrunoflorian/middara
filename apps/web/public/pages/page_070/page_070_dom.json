@@ -1421,7 +1421,16 @@
                 566.5108642578125
               ]
             }
-          ]
+          ],
+          "rasterizedDuplicate": true,
+          "rasterizedDuplicateReason": "extracted lowercase glyph is clipped by the p.70 printed card edge in the source PDF and must not render as a standalone letter",
+          "rasterizedDuplicateEvidence": {
+            "auditId": "2026-10-03-p070-clipped-glyph-v1",
+            "sourcePdfPage": 70,
+            "region": "top edge of the Protect the Smallest card under Component Limits",
+            "rule": "suppress the extracted full glyph when the source page paints only a clipped residue at the card edge",
+            "evidenceRef": "docs/QA/drafts/2026-10-03-bookwide-visual-review-batch.md"
+          }
         }
       ]
     },

@@ -76,3 +76,25 @@ Ao auditar as 10 primeiras páginas, procure estritamente pelas seguintes falhas
 1. **Você aponta a falha:** Ex: *"Na página 5, no bloco 'Crawl Mode', o texto está sobrepondo a imagem da espada e a fonte parece maior que no PDF."*
 2. **Nós investigamos a Extração (Python):** Conferimos se o `extract_dom.py` extraiu o dado errado, cortou a cor, ou se perdeu o estilo.
 3. **Nós ajustamos o Renderizador (React):** O `PageRenderer.tsx` será ajustado para interpretar a imperfeição de forma sistêmica, resolvendo de vez aquele padrão para todas as outras 100 páginas.
+
+---
+
+## 5. Fluxo ativo: fechar uma página por vez
+
+A partir da p.68, a revisão avança sequencialmente e mantém somente uma página em andamento. Folhas de contato podem ajudar a localizar problemas, mas não contam como aprovação.
+
+### Critério para fechar uma página
+
+- Comparar a página inteira do viewer em inglês com a mesma página do PDF-fonte, na mesma escala e depois de qualquer correção.
+- Ampliar e comparar com o PDF cada região com texto, ícones, marcadores, cartas, imagens, tags coloridas, caixas e ornamentos; não deixar texto duplicado, ausente ou deslocado.
+- Preservar como texto editável cada unidade que será traduzida. Tratar contornos, pictogramas e conteúdo realmente impresso como imagem sem criar uma segunda ocorrência de texto.
+- Conferir posição, fonte, peso, itálico, cor, quebra, espaçamento, caixas e relação com a arte ao redor. Se uma região não puder ser verificada, registrá-la como pendente em vez de aprovar a página.
+- Recapturar a página inteira e os detalhes afetados após a correção. Registrar as evidências pareadas `source`/`app` e a conclusão antes de avançar.
+- Para confrontos tipográficos em escala de leitura, capturar o viewer em PNG sem perdas (`scripts/capture_visual_audit_pages.mjs --format png`) para que a compressão JPEG não masque contornos e pictogramas pequenos.
+- Quando existir tradução PT-BR, fazer também a revisão integral dessa página traduzida e verificar que imagens/correções independentes de idioma continuam presentes.
+
+### Estados
+
+`não iniciada` → `em revisão` → `corrigida, aguardando confronto` → `fidelidade EN fechada` → `EN + PT-BR fechadas` (quando houver tradução).
+
+Uma página só fica “fechada” quando todas as regiões visíveis foram conferidas contra a referência; correção pontual com screenshot da região não equivale a aprovação integral. As p.68–81 foram fechadas em EN; o cursor passa agora à p.82. A revisão integral PT-BR ainda está pendente nas páginas que não têm tradução final, incluindo as cartas das p.77–79 e 81.

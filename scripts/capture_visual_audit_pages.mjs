@@ -9,6 +9,7 @@ function optionsFromArgs(args) {
   const options = {
     start: 1,
     end: 102,
+    format: 'jpg',
     url: process.env.RULEBOOK_APP_URL ?? 'http://127.0.0.1:8080/',
     output: 'tmp/ghost-audit/app-captures',
   };
@@ -16,6 +17,7 @@ function optionsFromArgs(args) {
     const arg = args[i];
     if (arg === '--start') options.start = Number(args[++i]);
     else if (arg === '--end') options.end = Number(args[++i]);
+    else if (arg === '--format') options.format = args[++i];
     else if (arg === '--url') options.url = args[++i];
     else if (arg === '--output') options.output = args[++i];
     else throw new Error(`Unknown argument: ${arg}`);
@@ -23,6 +25,9 @@ function optionsFromArgs(args) {
   if (!Number.isInteger(options.start) || !Number.isInteger(options.end)
       || options.start < 1 || options.end > 102 || options.start > options.end) {
     throw new Error('--start/--end must be a valid inclusive range from 1 to 102');
+  }
+  if (!['jpg', 'png'].includes(options.format)) {
+    throw new Error('--format must be jpg or png');
   }
   return options;
 }
@@ -59,7 +64,8 @@ try {
   }));
 
   await page.goto(options.url, { waitUntil: 'networkidle' });
-  await page.getByTitle('Fit to Screen').click();
+  // This control is exposed as an accessible button name, not a title attr.
+  await page.getByRole('button', { name: 'Fit to Screen' }).click();
   const captured = [];
 
   for (let number = options.start; number <= options.end; number += 1) {
@@ -77,13 +83,19 @@ try {
         && background?.getAttribute('src')?.includes(`page_${pageId}/background.webp`)
         && background.naturalWidth > 0;
     }, number, { timeout: 60_000 });
+    // Fidelity overlay images load independently from the background and page
+    // JSON. Do not capture while an overlay is still blank/unavailable.
+    await page.waitForFunction(() => {
+      const overlays = [...document.querySelectorAll('.page-container img[src*="fidelity-overlay-"]')];
+      return overlays.every(image => image.complete && image.naturalWidth > 0);
+    }, null, { timeout: 30_000 });
     await page.evaluate(() => document.fonts.ready);
 
-    const imagePath = path.join(outputDir, `app-page-${pageId}.jpg`);
+    const imagePath = path.join(outputDir, `app-page-${pageId}.${options.format}`);
     await page.locator('.page-container').screenshot({
       path: imagePath,
-      type: 'jpeg',
-      quality: 90,
+      type: options.format === 'jpg' ? 'jpeg' : 'png',
+      ...(options.format === 'jpg' ? { quality: 90 } : {}),
     });
     const dimensions = await page.locator('.page-container').evaluate(element => {
       const { width, height } = element.getBoundingClientRect();
@@ -100,6 +112,7 @@ try {
     viewport: { width: 1600, height: 1400 },
     deviceScaleFactor: 1,
     zoom: 'Fit to Screen',
+    imageFormat: options.format,
     language: 'EN',
     translationApi: 'intercepted with an empty response',
     browserStorage: 'fresh, isolated context',

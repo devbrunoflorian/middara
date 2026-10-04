@@ -1071,9 +1071,9 @@
           "id": "line_16_1",
           "bbox": [
             74.9756851196289,
-            747.8623046875,
+            754.463134765625,
             205.556396484375,
-            781.2383422851562
+            766.3631591796875
           ],
           "availableWidth": 130.5807113647461,
           "availableX": 74.9756851196289,
@@ -1103,7 +1103,8 @@
                 747.9183349609375,
                 191.50039672851562,
                 781.2383422851562
-              ]
+              ],
+              "renderSizeOverridePt": 10.0
             },
             {
               "text": "*",
@@ -1116,7 +1117,10 @@
                 747.8623046875,
                 197.77239990234375,
                 781.2383422851562
-              ]
+              ],
+              "renderSizeOverridePt": 10.0,
+              "renderAsSourceOverlayDuplicate": true,
+              "renderSourceOverlayLanguage": "all"
             },
             {
               "text": " ",
@@ -1129,7 +1133,8 @@
                 747.9183349609375,
                 205.556396484375,
                 781.2383422851562
-              ]
+              ],
+              "renderSizeOverridePt": 10.0
             }
           ]
         }
@@ -2316,7 +2321,10 @@
                 775.718505859375,
                 770.15380859375,
                 787.978515625
-              ]
+              ],
+              "renderOnlyStrokePass": true,
+              "sourcePaintRole": "stroke-only",
+              "sourcePaintAuditId": "2026-10-04-p090-093-folio-outline-v1"
             }
           ]
         },
@@ -2343,7 +2351,11 @@
                 775.718505859375,
                 770.15380859375,
                 787.978515625
-              ]
+              ],
+              "renderTextStrokeWidthPt": 1.5,
+              "renderTextStrokeColor": "#fff574",
+              "sourcePaintRole": "fill-with-source-stroke",
+              "sourcePaintAuditId": "2026-10-04-p090-093-folio-outline-v1"
             }
           ]
         }
