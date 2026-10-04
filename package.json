@@ -8,8 +8,8 @@
   ],
   "scripts": {
     "dev:api": "npm run dev -w apps/admin",
-    "dev:web": "npm run dev -w apps/web",
-    "dev": "npm run dev:api & npm run dev:web"
+    "dev:web": "npm run dev -w apps/web -- --host 127.0.0.1",
+    "dev": "node scripts/dev.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.48.0"
