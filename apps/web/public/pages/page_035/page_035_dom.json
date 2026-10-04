@@ -2587,8 +2587,8 @@
             554.9007568359375,
             216.59849548339844
           ],
-          "availableWidth": 642.1525650024414,
-          "availableX": 94.32869720458984,
+          "availableWidth": 293.962158203125,
+          "availableX": 442.51910400390625,
           "suspectedGhost": false,
           "spans": [
             {
@@ -2627,8 +2627,8 @@
             736.4812622070312,
             227.59849548339844
           ],
-          "availableWidth": 642.1525650024414,
-          "availableX": 94.32869720458984,
+          "availableWidth": 293.962158203125,
+          "availableX": 442.51910400390625,
           "suspectedGhost": false,
           "spans": [
             {
@@ -2654,8 +2654,8 @@
             729.4613647460938,
             238.59849548339844
           ],
-          "availableWidth": 642.1525650024414,
-          "availableX": 94.32869720458984,
+          "availableWidth": 293.962158203125,
+          "availableX": 442.51910400390625,
           "suspectedGhost": false,
           "spans": [
             {
@@ -2681,8 +2681,8 @@
             506.2507019042969,
             249.59849548339844
           ],
-          "availableWidth": 642.1525650024414,
-          "availableX": 94.32869720458984,
+          "availableWidth": 293.962158203125,
+          "availableX": 442.51910400390625,
           "suspectedGhost": false,
           "spans": [
             {
@@ -2708,7 +2708,7 @@
             98.82869720458984,
             248.66671752929688
           ],
-          "availableWidth": 642.1525650024414,
+          "availableWidth": 4.5,
           "availableX": 94.32869720458984,
           "suspectedGhost": false,
           "spans": [
@@ -2748,6 +2748,74 @@
           "spanRefs": [
             "line_26_4:0"
           ]
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p35-block-26-loot-deck-heading",
+          "field": {
+            "id": "p35-block-26-loot-deck-heading-field",
+            "lineIds": [
+              "line_26_0"
+            ],
+            "bbox": [
+              442.51910400390625,
+              204.698486328125,
+              554.9007568359375,
+              216.59849548339844
+            ],
+            "frame": {
+              "x": 442.51910400390625,
+              "width": 293.962158203125,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          }
+        },
+        {
+          "id": "p35-block-26-loot-deck-body",
+          "field": {
+            "id": "p35-block-26-loot-deck-body-field",
+            "lineIds": [
+              "line_26_1",
+              "line_26_2",
+              "line_26_3"
+            ],
+            "bbox": [
+              442.5207214355469,
+              215.698486328125,
+              736.4812622070312,
+              249.59849548339844
+            ],
+            "frame": {
+              "x": 442.5207214355469,
+              "width": 293.9605407714844,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p35-block-26-marker-e",
+          "field": {
+            "id": "p35-block-26-marker-e-field",
+            "lineIds": [
+              "line_26_4"
+            ],
+            "bbox": [
+              94.32869720458984,
+              237.938720703125,
+              98.82869720458984,
+              248.66671752929688
+            ],
+            "frame": {
+              "x": 94.32869720458984,
+              "width": 4.5,
+              "textAlign": "left",
+              "lineHeight": 1
+            }
+          },
+          "fixedPosition": true
         }
       ]
     },
@@ -3465,7 +3533,10 @@
                 775.718505859375,
                 771.78369140625,
                 787.978515625
-              ]
+              ],
+              "renderOnlyStrokePass": true,
+              "sourcePaintRole": "stroke-only",
+              "sourcePaintAuditId": "2026-10-04-p035-folio-outline-v1"
             }
           ]
         },
@@ -3492,7 +3563,11 @@
                 775.718505859375,
                 771.78369140625,
                 787.978515625
-              ]
+              ],
+              "renderTextStrokeWidthPt": 1.5,
+              "renderTextStrokeColor": "#fff574",
+              "sourcePaintRole": "fill-with-source-stroke",
+              "sourcePaintAuditId": "2026-10-04-p035-folio-outline-v1"
             }
           ]
         }

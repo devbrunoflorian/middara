@@ -37,3 +37,10 @@ These recurring roles are supported by the source-PDF comparison on pages 2–13
 ## Remaining known limits
 
 The typography inventory is not a visual pass of every span. The app currently suppresses pictogram font spans pending page-specific background comparison; a first font-coverage run found 204 Zapf Dingbats spans across 34 pages and one Wingdings 3 span on page 15. Do not unsuppress or globally remap them from this count alone. The separate next stage is to reconcile these glyphs against the PDF and actual page backgrounds, then continue geometry/spacing and artwork-text duplication checks.
+
+
+## Marcador em outra coluna dentro do mesmo bloco fonte — p. 35
+
+`block_26` guarda heading/body do Loot Deck à direita e E à esquerda. Não derivar o frame editável da união dessas duas regiões. As unidades de parágrafo preservam tinta/IDs e usam frames por coluna; o E tem unidade própria com `fixedPosition: true`. O renderer exclui unidades fixas do deslocamento de reflow e dos limites de vizinhos/obstáculos. Campos sem o atributo conservam o comportamento anterior. Nenhuma migração de tradução é implícita: overrides legados têm precedência.
+
+Fonte/estruturas, simulação da lógica e build foram verificados; seleção/caret/reflow vivo continuam pendentes no [registro de p. 35](../project-progress/2026-10-04-page35-source-review.md). Não generalizar o flag para outros marcadores sem conferir sua ligação fonte.

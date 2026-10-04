@@ -120,6 +120,8 @@ export interface CreditUnitDefinition {
 export interface TypographicUnitDefinition {
   id: string;
   field: CreditFieldDefinition;
+  /** Keep a source marker anchored when a neighboring heading grows. */
+  fixedPosition?: boolean;
 }
 
 export interface TypographicSpanUnitDefinition {
@@ -1560,7 +1562,9 @@ function findNextSameColumnComponentY(
   layoutObstacles: [number, number, number, number][],
   block: Block,
 ): number | undefined {
-  const frames = block.typographicUnits?.map(unit => unit.field.frame) ?? [];
+  const frames = block.typographicUnits
+    ?.filter(unit => !unit.fixedPosition)
+    .map(unit => unit.field.frame) ?? [];
   if (frames.length === 0) return undefined;
   const x0 = Math.min(...frames.map(frame => frame.x));
   const x1 = Math.max(...frames.map(frame => frame.x + frame.width));
@@ -1639,8 +1643,9 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
     height: `${blockH * scale}px`,
     zIndex: block.zIndex || 10,
   };
-  const firstFieldY = units[0]?.field.bbox[1];
-  const secondFieldY = units[1]?.field.bbox[1];
+  const flowUnits = units.filter(unit => !unit.fixedPosition);
+  const firstFieldY = flowUnits[0]?.field.bbox[1];
+  const secondFieldY = flowUnits[1]?.field.bbox[1];
   const handleLeadingUnitMeasure = useCallback((heightPx: number) => {
     if (firstFieldY === undefined || secondFieldY === undefined || !scale) return;
     const requiredPushPt = Math.max(0, heightPx / scale - (secondFieldY - firstFieldY));
@@ -1659,7 +1664,9 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
         const override = selectedBlockKey === spanKey && draftOverride
           ? draftOverride
           : overrides.get(spanKey) || null;
-        const nextFieldY = units[unitIndex + 1]?.field.bbox[1];
+        const nextFieldY = unit.fixedPosition ? undefined : units
+          .slice(unitIndex + 1)
+          .find(nextUnit => !nextUnit.fixedPosition)?.field.bbox[1];
         return (
           <CreditField
             key={spanKey}
@@ -1672,8 +1679,8 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
             override={override}
             language={language}
             nextFieldY={nextFieldY !== undefined ? nextFieldY + leadingUnitPushPt : undefined}
-            topOffsetPt={unitIndex > 0 ? leadingUnitPushPt : 0}
-            onPreviewMeasure={unitIndex === 0 ? handleLeadingUnitMeasure : undefined}
+            topOffsetPt={!unit.fixedPosition && unit !== flowUnits[0] ? leadingUnitPushPt : 0}
+            onPreviewMeasure={unit === flowUnits[0] ? handleLeadingUnitMeasure : undefined}
             inlineSpanStates={inlineSpanStates}
             onInlineSpanClick={state => onBlockClick(state.info)}
             onBlockClick={onBlockClick}
