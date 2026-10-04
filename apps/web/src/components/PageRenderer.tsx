@@ -714,6 +714,33 @@ function sourceLayoutFrame(block: Block): LayoutFrame {
   };
 }
 
+type AdminGeometryDataAttributes = React.HTMLAttributes<HTMLDivElement> & {
+  'data-admin-geometry'?: string;
+  'data-admin-geometry-key'?: string;
+  'data-admin-geometry-x'?: number;
+  'data-admin-geometry-y'?: number;
+  'data-admin-geometry-width'?: number;
+  'data-admin-geometry-height'?: number;
+  'data-admin-geometry-rotation'?: number;
+};
+
+function adminGeometryAttributes(
+  isAdmin: boolean,
+  key: string,
+  frame: LayoutFrame,
+): AdminGeometryDataAttributes {
+  if (!isAdmin) return {};
+  return {
+    'data-admin-geometry': 'true',
+    'data-admin-geometry-key': key,
+    'data-admin-geometry-x': frame.x,
+    'data-admin-geometry-y': frame.y ?? 0,
+    'data-admin-geometry-width': frame.width,
+    'data-admin-geometry-height': frame.height ?? 1,
+    'data-admin-geometry-rotation': frame.rotation ?? 0,
+  };
+}
+
 function frameUnitKey(pageNumber: number, block: Block, blockIndex: number): string {
   return block.editorKey ?? `page_${pageNumber}_block_${blockIndex}`;
 }
@@ -1253,6 +1280,10 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     transform: `rotate(${translatedFrame.rotation ?? 0}deg)`,
     transformOrigin: 'center center',
   } : blockStyle;
+  const geometryFrame = (layoutMode && layoutFrameOverride) || (currentOverride && translatedFrame)
+    ? (layoutFrameOverride ?? translatedFrame!)
+    : { x: frameX, y: blockY, width: frameW, height: blockH, rotation: 0 };
+  const geometryAttributes = adminGeometryAttributes(isAdmin, blockKey, geometryFrame);
 
   // Effect to measure height and set overflowing state for the live preview indicator
   useEffect(() => {
@@ -1324,6 +1355,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
   if (currentOverride && currentOverride.segments.length > 0) {
     // Use a translation frame when supplied; otherwise keep the source-derived fallback.
+    const fixedLineIndexes = staticEditorLineIndexes(block);
     const fixedLines = (block.lines ?? []).filter((_, index) => fixedLineIndexes.has(index));
     const firstLine = editableBlockLines(block)[0] ?? block.lines[0];
     const hasStaticEditorLines = fixedLines.length > 0;
@@ -1342,7 +1374,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     const blockLineW = rawWidth * scale;
 
     return (
-      <div className={`block-container ${blockHoverClass} ${overflowClass}`} style={translatedStyle} onClick={handleBlockClick}>
+      <div className={`block-container ${blockHoverClass} ${overflowClass}`} style={translatedStyle} onClick={handleBlockClick} {...geometryAttributes}>
         {fixedLines.map(line => (
           <div
             key={`static-${line.id}`}
@@ -1415,7 +1447,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   }
 
   return (
-    <div className={`block-container ${blockHoverClass}`} style={blockStyle} onClick={handleBlockClick}>
+    <div className={`block-container ${blockHoverClass}`} style={blockStyle} onClick={handleBlockClick} {...geometryAttributes}>
       {block.lines.map((line, lIdx) => {
         const lineId = line.id !== undefined ? line.id : lIdx;
         const isFixedLine = fixedLineIndexes.has(lIdx);
@@ -1690,6 +1722,13 @@ const CreditField: React.FC<CreditFieldProps> = ({
     width: `${field.frame.width * scale}px`,
     minHeight: `${fieldHeight * scale}px`,
   };
+  const geometryAttributes = adminGeometryAttributes(isAdmin, spanKey, {
+    x: field.frame.x,
+    y: fieldY,
+    width: field.frame.width,
+    height: fieldHeight,
+    rotation: 0,
+  });
 
   useEffect(() => {
     const preview = previewRef.current;
@@ -1719,6 +1758,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
       className={`credit-field ${sourceClass} ${selectedClass} ${overflowClass}`}
       style={fieldStyle}
       onClick={handleClick}
+      {...geometryAttributes}
     >
       {override && override.segments.length > 0 ? (
         <div
