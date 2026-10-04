@@ -1,6 +1,6 @@
 # Glossary candidates from audited drafts
 
-This is a review queue, **not an addition to the official glossary**. The official glossary remains authoritative and unchanged. These proposals come from the current semantic drafts (pages 3–9 and 13); confirm them with the other translation team before treating any as project-wide terminology.
+This is a review queue, **not an addition to the official glossary**. The official glossary remains authoritative and unchanged. These proposals come from the current semantic drafts (pages 3–11 and 13); confirm them with the other translation team before treating any as project-wide terminology.
 
 | English term/concept | Current draft rendering | Pages | Review note |
 |---|---|---:|---|
@@ -18,7 +18,8 @@ This is a review queue, **not an addition to the official glossary**. The offici
 | Story Discipline / Story Item | `Disciplina de História`; `Item de História` | 13 | New compound terms used together; confirm whether `Story` should be retained as a keyword or translated. |
 | Game Over | `Fim de Jogo` | 13 | Proposed translation of a rules outcome; absent from the official glossary. |
 | Side Quest | `Missão Secundária` | 13 | Proposed rules term; absent from the official glossary. |
-| Adventure Sheet | `Ficha de Aventura`; `Ficha da Aventura` | 10, 13 | P. 10 uses `Ficha de Aventura`, while p. 13 uses `Ficha da Aventura`; confirm capitalization and consistency with the companion book. |
+| Adventure Sheet / Adventurer Sheet | `Ficha de Aventura`; `Ficha da Aventura`; `Ficha de Aventureiro` | 10, 11, 13 | P. 11's source uses both English forms: its PT text maps `Adventure Sheet` to `Ficha de Aventura` and `Adventurer Sheet` to `Ficha de Aventureiro`. P. 10/13 also differ on the first form; confirm whether the source distinction is intentional. |
+| Unselectable / Selectable / Injured | `Não Selecionável`; `Selecionável`; `Ferido` | 11 | Proposed status labels; absent from the official glossary. Confirm these before using them as global terms. |
 | Party Tuck Bag | `Bolsa do Grupo` | 10 | Proposed name for the shared storage bag. Keep distinct from official `Party Stash → Estoque do Grupo` until the compound term is confirmed. |
 
 ## Already governed by the official glossary
