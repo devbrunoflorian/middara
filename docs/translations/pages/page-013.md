@@ -137,7 +137,7 @@
 
 **EN:** Once a **Bounty** has been completed, Adventurers may never attempt it during that Adventure again. If a **Bounty** is lost, players may try to complete it again during the next named Story Round where that difficulty, (or one of a lower difficulty) is allowed. In these cases they will start the **Bounty** over from the beginning.
 
-**PT-BR (rascunho):** Depois de concluir uma **Recompensa**, os Aventureiros não podem tentá-la novamente durante aquela Aventura. Se uma **Recompensa** for perdida, os jogadores podem tentar concluí-la de novo na próxima Rodada de História nomeada que permitir aquela dificuldade — ou uma dificuldade menor. Nesse caso, começam a **Recompensa** desde o início.
+**PT-BR (rascunho):** Depois de concluir uma **Recompensa**, os Aventureiros não podem tentá-la novamente durante aquela Aventura. Se uma **Recompensa** for perdida, os jogadores podem tentar concluí-la de novo na próxima Rodada de História nomeada que permitir aquela dificuldade — ou uma dificuldade menor. Nesses casos, começam a **Recompensa** desde o início.
 
 **EN (callout):** [ícone de raio] **_IMPORTANT:_** Any rewards earned during a **Bounty** are kept by Adventurers even if they fail a **Bounty**. Meaning, any rewards earned up to that point are retained.
 

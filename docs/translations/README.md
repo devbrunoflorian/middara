@@ -19,12 +19,12 @@ The existing 20% value is a review threshold, not an automatic pass/fail for lay
 - [`glossary.md`](glossary.md): project copy of the official glossary from `C:\Users\bruno\Middara\Rulebook 1.2\.agents\rules\glossary.md`.
 - [`glossary-candidates.md`](glossary-candidates.md): provisional, non-authoritative candidates and cross-page terminology conflicts found in the current drafts; requires team review before standardization.
 - [`references/page-2-voice-reference.md`](references/page-2-voice-reference.md): read-only scope and caveats for using the database translation on page 2.
-- [`pages/page-003.md`](pages/page-003.md): 40 Contents entries extracted from the PDF, paired to page numbers by baseline, and translated as a PT-BR draft after the existing EN visual review; PT preview remains pending.
-- [`pages/page-004.md`](pages/page-004.md): the page title and 14 component descriptions translated after the documented EN visual review; the artwork/card text is reserved for localization, and PT preview is pending.
-- [`pages/page-005.md`](pages/page-005.md): 12 editorial component descriptions translated after the documented EN visual review; the Portuguese preview is still pending.
-- [`pages/page-006.md`](pages/page-006.md): 8 component descriptions translated after the documented EN visual review; card text is held for artwork localization and two source wording anomalies are recorded.
-- [`pages/page-007.md`](pages/page-007.md): the complete three-column component checklist and quantities translated after the documented EN visual review; short labels with expansion above 20% are flagged for width review.
-- [`pages/page-013.md`](pages/page-013.md): both columns, phase list, callouts, split-size title, central-gutter coordinates and expansion alerts captured; the difficulty strip remains an artwork-localization item.
+- [`pages/page-003.md`](pages/page-003.md): all 40 Contents labels and destinations rechecked against the PDF; PT draft exists, but six width alerts and a conflict with the saved title (`Índice` vs `Sumário`) keep the page from being approved or reimported.
+- [`pages/page-004.md`](pages/page-004.md): title and 14 descriptions source-rechecked; printed `Adventures` typo and `Items Tiers` cross-reference discrepancy recorded, PT preview pending.
+- [`pages/page-005.md`](pages/page-005.md): 12 descriptions rechecked against source text; 8 short heading alerts need actual PT width review, preview still pending.
+- [`pages/page-006.md`](pages/page-006.md): 8 descriptions source-rechecked; `Adventurer Mode` and `Red Reveal Recoder` preserved as printed; a missing clause was restored; PT preview pending.
+- [`pages/page-007.md`](pages/page-007.md): all 40 list units and four quantity subtotals rechecked against the source; 19 copyfit alerts remain pending column preview.
+- [`pages/page-013.md`](pages/page-013.md): 25 content units and separate headings/callouts source-rechecked; skull stays an inline symbol, 5 copyfit alerts await preview, DIFFICULTY art stays separate.
 - [`source-pages/`](source-pages/): raw line-level English transcript for every PDF page, with per-span font/size/flags/bbox evidence. This generated transcript deliberately keeps artwork text and questionable reading order visible; it is not approved semantic copy or a translation.
 - [`../../scripts/extract_translation_markdown.py`](../../scripts/extract_translation_markdown.py): reproducibly regenerates those raw per-page transcripts from the official 102-page PDF.
 - [`../../scripts/audit_translation_copyfit.py`](../../scripts/audit_translation_copyfit.py): read-only EN/PT character-expansion report for curated drafts; alerts are not layout-fit judgments.

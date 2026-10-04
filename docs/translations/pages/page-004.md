@@ -30,7 +30,7 @@
 
 **EN:** This book contains the Adventure of Nightingale and her friends.
 
-**PT-BR (rascunho):** Este livro conta a Aventura de Nightingale e seus amigos.
+**PT-BR (rascunho):** Este livro contém a Aventura de Nightingale e seus amigos.
 
 ### 03 — Diagram Book
 
@@ -54,7 +54,7 @@
 
 **EN:** This book contains a Bounty that can be played with any Adventure you own.
 
-**PT-BR (rascunho):** Este livro contém uma Recompensa que pode ser jogada com qualquer Aventura sua.
+**PT-BR (rascunho):** Este livro contém uma Recompensa que pode ser jogada com qualquer Aventura que você tenha.
 
 ### 06 — Plastic Figures
 
@@ -112,15 +112,19 @@
 
 **EN:** Item Cards represent all the gear Adventurers can earn or buy. These cards are separated by Tier: Mundane, Common, Uncommon, and Rare. Item Cards also come in **6** different types: Weapon, Armor, Core, Relic, Accessory, and Consumable. See ***Items Tiers and Types*** Pg. 27.
 
-**PT-BR (rascunho):** As Cartas de Item representam todos os equipamentos que os Aventureiros podem ganhar ou comprar. Elas são divididas por Nível: Mundano, Comum, Incomum e Raro. Também há **6** tipos de Carta de Item: Arma, Armadura, Núcleo, Relíquia, Acessório e Consumível. Consulte ***Níveis e Tipos de Itens***, pág. 27.
+**PT-BR (rascunho):** As Cartas de Item representam todos os equipamentos que os Aventureiros podem ganhar ou comprar. Elas são divididas por Nível: Mundano, Comum, Incomum e Raro. Também há **6** tipos de Carta de Item: Arma, Armadura, Núcleo, Relíquia, Acessório e Consumível. Consulte ***Níveis e Tipos de Item***, pág. 27.
+
+**Referência cruzada:** a linha do PDF na p. 4 imprime “Items Tiers and Types”, mas o título no sumário da p. 3 e a seção correspondente estão no singular, “Item Tiers and Types”. A tradução usa o nome de seção da p. 3.
 
 ### 13 — Combatant Loot Cards
 
 **PT-BR (título):** Cartas de Saque de Combatente
 
-**EN:** Combatant Loot Cards represent the Items and Gold that Combatants drop when they are Defeated. Adventurers will draw these cards when they Defeat Combatants. See ***Combatant Loot*** Pg. 57.
+**EN:** Combatant Loot Cards represent the Items and Gold that Combatants drop when they are Defeated. Adventures will draw these cards when they Defeat Combatants. See ***Combatant Loot*** Pg. 57.
 
 **PT-BR (rascunho):** As Cartas de Saque de Combatente representam os Itens e o Ouro deixados por Combatentes quando são Derrotados. Os Aventureiros compram essas cartas ao Derrotar Combatentes. Consulte ***Saque de Combatente***, pág. 57.
+
+**Anomalia da fonte:** a página impressa diz literalmente “Adventures will draw these cards”. A inspeção ampliada da própria imagem da fonte confirmou o texto; o contexto indica que se refere aos Adventurers, então o PT mantém “Aventureiros” e o inglês-fonte não é corrigido silenciosamente.
 
 ### 14 — Monster Loot Cards
 
