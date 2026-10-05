@@ -6,6 +6,8 @@ export interface InlineSymbolMetrics {
   widthEm: number;
   heightEm: number;
   verticalAlignEm: number;
+  /** Source composition style used by the same semantic symbol ID. */
+  renderVariant?: string;
 }
 
 export interface SemanticSymbolDefinition {
@@ -46,6 +48,21 @@ export interface SemanticSymbolDefinition {
       heightEm: number;
       verticalAlignEm: number;
     }>>;
+    /** Per-occurrence source appearance variants; semantic identity stays symbolId. */
+    variants?: Record<string, {
+      viewBox: number[];
+      paths: NonNullable<SemanticSymbolDefinition['render']['paths']>;
+      widthEm: number;
+      heightEm: number;
+      verticalAlignEm: number;
+      localized?: Partial<Record<SymbolLanguage, {
+        viewBox: number[];
+        paths: NonNullable<SemanticSymbolDefinition['render']['paths']>;
+        widthEm: number;
+        heightEm: number;
+        verticalAlignEm: number;
+      }>>;
+    }>;
   };
 }
 

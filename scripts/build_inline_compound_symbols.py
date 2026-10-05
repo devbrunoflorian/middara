@@ -127,5 +127,55 @@ def compound_definitions(doc, vector_path, native_paint_colors, definition):
         entry['description'] = {'en': en+' complete tag: background, icon and localized label.',
             'pt-BR': pt+' — tag completa: fundo, ícone e rótulo localizado. Termo PT editorial provisório.'}
         entries.append(entry)
+    compact_status = compact_status_variant(doc, vector_path, native_paint_colors)
+    next(entry for entry in entries if entry['id'] == 'tag.status')['render']['variants'] = {'compact': compact_status}
     font.close()
     return entries
+
+
+def compact_status_variant(doc, vector_path, native_paint_colors):
+    """Rebuild the measured compact STATUS capsule shared by source pages 37 and 100."""
+    page = doc[36]
+    drawing_index = 109
+    drawings = page.get_drawings()
+    body = drawings[drawing_index]
+    rect = fitz.Rect(body['rect'])
+    assert body['type'] == 'f' and abs(rect.width - 44.65099) < .002 and abs(rect.height - 9.184998) < .002
+    other_page = doc[99]
+    other_body = other_page.get_drawings()[218]
+    other_rect = fitz.Rect(other_body['rect'])
+    assert other_body['type'] == 'f' and abs(other_rect.width - rect.width) < .002 and abs(other_rect.height - rect.height) < .002
+    assert tuple(round(v, 4) for v in body['fill']) == tuple(round(v, 4) for v in other_body['fill'])
+    for left, right in zip(body['items'], other_body['items']):
+        assert left[0] == right[0]
+        left_points = [coord for point in left[1:] for coord in (point.x-rect.x0, point.y-rect.y0)]
+        right_points = [coord for point in right[1:] for coord in (point.x-other_rect.x0, point.y-other_rect.y0)]
+        assert len(left_points) == len(right_points) and max(abs(a-b) for a,b in zip(left_points,right_points)) < .002
+
+    traces = [trace for trace in page.get_texttrace() if trace['font'] == 'OptimaLTStd-DemiBold'
+        and ''.join(chr(char[0]) for char in trace['chars']) == 'STATUS' and rect.contains(fitz.Rect(trace['bbox']))]
+    label = next(trace for trace in traces if abs(trace['size'] - 6.54309988) < .001)
+    assert all(fitz.Rect(char[3]).x0 >= rect.x0 and fitz.Rect(char[3]).y0 >= rect.y0
+        and fitz.Rect(char[3]).x1 <= rect.x1 and fitz.Rect(char[3]).y1 <= rect.y1 for char in label['chars'])
+    icon_chars = [char for trace in page.get_texttrace() if trace['font'] == 'ZapfDingbatsStd'
+        for char in trace['chars'] if char[0] == ord('✜') and rect.contains(fitz.Rect(char[3]))]
+    assert len(icon_chars) == 1 and abs(icon_chars[0][1] - 4) == 0
+    peer_label = [trace for trace in other_page.get_texttrace() if trace['font'] == 'OptimaLTStd-DemiBold'
+        and ''.join(chr(char[0]) for char in trace['chars']) == 'STATUS' and other_rect.contains(fitz.Rect(trace['bbox']))]
+    peer_icons = [char for trace in other_page.get_texttrace() if trace['font'] == 'ZapfDingbatsStd'
+        for char in trace['chars'] if char[0] == ord('✜') and other_rect.contains(fitz.Rect(char[3]))]
+    assert len(peer_label) == 1 and abs(peer_label[0]['size']-label['size']) < .001
+    assert len(peer_icons) == 1 and abs(peer_icons[0][1]-icon_chars[0][1]) == 0
+    assert abs(peer_label[0]['chars'][0][2][0]-other_rect.x0 - (label['chars'][0][2][0]-rect.x0)) < .002
+    assert abs(peer_label[0]['chars'][0][2][1]-other_rect.y0 - (label['chars'][0][2][1]-rect.y0)) < .002
+
+    svg = ET.fromstring(page.get_svg_image(text_as_path=True))
+    body_path = dict(d=vector_path(body), transform=f'translate({-rect.x0} {-rect.y0})', fill='#231f20')
+    body_path = native_paint_colors(page, rect, [body_path])[0]
+    paths = [body_path]
+    paths.extend(source_glyph_paths(page, rect, svg, ord('✜'), 'ZapfDingbatsStd'))
+    paths.extend(source_glyph_paths(page, rect, svg, font_contains='OptimaLTStd-DemiBold'))
+    size = label['size']
+    metrics = dict(widthEm=rect.width/size, heightEm=rect.height/size,
+        verticalAlignEm=(rect.y1-label['chars'][0][2][1])/size)
+    return dict(viewBox=[0, 0, rect.width, rect.height], paths=paths, **metrics)

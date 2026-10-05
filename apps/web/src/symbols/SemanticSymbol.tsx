@@ -5,9 +5,14 @@ export function SemanticSymbol({ id, language, size, color = 'currentColor', pre
   { id: string; language: SymbolLanguage; size: number; color?: string; preview?: boolean; alignToTop?: boolean; metrics?: InlineSymbolMetrics }) {
   const symbol=getSemanticSymbol(id);
   if (!symbol) return <span className="inline-symbol-unknown" role="img" aria-label={`Unknown symbol: ${id}`} title={id}>⟦{id}⟧</span>;
-  const visual = symbol.render.localized?.[language] ?? symbol.render;
-  const width=size*(metrics?.widthEm ?? symbol.render.widthEm)*(visual.widthEm/symbol.render.widthEm);
-  const height=size*(metrics?.heightEm ?? symbol.render.heightEm ?? symbol.render.widthEm)*((visual.heightEm ?? symbol.render.widthEm)/(symbol.render.heightEm ?? symbol.render.widthEm));
+  const sourceRender = metrics?.renderVariant
+    ? symbol.render.variants?.[metrics.renderVariant] ?? symbol.render
+    : symbol.render;
+  const visual = sourceRender.localized?.[language] ?? sourceRender;
+  const width=size*(metrics?.widthEm ?? sourceRender.widthEm)*(visual.widthEm/sourceRender.widthEm);
+  const sourceHeight = sourceRender.heightEm ?? sourceRender.widthEm;
+  const visualHeight = visual.heightEm ?? sourceHeight;
+  const height=size*(metrics?.heightEm ?? sourceHeight)*(visualHeight/sourceHeight);
   const style={display:alignToTop?'block':'inline-block',width,height,verticalAlign:alignToTop?'top':preview ? 'middle' : `${-size*(metrics?.verticalAlignEm ?? visual.verticalAlignEm)}px`,color, flexShrink:0};
   if (visual.paths && visual.viewBox) return (
     <svg className="inline-semantic-symbol" viewBox={visual.viewBox.join(' ')} style={{...style,overflow:'visible'}}
