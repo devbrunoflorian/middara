@@ -174,6 +174,39 @@ test('page 41 dice retain source baselines, word ownership, gaps and the wrapped
   assert.equal(wrapped.metrics.verticalAlignEm>0,true);
 });
 
+test('page 38 black dice stay owned by BLACK while following the source space on the same baseline',()=>{
+  const data=page(38);const dice=elements(38).filter((entry:any)=>entry.symbolId==='dice.black');
+  assert.equal(dice.length,3);
+  const expected=[
+    {blockId:'block_30',lineId:'line_30_0',ownerSpan:1,placementSpan:2},
+    {blockId:'block_33',lineId:'line_33_1',ownerSpan:3,placementSpan:4},
+    {blockId:'block_35',lineId:'line_35_1',ownerSpan:1,placementSpan:2},
+  ];
+  for(let i=0;i<dice.length;i++) {
+    const entry=dice[i];const target=expected[i];
+    assert.equal(entry.anchor.blockId,target.blockId);
+    assert.equal(entry.anchor.side,'after');
+    assert.deepEqual(entry.anchor.ownerSpanRef,{lineId:target.lineId,spanIndex:target.ownerSpan});
+    const block=data.blocks.find((candidate:any)=>candidate.id===target.blockId)!;
+    const line=block.lines.find((candidate:any)=>candidate.id===target.lineId)!;
+    assert.equal(line.spans[target.ownerSpan].text,'BLACK');
+    assert.equal(line.spans[target.placementSpan].text,' ');
+    assert.equal(entry.anchor.lineId,target.lineId);
+    assert.equal(entry.anchor.spanIndex,target.placementSpan);
+    assert.equal(entry.anchor.sizePt,10);
+    assert.ok(entry.anchor.gapPt>0 && entry.anchor.gapPt<.3);
+    assert.ok(entry.metrics.widthEm>1 && entry.metrics.heightEm>1);
+    assert.ok(entry.metrics.verticalAlignEm>0);
+  }
+  const adapted=attachSourceInlineElements(data.blocks,dice);
+  for(const entry of dice) {
+    const block=adapted.find(candidate=>candidate.id===entry.anchor.blockId)!;
+    const line=block.lines.find(candidate=>candidate.id===entry.anchor.lineId)!;
+    const symbol=line.spans.find(span=>span.semanticSymbolId===entry.symbolId)!;
+    assert.ok(Math.abs(symbol.sourceSymbolMetrics!.gapEm!-entry.anchor.gapPt/entry.anchor.sizePt)<1e-12);
+  }
+});
+
 test('mask activates for owning block/unit/draft, never the opposite language or unrelated unit',()=>{
   const es=elements(22);const data=page(22);const e=es[0];const b=data.blocks[e.anchor.blockIndex];const key=`page_22_block_${e.anchor.blockIndex}`;
   assert.equal(sourceElementIsReplaced(e,b,22,'pt-BR',new Map(),null,null),false);
