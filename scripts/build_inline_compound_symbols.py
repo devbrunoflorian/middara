@@ -131,6 +131,8 @@ def compound_definitions(doc, vector_path, native_paint_colors, definition):
     compact_status = compact_status_variant(doc, vector_path, native_paint_colors)
     status['render']['variants'] = {'compact': compact_status}
     status['render']['variants']['prose-9pt'] = prose_status_variant(doc, vector_path, native_paint_colors)
+    passive = next(entry for entry in entries if entry['id'] == 'tag.passive')
+    passive['render']['variants'] = {'prose-8pt': prose_passive_variant(doc, vector_path, native_paint_colors, font)}
     font.close()
     return entries
 
@@ -214,3 +216,50 @@ def prose_status_variant(doc, vector_path, native_paint_colors):
     metrics = dict(widthEm=rect.width/size, heightEm=rect.height/size,
         verticalAlignEm=(rect.y1-labels[0]['chars'][0][2][1])/size)
     return dict(viewBox=[0, 0, rect.width, rect.height], paths=paths, **metrics)
+
+
+def prose_passive_variant(doc, vector_path, native_paint_colors, font):
+    """Rebuild the measured 8pt PASSIVE capsule used inline in page 59 prose."""
+    page = doc[58]
+    drawing_index = 246
+    drawings = page.get_drawings()
+    body = drawings[drawing_index]
+    rect = fitz.Rect(body['rect'])
+    expected = (440.44500732421875, 576.989013671875, 491.6820068359375, 588.011962890625)
+    assert body['type'] == 'f' and max(abs(a-b) for a,b in zip(rect, expected)) < .002
+    assert tuple(round(v, 4) for v in body['fill']) == (0.1367, 0.122, 0.1253)
+
+    labels = [trace for trace in page.get_texttrace()
+        if trace['font'] == 'OptimaLTStd-DemiBold'
+        and ''.join(chr(char[0]) for char in trace['chars']) == 'PASSIVE'
+        and rect.contains(fitz.Rect(trace['bbox']))]
+    icons = [char for trace in page.get_texttrace() if trace['font'] == 'ZapfDingbatsStd'
+        for char in trace['chars'] if char[0] == ord('✤') and rect.contains(fitz.Rect(char[3]))]
+    assert len(labels) == 1 and abs(labels[0]['size'] - 8) < .001
+    assert len(icons) == 1
+
+    svg = ET.fromstring(page.get_svg_image(text_as_path=True))
+    paths = [dict(d=vector_path(body), transform=f'translate({-rect.x0} {-rect.y0})', fill='#231f20')]
+    paths = native_paint_colors(page, rect, paths)
+    paths.extend(source_glyph_paths(page, rect, svg, ord('✤'), 'ZapfDingbatsStd'))
+    paths.extend(source_glyph_paths(page, rect, svg, font_contains='OptimaLTStd-DemiBold'))
+    assert len(paths) >= 8, f'Incomplete p59 PASSIVE composition: {len(paths)} SVG paths'
+
+    label = labels[0]
+    size = label['size']
+    origin = label['chars'][0][2]
+    local_origin = [origin[0]-rect.x0, origin[1]-rect.y0]
+    # The source label tracks at 0.4 pt for adjacent letters on this compact tag.
+    translated, translated_width = localized_label(font, 'PASSIVO', size, local_origin, '#ffffff', .4)
+    source_width = label['bbox'][2] - label['bbox'][0]
+    delta = max(0, translated_width - source_width)
+    localized_width = rect.width + delta
+    localized_body = dict(paths[0], d=vector_path(extend_background(body, rect, delta)))
+    localized_icon = source_glyph_paths(page, rect, svg, ord('✤'), 'ZapfDingbatsStd')
+
+    metrics = dict(widthEm=rect.width/size, heightEm=rect.height/size,
+        verticalAlignEm=(rect.y1-origin[1])/size)
+    return dict(viewBox=[0, 0, rect.width, rect.height], paths=paths, **metrics,
+        localized={'pt-BR': dict(viewBox=[0, 0, localized_width, rect.height],
+            paths=[localized_body, *localized_icon, *translated],
+            **dict(metrics, widthEm=localized_width/size))})

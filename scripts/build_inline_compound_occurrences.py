@@ -171,6 +171,27 @@ overlay_path.write_text(json.dumps(overlay_data, ensure_ascii=False, indent=2) +
 print(json.dumps({'page': page_no, 'compoundOccurrences': 1,
     'remainingInlineElements': len(inline_data['elements']), 'variant': 'prose-9pt'}, ensure_ascii=False))
 
+# Page 59's PASSIVE tag is a smaller capsule embedded in ordinary prose.
+# Keep the icon and Demi label together as one `tag.passive` editing object.
+page_no = 59
+page_dir = ROOT / 'apps/web/public/pages/page_059'
+page_dom = json.loads((page_dir / 'page_059_dom.json').read_text(encoding='utf8'))
+rect = [440.44500732421875, 576.989013671875, 491.6820068359375, 588.011962890625]
+item = make_element(registry, page_dom, 'tag.passive', 'block_195', 'line_195_1', 1, 2,
+    '✤PASSIVE', rect, variant='prose-8pt', size=8.0)
+(page_dir / 'compound_elements.json').write_text(
+    json.dumps({'schemaVersion': 1, 'elements': [item]}, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+
+inline_path = page_dir / 'inline_elements.json'
+inline_data = json.loads(inline_path.read_text(encoding='utf8'))
+inline_data['elements'] = [element for element in inline_data['elements']
+    if not (element['symbolId'] == 'tag.passive.icon' and element['anchor']['blockId'] == 'block_195'
+        and element['anchor']['lineId'] == 'line_195_1' and element['anchor']['spanIndex'] == 1)]
+inline_path.write_text(json.dumps(inline_data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+(page_dir / 'inline-element-mask-000.png').unlink(missing_ok=True)
+print(json.dumps({'page': page_no, 'compoundOccurrences': 1,
+    'remainingInlineElements': len(inline_data['elements']), 'variant': 'prose-8pt'}, ensure_ascii=False))
+
 # Page 47's condition-tag examples reuse the exact p90 discard/exhaust
 # artwork. DISCARD's Zapf glyph and label share a PDF drawing with the capsule;
 # EXHAUST's white arrow is a separate source vector, also retained in p90.
