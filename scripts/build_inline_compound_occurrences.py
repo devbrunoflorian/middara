@@ -192,6 +192,118 @@ inline_path.write_text(json.dumps(inline_data, ensure_ascii=False, indent=2) + '
 print(json.dumps({'page': page_no, 'compoundOccurrences': 1,
     'remainingInlineElements': len(inline_data['elements']), 'variant': 'prose-8pt'}, ensure_ascii=False))
 
+# Page 73 repeats the same measured 8pt PASSIVE capsule in its page legend.
+page_no = 73
+page_dir = ROOT / 'apps/web/public/pages/page_073'
+page_dom = json.loads((page_dir / 'page_073_dom.json').read_text(encoding='utf8'))
+rect = [418.22882080078125, 547.78662109375, 469.4658203125, 558.8096313476562]
+item = make_element(registry, page_dom, 'tag.passive', 'block_108', 'line_108_1', 1, 2,
+    '✤PASSIVE', rect, variant='prose-8pt', size=8.0)
+(page_dir / 'compound_elements.json').write_text(
+    json.dumps({'schemaVersion': 1, 'elements': [item]}, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+
+inline_path = page_dir / 'inline_elements.json'
+inline_data = json.loads(inline_path.read_text(encoding='utf8'))
+removed = [element for element in inline_data['elements']
+    if element['symbolId'] == 'tag.passive.icon' and element['anchor']['blockId'] == 'block_108'
+        and element['anchor']['lineId'] == 'line_108_1' and element['anchor']['spanIndex'] == 1]
+assert len(removed) <= 1, f'Unexpected duplicate p73 source icon adapters: {len(removed)}'
+inline_data['elements'] = [element for element in inline_data['elements'] if element not in removed]
+inline_path.write_text(json.dumps(inline_data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+if removed:
+    mask_path = ROOT / 'apps/web/public' / removed[0]['mask']['url'].lstrip('/')
+    mask_path.unlink(missing_ok=True)
+else:
+    previous = json.loads((page_dir / 'compound_elements.json').read_text(encoding='utf8'))
+    assert any(element['symbolId'] == 'tag.passive' and element['anchor']['blockId'] == 'block_108'
+        and element['anchor']['lineId'] == 'line_108_1' and element['anchor']['spanStartIndex'] == 1
+        and element['anchor']['spanEndIndex'] == 2 for element in previous['elements']), \
+        'No p73 source adapter or existing compound anchor found'
+print(json.dumps({'page': page_no, 'compoundOccurrences': 1,
+    'remainingInlineElements': len(inline_data['elements']), 'variant': 'prose-8pt'}, ensure_ascii=False))
+
+# Page 70 has one visually present compact EXHAUST tag in the example callout.
+# Two other extracted EXHAUST runs have no visible ink in the source PDF render
+# and no matching DOM anchor, so they are deliberately not adopted.
+page_no = 70
+page_dir = ROOT / 'apps/web/public/pages/page_070'
+page_dom = json.loads((page_dir / 'page_070_dom.json').read_text(encoding='utf8'))
+rect = [272.79730224609375, 570.8878784179688, 319.2807312011719, 579.8575439453125]
+item = make_element(registry, page_dom, 'tag.exhaust', 'block_36', 'line_36_1', 0, 0,
+    'EXHAUST', rect, variant='prose-6.62pt', size=6.6209611892700195)
+(page_dir / 'compound_elements.json').write_text(
+    json.dumps({'schemaVersion': 1, 'elements': [item]}, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+print(json.dumps({'page': page_no, 'compoundOccurrences': 1,
+    'variant': 'prose-6.62pt', 'excludedInvisibleExtractions': 2}, ensure_ascii=False))
+
+# Page 95 has three reusable compact capsule shapes repeated across rules tables.
+# Join each icon+label pair into one editing object; adjacent body prose/newline
+# spans and the two larger standalone DISCARD glyphs remain ordinary content.
+page_no = 95
+page_dir = ROOT / 'apps/web/public/pages/page_095'
+page_dom = json.loads((page_dir / 'page_095_dom.json').read_text(encoding='utf8'))
+p95_specs = [
+    ('tag.status', 'block_7', 'line_7_0', 0, 1, '✜ STATUS',
+        [155.0869140625, 85.0252685546875, 193.44090270996094, 94.21026611328125], 'table-6.5pt', 6.5),
+    ('tag.status', 'block_20', 'line_20_0', 0, 1, '✜ STATUS',
+        [155.0869140625, 285.7438659667969, 193.44090270996094, 294.9288635253906], 'table-6.5pt', 6.5),
+    ('tag.status', 'block_35', 'line_35_0', 0, 1, '✜ STATUS',
+        [155.0869140625, 475.2506103515625, 193.44090270996094, 484.43560791015625], 'table-6.5pt', 6.5),
+    ('tag.passive', 'block_10', 'line_10_0', 0, 1, '✤PASSIVE',
+        [155.0869140625, 116.8455810546875, 197.7779083251953, 126.03057861328125], 'table-6.54pt', 6.543099880218506),
+    ('tag.passive', 'block_13', 'line_13_0', 0, 1, '✤PASSIVE',
+        [155.0869140625, 147.7752685546875, 197.7779083251953, 156.96026611328125], 'table-6.54pt', 6.543099880218506),
+    ('tag.passive', 'block_16', 'line_16_0', 0, 1, '✤PASSIVE',
+        [155.0869140625, 184.95989990234375, 197.7779083251953, 194.1448974609375], 'table-6.54pt', 6.543099880218506),
+    ('tag.passive', 'block_23', 'line_23_0', 0, 1, '✤PASSIVE',
+        [155.0869140625, 315.8192138671875, 197.7779083251953, 325.00421142578125], 'table-6.54pt', 6.543099880218506),
+    ('tag.passive', 'block_28', 'line_28_0', 0, 1, '✤PASSIVE',
+        [155.0869140625, 397.61279296875, 197.7779083251953, 406.79779052734375], 'table-6.54pt', 6.543099880218506),
+    ('tag.passive', 'block_31', 'line_31_0', 0, 1, '✤PASSIVE',
+        [155.0869140625, 427.5423583984375, 197.7779083251953, 436.72735595703125], 'table-6.54pt', 6.543099880218506),
+    ('tag.discard', 'block_59', 'line_59_0', 0, 1, '✘DISCARD',
+        [519.9058837890625, 76.23919677734375, 558.2598876953125, 85.4241943359375], 'table-6.5pt', 6.5),
+    ('tag.discard', 'block_62', 'line_62_0', 0, 1, '✘DISCARD',
+        [519.9058837890625, 131.35159301757812, 558.2598876953125, 140.53659057617188], 'table-6.5pt', 6.5),
+    ('tag.discard', 'block_64', 'line_64_0', 0, 1, '✘DISCARD',
+        [519.9058837890625, 161.71420288085938, 558.2598876953125, 170.89920043945312], 'table-6.5pt', 6.5),
+    ('tag.discard', 'block_66', 'line_66_0', 0, 1, '✘DISCARD',
+        [519.9058837890625, 190.84201049804688, 558.2598876953125, 200.02700805664062], 'table-6.5pt', 6.5),
+    ('tag.discard', 'block_68', 'line_68_0', 0, 1, '✘DISCARD',
+        [519.9058837890625, 229.05029296875, 558.2598876953125, 238.23529052734375], 'table-6.5pt', 6.5),
+]
+p95_elements = [make_element(registry, page_dom, symbol_id, block_id, line_id, start, end,
+    expected, rect, variant=variant, size=size)
+    for symbol_id, block_id, line_id, start, end, expected, rect, variant, size in p95_specs]
+(page_dir / 'compound_elements.json').write_text(
+    json.dumps({'schemaVersion': 1, 'elements': p95_elements}, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+
+inline_path = page_dir / 'inline_elements.json'
+inline_data = json.loads(inline_path.read_text(encoding='utf8'))
+removed = [element for element in inline_data['elements'] if any(
+    element['symbolId'] == symbol_id+'.icon'
+    and element['anchor']['blockId'] == block_id and element['anchor']['lineId'] == line_id
+    and element['anchor']['spanIndex'] == start
+    for symbol_id, block_id, line_id, start, *_ in p95_specs)]
+assert len(removed) in (0, 14), f'Expected 14 p95 tag-icon adapters or an already-applied migration, found {len(removed)}'
+inline_data['elements'] = [element for element in inline_data['elements'] if element not in removed]
+inline_path.write_text(json.dumps(inline_data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+for element in removed:
+    mask = ROOT / 'apps/web/public' / element['mask']['url'].lstrip('/')
+    mask.unlink(missing_ok=True)
+
+overlay_path = page_dir / 'fidelity_overlays.json'
+overlay_data = json.loads(overlay_path.read_text(encoding='utf8'))
+overlay_region = 'All fourteen STATUS/PASSIVE/DISCARD rounded black tag capsules'
+matching_overlays = [overlay for overlay in overlay_data['overlays'] if overlay.get('region') == overlay_region]
+assert len(matching_overlays) == (1 if removed else 0), \
+    f'Expected the p95 fixed capsule overlay to match migration state, found {len(matching_overlays)}'
+overlay_data['overlays'] = [overlay for overlay in overlay_data['overlays'] if overlay.get('region') != overlay_region]
+overlay_path.write_text(json.dumps(overlay_data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+(page_dir / 'fidelity-overlay-component-condition-tag-pills.svg').unlink(missing_ok=True)
+print(json.dumps({'page': page_no, 'compoundOccurrences': len(p95_elements),
+    'remainingInlineElements': len(inline_data['elements']), 'removedComponentOverlays': len(matching_overlays)}, ensure_ascii=False))
+
 # Page 47's condition-tag examples reuse the exact p90 discard/exhaust
 # artwork. DISCARD's Zapf glyph and label share a PDF drawing with the capsule;
 # EXHAUST's white arrow is a separate source vector, also retained in p90.

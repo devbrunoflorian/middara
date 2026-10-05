@@ -77,6 +77,7 @@ def extend_background(drawing, rect, delta):
 def compound_definitions(doc, vector_path, native_paint_colors, definition):
     page = doc[89]; drawings = page.get_drawings(); svg = ET.fromstring(page.get_svg_image(text_as_path=True))
     font = TTFont(ROOT/'apps/web/public/fonts/Optima LT Std Demi.otf'); entries = []
+    bold_font = TTFont(ROOT/'apps/web/public/fonts/Optima LT Std Bold.otf')
     for id, en, pt, index, icon in SPECS:
         body = drawings[index]; rect = body['rect']
         traces = [trace for trace in page.get_texttrace() if trace['font'] == 'OptimaLTStd-DemiBold'
@@ -132,9 +133,118 @@ def compound_definitions(doc, vector_path, native_paint_colors, definition):
     status['render']['variants'] = {'compact': compact_status}
     status['render']['variants']['prose-9pt'] = prose_status_variant(doc, vector_path, native_paint_colors)
     passive = next(entry for entry in entries if entry['id'] == 'tag.passive')
-    passive['render']['variants'] = {'prose-8pt': prose_passive_variant(doc, vector_path, native_paint_colors, font)}
+    passive['render']['variants'] = {
+        'prose-8pt': prose_passive_variant(doc, vector_path, native_paint_colors, font),
+        'table-6.54pt': compact_table_tag_variant(doc, vector_path, native_paint_colors,
+            symbol_id='tag.passive', label='PASSIVE', pt_label='PASSIVO', glyph='✤',
+            font_name='OptimaLTStd-DemiBold', font=font, drawing_indices=[162,164,166,175,177,183],
+            tracking=.3271574),
+    }
+    status['render']['variants']['table-6.5pt'] = compact_table_tag_variant(doc, vector_path,
+        native_paint_colors, symbol_id='tag.status', label='STATUS', pt_label='STATUS', glyph='✜',
+        font_name='OptimaLTStd-Bold', font=bold_font, drawing_indices=[154,169,194], tracking=0)
+    exhaust = next(entry for entry in entries if entry['id'] == 'tag.exhaust')
+    exhaust['render'].setdefault('variants', {})['prose-6.62pt'] = prose_exhaust_variant(
+        doc, vector_path, native_paint_colors, font)
+    discard = next(entry for entry in entries if entry['id'] == 'tag.discard')
+    discard['render']['variants'] = {'table-6.5pt': compact_table_tag_variant(doc, vector_path,
+        native_paint_colors, symbol_id='tag.discard', label='DISCARD', pt_label='DESCARTAR', glyph='✘',
+        font_name='OptimaLTStd-Bold', font=bold_font, drawing_indices=[280,281,282,283,284], tracking=0)}
     font.close()
+    bold_font.close()
     return entries
+
+
+def compact_table_tag_variant(doc, vector_path, native_paint_colors, *, symbol_id, label,
+    pt_label, glyph, font_name, font, drawing_indices, tracking):
+    """Rebuild repeated 6.5pt condition capsules in the page-95 rules tables."""
+    page = doc[94]
+    drawings = page.get_drawings()
+    svg = ET.fromstring(page.get_svg_image(text_as_path=True))
+    codepoint = ord(glyph)
+    reference = drawings[drawing_indices[0]]
+    rect = fitz.Rect(reference['rect'])
+    if reference['type'] != 'f' or tuple(round(v, 4) for v in reference['fill']) != (0.1367, 0.122, 0.1253):
+        raise ValueError(f'Unexpected p95 {symbol_id} capsule body: {reference}')
+
+    def normalized_items(drawing, bbox):
+        result = []
+        for item in drawing['items']:
+            coords = []
+            for value in item[1:]:
+                if isinstance(value, fitz.Point):
+                    coords.extend(((value.x-bbox.x0)/bbox.width, (value.y-bbox.y0)/bbox.height))
+                elif isinstance(value, fitz.Rect):
+                    coords.extend(((value.x0-bbox.x0)/bbox.width, (value.y0-bbox.y0)/bbox.height,
+                        (value.x1-bbox.x0)/bbox.width, (value.y1-bbox.y0)/bbox.height))
+                elif isinstance(value, fitz.Quad):
+                    for point in [value.ul, value.ur, value.lr, value.ll]:
+                        coords.extend(((point.x-bbox.x0)/bbox.width, (point.y-bbox.y0)/bbox.height))
+                else:
+                    coords.append(value)
+            result.append((item[0], coords))
+        return result
+
+    target_items = normalized_items(reference, rect)
+    expected_size = 6.543099880218506 if symbol_id == 'tag.passive' else 6.5
+    first_label = None
+    for index in drawing_indices:
+        body = drawings[index]
+        body_rect = fitz.Rect(body['rect'])
+        if body['type'] != 'f' or abs(body_rect.width-rect.width) > .002 or abs(body_rect.height-rect.height) > .002:
+            raise ValueError(f'Inconsistent p95 {symbol_id} capsule geometry at drawing {index}: {body_rect}')
+        candidate_items = normalized_items(body, body_rect)
+        same_paths = len(candidate_items) == len(target_items) and all(
+            left[0] == right[0] and len(left[1]) == len(right[1])
+            and max((abs(a-b) for a, b in zip(left[1], right[1])), default=0) < .000003
+            for left, right in zip(candidate_items, target_items))
+        if not same_paths:
+            raise ValueError(f'p95 {symbol_id} background drawings are not exact geometry matches')
+        if tuple(round(v, 4) for v in body['fill']) != (0.1367, 0.122, 0.1253):
+            raise ValueError(f'Inconsistent p95 {symbol_id} fill at drawing {index}: {body["fill"]}')
+
+        labels = [trace for trace in page.get_texttrace() if trace['font'] == font_name
+            and ''.join(chr(char[0]) for char in trace['chars']) == label
+            and body_rect.contains(fitz.Rect(trace['bbox']))]
+        icons = [char for trace in page.get_texttrace() if trace['font'] == 'ZapfDingbatsStd'
+            for char in trace['chars'] if char[0] == codepoint and body_rect.contains(fitz.Rect(char[3]))]
+        if len(labels) != 1 or len(icons) != 1 or abs(labels[0]['size']-expected_size) > .002:
+            raise ValueError(f'Missing/mismatched p95 {symbol_id} glyph or label at drawing {index}')
+        trace = labels[0]
+        relative_label = (trace['chars'][0][2][0]-body_rect.x0, trace['chars'][0][2][1]-body_rect.y0)
+        if first_label is None:
+            first_label = (trace, relative_label)
+        elif abs(relative_label[0]-first_label[1][0]) > .002 or abs(relative_label[1]-first_label[1][1]) > .002:
+            raise ValueError(f'p95 {symbol_id} label origin differs across repeated capsules')
+
+    trace = first_label[0]
+    origin = trace['chars'][0][2]
+    size = trace['size']
+    vectors = [dict(d=vector_path(reference), transform=f'translate({-rect.x0} {-rect.y0})', fill='#231f20')]
+    vectors = native_paint_colors(page, rect, vectors)
+    paths = vectors + source_glyph_paths(page, rect, svg, codepoint, 'ZapfDingbatsStd')
+    paths += source_glyph_paths(page, rect, svg, font_contains=font_name)
+    if len(paths) < 8:
+        raise ValueError(f'Incomplete p95 {symbol_id} source capsule: only {len(paths)} paths')
+
+    local_origin = [origin[0]-rect.x0, origin[1]-rect.y0]
+    if pt_label == label:
+        translated = source_glyph_paths(page, rect, svg, font_contains=font_name)
+        translated_width = trace['bbox'][2]-trace['bbox'][0]
+    else:
+        translated, translated_width = localized_label(font, pt_label,
+            size, local_origin, '#ffffff', tracking)
+    source_width = trace['bbox'][2]-trace['bbox'][0]
+    delta = max(0, translated_width-source_width)
+    localized_width = rect.width+delta
+    localized_body = dict(vectors[0], d=vector_path(extend_background(reference, rect, delta)))
+    localized_icon = source_glyph_paths(page, rect, svg, codepoint, 'ZapfDingbatsStd')
+    metrics = dict(widthEm=rect.width/size, heightEm=rect.height/size,
+        verticalAlignEm=(rect.y1-origin[1])/size)
+    return dict(viewBox=[0, 0, rect.width, rect.height], paths=paths, **metrics,
+        localized={'pt-BR': dict(viewBox=[0, 0, localized_width, rect.height],
+            paths=[localized_body, *localized_icon, *translated],
+            **dict(metrics, widthEm=localized_width/size))})
 
 
 def compact_status_variant(doc, vector_path, native_paint_colors):
@@ -262,4 +372,50 @@ def prose_passive_variant(doc, vector_path, native_paint_colors, font):
     return dict(viewBox=[0, 0, rect.width, rect.height], paths=paths, **metrics,
         localized={'pt-BR': dict(viewBox=[0, 0, localized_width, rect.height],
             paths=[localized_body, *localized_icon, *translated],
+            **dict(metrics, widthEm=localized_width/size))})
+
+
+def prose_exhaust_variant(doc, vector_path, native_paint_colors, font):
+    """Rebuild the visible compact EXHAUST capsule in page 70's example prose."""
+    page = doc[69]
+    drawings = page.get_drawings()
+    body_index, arrow_index = 188, 189
+    body, arrow = drawings[body_index], drawings[arrow_index]
+    rect = fitz.Rect(body['rect'])
+    expected = (272.79730224609375, 570.8878784179688, 319.2807312011719, 579.8575439453125)
+    assert body['type'] == 'f' and max(abs(a-b) for a,b in zip(rect, expected)) < .002
+    assert arrow['type'] == 'f' and rect.contains(arrow['rect'])
+    assert tuple(round(v, 4) for v in body['fill']) == (0.1367, 0.122, 0.1253)
+    assert tuple(round(v, 4) for v in arrow['fill']) == (1.0, 1.0, 1.0)
+
+    labels = [trace for trace in page.get_texttrace()
+        if trace['font'] == 'OptimaLTStd-DemiBold'
+        and ''.join(chr(char[0]) for char in trace['chars']) == 'EXHAUST'
+        and rect.contains(fitz.Rect(trace['bbox']))]
+    assert len(labels) == 1 and abs(labels[0]['size'] - 6.8607001304626465) < .002
+    label = labels[0]
+    origin = label['chars'][0][2]
+    svg = ET.fromstring(page.get_svg_image(text_as_path=True))
+    vectors = [
+        dict(d=vector_path(body), transform=f'translate({-rect.x0} {-rect.y0})', fill='#231f20'),
+        dict(d=vector_path(arrow), transform=f'translate({-rect.x0} {-rect.y0})', fill='#ffffff'),
+    ]
+    vectors = native_paint_colors(page, rect, vectors)
+    paths = vectors + source_glyph_paths(page, rect, svg, font_contains='OptimaLTStd-DemiBold')
+    assert len(paths) >= 9, f'Incomplete compact EXHAUST composition: {len(paths)} SVG paths'
+
+    size = label['size']
+    local_origin = [origin[0]-rect.x0, origin[1]-rect.y0]
+    # Source pair spacing averages just under 0.3 pt on this 6.86pt tag.
+    translated, translated_width = localized_label(font, 'EXAURIR', size, local_origin, '#ffffff', .3)
+    source_width = label['bbox'][2] - label['bbox'][0]
+    delta = max(0, translated_width - source_width)
+    localized_width = rect.width + delta
+    localized_body = dict(paths[0], d=vector_path(extend_background(body, rect, delta)))
+    localized_arrow = dict(paths[1], d=vector_path(extend_background(arrow, rect, delta)))
+    metrics = dict(widthEm=rect.width/size, heightEm=rect.height/size,
+        verticalAlignEm=(rect.y1-origin[1])/size)
+    return dict(viewBox=[0, 0, rect.width, rect.height], paths=paths, **metrics,
+        localized={'pt-BR': dict(viewBox=[0, 0, localized_width, rect.height],
+            paths=[localized_body, localized_arrow, *translated],
             **dict(metrics, widthEm=localized_width/size))})
