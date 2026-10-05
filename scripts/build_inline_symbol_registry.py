@@ -214,7 +214,24 @@ def build(apply, only_pages=None,registry_only=False):
         ('story.pencil',dict(page=13,drawingIndices=[108],bbox=[91.977294921875,281.093017578125,103.8272933959961,289.00701904296875]),[]),
         ('story.flag',dict(page=13,drawingIndices=[109,110,111],bbox=[178.47230529785156,294.3783874511719,186.71031188964844,303.7703857421875]),[]),
     ])
+    # Page 38: source-reviewed complete paths, including zero-width cube edges.
+    # These are explicit recipes, not expansion to unreviewed similar candidates.
+    def p38_component(indices):
+        drawings=source_drawings(doc[37]);rect=fitz.Rect(drawings[indices[0]]['rect'])
+        for index in indices[1:]:rect |= drawings[index]['rect']
+        return dict(page=38,drawingIndices=indices,bbox=list(rect))
+    additional={
+        'dice.black':[p38_component(ids) for ids in [[159,160,161,162],[168,169,170,171],[176,177,178,179]]],
+        'combat.skull':[p38_component(ids) for ids in [[166,167],[172,173]]],
+    }
+    selected=[(id,prototype,occurrences+additional.get(id,[])) for id,prototype,occurrences in selected]
+    selected.extend([
+        ('combat.shield.solid',p38_component([163,164,165]),[]),
+        ('combat.page',p38_component([174,175]),[p38_component([180,181])]),
+    ])
     labels={id:(en,pt) for _,id,en,pt in specs};labels.update({'attack.ranged':('Ranged attack','Ataque à distância'),'attack.melee-ranged':('Melee or ranged attack','Ataque corpo a corpo ou à distância'),'combat.shield.dark':('Defense shield, dark','Escudo de defesa, escuro'),'story.pencil':('Story entry','Anotação de história'),'story.flag':('Story flag','Bandeira de história')})
+    labels.update({'combat.shield.solid':('Solid defense shield','Escudo de defesa cheio'),
+                   'combat.page':('Page combat symbol','Símbolo de combate em forma de folha')})
     # The circle candidate group contains different foreground symbols.
     # Distribute only complete geometry matches to their reviewed recipes.
     circles=[complete_component(doc[o['page']-1],o) for o in audit['inlineVectorCandidates'][23]['occurrences']]
@@ -237,6 +254,9 @@ def build(apply, only_pages=None,registry_only=False):
         en,pt=labels[id];size=10
         entry=definition(id,en,pt,o['page'],list(rect),dict(viewBox=[0,0,rect.width,rect.height],paths=paths,widthEm=rect.width/size,heightEm=rect.height/size,verticalAlignEm=.18),'Dados' if id.startswith('dice.') else 'Regras e combate')
         entries.append(entry)
+        if id=='combat.page':
+            entry['searchTerms']['en']+=['book','sheet']
+            entry['searchTerms']['pt-BR']+=['livro','página']
         for occurrence in [o]+occurrences:
             if not same_component(doc[occurrence['page']-1],occurrence,page,o):continue
             page_no=occurrence['page'];dompath=ROOT/f'apps/web/public/pages/page_{page_no:03d}/page_{page_no:03d}_dom.json';dom=json.loads(dompath.read_text(encoding='utf8'));r=fitz.Rect(occurrence['bbox']);anchor=anchor_for(dom,r)

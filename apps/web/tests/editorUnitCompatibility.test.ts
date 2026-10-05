@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { hasPreservedLegacySpanOverride } from '../src/editorUnitCompatibility';
+import { exposesNestedSpanTargets, hasPreservedLegacySpanOverride } from '../src/editorUnitCompatibility';
 import { readFileSync } from 'node:fs';
 import { sourceElementIsReplaced, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
 import type { Block } from '../src/components/PageRenderer';
@@ -13,6 +13,12 @@ test('new paragraph fields opt in to preserving existing span-unit translation o
   assert.equal(hasPreservedLegacySpanOverride(block, 37, 'pt-BR', key => key === 'page_37_unit_p37-new-heading__pt-BR'), false);
   assert.equal(hasPreservedLegacySpanOverride({ ...block, preserveLegacySpanOverrides: false }, 37, 'pt-BR', () => true), false);
   assert.equal(hasPreservedLegacySpanOverride(block, 37, 'pt-BR', () => false), false);
+});
+
+test('source font fragments cannot intercept opted-in paragraph fields', () => {
+  assert.equal(exposesNestedSpanTargets({ preserveLegacySpanOverrides: true }), false);
+  assert.equal(exposesNestedSpanTargets({ preserveLegacySpanOverrides: false }), true);
+  assert.equal(exposesNestedSpanTargets({}), true);
 });
 
 test('p37 source glyph restoration is erased only when its own paragraph adopts the symbol', () => {

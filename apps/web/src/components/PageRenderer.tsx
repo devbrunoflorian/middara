@@ -9,7 +9,7 @@ import { sourceSpanRuns } from '../symbols/sourceRuns';
 import { decodeOverrideData, encodeOverrideData } from '../symbols/overrideData';
 import { contentsRowKey, contentsRowUsesLegacy, contentsRowLine, contentsLabelWidth, type ContentsRowDefinition } from '../contentsRows';
 import { ContentsRowFlow } from './ContentsRowFlow';
-import { hasPreservedLegacySpanOverride } from '../editorUnitCompatibility';
+import { exposesNestedSpanTargets, hasPreservedLegacySpanOverride } from '../editorUnitCompatibility';
 import { sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
 import './PageRenderer.css';
 import './Toast.css';
@@ -1690,9 +1690,9 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
   overrides, draftOverride, language,
 }) => {
   const [leadingUnitPushPt, setLeadingUnitPushPt] = useState(0);
-  const inlineSpanStates = buildInlineSpanStates(
+  const inlineSpanStates = exposesNestedSpanTargets(block) ? buildInlineSpanStates(
     block, pageNumber, selectedBlockKey, overrides, draftOverride, language,
-  );
+  ) : undefined;
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
   const blockW = block.bbox[2] - block.bbox[0];
