@@ -142,6 +142,35 @@ for page_no, block_id, line_id, start, end, expected, rect in COMPACT_STATUS:
     print(json.dumps({'page': page_no, 'compoundOccurrences': 1,
         'remainingInlineElements': len(inline_data['elements']), 'variant': 'compact'}, ensure_ascii=False))
 
+# Page 58 uses the same STATUS identity in a larger in-prose capsule. Its
+# Zapf dingbat and Optima label become one semantic object; the text is not
+# copied into a translated string or removed from the source DOM.
+page_no = 58
+page_dir = ROOT / 'apps/web/public/pages/page_058'
+page_dom = json.loads((page_dir / 'page_058_dom.json').read_text(encoding='utf8'))
+rect = [597.9517822265625, 662.9556884765625, 654.2647705078125, 674.5386962890625]
+item = make_element(registry, page_dom, 'tag.status', 'block_28', 'line_28_2', 1, 2,
+    '✜ STATUS', rect, variant='prose-9pt', size=9.0)
+(page_dir / 'compound_elements.json').write_text(
+    json.dumps({'schemaVersion': 1, 'elements': [item]}, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+
+inline_path = page_dir / 'inline_elements.json'
+inline_data = json.loads(inline_path.read_text(encoding='utf8'))
+inline_data['elements'] = [element for element in inline_data['elements']
+    if not (element['symbolId'] == 'tag.status.icon' and element['anchor']['blockId'] == 'block_28'
+        and element['anchor']['lineId'] == 'line_28_2' and element['anchor']['spanIndex'] == 1)]
+inline_path.write_text(json.dumps(inline_data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+
+overlay_path = page_dir / 'fidelity_overlays.json'
+overlay_data = json.loads(overlay_path.read_text(encoding='utf8'))
+overlay_data['overlays'] = [overlay for overlay in overlay_data['overlays']
+    if overlay.get('region') != 'status-tag-inline-symbol']
+overlay_path.write_text(json.dumps(overlay_data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+(page_dir / 'inline-element-mask-001.png').unlink(missing_ok=True)
+(page_dir / 'fidelity-overlay-status-tag-inline-symbol.png').unlink(missing_ok=True)
+print(json.dumps({'page': page_no, 'compoundOccurrences': 1,
+    'remainingInlineElements': len(inline_data['elements']), 'variant': 'prose-9pt'}, ensure_ascii=False))
+
 # The page-100 composition overlays are no longer referenced; remove their assets.
 page100 = ROOT / 'apps/web/public/pages/page_100'
 for unused in ['fidelity-overlay-component-status-tag-pill.svg', 'fidelity-overlay-component-status-tag-icon.png']:

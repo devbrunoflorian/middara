@@ -127,8 +127,10 @@ def compound_definitions(doc, vector_path, native_paint_colors, definition):
         entry['description'] = {'en': en+' complete tag: background, icon and localized label.',
             'pt-BR': pt+' — tag completa: fundo, ícone e rótulo localizado. Termo PT editorial provisório.'}
         entries.append(entry)
+    status = next(entry for entry in entries if entry['id'] == 'tag.status')
     compact_status = compact_status_variant(doc, vector_path, native_paint_colors)
-    next(entry for entry in entries if entry['id'] == 'tag.status')['render']['variants'] = {'compact': compact_status}
+    status['render']['variants'] = {'compact': compact_status}
+    status['render']['variants']['prose-9pt'] = prose_status_variant(doc, vector_path, native_paint_colors)
     font.close()
     return entries
 
@@ -178,4 +180,37 @@ def compact_status_variant(doc, vector_path, native_paint_colors):
     size = label['size']
     metrics = dict(widthEm=rect.width/size, heightEm=rect.height/size,
         verticalAlignEm=(rect.y1-label['chars'][0][2][1])/size)
+    return dict(viewBox=[0, 0, rect.width, rect.height], paths=paths, **metrics)
+
+
+def prose_status_variant(doc, vector_path, native_paint_colors):
+    """Rebuild the measured 9pt STATUS capsule used inline in page 58 prose."""
+    page = doc[57]
+    drawing_index = 107
+    drawings = page.get_drawings()
+    body = drawings[drawing_index]
+    rect = fitz.Rect(body['rect'])
+    expected = (597.9517822265625, 662.9556884765625, 654.2647705078125, 674.5386962890625)
+    assert body['type'] == 'f' and max(abs(a-b) for a,b in zip(rect, expected)) < .002
+    assert tuple(round(v, 4) for v in body['fill']) == (0.1367, 0.122, 0.1253)
+
+    labels = [trace for trace in page.get_texttrace()
+        if trace['font'] == 'OptimaLTStd-DemiBold'
+        and ''.join(chr(char[0]) for char in trace['chars']) == 'STATUS'
+        and rect.contains(fitz.Rect(trace['bbox']))]
+    icons = [char for trace in page.get_texttrace() if trace['font'] == 'ZapfDingbatsStd'
+        for char in trace['chars'] if char[0] == ord('✜') and rect.contains(fitz.Rect(char[3]))]
+    assert len(labels) == 1 and abs(labels[0]['size'] - 9) < .001
+    assert len(icons) == 1
+
+    svg = ET.fromstring(page.get_svg_image(text_as_path=True))
+    paths = [dict(d=vector_path(body), transform=f'translate({-rect.x0} {-rect.y0})', fill='#231f20')]
+    paths = native_paint_colors(page, rect, paths)
+    paths.extend(source_glyph_paths(page, rect, svg, ord('✜'), 'ZapfDingbatsStd'))
+    paths.extend(source_glyph_paths(page, rect, svg, font_contains='OptimaLTStd-DemiBold'))
+    assert len(paths) >= 8, f'Incomplete p58 STATUS composition: {len(paths)} SVG paths'
+
+    size = labels[0]['size']
+    metrics = dict(widthEm=rect.width/size, heightEm=rect.height/size,
+        verticalAlignEm=(rect.y1-labels[0]['chars'][0][2][1])/size)
     return dict(viewBox=[0, 0, rect.width, rect.height], paths=paths, **metrics)

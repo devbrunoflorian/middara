@@ -1,4 +1,4 @@
-"""Compare compact source STATUS compounds on pages 37/100 to the official PDF."""
+"""Compare source STATUS tag compounds on pages 37/58/100 to the official PDF."""
 from __future__ import annotations
 
 import json
@@ -17,16 +17,15 @@ from build_inline_symbol_registry import PDF  # noqa: E402
 REGISTRY = {item['id']: item for item in json.loads(
     (ROOT / 'apps/web/src/symbols/sourceSymbols.json').read_text(encoding='utf8'))}
 SYMBOL = REGISTRY['tag.status']
-VARIANT = SYMBOL['render']['variants']['compact']
 OUT_DIR = ROOT / 'docs/project-progress/evidence/2026-10-05-inline-elements-followup'
-PAGES = [37, 100]
+PAGES = [37, 58, 100]
 SCALE = 4
 
 
-def svg_render(size: tuple[int, int]) -> Image.Image:
+def svg_render(variant: dict, size: tuple[int, int]) -> Image.Image:
     paths = ''.join('<path ' + ' '.join(f'{key}={quoteattr(str(value))}' for key, value in path.items()) + '/>'
-        for path in VARIANT['paths'])
-    width, height = VARIANT['viewBox'][2:]
+        for path in variant['paths'])
+    width, height = variant['viewBox'][2:]
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{size[0]}" height="{size[1]}" '
         f'viewBox="0 0 {width} {height}">{paths}</svg>').encode()
     document = fitz.open('svg', svg)
@@ -41,11 +40,13 @@ def main() -> None:
         for page_number in PAGES:
             sidecar = json.loads((ROOT / f'apps/web/public/pages/page_{page_number:03d}/compound_elements.json').read_text(encoding='utf8'))
             item = next(element for element in sidecar['elements'] if element['symbolId'] == 'tag.status')
+            variant_id = item['metrics']['renderVariant']
+            variant = SYMBOL['render']['variants'][variant_id]
             rect = fitz.Rect(item['bbox'])
             source_page = document[page_number - 1]
             source_pix = source_page.get_pixmap(matrix=fitz.Matrix(SCALE, SCALE), clip=rect, alpha=False)
             native = Image.frombytes('RGB', (source_pix.width, source_pix.height), source_pix.samples)
-            rendered = svg_render(native.size)
+            rendered = svg_render(variant, native.size)
 
             background = Image.open(ROOT / f'apps/web/public/pages/page_{page_number:03d}/background.webp').convert('RGB')
             sx, sy = background.width / source_page.rect.width, background.height / source_page.rect.height
@@ -56,7 +57,7 @@ def main() -> None:
             report.append({
                 'page': page_number,
                 'symbolId': item['symbolId'],
-                'renderVariant': item['metrics']['renderVariant'],
+                'renderVariant': variant_id,
                 'sourceBBoxPt': list(rect),
                 'sizePt': item['sizePt'],
                 'nativeVsComposedMeanAbsoluteChannelError': round(float(delta.mean()), 4),
