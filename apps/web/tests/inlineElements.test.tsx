@@ -314,6 +314,38 @@ test('page 45 white and orange dice follow their exact source label runs',()=>{
   }
 });
 
+test('page 67 black dice follow BLACK after its source space',()=>{
+  const data=page(67);const dice=elements(67).filter((entry:any)=>entry.symbolId==='dice.black');
+  assert.equal(dice.length,2);
+  const expected=[
+    {blockId:'block_19',lineId:'line_19_2',ownerSpan:1,placementSpan:2,size:10.743599891662598,gap:.309265,vertical:.2416784511908546},
+    {blockId:'block_20',lineId:'line_20_6',ownerSpan:1,placementSpan:2,size:10,gap:.309204,vertical:.359649658203125},
+  ];
+  for(let i=0;i<dice.length;i++) {
+    const entry=dice[i];const target=expected[i];
+    assert.equal(entry.anchor.blockId,target.blockId);
+    assert.equal(entry.anchor.lineId,target.lineId);
+    assert.equal(entry.anchor.side,'after');
+    assert.equal(entry.anchor.gapPt,target.gap);
+    assert.deepEqual(entry.anchor.ownerSpanRef,{lineId:target.lineId,spanIndex:target.ownerSpan});
+    const block=data.blocks.find((candidate:any)=>candidate.id===target.blockId)!;
+    const line=block.lines.find((candidate:any)=>candidate.id===target.lineId)!;
+    assert.equal(line.spans[target.ownerSpan].text,'BLACK');
+    assert.equal(line.spans[target.placementSpan].text,' ');
+    assert.equal(entry.anchor.spanIndex,target.placementSpan);
+    assert.equal(entry.anchor.sizePt,target.size);
+    assert.ok(entry.metrics.widthEm>1 && entry.metrics.heightEm>1);
+    assert.equal(entry.metrics.verticalAlignEm,target.vertical);
+  }
+  const adapted=attachSourceInlineElements(data.blocks,dice);
+  for(const entry of dice) {
+    const block=adapted.find(candidate=>candidate.id===entry.anchor.blockId)!;
+    const line=block.lines.find(candidate=>candidate.id===entry.anchor.lineId)!;
+    const symbol=line.spans.find(span=>span.semanticSymbolId===entry.symbolId)!;
+    assert.ok(Math.abs(symbol.sourceSymbolMetrics!.gapEm!-entry.anchor.gapPt/entry.anchor.sizePt)<1e-12);
+  }
+});
+
 test('mask activates for owning block/unit/draft, never the opposite language or unrelated unit',()=>{
   const es=elements(22);const data=page(22);const e=es[0];const b=data.blocks[e.anchor.blockIndex];const key=`page_22_block_${e.anchor.blockIndex}`;
   assert.equal(sourceElementIsReplaced(e,b,22,'pt-BR',new Map(),null,null),false);
