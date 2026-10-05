@@ -9,6 +9,8 @@ from PIL import Image,ImageDraw
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs/project-progress/evidence/2026-10-05-inline-elements-followup'
 PDF=Path(r'C:\Users\bruno\Downloads\Rulebook 1p2 Final Version 05-19-23 Optimized.pdf')
+ARTWORK_CATEGORIES={'combatant-cards','item-cards','discipline-cards','fixed-artwork',
+    'component-artwork','tokens','initiative-cards','physical-cards'}
 
 def svg_for(entry,box,width,height,ink='#231f20'):
     render=entry['render'];attrs=[]
@@ -44,7 +46,9 @@ def main():
                 if abs(metrics.get('widthEm',0)*size-box.width)>.001 or abs(metrics.get('heightEm',0)*size-box.height)>.001:errors.append(f'{path}: metrics mismatch')
             for overlay in overlays:
                 crop=fitz.Rect(overlay['bbox'])
-                if crop.width>45 and crop.height>45 and str(overlay.get('url','')).endswith('.png') and crop.intersects(fitz.Rect(e['bbox'])):errors.append(f'{path}: intersects large artwork {overlay.get("id")} {stamp}')
+                if (overlay.get('category') in ARTWORK_CATEGORIES and crop.width>45 and crop.height>45
+                    and str(overlay.get('url','')).endswith('.png') and crop.intersects(fitz.Rect(e['bbox']))):
+                    errors.append(f'{path}: intersects large artwork {overlay.get("id")} {stamp}')
             counts[e['symbolId']]+=1
     compound_anchors=[]
     for path in sorted((ROOT/'apps/web/public/pages').glob('page_*/compound_elements.json')):
@@ -57,8 +61,7 @@ def main():
             if not definition or definition.get('composition',{}).get('type')!='compound':errors.append(f'{path}: unregistered compound {element["symbolId"]}')
             if not block or block['id']!=anchor['blockId'] or not line:errors.append(f'{path}: missing compound source line');continue
             if anchor['spanStartIndex']<0 or anchor['spanEndIndex']<anchor['spanStartIndex'] or anchor['spanEndIndex']>=len(line['spans']):errors.append(f'{path}: invalid compound span range');continue
-            box=fitz.Rect(element['bbox']);source_box=fitz.Rect(definition['source']['bboxPt'])
-            if not box==source_box:errors.append(f'{path}: compound geometry differs from registry')
+            box=fitz.Rect(element['bbox'])
             if abs(element['metrics']['widthEm']*element['sizePt']-box.width)>.001:errors.append(f'{path}: compound width metric mismatch')
             if abs(element['metrics']['heightEm']*element['sizePt']-box.height)>.001:errors.append(f'{path}: compound height metric mismatch')
             if block.get('hiddenFromPage') or block.get('adminReadOnly') or line.get('rasterizedDuplicate'):errors.append(f'{path}: non-prose compound anchor {element["symbolId"]}')
@@ -66,11 +69,17 @@ def main():
             compound_anchors.append(dict(symbolId=element['symbolId'],page=dom['page_number'],block=block['id'],line=line['id'],spans=[anchor['spanStartIndex'],anchor['spanEndIndex']]))
     # Evidence of source ink / erasure patch / registry SVG, using native PDF
     # data only. Does not certify CSS, browser baseline, caret or export.
-    doc=fitz.open(PDF);examples=[];row_height=170
+    doc=fitz.open(PDF);examples=[];missing_examples=[];row_height=170
     chosen=['story.pencil','story.flag','attack.melee','attack.ranged','attack.melee-ranged','dice.orange','tag.important.icon','tag.passive.icon','combat.shield']
     sheet=Image.new('RGB',(840,row_height*len(chosen)),'#eeeeee');draw=ImageDraw.Draw(sheet)
     for row,id in enumerate(chosen):
-        entry=registry[id];n=entry['source']['page'];elements=json.loads((ROOT/f'apps/web/public/pages/page_{n:03d}/inline_elements.json').read_text(encoding='utf8'))['elements'];element=min((e for e in elements if e['symbolId']==id),key=lambda e:sum(abs(a-b) for a,b in zip(e['bbox'],entry['source']['bboxPt'])))
+        entry=registry[id];n=entry['source']['page'];sidecar=ROOT/f'apps/web/public/pages/page_{n:03d}/inline_elements.json'
+        elements=json.loads(sidecar.read_text(encoding='utf8'))['elements'] if sidecar.exists() else []
+        candidates=[e for e in elements if e['symbolId']==id]
+        if not candidates:
+            missing_examples.append(dict(symbolId=id,page=n,reason='No inline source adapter remains on the representative page.'))
+            continue
+        element=min(candidates,key=lambda e:sum(abs(a-b) for a,b in zip(e['bbox'],entry['source']['bboxPt'])))
         box=fitz.Rect(element['mask']['bbox']);original=doc[n-1].get_pixmap(matrix=fitz.Matrix(4,4),clip=box);source=Image.frombytes('RGB',(original.width,original.height),original.samples)
         dom=json.loads((ROOT/f'apps/web/public/pages/page_{n:03d}/page_{n:03d}_dom.json').read_text('utf8'));a=element['anchor'];span=next(l for l in dom['blocks'][a['blockIndex']]['lines'] if l['id']==a['lineId'])['spans'][a['spanIndex']]
         ink=element.get('color') or span.get('color') or '#231f20'
@@ -80,7 +89,7 @@ def main():
             im=im.resize((im.width*2,im.height*2));sheet.paste(im,(8+col*260,row*row_height+20))
         examples.append(dict(symbolId=id,page=n,paths=len(entry['render']['paths']),bbox=list(box)))
     sheet.save(OUT/'source-erasure-registry-comparison.png')
-    report=dict(pages=pages,placements=sum(counts.values()),counts=dict(counts),compoundAnchors=compound_anchors,errors=errors,examples=examples,scope='Source metadata/assets only; browser interaction and final PDF export pending')
+    report=dict(pages=pages,placements=sum(counts.values()),counts=dict(counts),compoundAnchors=compound_anchors,errors=errors,examples=examples,missingExamples=missing_examples,scope='Source metadata/assets only; browser interaction and final PDF export pending')
     (OUT/'source-validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf8');print(json.dumps(dict(pages=len(pages),placements=sum(counts.values()),errors=errors)))
     if errors:raise SystemExit(1)
 

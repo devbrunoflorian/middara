@@ -150,8 +150,84 @@ def compound_definitions(doc, vector_path, native_paint_colors, definition):
     discard['render']['variants'] = {'table-6.5pt': compact_table_tag_variant(doc, vector_path,
         native_paint_colors, symbol_id='tag.discard', label='DISCARD', pt_label='DESCARTAR', glyph='✘',
         font_name='OptimaLTStd-Bold', font=bold_font, drawing_indices=[280,281,282,283,284], tracking=0)}
+    entries.extend(reference_letter_definitions(doc, vector_path, definition, bold_font))
     font.close()
     bold_font.close()
+    return entries
+
+
+def reference_letter_definitions(doc, vector_path, definition, bold_font):
+    """Create source-exact white tile + letter objects for page-40 inline refs."""
+    page = doc[39]
+    drawings = page.get_drawings()
+    svg = ET.fromstring(page.get_svg_image(text_as_path=True))
+    specs = {
+        'A': [103,104,135],
+        'B': [97,99,102,136],
+        'C': [100],
+        'D': [98,101],
+    }
+    entries = []
+    for letter, drawing_indices in specs.items():
+        if ord(letter) not in bold_font.getBestCmap():
+            raise ValueError(f'Optima Bold font file lacks page-40 marker {letter}')
+        body = drawings[drawing_indices[0]]
+        tile_rect = fitz.Rect(body['rect'])
+        if body['type'] != 'f' or tuple(body.get('fill') or ()) != (1.0,1.0,1.0):
+            raise ValueError(f'Unexpected page-40 marker tile for {letter}: {body}')
+        if abs(tile_rect.width-9.996) > .002 or abs(tile_rect.height-9.996) > .002:
+            raise ValueError(f'Unexpected page-40 marker tile size for {letter}: {tile_rect}')
+
+        representative = None
+        relative_char_bbox = None
+        for index in drawing_indices:
+            box = fitz.Rect(drawings[index]['rect'])
+            if (drawings[index]['type'] != 'f'
+                or abs(box.width-tile_rect.width) > .003
+                or abs(box.height-tile_rect.height) > .003
+                or tuple(drawings[index].get('fill') or ()) != (1.0,1.0,1.0)):
+                raise ValueError(f'Inconsistent page-40 {letter} tile path at drawing {index}: {box}')
+            traces = [trace for trace in page.get_texttrace()
+                if trace['font'] == 'OptimaLTStd-Bold'
+                and ''.join(chr(char[0]) for char in trace['chars']) == letter
+                and abs(trace['size']-8) < .002
+                and (box+(-1,-2,1,2)).intersects(fitz.Rect(trace['bbox']))]
+            if len(traces) != 1:
+                raise ValueError(f'Expected one Optima Bold {letter} label above p40 drawing {index}, found {len(traces)}')
+            trace = traces[0]
+            char_rect = fitz.Rect(trace['chars'][0][3])
+            offset = tuple(round(value,5) for value in (
+                char_rect.x0-box.x0, char_rect.y0-box.y0,
+                char_rect.x1-box.x0, char_rect.y1-box.y0))
+            if relative_char_bbox is None:
+                relative_char_bbox = offset
+                representative = (box, trace)
+            elif max(abs(a-b) for a,b in zip(offset,relative_char_bbox)) > .003:
+                raise ValueError(f'Page-40 {letter} glyph metrics vary across reference tiles')
+
+        assert representative is not None
+        box, trace = representative
+        label_rect = fitz.Rect(trace['chars'][0][3])
+        rect = box | label_rect
+        origin = trace['chars'][0][2]
+        paths = [dict(d=vector_path(body), transform=f'translate({-rect.x0} {-rect.y0})', fill='#ffffff')]
+        label_paths = source_glyph_paths(page, rect, svg, ord(letter), 'OptimaLTStd-Bold')
+        if not label_paths:
+            raise ValueError(f'Missing source glyph outline for page-40 reference {letter}')
+        paths.extend(dict(path, fill='currentColor') for path in label_paths)
+        size = trace['size']
+        metrics = dict(widthEm=rect.width/size, heightEm=rect.height/size,
+            verticalAlignEm=(rect.y1-origin[1])/size)
+        symbol_id = f'marker.reference.{letter.lower()}'
+        entry = definition(symbol_id, f'Reference {letter}', f'Referência {letter}', 40,
+            list(rect), dict(viewBox=[0,0,rect.width,rect.height],paths=paths,**metrics), 'Marcadores alfabéticos')
+        entry['composition'] = dict(type='compound', sourceFont='OptimaLTStd-Bold', sourceFontSizePt=size,
+            localizedLabel={'en':letter,'pt-BR':letter}, fixedTile='white 10pt square')
+        entry['description'] = {
+            'en': f'White reference tile {letter} with its letter as one movable inline object.',
+            'pt-BR': f'Quadrado branco de referência {letter} e sua letra em um único objeto inline móvel.',
+        }
+        entries.append(entry)
     return entries
 
 

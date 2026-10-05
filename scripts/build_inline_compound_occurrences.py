@@ -304,6 +304,33 @@ overlay_path.write_text(json.dumps(overlay_data, ensure_ascii=False, indent=2) +
 print(json.dumps({'page': page_no, 'compoundOccurrences': len(p95_elements),
     'remainingInlineElements': len(inline_data['elements']), 'removedComponentOverlays': len(matching_overlays)}, ensure_ascii=False))
 
+# The ten A-D callouts in page-40 prose each consist of a white source tile and
+# a separate 8pt letter. Keep the two larger A/B diagram labels independent.
+page_no = 40
+page_dir = ROOT / 'apps/web/public/pages/page_040'
+page_dom = json.loads((page_dir / 'page_040_dom.json').read_text(encoding='utf8'))
+p40_specs = [
+    ('marker.reference.b', 'block_8', 'line_8_3', 1, 'B', [390.7929992675781,328.08001708984375,400.78900146484375,338.0760192871094]),
+    ('marker.reference.d', 'block_8', 'line_8_3', 4, 'D', [620.2186889648438,328.08001708984375,630.2146606445312,338.0760192871094]),
+    ('marker.reference.b', 'block_9', 'line_9_0', 1, 'B', [236.8531036376953,344.7492980957031,246.84910583496094,354.74530029296875]),
+    ('marker.reference.c', 'block_9', 'line_9_0', 4, 'C', [556.1791381835938,344.7492980957031,566.1751098632812,354.74530029296875]),
+    ('marker.reference.d', 'block_9', 'line_9_1', 4, 'D', [234.45350646972656,355.7492980957031,244.4495086669922,365.74530029296875]),
+    ('marker.reference.b', 'block_10', 'line_10_0', 1, 'B', [160.7633056640625,372.4186096191406,170.75930786132812,382.41461181640625]),
+    ('marker.reference.a', 'block_10', 'line_10_2', 3, 'A', [442.38348388671875,394.4186096191406,452.3794860839844,404.41461181640625]),
+    ('marker.reference.a', 'block_10', 'line_10_3', 1, 'A', [185.45339965820312,405.4186096191406,195.44940185546875,415.41461181640625]),
+    ('marker.reference.a', 'block_37', 'line_37_8', 3, 'A', [586.1011962890625,725.3963012695312,596.09716796875,735.3922729492188]),
+    ('marker.reference.b', 'block_37', 'line_37_11', 1, 'B', [502.54779052734375,759.3963012695312,512.5438232421875,769.3922729492188]),
+]
+p40_elements = []
+for symbol_id, block_id, line_id, span_index, letter, rect in p40_specs:
+    p40_elements.append(make_element(registry, page_dom, symbol_id, block_id, line_id,
+        span_index, span_index, letter, rect, size=8.0))
+(page_dir / 'compound_elements.json').write_text(
+    json.dumps({'schemaVersion': 1, 'elements': p40_elements}, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+print(json.dumps({'page': page_no, 'compoundOccurrences': len(p40_elements),
+    'letters': {letter: sum(item[4] == letter for item in p40_specs) for letter in 'ABCD'},
+    'diagramMarkersUntouched': 2}, ensure_ascii=False))
+
 # Page 47's condition-tag examples reuse the exact p90 discard/exhaust
 # artwork. DISCARD's Zapf glyph and label share a PDF drawing with the capsule;
 # EXHAUST's white arrow is a separate source vector, also retained in p90.
