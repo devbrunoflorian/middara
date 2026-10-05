@@ -380,13 +380,85 @@ test('separate color-label dice ownership family uses source spaces without abso
   }
   const p54White=elements(54).filter((entry:any)=>entry.symbolId==='dice.white');
   assert.equal(p54White.length,2);
-  assert.equal(p54White.filter((entry:any)=>entry.anchor.ownerSpanRef).length,1);
+  assert.equal(p54White.filter((entry:any)=>entry.anchor.ownerSpanRef).length,2);
   const p78Teal=elements(78).filter((entry:any)=>entry.symbolId==='dice.teal');
   assert.equal(p78Teal.length,4);
-  assert.ok(p78Teal.every((entry:any)=>!entry.anchor.ownerSpanRef));
+  assert.ok(p78Teal.every((entry:any)=>entry.anchor.ownerSpanRef));
   const p85Dice=elements(85).filter((entry:any)=>entry.symbolId?.startsWith('dice.'));
   assert.equal(p85Dice.length,6);
-  assert.ok(p85Dice.every((entry:any)=>!entry.anchor.ownerSpanRef));
+  const p85Owned=p85Dice.filter((entry:any)=>entry.anchor.ownerSpanRef);
+  assert.equal(p85Owned.length,4);
+  assert.deepEqual(p85Dice.filter((entry:any)=>['dice.blue','dice.grey'].includes(entry.symbolId)).map((entry:any)=>entry.anchor.ownerSpanRef),[undefined,undefined]);
+});
+
+test('page 85 GREEN die belongs to its trailing-space source span at the measured PDF gap',()=>{
+  const data=page(85);const entry=elements(85).find((candidate:any)=>candidate.symbolId==='dice.green')!;
+  assert.deepEqual(entry.anchor.ownerSpanRef,{lineId:'line_10_6',spanIndex:3});
+  assert.equal(entry.anchor.lineId,'line_10_6');assert.equal(entry.anchor.spanIndex,3);assert.equal(entry.anchor.side,'after');
+  const sourceLine=data.blocks.find((block:any)=>block.id==='block_10')!.lines.find((line:any)=>line.id==='line_10_6')!;
+  assert.equal(sourceLine.spans[3].text,'GREEN ');
+  const measuredGap=entry.bbox[0]-sourceLine.spans[3].bbox[2];
+  assert.ok(Math.abs(entry.anchor.gapPt-measuredGap)<0.000001);
+  assert.equal(entry.drawingIndices.length,4);
+  const adapted=attachSourceInlineElements(data.blocks,[entry]);
+  const line=adapted.find(block=>block.id==='block_10')!.lines.find(candidate=>candidate.id==='line_10_6')!;
+  assert.equal(line.spans[3].text,'GREEN ');
+  assert.equal(line.spans[4].semanticSymbolId,'dice.green');
+  assert.ok(Math.abs(line.spans[4].sourceSymbolMetrics!.gapEm!-entry.anchor.gapPt/entry.anchor.sizePt)<1e-12);
+});
+
+test('page 54 WHITE die follows the owning span across a source line-ID split',()=>{
+  const data=page(54);const entry=elements(54).find((candidate:any)=>candidate.symbolId==='dice.white'&&candidate.anchor.ownerSpanRef?.lineId==='line_14_0')!;
+  assert.deepEqual(entry.anchor.ownerSpanRef,{lineId:'line_14_0',spanIndex:4});
+  assert.equal(entry.anchor.lineId,'line_14_0');assert.equal(entry.anchor.spanIndex,4);assert.equal(entry.anchor.side,'after');
+  const sourceLine=data.blocks.find((block:any)=>block.id==='block_14')!.lines.find((line:any)=>line.id==='line_14_0')!;
+  assert.equal(sourceLine.spans[4].text,'WHITE ');
+  const measuredGap=entry.bbox[0]-sourceLine.spans[4].bbox[2];
+  assert.ok(Math.abs(entry.anchor.gapPt-measuredGap)<0.000001);
+  assert.equal(entry.drawingIndices.length,4);
+  const adapted=attachSourceInlineElements(data.blocks,[entry]);
+  const line=adapted.find(block=>block.id==='block_14')!.lines.find(candidate=>candidate.id==='line_14_0')!;
+  assert.equal(line.spans[4].text,'WHITE ');
+  assert.equal(line.spans[5].semanticSymbolId,'dice.white');
+  assert.ok(Math.abs(line.spans[5].sourceSymbolMetrics!.gapEm!-entry.anchor.gapPt/entry.anchor.sizePt)<1e-12);
+});
+
+test('trailing-space color-label ownership family matches ten PDF occurrences and keeps composite/wrapped cases separate',()=>{
+  const expected=[
+    {page:54,symbol:'dice.white',x:295.962311,line:'line_14_0',span:4,label:'WHITE ',gap:.542877,size:10,vertical:.343084716796875},
+    {page:78,symbol:'dice.teal',x:521.774780,line:'line_22_11',span:1,label:' TEAL ',gap:.500366,size:10,vertical:.15498046875},
+    {page:78,symbol:'dice.teal',x:665.517090,line:'line_22_16',span:1,label:'TEAL ',gap:.500244,size:10,vertical:.154986572265625},
+    {page:78,symbol:'dice.teal',x:453.887482,line:'line_22_19',span:0,label:'TEAL ',gap:.500275,size:9,vertical:.1722073025173611},
+    {page:78,symbol:'dice.teal',x:463.975983,line:'line_22_19',span:0,label:'TEAL ',gap:1.000488,size:10,vertical:.154986572265625},
+    {page:78,symbol:'dice.black',x:569.801514,line:'line_22_21',span:1,label:'BLACK ',gap:.500183,size:9,vertical:.17220052083333334},
+    {page:85,symbol:'dice.purple',x:133.419601,line:'line_10_2',span:2,label:'PURPLE ',gap:.501709,size:10,vertical:.15496673583984374},
+    {page:85,symbol:'dice.teal',x:259.857788,line:'line_10_3',span:3,label:'TEAL ',gap:.500214,size:10,vertical:.15496673583984374},
+    {page:85,symbol:'dice.green',x:186.769302,line:'line_10_6',span:3,label:'GREEN ',gap:.495346,size:10,vertical:.25496673583984375},
+    {page:85,symbol:'dice.red',x:248.547699,line:'line_10_7',span:3,label:'RED ',gap:.500305,size:10,vertical:.25496673583984375},
+  ];
+  assert.equal(expected.length,10);
+  for(const target of expected) {
+    const data=page(target.page);const entry=elements(target.page).find((candidate:any)=>candidate.symbolId===target.symbol&&Math.abs(candidate.bbox[0]-target.x)<0.001);
+    assert.ok(entry,`missing p.${target.page} ${target.symbol} at x=${target.x}`);
+    assert.deepEqual(entry.anchor.ownerSpanRef,{lineId:target.line,spanIndex:target.span});
+    assert.equal(entry.anchor.lineId,target.line);assert.equal(entry.anchor.spanIndex,target.span);assert.equal(entry.anchor.side,'after');
+    assert.equal(entry.anchor.gapPt,target.gap);assert.equal(entry.anchor.sizePt,target.size);assert.equal(entry.metrics.verticalAlignEm,target.vertical);
+    const block=data.blocks.find((candidate:any)=>candidate.id===entry.anchor.blockId)!;
+    const line=block.lines.find((candidate:any)=>candidate.id===target.line)!;
+    assert.equal(line.spans[target.span].text,target.label);
+  }
+  const p78=page(78);const tealLine=p78.blocks.find((block:any)=>block.id==='block_22')!.lines.find((line:any)=>line.id==='line_22_19')!;
+  const adapted=attachSourceInlineElements(p78.blocks,elements(78).filter((entry:any)=>entry.anchor.ownerSpanRef));
+  const adaptedTeal=adapted.find(block=>block.id==='block_22')!.lines.find(line=>line.id==='line_22_19')!;
+  assert.equal(tealLine.spans[0].text,'TEAL ');
+  assert.deepEqual(adaptedTeal.spans.slice(1,3).map(span=>span.semanticSymbolId),['dice.teal','dice.teal']);
+  assert.ok(Math.abs(adaptedTeal.spans[1].sourceSymbolMetrics!.gapEm!-.500275/9)<1e-12);
+  assert.ok(Math.abs(adaptedTeal.spans[2].sourceSymbolMetrics!.gapEm!-1.000488/10)<1e-12);
+  const p85Dice=elements(85).filter((entry:any)=>entry.symbolId?.startsWith('dice.'));
+  const wrapped=p85Dice.find((entry:any)=>entry.symbolId==='dice.blue')!;
+  const counted=p85Dice.find((entry:any)=>entry.symbolId==='dice.grey')!;
+  assert.equal(wrapped.anchor.lineId,'line_10_9');assert.equal(wrapped.anchor.side,'before');assert.equal(wrapped.anchor.ownerSpanRef,undefined);
+  assert.equal(counted.anchor.lineId,'line_10_10');assert.equal(counted.anchor.side,'before');assert.equal(counted.anchor.ownerSpanRef,undefined);
 });
 
 test('mask activates for owning block/unit/draft, never the opposite language or unrelated unit',()=>{
