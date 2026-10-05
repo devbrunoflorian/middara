@@ -8,6 +8,7 @@ import { SemanticSymbol } from '../src/symbols/SemanticSymbol';
 import { attachSourceInlineElements, sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan } from '../src/symbols/sourceInlineElements';
 import { decodeOverrideData, encodeOverrideData } from '../src/symbols/overrideData';
 import { sourceSpanRuns } from '../src/symbols/sourceRuns';
+import { attachSourceCompoundElements, compoundElementIsReplaced, type SourceCompoundElement } from '../src/symbols/sourceCompounds';
 import type { Segment } from '../src/components/RichSpanEditor';
 
 const style={font:'OptimaLTStd',size:10,color:'#231f20',weight:400,style:'normal' as const};
@@ -15,6 +16,7 @@ const run=(text:string):Segment=>({...style,text});
 const object=(symbolId:string):Segment=>({...style,text:'\uFFFC',symbolId});
 const page=(n:number)=>JSON.parse(readFileSync(new URL(`../public/pages/page_${String(n).padStart(3,'0')}/page_${String(n).padStart(3,'0')}_dom.json`,import.meta.url),'utf8'));
 const elements=(n:number)=>JSON.parse(readFileSync(new URL(`../public/pages/page_${String(n).padStart(3,'0')}/inline_elements.json`,import.meta.url),'utf8')).elements;
+const compounds=(n:number)=>JSON.parse(readFileSync(new URL(`../public/pages/page_${String(n).padStart(3,'0')}/compound_elements.json`,import.meta.url),'utf8')).elements as SourceCompoundElement[];
 
 test('registry IDs and multilingual tokens are unique and source evidenced',()=>{
   assert.equal(new Set(SEMANTIC_SYMBOLS.map(s=>s.id)).size,SEMANTIC_SYMBOLS.length);
@@ -25,6 +27,46 @@ test('registry IDs and multilingual tokens are unique and source evidenced',()=>
     assert.ok(s.assetUrl || s.render.paths?.length);
     for (const token of Object.values(s.editorTokens)) { assert.ok(!tokens.has(token) || tokens.get(token)===s.id);tokens.set(token,s.id); }
   }
+});
+
+test('compound family identity stays stable while its full tagged composition localizes',()=>{
+  for(const id of ['tag.passive','tag.status','tag.exhaust','tag.discard']) {
+    const symbol=getSemanticSymbol(id)!;
+    assert.equal(symbol.composition?.type,'compound');
+    assert.equal(symbol.composition?.labelKey,`inline.${id}`);
+    assert.ok(symbol.render.localized?.['pt-BR']);
+    assert.ok(symbol.render.paths && symbol.render.paths.length>=2,'English capsule contains its source background and foreground');
+    assert.deepEqual(symbol.editorTokens.en,`⟦${symbol.labels.en}⟧`);
+    assert.deepEqual(symbol.editorTokens['pt-BR'],`⟦${symbol.labels['pt-BR']}⟧`);
+    const en=renderToStaticMarkup(<SemanticSymbol id={id} language="en" size={9} />);
+    const pt=renderToStaticMarkup(<SemanticSymbol id={id} language="pt-BR" size={9} />);
+    const fixed=renderToStaticMarkup(<SemanticSymbol id={id} language="en" size={9} alignToTop />);
+    assert.match(en,new RegExp(`aria-label="${symbol.labels.en}"`));
+    assert.match(pt,new RegExp(`aria-label="${symbol.labels['pt-BR']}"`));
+    assert.notEqual(en,pt,'localized badge changes presentation without changing ID');
+    assert.match(fixed,/display:block/);assert.match(fixed,/vertical-align:top/);
+  }
+});
+
+test('page 90 source tag spans project as four complete editor objects without mutating source indexes',()=>{
+  const data=page(90);const original=structuredClone(data.blocks);const definitions=compounds(90);
+  assert.deepEqual(definitions.map(item=>item.symbolId),['tag.passive','tag.status','tag.exhaust','tag.discard']);
+  const adapted=attachSourceCompoundElements(data.blocks,definitions);
+  const projected=adapted.flatMap(block=>block.lines.flatMap(line=>sourceSpanRuns(line.spans,()=>({weight:700,style:'normal'}))));
+  assert.deepEqual(projected.filter(run=>run.symbolId?.startsWith('tag.')).map(run=>run.symbolId),definitions.map(item=>item.symbolId));
+  for(const item of definitions) {
+    const block=adapted.find(candidate=>candidate.id===item.anchor.blockId)!;
+    const line=block.lines.find(candidate=>candidate.id===item.anchor.lineId)!;
+    const lineRuns=sourceSpanRuns(line.spans,()=>({weight:700,style:'normal'}));
+    assert.deepEqual(lineRuns.map(run=>run.symbolId).filter(Boolean),[item.symbolId]);
+    assert.ok(!lineRuns.some(run=>run.text.includes(item.symbolId.split('.')[1].toUpperCase())));
+    const key=`page_90_block_${item.anchor.blockIndex}`;
+    assert.equal(compoundElementIsReplaced(item,block,90,'en',new Map(),null,null),false);
+    assert.equal(compoundElementIsReplaced(item,block,90,'en',new Map([[key,{spanKey:key,segments:[run('translated')],bbox:block.bbox}]]),null,null),true,
+      'legacy translation block replaces the fixed source-position composition');
+  }
+  assert.deepEqual(data.blocks,original);
+  assert.equal(elements(90).some(item=>['tag.passive.icon','tag.status.icon','tag.discard.icon'].includes(item.symbolId)),false);
 });
 
 test('every symbol survives multilingual rich run JSON and editable text round trips',()=>{

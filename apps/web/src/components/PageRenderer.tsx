@@ -6,6 +6,7 @@ import { deleteLayoutFrame, fetchLayoutFrames, loadLocalLayoutFrames, saveLayout
 import { resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics } from '../symbols/semanticSymbols';
 import { SemanticSymbol } from '../symbols/SemanticSymbol';
 import { sourceSpanRuns } from '../symbols/sourceRuns';
+import { compoundElementIsReplaced, type SourceCompoundElement } from '../symbols/sourceCompounds';
 import { decodeOverrideData, encodeOverrideData } from '../symbols/overrideData';
 import { contentsRowKey, contentsRowUsesLegacy, contentsRowLine, contentsLabelWidth, type ContentsRowDefinition } from '../contentsRows';
 import { ContentsRowFlow } from './ContentsRowFlow';
@@ -46,6 +47,10 @@ export interface SpanData {
   renderOnlyStrokePass?: boolean;
   /** The source glyph is restored by a page fidelity overlay; retain its text in the DOM data. */
   renderAsSourceOverlayDuplicate?: boolean;
+  /** The source text spans form one semantic compound displayed from its page-space geometry. */
+  sourceCompoundSymbolId?: string;
+  sourceCompoundHidden?: boolean;
+  sourceCompoundMetrics?: InlineSymbolMetrics;
   /** Language(s) in which the source-overlay replacement should hide this glyph. */
   renderSourceOverlayLanguage?: 'en' | 'pt-BR' | 'all';
   /** Recreate the PDF's outlined text effect on the semantic fill span. */
@@ -203,6 +208,7 @@ export interface PageFidelityOverlay {
 export interface PageData {
   contentsRows?:ContentsRowDefinition[];
   inlineElements?: SourceInlineElement[];
+  sourceCompounds?: SourceCompoundElement[];
   page_number: number;
   width: number;
   height: number;
@@ -1125,6 +1131,20 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
             />
           );
         })}
+        {(pageData.sourceCompounds ?? []).filter(element => {
+          const block = pageData.blocks.find(candidate => candidate.id === element.anchor.blockId);
+          return !!block && !compoundElementIsReplaced(element, block, pageData.page_number, language, overrides,
+            selectedSpan?.spanKey ?? null, draftOverride);
+        }).map(element => (
+          <div key={`${element.symbolId}:${element.anchor.blockId}:${element.anchor.lineId}`}
+            data-source-compound={element.symbolId}
+            style={{ position: 'absolute', left: element.bbox[0] * scale, top: element.bbox[1] * scale,
+              zIndex: 20, width: (element.bbox[2] - element.bbox[0]) * scale,
+              height: (element.bbox[3] - element.bbox[1]) * scale, fontSize: 0, lineHeight: 0, pointerEvents: 'none' }}>
+            <SemanticSymbol id={element.symbolId} language={language} size={element.sizePt * scale}
+              metrics={element.metrics} alignToTop />
+          </div>
+        ))}
         {replacedInlineElements.map(element=><img key={element.mask.url} src={element.mask.url} alt="" aria-hidden="true" draggable={false}
           style={{position:'absolute',left:element.mask.bbox[0]*scale,top:element.mask.bbox[1]*scale,width:(element.mask.bbox[2]-element.mask.bbox[0])*scale,height:(element.mask.bbox[3]-element.mask.bbox[1])*scale,zIndex:2,pointerEvents:'none'}} />)}
         {pageData.fidelityOverlays?.map((overlay) => {
@@ -2133,6 +2153,10 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           // only their visible glyphs down; this leaves surrounding line geometry intact.
           ...(shouldDropEsmeraldaHeading ? { display: 'inline-block', transform: 'translateY(12%)' } : {}),
         };
+
+        if (span.sourceCompoundHidden || span.sourceCompoundSymbolId) {
+          return <span key={si} aria-hidden="true" style={{ ...spanStyle, visibility: 'hidden', pointerEvents: 'none' }}>{span.text}</span>;
+        }
 
         const inlineOverrideSegments = inlineUnit?.override?.segments ?? [];
         const inlineOverrideText = inlineOverrideSegments.map(segment => segment.text).join('');

@@ -1,14 +1,18 @@
 import type { Segment } from '../components/RichSpanEditor';
 import type { SpanData } from '../components/PageRenderer';
 import { resolveLegacySymbol } from './semanticSymbols';
+import { sourceCompoundRun } from './sourceCompounds';
 
 /** Preserve text styles and carry the glyph's identity into the editable run. */
 export function sourceSpanRuns(spans: SpanData[], mapFont: (font:string)=>{weight:number;style:'normal'|'italic'}): Segment[] {
   return spans.filter(span=>!span.renderOnlyStrokePass).flatMap(span=>{
+    if (span.sourceCompoundHidden) return [];
     const mapped=mapFont(span.font);
     const run:Segment={text:span.displayOverride || span.text,font:span.font,size:span.renderSizeOverridePt ?? span.size,
       color:span.color || '#231f20',weight:span.renderWeightOverride ?? mapped.weight,style:mapped.style,
       textStrokeWidthPt:span.renderTextStrokeWidthPt,textStrokeColor:span.renderTextStrokeColor,disableLigatures:true};
+    const compound = sourceCompoundRun(span);
+    if (compound) return [{ ...run, ...compound }];
     if(span.sourceInlineObjects?.length) {
       if(span.sourceInlineObjects.some(element=>!element.anchor.textRange))return [run];
       const objects=[...span.sourceInlineObjects].sort((a,b)=>a.anchor.textRange![0]-b.anchor.textRange![0]);

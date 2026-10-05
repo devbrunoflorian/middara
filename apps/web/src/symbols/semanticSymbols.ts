@@ -18,6 +18,13 @@ export interface SemanticSymbolDefinition {
   allowedBlockTypes?: InlineEditorContext[];
   assetUrl?: string;
   legacy?: { font: string; characters: string[] };
+  composition?: {
+    type: 'compound';
+    labelKey: string;
+    sourceFont: string;
+    localizedFont: string;
+    localizedLabel: Record<SymbolLanguage, string>;
+  };
   source: {
     pdf: string;
     page: number;
@@ -31,6 +38,14 @@ export interface SemanticSymbolDefinition {
     mask?: 'circle';
     viewBox?: number[];
     paths?: { d: string; transform?: string; fill: string; stroke?: string; strokeWidth?: number; fillRule?: 'evenodd' | 'nonzero'; strokeLinecap?: 'butt'|'round'|'square'; strokeLinejoin?: 'miter'|'round'|'bevel' }[];
+    /** Internal labels localize without changing the semantic ID. */
+    localized?: Partial<Record<SymbolLanguage, {
+      viewBox: number[];
+      paths: NonNullable<SemanticSymbolDefinition['render']['paths']>;
+      widthEm: number;
+      heightEm: number;
+      verticalAlignEm: number;
+    }>>;
   };
 }
 

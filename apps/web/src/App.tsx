@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import './App.css';
 import { attachSourceInlineElements, type SourceInlineElement } from './symbols/sourceInlineElements';
+import { attachSourceCompoundElements, type SourceCompoundElement } from './symbols/sourceCompounds';
 import type { ContentsRowDefinition } from './contentsRows';
 
 const TOTAL_PAGES = 102; // Pages with extracted DOM
@@ -37,6 +38,7 @@ async function loadPageData(pageNum: number): Promise<PageData> {
       // a stale hard-coded page allowlist here.
       let fidelityOverlays: PageFidelityOverlay[] = [];
       let inlineElements: SourceInlineElement[] = [];
+      let sourceCompounds: SourceCompoundElement[] = [];
       let contentsRows:ContentsRowDefinition[]|undefined;
       if(pageNum===3) {
         try {
@@ -47,6 +49,10 @@ async function loadPageData(pageNum: number): Promise<PageData> {
       try {
         const inlineResponse = await fetch(`/pages/page_${pageStr}/inline_elements.json`);
         if (inlineResponse.ok) inlineElements = (await inlineResponse.json()).elements ?? [];
+      } catch {}
+      try {
+        const compoundsResponse = await fetch(`/pages/page_${pageStr}/compound_elements.json`);
+        if (compoundsResponse.ok) sourceCompounds = (await compoundsResponse.json()).elements ?? [];
       } catch {}
       try {
         const overlayResponse = await fetch(`/pages/page_${pageStr}/fidelity_overlays.json`);
@@ -65,8 +71,9 @@ async function loadPageData(pageNum: number): Promise<PageData> {
           .map((image: { bbox: [number, number, number, number] }) => image.bbox),
         fidelityOverlays,
         inlineElements,
+        sourceCompounds,
         contentsRows,
-        blocks: attachSourceInlineElements((data.blocks || []).map((block: Block) => {
+        blocks: attachSourceInlineElements(attachSourceCompoundElements((data.blocks || []).map((block: Block) => {
           const sidecarUnits = pageCreditUnits[block.id];
           const creditUnits = Array.isArray(sidecarUnits)
             ? sidecarUnits
@@ -78,7 +85,7 @@ async function loadPageData(pageNum: number): Promise<PageData> {
             layoutFrame: pageFrames[block.id] || block.layoutFrame,
             creditUnits,
           };
-        }), inlineElements),
+        }), sourceCompounds), inlineElements),
         backgroundUrl: `/pages/page_${pageStr}/background.webp`
       };
     }

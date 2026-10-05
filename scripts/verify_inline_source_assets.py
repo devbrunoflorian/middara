@@ -7,7 +7,7 @@ import pymupdf as fitz
 from PIL import Image,ImageDraw
 
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'docs/project-progress/evidence/2026-10-04-inline-elements'
+OUT=ROOT/'docs/project-progress/evidence/2026-10-05-inline-elements-followup'
 PDF=Path(r'C:\Users\bruno\Downloads\Rulebook 1p2 Final Version 05-19-23 Optimized.pdf')
 
 def svg_for(entry,box,width,height,ink='#231f20'):
@@ -46,6 +46,24 @@ def main():
                 crop=fitz.Rect(overlay['bbox'])
                 if crop.width>45 and crop.height>45 and str(overlay.get('url','')).endswith('.png') and crop.intersects(fitz.Rect(e['bbox'])):errors.append(f'{path}: intersects large artwork {overlay.get("id")} {stamp}')
             counts[e['symbolId']]+=1
+    compound_anchors=[]
+    for path in sorted((ROOT/'apps/web/public/pages').glob('page_*/compound_elements.json')):
+        dom=json.loads(next(path.parent.glob('page_*_dom.json')).read_text(encoding='utf8'))
+        elements=json.loads(path.read_text(encoding='utf8'))['elements']
+        for element in elements:
+            anchor=element['anchor'];definition=registry.get(element['symbolId'])
+            block=dom['blocks'][anchor['blockIndex']] if anchor['blockIndex']<len(dom['blocks']) else None
+            line=next((line for line in block['lines'] if line['id']==anchor['lineId']),None) if block else None
+            if not definition or definition.get('composition',{}).get('type')!='compound':errors.append(f'{path}: unregistered compound {element["symbolId"]}')
+            if not block or block['id']!=anchor['blockId'] or not line:errors.append(f'{path}: missing compound source line');continue
+            if anchor['spanStartIndex']<0 or anchor['spanEndIndex']<anchor['spanStartIndex'] or anchor['spanEndIndex']>=len(line['spans']):errors.append(f'{path}: invalid compound span range');continue
+            box=fitz.Rect(element['bbox']);source_box=fitz.Rect(definition['source']['bboxPt'])
+            if not box==source_box:errors.append(f'{path}: compound geometry differs from registry')
+            if abs(element['metrics']['widthEm']*element['sizePt']-box.width)>.001:errors.append(f'{path}: compound width metric mismatch')
+            if abs(element['metrics']['heightEm']*element['sizePt']-box.height)>.001:errors.append(f'{path}: compound height metric mismatch')
+            if block.get('hiddenFromPage') or block.get('adminReadOnly') or line.get('rasterizedDuplicate'):errors.append(f'{path}: non-prose compound anchor {element["symbolId"]}')
+            counts[element['symbolId']]+=1
+            compound_anchors.append(dict(symbolId=element['symbolId'],page=dom['page_number'],block=block['id'],line=line['id'],spans=[anchor['spanStartIndex'],anchor['spanEndIndex']]))
     # Evidence of source ink / erasure patch / registry SVG, using native PDF
     # data only. Does not certify CSS, browser baseline, caret or export.
     doc=fitz.open(PDF);examples=[];row_height=170
@@ -62,7 +80,7 @@ def main():
             im=im.resize((im.width*2,im.height*2));sheet.paste(im,(8+col*260,row*row_height+20))
         examples.append(dict(symbolId=id,page=n,paths=len(entry['render']['paths']),bbox=list(box)))
     sheet.save(OUT/'source-erasure-registry-comparison.png')
-    report=dict(pages=pages,placements=sum(counts.values()),counts=dict(counts),errors=errors,examples=examples,scope='Source metadata/assets only; browser interaction and final PDF export pending')
+    report=dict(pages=pages,placements=sum(counts.values()),counts=dict(counts),compoundAnchors=compound_anchors,errors=errors,examples=examples,scope='Source metadata/assets only; browser interaction and final PDF export pending')
     (OUT/'source-validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf8');print(json.dumps(dict(pages=len(pages),placements=sum(counts.values()),errors=errors)))
     if errors:raise SystemExit(1)
 

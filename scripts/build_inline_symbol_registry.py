@@ -15,6 +15,7 @@ from xml.sax.saxutils import quoteattr
 from pathlib import Path
 import pymupdf as fitz
 from PIL import Image
+from build_inline_compound_symbols import compound_definitions
 
 ROOT=Path(__file__).resolve().parents[1]
 PDF=Path(r'C:\Users\bruno\Downloads\Rulebook 1p2 Final Version 05-19-23 Optimized.pdf')
@@ -290,6 +291,7 @@ def build(apply, only_pages=None,registry_only=False):
         ('marker.arrow','Arrow marker','Marcador de seta','ZapfDingbatsStd','➤',37),
         ('marker.checkbox','Checklist square','Quadrado de checklist','ZapfDingbatsStd','❏',7)]
     entries.extend(glyph_definition(doc,s) for s in glyphs)
+    entries.extend(compound_definitions(doc, vector_path, native_paint_colors, definition))
     for g in audit['groups']:
         definition_match=next((entry for entry in entries if entry.get('legacy') and entry['legacy']['font'] in g['font'] and g['representation'].strip() in entry['legacy']['characters'] and entry['allowedBlockTypes']),None)
         if not definition_match:continue
@@ -300,6 +302,16 @@ def build(apply, only_pages=None,registry_only=False):
             if b.get('staticEditorLineIndexes') and next(i for i,l in enumerate(b['lines']) if l['id']==o['line']) in b['staticEditorLineIndexes']:continue
             placements[o['page']].append(dict(symbolId=definition_match['id'],bbox=o['bbox'],drawingIndices=[],
                 anchor=dict(blockId=o['block'],blockIndex=o['blockIndex'],lineId=o['line'],spanIndex=o['spanIndex'],side='replace',sizePt=o['size'])))
+    # Page 90's three icon+label pairs are represented by whole semantic
+    # capsules. Do not regenerate old icon-only adapters over those spans.
+    compound_refs = {
+        ('tag.passive.icon', 'block_15', 'line_15_1', 0),
+        ('tag.status.icon', 'block_17', 'line_17_0', 0),
+        ('tag.discard.icon', 'block_20', 'line_20_0', 0),
+    }
+    placements[90] = [item for item in placements[90] if (
+        item['symbolId'], item['anchor']['blockId'], item['anchor']['lineId'], item['anchor']['spanIndex']
+    ) not in compound_refs]
     if apply:
         dest=ROOT/'apps/web/src/symbols/sourceSymbols.json';dest.write_text(json.dumps(entries,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     # Masks are independent of language. Source rendering remains untouched;
