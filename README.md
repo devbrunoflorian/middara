@@ -36,6 +36,8 @@ To support this without breaking browser rendering, we map special characters to
 
 ## Documentation Index
 
+- `docs/project-progress/2026-10-04-page3-adaptive-toc-leaders.md`: separate contents entries and adaptive dotted leaders for translations.
+- `docs/project-progress/2026-10-04-page37-source-review.md`: page 37 source comparison of phase rules and symbols.
 - `docs/project-progress/2026-10-04-page36-source-review.md`: source comparison of Initiative rules, cards and markers.
 - `docs/project-progress/2026-10-04-page35-source-review.md`: page 35 source review of setup legend hierarchy and symbols.
 - `docs/project-progress/2026-10-04-page34-source-review.md`: source comparison of the Game Table Setup diagram and surrounding live text.
@@ -58,3 +60,6 @@ To support this without breaking browser rendering, we map special characters to
 
 ---
 *Note: This project strictly adheres to continuous documentation. Check `.agents/rules/doc_maintenance.md` for the documentation protocol.*
+Registro ativo: [elementos inline — auditoria e integração](docs/project-progress/2026-10-04-inline-elements-audit-and-registry.md).
+
+Contrato e extensão: [elementos semânticos inline](docs/architecture/inline-semantic-elements.md). Inventário global e mapa de uso: [catálogo](docs/project-progress/evidence/2026-10-04-inline-elements/catalog-and-usage.md). A integração não certifica a fidelidade das 102 páginas.
