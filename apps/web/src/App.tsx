@@ -6,6 +6,7 @@ import {
   BookOpen, Ruler, Move
 } from 'lucide-react';
 import './App.css';
+import { attachSourceInlineElements, type SourceInlineElement } from './symbols/sourceInlineElements';
 
 const TOTAL_PAGES = 102; // Pages with extracted DOM
 
@@ -34,6 +35,11 @@ async function loadPageData(pageNum: number): Promise<PageData> {
       // newly audited component/diagram pages are rendered without maintaining
       // a stale hard-coded page allowlist here.
       let fidelityOverlays: PageFidelityOverlay[] = [];
+      let inlineElements: SourceInlineElement[] = [];
+      try {
+        const inlineResponse = await fetch(`/pages/page_${pageStr}/inline_elements.json`);
+        if (inlineResponse.ok) inlineElements = (await inlineResponse.json()).elements ?? [];
+      } catch {}
       try {
         const overlayResponse = await fetch(`/pages/page_${pageStr}/fidelity_overlays.json`);
         if (overlayResponse.ok) {
@@ -50,7 +56,8 @@ async function loadPageData(pageNum: number): Promise<PageData> {
           .filter((image: { role?: string }) => image.role === 'content')
           .map((image: { bbox: [number, number, number, number] }) => image.bbox),
         fidelityOverlays,
-        blocks: (data.blocks || []).map((block: Block) => {
+        inlineElements,
+        blocks: attachSourceInlineElements((data.blocks || []).map((block: Block) => {
           const sidecarUnits = pageCreditUnits[block.id];
           const creditUnits = Array.isArray(sidecarUnits)
             ? sidecarUnits
@@ -62,7 +69,7 @@ async function loadPageData(pageNum: number): Promise<PageData> {
             layoutFrame: pageFrames[block.id] || block.layoutFrame,
             creditUnits,
           };
-        }),
+        }), inlineElements),
         backgroundUrl: `/pages/page_${pageStr}/background.webp`
       };
     }

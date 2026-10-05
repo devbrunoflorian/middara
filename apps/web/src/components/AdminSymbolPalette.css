@@ -24,9 +24,34 @@
 
 .admin-symbol-palette-toggle:focus-visible,
 .admin-symbol-palette button:focus-visible,
+.admin-symbol-palette select:focus-visible,
 .admin-symbol-palette input:focus-visible {
   outline: 2px solid #38bdf8;
   outline-offset: 2px;
+}
+
+.admin-symbol-palette-search select {
+  width: 100%;
+  padding: 8px;
+  color: #f8fafc;
+  background: #111c27;
+  border: 1px solid #52606d;
+  border-radius: 6px;
+}
+
+.admin-symbol-palette-item .inline-semantic-symbol {
+  min-width: 24px;
+  max-width: 42px;
+  max-height: 42px;
+}
+
+.admin-symbol-palette-preview {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  min-height: 42px;
+  border-radius: 4px;
+  background: #eee9df;
 }
 
 .admin-symbol-palette {

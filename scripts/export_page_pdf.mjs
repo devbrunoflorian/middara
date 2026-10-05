@@ -26,7 +26,9 @@ function argsFrom(argv) {
 
 function translationPlainText(data) {
   const segments = Array.isArray(data?.segments) ? data.segments : [];
-  return segments.map(segment => String(segment.text ?? '')).join('');
+  // Inline SVGs/images intentionally have no textContent. Verify ordinary
+  // prose without expecting the object-replacement marker in that content.
+  return segments.map(segment => segment.symbolId ? '' : String(segment.text ?? '')).join('');
 }
 
 function normalizeText(value) {

@@ -3,7 +3,11 @@ import { RichSpanEditor, type Segment, type SpanOverride, type TextAlignment } f
 import { AdminRuler } from './AdminRuler';
 import { AdminLayoutFrameEditor } from './AdminLayoutFrameEditor';
 import { deleteLayoutFrame, fetchLayoutFrames, loadLocalLayoutFrames, saveLayoutFrame, saveLocalLayoutFrames, type LayoutLanguage } from '../layoutFrames';
-import { getSemanticSymbol } from '../symbols/semanticSymbols';
+import { resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics } from '../symbols/semanticSymbols';
+import { SemanticSymbol } from '../symbols/SemanticSymbol';
+import { sourceSpanRuns } from '../symbols/sourceRuns';
+import { decodeOverrideData, encodeOverrideData } from '../symbols/overrideData';
+import { sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
 import './PageRenderer.css';
 import './Toast.css';
 
@@ -11,6 +15,10 @@ import './Toast.css';
    Types – match the exact JSON DOM structure
    ───────────────────────────────────────────── */
 export interface SpanData {
+  /** Runtime inline symbol adapter; does not rewrite source extraction IDs. */
+  semanticSymbolId?: string;
+  sourceSymbolMetrics?: InlineSymbolMetrics;
+  sourceSpanIndex?: number;
   text: string;
   font: string;
   size: number;
@@ -132,6 +140,7 @@ export interface TypographicSpanUnitDefinition {
 
 interface InlineSpanUnitRenderState {
   spanKey: string;
+  renderAtRef?: string;
   override: SpanOverride | null;
   selected: boolean;
   info: SelectedSpanInfo;
@@ -153,6 +162,9 @@ function buildInlineSpanStates(
       : overrides.get(spanKey) || null;
     const state: InlineSpanUnitRenderState = {
       spanKey,
+      renderAtRef: (block.lines ?? []).flatMap(line=>line.spans.flatMap((span,index)=>
+        !span.semanticSymbolId && !span.renderOnlyStrokePass && unit.spanRefs.includes(`${line.id}:${span.sourceSpanIndex ?? index}`)
+          ? [`${line.id}:${span.sourceSpanIndex ?? index}`] : []))[0],
       override,
       selected: selectedBlockKey === spanKey,
       info: extractInlineSpanUnitInfo(spanKey, block, unit),
@@ -183,6 +195,7 @@ export interface PageFidelityOverlay {
 }
 
 export interface PageData {
+  inlineElements?: SourceInlineElement[];
   page_number: number;
   width: number;
   height: number;
@@ -342,7 +355,7 @@ function renderCreditSegments(
       fontVariantLigatures: 'none',
       fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
       letterSpacing: '-0.015em',
-    }}>{piece.text}</span>
+    }}>{renderSegmentContent({...piece.segment,text:piece.text},scale,language)}</span>
   );
 
   return groups.map((group, groupIndex) => {
@@ -432,7 +445,7 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
   for (const line of lines) {
     for (const span of line.spans) {
       if (span.renderOnlyStrokePass) continue;
-      if (!font && span.font && !span.font.includes('Dingbat') && span.text.trim()) {
+      if (!font && span.font && !span.semanticSymbolId && !resolveLegacySymbol(span.font,span.text) && !span.font.includes('Dingbat') && span.text.trim()) {
         font = span.font;
         size = span.size;
         color = span.color || '#231f20';
@@ -471,23 +484,7 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
 }
 
 function sourceSegmentsFromSpans(spans: SpanData[]): Segment[] {
-  return spans
-    .filter(span => !span.renderOnlyStrokePass)
-    .map(span => {
-      const mapped = mapPdfFont(span.font);
-      return {
-        text: span.displayOverride || span.text,
-        font: span.font,
-        size: span.renderSizeOverridePt ?? span.size,
-        color: span.color || '#231f20',
-        weight: span.renderWeightOverride ?? mapped.weight,
-        style: mapped.style,
-        textStrokeWidthPt: span.renderTextStrokeWidthPt,
-        textStrokeColor: span.renderTextStrokeColor,
-        disableLigatures: true,
-      } satisfies Segment;
-    })
-    .filter(segment => segment.text.length > 0);
+  return sourceSpanRuns(spans,mapPdfFont);
 }
 
 /* ─────────────────────────────────────────────
@@ -539,15 +536,13 @@ async function fetchOverridesFromPayload(lang: string): Promise<Map<string, Span
       const data = await res.json();
       const map = new Map<string, SpanOverride>();
       data.docs.forEach((doc: any) => {
-        const stored = doc.data;
-        const segments = Array.isArray(stored) ? stored : stored?.segments;
-        if (!Array.isArray(segments)) return;
+        const decoded=decodeOverrideData(doc.data);
+        if (!decoded) return;
         const uiSpanKey = clientSpanKey(doc.spanKey, lang);
         map.set(uiSpanKey, {
           spanKey: uiSpanKey,
-          segments,
+          ...decoded,
           bbox: [0, 0, 0, 0],
-          textAlign: Array.isArray(stored) ? undefined : stored?.textAlign,
         });
       });
       return map;
@@ -562,11 +557,7 @@ async function saveOverrideToPayload(override: SpanOverride, lang: string): Prom
   try {
     const existing = await findPayloadTranslation(override.spanKey, lang);
     const storedSpanKey = payloadSpanKey(override.spanKey, lang);
-    const data = {
-      schemaVersion: 2,
-      segments: override.segments,
-      textAlign: override.textAlign,
-    };
+    const data = encodeOverrideData(override);
     if (existing) {
       const id = existing.id;
       const res = await fetch(`http://localhost:3000/api/translations/${id}`, {
@@ -643,7 +634,7 @@ function extractCreditFieldInfo(
   for (const line of lines) {
     for (const span of line.spans) {
       if (span.renderOnlyStrokePass) continue;
-      if (!font && span.font && !span.font.includes('Dingbat') && span.text.trim()) {
+      if (!font && span.font && !span.semanticSymbolId && !resolveLegacySymbol(span.font,span.text) && !span.font.includes('Dingbat') && span.text.trim()) {
         font = span.font;
         size = span.size;
         color = span.color || '#231f20';
@@ -674,6 +665,7 @@ function extractCreditFieldInfo(
     bbox: field.bbox,
     textAlign: field.frame.textAlign || 'left',
     sourceSegments,
+    editorContext: block.creditUnit || block.creditUnits?.length ? 'credit-field' : 'typographic-field',
   };
 }
 
@@ -690,6 +682,7 @@ interface SelectedSpanInfo {
   textAlign: TextAlignment;
   sourceSegments?: Segment[];
   singleLine?: boolean;
+  editorContext?: InlineEditorContext;
 }
 
 interface PageRendererProps {
@@ -748,27 +741,10 @@ function frameUnitKey(pageNumber: number, block: Block, blockIndex: number): str
 }
 
 function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 'pt-BR'): React.ReactNode {
-  if (!segment.symbolId) return segment.text;
-  const symbol = getSemanticSymbol(segment.symbolId);
-  if (!symbol) return <span title={`Unmapped symbol: ${segment.symbolId}`}>◈</span>;
-  const imageSize = segment.size * scale * symbol.render.widthEm;
-  const verticalOffset = segment.size * scale * symbol.render.verticalAlignEm;
-  return Array.from(segment.text).map((_, index) => (
-    <img
-      key={`${symbol.id}-${index}`}
-      className="inline-semantic-symbol"
-      src={symbol.assetUrl}
-      alt={symbol.labels[language]}
-      role="img"
-      draggable={false}
-      style={{
-        width: `${imageSize}px`,
-        height: `${imageSize}px`,
-        verticalAlign: `-${verticalOffset}px`,
-        clipPath: symbol.render.mask === 'circle' ? 'circle(50% at 50% 50%)' : undefined,
-      }}
-    />
-  ));
+  const legacy = !segment.symbolId ? resolveLegacySymbol(segment.font,segment.text) : undefined;
+  const id=segment.symbolId ?? legacy?.id;
+  if (!id) return segment.text;
+  return <>{Array.from(legacy ? '\uFFFC' : segment.text).map((_,index)=><SemanticSymbol key={index} id={id} language={language} size={segment.size*scale} color={segment.color} metrics={segment.symbolMetrics} />)}{legacy ? segment.text.match(/\s+$/)?.[0] : null}</>;
 }
 
 export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, onNavigate, language = 'en' }) => {
@@ -805,6 +781,10 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
     return () => { active = false; };
   }, [language]);
   const overridesReady = overridesLoadedLanguage === language;
+  const replacedInlineElements = (pageData.inlineElements ?? []).filter(element=>{
+    const block=pageData.blocks.find(b=>b.id===element.anchor.blockId);
+    return block && sourceElementIsReplaced(element,block,pageData.page_number,language,overrides,selectedSpan?.spanKey ?? null,draftOverride);
+  });
 
   useEffect(() => {
     let active = true;
@@ -1129,6 +1109,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
             />
           );
         })}
+        {replacedInlineElements.map(element=><img key={element.mask.url} src={element.mask.url} alt="" aria-hidden="true" draggable={false}
+          style={{position:'absolute',left:element.mask.bbox[0]*scale,top:element.mask.bbox[1]*scale,width:(element.mask.bbox[2]-element.mask.bbox[0])*scale,height:(element.mask.bbox[3]-element.mask.bbox[1])*scale,zIndex:2,pointerEvents:'none'}} />)}
         {pageData.fidelityOverlays?.map((overlay) => {
           if ((!overlay.languageInvariant && overlay.language !== language) || (overlay.hideInAdmin && isAdmin)) return null;
           const [x0, y0, x1, y1] = overlay.bbox;
@@ -1152,6 +1134,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
                 zIndex: overlay.zIndex ?? 10000,
                 pointerEvents: 'none',
                 userSelect: 'none',
+                maskImage: sourceOverlayMask(overlay.bbox,replacedInlineElements),
+                maskSize: '100% 100%',
               }}
             />
           );
@@ -1179,6 +1163,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
           onDraftChange={handleDraftChange}
           existingOverride={selectedExistingOverride}
           singleLine={selectedSpan.singleLine}
+          editorContext={selectedSpan.editorContext ?? 'paragraph'}
         />
       )}
       {isAdmin && layoutMode && (
@@ -1355,7 +1340,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     ?.flatMap(line => line.spans)
     .find(span => needsEsmeraldaHeadingDrop(span.font, span.size, span.bbox[3] - span.bbox[1]));
 
-  if (currentOverride && currentOverride.segments.length > 0) {
+  if (currentOverride) {
     // Use a translation frame when supplied; otherwise keep the source-derived fallback.
     const fixedLineIndexes = staticEditorLineIndexes(block);
     const fixedLines = (block.lines ?? []).filter((_, index) => fixedLineIndexes.has(index));
@@ -1436,7 +1421,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
                 ) ? { display: 'inline-block', transform: 'translateY(12%)' } : {}),
               }}
             >
-              {seg.symbolId
+              {seg.symbolId || resolveLegacySymbol(seg.font,seg.text)
                 ? renderSegmentContent(seg, scale, language)
                 : block.noWrap
                 ? seg.text.replace(/[\r\n]+/g, ' ').replace(/[\t ]+/g, ' ')
@@ -1596,9 +1581,9 @@ function extractInlineSpanUnitInfo(
 ): SelectedSpanInfo {
   const selected = new Set(unit.spanRefs);
   const spans = (block.lines || []).flatMap(line => line.spans.flatMap((span, index) =>
-    selected.has(`${line.id}:${index}`) ? [span] : [],
+    selected.has(`${line.id}:${span.sourceSpanIndex ?? index}`) ? [span] : [],
   ));
-  const first = spans.find(span => span.text.trim() && !span.font.includes('Dingbat')) ?? spans[0];
+  const first = spans.find(span => span.text.trim() && !span.semanticSymbolId && !resolveLegacySymbol(span.font,span.text) && !span.font.includes('Dingbat')) ?? spans[0];
   const font = first?.font || 'OptimaLTStd';
   const mapped = mapPdfFont(font);
   const text = spans.map(span => span.displayOverride || span.text).join('').replace(/\n/g, ' ').replace(/ +/g, ' ').trim();
@@ -1620,6 +1605,7 @@ function extractInlineSpanUnitInfo(
     bbox,
     textAlign: 'left',
     sourceSegments,
+    editorContext: 'span-unit',
   };
 }
 
@@ -1767,7 +1753,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
       onClick={handleClick}
       {...geometryAttributes}
     >
-      {override && override.segments.length > 0 ? (
+      {override ? (
         <div
           ref={previewRef}
           className="realbox"
@@ -1987,27 +1973,30 @@ const LineRenderer: React.FC<LineRendererProps> = ({
       aria-description={ghostStatusLabel}
     >
       {line.spans.map((span, si) => {
-        const inlineUnit = inlineSpanStates?.get(`${line.id}:${si}`);
+        const inlineUnit = inlineSpanStates?.get(`${line.id}:${span.sourceSpanIndex ?? si}`);
+        // A unit can cover several source spans. Paint its override once;
+        // virtual source icons keep their original reference without repainting.
+        if(inlineUnit?.override && `${line.id}:${span.sourceSpanIndex ?? si}`!==inlineUnit.renderAtRef)return null;
         const sourceAdvanceWidth = Math.max(0, span.bbox[2] - span.bbox[0]) * scale;
-        const previousSpan = si > 0 ? line.spans[si - 1] : undefined;
+        const previousSpan = previousSourceSpan(line.spans,si);
         const sourceAdvanceGap = previousSpan
           ? Math.max(0, span.bbox[0] - previousSpan.bbox[2]) * scale
           : 0;
         const useSourceGeometry = !override
           && line.renderSourceSpanGeometry
-          && (line.renderSourceGeometryThroughSpan === undefined || si <= line.renderSourceGeometryThroughSpan);
+          && (line.renderSourceGeometryThroughSpan === undefined || (span.sourceSpanIndex ?? si) <= line.renderSourceGeometryThroughSpan);
         const isUnsupportedSymbol =
           (span.font?.includes('Webdings') && !(span.font?.includes('Webdings') && span.text === '\uF07E')) ||
           (span.font?.includes('Wingdings') && !span.pictogramDisplayOverride) ||
           (span.font?.includes('ZapfDingbats') && !span.pictogramSvgPath);
         const isReplacedBySourceOverlay = span.renderAsSourceOverlayDuplicate
           && (span.renderSourceOverlayLanguage === 'all' || span.renderSourceOverlayLanguage === language);
-        if (span.renderOnlyStrokePass || isReplacedBySourceOverlay) return null;
+        if (span.renderOnlyStrokePass || (isReplacedBySourceOverlay && (!inlineUnit?.override || span.semanticSymbolId))) return null;
         // The source PDF paints Webdings U+F07E twice at the same bbox: a
         // 2pt white stroke and a red fill. PyMuPDF's text dict keeps only the
         // white pass, so reconstruct that one known glyph from its trace data.
         const isOutlinedImportantGlyph = span.font?.includes('Webdings') && span.text === '\uF07E';
-        if (isUnsupportedSymbol && !isOutlinedImportantGlyph) {
+        if (isUnsupportedSymbol && !isOutlinedImportantGlyph && !inlineUnit?.override) {
           // Some unsupported symbol fonts still occupy real source-PDF width.
           // On explicitly audited lines, keep an invisible flex item so later
           // editable words do not slide left into a tag or neighboring prose.
@@ -2074,7 +2063,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           && sourceDisplayChars.length === Array.from(span.text).length
           && sourceDisplayChars.join('') !== span.text;
         let inlineSourceCharIndex = 0;
-        const spanContent = inlineOverrideSegments.length
+        const spanContent = inlineUnit?.override
           ? inlineOverrideSegments.map((segment, segmentIndex) => {
             const segmentText = preserveInlineDisplayOverride
               ? Array.from(segment.text).map(() => sourceDisplayChars[inlineSourceCharIndex++] ?? '').join('')
@@ -2102,7 +2091,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
                 letterSpacing: '-0.015em',
               }}
             >
-              {segmentText}
+              {segment.symbolId || resolveLegacySymbol(segment.font,segment.text) ? renderSegmentContent(segment,scale,language) : segmentText}
             </span>
           );
           })

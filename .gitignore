@@ -98,3 +98,6 @@ test_fonts*.html
 script.py
 page_002_background.jpg
 apps/admin/apps-admin.db
+# Source-confirmed inline adapters and conditional erasure patches.
+!apps/web/public/pages/page_*/inline_elements.json
+!apps/web/public/pages/page_*/inline-element-mask-*.png

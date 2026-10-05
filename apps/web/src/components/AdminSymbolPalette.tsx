@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react';
-import { normalizeSymbolSearch, SEMANTIC_SYMBOLS, type SymbolLanguage } from '../symbols/semanticSymbols';
+import { isSymbolAllowed, normalizeSymbolSearch, SEMANTIC_SYMBOLS, type InlineEditorContext, type SymbolLanguage } from '../symbols/semanticSymbols';
+import { SemanticSymbol } from '../symbols/SemanticSymbol';
 import './AdminSymbolPalette.css';
 
 interface AdminSymbolPaletteProps {
   language: SymbolLanguage;
+  context: InlineEditorContext;
   open: boolean;
   canInsert: boolean;
   canUndo: boolean;
@@ -16,17 +18,18 @@ interface AdminSymbolPaletteProps {
 }
 
 export function AdminSymbolPalette({
-  language, open, canInsert, canUndo, canRedo, status, onOpenChange, onInsert, onUndo, onRedo,
+  language, context, open, canInsert, canUndo, canRedo, status, onOpenChange, onInsert, onUndo, onRedo,
 }: AdminSymbolPaletteProps) {
   const [query, setQuery] = useState('');
+  const [category, setCategory] = useState('');
+  const categories = useMemo(() => Array.from(new Set(SEMANTIC_SYMBOLS.filter(s=>isSymbolAllowed(s,context)).map(s=>s.category))), [context]);
   const visibleSymbols = useMemo(() => {
     const normalizedQuery = normalizeSymbolSearch(query);
-    if (!normalizedQuery) return SEMANTIC_SYMBOLS;
-    return SEMANTIC_SYMBOLS.filter(symbol => [
+    return SEMANTIC_SYMBOLS.filter(symbol => isSymbolAllowed(symbol,context) && (!category || symbol.category===category) && (!normalizedQuery || [
       symbol.labels[language], symbol.category,
       ...symbol.searchTerms.en, ...symbol.searchTerms['pt-BR'],
-    ].some(value => normalizeSymbolSearch(value).includes(normalizedQuery)));
-  }, [language, query]);
+    ].some(value => normalizeSymbolSearch(value).includes(normalizedQuery))));
+  }, [language, query, context, category]);
 
   return (
     <>
@@ -46,7 +49,7 @@ export function AdminSymbolPalette({
           <header className="admin-symbol-palette-header">
             <div>
               <strong>{language === 'pt-BR' ? 'Símbolos do livro' : 'Rulebook symbols'}</strong>
-              <small>{language === 'pt-BR' ? 'ID semântico, sem codepoint' : 'Semantic IDs, no codepoints'}</small>
+              <small>{language === 'pt-BR' ? 'Inserir no texto' : 'Insert into text'}</small>
             </div>
             <button
               type="button"
@@ -64,6 +67,13 @@ export function AdminSymbolPalette({
               placeholder={language === 'pt-BR' ? 'Totem azul, dado…' : 'Blue Totem, die…'}
             />
           </label>
+          <label className="admin-symbol-palette-search">
+            <span>{language === 'pt-BR' ? 'Categoria' : 'Category'}</span>
+            <select value={category} onChange={e=>setCategory(e.currentTarget.value)}>
+              <option value="">{language === 'pt-BR' ? 'Todas' : 'All'}</option>
+              {categories.map(value=><option key={value}>{value}</option>)}
+            </select>
+          </label>
           <div className="admin-symbol-palette-list" role="list">
             {visibleSymbols.map(symbol => (
               <button
@@ -72,26 +82,17 @@ export function AdminSymbolPalette({
                 key={symbol.id}
                 className="admin-symbol-palette-item"
                 disabled={!canInsert}
-                title={symbol.id}
+                title={symbol.description?.[language] ?? symbol.labels[language]}
                 onMouseDown={event => event.preventDefault()}
                 onClick={() => onInsert(symbol.id)}
               >
-                <img
-                  src={symbol.assetUrl}
-                  alt=""
-                  aria-hidden="true"
-                  style={{
-                    width: 34,
-                    height: 34,
-                    clipPath: symbol.render.mask === 'circle' ? 'circle(50% at 50% 50%)' : undefined,
-                    objectFit: 'cover',
-                  }}
-                />
+                <span className="admin-symbol-palette-preview" aria-hidden="true">
+                  <SemanticSymbol id={symbol.id} language={language} size={20} color="#231f20" preview />
+                </span>
                 <span>
                   <strong>{symbol.labels[language]}</strong>
                   <small>{symbol.category}</small>
                 </span>
-                <code>{symbol.id}</code>
               </button>
             ))}
             {visibleSymbols.length === 0 && (

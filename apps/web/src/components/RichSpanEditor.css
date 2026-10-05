@@ -274,6 +274,10 @@
   min-width: 28px;
 }
 
+.rse-char-symbol:not(.rse-char-selected) {
+  background-color: #8b8e92;
+}
+
 .rse-char-symbol img {
   width: 26px;
   height: 26px;

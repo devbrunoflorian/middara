@@ -1,4 +1,12 @@
+import sourceSymbols from './sourceSymbols.json';
+
 export type SymbolLanguage = 'en' | 'pt-BR';
+export type InlineEditorContext = 'paragraph' | 'typographic-field' | 'span-unit' | 'credit-field';
+export interface InlineSymbolMetrics {
+  widthEm: number;
+  heightEm: number;
+  verticalAlignEm: number;
+}
 
 export interface SemanticSymbolDefinition {
   id: string;
@@ -6,7 +14,10 @@ export interface SemanticSymbolDefinition {
   labels: Record<SymbolLanguage, string>;
   searchTerms: Record<SymbolLanguage, string[]>;
   editorTokens: Record<SymbolLanguage, string>;
-  assetUrl: string;
+  description?: Record<SymbolLanguage, string>;
+  allowedBlockTypes?: InlineEditorContext[];
+  assetUrl?: string;
+  legacy?: { font: string; characters: string[] };
   source: {
     pdf: string;
     page: number;
@@ -15,8 +26,11 @@ export interface SemanticSymbolDefinition {
   };
   render: {
     widthEm: number;
+    heightEm?: number;
     verticalAlignEm: number;
-    mask: 'circle';
+    mask?: 'circle';
+    viewBox?: number[];
+    paths?: { d: string; transform?: string; fill: string; stroke?: string; strokeWidth?: number; fillRule?: 'evenodd' | 'nonzero'; strokeLinecap?: 'butt'|'round'|'square'; strokeLinejoin?: 'miter'|'round'|'bevel' }[];
   };
 }
 
@@ -26,6 +40,7 @@ export interface SemanticSymbolDefinition {
  * and never the insertion value shown to translators.
  */
 export const SEMANTIC_SYMBOLS: SemanticSymbolDefinition[] = [
+  ...sourceSymbols as unknown as SemanticSymbolDefinition[],
   {
     id: 'token.blue-totem',
     category: 'Tokens e cenário',
@@ -62,5 +77,14 @@ export function getSymbolEditorToken(id: string, language: SymbolLanguage): stri
 }
 
 export function findSymbolByEditorToken(token: string, language: SymbolLanguage): SemanticSymbolDefinition | undefined {
-  return SEMANTIC_SYMBOLS.find(symbol => symbol.editorTokens[language] === token);
+  return SEMANTIC_SYMBOLS.find(symbol => symbol.editorTokens[language] === token || Object.values(symbol.editorTokens).includes(token));
+}
+
+export function isSymbolAllowed(symbol: SemanticSymbolDefinition, context: InlineEditorContext): boolean {
+  return !symbol.allowedBlockTypes || symbol.allowedBlockTypes.includes(context);
+}
+
+/** Font/codepoint interpretation belongs here, never in an editor menu. */
+export function resolveLegacySymbol(font: string, text: string): SemanticSymbolDefinition | undefined {
+  return SEMANTIC_SYMBOLS.find(symbol => symbol.legacy && font.includes(symbol.legacy.font) && symbol.legacy.characters.includes(text.trim()));
 }
