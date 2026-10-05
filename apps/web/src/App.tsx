@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import './App.css';
 import { attachSourceInlineElements, type SourceInlineElement } from './symbols/sourceInlineElements';
+import type { ContentsRowDefinition } from './contentsRows';
 
 const TOTAL_PAGES = 102; // Pages with extracted DOM
 
@@ -36,6 +37,13 @@ async function loadPageData(pageNum: number): Promise<PageData> {
       // a stale hard-coded page allowlist here.
       let fidelityOverlays: PageFidelityOverlay[] = [];
       let inlineElements: SourceInlineElement[] = [];
+      let contentsRows:ContentsRowDefinition[]|undefined;
+      if(pageNum===3) {
+        try {
+          const rowsResponse=await fetch(`/pages/page_${pageStr}/contents_rows.json`);
+          if(rowsResponse.ok)contentsRows=(await rowsResponse.json()).rows;
+        } catch {}
+      }
       try {
         const inlineResponse = await fetch(`/pages/page_${pageStr}/inline_elements.json`);
         if (inlineResponse.ok) inlineElements = (await inlineResponse.json()).elements ?? [];
@@ -57,6 +65,7 @@ async function loadPageData(pageNum: number): Promise<PageData> {
           .map((image: { bbox: [number, number, number, number] }) => image.bbox),
         fidelityOverlays,
         inlineElements,
+        contentsRows,
         blocks: attachSourceInlineElements((data.blocks || []).map((block: Block) => {
           const sidecarUnits = pageCreditUnits[block.id];
           const creditUnits = Array.isArray(sidecarUnits)

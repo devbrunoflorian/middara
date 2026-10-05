@@ -7,6 +7,8 @@ import { resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics
 import { SemanticSymbol } from '../symbols/SemanticSymbol';
 import { sourceSpanRuns } from '../symbols/sourceRuns';
 import { decodeOverrideData, encodeOverrideData } from '../symbols/overrideData';
+import { contentsRowKey, contentsRowUsesLegacy, contentsRowLine, contentsLabelWidth, type ContentsRowDefinition } from '../contentsRows';
+import { ContentsRowFlow } from './ContentsRowFlow';
 import { sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
 import './PageRenderer.css';
 import './Toast.css';
@@ -195,6 +197,7 @@ export interface PageFidelityOverlay {
 }
 
 export interface PageData {
+  contentsRows?:ContentsRowDefinition[];
   inlineElements?: SourceInlineElement[];
   page_number: number;
   width: number;
@@ -294,6 +297,7 @@ function renderCreditSegments(
   language: 'en' | 'pt-BR',
   scale: number,
   isAdmin: boolean,
+  whiteSpace:'pre-wrap'|'nowrap'='pre-wrap',
 ): React.ReactNode[] {
   const fullText = segments.map(segment => segment.text).join('');
   const ranges: { start: number; end: number; href: string }[] = [];
@@ -351,7 +355,7 @@ function renderCreditSegments(
         WebkitTextStroke: `${piece.segment.textStrokeWidthPt * scale}px ${piece.segment.textStrokeColor || '#231f20'}`,
         paintOrder: 'stroke fill',
       } : {}),
-      whiteSpace: 'pre-wrap',
+      whiteSpace,
       fontVariantLigatures: 'none',
       fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
       letterSpacing: '-0.015em',
@@ -1081,10 +1085,18 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
 
         {pageData.blocks.map((block, bIdx) => {
           if (block.hiddenFromPage) return null;
+          const rows = pageData.contentsRows?.filter(row => row.blockId === block.id) ?? [];
+          const hasOverride = (key: string) => overrides.has(key)
+            || (selectedSpan?.spanKey === key && draftOverride !== null);
+          if (rows.length && overridesReady && !layoutMode && !contentsRowUsesLegacy(rows, language, hasOverride)) return (
+            <ContentsLabelBlock key={block.id} block={block} rows={rows} scale={scale} isAdmin={isAdmin}
+              language={language} overrides={overrides} selectedKey={selectedSpan?.spanKey ?? null} draft={draftOverride}
+              onBlockClick={handleSpanClick} onNavigate={onNavigate} />
+          );
           return (
             <SpanBlock
               key={block.id}
-              block={block}
+              block={pageData.contentsRows?.some(row=>block.lines?.some(line=>line.id===row.numberLineId)) ? {...block,adminReadOnly:true} : block}
               allBlocks={pageData.blocks}
               layoutObstacles={pageData.layoutObstacles ?? []}
               blockIdx={bIdx}
@@ -1192,6 +1204,66 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
     </div>
   );
 };
+
+interface ContentsLabelBlockProps {
+  block: Block;
+  rows: ContentsRowDefinition[];
+  scale: number;
+  isAdmin: boolean;
+  language: 'en' | 'pt-BR';
+  overrides: Map<string, SpanOverride>;
+  selectedKey: string | null;
+  draft: SpanOverride | null;
+  onBlockClick: (info: SelectedSpanInfo) => void;
+  onNavigate?: (page: number) => void;
+}
+function ContentsLabelBlock({
+  block, rows, scale, isAdmin, language, overrides, selectedKey, draft, onBlockClick, onNavigate,
+}: ContentsLabelBlockProps) {
+  return <>{rows.map(row => {
+    const line = contentsRowLine(block, row);
+    if (!line) return null;
+    const key = contentsRowKey(row, language);
+    const override = selectedKey === key && draft ? draft : overrides.get(key);
+    const [x, y, , bottom] = row.labelBBox;
+    const width = contentsLabelWidth(row);
+    const height = bottom - y;
+    const field: CreditFieldDefinition = {
+      id: row.id, lineIds: [row.lineId], bbox: [x, y, x + width, bottom],
+      frame: { x, width, textAlign: 'left', lineHeight: 1 },
+    };
+    const attributes = adminGeometryAttributes(isAdmin, key, { x, y, width, height, rotation: 0 });
+    const select = () => {
+      if (isAdmin) onBlockClick({ ...extractCreditFieldInfo(key, block, field), singleLine: true, editorContext: 'typographic-field' });
+      else onNavigate?.(row.targetPage);
+    };
+    const click = (event: React.MouseEvent) => {
+      event.stopPropagation();
+      select();
+    };
+    return <React.Fragment key={row.id}>
+      {override && <img src={row.mask.url} alt="" aria-hidden="true" draggable={false} style={{
+        position: 'absolute', left: row.mask.bbox[0] * scale, top: row.mask.bbox[1] * scale,
+        width: (row.mask.bbox[2] - row.mask.bbox[0]) * scale,
+        height: (row.mask.bbox[3] - row.mask.bbox[1]) * scale, zIndex: 2, pointerEvents: 'none',
+      }} />}
+      <div className={`contents-label-field ${isAdmin ? 'credit-edit-field' : ''} ${selectedKey === key ? 'credit-field-selected' : ''}`}
+        role={isAdmin ? 'button' : 'link'} tabIndex={0}
+        style={{ position: 'absolute', left: x * scale, top: y * scale, width: width * scale, height: height * scale, zIndex: block.zIndex ?? 10 }}
+        {...attributes} onClick={click} onKeyDown={event => {
+          if (event.key === 'Enter' || (isAdmin && event.key === ' ')) {
+            event.preventDefault();
+            select();
+          }
+        }}>
+        {override ? <ContentsRowFlow row={row} scale={scale} isAdmin={isAdmin} text={override.segments.map(run => run.text).join('')}>
+          {renderCreditSegments(override.segments.map(run => ({ ...run, text: run.text.replace(/[\r\n]+/g, ' ') })), undefined, language, scale, isAdmin, 'nowrap')}
+        </ContentsRowFlow> : <div style={{ pointerEvents: 'none' }}><LineRenderer line={line} scale={scale} blockOriginX={x} blockOriginY={y}
+          isAdmin={false} isSelected={false} language={language} onClick={() => {}} /></div>}
+      </div>
+    </React.Fragment>;
+  })}</>;
+}
 
 interface SpanBlockProps {
   block: Block;
