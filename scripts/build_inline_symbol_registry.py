@@ -228,10 +228,12 @@ def build(apply, only_pages=None,registry_only=False):
     selected.extend([
         ('combat.shield.solid',p38_component([163,164,165]),[]),
         ('combat.page',p38_component([174,175]),[p38_component([180,181])]),
+        ('terrain.red-border',dict(page=39,drawingIndices=[188],bbox=[220.102294921875,183.83380126953125,240.6772918701172,185.83380126953125]),[]),
     ])
     labels={id:(en,pt) for _,id,en,pt in specs};labels.update({'attack.ranged':('Ranged attack','Ataque à distância'),'attack.melee-ranged':('Melee or ranged attack','Ataque corpo a corpo ou à distância'),'combat.shield.dark':('Defense shield, dark','Escudo de defesa, escuro'),'story.pencil':('Story entry','Anotação de história'),'story.flag':('Story flag','Bandeira de história')})
     labels.update({'combat.shield.solid':('Solid defense shield','Escudo de defesa cheio'),
-                   'combat.page':('Page combat symbol','Símbolo de combate em forma de folha')})
+                   'combat.page':('Page combat symbol','Símbolo de combate em forma de folha'),
+                   'terrain.red-border':('Red terrain border','Borda vermelha de terreno')})
     # The circle candidate group contains different foreground symbols.
     # Distribute only complete geometry matches to their reviewed recipes.
     circles=[complete_component(doc[o['page']-1],o) for o in audit['inlineVectorCandidates'][23]['occurrences']]
@@ -245,8 +247,9 @@ def build(apply, only_pages=None,registry_only=False):
             paths.append(dict(d=vector_path(drawing),transform=f'translate({-rect.x0} {-rect.y0})',fill=color(drawing.get('fill')),stroke=color(drawing.get('color')),strokeWidth=drawing.get('width') or 0,fillRule='evenodd' if drawing.get('even_odd') else 'nonzero',
                 strokeLinecap=['butt','round','square'][max(drawing.get('lineCap') or (0,0,0))],strokeLinejoin=['miter','round','bevel'][round(drawing.get('lineJoin') or 0)]))
         paths=native_paint_colors(page,rect,paths)
-        monochrome=len({p['fill'] for p in paths if p['fill']!='none'} | {p['stroke'] for p in paths if p['stroke']!='none'})==1
-        source_ink=next((p['fill'] for p in paths if p['fill']!='none'),None)
+        # Red is the rule's meaning, so a newly inserted border keeps its paint.
+        monochrome=id!='terrain.red-border' and len({p['fill'] for p in paths if p['fill']!='none'} | {p['stroke'] for p in paths if p['stroke']!='none'})==1
+        source_ink=next((p['fill'] for p in paths if p['fill']!='none'),None) or next((p['stroke'] for p in paths if p['stroke']!='none'),None)
         if monochrome:
             for p in paths:
                 if p['fill']!='none':p['fill']='currentColor'
@@ -260,6 +263,16 @@ def build(apply, only_pages=None,registry_only=False):
         for occurrence in [o]+occurrences:
             if not same_component(doc[occurrence['page']-1],occurrence,page,o):continue
             page_no=occurrence['page'];dompath=ROOT/f'apps/web/public/pages/page_{page_no:03d}/page_{page_no:03d}_dom.json';dom=json.loads(dompath.read_text(encoding='utf8'));r=fitz.Rect(occurrence['bbox']);anchor=anchor_for(dom,r)
+            if id=='terrain.red-border':
+                assert page_no==39 and occurrence['drawingIndices']==[188]
+                bi=next(i for i,b in enumerate(dom['blocks']) if b['id']=='block_38')
+                line=dom['blocks'][bi]['lines'][0];span=line['spans'][2]
+                expected=' marked with a           cannot be moved into or through. '
+                assert line['id']=='line_38_0' and span['text']==expected and span['font']=='OptimaLTStd' and span['size']==10
+                trace=next(t for t in doc[38].get_texttrace() if t['font']==span['font'] and ''.join(chr(c[0]) for c in t['chars'])==expected)
+                assert expected[15:24]==' '*9 and trace['chars'][15][3][0]<r.x0<r.x1<trace['chars'][23][3][2]
+                assert abs(doc[38].get_drawings()[188]['width']-2)<.001 and r.height==2
+                anchor=dict(blockId='block_38',blockIndex=bi,lineId=line['id'],spanIndex=2,side='replace-text',sizePt=10,textRange=[15,24])
             if anchor is None:continue
             size=anchor['sizePt'];baseline=source_baseline(doc[page_no-1],dom,anchor,baseline_cache)
             metrics=dict(widthEm=r.width/size,heightEm=r.height/size,verticalAlignEm=(r.y1-baseline)/size)

@@ -32,6 +32,9 @@ def main():
             if stamp in seen:errors.append(f'{path}: duplicate {stamp}')
             seen.add(stamp)
             if b['id']!=a['blockId'] or l is None or a['spanIndex']>=len(l['spans']):errors.append(f'{path}: missing source anchor');continue
+            if a['side']=='replace-text':
+                start,end=a.get('textRange',[0,0]);text=l['spans'][a['spanIndex']]['text']
+                if start<0 or end<=start or end>len(text) or text[start:end].strip():errors.append(f'{path}: stale text range')
             if b.get('hiddenFromPage') or b.get('adminReadOnly') or l.get('rasterizedDuplicate') or b['lines'].index(l) in b.get('staticEditorLineIndexes',[]):errors.append(f'{path}: non-prose anchor {stamp}')
             r=fitz.Rect(e['mask']['bbox']);asset=ROOT/'apps/web/public'/e['mask']['url'].lstrip('/');im=Image.open(asset)
             if im.size!=(round(r.width*4),round(r.height*4)):errors.append(f'{path}: patch geometry mismatch {asset.name}')

@@ -8,7 +8,7 @@ export interface SourceInlineElement {
   metrics?: InlineSymbolMetrics;
   color?: string;
   bbox: [number,number,number,number];
-  anchor: { blockId: string; blockIndex: number; lineId: string; spanIndex: number; side: 'before'|'after'|'replace'; sizePt: number };
+  anchor: { blockId: string; blockIndex: number; lineId: string; spanIndex: number; side: 'before'|'after'|'replace'|'replace-text'; sizePt: number; textRange?: [number,number] };
   mask: { url: string; bbox: [number,number,number,number] };
 }
 
@@ -25,7 +25,10 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
     const make=(e:SourceInlineElement):SpanData=>({ text:SYMBOL_OBJECT_MARKER,semanticSymbolId:e.symbolId,sourceSpanIndex:index,
       sourceSymbolMetrics:e.metrics,
       font:span.font,size:e.anchor.sizePt,color:e.color ?? span.color,flags:span.flags,bbox:e.bbox,renderAsSourceOverlayDuplicate:true,renderSourceOverlayLanguage:'all' });
-    return [...matches.filter(e=>e.anchor.side==='before').map(make),{...span,sourceSpanIndex:index},...matches.filter(e=>e.anchor.side==='after').map(make)];
+    const sourceInlineObjects=matches.filter(e=>e.anchor.side==='replace-text' && e.anchor.textRange);
+    return [...matches.filter(e=>e.anchor.side==='before').map(make),{...span,sourceSpanIndex:index,
+      ...(sourceInlineObjects.length?{sourceInlineObjects}:{}),
+    },...matches.filter(e=>e.anchor.side==='after').map(make)];
   }) })) }));
 }
 

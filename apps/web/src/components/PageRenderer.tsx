@@ -22,6 +22,8 @@ export interface SpanData {
   semanticSymbolId?: string;
   sourceSymbolMetrics?: InlineSymbolMetrics;
   sourceSpanIndex?: number;
+  /** Explicit source-reviewed whitespace slots; source paint remains unchanged. */
+  sourceInlineObjects?: SourceInlineElement[];
   text: string;
   font: string;
   size: number;

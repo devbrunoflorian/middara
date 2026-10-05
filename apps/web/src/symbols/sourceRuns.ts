@@ -9,6 +9,21 @@ export function sourceSpanRuns(spans: SpanData[], mapFont: (font:string)=>{weigh
     const run:Segment={text:span.displayOverride || span.text,font:span.font,size:span.renderSizeOverridePt ?? span.size,
       color:span.color || '#231f20',weight:span.renderWeightOverride ?? mapped.weight,style:mapped.style,
       textStrokeWidthPt:span.renderTextStrokeWidthPt,textStrokeColor:span.renderTextStrokeColor,disableLigatures:true};
+    if(span.sourceInlineObjects?.length) {
+      if(span.sourceInlineObjects.some(element=>!element.anchor.textRange))return [run];
+      const objects=[...span.sourceInlineObjects].sort((a,b)=>a.anchor.textRange![0]-b.anchor.textRange![0]);
+      const parts:Segment[]=[];let cursor=0;
+      for(const element of objects) {
+        const [start,end]=element.anchor.textRange!;
+        // Keep source text intact if a stale/overlapping range cannot be proven.
+        if(!Number.isInteger(start) || !Number.isInteger(end) || start<cursor || end<=start || end>run.text.length || run.text.slice(start,end).trim())return [run];
+        if(start>cursor)parts.push({...run,text:run.text.slice(cursor,start)});
+        parts.push({...run,text:'\uFFFC',symbolId:element.symbolId,symbolMetrics:element.metrics,color:element.color ?? run.color});
+        cursor=end;
+      }
+      if(cursor<run.text.length)parts.push({...run,text:run.text.slice(cursor)});
+      return parts;
+    }
     const symbolId=span.semanticSymbolId ?? resolveLegacySymbol(span.font,span.text)?.id;
     if (!symbolId)return [run];
     const leading=span.text.match(/^\s+/)?.[0] ?? '';const trailing=span.text.match(/\s+$/)?.[0] ?? '';

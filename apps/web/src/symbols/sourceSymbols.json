@@ -1998,6 +1998,78 @@
     }
   },
   {
+    "id": "terrain.red-border",
+    "category": "Regras e combate",
+    "labels": {
+      "en": "Red terrain border",
+      "pt-BR": "Borda vermelha de terreno"
+    },
+    "description": {
+      "en": "Red terrain border — source PDF symbol.",
+      "pt-BR": "Borda vermelha de terreno — símbolo do PDF original."
+    },
+    "searchTerms": {
+      "en": [
+        "red",
+        "terrain",
+        "border"
+      ],
+      "pt-BR": [
+        "borda",
+        "vermelha",
+        "de",
+        "terreno"
+      ]
+    },
+    "editorTokens": {
+      "en": "⟦Red terrain border⟧",
+      "pt-BR": "⟦Borda vermelha de terreno⟧"
+    },
+    "allowedBlockTypes": [
+      "paragraph",
+      "typographic-field",
+      "span-unit",
+      "credit-field"
+    ],
+    "source": {
+      "pdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+      "page": 39,
+      "bboxPt": [
+        220.102294921875,
+        183.83380126953125,
+        240.6772918701172,
+        185.83380126953125
+      ],
+      "assetSizePx": [
+        0,
+        0
+      ]
+    },
+    "render": {
+      "viewBox": [
+        0,
+        0,
+        20.574996948242188,
+        2.0
+      ],
+      "paths": [
+        {
+          "d": "M 220.102294921875 184.83380126953125 L 240.6772918701172 184.83380126953125",
+          "transform": "translate(-220.102294921875 -183.83380126953125)",
+          "fill": "none",
+          "stroke": "#d2232a",
+          "strokeWidth": 2.0,
+          "fillRule": "nonzero",
+          "strokeLinecap": "butt",
+          "strokeLinejoin": "miter"
+        }
+      ],
+      "widthEm": 2.0574996948242186,
+      "heightEm": 0.2,
+      "verticalAlignEm": -0.198260498046875
+    }
+  },
+  {
     "id": "tag.important.icon",
     "category": "Tags e glifos",
     "labels": {
