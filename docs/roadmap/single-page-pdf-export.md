@@ -38,6 +38,20 @@ Para outra página, troque `--page` e o nome de saída. `--language` aceita `en`
 - A borda preta à direita/embaixo é um defeito visual conhecido. O código mantém explicitamente a proporção de palco do piloto para facilitar a reprodução do estado; essa proporção é provisória e não deve virar contrato da futura API.
 - O PDF não captura rascunhos não salvos do editor. A fonte deve ser o conteúdo persistido no Payload; a página precisa ser conferida no viewer antes da impressão.
 
+## Editabilidade no Adobe — investigação relatada, pendente
+
+O usuário informou em 05/10 que o PDF feito até agora foi aberto/tentado no Adobe e não ficou editável como esperado. Ainda não sabemos qual arquivo exato foi testado, qual aplicativo/produto Adobe e versão foram usados, qual ferramenta/ação foi tentada, nem qual definição de “editável” se aplica (selecionar/copiar texto, Editar PDF, importar para InDesign ou reflow de parágrafos). **Não mudar o exportador com base apenas no relato.**
+
+Na investigação futura:
+
+1. identificar/recuperar o PDF exato e reproduzir no mesmo Adobe app/versão e na mesma operação;
+2. inspecionar a estrutura real do PDF produzido: objetos de texto vs. paths/imagens, fontes incorporadas/subset, encoding e mapas `/ToUnicode`, glifos PUA, grupos/clips, transformações e ordem dos objetos;
+3. comparar o resultado contra uma página simples e outra com glifos/símbolos especiais, separando “texto selecionável” de “texto editável pelo Acrobat/InDesign”;
+4. consultar a documentação oficial da Adobe para a ferramenta reproduzida e identificar requisitos/limites de fonte e estrutura;
+5. propor a menor correção e verificar o PDF novamente no Adobe e com renderização lado a lado do viewer/PDF-fonte.
+
+O app já tem um piloto auditável em [`page-002-pt-BR-editavel.pdf`](../../output/pdf/page-002-pt-BR-editavel.pdf), que usa impressão Chromium; esta relação não prova a causa do problema nem que o arquivo piloto seja o arquivo reportado. A investigação fica fora da correção visual/dos símbolos em andamento e não autoriza modificar ou achatar PDFs agora.
+
 ## Preparação para a futura API
 
 A API ainda não deve existir como parte deste piloto. Quando for criada, ela deverá chamar a mesma rotina de exportação isolada (em processo/worker Chromium), recebendo pelo menos número da página e idioma. Deve usar uma revisão persistida das traduções, validar que o idioma pedido foi aplicado, guardar o PDF com identificação dessa revisão e retornar falhas explícitas de tradução, fonte ou renderização. Não deve aceitar uma captura de tela do browser como substituto do PDF.
