@@ -171,6 +171,40 @@ overlay_path.write_text(json.dumps(overlay_data, ensure_ascii=False, indent=2) +
 print(json.dumps({'page': page_no, 'compoundOccurrences': 1,
     'remainingInlineElements': len(inline_data['elements']), 'variant': 'prose-9pt'}, ensure_ascii=False))
 
+# Page 47's condition-tag examples reuse the exact p90 discard/exhaust
+# artwork. DISCARD's Zapf glyph and label share a PDF drawing with the capsule;
+# EXHAUST's white arrow is a separate source vector, also retained in p90.
+page_no = 47
+page_dir = ROOT / 'apps/web/public/pages/page_047'
+page_dom = json.loads((page_dir / 'page_047_dom.json').read_text(encoding='utf8'))
+p47_specs = [
+    ('tag.discard', 'block_14', 'line_14_0', 4, 5, '✘DISCARD',
+        [228.91329956054688, 157.76373291015625, 288.13531494140625, 173.8267364501953]),
+    ('tag.exhaust', 'block_14', 'line_14_1', 0, 0, 'EXHAUST',
+        [302.5857849121094, 157.76373291015625, 365.0557861328125, 173.8267364501953]),
+]
+p47_elements = [make_element(registry, page_dom, symbol_id, block_id, line_id, start, end,
+    expected, rect) for symbol_id, block_id, line_id, start, end, expected, rect in p47_specs]
+(page_dir / 'compound_elements.json').write_text(
+    json.dumps({'schemaVersion': 1, 'elements': p47_elements}, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+
+inline_path = page_dir / 'inline_elements.json'
+inline_data = json.loads(inline_path.read_text(encoding='utf8'))
+inline_data['elements'] = [element for element in inline_data['elements']
+    if not (element['symbolId'] == 'tag.discard.icon' and element['anchor']['blockId'] == 'block_14'
+        and element['anchor']['lineId'] == 'line_14_0' and element['anchor']['spanIndex'] == 4)]
+inline_path.write_text(json.dumps(inline_data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+
+overlay_path = page_dir / 'fidelity_overlays.json'
+overlay_data = json.loads(overlay_path.read_text(encoding='utf8'))
+overlay_data['overlays'] = [overlay for overlay in overlay_data['overlays']
+    if overlay.get('region') != 'discard-tag-x-symbol']
+overlay_path.write_text(json.dumps(overlay_data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+(page_dir / 'inline-element-mask-001.png').unlink(missing_ok=True)
+(page_dir / 'fidelity-overlay-discard-tag-x-symbol.png').unlink(missing_ok=True)
+print(json.dumps({'page': page_no, 'compoundOccurrences': len(p47_elements),
+    'remainingInlineElements': len(inline_data['elements']), 'variants': ['source']}, ensure_ascii=False))
+
 # The page-100 composition overlays are no longer referenced; remove their assets.
 page100 = ROOT / 'apps/web/public/pages/page_100'
 for unused in ['fidelity-overlay-component-status-tag-pill.svg', 'fidelity-overlay-component-status-tag-icon.png']:
