@@ -158,7 +158,10 @@ test('page 41 dice retain source baselines, word ownership, gaps and the wrapped
     const owner=entry.anchor.ownerSpanRef??{lineId:entry.anchor.lineId,spanIndex:entry.anchor.spanIndex};
     const block=data.blocks.find((candidate:any)=>candidate.id===entry.anchor.blockId)!;
     const ownerLine=block.lines.find((line:any)=>line.id===owner.lineId)!;
-    assert.equal(ownerLine.spans[owner.spanIndex].text.trim(),entry.anchor.ownerSpanRef?'BLACK':entry.expectedSpan);
+    const expectedOwner=entry.anchor.ownerSpanRef
+      ? entry.symbolId==='dice.purple'?'PURPLE':'BLACK'
+      : entry.expectedSpan;
+    assert.equal(ownerLine.spans[owner.spanIndex].text.trim(),expectedOwner);
     if(entry.anchor.gapPt!==undefined)assert.ok(entry.anchor.gapPt>0);
   }
   const adapted=attachSourceInlineElements(data.blocks,dice);
@@ -344,6 +347,46 @@ test('page 67 black dice follow BLACK after its source space',()=>{
     const symbol=line.spans.find(span=>span.semanticSymbolId===entry.symbolId)!;
     assert.ok(Math.abs(symbol.sourceSymbolMetrics!.gapEm!-entry.anchor.gapPt/entry.anchor.sizePt)<1e-12);
   }
+});
+
+test('separate color-label dice ownership family uses source spaces without absorbing distinct span families',()=>{
+  const expected=[
+    {page:41,symbolId:'dice.purple',lineId:'line_24_1',ownerSpan:1,spaceSpan:2,label:'PURPLE',gap:.631401,size:9,vertical:.29006277126736296},
+    {page:41,symbolId:'dice.purple',lineId:'line_24_3',ownerSpan:3,spaceSpan:4,label:'PURPLE',gap:.631612,size:9,vertical:.29006277126736296},
+    {page:41,symbolId:'dice.black',lineId:'line_27_2',ownerSpan:5,spaceSpan:6,label:'BLACK',gap:.283637,size:9,vertical:.29794466145833415},
+    {page:41,symbolId:'dice.black',lineId:'line_29_1',ownerSpan:3,spaceSpan:4,label:'BLACK',gap:.283511,size:9,vertical:.2979553222656237},
+    {page:41,symbolId:'dice.black',lineId:'line_29_4',ownerSpan:1,spaceSpan:2,label:'BLACK',gap:.283721,size:9,vertical:.2979553222656237},
+    {page:54,symbolId:'dice.white',lineId:'line_16_3',ownerSpan:1,spaceSpan:2,label:'WHITE',gap:.309174,size:10,vertical:.261029052734375},
+    {page:57,symbolId:'dice.white',lineId:'line_81_2',ownerSpan:1,spaceSpan:2,label:'WHITE',gap:.309265,size:10,vertical:.26103515625},
+    {page:64,symbolId:'dice.white',lineId:'line_15_1',ownerSpan:1,spaceSpan:2,label:'WHITE',gap:.309174,size:10,vertical:.261029052734375},
+    {page:78,symbolId:'dice.black',lineId:'line_20_4',ownerSpan:1,spaceSpan:2,label:'BLACK',gap:.283783,size:9,vertical:.2979227701822917},
+    {page:78,symbolId:'dice.black',lineId:'line_20_6',ownerSpan:1,spaceSpan:2,label:'BLACK',gap:.28389,size:9,vertical:.2979227701822917},
+  ];
+  assert.equal(expected.length,10);
+  for(const target of expected) {
+    const data=page(target.page);
+    const entry=elements(target.page).find((candidate:any)=>candidate.symbolId===target.symbolId&&candidate.anchor.lineId===target.lineId);
+    assert.ok(entry,`missing p.${target.page} ${target.lineId}`);
+    assert.equal(entry.anchor.side,'after');
+    assert.equal(entry.anchor.spanIndex,target.spaceSpan);
+    assert.equal(entry.anchor.gapPt,target.gap);
+    assert.equal(entry.anchor.sizePt,target.size);
+    assert.deepEqual(entry.anchor.ownerSpanRef,{lineId:target.lineId,spanIndex:target.ownerSpan});
+    assert.equal(entry.metrics.verticalAlignEm,target.vertical);
+    const block=data.blocks.find((candidate:any)=>candidate.id===entry.anchor.blockId)!;
+    const line=block.lines.find((candidate:any)=>candidate.id===target.lineId)!;
+    assert.equal(line.spans[target.ownerSpan].text,target.label);
+    assert.equal(line.spans[target.spaceSpan].text,' ');
+  }
+  const p54White=elements(54).filter((entry:any)=>entry.symbolId==='dice.white');
+  assert.equal(p54White.length,2);
+  assert.equal(p54White.filter((entry:any)=>entry.anchor.ownerSpanRef).length,1);
+  const p78Teal=elements(78).filter((entry:any)=>entry.symbolId==='dice.teal');
+  assert.equal(p78Teal.length,4);
+  assert.ok(p78Teal.every((entry:any)=>!entry.anchor.ownerSpanRef));
+  const p85Dice=elements(85).filter((entry:any)=>entry.symbolId?.startsWith('dice.'));
+  assert.equal(p85Dice.length,6);
+  assert.ok(p85Dice.every((entry:any)=>!entry.anchor.ownerSpanRef));
 });
 
 test('mask activates for owning block/unit/draft, never the opposite language or unrelated unit',()=>{
