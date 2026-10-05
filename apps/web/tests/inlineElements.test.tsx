@@ -279,6 +279,41 @@ test('page 33 white dice belong to WHITE and retain their per-occurrence source 
   }
 });
 
+test('page 45 white and orange dice follow their exact source label runs',()=>{
+  const data=page(45);const dice=elements(45).filter((entry:any)=>entry.symbolId==='dice.white'||entry.symbolId==='dice.orange');
+  assert.equal(dice.length,4);
+  const expected=[
+    {symbolId:'dice.white',blockId:'block_10',lineId:'line_10_1',ownerSpan:5,placementSpan:6,ownerText:'WHITE',size:10,vertical:.3416900634765625},
+    {symbolId:'dice.orange',blockId:'block_10',lineId:'line_10_3',ownerSpan:5,placementSpan:6,ownerText:'FINESSE : ORANGE',size:10,vertical:.2596405029296875},
+    {symbolId:'dice.orange',blockId:'block_10',lineId:'line_10_6',ownerSpan:1,placementSpan:2,ownerText:'ORANGE',size:10,vertical:.2596405029296875},
+    {symbolId:'dice.orange',blockId:'block_14',lineId:'line_14_1',ownerSpan:1,placementSpan:2,ownerText:'ORANGE',size:10.743599891662598,vertical:.24168413226208452},
+  ];
+  for(let i=0;i<dice.length;i++) {
+    const entry=dice[i];const target=expected[i];
+    assert.equal(entry.symbolId,target.symbolId);
+    assert.equal(entry.anchor.blockId,target.blockId);
+    assert.equal(entry.anchor.lineId,target.lineId);
+    assert.equal(entry.anchor.side,'after');
+    assert.deepEqual(entry.anchor.ownerSpanRef,{lineId:target.lineId,spanIndex:target.ownerSpan});
+    const block=data.blocks.find((candidate:any)=>candidate.id===target.blockId)!;
+    const line=block.lines.find((candidate:any)=>candidate.id===target.lineId)!;
+    assert.equal(line.spans[target.ownerSpan].text,target.ownerText);
+    assert.equal(line.spans[target.placementSpan].text,' ');
+    assert.equal(entry.anchor.spanIndex,target.placementSpan);
+    assert.equal(entry.anchor.sizePt,target.size);
+    assert.ok(entry.anchor.gapPt>0 && entry.anchor.gapPt<.7);
+    assert.ok(entry.metrics.widthEm>1 && entry.metrics.heightEm>1);
+    assert.equal(entry.metrics.verticalAlignEm,target.vertical);
+  }
+  const adapted=attachSourceInlineElements(data.blocks,dice);
+  for(const entry of dice) {
+    const block=adapted.find(candidate=>candidate.id===entry.anchor.blockId)!;
+    const line=block.lines.find(candidate=>candidate.id===entry.anchor.lineId)!;
+    const symbol=line.spans.find(span=>span.semanticSymbolId===entry.symbolId)!;
+    assert.ok(Math.abs(symbol.sourceSymbolMetrics!.gapEm!-entry.anchor.gapPt/entry.anchor.sizePt)<1e-12);
+  }
+});
+
 test('mask activates for owning block/unit/draft, never the opposite language or unrelated unit',()=>{
   const es=elements(22);const data=page(22);const e=es[0];const b=data.blocks[e.anchor.blockIndex];const key=`page_22_block_${e.anchor.blockIndex}`;
   assert.equal(sourceElementIsReplaced(e,b,22,'pt-BR',new Map(),null,null),false);
