@@ -47,6 +47,31 @@ function mount(language: 'en' | 'pt-BR', runs: Segment[], existingOverride?: Spa
 }
 
 describe.each(['en', 'pt-BR'] as const)('RichSpanEditor mounted regression %s', language => {
+  it('keeps fill and outline styling when replacing text within one uniformly styled source run', () => {
+    const source = [{ ...plain('IMPORTANT:'), color: '#b91d23', weight: 900,
+      textStrokeWidthPt: 2, textStrokeColor: '#ffffff', disableLigatures: true }];
+    const v = mount(language, source);
+    v.edit('IMPORTANTE:');
+    const runs = v.draft()!.segments;
+    expect(runs.map(run => run.text).join('')).toBe('IMPORTANTE:');
+    expect(runs.every(run => run.color === '#b91d23' && run.weight === 900
+      && run.textStrokeWidthPt === 2 && run.textStrokeColor === '#ffffff'
+      && run.disableLigatures === true)).toBe(true);
+    expect(v.onSave).not.toHaveBeenCalled();
+  });
+
+  it('uses the selected insertion style when a replacement spans mixed source styles', () => {
+    const source = [{ ...plain('COMMAND'), color: '#b91d23', weight: 900,
+      textStrokeWidthPt: 2, textStrokeColor: '#ffffff' }, plain(' body')];
+    const v = mount(language, source);
+    v.edit('Texto traduzido', 0, 'COMMAND body'.length);
+    const runs = v.draft()!.segments;
+    expect(runs.map(run => run.text).join('')).toBe('Texto traduzido');
+    expect(runs.every(run => run.color === style.color && run.textStrokeWidthPt === undefined
+      && run.textStrokeColor === undefined)).toBe(true);
+    expect(v.onSave).not.toHaveBeenCalled();
+  });
+
   it('inserting a space emits a draft and saves without unmounting or exceptions', () => {
     const v = mount(language, [plain('This is a test')]);
     v.edit('This is  a test', 8);

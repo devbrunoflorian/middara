@@ -45,14 +45,50 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
   // Do not preserve half a surrogate pair as a separate React text run.
   if(prefix>0 && /[\uDC00-\uDFFF]/.test(text[prefix] ?? ''))prefix--;
   if(suffix>0 && /[\uDC00-\uDFFF]/.test(text[text.length-suffix] ?? ''))suffix--;
-  // Retain ordinary styles in unchanged regions. The changed middle uses the
-  // selected insertion style; do not guess formatting for a new translation.
   const oldPlain:{start:number;end:number;run:Segment}[]=[];let oldOffset=0;
   for(const run of previous) {
     const projected=editableTextForSegments([run],language);
     if(!run.symbolId)oldPlain.push({start:oldOffset,end:oldOffset+projected.length,run});
     oldOffset+=projected.length;
   }
+  // If an edit is contained by one consistent source style, retain that style
+  // (including text outlines used by IMPORTANT/COMMAND/INTELLIGENT). At a
+  // mixed-style boundary or across a symbol, keep the selected tool style
+  // rather than guessing how new text should be formatted.
+  const changedEnd=baseline.length-suffix;
+  const replacementStyle = (() => {
+    const sameStyle=(a:Segment,b:Segment) => a.font===b.font && a.size===b.size && a.color===b.color
+      && a.weight===b.weight && a.style===b.style && a.disableLigatures===b.disableLigatures
+      && a.textStrokeWidthPt===b.textStrokeWidthPt && a.textStrokeColor===b.textStrokeColor;
+    const styleOf=(run:Segment):RunStyle => ({font:run.font,size:run.size,color:run.color,weight:run.weight,
+      style:run.style,disableLigatures:run.disableLigatures,textStrokeWidthPt:run.textStrokeWidthPt,textStrokeColor:run.textStrokeColor});
+    if (changedEnd <= prefix) {
+      // Insertions inside a source run (or at either outer edge of the whole
+      // text) should follow that run. At internal boundaries, only inherit
+      // when both neighboring runs have identical styling.
+      const left=oldPlain.find(old=>old.start<prefix && old.end>=prefix)?.run;
+      const right=oldPlain.find(old=>old.start<=prefix && old.end>prefix)?.run;
+      const inherited=left && right ? (sameStyle(left,right) ? left : undefined)
+        : prefix===0 ? right : prefix===baseline.length ? left : undefined;
+      return inherited ? styleOf(inherited) : style;
+    }
+    const covered=oldPlain.filter(old=>old.start<changedEnd && old.end>prefix)
+      .sort((a,b)=>a.start-b.start);
+    let cursor=prefix;
+    let first:Segment|undefined;
+    for(const range of covered) {
+      const start=Math.max(prefix,range.start);const end=Math.min(changedEnd,range.end);
+      if(end<=start)continue;
+      if(start>cursor || (first && !sameStyle(first,range.run)))return style;
+      first ??=range.run;
+      cursor=Math.max(cursor,end);
+    }
+    if(!first || cursor<changedEnd)return style;
+    return styleOf(first);
+  })();
+  const changedStyle=replacementStyle;
+  // Retain ordinary styles in unchanged regions; only a confidently uniform
+  // source run may lend its style to replaced text.
   const oldSymbols = previous.filter(run => run.symbolId).flatMap(run => Array.from(run.text || SYMBOL_OBJECT_MARKER,()=>({ ...run })));
   const output: Segment[] = [];
   const plain=(start:number,end:number)=>{
@@ -63,11 +99,11 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
     let offset=start;
     for(const range of preserved) {
       const a=Math.max(offset,range.a);const b=Math.min(end,range.b);
-      if(a>offset)output.push({...style,text:text.slice(offset,a)});
+      if(a>offset)output.push({...changedStyle,text:text.slice(offset,a)});
       if(b>a)output.push({...range.run,text:text.slice(a,b)});
       offset=Math.max(offset,b);
     }
-    if(offset<end)output.push({...style,text:text.slice(offset,end)});
+    if(offset<end)output.push({...changedStyle,text:text.slice(offset,end)});
   };
   let cursor = 0;
   for (const {start,end,token,id} of editableTokenRanges(text)) {
