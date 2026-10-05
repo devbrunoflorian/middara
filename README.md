@@ -36,6 +36,7 @@ To support this without breaking browser rendering, we map special characters to
 
 ## Documentation Index
 
+- `docs/project-progress/2026-10-05-dice-count-color-ownership-families.md`: pattern-first source/DOM audit for dice labels containing a count and color, including the two distinct page 85 anchor families and the measured result of the method.
 - `docs/project-progress/2026-10-04-page3-adaptive-toc-leaders.md`: separate contents entries and adaptive dotted leaders for translations.
 - `docs/project-progress/2026-10-04-page37-source-review.md`: page 37 source comparison of phase rules and symbols.
 - `docs/project-progress/2026-10-04-page36-source-review.md`: source comparison of Initiative rules, cards and markers.
