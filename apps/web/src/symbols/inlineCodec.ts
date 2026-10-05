@@ -1,9 +1,9 @@
 import type { Segment } from '../components/RichSpanEditor';
-import { SEMANTIC_SYMBOLS, getSemanticSymbol, getSymbolEditorToken, isSymbolAllowed, type InlineEditorContext, type SymbolLanguage } from './semanticSymbols';
+import { SEMANTIC_SYMBOLS, findSymbolByAlias, getSemanticSymbol, getSymbolEditorToken, isSymbolAllowed, type InlineEditorContext, type SymbolLanguage } from './semanticSymbols';
 
 export const SYMBOL_OBJECT_MARKER = '\uFFFC';
 type RunStyle = Omit<Segment, 'text' | 'symbolId'>;
-const EDITOR_TOKENS = SEMANTIC_SYMBOLS.flatMap(symbol => Object.values(symbol.editorTokens).map(token => ({ token, symbol })))
+const LEGACY_EDITOR_TOKENS = SEMANTIC_SYMBOLS.flatMap(symbol => Object.values(symbol.editorTokens).map(token => ({ token, symbol })))
   .sort((a,b) => b.token.length - a.token.length);
 
 export interface EditableTokenRange { start:number; end:number; id:string; token:string }
@@ -12,17 +12,37 @@ export interface EditableTokenRange { start:number; end:number; id:string; token
 export function editableTokenRanges(text:string):EditableTokenRange[] {
   const ranges:EditableTokenRange[]=[];let cursor=0;
   while (cursor<text.length) {
-    const known=EDITOR_TOKENS.map(entry=>({...entry,index:text.indexOf(entry.token,cursor)}))
+    const legacy=LEGACY_EDITOR_TOKENS.map(entry=>({...entry,index:text.indexOf(entry.token,cursor)}))
       .filter(entry=>entry.index>=0).sort((a,b)=>a.index-b.index || b.token.length-a.token.length)[0];
-    const unknown=/⟦symbol:([^⟧]+)⟧/g;unknown.lastIndex=cursor;
-    const explicit=unknown.exec(text);
-    if (!known && !explicit)break;
-    const useExplicit=explicit && (!known || explicit.index<known.index);
-    const start=useExplicit ? explicit.index : known.index;
-    const token=useExplicit ? explicit[0] : known.token;
-    let id=useExplicit ? explicit[1] : known.symbol.id;
-    if(useExplicit) {try {id=decodeURIComponent(id);} catch {/* Retain a legacy literal ID with percent signs. */}}
-    ranges.push({start,end:start+token.length,id,token});cursor=start+token.length;
+    const candidates: EditableTokenRange[] = legacy
+      ? [{start:legacy.index,end:legacy.index+legacy.token.length,id:legacy.symbol.id,token:legacy.token}]
+      : [];
+    const legacyExplicit=/⟦symbol:([^⟧]+)⟧/g;legacyExplicit.lastIndex=cursor;
+    const oldUnknown=legacyExplicit.exec(text);
+    if(oldUnknown) {
+      let id=oldUnknown[1];
+      try {id=decodeURIComponent(id);} catch {/* Retain a legacy literal ID with percent signs. */}
+      candidates.push({start:oldUnknown.index,end:oldUnknown.index+oldUnknown[0].length,id,token:oldUnknown[0]});
+    }
+    const aliases=/\[\[([^\[\]]+)\]\]/g;aliases.lastIndex=cursor;
+    let aliasMatch:RegExpExecArray|null;
+    while((aliasMatch=aliases.exec(text))) {
+      const expression=aliasMatch[1];
+      if(expression.toLowerCase().startsWith('symbol:')) {
+        let id=expression.slice('symbol:'.length);
+        try {id=decodeURIComponent(id);} catch {/* Retain an explicit future ID with percent signs. */}
+        candidates.push({start:aliasMatch.index,end:aliases.lastIndex,id,token:aliasMatch[0]});
+        break;
+      }
+      const symbol=findSymbolByAlias(expression);
+      if(symbol) {
+        candidates.push({start:aliasMatch.index,end:aliases.lastIndex,id:symbol.id,token:aliasMatch[0]});
+        break;
+      }
+    }
+    const next=candidates.sort((a,b)=>a.start-b.start || b.token.length-a.token.length)[0];
+    if(!next)break;
+    ranges.push(next);cursor=next.end;
   }
   return ranges;
 }
@@ -30,7 +50,7 @@ export function editableTokenRanges(text:string):EditableTokenRange[] {
 /** Editable plain-text projection. IDs remain reversible even without a definition. */
 export function editableTextForSegments(segments: Segment[], language: SymbolLanguage): string {
   return segments.map(run => run.symbolId
-    ? (getSymbolEditorToken(run.symbolId, language) ?? `⟦symbol:${encodeURIComponent(run.symbolId)}⟧`).repeat(Array.from(run.text).length || 1)
+    ? (getSymbolEditorToken(run.symbolId, language) ?? `[[symbol:${encodeURIComponent(run.symbolId)}]]`).repeat(Array.from(run.text).length || 1)
     : run.text).join('');
 }
 

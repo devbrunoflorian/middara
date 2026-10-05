@@ -8,7 +8,7 @@ export interface SourceInlineElement {
   metrics?: InlineSymbolMetrics;
   color?: string;
   bbox: [number,number,number,number];
-  anchor: { blockId: string; blockIndex: number; lineId: string; spanIndex: number; side: 'before'|'after'|'replace'|'replace-text'; sizePt: number; textRange?: [number,number] };
+  anchor: { blockId: string; blockIndex: number; lineId: string; spanIndex: number; side: 'before'|'after'|'replace'|'replace-text'; sizePt: number; textRange?: [number,number]; lineStartX?: number; gapPt?: number; ownerSpanRef?: { lineId: string; spanIndex: number } };
   mask: { url: string; bbox: [number,number,number,number] };
 }
 
@@ -20,16 +20,27 @@ export function previousSourceSpan(spans:SpanData[],index:number):SpanData|undef
 
 /** Runtime augmentation: original JSON IDs, arrays and persisted keys stay intact. */
 export function attachSourceInlineElements(blocks: Block[], elements: SourceInlineElement[]): Block[] {
-  return blocks.map(block=>({ ...block,lines:block.lines?.map(line=>({ ...line,spans:line.spans.flatMap((span,index)=>{
-    const matches=elements.filter(e=>e.anchor.blockId===block.id && e.anchor.lineId===line.id && e.anchor.spanIndex===index && getSemanticSymbol(e.symbolId));
-    const make=(e:SourceInlineElement):SpanData=>({ text:SYMBOL_OBJECT_MARKER,semanticSymbolId:e.symbolId,sourceSpanIndex:index,
-      sourceSymbolMetrics:e.metrics,
-      font:span.font,size:e.anchor.sizePt,color:e.color ?? span.color,flags:span.flags,bbox:e.bbox,renderAsSourceOverlayDuplicate:true,renderSourceOverlayLanguage:'all' });
-    const sourceInlineObjects=matches.filter(e=>e.anchor.side==='replace-text' && e.anchor.textRange);
-    return [...matches.filter(e=>e.anchor.side==='before').map(make),{...span,sourceSpanIndex:index,
-      ...(sourceInlineObjects.length?{sourceInlineObjects}:{}),
-    },...matches.filter(e=>e.anchor.side==='after').map(make)];
-  }) })) }));
+  return blocks.map(block=>({ ...block,lines:block.lines?.map(line=>{
+    const lineElements=elements.filter(e=>e.anchor.blockId===block.id && e.anchor.lineId===line.id && getSemanticSymbol(e.symbolId));
+    const requestedStart=lineElements.map(e=>e.anchor.lineStartX).filter((x):x is number=>x!==undefined);
+    const adjustedLine= requestedStart.length ? (()=>{
+      const availableX=line.availableX ?? line.bbox[0];
+      const availableWidth=line.availableWidth ?? line.bbox[2]-availableX;
+      const right=availableX+availableWidth;
+      const availableXNext=Math.min(...requestedStart);
+      return {...line,availableX:availableXNext,availableWidth:Math.max(0,right-availableXNext)};
+    })() : line;
+    return {...adjustedLine,spans:line.spans.flatMap((span,index)=>{
+      const matches=lineElements.filter(e=>e.anchor.spanIndex===index);
+      const make=(e:SourceInlineElement):SpanData=>({ text:SYMBOL_OBJECT_MARKER,semanticSymbolId:e.symbolId,sourceSpanIndex:index,
+        sourceSymbolMetrics:e.metrics ? {...e.metrics,...(e.anchor.gapPt ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {})} : undefined,
+        font:span.font,size:e.anchor.sizePt,color:e.color ?? span.color,flags:span.flags,bbox:e.bbox,renderAsSourceOverlayDuplicate:true,renderSourceOverlayLanguage:'all' });
+      const sourceInlineObjects=matches.filter(e=>e.anchor.side==='replace-text' && e.anchor.textRange);
+      return [...matches.filter(e=>e.anchor.side==='before').map(make),{...span,sourceSpanIndex:index,
+        ...(sourceInlineObjects.length?{sourceInlineObjects}:{}),
+      },...matches.filter(e=>e.anchor.side==='after').map(make)];
+    })};
+  }) }));
 }
 
 export function sourceElementIsReplaced(element: SourceInlineElement, block: Block, page: number, language: string,
@@ -41,11 +52,13 @@ export function sourceElementIsReplaced(element: SourceInlineElement, block: Blo
     return !!override && (override.managedSourceSymbols?.includes(element.symbolId)
       || override.segments.some(run=>(run.symbolId ?? resolveLegacySymbol(run.font,run.text)?.id)===element.symbolId));
   };
+  const ownerLineId=element.anchor.ownerSpanRef?.lineId ?? element.anchor.lineId;
+  const ownerSpanRef=`${ownerLineId}:${element.anchor.ownerSpanRef?.spanIndex ?? element.anchor.spanIndex}`;
   const blockKey=block.editorKey ? `${block.editorKey}__${language}` : `page_${page}_block_${element.anchor.blockIndex}`;
   if (has(blockKey)) return true;
-  return (block.typographicUnits ?? []).some(unit=>unit.field.lineIds.includes(element.anchor.lineId) && has(`page_${page}_unit_${unit.id}__${language}`))
-    || (block.typographicSpanUnits ?? []).some(unit=>unit.spanRefs.includes(`${element.anchor.lineId}:${element.anchor.spanIndex}`) && has(`page_${page}_unit_${unit.id}__${language}`))
-    || (block.creditUnits ?? (block.creditUnit?[block.creditUnit]:[])).some(unit=>[unit.label,unit.body].some(field=>field.lineIds.includes(element.anchor.lineId) && has(`page_${page}_credit_${unit.id}_${field.id}__${language}`)));
+  return (block.typographicUnits ?? []).some(unit=>unit.field.lineIds.includes(ownerLineId) && has(`page_${page}_unit_${unit.id}__${language}`))
+    || (block.typographicSpanUnits ?? []).some(unit=>unit.spanRefs.includes(ownerSpanRef) && has(`page_${page}_unit_${unit.id}__${language}`))
+    || (block.creditUnits ?? (block.creditUnit?[block.creditUnit]:[])).some(unit=>[unit.label,unit.body].some(field=>field.lineIds.includes(ownerLineId) && has(`page_${page}_credit_${unit.id}_${field.id}__${language}`)));
 }
 
 /** Cut only confirmed inline regions out of an existing source-art overlay. */

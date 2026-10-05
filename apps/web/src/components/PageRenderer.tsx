@@ -61,6 +61,9 @@ export interface SpanData {
 export interface LineData {
   id: string;
   bbox: [number, number, number, number];
+  /** Source text-flow frame; optional for extracted JSON lines. */
+  availableX?: number;
+  availableWidth?: number;
   renderTopOffsetPt?: number;
   /** Browser-only indentation when a filtered tiny leading glyph still occupies source advance. */
   renderTextOffsetPt?: number;

@@ -6,6 +6,8 @@ export interface InlineSymbolMetrics {
   widthEm: number;
   heightEm: number;
   verticalAlignEm: number;
+  /** Source-measured whitespace between the owner word and this inline object. */
+  gapEm?: number;
   /** Source composition style used by the same semantic symbol ID. */
   renderVariant?: string;
 }
@@ -96,19 +98,121 @@ export const SEMANTIC_SYMBOLS: SemanticSymbolDefinition[] = [
   },
 ];
 
+/**
+ * Stable, language-neutral typing shortcuts. Keep labels and translations out
+ * of the stored ID; aliases are only an editor-facing projection. A later
+ * Admin alias editor can override these defaults without changing symbols.
+ */
+const PREFERRED_EDITOR_ALIASES: Record<string, string[]> = {
+  'attack.melee': ['sword', 'espada', 'melee'],
+  'attack.ranged': ['arrow', 'flecha', 'ranged'],
+  'attack.melee-ranged': ['sword-arrow', 'melee-or-ranged'],
+  'dice.black': ['black-die', 'dado-preto', 'black'],
+  'dice.white': ['white-die', 'dado-branco', 'white'],
+  'dice.teal': ['teal-die', 'dado-turquesa', 'teal'],
+  'dice.green': ['green-die', 'dado-verde', 'green'],
+  'dice.blue': ['blue-die', 'dado-azul', 'blue'],
+  'dice.purple': ['purple-die', 'dado-roxo', 'purple'],
+  'dice.orange': ['orange-die', 'dado-laranja', 'orange'],
+  'dice.red': ['red-die', 'dado-vermelho', 'red'],
+  'dice.grey': ['grey-die', 'dado-cinza', 'grey'],
+  'combat.skull': ['skull', 'caveira'],
+  'combat.damage-star': ['damage-star', 'estrela-de-dano'],
+  'combat.shield': ['defense-shield', 'escudo-de-defesa'],
+  'weapon.hand': ['hand-requirement', 'requisito-de-mao'],
+  'action.redirect': ['redirect', 'redirecionar'],
+  'combat.shield.dark': ['dark-shield', 'escudo-escuro'],
+  'combat.shield.solid': ['solid-shield', 'escudo-cheio'],
+  'combat.page': ['combat-page', 'pagina-de-combate'],
+  'terrain.red-border': ['red-terrain-border', 'borda-vermelha-de-terreno'],
+  'tag.important.icon': ['lightning', 'raio', 'important-icon'],
+  'tag.discard.icon': ['discard-icon', 'icone-descartar'],
+  'tag.status.icon': ['status-icon', 'icone-status'],
+  'tag.passive.icon': ['passive-icon', 'icone-passivo'],
+  'marker.star': ['four-point-star', 'estrela-de-quatro-pontas'],
+  'marker.arrow': ['arrow-marker', 'marcador-de-seta'],
+  'marker.checkbox': ['checklist-square', 'quadrado-de-checklist'],
+  'tag.passive': ['passive', 'passivo'],
+  'tag.status': ['status'],
+  'tag.exhaust': ['exhaust', 'exaustir'],
+  'tag.discard': ['discard', 'descartar'],
+  'marker.reference.a': ['reference-a', 'referencia-a'],
+  'marker.reference.b': ['reference-b', 'referencia-b'],
+  'marker.reference.c': ['reference-c', 'referencia-c'],
+  'marker.reference.d': ['reference-d', 'referencia-d'],
+  'token.blue-totem': ['blue-totem', 'totem-azul'],
+};
+
 export function getSemanticSymbol(id: string | undefined): SemanticSymbolDefinition | undefined {
   return id ? SEMANTIC_SYMBOLS.find(symbol => symbol.id === id) : undefined;
 }
 
 export function normalizeSymbolSearch(value: string): string {
-  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase().trim();
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+}
+
+export function normalizeEditorAlias(value: string): string {
+  return normalizeSymbolSearch(value)
+    .replace(/[\s_.]+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+export function getSymbolEditorAliases(id: string): string[] {
+  const symbol = getSemanticSymbol(id);
+  if (!symbol) return [];
+  const candidates = [
+    ...(PREFERRED_EDITOR_ALIASES[id] ?? []),
+    id.replace(/\./g, '-'),
+    symbol.labels.en,
+    symbol.labels['pt-BR'],
+  ];
+  return [...new Set(candidates.map(normalizeEditorAlias).filter(Boolean))];
+}
+
+export function getPreferredSymbolEditorAlias(id: string): string | undefined {
+  return getSymbolEditorAliases(id)[0];
+}
+
+const editorAliasIndex = (() => {
+  const aliases = new Map<string, SemanticSymbolDefinition | null>();
+  for (const symbol of SEMANTIC_SYMBOLS) {
+    for (const alias of getSymbolEditorAliases(symbol.id)) {
+      const key = normalizeEditorAlias(alias);
+      if (!aliases.has(key)) aliases.set(key, symbol);
+      else if (aliases.get(key)?.id !== symbol.id) aliases.set(key, null);
+    }
+  }
+  return new Map([...aliases].filter((entry): entry is [string, SemanticSymbolDefinition] => entry[1] !== null));
+})();
+
+export function findSymbolByAlias(alias: string): SemanticSymbolDefinition | undefined {
+  return editorAliasIndex.get(normalizeEditorAlias(alias));
+}
+
+export function getEditorAliasConflicts(): string[] {
+  // Exposed for registry tests and for a future Admin alias editor.
+  const seen = new Map<string, string>();
+  const conflicts = new Set<string>();
+  for (const symbol of SEMANTIC_SYMBOLS) for (const alias of getSymbolEditorAliases(symbol.id)) {
+    const key = normalizeEditorAlias(alias);
+    const previous = seen.get(key);
+    if (previous && previous !== symbol.id) conflicts.add(key);
+    else seen.set(key, symbol.id);
+  }
+  return [...conflicts].sort();
 }
 
 export function getSymbolEditorToken(id: string, language: SymbolLanguage): string | undefined {
-  return getSemanticSymbol(id)?.editorTokens[language];
+  void language; // Shortcut tokens stay language-neutral; localized legacy tokens remain readable.
+  const alias = getPreferredSymbolEditorAlias(id);
+  return alias ? `[[${alias}]]` : undefined;
 }
 
 export function findSymbolByEditorToken(token: string, language: SymbolLanguage): SemanticSymbolDefinition | undefined {
+  const alias = /^\[\[([^\[\]]+)\]\]$/.exec(token)?.[1];
+  if (alias) return findSymbolByAlias(alias);
   return SEMANTIC_SYMBOLS.find(symbol => symbol.editorTokens[language] === token || Object.values(symbol.editorTokens).includes(token));
 }
 

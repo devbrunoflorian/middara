@@ -797,8 +797,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             <label>{language === 'pt-BR' ? 'Editar texto:' : 'Rewrite text:'}</label>
             <p className="rse-symbol-edit-hint">
               {language === 'pt-BR'
-                ? 'Tokens entre ⟦colchetes⟧ representam símbolos especiais. A paleta pode inseri-los no cursor ou substituir texto selecionado.'
-                : 'Tokens inside ⟦brackets⟧ represent special symbols. The palette inserts at the caret or replaces selected text.'}
+                ? 'Atalhos como [[lightning]], [[sword]] e [[black-die]] viram símbolos ao confirmar. Tokens antigos entre ⟦colchetes⟧ continuam aceitos; a paleta insere no cursor ou substitui a seleção.'
+                : 'Shortcuts like [[lightning]], [[sword]] and [[black-die]] become symbols when confirmed. Legacy ⟦bracket⟧ tokens still work; the palette inserts at the caret or replaces the selection.'}
             </p>
             <textarea
               ref={editTextAreaRef}

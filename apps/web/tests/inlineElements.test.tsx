@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { SEMANTIC_SYMBOLS, getSemanticSymbol, isSymbolAllowed, resolveLegacySymbol } from '../src/symbols/semanticSymbols';
+import { SEMANTIC_SYMBOLS, findSymbolByAlias, findSymbolByEditorToken, getEditorAliasConflicts, getPreferredSymbolEditorAlias, getSemanticSymbol, getSymbolEditorAliases, getSymbolEditorToken, isSymbolAllowed, resolveLegacySymbol } from '../src/symbols/semanticSymbols';
 import { editableTextForSegments, segmentsFromEditableText, replaceSegmentRange, insertEditorToken, editableTokenRanges, expandEditorTokenSelection, deleteEditorToken, normalizeEditableInput } from '../src/symbols/inlineCodec';
 import { SemanticSymbol } from '../src/symbols/SemanticSymbol';
 import { attachSourceInlineElements, sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan } from '../src/symbols/sourceInlineElements';
@@ -27,6 +27,22 @@ test('registry IDs and multilingual tokens are unique and source evidenced',()=>
     assert.ok(s.assetUrl || s.render.paths?.length);
     for (const token of Object.values(s.editorTokens)) { assert.ok(!tokens.has(token) || tokens.get(token)===s.id);tokens.set(token,s.id); }
   }
+});
+
+test('simple aliases resolve every registry symbol without collisions and serialize as [[alias]]',()=>{
+  assert.deepEqual(getEditorAliasConflicts(),[]);
+  for(const symbol of SEMANTIC_SYMBOLS) {
+    const alias=getPreferredSymbolEditorAlias(symbol.id)!;
+    assert.ok(alias.length>0);
+    assert.equal(findSymbolByAlias(alias)?.id,symbol.id);
+    assert.equal(getSymbolEditorToken(symbol.id,'en'),`[[${alias}]]`);
+    assert.equal(getSymbolEditorToken(symbol.id,'pt-BR'),`[[${alias}]]`);
+    assert.ok(getSymbolEditorAliases(symbol.id).some(value=>value.length>0));
+  }
+  assert.equal(findSymbolByAlias('LIGHTNING')?.id,'tag.important.icon');
+  assert.equal(findSymbolByAlias('Dado Preto')?.id,'dice.black');
+  assert.equal(findSymbolByAlias('sword')?.id,'attack.melee');
+  assert.equal(findSymbolByEditorToken('[[lightning]]','en')?.id,'tag.important.icon');
 });
 
 test('compound family identity stays stable while its full tagged composition localizes',()=>{
@@ -86,6 +102,21 @@ test('both token languages parse in either editor; unknown literal remains liter
   }
 });
 
+test('typed aliases become inline objects, are case/diacritic tolerant, and keep unknown text reversible',()=>{
+  const input='[[lightning]] [[SWORD]] [[Dado Preto]] [[DADO ROXO]] [[symbol:future.new]] [[not-real]]';
+  for(const language of ['en','pt-BR'] as const) {
+    const parsed=segmentsFromEditableText(input,style,language);
+    assert.deepEqual(parsed.filter(segment=>segment.symbolId).map(segment=>segment.symbolId),[
+      'tag.important.icon','attack.melee','dice.black','dice.purple','future.new',
+    ]);
+    assert.ok(parsed.some(segment=>segment.text.includes('[[not-real]]')));
+    const projected=editableTextForSegments(parsed,language);
+    assert.ok(projected.includes('[[lightning]]'));
+    assert.ok(projected.includes('[[sword]]'));
+    assert.ok(projected.includes('[[black-die]]'));
+  }
+});
+
 test('fixed checklist is excluded from picker contexts, existing data remains readable',()=>{
   const s=getSemanticSymbol('marker.checkbox')!;
   assert.equal(isSymbolAllowed(s,'paragraph'),false);
@@ -115,6 +146,32 @@ test('two source patterns get inline objects without shifting original span refe
     for (const e of es)assert.ok(symbols.some(r=>r.symbolId===e.symbolId));
     assert.deepEqual(source,data.blocks);
   }
+});
+
+test('page 41 dice retain source baselines, word ownership, gaps and the wrapped-line start',()=>{
+  const data=page(41);const dice=elements(41).filter((entry:any)=>entry.symbolId==='dice.black'||entry.symbolId==='dice.purple');
+  assert.equal(dice.length,6);
+  assert.equal(dice.filter((entry:any)=>entry.symbolId==='dice.purple').length,2);
+  assert.equal(dice.filter((entry:any)=>entry.symbolId==='dice.black').length,4);
+  for(const entry of dice) {
+    assert.ok(entry.metrics.widthEm>0 && entry.metrics.heightEm>0);
+    const owner=entry.anchor.ownerSpanRef??{lineId:entry.anchor.lineId,spanIndex:entry.anchor.spanIndex};
+    const block=data.blocks.find((candidate:any)=>candidate.id===entry.anchor.blockId)!;
+    const ownerLine=block.lines.find((line:any)=>line.id===owner.lineId)!;
+    assert.equal(ownerLine.spans[owner.spanIndex].text.trim(),entry.anchor.ownerSpanRef?'BLACK':entry.expectedSpan);
+    if(entry.anchor.gapPt!==undefined)assert.ok(entry.anchor.gapPt>0);
+  }
+  const adapted=attachSourceInlineElements(data.blocks,dice);
+  for(const entry of dice.filter((candidate:any)=>candidate.anchor.gapPt!==undefined)) {
+    const line=adapted.find(block=>block.id===entry.anchor.blockId)!.lines.find(candidate=>candidate.id===entry.anchor.lineId)!;
+    const symbol=line.spans.find(span=>span.semanticSymbolId===entry.symbolId)!;
+    assert.ok(Math.abs(symbol.sourceSymbolMetrics!.gapEm! - entry.anchor.gapPt/entry.anchor.sizePt)<1e-12);
+  }
+  const wrapped=dice.find((entry:any)=>entry.anchor.lineStartX!==undefined)!;
+  assert.deepEqual(wrapped.anchor.ownerSpanRef,{lineId:'line_30_4',spanIndex:5});
+  const wrappedLine=adapted.find(block=>block.id===wrapped.anchor.blockId)!.lines.find(line=>line.id===wrapped.anchor.lineId)!;
+  assert.equal(wrappedLine.availableX,112.239);
+  assert.equal(wrapped.metrics.verticalAlignEm>0,true);
 });
 
 test('mask activates for owning block/unit/draft, never the opposite language or unrelated unit',()=>{
@@ -197,8 +254,8 @@ test('changed prose preserves untouched formatting, symbol metrics and repeated 
   assert.deepEqual(parsed.filter(r=>r.symbolId).map(r=>r.weight),[700,700]);
 });
 
-test('tokens delete and copy atomically, including partial selections and unknown IDs',()=>{
-  for(const token of ['⟦Melee attack⟧','⟦Ataque corpo a corpo⟧','⟦symbol:future.new⟧']) {
+test('tokens delete and copy atomically, including aliases, legacy forms and unknown IDs',()=>{
+  for(const token of ['[[sword]]','[[Dado Preto]]','⟦Melee attack⟧','⟦Ataque corpo a corpo⟧','⟦symbol:future.new⟧','[[symbol:future.new]]']) {
     const text=`A${token}B`;const range=editableTokenRanges(text)[0];
     assert.equal(deleteEditorToken(text,range.end,range.end,'backward')?.text,'AB');
     assert.equal(deleteEditorToken(text,range.start,range.start,'forward')?.text,'AB');

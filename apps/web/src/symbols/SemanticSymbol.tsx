@@ -13,7 +13,7 @@ export function SemanticSymbol({ id, language, size, color = 'currentColor', pre
   const sourceHeight = sourceRender.heightEm ?? sourceRender.widthEm;
   const visualHeight = visual.heightEm ?? sourceHeight;
   const height=size*(metrics?.heightEm ?? sourceHeight)*(visualHeight/sourceHeight);
-  const style={display:alignToTop?'block':'inline-block',width,height,verticalAlign:alignToTop?'top':preview ? 'middle' : `${-size*(metrics?.verticalAlignEm ?? visual.verticalAlignEm)}px`,color, flexShrink:0};
+  const style={display:alignToTop?'block':'inline-block',width,height,verticalAlign:alignToTop?'top':preview ? 'middle' : `${-size*(metrics?.verticalAlignEm ?? visual.verticalAlignEm)}px`,marginInlineStart:metrics?.gapEm ? size*metrics.gapEm : undefined,color, flexShrink:0};
   if (visual.paths && visual.viewBox) return (
     <svg className="inline-semantic-symbol" viewBox={visual.viewBox.join(' ')} style={{...style,overflow:'visible'}}
       role="img" aria-label={symbol.labels[language]} data-symbol-id={id}>
