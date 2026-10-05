@@ -52,7 +52,7 @@ TARGETS: list[dict[str, object]] = [
     # Match the existing 525px raster extent; keep the turn labels live below it.
     {"page": 36, "name": "initiative-track-round", "bbox": [150, 430, 670, 561.25], "category": "initiative-cards"},
     {"page": 36, "name": "initiative-track-shuffle", "bbox": [176, 623, 642, 748], "category": "initiative-cards"},
-    {"page": 37, "name": "exhaust-cards", "bbox": [475, 153, 678, 269.3], "category": "item-cards"},
+    {"page": 37, "name": "exhaust-cards", "bbox": [475, 153, 678, 269.25], "category": "item-cards"},
     {"page": 37, "name": "flip-cards", "bbox": [475, 363, 678, 480.5], "category": "item-cards"},
     {"page": 44, "name": "line-of-sight-diagram", "bbox": [126, 96, 693, 384], "category": "diagram"},
     {"page": 44, "name": "damage-healing-components", "bbox": [421, 538, 721, 706], "category": "item-cards"},

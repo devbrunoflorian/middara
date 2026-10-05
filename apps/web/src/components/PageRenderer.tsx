@@ -9,6 +9,7 @@ import { sourceSpanRuns } from '../symbols/sourceRuns';
 import { decodeOverrideData, encodeOverrideData } from '../symbols/overrideData';
 import { contentsRowKey, contentsRowUsesLegacy, contentsRowLine, contentsLabelWidth, type ContentsRowDefinition } from '../contentsRows';
 import { ContentsRowFlow } from './ContentsRowFlow';
+import { hasPreservedLegacySpanOverride } from '../editorUnitCompatibility';
 import { sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
 import './PageRenderer.css';
 import './Toast.css';
@@ -80,6 +81,7 @@ export interface LayoutFrame {
 }
 
 export interface Block {
+  preserveLegacySpanOverrides?: boolean;
   id: string;
   /** Preserve the block's stable legacy array index while omitting it from the page canvas. */
   hiddenFromPage?: boolean;
@@ -1355,7 +1357,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   }, [currentOverride, scale, translatedHeight, translatedWidth]);
 
   const typographicUnits = block.typographicUnits ?? [];
-  if (typographicUnits.length > 0 && overridesReady && !overrides.has(blockKey)) {
+  const preserveSpanOverride = hasPreservedLegacySpanOverride(block, pageNumber, language,
+    key => overrides.has(key) || (selectedBlockKey === key && draftOverride !== null));
+  if (typographicUnits.length > 0 && overridesReady && !overrides.has(blockKey) && !preserveSpanOverride) {
     return (
       <TypographicUnitBlock
         block={block}
