@@ -197,6 +197,45 @@ describe('source inline whitespace ordering', () => {
     }
   });
 
+  it('restores the p. 67 heavy-face black die variant at both source occurrences', () => {
+    const pageDir = join(process.cwd(), 'public/pages', 'page_067');
+    const dom = JSON.parse(readFileSync(join(pageDir, 'page_067_dom.json'), 'utf8'));
+    const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
+    const dice = elements.filter(element => element.symbolId === 'dice.black');
+    expect(dice).toHaveLength(2);
+
+    for (const target of dice) {
+      const blockElements = elements.filter(element => element.anchor.blockId === target.anchor.blockId);
+      const blocks = attachSourceInlineElements(dom.blocks, blockElements);
+      const block = blocks.find((candidate: { id: string }) => candidate.id === target.anchor.blockId)!;
+      const sourceTemplateSegments = sourceSpanRuns(block.lines.flatMap((line: { spans: unknown[] }) => line.spans), mapFont);
+      const line = block.lines.find((candidate: { id: string }) => candidate.id === target.anchor.lineId)!;
+      const sourceRuns = sourceSpanRuns(line.spans, mapFont);
+      const sourceIcon = sourceRuns.find(run => run.symbolId === 'dice.black')!;
+      const previous = sourceRuns.filter(run => run !== sourceIcon);
+      const token = getSymbolEditorToken('dice.black', 'en')!;
+      const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+      const restored = segmentsFromEditableText(token + editableTextForSegments(previous, 'en'), toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
+      const restoredIcon = restored.find(run => run.symbolId === 'dice.black')!;
+
+      expect(restoredIcon.size).toBe(sourceIcon.size);
+      expect(restoredIcon.color).toBe(sourceIcon.color);
+      expect(restoredIcon.symbolMetrics).toEqual(sourceIcon.symbolMetrics);
+      expect(restoredIcon.symbolMetrics?.renderVariant).toBe('black-p67-heavy-face-lines');
+
+      const svg = renderToStaticMarkup(createElement(SemanticSymbol, {
+        id: 'dice.black', language: 'en', size: restoredIcon.size,
+        color: restoredIcon.color, metrics: restoredIcon.symbolMetrics,
+      }));
+      expect(svg.match(/<path\b/g)).toHaveLength(4);
+      expect(svg).toContain('fill="#231f20"');
+      expect(svg).toContain('stroke="#ffffff"');
+      expect(svg).toContain('stroke-width="1.2640000581741333"');
+      expect(svg).toContain('stroke-width="1"');
+      expect(svg).not.toMatch(/<rect(?:\s|>)/);
+    }
+  });
+
   it('does not choose a random source metric when one ID has conflicting source variants', () => {
     const token = getSymbolEditorToken('dice.black', 'en')!;
     const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
