@@ -97,13 +97,17 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
     })() : line;
     return {...adjustedLine,spans:line.spans.flatMap((span,index)=>{
       const matches=lineElements.filter(e=>sourceObjectInsertionIndex(e,line.spans)===index);
+      const metricsFor=(e:SourceInlineElement):InlineSymbolMetrics|undefined=>e.metrics ? {...e.metrics,
+        ...(e.anchor.gapPt !== undefined ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {}),
+        ...(e.anchor.trailingGapPt !== undefined ? {trailingGapEm:e.anchor.trailingGapPt/e.anchor.sizePt} : {})} : undefined;
       const make=(e:SourceInlineElement,styleSpan:SpanData,sourceSpanIndex:number):SpanData=>({ text:SYMBOL_OBJECT_MARKER,semanticSymbolId:e.symbolId,sourceSpanIndex,
-        sourceSymbolMetrics:e.metrics ? {...e.metrics,
-          ...(e.anchor.gapPt !== undefined ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {}),
-          ...(e.anchor.trailingGapPt !== undefined ? {trailingGapEm:e.anchor.trailingGapPt/e.anchor.sizePt} : {})} : undefined,
+        sourceSymbolMetrics:metricsFor(e),
         font:styleSpan.font,size:e.anchor.sizePt,color:e.color ?? styleSpan.color,flags:styleSpan.flags,bbox:e.bbox,renderAsSourceOverlayDuplicate:true,renderSourceOverlayLanguage:'all' });
       const sourceInlineObjects=matches.filter(e=>e.anchor.side==='replace-text' && e.anchor.textRange);
+      const replacedLegacyGlyph=matches.find(e=>e.anchor.side==='replace' && e.anchor.spanIndex===index
+        && resolveLegacySymbol(span.font,span.text)?.id===e.symbolId);
       return [...matches.filter(e=>e.anchor.side==='before').map(e=>make(e,line.spans[e.anchor.spanIndex] ?? span,index)),{...span,sourceSpanIndex:index,
+        ...(replacedLegacyGlyph?.metrics ? {sourceSymbolMetrics:metricsFor(replacedLegacyGlyph)} : {}),
         ...(sourceInlineObjects.length?{sourceInlineObjects}:{}),
       },...matches.filter(e=>e.anchor.side==='after').map(e=>make(e,line.spans[e.anchor.spanIndex] ?? span,index))];
     })};

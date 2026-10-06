@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -286,6 +286,61 @@ describe('source inline whitespace ordering', () => {
       expect(svg).toContain('fill="#231f20"');
       expect(svg).toContain('fill="#ffffff"');
       expect(svg).not.toMatch(/<rect(?:\s|>)/);
+    }
+  });
+
+  it('round-trips [[lightning]] through all 62 IMPORTANT icon source blocks', () => {
+    const pagesRoot = join(process.cwd(), 'public/pages');
+    const pageCache = new Map<number, { dom: any; elements: SourceInlineElement[] }>();
+    const targets: { pageNumber: number; element: SourceInlineElement }[] = [];
+    for (const pageDir of readdirSync(pagesRoot).filter(name => /^page_\d{3}$/.test(name))) {
+      const pageNumber = Number(pageDir.slice(-3));
+      const pageDirPath = join(pagesRoot, pageDir);
+      const sidecarPath = join(pageDirPath, 'inline_elements.json');
+      if (!existsSync(sidecarPath)) continue;
+      const elements = JSON.parse(readFileSync(sidecarPath, 'utf8')).elements as SourceInlineElement[];
+      const matches = elements.filter(element => element.symbolId === 'tag.important.icon');
+      if (matches.length === 0) continue;
+      const dom = JSON.parse(readFileSync(join(pageDirPath, `page_${String(pageNumber).padStart(3, '0')}_dom.json`), 'utf8'));
+      pageCache.set(pageNumber, { dom, elements });
+      targets.push(...matches.map(element => ({ pageNumber, element })));
+    }
+    expect(targets).toHaveLength(62);
+
+    for (const { pageNumber, element: target } of targets) {
+      const { dom, elements } = pageCache.get(pageNumber)!;
+      const blockElements = elements.filter(element => element.anchor.blockId === target.anchor.blockId);
+      const blocks = attachSourceInlineElements(dom.blocks, blockElements);
+      const block = blocks.find((candidate: { id: string }) => candidate.id === target.anchor.blockId)!;
+      const sourceTemplateSegments = sourceSpanRuns(block.lines.flatMap((line: { spans: unknown[] }) => line.spans), mapFont);
+      const line = block.lines.find((candidate: { id: string }) => candidate.id === target.anchor.lineId)!;
+      const sourceRuns = sourceSpanRuns(line.spans, mapFont);
+      const sourceIcon = sourceRuns.find(run => run.symbolId === 'tag.important.icon')!;
+      const previous = sourceRuns.filter(run => run !== sourceIcon);
+      const token = getSymbolEditorToken('tag.important.icon', 'en')!;
+      expect(token).toBe('[[lightning]]');
+      const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+      const restored = segmentsFromEditableText(token + editableTextForSegments(previous, 'en'), toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
+      const restoredIcon = restored.find(run => run.symbolId === 'tag.important.icon')!;
+      expect(restoredIcon.size).toBe(sourceIcon.size);
+      expect(restoredIcon.symbolMetrics).toEqual(sourceIcon.symbolMetrics);
+
+      const svg = renderToStaticMarkup(createElement(SemanticSymbol, {
+        id: 'tag.important.icon', language: 'en', size: restoredIcon.size,
+        color: restoredIcon.color, metrics: restoredIcon.symbolMetrics,
+      }));
+      expect(svg.match(/<path\b/g)).toHaveLength(2);
+      expect(svg).toContain('stroke="#ffffff"');
+      expect(svg).toContain('fill="#ba1d23"');
+      expect(svg).not.toContain('currentColor');
+      expect(svg).not.toMatch(/<rect(?:\s|>)/);
+      if (target.anchor.sizePt === 9) {
+        expect(restoredIcon.symbolMetrics?.renderVariant).toBe('important-outline-2pt-at-9pt');
+        expect(svg).toContain('stroke-width="0.2222222222222222"');
+      } else {
+        expect(restoredIcon.symbolMetrics?.renderVariant).toBeUndefined();
+        expect(svg).toContain('stroke-width="0.2"');
+      }
     }
   });
 
