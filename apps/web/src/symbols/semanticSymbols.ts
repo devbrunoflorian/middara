@@ -9,6 +9,8 @@ export interface InlineSymbolMetrics {
   verticalAlignEm: number;
   /** Source-measured whitespace between the owner word and this inline object. */
   gapEm?: number;
+  /** Source-measured overlap/spacing after this object before the following text. */
+  trailingGapEm?: number;
   /** Source composition style used by the same semantic symbol ID. */
   renderVariant?: string;
 }

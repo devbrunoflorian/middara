@@ -48,7 +48,8 @@ export function decodeInlineClipboard(payload: string, plainText: string, aliasP
         && run.text.length > 0 && Array.from(run.text).every(ch => ch === SYMBOL_OBJECT_MARKER))
       && (run.symbolMetrics === undefined || run.symbolMetrics && Number.isFinite(run.symbolMetrics.widthEm)
         && run.symbolMetrics.widthEm > 0 && Number.isFinite(run.symbolMetrics.heightEm) && run.symbolMetrics.heightEm > 0
-        && Number.isFinite(run.symbolMetrics.verticalAlignEm)))) return null;
+        && Number.isFinite(run.symbolMetrics.verticalAlignEm)
+        && (run.symbolMetrics.trailingGapEm === undefined || Number.isFinite(run.symbolMetrics.trailingGapEm))))) return null;
     if (editableTextForSegments(data.segments, data.language, aliasPreferences) !== plainText) return null;
     return data.segments.map((run: Segment) => ({ ...run }));
   } catch { return null; }

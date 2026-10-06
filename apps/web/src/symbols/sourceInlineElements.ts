@@ -8,7 +8,7 @@ export interface SourceInlineElement {
   metrics?: InlineSymbolMetrics;
   color?: string;
   bbox: [number,number,number,number];
-  anchor: { blockId: string; blockIndex: number; lineId: string; spanIndex: number; side: 'before'|'after'|'replace'|'replace-text'; sizePt: number; textRange?: [number,number]; lineStartX?: number; gapPt?: number; ownerSpanRef?: { lineId: string; spanIndex: number } };
+  anchor: { blockId: string; blockIndex: number; lineId: string; spanIndex: number; side: 'before'|'after'|'replace'|'replace-text'; sizePt: number; textRange?: [number,number]; lineStartX?: number; gapPt?: number; trailingGapPt?: number; ownerSpanRef?: { lineId: string; spanIndex: number } };
   mask: { url: string; bbox: [number,number,number,number] };
 }
 
@@ -33,7 +33,9 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
     return {...adjustedLine,spans:line.spans.flatMap((span,index)=>{
       const matches=lineElements.filter(e=>e.anchor.spanIndex===index);
       const make=(e:SourceInlineElement):SpanData=>({ text:SYMBOL_OBJECT_MARKER,semanticSymbolId:e.symbolId,sourceSpanIndex:index,
-        sourceSymbolMetrics:e.metrics ? {...e.metrics,...(e.anchor.gapPt ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {})} : undefined,
+        sourceSymbolMetrics:e.metrics ? {...e.metrics,
+          ...(e.anchor.gapPt !== undefined ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {}),
+          ...(e.anchor.trailingGapPt !== undefined ? {trailingGapEm:e.anchor.trailingGapPt/e.anchor.sizePt} : {})} : undefined,
         font:span.font,size:e.anchor.sizePt,color:e.color ?? span.color,flags:span.flags,bbox:e.bbox,renderAsSourceOverlayDuplicate:true,renderSourceOverlayLanguage:'all' });
       const sourceInlineObjects=matches.filter(e=>e.anchor.side==='replace-text' && e.anchor.textRange);
       return [...matches.filter(e=>e.anchor.side==='before').map(make),{...span,sourceSpanIndex:index,
