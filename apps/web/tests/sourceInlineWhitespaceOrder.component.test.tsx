@@ -289,7 +289,7 @@ describe('source inline whitespace ordering', () => {
     }
   });
 
-  it('round-trips [[lightning]] through all 62 IMPORTANT icon source blocks', () => {
+  it('round-trips aliases through all 73 source-replaced legacy glyphs', () => {
     const pagesRoot = join(process.cwd(), 'public/pages');
     const pageCache = new Map<number, { dom: any; elements: SourceInlineElement[] }>();
     const targets: { pageNumber: number; element: SourceInlineElement }[] = [];
@@ -299,13 +299,19 @@ describe('source inline whitespace ordering', () => {
       const sidecarPath = join(pageDirPath, 'inline_elements.json');
       if (!existsSync(sidecarPath)) continue;
       const elements = JSON.parse(readFileSync(sidecarPath, 'utf8')).elements as SourceInlineElement[];
-      const matches = elements.filter(element => element.symbolId === 'tag.important.icon');
+      const matches = elements.filter(element => element.anchor.side === 'replace'
+        && ['tag.important.icon', 'marker.arrow', 'tag.discard.icon', 'marker.star', 'tag.passive.icon'].includes(element.symbolId));
       if (matches.length === 0) continue;
       const dom = JSON.parse(readFileSync(join(pageDirPath, `page_${String(pageNumber).padStart(3, '0')}_dom.json`), 'utf8'));
       pageCache.set(pageNumber, { dom, elements });
       targets.push(...matches.map(element => ({ pageNumber, element })));
     }
-    expect(targets).toHaveLength(62);
+    expect(targets).toHaveLength(73);
+    expect(new Set(targets.map(target => target.pageNumber)).size).toBe(35);
+    expect(Object.fromEntries(['tag.important.icon', 'marker.arrow', 'tag.discard.icon', 'marker.star', 'tag.passive.icon']
+      .map(id => [id, targets.filter(target => target.element.symbolId === id).length]))).toEqual({
+      'tag.important.icon': 62, 'marker.arrow': 4, 'tag.discard.icon': 3, 'marker.star': 2, 'tag.passive.icon': 2,
+    });
 
     for (const { pageNumber, element: target } of targets) {
       const { dom, elements } = pageCache.get(pageNumber)!;
@@ -315,31 +321,36 @@ describe('source inline whitespace ordering', () => {
       const sourceTemplateSegments = sourceSpanRuns(block.lines.flatMap((line: { spans: unknown[] }) => line.spans), mapFont);
       const line = block.lines.find((candidate: { id: string }) => candidate.id === target.anchor.lineId)!;
       const sourceRuns = sourceSpanRuns(line.spans, mapFont);
-      const sourceIcon = sourceRuns.find(run => run.symbolId === 'tag.important.icon')!;
+      const sourceIcon = sourceRuns.find(run => run.symbolId === target.symbolId)!;
       const previous = sourceRuns.filter(run => run !== sourceIcon);
-      const token = getSymbolEditorToken('tag.important.icon', 'en')!;
-      expect(token).toBe('[[lightning]]');
+      const token = getSymbolEditorToken(target.symbolId, 'en')!;
+      expect(token).toMatch(/^\[\[[a-z0-9-]+\]\]$/);
       const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
       const restored = segmentsFromEditableText(token + editableTextForSegments(previous, 'en'), toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
-      const restoredIcon = restored.find(run => run.symbolId === 'tag.important.icon')!;
+      const restoredIcon = restored.find(run => run.symbolId === target.symbolId)!;
       expect(restoredIcon.size).toBe(sourceIcon.size);
       expect(restoredIcon.symbolMetrics).toEqual(sourceIcon.symbolMetrics);
 
-      const svg = renderToStaticMarkup(createElement(SemanticSymbol, {
-        id: 'tag.important.icon', language: 'en', size: restoredIcon.size,
-        color: restoredIcon.color, metrics: restoredIcon.symbolMetrics,
+      const renderSymbol = (run: Segment) => renderToStaticMarkup(createElement(SemanticSymbol, {
+        id: run.symbolId!, language: 'en', size: run.size,
+        color: run.color, metrics: run.symbolMetrics,
       }));
-      expect(svg.match(/<path\b/g)).toHaveLength(2);
-      expect(svg).toContain('stroke="#ffffff"');
-      expect(svg).toContain('fill="#ba1d23"');
-      expect(svg).not.toContain('currentColor');
-      expect(svg).not.toMatch(/<rect(?:\s|>)/);
-      if (target.anchor.sizePt === 9) {
+      const sourceSvg = renderSymbol(sourceIcon);
+      const restoredSvg = renderSymbol(restoredIcon);
+      expect(restoredSvg).toBe(sourceSvg);
+      expect(restoredSvg).not.toMatch(/<rect(?:\s|>)/);
+      if (target.symbolId === 'tag.important.icon') {
+        expect(restoredSvg.match(/<path\b/g)).toHaveLength(2);
+        expect(restoredSvg).toContain('stroke="#ffffff"');
+        expect(restoredSvg).toContain('fill="#ba1d23"');
+        expect(restoredSvg).not.toContain('currentColor');
+      }
+      if (target.symbolId === 'tag.important.icon' && target.anchor.sizePt === 9) {
         expect(restoredIcon.symbolMetrics?.renderVariant).toBe('important-outline-2pt-at-9pt');
-        expect(svg).toContain('stroke-width="0.2222222222222222"');
-      } else {
+        expect(restoredSvg).toContain('stroke-width="0.2222222222222222"');
+      } else if (target.symbolId === 'tag.important.icon') {
         expect(restoredIcon.symbolMetrics?.renderVariant).toBeUndefined();
-        expect(svg).toContain('stroke-width="0.2"');
+        expect(restoredSvg).toContain('stroke-width="0.2"');
       }
     }
   });
