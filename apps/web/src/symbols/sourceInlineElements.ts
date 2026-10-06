@@ -18,9 +18,53 @@ export function previousSourceSpan(spans:SpanData[],index:number):SpanData|undef
   return undefined;
 }
 
+/** Keep an inline object and the whitespace around it editable within a span unit. */
+function includeInlineObjectsInSpanUnits(block: Block, elements: SourceInlineElement[]): Block {
+  if (!block.typographicSpanUnits?.length || !block.lines) return block;
+  const units = block.typographicSpanUnits.map(unit => ({ ...unit, spanRefs: [...unit.spanRefs] }));
+  let changed = false;
+  for (const element of elements) {
+    if (element.anchor.blockId !== block.id) continue;
+    const line = block.lines.find(candidate => candidate.id === element.anchor.lineId);
+    if (!line) continue;
+    const refAt = (index: number) => `${line.id}:${line.spans[index]?.sourceSpanIndex ?? index}`;
+    const objectRef = refAt(element.anchor.spanIndex);
+    if (units.some(unit => unit.spanRefs.includes(objectRef))) continue;
+
+    let left = element.anchor.spanIndex - 1;
+    while (left >= 0 && !line.spans[left].text.trim()) left--;
+    let right = element.anchor.spanIndex;
+    while (right < line.spans.length && !line.spans[right].text.trim()) right++;
+    if (left < 0 || right >= line.spans.length) continue;
+    const beforeRef = refAt(left);
+    const afterRef = refAt(right);
+    const owner = units.find(unit => unit.spanRefs.includes(beforeRef) && unit.spanRefs.includes(afterRef));
+    if (!owner) continue;
+
+    let safeWhitespaceGap = true;
+    for (let index = left + 1; index < right; index++) {
+      const ref = refAt(index);
+      if (line.spans[index].text.trim() || units.some(unit => unit.spanRefs.includes(ref) && unit !== owner)) {
+        safeWhitespaceGap = false;
+        break;
+      }
+    }
+    if (!safeWhitespaceGap) continue;
+    for (let index = left + 1; index <= right; index++) {
+      const ref = refAt(index);
+      if (line.spans[index].text.trim()) continue;
+      if (!owner.spanRefs.includes(ref)) owner.spanRefs.push(ref);
+      changed = true;
+    }
+  }
+  return changed ? { ...block, typographicSpanUnits: units } : block;
+}
+
 /** Runtime augmentation: original JSON IDs, arrays and persisted keys stay intact. */
 export function attachSourceInlineElements(blocks: Block[], elements: SourceInlineElement[]): Block[] {
-  return blocks.map(block=>({ ...block,lines:block.lines?.map(line=>{
+  return blocks.map(block=>{
+    const unitAwareBlock = includeInlineObjectsInSpanUnits(block, elements);
+    return { ...unitAwareBlock,lines:block.lines?.map(line=>{
     const lineElements=elements.filter(e=>e.anchor.blockId===block.id && e.anchor.lineId===line.id && getSemanticSymbol(e.symbolId));
     const requestedStart=lineElements.map(e=>e.anchor.lineStartX).filter((x):x is number=>x!==undefined);
     const adjustedLine= requestedStart.length ? (()=>{
@@ -42,7 +86,8 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
         ...(sourceInlineObjects.length?{sourceInlineObjects}:{}),
       },...matches.filter(e=>e.anchor.side==='after').map(make)];
     })};
-  }) }));
+    })};
+  });
 }
 
 export function sourceElementIsReplaced(element: SourceInlineElement, block: Block, page: number, language: string,
