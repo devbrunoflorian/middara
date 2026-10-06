@@ -311,8 +311,11 @@ def build(apply, only_pages=None,registry_only=False):
             dom=json.loads((ROOT/f"apps/web/public/pages/page_{o['page']:03d}/page_{o['page']:03d}_dom.json").read_text(encoding='utf8'))
             b=dom['blocks'][o['blockIndex']]
             if b.get('staticEditorLineIndexes') and next(i for i,l in enumerate(b['lines']) if l['id']==o['line']) in b['staticEditorLineIndexes']:continue
-            placements[o['page']].append(dict(symbolId=definition_match['id'],bbox=o['bbox'],drawingIndices=[],
-                anchor=dict(blockId=o['block'],blockIndex=o['blockIndex'],lineId=o['line'],spanIndex=o['spanIndex'],side='replace',sizePt=o['size'])))
+            anchor=dict(blockId=o['block'],blockIndex=o['blockIndex'],lineId=o['line'],spanIndex=o['spanIndex'],side='replace',sizePt=o['size'])
+            baseline=source_baseline(doc[o['page']-1],dom,anchor,baseline_cache)
+            rect=fitz.Rect(o['bbox']);size=o['size']
+            metrics=dict(widthEm=rect.width/size,heightEm=rect.height/size,verticalAlignEm=(rect.y1-baseline)/size)
+            placements[o['page']].append(dict(symbolId=definition_match['id'],bbox=o['bbox'],drawingIndices=[],anchor=anchor,metrics=metrics))
     # Page 90's three icon+label pairs are represented by whole semantic
     # capsules. Do not regenerate old icon-only adapters over those spans.
     compound_refs = {
