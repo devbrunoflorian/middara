@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections import Counter
 from pathlib import Path
 
 import pymupdf as fitz
@@ -15,6 +16,28 @@ ROOT = Path(__file__).resolve().parents[1]
 PDF = Path(r"C:\Users\bruno\Downloads\Rulebook 1p2 Final Version 05-19-23 Optimized.pdf")
 PAGES = ROOT / "apps/web/public/pages"
 REGISTRY = ROOT / "apps/web/src/symbols/sourceSymbols.json"
+EXPECTED_COUNTS = {
+    "dice.black": 19,
+    "dice.blue": 1,
+    "dice.green": 1,
+    "dice.grey": 1,
+    "dice.orange": 3,
+    "dice.purple": 3,
+    "dice.red": 1,
+    "dice.teal": 5,
+    "dice.white": 7,
+}
+BASE_COUNTS = {
+    "dice.black": 16,
+    "dice.blue": 1,
+    "dice.green": 1,
+    "dice.grey": 1,
+    "dice.orange": 3,
+    "dice.purple": 1,
+    "dice.red": 1,
+    "dice.teal": 5,
+    "dice.white": 7,
+}
 
 # Representatives were selected only after a read-only scan of all 22 dice
 # adapters. The signatures include path topology/geometry, normalized stroke
@@ -28,12 +51,6 @@ FAMILIES = [
     dict(name="black-p78-compact-lines", symbolId="dice.black", page=78,
          bbox=(569.8015, 742.6188, 578.8895, 753.1098), expectedCount=1),
 ]
-BASE_REPRESENTATIVES = {
-    "dice.black": (52, (244.157394, 333.248596, 255.645401, 346.507599), 16),
-    "dice.purple": (85, (133.419601, 165.496292, 142.507599, 175.987289), 1),
-}
-
-
 def color_hex(color) -> str | None:
     if color is None:
         return None
@@ -182,6 +199,13 @@ def main() -> None:
 
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
     symbols = {symbol["id"]: symbol for symbol in registry}
+    dice_symbols = {symbol_id: symbols[symbol_id] for symbol_id in EXPECTED_COUNTS if symbol_id in symbols}
+    if set(dice_symbols) != set(EXPECTED_COUNTS):
+        raise ValueError(f"Dice registry changed: missing {sorted(set(EXPECTED_COUNTS) - set(dice_symbols))}")
+    base_representatives = {
+        symbol_id: (int(symbol["source"]["page"]), tuple(symbol["source"]["bboxPt"]), BASE_COUNTS[symbol_id])
+        for symbol_id, symbol in dice_symbols.items()
+    }
     sidecars = {int(path.parent.name.split("_")[1]): (path, json.loads(path.read_text(encoding="utf-8")))
                 for path in PAGES.glob("page_*/inline_elements.json")}
 
@@ -190,14 +214,18 @@ def main() -> None:
         for page_number, (path, sidecar) in sidecars.items():
             drawings = pdf[page_number - 1].get_drawings()
             for element in sidecar.get("elements", []):
-                if element.get("symbolId") not in ("dice.black", "dice.purple"):
+                symbol_id = element.get("symbolId")
+                if isinstance(symbol_id, str) and symbol_id.startswith("dice.") and symbol_id not in EXPECTED_COUNTS:
+                    raise ValueError(f"Uncatalogued dice adapter on page {page_number}: {symbol_id}")
+                if symbol_id not in EXPECTED_COUNTS:
                     continue
                 box = tuple(element["bbox"])
                 group = drawing_group(drawings, box)
-                observations.append((element["symbolId"], page_number, box,
+                observations.append((symbol_id, page_number, box,
                                      vector_signature(group, box), group))
-        if len(observations) != 22:
-            raise ValueError(f"Dice inventory changed: expected 22 source adapters, found {len(observations)}")
+        observed_counts = Counter(symbol_id for symbol_id, *_ in observations)
+        if observed_counts != Counter(EXPECTED_COUNTS):
+            raise ValueError(f"Dice inventory changed: expected {EXPECTED_COUNTS}, found {dict(observed_counts)}")
 
         plans = []
         for family in FAMILIES:
@@ -208,7 +236,7 @@ def main() -> None:
                        if symbol_id == family["symbolId"] and same_family(sig, signature)]
             if len(members) != family["expectedCount"]:
                 raise ValueError(f"{family['name']}: expected {family['expectedCount']} equivalent placements, found {len(members)}")
-            base_page, base_bbox, expected_count = BASE_REPRESENTATIVES[family["symbolId"]]
+            base_page, base_bbox, expected_count = base_representatives[family["symbolId"]]
             base_group, _ = source_group(pdf, base_page, base_bbox)
             base_signature = vector_signature(base_group, base_bbox)
             if same_family(signature, base_signature):
@@ -231,7 +259,7 @@ def main() -> None:
                 symbol["render"]["variants"][family["name"]] = variant
             plans.append((family, signature, members, variant))
 
-        for symbol_id, (page_number, bbox, expected_count) in BASE_REPRESENTATIVES.items():
+        for symbol_id, (page_number, bbox, expected_count) in base_representatives.items():
             group, _ = source_group(pdf, page_number, bbox)
             signature = vector_signature(group, bbox)
             count = sum(1 for candidate_id, _, _, candidate_signature, _ in observations
@@ -239,7 +267,7 @@ def main() -> None:
             if count != expected_count:
                 raise ValueError(f"Base family {symbol_id} changed: expected {expected_count}, found {count}")
         planned_count = sum(len(members) for _, _, members, _ in plans)
-        base_count = sum(expected_count for _, _, expected_count in BASE_REPRESENTATIVES.values())
+        base_count = sum(expected_count for _, _, expected_count in base_representatives.values())
         if planned_count + base_count != len(observations):
             raise ValueError(f"Unclassified dice remain: {base_count} base + {planned_count} variant != {len(observations)}")
 
@@ -275,7 +303,8 @@ def main() -> None:
                               if path.get("fill") != "none"}),
         })
     result.append({"mode": "apply" if args.apply else "dry-run", "diceAdapters": len(observations),
-                   "baseFamilies": {symbol_id: expected for symbol_id, (_, _, expected) in BASE_REPRESENTATIVES.items()},
+            "baseFamilies": {symbol_id: expected for symbol_id, (_, _, expected) in base_representatives.items()},
+            "expectedDiceCounts": EXPECTED_COUNTS,
                    "variantOccurrences": len(updates)})
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
