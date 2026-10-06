@@ -95,7 +95,16 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
       const availableXNext=Math.min(...requestedStart);
       return {...line,availableX:availableXNext,availableWidth:Math.max(0,right-availableXNext)};
     })() : line;
-    return {...adjustedLine,spans:line.spans.flatMap((span,index)=>{
+    const sourceFlowStartPt = lineElements.length
+      ? Math.min(...line.spans.filter(span=>!span.renderOnlyStrokePass).map(span=>span.bbox[0]),...lineElements.map(element=>element.bbox[0]))
+      : undefined;
+    const flowLine = lineElements.length && sourceFlowStartPt !== undefined && sourceFlowStartPt < (adjustedLine.availableX ?? adjustedLine.bbox[0])
+      ? { ...adjustedLine,
+        availableWidth: (adjustedLine.availableX ?? adjustedLine.bbox[0]) + (adjustedLine.availableWidth ?? adjustedLine.bbox[2] - (adjustedLine.availableX ?? adjustedLine.bbox[0])) - sourceFlowStartPt,
+        availableX: sourceFlowStartPt,
+      }
+      : adjustedLine;
+    return {...flowLine,...(lineElements.length ? {renderSourceSpanGeometry:true,renderSourceSpanStartPt:sourceFlowStartPt} : {}),spans:line.spans.flatMap((span,index)=>{
       const matches=lineElements.filter(e=>sourceObjectInsertionIndex(e,line.spans)===index);
       const metricsFor=(e:SourceInlineElement):InlineSymbolMetrics|undefined=>e.metrics ? {...e.metrics,
         ...(e.anchor.gapPt !== undefined ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {}),

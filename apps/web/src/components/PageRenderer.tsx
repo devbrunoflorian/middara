@@ -69,8 +69,10 @@ export interface LineData {
   renderTopOffsetPt?: number;
   /** Browser-only indentation when a filtered tiny leading glyph still occupies source advance. */
   renderTextOffsetPt?: number;
-  /** Keep source PDF span advances/gaps in the English view for inline callout alignment. */
+  /** Keep source PDF span advances/gaps in the untouched source view around inline symbols. */
   renderSourceSpanGeometry?: boolean;
+  /** Left edge of the first source text/vector item when an inline symbol starts the line. */
+  renderSourceSpanStartPt?: number;
   /** Stop source-advance locking just after the last callout on this line. */
   renderSourceGeometryThroughSpan?: number;
   /** Limit suppression of rasterized source text to the overlay's language. */
@@ -2054,7 +2056,10 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     transformOrigin: 'left top',
   } : {};
   
-  const originalX = (line.bbox[0] + (line.renderTextOffsetPt ?? 0) - blockOriginX) * scale;
+  const sourceFlowStartX = line.renderSourceSpanGeometry && line.renderSourceSpanStartPt !== undefined
+    ? line.renderSourceSpanStartPt
+    : line.bbox[0] + (line.renderTextOffsetPt ?? 0);
+  const originalX = (sourceFlowStartX - blockOriginX) * scale;
   const textOffset = Math.max(0, originalX - lineX);
 
   const sourceText = line.spans.map(span => span.text).join('');
@@ -2186,20 +2191,39 @@ const LineRenderer: React.FC<LineRendererProps> = ({
         // virtual source icons keep their original reference without repainting.
         if(inlineUnit?.override && `${line.id}:${span.sourceSpanIndex ?? si}`!==inlineUnit.renderAtRef)return null;
         const sourceAdvanceWidth = Math.max(0, span.bbox[2] - span.bbox[0]) * scale;
-        const previousSpan = previousSourceSpan(line.spans,si);
-        const sourceAdvanceGap = previousSpan
-          ? Math.max(0, span.bbox[0] - previousSpan.bbox[2]) * scale
-          : 0;
         const useSourceGeometry = !override
           && line.renderSourceSpanGeometry
           && (line.renderSourceGeometryThroughSpan === undefined || (span.sourceSpanIndex ?? si) <= line.renderSourceGeometryThroughSpan);
+        const previousSpan = useSourceGeometry
+          ? [...line.spans.slice(0, si)].reverse().find(candidate => !candidate.renderOnlyStrokePass)
+          : previousSourceSpan(line.spans,si);
+        const sourceAdvanceGap = previousSpan
+          ? (useSourceGeometry ? span.bbox[0] - previousSpan.bbox[2] : Math.max(0, span.bbox[0] - previousSpan.bbox[2])) * scale
+          : 0;
         const isUnsupportedSymbol =
           (span.font?.includes('Webdings') && !(span.font?.includes('Webdings') && span.text === '\uF07E')) ||
           (span.font?.includes('Wingdings') && !span.pictogramDisplayOverride) ||
           (span.font?.includes('ZapfDingbats') && !span.pictogramSvgPath);
         const isReplacedBySourceOverlay = span.renderAsSourceOverlayDuplicate
           && (span.renderSourceOverlayLanguage === 'all' || span.renderSourceOverlayLanguage === language);
-        if (span.renderOnlyStrokePass || (isReplacedBySourceOverlay && (!inlineUnit?.override || span.semanticSymbolId))) return null;
+        if (span.renderOnlyStrokePass) return null;
+        if (isReplacedBySourceOverlay && (!inlineUnit?.override || span.semanticSymbolId)) {
+          if (!useSourceGeometry || !span.semanticSymbolId) return null;
+          return (
+            <span
+              key={si}
+              aria-hidden="true"
+              data-source-inline-placeholder={span.semanticSymbolId}
+              style={{
+                flex: `0 0 ${sourceAdvanceWidth}px`,
+                marginInlineStart: `${sourceAdvanceGap}px`,
+                minWidth: 0,
+                visibility: 'hidden',
+                pointerEvents: 'none',
+              }}
+            />
+          );
+        }
         // The source PDF paints Webdings U+F07E twice at the same bbox: a
         // 2pt white stroke and a red fill. PyMuPDF's text dict keeps only the
         // white pass, so reconstruct that one known glyph from its trace data.
@@ -2250,6 +2274,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           ...(useSourceGeometry ? {
             flex: `0 0 ${sourceAdvanceWidth}px`,
             marginInlineStart: `${sourceAdvanceGap}px`,
+            minWidth: 0,
           } : {}),
           ...(span.renderTextStrokeWidthPt ? {
             WebkitTextStroke: `${span.renderTextStrokeWidthPt * scale}px ${span.renderTextStrokeColor || '#231f20'}`,
