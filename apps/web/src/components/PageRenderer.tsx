@@ -454,7 +454,58 @@ function normalizeStaticEditorPrefix(block: Block, override: SpanOverride | null
   return { ...override, segments: segments.filter(segment => segment.text.length > 0) };
 }
 
-function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
+function inferSourceInlineFlowLineHeight(block: Block): number | undefined {
+  const rows: { y: number; sizes: { size: number; weight: number }[] }[] = [];
+  for (const line of block.lines ?? []) {
+    const spans = line.spans.filter(span =>
+      span.text.trim() && !span.renderOnlyStrokePass && Number.isFinite(span.size) && span.size > 0,
+    );
+    if (!spans.length) continue;
+    const y = line.bbox[1];
+    let row = rows.find(candidate => Math.abs(candidate.y - y) <= 0.25);
+    if (!row) {
+      row = { y, sizes: [] };
+      rows.push(row);
+    }
+    for (const span of spans) {
+      row.sizes.push({ size: span.size, weight: Math.max(1, span.text.length) });
+    }
+  }
+  rows.sort((a, b) => a.y - b.y);
+  if (rows.length < 2) return undefined;
+
+  const sizeWeights = new Map<number, number>();
+  for (const row of rows) {
+    for (const entry of row.sizes) {
+      const size = Math.round(entry.size * 100) / 100;
+      sizeWeights.set(size, (sizeWeights.get(size) ?? 0) + entry.weight);
+    }
+  }
+  const totalWeight = [...sizeWeights.values()].reduce((sum, value) => sum + value, 0);
+  const [mainSize, mainWeight] = [...sizeWeights.entries()].sort((a, b) => b[1] - a[1])[0] ?? [];
+  if (!mainSize || mainSize < 4 || mainWeight / totalWeight < 0.8) return undefined;
+
+  const pitches = rows.slice(1).map((row, index) => (row.y - rows[index].y) / mainSize);
+  const sortedPitches = pitches.filter(Number.isFinite).sort((a, b) => a - b);
+  if (!sortedPitches.length) return undefined;
+  const middle = Math.floor(sortedPitches.length / 2);
+  const median = sortedPitches.length % 2
+    ? sortedPitches[middle]
+    : (sortedPitches[middle - 1] + sortedPitches[middle]) / 2;
+
+  // Inline SVG boxes can be taller than the PDF's text leading and inflate a
+  // browser line box. Seed the editor with the stable source row pitch instead
+  // of the CSS fallback; leave unusual/paragraph-spaced patterns editable.
+  if (median < 1.08 || median > 1.12) return undefined;
+  return Math.round(median * 100) / 100;
+}
+
+function extractBlockInfo(
+  blockKey: string,
+  block: Block,
+  language: 'en' | 'pt-BR',
+  hasSourceInlineSymbols: boolean,
+): SelectedSpanInfo {
   let text = '';
   let font = '';
   let size = 0;
@@ -500,7 +551,9 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
     size,
     bbox: block.bbox,
     textAlign: block.layoutFrame?.textAlign || 'left',
-    lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+    lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight
+      ?? (language === 'en' && hasSourceInlineSymbols ? inferSourceInlineFlowLineHeight(block) : undefined)
+      ?? 1,
     sourceSegments,
     singleLine: block.noWrap ?? false,
   };
@@ -1133,6 +1186,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
 
         {pageData.blocks.map((block, bIdx) => {
           if (block.hiddenFromPage) return null;
+          const hasSourceInlineSymbols = (pageData.inlineElements ?? []).some(
+            element => element.anchor.blockId === block.id,
+          );
           const rows = pageData.contentsRows?.filter(row => row.blockId === block.id) ?? [];
           const hasOverride = (key: string) => overrides.has(key)
             || (selectedSpan?.spanKey === key && draftOverride !== null);
@@ -1145,6 +1201,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
             <SpanBlock
               key={block.id}
               block={pageData.contentsRows?.some(row=>block.lines?.some(line=>line.id===row.numberLineId)) ? {...block,adminReadOnly:true} : block}
+              hasSourceInlineSymbols={hasSourceInlineSymbols}
               allBlocks={pageData.blocks}
               layoutObstacles={pageData.layoutObstacles ?? []}
               blockIdx={bIdx}
@@ -1335,6 +1392,7 @@ function ContentsLabelBlock({
 
 interface SpanBlockProps {
   block: Block;
+  hasSourceInlineSymbols: boolean;
   allBlocks: Block[];
   layoutObstacles: [number, number, number, number][];
   blockIdx: number;
@@ -1357,7 +1415,7 @@ interface SpanBlockProps {
 }
 
 const SpanBlock: React.FC<SpanBlockProps> = ({
-  block, allBlocks, layoutObstacles, blockIdx, pageNumber, scale, isAdmin, contentsMap,
+  block, hasSourceInlineSymbols, allBlocks, layoutObstacles, blockIdx, pageNumber, scale, isAdmin, contentsMap,
   onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutFrameForSelection, layoutFrameOverride, onSelectLayoutFrame,
   selectedBlockKey, overrides, overridesReady, draftOverride, language
 }) => {
@@ -1474,7 +1532,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     : blockCanEdit ? `block-editable ${selectedBlockKey === blockKey ? 'block-selected' : ''}` : '';
   const handleBlockClick = () => {
     if (blockCanSelectLayout) onSelectLayoutFrame(layoutUnitKey, layoutFrameForSelection);
-    else if (blockCanEdit) onBlockClick(extractBlockInfo(blockKey, block));
+    else if (blockCanEdit) onBlockClick(extractBlockInfo(blockKey, block, language, hasSourceInlineSymbols));
   };
   const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
   const fixedLineIndexes = staticEditorLineIndexes(block);
@@ -1533,7 +1591,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             width: `${blockLineW}px`,
             whiteSpace: block.noWrap ? 'pre' : 'pre-wrap',
             textAlign: currentOverride.textAlign ?? layoutFrameOverride?.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
-            lineHeight: currentOverride.lineHeight ?? block.defaultLineHeight ?? layoutFrameOverride?.lineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+            lineHeight: currentOverride.lineHeight ?? block.defaultLineHeight ?? layoutFrameOverride?.lineHeight ?? block.layoutFrame?.lineHeight
+              ?? (language === 'en' && hasInlineSymbols ? inferSourceInlineFlowLineHeight(block) : undefined)
+              ?? 1,
             display: 'block',
             fontSize: 0,
             cursor: layoutMode ? 'move' : isAdmin ? 'text' : 'default',
