@@ -77,12 +77,39 @@ describe('source inline whitespace ordering', () => {
     const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
     const templates = [
       { ...toolStyle, text: '\uFFFC', symbolId: 'dice.black', symbolMetrics: { widthEm: 1.1, heightEm: 1.2, verticalAlignEm: 0.2 } },
-      { ...toolStyle, text: '\uFFFC', symbolId: 'dice.black', symbolMetrics: { widthEm: 0.9, heightEm: 1.0, verticalAlignEm: 0.3 } },
+      // Mirrors the 0.004 pt line-baseline delta in the p. 50 source family;
+      // this remains larger than PDF metric rounding and must stay ambiguous.
+      { ...toolStyle, text: '\uFFFC', symbolId: 'dice.black', symbolMetrics: { widthEm: 1.1, heightEm: 1.2, verticalAlignEm: 0.2004 } },
     ];
     const result = segmentsFromEditableText(token, toolStyle, 'en', [], 'paragraph', undefined, templates);
     const icon = result.find(run => run.symbolId === 'dice.black')!;
 
     expect(icon.symbolMetrics).toBeUndefined();
     expect(icon.size).toBe(toolStyle.size);
+  });
+
+  it('inherits the p. 41 purple die template when identical PDF paths differ only by metric rounding', () => {
+    const pageDir = join(process.cwd(), 'public/pages', 'page_041');
+    const dom = JSON.parse(readFileSync(join(pageDir, 'page_041_dom.json'), 'utf8'));
+    const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
+    const purpleDice = elements.filter(element => element.symbolId === 'dice.purple'
+      && element.anchor.blockId === 'block_24');
+    expect(purpleDice).toHaveLength(2);
+
+    const blocks = attachSourceInlineElements(dom.blocks, purpleDice);
+    const block = blocks.find((candidate: { id: string }) => candidate.id === 'block_24')!;
+    const sourceTemplates = sourceSpanRuns(block.lines.flatMap((line: { spans: unknown[] }) => line.spans), mapFont);
+    const sourceDice = sourceTemplates.filter(run => run.symbolId === 'dice.purple');
+    expect(sourceDice).toHaveLength(2);
+    expect(Math.abs(sourceDice[0].symbolMetrics!.widthEm - sourceDice[1].symbolMetrics!.widthEm)
+      * sourceDice[0].size).toBeCloseTo(0.001, 8);
+
+    const token = getSymbolEditorToken('dice.purple', 'en')!;
+    const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+    const restored = segmentsFromEditableText(token, toolStyle, 'en', [], 'paragraph', undefined, sourceTemplates);
+    const restoredDie = restored.find(run => run.symbolId === 'dice.purple')!;
+    expect(restoredDie.size).toBe(9);
+    expect(restoredDie.color).toBe(sourceDice[0].color);
+    expect(restoredDie.symbolMetrics).toEqual(sourceDice[0].symbolMetrics);
   });
 });

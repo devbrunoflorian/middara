@@ -12,12 +12,18 @@ export interface EditableTokenRange { start:number; end:number; id:string; token
 function sameSourceSymbolTemplate(a:Segment,b:Segment):boolean {
   const visualFields: (keyof Segment)[] = ['font','size','color','weight','style','textStrokeWidthPt','textStrokeColor'];
   if(!visualFields.every(key=>a[key]===b[key]))return false;
+  // Some source dimensions are rounded to 0.001 pt. Compare normalized values
+  // in point space so the same PDF drawing does not become ambiguous solely
+  // because its measured width landed on adjacent rounding steps.
+  const sizePt=Number.isFinite(a.size) && a.size>0 ? a.size : undefined;
   const metricFields: (keyof InlineSymbolMetrics)[] = ['widthEm','heightEm','verticalAlignEm','gapEm','trailingGapEm','renderVariant'];
   return metricFields.every(key=>{
     const first=a.symbolMetrics?.[key];const second=b.symbolMetrics?.[key];
-    return typeof first==='number' && typeof second==='number'
-      ? Math.abs(first-second)<=0.0001
-      : first===second;
+    if(typeof first==='number' && typeof second==='number') {
+      if(!Number.isFinite(first) || !Number.isFinite(second))return false;
+      return first===second || (sizePt!==undefined && Math.abs(first-second)*sizePt<=0.0011);
+    }
+    return first===second;
   });
 }
 
