@@ -316,6 +316,7 @@ function renderCreditSegments(
   isAdmin: boolean,
   whiteSpace:'pre-wrap'|'nowrap'='pre-wrap',
 ): React.ReactNode[] {
+  const hasInlineSymbols = segments.some(hasInlineSemanticSymbol);
   const fullText = segments.map(segment => segment.text).join('');
   const ranges: { start: number; end: number; href: string }[] = [];
   for (const link of links ?? []) {
@@ -375,7 +376,7 @@ function renderCreditSegments(
       whiteSpace,
       fontVariantLigatures: 'none',
       fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
-      letterSpacing: '-0.015em',
+      letterSpacing: hasInlineSymbols && language === 'en' ? 'normal' : '-0.015em',
     }}>{renderSegmentContent({...piece.segment,text:piece.text},scale,language)}</span>
   );
 
@@ -771,6 +772,10 @@ function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 
   const id=segment.symbolId ?? legacy?.id;
   if (!id) return segment.text;
   return <>{Array.from(legacy ? '\uFFFC' : segment.text).map((_,index)=><SemanticSymbol key={index} id={id} language={language} size={segment.size*scale} color={segment.color} metrics={segment.symbolMetrics} />)}{legacy ? segment.text.match(/\s+$/)?.[0] : null}</>;
+}
+
+function hasInlineSemanticSymbol(segment: Segment): boolean {
+  return Boolean(segment.symbolId || resolveLegacySymbol(segment.font, segment.text));
 }
 
 export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, onNavigate, language = 'en', symbolAliasPreferences, onPaletteEditorChange }) => {
@@ -1478,6 +1483,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     .find(span => needsEsmeraldaHeadingDrop(span.font, span.size, span.bbox[3] - span.bbox[1]));
 
   if (currentOverride) {
+    const hasInlineSymbols = currentOverride.segments.some(hasInlineSemanticSymbol);
     // Use a translation frame when supplied; otherwise keep the source-derived fallback.
     const fixedLineIndexes = staticEditorLineIndexes(block);
     const fixedLines = (block.lines ?? []).filter((_, index) => fixedLineIndexes.has(index));
@@ -1550,7 +1556,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
                 whiteSpace: block.noWrap ? 'pre' : 'pre-wrap',
                 fontVariantLigatures: 'none',
                 fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
-                letterSpacing: '-0.015em',
+                // EN uses source-native advances so symbols match the PDF. Keep
+                // the established PT-BR copyfit tracking to prevent extra wraps.
+                letterSpacing: hasInlineSymbols && language === 'en' ? 'normal' : '-0.015em',
                 ...(esmeraldaHeadingSource && needsEsmeraldaHeadingDrop(
                   seg.font,
                   seg.size,
@@ -2048,6 +2056,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
   };
 
   if (override && previewSegments && previewSegments.length > 0) {
+    const hasInlineSymbols = previewSegments.some(hasInlineSemanticSymbol);
     const sourceHasEsmeraldaHeading = line.spans.some(span =>
       needsEsmeraldaHeadingDrop(span.font, span.size, span.bbox[3] - span.bbox[1]),
     );
@@ -2088,7 +2097,8 @@ const LineRenderer: React.FC<LineRendererProps> = ({
               whiteSpace: 'pre-wrap',
               fontVariantLigatures: 'none',
               fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
-              letterSpacing: '-0.015em',
+              // Keep preview advances identical to the saved editable flow.
+              letterSpacing: hasInlineSymbols && language === 'en' ? 'normal' : '-0.015em',
               ...(sourceHasEsmeraldaHeading && needsEsmeraldaHeadingDrop(seg.font, seg.size, lineH / scale)
                 ? { display: 'inline-block', transform: 'translateY(12%)' }
                 : {}),
@@ -2230,7 +2240,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
                 whiteSpace: 'pre',
                 fontVariantLigatures: 'none',
                 fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
-                letterSpacing: '-0.015em',
+                letterSpacing: inlineOverrideSegments.some(hasInlineSemanticSymbol) && language === 'en' ? 'normal' : '-0.015em',
               }}
             >
               {segment.symbolId || resolveLegacySymbol(segment.font,segment.text) ? renderSegmentContent(segment,scale,language) : segmentText}
