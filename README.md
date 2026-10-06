@@ -1,6 +1,8 @@
 # Middara Rulebook Translation & Digitization
 
-This project aims to digitize the "Middara Rulebook 1.2" PDF into an interactive, translatable Web App while maintaining strict typographic and layout fidelity to the original book.
+This project digitizes the "Middara Rulebook 1.2" PDF into an interactive, translatable web app. Source-PDF fidelity is an explicit requirement, but the 102-page book is not yet globally certified; current scope, evidence and open work are tracked in the [project handoff](PROJECT-HANDOFF.md).
+
+**Resume work from [`PROJECT-HANDOFF.md`](PROJECT-HANDOFF.md) first.** It links the current family matrix, known issues, evidence and next-session procedure.
 
 ## Local development
 
@@ -19,7 +21,7 @@ Payload opens SQLite directly; there is no separate database server to launch. T
 The project consists of three main pillars:
 1. **Extraction (Python)**: Scripts in `/scripts` extract raw DOM data (text, bounding boxes, fonts, colors) directly from the PDF using `PyMuPDF` (`fitz`). The output is stored in JSON files per page.
 2. **Translation/Overrides (Payload/SQLite)**: Saved translations and custom translation frames are persisted by Payload in the local SQLite database. Browser drafts remain separate from saved records. See `docs/architecture/translation-data-schema-and-symbol-catalog.md` for the current contract.
-3. **Rendering (React)**: The `PageRenderer.tsx` takes the PDF DOM + Overrides and renders HTML that sits pixel-perfect over the original page images.
+3. **Rendering (React)**: `PageRenderer.tsx` combines page images, extracted PDF geometry and editable overrides. Untouched English can use source coordinates when the required geometry exists; edited/translated text reflows. The fidelity status is scoped in the handoff rather than assumed pixel-perfect.
 
 ## Core Principles (Constraints over Freedom)
 
@@ -27,7 +29,7 @@ Through trial and error, we discovered that giving the translation editor "too m
 
 We operate under **Constraints**:
 1. **Semantic Styling:** A text block is identified by its purpose (e.g., "Body Text", "Title", "Stat"). The editor assigns a semantic class, and the App enforces the correct font, weight, and size.
-2. **Block-Level Rendering:** Instead of rendering text line-by-line absolutely (which causes translated text to shoot out of the page bounds), text is rendered as contiguous paragraph blocks (`<p>`) with a fixed width, allowing the browser to handle natural line breaks (`word-wrap`) and justification.
+2. **Separate source and translated flow:** Unchanged English should preserve extracted source positions when its geometry is available. Changed English/PT-BR uses editable flow inside its frame. Do not infer that one layout mode or line-height is correct for every source block.
 
 ## Typography & PUA
 
@@ -35,6 +37,12 @@ The rulebook heavily utilizes custom typography, particularly swash variants and
 To support this without breaking browser rendering, we map special characters to the Private Use Area (PUA) of a custom font. The `create_pua_font_all.py` script manages this generation.
 
 ## Documentation Index
+
+- [`PROJECT-HANDOFF.md`](PROJECT-HANDOFF.md): canonical first-read handoff, current repository state and `NEXT SESSION START HERE`.
+- [`docs/project-progress/inline-semantic-family-matrix.md`](docs/project-progress/inline-semantic-family-matrix.md): current status, counts, validation scope and limits by semantic family.
+- [`docs/project-progress/known-issues-inline-rendering.md`](docs/project-progress/known-issues-inline-rendering.md): active `origin`/fallback-renderer investigation and first experiment.
+- [`docs/architecture/inline-semantic-lessons-and-playbooks.md`](docs/architecture/inline-semantic-lessons-and-playbooks.md): reusable classification, family and visual-debug playbooks plus anti-patterns.
+- [`docs/project-progress/documentation-status-inline-project.md`](docs/project-progress/documentation-status-inline-project.md): CURRENT/HISTORICAL/SUPERSEDED index for inline-semantic docs.
 
 - `docs/project-progress/2026-10-05-dice-count-color-ownership-families.md`: pattern-first source/DOM audit for dice labels containing a count and color, including the two distinct page 85 anchor families and the measured result of the method.
 - `docs/project-progress/2026-10-04-page3-adaptive-toc-leaders.md`: separate contents entries and adaptive dotted leaders for translations.
@@ -51,7 +59,7 @@ To support this without breaking browser rendering, we map special characters to
 - `docs/project-progress/2026-10-04-page29-fixed-artwork.md`: source-confirmed artwork and numeric paint corrections with before/PDF/after evidence.
 - `docs/architecture_v3_constraints.md`: Deep dive into the block-level rendering and constraint-based editor architecture.
 - `docs/architecture/text-layout-frames.md`: Accepted page 2 frame pilot separating printed ink bounds from translation space, with audit findings and the plan for generalization.
-- `docs/project-progress/CONTINUE-HERE.md`: mandatory handoff for developers and AI agents resuming project work.
+- `docs/project-progress/CONTINUE-HERE.md`: historical handoff snapshot; superseded by root `PROJECT-HANDOFF.md`.
 - `docs/project-progress/2026-10-01-book-wide-typographic-units.md`: active plan to identify editable typography units and style hierarchy across all 102 pages before geometry audits.
 - `docs/project-progress/README.md`: Per-task work log with methods, results, corrections, checks, and next steps.
 - `docs/translation-editor-save-and-line-breaks.md`: Save point for the docked editor, live text preview, line-height, and local-first draft persistence.
