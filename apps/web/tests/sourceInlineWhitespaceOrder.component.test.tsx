@@ -3,10 +3,11 @@ import { join } from 'node:path';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
+import type { Segment } from '../src/components/RichSpanEditor';
 import { attachSourceInlineElements, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
 import { sourceSpanRuns } from '../src/symbols/sourceRuns';
 import { editableTextForSegments, segmentsFromEditableText } from '../src/symbols/inlineCodec';
-import { getSymbolEditorToken } from '../src/symbols/semanticSymbols';
+import { getSymbolEditorToken, isSymbolAllowed, resolveLegacySymbol } from '../src/symbols/semanticSymbols';
 import { SemanticSymbol } from '../src/symbols/SemanticSymbol';
 
 const mapFont = (font: string) => ({ weight: font.includes('Bold') ? 700 : 400, style: 'normal' as const });
@@ -46,6 +47,90 @@ describe('source inline whitespace ordering', () => {
     expect(JSON.stringify(dom.blocks)).toBe(original);
     });
   }
+
+  it('inherits a unique legacy glyph style when no per-occurrence metrics exist', () => {
+    const pageDir = join(process.cwd(), 'public/pages', 'page_033');
+    const dom = JSON.parse(readFileSync(join(pageDir, 'page_033_dom.json'), 'utf8'));
+    const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
+    const block = dom.blocks.find((candidate: { id: string }) => candidate.id === 'block_111')!;
+    const line = block.lines.find((candidate: { id: string }) => candidate.id === 'line_111_2')!;
+    const blocks = attachSourceInlineElements(dom.blocks, elements.filter(element => element.anchor.blockId === block.id));
+    const attachedBlock = blocks.find((candidate: { id: string }) => candidate.id === block.id)!;
+    const attachedLine = attachedBlock.lines.find((candidate: { id: string }) => candidate.id === line.id)!;
+    const sourceTemplateSegments = sourceSpanRuns(attachedBlock.lines.flatMap((sourceLine: { spans: unknown[] }) => sourceLine.spans), mapFont);
+    const sourceRuns = sourceSpanRuns(attachedLine.spans, mapFont);
+    const sourceIcon = sourceRuns.find(run => run.symbolId === 'tag.discard.icon')!;
+    const previous = sourceRuns.filter(run => run !== sourceIcon);
+    const token = getSymbolEditorToken('tag.discard.icon', 'en')!;
+    const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+    const restored = segmentsFromEditableText(token + editableTextForSegments(previous, 'en'), toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
+    const restoredIcon = restored.find(run => run.symbolId === 'tag.discard.icon')!;
+
+    expect(sourceIcon.size).toBeCloseTo(5.6832, 3);
+    expect(sourceIcon.symbolMetrics).toBeUndefined();
+    expect(restoredIcon.size).toBe(sourceIcon.size);
+    expect(restoredIcon.color).toBe(sourceIcon.color);
+  });
+
+  it('round-trips the source style for every unadapted, unambiguous legacy glyph', () => {
+    const pagesRoot = join(process.cwd(), 'public/pages');
+    const aliases = new Map<number, { dom: any; elements: SourceInlineElement[]; compounds: any[] }>();
+    const targets: { pageNumber: number; blockId: string; lineId: string; spanIndex: number; symbolId: string }[] = [];
+    for (const pageDir of readdirSync(pagesRoot).filter(name => /^page_\d{3}$/.test(name))) {
+      const pageNumber = Number(pageDir.slice(-3));
+      const pageDirPath = join(pagesRoot, pageDir);
+      const dom = JSON.parse(readFileSync(join(pageDirPath, `${pageDir}_dom.json`), 'utf8'));
+      const sidecarPath = join(pageDirPath, 'inline_elements.json');
+      const elements = existsSync(sidecarPath)
+        ? JSON.parse(readFileSync(sidecarPath, 'utf8')).elements as SourceInlineElement[] : [];
+      const compoundPath = join(pageDirPath, 'compound_elements.json');
+      const compounds = existsSync(compoundPath) ? JSON.parse(readFileSync(compoundPath, 'utf8')).elements as any[] : [];
+      aliases.set(pageNumber, { dom, elements, compounds });
+
+      for (const block of dom.blocks) for (const line of block.lines) for (const [spanIndex, span] of line.spans.entries()) {
+        const symbol = resolveLegacySymbol(span.font, span.text);
+        if (!symbol || !isSymbolAllowed(symbol, 'paragraph')) continue;
+        const adapted = elements.some(element => element.anchor.side === 'replace' && element.symbolId === symbol.id
+          && element.anchor.blockId === block.id && element.anchor.lineId === line.id && element.anchor.spanIndex === spanIndex);
+        const compounded = compounds.some(element => element.anchor.blockId === block.id && element.anchor.lineId === line.id
+          && spanIndex >= element.anchor.spanStartIndex && spanIndex <= element.anchor.spanEndIndex);
+        if (!adapted && !compounded) targets.push({ pageNumber, blockId: block.id, lineId: line.id, spanIndex, symbolId: symbol.id });
+      }
+    }
+    expect(targets).toHaveLength(164);
+    expect(new Set(targets.map(target => target.pageNumber)).size).toBe(27);
+    expect(Object.fromEntries(['tag.passive.icon', 'marker.arrow', 'marker.star', 'tag.discard.icon', 'tag.status.icon']
+      .map(id => [id, targets.filter(target => target.symbolId === id).length]))).toEqual({
+      'tag.passive.icon': 69, 'marker.arrow': 48, 'marker.star': 26, 'tag.discard.icon': 19, 'tag.status.icon': 2,
+    });
+
+    for (const target of targets) {
+      const { dom, elements } = aliases.get(target.pageNumber)!;
+      const blockElements = elements.filter(element => element.anchor.blockId === target.blockId);
+      const blocks = attachSourceInlineElements(dom.blocks, blockElements);
+      const block = blocks.find((candidate: { id: string }) => candidate.id === target.blockId)!;
+      const sourceTemplateSegments = sourceSpanRuns(block.lines.flatMap((sourceLine: { spans: unknown[] }) => sourceLine.spans), mapFont);
+      const line = block.lines.find((candidate: { id: string }) => candidate.id === target.lineId)!;
+      const sourceRuns = sourceSpanRuns(line.spans, mapFont);
+      const sourceIcon = sourceRuns.find(run => run.symbolId === target.symbolId)!;
+      const previous = sourceRuns.filter(run => run !== sourceIcon);
+      const token = getSymbolEditorToken(target.symbolId, 'en')!;
+      const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+      const restored = segmentsFromEditableText(token + editableTextForSegments(previous, 'en'), toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
+      const restoredIcon = restored.find(run => run.symbolId === target.symbolId)!;
+
+      expect(restoredIcon.size).toBe(sourceIcon.size);
+      expect(restoredIcon.font).toBe(sourceIcon.font);
+      expect(restoredIcon.color).toBe(sourceIcon.color);
+      expect(restoredIcon.weight).toBe(sourceIcon.weight);
+      expect(restoredIcon.style).toBe(sourceIcon.style);
+      expect(restoredIcon.symbolMetrics).toBeUndefined();
+      const renderSymbol = (run: Segment) => renderToStaticMarkup(createElement(SemanticSymbol, {
+        id: run.symbolId!, language: 'en', size: run.size, color: run.color, metrics: run.symbolMetrics,
+      }));
+      expect(renderSymbol(restoredIcon)).toBe(renderSymbol(sourceIcon));
+    }
+  });
 
   for (const item of cases) {
     it(`p${item.page} restores ${item.symbolId} source styling and metrics after alias reinsertion`, () => {

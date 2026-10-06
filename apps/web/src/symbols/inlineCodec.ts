@@ -34,10 +34,13 @@ function uniqueSourceSymbolTemplates(segments:Segment[]):Map<string,Segment|null
     const id=segment.symbolId ?? resolveLegacySymbol(segment.font,segment.text)?.id;
     if(!id)continue;
     const existing=templates.get(id);
-    if(!segment.symbolMetrics || (templates.has(id) && (!existing || !sameSourceSymbolTemplate(existing,segment)))) {
+    if(templates.has(id) && (!existing || !sameSourceSymbolTemplate(existing,segment))) {
       templates.set(id,null);
     } else if(!templates.has(id)) {
-      templates.set(id,{...segment,symbolMetrics:{...segment.symbolMetrics}});
+      // A legacy font glyph can provide an unambiguous size/style template even
+      // when no sidecar supplied occurrence metrics; the renderer then uses its
+      // normal registry geometry for that alias.
+      templates.set(id,{...segment,...(segment.symbolMetrics ? {symbolMetrics:{...segment.symbolMetrics}} : {})});
     }
   }
   return templates;
