@@ -1,5 +1,5 @@
 import type { Segment } from '../components/RichSpanEditor';
-import { SEMANTIC_SYMBOLS, findSymbolByAlias, getSemanticSymbol, getSymbolEditorToken, isSymbolAllowed, type InlineEditorContext, type SymbolAliasPreferences, type SymbolLanguage } from './semanticSymbols';
+import { SEMANTIC_SYMBOLS, findSymbolByAlias, getSemanticSymbol, getSymbolEditorToken, isSymbolAllowed, resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences, type SymbolLanguage } from './semanticSymbols';
 
 export const SYMBOL_OBJECT_MARKER = '\uFFFC';
 type RunStyle = Omit<Segment, 'text' | 'symbolId'>;
@@ -7,6 +7,35 @@ const LEGACY_EDITOR_TOKENS = SEMANTIC_SYMBOLS.flatMap(symbol => Object.values(sy
   .sort((a,b) => b.token.length - a.token.length);
 
 export interface EditableTokenRange { start:number; end:number; id:string; token:string }
+
+/** Float-noise-tolerant identity check for a source icon's local appearance. */
+function sameSourceSymbolTemplate(a:Segment,b:Segment):boolean {
+  const visualFields: (keyof Segment)[] = ['font','size','color','weight','style','textStrokeWidthPt','textStrokeColor'];
+  if(!visualFields.every(key=>a[key]===b[key]))return false;
+  const metricFields: (keyof InlineSymbolMetrics)[] = ['widthEm','heightEm','verticalAlignEm','gapEm','trailingGapEm','renderVariant'];
+  return metricFields.every(key=>{
+    const first=a.symbolMetrics?.[key];const second=b.symbolMetrics?.[key];
+    return typeof first==='number' && typeof second==='number'
+      ? Math.abs(first-second)<=0.0001
+      : first===second;
+  });
+}
+
+/** A deleted/reinserted alias may inherit only one unambiguous source instance. */
+function uniqueSourceSymbolTemplates(segments:Segment[]):Map<string,Segment|null> {
+  const templates=new Map<string,Segment|null>();
+  for(const segment of segments) {
+    const id=segment.symbolId ?? resolveLegacySymbol(segment.font,segment.text)?.id;
+    if(!id)continue;
+    const existing=templates.get(id);
+    if(!segment.symbolMetrics || (templates.has(id) && (!existing || !sameSourceSymbolTemplate(existing,segment)))) {
+      templates.set(id,null);
+    } else if(!templates.has(id)) {
+      templates.set(id,{...segment,symbolMetrics:{...segment.symbolMetrics}});
+    }
+  }
+  return templates;
+}
 
 /** One tokenizer for serialization, atomic editing and clipboard boundaries. */
 export function editableTokenRanges(text:string, aliasPreferences?:SymbolAliasPreferences):EditableTokenRange[] {
@@ -55,7 +84,8 @@ export function editableTextForSegments(segments: Segment[], language: SymbolLan
 }
 
 export function segmentsFromEditableText(text: string, style: RunStyle, language: SymbolLanguage,
-  previous: Segment[] = [], context: InlineEditorContext = 'paragraph', aliasPreferences?:SymbolAliasPreferences): Segment[] {
+  previous: Segment[] = [], context: InlineEditorContext = 'paragraph', aliasPreferences?:SymbolAliasPreferences,
+  sourceTemplateSegments: Segment[] = []): Segment[] {
   // Exact round-trip keeps segmentation, style, unknown IDs and future metadata.
   if (text === editableTextForSegments(previous, language, aliasPreferences)) return previous.map(run => ({ ...run }));
   const baseline=editableTextForSegments(previous,language,aliasPreferences);
@@ -110,6 +140,7 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
   // Retain ordinary styles in unchanged regions; only a confidently uniform
   // source run may lend its style to replaced text.
   const oldSymbols = previous.filter(run => run.symbolId).flatMap(run => Array.from(run.text || SYMBOL_OBJECT_MARKER,()=>({ ...run })));
+  const sourceTemplates=uniqueSourceSymbolTemplates(sourceTemplateSegments);
   const output: Segment[] = [];
   const plain=(start:number,end:number)=>{
     const preserved=oldPlain.flatMap(old=>[
@@ -132,7 +163,12 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
     const old = oldIndex < 0 ? undefined : oldSymbols.splice(oldIndex,1)[0];
     const definition=getSemanticSymbol(id);
     if (definition && !old && !isSymbolAllowed(definition, context)) output.push({ ...style, text: token });
-    else output.push({ ...(old ?? style), text: SYMBOL_OBJECT_MARKER, symbolId: id });
+    else {
+      const sourceTemplate=sourceTemplates.get(id) ?? undefined;
+      const base=old ?? sourceTemplate ?? style;
+      output.push({ ...base, text: SYMBOL_OBJECT_MARKER, symbolId: id,
+        ...(!old?.symbolMetrics && sourceTemplate?.symbolMetrics ? {symbolMetrics:{...sourceTemplate.symbolMetrics}} : {}) });
+    }
     cursor=end;
   }
   if(cursor<text.length)plain(cursor,text.length);

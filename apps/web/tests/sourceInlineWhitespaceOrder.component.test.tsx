@@ -3,6 +3,8 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { attachSourceInlineElements, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
 import { sourceSpanRuns } from '../src/symbols/sourceRuns';
+import { editableTextForSegments, segmentsFromEditableText } from '../src/symbols/inlineCodec';
+import { getSymbolEditorToken } from '../src/symbols/semanticSymbols';
 
 const mapFont = (font: string) => ({ weight: font.includes('Bold') ? 700 : 400, style: 'normal' as const });
 
@@ -41,4 +43,46 @@ describe('source inline whitespace ordering', () => {
     expect(JSON.stringify(dom.blocks)).toBe(original);
     });
   }
+
+  for (const item of cases) {
+    it(`p${item.page} restores ${item.symbolId} source styling and metrics after alias reinsertion`, () => {
+      const pageDir = join(process.cwd(), 'public/pages', `page_${String(item.page).padStart(3, '0')}`);
+      const dom = JSON.parse(readFileSync(join(pageDir, `page_${String(item.page).padStart(3, '0')}_dom.json`), 'utf8'));
+      const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
+      const target = elements.find(element => element.symbolId === item.symbolId && element.anchor.lineId === item.lineId)!;
+      const blockElements = elements.filter(element => element.anchor.blockId === target.anchor.blockId);
+      const blocks = attachSourceInlineElements(dom.blocks, blockElements);
+      const block = blocks.find((candidate: { id: string }) => candidate.id === target.anchor.blockId)!;
+      const sourceTemplateSegments = sourceSpanRuns(block.lines.flatMap((line: { spans: unknown[] }) => line.spans), mapFont);
+      const line = block.lines.find((candidate: { id: string }) => candidate.id === item.lineId)!;
+      const sourceRuns = sourceSpanRuns(line.spans, mapFont);
+      const sourceIcon = sourceRuns.find(run => run.symbolId === item.symbolId)!;
+      const previous = sourceRuns.filter(run => run !== sourceIcon);
+      const sourceText = editableTextForSegments(previous, 'en');
+      const token = getSymbolEditorToken(item.symbolId, 'en')!;
+      const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+
+      const restored = segmentsFromEditableText(token + sourceText, toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
+      const restoredIcon = restored.find(run => run.symbolId === item.symbolId)!;
+
+      expect(restoredIcon).toBeDefined();
+      expect(restoredIcon.size).toBe(sourceIcon.size);
+      expect(restoredIcon.color).toBe(sourceIcon.color);
+      expect(restoredIcon.symbolMetrics).toEqual(sourceIcon.symbolMetrics);
+    });
+  }
+
+  it('does not choose a random source metric when one ID has conflicting source variants', () => {
+    const token = getSymbolEditorToken('dice.black', 'en')!;
+    const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+    const templates = [
+      { ...toolStyle, text: '\uFFFC', symbolId: 'dice.black', symbolMetrics: { widthEm: 1.1, heightEm: 1.2, verticalAlignEm: 0.2 } },
+      { ...toolStyle, text: '\uFFFC', symbolId: 'dice.black', symbolMetrics: { widthEm: 0.9, heightEm: 1.0, verticalAlignEm: 0.3 } },
+    ];
+    const result = segmentsFromEditableText(token, toolStyle, 'en', [], 'paragraph', undefined, templates);
+    const icon = result.find(run => run.symbolId === 'dice.black')!;
+
+    expect(icon.symbolMetrics).toBeUndefined();
+    expect(icon.size).toBe(toolStyle.size);
+  });
 });

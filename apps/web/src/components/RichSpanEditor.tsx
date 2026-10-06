@@ -589,7 +589,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     const text = normalizeText(next.text);
     const nextSegments = next.segments ?? segmentsFromEditableText(text, {
       font: toolFont, size: toolSize, color: toolColor, weight: toolWeight, style: toolStyle,
-    }, language, editTextSegments, editorContext, symbolAliasPreferences);
+    }, language, editTextSegments, editorContext, symbolAliasPreferences, originalSegments ?? []);
     pushHistory();
     setEditText(text);
     setEditTextSegments(nextSegments);
@@ -599,7 +599,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       editSelectionRef.current = { start: caret, end: caret };
       requestAnimationFrame(() => { editTextAreaRef.current?.setSelectionRange(caret, caret); });
     }
-  }, [normalizeText, toolFont, toolSize, toolColor, toolWeight, toolStyle, language, editTextSegments, editorContext, symbolAliasPreferences, pushHistory]);
+  }, [normalizeText, toolFont, toolSize, toolColor, toolWeight, toolStyle, language, editTextSegments, editorContext, symbolAliasPreferences, originalSegments, pushHistory]);
 
   const insertSemanticSymbol = useCallback((symbolId: string) => {
     const symbol = getSemanticSymbol(symbolId);
