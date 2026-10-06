@@ -236,6 +236,59 @@ describe('source inline whitespace ordering', () => {
     }
   });
 
+  it('round-trips all p. 78 weapon icon aliases across the three source path families', () => {
+    const pageDir = join(process.cwd(), 'public/pages', 'page_078');
+    const dom = JSON.parse(readFileSync(join(pageDir, 'page_078_dom.json'), 'utf8'));
+    const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
+    const attacks = elements.filter(element => element.symbolId === 'attack.melee'
+      || element.symbolId === 'attack.ranged' || element.symbolId === 'attack.melee-ranged');
+    expect(attacks).toHaveLength(18);
+    expect(attacks.filter(element => element.symbolId === 'attack.melee')).toHaveLength(8);
+    expect(attacks.filter(element => element.symbolId === 'attack.ranged')).toHaveLength(4);
+    expect(attacks.filter(element => element.symbolId === 'attack.melee-ranged')).toHaveLength(6);
+    const pathCounts = { 'attack.melee': 2, 'attack.ranged': 2, 'attack.melee-ranged': 4 } as const;
+    const aliases = { 'attack.melee': '[[sword]]', 'attack.ranged': '[[arrow]]', 'attack.melee-ranged': '[[sword-arrow]]' } as const;
+
+    for (const target of attacks) {
+      const blockElements = elements.filter(element => element.anchor.blockId === target.anchor.blockId);
+      const blocks = attachSourceInlineElements(dom.blocks, blockElements);
+      const block = blocks.find((candidate: { id: string }) => candidate.id === target.anchor.blockId)!;
+      const sourceTemplateSegments = sourceSpanRuns(block.lines.flatMap((line: { spans: unknown[] }) => line.spans), mapFont);
+      const line = block.lines.find((candidate: { id: string }) => candidate.id === target.anchor.lineId)!;
+      const sourceRuns = sourceSpanRuns(line.spans, mapFont);
+      const sourceIcon = sourceRuns.find(run => run.symbolId === target.symbolId)!;
+      const previous = sourceRuns.filter(run => run !== sourceIcon);
+      const token = getSymbolEditorToken(target.symbolId, 'en')!;
+      const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+      expect(token).toBe(aliases[target.symbolId as keyof typeof aliases]);
+
+      const restored = segmentsFromEditableText(token + editableTextForSegments(previous, 'en'), toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
+      const restoredIcon = restored.find(run => run.symbolId === target.symbolId)!;
+      expect(restoredIcon).toBeDefined();
+      expect(restoredIcon.size).toBe(sourceIcon.size);
+      expect(restoredIcon.color).toBe(sourceIcon.color);
+      expect(restoredIcon.symbolMetrics?.renderVariant).toBeUndefined();
+      for (const metric of ['widthEm', 'heightEm', 'verticalAlignEm', 'gapEm', 'trailingGapEm'] as const) {
+        const original = sourceIcon.symbolMetrics?.[metric];
+        const restoredMetric = restoredIcon.symbolMetrics?.[metric];
+        if (original === undefined || restoredMetric === undefined) {
+          expect(restoredMetric).toBe(original);
+        } else {
+          expect(Math.abs(restoredMetric - original) * sourceIcon.size).toBeLessThanOrEqual(0.0011);
+        }
+      }
+
+      const svg = renderToStaticMarkup(createElement(SemanticSymbol, {
+        id: restoredIcon.symbolId!, language: 'en', size: restoredIcon.size,
+        color: restoredIcon.color, metrics: restoredIcon.symbolMetrics,
+      }));
+      expect(svg.match(/<path\b/g)).toHaveLength(pathCounts[target.symbolId as keyof typeof pathCounts]);
+      expect(svg).toContain('fill="#231f20"');
+      expect(svg).toContain('fill="#ffffff"');
+      expect(svg).not.toMatch(/<rect(?:\s|>)/);
+    }
+  });
+
   it('does not choose a random source metric when one ID has conflicting source variants', () => {
     const token = getSymbolEditorToken('dice.black', 'en')!;
     const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
