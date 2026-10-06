@@ -1,4 +1,5 @@
 import type { LayoutFrame } from './components/PageRenderer';
+import { payloadApiUrl } from './config/payloadApi';
 
 export type LayoutLanguage = 'en' | 'pt-BR';
 
@@ -10,7 +11,7 @@ export interface LayoutFrameRecord {
 }
 
 const STORAGE_PREFIX = 'middara-layout-frames-v1';
-const PAYLOAD_URL = 'http://localhost:3000/api/layout-frames';
+const PAYLOAD_URL = payloadApiUrl('layout-frames');
 
 export function layoutFrameStorageKey(pageNumber: number, language: LayoutLanguage) {
   return `${STORAGE_PREFIX}-${language}-page-${pageNumber}`;

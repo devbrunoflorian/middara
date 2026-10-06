@@ -16,6 +16,7 @@ import { exposesNestedSpanTargets, hasPreservedLegacySpanOverride } from '../edi
 import { sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
 import './PageRenderer.css';
 import './Toast.css';
+import { payloadApiUrl } from '../config/payloadApi';
 
 /* ─────────────────────────────────────────────
    Types – match the exact JSON DOM structure
@@ -458,57 +459,9 @@ function normalizeStaticEditorPrefix(block: Block, override: SpanOverride | null
   return { ...override, segments: segments.filter(segment => segment.text.length > 0) };
 }
 
-function inferSourceInlineFlowLineHeight(block: Block): number | undefined {
-  const rows: { y: number; sizes: { size: number; weight: number }[] }[] = [];
-  for (const line of block.lines ?? []) {
-    const spans = line.spans.filter(span =>
-      span.text.trim() && !span.renderOnlyStrokePass && Number.isFinite(span.size) && span.size > 0,
-    );
-    if (!spans.length) continue;
-    const y = line.bbox[1];
-    let row = rows.find(candidate => Math.abs(candidate.y - y) <= 0.25);
-    if (!row) {
-      row = { y, sizes: [] };
-      rows.push(row);
-    }
-    for (const span of spans) {
-      row.sizes.push({ size: span.size, weight: Math.max(1, span.text.length) });
-    }
-  }
-  rows.sort((a, b) => a.y - b.y);
-  if (rows.length < 2) return undefined;
-
-  const sizeWeights = new Map<number, number>();
-  for (const row of rows) {
-    for (const entry of row.sizes) {
-      const size = Math.round(entry.size * 100) / 100;
-      sizeWeights.set(size, (sizeWeights.get(size) ?? 0) + entry.weight);
-    }
-  }
-  const totalWeight = [...sizeWeights.values()].reduce((sum, value) => sum + value, 0);
-  const [mainSize, mainWeight] = [...sizeWeights.entries()].sort((a, b) => b[1] - a[1])[0] ?? [];
-  if (!mainSize || mainSize < 4 || mainWeight / totalWeight < 0.8) return undefined;
-
-  const pitches = rows.slice(1).map((row, index) => (row.y - rows[index].y) / mainSize);
-  const sortedPitches = pitches.filter(Number.isFinite).sort((a, b) => a - b);
-  if (!sortedPitches.length) return undefined;
-  const middle = Math.floor(sortedPitches.length / 2);
-  const median = sortedPitches.length % 2
-    ? sortedPitches[middle]
-    : (sortedPitches[middle - 1] + sortedPitches[middle]) / 2;
-
-  // Inline SVG boxes can be taller than the PDF's text leading and inflate a
-  // browser line box. Seed the editor with the stable source row pitch instead
-  // of the CSS fallback; leave unusual/paragraph-spaced patterns editable.
-  if (median < 1.08 || median > 1.12) return undefined;
-  return Math.round(median * 100) / 100;
-}
-
 function extractBlockInfo(
   blockKey: string,
   block: Block,
-  language: 'en' | 'pt-BR',
-  hasSourceInlineSymbols: boolean,
 ): SelectedSpanInfo {
   let text = '';
   let font = '';
@@ -555,9 +508,7 @@ function extractBlockInfo(
     size,
     bbox: block.bbox,
     textAlign: block.layoutFrame?.textAlign || 'left',
-    lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight
-      ?? (language === 'en' && hasSourceInlineSymbols ? inferSourceInlineFlowLineHeight(block) : undefined)
-      ?? 1,
+    lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
     sourceSegments,
     singleLine: block.noWrap ?? false,
   };
@@ -565,6 +516,31 @@ function extractBlockInfo(
 
 function sourceSegmentsFromSpans(spans: SpanData[]): Segment[] {
   return sourceSpanRuns(spans,mapPdfFont);
+}
+
+/** Reuse measured source metrics for the same semantic occurrences in saved text. */
+function sourceMetricsForOverrideSegments(block: Block, segments: Segment[]): Segment[] {
+  const sourceSegments = sourceSegmentsFromSpans(editableBlockLines(block).flatMap(line => line.spans));
+  const metricsById = new Map<string, InlineSymbolMetrics[]>();
+  for (const source of sourceSegments) {
+    if (!source.symbolId || !source.symbolMetrics
+      || getSemanticSymbol(source.symbolId)?.sourceRendering !== 'semantic-inline') continue;
+    const entries = metricsById.get(source.symbolId) ?? [];
+    entries.push(source.symbolMetrics);
+    metricsById.set(source.symbolId, entries);
+  }
+
+  const occurrenceById = new Map<string, number>();
+  return segments.map(segment => {
+    const id = segment.symbolId ?? resolveLegacySymbol(segment.font, segment.text)?.id;
+    if (!id) return segment;
+    const sourceMetrics = metricsById.get(id);
+    if (!sourceMetrics?.length) return segment;
+    const occurrence = occurrenceById.get(id) ?? 0;
+    occurrenceById.set(id, occurrence + 1);
+    const measured = sourceMetrics[Math.min(occurrence, sourceMetrics.length - 1)];
+    return { ...segment, symbolMetrics: { ...measured, ...segment.symbolMetrics } };
+  });
 }
 
 /* ─────────────────────────────────────────────
@@ -601,7 +577,7 @@ async function findPayloadTranslation(spanKey: string, lang: string): Promise<an
       'where[and][0][spanKey][equals]': candidate,
       'where[and][1][language][equals]': lang,
     });
-    const response = await fetch(`http://localhost:3000/api/translations?${query}`);
+    const response = await fetch(`${payloadApiUrl('translations')}?${query}`);
     if (!response.ok) continue;
     const data = await response.json();
     if (data.docs?.length > 0) return data.docs[0];
@@ -611,7 +587,7 @@ async function findPayloadTranslation(spanKey: string, lang: string): Promise<an
 
 async function fetchOverridesFromPayload(lang: string): Promise<Map<string, SpanOverride> | null> {
   try {
-    const res = await fetch(`http://localhost:3000/api/translations?where[language][equals]=${lang}&limit=5000`);
+    const res = await fetch(`${payloadApiUrl('translations')}?where[language][equals]=${lang}&limit=5000`);
     if (res.ok) {
       const data = await res.json();
       const map = new Map<string, SpanOverride>();
@@ -640,14 +616,14 @@ async function saveOverrideToPayload(override: SpanOverride, lang: string): Prom
     const data = encodeOverrideData(override);
     if (existing) {
       const id = existing.id;
-      const res = await fetch(`http://localhost:3000/api/translations/${id}`, {
+      const res = await fetch(payloadApiUrl(`translations/${id}`), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ language: lang, data })
       });
       return res.ok;
     } else {
-      const res = await fetch(`http://localhost:3000/api/translations`, {
+      const res = await fetch(payloadApiUrl('translations'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ spanKey: storedSpanKey, language: lang, data })
@@ -664,7 +640,7 @@ async function deleteOverrideFromPayload(spanKey: string, lang: string): Promise
     const existing = await findPayloadTranslation(spanKey, lang);
     if (existing) {
       const id = existing.id;
-      const res = await fetch(`http://localhost:3000/api/translations/${id}`, {
+      const res = await fetch(payloadApiUrl(`translations/${id}`), {
         method: 'DELETE'
       });
       return res.ok;
@@ -824,15 +800,131 @@ function frameUnitKey(pageNumber: number, block: Block, blockIndex: number): str
   return block.editorKey ?? `page_${pageNumber}_block_${blockIndex}`;
 }
 
-function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 'pt-BR'): React.ReactNode {
+function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 'pt-BR', geometryMode: 'translatedFlow' | 'inline' = 'inline'): React.ReactNode {
   const legacy = !segment.symbolId ? resolveLegacySymbol(segment.font,segment.text) : undefined;
   const id=segment.symbolId ?? legacy?.id;
   if (!id) return segment.text;
-  return <>{Array.from(legacy ? '\uFFFC' : segment.text).map((_,index)=><SemanticSymbol key={index} id={id} language={language} size={segment.size*scale} color={segment.color} metrics={segment.symbolMetrics} />)}{legacy ? segment.text.match(/\s+$/)?.[0] : null}</>;
+  return <>{Array.from(legacy ? '\uFFFC' : segment.text).map((_,index)=><SemanticSymbol key={index} id={id} language={language} size={segment.size*scale} color={segment.color} geometryMode={geometryMode} metrics={segment.symbolMetrics} />)}{legacy ? segment.text.match(/\s+$/)?.[0] : null}</>;
+}
+
+/** Exact source rendering is available only when every extracted text run has its PDF origin. */
+function hasExactSourceGeometry(block: Block): boolean {
+  const spans = block.lines?.flatMap(line => line.spans) ?? [];
+  return spans.length > 0
+    && spans.some(span => !!span.semanticSymbolId)
+    && spans.every(span => {
+      if (span.semanticSymbolId) return span.bbox.every(Number.isFinite);
+      return Array.isArray(span.origin) && span.origin.length === 2 && span.origin.every(Number.isFinite)
+        && span.bbox.every(Number.isFinite) && !span.pictogramSvgPath
+        && !span.sourceCompoundHidden && !span.sourceCompoundSymbolId;
+    });
+}
+
+/**
+ * SOURCE geometry contract: SVG text y is the extracted PDF baseline, x is the
+ * extracted span origin, and semantic drawings use their source bbox. The SVGs
+ * are positioned independently, so neither symbol ink bounds nor line-height
+ * can change the source leading. PT-BR stays in the separate translatedFlow path.
+ */
+function SourceGeometryBlock({ block, scale, blockOriginX, blockOriginY }: {
+  block: Block; scale: number; blockOriginX: number; blockOriginY: number;
+}) {
+  const width = block.bbox[2] - blockOriginX;
+  const height = block.bbox[3] - blockOriginY;
+  const lines = block.lines ?? [];
+  return (
+    <svg className="source-geometry-renderer" data-source-geometry="pdf-coordinates"
+      width={width * scale} height={height * scale} viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio="none" aria-hidden="false"
+      style={{ position: 'absolute', inset: 0, overflow: 'visible', display: 'block' }}>
+      {lines.map((line, lineIndex) => {
+        const baselines = line.spans.flatMap(span => span.origin ? [span.origin[1]] : []);
+        return (
+          <g key={line.id ?? lineIndex} data-source-line-id={line.id}
+            data-source-baseline-y={baselines[0]}>
+            {line.spans.map((span, spanIndex) => {
+              if (span.renderOnlyStrokePass) return null;
+              if (span.sourceInlineCoveredBy) {
+                const origin = span.origin;
+                return (
+                  <g key={`${line.id}:${spanIndex}`} data-source-covered-span={`${line.id}:${span.sourceSpanIndex ?? spanIndex}`}
+                    data-source-covered-by={span.sourceInlineCoveredBy} data-source-x={origin?.[0]}
+                    data-source-baseline-y={origin?.[1]} data-source-bbox={span.bbox.join(',')} />
+                );
+              }
+              if (span.semanticSymbolId) {
+                const symbol = getSemanticSymbol(span.semanticSymbolId);
+                if (!symbol) return null;
+                const sourceRender = span.sourceSymbolMetrics?.renderVariant
+                  ? symbol.render.variants?.[span.sourceSymbolMetrics.renderVariant] ?? symbol.render
+                  : symbol.render;
+                const visual = sourceRender.localized?.en ?? sourceRender;
+                if (!visual.paths || !visual.viewBox) return null;
+                const [x0, y0, x1, y1] = span.bbox;
+                return (
+                  <svg key={`${line.id}:${spanIndex}`} data-source-symbol-id={span.semanticSymbolId}
+                    data-source-x={x0} data-source-y={y0} data-source-bbox={span.bbox.join(',')}
+                    x={x0 - blockOriginX} y={y0 - blockOriginY} width={x1 - x0} height={y1 - y0}
+                    viewBox={visual.viewBox.join(' ')} preserveAspectRatio="none"
+                    role="img" aria-label={symbol.labels.en} overflow="visible" style={{ color: span.color }}>
+                    {visual.paths.map((path, pathIndex) => <path key={pathIndex} {...path} />)}
+                  </svg>
+                );
+              }
+
+              const origin = span.origin;
+              if (!origin) return null;
+              const text = (span.renderTextOverride ?? span.displayOverride ?? span.text).replace(/[\r\n]+$/g, '');
+              const mapped = mapPdfFont(span.font);
+              const isOutlinedImportantGlyph = span.font?.includes('Webdings') && span.text === '\uF07E';
+              const sourceText = span.pictogramDisplayOverride ?? text;
+              if (!sourceText) return null;
+              const textLength = Math.max(0, span.bbox[2] - span.bbox[0]);
+              return (
+                <text key={`${line.id}:${spanIndex}`} data-source-span={`${line.id}:${span.sourceSpanIndex ?? spanIndex}`}
+                  data-source-x={origin[0]} data-source-baseline-y={origin[1]}
+                  data-source-bbox={span.bbox.join(',')} x={origin[0] - blockOriginX} y={origin[1] - blockOriginY}
+                  textLength={textLength || undefined} lengthAdjust="spacingAndGlyphs" xmlSpace="preserve"
+                  fill={isOutlinedImportantGlyph ? '#b91d23' : (span.color || '#231f20')}
+                  stroke={span.renderTextStrokeColor ?? (isOutlinedImportantGlyph ? '#ffffff' : 'none')}
+                  strokeWidth={span.renderTextStrokeWidthPt ?? (isOutlinedImportantGlyph ? 2 : undefined)}
+                  paintOrder="stroke fill"
+                  style={{ fontFamily: span.pictogramFontOverride ? `'${span.pictogramFontOverride}', sans-serif` : mapped.family,
+                    fontSize: span.renderSizeOverridePt ?? span.size,
+                    fontWeight: span.renderWeightOverride ?? mapped.weight, fontStyle: mapped.style,
+                    fontVariantCaps: mapped.variantCaps, letterSpacing: '-0.015em',
+                    fontVariantLigatures: 'none', fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0' }}>
+                  {sourceText}
+                </text>
+              );
+            })}
+          </g>
+        );
+      })}
+    </svg>
+  );
 }
 
 function hasInlineSemanticSymbol(segment: Segment): boolean {
   return Boolean(segment.symbolId || resolveLegacySymbol(segment.font, segment.text));
+}
+
+/** Clip a cleanup patch to the source circle, not the padded rectangular PNG. */
+function sourceMaskClipPath(element: SourceInlineElement): string | undefined {
+  if (element.mask.clipShape !== 'circle') return undefined;
+  const [maskX0, maskY0, maskX1, maskY1] = element.mask.bbox;
+  const [x0, y0, x1, y1] = element.bbox;
+  const maskWidth = maskX1 - maskX0;
+  const maskHeight = maskY1 - maskY0;
+  if (maskWidth <= 0 || maskHeight <= 0) return undefined;
+  // 0.3 pt covers the source raster's antialias fringe while keeping the
+  // cleaned area tied to the circular vector rather than the patch rectangle.
+  const bleedPt = 0.3;
+  const radiusX = ((x1 - x0) / 2 + bleedPt) / maskWidth * 100;
+  const radiusY = ((y1 - y0) / 2 + bleedPt) / maskHeight * 100;
+  const centerX = ((x0 + x1) / 2 - maskX0) / maskWidth * 100;
+  const centerY = ((y0 + y1) / 2 - maskY0) / maskHeight * 100;
+  return `ellipse(${radiusX}% ${radiusY}% at ${centerX}% ${centerY}%)`;
 }
 
 export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, onNavigate, language = 'en', symbolAliasPreferences, onPaletteEditorChange }) => {
@@ -1248,7 +1340,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
           </div>
         ))}
         {replacedInlineElements.map(element=><img key={element.mask.url} src={element.mask.url} alt="" aria-hidden="true" draggable={false}
-          style={{position:'absolute',left:element.mask.bbox[0]*scale,top:element.mask.bbox[1]*scale,width:(element.mask.bbox[2]-element.mask.bbox[0])*scale,height:(element.mask.bbox[3]-element.mask.bbox[1])*scale,zIndex:2,pointerEvents:'none'}} />)}
+          style={{position:'absolute',left:element.mask.bbox[0]*scale,top:element.mask.bbox[1]*scale,width:(element.mask.bbox[2]-element.mask.bbox[0])*scale,height:(element.mask.bbox[3]-element.mask.bbox[1])*scale,
+            clipPath:sourceMaskClipPath(element),zIndex:2,pointerEvents:'none'}} />)}
         {pageData.fidelityOverlays?.map((overlay) => {
           if ((!overlay.languageInvariant && overlay.language !== language) || (overlay.hideInAdmin && isAdmin)) return null;
           const [x0, y0, x1, y1] = overlay.bbox;
@@ -1540,7 +1633,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     : blockCanEdit ? `block-editable ${selectedBlockKey === blockKey ? 'block-selected' : ''}` : '';
   const handleBlockClick = () => {
     if (blockCanSelectLayout) onSelectLayoutFrame(layoutUnitKey, layoutFrameForSelection);
-    else if (blockCanEdit) onBlockClick(extractBlockInfo(blockKey, block, language, hasSourceInlineSymbols));
+    else if (blockCanEdit) onBlockClick(extractBlockInfo(blockKey, block));
   };
   const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
   const fixedLineIndexes = staticEditorLineIndexes(block);
@@ -1548,9 +1641,31 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     ?.flatMap(line => line.spans)
     .find(span => needsEsmeraldaHeadingDrop(span.font, span.size, span.bbox[3] - span.bbox[1]));
 
+  const sourceSegments = sourceSegmentsFromSpans(block.lines.flatMap(line => line.spans));
+  const sourceSignature = (segments: Segment[]) => segments
+    .map(segment => segment.symbolId ? `\uFFF9${segment.symbolId}\uFFFA` : segment.text)
+    .join('').replace(/[\s\u00a0]+/g, ' ').trim();
+  const sourceOverrideIsUnchanged = !!currentOverride
+    && sourceSignature(currentOverride.segments) === sourceSignature(sourceSegments);
+  if (language === 'en' && hasExactSourceGeometry(block) && (!currentOverride || sourceOverrideIsUnchanged)) {
+    return (
+      <div className={`block-container ${blockHoverClass} ${overflowClass}`} data-render-mode="sourceGeometry"
+        style={{ ...blockStyle, left: `${blockX * scale}px`, top: `${blockY * scale}px`, width: `${blockW * scale}px`, height: `${blockH * scale}px` }}
+        onClick={handleBlockClick} {...geometryAttributes}>
+        <SourceGeometryBlock block={block} scale={scale} blockOriginX={blockX} blockOriginY={blockY} />
+      </div>
+    );
+  }
+
   if (currentOverride) {
     const hasInlineSymbols = currentOverride.segments.some(hasInlineSemanticSymbol);
-    // Use a translation frame when supplied; otherwise keep the source-derived fallback.
+    const sourceAwareSegments = hasSourceInlineSymbols && hasInlineSymbols
+      ? sourceMetricsForOverrideSegments(block, currentOverride.segments)
+      : currentOverride.segments;
+    const fallbackLineHeight = currentOverride.lineHeight ?? block.defaultLineHeight ?? layoutFrameOverride?.lineHeight
+      ?? block.layoutFrame?.lineHeight ?? 1;
+    const effectiveLineHeight = fallbackLineHeight;
+    // Edited text uses translatedFlow; untouched EN stays in SourceGeometryBlock above.
     const fixedLineIndexes = staticEditorLineIndexes(block);
     const fixedLines = (block.lines ?? []).filter((_, index) => fixedLineIndexes.has(index));
     const firstLine = editableBlockLines(block)[0] ?? block.lines[0];
@@ -1599,15 +1714,13 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             width: `${blockLineW}px`,
             whiteSpace: block.noWrap ? 'pre' : 'pre-wrap',
             textAlign: currentOverride.textAlign ?? layoutFrameOverride?.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
-            lineHeight: currentOverride.lineHeight ?? block.defaultLineHeight ?? layoutFrameOverride?.lineHeight ?? block.layoutFrame?.lineHeight
-              ?? (language === 'en' && hasInlineSymbols ? inferSourceInlineFlowLineHeight(block) : undefined)
-              ?? 1,
+            lineHeight: effectiveLineHeight,
             display: 'block',
             fontSize: 0,
             cursor: layoutMode ? 'move' : isAdmin ? 'text' : 'default',
           }}
         >
-          {currentOverride.segments.map((seg, segIdx) => (
+          {sourceAwareSegments.map((seg, segIdx) => (
             <span
               key={segIdx}
               style={{
@@ -1635,7 +1748,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
               }}
             >
               {seg.symbolId || resolveLegacySymbol(seg.font,seg.text)
-                ? renderSegmentContent(seg, scale, language)
+                ? renderSegmentContent(seg, scale, language, 'translatedFlow')
                 : block.noWrap
                 ? seg.text.replace(/[\r\n]+/g, ' ').replace(/[\t ]+/g, ' ')
                 : seg.text}

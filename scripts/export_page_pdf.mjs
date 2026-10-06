@@ -4,6 +4,7 @@
 import { chromium } from 'playwright';
 import { readFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 function argsFrom(argv) {
   const result = { page: undefined, language: 'en', output: undefined, baseUrl: 'http://127.0.0.1:8080', apiUrl: 'http://127.0.0.1:3000', executablePath: undefined };
@@ -101,16 +102,23 @@ try {
   await page.getByTitle('Fit to Screen').click();
   await page.waitForTimeout(300);
   await page.emulateMedia({ media: 'print' });
-  // Retain the prototype stage ratio used for the current p.2 proof. The
-  // extra dark strip at the page edge is documented as a known print-geometry
-  // defect; do not treat this ratio as the final API/export contract.
-  const legacyStageScale = 1141.794 / 820.346;
-  const cssWidth = pageData.width * legacyStageScale;
-  const cssHeight = pageData.height * legacyStageScale;
+  // PageRenderer converts source points to CSS pixels at 96/72 and reserves
+  // 48 CSS px when fitting a page to its stage. Keep that extra room on the
+  // stage only; growing the printable root makes Chromium shrink the whole
+  // page to fit and exposes the app's dark background as an edge strip.
+  const cssWidth = pageData.width * (96 / 72);
+  const cssHeight = pageData.height * (96 / 72);
+  const stageCssWidth = cssWidth + 48;
+  const stageCssHeight = cssHeight + 48;
   await page.addStyleTag({ content: `
     @page { size: ${pageData.width}pt ${pageData.height}pt; margin: 0; }
-    html, body, #root, .app-container, .viewer-main, .page-wrapper, .page-renderer, .page-stage {
+    html, body, #root, .app-container, .viewer-main, .page-wrapper, .page-renderer {
       width: ${cssWidth}px !important; height: ${cssHeight}px !important;
+      min-width: 0 !important; min-height: 0 !important; max-width: none !important; max-height: none !important;
+      margin: 0 !important; padding: 0 !important; overflow: hidden !important; box-sizing: border-box !important;
+    }
+    .page-stage {
+      width: ${stageCssWidth}px !important; height: ${stageCssHeight}px !important;
       min-width: 0 !important; min-height: 0 !important; max-width: none !important; max-height: none !important;
       margin: 0 !important; padding: 0 !important; overflow: hidden !important; box-sizing: border-box !important;
     }
@@ -145,7 +153,16 @@ try {
     displayHeaderFooter: false,
     margin: { top: 0, bottom: 0, left: 0, right: 0 },
   });
-  console.log(JSON.stringify({ output: config.output, page: config.page, language: config.language, pageSizePt: [pageData.width, pageData.height], verifiedTranslationRecords: config.language === 'pt-BR' ? true : undefined }, null, 2));
+  const normalizePageBox = spawnSync('python', [
+    resolve('scripts/normalize_export_page_box.py'),
+    config.output,
+    String(pageData.width),
+    String(pageData.height),
+  ], { encoding: 'utf8' });
+  if (normalizePageBox.status !== 0) {
+    throw new Error(`Could not normalize the exported MediaBox: ${normalizePageBox.stderr || normalizePageBox.stdout}`);
+  }
+  console.log(JSON.stringify({ output: config.output, page: config.page, language: config.language, pageSizePt: [pageData.width, pageData.height], normalizedMediaBox: true, verifiedTranslationRecords: config.language === 'pt-BR' ? true : undefined }, null, 2));
 } finally {
   await browser.close();
 }

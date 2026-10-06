@@ -4,9 +4,14 @@ export type SymbolLanguage = 'en' | 'pt-BR';
 export type SymbolAliasPreferences = Record<string, string>;
 export type InlineEditorContext = 'paragraph' | 'typographic-field' | 'span-unit' | 'credit-field';
 export interface InlineSymbolMetrics {
+  /** Physical ink width from the source PDF, normalized to the owning font size. */
   widthEm: number;
+  /** Physical ink height from the source PDF; it must not set the CSS line box. */
   heightEm: number;
+  /** Positive values place the ink below the owning text baseline. */
   verticalAlignEm: number;
+  /** Horizontal text advance; defaults to the source ink width when omitted. */
+  advanceEm?: number;
   /** Source-measured whitespace between the owner word and this inline object. */
   gapEm?: number;
   /** Source-measured overlap/spacing after this object before the following text. */

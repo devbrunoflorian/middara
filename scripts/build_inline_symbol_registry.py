@@ -509,7 +509,11 @@ def build(apply, only_pages=None,registry_only=False):
             r=fitz.Rect(item['bbox'])+(-crop_pad,-crop_pad,crop_pad,crop_pad)
             # Pixel-aligned 4x masks preserve placement on the source canvas.
             r=fitz.Rect(math.floor(r.x0*4)/4,math.floor(r.y0*4)/4,math.ceil(r.x1*4)/4,math.ceil(r.y1*4)/4)
-            name=f'inline-element-mask-{i:03d}.png';item['mask']=dict(url=f'/pages/page_{page_no:03d}/{name}',bbox=list(r));item.pop('_stamp',None)
+            name=f'inline-element-mask-{i:03d}.png'
+            mask=dict(url=f'/pages/page_{page_no:03d}/{name}',bbox=list(r))
+            if item['symbolId'] in {'attack.melee','attack.ranged','attack.melee-ranged'}:
+                mask['clipShape']='circle'
+            item['mask']=mask;item.pop('_stamp',None)
             if apply:full.crop(tuple(round(v*4) for v in r)).save(page_dir/name)
         if apply:
             (page_dir/'inline_elements.json').write_text(json.dumps(dict(schemaVersion=1,elements=items),ensure_ascii=False,indent=2)+'\n',encoding='utf8')

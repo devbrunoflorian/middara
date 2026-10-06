@@ -1,4 +1,10 @@
-import type { Segment, SpanOverride } from '../components/RichSpanEditor';
+import type { LineHeightMode, Segment, SpanOverride } from '../components/RichSpanEditor';
+
+/** Older records used `1` as a CSS fallback; non-1 values are treated as custom. */
+export function lineHeightModeForOverride(override: Pick<SpanOverride, 'lineHeight' | 'lineHeightMode'> | null | undefined): LineHeightMode {
+  return override?.lineHeightMode
+    ?? (override?.lineHeight !== undefined && Math.abs(override.lineHeight - 1) > 0.001 ? 'custom' : 'source');
+}
 
 /** Adoption is editing history, not only the objects remaining in the text. */
 export function collectManagedSourceSymbols(previous: readonly string[], runs: readonly Segment[]): string[] {
@@ -12,6 +18,7 @@ export function initialManagedSourceSymbols(original: readonly Segment[], existi
 
 /** Preview and save serialize exactly the same contract. */
 export function createEditorOverride(spanKey: string, bbox: SpanOverride['bbox'], textAlign: SpanOverride['textAlign'],
-  segments: Segment[], managedSourceSymbols: readonly string[], lineHeight?: number): SpanOverride {
-  return { spanKey, bbox, textAlign, lineHeight, segments, managedSourceSymbols: collectManagedSourceSymbols(managedSourceSymbols, segments) };
+  segments: Segment[], managedSourceSymbols: readonly string[], lineHeight?: number,
+  lineHeightMode: SpanOverride['lineHeightMode'] = 'source'): SpanOverride {
+  return { spanKey, bbox, textAlign, lineHeight, lineHeightMode, segments, managedSourceSymbols: collectManagedSourceSymbols(managedSourceSymbols, segments) };
 }

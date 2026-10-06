@@ -5,8 +5,9 @@ import {
   normalizeEditorAlias,
   type SymbolAliasPreferences,
 } from './semanticSymbols';
+import { payloadApiUrl } from '../config/payloadApi';
 
-const SETTINGS_URL = 'http://localhost:3000/api/symbol-alias-settings';
+const SETTINGS_URL = payloadApiUrl('symbol-alias-settings');
 const SETTINGS_KEY = 'shared';
 
 export interface SymbolAliasSettingsLoad {

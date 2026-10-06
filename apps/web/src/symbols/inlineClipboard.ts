@@ -49,6 +49,7 @@ export function decodeInlineClipboard(payload: string, plainText: string, aliasP
       && (run.symbolMetrics === undefined || run.symbolMetrics && Number.isFinite(run.symbolMetrics.widthEm)
         && run.symbolMetrics.widthEm > 0 && Number.isFinite(run.symbolMetrics.heightEm) && run.symbolMetrics.heightEm > 0
         && Number.isFinite(run.symbolMetrics.verticalAlignEm)
+        && (run.symbolMetrics.advanceEm === undefined || Number.isFinite(run.symbolMetrics.advanceEm) && run.symbolMetrics.advanceEm > 0)
         && (run.symbolMetrics.trailingGapEm === undefined || Number.isFinite(run.symbolMetrics.trailingGapEm))))) return null;
     if (editableTextForSegments(data.segments, data.language, aliasPreferences) !== plainText) return null;
     return data.segments.map((run: Segment) => ({ ...run }));

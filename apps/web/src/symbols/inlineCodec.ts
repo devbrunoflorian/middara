@@ -16,7 +16,7 @@ function sameSourceSymbolTemplate(a:Segment,b:Segment):boolean {
   // in point space so the same PDF drawing does not become ambiguous solely
   // because its measured width landed on adjacent rounding steps.
   const sizePt=Number.isFinite(a.size) && a.size>0 ? a.size : undefined;
-  const metricFields: (keyof InlineSymbolMetrics)[] = ['widthEm','heightEm','verticalAlignEm','gapEm','trailingGapEm','renderVariant'];
+  const metricFields: (keyof InlineSymbolMetrics)[] = ['widthEm','heightEm','verticalAlignEm','advanceEm','gapEm','trailingGapEm','renderVariant'];
   return metricFields.every(key=>{
     const first=a.symbolMetrics?.[key];const second=b.symbolMetrics?.[key];
     if(typeof first==='number' && typeof second==='number') {

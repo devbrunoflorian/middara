@@ -11,7 +11,7 @@ export interface SourceInlineElement {
   color?: string;
   bbox: [number,number,number,number];
   anchor: { blockId: string; blockIndex: number; lineId: string; spanIndex: number; side: 'before'|'after'|'replace'|'replace-text'; sizePt: number; textRange?: [number,number]; lineStartX?: number; gapPt?: number; trailingGapPt?: number; ownerSpanRef?: { lineId: string; spanIndex: number } };
-  mask: { url: string; bbox: [number,number,number,number] };
+  mask: { url: string; bbox: [number,number,number,number]; clipShape?: 'circle' };
 }
 
 /** Virtual editor objects must not change advances in the untouched EN view. */
@@ -87,7 +87,7 @@ function includeInlineObjectsInSpanUnits(block: Block, elements: SourceInlineEle
 export function attachSourceInlineElements(blocks: Block[], elements: SourceInlineElement[]): Block[] {
   return blocks.map(block=>{
     const unitAwareBlock = includeInlineObjectsInSpanUnits(block, elements);
-    return { ...unitAwareBlock,lines:block.lines?.map(line=>{
+    return { ...unitAwareBlock,lines:unitAwareBlock.lines?.map(line=>{
     const lineElements=elements.filter(e=>e.anchor.blockId===block.id && e.anchor.lineId===line.id && getSemanticSymbol(e.symbolId));
     const requestedStart=lineElements.map(e=>e.anchor.lineStartX).filter((x):x is number=>x!==undefined);
     const coveredLineElements=elements.filter(e=>e.anchor.blockId===block.id && e.coveredSourceText?.lineId===line.id);
@@ -114,9 +114,12 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
       const matches=lineElements.filter(e=>sourceObjectInsertionIndex(e,line.spans)===index);
       const coveredBy=elements.find(e=>e.anchor.blockId===block.id && e.coveredSourceText?.lineId===line.id
         && e.coveredSourceText.spanIndex===(span.sourceSpanIndex ?? index));
-      const metricsFor=(e:SourceInlineElement):InlineSymbolMetrics|undefined=>e.metrics ? {...e.metrics,
-        ...(e.anchor.gapPt !== undefined ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {}),
-        ...(e.anchor.trailingGapPt !== undefined ? {trailingGapEm:e.anchor.trailingGapPt/e.anchor.sizePt} : {})} : undefined;
+      const metricsFor=(e:SourceInlineElement):InlineSymbolMetrics|undefined=>{
+        if(!e.metrics)return undefined;
+        return {...e.metrics,
+          ...(e.anchor.gapPt !== undefined ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {}),
+          ...(e.anchor.trailingGapPt !== undefined ? {trailingGapEm:e.anchor.trailingGapPt/e.anchor.sizePt} : {})};
+      };
       const make=(e:SourceInlineElement,styleSpan:SpanData,sourceSpanIndex:number):SpanData=>({ text:SYMBOL_OBJECT_MARKER,semanticSymbolId:e.symbolId,sourceSpanIndex,
         sourceSymbolMetrics:metricsFor(e),
         font:styleSpan.font,size:e.anchor.sizePt,color:e.color ?? styleSpan.color,flags:styleSpan.flags,bbox:e.bbox,renderAsSourceOverlayDuplicate:true,renderSourceOverlayLanguage:'all' });

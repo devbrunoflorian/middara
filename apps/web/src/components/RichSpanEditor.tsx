@@ -5,7 +5,7 @@ import type { AdminSymbolPaletteEditorState } from './AdminSymbolPalette';
 import { getDefaultSymbolAliasPreferences, getSemanticSymbol, getSymbolEditorToken, isSymbolAllowed, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences } from '../symbols/semanticSymbols';
 import { SemanticSymbol } from '../symbols/SemanticSymbol';
 import { SYMBOL_OBJECT_MARKER, editableTextForSegments, segmentsFromEditableText, replaceSegmentRange, insertEditorToken, deleteEditorToken, expandEditorTokenSelection, normalizeEditableInput } from '../symbols/inlineCodec';
-import { collectManagedSourceSymbols, initialManagedSourceSymbols, createEditorOverride } from '../symbols/editorOverride';
+import { collectManagedSourceSymbols, initialManagedSourceSymbols, createEditorOverride, lineHeightModeForOverride } from '../symbols/editorOverride';
 import { INLINE_CLIPBOARD_MIME, editableRangeToSegmentRange, sliceSegmentRange, encodeInlineClipboard, decodeInlineClipboard } from '../symbols/inlineClipboard';
 
 const PUA_MAPPING: Record<string, {name: string, pua_char: string, hex: string}[]> = puaMappingRaw;
@@ -56,6 +56,7 @@ export interface Segment {
 }
 
 export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
+export type LineHeightMode = 'source' | 'custom';
 
 export interface SpanOverride {
   spanKey: string;
@@ -64,6 +65,8 @@ export interface SpanOverride {
   textAlign?: TextAlignment;
   /** Unitless CSS line height used for explicit line breaks and wrapped rows. */
   lineHeight?: number;
+  /** Source leading is the default; `custom` means the admin changed the control. */
+  lineHeightMode?: LineHeightMode;
   /** Source IDs adopted by this edit, including objects deliberately deleted. */
   managedSourceSymbols?: string[];
 }
@@ -96,6 +99,7 @@ interface EditorSnapshot {
   segments: Segment[];
   textAlign: TextAlignment;
   lineHeight: number;
+  lineHeightMode: LineHeightMode;
   isEditingText: boolean;
   editText: string;
   editTextBaseline: string;
@@ -159,7 +163,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     }];
   }, [existingOverride, originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, normalizeText, singleLine]);
   const baseTextAlign = existingOverride?.textAlign ?? originalTextAlign;
-  const baseLineHeight = existingOverride?.lineHeight ?? originalLineHeight;
+  const baseLineHeightMode = lineHeightModeForOverride(existingOverride);
+  const baseLineHeight = baseLineHeightMode === 'custom' ? existingOverride?.lineHeight ?? originalLineHeight : originalLineHeight;
   const baseManagedSourceSymbols = useMemo(() => initialManagedSourceSymbols(originalSegments ?? baseSegments, existingOverride),
     [originalSegments, baseSegments, existingOverride]);
   const [managedSourceSymbols, setManagedSourceSymbols] = useState(baseManagedSourceSymbols);
@@ -179,6 +184,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const [toolLigatures, setToolLigatures] = useState(true);
   const [textAlign, setTextAlign] = useState<TextAlignment>(baseTextAlign);
   const [lineHeight, setLineHeight] = useState(baseLineHeight);
+  const [lineHeightMode, setLineHeightMode] = useState<LineHeightMode>(baseLineHeightMode);
   // Text editing
   const [isEditingText, setIsEditingText] = useState(false);
   const [editText, setEditText] = useState('');
@@ -202,6 +208,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       segments: segments.map(segment => ({ ...segment })),
       textAlign,
       lineHeight,
+      lineHeightMode,
       isEditingText,
       editText,
       editTextBaseline,
@@ -219,7 +226,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       toolSize,
       toolLigatures,
     };
-  }, [segments, textAlign, lineHeight, isEditingText, editText, editTextBaseline, editTextSegments, managedSourceSymbols, editInitialManagedSourceSymbols, selStart, selEnd, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures]);
+  }, [segments, textAlign, lineHeight, lineHeightMode, isEditingText, editText, editTextBaseline, editTextSegments, managedSourceSymbols, editInitialManagedSourceSymbols, selStart, selEnd, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures]);
 
   const pushHistory = useCallback(() => {
     const snapshot = createSnapshot();
@@ -231,6 +238,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setSegments(snapshot.segments.map(segment => ({ ...segment })));
     setTextAlign(snapshot.textAlign);
     setLineHeight(snapshot.lineHeight);
+    setLineHeightMode(snapshot.lineHeightMode);
     setIsEditingText(snapshot.isEditingText);
     setEditText(snapshot.editText);
     setEditTextBaseline(snapshot.editTextBaseline);
@@ -291,6 +299,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     if (Math.abs(value - lineHeight) < 0.001) return;
     pushHistory();
     setLineHeight(value);
+    setLineHeightMode('custom');
   }, [lineHeight, pushHistory]);
 
   useEffect(() => {
@@ -299,7 +308,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
   useEffect(() => {
     setLineHeight(baseLineHeight);
-  }, [spanKey, baseLineHeight]);
+    setLineHeightMode(baseLineHeightMode);
+  }, [spanKey, baseLineHeight, baseLineHeightMode]);
 
   useEffect(() => {
     setToolFont(editorFontForSource(originalFont));
@@ -355,6 +365,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const textChanged = isEditingText && editText !== editTextBaseline;
   const hasDraftChanges = segmentsChanged || textChanged || textAlign !== baseTextAlign
     || Math.abs(lineHeight - baseLineHeight) > 0.001
+    || lineHeightMode !== baseLineHeightMode
     || JSON.stringify(managedSourceSymbols) !== JSON.stringify(baseManagedSourceSymbols);
 
   const requestClose = useCallback(() => {
@@ -372,8 +383,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     }
 
     const previewSegments = isEditingText ? editTextSegments : segments;
-    onDraftChange(createEditorOverride(spanKey, bbox, textAlign, previewSegments, managedSourceSymbols, lineHeight));
-  }, [segments, editTextSegments, textAlign, lineHeight, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, managedSourceSymbols]);
+    onDraftChange(createEditorOverride(spanKey, bbox, textAlign, previewSegments, managedSourceSymbols, lineHeight, lineHeightMode));
+  }, [segments, editTextSegments, textAlign, lineHeight, lineHeightMode, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, managedSourceSymbols]);
 
   // Selection helpers
   const hasSelection = selStart !== null && selEnd !== null && selStart !== selEnd;
@@ -733,8 +744,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       return;
     }
     const finalSegments = isEditingText ? editTextSegments : segments;
-    onSave(createEditorOverride(spanKey, bbox, textAlign, finalSegments, managedSourceSymbols, lineHeight));
-  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign, lineHeight, isEditingText, editTextSegments, managedSourceSymbols]);
+    onSave(createEditorOverride(spanKey, bbox, textAlign, finalSegments, managedSourceSymbols, lineHeight, lineHeightMode));
+  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign, lineHeight, lineHeightMode, isEditingText, editTextSegments, managedSourceSymbols]);
 
   // Reset to original
   const handleReset = useCallback(() => {
