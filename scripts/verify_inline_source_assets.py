@@ -29,7 +29,11 @@ def main():
         dom=json.loads(next(path.parent.glob('page_*_dom.json')).read_text(encoding='utf8'));elements=json.loads(path.read_text(encoding='utf8'))['elements'];pages.append(dom['page_number']);seen=set()
         overlays_path=path.parent/'fidelity_overlays.json';overlays=json.loads(overlays_path.read_text(encoding='utf8')).get('overlays',[]) if overlays_path.exists() else []
         for e in elements:
-            a=e['anchor'];b=dom['blocks'][a['blockIndex']];l=next((l for l in b['lines'] if l['id']==a['lineId']),None);stamp=(e['symbolId'],a['lineId'],a['spanIndex'],a['side'])
+            a=e['anchor'];b=dom['blocks'][a['blockIndex']];l=next((l for l in b['lines'] if l['id']==a['lineId']),None)
+            # One source text span may own multiple adjacent symbols. Treat
+            # only exact same-geometry records as duplicates (p.78 has two
+            # distinct TEAL dice anchored after the same word).
+            stamp=(e['symbolId'],a['lineId'],a['spanIndex'],a['side'],tuple(round(v,3) for v in e['bbox']))
             if e['symbolId'] not in registry or not registry[e['symbolId']]['allowedBlockTypes']:errors.append(f'{path}: unregistered/fixed symbol')
             if stamp in seen:errors.append(f'{path}: duplicate {stamp}')
             seen.add(stamp)
