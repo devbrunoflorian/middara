@@ -6,7 +6,7 @@ import { sourceCompoundRun } from './sourceCompounds';
 /** Preserve text styles and carry the glyph's identity into the editable run. */
 export function sourceSpanRuns(spans: SpanData[], mapFont: (font:string)=>{weight:number;style:'normal'|'italic'}): Segment[] {
   return spans.filter(span=>!span.renderOnlyStrokePass).flatMap(span=>{
-    if (span.sourceCompoundHidden) return [];
+    if (span.sourceCompoundHidden || span.sourceInlineCoveredBy) return [];
     const mapped=mapFont(span.font);
     const run:Segment={text:span.displayOverride || span.text,font:span.font,size:span.renderSizeOverridePt ?? span.size,
       color:span.color || '#231f20',weight:span.renderWeightOverride ?? mapped.weight,style:mapped.style,

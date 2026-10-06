@@ -5,6 +5,8 @@ import { getSemanticSymbol, resolveLegacySymbol, type InlineSymbolMetrics } from
 
 export interface SourceInlineElement {
   symbolId: string;
+  /** Source text glyphs that are visually part of this composite symbol. */
+  coveredSourceText?: { lineId: string; spanIndex: number; text: string };
   metrics?: InlineSymbolMetrics;
   color?: string;
   bbox: [number,number,number,number];
@@ -88,6 +90,7 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
     return { ...unitAwareBlock,lines:block.lines?.map(line=>{
     const lineElements=elements.filter(e=>e.anchor.blockId===block.id && e.anchor.lineId===line.id && getSemanticSymbol(e.symbolId));
     const requestedStart=lineElements.map(e=>e.anchor.lineStartX).filter((x):x is number=>x!==undefined);
+    const coveredLineElements=elements.filter(e=>e.anchor.blockId===block.id && e.coveredSourceText?.lineId===line.id);
     const adjustedLine= requestedStart.length ? (()=>{
       const availableX=line.availableX ?? line.bbox[0];
       const availableWidth=line.availableWidth ?? line.bbox[2]-availableX;
@@ -97,15 +100,20 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
     })() : line;
     const sourceFlowStartPt = lineElements.length
       ? Math.min(...line.spans.filter(span=>!span.renderOnlyStrokePass).map(span=>span.bbox[0]),...lineElements.map(element=>element.bbox[0]))
-      : undefined;
+      : coveredLineElements.length ? Math.min(...coveredLineElements.map(element=>element.coveredSourceText!.spanIndex===0
+        ? line.spans[0]?.bbox[0] ?? line.bbox[0]
+        : line.spans[element.coveredSourceText!.spanIndex]?.bbox[0] ?? line.bbox[0]))
+        : undefined;
     const flowLine = lineElements.length && sourceFlowStartPt !== undefined && sourceFlowStartPt < (adjustedLine.availableX ?? adjustedLine.bbox[0])
       ? { ...adjustedLine,
         availableWidth: (adjustedLine.availableX ?? adjustedLine.bbox[0]) + (adjustedLine.availableWidth ?? adjustedLine.bbox[2] - (adjustedLine.availableX ?? adjustedLine.bbox[0])) - sourceFlowStartPt,
         availableX: sourceFlowStartPt,
       }
       : adjustedLine;
-    return {...flowLine,...(lineElements.length ? {renderSourceSpanGeometry:true,renderSourceSpanStartPt:sourceFlowStartPt} : {}),spans:line.spans.flatMap((span,index)=>{
+    return {...flowLine,...(sourceFlowStartPt !== undefined ? {renderSourceSpanGeometry:true,renderSourceSpanStartPt:sourceFlowStartPt} : {}),spans:line.spans.flatMap((span,index)=>{
       const matches=lineElements.filter(e=>sourceObjectInsertionIndex(e,line.spans)===index);
+      const coveredBy=elements.find(e=>e.anchor.blockId===block.id && e.coveredSourceText?.lineId===line.id
+        && e.coveredSourceText.spanIndex===(span.sourceSpanIndex ?? index));
       const metricsFor=(e:SourceInlineElement):InlineSymbolMetrics|undefined=>e.metrics ? {...e.metrics,
         ...(e.anchor.gapPt !== undefined ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {}),
         ...(e.anchor.trailingGapPt !== undefined ? {trailingGapEm:e.anchor.trailingGapPt/e.anchor.sizePt} : {})} : undefined;
@@ -116,6 +124,7 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
       const replacedLegacyGlyph=matches.find(e=>e.anchor.side==='replace' && e.anchor.spanIndex===index
         && resolveLegacySymbol(span.font,span.text)?.id===e.symbolId);
       return [...matches.filter(e=>e.anchor.side==='before').map(e=>make(e,line.spans[e.anchor.spanIndex] ?? span,index)),{...span,sourceSpanIndex:index,
+        ...(coveredBy ? {sourceInlineCoveredBy:coveredBy.symbolId} : {}),
         ...(replacedLegacyGlyph?.metrics ? {sourceSymbolMetrics:metricsFor(replacedLegacyGlyph)} : {}),
         ...(sourceInlineObjects.length?{sourceInlineObjects}:{}),
       },...matches.filter(e=>e.anchor.side==='after').map(e=>make(e,line.spans[e.anchor.spanIndex] ?? span,index))];
@@ -126,8 +135,9 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
 
 export function sourceElementIsReplaced(element: SourceInlineElement, block: Block, page: number, language: string,
   overrides: Map<string,SpanOverride>, selectedKey: string|null, draft: SpanOverride|null): boolean {
+  const overrideFor=(key:string)=>key===selectedKey && draft!==null ? draft : overrides.get(key);
   const has=(key:string)=> {
-    const override=key===selectedKey && draft!==null ? draft : overrides.get(key);
+    const override=overrideFor(key);
     // Old saved prose did not contain vector objects. Preserve its source ink
     // until that ID is inserted/adopted, including an intentional deletion.
     return !!override && (override.managedSourceSymbols?.includes(element.symbolId)
@@ -136,10 +146,18 @@ export function sourceElementIsReplaced(element: SourceInlineElement, block: Blo
   const ownerLineId=element.anchor.ownerSpanRef?.lineId ?? element.anchor.lineId;
   const ownerSpanRef=`${ownerLineId}:${element.anchor.ownerSpanRef?.spanIndex ?? element.anchor.spanIndex}`;
   const blockKey=block.editorKey ? `${block.editorKey}__${language}` : `page_${page}_block_${element.anchor.blockIndex}`;
-  if (has(blockKey)) return true;
-  return (block.typographicUnits ?? []).some(unit=>unit.field.lineIds.includes(ownerLineId) && has(`page_${page}_unit_${unit.id}__${language}`))
-    || (block.typographicSpanUnits ?? []).some(unit=>unit.spanRefs.includes(ownerSpanRef) && has(`page_${page}_unit_${unit.id}__${language}`))
-    || (block.creditUnits ?? (block.creditUnit?[block.creditUnit]:[])).some(unit=>[unit.label,unit.body].some(field=>field.lineIds.includes(ownerLineId) && has(`page_${page}_credit_${unit.id}_${field.id}__${language}`)));
+  const keys=[blockKey,
+    ...(block.typographicUnits ?? []).filter(unit=>unit.field.lineIds.includes(ownerLineId)).map(unit=>`page_${page}_unit_${unit.id}__${language}`),
+    ...(block.typographicSpanUnits ?? []).filter(unit=>unit.spanRefs.includes(ownerSpanRef)).map(unit=>`page_${page}_unit_${unit.id}__${language}`),
+    ...(block.creditUnits ?? (block.creditUnit?[block.creditUnit]:[])).flatMap(unit=>[unit.label,unit.body]
+      .filter(field=>field.lineIds.includes(ownerLineId)).map(field=>`page_${page}_credit_${unit.id}_${field.id}__${language}`)),
+  ];
+  if(keys.some(has))return true;
+  // A semantic-source family replaces its PDF paint only when this language
+  // has no legacy override for the owner. Legacy prose without symbol IDs
+  // keeps the original ink until the editor explicitly adopts the symbol.
+  if(keys.some(key=>overrideFor(key)))return false;
+  return getSemanticSymbol(element.symbolId)?.sourceRendering==='semantic-inline';
 }
 
 /** Cut only confirmed inline regions out of an existing source-art overlay. */

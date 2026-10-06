@@ -190,6 +190,114 @@ def source_baseline(page, dom, anchor, cache):
     if not matches:raise ValueError(f"No proven baseline p{page.number+1} {anchor['lineId']}:{anchor['spanIndex']}")
     return matches[0]['origin'][1]
 
+def hand_count_companion(page, icon_rect):
+    """Find an overlapping Cinzel 1/2 glyph that completes a hand icon."""
+    candidates={}
+    for trace in page.get_texttrace():
+        if 'Cinzel' not in trace['font']:continue
+        for char in trace['chars']:
+            digit=chr(char[0]) if char[0] in (ord('1'),ord('2')) else None
+            if not digit:continue
+            box=fitz.Rect(char[3])
+            if (box.x0 < icon_rect.x0+icon_rect.width*.55 or box.x0 >= icon_rect.x1
+                or box.y0 < icon_rect.y0+icon_rect.height*.35 or box.y1 <= icon_rect.y1):continue
+            key=(digit,tuple(round(v,4) for v in char[2]),tuple(round(v,4) for v in box))
+            candidates[key]=dict(digit=digit,origin=char[2],bbox=list(box),font=trace['font'])
+    return next(iter(candidates.values())) if len(candidates)==1 else None
+
+def source_glyph_paths(page, glyph, composition_rect):
+    """Extract every exact PDF text paint pass for one glyph outline."""
+    svg=ET.fromstring(page.get_svg_image(text_as_path=True));defs={n.attrib.get('id'):n for n in svg.findall('.//s:defs/*',NS)}
+    found=[]
+    for use in svg.findall('.//s:use',NS):
+        if use.attrib.get('data-text')!=glyph['digit']:continue
+        href=use.attrib.get('{http://www.w3.org/1999/xlink}href','').lstrip('#')
+        matrix=re.fullmatch(r'matrix\(([^)]+)\)',use.attrib.get('transform',''))
+        if href not in defs or not matrix:continue
+        m=[float(v) for v in re.split('[ ,]+',matrix[1])]
+        if abs(m[4]-glyph['origin'][0])<.02 and abs(m[5]-glyph['origin'][1])<.02:
+            found.append((use,defs[href],m))
+    if len(found)!=2:raise ValueError(f"Expected fill and outline PDF paints for Cinzel {glyph['digit']} at {glyph['origin']}, found {len(found)}")
+    box=fitz.Rect(glyph['bbox']);paths=[]
+    for use,path,m in found:
+        paint={}
+        for attribute in ('fill','stroke','stroke-width','stroke-linecap','stroke-linejoin'):
+            if attribute in use.attrib:
+                key={'stroke-width':'strokeWidth','stroke-linecap':'strokeLinecap','stroke-linejoin':'strokeLinejoin'}.get(attribute,attribute)
+                value=use.attrib[attribute]
+                paint[key]=float(value) if key=='strokeWidth' else value
+        paint.update(d=path.attrib['d'],transform=(
+            f'translate({box.x0-composition_rect.x0} {box.y0-composition_rect.y0}) '
+            f'matrix({m[0]} {m[1]} {m[2]} {m[3]} {m[4]-box.x0} {m[5]-box.y0})'))
+        paths.append(paint)
+    return paths
+
+def hand_count_definition(doc, icon_occurrence, digit_glyph, digit_span, anchor, baseline):
+    """Build a numbered hand semantic symbol from the exact vector and glyph."""
+    page=doc[77];icon_rect=fitz.Rect(icon_occurrence['bbox']);digit_rect=fitz.Rect(digit_glyph['bbox'])
+    rect=icon_rect|digit_rect;paths=[];drawings=source_drawings(page)
+    for index in icon_occurrence['drawingIndices']:
+        drawing=drawings[index]
+        paths.append(dict(d=vector_path(drawing),transform=f'translate({-rect.x0} {-rect.y0})',
+            fill=color(drawing.get('fill')),stroke=color(drawing.get('color')),strokeWidth=drawing.get('width') or 0,
+            fillRule='evenodd' if drawing.get('even_odd') else 'nonzero',
+            strokeLinecap=['butt','round','square'][max(drawing.get('lineCap') or (0,0,0))],
+            strokeLinejoin=['miter','round','bevel'][round(drawing.get('lineJoin') or 0)]))
+    paths=native_paint_colors(page,rect,paths)
+    paths.extend(source_glyph_paths(page,digit_glyph,rect))
+    digit=digit_glyph['digit'];word='one' if digit=='1' else 'two'
+    en='One-hand requirement' if digit=='1' else 'Two-hand requirement'
+    pt='Requisito de uma mão' if digit=='1' else 'Requisito de duas mãos'
+    symbol_id=f'weapon.hand.{word}';size=anchor['sizePt']
+    metrics=dict(widthEm=rect.width/size,heightEm=rect.height/size,verticalAlignEm=(rect.y1-baseline)/size)
+    entry=definition(symbol_id,en,pt,78,list(rect),dict(viewBox=[0,0,rect.width,rect.height],paths=paths,**metrics))
+    entry['sourceRendering']='semantic-inline'
+    entry['searchTerms']['en']+=['hand',f'{digit} hand',f'{digit}-handed']
+    entry['searchTerms']['pt-BR']+=['mão',f'{digit} mãos']
+    covered=dict(lineId=digit_span['_lineId'],spanIndex=digit_span['_spanIndex'],text=digit)
+    source_anchor={**anchor,'trailingGapPt':0}
+    placement=dict(symbolId=symbol_id,bbox=list(rect),drawingIndices=icon_occurrence['drawingIndices'],
+        anchor=source_anchor,metrics=metrics,coveredSourceText=covered)
+    return entry,placement
+
+def discover_hand_compositions(doc, audit):
+    """Resolve exact hand+count compositions in semantic inline prose."""
+    page=doc[77];dom=json.loads((ROOT/'apps/web/public/pages/page_078/page_078_dom.json').read_text(encoding='utf8'))
+    prototype=complete_component(doc[27],audit['inlineVectorCandidates'][253]['occurrences'][0])
+    occurrences=[]
+    for group in audit['inlineVectorCandidates']:
+        for candidate in group['occurrences']:
+            candidate_page=doc[candidate['page']-1]
+            component=complete_component(candidate_page,candidate)
+            if same_component(candidate_page,component,doc[27],prototype):occurrences.append(component)
+    found={}
+    for occurrence in occurrences:
+        if occurrence.get('page')!=78:continue
+        icon_rect=fitz.Rect(occurrence['bbox']);digit=hand_count_companion(page,icon_rect)
+        anchor=anchor_for(dom,icon_rect)
+        if digit is None or anchor is None:continue
+        digit_rect=fitz.Rect(digit['bbox']);matches=[]
+        for block in dom['blocks']:
+            for line in block.get('lines',[]):
+                for index,span in enumerate(line['spans']):
+                    if (span['text'].strip()==digit['digit'] and 'Cinzel' in span['font']
+                        and abs(span['bbox'][0]-digit_rect.x0)<.05):
+                        matches.append({**span,'_lineId':line['id'],'_spanIndex':index})
+        if len(matches)!=1:raise ValueError(f"Ambiguous hand count text on p78: {digit['digit']} {digit_rect}")
+        digit_span=matches[0]
+        if digit_span['_lineId']==anchor['lineId'] or digit_span['text'].strip()!=digit['digit']:
+            raise ValueError('The hand count must remain a separately extracted source glyph')
+        owner=dom['blocks'][anchor['blockIndex']]['lines']
+        owner_line=next(line for line in owner if line['id']==anchor['lineId'])
+        if abs(owner_line['spans'][anchor['spanIndex']]['size']-10)>.02:
+            raise ValueError(f"Unexpected p78 hand owner size: {anchor}")
+        baseline=source_baseline(page,dom,anchor,{})
+        entry,placement=hand_count_definition(doc,occurrence,digit,digit_span,anchor,baseline)
+        found[tuple(occurrence['drawingIndices'])]=dict(entry=entry,placement=placement,occurrence=occurrence)
+    if len(found)!=2 or {item['entry']['id'] for item in found.values()}!={'weapon.hand.one','weapon.hand.two'}:
+        raise ValueError(f"Expected one source composition per hand count on p78, found {sorted(item['entry']['id'] for item in found.values())}")
+    return found
+
 def build(apply, only_pages=None,registry_only=False):
     audit=json.loads(AUDIT.read_text(encoding='utf8'));doc=fitz.open(PDF)
     # Indices address the source-reviewed atlas, not arbitrary new candidates.
@@ -239,6 +347,7 @@ def build(apply, only_pages=None,registry_only=False):
     # Distribute only complete geometry matches to their reviewed recipes.
     circles=[complete_component(doc[o['page']-1],o) for o in audit['inlineVectorCandidates'][23]['occurrences']]
     selected=[(id,o,circles if id.startswith('attack.') else occurrences) for id,o,occurrences in selected]
+    hand_compositions=discover_hand_compositions(doc,audit)
     placements=defaultdict(list)
     for id,o,occurrences in selected:
         page=doc[o['page']-1];drawings=source_drawings(page);rect=fitz.Rect(o['bbox']);paths=[]
@@ -257,12 +366,25 @@ def build(apply, only_pages=None,registry_only=False):
                 if p['stroke']!='none':p['stroke']='currentColor'
         en,pt=labels[id];size=10
         entry=definition(id,en,pt,o['page'],list(rect),dict(viewBox=[0,0,rect.width,rect.height],paths=paths,widthEm=rect.width/size,heightEm=rect.height/size,verticalAlignEm=.18),'Dados' if id.startswith('dice.') else 'Regras e combate')
+        if id=='weapon.hand':
+            # Retain the old unnumbered ID for saved segments, but don't offer
+            # it as a new editor symbol: the source compositions include 1/2.
+            entry['allowedBlockTypes']=[]
+            entry['description']['en']='Unnumbered hand glyph retained for saved-object compatibility.'
+            entry['description']['pt-BR']='Glifo de mão sem número mantido para compatibilidade de objetos salvos.'
         entries.append(entry)
+        if id=='weapon.hand':entries.extend(item['entry'] for item in hand_compositions.values())
         if id=='combat.page':
             entry['searchTerms']['en']+=['book','sheet']
             entry['searchTerms']['pt-BR']+=['livro','página']
         for occurrence in [o]+occurrences:
             if not same_component(doc[occurrence['page']-1],occurrence,page,o):continue
+            if id=='weapon.hand':
+                composition=hand_compositions.get(tuple(occurrence['drawingIndices']))
+                if composition:
+                    page_no=78;placement=dict(composition['placement'],_stamp=(composition['entry']['id'],tuple(composition['placement']['bbox'])))
+                    if not any(item['_stamp']==placement['_stamp'] for item in placements[page_no]):placements[page_no].append(placement)
+                    continue
             page_no=occurrence['page'];dompath=ROOT/f'apps/web/public/pages/page_{page_no:03d}/page_{page_no:03d}_dom.json';dom=json.loads(dompath.read_text(encoding='utf8'));r=fitz.Rect(occurrence['bbox']);anchor=anchor_for(dom,r)
             if id=='terrain.red-border':
                 assert page_no==39 and occurrence['drawingIndices']==[188]

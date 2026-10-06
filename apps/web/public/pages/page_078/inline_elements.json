@@ -983,28 +983,17 @@
       "symbolId": "dice.black"
     },
     {
+      "symbolId": "weapon.hand.two",
       "bbox": [
-        304.728912353516,
-        139.369522094727,
-        318.646911621094,
-        152.269515991211
+        304.7289123535156,
+        139.36952209472656,
+        321.71270751953125,
+        155.91363525390625
       ],
       "drawingIndices": [
         185,
         186
       ],
-      "blockIndex": 12,
-      "blockId": "block_25",
-      "lineId": "line_25_2",
-      "spanIndex": 2,
-      "expectedText": " Ability may equip ",
-      "followingLineId": "line_25_3",
-      "followingText": "2",
-      "metrics": {
-        "widthEm": 1.3917999267577954,
-        "heightEm": 1.2899993896484006,
-        "verticalAlignEm": 0.14045867919922445
-      },
       "anchor": {
         "blockId": "block_25",
         "blockIndex": 12,
@@ -1012,42 +1001,40 @@
         "spanIndex": 2,
         "side": "after",
         "sizePt": 10.0,
-        "trailingGapPt": -3.1042175292971024
+        "trailingGapPt": 0
+      },
+      "metrics": {
+        "widthEm": 1.6983795166015625,
+        "heightEm": 1.6544113159179688,
+        "verticalAlignEm": 0.50487060546875
+      },
+      "coveredSourceText": {
+        "lineId": "line_25_3",
+        "spanIndex": 0,
+        "text": "2"
       },
       "mask": {
         "url": "/pages/page_078/inline-element-mask-026.png",
         "bbox": [
           304.25,
           138.75,
-          319.25,
-          152.75
+          322.25,
+          156.5
         ]
-      },
-      "symbolId": "weapon.hand"
+      }
     },
     {
+      "symbolId": "weapon.hand.one",
       "bbox": [
-        336.199279785156,
-        151.369522094727,
-        350.118286132812,
-        164.269515991211
+        336.19927978515625,
+        151.36952209472656,
+        352.0641784667969,
+        167.91363525390625
       ],
       "drawingIndices": [
         193,
         194
       ],
-      "blockIndex": 12,
-      "blockId": "block_25",
-      "lineId": "line_25_5",
-      "spanIndex": 0,
-      "expectedText": " (Melee/Ranged) Weapons as if they were ",
-      "followingLineId": "line_25_6",
-      "followingText": "1",
-      "metrics": {
-        "widthEm": 1.3919006347655967,
-        "heightEm": 1.2899993896484006,
-        "verticalAlignEm": 0.24045867919922442
-      },
       "anchor": {
         "blockId": "block_25",
         "blockIndex": 12,
@@ -1055,18 +1042,27 @@
         "spanIndex": 0,
         "side": "after",
         "sizePt": 10.0,
-        "trailingGapPt": -1.9841003417963634
+        "trailingGapPt": 0
+      },
+      "metrics": {
+        "widthEm": 1.5864898681640625,
+        "heightEm": 1.6544113159179688,
+        "verticalAlignEm": 0.60487060546875
+      },
+      "coveredSourceText": {
+        "lineId": "line_25_6",
+        "spanIndex": 0,
+        "text": "1"
       },
       "mask": {
         "url": "/pages/page_078/inline-element-mask-027.png",
         "bbox": [
           335.75,
           150.75,
-          350.75,
-          164.75
+          352.5,
+          168.5
         ]
-      },
-      "symbolId": "weapon.hand"
+      }
     }
   ]
 }

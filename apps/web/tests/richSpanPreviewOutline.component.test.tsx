@@ -125,7 +125,8 @@ describe('RichSpanEditor live PageRenderer preview', () => {
     const textarea = view.container.querySelector('.rse-edit-text textarea') as HTMLTextAreaElement;
     expect(textarea.value).toContain('[[sword]]');
     expect(textarea.value).toContain('[[sword-arrow]]');
-    expect(textarea.value).toContain('[[hand-requirement]]');
+    expect(textarea.value).toContain('[[2hand]]');
+    expect(textarea.value).toContain('[[1hand]]');
     const sourceWords = 'Adventurers with the ';
     const translation = 'Aventureiros com a ';
     const translatedText = textarea.value.replace(sourceWords, translation);
@@ -142,10 +143,10 @@ describe('RichSpanEditor live PageRenderer preview', () => {
 
     expect(Array.from(view.container.querySelectorAll('.realbox')).some(box => box.textContent?.includes(translation))).toBe(true);
     const sourceVectors = inlineElements.elements.filter(element => element.anchor.blockId === 'block_25'
-      && ['attack.melee', 'attack.melee-ranged', 'weapon.hand'].includes(element.symbolId));
+      && ['attack.melee', 'attack.melee-ranged', 'weapon.hand.one', 'weapon.hand.two'].includes(element.symbolId));
     const renderedVectors = Array.from(view.container.querySelectorAll('.realbox svg[data-symbol-id]')) as SVGSVGElement[];
     expect(sourceVectors).toHaveLength(4); // Melee, Melee/Ranged, two-handed hand, one-handed hand.
-    for (const symbolId of ['attack.melee', 'attack.melee-ranged', 'weapon.hand']) {
+    for (const symbolId of ['attack.melee', 'attack.melee-ranged', 'weapon.hand.one', 'weapon.hand.two']) {
       const sourceMetrics = sourceVectors.filter(element => element.symbolId === symbolId).map(requireMetrics);
       const actualMetrics = renderedVectors.filter(element => element.dataset.symbolId === symbolId).map(element => {
         const fontSize = Number.parseFloat((element.parentElement as HTMLElement).style.fontSize);
@@ -166,18 +167,10 @@ describe('RichSpanEditor live PageRenderer preview', () => {
         expect(element.style.backgroundColor).toBe('');
       }
     }
-    const sourceHandGaps = sourceVectors.filter(element => element.symbolId === 'weapon.hand')
-      .map(element => {
-        expect(element.anchor.trailingGapPt).toBeDefined();
-        return element.anchor.trailingGapPt! / element.anchor.sizePt;
-      }).sort((a, b) => a - b);
-    const renderedHandGaps = renderedVectors.filter(element => element.dataset.symbolId === 'weapon.hand')
-      .map(element => Number.parseFloat(element.style.marginInlineEnd)
-        / Number.parseFloat((element.parentElement as HTMLElement).style.fontSize)).sort((a, b) => a - b);
-    expect(sourceHandGaps.every(gap => gap < 0)).toBe(true);
-    expect(renderedHandGaps).toHaveLength(sourceHandGaps.length);
-    for (let index = 0; index < sourceHandGaps.length; index++) {
-      expect(renderedHandGaps[index]).toBeCloseTo(sourceHandGaps[index], 5);
-    }
+    const sourceHands = sourceVectors.filter(element => element.symbolId.startsWith('weapon.hand.'));
+    const renderedHands = renderedVectors.filter(element => element.dataset.symbolId.startsWith('weapon.hand.'));
+    expect(sourceHands).toHaveLength(2);
+    expect(sourceHands.every(element => element.anchor.trailingGapPt === 0)).toBe(true);
+    expect(renderedHands.every(element => !element.style.marginInlineEnd)).toBe(true);
   });
 });

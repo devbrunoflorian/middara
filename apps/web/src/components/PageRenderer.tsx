@@ -5,7 +5,7 @@ import { AdminRuler } from './AdminRuler';
 import { AdminLayoutFrameEditor } from './AdminLayoutFrameEditor';
 import type { LayoutAlignmentGuide, SnapFrameRect } from '../layoutFrameSnapping';
 import { deleteLayoutFrame, fetchLayoutFrames, loadLocalLayoutFrames, saveLayoutFrame, saveLocalLayoutFrames, type LayoutLanguage } from '../layoutFrames';
-import { resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences } from '../symbols/semanticSymbols';
+import { getSemanticSymbol, resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences } from '../symbols/semanticSymbols';
 import { SemanticSymbol } from '../symbols/SemanticSymbol';
 import { sourceSpanRuns } from '../symbols/sourceRuns';
 import { compoundElementIsReplaced, type SourceCompoundElement } from '../symbols/sourceCompounds';
@@ -23,6 +23,8 @@ import './Toast.css';
 export interface SpanData {
   /** Runtime inline symbol adapter; does not rewrite source extraction IDs. */
   semanticSymbolId?: string;
+  /** Source text glyph represented inside a numbered semantic inline symbol. */
+  sourceInlineCoveredBy?: string;
   sourceSymbolMetrics?: InlineSymbolMetrics;
   sourceSpanIndex?: number;
   /** Explicit source-reviewed whitespace slots; source paint remains unchanged. */
@@ -872,6 +874,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
     const block=pageData.blocks.find(b=>b.id===element.anchor.blockId);
     return block && sourceElementIsReplaced(element,block,pageData.page_number,language,overrides,selectedSpan?.spanKey ?? null,draftOverride);
   });
+  const coveredSourceSymbols = new Set(replacedInlineElements.filter(element=>element.coveredSourceText)
+    .map(element=>element.symbolId));
 
   useEffect(() => {
     let active = true;
@@ -1204,6 +1208,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
               key={block.id}
               block={pageData.contentsRows?.some(row=>block.lines?.some(line=>line.id===row.numberLineId)) ? {...block,adminReadOnly:true} : block}
               hasSourceInlineSymbols={hasSourceInlineSymbols}
+              coveredSourceSymbols={coveredSourceSymbols}
               allBlocks={pageData.blocks}
               layoutObstacles={pageData.layoutObstacles ?? []}
               blockIdx={bIdx}
@@ -1395,6 +1400,7 @@ function ContentsLabelBlock({
 interface SpanBlockProps {
   block: Block;
   hasSourceInlineSymbols: boolean;
+  coveredSourceSymbols: Set<string>;
   allBlocks: Block[];
   layoutObstacles: [number, number, number, number][];
   blockIdx: number;
@@ -1417,7 +1423,7 @@ interface SpanBlockProps {
 }
 
 const SpanBlock: React.FC<SpanBlockProps> = ({
-  block, hasSourceInlineSymbols, allBlocks, layoutObstacles, blockIdx, pageNumber, scale, isAdmin, contentsMap,
+  block, hasSourceInlineSymbols, coveredSourceSymbols, allBlocks, layoutObstacles, blockIdx, pageNumber, scale, isAdmin, contentsMap,
   onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutFrameForSelection, layoutFrameOverride, onSelectLayoutFrame,
   selectedBlockKey, overrides, overridesReady, draftOverride, language
 }) => {
@@ -1658,6 +1664,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             isAdmin={blockCanEdit && !isFixedLine}
             isSelected={false}
             language={language}
+            coveredSourceSymbols={coveredSourceSymbols}
             onClick={() => {}}
             inlineSpanStates={inlineSpanStates}
             onInlineSpanClick={state => onBlockClick(state.info)}
@@ -2008,6 +2015,7 @@ interface LineRendererProps {
   isAdmin: boolean;
   isSelected: boolean;
   language: 'en' | 'pt-BR';
+  coveredSourceSymbols?: Set<string>;
   override?: SpanOverride;
   onClick: () => void;
   inlineSpanStates?: Map<string, InlineSpanUnitRenderState>;
@@ -2017,6 +2025,7 @@ interface LineRendererProps {
 const LineRenderer: React.FC<LineRendererProps> = ({ 
   line, scale, blockOriginX, blockOriginY, targetPage, 
   onNavigate, isAdmin, isSelected, language, override, onClick, inlineSpanStates, onInlineSpanClick,
+  coveredSourceSymbols,
 }) => {
   // Some composite source illustrations (for example page 15's inset encounter
   // diagram) already contain these words in the background artwork. Keep the
@@ -2209,19 +2218,27 @@ const LineRenderer: React.FC<LineRendererProps> = ({
         if (span.renderOnlyStrokePass) return null;
         if (isReplacedBySourceOverlay && (!inlineUnit?.override || span.semanticSymbolId)) {
           if (!useSourceGeometry || !span.semanticSymbolId) return null;
+          const renderSemanticSource = getSemanticSymbol(span.semanticSymbolId)?.sourceRendering === 'semantic-inline';
+          const sourceSymbolMetrics = span.sourceSymbolMetrics
+            ? { ...span.sourceSymbolMetrics, gapEm: undefined, trailingGapEm: undefined }
+            : undefined;
           return (
             <span
               key={si}
-              aria-hidden="true"
-              data-source-inline-placeholder={span.semanticSymbolId}
+              aria-hidden={renderSemanticSource ? undefined : 'true'}
+              data-source-inline-placeholder={renderSemanticSource ? undefined : span.semanticSymbolId}
+              data-source-inline-semantic={renderSemanticSource ? span.semanticSymbolId : undefined}
               style={{
                 flex: `0 0 ${sourceAdvanceWidth}px`,
                 marginInlineStart: `${sourceAdvanceGap}px`,
                 minWidth: 0,
-                visibility: 'hidden',
+                ...(renderSemanticSource ? {} : { visibility: 'hidden' }),
                 pointerEvents: 'none',
               }}
-            />
+            >
+              {renderSemanticSource ? <SemanticSymbol id={span.semanticSymbolId} language={language}
+                size={span.size * scale} color={span.color} metrics={sourceSymbolMetrics} /> : null}
+            </span>
           );
         }
         // The source PDF paints Webdings U+F07E twice at the same bbox: a
@@ -2291,6 +2308,10 @@ const LineRenderer: React.FC<LineRendererProps> = ({
 
         if (span.sourceCompoundHidden || span.sourceCompoundSymbolId) {
           return <span key={si} aria-hidden="true" style={{ ...spanStyle, visibility: 'hidden', pointerEvents: 'none' }}>{span.text}</span>;
+        }
+        if (span.sourceInlineCoveredBy && coveredSourceSymbols?.has(span.sourceInlineCoveredBy)) {
+          return <span key={si} aria-hidden="true" data-source-inline-covered={span.sourceInlineCoveredBy}
+            style={{ ...spanStyle, visibility: 'hidden', pointerEvents: 'none' }}>{span.text}</span>;
         }
 
         const inlineOverrideSegments = inlineUnit?.override?.segments ?? [];

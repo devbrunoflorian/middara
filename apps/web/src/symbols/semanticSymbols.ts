@@ -38,6 +38,8 @@ export interface SemanticSymbolDefinition {
     bboxPt: [number, number, number, number];
     assetSizePx: [number, number];
   };
+  /** Use this semantic renderer for untouched source inline placements in both language views. */
+  sourceRendering?: 'semantic-inline';
   render: {
     widthEm: number;
     heightEm?: number;
@@ -124,6 +126,8 @@ const PREFERRED_EDITOR_ALIASES: Record<string, string[]> = {
   'combat.damage-star': ['damage-star', 'estrela-de-dano'],
   'combat.shield': ['defense-shield', 'escudo-de-defesa'],
   'weapon.hand': ['hand-requirement', 'requisito-de-mao'],
+  'weapon.hand.one': ['1hand', 'one-hand', 'one-handed', 'uma-mao', '1-mao'],
+  'weapon.hand.two': ['2hand', 'two-hand', 'two-handed', 'duas-maos', '2-maos'],
   'action.redirect': ['redirect', 'redirecionar'],
   'combat.shield.dark': ['dark-shield', 'escudo-escuro'],
   'combat.shield.solid': ['solid-shield', 'escudo-cheio'],

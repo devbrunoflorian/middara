@@ -1,4 +1,4 @@
-"""Adapt the two editable p78 hand icons, preserving their overlap with 1/2.
+"""Adapt the two p78 hand-and-count compositions as numbered inline symbols.
 
 Dry-run by default. The source PDF and extracted DOM are read-only; --apply
 writes only p.78 inline metadata and its two conditional erasure masks.
@@ -26,7 +26,7 @@ AUDIT_PATH = ROOT / "docs/project-progress/evidence/2026-10-04-inline-elements/i
 EVIDENCE = ROOT / "docs/project-progress/evidence/2026-10-05-inline-elements-followup"
 
 sys.path.insert(0, str(ROOT / "scripts"))
-from build_inline_symbol_registry import complete_component, same_component  # noqa: E402
+from build_inline_symbol_registry import complete_component, same_component, discover_hand_compositions  # noqa: E402
 
 PROTOTYPE = {
     "bbox": [520.7333984375, 193.50100708007812, 534.7404174804688, 207.50900268554688],
@@ -98,10 +98,6 @@ def main() -> None:
     sidecar = json.loads(SIDECAR_PATH.read_text(encoding="utf-8"))
     registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
     audit = json.loads(AUDIT_PATH.read_text(encoding="utf-8"))
-    symbol = next((entry for entry in registry if entry["id"] == "weapon.hand"), None)
-    if symbol is None:
-        raise ValueError("The existing weapon.hand registry entry is required")
-
     with fitz.open(PDF) as source, fitz.open(PDF) as mask_doc:
         family = all_exact_family_matches(source, audit)
         counts = Counter(item["page"] for item in family)
@@ -112,53 +108,63 @@ def main() -> None:
             raise ValueError("The reviewed p78 hand objects no longer match the two planned targets")
 
         source_page, mask_page = source[77], mask_doc[77]
+        compositions = discover_hand_compositions(source, audit)
+        compositions_by_drawing = {tuple(item["occurrence"]["drawingIndices"]): item for item in compositions.values()}
         drawings = source_page.get_drawings()
         block = dom["blocks"][12]
         if block["id"] != "block_25":
             raise ValueError("DOM block moved: block_25")
         existing_lines = {line["id"]: line for line in block["lines"]}
+        target_drawings = {tuple(target["drawingIndices"]) for target in TARGETS}
+        previous = [e for e in sidecar["elements"] if tuple(e.get("drawingIndices", [])) in target_drawings]
+        if len(previous) != 2 or any(e.get("symbolId") != "weapon.hand" for e in previous):
+            raise ValueError("Expected exactly the two old unnumbered p78 hand adapters")
         occupied = {(e.get("anchor", {}).get("lineId"), e.get("anchor", {}).get("spanIndex"), e.get("anchor", {}).get("side"))
-                    for e in sidecar["elements"]}
-        if any((target["lineId"], target["spanIndex"], "after") in occupied for target in TARGETS):
-            raise ValueError("A target anchor already has a source adapter; inspect before reapplying")
+                    for e in sidecar["elements"] if e not in previous}
 
-        for target in TARGETS:
-            line = existing_lines.get(target["lineId"])
-            following = existing_lines.get(target["followingLineId"])
-            if line is None or target["spanIndex"] >= len(line["spans"]):
-                raise ValueError(f"DOM anchor moved: {target['lineId']}:{target['spanIndex']}")
-            owner = line["spans"][target["spanIndex"]]
-            if owner["text"] != target["expectedText"] or abs(owner["size"] - 10) > .02:
-                raise ValueError(f"Unexpected owner text: {target['lineId']} {owner['text']!r}")
-            if following is None or following["spans"][0]["text"] != target["followingText"]:
-                raise ValueError(f"Expected editable count moved: {target['followingLineId']}")
-            number_span = following["spans"][0]
-            target["trailingGapPt"] = number_span["bbox"][0] - target["bbox"][2]
-            if not -4 < target["trailingGapPt"] < -1:
-                raise ValueError(f"Unexpected hand/count overlap: {target['trailingGapPt']:.4f} pt")
-            if abs(owner["bbox"][2] - target["bbox"][0]) > .02:
-                raise ValueError(f"Owner span no longer ends at icon x: {target['lineId']}")
-            for index in target["drawingIndices"]:
-                if not (fitz.Rect(target["bbox"]) + (-.02, -.02, .02, .02)).contains(drawings[index]["rect"]):
+        placements = []
+        for target_spec in TARGETS:
+            line = existing_lines.get(target_spec["lineId"])
+            following = existing_lines.get(target_spec["followingLineId"])
+            if line is None or target_spec["spanIndex"] >= len(line["spans"]):
+                raise ValueError(f"DOM anchor moved: {target_spec['lineId']}:{target_spec['spanIndex']}")
+            owner = line["spans"][target_spec["spanIndex"]]
+            if owner["text"] != target_spec["expectedText"] or abs(owner["size"] - 10) > .02:
+                raise ValueError(f"Unexpected owner text: {target_spec['lineId']} {owner['text']!r}")
+            if following is None or following["spans"][0]["text"] != target_spec["followingText"]:
+                raise ValueError(f"Expected editable count moved: {target_spec['followingLineId']}")
+            if abs(owner["bbox"][2] - target_spec["bbox"][0]) > .02:
+                raise ValueError(f"Owner span no longer ends at icon x: {target_spec['lineId']}")
+            composition = compositions_by_drawing.get(tuple(target_spec["drawingIndices"]))
+            if composition is None:
+                raise ValueError(f"No measured numbered symbol for p78 drawings {target_spec['drawingIndices']}")
+            target = dict(composition["placement"])
+            if target["anchor"]["lineId"] != target_spec["lineId"] or target["coveredSourceText"]["text"] != target_spec["followingText"]:
+                raise ValueError(f"Composition source anchor changed: {target['symbolId']}")
+            if (target["anchor"]["lineId"], target["anchor"]["spanIndex"], target["anchor"]["side"]) in occupied:
+                raise ValueError(f"A different source adapter already occupies {target['anchor']}")
+            for index in target_spec["drawingIndices"]:
+                if not (fitz.Rect(target_spec["bbox"]) + (-.02, -.02, .02, .02)).contains(drawings[index]["rect"]):
                     raise ValueError(f"Source drawing changed at index {index}")
-
-            baseline = source_baseline(source_page, owner)
-            target["metrics"] = dict(widthEm=(target["bbox"][2] - target["bbox"][0]) / owner["size"],
-                                     heightEm=(target["bbox"][3] - target["bbox"][1]) / owner["size"],
-                                     verticalAlignEm=(target["bbox"][3] - baseline) / owner["size"])
-            target["anchor"] = dict(blockId=target["blockId"], blockIndex=target["blockIndex"],
-                                     lineId=target["lineId"], spanIndex=target["spanIndex"],
-                                     side="after", sizePt=owner["size"], trailingGapPt=target["trailingGapPt"])
             target["maskBox"] = mask_box(target, drawings)
+            old = next(e for e in previous if tuple(e["drawingIndices"]) == tuple(target_spec["drawingIndices"]))
+            filename = old.get("mask", {}).get("url", "").rsplit("/", 1)[-1]
+            if not filename.startswith("inline-element-mask-"):
+                raise ValueError(f"Unexpected previous mask asset: {filename}")
+            target["mask"] = {"url": f"/pages/page_078/{filename}", "bbox": list(target["maskBox"])}
 
-        # Remove source text from the patch first so the adjacent 1/2 remain
-        # editable PDF text rather than becoming a raster ghost in the mask.
+            box = target["maskBox"]
+            patch = None  # Filled after source erasure below.
+            placements.append((target, composition["entry"], patch, filename))
+
+        # Keep general text intact; the targeted composition redactions below
+        # remove only the hand and its count, which the semantic SVG now owns.
         for text_block in mask_page.get_text("blocks"):
             if text_block[4].strip():
                 mask_page.add_redact_annot(fitz.Rect(text_block[:4]), fill=None)
         mask_page.apply_redactions(images=0, graphics=0, text=0)
         paint_bounds = source_page.get_bboxlog()
-        for target in TARGETS:
+        for target, _, _, _ in placements:
             removal = fitz.Rect(target["bbox"])
             for index in target["drawingIndices"]:
                 drawing = drawings[index]
@@ -169,7 +175,7 @@ def main() -> None:
             mask_page.add_redact_annot(removal + (-.3, -.3, .3, .3), fill=None)
             mask_page.apply_redactions(images=0, graphics=1, text=1)
 
-        for target in TARGETS:
+        for target, _, _, _ in placements:
             for index in target["drawingIndices"]:
                 rect = tuple(round(v, 2) for v in drawings[index]["rect"])
                 if any(tuple(round(v, 2) for v in remaining["rect"]) == rect for remaining in mask_page.get_drawings()):
@@ -179,15 +185,9 @@ def main() -> None:
         clean_page = Image.frombytes("RGB", (full.width, full.height), full.samples)
         original_pix = source_page.get_pixmap(matrix=fitz.Matrix(4, 4), alpha=False)
         original_page = Image.frombytes("RGB", (original_pix.width, original_pix.height), original_pix.samples)
-        existing_names = {e.get("mask", {}).get("url", "").rsplit("/", 1)[-1] for e in sidecar["elements"]}
-        next_index = max([int(name.removeprefix("inline-element-mask-").removesuffix(".png"))
-                          for name in existing_names if name.startswith("inline-element-mask-") and name.endswith(".png")] + [-1]) + 1
-        placements = []
-        for offset, target in enumerate(TARGETS):
-            box = target["maskBox"]
-            filename = f"inline-element-mask-{next_index + offset:03d}.png"
-            target["mask"] = {"url": f"/pages/page_078/{filename}", "bbox": list(box)}
-            target["symbolId"] = "weapon.hand"
+        finalized = []
+        for target, symbol, _, filename in placements:
+            box = fitz.Rect(target["maskBox"])
             crop_box = tuple(round(value * 4) for value in box)
             patch = clean_page.crop(crop_box)
             source_crop = original_page.crop(crop_box)
@@ -196,19 +196,19 @@ def main() -> None:
             local_x = round((target["bbox"][0] - box.x0 - .75) * 4)
             local_y = round((target["bbox"][1] - box.y0 - .75) * 4)
             with_symbol.paste(icon, (local_x, local_y), icon)
-            placements.append((target, patch, source_crop, with_symbol, filename))
+            finalized.append((target, symbol, patch, source_crop, with_symbol, filename))
 
     if args.apply:
         EVIDENCE.mkdir(parents=True, exist_ok=True)
         rows = []
-        for target, patch, source_crop, with_symbol, filename in placements:
+        for target, symbol, patch, source_crop, with_symbol, filename in finalized:
             patch.save(PAGE / filename)
             scale = 3
             row = Image.new("RGB", (source_crop.width * scale * 3 + 50, source_crop.height * scale + 34), "#f4f0e8")
             draw = ImageDraw.Draw(row)
             draw.text((8, 4), "PDF original", fill="#111111")
             draw.text((16 + source_crop.width * scale, 4), "Patch without vector/text", fill="#111111")
-            draw.text((24 + source_crop.width * scale * 2, 4), "Patch + registry hand", fill="#111111")
+            draw.text((24 + source_crop.width * scale * 2, 4), f"Patch + {target['symbolId']}", fill="#111111")
             row.paste(source_crop.resize((source_crop.width * scale, source_crop.height * scale), Image.Resampling.NEAREST), (8, 22))
             row.paste(patch.resize((patch.width * scale, patch.height * scale), Image.Resampling.NEAREST), (16 + source_crop.width * scale, 22))
             row.paste(with_symbol.resize((with_symbol.width * scale, with_symbol.height * scale), Image.Resampling.NEAREST), (24 + source_crop.width * scale * 2, 22))
@@ -218,21 +218,35 @@ def main() -> None:
         for row in rows:
             comparison.paste(row, (0, y)); y += row.height
         comparison.save(EVIDENCE / "page78-hand-source-patch-registry.png")
-        sidecar["elements"].extend({key: value for key, value in target.items() if key not in {"maskBox", "trailingGapPt"}}
-                                   for target, *_ in placements)
+        sidecar["elements"] = [e for e in sidecar["elements"] if e not in previous]
+        sidecar["elements"].extend({key: value for key, value in target.items() if key != "maskBox"}
+                                   for target, *_ in finalized)
+        symbol = next((entry for entry in registry if entry["id"] == "weapon.hand"), None)
+        if symbol is None:
+            raise ValueError("The existing weapon.hand registry entry is required")
+        symbol["allowedBlockTypes"] = []
+        symbol.pop("sourceRendering", None)
+        symbol["description"] = {
+            "en": "Unnumbered hand glyph retained for saved-object compatibility.",
+            "pt-BR": "Glifo de mão sem número mantido para compatibilidade de objetos salvos.",
+        }
+        composition_ids = {item["symbolId"] for item, *_ in finalized}
+        registry = [entry for entry in registry if entry["id"] not in composition_ids]
+        registry.extend(symbol_entry for _, symbol_entry, *_ in finalized)
+        REGISTRY_PATH.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         SIDECAR_PATH.write_text(json.dumps(sidecar, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         output = EVIDENCE / "page78-hand-source-patch-registry.png"
     else:
         preview = ROOT / "tmp/page78-hand-dry-run.png"
         preview.parent.mkdir(parents=True, exist_ok=True)
         rows = []
-        for target, patch, source_crop, with_symbol, _ in placements:
+        for target, symbol, patch, source_crop, with_symbol, _ in finalized:
             scale = 3
             row = Image.new("RGB", (source_crop.width * scale * 3 + 50, source_crop.height * scale + 34), "#f4f0e8")
             draw = ImageDraw.Draw(row)
             draw.text((8, 4), "PDF original", fill="#111111")
             draw.text((16 + source_crop.width * scale, 4), "Patch without vector/text", fill="#111111")
-            draw.text((24 + source_crop.width * scale * 2, 4), "Patch + registry hand", fill="#111111")
+            draw.text((24 + source_crop.width * scale * 2, 4), f"Patch + {target['symbolId']}", fill="#111111")
             row.paste(source_crop.resize((source_crop.width * scale, source_crop.height * scale), Image.Resampling.NEAREST), (8, 22))
             row.paste(patch.resize((patch.width * scale, patch.height * scale), Image.Resampling.NEAREST), (16 + source_crop.width * scale, 22))
             row.paste(with_symbol.resize((with_symbol.width * scale, with_symbol.height * scale), Image.Resampling.NEAREST), (24 + source_crop.width * scale * 2, 22))
@@ -246,9 +260,9 @@ def main() -> None:
 
     print(json.dumps({
         "mode": "apply" if args.apply else "dry-run",
-        "pattern": "weapon.hand: dark circular field + white hand; full normalized paths and paint compared",
+        "pattern": "weapon.hand: dark circular field + white hand + source Cinzel count outline",
         "familyMatches": len(family), "matchesByPage": dict(sorted(counts.items())),
-        "placements": [{k: t[k] for k in ("symbolId", "bbox", "anchor", "metrics", "mask")} for t, *_ in placements],
+        "placements": [{k: t[k] for k in ("symbolId", "bbox", "anchor", "metrics", "coveredSourceText", "mask")} for t, *_ in finalized],
         "manualReview": {"p28_p48_p49": "printed weapon-card artwork; excluded", "p55": "candidate path is not a visible hand in the rendered PDF; excluded"},
         "output": str(output),
     }, ensure_ascii=False, indent=2))
