@@ -2,6 +2,11 @@
 
 This folder is the maintained home for page-by-page English source text and Brazilian Portuguese drafts. The official PDF is the textual source of truth. App JSON, database entries, previous extraction files, and screenshots help with style/context but do not replace the PDF.
 
+**Escopo confirmado pelo usuário:** o conteúdo já existente no database das páginas impressas 1–12 está aprovado e deve ser preservado. A fila/drafts novos começam na p. 13; essa aprovação se refere ao conteúdo persistido, não afirma que cada página esteja integralmente traduzida.
+Os estados das páginas 1–12 em `page-status.csv` são registros de auditorias anteriores, não uma solicitação para reabrir essa faixa. A fila de produção ativa começa na p. 13.
+
+Use [`production-workflow.md`](production-workflow.md) para o procedimento repetível, [`templates/page-template.md`](templates/page-template.md) para novos drafts e [`pilots/workflow-acceptance.md`](pilots/workflow-acceptance.md) para os pilotos e pendências antes de escalar.
+
 ## Workflow
 
 1. Extract source English directly from the PDF and map the text to visible, semantic units.
@@ -28,7 +33,8 @@ The existing 20% value is a review threshold, not an automatic pass/fail for lay
 - [`pages/page-009.md`](pages/page-009.md): 17 saved PT-BR units recorded, six source-size/style mismatches aligned, `SHOP AND TRAIN` copyfit backed up and saved, and the full PT preview checked after read-back; `Crawl Mode` term remains provisional.
 - [`pages/page-010.md`](pages/page-010.md): 22 saved PT-BR units audited; five targeted copy/style corrections read back and previewed. `Ficha de Aventura` remains a cross-page glossary decision.
 - [`pages/page-011.md`](pages/page-011.md): nine saved PT-BR units reconciled and previewed; title subtitle copyedited with snapshot/read-back; the cover's three duplicate editable labels stay hidden. Status and sheet-label terminology remain candidates.
-- [`pages/page-013.md`](pages/page-013.md): 25 content units and separate headings/callouts source-rechecked; skull stays an inline symbol, 5 copyfit alerts await preview, DIFFICULTY art stays separate.
+- [`pages/page-013.md`](pages/page-013.md): 25 content units and separate headings/callouts source-rechecked; five semantic placements are mapped, and the decorative flag beside `Flags` remains removed by the approved cleanup overlay; 5 copyfit alerts await preview, DIFFICULTY art stays separate.
+- [`pages/page-085.md`](pages/page-085.md): draft piloto para prosa densa, dados inline e legenda A/B/C; o PDF mostra dados branco/laranja sem placement no sidecar atual, então a prévia integrada está bloqueada até reconciliar esses símbolos.
 - [`source-pages/`](source-pages/): raw line-level English transcript for every PDF page, with per-span font/size/flags/bbox evidence. This generated transcript deliberately keeps artwork text and questionable reading order visible; it is not approved semantic copy or a translation.
 - [`../../scripts/extract_translation_markdown.py`](../../scripts/extract_translation_markdown.py): reproducibly regenerates those raw per-page transcripts from the official 102-page PDF.
 - [`../../scripts/audit_translation_copyfit.py`](../../scripts/audit_translation_copyfit.py): read-only EN/PT character-expansion report for curated drafts; alerts are not layout-fit judgments.

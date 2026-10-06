@@ -4,7 +4,7 @@ This is a review queue, **not an addition to the official glossary**. The offici
 
 | English term/concept | Current draft rendering | Pages | Review note |
 |---|---|---:|---|
-| Adventure Mode | `Modo Aventura`; `Modo Aventureiro` | 4–6, 10, 13 | Inconsistent between drafts. **Recommendation:** standardize on `Modo Aventura`; the other wording changes the sense from a game mode to a person. |
+| Adventure Mode | `Modo Aventura`; `Modo Aventureiro` | 4–6, 10, 13, 85 | Inconsistent between drafts. **Recommendation:** standardize on `Modo Aventura`; the other wording changes the sense from a game mode to a person. |
 | Tier | `Nível`; `Categoria` | 4, 13 | Context-sensitive and not in the official glossary. Keep unresolved until the card/rules usage is agreed. |
 | Bounty | `Recompensa`; `Livro de Recompensas` | 4, 7, 13 | Same proposed root appears in the mode, heading, and book name; confirm the game's intended PT term. |
 | Crawl Mode / Epic Crawl Mode | `Modo Crawl`; `Modo Exploração`; `Modo de Exploração`; `Modo de Exploração Épica` | 4–9 | The official glossary has no entry. P. 8 Payload uses `Modo Exploração` as a heading and `Modo de Exploração` in body text; p. 8–9 drafts use the latter. Decide whether this is a translated descriptive mode or a proper game-mode name before standardizing. |
@@ -18,6 +18,12 @@ This is a review queue, **not an addition to the official glossary**. The offici
 | Story Discipline / Story Item | `Disciplina de História`; `Item de História` | 13 | New compound terms used together; confirm whether `Story` should be retained as a keyword or translated. |
 | Game Over | `Fim de Jogo` | 13 | Proposed translation of a rules outcome; absent from the official glossary. |
 | Side Quest | `Missão Secundária` | 13 | Proposed rules term; absent from the official glossary. |
+| Abraxis Battle Dice | `Dados de Batalha de Abraxis` | 85 | Pilot rendering only; decide whether the game mode/title remains in English or uses this translated name. |
+| Abraxis Point(s) | `Ponto(s) de Abraxis` | 85 | Named score resource; absent from the official glossary. |
+| Fate token | `Ficha de Destino` | 85 | Mechanic resource proposed in the pilot; confirm as a rules term. |
+| Lock In / Locked In | `Fixar` / `Fixado` | 85 | Action-state pair must remain unambiguous and consistent through the procedure. |
+| Damage token / SP token | `Ficha(s) de Dano` / `Ficha(s) de SP` | 85 | Component names used to track values; confirm capitalization and whether SP is expanded. |
+| Adventure Book | `Livro de Aventura` | 85 | Cross-book reference; confirm title/capitalization against the Adventure Book localization. |
 | Adventure Sheet / Adventurer Sheet | `Ficha de Aventura`; `Ficha da Aventura`; `Ficha de Aventureiro` | 10, 11, 13 | P. 11's source uses both English forms: its PT text maps `Adventure Sheet` to `Ficha de Aventura` and `Adventurer Sheet` to `Ficha de Aventureiro`. P. 10/13 also differ on the first form; confirm whether the source distinction is intentional. |
 | Unselectable / Selectable / Injured | `Não Selecionável`; `Selecionável`; `Ferido` | 11 | Proposed status labels; absent from the official glossary. Confirm these before using them as global terms. |
 | Party Tuck Bag | `Bolsa do Grupo` | 10 | Proposed name for the shared storage bag. Keep distinct from official `Party Stash → Estoque do Grupo` until the compound term is confirmed. |

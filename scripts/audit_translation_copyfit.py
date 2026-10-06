@@ -26,6 +26,7 @@ HEADING_PAIR = re.compile(
     re.MULTILINE,
 )
 ICON_PLACEHOLDER = re.compile(r"\[(?:ícone|pictograma)[^\]]*\]", re.IGNORECASE)
+SEMANTIC_SYMBOL = re.compile(r"\{\{symbol:[A-Za-z0-9._-]+\}\}")
 MARKDOWN_DECORATION = re.compile(r"[*_`]")
 
 
@@ -41,6 +42,7 @@ class Unit:
 
 def plain_text(value: str) -> str:
     value = ICON_PLACEHOLDER.sub("", value)
+    value = SEMANTIC_SYMBOL.sub("", value)
     value = re.sub(r"<br\s*/?>", " ", value, flags=re.IGNORECASE)
     value = MARKDOWN_DECORATION.sub("", value)
     value = re.sub(r"\s+", " ", value)

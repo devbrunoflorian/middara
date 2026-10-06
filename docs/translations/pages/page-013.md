@@ -4,7 +4,7 @@
 - **Fidelidade EN:** página revisada visualmente; a caixa `Story Disciplines and Items` termina na coluna esquerda e mantém o espaço até o callout `IMPORTANT` da coluna direita. A auditoria registra ainda os títulos em runs/tamanhos separados `Adventure Mode` (18 pt) e `Continued` (11 pt). Ver `docs/project-progress/2026-10-01-page13-fullpage-visual-audit.md`.
 - **PT-BR:** rascunho dos textos editoriais, listas e duas caixas IMPORTANT; preview PT pendente.
 - **Hierarquia:** preservar as duas partes do título, headings, números e rótulos de fase; manter as duas colunas e os limites dos callouts.
-- **Arte/ícones:** as palavras `DIFFICULTY` e caveiras na faixa ilustrada são arte. O símbolo de caveira no parágrafo é um pictograma; mantido como placeholder. Bandeira, lápis e raio continuam como ícones, não palavras traduzidas.
+- **Arte/ícones:** as palavras `DIFFICULTY` e caveiras na faixa ilustrada são arte. O parágrafo de dificuldade contém `{{symbol:combat.skull}}`; lápis, bandeira e raios são `{{symbol:story.pencil}}`, `{{symbol:story.flag}}` e `{{symbol:tag.important.icon}}`. A arte da faixa permanece separada. A bandeira vetorial do heading `Flags` (desenhos 104–106) é intencionalmente removida pelo overlay aprovado `page-013-flags-title-cleanup.png`; não reintroduzir como token. A `story.flag` no callout “New Story Flag” é outra ocorrência e continua semântica.
 
 ## Título — runs separados
 
@@ -18,7 +18,7 @@
 
 ## Coluna esquerda
 
-### Flags [ícone de bandeira]
+### Flags
 
 **PT-BR (título):** Marcadores
 
@@ -38,9 +38,9 @@
 
 **PT-BR (rascunho):** No exemplo abaixo, os jogadores registrariam o Marcador de História **“Guia Experiente”**.
 
-**EN (callout):** [ícone de lápis] **New Story Flag:** Mark the Story Flag [ícone de bandeira] **Experienced Guide** on the Adventure Sheet.
+**EN (callout):** {{symbol:story.pencil}} **New Story Flag:** Mark the Story Flag {{symbol:story.flag}} **Experienced Guide** on the Adventure Sheet.
 
-**PT-BR (rascunho, callout):** [ícone de lápis] **Novo Marcador de História:** registre o Marcador [ícone de bandeira] **Guia Experiente** na Ficha da Aventura.
+**PT-BR (rascunho, callout):** {{symbol:story.pencil}} **Novo Marcador de História:** registre o Marcador {{symbol:story.flag}} **Guia Experiente** na Ficha da Aventura.
 
 ### Story Rounds
 
@@ -119,9 +119,9 @@
 
 **PT-BR (rascunho):** A maioria das Lojas terá 1 Item Único aleatório. Nesse caso, embaralhe todas as Cartas de Item Único Comum e compre uma do fundo do baralho. Itens Únicos não são sorteados novamente e permanecem na Loja durante toda a Rodada de História em questão. Nenhum outro Item Único fica disponível para compra até a próxima Rodada de História nomeada, mesmo que o grupo decida comprar este Item. Este Item também não fica disponível durante um Encontro em que se compre um Item Único aleatório do mesmo Nível.
 
-**EN (callout):** [ícone de raio] **_IMPORTANT:_** Unique Items can only be acquired when you are specifically instructed to do so. Anytime an Adventure Mechanic instructs the players to Gain, draw, or purchase an Item of a specific Tier or type you will have access to every **non-unique** card of these Tiers or types.
+**EN (callout):** {{symbol:tag.important.icon}} **_IMPORTANT:_** Unique Items can only be acquired when you are specifically instructed to do so. Anytime an Adventure Mechanic instructs the players to Gain, draw, or purchase an Item of a specific Tier or type you will have access to every **non-unique** card of these Tiers or types.
 
-**PT-BR (rascunho, callout):** [ícone de raio] **_IMPORTANTE:_** Itens Únicos só podem ser obtidos quando houver instrução específica. Sempre que uma Mecânica da Aventura instruir os jogadores a Ganhar um Item, comprar uma carta ou adquirir um Item de Nível ou tipo específico, eles terão acesso a todas as cartas **não únicas** desses Níveis ou tipos.
+**PT-BR (rascunho, callout):** {{symbol:tag.important.icon}} **_IMPORTANTE:_** Itens Únicos só podem ser obtidos quando houver instrução específica. Sempre que uma Mecânica da Aventura instruir os jogadores a Ganhar um Item, comprar uma carta ou adquirir um Item de Nível ou tipo específico, eles terão acesso a todas as cartas **não únicas** desses Níveis ou tipos.
 
 ### Bounties
 
@@ -131,17 +131,17 @@
 
 **PT-BR (rascunho):** Muitas Rodadas de História oferecem a oportunidade de encarar uma Missão Secundária especial de **Recompensa**. Uma **Recompensa** é um conjunto de Encontros que pode ser tentado uma vez durante a Fase de ***Explorar*** de uma Rodada de História nomeada. Só é possível tentar uma **Recompensa** em cada Rodada de História nomeada. Se tiver mais de uma **Recompensa**, escolha apenas **UMA** para tentar naquela Rodada de História.
 
-**EN:** Story Rounds will specify the **Bounties** that can be attempted based on the difficulty rating listed as a [skull icon] symbol. Players may not attempt a **Bounty** with a higher difficulty rating (e.g. More skulls.) than the Story Round allows.
+**EN:** Story Rounds will specify the **Bounties** that can be attempted based on the difficulty rating listed as a {{symbol:combat.skull}} symbol. Players may not attempt a **Bounty** with a higher difficulty rating (e.g. More skulls.) than the Story Round allows.
 
-**PT-BR (rascunho):** Cada Rodada de História especifica quais **Recompensas** podem ser tentadas, de acordo com o nível de dificuldade indicado pelo [ícone de caveira]. Os jogadores não podem tentar uma **Recompensa** com dificuldade maior (por exemplo, com mais caveiras) do que a permitida pela Rodada de História.
+**PT-BR (rascunho):** Cada Rodada de História especifica quais **Recompensas** podem ser tentadas, de acordo com o nível de dificuldade indicado pelo {{symbol:combat.skull}}. Os jogadores não podem tentar uma **Recompensa** com dificuldade maior (por exemplo, com mais caveiras) do que a permitida pela Rodada de História.
 
 **EN:** Once a **Bounty** has been completed, Adventurers may never attempt it during that Adventure again. If a **Bounty** is lost, players may try to complete it again during the next named Story Round where that difficulty, (or one of a lower difficulty) is allowed. In these cases they will start the **Bounty** over from the beginning.
 
 **PT-BR (rascunho):** Depois de concluir uma **Recompensa**, os Aventureiros não podem tentá-la novamente durante aquela Aventura. Se uma **Recompensa** for perdida, os jogadores podem tentar concluí-la de novo na próxima Rodada de História nomeada que permitir aquela dificuldade — ou uma dificuldade menor. Nesses casos, começam a **Recompensa** desde o início.
 
-**EN (callout):** [ícone de raio] **_IMPORTANT:_** Any rewards earned during a **Bounty** are kept by Adventurers even if they fail a **Bounty**. Meaning, any rewards earned up to that point are retained.
+**EN (callout):** {{symbol:tag.important.icon}} **_IMPORTANT:_** Any rewards earned during a **Bounty** are kept by Adventurers even if they fail a **Bounty**. Meaning, any rewards earned up to that point are retained.
 
-**PT-BR (rascunho, callout):** [ícone de raio] **_IMPORTANTE:_** Os Aventureiros ficam com quaisquer recompensas obtidas durante uma **Recompensa**, mesmo que não a concluam. Ou seja, mantêm todas as recompensas obtidas até aquele momento.
+**PT-BR (rascunho, callout):** {{symbol:tag.important.icon}} **_IMPORTANTE:_** Os Aventureiros ficam com quaisquer recompensas obtidas durante uma **Recompensa**, mesmo que não a concluam. Ou seja, mantêm todas as recompensas obtidas até aquele momento.
 
 ## Notas de copyfit e termos
 
