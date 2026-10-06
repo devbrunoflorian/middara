@@ -75,6 +75,7 @@ export interface Config {
     'rulebook-blocks': RulebookBlock;
     translations: Translation;
     'layout-frames': LayoutFrame;
+    'symbol-alias-settings': SymbolAliasSetting;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +91,7 @@ export interface Config {
     'rulebook-blocks': RulebookBlocksSelect<false> | RulebookBlocksSelect<true>;
     translations: TranslationsSelect<false> | TranslationsSelect<true>;
     'layout-frames': LayoutFramesSelect<false> | LayoutFramesSelect<true>;
+    'symbol-alias-settings': SymbolAliasSettingsSelect<false> | SymbolAliasSettingsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -285,6 +287,27 @@ export interface LayoutFrame {
   createdAt: string;
 }
 /**
+ * Shared preferred [[alias]] values for inline semantic symbols.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "symbol-alias-settings".
+ */
+export interface SymbolAliasSetting {
+  id: number;
+  settingsKey: string;
+  aliases:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -339,6 +362,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'layout-frames';
         value: number | LayoutFrame;
+      } | null)
+    | ({
+        relationTo: 'symbol-alias-settings';
+        value: number | SymbolAliasSetting;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -499,6 +526,16 @@ export interface LayoutFramesSelect<T extends boolean = true> {
   pageNumber?: T;
   language?: T;
   data?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "symbol-alias-settings_select".
+ */
+export interface SymbolAliasSettingsSelect<T extends boolean = true> {
+  settingsKey?: T;
+  aliases?: T;
   updatedAt?: T;
   createdAt?: T;
 }

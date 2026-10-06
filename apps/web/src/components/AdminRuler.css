@@ -1,7 +1,7 @@
 .admin-ruler-layer {
   position: fixed;
   inset: 0;
-  z-index: 20000;
+  z-index: 20002;
   pointer-events: none;
   color: #fff;
   font: 9px/1 Inter, sans-serif;
@@ -70,6 +70,44 @@
 .admin-ruler-corner {
   width: 22px;
   height: 22px;
+}
+
+.admin-ruler-snap-guide,
+.admin-ruler-snap-mark {
+  position: fixed;
+  display: block;
+}
+
+.admin-ruler-snap-guide-vertical {
+  width: 1px;
+  background: repeating-linear-gradient(to bottom, #7dd3fc 0 4px, transparent 4px 8px);
+  filter: drop-shadow(0 0 2px rgb(56 189 248 / 70%));
+}
+
+.admin-ruler-snap-guide-horizontal {
+  height: 1px;
+  background: repeating-linear-gradient(to right, #7dd3fc 0 4px, transparent 4px 8px);
+  filter: drop-shadow(0 0 2px rgb(56 189 248 / 70%));
+}
+
+.admin-ruler-snap-mark-x {
+  width: 0;
+  height: 0;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-top: 6px solid #7dd3fc;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 2px #38bdf8);
+}
+
+.admin-ruler-snap-mark-y {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid #7dd3fc;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 0 2px #38bdf8);
 }
 
 .admin-geometry-measurements {

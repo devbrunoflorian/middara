@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { LayoutFrame } from './PageRenderer';
+import { snapLayoutFrame, type LayoutAlignmentGuide, type SnapFrameRect } from '../layoutFrameSnapping';
 import './AdminLayoutFrameEditor.css';
 
 interface AdminLayoutFrameEditorProps {
   pageElement: HTMLElement | null;
   pageWidth: number;
+  pageHeight: number;
+  snapTargets: SnapFrameRect[];
   sourceBbox: { x: number; y: number; width: number; height: number } | null;
   unitKey: string | null;
   frame: LayoutFrame | null;
@@ -18,6 +21,7 @@ interface AdminLayoutFrameEditorProps {
   onSave: () => void;
   onDiscard: () => void;
   onResetToEnglish: () => void;
+  onSnapGuidesChange: (guides: LayoutAlignmentGuide[]) => void;
 }
 
 interface PageRect {
@@ -27,8 +31,8 @@ interface PageRect {
 }
 
 export function AdminLayoutFrameEditor({
-  pageElement, pageWidth, sourceBbox, unitKey, frame, language, hasOwnFrame, isDirty, isSaving, status,
-  onChange, onSave, onDiscard, onResetToEnglish,
+  pageElement, pageWidth, pageHeight, snapTargets, sourceBbox, unitKey, frame, language, hasOwnFrame, isDirty, isSaving, status,
+  onChange, onSave, onDiscard, onResetToEnglish, onSnapGuidesChange,
 }: AdminLayoutFrameEditorProps) {
   const [pageRect, setPageRect] = useState<PageRect | null>(null);
 
@@ -78,14 +82,21 @@ export function AdminLayoutFrameEditor({
       const angle = (initial.rotation ?? 0) * Math.PI / 180;
       const frameDx = dx * Math.cos(angle) + dy * Math.sin(angle);
       const frameDy = -dx * Math.sin(angle) + dy * Math.cos(angle);
-      onChange(resize
-        ? { ...initial, width: Math.max(12, initial.width + frameDx), height: Math.max(8, initialHeight + frameDy) }
-        : { ...initial, x: Math.max(0, initial.x + dx), y: Math.max(0, initialY + dy) });
+      if (resize) {
+        onSnapGuidesChange([]);
+        onChange({ ...initial, width: Math.max(12, initial.width + frameDx), height: Math.max(8, initialHeight + frameDy) });
+        return;
+      }
+      const moved = { ...initial, height: initialHeight, x: Math.max(0, initial.x + dx), y: Math.max(0, initialY + dy) };
+      const snapped = snapLayoutFrame(moved, pageWidth, pageHeight, snapTargets, unitKey, pageRect.scale);
+      onSnapGuidesChange(snapped.guides);
+      onChange(snapped.frame);
     };
     const end = () => {
       window.removeEventListener('pointermove', move);
       window.removeEventListener('pointerup', end);
       window.removeEventListener('pointercancel', end);
+      onSnapGuidesChange([]);
     };
     window.addEventListener('pointermove', move);
     window.addEventListener('pointerup', end, { once: true });

@@ -1,5 +1,5 @@
 import type { Segment } from '../components/RichSpanEditor';
-import { SEMANTIC_SYMBOLS, findSymbolByAlias, getSemanticSymbol, getSymbolEditorToken, isSymbolAllowed, type InlineEditorContext, type SymbolLanguage } from './semanticSymbols';
+import { SEMANTIC_SYMBOLS, findSymbolByAlias, getSemanticSymbol, getSymbolEditorToken, isSymbolAllowed, type InlineEditorContext, type SymbolAliasPreferences, type SymbolLanguage } from './semanticSymbols';
 
 export const SYMBOL_OBJECT_MARKER = '\uFFFC';
 type RunStyle = Omit<Segment, 'text' | 'symbolId'>;
@@ -9,7 +9,7 @@ const LEGACY_EDITOR_TOKENS = SEMANTIC_SYMBOLS.flatMap(symbol => Object.values(sy
 export interface EditableTokenRange { start:number; end:number; id:string; token:string }
 
 /** One tokenizer for serialization, atomic editing and clipboard boundaries. */
-export function editableTokenRanges(text:string):EditableTokenRange[] {
+export function editableTokenRanges(text:string, aliasPreferences?:SymbolAliasPreferences):EditableTokenRange[] {
   const ranges:EditableTokenRange[]=[];let cursor=0;
   while (cursor<text.length) {
     const legacy=LEGACY_EDITOR_TOKENS.map(entry=>({...entry,index:text.indexOf(entry.token,cursor)}))
@@ -34,7 +34,7 @@ export function editableTokenRanges(text:string):EditableTokenRange[] {
         candidates.push({start:aliasMatch.index,end:aliases.lastIndex,id,token:aliasMatch[0]});
         break;
       }
-      const symbol=findSymbolByAlias(expression);
+      const symbol=findSymbolByAlias(expression,aliasPreferences);
       if(symbol) {
         candidates.push({start:aliasMatch.index,end:aliases.lastIndex,id:symbol.id,token:aliasMatch[0]});
         break;
@@ -48,17 +48,17 @@ export function editableTokenRanges(text:string):EditableTokenRange[] {
 }
 
 /** Editable plain-text projection. IDs remain reversible even without a definition. */
-export function editableTextForSegments(segments: Segment[], language: SymbolLanguage): string {
+export function editableTextForSegments(segments: Segment[], language: SymbolLanguage, aliasPreferences?:SymbolAliasPreferences): string {
   return segments.map(run => run.symbolId
-    ? (getSymbolEditorToken(run.symbolId, language) ?? `[[symbol:${encodeURIComponent(run.symbolId)}]]`).repeat(Array.from(run.text).length || 1)
+    ? (getSymbolEditorToken(run.symbolId, language, aliasPreferences) ?? `[[symbol:${encodeURIComponent(run.symbolId)}]]`).repeat(Array.from(run.text).length || 1)
     : run.text).join('');
 }
 
 export function segmentsFromEditableText(text: string, style: RunStyle, language: SymbolLanguage,
-  previous: Segment[] = [], context: InlineEditorContext = 'paragraph'): Segment[] {
+  previous: Segment[] = [], context: InlineEditorContext = 'paragraph', aliasPreferences?:SymbolAliasPreferences): Segment[] {
   // Exact round-trip keeps segmentation, style, unknown IDs and future metadata.
-  if (text === editableTextForSegments(previous, language)) return previous.map(run => ({ ...run }));
-  const baseline=editableTextForSegments(previous,language);
+  if (text === editableTextForSegments(previous, language, aliasPreferences)) return previous.map(run => ({ ...run }));
+  const baseline=editableTextForSegments(previous,language,aliasPreferences);
   let prefix=0;let suffix=0;
   while(prefix<Math.min(text.length,baseline.length) && text[prefix]===baseline[prefix])prefix++;
   while(suffix<Math.min(text.length,baseline.length)-prefix && text[text.length-1-suffix]===baseline[baseline.length-1-suffix])suffix++;
@@ -67,7 +67,7 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
   if(suffix>0 && /[\uDC00-\uDFFF]/.test(text[text.length-suffix] ?? ''))suffix--;
   const oldPlain:{start:number;end:number;run:Segment}[]=[];let oldOffset=0;
   for(const run of previous) {
-    const projected=editableTextForSegments([run],language);
+    const projected=editableTextForSegments([run],language,aliasPreferences);
     if(!run.symbolId)oldPlain.push({start:oldOffset,end:oldOffset+projected.length,run});
     oldOffset+=projected.length;
   }
@@ -126,7 +126,7 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
     if(offset<end)output.push({...changedStyle,text:text.slice(offset,end)});
   };
   let cursor = 0;
-  for (const {start,end,token,id} of editableTokenRanges(text)) {
+  for (const {start,end,token,id} of editableTokenRanges(text,aliasPreferences)) {
     if (start > cursor) plain(cursor,start);
     const oldIndex = oldSymbols.findIndex(run => run.symbolId === id);
     const old = oldIndex < 0 ? undefined : oldSymbols.splice(oldIndex,1)[0];
@@ -159,15 +159,15 @@ export function replaceSegmentRange(segments: Segment[], start: number, end: num
   return out.filter(run=>run.text.length>0);
 }
 
-export function insertEditorToken(text: string, start: number, end: number, token: string) {
-  const {start:from,end:to}=expandEditorTokenSelection(text,start,end);
+export function insertEditorToken(text: string, start: number, end: number, token: string, aliasPreferences?:SymbolAliasPreferences) {
+  const {start:from,end:to}=expandEditorTokenSelection(text,start,end,aliasPreferences);
   return { text: text.slice(0,from)+token+text.slice(to), caret: from+token.length };
 }
 
 /** A partial object token is selected as a whole, never silently damaged. */
-export function expandEditorTokenSelection(text:string,start:number,end:number) {
+export function expandEditorTokenSelection(text:string,start:number,end:number,aliasPreferences?:SymbolAliasPreferences) {
   let from=Math.max(0,Math.min(start,text.length));let to=Math.max(from,Math.min(end,text.length));
-  for(const range of editableTokenRanges(text)) {
+  for(const range of editableTokenRanges(text,aliasPreferences)) {
     if((from<range.end && to>range.start) || (from===to && from>range.start && from<range.end)) {
       from=Math.min(from,range.start);to=Math.max(to,range.end);
     }
@@ -175,21 +175,21 @@ export function expandEditorTokenSelection(text:string,start:number,end:number) 
   return {start:from,end:to};
 }
 
-export function deleteEditorToken(text:string,start:number,end:number,direction:'backward'|'forward') {
+export function deleteEditorToken(text:string,start:number,end:number,direction:'backward'|'forward',aliasPreferences?:SymbolAliasPreferences) {
   let from=start;let to=end;
   if(from===to) {
-    const range=editableTokenRanges(text).find(r=>direction==='backward'
+    const range=editableTokenRanges(text,aliasPreferences).find(r=>direction==='backward'
       ? from>r.start && from<=r.end : from>=r.start && from<r.end);
     if(!range)return undefined;
     from=range.start;to=range.end;
-  } else if(!editableTokenRanges(text).some(r=>from<r.end && to>r.start))return undefined;
-  return insertEditorToken(text,from,to,'');
+  } else if(!editableTokenRanges(text,aliasPreferences).some(r=>from<r.end && to>r.start))return undefined;
+  return insertEditorToken(text,from,to,'',aliasPreferences);
 }
 
 /** Repair native typing over a partial token using the pre-input selection. */
-export function normalizeEditableInput(previous:string,next:string,start:number,end:number) {
-  const expanded=expandEditorTokenSelection(previous,start,end);
+export function normalizeEditableInput(previous:string,next:string,start:number,end:number,aliasPreferences?:SymbolAliasPreferences) {
+  const expanded=expandEditorTokenSelection(previous,start,end,aliasPreferences);
   if(expanded.start===start && expanded.end===end)return {text:next,caret:undefined};
   const insertedLength=Math.max(0,next.length-(previous.length-(end-start)));
-  return insertEditorToken(previous,start,end,next.slice(start,start+insertedLength));
+  return insertEditorToken(previous,start,end,next.slice(start,start+insertedLength),aliasPreferences);
 }

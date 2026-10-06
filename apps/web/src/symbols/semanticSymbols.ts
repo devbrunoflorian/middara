@@ -1,6 +1,7 @@
 import sourceSymbols from './sourceSymbols.json';
 
 export type SymbolLanguage = 'en' | 'pt-BR';
+export type SymbolAliasPreferences = Record<string, string>;
 export type InlineEditorContext = 'paragraph' | 'typographic-field' | 'span-unit' | 'credit-field';
 export interface InlineSymbolMetrics {
   widthEm: number;
@@ -52,8 +53,9 @@ export interface SemanticSymbolDefinition {
     }>>;
     /** Per-occurrence source appearance variants; semantic identity stays symbolId. */
     variants?: Record<string, {
-      viewBox: number[];
-      paths: NonNullable<SemanticSymbolDefinition['render']['paths']>;
+      assetUrl?: string;
+      viewBox?: number[];
+      paths?: NonNullable<SemanticSymbolDefinition['render']['paths']>;
       widthEm: number;
       heightEm: number;
       verticalAlignEm: number;
@@ -159,10 +161,11 @@ export function normalizeEditorAlias(value: string): string {
     .replace(/^-|-$/g, '');
 }
 
-export function getSymbolEditorAliases(id: string): string[] {
+export function getSymbolEditorAliases(id: string, preferences?: SymbolAliasPreferences): string[] {
   const symbol = getSemanticSymbol(id);
   if (!symbol) return [];
   const candidates = [
+    ...(preferences?.[id] ? [preferences[id]] : []),
     ...(PREFERRED_EDITOR_ALIASES[id] ?? []),
     id.replace(/\./g, '-'),
     symbol.labels.en,
@@ -171,8 +174,8 @@ export function getSymbolEditorAliases(id: string): string[] {
   return [...new Set(candidates.map(normalizeEditorAlias).filter(Boolean))];
 }
 
-export function getPreferredSymbolEditorAlias(id: string): string | undefined {
-  return getSymbolEditorAliases(id)[0];
+export function getPreferredSymbolEditorAlias(id: string, preferences?: SymbolAliasPreferences): string | undefined {
+  return getSymbolEditorAliases(id, preferences)[0];
 }
 
 const editorAliasIndex = (() => {
@@ -187,15 +190,22 @@ const editorAliasIndex = (() => {
   return new Map([...aliases].filter((entry): entry is [string, SemanticSymbolDefinition] => entry[1] !== null));
 })();
 
-export function findSymbolByAlias(alias: string): SemanticSymbolDefinition | undefined {
-  return editorAliasIndex.get(normalizeEditorAlias(alias));
+export function findSymbolByAlias(alias: string, preferences?: SymbolAliasPreferences): SemanticSymbolDefinition | undefined {
+  const key = normalizeEditorAlias(alias);
+  if (!preferences || Object.keys(preferences).length === 0) return editorAliasIndex.get(key);
+  let match: SemanticSymbolDefinition | undefined;
+  for (const symbol of SEMANTIC_SYMBOLS) {
+    if (!getSymbolEditorAliases(symbol.id, preferences).includes(key)) continue;
+    if (match && match.id !== symbol.id) return undefined;
+    match = symbol;
+  }
+  return match;
 }
 
-export function getEditorAliasConflicts(): string[] {
-  // Exposed for registry tests and for a future Admin alias editor.
+export function getEditorAliasConflicts(preferences?: SymbolAliasPreferences): string[] {
   const seen = new Map<string, string>();
   const conflicts = new Set<string>();
-  for (const symbol of SEMANTIC_SYMBOLS) for (const alias of getSymbolEditorAliases(symbol.id)) {
+  for (const symbol of SEMANTIC_SYMBOLS) for (const alias of getSymbolEditorAliases(symbol.id, preferences)) {
     const key = normalizeEditorAlias(alias);
     const previous = seen.get(key);
     if (previous && previous !== symbol.id) conflicts.add(key);
@@ -204,16 +214,22 @@ export function getEditorAliasConflicts(): string[] {
   return [...conflicts].sort();
 }
 
-export function getSymbolEditorToken(id: string, language: SymbolLanguage): string | undefined {
+export function getSymbolEditorToken(id: string, language: SymbolLanguage, preferences?: SymbolAliasPreferences): string | undefined {
   void language; // Shortcut tokens stay language-neutral; localized legacy tokens remain readable.
-  const alias = getPreferredSymbolEditorAlias(id);
+  const alias = getPreferredSymbolEditorAlias(id, preferences);
   return alias ? `[[${alias}]]` : undefined;
 }
 
-export function findSymbolByEditorToken(token: string, language: SymbolLanguage): SemanticSymbolDefinition | undefined {
+export function findSymbolByEditorToken(token: string, language: SymbolLanguage, preferences?: SymbolAliasPreferences): SemanticSymbolDefinition | undefined {
   const alias = /^\[\[([^\[\]]+)\]\]$/.exec(token)?.[1];
-  if (alias) return findSymbolByAlias(alias);
+  if (alias) return findSymbolByAlias(alias, preferences);
   return SEMANTIC_SYMBOLS.find(symbol => symbol.editorTokens[language] === token || Object.values(symbol.editorTokens).includes(token));
+}
+
+export function getDefaultSymbolAliasPreferences(): SymbolAliasPreferences {
+  return Object.fromEntries(SEMANTIC_SYMBOLS
+    .filter(symbol => !!symbol.allowedBlockTypes?.length)
+    .map(symbol => [symbol.id, getPreferredSymbolEditorAlias(symbol.id)!]));
 }
 
 export function isSymbolAllowed(symbol: SemanticSymbolDefinition, context: InlineEditorContext): boolean {

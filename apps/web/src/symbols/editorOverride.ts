@@ -12,6 +12,6 @@ export function initialManagedSourceSymbols(original: readonly Segment[], existi
 
 /** Preview and save serialize exactly the same contract. */
 export function createEditorOverride(spanKey: string, bbox: SpanOverride['bbox'], textAlign: SpanOverride['textAlign'],
-  segments: Segment[], managedSourceSymbols: readonly string[]): SpanOverride {
-  return { spanKey, bbox, textAlign, segments, managedSourceSymbols: collectManagedSourceSymbols(managedSourceSymbols, segments) };
+  segments: Segment[], managedSourceSymbols: readonly string[], lineHeight?: number): SpanOverride {
+  return { spanKey, bbox, textAlign, lineHeight, segments, managedSourceSymbols: collectManagedSourceSymbols(managedSourceSymbols, segments) };
 }

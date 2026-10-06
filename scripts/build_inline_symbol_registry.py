@@ -292,6 +292,17 @@ def build(apply, only_pages=None,registry_only=False):
         ('marker.checkbox','Checklist square','Quadrado de checklist','ZapfDingbatsStd','❏',7)]
     entries.extend(glyph_definition(doc,s) for s in glyphs)
     entries.extend(compound_definitions(doc, vector_path, native_paint_colors, definition))
+    # The p13 bounty difficulty skull is a tiny RGBA image (not a path or font
+    # glyph). Keep it as a source-measured appearance variant of combat.skull.
+    skull_entry=next(entry for entry in entries if entry['id']=='combat.skull')
+    skull_bbox=[544.67,560.72,558.52,581.18]
+    skull_size=10.0
+    skull_entry['render'].setdefault('variants',{})['bounty-red-raster']={
+        'assetUrl':'/pages/page_013/source-symbol-bounty-skull.png',
+        'widthEm':(skull_bbox[2]-skull_bbox[0])/skull_size,
+        'heightEm':(skull_bbox[3]-skull_bbox[1])/skull_size,
+        'verticalAlignEm':.6997,
+    }
     for g in audit['groups']:
         definition_match=next((entry for entry in entries if entry.get('legacy') and entry['legacy']['font'] in g['font'] and g['representation'].strip() in entry['legacy']['characters'] and entry['allowedBlockTypes']),None)
         if not definition_match:continue
@@ -312,6 +323,17 @@ def build(apply, only_pages=None,registry_only=False):
     placements[90] = [item for item in placements[90] if (
         item['symbolId'], item['anchor']['blockId'], item['anchor']['lineId'], item['anchor']['spanIndex']
     ) not in compound_refs]
+    # One reviewed occurrence: the image xref 54306 is unique to the p13
+    # phrase "listed as a [skull] symbol". The black vector skulls elsewhere
+    # have different source geometry and keep the default rendering.
+    p13_dom=json.loads((ROOT/'apps/web/public/pages/page_013/page_013_dom.json').read_text(encoding='utf8'))
+    p13_block_index=next(i for i,b in enumerate(p13_dom['blocks']) if b['id']=='block_48')
+    p13_line=next(line for line in p13_dom['blocks'][p13_block_index]['lines'] if line['id']=='line_48_0')
+    p13_anchor=dict(blockId='block_48',blockIndex=p13_block_index,lineId='line_48_0',spanIndex=0,side='before',sizePt=skull_size)
+    p13_metrics=dict(widthEm=(skull_bbox[2]-skull_bbox[0])/skull_size,
+        heightEm=(skull_bbox[3]-skull_bbox[1])/skull_size,verticalAlignEm=.6997,
+        renderVariant='bounty-red-raster')
+    placements[13].append(dict(symbolId='combat.skull',bbox=skull_bbox,drawingIndices=[],anchor=p13_anchor,metrics=p13_metrics))
     if apply:
         dest=ROOT/'apps/web/src/symbols/sourceSymbols.json';dest.write_text(json.dumps(entries,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     # Masks are independent of language. Source rendering remains untouched;
@@ -322,9 +344,16 @@ def build(apply, only_pages=None,registry_only=False):
         page_dir=ROOT/f'apps/web/public/pages/page_{page_no:03d}'
         if apply:
             mask_doc=fitz.open(PDF);page=mask_doc[page_no-1]
+            source_skull_pix=None
             for b in page.get_text('blocks'):
                 if b[4].strip():page.add_redact_annot(fitz.Rect(b[:4]),fill=None)
             page.apply_redactions(images=0,graphics=0,text=0)
+            if any(item['metrics'].get('renderVariant')=='bounty-red-raster' for item in items):
+                if len([i for i in page.get_images(full=True) if i[0]==54306])!=1:
+                    raise ValueError('Expected the unique p13 bounty skull image xref 54306')
+                base=fitz.Pixmap(mask_doc,54306);alpha=fitz.Pixmap(mask_doc,54305)
+                source_skull_pix=fitz.Pixmap(fitz.csRGB,fitz.Pixmap(base,alpha))
+                page.delete_image(54306)
             drawings=source_drawings(doc[page_no-1])
             paint_bounds=doc[page_no-1].get_bboxlog()
             for item in items:
@@ -348,6 +377,8 @@ def build(apply, only_pages=None,registry_only=False):
                     raise ValueError(f"Source path remains in erasure patch p{page_no}: {item['symbolId']} indices={item['drawingIndices']} bbox={item['bbox']}")
             # One render per page, not one complete PDF traversal per icon.
             pix=page.get_pixmap(matrix=fitz.Matrix(4,4));full=Image.frombytes('RGB',(pix.width,pix.height),pix.samples)
+            if source_skull_pix is not None:
+                source_skull_pix.save(page_dir/'source-symbol-bounty-skull.png')
         for i,item in enumerate(items):
             crop_pad=max(.4,max(((drawings[index].get('width') or 0)/2+.3 for index in item['drawingIndices']),default=0)) if apply else .8
             r=fitz.Rect(item['bbox'])+(-crop_pad,-crop_pad,crop_pad,crop_pad)

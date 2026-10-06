@@ -489,14 +489,29 @@ test('complete source geometry distinguishes sword, arrow, combined weapon and s
   assert.equal(getSemanticSymbol('combat.status-square'),undefined);
 });
 
-test('Payload envelope preserves adopted source IDs, metrics, unknown IDs and an empty edit',()=>{
-  const saved={spanKey:'test',bbox:[0,0,10,10] as [number,number,number,number],segments:[object('future.new')],textAlign:'center' as const,managedSourceSymbols:['attack.melee']};
+test('Payload envelope preserves adopted source IDs, metrics, line spacing, unknown IDs and an empty edit',()=>{
+  const saved={spanKey:'test',bbox:[0,0,10,10] as [number,number,number,number],segments:[object('future.new')],textAlign:'center' as const,lineHeight:1.38,managedSourceSymbols:['attack.melee']};
   const decoded=decodeOverrideData(JSON.parse(JSON.stringify(encodeOverrideData(saved))))!;
   assert.deepEqual(decoded.segments,saved.segments);assert.deepEqual(decoded.managedSourceSymbols,saved.managedSourceSymbols);
   assert.equal(decoded.textAlign,'center');
+  assert.equal(decoded.lineHeight,1.38);
   assert.deepEqual(decodeOverrideData([])?.segments,[]);
   assert.deepEqual(decodeOverrideData({schemaVersion:2,segments:[]})?.segments,[]);
   assert.equal(decodeOverrideData({text:'invalid'}),null);
+});
+
+test('p13 Story Flag example uses source-matched editable leading for its separate label and instruction rows',()=>{
+  const data=page(13);const block=data.blocks[5];
+  assert.equal(block.id,'block_19');
+  assert.equal(block.defaultLineHeight,1.3835);
+  const lines=new Map(block.lines.map((line:any)=>[line.id,line]));
+  const header=lines.get('line_19_0') as any;
+  const bodyTop=Math.min((lines.get('line_19_1') as any).bbox[1],(lines.get('line_19_2') as any).bbox[1]);
+  assert.ok(Math.abs((bodyTop-header.bbox[1])/10-block.defaultLineHeight)<0.001);
+  const icons=elements(13).filter((element:any)=>element.anchor.blockId==='block_19');
+  assert.deepEqual(icons.map((element:any)=>[element.symbolId,element.anchor.lineId,element.anchor.side]),[
+    ['story.pencil','line_19_0','before'],['story.flag','line_19_1','after'],
+  ]);
 });
 
 test('virtual objects preserve original EN advances and source geometry indexes',()=>{

@@ -20,6 +20,7 @@ export function SemanticSymbol({ id, language, size, color = 'currentColor', pre
       {visual.paths.map((path,i)=><path key={i} {...path} />)}
     </svg>
   );
-  return <img className="inline-semantic-symbol" src={symbol.assetUrl} alt={symbol.labels[language]} draggable={false} data-symbol-id={id}
+  const visualAssetUrl = 'assetUrl' in visual ? visual.assetUrl : undefined;
+  return <img className="inline-semantic-symbol" src={visualAssetUrl ?? symbol.assetUrl} alt={symbol.labels[language]} draggable={false} data-symbol-id={id}
     style={{...style,clipPath:symbol.render.mask==='circle'?'circle(50% at 50% 50%)':undefined}} />;
 }

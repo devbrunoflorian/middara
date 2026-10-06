@@ -170,6 +170,75 @@
   font-size: 10px;
 }
 
+.admin-symbol-alias-item {
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 30px 30px;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 8px;
+  border-bottom: 1px solid rgb(148 163 184 / 13%);
+}
+
+.admin-symbol-alias-main,
+.admin-symbol-alias-main > strong {
+  display: block;
+  min-width: 0;
+}
+
+.admin-symbol-alias-main > strong {
+  overflow: hidden;
+  color: #f8fafc;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-symbol-alias-main > code {
+  display: block;
+  margin-top: 3px;
+  color: #7dd3fc;
+  font-size: 11px;
+}
+
+.admin-symbol-alias-edit,
+.admin-symbol-alias-reset,
+.admin-symbol-alias-editor button {
+  min-width: 28px;
+  min-height: 28px;
+  border: 1px solid #536273;
+  border-radius: 5px;
+  background: #253444;
+  color: white;
+  cursor: pointer;
+}
+
+.admin-symbol-alias-edit { font-size: 17px; }
+.admin-symbol-alias-reset { color: #cbd5e1; }
+
+.admin-symbol-alias-editor {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 4px;
+  color: #94a3b8;
+  font: 11px/1.2 ui-monospace, monospace;
+}
+
+.admin-symbol-alias-editor input {
+  min-width: 0;
+  width: 100%;
+  height: 26px;
+  padding: 2px 5px;
+  border: 1px solid #38bdf8;
+  border-radius: 4px;
+  background: #0f1720;
+  color: #f8fafc;
+  font: inherit;
+}
+
+.admin-symbol-alias-editor button { min-width: 25px; min-height: 25px; padding: 0; }
+
 .admin-symbol-palette-empty {
   padding: 8px;
   color: #cbd5e1;
@@ -195,6 +264,11 @@
 .admin-symbol-palette-history button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+.admin-symbol-palette-history button[aria-pressed="true"] {
+  border-color: #38bdf8;
+  color: #bae6fd;
 }
 
 .admin-symbol-palette-status {

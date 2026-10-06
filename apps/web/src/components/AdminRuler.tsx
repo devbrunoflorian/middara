@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
+import type { LayoutAlignmentGuide } from '../layoutFrameSnapping';
 import './AdminRuler.css';
 
 interface AdminRulerProps {
   pageElement: HTMLElement | null;
   pageWidth: number;
   pageHeight: number;
+  alignmentGuides?: LayoutAlignmentGuide[];
 }
 
 interface PageRect {
@@ -13,6 +15,14 @@ interface PageRect {
   top: number;
   width: number;
   height: number;
+  viewport: ViewportRect;
+}
+
+interface ViewportRect {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
 }
 
 interface HoveredBlockGeometry {
@@ -28,7 +38,7 @@ const LABEL_INTERVAL_PT = 100;
 const TICK_INTERVAL_PT = 10;
 const RULER_SIZE_PX = 22;
 
-export function AdminRuler({ pageElement, pageWidth, pageHeight }: AdminRulerProps) {
+export function AdminRuler({ pageElement, pageWidth, pageHeight, alignmentGuides = [] }: AdminRulerProps) {
   const [pageRect, setPageRect] = useState<PageRect | null>(null);
   const [hoveredGeometry, setHoveredGeometry] = useState<HoveredBlockGeometry | null>(null);
 
@@ -85,25 +95,53 @@ export function AdminRuler({ pageElement, pageWidth, pageHeight }: AdminRulerPro
       return;
     }
 
+    const scrollViewport = pageElement.parentElement;
     let frame = 0;
     const update = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
         const rect = pageElement.getBoundingClientRect();
-        setPageRect({ left: rect.left, top: rect.top, width: rect.width, height: rect.height });
+        const stageRect = scrollViewport?.getBoundingClientRect();
+        const viewport: ViewportRect = scrollViewport && stageRect
+          ? {
+              left: stageRect.left + scrollViewport.clientLeft,
+              top: stageRect.top + scrollViewport.clientTop,
+              right: stageRect.left + scrollViewport.clientLeft + scrollViewport.clientWidth,
+              bottom: stageRect.top + scrollViewport.clientTop + scrollViewport.clientHeight,
+            }
+          : { left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight };
+        const next: PageRect = { left: rect.left, top: rect.top, width: rect.width, height: rect.height, viewport };
+        setPageRect(current => current
+          && current.left === next.left && current.top === next.top
+          && current.width === next.width && current.height === next.height
+          && current.viewport.left === viewport.left && current.viewport.top === viewport.top
+          && current.viewport.right === viewport.right && current.viewport.bottom === viewport.bottom
+          ? current
+          : next);
       });
     };
-    const observer = new ResizeObserver(update);
-    observer.observe(pageElement);
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(update);
+    observer?.observe(pageElement);
+    if (scrollViewport) observer?.observe(scrollViewport);
     window.addEventListener('resize', update);
+    // The page is inside .page-stage, which owns scrolling in the single-page
+    // viewer. Subscribe directly to it as well as to outer page scrolls; a
+    // fixed overlay must be measured against the transformed page after either.
+    scrollViewport?.addEventListener('scroll', update, { passive: true });
     window.addEventListener('scroll', update, true);
+    const visualViewport = window.visualViewport;
+    visualViewport?.addEventListener('resize', update);
+    visualViewport?.addEventListener('scroll', update);
     update();
 
     return () => {
       cancelAnimationFrame(frame);
-      observer.disconnect();
+      observer?.disconnect();
       window.removeEventListener('resize', update);
+      scrollViewport?.removeEventListener('scroll', update);
       window.removeEventListener('scroll', update, true);
+      visualViewport?.removeEventListener('resize', update);
+      visualViewport?.removeEventListener('scroll', update);
     };
   }, [pageElement, pageWidth, pageHeight]);
 
@@ -121,17 +159,32 @@ export function AdminRuler({ pageElement, pageWidth, pageHeight }: AdminRulerPro
 
   if (!pageRect || !Number.isFinite(scale) || scale <= 0) return null;
 
+  const viewport = pageRect.viewport;
+  const pageRight = pageRect.left + pageRect.width;
+  const pageBottom = pageRect.top + pageRect.height;
+  if (pageRight <= viewport.left || pageRect.left >= viewport.right
+    || pageBottom <= viewport.top || pageRect.top >= viewport.bottom) return null;
+
+  const horizontalLeft = Math.max(pageRect.left, viewport.left);
+  const horizontalRight = Math.min(pageRight, viewport.right);
+  const horizontalTop = Math.min(Math.max(pageRect.top - RULER_SIZE_PX, viewport.top), viewport.bottom - RULER_SIZE_PX);
+  const verticalTop = Math.max(pageRect.top, viewport.top);
+  const verticalBottom = Math.min(pageBottom, viewport.bottom);
+  const verticalLeft = Math.min(Math.max(pageRect.left - RULER_SIZE_PX, viewport.left), viewport.right - RULER_SIZE_PX);
+  const xOffset = pageRect.left - horizontalLeft;
+  const yOffset = pageRect.top - verticalTop;
+
   const horizontalStyle = {
-    left: pageRect.left,
-    top: pageRect.top - RULER_SIZE_PX,
-    width: pageRect.width,
+    left: horizontalLeft,
+    top: horizontalTop,
+    width: Math.max(0, horizontalRight - horizontalLeft),
     height: RULER_SIZE_PX,
   };
   const verticalStyle = {
-    left: pageRect.left - RULER_SIZE_PX,
-    top: pageRect.top,
+    left: verticalLeft,
+    top: verticalTop,
     width: RULER_SIZE_PX,
-    height: pageRect.height,
+    height: Math.max(0, verticalBottom - verticalTop),
   };
   const geometryPosition = hoveredGeometry ? {
     left: pageRect.left + hoveredGeometry.x * scale,
@@ -139,17 +192,38 @@ export function AdminRuler({ pageElement, pageWidth, pageHeight }: AdminRulerPro
     width: hoveredGeometry.width * scale,
     height: hoveredGeometry.height * scale,
   } : null;
+  const snapGuideNodes = alignmentGuides.flatMap((guide, index) => {
+    if (guide.axis === 'x') {
+      const x = pageRect.left + guide.value * scale;
+      if (x < horizontalLeft || x > horizontalRight) return [];
+      return [
+        <span key={index * 2} className="admin-ruler-snap-guide admin-ruler-snap-guide-vertical"
+          style={{ left: x, top: verticalTop, height: Math.max(0, verticalBottom - verticalTop) }} />,
+        <span key={index * 2 + 1} className="admin-ruler-snap-mark admin-ruler-snap-mark-x"
+          title={guide.label} style={{ left: x, top: horizontalTop + RULER_SIZE_PX - 5 }} />,
+      ];
+    }
+    const y = pageRect.top + guide.value * scale;
+    if (y < verticalTop || y > verticalBottom) return [];
+    return [
+      <span key={index * 2} className="admin-ruler-snap-guide admin-ruler-snap-guide-horizontal"
+        style={{ left: horizontalLeft, top: y, width: Math.max(0, horizontalRight - horizontalLeft) }} />,
+      <span key={index * 2 + 1} className="admin-ruler-snap-mark admin-ruler-snap-mark-y"
+        title={guide.label} style={{ left: verticalLeft + RULER_SIZE_PX - 5, top: y }} />,
+    ];
+  });
 
   return createPortal(
     <>
       <div className="admin-ruler-layer" aria-hidden="true">
+        {snapGuideNodes}
         <div className="admin-ruler-corner" style={{ left: verticalStyle.left, top: horizontalStyle.top }} />
         <div className="admin-ruler admin-ruler-horizontal" style={horizontalStyle}>
           {xTicks.map(value => (
             <span
               key={value}
               className={`admin-ruler-tick ${value % LABEL_INTERVAL_PT === 0 ? 'labeled' : ''}`}
-              style={{ left: `${value * scale}px` }}
+              style={{ left: `${xOffset + value * scale}px` }}
             >
               {value % LABEL_INTERVAL_PT === 0 ? <span>{value}</span> : null}
             </span>
@@ -161,7 +235,7 @@ export function AdminRuler({ pageElement, pageWidth, pageHeight }: AdminRulerPro
             <span
               key={value}
               className={`admin-ruler-tick ${value % LABEL_INTERVAL_PT === 0 ? 'labeled' : ''}`}
-              style={{ top: `${value * scale}px` }}
+              style={{ top: `${yOffset + value * scale}px` }}
             >
               {value % LABEL_INTERVAL_PT === 0 ? <span>{value}</span> : null}
             </span>

@@ -1,8 +1,10 @@
 import React, { act } from 'react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { getQueriesForElement, fireEvent as dispatchEvent } from '@testing-library/dom';
 import { createRoot } from 'react-dom/client';
 import { RichSpanEditor, type Segment, type SpanOverride } from '../src/components/RichSpanEditor';
+import { AdminSymbolPalette, type AdminSymbolPaletteEditorState } from '../src/components/AdminSymbolPalette';
+import { getDefaultSymbolAliasPreferences } from '../src/symbols/semanticSymbols';
 import { editableTextForSegments } from '../src/symbols/inlineCodec';
 import { decodeOverrideData, encodeOverrideData } from '../src/symbols/overrideData';
 import { INLINE_CLIPBOARD_MIME } from '../src/symbols/inlineClipboard';
@@ -24,17 +26,59 @@ function render(node: React.ReactNode) {
   cleanups.add(unmount);
   return { container, unmount, ...getQueriesForElement(container) };
 }
-afterEach(() => { for (const cleanup of cleanups) cleanup(); });
+
+function AdminEditorHarness(props: React.ComponentProps<typeof RichSpanEditor>) {
+  const [paletteOpen, setPaletteOpen] = React.useState(false);
+  const [editorState, setEditorState] = React.useState<AdminSymbolPaletteEditorState | null>(null);
+  const activeEditor = React.useRef<{ key: string; state: AdminSymbolPaletteEditorState } | null>(null);
+  const onPaletteEditorChange = React.useCallback((key: string, state: AdminSymbolPaletteEditorState | null) => {
+    if (state) {
+      activeEditor.current = { key, state };
+      setEditorState(current => current
+        && current.context === state.context
+        && current.canInsert === state.canInsert
+        && current.canUndo === state.canUndo
+        && current.status === state.status
+        ? current
+        : state);
+    } else if (activeEditor.current?.key === key) {
+      activeEditor.current = null;
+      setEditorState(null);
+    }
+  }, []);
+  return <>
+    <RichSpanEditor {...props} symbolAliasPreferences={defaultAliasPreferences} onPaletteEditorChange={onPaletteEditorChange} />
+    <AdminSymbolPalette
+      language={props.language}
+      context={editorState?.context ?? 'admin'}
+      open={paletteOpen}
+      canInsert={editorState?.canInsert ?? false}
+      canUndo={editorState?.canUndo ?? false}
+      status={editorState?.status ?? null}
+      aliasPreferences={defaultAliasPreferences}
+      aliasesLoading={false}
+      onOpenChange={setPaletteOpen}
+      onInsert={id => activeEditor.current?.state.insert(id)}
+      onUndo={() => activeEditor.current?.state.undo()}
+      onSaveAlias={async () => ({ ok: true, message: 'saved' })}
+    />
+  </>;
+}
+beforeEach(() => {
+  vi.stubGlobal('fetch', vi.fn(async () => ({ ok: false, status: 404, json: async () => ({}) })));
+});
+afterEach(() => { for (const cleanup of cleanups) cleanup(); vi.unstubAllGlobals(); });
 const style = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+const defaultAliasPreferences = getDefaultSymbolAliasPreferences();
 const plain = (text: string): Segment => ({ ...style, text });
 const symbol = (): Segment => ({ ...style, text: '\uFFFC', symbolId: 'tag.status.icon', symbolMetrics: { widthEm: .9, heightEm: 1, verticalAlignEm: .2 } });
 
-function mount(language: 'en' | 'pt-BR', runs: Segment[], existingOverride?: SpanOverride) {
+function mount(language: 'en' | 'pt-BR', runs: Segment[], existingOverride?: SpanOverride, originalLineHeight = 1) {
   const onDraftChange = vi.fn(); const onSave = vi.fn();
-  const view = render(<RichSpanEditor spanKey={`p0-${language}`} pageNumber={37} language={language}
+  const view = render(<AdminEditorHarness spanKey={`p0-${language}`} pageNumber={37} language={language}
     originalText={runs.map(r => r.text).join('')} originalSegments={runs}
     originalFont={style.font} originalSize={10} originalColor={style.color} originalWeight={400}
-    originalStyle="normal" bbox={[10, 10, 300, 60]} onClose={vi.fn()} onSave={onSave}
+    originalStyle="normal" originalLineHeight={originalLineHeight} bbox={[10, 10, 300, 60]} onClose={vi.fn()} onSave={onSave}
     onDraftChange={onDraftChange} existingOverride={existingOverride} />);
   fireEvent.click(view.getByText('📝 Edit Text'));
   const textarea = view.getByRole('textbox') as HTMLTextAreaElement;
@@ -83,6 +127,18 @@ describe.each(['en', 'pt-BR'] as const)('RichSpanEditor mounted regression %s', 
     expect(v.onSave.mock.calls.at(-1)?.[0].segments.map((r: Segment) => r.text).join('')).toBe('This is  a test');
   });
 
+  it('adjusts line spacing in the live draft and round-trips it with the translation', () => {
+    const v = mount(language, [plain('Header:\nBody text')], undefined, 1.38);
+    const spacing = v.getByRole('spinbutton', { name: language === 'pt-BR' ? 'Entrelinha' : 'Line spacing' }) as HTMLInputElement;
+    expect(spacing.value).toBe('1.38');
+    fireEvent.change(spacing, { target: { value: '1.50' } });
+    expect(v.draft()?.lineHeight).toBe(1.5);
+    fireEvent.click(v.getByText('💾 Save'));
+    const saved = v.onSave.mock.calls.at(-1)![0] as SpanOverride;
+    expect(saved.lineHeight).toBe(1.5);
+    expect(decodeOverrideData(JSON.parse(JSON.stringify(encodeOverrideData(saved))))?.lineHeight).toBe(1.5);
+  });
+
   it('spaces before/after an element preserve identity, metrics and neighboring styles', () => {
     const source = [plain('Before '), symbol(), { ...plain(' after'), weight: 700 }];
     const v = mount(language, source); const token = editableTextForSegments([symbol()], language);
@@ -116,8 +172,8 @@ describe.each(['en', 'pt-BR'] as const)('RichSpanEditor mounted regression %s', 
     fireEvent.click(v.getByText(language === 'en' ? 'Undo' : 'Desfazer'));
     fireEvent.click(v.getByText(language === 'en' ? 'Undo' : 'Desfazer'));
     expect(v.textarea.value).toBe(`Before ${token}after`);
-    fireEvent.click(v.getByText(language === 'en' ? 'Redo' : 'Refazer'));
-    fireEvent.click(v.getByText(language === 'en' ? 'Redo' : 'Refazer'));
+    fireEvent.keyDown(v.textarea, { key: 'z', ctrlKey: true, shiftKey: true });
+    fireEvent.keyDown(v.textarea, { key: 'z', ctrlKey: true, shiftKey: true });
     expect(v.textarea.value).toBe('Before after!');
     fireEvent.click(v.getByText('💾 Save'));
     const saved = v.onSave.mock.calls.at(-1)![0] as SpanOverride;
@@ -139,6 +195,47 @@ describe.each(['en', 'pt-BR'] as const)('RichSpanEditor mounted regression %s', 
     expect(v.queryByRole('textbox')).toBeNull();
     fireEvent.click(v.getByText('💾 Save'));
     expect(v.onSave.mock.calls.at(-1)![0].segments).toEqual(draft.segments);
+  });
+
+  it('edits at the start, middle and end, and removes an allowed line break without damaging an adjacent symbol', () => {
+    const source = [{ ...plain('Before '), weight: 700 }, symbol(), { ...plain(' after'), style: 'italic' as const }];
+    const v = mount(language, source); const token = editableTextForSegments([symbol()], language);
+    const expectSourceSymbolIntact = () => {
+      expect(v.draft()!.segments.filter(run => run.symbolId)).toEqual([symbol()]);
+    };
+
+    v.edit(`!Before ${token} after`, 0);
+    expectSourceSymbolIntact();
+    v.edit(`!BeforeX ${token} after`, 8);
+    expectSourceSymbolIntact();
+    const withEndInsertion = `!BeforeX ${token} after!`;
+    v.edit(withEndInsertion, withEndInsertion.length);
+    expectSourceSymbolIntact();
+    v.edit(`!BeginX ${token} after!`, 1, 7);
+    expectSourceSymbolIntact();
+    const withLineBreak = `!BeginX ${token} after!\nnext`;
+    v.edit(withLineBreak, withLineBreak.length);
+    expectSourceSymbolIntact();
+    const withoutLineBreak = `!BeginX ${token} after!next`;
+    v.edit(withoutLineBreak, withoutLineBreak.length);
+    expectSourceSymbolIntact();
+
+    const draft = v.draft()!;
+    const finalText = `!BeginX ${token} after!next`;
+    expect(v.textarea.value).toBe(finalText);
+    const segmentText = draft.segments.map(run => run.text).join('');
+    const runAt = (position: number) => {
+      let offset = 0;
+      return draft.segments.find(run => {
+        const end = offset + run.text.length;
+        const containsPosition = position >= offset && position < end;
+        offset = end;
+        return containsPosition;
+      });
+    };
+    expect(runAt(segmentText.indexOf('Begin') + 2)?.weight).toBe(700);
+    expect(runAt(segmentText.indexOf('after'))?.style).toBe('italic');
+    expect(segmentText).toBe(`!BeginX \uFFFC after!next`);
   });
 
   it.each(['Backspace', 'Delete'])('%s treats a source object atomically and retains intentional deletion', key => {

@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { RichSpanEditor, type Segment, type SpanOverride, type TextAlignment } from './RichSpanEditor';
+import type { AdminSymbolPaletteEditorState } from './AdminSymbolPalette';
 import { AdminRuler } from './AdminRuler';
 import { AdminLayoutFrameEditor } from './AdminLayoutFrameEditor';
+import type { LayoutAlignmentGuide, SnapFrameRect } from '../layoutFrameSnapping';
 import { deleteLayoutFrame, fetchLayoutFrames, loadLocalLayoutFrames, saveLayoutFrame, saveLocalLayoutFrames, type LayoutLanguage } from '../layoutFrames';
-import { resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics } from '../symbols/semanticSymbols';
+import { resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences } from '../symbols/semanticSymbols';
 import { SemanticSymbol } from '../symbols/SemanticSymbol';
 import { sourceSpanRuns } from '../symbols/sourceRuns';
 import { compoundElementIsReplaced, type SourceCompoundElement } from '../symbols/sourceCompounds';
@@ -103,6 +105,8 @@ export interface Block {
   adminReadOnly?: boolean;
   /** Keep translated content on one line inside this page-specific text frame. */
   noWrap?: boolean;
+  /** Source-matched initial line-height for text overrides when the PDF has a larger row gap. */
+  defaultLineHeight?: number;
   bbox: [number, number, number, number];
   layoutFrame?: LayoutFrame;
   content?: string;
@@ -495,6 +499,7 @@ function extractBlockInfo(blockKey: string, block: Block): SelectedSpanInfo {
     size,
     bbox: block.bbox,
     textAlign: block.layoutFrame?.textAlign || 'left',
+    lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
     sourceSegments,
     singleLine: block.noWrap ?? false,
   };
@@ -681,6 +686,7 @@ function extractCreditFieldInfo(
     size,
     bbox: field.bbox,
     textAlign: field.frame.textAlign || 'left',
+    lineHeight: field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
     sourceSegments,
     editorContext: block.creditUnit || block.creditUnits?.length ? 'credit-field' : 'typographic-field',
   };
@@ -697,6 +703,7 @@ interface SelectedSpanInfo {
   size: number;
   bbox: [number, number, number, number];
   textAlign: TextAlignment;
+  lineHeight: number;
   sourceSegments?: Segment[];
   singleLine?: boolean;
   editorContext?: InlineEditorContext;
@@ -711,6 +718,8 @@ interface PageRendererProps {
   zoomLevel?: number;
   onNavigate?: (pageNum: number) => void;
   language?: 'en' | 'pt-BR';
+  symbolAliasPreferences?: SymbolAliasPreferences;
+  onPaletteEditorChange?: (editorKey: string, state: AdminSymbolPaletteEditorState | null) => void;
 }
 
 function sourceLayoutFrame(block: Block): LayoutFrame {
@@ -722,7 +731,7 @@ function sourceLayoutFrame(block: Block): LayoutFrame {
     height: block.bbox[3] - block.bbox[1],
     rotation: 0,
     textAlign: block.layoutFrame?.textAlign,
-    lineHeight: block.layoutFrame?.lineHeight,
+    lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight,
   };
 }
 
@@ -764,7 +773,7 @@ function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 
   return <>{Array.from(legacy ? '\uFFFC' : segment.text).map((_,index)=><SemanticSymbol key={index} id={id} language={language} size={segment.size*scale} color={segment.color} metrics={segment.symbolMetrics} />)}{legacy ? segment.text.match(/\s+$/)?.[0] : null}</>;
 }
 
-export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, onNavigate, language = 'en' }) => {
+export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, onNavigate, language = 'en', symbolAliasPreferences, onPaletteEditorChange }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [pageElement, setPageElement] = useState<HTMLDivElement | null>(null);
   const [scale, setScale] = useState(1);
@@ -781,6 +790,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
   const [layoutDirty, setLayoutDirty] = useState(false);
   const [isSavingLayout, setIsSavingLayout] = useState(false);
   const [layoutStatus, setLayoutStatus] = useState<string | null>(null);
+  const [alignmentGuides, setAlignmentGuides] = useState<LayoutAlignmentGuide[]>([]);
 
   useEffect(() => {
     let active = true;
@@ -847,6 +857,10 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
   }, [layoutMode]);
 
   useEffect(() => {
+    if (!layoutMode) setAlignmentGuides([]);
+  }, [layoutMode, pageData.page_number]);
+
+  useEffect(() => {
     if (!layoutDirty) return;
     const warnBeforeClose = (event: BeforeUnloadEvent) => {
       event.preventDefault();
@@ -861,6 +875,22 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
       ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(unitKey) : undefined)
       ?? sourceLayoutFrame(block);
   }, [layoutFrames, inheritedLayoutFrames, language]);
+
+  const layoutSnapTargets = useMemo<SnapFrameRect[]>(() => pageData.blocks.flatMap((block, index) => {
+    if (block.hiddenFromPage || block.adminReadOnly || block.staticEditorLineIndexes?.length
+      || block.typographicUnits?.length || block.creditUnits?.length || block.creditUnit) return [];
+    const key = frameUnitKey(pageData.page_number, block, index);
+    const frame = effectiveFrameFor(key, block);
+    return [{
+      key,
+      label: `Bloco ${index + 1}`,
+      x: frame.x,
+      y: frame.y ?? block.bbox[1],
+      width: frame.width,
+      height: frame.height ?? Math.max(1, block.bbox[3] - block.bbox[1]),
+      rotation: frame.rotation,
+    }];
+  }), [pageData.blocks, pageData.page_number, effectiveFrameFor]);
 
   const selectLayoutFrame = useCallback((unitKey: string, initialFrame: LayoutFrame) => {
     if (layoutDirty && unitKey !== layoutUnitKey && !window.confirm('Há alterações de moldura não salvas. Descartar e selecionar outra?')) return;
@@ -1180,7 +1210,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
           );
         })}
       </div>
-      {isAdmin && showRuler && <AdminRuler pageElement={pageElement} pageWidth={pageData.width} pageHeight={pageData.height} />}
+      {isAdmin && showRuler && <AdminRuler pageElement={pageElement} pageWidth={pageData.width} pageHeight={pageData.height} alignmentGuides={alignmentGuides} />}
       </div>
 
       {isAdmin && selectedSpan && (
@@ -1194,6 +1224,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
           originalStyle={selectedSpan.style}
           originalSegments={selectedSpan.sourceSegments}
           originalTextAlign={selectedSpan.textAlign}
+          originalLineHeight={selectedSpan.lineHeight}
           bbox={selectedSpan.bbox}
           pageNumber={pageData.page_number}
           language={language}
@@ -1203,12 +1234,16 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
           existingOverride={selectedExistingOverride}
           singleLine={selectedSpan.singleLine}
           editorContext={selectedSpan.editorContext ?? 'paragraph'}
+          symbolAliasPreferences={symbolAliasPreferences}
+          onPaletteEditorChange={onPaletteEditorChange}
         />
       )}
       {isAdmin && layoutMode && (
         <AdminLayoutFrameEditor
           pageElement={pageElement}
           pageWidth={pageData.width}
+          pageHeight={pageData.height}
+          snapTargets={layoutSnapTargets}
           unitKey={layoutUnitKey}
           sourceBbox={selectedLayoutBlock ? {
             x: selectedLayoutBlock.bbox[0],
@@ -1226,6 +1261,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
           onSave={saveLayoutDraft}
           onDiscard={discardLayoutDraft}
           onResetToEnglish={resetLayoutToEnglish}
+          onSnapGuidesChange={setAlignmentGuides}
         />
       )}
     </div>
@@ -1491,7 +1527,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             width: `${blockLineW}px`,
             whiteSpace: block.noWrap ? 'pre' : 'pre-wrap',
             textAlign: currentOverride.textAlign ?? layoutFrameOverride?.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
-            lineHeight: layoutFrameOverride?.lineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+            lineHeight: currentOverride.lineHeight ?? block.defaultLineHeight ?? layoutFrameOverride?.lineHeight ?? block.layoutFrame?.lineHeight ?? 1,
             display: 'block',
             fontSize: 0,
             cursor: layoutMode ? 'move' : isAdmin ? 'text' : 'default',
@@ -1705,6 +1741,7 @@ function extractInlineSpanUnitInfo(
     size: first?.size || 10,
     bbox,
     textAlign: 'left',
+    lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
     sourceSegments,
     editorContext: 'span-unit',
   };
@@ -1863,7 +1900,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
             width: '100%',
             whiteSpace: 'pre-wrap',
             textAlign: override.textAlign ?? field.frame.textAlign ?? 'left',
-            lineHeight: field.frame.lineHeight ?? 1,
+            lineHeight: override.lineHeight ?? field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
             display: 'block',
             fontSize: 0,
           }}

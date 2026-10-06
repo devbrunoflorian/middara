@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, type PageData, type PageFidelityOverlay } from './components/PageRenderer';
+import { AdminSymbolPalette, type AdminSymbolPaletteEditorState } from './components/AdminSymbolPalette';
 import { 
   ChevronLeft, ChevronRight, Edit3, 
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
@@ -9,8 +10,15 @@ import './App.css';
 import { attachSourceInlineElements, type SourceInlineElement } from './symbols/sourceInlineElements';
 import { attachSourceCompoundElements, type SourceCompoundElement } from './symbols/sourceCompounds';
 import type { ContentsRowDefinition } from './contentsRows';
+import { getDefaultSymbolAliasPreferences, getEditorAliasConflicts, getSemanticSymbol, normalizeEditorAlias, type SymbolAliasPreferences } from './symbols/semanticSymbols';
+import { loadSymbolAliasSettings, saveSymbolAliasSettings } from './symbols/symbolAliasSettings';
 
 const TOTAL_PAGES = 102; // Pages with extracted DOM
+
+interface ActivePaletteEditor {
+  editorKey: string;
+  state: AdminSymbolPaletteEditorState;
+}
 
 async function loadPageData(pageNum: number): Promise<PageData> {
   const pageStr = pageNum.toString().padStart(3, '0');
@@ -112,6 +120,11 @@ function App() {
   const [viewMode, setViewMode] = useState<'single' | 'scroll'>('single');
   const [pageInput, setPageInput] = useState<string>('1');
   const [language, setLanguage] = useState<'en' | 'pt-BR'>('en');
+  const [isSymbolPaletteOpen, setIsSymbolPaletteOpen] = useState(false);
+  const [symbolAliasPreferences, setSymbolAliasPreferences] = useState<SymbolAliasPreferences>(getDefaultSymbolAliasPreferences);
+  const [symbolAliasSettingsLoading, setSymbolAliasSettingsLoading] = useState(true);
+  const [paletteEditorState, setPaletteEditorState] = useState<Pick<AdminSymbolPaletteEditorState, 'context' | 'canInsert' | 'canUndo' | 'status'> & { editorKey: string } | null>(null);
+  const activePaletteEditorRef = useRef<ActivePaletteEditor | null>(null);
 
   // Single page mode: one page
   const [pageData, setPageData] = useState<PageData | null>(null);
@@ -120,6 +133,63 @@ function App() {
   const [scrollPages, setScrollPages] = useState<Map<number, PageData>>(new Map());
 
   const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let active = true;
+    loadSymbolAliasSettings().then(result => {
+      if (!active) return;
+      setSymbolAliasPreferences(result.preferences);
+      setSymbolAliasSettingsLoading(false);
+    });
+    return () => { active = false; };
+  }, []);
+
+  const handlePaletteEditorChange = useCallback((editorKey: string, state: AdminSymbolPaletteEditorState | null) => {
+    if (state) {
+      activePaletteEditorRef.current = { editorKey, state };
+      setPaletteEditorState(current => current
+        && current.editorKey === editorKey
+        && current.context === state.context
+        && current.canInsert === state.canInsert
+        && current.canUndo === state.canUndo
+        && current.status === state.status
+        ? current
+        : { editorKey, context: state.context, canInsert: state.canInsert, canUndo: state.canUndo, status: state.status });
+    } else if (activePaletteEditorRef.current?.editorKey === editorKey) {
+      activePaletteEditorRef.current = null;
+      setPaletteEditorState(null);
+    }
+  }, []);
+
+  const handleSaveSymbolAlias = useCallback(async (symbolId: string, alias: string | null) => {
+    const next = { ...symbolAliasPreferences };
+    if (alias === null) next[symbolId] = getDefaultSymbolAliasPreferences()[symbolId];
+    else {
+      const normalized = normalizeEditorAlias(alias);
+      if (!normalized || !getSemanticSymbol(symbolId)) {
+        return { ok: false, message: language === 'pt-BR' ? 'Digite um atalho válido.' : 'Enter a valid shortcut.' };
+      }
+      next[symbolId] = normalized;
+    }
+    const conflicts = getEditorAliasConflicts(next);
+    if (conflicts.length) return {
+      ok: false,
+      message: language === 'pt-BR'
+        ? `Atalho em conflito: ${conflicts.map(value => `[[${value}]]`).join(', ')}.`
+        : `Shortcut conflict: ${conflicts.map(value => `[[${value}]]`).join(', ')}.`,
+    };
+    const result = await saveSymbolAliasSettings(next);
+    if (!result.ok) {
+      const message = result.reason === 'conflict'
+        ? (language === 'pt-BR' ? 'Esse atalho já está atribuído a outro símbolo.' : 'That shortcut is already assigned to another symbol.')
+        : result.reason === 'verification-failed'
+          ? (language === 'pt-BR' ? 'O Payload não confirmou a preferência salva.' : 'Payload did not confirm the saved preference.')
+          : (language === 'pt-BR' ? 'Não foi possível salvar no Payload.' : 'Could not save to Payload.');
+      return { ok: false, message };
+    }
+    setSymbolAliasPreferences(result.preferences);
+    return { ok: true, message: language === 'pt-BR' ? 'Atalho salvo e relido do banco.' : 'Shortcut saved and reloaded from the database.' };
+  }, [symbolAliasPreferences, language]);
 
   const acceptLeavingLayout = useCallback(() => {
     if (isLayoutDirty && !window.confirm('Há alterações de moldura não salvas. Descartar e sair do modo de layout?')) return false;
@@ -220,6 +290,8 @@ function App() {
                 zoomLevel={zoomLevel}
                 onNavigate={navigateToPage}
                 language={language}
+                symbolAliasPreferences={symbolAliasPreferences}
+                onPaletteEditorChange={handlePaletteEditorChange}
               />
             ) : null}
           </div>
@@ -244,6 +316,8 @@ function App() {
                     zoomLevel={zoomLevel}
                     onNavigate={navigateToPage}
                     language={language}
+                    symbolAliasPreferences={symbolAliasPreferences}
+                    onPaletteEditorChange={handlePaletteEditorChange}
                   />
                 ) : (
                   <div className="placeholder-page" style={{ height: 1100 * zoomLevel, width: 820 * zoomLevel, background: '#111' }}></div>
@@ -349,6 +423,7 @@ function App() {
               const nextAdmin = !isAdmin;
               setIsAdmin(nextAdmin);
               setIsRulerVisible(nextAdmin);
+              if (!nextAdmin) setIsSymbolPaletteOpen(false);
             }}
             title={isAdmin ? 'Exit Admin' : 'Enter Admin'}
           >
@@ -385,6 +460,22 @@ function App() {
           )}
         </div>
       </aside>
+      {isAdmin && (
+        <AdminSymbolPalette
+          language={language}
+          context={paletteEditorState?.context ?? 'admin'}
+          open={isSymbolPaletteOpen}
+          canInsert={paletteEditorState?.canInsert ?? false}
+          canUndo={paletteEditorState?.canUndo ?? false}
+          status={paletteEditorState?.status ?? null}
+          aliasPreferences={symbolAliasPreferences}
+          aliasesLoading={symbolAliasSettingsLoading}
+          onOpenChange={setIsSymbolPaletteOpen}
+          onInsert={symbolId => activePaletteEditorRef.current?.state.insert(symbolId)}
+          onUndo={() => activePaletteEditorRef.current?.state.undo()}
+          onSaveAlias={handleSaveSymbolAlias}
+        />
+      )}
     </div>
   );
 }
