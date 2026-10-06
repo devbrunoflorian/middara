@@ -1,10 +1,13 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { attachSourceInlineElements, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
 import { sourceSpanRuns } from '../src/symbols/sourceRuns';
 import { editableTextForSegments, segmentsFromEditableText } from '../src/symbols/inlineCodec';
 import { getSymbolEditorToken } from '../src/symbols/semanticSymbols';
+import { SemanticSymbol } from '../src/symbols/SemanticSymbol';
 
 const mapFont = (font: string) => ({ weight: font.includes('Bold') ? 700 : 400, style: 'normal' as const });
 
@@ -98,6 +101,42 @@ describe('source inline whitespace ordering', () => {
     expect(restoredIcon.size).toBe(sourceIcon.size);
     expect(restoredIcon.color).toBe(sourceIcon.color);
     expect(restoredIcon.symbolMetrics).toEqual(sourceIcon.symbolMetrics);
+  });
+
+  it('restores and renders the p. 78 compact black die vector after [[black-die]] reinsertion', () => {
+    const pageDir = join(process.cwd(), 'public/pages', 'page_078');
+    const dom = JSON.parse(readFileSync(join(pageDir, 'page_078_dom.json'), 'utf8'));
+    const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
+    const target = elements.find(element => element.symbolId === 'dice.black'
+      && element.anchor.blockId === 'block_22' && element.anchor.lineId === 'line_22_21')!;
+    expect(target).toBeDefined();
+    const blockElements = elements.filter(element => element.anchor.blockId === target.anchor.blockId);
+    const blocks = attachSourceInlineElements(dom.blocks, blockElements);
+    const block = blocks.find((candidate: { id: string }) => candidate.id === target.anchor.blockId)!;
+    const sourceTemplateSegments = sourceSpanRuns(block.lines.flatMap((line: { spans: unknown[] }) => line.spans), mapFont);
+    const line = block.lines.find((candidate: { id: string }) => candidate.id === target.anchor.lineId)!;
+    const sourceRuns = sourceSpanRuns(line.spans, mapFont);
+    const sourceIcon = sourceRuns.find(run => run.symbolId === 'dice.black')!;
+    const previous = sourceRuns.filter(run => run !== sourceIcon);
+    const sourceText = editableTextForSegments(previous, 'en');
+    const token = getSymbolEditorToken('dice.black', 'en')!;
+    const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+
+    expect(sourceIcon.symbolMetrics?.renderVariant).toBe('black-p78-compact-lines');
+    const restored = segmentsFromEditableText(token + sourceText, toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
+    const restoredIcon = restored.find(run => run.symbolId === 'dice.black')!;
+
+    expect(restoredIcon.size).toBe(sourceIcon.size);
+    expect(restoredIcon.color).toBe(sourceIcon.color);
+    expect(restoredIcon.symbolMetrics).toEqual(sourceIcon.symbolMetrics);
+
+    const svg = renderToStaticMarkup(createElement(SemanticSymbol, {
+      id: restoredIcon.symbolId!, language: 'en', size: restoredIcon.size,
+      color: restoredIcon.color, metrics: restoredIcon.symbolMetrics,
+    }));
+    expect(svg.match(/<path\b/g)).toHaveLength(4);
+    expect(svg).toContain('stroke="#ffffff"');
+    expect(svg).not.toMatch(/<rect(?:\s|>)/);
   });
 
   it('does not choose a random source metric when one ID has conflicting source variants', () => {

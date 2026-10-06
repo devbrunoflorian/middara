@@ -222,7 +222,7 @@ test('page 52 black dice retain source metrics and belong to BLACK across extrac
     {blockId:'block_25',lineId:'line_25_1',ownerSpan:3,placementSpan:4},
     {blockId:'block_25',lineId:'line_25_4',ownerSpan:1,placementSpan:2},
   ];
-  const expectedVertical=[.261029052734375,.261029052734375,.2610382080078125,.36104736328125,.36104736328125,.36103515625,.26103515625];
+  const expectedVertical=[.261029052734375,.261029052734375,.3610382080078125,.36104736328125,.36104736328125,.36103515625,.26103515625];
   for(let i=0;i<dice.length;i++) {
     const entry=dice[i];const target=expected[i];
     assert.equal(entry.anchor.blockId,target.blockId);
@@ -387,8 +387,13 @@ test('separate color-label dice ownership family uses source spaces without abso
   const p85Dice=elements(85).filter((entry:any)=>entry.symbolId?.startsWith('dice.'));
   assert.equal(p85Dice.length,6);
   const p85Owned=p85Dice.filter((entry:any)=>entry.anchor.ownerSpanRef);
-  assert.equal(p85Owned.length,4);
-  assert.deepEqual(p85Dice.filter((entry:any)=>['dice.blue','dice.grey'].includes(entry.symbolId)).map((entry:any)=>entry.anchor.ownerSpanRef),[undefined,undefined]);
+  assert.equal(p85Owned.length,6);
+  const p85Blue=p85Dice.find((entry:any)=>entry.symbolId==='dice.blue')!;
+  const p85Grey=p85Dice.find((entry:any)=>entry.symbolId==='dice.grey')!;
+  assert.deepEqual(p85Blue.anchor.ownerSpanRef,{lineId:'line_10_8',spanIndex:1});
+  assert.deepEqual(p85Grey.anchor.ownerSpanRef,{lineId:'line_10_9',spanIndex:1});
+  assert.equal(p85Blue.anchor.side,'before');
+  assert.equal(p85Grey.anchor.side,'after');
 });
 
 test('page 85 GREEN die belongs to its trailing-space source span at the measured PDF gap',()=>{
@@ -457,8 +462,10 @@ test('trailing-space color-label ownership family matches ten PDF occurrences an
   const p85Dice=elements(85).filter((entry:any)=>entry.symbolId?.startsWith('dice.'));
   const wrapped=p85Dice.find((entry:any)=>entry.symbolId==='dice.blue')!;
   const counted=p85Dice.find((entry:any)=>entry.symbolId==='dice.grey')!;
-  assert.equal(wrapped.anchor.lineId,'line_10_9');assert.equal(wrapped.anchor.side,'before');assert.equal(wrapped.anchor.ownerSpanRef,undefined);
-  assert.equal(counted.anchor.lineId,'line_10_10');assert.equal(counted.anchor.side,'before');assert.equal(counted.anchor.ownerSpanRef,undefined);
+  assert.equal(wrapped.anchor.lineId,'line_10_9');assert.equal(wrapped.anchor.side,'before');
+  assert.deepEqual(wrapped.anchor.ownerSpanRef,{lineId:'line_10_8',spanIndex:1});
+  assert.equal(counted.anchor.lineId,'line_10_9');assert.equal(counted.anchor.side,'after');
+  assert.deepEqual(counted.anchor.ownerSpanRef,{lineId:'line_10_9',spanIndex:1});
 });
 
 test('mask activates for owning block/unit/draft, never the opposite language or unrelated unit',()=>{
