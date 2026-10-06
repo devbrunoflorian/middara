@@ -829,7 +829,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
                 onChange={event => changeLineHeight(event.currentTarget.valueAsNumber)}
                 min={0.6}
                 max={2.5}
-                step={0.05}
+                step={0.01}
                 className="rse-size-input rse-line-height-input"
               />
             </label>
