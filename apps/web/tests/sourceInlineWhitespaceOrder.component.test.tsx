@@ -1,0 +1,44 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { describe, expect, it } from 'vitest';
+import { attachSourceInlineElements, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
+import { sourceSpanRuns } from '../src/symbols/sourceRuns';
+
+const mapFont = (font: string) => ({ weight: font.includes('Bold') ? 700 : 400, style: 'normal' as const });
+
+const cases = [
+  { page: 13, lineId: 'line_19_0', symbolId: 'story.pencil', text: 'New Story Flag:', color: '#231f20' },
+  { page: 78, lineId: 'line_25_4', symbolId: 'attack.melee', text: '(Melee) or ', color: '#231f20' },
+];
+
+describe('source inline whitespace ordering', () => {
+  for (const item of cases) {
+    it(`p${item.page} inserts ${item.symbolId} before its geometrically following space`, () => {
+    const pageDir = join(process.cwd(), 'public/pages', `page_${String(item.page).padStart(3, '0')}`);
+    const dom = JSON.parse(readFileSync(join(pageDir, `page_${String(item.page).padStart(3, '0')}_dom.json`), 'utf8'));
+    const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
+    const target = elements.find(element => element.symbolId === item.symbolId && element.anchor.lineId === item.lineId)!;
+    expect(target).toBeDefined();
+    expect(target.anchor.side).toBe('before');
+    const lineBefore = dom.blocks[target.anchor.blockIndex].lines.find((line: { id: string }) => line.id === item.lineId)!;
+    const oldAnchorIndex = target.anchor.spanIndex;
+    const oldMetrics = { ...target.metrics };
+    const original = JSON.stringify(dom.blocks);
+
+    const blocks = attachSourceInlineElements(dom.blocks, [target]);
+    const block = blocks.find((candidate: { id: string }) => candidate.id === target.anchor.blockId)!;
+    const line = block.lines.find((candidate: { id: string }) => candidate.id === item.lineId)!;
+    const runs = sourceSpanRuns(line.spans, mapFont);
+
+    expect(runs.map(run => [run.text, run.symbolId])).toEqual([
+      ['\uFFFC', item.symbolId], [' ', undefined], [item.text, undefined],
+    ]);
+    const icon = runs[0];
+    expect(icon.color).toBe(item.color);
+    expect(icon.symbolMetrics).toEqual(oldMetrics);
+    expect(lineBefore.spans[oldAnchorIndex - 1].text.trim()).toBe('');
+    expect(target.anchor.spanIndex).toBe(oldAnchorIndex);
+    expect(JSON.stringify(dom.blocks)).toBe(original);
+    });
+  }
+});

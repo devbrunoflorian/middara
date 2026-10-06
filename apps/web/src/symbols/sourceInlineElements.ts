@@ -18,6 +18,26 @@ export function previousSourceSpan(spans:SpanData[],index:number):SpanData|undef
   return undefined;
 }
 
+const INLINE_ORDER_X_TOLERANCE_PT = 0.05;
+const INLINE_ORDER_Y_TOLERANCE_PT = 1;
+
+/** Correct PDF extraction order when a standalone space follows a before-anchored drawing. */
+function sourceObjectInsertionIndex(element:SourceInlineElement,spans:SpanData[]):number {
+  let index=element.anchor.spanIndex;
+  if(element.anchor.side!=='before')return index;
+  const iconRight=element.bbox[2];
+  const iconTop=element.bbox[1];
+  const iconBottom=element.bbox[3];
+  while(index>0) {
+    const preceding=spans[index-1];
+    const [x0,y0,,y1]=preceding.bbox;
+    if(preceding.text.trim() || x0<iconRight-INLINE_ORDER_X_TOLERANCE_PT
+      || y0>=iconBottom+INLINE_ORDER_Y_TOLERANCE_PT || y1<=iconTop-INLINE_ORDER_Y_TOLERANCE_PT)break;
+    index--;
+  }
+  return index;
+}
+
 /** Keep an inline object and the whitespace around it editable within a span unit. */
 function includeInlineObjectsInSpanUnits(block: Block, elements: SourceInlineElement[]): Block {
   if (!block.typographicSpanUnits?.length || !block.lines) return block;
@@ -28,12 +48,13 @@ function includeInlineObjectsInSpanUnits(block: Block, elements: SourceInlineEle
     const line = block.lines.find(candidate => candidate.id === element.anchor.lineId);
     if (!line) continue;
     const refAt = (index: number) => `${line.id}:${line.spans[index]?.sourceSpanIndex ?? index}`;
-    const objectRef = refAt(element.anchor.spanIndex);
+    const insertionIndex = sourceObjectInsertionIndex(element,line.spans);
+    const objectRef = refAt(insertionIndex);
     if (units.some(unit => unit.spanRefs.includes(objectRef))) continue;
 
-    let left = element.anchor.spanIndex - 1;
+    let left = insertionIndex - 1;
     while (left >= 0 && !line.spans[left].text.trim()) left--;
-    let right = element.anchor.spanIndex;
+    let right = insertionIndex;
     while (right < line.spans.length && !line.spans[right].text.trim()) right++;
     if (left < 0 || right >= line.spans.length) continue;
     const beforeRef = refAt(left);
@@ -75,16 +96,16 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
       return {...line,availableX:availableXNext,availableWidth:Math.max(0,right-availableXNext)};
     })() : line;
     return {...adjustedLine,spans:line.spans.flatMap((span,index)=>{
-      const matches=lineElements.filter(e=>e.anchor.spanIndex===index);
-      const make=(e:SourceInlineElement):SpanData=>({ text:SYMBOL_OBJECT_MARKER,semanticSymbolId:e.symbolId,sourceSpanIndex:index,
+      const matches=lineElements.filter(e=>sourceObjectInsertionIndex(e,line.spans)===index);
+      const make=(e:SourceInlineElement,styleSpan:SpanData,sourceSpanIndex:number):SpanData=>({ text:SYMBOL_OBJECT_MARKER,semanticSymbolId:e.symbolId,sourceSpanIndex,
         sourceSymbolMetrics:e.metrics ? {...e.metrics,
           ...(e.anchor.gapPt !== undefined ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {}),
           ...(e.anchor.trailingGapPt !== undefined ? {trailingGapEm:e.anchor.trailingGapPt/e.anchor.sizePt} : {})} : undefined,
-        font:span.font,size:e.anchor.sizePt,color:e.color ?? span.color,flags:span.flags,bbox:e.bbox,renderAsSourceOverlayDuplicate:true,renderSourceOverlayLanguage:'all' });
+        font:styleSpan.font,size:e.anchor.sizePt,color:e.color ?? styleSpan.color,flags:styleSpan.flags,bbox:e.bbox,renderAsSourceOverlayDuplicate:true,renderSourceOverlayLanguage:'all' });
       const sourceInlineObjects=matches.filter(e=>e.anchor.side==='replace-text' && e.anchor.textRange);
-      return [...matches.filter(e=>e.anchor.side==='before').map(make),{...span,sourceSpanIndex:index,
+      return [...matches.filter(e=>e.anchor.side==='before').map(e=>make(e,line.spans[e.anchor.spanIndex] ?? span,index)),{...span,sourceSpanIndex:index,
         ...(sourceInlineObjects.length?{sourceInlineObjects}:{}),
-      },...matches.filter(e=>e.anchor.side==='after').map(make)];
+      },...matches.filter(e=>e.anchor.side==='after').map(e=>make(e,line.spans[e.anchor.spanIndex] ?? span,index))];
     })};
     })};
   });
