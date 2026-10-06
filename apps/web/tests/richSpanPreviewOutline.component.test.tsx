@@ -166,5 +166,18 @@ describe('RichSpanEditor live PageRenderer preview', () => {
         expect(element.style.backgroundColor).toBe('');
       }
     }
+    const sourceHandGaps = sourceVectors.filter(element => element.symbolId === 'weapon.hand')
+      .map(element => {
+        expect(element.anchor.trailingGapPt).toBeDefined();
+        return element.anchor.trailingGapPt! / element.anchor.sizePt;
+      }).sort((a, b) => a - b);
+    const renderedHandGaps = renderedVectors.filter(element => element.dataset.symbolId === 'weapon.hand')
+      .map(element => Number.parseFloat(element.style.marginInlineEnd)
+        / Number.parseFloat((element.parentElement as HTMLElement).style.fontSize)).sort((a, b) => a - b);
+    expect(sourceHandGaps.every(gap => gap < 0)).toBe(true);
+    expect(renderedHandGaps).toHaveLength(sourceHandGaps.length);
+    for (let index = 0; index < sourceHandGaps.length; index++) {
+      expect(renderedHandGaps[index]).toBeCloseTo(sourceHandGaps[index], 5);
+    }
   });
 });
