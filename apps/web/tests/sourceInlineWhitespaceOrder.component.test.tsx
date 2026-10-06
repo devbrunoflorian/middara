@@ -139,6 +139,64 @@ describe('source inline whitespace ordering', () => {
     expect(svg).not.toMatch(/<rect(?:\s|>)/);
   });
 
+  it('restores the p. 41 source artwork for all six purple and black dice aliases', () => {
+    const pageDir = join(process.cwd(), 'public/pages', 'page_041');
+    const dom = JSON.parse(readFileSync(join(pageDir, 'page_041_dom.json'), 'utf8'));
+    const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
+    const dice = elements.filter(element => element.symbolId === 'dice.purple' || element.symbolId === 'dice.black');
+    expect(dice).toHaveLength(6);
+    expect(dice.filter(element => element.symbolId === 'dice.purple')).toHaveLength(2);
+    expect(dice.filter(element => element.symbolId === 'dice.black')).toHaveLength(4);
+
+    for (const target of dice) {
+      const blockElements = elements.filter(element => element.anchor.blockId === target.anchor.blockId);
+      const blocks = attachSourceInlineElements(dom.blocks, blockElements);
+      const block = blocks.find((candidate: { id: string }) => candidate.id === target.anchor.blockId)!;
+      const sourceTemplateSegments = sourceSpanRuns(block.lines.flatMap((line: { spans: unknown[] }) => line.spans), mapFont);
+      const line = block.lines.find((candidate: { id: string }) => candidate.id === target.anchor.lineId)!;
+      const sourceRuns = sourceSpanRuns(line.spans, mapFont);
+      const sourceIcon = sourceRuns.find(run => run.symbolId === target.symbolId)!;
+      const previous = sourceRuns.filter(run => run !== sourceIcon);
+      const token = getSymbolEditorToken(target.symbolId, 'en')!;
+      const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+      const restored = segmentsFromEditableText(token + editableTextForSegments(previous, 'en'), toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
+      const restoredIcon = restored.find(run => run.symbolId === target.symbolId)!;
+
+      expect(restoredIcon.size).toBe(sourceIcon.size);
+      expect(restoredIcon.color).toBe(sourceIcon.color);
+      expect(restoredIcon.symbolMetrics?.renderVariant).toBe(sourceIcon.symbolMetrics?.renderVariant);
+      for (const metric of ['widthEm', 'heightEm', 'verticalAlignEm', 'gapEm', 'trailingGapEm'] as const) {
+        const original = sourceIcon.symbolMetrics?.[metric];
+        const restored = restoredIcon.symbolMetrics?.[metric];
+        if (original === undefined || restored === undefined) {
+          expect(restored).toBe(original);
+        } else {
+          // The two purple source placements differ only by PDF metric rounding.
+          expect(Math.abs(restored - original) * sourceIcon.size).toBeLessThanOrEqual(0.0011);
+        }
+      }
+
+      const svg = renderToStaticMarkup(createElement(SemanticSymbol, {
+        id: restoredIcon.symbolId!, language: 'en', size: restoredIcon.size,
+        color: restoredIcon.color, metrics: restoredIcon.symbolMetrics,
+      }));
+      expect(svg.match(/<path\b/g)).toHaveLength(4);
+      expect(svg).toContain('stroke="#ffffff"');
+      expect(svg).not.toMatch(/<rect(?:\s|>)/);
+      if (target.symbolId === 'dice.purple') {
+        expect(restoredIcon.symbolMetrics?.renderVariant).toBe('purple-p41-heavy-outline');
+        expect(svg).toContain('fill="#6a3f8d"');
+        expect(svg).toContain('stroke-width="1.2640000581741333"');
+        expect(svg).toContain('stroke-width="0.6629999876022339"');
+      } else {
+        expect(restoredIcon.symbolMetrics?.renderVariant).toBeUndefined();
+        expect(svg).toContain('fill="#231f20"');
+        expect(svg).toContain('stroke-width="1.2640000581741333"');
+        expect(svg).toContain('stroke-width="0.6629999876022339"');
+      }
+    }
+  });
+
   it('does not choose a random source metric when one ID has conflicting source variants', () => {
     const token = getSymbolEditorToken('dice.black', 'en')!;
     const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
