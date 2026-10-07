@@ -120,18 +120,98 @@ export function editableTextForSegments(segments: Segment[], language: SymbolLan
     : run.text).join('');
 }
 
+interface TextMatchRange {
+  sourceStart:number;
+  sourceEnd:number;
+  targetStart:number;
+  targetEnd:number;
+}
+
+interface TextToken {
+  text:string;
+  start:number;
+  end:number;
+}
+
+/**
+ * Align unchanged word/punctuation runs across a rewrite so their original
+ * rich metadata follows them even when translated text changes around them.
+ * The bounded LCS is intentionally token-based: it keeps formatting on stable
+ * values and terms without aligning individual repeated letters in new words.
+ */
+function unchangedTextRanges(source:string,target:string):TextMatchRange[] {
+  if(!source || !target)return [];
+  const tokenize=(value:string):TextToken[]=>Array.from(
+    // Whitespace is deliberately not an alignment anchor. Repeated spaces
+    // otherwise win LCS ties and can misassociate a later emphasized token.
+    value.matchAll(/[\p{L}\p{M}_]+|[-+]?\p{N}+|[^\s\p{L}\p{M}\p{N}_]+/gu),
+    match=>({text:match[0],start:match.index ?? 0,end:(match.index ?? 0)+match[0].length}),
+  );
+  const oldTokens=tokenize(source);
+  const newTokens=tokenize(target);
+  const columns=newTokens.length+1;
+  const cells=(oldTokens.length+1)*columns;
+  // Avoid a large synchronous editor pause for unusually long blocks. The
+  // caller still receives the proven common edge spans in that rare case.
+  if(cells>4_000_000) {
+    let prefix=0;
+    while(prefix<Math.min(source.length,target.length) && source[prefix]===target[prefix])prefix++;
+    if(prefix>0 && /[\uDC00-\uDFFF]/.test(target[prefix] ?? ''))prefix--;
+    let suffix=0;
+    while(suffix<Math.min(source.length,target.length)-prefix
+      && source[source.length-1-suffix]===target[target.length-1-suffix])suffix++;
+    if(suffix>0 && /[\uDC00-\uDFFF]/.test(target[target.length-suffix] ?? ''))suffix--;
+    const ranges:TextMatchRange[]=[];
+    if(prefix)ranges.push({sourceStart:0,sourceEnd:prefix,targetStart:0,targetEnd:prefix});
+    if(suffix)ranges.push({sourceStart:source.length-suffix,sourceEnd:source.length,
+      targetStart:target.length-suffix,targetEnd:target.length});
+    return ranges;
+  }
+
+  const table=new Uint16Array(cells);
+  for(let oldIndex=oldTokens.length-1;oldIndex>=0;oldIndex--) {
+    const row=oldIndex*columns;
+    const nextRow=(oldIndex+1)*columns;
+    for(let newIndex=newTokens.length-1;newIndex>=0;newIndex--) {
+      table[row+newIndex]=oldTokens[oldIndex].text===newTokens[newIndex].text
+        ? table[nextRow+newIndex+1]+1
+        : Math.max(table[nextRow+newIndex],table[row+newIndex+1]);
+    }
+  }
+
+  const ranges:TextMatchRange[]=[];
+  let oldIndex=0;
+  let newIndex=0;
+  while(oldIndex<oldTokens.length && newIndex<newTokens.length) {
+    const oldToken=oldTokens[oldIndex];
+    const newToken=newTokens[newIndex];
+    if(oldToken.text===newToken.text) {
+      const previous=ranges[ranges.length-1];
+      if(previous
+        && source.slice(previous.sourceEnd,oldToken.start)===target.slice(previous.targetEnd,newToken.start)) {
+        previous.sourceEnd=oldToken.end;
+        previous.targetEnd=newToken.end;
+      } else {
+        ranges.push({sourceStart:oldToken.start,sourceEnd:oldToken.end,
+          targetStart:newToken.start,targetEnd:newToken.end});
+      }
+      oldIndex++;
+      newIndex++;
+      continue;
+    }
+    if(table[(oldIndex+1)*columns+newIndex]>=table[oldIndex*columns+newIndex+1])oldIndex++;
+    else newIndex++;
+  }
+  return ranges;
+}
+
 export function segmentsFromEditableText(text: string, style: RunStyle, language: SymbolLanguage,
   previous: Segment[] = [], context: InlineEditorContext = 'paragraph', aliasPreferences?:SymbolAliasPreferences,
   sourceTemplateSegments: Segment[] = []): Segment[] {
   // Exact round-trip keeps segmentation, style, unknown IDs and future metadata.
   if (text === editableTextForSegments(previous, language, aliasPreferences)) return previous.map(run => ({ ...run }));
   const baseline=editableTextForSegments(previous,language,aliasPreferences);
-  let prefix=0;let suffix=0;
-  while(prefix<Math.min(text.length,baseline.length) && text[prefix]===baseline[prefix])prefix++;
-  while(suffix<Math.min(text.length,baseline.length)-prefix && text[text.length-1-suffix]===baseline[baseline.length-1-suffix])suffix++;
-  // Do not preserve half a surrogate pair as a separate React text run.
-  if(prefix>0 && /[\uDC00-\uDFFF]/.test(text[prefix] ?? ''))prefix--;
-  if(suffix>0 && /[\uDC00-\uDFFF]/.test(text[text.length-suffix] ?? ''))suffix--;
+  const unchanged=unchangedTextRanges(baseline,text);
   const oldPlain:{start:number;end:number;run:Segment}[]=[];let oldOffset=0;
   for(const run of previous) {
     const projected=editableTextForSegments([run],language,aliasPreferences);
@@ -144,74 +224,180 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
   // source style for new body text. The selected character style is often the
   // opening label (for example italic bold "Note:") and must not leak across
   // the entire translated paragraph.
-  const changedEnd=baseline.length-suffix;
-  const replacementStyle = (() => {
-    const sameStyle=(a:Segment,b:Segment) => a.font===b.font && a.size===b.size && a.color===b.color
-      && a.weight===b.weight && a.style===b.style && a.disableLigatures===b.disableLigatures
-      && a.textStrokeWidthPt===b.textStrokeWidthPt && a.textStrokeColor===b.textStrokeColor;
-    const styleOf=(run:Segment):RunStyle => ({font:run.font,size:run.size,color:run.color,weight:run.weight,
-      style:run.style,disableLigatures:run.disableLigatures,textStrokeWidthPt:run.textStrokeWidthPt,textStrokeColor:run.textStrokeColor});
-    const dominantSourceStyle = (): RunStyle | undefined => {
-      if (context !== 'paragraph') return undefined;
-      const totals = new Map<string, { style: RunStyle; characters: number }>();
-      for (const run of sourceTemplateSegments) {
-        if (run.symbolId || !run.text) continue;
-        const characters = Array.from(run.text).filter(char => !/\s/u.test(char)).length;
-        if (!characters) continue;
-        const runStyle = styleOf(run);
-        const key = JSON.stringify(runStyle);
-        const current = totals.get(key);
-        totals.set(key, { style: runStyle, characters: (current?.characters ?? 0) + characters });
-      }
-      return [...totals.values()].sort((a, b) => b.characters - a.characters)[0]?.style;
-    };
-    const fallbackStyle = dominantSourceStyle() ?? style;
-    if (changedEnd <= prefix) {
-      // Insertions inside a source run (or at either outer edge of the whole
-      // text) should follow that run. At internal boundaries, only inherit
-      // when both neighboring runs have identical styling.
-      const left=oldPlain.find(old=>old.start<prefix && old.end>=prefix)?.run;
-      const right=oldPlain.find(old=>old.start<=prefix && old.end>prefix)?.run;
-      // At a mixed-style boundary, an insertion before the right-hand run
-      // belongs to that run. Falling back to the active toolbar style can
-      // leak a bold/italic label style into every character typed next.
-      const inherited=left && right ? (sameStyle(left,right) ? left : right)
-        : prefix===0 ? right : prefix===baseline.length ? left : undefined;
-      return inherited ? styleOf(inherited) : style;
+  const sameStyle=(a:Segment,b:Segment) => a.font===b.font && a.size===b.size && a.color===b.color
+    && a.weight===b.weight && a.style===b.style && a.disableLigatures===b.disableLigatures
+    && a.textStrokeWidthPt===b.textStrokeWidthPt && a.textStrokeColor===b.textStrokeColor;
+  const styleOf=(run:Segment):RunStyle => ({font:run.font,size:run.size,color:run.color,weight:run.weight,
+    style:run.style,disableLigatures:run.disableLigatures,textStrokeWidthPt:run.textStrokeWidthPt,textStrokeColor:run.textStrokeColor});
+  const dominantSourceStyle = (): RunStyle | undefined => {
+    if (context !== 'paragraph') return undefined;
+    const totals = new Map<string, { style: RunStyle; characters: number }>();
+    for (const run of sourceTemplateSegments) {
+      if (run.symbolId || !run.text) continue;
+      const characters = Array.from(run.text).filter(char => !/\s/u.test(char)).length;
+      if (!characters) continue;
+      const runStyle = styleOf(run);
+      const key = JSON.stringify(runStyle);
+      const current = totals.get(key);
+      totals.set(key, { style: runStyle, characters: (current?.characters ?? 0) + characters });
     }
-    const covered=oldPlain.filter(old=>old.start<changedEnd && old.end>prefix)
-      .sort((a,b)=>a.start-b.start);
-    let cursor=prefix;
+    return [...totals.values()].sort((a, b) => b.characters - a.characters)[0]?.style;
+  };
+  // When no exact text survives a full rewrite, follow the active editor style
+  // rather than promoting whichever rich source run happened to be longest.
+  // Stable islands in a partial/translated rewrite still let us infer the
+  // source body style around preserved labels, numbers, and terms.
+  const fallbackStyle=(unchanged.length ? dominantSourceStyle() : undefined) ?? style;
+  const styleForOldRange=(start:number,end:number):RunStyle=>{
+    if(end<=start) {
+      const left=oldPlain.find(old=>old.start<start && old.end>=start)?.run;
+      const right=oldPlain.find(old=>old.start<=start && old.end>start)?.run;
+      const inherited=left && right ? (sameStyle(left,right) ? left : right) : left ?? right;
+      return inherited ? styleOf(inherited) : fallbackStyle;
+    }
+    const covered=oldPlain.filter(old=>old.start<end && old.end>start).sort((a,b)=>a.start-b.start);
+    let cursor=start;
     let first:Segment|undefined;
     for(const range of covered) {
-      const start=Math.max(prefix,range.start);const end=Math.min(changedEnd,range.end);
-      if(end<=start)continue;
-      if(start>cursor || (first && !sameStyle(first,range.run)))return fallbackStyle;
-      first ??=range.run;
-      cursor=Math.max(cursor,end);
+      const from=Math.max(start,range.start);const to=Math.min(end,range.end);
+      if(to<=from)continue;
+      if(from>cursor || (first && !sameStyle(first,range.run)))return fallbackStyle;
+      first ??= range.run;
+      cursor=Math.max(cursor,to);
     }
-    if(!first || cursor<changedEnd)return fallbackStyle;
-    return styleOf(first);
-  })();
-  const changedStyle=replacementStyle;
-  // Retain ordinary styles in unchanged regions; only a confidently uniform
-  // source run may lend its style to replaced text.
+    return first && cursor>=end ? styleOf(first) : fallbackStyle;
+  };
+  const oldRangeForTarget=(start:number,end:number):[number,number]=>{
+    const before=[...unchanged].reverse().find(range=>range.targetEnd<=start);
+    const after=unchanged.find(range=>range.targetStart>=end);
+    const oldStart=before?.sourceEnd ?? 0;
+    const oldEnd=after?.sourceStart ?? baseline.length;
+    return [oldStart,Math.max(oldStart,oldEnd)];
+  };
+  const snapToWordBoundary=(offset:number,start:number,end:number,direction:'start'|'end'|'nearest'):number=>{
+    const starts=[start];
+    const ends=[end];
+    for(let index=start;index<end;index++) {
+      if(/\s/u.test(text[index])) {
+        starts.push(index+1);
+        ends.push(index);
+      }
+    }
+    const directed=direction==='start'
+      ? starts.filter(candidate=>candidate>=offset).sort((a,b)=>a-b)[0]
+      : direction==='end'
+        ? ends.filter(candidate=>candidate<=offset).sort((a,b)=>b-a)[0]
+        : undefined;
+    if(directed!==undefined)return directed;
+    const candidates=[...starts,...ends];
+    return candidates.reduce((best,candidate)=>Math.abs(candidate-offset)<Math.abs(best-offset)
+      || (Math.abs(candidate-offset)===Math.abs(best-offset) && candidate>best) ? candidate : best,candidates[0]);
+  };
+  const isEmphasized=(run:Segment):boolean=>(typeof run.weight==='number' && run.weight>=600)
+    || /bold|italic/i.test(run.font ?? '') || run.style==='italic';
+  const isAllCaps=(value:string):boolean=>{
+    const letters=value.replace(/[^\p{L}\p{N}]/gu,'');
+    return !!letters && letters===letters.toLocaleUpperCase();
+  };
+  const appendChangedText=(start:number,end:number)=>{
+    if(end<=start)return;
+    const [oldStart,oldEnd]=oldRangeForTarget(start,end);
+    if(!unchanged.length || oldEnd<=oldStart) {
+      output.push({...styleForOldRange(oldStart,oldEnd),text:text.slice(start,end)});
+      return;
+    }
+    const sourceRuns=oldPlain.filter(old=>old.start<oldEnd && old.end>oldStart)
+      .sort((a,b)=>a.start-b.start);
+    const groups:{start:number;end:number;run:Segment}[]=[];
+    let sourceCursor=oldStart;
+    for(const sourceRun of sourceRuns) {
+      const from=Math.max(oldStart,sourceRun.start);
+      const to=Math.min(oldEnd,sourceRun.end);
+      if(to<=from || from!==sourceCursor) {
+        // Semantic objects or unrepresented source positions make proportional
+        // style transfer ambiguous; keep the established paragraph fallback.
+        if(to>from)return output.push({...fallbackStyle,text:text.slice(start,end)});
+        continue;
+      }
+      const previous=groups[groups.length-1];
+      if(previous && previous.end===from && sameStyle(previous.run,sourceRun.run))previous.end=to;
+      else groups.push({start:from,end:to,run:sourceRun.run});
+      sourceCursor=to;
+    }
+    if(sourceCursor!==oldEnd || !groups.length)return output.push({...fallbackStyle,text:text.slice(start,end)});
+    if(groups.length===1)return output.push({...styleOf(groups[0].run),text:text.slice(start,end)});
+
+    // Map rich-run boundaries through the corresponding edited gap. Exact text
+    // islands split the gap first; within each gap, proportional mapping keeps
+    // translated replacements attached to the source rich run that they
+    // replace. Snap to word boundaries so a font/style transition never cuts
+    // through a newly typed word.
+    const targetBoundaries=[start];
+    const oldLength=oldEnd-oldStart;
+    const targetLength=end-start;
+    for(let index=1;index<groups.length;index++) {
+      const raw=start+Math.round(((groups[index].start-oldStart)/oldLength)*targetLength);
+      const previousRun=groups[index-1].run;
+      const nextRun=groups[index].run;
+      const direction=!isEmphasized(previousRun) && isEmphasized(nextRun) ? 'start'
+        : isEmphasized(previousRun) && !isEmphasized(nextRun) ? 'end' : 'nearest';
+      const snapped=snapToWordBoundary(raw,start,end,direction);
+      targetBoundaries.push(Math.max(targetBoundaries[targetBoundaries.length-1],Math.min(end,snapped)));
+    }
+    // Preserve the typography of translated all-caps terms when the target
+    // keeps the same editorial casing (for example, an all-caps game term).
+    // This is language-agnostic and applies only inside the already-aligned
+    // changed gap; it does not guess a translation or alter ordinary prose.
+    for(let index=0;index<groups.length;index++) {
+      const sourceText=baseline.slice(groups[index].start,groups[index].end);
+      if(!isEmphasized(groups[index].run) || !isAllCaps(sourceText))continue;
+      const expectedStart=start+Math.round(((groups[index].start-oldStart)/oldLength)*targetLength);
+      const expectedEnd=start+Math.round(((groups[index].end-oldStart)/oldLength)*targetLength);
+      const candidates=Array.from(text.slice(start,end).matchAll(/[\p{Lu}\p{M}\p{N}]+(?:\s+[\p{Lu}\p{M}\p{N}]+)*/gu))
+        .filter(match=>isAllCaps(match[0]));
+      const match=candidates.sort((left,right)=>{
+        const leftStart=start+(left.index ?? 0);const rightStart=start+(right.index ?? 0);
+        const leftScore=Math.abs(leftStart-expectedStart)+Math.abs(leftStart+left[0].length-expectedEnd);
+        const rightScore=Math.abs(rightStart-expectedStart)+Math.abs(rightStart+right[0].length-expectedEnd);
+        return leftScore-rightScore;
+      })[0];
+      if(!match)continue;
+      targetBoundaries[index]=start+(match.index ?? 0);
+      targetBoundaries[index+1]=targetBoundaries[index]+match[0].length;
+    }
+    targetBoundaries.push(end);
+    groups.forEach((group,index)=>{
+      const from=targetBoundaries[index];
+      const to=targetBoundaries[index+1];
+      if(to>from)output.push({...styleOf(group.run),text:text.slice(from,to)});
+    });
+  };
+  // Retain the full style metadata for exact unchanged islands, not just the
+  // common prefix and suffix. This keeps emphasis on stable values such as
+  // -1/-2 through a whole-paragraph rewrite and translated reflow.
   const oldSymbols = previous.filter(run => run.symbolId).flatMap(run => Array.from(run.text || SYMBOL_OBJECT_MARKER,()=>({ ...run })));
   const sourceTemplates=uniqueSourceSymbolTemplates(sourceTemplateSegments);
   const output: Segment[] = [];
   const plain=(start:number,end:number)=>{
-    const preserved=oldPlain.flatMap(old=>[
-      {a:old.start,b:Math.min(old.end,prefix),run:old.run},
-      {a:Math.max(old.start,baseline.length-suffix)+text.length-baseline.length,b:old.end+text.length-baseline.length,run:old.run},
-    ]).filter(range=>range.b>range.a && range.a<end && range.b>start).sort((a,b)=>a.a-b.a);
+    const preserved=unchanged.flatMap(match=>oldPlain.flatMap(old=>{
+      const sourceStart=Math.max(match.sourceStart,old.start);
+      const sourceEnd=Math.min(match.sourceEnd,old.end);
+      if(sourceEnd<=sourceStart)return [];
+      const targetStart=match.targetStart+(sourceStart-match.sourceStart);
+      return [{a:targetStart,b:targetStart+(sourceEnd-sourceStart),run:old.run}];
+    })).filter(range=>range.b>range.a && range.a<end && range.b>start).sort((a,b)=>a.a-b.a);
     let offset=start;
     for(const range of preserved) {
       const a=Math.max(offset,range.a);const b=Math.min(end,range.b);
-      if(a>offset)output.push({...changedStyle,text:text.slice(offset,a)});
+      if(a>offset) {
+        appendChangedText(offset,a);
+      }
       if(b>a)output.push({...range.run,text:text.slice(a,b)});
       offset=Math.max(offset,b);
     }
-    if(offset<end)output.push({...changedStyle,text:text.slice(offset,end)});
+    if(offset<end) {
+      appendChangedText(offset,end);
+    }
   };
   let cursor = 0;
   for (const {start,end,token,id} of editableTokenRanges(text,aliasPreferences)) {
