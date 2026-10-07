@@ -1727,7 +1727,8 @@ function ContentsLabelBlock({
             select();
           }
         }}>
-        {override ? <ContentsRowFlow row={row} scale={scale} isAdmin={isAdmin} text={override.segments.map(run => run.text).join('')}>
+        {override ? <ContentsRowFlow row={row} scale={scale} sourceFontSize={line.spans[0]?.size ?? override.segments[0]?.size ?? 12}
+          isAdmin={isAdmin} text={override.segments.map(run => run.text).join('')}>
           {renderCreditSegments(override.segments.map(run => ({ ...run, text: run.text.replace(/[\r\n]+/g, ' ') })), undefined, language, scale, isAdmin, 'nowrap')}
         </ContentsRowFlow> : <div style={{ pointerEvents: 'none' }}><LineRenderer line={line} scale={scale} blockOriginX={x} blockOriginY={y}
           isAdmin={false} isSelected={false} language={language} onClick={() => {}} /></div>}
