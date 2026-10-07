@@ -14,7 +14,9 @@ Os estados históricos das páginas 1–12 na matriz não reabrem esse conteúdo
 | 13 | Duas colunas, headings, prosa, lista numerada, callouts, marcador de bandeira, caveira inline e arte na faixa de dificuldade | Aproveita o draft iniciado e cobre regras corridas, hierarquia, semântica inline e caixas. |
 | 85 | Prosa densa em duas colunas, oito cores de dado inline, etapas numeradas, painel de diagrama e texto dentro da carta ilustrada | Pressiona copyfit e testa a separação de conteúdo editorial, símbolos, legenda e artwork. |
 
-A p. 78 não foi usada como piloto de aceite: o problema já registrado de `origin` ausente no bloco de ataque deixaria o resultado do fluxo de tradução misturado com um issue de renderer/editor ainda aberto. A p. 78 segue como caso separado para a investigação técnica em `docs/project-progress/known-issues-inline-rendering.md`.
+A p. 78 não foi usada como piloto do fluxo de **drafts Markdown** de p. 13/85. Em 2026-10-07, uma trilha separada do produto editor/viewer aceitou Body + Example da p. 78 em EN/PT-BR, com save/reload e export; consulte [`aceite vivo das unidades editoriais da p. 78`](../../project-progress/2026-10-07-p78-editorial-unit-live-acceptance.md). O resultado não promove nem grava os drafts Markdown de p. 13/85.
+
+O viewer/editor tem um procedimento de aceite separado para unidades editoriais persistidas. O primeiro rollout controlado concluiu Examples numerados p. 50, pares heading/body p. 28 e label/body p. 57, incluindo o round-trip em Payload, reflow PT-BR, alternância após reload e comparação dos exports/page boxes com a fonte. Consulte o [relatório](../../project-progress/2026-10-07-controlled-editorial-rollout.md) e a [matriz de famílias editoriais](../../project-progress/editorial-unit-family-matrix.md). Essa trilha não transforma traduções de prova em terminologia aprovada e não substitui o aceite dos drafts Markdown.
 
 ## Evidência do pipeline
 
