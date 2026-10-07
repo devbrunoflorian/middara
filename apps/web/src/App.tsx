@@ -12,6 +12,7 @@ import { attachSourceCompoundElements, type SourceCompoundElement } from './symb
 import type { ContentsRowDefinition } from './contentsRows';
 import { getDefaultSymbolAliasPreferences, getEditorAliasConflicts, getSemanticSymbol, normalizeEditorAlias, type SymbolAliasPreferences } from './symbols/semanticSymbols';
 import { loadSymbolAliasSettings, saveSymbolAliasSettings } from './symbols/symbolAliasSettings';
+import { payloadApiOrigin } from './config/payloadApi';
 
 const TOTAL_PAGES = 102; // Pages with extracted DOM
 
@@ -133,6 +134,7 @@ function App() {
   const [scrollPages, setScrollPages] = useState<Map<number, PageData>>(new Map());
 
   const mainRef = useRef<HTMLDivElement>(null);
+  const devMode = isLayoutMode ? 'layout' : paletteEditorState ? 'editor' : isAdmin ? 'admin' : 'viewer';
 
   useEffect(() => {
     let active = true;
@@ -270,6 +272,21 @@ function App() {
 
   return (
     <div className={`app-container ${isAdmin ? 'admin-mode' : ''} theme-dark`}>
+      {import.meta.env.DEV && (
+        <div
+          className="dev-environment-indicator"
+          aria-label={`Development environment: web ${window.location.host}, API ${payloadApiOrigin}, locale ${language}, mode ${devMode}`}
+          data-web-origin={window.location.origin}
+          data-api-origin={payloadApiOrigin}
+          data-locale={language}
+          data-mode={devMode}
+        >
+          <span>WEB {window.location.host}</span>
+          <span>API {payloadApiOrigin}</span>
+          <span>{language}</span>
+          <span>{devMode}</span>
+        </div>
+      )}
       {/* Main Viewer Area */}
       <main className={`viewer-main ${viewMode}`} ref={mainRef}>
         {viewMode === 'single' ? (

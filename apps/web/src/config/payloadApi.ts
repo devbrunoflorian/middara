@@ -1,4 +1,4 @@
-const configuredPayloadOrigin = import.meta.env.VITE_PAYLOAD_API_URL ?? 'http://localhost:3000';
+export const payloadApiOrigin = (import.meta.env.VITE_PAYLOAD_API_URL ?? 'http://localhost:3000').replace(/\/+$/u, '');
 
 export const payloadApiUrl = (path: string): string =>
-  `${configuredPayloadOrigin.replace(/\/+$/u, '')}/api/${path.replace(/^\/+/, '')}`;
+  `${payloadApiOrigin}/api/${path.replace(/^\/+/, '')}`;

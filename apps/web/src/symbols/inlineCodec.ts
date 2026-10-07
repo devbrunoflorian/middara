@@ -111,9 +111,11 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
     oldOffset+=projected.length;
   }
   // If an edit is contained by one consistent source style, retain that style
-  // (including text outlines used by IMPORTANT/COMMAND/INTELLIGENT). At a
-  // mixed-style boundary or across a symbol, keep the selected tool style
-  // rather than guessing how new text should be formatted.
+  // (including text outlines used by IMPORTANT/COMMAND/INTELLIGENT). For an
+  // editorial paragraph rewritten across mixed source runs, use its dominant
+  // source style for new body text. The selected character style is often the
+  // opening label (for example italic bold "Note:") and must not leak across
+  // the entire translated paragraph.
   const changedEnd=baseline.length-suffix;
   const replacementStyle = (() => {
     const sameStyle=(a:Segment,b:Segment) => a.font===b.font && a.size===b.size && a.color===b.color
@@ -121,6 +123,21 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
       && a.textStrokeWidthPt===b.textStrokeWidthPt && a.textStrokeColor===b.textStrokeColor;
     const styleOf=(run:Segment):RunStyle => ({font:run.font,size:run.size,color:run.color,weight:run.weight,
       style:run.style,disableLigatures:run.disableLigatures,textStrokeWidthPt:run.textStrokeWidthPt,textStrokeColor:run.textStrokeColor});
+    const dominantSourceStyle = (): RunStyle | undefined => {
+      if (context !== 'paragraph') return undefined;
+      const totals = new Map<string, { style: RunStyle; characters: number }>();
+      for (const run of sourceTemplateSegments) {
+        if (run.symbolId || !run.text) continue;
+        const characters = Array.from(run.text).filter(char => !/\s/u.test(char)).length;
+        if (!characters) continue;
+        const runStyle = styleOf(run);
+        const key = JSON.stringify(runStyle);
+        const current = totals.get(key);
+        totals.set(key, { style: runStyle, characters: (current?.characters ?? 0) + characters });
+      }
+      return [...totals.values()].sort((a, b) => b.characters - a.characters)[0]?.style;
+    };
+    const fallbackStyle = dominantSourceStyle() ?? style;
     if (changedEnd <= prefix) {
       // Insertions inside a source run (or at either outer edge of the whole
       // text) should follow that run. At internal boundaries, only inherit
@@ -138,11 +155,11 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
     for(const range of covered) {
       const start=Math.max(prefix,range.start);const end=Math.min(changedEnd,range.end);
       if(end<=start)continue;
-      if(start>cursor || (first && !sameStyle(first,range.run)))return style;
+      if(start>cursor || (first && !sameStyle(first,range.run)))return fallbackStyle;
       first ??=range.run;
       cursor=Math.max(cursor,end);
     }
-    if(!first || cursor<changedEnd)return style;
+    if(!first || cursor<changedEnd)return fallbackStyle;
     return styleOf(first);
   })();
   const changedStyle=replacementStyle;
@@ -181,6 +198,49 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
     cursor=end;
   }
   if(cursor<text.length)plain(cursor,text.length);
+  if (context === 'paragraph') {
+    const sourcePrefix = sourceTemplateSegments.filter(run => !run.symbolId).map(run => run.text).join('');
+    const targetStart = text.search(/\S/u);
+    const sourceStart = sourcePrefix.search(/\S/u);
+    const targetColon = targetStart >= 0 ? text.indexOf(':', targetStart) : -1;
+    const sourceColon = sourceStart >= 0 ? sourcePrefix.indexOf(':', sourceStart) : -1;
+    const sourceLabelRun = sourceTemplateSegments.find(run => !run.symbolId && /\S/u.test(run.text));
+    if (sourceLabelRun && targetColon >= targetStart && targetColon - targetStart < 32
+      && sourceColon >= sourceStart && sourceColon - sourceStart < 32) {
+      // Keep short editorial labels (Note:, Example 1:, Important:) in their
+      // source emphasis after translation, even when the translated label no
+      // longer shares a literal prefix with the English wording.
+      const labelStyle: RunStyle = {
+        font: sourceLabelRun.font,
+        size: sourceLabelRun.size,
+        color: sourceLabelRun.color,
+        weight: sourceLabelRun.weight,
+        style: sourceLabelRun.style,
+        disableLigatures: sourceLabelRun.disableLigatures,
+        textStrokeWidthPt: sourceLabelRun.textStrokeWidthPt,
+        textStrokeColor: sourceLabelRun.textStrokeColor,
+      };
+      const labelEnd = targetColon + 1;
+      let outputOffset = 0;
+      const styledOutput: Segment[] = [];
+      for (const run of output) {
+        const runEnd = outputOffset + run.text.length;
+        const labelFrom = Math.max(outputOffset, targetStart);
+        const labelTo = Math.min(runEnd, labelEnd);
+        if (labelTo > labelFrom) {
+          const prefixLength = labelFrom - outputOffset;
+          const labelLength = labelTo - labelFrom;
+          if (prefixLength) styledOutput.push({ ...run, text: run.text.slice(0, prefixLength) });
+          styledOutput.push({ ...run, ...labelStyle, text: run.text.slice(prefixLength, prefixLength + labelLength) });
+          if (labelTo < runEnd) styledOutput.push({ ...run, text: run.text.slice(prefixLength + labelLength) });
+        } else {
+          styledOutput.push(run);
+        }
+        outputOffset = runEnd;
+      }
+      output.splice(0, output.length, ...styledOutput);
+    }
+  }
   return output.length ? output : [{ ...style, text: '' }];
 }
 

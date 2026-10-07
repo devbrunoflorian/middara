@@ -73,6 +73,7 @@ export interface SpanOverride {
 
 interface RichSpanEditorProps {
   spanKey: string;
+  editorLabel?: string;
   originalText: string;
   originalFont: string;
   originalSize: number;
@@ -120,6 +121,7 @@ interface EditorSnapshot {
 
 export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   spanKey,
+  editorLabel,
   originalText,
   originalFont,
   originalSize,
@@ -784,7 +786,9 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         <div className="rse-header">
           <div>
             <h3>✏️ Rich Block Editor</h3>
-            <span className="rse-subtitle">Page {pageNumber} · <code>{spanKey}</code></span>
+            <span className="rse-subtitle">
+              Page {pageNumber} · {editorLabel ? editorLabel : <code>{spanKey}</code>}
+            </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <span style={{ fontSize: '12px', color: '#666', fontStyle: 'italic' }}>

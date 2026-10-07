@@ -158,6 +158,10 @@ export interface CreditUnitDefinition {
 
 export interface TypographicUnitDefinition {
   id: string;
+  /** Short source-facing label shown in the editor; not part of the persisted translation key. */
+  label?: string;
+  /** A source-backed editorial paragraph; its extracted line breaks are not hard breaks. */
+  kind?: 'paragraph';
   field: CreditFieldDefinition;
   /** Keep a source marker anchored when a neighboring heading grows. */
   fixedPosition?: boolean;
@@ -174,6 +178,8 @@ interface InlineSpanUnitRenderState {
   renderAtRef?: string;
   override: SpanOverride | null;
   selected: boolean;
+  /** Editorial paragraph lines route clicks to the paragraph editor while still rendering legacy span overrides. */
+  interactive?: boolean;
   info: SelectedSpanInfo;
 }
 
@@ -184,6 +190,7 @@ function buildInlineSpanStates(
   overrides: Map<string, SpanOverride>,
   draftOverride: SpanOverride | null,
   language: 'en' | 'pt-BR',
+  nonInteractiveLineIds?: Set<string>,
 ): Map<string, InlineSpanUnitRenderState> {
   const states = new Map<string, InlineSpanUnitRenderState>();
   for (const unit of block.typographicSpanUnits ?? []) {
@@ -200,7 +207,12 @@ function buildInlineSpanStates(
       selected: selectedBlockKey === spanKey,
       info: extractInlineSpanUnitInfo(spanKey, block, unit),
     };
-    for (const spanRef of unit.spanRefs) states.set(spanRef, state);
+    for (const spanRef of unit.spanRefs) {
+      const lineId = spanRef.slice(0, spanRef.lastIndexOf(':'));
+      states.set(spanRef, nonInteractiveLineIds?.has(lineId)
+        ? { ...state, interactive: false }
+        : state);
+    }
   }
   return states;
 }
@@ -712,6 +724,37 @@ function sourceSegmentsFromSpans(spans: SpanData[]): Segment[] {
   return sourceSpanRuns(spans,mapPdfFont);
 }
 
+/** Project PDF line fragments as one editable paragraph while retaining rich runs and symbols. */
+function normalizeParagraphSourceSegments(segments: Segment[]): Segment[] {
+  const normalized: Segment[] = [];
+  let pendingSpace: Segment | null = null;
+  let hasContent = false;
+
+  for (const segment of segments) {
+    if (segment.symbolId) {
+      if (pendingSpace && hasContent) normalized.push(pendingSpace);
+      pendingSpace = null;
+      normalized.push({ ...segment });
+      hasContent = true;
+      continue;
+    }
+
+    for (const chunk of segment.text.split(/(\s+)/u)) {
+      if (!chunk) continue;
+      if (/^\s+$/u.test(chunk)) {
+        if (hasContent && !pendingSpace) pendingSpace = { ...segment, text: ' ' };
+        continue;
+      }
+      if (pendingSpace) normalized.push(pendingSpace);
+      pendingSpace = null;
+      normalized.push({ ...segment, text: chunk });
+      hasContent = true;
+    }
+  }
+
+  return normalized;
+}
+
 /** Reuse measured source metrics for the same semantic occurrences in saved text. */
 function sourceMetricsForOverrideSegments(block: Block, segments: Segment[]): Segment[] {
   const sourceSegments = sourceSegmentsFromSpans(editableBlockLines(block).flatMap(line => line.spans));
@@ -870,6 +913,8 @@ function extractCreditFieldInfo(
   spanKey: string,
   block: Block,
   field: CreditFieldDefinition,
+  unitKind?: TypographicUnitDefinition['kind'],
+  unitLabel?: string,
 ): SelectedSpanInfo {
   const selectedIds = new Set(field.lineIds);
   const lines = (block.lines || []).filter(line => selectedIds.has(line.id));
@@ -905,6 +950,7 @@ function extractCreditFieldInfo(
 
   return {
     spanKey,
+    editorLabel: unitLabel,
     text,
     font,
     family: mapPdfFont(font).family,
@@ -915,13 +961,16 @@ function extractCreditFieldInfo(
     bbox: field.bbox,
     textAlign: field.frame.textAlign || 'left',
     lineHeight: field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
-    sourceSegments,
-    editorContext: block.creditUnit || block.creditUnits?.length ? 'credit-field' : 'typographic-field',
+    sourceSegments: unitKind === 'paragraph' ? normalizeParagraphSourceSegments(sourceSegments) : sourceSegments,
+    editorContext: unitKind === 'paragraph'
+      ? 'paragraph'
+      : block.creditUnit || block.creditUnits?.length ? 'credit-field' : 'typographic-field',
   };
 }
 
 interface SelectedSpanInfo {
   spanKey: string;
+  editorLabel?: string;
   text: string;
   font: string;
   family: string;
@@ -1111,11 +1160,13 @@ function sourceMaskClipPath(element: SourceInlineElement): string | undefined {
   const maskWidth = maskX1 - maskX0;
   const maskHeight = maskY1 - maskY0;
   if (maskWidth <= 0 || maskHeight <= 0) return undefined;
-  // 0.3 pt covers the source raster's antialias fringe while keeping the
-  // cleaned area tied to the circular vector rather than the patch rectangle.
-  const bleedPt = 0.3;
-  const radiusX = ((x1 - x0) / 2 + bleedPt) / maskWidth * 100;
-  const radiusY = ((y1 - y0) / 2 + bleedPt) / maskHeight * 100;
+  // Extend the cleanup circle through the available padding around the source
+  // ink so antialiased edges do not survive when the translated text reflows.
+  // Keep the ellipse inside the sampled patch; its nearest edge bounds bleed.
+  const bleedX = Math.max(0, Math.min(x0 - maskX0, maskX1 - x1));
+  const bleedY = Math.max(0, Math.min(y0 - maskY0, maskY1 - y1));
+  const radiusX = Math.min(maskWidth / 2, (x1 - x0) / 2 + bleedX) / maskWidth * 100;
+  const radiusY = Math.min(maskHeight / 2, (y1 - y0) / 2 + bleedY) / maskHeight * 100;
   const centerX = ((x0 + x1) / 2 - maskX0) / maskWidth * 100;
   const centerY = ((y0 + y1) / 2 - maskY0) / maskHeight * 100;
   return `ellipse(${radiusX}% ${radiusY}% at ${centerX}% ${centerY}%)`;
@@ -1572,6 +1623,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
       {isAdmin && selectedSpan && (
         <RichSpanEditor
           spanKey={selectedSpan.spanKey}
+          editorLabel={selectedSpan.editorLabel}
           originalText={selectedSpan.text}
           originalFont={selectedSpan.font}
           originalSize={selectedSpan.size}
@@ -2218,9 +2270,13 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
   block, nextComponentY, units, pageNumber, scale, isAdmin, onBlockClick, selectedBlockKey,
   overrides, draftOverride, language,
 }) => {
-  const [leadingUnitPushPt, setLeadingUnitPushPt] = useState(0);
+  const [measuredUnitHeightsPt, setMeasuredUnitHeightsPt] = useState<Record<string, number>>({});
+  // A semantic field owns its complete source lines, whatever its editorial
+  // subtype. Nested same-font span targets may render legacy overrides, but
+  // must not intercept clicks intended to open the whole heading/body field.
+  const editorialLineIds = new Set(units.flatMap(unit => unit.field.lineIds));
   const inlineSpanStates = exposesNestedSpanTargets(block) ? buildInlineSpanStates(
-    block, pageNumber, selectedBlockKey, overrides, draftOverride, language,
+    block, pageNumber, selectedBlockKey, overrides, draftOverride, language, editorialLineIds,
   ) : undefined;
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
@@ -2234,30 +2290,83 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
     height: `${blockH * scale}px`,
     zIndex: block.zIndex || 10,
   };
+  const fixedLineIndexes = fixedEditorLineIndexes(block);
+  const translatedUnitLineIds = new Set(units.flatMap(unit => {
+    const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
+    const override = selectedBlockKey === spanKey && draftOverride
+      ? draftOverride
+      : overrides.get(spanKey) || null;
+    return override ? unit.field.lineIds : [];
+  }));
+  const fixedSourceLines = (block.lines ?? []).filter((line, index) =>
+    fixedLineIndexes.has(index) && !translatedUnitLineIds.has(line.id),
+  );
   const flowUnits = units.filter(unit => !unit.fixedPosition);
-  const firstFieldY = flowUnits[0]?.field.bbox[1];
-  const secondFieldY = flowUnits[1]?.field.bbox[1];
-  const handleLeadingUnitMeasure = useCallback((heightPx: number) => {
-    if (firstFieldY === undefined || secondFieldY === undefined || !scale) return;
-    const requiredPushPt = Math.max(0, heightPx / scale - (secondFieldY - firstFieldY));
-    const clearancePt = 8;
-    const availablePushPt = nextComponentY === undefined
-      ? 0
-      : Math.max(0, nextComponentY - block.bbox[3] - clearancePt);
-    const pushPt = requiredPushPt <= availablePushPt ? requiredPushPt : 0;
-    setLeadingUnitPushPt(current => Math.abs(current - pushPt) < 0.01 ? current : pushPt);
-  }, [block.bbox, firstFieldY, nextComponentY, scale, secondFieldY]);
+  const handleUnitMeasure = useCallback((unitId: string, heightPx: number | null) => {
+    if (!scale) return;
+    setMeasuredUnitHeightsPt(current => {
+      if (heightPx === null) {
+        if (!(unitId in current)) return current;
+        const next = { ...current };
+        delete next[unitId];
+        return next;
+      }
+      const heightPt = heightPx / scale;
+      return Math.abs((current[unitId] ?? -1) - heightPt) < 0.05
+        ? current
+        : { ...current, [unitId]: heightPt };
+    });
+  }, [scale]);
+
+  // Each translated paragraph keeps its source gap to the next paragraph.
+  // Any extra height is accumulated through the rest of this visual block,
+  // so three or more siblings flow just as the two-unit p.78 pilot does.
+  const requiredOffsetsPt = new Map<string, number>();
+  let totalRequiredPushPt = 0;
+  flowUnits.forEach((unit, index) => {
+    requiredOffsetsPt.set(unit.id, totalRequiredPushPt);
+    const nextUnit = flowUnits[index + 1];
+    const measuredHeightPt = measuredUnitHeightsPt[unit.id];
+    if (!nextUnit || measuredHeightPt === undefined) return;
+    const sourceGapPt = nextUnit.field.bbox[1] - unit.field.bbox[1];
+    totalRequiredPushPt += Math.max(0, measuredHeightPt - sourceGapPt);
+  });
+  const clearancePt = 8;
+  const availablePushPt = nextComponentY === undefined
+    ? 0
+    : Math.max(0, nextComponentY - block.bbox[3] - clearancePt);
+  const canApplyReflowPush = totalRequiredPushPt <= availablePushPt + 0.01;
+  const flowOffsetFor = (unit: TypographicUnitDefinition | undefined): number =>
+    unit && canApplyReflowPush ? requiredOffsetsPt.get(unit.id) ?? 0 : 0;
 
   return (
     <div className="block-container" style={blockStyle}>
+      {fixedSourceLines.map(line => (
+        <div key={`static-${line.id}`} className="static-editor-line" onClick={event => event.stopPropagation()}>
+          <LineRenderer
+            line={line}
+            scale={scale}
+            blockOriginX={blockX}
+            blockOriginY={blockY}
+            isAdmin={false}
+            isSelected={false}
+            language={language}
+            onClick={() => {}}
+          />
+        </div>
+      ))}
       {units.map((unit, unitIndex) => {
         const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
         const override = selectedBlockKey === spanKey && draftOverride
           ? draftOverride
           : overrides.get(spanKey) || null;
-        const nextFieldY = unit.fixedPosition ? undefined : units
+        const nextFlowUnit = unit.fixedPosition ? undefined : units
           .slice(unitIndex + 1)
-          .find(nextUnit => !nextUnit.fixedPosition)?.field.bbox[1];
+          .find(nextUnit => !nextUnit.fixedPosition);
+        const nextFieldY = nextFlowUnit
+          ? nextFlowUnit.field.bbox[1] + flowOffsetFor(nextFlowUnit)
+          : undefined;
+        const unitOffsetPt = flowOffsetFor(unit);
         return (
           <CreditField
             key={spanKey}
@@ -2269,12 +2378,16 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
             selected={selectedBlockKey === spanKey}
             override={override}
             language={language}
-            nextFieldY={nextFieldY !== undefined ? nextFieldY + leadingUnitPushPt : undefined}
-            topOffsetPt={!unit.fixedPosition && unit !== flowUnits[0] ? leadingUnitPushPt : 0}
-            onPreviewMeasure={unit === flowUnits[0] ? handleLeadingUnitMeasure : undefined}
+            nextFieldY={nextFieldY}
+            topOffsetPt={unitOffsetPt}
+            onPreviewMeasure={!unit.fixedPosition
+              ? heightPx => handleUnitMeasure(unit.id, heightPx)
+              : undefined}
             inlineSpanStates={inlineSpanStates}
             onInlineSpanClick={state => onBlockClick(state.info)}
             onBlockClick={onBlockClick}
+            unitKind={unit.kind}
+            unitLabel={unit.label}
           />
         );
       })}
@@ -2291,9 +2404,11 @@ interface CreditFieldProps {
   selected: boolean;
   override: SpanOverride | null;
   language: 'en' | 'pt-BR';
+  unitKind?: TypographicUnitDefinition['kind'];
+  unitLabel?: string;
   nextFieldY?: number;
   topOffsetPt?: number;
-  onPreviewMeasure?: (heightPx: number) => void;
+  onPreviewMeasure?: (heightPx: number | null) => void;
   inlineSpanStates?: Map<string, InlineSpanUnitRenderState>;
   onInlineSpanClick?: (state: InlineSpanUnitRenderState) => void;
   onBlockClick: (info: SelectedSpanInfo) => void;
@@ -2301,7 +2416,7 @@ interface CreditFieldProps {
 
 const CreditField: React.FC<CreditFieldProps> = ({
   block, field, spanKey, scale, isAdmin, selected, override, language, nextFieldY,
-  topOffsetPt = 0, onPreviewMeasure, inlineSpanStates, onInlineSpanClick, onBlockClick,
+  unitKind, unitLabel, topOffsetPt = 0, onPreviewMeasure, inlineSpanStates, onInlineSpanClick, onBlockClick,
 }) => {
   const previewRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -2309,9 +2424,10 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const blockY = block.bbox[1];
   const fieldX = field.frame.x;
   const fieldY = field.bbox[1];
+  const effectiveFieldY = fieldY + topOffsetPt;
   const fieldHeight = field.bbox[3] - field.bbox[1];
-  const neighborHeight = nextFieldY !== undefined && nextFieldY > fieldY
-    ? nextFieldY - fieldY
+  const neighborHeight = nextFieldY !== undefined && nextFieldY > effectiveFieldY
+    ? nextFieldY - effectiveFieldY
     : fieldHeight;
   const fieldStyle: React.CSSProperties = {
     position: 'absolute',
@@ -2337,6 +2453,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
       onPreviewMeasure?.(preview.scrollHeight);
     } else {
       setIsOverflowing(false);
+      onPreviewMeasure?.(null);
     }
   }, [onPreviewMeasure, override, neighborHeight, scale]);
 
@@ -2348,7 +2465,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const handleClick = (event: React.MouseEvent) => {
     if (!isAdmin) return;
     event.stopPropagation();
-    onBlockClick(extractCreditFieldInfo(spanKey, block, field));
+    onBlockClick(extractCreditFieldInfo(spanKey, block, field, unitKind, unitLabel));
   };
 
   return (
@@ -2586,6 +2703,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     >
       {line.spans.map((span, si) => {
         const inlineUnit = inlineSpanStates?.get(`${line.id}:${span.sourceSpanIndex ?? si}`);
+        const inlineUnitInteractive = !!inlineUnit && inlineUnit.interactive !== false;
         // A unit can cover several source spans. Paint its override once;
         // virtual source icons keep their original reference without repainting.
         if(inlineUnit?.override && `${line.id}:${span.sourceSpanIndex ?? si}`!==inlineUnit.renderAtRef)return null;
@@ -2758,9 +2876,9 @@ const LineRenderer: React.FC<LineRendererProps> = ({
         return (
           <span
             key={si}
-            className={inlineUnit ? `span-editable ${inlineUnit.selected ? 'span-selected' : ''}` : undefined}
-            style={{ ...spanStyle, ...(inlineUnit && isAdmin ? { cursor: 'text' } : {}) }}
-            onClick={inlineUnit && isAdmin ? event => {
+            className={inlineUnitInteractive ? `span-editable ${inlineUnit?.selected ? 'span-selected' : ''}` : undefined}
+            style={{ ...spanStyle, ...(inlineUnitInteractive && isAdmin ? { cursor: 'text' } : {}) }}
+            onClick={inlineUnitInteractive && isAdmin ? event => {
               event.stopPropagation();
               onInlineSpanClick?.(inlineUnit);
             } : undefined}
