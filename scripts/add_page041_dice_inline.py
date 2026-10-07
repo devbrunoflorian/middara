@@ -1,4 +1,4 @@
-"""Add source-confirmed purple and black dice as editable inline objects on p.41.
+"""Add source-confirmed dice and combat glyphs as editable inline objects on p.41.
 
 Dry-run by default. The source PDF and page DOM are read-only; --apply writes
 only p.41 inline metadata/mask crops and the comparison evidence image.
@@ -39,6 +39,15 @@ TARGETS = [
     dict(symbolId="dice.black", bbox=[112.239,584.084,122.309,595.708], drawingIndices=[135,136,137,138],
          blockIndex=10, blockId="block_30", lineId="line_30_5", spanIndex=0, side="before", expectedSpan=" , ",
          lineStartX=112.239, ownerSpanRef=dict(lineId="line_30_4",spanIndex=5)),
+    dict(symbolId="combat.shield", bbox=[183.870,585.022,193.224,595.026], drawingIndices=[139,140,141],
+         blockIndex=10, blockId="block_30", lineId="line_30_6", spanIndex=0, side="before", expectedSpan=" rolled, adds ",
+         ownerSpanRef=dict(lineId="line_30_5",spanIndex=3)),
+    dict(symbolId="combat.skull", bbox=[361.388,583.480,369.724,595.034], drawingIndices=[142,143],
+         blockIndex=10, blockId="block_30", lineId="line_30_6", spanIndex=3, side="after",
+         expectedSpan=" to their Defense. If the ", ownerSpanRef=dict(lineId="line_30_6",spanIndex=3)),
+    dict(symbolId="combat.skull", bbox=[135.945,619.315,144.281,630.868], drawingIndices=[144,145],
+         blockIndex=10, blockId="block_30", lineId="line_30_10", spanIndex=0, side="after", expectedSpan="if the ",
+         ownerSpanRef=dict(lineId="line_30_10",spanIndex=0)),
 ]
 
 
