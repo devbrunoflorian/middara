@@ -16,6 +16,7 @@ from pathlib import Path
 import pymupdf as fitz
 from PIL import Image
 from build_inline_compound_symbols import compound_definitions
+from rebuild_inline_source_masks import rebuild_page as rebuild_background_grid_masks
 
 ROOT=Path(__file__).resolve().parents[1]
 PDF=Path(r'C:\Users\bruno\Downloads\Rulebook 1p2 Final Version 05-19-23 Optimized.pdf')
@@ -520,6 +521,11 @@ def build(apply, only_pages=None,registry_only=False):
             expected={item['mask']['url'].rsplit('/',1)[-1] for item in items}
             for stale in page_dir.glob('inline-element-mask-*.png'):
                 if stale.name not in expected:stale.unlink()
+            # Circular attack-symbol cleanup masks must share the exact raster
+            # grid of background.webp. A 4x PDF crop can leave antialias halos
+            # when composited over the separately rasterized 150-DPI page.
+            if any(item.get('mask',{}).get('clipShape')=='circle' for item in items):
+                rebuild_background_grid_masks(page_no)
         if apply:mask_doc.close()
         if apply:print(f'p{page_no}: {len(items)} source adapters written',flush=True)
     doc.close()
