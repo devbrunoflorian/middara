@@ -7,13 +7,21 @@ import { dirname, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function argsFrom(argv) {
-  const result = { page: undefined, language: 'en', output: undefined, baseUrl: 'http://127.0.0.1:8080', apiUrl: 'http://127.0.0.1:3000', executablePath: undefined };
+  const result = {
+    page: undefined,
+    language: 'en',
+    output: undefined,
+    baseUrl: 'http://127.0.0.1:8080',
+    apiUrl: process.env.VITE_PAYLOAD_API_URL ?? 'http://localhost:3000',
+    sourcePdf: process.env.MIDDARA_SOURCE_PDF_PATH ?? 'C:/Users/bruno/Downloads/Rulebook 1p2 Final Version 05-19-23 Optimized.pdf',
+    executablePath: undefined,
+  };
   for (let i = 0; i < argv.length; i += 1) {
     const key = argv[i];
     const value = argv[i + 1];
     if (!key.startsWith('--')) continue;
     if (value === undefined || value.startsWith('--')) throw new Error(`Missing value for ${key}`);
-    const name = ({ '--page': 'page', '--language': 'language', '--output': 'output', '--base-url': 'baseUrl', '--api-url': 'apiUrl', '--browser': 'executablePath' })[key];
+    const name = ({ '--page': 'page', '--language': 'language', '--output': 'output', '--base-url': 'baseUrl', '--api-url': 'apiUrl', '--source-pdf': 'sourcePdf', '--browser': 'executablePath' })[key];
     if (!name) throw new Error(`Unknown option: ${key}`);
     result[name] = name === 'page' ? Number(value) : value;
     i += 1;
@@ -36,7 +44,17 @@ function normalizeText(value) {
   return value.replace(/\s+/gu, ' ').trim();
 }
 
+function normalizedOrigin(value) {
+  return new URL(value).origin;
+}
+
 const config = argsFrom(process.argv.slice(2));
+console.log('[page-export] requested environment', JSON.stringify({
+  viewerUrl: config.baseUrl,
+  translationApiOrigin: normalizedOrigin(config.apiUrl),
+  page: config.page,
+  language: config.language,
+}, null, 2));
 const pageId = String(config.page).padStart(3, '0');
 const pageDataPath = resolve(`apps/web/public/pages/page_${pageId}/page_${pageId}_dom.json`);
 const pageData = JSON.parse(await readFile(pageDataPath, 'utf8'));
@@ -71,10 +89,28 @@ try {
   const context = await browser.newContext({ viewport: { width: 1600, height: 1400 }, deviceScaleFactor: 1 });
   const page = await context.newPage();
   const failedRequests = [];
+  const apiRequestOrigins = new Set();
   page.on('requestfailed', request => failedRequests.push(`${request.url()}: ${request.failure()?.errorText}`));
+  page.on('request', request => {
+    try {
+      const requestUrl = new URL(request.url());
+      if (requestUrl.pathname.startsWith('/api/')) apiRequestOrigins.add(requestUrl.origin);
+    } catch {}
+  });
   const appResponse = await page.goto(config.baseUrl, { waitUntil: 'domcontentloaded' });
   if (!appResponse?.ok()) throw new Error(`Viewer returned ${appResponse?.status() ?? 'no response'} at ${config.baseUrl}`);
   await page.waitForFunction(() => !!document.querySelector('input.page-input') && !!document.querySelector('.page-container img'));
+
+  const initialDevEnvironment = await page.locator('.dev-environment-indicator').evaluate(element => ({
+    webOrigin: element.getAttribute('data-web-origin'),
+    apiOrigin: element.getAttribute('data-api-origin'),
+    locale: element.getAttribute('data-locale'),
+    mode: element.getAttribute('data-mode'),
+  })).catch(() => null);
+  const expectedApiOrigin = normalizedOrigin(config.apiUrl);
+  if (initialDevEnvironment?.apiOrigin && normalizedOrigin(initialDevEnvironment.apiOrigin) !== expectedApiOrigin) {
+    throw new Error(`Viewer API origin ${initialDevEnvironment.apiOrigin} does not match export translation API ${expectedApiOrigin}.`);
+  }
 
   const pageInput = page.locator('input.page-input');
   await pageInput.fill(String(config.page));
@@ -90,12 +126,30 @@ try {
 
   if (config.language === 'pt-BR') {
     await page.locator('select.language-select').selectOption('pt-BR');
+    await page.waitForFunction(
+      expected => document.querySelector('.dev-environment-indicator')?.getAttribute('data-locale') === expected,
+      config.language,
+      { timeout: 10000 },
+    );
     const expectedFragment = normalizeText(expectedTranslation).slice(0, 48);
     await page.waitForFunction(fragment => {
       const content = normalizeText(document.querySelector('.page-container')?.textContent ?? '');
       return content.includes(fragment);
       function normalizeText(value) { return value.replace(/\s+/gu, ' ').trim(); }
     }, expectedFragment, { timeout: 60000 });
+  }
+
+  const devEnvironment = await page.locator('.dev-environment-indicator').evaluate(element => ({
+    webOrigin: element.getAttribute('data-web-origin'),
+    apiOrigin: element.getAttribute('data-api-origin'),
+    locale: element.getAttribute('data-locale'),
+    mode: element.getAttribute('data-mode'),
+  }));
+  if (devEnvironment.locale !== config.language) {
+    throw new Error(`Viewer locale ${devEnvironment.locale} does not match requested export language ${config.language}.`);
+  }
+  if (devEnvironment.apiOrigin && normalizedOrigin(devEnvironment.apiOrigin) !== expectedApiOrigin) {
+    throw new Error(`Viewer API origin ${devEnvironment.apiOrigin} does not match export translation API ${expectedApiOrigin}.`);
   }
 
   await page.evaluate(() => document.fonts.ready);
@@ -124,6 +178,7 @@ try {
     }
     .app-container, .viewer-main, .page-wrapper, .page-renderer, .page-stage { display: block !important; }
     .pdf-sidebar, .toast-notification, .translation-editor, .rich-block-editor, .block-editor { display: none !important; }
+    .dev-environment-indicator { display: none !important; }
     .page-container {
       width: ${pageData.width}pt !important; height: ${pageData.height}pt !important;
       max-width: none !important; max-height: none !important; margin: 0 !important;
@@ -144,6 +199,10 @@ try {
     throw new Error('Saved PT-BR text is not visible in the rendered page; refusing to export English fallback.');
   }
   if (failedRequests.length) throw new Error(`Page has failed network assets: ${failedRequests.slice(0, 5).join('; ')}`);
+  const actualApiOrigins = [...apiRequestOrigins].sort();
+  if (actualApiOrigins.length !== 1 || actualApiOrigins[0] !== expectedApiOrigin) {
+    throw new Error(`Expected one Payload/API origin ${expectedApiOrigin}; viewer queried ${actualApiOrigins.join(', ') || 'none'}.`);
+  }
 
   await mkdir(dirname(config.output), { recursive: true });
   await page.pdf({
@@ -158,11 +217,25 @@ try {
     config.output,
     String(pageData.width),
     String(pageData.height),
+    config.sourcePdf,
+    String(config.page),
   ], { encoding: 'utf8' });
   if (normalizePageBox.status !== 0) {
     throw new Error(`Could not normalize the exported MediaBox: ${normalizePageBox.stderr || normalizePageBox.stdout}`);
   }
-  console.log(JSON.stringify({ output: config.output, page: config.page, language: config.language, pageSizePt: [pageData.width, pageData.height], normalizedMediaBox: true, verifiedTranslationRecords: config.language === 'pt-BR' ? true : undefined }, null, 2));
+  console.log('[page-export] completed environment and result', JSON.stringify({
+    viewerUrl: page.url(),
+    devEnvironment,
+    translationApiOrigin: expectedApiOrigin,
+    actualApiOrigins,
+    sourcePdf: config.sourcePdf,
+    output: config.output,
+    page: config.page,
+    language: config.language,
+    pageSizePt: [pageData.width, pageData.height],
+    normalizedMediaBox: true,
+    verifiedTranslationRecords: config.language === 'pt-BR' ? true : undefined,
+  }, null, 2));
 } finally {
   await browser.close();
 }
