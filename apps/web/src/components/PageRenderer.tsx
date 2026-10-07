@@ -106,6 +106,14 @@ export interface Block {
   editorKey?: string;
   /** Source line indexes that render as fixed page furniture and stay outside rich-text editing. */
   staticEditorLineIndexes?: number[];
+  /** Source line indexes explicitly reviewed as non-editable list markers. */
+  listMarkerLineIndexes?: number[];
+  /** Internal marker used by generated text rows to keep their frame attached to the list marker. */
+  listFlowItem?: boolean;
+  /** Available translated-flow height before the next source list item. */
+  listFlowHeight?: number;
+  /** Preserve a legacy whole-block translation whose list cannot be split losslessly. */
+  disableAutoListMarkerDetection?: boolean;
   /** Keep source-furniture visible but unavailable to Admin editing. */
   adminReadOnly?: boolean;
   /** Keep translated content on one line inside this page-specific text frame. */
@@ -418,15 +426,60 @@ function staticEditorLineIndexes(block: Block): Set<number> {
   return new Set(block.staticEditorLineIndexes ?? []);
 }
 
+const LIST_MARKER_GLYPHS = new Set(Array.from('•·▪■●○◦▫‣⁃'));
+
+function sourceLineText(line: LineData): string {
+  return line.spans
+    .filter(span => !span.renderOnlyStrokePass)
+    .map(span => span.displayOverride || span.text)
+    .join('');
+}
+
+function listMarkerGlyph(line: LineData): string | null {
+  const visible = Array.from(sourceLineText(line).replace(/[\s\u00a0]+/gu, ''));
+  return visible.length === 1 && LIST_MARKER_GLYPHS.has(visible[0]) ? visible[0] : null;
+}
+
+/**
+ * Recognize only a standalone source marker whose following text line is
+ * geometrically indented beside it. This avoids changing bullets used as
+ * punctuation in card labels or prose.
+ */
+function listMarkerLineIndexes(block: Block): Set<number> {
+  const lines = block.lines ?? [];
+  const indexes = new Set(block.listMarkerLineIndexes ?? []);
+  if (block.disableAutoListMarkerDetection) return indexes;
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
+    if (indexes.has(index)) continue;
+    const glyph = listMarkerGlyph(line);
+    if (!glyph) continue;
+    const nextTextLine = lines.slice(index + 1).find(candidate => sourceLineText(candidate).trim().length > 0);
+    if (!nextTextLine) continue;
+    const markerSize = line.spans.find(span => !span.renderOnlyStrokePass)?.size ?? 10;
+    const horizontalGap = nextTextLine.bbox[0] - line.bbox[0];
+    const verticalDelta = Math.abs(nextTextLine.bbox[1] - line.bbox[1]);
+    if (horizontalGap <= markerSize * 0.6 || horizontalGap > markerSize * 3
+      || verticalDelta > Math.max(2.5, markerSize * 0.25)) continue;
+    indexes.add(index);
+  }
+  return indexes;
+}
+
+function fixedEditorLineIndexes(block: Block): Set<number> {
+  return new Set([...staticEditorLineIndexes(block), ...listMarkerLineIndexes(block)]);
+}
+
 function editableBlockLines(block: Block): LineData[] {
-  const staticIndexes = staticEditorLineIndexes(block);
+  const staticIndexes = fixedEditorLineIndexes(block);
   return (block.lines ?? []).filter((_, index) => !staticIndexes.has(index));
 }
 
 function normalizeStaticEditorPrefix(block: Block, override: SpanOverride | null): SpanOverride | null {
-  if (!override || !block.lines || !block.staticEditorLineIndexes?.length) return override;
+  const fixedIndexes = fixedEditorLineIndexes(block);
+  if (!override || !block.lines || fixedIndexes.size === 0) return override;
 
-  const fixedPrefix = block.staticEditorLineIndexes
+  const fixedPrefix = [...fixedIndexes].sort((a, b) => a - b)
     .flatMap(index => block.lines?.[index]?.spans ?? [])
     .filter(span => !span.renderOnlyStrokePass)
     .map(span => span.displayOverride || span.text)
@@ -457,6 +510,147 @@ function normalizeStaticEditorPrefix(block: Block, override: SpanOverride | null
 
   if (remaining) return override;
   return { ...override, segments: segments.filter(segment => segment.text.length > 0) };
+}
+
+interface ListFlowPart {
+  kind: 'marker' | 'text';
+  key: string;
+  line?: LineData;
+  lines?: LineData[];
+  markerOrdinal?: number;
+  nextMarker?: LineData;
+}
+
+function splitBlockIntoListFlowParts(block: Block, markerIndexes: Set<number>): ListFlowPart[] {
+  const lines = block.lines ?? [];
+  const parts: ListFlowPart[] = [];
+  let activeLines: LineData[] = [];
+  let activeMarkerOrdinal: number | undefined;
+  let markerOrdinal = -1;
+
+  const flushText = (boundary?: LineData) => {
+    if (!activeLines.length) return;
+    const firstLine = activeLines[0];
+    parts.push({
+      kind: 'text',
+      key: `${activeMarkerOrdinal === undefined ? 'prose' : `item-${activeMarkerOrdinal}`}-${firstLine.id}`,
+      lines: activeLines,
+      markerOrdinal: activeMarkerOrdinal,
+      nextMarker: boundary,
+    });
+    activeLines = [];
+    activeMarkerOrdinal = undefined;
+  };
+
+  lines.forEach((line, index) => {
+    if (markerIndexes.has(index)) {
+      flushText(line);
+      markerOrdinal += 1;
+      parts.push({ kind: 'marker', key: `marker-${line.id}`, line });
+      activeMarkerOrdinal = markerOrdinal;
+      return;
+    }
+    activeLines.push(line);
+  });
+  flushText();
+
+  // Pair every text row with the next marker after its source lines. This
+  // supplies a copyfit boundary without moving source marker coordinates.
+  let followingMarker: LineData | undefined;
+  for (let index = parts.length - 1; index >= 0; index -= 1) {
+    const part = parts[index];
+    if (part.kind === 'marker') {
+      followingMarker = part.line;
+    } else {
+      part.nextMarker = followingMarker;
+    }
+  }
+  return parts;
+}
+
+function trimSegmentEdgeWhitespace(segments: Segment[], edge: 'start' | 'end'): Segment[] {
+  const result = segments.map(segment => ({ ...segment }));
+  const ordered = edge === 'start' ? result : result.slice().reverse();
+  for (const segment of ordered) {
+    if (!segment.text) continue;
+    segment.text = edge === 'start'
+      ? segment.text.replace(/^[\s\u00a0]+/u, '')
+      : segment.text.replace(/[\s\u00a0]+$/u, '');
+    if (segment.text.length) break;
+  }
+  return result.filter(segment => segment.text.length > 0);
+}
+
+/** Split an older whole-list override only when it explicitly contains every source marker. */
+function splitLegacyListOverride(override: SpanOverride, markerGlyphs: string[]): Segment[][] | null {
+  if (!markerGlyphs.length || override.managedSourceSymbols?.length) return null;
+  const markerSet = new Set(markerGlyphs);
+  const pieces: Segment[][] = [[]];
+  let markerIndex = 0;
+  for (const segment of override.segments) {
+    const chars = Array.from(segment.text);
+    let start = 0;
+    for (let index = 0; index < chars.length; index += 1) {
+      const char = chars[index];
+      if (!markerSet.has(char)) continue;
+      if (markerIndex >= markerGlyphs.length || char !== markerGlyphs[markerIndex]) return null;
+      if (index > start) pieces[pieces.length - 1].push({ ...segment, text: chars.slice(start, index).join('') });
+      markerIndex += 1;
+      pieces.push([]);
+      start = index + 1;
+    }
+    if (start < chars.length) pieces[pieces.length - 1].push({ ...segment, text: chars.slice(start).join('') });
+  }
+  if (markerIndex !== markerGlyphs.length) return null;
+  return pieces.map((piece, index) => trimSegmentEdgeWhitespace(piece, index === 0 ? 'end' : 'start'));
+}
+
+function listFlowTextBlock(
+  parent: Block,
+  part: ListFlowPart,
+  pageNumber: number,
+  blockIdx: number,
+): Block | null {
+  const lines = part.lines ?? [];
+  if (!lines.length) return null;
+  const firstLine = lines[0];
+  const x = firstLine.bbox[0];
+  const y = Math.min(...lines.map(line => line.bbox[1]));
+  const right = Math.max(...lines.map(line => {
+    const availableX = line.availableX ?? line.bbox[0];
+    const availableWidth = line.availableWidth ?? (line.bbox[2] - line.bbox[0]);
+    return availableX + availableWidth;
+  }), parent.layoutFrame ? parent.layoutFrame.x + parent.layoutFrame.width : parent.bbox[2]);
+  const sourceBottom = Math.max(...lines.map(line => line.bbox[3]));
+  const boundaryBottom = part.nextMarker?.bbox[1] ?? parent.bbox[3];
+  const listFlowHeight = Math.max(1, Math.max(sourceBottom, boundaryBottom) - y);
+  const sourceEditorKey = parent.editorKey ?? `page_${pageNumber}_block_${blockIdx}`;
+  const safePartKey = part.key.replace(/[^a-zA-Z0-9_-]/g, '_');
+  const editorKey = `${sourceEditorKey}__${safePartKey}`;
+  const blockBBox: [number, number, number, number] = [
+    x,
+    y,
+    Math.max(x + 1, ...lines.map(line => line.bbox[2])),
+    sourceBottom,
+  ];
+  return {
+    ...parent,
+    id: parent.id,
+    editorKey,
+    bbox: blockBBox,
+    layoutFrame: {
+      ...(parent.layoutFrame ?? {}),
+      x,
+      width: Math.max(1, right - x),
+      y,
+      height: listFlowHeight,
+    },
+    lines,
+    staticEditorLineIndexes: undefined,
+    listMarkerLineIndexes: undefined,
+    listFlowItem: part.markerOrdinal !== undefined,
+    listFlowHeight,
+  };
 }
 
 function extractBlockInfo(
@@ -1033,7 +1227,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
   }, [layoutFrames, inheritedLayoutFrames, language]);
 
   const layoutSnapTargets = useMemo<SnapFrameRect[]>(() => pageData.blocks.flatMap((block, index) => {
-    if (block.hiddenFromPage || block.adminReadOnly || block.staticEditorLineIndexes?.length
+    if (block.hiddenFromPage || block.adminReadOnly || fixedEditorLineIndexes(block).size
       || block.typographicUnits?.length || block.creditUnits?.length || block.creditUnit) return [];
     const key = frameUnitKey(pageData.page_number, block, index);
     const frame = effectiveFrameFor(key, block);
@@ -1556,7 +1750,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   const translatedX = translatedFrame?.x ?? frameX;
   const translatedY = translatedFrame?.y ?? blockY;
   const translatedWidth = translatedFrame?.width ?? frameW;
-  const translatedHeight = translatedFrame?.height ?? blockH;
+  const translatedHeight = translatedFrame?.height ?? block.listFlowHeight ?? blockH;
   const translatedStyle: React.CSSProperties = translatedFrame ? {
     ...blockStyle,
     left: `${translatedX * scale}px`,
@@ -1622,12 +1816,95 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
   if (!block.lines || block.lines.length === 0) return null;
 
+  const markerIndexes = listMarkerLineIndexes(block);
+  const sortedMarkerIndexes = [...markerIndexes].sort((a, b) => a - b);
+  const firstMarkerIndex = sortedMarkerIndexes[0] ?? -1;
+  const shouldSplitListFlow = markerIndexes.size > 0
+    && (markerIndexes.size > 1 || firstMarkerIndex > 0);
+  const hasActiveWholeBlockDraft = selectedBlockKey === blockKey && draftOverride !== null;
+  const canSplitListFlow = shouldSplitListFlow
+    && !block.adminReadOnly
+    && !block.preserveLegacySpanOverrides
+    && !block.typographicUnits?.length
+    && !block.typographicSpanUnits?.length
+    && !block.creditUnits?.length
+    && !block.creditUnit
+    && !layoutMode
+    && !layoutFrameOverride;
+  const legacyMarkerGlyphs = sortedMarkerIndexes.map(index =>
+    listMarkerGlyph(block.lines![index]) ?? sourceLineText(block.lines![index]).replace(/[\s\u00a0]+/gu, ''),
+  );
+  const legacyListParts = currentOverride ? splitLegacyListOverride(currentOverride, legacyMarkerGlyphs) : null;
+
+  if (canSplitListFlow && (hasActiveWholeBlockDraft || (currentOverride && !legacyListParts))) {
+    // Keep an existing whole-block draft intact if it lacks enough source
+    // markers to migrate without guessing where one translated item ends.
+    return <SpanBlock {...{
+      block: { ...block, listMarkerLineIndexes: undefined, disableAutoListMarkerDetection: true },
+      hasSourceInlineSymbols, coveredSourceSymbols, allBlocks, layoutObstacles, blockIdx, pageNumber, scale,
+      isAdmin, contentsMap, onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutFrameForSelection,
+      layoutFrameOverride, onSelectLayoutFrame, selectedBlockKey, overrides, overridesReady, draftOverride, language,
+    }} />;
+  }
+
+  if (canSplitListFlow && !hasActiveWholeBlockDraft) {
+    const parts = splitBlockIntoListFlowParts(block, markerIndexes);
+    const rowOverrides = new Map(overrides);
+    if (legacyListParts && currentOverride) {
+      for (const part of parts) {
+        if (part.kind !== 'text') continue;
+        const rowBlock = listFlowTextBlock(block, part, pageNumber, blockIdx);
+        if (!rowBlock?.editorKey) continue;
+        const rowKey = `${rowBlock.editorKey}__${language}`;
+        const segments = legacyListParts[part.markerOrdinal === undefined ? 0 : part.markerOrdinal + 1];
+        if (!segments?.length || rowOverrides.has(rowKey)) continue;
+        rowOverrides.set(rowKey, {
+          ...currentOverride,
+          spanKey: rowKey,
+          bbox: rowBlock.bbox,
+          segments,
+          managedSourceSymbols: undefined,
+        });
+      }
+    }
+
+    return <>
+      {parts.map(part => {
+        if (part.kind === 'marker' && part.line) {
+          return (
+            <div key={part.key} className="block-container list-marker-source" aria-hidden="true"
+              data-list-marker-line={part.line.id}
+              style={{ position: 'absolute', left: `${blockX * scale}px`, top: `${blockY * scale}px`,
+                width: `${blockW * scale}px`, height: `${blockH * scale}px`, zIndex: block.zIndex || 10,
+                pointerEvents: 'none' }}>
+              <LineRenderer line={part.line} scale={scale} blockOriginX={blockX} blockOriginY={blockY}
+                isAdmin={false} isSelected={false} language={language} onClick={() => {}} />
+            </div>
+          );
+        }
+        const rowBlock = listFlowTextBlock(block, part, pageNumber, blockIdx);
+        if (!rowBlock) return null;
+        const rowUnitKey = frameUnitKey(pageNumber, rowBlock, blockIdx);
+        return (
+          <SpanBlock key={rowBlock.editorKey} block={rowBlock} hasSourceInlineSymbols={hasSourceInlineSymbols}
+            coveredSourceSymbols={coveredSourceSymbols} allBlocks={allBlocks} layoutObstacles={layoutObstacles}
+            blockIdx={blockIdx} pageNumber={pageNumber} scale={scale} isAdmin={isAdmin} contentsMap={contentsMap}
+            onNavigate={onNavigate} onBlockClick={onBlockClick} layoutMode={layoutMode} layoutUnitKey={rowUnitKey}
+            layoutFrameForSelection={sourceLayoutFrame(rowBlock)} onSelectLayoutFrame={onSelectLayoutFrame}
+            selectedBlockKey={selectedBlockKey} overrides={rowOverrides} overridesReady={overridesReady}
+            draftOverride={draftOverride} language={language} />
+        );
+      })}
+    </>;
+  }
+
   const inlineSpanStates = buildInlineSpanStates(
     block, pageNumber, selectedBlockKey, overrides, draftOverride, language,
   );
 
   const blockCanEdit = isAdmin && !layoutMode && !block.adminReadOnly;
-  const blockCanSelectLayout = isAdmin && layoutMode && !block.adminReadOnly && !block.staticEditorLineIndexes?.length && !block.typographicUnits?.length && !block.creditUnits?.length && !block.creditUnit;
+  const blockCanSelectLayout = isAdmin && layoutMode && !block.adminReadOnly && !fixedEditorLineIndexes(block).size
+    && !block.listFlowItem && !block.typographicUnits?.length && !block.creditUnits?.length && !block.creditUnit;
   const blockHoverClass = blockCanSelectLayout
     ? 'layout-frame-selectable'
     : blockCanEdit ? `block-editable ${selectedBlockKey === blockKey ? 'block-selected' : ''}` : '';
@@ -1636,7 +1913,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     else if (blockCanEdit) onBlockClick(extractBlockInfo(blockKey, block));
   };
   const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
-  const fixedLineIndexes = staticEditorLineIndexes(block);
+  const fixedLineIndexes = fixedEditorLineIndexes(block);
   const esmeraldaHeadingSource = block.lines
     ?.flatMap(line => line.spans)
     .find(span => needsEsmeraldaHeadingDrop(span.font, span.size, span.bbox[3] - span.bbox[1]));
@@ -1666,7 +1943,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
       ?? block.layoutFrame?.lineHeight ?? 1;
     const effectiveLineHeight = fallbackLineHeight;
     // Edited text uses translatedFlow; untouched EN stays in SourceGeometryBlock above.
-    const fixedLineIndexes = staticEditorLineIndexes(block);
+    const fixedLineIndexes = fixedEditorLineIndexes(block);
     const fixedLines = (block.lines ?? []).filter((_, index) => fixedLineIndexes.has(index));
     const firstLine = editableBlockLines(block)[0] ?? block.lines[0];
     const hasStaticEditorLines = fixedLines.length > 0;
