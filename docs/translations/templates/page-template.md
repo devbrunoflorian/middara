@@ -4,6 +4,7 @@
 - **Estado:** SOURCE_PENDING | STRUCTURED_EN_PASS | PT_DRAFT | LANGUAGE_PASS | LAYOUT_PASS | READY | PARTIAL | BLOCKED.
 - **Render fonte:** caminho da captura direta do PDF e resolução/data.
 - **Mapa de leitura:** ordem de colunas/regiões e IDs de bloco/linha.
+- **Listas/marcadores:** referência do marcador-fonte, X do marcador e do início do texto, tipo da lista e recuo pendente; o marcador não entra como prefixo da prosa traduzida.
 - **IDs semânticos:** IDs confirmados; faltas marcadas `UNMAPPED_INLINE`.
 - **Exceções abertas:** nenhuma ou lista com evidência e próximo passo.
 
