@@ -1830,7 +1830,19 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   const typographicUnits = block.typographicUnits ?? [];
   const preserveSpanOverride = hasPreservedLegacySpanOverride(block, pageNumber, language,
     key => overrides.has(key) || (selectedBlockKey === key && draftOverride !== null));
-  if (typographicUnits.length > 0 && overridesReady && !overrides.has(blockKey) && !preserveSpanOverride) {
+  const hasCompleteEditorialUnitOverrides = typographicUnits.length > 0 && typographicUnits.every(unit => {
+    const unitKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
+    return overrides.has(unitKey) || (selectedBlockKey === unitKey && draftOverride !== null);
+  });
+  // Keep a legacy whole-block translation active until all editorial children
+  // have their own saved values. Once the complete child set exists, the new
+  // units become editable/renderable while the old record remains preserved
+  // as a compatibility fallback.
+  const hasLegacyWholeBlockOverride = overrides.has(blockKey)
+    || (selectedBlockKey === blockKey && draftOverride !== null);
+  if (typographicUnits.length > 0 && overridesReady
+      && (!hasLegacyWholeBlockOverride || hasCompleteEditorialUnitOverrides)
+      && !preserveSpanOverride) {
     return (
       <TypographicUnitBlock
         block={block}
@@ -2414,6 +2426,24 @@ interface CreditFieldProps {
   onBlockClick: (info: SelectedSpanInfo) => void;
 }
 
+/** Preserve a PDF line's first ink position when a leading source newline is
+ * split into its own editorial field and no longer participates in browser flow. */
+function sourceLeadingContentOffsetPt(line: LineData | undefined): number {
+  if (!line) return 0;
+  let hasLeadingBreak = false;
+  for (const span of line.spans) {
+    if (span.renderOnlyStrokePass) continue;
+    if (!span.text.trim() && span.text.includes('\n')) {
+      hasLeadingBreak = true;
+      continue;
+    }
+    if (span.text.trim() || span.semanticSymbolId || span.pictogramSvgPath) {
+      return hasLeadingBreak ? Math.max(0, span.bbox[1] - line.bbox[1]) : 0;
+    }
+  }
+  return 0;
+}
+
 const CreditField: React.FC<CreditFieldProps> = ({
   block, field, spanKey, scale, isAdmin, selected, override, language, nextFieldY,
   unitKind, unitLabel, topOffsetPt = 0, onPreviewMeasure, inlineSpanStates, onInlineSpanClick, onBlockClick,
@@ -2458,6 +2488,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
   }, [onPreviewMeasure, override, neighborHeight, scale]);
 
   const lines = (block.lines || []).filter(line => field.lineIds.includes(line.id));
+  const leadingContentOffsetPt = sourceLeadingContentOffsetPt(lines[0]);
   const sourceClass = isAdmin ? 'credit-edit-field' : '';
   const selectedClass = selected ? 'credit-field-selected' : '';
   const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
@@ -2487,6 +2518,10 @@ const CreditField: React.FC<CreditFieldProps> = ({
             lineHeight: override.lineHeight ?? field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
             display: 'block',
             fontSize: 0,
+            // Only translated segments omit the source newline-only run. Keep
+            // its measured first-ink offset here; the EN line renderer still
+            // has the run and must not receive the same offset a second time.
+            paddingTop: `${leadingContentOffsetPt * scale}px`,
           }}
         >
           {renderCreditSegments(override.segments, field.links, language, scale, isAdmin)}
