@@ -46,6 +46,34 @@ function uniqueSourceSymbolTemplates(segments:Segment[]):Map<string,Segment|null
   return templates;
 }
 
+function sameMetadataValue(left:unknown,right:unknown):boolean {
+  if(Object.is(left,right))return true;
+  if(!left || !right || typeof left!=='object' || typeof right!=='object')return false;
+  if(Array.isArray(left)!==Array.isArray(right))return false;
+  const leftKeys=Object.keys(left as object).sort();
+  const rightKeys=Object.keys(right as object).sort();
+  return leftKeys.length===rightKeys.length && leftKeys.every((key,index)=>key===rightKeys[index]
+    && sameMetadataValue((left as Record<string,unknown>)[key],(right as Record<string,unknown>)[key]));
+}
+
+/** Merge only adjacent plain-text runs whose complete non-text metadata matches. */
+function coalesceEquivalentTextRuns(segments:Segment[]):Segment[] {
+  const merged:Segment[]=[];
+  for(const segment of segments) {
+    const previous=merged[merged.length-1];
+    const canMerge=previous && !previous.symbolId && !segment.symbolId
+      && !previous.text.includes(SYMBOL_OBJECT_MARKER) && !segment.text.includes(SYMBOL_OBJECT_MARKER)
+      && !resolveLegacySymbol(previous.font,previous.text) && !resolveLegacySymbol(segment.font,segment.text)
+      && sameMetadataValue(
+        Object.fromEntries(Object.entries(previous).filter(([key])=>key!=='text')),
+        Object.fromEntries(Object.entries(segment).filter(([key])=>key!=='text')),
+      );
+    if(canMerge)previous.text+=segment.text;
+    else merged.push({...segment});
+  }
+  return merged;
+}
+
 /** One tokenizer for serialization, atomic editing and clipboard boundaries. */
 export function editableTokenRanges(text:string, aliasPreferences?:SymbolAliasPreferences):EditableTokenRange[] {
   const ranges:EditableTokenRange[]=[];let cursor=0;
@@ -144,7 +172,10 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
       // when both neighboring runs have identical styling.
       const left=oldPlain.find(old=>old.start<prefix && old.end>=prefix)?.run;
       const right=oldPlain.find(old=>old.start<=prefix && old.end>prefix)?.run;
-      const inherited=left && right ? (sameStyle(left,right) ? left : undefined)
+      // At a mixed-style boundary, an insertion before the right-hand run
+      // belongs to that run. Falling back to the active toolbar style can
+      // leak a bold/italic label style into every character typed next.
+      const inherited=left && right ? (sameStyle(left,right) ? left : right)
         : prefix===0 ? right : prefix===baseline.length ? left : undefined;
       return inherited ? styleOf(inherited) : style;
     }
@@ -241,7 +272,7 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
       output.splice(0, output.length, ...styledOutput);
     }
   }
-  return output.length ? output : [{ ...style, text: '' }];
+  return output.length ? coalesceEquivalentTextRuns(output) : [{ ...style, text: '' }];
 }
 
 /** UTF-16 offsets match textarea selectionStart/End; objects occupy one slot. */
