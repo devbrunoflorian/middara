@@ -2351,6 +2351,21 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
   overrides, draftOverride, language,
 }) => {
   const [measuredUnitHeightsPt, setMeasuredUnitHeightsPt] = useState<Record<string, number>>({});
+  const handleUnitMeasure = useCallback((unitId: string, heightPx: number | null) => {
+    if (!scale) return;
+    setMeasuredUnitHeightsPt(current => {
+      if (heightPx === null) {
+        if (!(unitId in current)) return current;
+        const next = { ...current };
+        delete next[unitId];
+        return next;
+      }
+      const heightPt = heightPx / scale;
+      return Math.abs((current[unitId] ?? -1) - heightPt) < 0.05
+        ? current
+        : { ...current, [unitId]: heightPt };
+    });
+  }, [scale]);
   // A semantic field owns its complete source lines, whatever its editorial
   // subtype. Nested same-font span targets may render legacy overrides, but
   // must not intercept clicks intended to open the whole heading/body field.
@@ -2393,21 +2408,6 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
     );
   }
   const flowUnits = units.filter(unit => !unit.fixedPosition);
-  const handleUnitMeasure = useCallback((unitId: string, heightPx: number | null) => {
-    if (!scale) return;
-    setMeasuredUnitHeightsPt(current => {
-      if (heightPx === null) {
-        if (!(unitId in current)) return current;
-        const next = { ...current };
-        delete next[unitId];
-        return next;
-      }
-      const heightPt = heightPx / scale;
-      return Math.abs((current[unitId] ?? -1) - heightPt) < 0.05
-        ? current
-        : { ...current, [unitId]: heightPt };
-    });
-  }, [scale]);
 
   // Each translated paragraph keeps its source gap to the next paragraph.
   // Any extra height is accumulated through the rest of this visual block,
