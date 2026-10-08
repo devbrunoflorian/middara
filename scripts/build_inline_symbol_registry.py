@@ -347,6 +347,23 @@ def build(apply, only_pages=None,registry_only=False):
     # The circle candidate group contains different foreground symbols.
     # Distribute only complete geometry matches to their reviewed recipes.
     circles=[complete_component(doc[o['page']-1],o) for o in audit['inlineVectorCandidates'][23]['occurrences']]
+    # p.43 Range definitions: these four sword/bow pictograms are true source
+    # vectors placed between text runs. They were left baked into background.webp,
+    # so translated text could reflow away from them. Register only the four
+    # source-confirmed drawings and let the normal inline anchor logic own them.
+    p43_range_icons=[
+        dict(page=43,drawingIndices=[109,110],bbox=[616.3051147460938,180.19219970703125,625.1229858398438,189.01019287109375]),
+        dict(page=43,drawingIndices=[111,112],bbox=[692.2648315429688,218.8610076904297,701.0828247070312,227.6790008544922]),
+        dict(page=43,drawingIndices=[113,114],bbox=[573.5156860351562,257.5039978027344,582.33349609375,266.3480224609375]),
+        dict(page=43,drawingIndices=[115,116],bbox=[631.9760131835938,279.5039978027344,640.7940063476562,288.3479919433594]),
+    ]
+    for target in p43_range_icons:
+        rect=fitz.Rect(target['bbox'])
+        union=fitz.Rect(source_drawings(doc[42])[target['drawingIndices'][0]]['rect'])
+        for drawing_index in target['drawingIndices'][1:]:union |= source_drawings(doc[42])[drawing_index]['rect']
+        if any(abs(a-b)>.03 for a,b in zip(union,target['bbox'])):
+            raise ValueError(f"Stale p43 source icon geometry: {target}")
+        circles.append(target)
     selected=[(id,o,circles if id.startswith('attack.') else occurrences) for id,o,occurrences in selected]
     hand_compositions=discover_hand_compositions(doc,audit)
     placements=defaultdict(list)
@@ -460,8 +477,32 @@ def build(apply, only_pages=None,registry_only=False):
         heightEm=(skull_bbox[3]-skull_bbox[1])/skull_size,verticalAlignEm=.6997,
         renderVariant='bounty-red-raster')
     placements[13].append(dict(symbolId='combat.skull',bbox=skull_bbox,drawingIndices=[],anchor=p13_anchor,metrics=p13_metrics))
-    if apply:
-        dest=ROOT/'apps/web/src/symbols/sourceSymbols.json';dest.write_text(json.dumps(entries,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+    if apply and only_pages:
+        # A page-scoped adapter refresh must not rewrite the shared symbol
+        # registry: the builder also contains definitions for unrelated pages
+        # and would otherwise replace hand-maintained legacy entries. Existing
+        # definitions are sufficient for the p43 source-confirmed placements.
+        dest=ROOT/'apps/web/src/symbols/sourceSymbols.json'
+        existing_ids={entry.get('id') for entry in json.loads(dest.read_text(encoding='utf8'))}
+        required_ids={item['symbolId'] for page_no,items in placements.items() if page_no in only_pages for item in items}
+        missing=required_ids-existing_ids
+        if missing:
+            raise ValueError(f'Page-scoped refresh requires new shared symbol definitions: {sorted(missing)}')
+    elif apply:
+        dest=ROOT/'apps/web/src/symbols/sourceSymbols.json'
+        # Registry generation refreshes base source paths, but reviewed render
+        # variants are maintained independently of the source vector atlas.
+        # Keep them when rebuilding a subset of page placements.
+        if dest.exists():
+            previous=json.loads(dest.read_text(encoding='utf8'))
+            previous_by_id={entry.get('id'):entry for entry in previous}
+            for entry in entries:
+                old_render=previous_by_id.get(entry.get('id'),{}).get('render',{})
+                old_variants=old_render.get('variants',{}) if isinstance(old_render,dict) else {}
+                new_variants=entry.get('render',{}).get('variants',{})
+                if old_variants:
+                    entry.setdefault('render',{})['variants']={**old_variants,**new_variants}
+        dest.write_text(json.dumps(entries,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     # Masks are independent of language. Source rendering remains untouched;
     # patches are painted only while the owning text unit is replaced.
     for page_no,items in placements.items():
