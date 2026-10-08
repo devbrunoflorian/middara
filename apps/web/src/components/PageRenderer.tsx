@@ -1025,6 +1025,40 @@ function sourceLayoutFrame(block: Block): LayoutFrame {
   };
 }
 
+function typographicUnitFrameKey(pageNumber: number, unit: TypographicUnitDefinition): string {
+  return `page_${pageNumber}_unit_${unit.id}`;
+}
+
+function sourceLayoutFrameForField(field: CreditFieldDefinition): LayoutFrame {
+  return {
+    x: field.frame.x,
+    y: field.bbox[1],
+    width: field.frame.width,
+    height: Math.max(1, field.bbox[3] - field.bbox[1]),
+    rotation: 0,
+    textAlign: field.frame.textAlign,
+    lineHeight: field.frame.lineHeight,
+  };
+}
+
+interface LayoutFrameSource {
+  frame: LayoutFrame;
+  bbox: [number, number, number, number];
+}
+
+function findLayoutFrameSource(pageData: PageData, unitKey: string): LayoutFrameSource | null {
+  for (const [blockIndex, block] of pageData.blocks.entries()) {
+    if (frameUnitKey(pageData.page_number, block, blockIndex) === unitKey) {
+      return { frame: sourceLayoutFrame(block), bbox: block.bbox };
+    }
+    const unit = block.typographicUnits?.find(candidate =>
+      typographicUnitFrameKey(pageData.page_number, candidate) === unitKey,
+    );
+    if (unit) return { frame: sourceLayoutFrameForField(unit.field), bbox: unit.field.bbox };
+  }
+  return null;
+}
+
 type AdminGeometryDataAttributes = React.HTMLAttributes<HTMLDivElement> & {
   'data-admin-geometry'?: string;
   'data-admin-geometry-key'?: string;
@@ -1342,17 +1376,33 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
     return () => window.removeEventListener('beforeunload', warnBeforeClose);
   }, [layoutDirty]);
 
-  const effectiveFrameFor = useCallback((unitKey: string, block: Block) => {
+  const effectiveFrameFor = useCallback((unitKey: string, sourceFrame: LayoutFrame) => {
     return layoutFrames.get(unitKey)
       ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(unitKey) : undefined)
-      ?? sourceLayoutFrame(block);
+      ?? sourceFrame;
   }, [layoutFrames, inheritedLayoutFrames, language]);
 
   const layoutSnapTargets = useMemo<SnapFrameRect[]>(() => pageData.blocks.flatMap((block, index) => {
-    if (block.hiddenFromPage || block.adminReadOnly || fixedEditorLineIndexes(block).size
-      || block.typographicUnits?.length || block.creditUnits?.length || block.creditUnit) return [];
+    if (block.hiddenFromPage || block.adminReadOnly || block.creditUnits?.length || block.creditUnit) return [];
+    if (block.typographicUnits?.length) {
+      return block.typographicUnits.map(unit => {
+        const key = typographicUnitFrameKey(pageData.page_number, unit);
+        const sourceFrame = sourceLayoutFrameForField(unit.field);
+        const frame = effectiveFrameFor(key, sourceFrame);
+        return {
+          key,
+          label: unit.label || `Bloco ${index + 1} · ${unit.id}`,
+          x: frame.x,
+          y: frame.y ?? unit.field.bbox[1],
+          width: frame.width,
+          height: frame.height ?? Math.max(1, unit.field.bbox[3] - unit.field.bbox[1]),
+          rotation: frame.rotation,
+        };
+      });
+    }
+    if (fixedEditorLineIndexes(block).size) return [];
     const key = frameUnitKey(pageData.page_number, block, index);
-    const frame = effectiveFrameFor(key, block);
+    const frame = effectiveFrameFor(key, sourceLayoutFrame(block));
     return [{
       key,
       label: `Bloco ${index + 1}`,
@@ -1366,16 +1416,17 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
 
   const selectLayoutFrame = useCallback((unitKey: string, initialFrame: LayoutFrame) => {
     if (layoutDirty && unitKey !== layoutUnitKey && !window.confirm('Há alterações de moldura não salvas. Descartar e selecionar outra?')) return;
-    const block = pageData.blocks.find((candidate, index) => frameUnitKey(pageData.page_number, candidate, index) === unitKey);
+    const source = findLayoutFrameSource(pageData, unitKey);
     const saved = layoutFrames.get(unitKey)
       ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(unitKey) : undefined)
-      ?? (block ? sourceLayoutFrame(block) : initialFrame);
+      ?? source?.frame
+      ?? initialFrame;
     setLayoutUnitKey(unitKey);
     setLayoutDraft({ ...saved });
     setLayoutDirty(false);
     onLayoutDirtyChange?.(false);
     setLayoutStatus(language === 'pt-BR' && !layoutFrames.has(unitKey) ? 'PT-BR herda a moldura EN até ser personalizada.' : null);
-  }, [layoutDirty, layoutUnitKey, pageData.blocks, pageData.page_number, layoutFrames, inheritedLayoutFrames, language, onLayoutDirtyChange]);
+  }, [layoutDirty, layoutUnitKey, pageData, layoutFrames, inheritedLayoutFrames, language, onLayoutDirtyChange]);
 
   const changeLayoutDraft = useCallback((frame: LayoutFrame) => {
     setLayoutDraft(frame);
@@ -1386,15 +1437,16 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
 
   const discardLayoutDraft = useCallback(() => {
     if (!layoutUnitKey) return;
-    const block = pageData.blocks.find((candidate, index) => frameUnitKey(pageData.page_number, candidate, index) === layoutUnitKey);
+    const source = findLayoutFrameSource(pageData, layoutUnitKey);
     const saved = layoutFrames.get(layoutUnitKey)
       ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(layoutUnitKey) : undefined)
-      ?? (block ? sourceLayoutFrame(block) : null);
+      ?? source?.frame
+      ?? null;
     setLayoutDraft(saved ? { ...saved } : null);
     setLayoutDirty(false);
     onLayoutDirtyChange?.(false);
     setLayoutStatus('Alterações descartadas.');
-  }, [layoutUnitKey, pageData.blocks, pageData.page_number, layoutFrames, inheritedLayoutFrames, language, onLayoutDirtyChange]);
+  }, [layoutUnitKey, pageData, layoutFrames, inheritedLayoutFrames, language, onLayoutDirtyChange]);
 
   const saveLayoutDraft = useCallback(async () => {
     if (!layoutUnitKey || !layoutDraft || !layoutDirty || isSavingLayout) return;
@@ -1420,14 +1472,14 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
     saveLocalLayoutFrames(pageData.page_number, language, next);
     const removedRemotely = await deleteLayoutFrame(layoutUnitKey, language);
     const inherited = inheritedLayoutFrames.get(layoutUnitKey)
-      ?? pageData.blocks.flatMap((block, index) => frameUnitKey(pageData.page_number, block, index) === layoutUnitKey ? [sourceLayoutFrame(block)] : [])[0]
+      ?? findLayoutFrameSource(pageData, layoutUnitKey)?.frame
       ?? null;
     setLayoutDraft(inherited ? { ...inherited } : null);
     setLayoutDirty(false);
     onLayoutDirtyChange?.(false);
     setLayoutStatus(removedRemotely ? 'Moldura PT-BR removida; herdando EN.' : 'Herança aplicada neste navegador; remoção remota pendente.');
     setIsSavingLayout(false);
-  }, [layoutUnitKey, language, layoutFrames, isSavingLayout, pageData.page_number, inheritedLayoutFrames, pageData.blocks, onLayoutDirtyChange]);
+  }, [layoutUnitKey, language, layoutFrames, isSavingLayout, pageData, inheritedLayoutFrames, onLayoutDirtyChange]);
 
   const contentsMap = useMemo(() => {
     const map = new Map<string, number>();
@@ -1569,10 +1621,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
       : overrides.get(selectedSpan.spanKey) || null
     : null;
 
-  const selectedLayoutBlockIndex = layoutUnitKey
-    ? pageData.blocks.findIndex((block, index) => frameUnitKey(pageData.page_number, block, index) === layoutUnitKey)
-    : -1;
-  const selectedLayoutBlock = selectedLayoutBlockIndex >= 0 ? pageData.blocks[selectedLayoutBlockIndex] : null;
+  const selectedLayoutSource = layoutUnitKey ? findLayoutFrameSource(pageData, layoutUnitKey) : null;
   const selectedLayoutFrame = layoutDraft;
   const selectedLayoutHasOwnFrame = !!layoutUnitKey && layoutFrames.has(layoutUnitKey);
 
@@ -1628,7 +1677,11 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
               onBlockClick={handleSpanClick}
               layoutMode={isAdmin && layoutMode}
               layoutUnitKey={frameUnitKey(pageData.page_number, block, bIdx)}
-              layoutFrameForSelection={effectiveFrameFor(frameUnitKey(pageData.page_number, block, bIdx), block)}
+              layoutSelectionKey={layoutUnitKey}
+              layoutDraft={layoutDraft}
+              layoutFrames={layoutFrames}
+              inheritedLayoutFrames={inheritedLayoutFrames}
+              layoutFrameForSelection={effectiveFrameFor(frameUnitKey(pageData.page_number, block, bIdx), sourceLayoutFrame(block))}
               layoutFrameOverride={(layoutUnitKey === frameUnitKey(pageData.page_number, block, bIdx) ? layoutDraft : undefined)
                 ?? layoutFrames.get(frameUnitKey(pageData.page_number, block, bIdx))
                 ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(frameUnitKey(pageData.page_number, block, bIdx)) : undefined)}
@@ -1715,11 +1768,11 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
           pageHeight={pageData.height}
           snapTargets={layoutSnapTargets}
           unitKey={layoutUnitKey}
-          sourceBbox={selectedLayoutBlock ? {
-            x: selectedLayoutBlock.bbox[0],
-            y: selectedLayoutBlock.bbox[1],
-            width: selectedLayoutBlock.bbox[2] - selectedLayoutBlock.bbox[0],
-            height: selectedLayoutBlock.bbox[3] - selectedLayoutBlock.bbox[1],
+          sourceBbox={selectedLayoutSource ? {
+            x: selectedLayoutSource.bbox[0],
+            y: selectedLayoutSource.bbox[1],
+            width: selectedLayoutSource.bbox[2] - selectedLayoutSource.bbox[0],
+            height: selectedLayoutSource.bbox[3] - selectedLayoutSource.bbox[1],
           } : null}
           frame={selectedLayoutFrame}
           language={language}
@@ -1814,6 +1867,10 @@ interface SpanBlockProps {
   onBlockClick: (info: SelectedSpanInfo) => void;
   layoutMode: boolean;
   layoutUnitKey: string;
+  layoutSelectionKey: string | null;
+  layoutDraft: LayoutFrame | null;
+  layoutFrames: Map<string, LayoutFrame>;
+  inheritedLayoutFrames: Map<string, LayoutFrame>;
   layoutFrameForSelection: LayoutFrame;
   layoutFrameOverride?: LayoutFrame;
   onSelectLayoutFrame: (unitKey: string, frame: LayoutFrame) => void;
@@ -1826,7 +1883,8 @@ interface SpanBlockProps {
 
 const SpanBlock: React.FC<SpanBlockProps> = ({
   block, hasSourceInlineSymbols, coveredSourceSymbols, allBlocks, layoutObstacles, blockIdx, pageNumber, scale, isAdmin, contentsMap,
-  onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutFrameForSelection, layoutFrameOverride, onSelectLayoutFrame,
+  onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutSelectionKey, layoutDraft, layoutFrames, inheritedLayoutFrames,
+  layoutFrameForSelection, layoutFrameOverride, onSelectLayoutFrame,
   selectedBlockKey, overrides, overridesReady, draftOverride, language
 }) => {
   const blockRef = useRef<HTMLDivElement>(null);
@@ -1914,6 +1972,12 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
         pageNumber={pageNumber}
         scale={scale}
         isAdmin={isAdmin}
+        layoutMode={layoutMode}
+        layoutUnitKey={layoutSelectionKey}
+        layoutDraft={layoutDraft}
+        layoutFrames={layoutFrames}
+        inheritedLayoutFrames={inheritedLayoutFrames}
+        onSelectLayoutFrame={onSelectLayoutFrame}
         onBlockClick={onBlockClick}
         selectedBlockKey={selectedBlockKey}
         overrides={overrides}
@@ -1969,7 +2033,8 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     return <SpanBlock {...{
       block: { ...block, listMarkerLineIndexes: undefined, disableAutoListMarkerDetection: true },
       hasSourceInlineSymbols, coveredSourceSymbols, allBlocks, layoutObstacles, blockIdx, pageNumber, scale,
-      isAdmin, contentsMap, onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutFrameForSelection,
+      isAdmin, contentsMap, onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutSelectionKey, layoutDraft,
+      layoutFrames, inheritedLayoutFrames, layoutFrameForSelection,
       layoutFrameOverride, onSelectLayoutFrame, selectedBlockKey, overrides, overridesReady, draftOverride, language,
     }} />;
   }
@@ -2017,6 +2082,8 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             coveredSourceSymbols={coveredSourceSymbols} allBlocks={allBlocks} layoutObstacles={layoutObstacles}
             blockIdx={blockIdx} pageNumber={pageNumber} scale={scale} isAdmin={isAdmin} contentsMap={contentsMap}
             onNavigate={onNavigate} onBlockClick={onBlockClick} layoutMode={layoutMode} layoutUnitKey={rowUnitKey}
+            layoutSelectionKey={layoutSelectionKey} layoutDraft={layoutDraft} layoutFrames={layoutFrames}
+            inheritedLayoutFrames={inheritedLayoutFrames}
             layoutFrameForSelection={sourceLayoutFrame(rowBlock)} onSelectLayoutFrame={onSelectLayoutFrame}
             selectedBlockKey={selectedBlockKey} overrides={rowOverrides} overridesReady={overridesReady}
             draftOverride={draftOverride} language={language} />
@@ -2266,6 +2333,12 @@ interface TypographicUnitBlockProps {
   pageNumber: number;
   scale: number;
   isAdmin: boolean;
+  layoutMode: boolean;
+  layoutUnitKey: string | null;
+  layoutDraft: LayoutFrame | null;
+  layoutFrames: Map<string, LayoutFrame>;
+  inheritedLayoutFrames: Map<string, LayoutFrame>;
+  onSelectLayoutFrame: (unitKey: string, initialFrame: LayoutFrame) => void;
   onBlockClick: (info: SelectedSpanInfo) => void;
   selectedBlockKey: string | null;
   overrides: Map<string, SpanOverride>;
@@ -2447,6 +2520,14 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
       ))}
       {units.map((unit, unitIndex) => {
         const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
+        const frameKey = typographicUnitFrameKey(pageNumber, unit);
+        const sourceFrame = sourceLayoutFrameForField(unit.field);
+        const frameForSelection = layoutFrames.get(frameKey)
+          ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(frameKey) : undefined)
+          ?? sourceFrame;
+        const frameOverride = layoutMode && layoutUnitKey === frameKey && layoutDraft
+          ? layoutDraft
+          : layoutFrames.get(frameKey) ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(frameKey) : undefined);
         const override = selectedBlockKey === spanKey && draftOverride
           ? draftOverride
           : overrides.get(spanKey) || null;
@@ -2476,6 +2557,11 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
             inlineSpanStates={inlineSpanStates}
             onInlineSpanClick={state => onBlockClick(state.info)}
             onBlockClick={onBlockClick}
+            layoutMode={layoutMode}
+            layoutUnitKey={frameKey}
+            layoutFrameForSelection={frameForSelection}
+            layoutFrameOverride={frameOverride}
+            onSelectLayoutFrame={onSelectLayoutFrame}
             unitKind={unit.kind}
             unitLabel={unit.label}
           />
@@ -2498,6 +2584,11 @@ interface CreditFieldProps {
   unitLabel?: string;
   nextFieldY?: number;
   topOffsetPt?: number;
+  layoutMode?: boolean;
+  layoutUnitKey?: string;
+  layoutFrameForSelection?: LayoutFrame;
+  layoutFrameOverride?: LayoutFrame;
+  onSelectLayoutFrame?: (unitKey: string, initialFrame: LayoutFrame) => void;
   onPreviewMeasure?: (heightPx: number | null) => void;
   inlineSpanStates?: Map<string, InlineSpanUnitRenderState>;
   onInlineSpanClick?: (state: InlineSpanUnitRenderState) => void;
@@ -2524,16 +2615,19 @@ function sourceLeadingContentOffsetPt(line: LineData | undefined): number {
 
 const CreditField: React.FC<CreditFieldProps> = ({
   block, field, spanKey, scale, isAdmin, selected, override, language, nextFieldY,
-  unitKind, unitLabel, topOffsetPt = 0, onPreviewMeasure, inlineSpanStates, onInlineSpanClick, onBlockClick,
+  unitKind, unitLabel, topOffsetPt = 0, layoutMode = false, layoutUnitKey, layoutFrameForSelection,
+  layoutFrameOverride, onSelectLayoutFrame, onPreviewMeasure, inlineSpanStates, onInlineSpanClick, onBlockClick,
 }) => {
   const previewRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
-  const fieldX = field.frame.x;
-  const fieldY = field.bbox[1];
+  const activeFrame = layoutFrameOverride ?? (layoutMode ? layoutFrameForSelection : undefined);
+  const fieldX = activeFrame?.x ?? field.frame.x;
+  const fieldY = activeFrame?.y ?? field.bbox[1];
   const effectiveFieldY = fieldY + topOffsetPt;
-  const fieldHeight = field.bbox[3] - field.bbox[1];
+  const fieldHeight = activeFrame?.height ?? (field.bbox[3] - field.bbox[1]);
+  const fieldWidth = activeFrame?.width ?? field.frame.width;
   const neighborHeight = nextFieldY !== undefined && nextFieldY > effectiveFieldY
     ? nextFieldY - effectiveFieldY
     : fieldHeight;
@@ -2541,15 +2635,19 @@ const CreditField: React.FC<CreditFieldProps> = ({
     position: 'absolute',
     left: `${(fieldX - blockX) * scale}px`,
     top: `${(fieldY - blockY + topOffsetPt) * scale}px`,
-    width: `${field.frame.width * scale}px`,
+    width: `${fieldWidth * scale}px`,
     minHeight: `${fieldHeight * scale}px`,
+    ...(activeFrame?.rotation ? {
+      transform: `rotate(${activeFrame.rotation}deg)`,
+      transformOrigin: 'center center',
+    } : {}),
   };
-  const geometryAttributes = adminGeometryAttributes(isAdmin, spanKey, {
-    x: field.frame.x,
-    y: fieldY,
-    width: field.frame.width,
+  const geometryAttributes = adminGeometryAttributes(isAdmin, layoutMode && layoutUnitKey ? layoutUnitKey : spanKey, {
+    x: fieldX,
+    y: effectiveFieldY,
+    width: fieldWidth,
     height: fieldHeight,
-    rotation: 0,
+    rotation: activeFrame?.rotation ?? 0,
   });
 
   useEffect(() => {
@@ -2567,20 +2665,24 @@ const CreditField: React.FC<CreditFieldProps> = ({
 
   const lines = (block.lines || []).filter(line => field.lineIds.includes(line.id));
   const leadingContentOffsetPt = sourceLeadingContentOffsetPt(lines[0]);
-  const sourceClass = isAdmin ? 'credit-edit-field' : '';
+  const sourceClass = isAdmin ? (layoutMode ? 'layout-frame-selectable' : 'credit-edit-field') : '';
   const selectedClass = selected ? 'credit-field-selected' : '';
   const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
 
   const handleClick = (event: React.MouseEvent) => {
     if (!isAdmin) return;
     event.stopPropagation();
+    if (layoutMode && layoutUnitKey && layoutFrameForSelection) {
+      onSelectLayoutFrame?.(layoutUnitKey, layoutFrameForSelection);
+      return;
+    }
     onBlockClick(extractCreditFieldInfo(spanKey, block, field, unitKind, unitLabel));
   };
 
   return (
     <div
       className={`credit-field ${sourceClass} ${selectedClass} ${overflowClass}`}
-      style={fieldStyle}
+      style={{ ...fieldStyle, cursor: layoutMode ? 'crosshair' : undefined }}
       onClick={handleClick}
       {...geometryAttributes}
     >
@@ -2592,8 +2694,8 @@ const CreditField: React.FC<CreditFieldProps> = ({
             position: 'relative',
             width: '100%',
             whiteSpace: 'pre-wrap',
-            textAlign: override.textAlign ?? field.frame.textAlign ?? 'left',
-            lineHeight: override.lineHeight ?? field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+            textAlign: override.textAlign ?? activeFrame?.textAlign ?? field.frame.textAlign ?? 'left',
+            lineHeight: override.lineHeight ?? activeFrame?.lineHeight ?? field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
             display: 'block',
             fontSize: 0,
             // Only translated segments omit the source newline-only run. Keep
