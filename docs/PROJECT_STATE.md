@@ -15,15 +15,15 @@
 ## O que continua aberto
 
 - A auditoria 49–102 gerou 810 ocorrências vetoriais de adjacência: 62 já registradas, 75 em regiões de overlay conhecidas, 21 com assinatura visual equivalente a família já existente, 3 apenas sobrepostas a placements existentes e 649 sem classificação suficiente. Esses números são triagem, não defeitos.
-- Foram encontrados cartões de item dentro da composição das páginas 49 e 67 cujos textos aparecem no DOM como blocos genéricos, sem classificação explícita de cartão/arte. É um outlier estrutural novo para decisão; não foi corrigido.
-- Das 102 ocorrências raster próximas a texto, 83 estão concentradas nos componentes/cartões das p. 49 e 67, duas são marcadores numerados da p. 96 e 17 permanecem sem atribuição individual concluída.
+- Os cartões físicos das p. 49 e 67 são um outlier estrutural ainda sem parent/contrato de card. Foi confirmada perda visual: labels legítimas de 3,7846 pt e 3,9763 pt são omitidas pela regra compartilhada `<4 pt`, e a cápsula `PER ENCOUNTER` p. 67 perdeu o fundo escuro e ficou branca. Nenhuma correção foi aplicada; ver [auditoria](project-progress/2026-10-08-card-components-audit-p49-p67.md).
+- Das ocorrências raster fora dos cards p. 49/67, 18 foram associadas a elementos de diagramas, cards, marcadores ou tabelas sem nova divergência confirmada; a identidade individual de um candidato da p. 84 permanece incerta. As 83 ocorrências concentradas nos cards estão classificadas como partes dos componentes físicos, mas detalhes visuais e contrato de card continuam abertos.
 - A revisão ampliada não confirma o estado estrutural global 1–102. A faixa 1–48 tem registros de revisão com escopos diferentes; não somá-los como certificação uniforme.
 - A execução direta da suíte web teve 49/55 testes aprovados; seis falhas em três suítes de outline/inline p. 41/78 seguem sem diagnóstico e fora da correção de Hooks.
 - Tradução final em PT-BR, outliers restantes, localização de texto rasterizado e QA integral viewer/export continuam dependendo de página/família e estado de tradução.
 
 ## Próximo estágio
 
-Retomar a classificação de candidatos com o PDF aberto e contexto da página, começando pela família de cartões incorporados. Só então decidir se ela merece um contrato estrutural. Não iniciar tradução em massa nem converter os candidatos remanescentes em backlog automático.
+Decidir o contrato estrutural/visual dos cards físicos p. 49/67. Depois retomar a classificação dos 649 candidatos vetoriais inconclusivos com contexto do PDF; não iniciar tradução em massa nem converter candidatos em backlog automático.
 
 ## Invariantes
 
