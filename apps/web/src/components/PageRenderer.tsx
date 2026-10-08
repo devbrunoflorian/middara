@@ -2233,9 +2233,14 @@ function findNextSameColumnComponentY(
       nearest === undefined || candidate.bbox[1] < nearest ? candidate.bbox[1] : nearest,
     undefined);
   const nextArtworkY = layoutObstacles
-    .filter(([imageX0, , imageX1, imageY1]) => imageX0 < x1 && imageX1 > x0 && imageY1 > block.bbox[3])
+    // Artwork that already starts above the block may overlap its text column
+    // as decoration; it is not a downstream flow boundary. Only artwork whose
+    // top edge begins after this block can limit paragraph reflow below it.
+    .filter(([imageX0, imageY0, imageX1]) =>
+      imageX0 < x1 && imageX1 > x0 && imageY0 >= block.bbox[3],
+    )
     .reduce<number | undefined>((nearest, image) => {
-      const obstacleY = Math.max(block.bbox[3], image[1]);
+      const obstacleY = image[1];
       return nearest === undefined || obstacleY < nearest ? obstacleY : nearest;
     }, undefined);
   if (nextTextY === undefined) return nextArtworkY;
@@ -2344,10 +2349,9 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
     const sourceGapPt = nextUnit.field.bbox[1] - unit.field.bbox[1];
     totalRequiredPushPt += Math.max(0, measuredHeightPt - sourceGapPt);
   });
-  const clearancePt = 8;
   const availablePushPt = nextComponentY === undefined
     ? 0
-    : Math.max(0, nextComponentY - block.bbox[3] - clearancePt);
+    : Math.max(0, nextComponentY - block.bbox[3]);
   const canApplyReflowPush = totalRequiredPushPt <= availablePushPt + 0.01;
   const flowOffsetFor = (unit: TypographicUnitDefinition | undefined): number =>
     unit && canApplyReflowPush ? requiredOffsetsPt.get(unit.id) ?? 0 : 0;
