@@ -2,7 +2,7 @@
 
 This project digitizes the "Middara Rulebook 1.2" PDF into an interactive, translatable web app. Source-PDF fidelity is an explicit requirement, but the 102-page book is not yet globally certified; current scope, evidence and open work are tracked in the [project handoff](PROJECT-HANDOFF.md).
 
-**Resume work from [`PROJECT-HANDOFF.md`](PROJECT-HANDOFF.md) first.** It links the current family matrix, known issues, evidence and next-session procedure.
+**Resume work from [`PROJECT-HANDOFF.md`](PROJECT-HANDOFF.md) and [`docs/PROJECT_STATE.md`](docs/PROJECT_STATE.md).** The canonical documentation map is [`docs/README.md`](docs/README.md); dated progress files are scoped evidence, not global status.
 
 ## Local development
 
@@ -38,37 +38,10 @@ To support this without breaking browser rendering, we map special characters to
 
 ## Documentation Index
 
-- [`PROJECT-HANDOFF.md`](PROJECT-HANDOFF.md): canonical first-read handoff, current repository state and `NEXT SESSION START HERE`.
-- [`docs/project-progress/inline-semantic-family-matrix.md`](docs/project-progress/inline-semantic-family-matrix.md): current status, counts, validation scope and limits by semantic family.
-- [`docs/project-progress/known-issues-inline-rendering.md`](docs/project-progress/known-issues-inline-rendering.md): active `origin`/fallback-renderer investigation and first experiment.
-- [`docs/architecture/inline-semantic-lessons-and-playbooks.md`](docs/architecture/inline-semantic-lessons-and-playbooks.md): reusable classification, family and visual-debug playbooks plus anti-patterns.
-- [`docs/project-progress/documentation-status-inline-project.md`](docs/project-progress/documentation-status-inline-project.md): CURRENT/HISTORICAL/SUPERSEDED index for inline-semantic docs.
+- [`PROJECT-HANDOFF.md`](PROJECT-HANDOFF.md): operational first read and current workspace handoff.
+- [`docs/README.md`](docs/README.md): canonical map of architecture, editorial model, symbols, QA, ADRs, history and translation workflow.
+- [`docs/PROJECT_STATE.md`](docs/PROJECT_STATE.md): concise status, open work and invariants.
+- [`docs/project-progress/README.md`](docs/project-progress/README.md): dated evidence; status is scoped to each record.
+- [`docs/history/documentation-dispositions.md`](docs/history/documentation-dispositions.md): stale, superseded and retained material.
 
-- `docs/project-progress/2026-10-05-dice-count-color-ownership-families.md`: pattern-first source/DOM audit for dice labels containing a count and color, including the two distinct page 85 anchor families and the measured result of the method.
-- `docs/project-progress/2026-10-04-page3-adaptive-toc-leaders.md`: separate contents entries and adaptive dotted leaders for translations.
-- `docs/project-progress/2026-10-04-page37-source-review.md`: page 37 source comparison of phase rules and symbols.
-- `docs/project-progress/2026-10-04-page36-source-review.md`: source comparison of Initiative rules, cards and markers.
-- `docs/project-progress/2026-10-04-page35-source-review.md`: page 35 source review of setup legend hierarchy and symbols.
-- `docs/project-progress/2026-10-04-page34-source-review.md`: source comparison of the Game Table Setup diagram and surrounding live text.
-- `docs/project-progress/2026-10-04-page33-source-review.md`: page 33 source review of the Discipline card, alphabet markers and external legend.
-- `docs/project-progress/2026-10-04-page32-source-review.md`: page 32 source-PDF review of Discipline artwork and adjacent editable prose.
-- `docs/project-progress/2026-10-04-page31-source-review.md`: source-PDF review of page 31 and its confirmed corrections.
-- `docs/project-progress/2026-10-04-page30-source-review.md`: next sequential source-PDF review, with live verification tracked separately.
-- `docs/project-progress/2026-10-04-page28-shared-artwork-followup.md`: page-local follow-up of shared English card artwork and transparent-window seams.
-- `docs/project-progress/2026-10-04-restart-recovery-and-live-qa.md`: restart recovery, parallel dev startup, database checks and the current visual-review gate.
-- `docs/project-progress/2026-10-04-page29-fixed-artwork.md`: source-confirmed artwork and numeric paint corrections with before/PDF/after evidence.
-- `docs/architecture_v3_constraints.md`: Deep dive into the block-level rendering and constraint-based editor architecture.
-- `docs/architecture/text-layout-frames.md`: Accepted page 2 frame pilot separating printed ink bounds from translation space, with audit findings and the plan for generalization.
-- `docs/project-progress/CONTINUE-HERE.md`: historical handoff snapshot; superseded by root `PROJECT-HANDOFF.md`.
-- `docs/project-progress/2026-10-01-book-wide-typographic-units.md`: active plan to identify editable typography units and style hierarchy across all 102 pages before geometry audits.
-- `docs/project-progress/README.md`: Per-task work log with methods, results, corrections, checks, and next steps.
-- `docs/translation-editor-save-and-line-breaks.md`: Save point for the docked editor, live text preview, line-height, and local-first draft persistence.
-- `docs/payload-database-recovery.md`: Payload database diagnosis, clone-only API verification, and the safe migration checkpoint.
-- `icebox/README.md`: Index and archival policy for superseded versions and retired project items.
-- `docs/QA/`: Spot checks and transcription analyses for specific pages.
-
----
-*Note: This project strictly adheres to continuous documentation. Check `.agents/rules/doc_maintenance.md` for the documentation protocol.*
-Registro ativo: [elementos inline — auditoria e integração](docs/project-progress/2026-10-04-inline-elements-audit-and-registry.md).
-
-Contrato e extensão: [elementos semânticos inline](docs/architecture/inline-semantic-elements.md). Inventário global e mapa de uso: [catálogo](docs/project-progress/evidence/2026-10-04-inline-elements/catalog-and-usage.md). A integração não certifica a fidelidade das 102 páginas.
+The app remains under development and is not certified across all 102 pages. See the project state and handoff for current scope.

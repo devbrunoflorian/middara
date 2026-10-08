@@ -1,4 +1,6 @@
-# Book typographic hierarchy and fidelity rules
+# Book typographic hierarchy inventory — historical
+
+> **Status: historical source/style inventory.** Family observations remain useful for visual review, but this is not the current editorial-unit contract. In particular, the 6 pt threshold and requirement to make every source-size boundary a separate edit target are superseded. See [editorial model](editorial-model.md), [project state](../PROJECT_STATE.md) and [documentation dispositions](../history/documentation-dispositions.md).
 
 This is the current evidence-based style guide for reproducing English text in the Middara Rulebook viewer. It records recurring classes, not a global template for every page. Printed cards, diagrams, labels and text over artwork must be classified in their page context.
 
@@ -23,7 +25,7 @@ These recurring roles are supported by the source-PDF comparison on pages 2–13
 4. Resolve decorative alternates per character from the embedded source glyph sequence. Do not search ordinary body text or substitute a matching letter throughout the book.
 5. Separate geometry from style. Preserve source text bbox, baseline and column/frame bounds; correct local overflow or alignment only after measuring the page region and neighbor clearance.
 6. Exclude raster duplicates, ghost candidates, tiny vector text and card artwork from heading inference until the PDF and the app background are compared.
-7. A size/style difference creates a distinct editable target. Keep deliberate rich-text runs in the same reading flow only when the PDF does so, and make every source-size run independently selectable; no unit may cross a source font-size boundary. The current corpus rule uses 6 pt as the lower editable threshold: the 102-page pass found 771 content-bearing mixed-size blocks and all 771 now carry `typographicSpanUnits`. The 440 remaining mixed-source blocks contain only sub-6 pt traces beside one editable size and remain source evidence rather than automatic translation units. The executable invariant is [`validate_font_size_boundaries.py`](../../scripts/validate_font_size_boundaries.py), which must report zero editable mixed blocks without boundary units.
+7. Preserve distinct source-size/style runs as rich formatting inside an editorial unit when they share one semantic paragraph. A typography boundary alone does not require a new translation key or independently editable target. The old 6 pt threshold, 771/440 corpus counts, and script requirement are historical triage data, not an active invariant.
 8. Editorial page titles in `EsmeraldaPro` at exactly 30 pt are the documented wide-frame exception: allow the title to use the available horizontal space across its heading band, bounded by the page/title ornaments and neighboring content. Do not make a tiny frame from the visible glyph bbox. Preserve the original centered anchor in every language and let the localized title wrap/use a second line when the band has room; keep other size/style runs (such as the small version line on p. 1) in separate edit targets. The page sidecar is the shared default frame for EN and any language without a custom frame; language-specific changes (including PT-BR) persist as separate `layout-frames` records. This is a role-specific rule, not permission to widen 30 pt text found inside cards or artwork.
 
 ## Verification record
@@ -36,7 +38,7 @@ These recurring roles are supported by the source-PDF comparison on pages 2–13
 
 ## Remaining known limits
 
-The typography inventory is not a visual pass of every span. The app currently suppresses pictogram font spans pending page-specific background comparison; a first font-coverage run found 204 Zapf Dingbats spans across 34 pages and one Wingdings 3 span on page 15. Do not unsuppress or globally remap them from this count alone. The separate next stage is to reconcile these glyphs against the PDF and actual page backgrounds, then continue geometry/spacing and artwork-text duplication checks.
+The typography inventory is not a visual pass of every span. Counts and pending work in this historic report must be compared with current sidecars and project state before use. Never unsuppress or globally remap pictogram font spans from a count alone.
 
 
 ## Marcador em outra coluna dentro do mesmo bloco fonte — p. 35
