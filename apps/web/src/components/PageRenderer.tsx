@@ -37,6 +37,8 @@ export interface SpanData {
   flags: number;
   bbox: [number, number, number, number];
   origin?: [number, number];
+  /** Exact PDF paint fragments when one extracted span contains multiple baselines. */
+  sourceGlyphRuns?: Array<{ start: number; end: number; origin: [number, number]; advance: number }>;
   displayOverride?: string;
   /** Per-span replacement for symbol-font encodings that need a Unicode cmap codepoint. */
   pictogramDisplayOverride?: string;
@@ -1065,12 +1067,11 @@ function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 
 function hasExactSourceGeometry(block: Block): boolean {
   const spans = block.lines?.flatMap(line => line.spans) ?? [];
   return spans.length > 0
-    && spans.some(span => !!span.semanticSymbolId)
+    && spans.some(span => !!span.semanticSymbolId || !!span.sourceCompoundSymbolId)
     && spans.every(span => {
       if (span.semanticSymbolId) return span.bbox.every(Number.isFinite);
       return Array.isArray(span.origin) && span.origin.length === 2 && span.origin.every(Number.isFinite)
-        && span.bbox.every(Number.isFinite) && !span.pictogramSvgPath
-        && !span.sourceCompoundHidden && !span.sourceCompoundSymbolId;
+        && span.bbox.every(Number.isFinite) && !span.pictogramSvgPath;
     });
 }
 
@@ -1098,6 +1099,10 @@ function SourceGeometryBlock({ block, scale, blockOriginX, blockOriginY }: {
             data-source-baseline-y={baselines[0]}>
             {line.spans.map((span, spanIndex) => {
               if (span.renderOnlyStrokePass) return null;
+              // Source-compound text (for example, a letter inside a white
+              // reference capsule) is painted by the page-coordinate vector
+              // layer. Its extracted glyph must not be painted a second time.
+              if (span.sourceCompoundHidden || span.sourceCompoundSymbolId) return null;
               if (span.sourceInlineCoveredBy) {
                 const origin = span.origin;
                 return (
@@ -1134,20 +1139,38 @@ function SourceGeometryBlock({ block, scale, blockOriginX, blockOriginY }: {
               const sourceText = span.pictogramDisplayOverride ?? text;
               if (!sourceText) return null;
               const textLength = Math.max(0, span.bbox[2] - span.bbox[0]);
+              const glyphRuns = sourceText === span.text ? span.sourceGlyphRuns : undefined;
+              const textStyle = { fontFamily: span.pictogramFontOverride ? `'${span.pictogramFontOverride}', sans-serif` : mapped.family,
+                fontSize: span.renderSizeOverridePt ?? span.size,
+                fontWeight: span.renderWeightOverride ?? mapped.weight, fontStyle: mapped.style,
+                fontVariantCaps: mapped.variantCaps, letterSpacing: '-0.015em',
+                fontVariantLigatures: 'none' as const, fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0' };
+              const sharedTextProps = {
+                'data-source-span': `${line.id}:${span.sourceSpanIndex ?? spanIndex}`,
+                'data-source-bbox': span.bbox.join(','),
+                lengthAdjust: 'spacingAndGlyphs' as const,
+                xmlSpace: 'preserve' as const,
+                fill: isOutlinedImportantGlyph ? '#b91d23' : (span.color || '#231f20'),
+                stroke: span.renderTextStrokeColor ?? (isOutlinedImportantGlyph ? '#ffffff' : 'none'),
+                strokeWidth: span.renderTextStrokeWidthPt ?? (isOutlinedImportantGlyph ? 2 : undefined),
+                paintOrder: 'stroke fill' as const,
+                style: textStyle,
+              };
+              if (glyphRuns && glyphRuns.length > 1 && glyphRuns.every(run => run.start >= 0 && run.end <= sourceText.length && run.end > run.start)) {
+                return glyphRuns.map((run, runIndex) => (
+                  <text key={`${line.id}:${spanIndex}:${runIndex}`} {...sharedTextProps}
+                    data-source-x={run.origin[0]} data-source-baseline-y={run.origin[1]}
+                    x={run.origin[0] - blockOriginX} y={run.origin[1] - blockOriginY}
+                    textLength={run.advance || undefined}>
+                    {sourceText.slice(run.start, run.end)}
+                  </text>
+                ));
+              }
               return (
-                <text key={`${line.id}:${spanIndex}`} data-source-span={`${line.id}:${span.sourceSpanIndex ?? spanIndex}`}
+                <text key={`${line.id}:${spanIndex}`} {...sharedTextProps}
                   data-source-x={origin[0]} data-source-baseline-y={origin[1]}
-                  data-source-bbox={span.bbox.join(',')} x={origin[0] - blockOriginX} y={origin[1] - blockOriginY}
-                  textLength={textLength || undefined} lengthAdjust="spacingAndGlyphs" xmlSpace="preserve"
-                  fill={isOutlinedImportantGlyph ? '#b91d23' : (span.color || '#231f20')}
-                  stroke={span.renderTextStrokeColor ?? (isOutlinedImportantGlyph ? '#ffffff' : 'none')}
-                  strokeWidth={span.renderTextStrokeWidthPt ?? (isOutlinedImportantGlyph ? 2 : undefined)}
-                  paintOrder="stroke fill"
-                  style={{ fontFamily: span.pictogramFontOverride ? `'${span.pictogramFontOverride}', sans-serif` : mapped.family,
-                    fontSize: span.renderSizeOverridePt ?? span.size,
-                    fontWeight: span.renderWeightOverride ?? mapped.weight, fontStyle: mapped.style,
-                    fontVariantCaps: mapped.variantCaps, letterSpacing: '-0.015em',
-                    fontVariantLigatures: 'none', fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0' }}>
+                  x={origin[0] - blockOriginX} y={origin[1] - blockOriginY}
+                  textLength={textLength || undefined}>
                   {sourceText}
                 </text>
               );
@@ -1155,6 +1178,43 @@ function SourceGeometryBlock({ block, scale, blockOriginX, blockOriginY }: {
           </g>
         );
       })}
+    </svg>
+  );
+}
+
+/** Paint source compound vectors in PDF point coordinates, independent of CSS line flow. */
+function SourceCompoundVectorLayer({ elements, pageWidth, pageHeight, scale, language }: {
+  elements: SourceCompoundElement[];
+  pageWidth: number;
+  pageHeight: number;
+  scale: number;
+  language: 'en' | 'pt-BR';
+}) {
+  const renderable = elements.flatMap(element => {
+    const symbol = getSemanticSymbol(element.symbolId);
+    if (!symbol) return [];
+    const sourceRender = element.metrics.renderVariant
+      ? symbol.render.variants?.[element.metrics.renderVariant] ?? symbol.render
+      : symbol.render;
+    const visual = sourceRender.localized?.[language] ?? sourceRender;
+    return visual.paths && visual.viewBox ? [{ element, symbol, visual }] : [];
+  });
+  if (!renderable.length) return null;
+
+  return (
+    <svg className="source-compound-vector-layer" data-source-geometry="pdf-compounds"
+      width={pageWidth * scale} height={pageHeight * scale} viewBox={`0 0 ${pageWidth} ${pageHeight}`}
+      preserveAspectRatio="none" aria-hidden="false"
+      style={{ position: 'absolute', inset: 0, zIndex: 20, overflow: 'visible', display: 'block', pointerEvents: 'none' }}>
+      {renderable.map(({ element, symbol, visual }) => (
+        <svg key={`${element.symbolId}:${element.anchor.blockId}:${element.anchor.lineId}`}
+          data-source-compound={element.symbolId} x={element.bbox[0]} y={element.bbox[1]}
+          width={element.bbox[2] - element.bbox[0]} height={element.bbox[3] - element.bbox[1]}
+          viewBox={visual.viewBox!.join(' ')} preserveAspectRatio="none"
+          role="img" aria-label={symbol.labels[language]} overflow="visible">
+          {visual.paths!.map((path, index) => <path key={index} {...path} />)}
+        </svg>
+      ))}
     </svg>
   );
 }
@@ -1581,20 +1641,11 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
             />
           );
         })}
-        {(pageData.sourceCompounds ?? []).filter(element => {
+        <SourceCompoundVectorLayer elements={(pageData.sourceCompounds ?? []).filter(element => {
           const block = pageData.blocks.find(candidate => candidate.id === element.anchor.blockId);
           return !!block && !compoundElementIsReplaced(element, block, pageData.page_number, language, overrides,
             selectedSpan?.spanKey ?? null, draftOverride);
-        }).map(element => (
-          <div key={`${element.symbolId}:${element.anchor.blockId}:${element.anchor.lineId}`}
-            data-source-compound={element.symbolId}
-            style={{ position: 'absolute', left: element.bbox[0] * scale, top: element.bbox[1] * scale,
-              zIndex: 20, width: (element.bbox[2] - element.bbox[0]) * scale,
-              height: (element.bbox[3] - element.bbox[1]) * scale, fontSize: 0, lineHeight: 0, pointerEvents: 'none' }}>
-            <SemanticSymbol id={element.symbolId} language={language} size={element.sizePt * scale}
-              metrics={element.metrics} alignToTop />
-          </div>
-        ))}
+        })} pageWidth={pageData.width} pageHeight={pageData.height} scale={scale} language={language} />
         {replacedInlineElements.map(element=><img key={element.mask.url} src={element.mask.url} alt="" aria-hidden="true" draggable={false}
           style={{position:'absolute',left:element.mask.bbox[0]*scale,top:element.mask.bbox[1]*scale,width:(element.mask.bbox[2]-element.mask.bbox[0])*scale,height:(element.mask.bbox[3]-element.mask.bbox[1])*scale,
             clipPath:sourceMaskClipPath(element),zIndex:2,pointerEvents:'none'}} />)}
@@ -2330,6 +2381,17 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
   const fixedSourceLines = (block.lines ?? []).filter((line, index) =>
     fixedLineIndexes.has(index) && !translatedUnitLineIds.has(line.id),
   );
+  const untouchedSourceUnits = language === 'en' && !isAdmin && units.every(unit => {
+    const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
+    return !overrides.has(spanKey) && !(selectedBlockKey === spanKey && draftOverride !== null);
+  });
+  if (untouchedSourceUnits && hasExactSourceGeometry(block)) {
+    return (
+      <div className="block-container" data-render-mode="sourceGeometry" style={blockStyle}>
+        <SourceGeometryBlock block={block} scale={scale} blockOriginX={blockX} blockOriginY={blockY} />
+      </div>
+    );
+  }
   const flowUnits = units.filter(unit => !unit.fixedPosition);
   const handleUnitMeasure = useCallback((unitId: string, heightPx: number | null) => {
     if (!scale) return;
