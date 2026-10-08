@@ -20,16 +20,12 @@ Payload opens SQLite directly; there is no separate database server to launch. T
 
 The project consists of three main pillars:
 1. **Extraction (Python)**: Scripts in `/scripts` extract raw DOM data (text, bounding boxes, fonts, colors) directly from the PDF using `PyMuPDF` (`fitz`). The output is stored in JSON files per page.
-2. **Translation/Overrides (Payload/SQLite)**: Saved translations and custom translation frames are persisted by Payload in the local SQLite database. Browser drafts remain separate from saved records. See `docs/architecture/translation-data-schema-and-symbol-catalog.md` for the current contract.
+2. **Translation/Overrides (Payload/SQLite)**: Saved translations and custom translation frames are persisted by Payload in the local SQLite database. Browser drafts remain separate from saved records. The active data invariants are in [rule 02](.agents/rules/02-schema-e-modelagem-de-dados.md); schema proposals and older catalog work are retained as [historical reference](docs/architecture/translation-data-schema-and-symbol-catalog.md).
 3. **Rendering (React)**: `PageRenderer.tsx` combines page images, extracted PDF geometry and editable overrides. Untouched English can use source coordinates when the required geometry exists; edited/translated text reflows. The fidelity status is scoped in the handoff rather than assumed pixel-perfect.
 
-## Core Principles (Constraints over Freedom)
+## Project contracts and architecture
 
-Through trial and error, we discovered that giving the translation editor "too much freedom" (free font choice, line-by-line formatting, arbitrary CSS properties) breaks the rigid layout of a PDF.
-
-We operate under **Constraints**:
-1. **Semantic Styling:** A text block is identified by its purpose (e.g., "Body Text", "Title", "Stat"). The editor assigns a semantic class, and the App enforces the correct font, weight, and size.
-2. **Separate source and translated flow:** Unchanged English should preserve extracted source positions when its geometry is available. Changed English/PT-BR uses editable flow inside its frame. Do not infer that one layout mode or line-height is correct for every source block.
+Mandatory project invariants live in the [active rules](.agents/rules/00-README.md). Procedures live in [skills](.agents/skills/README.md). The current renderer/data model and its rationale are in [docs/architecture/overview.md](docs/architecture/overview.md); read the rules and canonical documentation index before changing behavior.
 
 ## Typography & PUA
 

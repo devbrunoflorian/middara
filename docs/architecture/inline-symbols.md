@@ -1,4 +1,6 @@
-# Símbolos inline: contrato atual
+# Símbolos inline: modelo atual
+
+> Este documento explica o modelo e suas evidências. Os requisitos obrigatórios de renderer e semântica ficam nas [rules 03](../../.agents/rules/03-motor-de-renderizacao.md) e [14](../../.agents/rules/14-inline-semantic-elements.md); se houver divergência, use as rules `ACTIVE`.
 
 ## Identidade versus ocorrência
 

@@ -2,6 +2,8 @@
 
 This guide describes a reusable architecture for localizing a complex, illustrated PDF. It is independent of Middara; each PDF still needs source-specific classification and acceptance evidence.
 
+For this repository, this is an architectural reference. Project-specific requirements come from active rules and operational steps from the relevant skills; this guide does not override either.
+
 ## Pipeline
 
 ```text

@@ -2,6 +2,8 @@
 
 ADRs registram decisões duráveis, não cada ajuste local. Status `Accepted` vale dentro do escopo descrito; evidências e limitações ficam nos relatórios de progresso.
 
+ADRs explicam rationale e consequências. Os contratos operacionais ficam nas rules `ACTIVE`; em conflito, siga a precedência de [docs/README](../../README.md), não um snapshot antigo de ADR.
+
 | ADR | Decisão | Status |
 |---|---|---|
 | [0001](0001-source-geometry-and-translated-flow.md) | Separar desenho SOURCE de fluxo traduzido | Accepted |

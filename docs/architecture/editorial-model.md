@@ -1,5 +1,7 @@
 # Modelo editorial
 
+> Este documento explica o modelo aceito e seus casos. As regras obrigatórias de identidade/persistência, renderer e QA estão nas [rules 02](../../.agents/rules/02-schema-e-modelagem-de-dados.md), [03](../../.agents/rules/03-motor-de-renderizacao.md) e [05](../../.agents/rules/05-processo-de-validacao-qa.md); se houver divergência, use as rules `ACTIVE`.
+
 ## Unidade de tradução
 
 O tradutor deve selecionar uma unidade editorial natural — principalmente um parágrafo — sem editar linhas físicas, IDs internos ou `FlowBlock`s. A identidade EN ↔ PT-BR é estável na chave editorial existente; a tradução pode reflowar dentro dos limites visuais autorizados.
@@ -26,8 +28,8 @@ Linhas de PDF são evidência de layout, não identidade persistente. O renderer
 
 ## Migração e compatibilidade
 
-Aplicar a estrutura no metadata/sidecar compartilhado quando preserva as chaves existentes. Não converter automaticamente um subparágrafo em novo registro Payload, não renomear chaves e não dividir traduções existentes sem plano de migração e autorização. O piloto deve demonstrar edição, reflow, estilos, save/reload, troca EN/PT-BR e export antes da expansão de uma família.
+O modelo híbrido foi escolhido porque metadata/sidecars podem expor unidades editoriais sem substituir automaticamente as chaves Payload já aprovadas. O contrato de identidade, envelope e compatibilidade está na rule 02; resultados por família ficam nos registros de progresso.
 
 ## Não inferir estrutura por geometria isolada
 
-Gap, baseline e recuo são evidência para localizar candidatos. Não significam por si só `Example`, bullet, paragraph, heading ou cell. Usar marcador explícito e contexto do PDF; quando a classificação não for segura, manter `candidate` ou `outlier` e registrar evidência.
+Gap, baseline e recuo ajudam a localizar candidatos, mas não explicam sozinhos se a relação é `Example`, bullet, parágrafo, heading ou cell. Essa limitação motiva a classificação por contexto descrita nas rules 01, 05 e 07; casos sem evidência suficiente permanecem com status explícito nos relatórios.

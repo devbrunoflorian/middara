@@ -1,4 +1,6 @@
-# QA acceptance contract
+# QA status semantics and evidence
+
+> Rule 05 owns the required policy. This document explains the status vocabulary and evidence used to apply it; the operational certification procedure is the [visual-fidelity-qa skill](../../.agents/skills/visual-fidelity-qa/SKILL.md). If wording conflicts, rule 05 prevails.
 
 ## Candidate states
 
@@ -23,19 +25,8 @@ A page/family passes only for its declared scope when:
 
 `0 clipping` and `0 collision` are necessary but insufficient. A source PDF render and coordinates are primary evidence; the viewer/export is the implementation under test.
 
-## Validation sequence
+## Evidence interpretation
 
-1. Record the exact PDF, printed page and PDF page index, viewer URL/API/locale/mode, source sidecars and translation state.
-2. Inspect source geometry: baseline/origin, bbox, vector/image bounds, paint order, line breaks and adjacent content.
-3. Inspect the same region in viewer SOURCE/EN and export. Use raster comparison as supporting evidence, not semantic classification.
-4. For localized units, edit and reflow; confirm styles, inline symbols, list/table/card relation, save/reload, locale switch and fallback behavior.
-5. Compare page boxes and export at the physical page size.
-6. State tolerance, failures, unknowns and exact coverage. A representative test does not certify all pages.
+The official source PDF is the primary evidence; extracted sidecars explain the source model, and viewer/export show the implementation. Raster comparison supports appearance review but cannot establish semantic classification by itself. The same observed difference can be a false positive, defect or unresolved candidate depending on source geometry and the active renderer path.
 
-## Audit reporting
-
-Report candidate counts by detector and classification. Separate current adapters, known artwork/overlay intersections, signature similarities, unconfirmed overlaps and inconclusives. Never describe all geometric candidates as a defect backlog. A confirmed outlier includes page, block/region, source evidence, classification, confidence and why approved families do not fit.
-
-## p. 40 reference check
-
-For the ten A–D markers in the Movement Example, source advances are 9.991–10.000 pt and compound boxes are 9.996 pt. The export MediaBox matches `820.3460 × 820.3460 pt`; measured marker bbox translation is +0.257 to +0.262 pt in y and at most 0.008 pt in x. The acceptance tolerance for this comparison is 0.30 pt (less than 0.4 CSS px at 96 dpi); the viewer was visually checked at 200%. This does not establish a book-wide tolerance for unrelated measurements.
+Detailed measurements and page-specific acceptance results belong in dated `docs/project-progress/` records. For example, the p. 40 A–D tolerance and viewer/export results are recorded in [the 2026-10-07 audit](../project-progress/2026-10-07-source-structure-audit-and-doc-consolidation.md); that local tolerance does not establish a book-wide tolerance for unrelated measurements.

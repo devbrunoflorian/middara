@@ -1,6 +1,6 @@
 # Estado atual do projeto
 
-**Atualizado:** 2026-10-07. O projeto segue em desenvolvimento; o livro inteiro ainda não tem certificação estrutural global.
+**Atualizado:** 2026-10-08. O projeto segue em desenvolvimento; o livro inteiro ainda não tem certificação estrutural global.
 
 ## O que funciona e foi aceito
 
@@ -9,6 +9,7 @@
 - Identidade de símbolos por `symbolId`, mantendo arte, avanço e âncora como propriedades distintas.
 - Famílias editoriais aprovadas em escopos registrados, incluindo parágrafos, Examples, Notes, heading/body, labels e bullets. O contrato híbrido da p. 78 mantém body e Example como unidades editáveis simples sob o mesmo item de lista.
 - p. 40 A–D após correção compartilhada de geometria fonte: dez marcadores, avanço fonte de 9,991–10,000 pt, MediaBox coincidente e diferença máxima de bbox no export de 0,262 pt.
+- Regressão de ordem de Hooks no bloco tipográfico p. 40 corrigida; teste de componente, TSC, viewer Admin/locale/edição e save/reload passaram. Ver [registro](project-progress/2026-10-08-typographic-unit-hook-order.md).
 - Páginas 1–12 e suas traduções aprovadas permanecem intocadas.
 
 ## O que continua aberto
@@ -17,6 +18,7 @@
 - Foram encontrados cartões de item dentro da composição das páginas 49 e 67 cujos textos aparecem no DOM como blocos genéricos, sem classificação explícita de cartão/arte. É um outlier estrutural novo para decisão; não foi corrigido.
 - Das 102 ocorrências raster próximas a texto, 83 estão concentradas nos componentes/cartões das p. 49 e 67, duas são marcadores numerados da p. 96 e 17 permanecem sem atribuição individual concluída.
 - A revisão ampliada não confirma o estado estrutural global 1–102. A faixa 1–48 tem registros de revisão com escopos diferentes; não somá-los como certificação uniforme.
+- A execução direta da suíte web teve 49/55 testes aprovados; seis falhas em três suítes de outline/inline p. 41/78 seguem sem diagnóstico e fora da correção de Hooks.
 - Tradução final em PT-BR, outliers restantes, localização de texto rasterizado e QA integral viewer/export continuam dependendo de página/família e estado de tradução.
 
 ## Próximo estágio

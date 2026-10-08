@@ -2,7 +2,7 @@
 
 > **Status: historical source/style inventory.** Family observations remain useful for visual review, but this is not the current editorial-unit contract. In particular, the 6 pt threshold and requirement to make every source-size boundary a separate edit target are superseded. See [editorial model](editorial-model.md), [project state](../PROJECT_STATE.md) and [documentation dispositions](../history/documentation-dispositions.md).
 
-This is the current evidence-based style guide for reproducing English text in the Middara Rulebook viewer. It records recurring classes, not a global template for every page. Printed cards, diagrams, labels and text over artwork must be classified in their page context.
+This historical inventory recorded recurring source/style classes; it was never a universal page template. Use it as dated evidence only, not as a current editing procedure. Printed cards, diagrams, labels and text over artwork remain context-dependent.
 
 ## Observed hierarchy
 

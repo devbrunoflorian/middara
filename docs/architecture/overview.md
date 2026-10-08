@@ -1,5 +1,7 @@
 # Arquitetura atual
 
+> Esta visão descreve implementação e rationale. Os invariantes obrigatórios ficam nas rules `ACTIVE` — em especial 02, 03, 05 e 14 — e prevalecem se esta explicação ou qualquer outra skill divergir.
+
 ## Fluxo de dados
 
 ```text
@@ -50,4 +52,4 @@ Os segmentos ricos guardam texto, fonte, tamanho, cor, peso/estilo e metadados c
 
 O export de página usa Chromium/Playwright e normaliza o PDF produzido para as dimensões físicas da página-fonte. `MediaBox`, escala de impressão, clipping e correspondência de overlays devem ser medidos. Screenshot de viewport não certifica export.
 
-Para procedimentos de QA, veja [aceite](../qa/acceptance.md). Para escolhas aprovadas, consulte os [ADRs](decisions/README.md).
+Para procedimentos de QA, veja o [checklist de aceite](../QA/acceptance.md), subordinado à [rule 05](../../.agents/rules/05-processo-de-validacao-qa.md). Para escolhas aprovadas, consulte os [ADRs](decisions/README.md).
