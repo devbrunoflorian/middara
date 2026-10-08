@@ -52,6 +52,8 @@ export interface SpanData {
   renderOnlyStrokePass?: boolean;
   /** The source glyph is restored by a page fidelity overlay; retain its text in the DOM data. */
   renderAsSourceOverlayDuplicate?: boolean;
+  /** Review identifier for a source overlay whose advance remains in text flow. */
+  sourcePaintAuditId?: string;
   /** The source text spans form one semantic compound displayed from its page-space geometry. */
   sourceCompoundSymbolId?: string;
   sourceCompoundHidden?: boolean;
@@ -102,6 +104,15 @@ export interface Block {
   id: string;
   /** Preserve the block's stable legacy array index while omitting it from the page canvas. */
   hiddenFromPage?: boolean;
+  /** Source-confirmed physical artwork content; retained in JSON for provenance, excluded from text rendering/editing. */
+  artworkOnly?: boolean;
+  artworkOnlyEvidence?: {
+    auditId: string;
+    sourcePdfPage: number;
+    region: string;
+    rule: string;
+    evidenceRef: string;
+  };
   /** Stable semantic editor key for newly split units; legacy blocks keep their index-based key. */
   editorKey?: string;
   /** Source line indexes that render as fixed page furniture and stay outside rich-text editing. */
@@ -1528,7 +1539,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
         )}
 
         {pageData.blocks.map((block, bIdx) => {
-          if (block.hiddenFromPage) return null;
+          if (block.hiddenFromPage || block.artworkOnly) return null;
           const hasSourceInlineSymbols = (pageData.inlineElements ?? []).some(
             element => element.anchor.blockId === block.id,
           );
@@ -2765,7 +2776,26 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           && (span.renderSourceOverlayLanguage === 'all' || span.renderSourceOverlayLanguage === language);
         if (span.renderOnlyStrokePass) return null;
         if (isReplacedBySourceOverlay && (!inlineUnit?.override || span.semanticSymbolId)) {
-          if (!useSourceGeometry || !span.semanticSymbolId) return null;
+          if (!useSourceGeometry) return null;
+          // A source vector may be painted by a page overlay while still
+          // occupying a measured text advance. Keep that advance in the
+          // source-faithful flow, even when it is not a semantic-symbol span.
+          if (!span.semanticSymbolId) {
+            return (
+              <span
+                key={si}
+                aria-hidden="true"
+                data-source-overlay-advance={span.sourcePaintAuditId ?? 'vector'}
+                style={{
+                  flex: `0 0 ${sourceAdvanceWidth}px`,
+                  marginInlineStart: `${sourceAdvanceGap}px`,
+                  minWidth: 0,
+                  visibility: 'hidden',
+                  pointerEvents: 'none',
+                }}
+              />
+            );
+          }
           const renderSemanticSource = getSemanticSymbol(span.semanticSymbolId)?.sourceRendering === 'semantic-inline';
           const sourceSymbolMetrics = span.sourceSymbolMetrics
             ? { ...span.sourceSymbolMetrics, gapEm: undefined, trailingGapEm: undefined }
@@ -2835,7 +2865,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           whiteSpace: 'pre',
           fontVariantLigatures: 'none',
           fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
-          letterSpacing: '-0.015em',
+          letterSpacing: useSourceGeometry ? 'normal' : '-0.015em',
           ...(useSourceGeometry ? {
             flex: `0 0 ${sourceAdvanceWidth}px`,
             marginInlineStart: `${sourceAdvanceGap}px`,
