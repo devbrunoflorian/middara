@@ -5,6 +5,8 @@ import { getSemanticSymbol, resolveLegacySymbol, type InlineSymbolMetrics } from
 
 export interface SourceInlineElement {
   symbolId: string;
+  /** Per-occurrence exception when the page/component raster omits this source vector. */
+  sourceRendering?: 'semantic-inline';
   /** Source text glyphs that are visually part of this composite symbol. */
   coveredSourceText?: { lineId: string; spanIndex: number; text: string };
   metrics?: InlineSymbolMetrics;
@@ -120,7 +122,7 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
           ...(e.anchor.gapPt !== undefined ? {gapEm:e.anchor.gapPt/e.anchor.sizePt} : {}),
           ...(e.anchor.trailingGapPt !== undefined ? {trailingGapEm:e.anchor.trailingGapPt/e.anchor.sizePt} : {})};
       };
-      const make=(e:SourceInlineElement,styleSpan:SpanData,sourceSpanIndex:number):SpanData=>({ text:SYMBOL_OBJECT_MARKER,semanticSymbolId:e.symbolId,sourceSpanIndex,
+      const make=(e:SourceInlineElement,styleSpan:SpanData,sourceSpanIndex:number):SpanData=>({ text:SYMBOL_OBJECT_MARKER,semanticSymbolId:e.symbolId,sourceRendering:e.sourceRendering,sourceSpanIndex,
         sourceSymbolMetrics:metricsFor(e),
         font:styleSpan.font,size:e.anchor.sizePt,color:e.color ?? styleSpan.color,flags:styleSpan.flags,bbox:e.bbox,renderAsSourceOverlayDuplicate:true,renderSourceOverlayLanguage:'all' });
       const sourceInlineObjects=matches.filter(e=>e.anchor.side==='replace-text' && e.anchor.textRange);
@@ -160,7 +162,7 @@ export function sourceElementIsReplaced(element: SourceInlineElement, block: Blo
   // has no legacy override for the owner. Legacy prose without symbol IDs
   // keeps the original ink until the editor explicitly adopts the symbol.
   if(keys.some(key=>overrideFor(key)))return false;
-  return getSemanticSymbol(element.symbolId)?.sourceRendering==='semantic-inline';
+  return (element.sourceRendering ?? getSemanticSymbol(element.symbolId)?.sourceRendering)==='semantic-inline';
 }
 
 /** Cut only confirmed inline regions out of an existing source-art overlay. */

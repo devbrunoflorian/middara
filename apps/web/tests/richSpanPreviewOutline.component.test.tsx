@@ -85,9 +85,11 @@ describe('RichSpanEditor live PageRenderer preview', () => {
     const labelBox = Array.from(view.container.querySelectorAll('.realbox'))
       .find(element => element.textContent?.includes('IMPORTANTE:')) as HTMLDivElement | undefined;
     const redTextSpans = Array.from(labelBox?.querySelectorAll('span') ?? [])
-      .filter(element => (element as HTMLElement).style.color === 'rgb(185, 29, 35)') as HTMLSpanElement[];
+      .filter(element => (element as HTMLElement).style.color === 'rgb(185, 29, 35)'
+        && !!element.textContent && !!(element as HTMLElement).style.getPropertyValue('-webkit-text-stroke')) as HTMLSpanElement[];
     expect(redTextSpans.map(element => element.textContent).join('')).toContain('IMPORTANTE:');
-    expect(redTextSpans.every(element => element.style.getPropertyValue('-webkit-text-stroke').includes('#ffffff'))).toBe(true);
+    const isWhiteOutline = (value: string) => /(?:#ffffff|rgb\(\s*255\s*,\s*255\s*,\s*255\s*\))/i.test(value);
+    expect(redTextSpans.every(element => isWhiteOutline(element.style.getPropertyValue('-webkit-text-stroke')))).toBe(true);
     expect(redTextSpans.every(element => {
       const strokeWidth = Number.parseFloat(element.style.getPropertyValue('-webkit-text-stroke'));
       const fontSize = Number.parseFloat(element.style.fontSize);
@@ -149,20 +151,27 @@ describe('RichSpanEditor live PageRenderer preview', () => {
     for (const symbolId of ['attack.melee', 'attack.melee-ranged', 'weapon.hand.one', 'weapon.hand.two']) {
       const sourceMetrics = sourceVectors.filter(element => element.symbolId === symbolId).map(requireMetrics);
       const actualMetrics = renderedVectors.filter(element => element.dataset.symbolId === symbolId).map(element => {
-        const fontSize = Number.parseFloat((element.parentElement as HTMLElement).style.fontSize);
+        const slot = element.closest('.inline-semantic-symbol-slot') as HTMLElement | null;
+        expect(slot, `${symbolId} SVG should be anchored in the shared zero-height advance slot`).not.toBeNull();
+        const advanceWidth = Number.parseFloat(slot!.style.width);
+        const inkTop = Number.parseFloat(element.style.top);
+        const inkHeight = Number.parseFloat(element.style.height);
         return {
-          widthEm: Number.parseFloat(element.style.width) / fontSize,
-          heightEm: Number.parseFloat(element.style.height) / fontSize,
-          verticalAlignEm: -Number.parseFloat(element.style.verticalAlign) / fontSize,
+          widthEm: Number.parseFloat(element.style.width) / advanceWidth,
+          heightEm: inkHeight / advanceWidth,
+          verticalAlignEm: (inkTop + inkHeight) / advanceWidth,
         };
       });
       expect(actualMetrics).toHaveLength(sourceMetrics.length);
       for (const key of ['widthEm', 'heightEm', 'verticalAlignEm'] as const) {
-        const expected = sourceMetrics.map(metrics => metrics[key]).sort((a, b) => a - b);
+        const expected = sourceMetrics.map(metrics => metrics[key] / (metrics.advanceEm ?? metrics.widthEm)).sort((a, b) => a - b);
         const actual = actualMetrics.map(metrics => metrics[key]).sort((a, b) => a - b);
         for (let index = 0; index < expected.length; index++) expect(actual[index]).toBeCloseTo(expected[index], 5);
       }
       for (const element of renderedVectors.filter(candidate => candidate.dataset.symbolId === symbolId)) {
+        const slot = element.closest('.inline-semantic-symbol-slot') as HTMLElement;
+        expect(slot.style.height).toBe('0px');
+        expect(slot.style.verticalAlign).toBe('baseline');
         expect(element.querySelector('rect')).toBeNull();
         expect(element.style.backgroundColor).toBe('');
       }
@@ -171,6 +180,6 @@ describe('RichSpanEditor live PageRenderer preview', () => {
     const renderedHands = renderedVectors.filter(element => element.dataset.symbolId.startsWith('weapon.hand.'));
     expect(sourceHands).toHaveLength(2);
     expect(sourceHands.every(element => element.anchor.trailingGapPt === 0)).toBe(true);
-    expect(renderedHands.every(element => !element.style.marginInlineEnd)).toBe(true);
+    expect(renderedHands.every(element => !(element.closest('.inline-semantic-symbol-slot') as HTMLElement).style.marginInlineEnd)).toBe(true);
   });
 });

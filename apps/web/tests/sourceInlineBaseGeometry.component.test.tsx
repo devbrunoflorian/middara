@@ -47,28 +47,29 @@ describe('source inline symbol base geometry', () => {
     const markup = renderToStaticMarkup(<PageRenderer pageData={pageData} isAdmin={false} language="en" />);
     const container = document.createElement('div');
     container.innerHTML = markup;
-    const handSemantic = container.querySelector('[data-source-inline-semantic="weapon.hand.two"]') as HTMLSpanElement | null;
-    expect(handSemantic).not.toBeNull();
-    expect(Number.parseFloat(handSemantic!.style.flexBasis)).toBeCloseTo(16.9838, 3);
-    expect(Number.parseFloat(handSemantic!.style.marginInlineStart)).toBeCloseTo(-0.0043, 2);
-    expect(handSemantic!.querySelector('svg.inline-semantic-symbol')?.getAttribute('data-symbol-id')).toBe('weapon.hand.two');
-    expect(handSemantic!.querySelectorAll('path')).toHaveLength(4);
-    expect(container.querySelector('[data-source-inline-covered="weapon.hand.two"]')?.textContent).toBe('2');
-    expect(container.querySelectorAll('img[src*="inline-element-mask-02"]').length).toBeGreaterThanOrEqual(2);
+    const handSourceSvg = container.querySelector('svg[data-source-symbol-id="weapon.hand.two"]') as SVGSVGElement | null;
+    expect(handSourceSvg).not.toBeNull();
+    expect(handSourceSvg!.getAttribute('data-source-bbox')).toBe(hand.bbox.join(','));
+    expect(handSourceSvg!.querySelectorAll('path')).toHaveLength(4);
+    expect(container.querySelector('[data-source-covered-by="weapon.hand.two"]')).not.toBeNull();
 
     for (const language of ['en', 'pt-BR'] as const) {
       const languageMarkup = renderToStaticMarkup(<PageRenderer pageData={pageData} isAdmin={false} language={language} />);
       const languageContainer = document.createElement('div');
       languageContainer.innerHTML = languageMarkup;
-      expect(languageContainer.querySelectorAll('[data-source-inline-semantic="weapon.hand.two"], [data-source-inline-semantic="weapon.hand.one"]')).toHaveLength(2);
-      expect(languageContainer.querySelectorAll('svg[data-symbol-id="weapon.hand.two"], svg[data-symbol-id="weapon.hand.one"]')).toHaveLength(2);
-      expect(languageContainer.querySelector('[data-source-inline-covered="weapon.hand.two"]')).not.toBeNull();
-      expect(languageContainer.querySelector('[data-source-inline-covered="weapon.hand.one"]')).not.toBeNull();
+      if (language === 'en') {
+        expect(languageContainer.querySelectorAll('svg[data-source-symbol-id="weapon.hand.two"], svg[data-source-symbol-id="weapon.hand.one"]')).toHaveLength(2);
+        expect(languageContainer.querySelector('[data-source-covered-by="weapon.hand.two"]')).not.toBeNull();
+        expect(languageContainer.querySelector('[data-source-covered-by="weapon.hand.one"]')).not.toBeNull();
+      } else {
+        expect(languageContainer.querySelectorAll('[data-source-inline-semantic="weapon.hand.two"], [data-source-inline-semantic="weapon.hand.one"]')).toHaveLength(2);
+        expect(languageContainer.querySelectorAll('svg[data-symbol-id="weapon.hand.two"], svg[data-symbol-id="weapon.hand.one"]')).toHaveLength(2);
+      }
     }
 
-    const lastTextRun = Array.from(container.querySelectorAll('span')).find(span => span.textContent === ' Ability may equip ') as HTMLSpanElement | undefined;
+    const lastTextRun = Array.from(container.querySelectorAll('text')).find(span => span.textContent === ' Ability may equip ') as SVGTextElement | undefined;
     expect(lastTextRun).toBeDefined();
-    expect(Number.parseFloat(lastTextRun!.style.flexBasis)).toBeCloseTo(81.59, 2);
+    expect(Number.parseFloat(lastTextRun!.getAttribute('textLength') ?? '')).toBeCloseTo(81.59, 2);
   });
 
   it('routes every source inline placement through source geometry as one shared renderer family', () => {
@@ -102,6 +103,6 @@ describe('source inline symbol base geometry', () => {
       }
     }
 
-    expect({ elementCount, lineCount: seenLines.size, affectedPages }).toEqual({ elementCount: 171, lineCount: 165, affectedPages: 48 });
+    expect({ elementCount, lineCount: seenLines.size, affectedPages }).toEqual({ elementCount: 178, lineCount: 171, affectedPages: 48 });
   });
 });

@@ -72,7 +72,7 @@ describe('source inline whitespace ordering', () => {
     expect(restoredIcon.color).toBe(sourceIcon.color);
   });
 
-  it('round-trips the source style for every unadapted, unambiguous legacy glyph', () => {
+  it('round-trips the source style for every visible, unadapted, unambiguous legacy glyph', () => {
     const pagesRoot = join(process.cwd(), 'public/pages');
     const aliases = new Map<number, { dom: any; elements: SourceInlineElement[]; compounds: any[] }>();
     const targets: { pageNumber: number; blockId: string; lineId: string; spanIndex: number; symbolId: string }[] = [];
@@ -88,6 +88,9 @@ describe('source inline whitespace ordering', () => {
       aliases.set(pageNumber, { dom, elements, compounds });
 
       for (const block of dom.blocks) for (const line of block.lines) for (const [spanIndex, span] of line.spans.entries()) {
+        // Hidden artwork text is not a reader/editor glyph and has no rich-run
+        // round-trip contract. Keep this coverage scoped to rendered content.
+        if (block.hiddenFromPage) continue;
         const symbol = resolveLegacySymbol(span.font, span.text);
         if (!symbol || !isSymbolAllowed(symbol, 'paragraph')) continue;
         const adapted = elements.some(element => element.anchor.side === 'replace' && element.symbolId === symbol.id
@@ -97,11 +100,11 @@ describe('source inline whitespace ordering', () => {
         if (!adapted && !compounded) targets.push({ pageNumber, blockId: block.id, lineId: line.id, spanIndex, symbolId: symbol.id });
       }
     }
-    expect(targets).toHaveLength(164);
-    expect(new Set(targets.map(target => target.pageNumber)).size).toBe(27);
+    expect(targets).toHaveLength(126);
+    expect(new Set(targets.map(target => target.pageNumber)).size).toBe(26);
     expect(Object.fromEntries(['tag.passive.icon', 'marker.arrow', 'marker.star', 'tag.discard.icon', 'tag.status.icon']
       .map(id => [id, targets.filter(target => target.symbolId === id).length]))).toEqual({
-      'tag.passive.icon': 69, 'marker.arrow': 48, 'marker.star': 26, 'tag.discard.icon': 19, 'tag.status.icon': 2,
+      'tag.passive.icon': 57, 'marker.arrow': 25, 'marker.star': 23, 'tag.discard.icon': 19, 'tag.status.icon': 2,
     });
 
     for (const target of targets) {
@@ -120,7 +123,7 @@ describe('source inline whitespace ordering', () => {
       const restoredIcon = restored.find(run => run.symbolId === target.symbolId)!;
 
       expect(restoredIcon.size).toBe(sourceIcon.size);
-      expect(restoredIcon.font).toBe(sourceIcon.font);
+      expect(restoredIcon.font, `p.${target.pageNumber} ${target.blockId}/${target.lineId} span ${target.spanIndex} ${target.symbolId}: source ${sourceIcon.font}, restored ${restoredIcon.font}`).toBe(sourceIcon.font);
       expect(restoredIcon.color).toBe(sourceIcon.color);
       expect(restoredIcon.weight).toBe(sourceIcon.weight);
       expect(restoredIcon.style).toBe(sourceIcon.style);
@@ -244,10 +247,13 @@ describe('source inline whitespace ordering', () => {
       const previous = sourceRuns.filter(run => run !== sourceIcon);
       const token = getSymbolEditorToken(target.symbolId, 'en')!;
       const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
-      const restored = segmentsFromEditableText(token + editableTextForSegments(previous, 'en'), toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
+      // This test knows the source occurrence's line. A block-level template
+      // can contain several same-ID symbols with different contextual gaps;
+      // choosing one for a newly typed alias would violate the ambiguity guard.
+      const restored = segmentsFromEditableText(token + editableTextForSegments(previous, 'en'), toolStyle, 'en', previous, 'paragraph', undefined, sourceRuns);
       const restoredIcon = restored.find(run => run.symbolId === target.symbolId)!;
 
-      expect(restoredIcon.size).toBe(sourceIcon.size);
+      expect(restoredIcon.size, `p.41 ${target.anchor.blockId}/${target.anchor.lineId} ${target.symbolId}: source=${sourceIcon.size}, restored=${restoredIcon.size}, source runs=${JSON.stringify(sourceRuns.filter(run => run.symbolId === target.symbolId))}, metrics=${JSON.stringify(restoredIcon.symbolMetrics)}`).toBe(sourceIcon.size);
       expect(restoredIcon.color).toBe(sourceIcon.color);
       expect(restoredIcon.symbolMetrics?.renderVariant).toBe(sourceIcon.symbolMetrics?.renderVariant);
       for (const metric of ['widthEm', 'heightEm', 'verticalAlignEm', 'gapEm', 'trailingGapEm'] as const) {

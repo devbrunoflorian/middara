@@ -53,6 +53,8 @@ export interface Segment {
   symbolId?: string;
   /** Per-occurrence PDF metrics; optional and compatible with existing JSON. */
   symbolMetrics?: InlineSymbolMetrics;
+  /** Source occurrence needs its semantic SVG because the page raster omits the vector. */
+  sourceRendering?: 'semantic-inline';
 }
 
 export type TextAlignment = 'left' | 'center' | 'right' | 'justify';

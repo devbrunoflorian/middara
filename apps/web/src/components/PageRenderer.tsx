@@ -24,6 +24,8 @@ import { payloadApiUrl } from '../config/payloadApi';
 export interface SpanData {
   /** Runtime inline symbol adapter; does not rewrite source extraction IDs. */
   semanticSymbolId?: string;
+  /** This source occurrence must paint its vector over an incomplete page/component raster. */
+  sourceRendering?: 'semantic-inline';
   /** Source text glyph represented inside a numbered semantic inline symbol. */
   sourceInlineCoveredBy?: string;
   sourceSymbolMetrics?: InlineSymbolMetrics;
@@ -774,7 +776,7 @@ function sourceMetricsForOverrideSegments(block: Block, segments: Segment[]): Se
   const metricsById = new Map<string, InlineSymbolMetrics[]>();
   for (const source of sourceSegments) {
     if (!source.symbolId || !source.symbolMetrics
-      || getSemanticSymbol(source.symbolId)?.sourceRendering !== 'semantic-inline') continue;
+      || (source.sourceRendering ?? getSemanticSymbol(source.symbolId)?.sourceRendering) !== 'semantic-inline') continue;
     const entries = metricsById.get(source.symbolId) ?? [];
     entries.push(source.symbolMetrics);
     metricsById.set(source.symbolId, entries);
@@ -2420,7 +2422,8 @@ function extractInlineSpanUnitInfo(
 }
 
 const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
-  block, nextComponentY, units, pageNumber, scale, isAdmin, onBlockClick, selectedBlockKey,
+  block, nextComponentY, units, pageNumber, scale, isAdmin, layoutMode, layoutUnitKey, layoutDraft,
+  layoutFrames, inheritedLayoutFrames, onSelectLayoutFrame, onBlockClick, selectedBlockKey,
   overrides, draftOverride, language,
 }) => {
   const [measuredUnitHeightsPt, setMeasuredUnitHeightsPt] = useState<Record<string, number>>({});
@@ -2459,15 +2462,12 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
     zIndex: block.zIndex || 10,
   };
   const fixedLineIndexes = fixedEditorLineIndexes(block);
-  const translatedUnitLineIds = new Set(units.flatMap(unit => {
-    const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
-    const override = selectedBlockKey === spanKey && draftOverride
-      ? draftOverride
-      : overrides.get(spanKey) || null;
-    return override ? unit.field.lineIds : [];
-  }));
+  // Every editorial unit paints its source lines when it has no override and
+  // paints translated segments when it does. Keep those lines out of the
+  // fixed-source layer in both cases; otherwise untranslated EN is painted
+  // twice whenever fixed indexes overlap unit-owned lines.
   const fixedSourceLines = (block.lines ?? []).filter((line, index) =>
-    fixedLineIndexes.has(index) && !translatedUnitLineIds.has(line.id),
+    fixedLineIndexes.has(index) && !editorialLineIds.has(line.id),
   );
   const untouchedSourceUnits = language === 'en' && !isAdmin && units.every(unit => {
     const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
@@ -2960,7 +2960,8 @@ const LineRenderer: React.FC<LineRendererProps> = ({
               />
             );
           }
-          const renderSemanticSource = getSemanticSymbol(span.semanticSymbolId)?.sourceRendering === 'semantic-inline';
+          const renderSemanticSource = (span.sourceRendering
+            ?? getSemanticSymbol(span.semanticSymbolId)?.sourceRendering) === 'semantic-inline';
           const sourceSymbolMetrics = span.sourceSymbolMetrics
             ? { ...span.sourceSymbolMetrics, gapEm: undefined, trailingGapEm: undefined }
             : undefined;

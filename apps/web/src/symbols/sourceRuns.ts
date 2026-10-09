@@ -22,7 +22,8 @@ export function sourceSpanRuns(spans: SpanData[], mapFont: (font:string)=>{weigh
         // Keep source text intact if a stale/overlapping range cannot be proven.
         if(!Number.isInteger(start) || !Number.isInteger(end) || start<cursor || end<=start || end>run.text.length || run.text.slice(start,end).trim())return [run];
         if(start>cursor)parts.push({...run,text:run.text.slice(cursor,start)});
-        parts.push({...run,text:'\uFFFC',symbolId:element.symbolId,symbolMetrics:element.metrics,color:element.color ?? run.color});
+        parts.push({...run,text:'\uFFFC',symbolId:element.symbolId,symbolMetrics:element.metrics,
+          sourceRendering:element.sourceRendering,color:element.color ?? run.color});
         cursor=end;
       }
       if(cursor<run.text.length)parts.push({...run,text:run.text.slice(cursor)});
@@ -31,6 +32,7 @@ export function sourceSpanRuns(spans: SpanData[], mapFont: (font:string)=>{weigh
     const symbolId=span.semanticSymbolId ?? resolveLegacySymbol(span.font,span.text)?.id;
     if (!symbolId)return [run];
     const leading=span.text.match(/^\s+/)?.[0] ?? '';const trailing=span.text.match(/\s+$/)?.[0] ?? '';
-    return [...(leading?[{...run,text:leading,font:'OptimaLTStd'}]:[]),{...run,text:'\uFFFC',symbolId,symbolMetrics:span.sourceSymbolMetrics},...(trailing?[{...run,text:trailing,font:'OptimaLTStd'}]:[])];
+    return [...(leading?[{...run,text:leading,font:'OptimaLTStd'}]:[]),{...run,text:'\uFFFC',symbolId,symbolMetrics:span.sourceSymbolMetrics,
+      sourceRendering:span.sourceRendering},...(trailing?[{...run,text:trailing,font:'OptimaLTStd'}]:[])];
   }).filter(run=>run.text.length>0);
 }

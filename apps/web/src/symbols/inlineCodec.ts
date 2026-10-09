@@ -442,6 +442,14 @@ export function segmentsFromEditableText(text: string, style: RunStyle, language
       const styledOutput: Segment[] = [];
       for (const run of output) {
         const runEnd = outputOffset + run.text.length;
+        // Label-style recovery applies to prose characters only. Inline
+        // objects keep their own occurrence metrics and rich metadata even
+        // when an alias was reinserted before a short label.
+        if (run.symbolId || resolveLegacySymbol(run.font, run.text)) {
+          styledOutput.push(run);
+          outputOffset = runEnd;
+          continue;
+        }
         const labelFrom = Math.max(outputOffset, targetStart);
         const labelTo = Math.min(runEnd, labelEnd);
         if (labelTo > labelFrom) {
