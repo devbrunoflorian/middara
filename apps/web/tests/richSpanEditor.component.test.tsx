@@ -73,13 +73,21 @@ const defaultAliasPreferences = getDefaultSymbolAliasPreferences();
 const plain = (text: string): Segment => ({ ...style, text });
 const symbol = (): Segment => ({ ...style, text: '\uFFFC', symbolId: 'tag.status.icon', symbolMetrics: { widthEm: .9, heightEm: 1, verticalAlignEm: .2 } });
 
-function mount(language: 'en' | 'pt-BR', runs: Segment[], existingOverride?: SpanOverride, originalLineHeight = 1, overrideStatusLoading = false) {
+function mount(
+  language: 'en' | 'pt-BR',
+  runs: Segment[],
+  existingOverride?: SpanOverride,
+  originalLineHeight = 1,
+  overrideStatusLoading = false,
+  persistenceStatus?: 'confirmed' | 'missing_remote' | 'diverged' | 'unverified' | 'sync_error' | 'inherited' | 'loading',
+) {
   const onDraftChange = vi.fn(); const onSave = vi.fn();
   const view = render(<AdminEditorHarness spanKey={`p0-${language}`} pageNumber={37} language={language}
     originalText={runs.map(r => r.text).join('')} originalSegments={runs}
     originalFont={style.font} originalSize={10} originalColor={style.color} originalWeight={400}
     originalStyle="normal" originalLineHeight={originalLineHeight} bbox={[10, 10, 300, 60]} onClose={vi.fn()} onSave={onSave}
-    onDraftChange={onDraftChange} existingOverride={existingOverride} overrideStatusLoading={overrideStatusLoading} />);
+    onDraftChange={onDraftChange} existingOverride={existingOverride} overrideStatusLoading={overrideStatusLoading}
+    persistenceStatus={persistenceStatus} />);
   fireEvent.click(view.getByText('📝 Edit Text'));
   const textarea = view.getByRole('textbox') as HTMLTextAreaElement;
   const edit = (text: string, start = 0, end = start) => {
@@ -300,6 +308,23 @@ describe.each(['en', 'pt-BR'] as const)('RichSpanEditor mounted regression %s', 
 });
 
 describe('RichSpanEditor translation context and state', () => {
+  it.each([
+    ['confirmed', 'PAYLOAD CONFIRMADO'],
+    ['missing_remote', 'SALVO LOCALMENTE / SINCRONIZAÇÃO PENDENTE'],
+    ['sync_error', 'ERRO DE SINCRONIZAÇÃO — cópia local preservada quando disponível'],
+    ['diverged', 'DIVERGÊNCIA LOCAL / PAYLOAD'],
+    ['unverified', 'PAYLOAD INDISPONÍVEL — ESTADO NÃO VERIFICADO'],
+  ] as const)('shows the distinct persistence status %s', (status, expected) => {
+    const v = mount('pt-BR', [plain('Original text')], undefined, 1, false, status);
+    expect(v.getByRole('status').textContent).toBe(expected);
+  });
+
+  it('keeps an unsaved draft status above the previous persisted status', () => {
+    const v = mount('pt-BR', [plain('Original text')], undefined, 1, false, 'confirmed');
+    v.edit('Texto draft');
+    expect(v.getByRole('status').textContent).toBe('PT-BR ALTERADO NA SESSÃO / NÃO SALVO');
+  });
+
   it('shows read-only EN source and accurately identifies an existing PT-BR override', () => {
     const source = [plain('Original Setup text')];
     const existing: SpanOverride = {

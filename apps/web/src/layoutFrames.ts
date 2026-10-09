@@ -13,6 +13,15 @@ export interface LayoutFrameRecord {
 const STORAGE_PREFIX = 'middara-layout-frames-v1';
 const PAYLOAD_URL = payloadApiUrl('layout-frames');
 
+function stableFrameJson(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(stableFrameJson).join(',')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.entries(value).sort(([a], [b]) => a.localeCompare(b))
+      .map(([key, child]) => `${JSON.stringify(key)}:${stableFrameJson(child)}`).join(',')}}`;
+  }
+  return JSON.stringify(value);
+}
+
 export function layoutFrameStorageKey(pageNumber: number, language: LayoutLanguage) {
   return `${STORAGE_PREFIX}-${language}-page-${pageNumber}`;
 }
@@ -71,7 +80,8 @@ export async function saveLayoutFrame(record: LayoutFrameRecord): Promise<boolea
     const frameKey = layoutFrameRecordKey(record.unitKey, record.language);
     const query = new URLSearchParams({ 'where[frameKey][equals]': frameKey, limit: '1' });
     const lookup = await fetch(`${PAYLOAD_URL}?${query}`);
-    const existing = lookup.ok ? (await lookup.json()).docs?.[0] : null;
+    if (!lookup.ok) return false;
+    const existing = (await lookup.json()).docs?.[0];
     const payload = {
       frameKey,
       unitKey: record.unitKey,
@@ -90,7 +100,17 @@ export async function saveLayoutFrame(record: LayoutFrameRecord): Promise<boolea
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
-    return response.ok;
+    if (!response.ok) return false;
+
+    const verify = await fetch(`${PAYLOAD_URL}?${query}`);
+    if (!verify.ok) return false;
+    const saved = (await verify.json()).docs?.[0];
+    return !!saved
+      && saved.frameKey === frameKey
+      && saved.unitKey === record.unitKey
+      && saved.pageNumber === record.pageNumber
+      && saved.language === record.language
+      && stableFrameJson(saved.data) === stableFrameJson(record.frame);
   } catch {
     return false;
   }

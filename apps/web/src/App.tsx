@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, type PageData, type PageFidelityOverlay } from './components/PageRenderer';
 import { AdminSymbolPalette, type AdminSymbolPaletteEditorState } from './components/AdminSymbolPalette';
+import { LocalSyncRecoveryControl } from './components/LocalSyncRecoveryControl';
 import { 
   ChevronLeft, ChevronRight, Edit3, 
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
@@ -447,6 +448,7 @@ function App() {
             <Edit3 size={16} />
             <span>Admin</span>
           </button>
+          <LocalSyncRecoveryControl visible={isAdmin} />
           {isAdmin && (
             <button
               className={`tool-btn ${isRulerVisible ? 'active' : ''}`}

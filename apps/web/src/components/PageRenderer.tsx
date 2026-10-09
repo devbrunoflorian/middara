@@ -17,6 +17,15 @@ import { sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan, type So
 import './PageRenderer.css';
 import './Toast.css';
 import { payloadApiUrl } from '../config/payloadApi';
+import {
+  dispatchLocalPersistenceChanged,
+  loadLocalOverrides,
+  LOCAL_PERSISTENCE_CHANGED_EVENT,
+  persistOverrideToPayload,
+  persistedOverridesEqual,
+  saveLocalOverrides,
+  type LocalSyncState,
+} from '../localPersistence';
 
 /* ─────────────────────────────────────────────
    Types – match the exact JSON DOM structure
@@ -798,10 +807,6 @@ function sourceMetricsForOverrideSegments(block: Block, segments: Segment[]): Se
 /* ─────────────────────────────────────────────
    Overrides persistence (localStorage per language)
    ───────────────────────────────────────────── */
-function getOverridesKey(lang: string) {
-  return `middara-lines-v2-${lang}`;
-}
-
 function isPlainBlockKey(spanKey: string): boolean {
   return /^page_\d+_block_\d+$/.test(spanKey);
 }
@@ -861,32 +866,6 @@ async function fetchOverridesFromPayload(lang: string): Promise<Map<string, Span
   return null;
 }
 
-async function saveOverrideToPayload(override: SpanOverride, lang: string): Promise<boolean> {
-  try {
-    const existing = await findPayloadTranslation(override.spanKey, lang);
-    const storedSpanKey = payloadSpanKey(override.spanKey, lang);
-    const data = encodeOverrideData(override);
-    if (existing) {
-      const id = existing.id;
-      const res = await fetch(payloadApiUrl(`translations/${id}`), {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ language: lang, data })
-      });
-      return res.ok;
-    } else {
-      const res = await fetch(payloadApiUrl('translations'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ spanKey: storedSpanKey, language: lang, data })
-      });
-      return res.ok;
-    }
-  } catch {
-    return false;
-  }
-}
-
 async function deleteOverrideFromPayload(spanKey: string, lang: string): Promise<boolean> {
   try {
     const existing = await findPayloadTranslation(spanKey, lang);
@@ -898,27 +877,6 @@ async function deleteOverrideFromPayload(spanKey: string, lang: string): Promise
       return res.ok;
     }
     return true; // didn't exist anyway
-  } catch {
-    return false;
-  }
-}
-
-function loadOverrides(lang: string): Map<string, SpanOverride> {
-  try {
-    const raw = localStorage.getItem(getOverridesKey(lang));
-    if (raw) {
-      const arr: SpanOverride[] = JSON.parse(raw);
-      return new Map(arr.map(o => [o.spanKey, o]));
-    }
-  } catch {}
-  return new Map();
-}
-
-function saveOverridesToStorage(lang: string, map: Map<string, SpanOverride>) {
-  const arr = Array.from(map.values());
-  try {
-    localStorage.setItem(getOverridesKey(lang), JSON.stringify(arr));
-    return true;
   } catch {
     return false;
   }
@@ -981,6 +939,10 @@ function extractCreditFieldInfo(
       ? 'paragraph'
       : block.creditUnit || block.creditUnits?.length ? 'credit-field' : 'typographic-field',
   };
+}
+
+function overrideSyncKey(lang: string, spanKey: string): string {
+  return `${lang}\0${spanKey}`;
 }
 
 interface SelectedSpanInfo {
@@ -1284,8 +1246,11 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
   const [pageElement, setPageElement] = useState<HTMLDivElement | null>(null);
   const [scale, setScale] = useState(1);
   const [selectedSpan, setSelectedSpan] = useState<SelectedSpanInfo | null>(null);
-  const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => loadOverrides(language));
+  const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => loadLocalOverrides(language));
   const [overridesLoadedLanguage, setOverridesLoadedLanguage] = useState<string | null>(null);
+  const [payloadOverrides, setPayloadOverrides] = useState<Map<string, SpanOverride> | null>(null);
+  const [payloadOverrideReadState, setPayloadOverrideReadState] = useState<'loading' | 'available' | 'unavailable'>('loading');
+  const [overrideSyncStates, setOverrideSyncStates] = useState<Map<string, LocalSyncState | 'sync_error'>>(new Map());
   const [draftOverride, setDraftOverride] = useState<SpanOverride | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -1300,20 +1265,45 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
 
   useEffect(() => {
     let active = true;
+    setPayloadOverrideReadState('loading');
     fetchOverridesFromPayload(language).then((serverMap) => {
       if (!active) return;
+      setPayloadOverrides(serverMap);
+      setPayloadOverrideReadState(serverMap ? 'available' : 'unavailable');
       if (serverMap) {
-        const merged = loadOverrides(language);
+        const merged = loadLocalOverrides(language);
         serverMap.forEach((override, key) => merged.set(key, override));
         setOverrides(merged);
       } else {
-        setOverrides(loadOverrides(language));
+        setOverrides(loadLocalOverrides(language));
       }
       setOverridesLoadedLanguage(language);
     });
     return () => { active = false; };
   }, [language]);
   const overridesReady = overridesLoadedLanguage === language;
+
+  useEffect(() => {
+    const onRemoteConfirmation = (event: Event) => {
+      const detail = (event as CustomEvent<{ kind?: string; language?: string; spanKey?: string; unitKey?: string; data?: unknown; confirmed?: boolean }>).detail;
+      if (!detail?.confirmed || detail.language !== language) return;
+      if (detail.kind === 'translation' && detail.spanKey === selectedSpan?.spanKey) {
+        setOverrideSyncStates(current => new Map(current).set(overrideSyncKey(language, detail.spanKey!), 'confirmed'));
+        const saved = decodeOverrideData(detail.data);
+        if (saved) setPayloadOverrides(current => new Map(current).set(detail.spanKey!, { ...saved, spanKey: detail.spanKey! } as SpanOverride));
+        setPayloadOverrideReadState('available');
+      }
+      if (detail.kind === 'frame' && detail.unitKey === layoutUnitKey) {
+        setLayoutStatus('SALVO / PAYLOAD CONFIRMADO.');
+        if (detail.data && typeof detail.data === 'object') {
+          setLayoutFrames(current => new Map(current).set(detail.unitKey!, detail.data as LayoutFrame));
+        }
+      }
+    };
+    window.addEventListener(LOCAL_PERSISTENCE_CHANGED_EVENT, onRemoteConfirmation);
+    return () => window.removeEventListener(LOCAL_PERSISTENCE_CHANGED_EVENT, onRemoteConfirmation);
+  }, [language, selectedSpan?.spanKey, layoutUnitKey, pageData.page_number]);
+
   const replacedInlineElements = (pageData.inlineElements ?? []).filter(element=>{
     const block=pageData.blocks.find(b=>b.id===element.anchor.blockId);
     return block && sourceElementIsReplaced(element,block,pageData.page_number,language,overrides,selectedSpan?.spanKey ?? null,draftOverride);
@@ -1457,10 +1447,20 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
     next.set(layoutUnitKey, layoutDraft);
     setLayoutFrames(next);
     const savedLocally = saveLocalLayoutFrames(pageData.page_number, language, next);
+    setLayoutStatus(savedLocally
+      ? 'SALVO LOCALMENTE / SINCRONIZAÇÃO PENDENTE.'
+      : 'A cópia local falhou; aguardando confirmação do Payload.');
     const savedRemotely = await saveLayoutFrame({ unitKey: layoutUnitKey, pageNumber: pageData.page_number, language, frame: layoutDraft });
+    if (savedLocally) dispatchLocalPersistenceChanged({
+      kind: 'frame', language, unitKey: layoutUnitKey, pageNumber: pageData.page_number,
+      data: layoutDraft, confirmed: savedRemotely,
+    });
+    else dispatchLocalPersistenceChanged();
     setLayoutDirty(false);
     onLayoutDirtyChange?.(false);
-    setLayoutStatus(savedRemotely ? 'Sincronizado com Payload.' : savedLocally ? 'Salvo neste navegador; não sincronizado com Payload.' : 'Falha ao salvar localmente e no servidor.');
+    setLayoutStatus(savedRemotely ? 'SALVO / PAYLOAD CONFIRMADO.' : savedLocally
+      ? 'ERRO DE SINCRONIZAÇÃO — moldura preservada localmente; Payload não confirmou.'
+      : 'ERRO DE SINCRONIZAÇÃO — falha ao salvar localmente e Payload não confirmou.');
     setIsSavingLayout(false);
   }, [layoutUnitKey, layoutDraft, layoutDirty, isSavingLayout, layoutFrames, pageData.page_number, language, onLayoutDirtyChange]);
 
@@ -1473,13 +1473,14 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
     setLayoutFrames(next);
     saveLocalLayoutFrames(pageData.page_number, language, next);
     const removedRemotely = await deleteLayoutFrame(layoutUnitKey, language);
+    dispatchLocalPersistenceChanged();
     const inherited = inheritedLayoutFrames.get(layoutUnitKey)
       ?? findLayoutFrameSource(pageData, layoutUnitKey)?.frame
       ?? null;
     setLayoutDraft(inherited ? { ...inherited } : null);
     setLayoutDirty(false);
     onLayoutDirtyChange?.(false);
-    setLayoutStatus(removedRemotely ? 'Moldura PT-BR removida; herdando EN.' : 'Herança aplicada neste navegador; remoção remota pendente.');
+    setLayoutStatus(removedRemotely ? 'PAYLOAD CONFIRMADO — moldura PT-BR removida; herdando EN.' : 'ERRO DE SINCRONIZAÇÃO — a remoção local não foi confirmada no Payload.');
     setIsSavingLayout(false);
   }, [layoutUnitKey, language, layoutFrames, isSavingLayout, pageData, inheritedLayoutFrames, onLayoutDirtyChange]);
 
@@ -1562,31 +1563,47 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
       nextMap.delete(selectedSpan.spanKey);
     }
     setOverrides(nextMap);
-    const savedLocally = saveOverridesToStorage(language, nextMap);
+    const savedLocally = saveLocalOverrides(language, nextMap);
 
     if (override) {
-      const success = await saveOverrideToPayload(override, language);
-      if (!success) {
+      const syncKey = overrideSyncKey(language, override.spanKey);
+      setOverrideSyncStates(current => new Map(current).set(syncKey, savedLocally ? 'missing_remote' : 'sync_error'));
+      const result = await persistOverrideToPayload(override, language);
+      if (savedLocally) dispatchLocalPersistenceChanged({
+        kind: 'translation', language, spanKey: override.spanKey,
+        data: encodeOverrideData(override), confirmed: result === 'confirmed',
+      });
+      else dispatchLocalPersistenceChanged();
+      if (result !== 'confirmed') {
+        setOverrideSyncStates(current => new Map(current).set(syncKey, 'sync_error'));
         setToast({
           message: savedLocally
-            ? "Rascunho salvo neste navegador; não sincronizado com o servidor."
-            : "Falha ao salvar no navegador e no servidor.",
-          type: savedLocally ? 'success' : 'error',
+            ? 'ERRO DE SINCRONIZAÇÃO — tradução salva localmente; Payload ainda não confirmou.'
+            : 'ERRO DE SINCRONIZAÇÃO — falhou o save local e o Payload.',
+          type: 'error',
         });
         setTimeout(() => setToast(null), 5000);
       } else {
-        setToast({ message: "Salvo no Payload", type: 'success' });
+        setOverrideSyncStates(current => new Map(current).set(syncKey, 'confirmed'));
+        setToast({ message: 'SALVO / PAYLOAD CONFIRMADO', type: 'success' });
         setTimeout(() => setToast(null), 3000);
       }
     } else if (selectedSpan) {
       const deletedOnServer = await deleteOverrideFromPayload(selectedSpan.spanKey, language);
+      dispatchLocalPersistenceChanged();
+      if (deletedOnServer) {
+        setOverrideSyncStates(current => { const next = new Map(current); next.delete(overrideSyncKey(language, selectedSpan.spanKey)); return next; });
+        setPayloadOverrides(current => { if (!current) return current; const next = new Map(current); next.delete(selectedSpan.spanKey); return next; });
+      } else {
+        setOverrideSyncStates(current => new Map(current).set(overrideSyncKey(language, selectedSpan.spanKey), 'sync_error'));
+      }
       setToast({
         message: deletedOnServer
-          ? "Rascunho removido do Payload."
+          ? 'PAYLOAD CONFIRMADO — override removido.'
           : savedLocally
-            ? "Rascunho removido deste navegador; servidor não sincronizado."
-            : "Falha ao remover o rascunho.",
-        type: deletedOnServer || savedLocally ? 'success' : 'error',
+            ? 'ERRO DE SINCRONIZAÇÃO — remoção local aplicada; o override ainda pode existir no Payload.'
+            : 'ERRO DE SINCRONIZAÇÃO — falha ao remover o override.',
+        type: deletedOnServer ? 'success' : 'error',
       });
       setTimeout(() => setToast(null), 5000);
     }
@@ -1621,6 +1638,20 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
     ? selectedSourceBlock
       ? normalizeStaticEditorPrefix(selectedSourceBlock, overrides.get(selectedSpan.spanKey) || null)
       : overrides.get(selectedSpan.spanKey) || null
+    : null;
+
+  const selectedOverridePersistenceState = selectedSpan
+    ? overrideSyncStates.get(overrideSyncKey(language, selectedSpan.spanKey))
+      ?? (!overridesReady ? 'loading'
+        : payloadOverrideReadState === 'unavailable' ? 'unverified'
+          : (() => {
+            const local = loadLocalOverrides(language).get(selectedSpan.spanKey);
+            const remote = payloadOverrides?.get(selectedSpan.spanKey);
+            if (local && remote) return persistedOverridesEqual(local, remote) ? 'confirmed' : 'diverged';
+            if (local) return 'missing_remote';
+            if (remote) return 'confirmed';
+            return 'inherited';
+          })())
     : null;
 
   const selectedLayoutSource = layoutUnitKey ? findLayoutFrameSource(pageData, layoutUnitKey) : null;
@@ -1758,6 +1789,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
           onDraftChange={handleDraftChange}
           existingOverride={selectedExistingOverride}
           overrideStatusLoading={!overridesReady}
+          persistenceStatus={selectedOverridePersistenceState ?? undefined}
           singleLine={selectedSpan.singleLine}
           editorContext={selectedSpan.editorContext ?? 'paragraph'}
           symbolAliasPreferences={symbolAliasPreferences}

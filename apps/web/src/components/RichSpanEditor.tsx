@@ -8,6 +8,7 @@ import { SYMBOL_OBJECT_MARKER, editableTextForSegments, segmentsFromEditableText
 import { collectManagedSourceSymbols, initialManagedSourceSymbols, createEditorOverride, lineHeightModeForOverride } from '../symbols/editorOverride';
 import { INLINE_CLIPBOARD_MIME, editableRangeToSegmentRange, sliceSegmentRange, encodeInlineClipboard, decodeInlineClipboard } from '../symbols/inlineClipboard';
 import { findGlossaryMatches } from '../translations/glossaryContext';
+import type { LocalSyncState } from '../localPersistence';
 
 const PUA_MAPPING: Record<string, {name: string, pua_char: string, hex: string}[]> = puaMappingRaw;
 
@@ -93,6 +94,7 @@ interface RichSpanEditorProps {
   onSave: (override: SpanOverride | null) => void;
   existingOverride?: SpanOverride | null;
   overrideStatusLoading?: boolean;
+  persistenceStatus?: LocalSyncState | 'sync_error' | 'inherited' | 'loading';
   onDraftChange?: (draft: SpanOverride | null) => void;
   singleLine?: boolean;
   editorContext?: InlineEditorContext;
@@ -142,6 +144,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   onSave,
   existingOverride,
   overrideStatusLoading = false,
+  persistenceStatus,
   onDraftChange,
   singleLine = false,
   editorContext = 'paragraph',
@@ -387,11 +390,25 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     || JSON.stringify(managedSourceSymbols) !== JSON.stringify(baseManagedSourceSymbols);
   const translationState = hasDraftChanges
     ? { label: 'PT-BR ALTERADO NA SESSÃO / NÃO SALVO', className: 'is-dirty' }
-    : existingOverride
-      ? { label: 'PT-BR OVERRIDE SALVO', className: 'is-saved' }
-      : overrideStatusLoading
-        ? { label: 'CARREGANDO ESTADO…', className: 'is-loading' }
-        : { label: 'HERDANDO EN', className: 'is-inherited' };
+    : persistenceStatus === 'sync_error'
+      ? { label: 'ERRO DE SINCRONIZAÇÃO — cópia local preservada quando disponível', className: 'is-error' }
+      : persistenceStatus === 'missing_remote'
+        ? { label: 'SALVO LOCALMENTE / SINCRONIZAÇÃO PENDENTE', className: 'is-pending' }
+        : persistenceStatus === 'diverged'
+          ? { label: 'DIVERGÊNCIA LOCAL / PAYLOAD', className: 'is-error' }
+          : persistenceStatus === 'unverified'
+            ? { label: 'PAYLOAD INDISPONÍVEL — ESTADO NÃO VERIFICADO', className: 'is-pending' }
+            : persistenceStatus === 'loading' || overrideStatusLoading
+              ? { label: 'CARREGANDO ESTADO…', className: 'is-loading' }
+              : persistenceStatus === 'confirmed'
+                ? { label: 'PAYLOAD CONFIRMADO', className: 'is-saved' }
+                : persistenceStatus === 'inherited'
+                  ? { label: language === 'pt-BR' ? 'HERDANDO EN' : 'EN ORIGINAL', className: 'is-inherited' }
+                  : existingOverride
+                    ? { label: 'PT-BR OVERRIDE SALVO', className: 'is-saved' }
+                    : overrideStatusLoading
+                      ? { label: 'CARREGANDO ESTADO…', className: 'is-loading' }
+                      : { label: language === 'pt-BR' ? 'HERDANDO EN' : 'EN ORIGINAL', className: 'is-inherited' };
 
   const requestClose = useCallback(() => {
     if (language === 'pt-BR' && hasDraftChanges && !window.confirm('Há alterações de tradução não salvas. Quer sair e descartá-las?')) {
@@ -812,6 +829,9 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             <span className="rse-subtitle">
               Page {pageNumber} · {editorLabel ? editorLabel : <code>{spanKey}</code>}
             </span>
+            <span role="status" aria-live="polite" className={`rse-context-status ${translationState.className}`}>
+              {translationState.label}
+            </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <span style={{ fontSize: '12px', color: '#666', fontStyle: 'italic' }}>
@@ -826,7 +846,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             <summary>
               <span className="rse-context-chevron" aria-hidden="true">›</span>
               <span>Contexto para tradução</span>
-              <span role="status" aria-live="polite" className={`rse-context-status ${translationState.className}`}>
+              <span className={`rse-context-status ${translationState.className}`}>
                 {translationState.label}
               </span>
             </summary>

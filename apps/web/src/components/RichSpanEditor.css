@@ -171,6 +171,14 @@
 .rse-context-status.is-saved { color: #86efac; }
 .rse-context-status.is-dirty { color: #fbbf24; }
 .rse-context-status.is-loading { color: #a5b4fc; }
+.rse-context-status.is-pending { color: #fbbf24; }
+.rse-context-status.is-error { color: #f87171; }
+.rse-header .rse-context-status {
+  display: block;
+  margin: 5px 0 0;
+  text-align: left;
+  white-space: normal;
+}
 
 .rse-context-content {
   display: flex;
