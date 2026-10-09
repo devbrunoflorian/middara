@@ -2965,6 +2965,46 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           const sourceSymbolMetrics = span.sourceSymbolMetrics
             ? { ...span.sourceSymbolMetrics, gapEm: undefined, trailingGapEm: undefined }
             : undefined;
+          if (renderSemanticSource && !override) {
+            const [x0, y0, x1, y1] = span.bbox;
+            const sourceTop = (y0 - line.bbox[1]) * scale;
+            const sourceLeft = (x0 - rawX) * scale;
+            const sourceWidth = (x1 - x0) * scale;
+            const sourceHeight = (y1 - y0) * scale;
+            return (
+              <React.Fragment key={`${si}:source-inline-symbol`}>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    flex: `0 0 ${sourceAdvanceWidth}px`,
+                    marginInlineStart: `${sourceAdvanceGap}px`,
+                    minWidth: 0,
+                    height: 0,
+                    alignSelf: 'flex-start',
+                    fontSize: 0,
+                    lineHeight: 0,
+                    visibility: 'hidden',
+                    pointerEvents: 'none',
+                  }}
+                />
+                <span
+                  data-source-inline-semantic={span.semanticSymbolId}
+                  style={{
+                    position: 'absolute',
+                    display: 'block',
+                    left: `${sourceLeft}px`,
+                    top: `${sourceTop}px`,
+                    width: `${sourceWidth}px`,
+                    height: `${sourceHeight}px`,
+                    pointerEvents: 'none',
+                  }}
+                >
+                  <SemanticSymbol id={span.semanticSymbolId} language={language}
+                    size={span.size * scale} color={span.color} metrics={sourceSymbolMetrics} alignToTop />
+                </span>
+              </React.Fragment>
+            );
+          }
           return (
             <span
               key={si}
