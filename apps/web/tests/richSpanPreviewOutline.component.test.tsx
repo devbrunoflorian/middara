@@ -43,6 +43,19 @@ function render(node: React.ReactNode) {
   return { container, unmount, ...getQueriesForElement(container) };
 }
 
+function stubRangeClientRectsForJSDOM() {
+  const prototype = Range.prototype as Range['prototype'] & { getClientRects?: () => DOMRectList };
+  const previous = Object.getOwnPropertyDescriptor(prototype, 'getClientRects');
+  if (typeof prototype.getClientRects !== 'function') {
+    Object.defineProperty(prototype, 'getClientRects', { configurable: true, value: () => [] });
+  }
+  const restore = () => {
+    if (previous) Object.defineProperty(prototype, 'getClientRects', previous);
+    else delete prototype.getClientRects;
+  };
+  cleanups.add(restore);
+}
+
 beforeEach(() => {
   vi.stubGlobal('fetch', fetchMock);
 });
@@ -58,6 +71,113 @@ function requireMetrics(element: SourceInlineElement) {
 }
 
 describe('RichSpanEditor live PageRenderer preview', () => {
+  it('returns a reverted source-equivalent EN draft to the source-line composition', async () => {
+    stubRangeClientRectsForJSDOM();
+    const initialStorage = JSON.stringify(Object.entries(window.localStorage));
+    const view = render(<PageRenderer pageData={pageData} isAdmin language="en" />);
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+
+    const spanKey = 'page_78_unit_p78-gigas-grip-equip-1hand-example__en';
+    const sourceField = view.container.querySelector<HTMLElement>(`[data-admin-geometry-key="${spanKey}"]`);
+    expect(sourceField).not.toBeNull();
+    expect(sourceField!.querySelector('.realbox')).toBeNull();
+    expect(sourceField!.querySelector('[data-source-line-id="line_18_3"]')).not.toBeNull();
+
+    fireEvent.click(sourceField!);
+    fireEvent.click(await view.findByText('📝 Edit Text'));
+    const textarea = view.container.querySelector('.rse-edit-text textarea') as HTMLTextAreaElement;
+    const sourceText = textarea.value;
+    expect(sourceText.startsWith('Example:')).toBe(true);
+
+    textarea.setSelectionRange(0, 1);
+    fireEvent.select(textarea);
+    fireEvent.keyUp(textarea);
+    const withoutFirstCharacter = sourceText.slice(1);
+    fireEvent.change(textarea, {
+      target: { value: withoutFirstCharacter, selectionStart: 0, selectionEnd: 0 },
+    });
+    fireEvent.click(view.getByText('Confirm'));
+
+    const editedField = view.container.querySelector<HTMLElement>(`[data-admin-geometry-key="${spanKey}"]`);
+    expect(editedField?.querySelector('.realbox')).not.toBeNull();
+
+    fireEvent.click(await view.findByText('📝 Edit Text'));
+    const restoreTextarea = view.container.querySelector('.rse-edit-text textarea') as HTMLTextAreaElement;
+    restoreTextarea.setSelectionRange(0, 0);
+    fireEvent.select(restoreTextarea);
+    fireEvent.keyUp(restoreTextarea);
+    fireEvent.change(restoreTextarea, {
+      target: { value: sourceText, selectionStart: 1, selectionEnd: 1 },
+    });
+    expect(restoreTextarea.value).toBe(sourceText);
+    fireEvent.click(view.getByText('Confirm'));
+
+    const restoredField = view.container.querySelector<HTMLElement>(`[data-admin-geometry-key="${spanKey}"]`);
+    expect(restoredField?.querySelector('.realbox')).toBeNull();
+    expect(restoredField?.querySelector('[data-source-line-id="line_18_3"]')).not.toBeNull();
+
+    fireEvent.click(await view.findByText('📝 Edit Text'));
+    const spaceTextarea = view.container.querySelector('.rse-edit-text textarea') as HTMLTextAreaElement;
+    const sourceSpaceIndex = spaceTextarea.value.indexOf('Example:') + 'Example:'.length;
+    const withExtraSpace = `${spaceTextarea.value.slice(0, sourceSpaceIndex)} ${spaceTextarea.value.slice(sourceSpaceIndex)}`;
+    spaceTextarea.setSelectionRange(sourceSpaceIndex, sourceSpaceIndex);
+    fireEvent.select(spaceTextarea);
+    fireEvent.keyUp(spaceTextarea);
+    fireEvent.change(spaceTextarea, {
+      target: { value: withExtraSpace, selectionStart: sourceSpaceIndex + 1, selectionEnd: sourceSpaceIndex + 1 },
+    });
+    fireEvent.click(view.getByText('Confirm'));
+    const whitespaceEditedField = view.container.querySelector<HTMLElement>(`[data-admin-geometry-key="${spanKey}"]`);
+    expect(whitespaceEditedField?.querySelector('.realbox')).not.toBeNull();
+
+    fireEvent.click(await view.findByText('📝 Edit Text'));
+    const removeExtraSpaceTextarea = view.container.querySelector('.rse-edit-text textarea') as HTMLTextAreaElement;
+    const extraSpaceIndex = removeExtraSpaceTextarea.value.indexOf('Example:') + 'Example:'.length;
+    const withoutExtraSpace = `${removeExtraSpaceTextarea.value.slice(0, extraSpaceIndex)}${removeExtraSpaceTextarea.value.slice(extraSpaceIndex + 1)}`;
+    removeExtraSpaceTextarea.setSelectionRange(extraSpaceIndex, extraSpaceIndex);
+    fireEvent.select(removeExtraSpaceTextarea);
+    fireEvent.keyUp(removeExtraSpaceTextarea);
+    fireEvent.change(removeExtraSpaceTextarea, {
+      target: { value: withoutExtraSpace, selectionStart: extraSpaceIndex, selectionEnd: extraSpaceIndex },
+    });
+    fireEvent.click(view.getByText('Confirm'));
+    const whitespaceRestoredField = view.container.querySelector<HTMLElement>(`[data-admin-geometry-key="${spanKey}"]`);
+    expect(whitespaceRestoredField?.querySelector('.realbox')).toBeNull();
+    expect(whitespaceRestoredField?.querySelector('[data-source-line-id="line_18_3"]')).not.toBeNull();
+
+    fireEvent.click(await view.findByText('📝 Edit Text'));
+    const breakTextarea = view.container.querySelector('.rse-edit-text textarea') as HTMLTextAreaElement;
+    const breakIndex = breakTextarea.value.indexOf('Example:') + 'Example:'.length;
+    const withHardBreak = `${breakTextarea.value.slice(0, breakIndex)}\n${breakTextarea.value.slice(breakIndex)}`;
+    breakTextarea.setSelectionRange(breakIndex, breakIndex);
+    fireEvent.select(breakTextarea);
+    fireEvent.keyUp(breakTextarea);
+    fireEvent.change(breakTextarea, {
+      target: { value: withHardBreak, selectionStart: breakIndex + 1, selectionEnd: breakIndex + 1 },
+    });
+    fireEvent.click(view.getByText('Confirm'));
+    const hardBreakField = view.container.querySelector<HTMLElement>(`[data-admin-geometry-key="${spanKey}"]`);
+    expect(hardBreakField?.querySelector('.realbox')).not.toBeNull();
+
+    fireEvent.click(await view.findByText('📝 Edit Text'));
+    const removeBreakTextarea = view.container.querySelector('.rse-edit-text textarea') as HTMLTextAreaElement;
+    const restoredText = `${removeBreakTextarea.value.slice(0, breakIndex)}${removeBreakTextarea.value.slice(breakIndex + 1)}`;
+    removeBreakTextarea.setSelectionRange(breakIndex, breakIndex + 1);
+    fireEvent.select(removeBreakTextarea);
+    fireEvent.keyUp(removeBreakTextarea);
+    fireEvent.change(removeBreakTextarea, {
+      target: { value: restoredText, selectionStart: breakIndex, selectionEnd: breakIndex },
+    });
+    fireEvent.click(view.getByText('Confirm'));
+    const hardBreakRestoredField = view.container.querySelector<HTMLElement>(`[data-admin-geometry-key="${spanKey}"]`);
+    expect(hardBreakRestoredField?.querySelector('.realbox')).toBeNull();
+    expect(hardBreakRestoredField?.querySelector('[data-source-line-id="line_18_3"]')).not.toBeNull();
+    expect(hardBreakRestoredField?.querySelector('[data-source-inline-semantic="attack.ranged"]')).not.toBeNull();
+    expect(hardBreakRestoredField?.querySelector('[data-source-inline-semantic="attack.melee-ranged"]')).not.toBeNull();
+    expect(JSON.stringify(Object.entries(window.localStorage))).toBe(initialStorage);
+    expect(fetchMock.mock.calls.every(([, init]) => !init?.method || init.method.toUpperCase() === 'GET')).toBe(true);
+  }, 15_000);
+
   it('keeps the source lightning SVG and white text outline when translating the p. 78 callout', async () => {
     const initialStorage = JSON.stringify(Object.entries(window.localStorage));
     const view = render(<PageRenderer pageData={pageData} isAdmin language="pt-BR" />);

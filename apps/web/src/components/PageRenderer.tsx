@@ -1067,7 +1067,7 @@ function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 
 }
 
 /** Compare visible content and rich styles while ignoring source-only line wraps. */
-function sourceGeometrySignature(segments: Segment[]): string {
+function sourceGeometrySignature(segments: Segment[], preserveWhitespaceMultiplicity = false): string {
   const signature: Array<{ text?: string; symbolId?: string; style: string | null }> = [];
   let pendingSpace = false;
 
@@ -1093,6 +1093,10 @@ function sourceGeometrySignature(segments: Segment[]): string {
 
     for (const character of Array.from(segment.text)) {
       if (/\s/u.test(character)) {
+        if (preserveWhitespaceMultiplicity) {
+          signature.push({ text: character, style: null });
+          continue;
+        }
         if (signature.length) pendingSpace = true;
         continue;
       }
@@ -1117,6 +1121,12 @@ export function overrideIsSourceEquivalent(
   if (override.lineHeight !== undefined && Math.abs(override.lineHeight - sourceLayout.lineHeight) > 0.0001) return false;
   return sourceGeometrySignature(override.segments)
     === sourceGeometrySignature(normalizeParagraphSourceSegments(sourceSegments));
+}
+
+function overridePreservesSourceLineContent(override: SpanOverride, sourceSegments: Segment[]): boolean {
+  if (override.segments.some(segment => /[\r\n]/u.test(segment.text))) return false;
+  return sourceGeometrySignature(override.segments, true)
+    === sourceGeometrySignature(normalizeParagraphSourceSegments(sourceSegments), true);
 }
 
 function isEnglishRasterizedDuplicateLine(line: LineData): boolean {
@@ -2870,6 +2880,10 @@ const CreditField: React.FC<CreditFieldProps> = ({
     textAlign: field.frame.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
     lineHeight: field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
   });
+  const overridePreservesSourceLines = override !== null
+    && sourceEquivalentOverride
+    && overridePreservesSourceLineContent(override, sourceFieldSegments);
+  const useSourceLines = !override || (language === 'en' && overridePreservesSourceLines);
   const handleClick = (event: React.MouseEvent) => {
     if (!isAdmin) return;
     event.stopPropagation();
@@ -2880,7 +2894,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
     onBlockClick(extractCreditFieldInfo(spanKey, block, field, unitKind, unitLabel));
   };
 
-  if (language === 'en' && !isAdmin && (!override || sourceEquivalentOverride)
+  if (language === 'en' && useSourceLines
     && hasExactSourceGeometry(sourceFieldBlock)) {
     return (
       <div
@@ -2901,7 +2915,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
       onClick={handleClick}
       {...geometryAttributes}
     >
-      {override ? (
+      {!useSourceLines ? (
         <div
           ref={previewRef}
           className="realbox"

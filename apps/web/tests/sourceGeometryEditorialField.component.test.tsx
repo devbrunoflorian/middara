@@ -11,10 +11,15 @@ import { sourceSpanRuns } from '../src/symbols/sourceRuns';
 describe('source geometry for editorial fields', () => {
   let root: Root | undefined;
   let container: HTMLDivElement | undefined;
+  let previousRangeClientRects: PropertyDescriptor | undefined;
 
   beforeEach(() => {
     globalThis.IS_REACT_ACT_ENVIRONMENT = true;
     localStorage.clear();
+    previousRangeClientRects = Object.getOwnPropertyDescriptor(Range.prototype, 'getClientRects');
+    if (!previousRangeClientRects) {
+      Object.defineProperty(Range.prototype, 'getClientRects', { configurable: true, value: () => [] });
+    }
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({ docs: [] }),
@@ -26,6 +31,9 @@ describe('source geometry for editorial fields', () => {
     container?.remove();
     root = undefined;
     container = undefined;
+    if (previousRangeClientRects) Object.defineProperty(Range.prototype, 'getClientRects', previousRangeClientRects);
+    else delete (Range.prototype as Range & { getClientRects?: () => DOMRectList }).getClientRects;
+    previousRangeClientRects = undefined;
     localStorage.clear();
     vi.unstubAllGlobals();
   });
@@ -92,6 +100,84 @@ describe('source geometry for editorial fields', () => {
     expect(container.querySelectorAll('svg[data-source-symbol-id="dice.teal"]')).toHaveLength(4);
   });
 
+  it('keeps untouched P78 EN source composition identical while toggling Admin', async () => {
+    const page = JSON.parse(readFileSync(
+      join(process.cwd(), 'public/pages/page_078/page_078_dom.json'), 'utf8',
+    )) as PageData;
+    const inlineElements = (JSON.parse(readFileSync(
+      join(process.cwd(), 'public/pages/page_078/inline_elements.json'), 'utf8',
+    )) as { elements: SourceInlineElement[] }).elements;
+    page.images = [];
+    page.blocks = attachSourceInlineElements(page.blocks.filter(block => block.id === 'block_18'), inlineElements);
+    page.inlineElements = inlineElements;
+    page.fidelityOverlays = [];
+    const unit = page.blocks[0].typographicUnits?.find(candidate =>
+      candidate.id === 'p78-gigas-grip-equip-1hand-example',
+    );
+    expect(unit).toBeDefined();
+    const lineIds = unit!.field.lineIds;
+
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    root = createRoot(container);
+
+    const renderMode = async (isAdmin: boolean) => {
+      await act(async () => {
+        root!.render(<PageRenderer pageData={page} isAdmin={isAdmin} language="en" />);
+        await new Promise(resolve => setTimeout(resolve, 0));
+      });
+    };
+    const sourceComposition = () => lineIds.map(lineId => {
+      const line = container!.querySelector<SVGGElement>(
+        `svg[data-source-geometry="pdf-coordinates"] g[data-source-line-id="${lineId}"]`,
+      );
+      if (!line) return { lineId, missingSourceLine: true };
+      return {
+        lineId,
+        baseline: line.getAttribute('data-source-baseline-y'),
+        spans: Array.from(line.querySelectorAll<SVGTextElement>('text[data-source-span]')).map(span => ({
+          text: span.textContent,
+          x: span.getAttribute('data-source-x'),
+          baseline: span.getAttribute('data-source-baseline-y'),
+          bbox: span.getAttribute('data-source-bbox'),
+          textLength: span.getAttribute('textLength'),
+          fontFamily: span.style.fontFamily,
+          fontSize: span.style.fontSize,
+          fontWeight: span.style.fontWeight,
+          fontStyle: span.style.fontStyle,
+        })),
+        symbols: Array.from(line.querySelectorAll<SVGSVGElement>('svg[data-source-symbol-id]')).map(symbol => ({
+          id: symbol.getAttribute('data-source-symbol-id'),
+          x: symbol.getAttribute('data-source-x'),
+          y: symbol.getAttribute('data-source-y'),
+          bbox: symbol.getAttribute('data-source-bbox'),
+        })),
+      };
+    });
+
+    await renderMode(false);
+    const viewerComposition = sourceComposition();
+    expect(viewerComposition.every(line => !('missingSourceLine' in line))).toBe(true);
+    expect(viewerComposition).toHaveLength(6);
+    expect(viewerComposition.flatMap(line => 'symbols' in line ? line.symbols : [])).toHaveLength(2);
+
+    for (const isAdmin of [true, false, true]) {
+      await renderMode(isAdmin);
+      expect(sourceComposition()).toEqual(viewerComposition);
+      if (isAdmin) {
+        const field = container!.querySelector<HTMLElement>(
+          '[data-admin-geometry-key="page_78_unit_p78-gigas-grip-equip-1hand-example__en"]',
+        );
+        expect(field?.classList.contains('credit-edit-field')).toBe(true);
+        expect(field?.querySelector('.realbox')).toBeNull();
+        // The normal field target remains clickable while its text uses source geometry.
+        await act(async () => { field?.click(); });
+        expect(field?.classList.contains('credit-field-selected')).toBe(true);
+        expect(sourceComposition()).toEqual(viewerComposition);
+      }
+    }
+  });
+
   it('uses traced glyph width instead of the extraction bbox width when a source line ends with a newline', async () => {
     const page = JSON.parse(readFileSync(
       join(process.cwd(), 'public/pages/page_078/page_078_dom.json'),
@@ -147,11 +233,36 @@ describe('source geometry for editorial fields', () => {
     const block = page.blocks.find(candidate => candidate.id === 'block_16')!;
     const unit = block.typographicUnits!.find(candidate => candidate.id === 'p78-gigas-grip-item-2-example')!;
     const sourceLines = block.lines!.filter(line => unit.field.lineIds.includes(line.id));
-    const sourceSegments = sourceSpanRuns(sourceLines.flatMap(line => line.spans), font => {
+    const extractedSegments = sourceSpanRuns(sourceLines.flatMap(line => line.spans), font => {
       const bold = font.includes('Bold');
       const italic = font.includes('Italic');
       return { weight: bold ? 700 : 400, style: italic ? 'italic' : 'normal' };
     }).map(segment => ({ ...segment, text: segment.text.replace(/[\r\n]+/gu, ' ') }));
+    // Match RichSpanEditor's paragraph input: PDF line endings and repeated
+    // extraction whitespace become one editorial space, while style runs stay intact.
+    const sourceSegments: typeof extractedSegments = [];
+    let pendingSpace: (typeof extractedSegments)[number] | null = null;
+    let hasContent = false;
+    for (const segment of extractedSegments) {
+      if (segment.symbolId) {
+        if (pendingSpace && hasContent) sourceSegments.push(pendingSpace);
+        pendingSpace = null;
+        sourceSegments.push({ ...segment });
+        hasContent = true;
+        continue;
+      }
+      for (const chunk of segment.text.split(/(\s+)/u)) {
+        if (!chunk) continue;
+        if (/^\s+$/u.test(chunk)) {
+          if (hasContent && !pendingSpace) pendingSpace = { ...segment, text: ' ' };
+          continue;
+        }
+        if (pendingSpace) sourceSegments.push(pendingSpace);
+        pendingSpace = null;
+        sourceSegments.push({ ...segment, text: chunk });
+        hasContent = true;
+      }
+    }
     const spanKey = `page_78_unit_${unit.id}__en`;
     vi.stubGlobal('fetch', vi.fn().mockImplementation(async (input: string | URL) => ({
       ok: true,
