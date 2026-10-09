@@ -7,6 +7,7 @@ import { SemanticSymbol } from '../symbols/SemanticSymbol';
 import { SYMBOL_OBJECT_MARKER, editableTextForSegments, segmentsFromEditableText, replaceSegmentRange, insertEditorToken, deleteEditorToken, expandEditorTokenSelection, normalizeEditableInput } from '../symbols/inlineCodec';
 import { collectManagedSourceSymbols, initialManagedSourceSymbols, createEditorOverride, lineHeightModeForOverride } from '../symbols/editorOverride';
 import { INLINE_CLIPBOARD_MIME, editableRangeToSegmentRange, sliceSegmentRange, encodeInlineClipboard, decodeInlineClipboard } from '../symbols/inlineClipboard';
+import { findGlossaryMatches } from '../translations/glossaryContext';
 
 const PUA_MAPPING: Record<string, {name: string, pua_char: string, hex: string}[]> = puaMappingRaw;
 
@@ -91,6 +92,7 @@ interface RichSpanEditorProps {
   onClose: () => void;
   onSave: (override: SpanOverride | null) => void;
   existingOverride?: SpanOverride | null;
+  overrideStatusLoading?: boolean;
   onDraftChange?: (draft: SpanOverride | null) => void;
   singleLine?: boolean;
   editorContext?: InlineEditorContext;
@@ -139,6 +141,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   onClose,
   onSave,
   existingOverride,
+  overrideStatusLoading = false,
   onDraftChange,
   singleLine = false,
   editorContext = 'paragraph',
@@ -166,6 +169,17 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       style: originalStyle,
     }];
   }, [existingOverride, originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, normalizeText, singleLine]);
+  const sourceContextSegments = useMemo<Segment[]>(() => originalSegments?.length
+    ? originalSegments
+    : [{ text: originalText, font: originalFont, size: originalSize, color: originalColor, weight: originalWeight, style: originalStyle }],
+  [originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle]);
+  const sourceContextText = useMemo(() => editableTextForSegments(sourceContextSegments, 'en', symbolAliasPreferences),
+    [sourceContextSegments, symbolAliasPreferences]);
+  const sourceGlossaryText = useMemo(() => sourceContextSegments
+    .filter(segment => !segment.symbolId)
+    .map(segment => segment.text)
+    .join(''), [sourceContextSegments]);
+  const sourceGlossaryMatches = useMemo(() => findGlossaryMatches(sourceGlossaryText), [sourceGlossaryText]);
   const baseTextAlign = existingOverride?.textAlign ?? originalTextAlign;
   const baseLineHeightMode = lineHeightModeForOverride(existingOverride);
   const baseLineHeight = baseLineHeightMode === 'custom' ? existingOverride?.lineHeight ?? originalLineHeight : originalLineHeight;
@@ -371,6 +385,13 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     || Math.abs(lineHeight - baseLineHeight) > 0.001
     || lineHeightMode !== baseLineHeightMode
     || JSON.stringify(managedSourceSymbols) !== JSON.stringify(baseManagedSourceSymbols);
+  const translationState = hasDraftChanges
+    ? { label: 'PT-BR ALTERADO NA SESSÃO / NÃO SALVO', className: 'is-dirty' }
+    : existingOverride
+      ? { label: 'PT-BR OVERRIDE SALVO', className: 'is-saved' }
+      : overrideStatusLoading
+        ? { label: 'CARREGANDO ESTADO…', className: 'is-loading' }
+        : { label: 'HERDANDO EN', className: 'is-inherited' };
 
   const requestClose = useCallback(() => {
     if (language === 'pt-BR' && hasDraftChanges && !window.confirm('Há alterações de tradução não salvas. Quer sair e descartá-las?')) {
@@ -799,6 +820,40 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             <button className="rse-close" onClick={requestClose}>✕</button>
           </div>
         </div>
+
+        {language === 'pt-BR' && (
+          <details className="rse-translation-context">
+            <summary>
+              <span className="rse-context-chevron" aria-hidden="true">›</span>
+              <span>Contexto para tradução</span>
+              <span role="status" aria-live="polite" className={`rse-context-status ${translationState.className}`}>
+                {translationState.label}
+              </span>
+            </summary>
+            <div className="rse-context-content">
+              <span className="rse-context-label">FONTE EN</span>
+              <p className="rse-context-source" lang="en">{sourceContextText || '—'}</p>
+              {sourceContextSegments.some(segment => segment.symbolId) && (
+                <p className="rse-context-hint">Símbolos inline aparecem pelos atalhos entre colchetes duplos.</p>
+              )}
+              <div className="rse-context-glossary">
+                <span className="rse-context-label">GLOSSÁRIO OFICIAL</span>
+                {sourceGlossaryMatches.length > 0 ? (
+                  <ul>
+                    {sourceGlossaryMatches.map(match => (
+                      <li key={`${match.source}:${match.target}`}><span lang="en">{match.source}</span><span aria-hidden="true"> → </span><span lang="pt-BR">{match.target}</span></li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>Sem correspondências literais exatas.</p>
+                )}
+              </div>
+              <p className="rse-context-footnote">
+                As correspondências são literais; flexões podem não aparecer. Após salvar, confira a confirmação de sincronização com o Payload.
+              </p>
+            </div>
+          </details>
+        )}
 
         {/* Toolbar */}
         <div className="rse-toolbar">

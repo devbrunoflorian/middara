@@ -124,6 +124,119 @@
   width: 60px;
 }
 
+/* Read-only source and glossary context for manual PT-BR work. */
+.rse-translation-context {
+  padding: 9px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+.rse-translation-context > summary {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  flex-wrap: wrap;
+  min-block-size: 28px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.rse-context-chevron {
+  flex: 0 0 auto;
+  color: #a5b4fc;
+  transition: transform 0.15s ease;
+}
+
+.rse-translation-context[open] .rse-context-chevron { transform: rotate(90deg); }
+
+.rse-translation-context > summary:focus-visible {
+  outline: 2px solid #a5b4fc;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.rse-context-status {
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: #a5b4fc;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.rse-context-status.is-inherited { color: #94a3b8; }
+.rse-context-status.is-saved { color: #86efac; }
+.rse-context-status.is-dirty { color: #fbbf24; }
+.rse-context-status.is-loading { color: #a5b4fc; }
+
+.rse-context-content {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-top: 9px;
+}
+
+.rse-context-label {
+  color: #8f91ae;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.rse-context-source {
+  max-block-size: 150px;
+  overflow: auto;
+  margin: 0;
+  padding: 8px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.045);
+  color: #e2e8f0;
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+.rse-context-hint,
+.rse-context-footnote,
+.rse-context-glossary > p {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.rse-context-footnote { max-inline-size: 72ch; }
+
+.rse-context-glossary {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rse-context-glossary ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rse-context-glossary li {
+  padding: 3px 6px;
+  border: 1px solid rgba(165, 180, 252, 0.2);
+  border-radius: 4px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #dbeafe;
+  font-size: 10px;
+}
+
 .rse-line-height-control {
   display: inline-flex;
   align-items: center;

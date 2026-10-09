@@ -73,13 +73,13 @@ const defaultAliasPreferences = getDefaultSymbolAliasPreferences();
 const plain = (text: string): Segment => ({ ...style, text });
 const symbol = (): Segment => ({ ...style, text: '\uFFFC', symbolId: 'tag.status.icon', symbolMetrics: { widthEm: .9, heightEm: 1, verticalAlignEm: .2 } });
 
-function mount(language: 'en' | 'pt-BR', runs: Segment[], existingOverride?: SpanOverride, originalLineHeight = 1) {
+function mount(language: 'en' | 'pt-BR', runs: Segment[], existingOverride?: SpanOverride, originalLineHeight = 1, overrideStatusLoading = false) {
   const onDraftChange = vi.fn(); const onSave = vi.fn();
   const view = render(<AdminEditorHarness spanKey={`p0-${language}`} pageNumber={37} language={language}
     originalText={runs.map(r => r.text).join('')} originalSegments={runs}
     originalFont={style.font} originalSize={10} originalColor={style.color} originalWeight={400}
     originalStyle="normal" originalLineHeight={originalLineHeight} bbox={[10, 10, 300, 60]} onClose={vi.fn()} onSave={onSave}
-    onDraftChange={onDraftChange} existingOverride={existingOverride} />);
+    onDraftChange={onDraftChange} existingOverride={existingOverride} overrideStatusLoading={overrideStatusLoading} />);
   fireEvent.click(view.getByText('📝 Edit Text'));
   const textarea = view.getByRole('textbox') as HTMLTextAreaElement;
   const edit = (text: string, start = 0, end = start) => {
@@ -296,5 +296,98 @@ describe.each(['en', 'pt-BR'] as const)('RichSpanEditor mounted regression %s', 
     v.edit('Translated  text', 11);
     expect(v.draft()!.managedSourceSymbols).toEqual([]);
     expect(v.draft()!.segments.some(r => r.symbolId)).toBe(false);
+  });
+});
+
+describe('RichSpanEditor translation context and state', () => {
+  it('shows read-only EN source and accurately identifies an existing PT-BR override', () => {
+    const source = [plain('Original Setup text')];
+    const existing: SpanOverride = {
+      spanKey: 'p0-pt-BR', segments: [plain('Texto já traduzido')], bbox: [10, 10, 300, 60],
+    };
+    const v = mount('pt-BR', source, existing);
+    fireEvent.click(v.getByText('Contexto para tradução'));
+
+    const panel = v.container.querySelector('.rse-translation-context')!;
+    expect(panel.querySelector('.rse-context-source')?.textContent).toBe('Original Setup text');
+    expect(panel.querySelector('.rse-context-status')?.textContent).toBe('PT-BR OVERRIDE SALVO');
+    expect(panel.querySelector('input, textarea, button, [contenteditable="true"]')).toBeNull();
+    expect(v.onSave).not.toHaveBeenCalled();
+    v.unmount();
+
+    const inherited = mount('pt-BR', source);
+    fireEvent.click(inherited.getByText('Contexto para tradução'));
+    expect(inherited.container.querySelector('.rse-context-status')?.textContent).toBe('HERDANDO EN');
+  });
+
+  it('does not claim EN inheritance while the parent is still loading saved overrides', () => {
+    const v = mount('pt-BR', [plain('Original text')], undefined, 1, true);
+    expect(v.container.querySelector('.rse-context-status')?.textContent).toBe('CARREGANDO ESTADO…');
+  });
+
+  it('finds case-insensitive literal glossary terms and displays canonical spelling, or the empty state', () => {
+    const matched = mount('pt-BR', [plain('spell and setup; Spellbook is not Spell.')]);
+    fireEvent.click(matched.getByText('Contexto para tradução'));
+    const glossary = matched.container.querySelector('.rse-context-glossary')!;
+    expect(glossary.textContent).toContain('Spell → Feitiço');
+    expect(glossary.textContent).toContain('Setup → Preparação');
+    expect(glossary.textContent).not.toContain('Spellbook');
+    expect(glossary.querySelectorAll('li')).toHaveLength(2);
+
+    const unmatched = mount('pt-BR', [plain('Qzxv has no official glossary match.')]);
+    fireEvent.click(unmatched.getByText('Contexto para tradução'));
+    expect(unmatched.container.querySelector('.rse-context-glossary')?.textContent)
+      .toContain('Sem correspondências literais exatas.');
+  });
+
+  it('opening and closing the context leaves translation and persistence untouched', () => {
+    const v = mount('pt-BR', [plain('No glossary term here')]);
+    const storageWrite = vi.spyOn(Storage.prototype, 'setItem');
+    const storageRemove = vi.spyOn(Storage.prototype, 'removeItem');
+    const initialStorage = Object.fromEntries(Array.from({ length: localStorage.length }, (_, index) => {
+      const key = localStorage.key(index)!;
+      return [key, localStorage.getItem(key)];
+    }));
+    const summary = v.getByText('Contexto para tradução');
+    fireEvent.click(summary);
+    fireEvent.click(summary);
+
+    expect(v.onSave).not.toHaveBeenCalled();
+    expect(storageWrite).not.toHaveBeenCalled();
+    expect(storageRemove).not.toHaveBeenCalled();
+    expect(Object.fromEntries(Array.from({ length: localStorage.length }, (_, index) => {
+      const key = localStorage.key(index)!;
+      return [key, localStorage.getItem(key)];
+    }))).toEqual(initialStorage);
+    expect(v.container.querySelector('.rse-context-source')?.textContent).toBe('No glossary term here');
+  });
+
+  it('tracks inherited, unsaved, saved, edited and reset states across editor reloads', () => {
+    const source = [plain('Original Setup text')];
+    const inherited = mount('pt-BR', source);
+    const readState = (view: typeof inherited) => view.container.querySelector('.rse-context-status')?.textContent;
+    expect(readState(inherited)).toBe('HERDANDO EN');
+    inherited.edit('Texto temporário');
+    expect(readState(inherited)).toBe('PT-BR ALTERADO NA SESSÃO / NÃO SALVO');
+    fireEvent.click(inherited.getByText('💾 Save'));
+    const saved = inherited.onSave.mock.calls.at(-1)?.[0] as SpanOverride;
+    inherited.unmount();
+
+    const reloaded = mount('pt-BR', source, saved);
+    expect(readState(reloaded)).toBe('PT-BR OVERRIDE SALVO');
+    reloaded.edit('Texto salvo editado');
+    expect(readState(reloaded)).toBe('PT-BR ALTERADO NA SESSÃO / NÃO SALVO');
+    vi.stubGlobal('confirm', () => true);
+    fireEvent.click(reloaded.getByText('Reset'));
+    expect(reloaded.onSave.mock.calls.at(-1)?.[0]).toBeNull();
+    reloaded.unmount();
+
+    const afterResetReload = mount('pt-BR', source);
+    expect(readState(afterResetReload)).toBe('HERDANDO EN');
+    expect((afterResetReload.getByRole('textbox') as HTMLTextAreaElement).value).toBe('Original Setup text');
+
+    const english = mount('en', source);
+    expect(english.container.querySelector('.rse-translation-context')).toBeNull();
+    expect((english.getByRole('textbox') as HTMLTextAreaElement).value).toBe('Original Setup text');
   });
 });

@@ -1757,6 +1757,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
           onSave={handleSaveOverride}
           onDraftChange={handleDraftChange}
           existingOverride={selectedExistingOverride}
+          overrideStatusLoading={!overridesReady}
           singleLine={selectedSpan.singleLine}
           editorContext={selectedSpan.editorContext ?? 'paragraph'}
           symbolAliasPreferences={symbolAliasPreferences}
