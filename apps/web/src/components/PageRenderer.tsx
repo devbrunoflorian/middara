@@ -11,6 +11,7 @@ import { sourceSpanRuns } from '../symbols/sourceRuns';
 import { compoundElementIsReplaced, type SourceCompoundElement } from '../symbols/sourceCompounds';
 import { decodeOverrideData, encodeOverrideData } from '../symbols/overrideData';
 import { contentsRowKey, contentsRowUsesLegacy, contentsRowLine, contentsLabelWidth, type ContentsRowDefinition } from '../contentsRows';
+import { calculateTypographicFlowPlan } from '../typographicReflow';
 import { ContentsRowFlow } from './ContentsRowFlow';
 import { exposesNestedSpanTargets, hasPreservedLegacySpanOverride } from '../editorUnitCompatibility';
 import { sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
@@ -1703,6 +1704,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
               layoutObstacles={pageData.layoutObstacles ?? []}
               blockIdx={bIdx}
               pageNumber={pageData.page_number}
+              pageHeightPt={pageData.height}
               scale={scale}
               isAdmin={isAdmin}
               contentsMap={contentsMap}
@@ -1895,6 +1897,7 @@ interface SpanBlockProps {
   layoutObstacles: [number, number, number, number][];
   blockIdx: number;
   pageNumber: number;
+  pageHeightPt: number;
   scale: number;
   isAdmin: boolean;
   contentsMap?: Map<string, number>;
@@ -1917,7 +1920,7 @@ interface SpanBlockProps {
 }
 
 const SpanBlock: React.FC<SpanBlockProps> = ({
-  block, hasSourceInlineSymbols, coveredSourceSymbols, allBlocks, layoutObstacles, blockIdx, pageNumber, scale, isAdmin, contentsMap,
+  block, hasSourceInlineSymbols, coveredSourceSymbols, allBlocks, layoutObstacles, blockIdx, pageNumber, pageHeightPt, scale, isAdmin, contentsMap,
   onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutSelectionKey, layoutDraft, layoutFrames, inheritedLayoutFrames,
   layoutFrameForSelection, layoutFrameOverride, onSelectLayoutFrame,
   selectedBlockKey, overrides, overridesReady, draftOverride, language
@@ -2003,6 +2006,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
       <TypographicUnitBlock
         block={block}
         nextComponentY={findNextSameColumnComponentY(allBlocks, layoutObstacles, block)}
+        pageHeightPt={pageHeightPt}
         units={typographicUnits}
         pageNumber={pageNumber}
         scale={scale}
@@ -2068,7 +2072,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     return <SpanBlock {...{
       block: { ...block, listMarkerLineIndexes: undefined, disableAutoListMarkerDetection: true },
       hasSourceInlineSymbols, coveredSourceSymbols, allBlocks, layoutObstacles, blockIdx, pageNumber, scale,
-      isAdmin, contentsMap, onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutSelectionKey, layoutDraft,
+      isAdmin, contentsMap, onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutSelectionKey, layoutDraft, pageHeightPt,
       layoutFrames, inheritedLayoutFrames, layoutFrameForSelection,
       layoutFrameOverride, onSelectLayoutFrame, selectedBlockKey, overrides, overridesReady, draftOverride, language,
     }} />;
@@ -2114,8 +2118,8 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
         const rowUnitKey = frameUnitKey(pageNumber, rowBlock, blockIdx);
         return (
           <SpanBlock key={rowBlock.editorKey} block={rowBlock} hasSourceInlineSymbols={hasSourceInlineSymbols}
-            coveredSourceSymbols={coveredSourceSymbols} allBlocks={allBlocks} layoutObstacles={layoutObstacles}
-            blockIdx={blockIdx} pageNumber={pageNumber} scale={scale} isAdmin={isAdmin} contentsMap={contentsMap}
+          coveredSourceSymbols={coveredSourceSymbols} allBlocks={allBlocks} layoutObstacles={layoutObstacles}
+          blockIdx={blockIdx} pageNumber={pageNumber} pageHeightPt={pageHeightPt} scale={scale} isAdmin={isAdmin} contentsMap={contentsMap}
             onNavigate={onNavigate} onBlockClick={onBlockClick} layoutMode={layoutMode} layoutUnitKey={rowUnitKey}
             layoutSelectionKey={layoutSelectionKey} layoutDraft={layoutDraft} layoutFrames={layoutFrames}
             inheritedLayoutFrames={inheritedLayoutFrames}
@@ -2364,6 +2368,7 @@ const CreditUnitBlock: React.FC<CreditUnitBlockProps> = ({
 interface TypographicUnitBlockProps {
   block: Block;
   nextComponentY?: number;
+  pageHeightPt: number;
   units: TypographicUnitDefinition[];
   pageNumber: number;
   scale: number;
@@ -2455,24 +2460,30 @@ function extractInlineSpanUnitInfo(
 }
 
 const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
-  block, nextComponentY, units, pageNumber, scale, isAdmin, layoutMode, layoutUnitKey, layoutDraft,
+  block, nextComponentY, pageHeightPt, units, pageNumber, scale, isAdmin, layoutMode, layoutUnitKey, layoutDraft,
   layoutFrames, inheritedLayoutFrames, onSelectLayoutFrame, onBlockClick, selectedBlockKey,
   overrides, draftOverride, language,
 }) => {
-  const [measuredUnitHeightsPt, setMeasuredUnitHeightsPt] = useState<Record<string, number>>({});
-  const handleUnitMeasure = useCallback((unitId: string, heightPx: number | null) => {
+  const [measuredUnitContentBoundsPt, setMeasuredUnitContentBoundsPt] = useState<Record<string, { topOffsetPt: number; bottomOffsetPt: number }>>({});
+  const handleUnitMeasure = useCallback((unitId: string, boundsPx: { topPx: number; bottomPx: number } | null) => {
     if (!scale) return;
-    setMeasuredUnitHeightsPt(current => {
-      if (heightPx === null) {
+    setMeasuredUnitContentBoundsPt(current => {
+      if (boundsPx === null) {
         if (!(unitId in current)) return current;
         const next = { ...current };
         delete next[unitId];
         return next;
       }
-      const heightPt = heightPx / scale;
-      return Math.abs((current[unitId] ?? -1) - heightPt) < 0.05
+      const boundsPt = {
+        topOffsetPt: boundsPx.topPx / scale,
+        bottomOffsetPt: boundsPx.bottomPx / scale,
+      };
+      const previous = current[unitId];
+      return previous
+        && Math.abs(previous.topOffsetPt - boundsPt.topOffsetPt) < 0.05
+        && Math.abs(previous.bottomOffsetPt - boundsPt.bottomOffsetPt) < 0.05
         ? current
-        : { ...current, [unitId]: heightPt };
+        : { ...current, [unitId]: boundsPt };
     });
   }, [scale]);
   // A semantic field owns its complete source lines, whatever its editorial
@@ -2514,29 +2525,47 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
     );
   }
   const flowUnits = units.filter(unit => !unit.fixedPosition);
-
-  // Each translated paragraph keeps its source gap to the next paragraph.
-  // Any extra height is accumulated through the rest of this visual block,
-  // so three or more siblings flow just as the two-unit p.78 pilot does.
-  const requiredOffsetsPt = new Map<string, number>();
-  let totalRequiredPushPt = 0;
-  flowUnits.forEach((unit, index) => {
-    requiredOffsetsPt.set(unit.id, totalRequiredPushPt);
-    const nextUnit = flowUnits[index + 1];
-    const measuredHeightPt = measuredUnitHeightsPt[unit.id];
-    if (!nextUnit || measuredHeightPt === undefined) return;
-    const sourceGapPt = nextUnit.field.bbox[1] - unit.field.bbox[1];
-    totalRequiredPushPt += Math.max(0, measuredHeightPt - sourceGapPt);
-  });
-  const availablePushPt = nextComponentY === undefined
-    ? 0
-    : Math.max(0, nextComponentY - block.bbox[3]);
-  const canApplyReflowPush = totalRequiredPushPt <= availablePushPt + 0.01;
+  const frameForUnit = (unit: TypographicUnitDefinition): LayoutFrame | undefined => {
+    const key = typographicUnitFrameKey(pageNumber, unit);
+    return layoutMode && layoutUnitKey === key && layoutDraft
+      ? layoutDraft
+      : layoutFrames.get(key) ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(key) : undefined);
+  };
+  const flowPlan = calculateTypographicFlowPlan(
+    flowUnits.map(unit => ({
+      id: unit.id,
+      sourceTopPt: unit.field.bbox[1],
+      sourceBottomPt: unit.field.bbox[3],
+      frameTopPt: frameForUnit(unit)?.y ?? unit.field.bbox[1],
+    })),
+    measuredUnitContentBoundsPt,
+  );
+  const flowBoundaryY = Math.min(nextComponentY ?? pageHeightPt, pageHeightPt);
+  const reflowOverflowUnits = new Set(flowUnits.filter(unit => {
+    const offsetPt = flowPlan.offsetsByUnitId.get(unit.id) ?? 0;
+    const contentBoundsPt = measuredUnitContentBoundsPt[unit.id];
+    if (contentBoundsPt === undefined && offsetPt === 0) return false;
+    const sourceHeightPt = Math.max(0, unit.field.bbox[3] - unit.field.bbox[1]);
+    const contentBottomOffsetPt = contentBoundsPt?.bottomOffsetPt ?? sourceHeightPt;
+    const frameTopPt = frameForUnit(unit)?.y ?? unit.field.bbox[1];
+    return frameTopPt + offsetPt + contentBottomOffsetPt > flowBoundaryY + 0.5;
+  }).map(unit => unit.id));
   const flowOffsetFor = (unit: TypographicUnitDefinition | undefined): number =>
-    unit && canApplyReflowPush ? requiredOffsetsPt.get(unit.id) ?? 0 : 0;
+    unit ? flowPlan.offsetsByUnitId.get(unit.id) ?? 0 : 0;
 
   return (
-    <div className="block-container" style={blockStyle}>
+    <div
+      className="block-container"
+      style={blockStyle}
+      data-reflow-overflow-pt={reflowOverflowUnits.size ? Math.max(...flowUnits
+        .filter(unit => reflowOverflowUnits.has(unit.id))
+        .map(unit => {
+          const frameTopPt = frameForUnit(unit)?.y ?? unit.field.bbox[1];
+          const sourceHeightPt = Math.max(0, unit.field.bbox[3] - unit.field.bbox[1]);
+          const contentBottomOffsetPt = measuredUnitContentBoundsPt[unit.id]?.bottomOffsetPt ?? sourceHeightPt;
+          return frameTopPt + flowOffsetFor(unit) + contentBottomOffsetPt - flowBoundaryY;
+        })) : undefined}
+    >
       {fixedSourceLines.map(line => (
         <div key={`static-${line.id}`} className="static-editor-line" onClick={event => event.stopPropagation()}>
           <LineRenderer
@@ -2555,9 +2584,7 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
         const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
         const frameKey = typographicUnitFrameKey(pageNumber, unit);
         const sourceFrame = sourceLayoutFrameForField(unit.field);
-        const frameForSelection = layoutFrames.get(frameKey)
-          ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(frameKey) : undefined)
-          ?? sourceFrame;
+        const frameForSelection = frameForUnit(unit) ?? sourceFrame;
         const frameOverride = layoutMode && layoutUnitKey === frameKey && layoutDraft
           ? layoutDraft
           : layoutFrames.get(frameKey) ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(frameKey) : undefined);
@@ -2581,6 +2608,7 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
             isAdmin={isAdmin}
             selected={selectedBlockKey === spanKey}
             override={override}
+            flowOverflow={reflowOverflowUnits.has(unit.id)}
             language={language}
             nextFieldY={nextFieldY}
             topOffsetPt={unitOffsetPt}
@@ -2612,6 +2640,7 @@ interface CreditFieldProps {
   isAdmin: boolean;
   selected: boolean;
   override: SpanOverride | null;
+  flowOverflow?: boolean;
   language: 'en' | 'pt-BR';
   unitKind?: TypographicUnitDefinition['kind'];
   unitLabel?: string;
@@ -2622,7 +2651,7 @@ interface CreditFieldProps {
   layoutFrameForSelection?: LayoutFrame;
   layoutFrameOverride?: LayoutFrame;
   onSelectLayoutFrame?: (unitKey: string, initialFrame: LayoutFrame) => void;
-  onPreviewMeasure?: (heightPx: number | null) => void;
+  onPreviewMeasure?: (boundsPx: { topPx: number; bottomPx: number } | null) => void;
   inlineSpanStates?: Map<string, InlineSpanUnitRenderState>;
   onInlineSpanClick?: (state: InlineSpanUnitRenderState) => void;
   onBlockClick: (info: SelectedSpanInfo) => void;
@@ -2647,7 +2676,7 @@ function sourceLeadingContentOffsetPt(line: LineData | undefined): number {
 }
 
 const CreditField: React.FC<CreditFieldProps> = ({
-  block, field, spanKey, scale, isAdmin, selected, override, language, nextFieldY,
+  block, field, spanKey, scale, isAdmin, selected, override, flowOverflow = false, language, nextFieldY,
   unitKind, unitLabel, topOffsetPt = 0, layoutMode = false, layoutUnitKey, layoutFrameForSelection,
   layoutFrameOverride, onSelectLayoutFrame, onPreviewMeasure, inlineSpanStates, onInlineSpanClick, onBlockClick,
 }) => {
@@ -2687,9 +2716,28 @@ const CreditField: React.FC<CreditFieldProps> = ({
     const preview = previewRef.current;
     if (override && preview) {
       // A unit can fit its own ink bbox and still run into the next typography unit.
-      // Bound it by the next field's start when one exists; keep 1px for browser rounding.
-      setIsOverflowing(preview.scrollHeight > neighborHeight * scale + 1);
-      onPreviewMeasure?.(preview.scrollHeight);
+      const previewRect = preview.getBoundingClientRect();
+      const contentRects: DOMRect[] = [];
+      const contentRange = document.createRange();
+      contentRange.selectNodeContents(preview);
+      for (const rect of Array.from(contentRange.getClientRects())) {
+        if (rect.width > 0 && rect.height > 0) contentRects.push(rect);
+      }
+      for (const element of preview.querySelectorAll('[data-source-inline-semantic], [data-source-inline-placeholder], svg[data-symbol-id], img')) {
+        const rect = element.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) contentRects.push(rect);
+      }
+      const contentBoundsPx = contentRects.length > 0
+        ? {
+            topPx: Math.min(...contentRects.map(rect => rect.top)) - previewRect.top,
+            bottomPx: Math.max(...contentRects.map(rect => rect.bottom)) - previewRect.top,
+          }
+        : { topPx: 0, bottomPx: previewRect.height };
+      // Keep the visible overflow indicator tied to the measured layout box.
+      // Inline fragment rects may extend a fraction of a point across a source
+      // baseline boundary, which is normal font ink overlap rather than copyfit.
+      setIsOverflowing(previewRect.height > neighborHeight * scale + 1);
+      onPreviewMeasure?.(contentBoundsPx);
     } else {
       setIsOverflowing(false);
       onPreviewMeasure?.(null);
@@ -2700,7 +2748,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const leadingContentOffsetPt = sourceLeadingContentOffsetPt(lines[0]);
   const sourceClass = isAdmin ? (layoutMode ? 'layout-frame-selectable' : 'credit-edit-field') : '';
   const selectedClass = selected ? 'credit-field-selected' : '';
-  const overflowClass = isAdmin && isOverflowing ? 'block-overflow' : '';
+  const overflowClass = isAdmin && (isOverflowing || flowOverflow) ? 'block-overflow' : '';
 
   const handleClick = (event: React.MouseEvent) => {
     if (!isAdmin) return;
