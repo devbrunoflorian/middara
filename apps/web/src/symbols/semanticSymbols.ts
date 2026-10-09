@@ -139,6 +139,7 @@ const PREFERRED_EDITOR_ALIASES: Record<string, string[]> = {
   'combat.page': ['combat-page', 'pagina-de-combate'],
   'terrain.red-border': ['red-terrain-border', 'borda-vermelha-de-terreno'],
   'tag.important.icon': ['lightning', 'raio', 'important-icon'],
+  'action.exhaust': ['exhaust-action', 'exhaust-icon', 'icone-de-exaustao'],
   'tag.discard.icon': ['discard-icon', 'icone-descartar'],
   'tag.status.icon': ['status-icon', 'icone-status'],
   'tag.passive.icon': ['passive-icon', 'icone-passivo'],
