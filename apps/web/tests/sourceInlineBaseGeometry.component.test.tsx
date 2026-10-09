@@ -103,6 +103,8 @@ describe('source inline symbol base geometry', () => {
       }
     }
 
-    expect({ elementCount, lineCount: seenLines.size, affectedPages }).toEqual({ elementCount: 178, lineCount: 171, affectedPages: 48 });
+    // The two restored action.exhaust source placements (pp. 37 and 100) add
+    // two inline elements and two distinct source lines to the accepted inventory.
+    expect({ elementCount, lineCount: seenLines.size, affectedPages }).toEqual({ elementCount: 180, lineCount: 173, affectedPages: 48 });
   });
 });
