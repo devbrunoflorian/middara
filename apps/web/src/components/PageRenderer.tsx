@@ -1119,8 +1119,11 @@ export function overrideIsSourceEquivalent(
   if (override.segments.some(segment => /[\r\n]/u.test(segment.text))) return false;
   if (override.textAlign !== undefined && override.textAlign !== sourceLayout.textAlign) return false;
   if (override.lineHeight !== undefined && Math.abs(override.lineHeight - sourceLayout.lineHeight) > 0.0001) return false;
-  return sourceGeometrySignature(override.segments)
-    === sourceGeometrySignature(normalizeParagraphSourceSegments(sourceSegments));
+  // Extraction wraps are normalized to a single editorial space on the source
+  // side. Once normalized, preserve whitespace multiplicity in the override so
+  // a real extra/missing space cannot be mistaken for the source composition.
+  return sourceGeometrySignature(override.segments, true)
+    === sourceGeometrySignature(normalizeParagraphSourceSegments(sourceSegments), true);
 }
 
 function overridePreservesSourceLineContent(override: SpanOverride, sourceSegments: Segment[]): boolean {
@@ -2250,6 +2253,29 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   const inlineSpanStates = buildInlineSpanStates(
     block, pageNumber, selectedBlockKey, overrides, draftOverride, language,
   );
+  const inlineSpanHitTargets = isAdmin && !layoutMode
+    ? (block.typographicSpanUnits ?? []).flatMap(unit => {
+      const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
+      const state = inlineSpanStates.get(unit.spanRefs[0]);
+      if (!state?.renderAtRef || state.interactive === false) return [];
+      const references = new Set(unit.spanRefs);
+      const targetSpans = (block.lines ?? []).flatMap(line => line.spans.flatMap((span, index) => {
+        const reference = `${line.id}:${span.sourceSpanIndex ?? index}`;
+        return references.has(reference) && !span.semanticSymbolId && !span.renderOnlyStrokePass
+          ? [span] : [];
+      }));
+      if (!targetSpans.length) return [];
+      const bounds = targetSpans.map(span => span.bbox);
+      return [{
+        spanKey,
+        state,
+        x: Math.min(...bounds.map(bbox => bbox[0])),
+        y: Math.min(...bounds.map(bbox => bbox[1])),
+        right: Math.max(...bounds.map(bbox => bbox[2])),
+        bottom: Math.max(...bounds.map(bbox => bbox[3])),
+      }];
+    })
+    : [];
 
   const blockCanEdit = isAdmin && !layoutMode && !block.adminReadOnly;
   const blockCanSelectLayout = isAdmin && layoutMode && !block.adminReadOnly && !fixedEditorLineIndexes(block).size
@@ -2273,12 +2299,50 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
       textAlign: block.layoutFrame?.textAlign ?? 'left',
       lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
     });
-  if (!isAdmin && language === 'en' && hasExactSourceGeometry(block) && (!currentOverride || sourceOverrideIsUnchanged)) {
+  const nestedOverridesAreSourceEquivalent = Array.from(new Map(
+    Array.from(inlineSpanStates.values(), state => [state.spanKey, state] as const),
+  ).values()).every(state => !state.override || overrideIsSourceEquivalent(
+    state.override,
+    state.info.sourceSegments ?? [],
+    {
+      textAlign: 'left',
+      lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+    },
+  ));
+  if (language === 'en' && (!isAdmin || !layoutMode) && hasExactSourceGeometry(block)
+    && (!currentOverride || sourceOverrideIsUnchanged) && nestedOverridesAreSourceEquivalent) {
     return (
       <div className={`block-container ${blockHoverClass} ${overflowClass}`} data-render-mode="sourceGeometry"
         style={{ ...blockStyle, left: `${blockX * scale}px`, top: `${blockY * scale}px`, width: `${blockW * scale}px`, height: `${blockH * scale}px` }}
         onClick={handleBlockClick} {...geometryAttributes}>
         <SourceGeometryBlock block={block} scale={scale} blockOriginX={blockX} blockOriginY={blockY} />
+        {inlineSpanHitTargets.map(target => (
+          <button
+            key={target.spanKey}
+            type="button"
+            className={`span-editable ${target.state.selected ? 'span-selected' : ''}`}
+            data-source-inline-hit-target={target.spanKey}
+            aria-label={`Edit text ${target.state.info.text.slice(0, 48)}`}
+            title={target.state.info.text}
+            style={{
+              position: 'absolute',
+              left: `${(target.x - blockX) * scale}px`,
+              top: `${(target.y - blockY) * scale}px`,
+              width: `${Math.max(1, (target.right - target.x) * scale)}px`,
+              height: `${Math.max(1, (target.bottom - target.y) * scale)}px`,
+              padding: 0,
+              border: 0,
+              background: 'transparent',
+              color: 'transparent',
+              fontSize: 0,
+              zIndex: 2,
+            }}
+            onClick={event => {
+              event.stopPropagation();
+              onBlockClick(target.state.info);
+            }}
+          />
+        ))}
       </div>
     );
   }

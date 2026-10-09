@@ -3,7 +3,7 @@ import { createRoot, type Root } from 'react-dom/client';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { PageRenderer, overrideIsSourceEquivalent, type PageData } from '../src/components/PageRenderer';
+import { PageRenderer, mapPdfFont, overrideIsSourceEquivalent, type PageData } from '../src/components/PageRenderer';
 import { attachSourceInlineElements } from '../src/symbols/sourceInlineElements';
 import type { SourceInlineElement } from '../src/symbols/sourceInlineElements';
 import { sourceSpanRuns } from '../src/symbols/sourceRuns';
@@ -178,6 +178,162 @@ describe('source geometry for editorial fields', () => {
     }
   });
 
+  it('keeps normal P78 blocks source-identical in Admin and preserves nested span targets', async () => {
+    const page = JSON.parse(readFileSync(
+      join(process.cwd(), 'public/pages/page_078/page_078_dom.json'), 'utf8',
+    )) as PageData;
+    const inlineElements = (JSON.parse(readFileSync(
+      join(process.cwd(), 'public/pages/page_078/inline_elements.json'), 'utf8',
+    )) as { elements: SourceInlineElement[] }).elements;
+    const blockIds = ['block_12', 'block_15', 'block_25'];
+    const sourceBlocks = page.blocks.filter(block => blockIds.includes(block.id));
+    expect(sourceBlocks.find(block => block.id === 'block_25')?.typographicSpanUnits?.length).toBeGreaterThan(0);
+    page.images = [];
+    page.blocks = attachSourceInlineElements(sourceBlocks, inlineElements);
+    page.inlineElements = inlineElements;
+    page.fidelityOverlays = [];
+    const lineIds = page.blocks.flatMap(block => (block.lines ?? []).map(line => line.id));
+
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    root = createRoot(container);
+
+    const renderMode = async (isAdmin: boolean) => {
+      await act(async () => {
+        root!.render(<PageRenderer pageData={page} isAdmin={isAdmin} language="en" />);
+        await new Promise(resolve => setTimeout(resolve, 0));
+      });
+    };
+    const sourceComposition = () => lineIds.map(lineId => {
+      const line = container!.querySelector<SVGGElement>(
+        `svg[data-source-geometry="pdf-coordinates"] g[data-source-line-id="${lineId}"]`,
+      );
+      if (!line) return { lineId, missingSourceLine: true };
+      return {
+        lineId,
+        baseline: line.getAttribute('data-source-baseline-y'),
+        spans: Array.from(line.querySelectorAll<SVGTextElement>('text[data-source-span]')).map(span => ({
+          text: span.textContent,
+          x: span.getAttribute('data-source-x'),
+          baseline: span.getAttribute('data-source-baseline-y'),
+          bbox: span.getAttribute('data-source-bbox'),
+          textLength: span.getAttribute('textLength'),
+          fontFamily: span.style.fontFamily,
+          fontSize: span.style.fontSize,
+          fontWeight: span.style.fontWeight,
+          fontStyle: span.style.fontStyle,
+        })),
+        symbols: Array.from(line.querySelectorAll<SVGSVGElement>('svg[data-source-symbol-id]')).map(symbol => ({
+          id: symbol.getAttribute('data-source-symbol-id'),
+          x: symbol.getAttribute('data-source-x'),
+          y: symbol.getAttribute('data-source-y'),
+          bbox: symbol.getAttribute('data-source-bbox'),
+        })),
+      };
+    });
+
+    await renderMode(false);
+    const viewerComposition = sourceComposition();
+    expect(viewerComposition.every(line => !('missingSourceLine' in line))).toBe(true);
+    expect(viewerComposition.flatMap(line => 'symbols' in line ? line.symbols : []).length).toBeGreaterThan(0);
+    expect(container!.querySelectorAll('text[data-source-span]').length).toBeGreaterThan(0);
+
+    for (const isAdmin of [true, false, true]) {
+      await renderMode(isAdmin);
+      expect(sourceComposition()).toEqual(viewerComposition);
+      if (isAdmin) {
+        const hitTarget = container!.querySelector<HTMLElement>(
+          '[data-source-inline-hit-target="page_78_unit_p78-block-25-font-size-9pt-unit-01__en"]',
+        );
+        expect(hitTarget).not.toBeNull();
+        await act(async () => {
+          hitTarget!.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        });
+        expect(hitTarget!.classList.contains('span-selected')).toBe(true);
+        expect(sourceComposition()).toEqual(viewerComposition);
+      }
+    }
+  });
+
+  it('reloads a source-equivalent normal EN block from Payload into source geometry', async () => {
+    const page = JSON.parse(readFileSync(
+      join(process.cwd(), 'public/pages/page_078/page_078_dom.json'), 'utf8',
+    )) as PageData;
+    const sourceBlock = page.blocks.find(block => block.id === 'block_12')!;
+    const block = { ...sourceBlock, editorKey: 'p78-normal-heading-source-equivalent' };
+    const sourceSegments = sourceSpanRuns(block.lines!.flatMap(line => line.spans), mapPdfFont)
+      .map(segment => ({ ...segment, text: segment.text.replace(/[\r\n]+/gu, ' ').replace(/\s+/gu, ' ').trim() }))
+      .filter(segment => segment.text.length > 0);
+    const spanKey = `${block.editorKey}__en`;
+    const fetchMock = vi.fn().mockImplementation(async (input: string | URL) => ({
+      ok: true,
+      json: async () => String(input).includes('/api/translations')
+        ? { docs: [{ spanKey, data: { schemaVersion: 2, segments: sourceSegments } }] }
+        : { docs: [] },
+    }));
+    vi.stubGlobal('fetch', fetchMock);
+    const initialStorage = JSON.stringify(Object.entries(localStorage));
+    const fixture = { ...page, blocks: [block], images: [], fidelityOverlays: [] };
+
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    root = createRoot(container);
+    await act(async () => {
+      root!.render(<PageRenderer pageData={fixture} isAdmin={false} language="en" />);
+      await new Promise(resolve => setTimeout(resolve, 0));
+    });
+    expect(container.querySelector('svg[data-source-geometry="pdf-coordinates"] g[data-source-line-id="line_12_0"]')).not.toBeNull();
+
+    await act(async () => {
+      root!.render(<PageRenderer pageData={fixture} isAdmin language="en" />);
+      await new Promise(resolve => setTimeout(resolve, 0));
+    });
+    expect(container.querySelector('svg[data-source-geometry="pdf-coordinates"] g[data-source-line-id="line_12_0"]')).not.toBeNull();
+
+    await act(async () => root!.unmount());
+    root = createRoot(container);
+    await act(async () => {
+      root!.render(<PageRenderer pageData={fixture} isAdmin language="en" />);
+      await new Promise(resolve => setTimeout(resolve, 0));
+    });
+    expect(container.querySelector('svg[data-source-geometry="pdf-coordinates"] g[data-source-line-id="line_12_0"]')).not.toBeNull();
+    expect(container.querySelector('.realbox')).toBeNull();
+    expect(JSON.stringify(Object.entries(localStorage))).toBe(initialStorage);
+    expect(fetchMock.mock.calls.every(([, init]) => !init?.method || init.method.toUpperCase() === 'GET')).toBe(true);
+  });
+
+  it('keeps non-source-equivalent normal EN overrides in editable flow', async () => {
+    const page = JSON.parse(readFileSync(
+      join(process.cwd(), 'public/pages/page_078/page_078_dom.json'), 'utf8',
+    )) as PageData;
+    const sourceBlock = page.blocks.find(block => block.id === 'block_12')!;
+    const block = { ...sourceBlock, editorKey: 'p78-normal-heading-edited' };
+    const sourceSegments = sourceSpanRuns(block.lines!.flatMap(line => line.spans), mapPdfFont)
+      .map(segment => ({ ...segment, text: segment.text.replace(/[\r\n]+/gu, ' ').replace(/\s+/gu, ' ').trim() }))
+      .filter(segment => segment.text.length > 0);
+    const spanKey = `${block.editorKey}__en`;
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async (input: string | URL) => ({
+      ok: true,
+      json: async () => String(input).includes('/api/translations')
+        ? { docs: [{ spanKey, data: { schemaVersion: 2, segments: [{ ...sourceSegments[0], text: 'Gigas  Grip' }] } }] }
+        : { docs: [] },
+    })));
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    root = createRoot(container);
+    const fixture = { ...page, blocks: [block], images: [], fidelityOverlays: [] };
+
+    for (const isAdmin of [false, true]) {
+      await act(async () => {
+        root!.render(<PageRenderer pageData={fixture} isAdmin={isAdmin} language="en" />);
+        await new Promise(resolve => setTimeout(resolve, 0));
+      });
+      expect(container.querySelector('.realbox')).not.toBeNull();
+      expect(container.querySelector('svg[data-source-geometry="pdf-coordinates"] g[data-source-line-id="line_12_0"]')).toBeNull();
+      expect(container.textContent).toContain('Gigas  Grip');
+    }
+  });
+
   it('uses traced glyph width instead of the extraction bbox width when a source line ends with a newline', async () => {
     const page = JSON.parse(readFileSync(
       join(process.cwd(), 'public/pages/page_078/page_078_dom.json'),
@@ -285,6 +441,34 @@ describe('source geometry for editorial fields', () => {
     expect(renderedLine).not.toBeNull();
     expect(Number(renderedLine!.getAttribute('data-source-baseline-y'))).toBeCloseTo(261.034423828125, 4);
     expect(renderedLine!.closest('svg[data-source-geometry="pdf-coordinates"]')?.querySelectorAll('[data-source-symbol-id]')).toHaveLength(4);
+
+    const composition = () => unit.field.lineIds.map(lineId => {
+      const line = container!.querySelector<SVGGElement>(
+        `svg[data-source-geometry="pdf-coordinates"] g[data-source-line-id="${lineId}"]`,
+      );
+      return line && {
+        lineId,
+        baseline: line.getAttribute('data-source-baseline-y'),
+        text: Array.from(line.querySelectorAll<SVGTextElement>('text[data-source-span]')).map(span => ({
+          text: span.textContent,
+          x: span.getAttribute('data-source-x'),
+          y: span.getAttribute('data-source-baseline-y'),
+          length: span.getAttribute('textLength'),
+          weight: span.style.fontWeight,
+          style: span.style.fontStyle,
+        })),
+        symbols: Array.from(line.querySelectorAll<SVGSVGElement>('svg[data-source-symbol-id]')).map(symbol => ({
+          id: symbol.getAttribute('data-source-symbol-id'),
+          bbox: symbol.getAttribute('data-source-bbox'),
+        })),
+      };
+    });
+    const viewerComposition = composition();
+    await act(async () => {
+      root!.render(<PageRenderer pageData={page} isAdmin language="en" />);
+      await new Promise(resolve => setTimeout(resolve, 0));
+    });
+    expect(composition()).toEqual(viewerComposition);
   });
 
   it('uses exact source geometry for P13 label, step and Note fields without absorbing the list marker', async () => {
@@ -319,6 +503,60 @@ describe('source geometry for editorial fields', () => {
     const listMarker = container.querySelector<HTMLElement>('[data-source-line-id="line_24_0"]');
     expect(listMarker).not.toBeNull();
     expect(listMarker!.closest('.credit-field')).toBeNull();
+  });
+
+  it('keeps P24 heading and body source composition identical in Viewer and Admin', async () => {
+    const page = JSON.parse(readFileSync(
+      join(process.cwd(), 'public/pages/page_024/page_024_dom.json'),
+      'utf8',
+    )) as PageData;
+    const block = page.blocks.find(candidate => candidate.id === 'block_36')!;
+    expect(block.typographicUnits?.map(unit => unit.field.lineIds)).toEqual([
+      ['line_36_0'],
+      ['line_36_2', 'line_36_3', 'line_36_4', 'line_36_5'],
+    ]);
+    page.images = [];
+    page.blocks = [block];
+    page.fidelityOverlays = [];
+
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    root = createRoot(container);
+    const renderMode = async (isAdmin: boolean) => {
+      await act(async () => {
+        root!.render(<PageRenderer pageData={page} isAdmin={isAdmin} language="en" />);
+        await new Promise(resolve => setTimeout(resolve, 0));
+      });
+    };
+    const composition = () => ['line_36_0', 'line_36_2', 'line_36_3', 'line_36_4', 'line_36_5'].map(lineId => {
+      const line = container!.querySelector<SVGGElement>(
+        `svg[data-source-geometry="pdf-coordinates"] g[data-source-line-id="${lineId}"]`,
+      );
+      if (!line) return { lineId, missingSourceLine: true };
+      return {
+        lineId,
+        baseline: line.getAttribute('data-source-baseline-y'),
+        spans: Array.from(line.querySelectorAll<SVGTextElement>('text[data-source-span]')).map(span => ({
+          text: span.textContent,
+          x: span.getAttribute('data-source-x'),
+          baseline: span.getAttribute('data-source-baseline-y'),
+          bbox: span.getAttribute('data-source-bbox'),
+          textLength: span.getAttribute('textLength'),
+          style: span.getAttribute('style'),
+        })),
+        symbols: Array.from(line.querySelectorAll<SVGSVGElement>('svg[data-source-symbol-id]')).map(symbol => ({
+          id: symbol.getAttribute('data-source-symbol-id'),
+          bbox: symbol.getAttribute('data-source-bbox'),
+        })),
+      };
+    });
+
+    await renderMode(false);
+    const viewerComposition = composition();
+    expect(viewerComposition.every(line => !('missingSourceLine' in line))).toBe(true);
+    await renderMode(true);
+    expect(composition()).toEqual(viewerComposition);
+    expect(container.querySelectorAll('[data-admin-geometry-key^="page_24_unit_"]')).toHaveLength(2);
   });
 
   it('uses measured PDF origins for an ordinary text-only block without semantic symbols', async () => {
@@ -382,5 +620,20 @@ describe('source geometry for editorial fields', () => {
     } as any, sourceSegments, sourceLayout)).toBe(false);
     expect(overrideIsSourceEquivalent({ segments: sourceSegments, lineHeight: 1.2 } as any, sourceSegments, sourceLayout)).toBe(false);
     expect(overrideIsSourceEquivalent({ segments: sourceSegments, textAlign: 'center' } as any, sourceSegments, sourceLayout)).toBe(false);
+  });
+
+  it('keeps meaningful whitespace changes on flow and returns removed whitespace to source', () => {
+    const sourceSegments = [{ text: 'One phrase follows.', font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const }];
+    const sourceLayout = { textAlign: 'left' as const, lineHeight: 1.1 };
+    expect(overrideIsSourceEquivalent({ segments: sourceSegments } as any, sourceSegments, sourceLayout)).toBe(true);
+    expect(overrideIsSourceEquivalent({
+      segments: [{ ...sourceSegments[0], text: 'One  phrase follows.' }],
+    } as any, sourceSegments, sourceLayout)).toBe(false);
+    expect(overrideIsSourceEquivalent({
+      segments: [{ ...sourceSegments[0], text: 'One phrase follows.' }],
+    } as any, sourceSegments, sourceLayout)).toBe(true);
+    expect(overrideIsSourceEquivalent({
+      segments: [{ ...sourceSegments[0], text: 'One phrase\nfollows.' }],
+    } as any, sourceSegments, sourceLayout)).toBe(false);
   });
 });
