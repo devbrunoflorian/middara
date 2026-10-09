@@ -61,6 +61,7 @@ Quebras de linha digitadas no campo pertencem ao mesmo override. Elas não criam
 ## Persistência, viewer e export
 
 - O texto salvo fica como override da unidade selecionada, com uma chave estável derivada da página/unidade e do locale. As traduções existentes e seus keys não devem ser renomeados ou migrados durante a tradução manual.
+- Para salvar uma cópia dos registros confirmados no Payload, consulte [backup portátil](translation-backup.md). A CLI não inclui localStorage-only saves nem drafts de sessão.
 - O viewer mostra o draft ao vivo. Salvar atualiza o estado local e tenta sincronizar com Payload; reload é a verificação prática de persistência.
 - Preview visual não equivale a export. Quando for necessário um PDF de página, o caminho atual é `scripts/export_page_pdf.mjs`; para um Rulebook completo, existe `scripts/export_full_book_ptbr.mjs`. O export integral não é um gate para começar ou continuar a tradução manual. `scripts/export-translations.ts` é um export legado de dados e não gera o PDF do livro.
 - Não há hoje um pacote genérico de tradução Markdown/CSV para importação pelo Admin. Não presuma que colar um draft ou `{{symbol:id}}` grave dados no editor. `{{symbol:id}}` é notação documental antiga; a edição atual usa a paleta e aliases `[[...]]`.
