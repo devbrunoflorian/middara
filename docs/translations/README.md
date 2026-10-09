@@ -1,27 +1,22 @@
-# Middara Rulebook 1.2 — translation drafts
+# Middara Rulebook 1.2 — translation reference and progress
 
-This folder is the maintained home for page-by-page English source text and Brazilian Portuguese drafts. The official PDF is the textual source of truth. App JSON, database entries, previous extraction files, and screenshots help with style/context but do not replace the PDF.
+This folder contains translation references, curated notes, source extracts, and page-level history. The active production route is manual EN→PT-BR translation in the Admin RichSpanEditor, saved as unit overrides. The official PDF remains the textual source of truth; app JSON, database entries, previous extraction files, and screenshots help with locating context but do not replace it.
 
 **Escopo confirmado pelo usuário:** o conteúdo já existente no database das páginas impressas 1–12 está aprovado e deve ser preservado. A fila/drafts novos começam na p. 13; essa aprovação se refere ao conteúdo persistido, não afirma que cada página esteja integralmente traduzida.
 Os estados das páginas 1–12 em `page-status.csv` são registros de auditorias anteriores, não uma solicitação para reabrir essa faixa. A fila de produção ativa começa na p. 13.
 
-Use [`production-workflow.md`](production-workflow.md) para o procedimento repetível, [`templates/page-template.md`](templates/page-template.md) para novos drafts e [`pilots/workflow-acceptance.md`](pilots/workflow-acceptance.md) para os pilotos e pendências antes de escalar.
+Use [`manual-editor-workflow.md`](manual-editor-workflow.md) for the current repeatable translation procedure. [`production-workflow.md`](production-workflow.md) and the Markdown templates describe the older offline draft/review process; they are reference material, not the active save/preview route. Pilot files preserve historical decisions and evidence.
 
-## Workflow
+## Current workflow
 
-1. Extract source English directly from the PDF and map the text to visible, semantic units.
-2. Check wording, ordering, and styling against the PDF. Keep a separate note for ambiguous text over cards/artwork; do not automatically translate or suppress it.
-3. Mark English source/layout status. Only after a page's English has passed the fidelity review, add PT-BR beneath the corresponding English units.
-4. Apply the official glossary and page 2 voice reference. Record unresolved recurring terms as candidates rather than silently standardizing them.
-5. Calculate character expansion as a warning signal, preserve source hierarchy, and review actual line wrapping/frame fit in the rendered PT preview. Use a DTP flag when the layout needs a deliberate change.
+Translate the next page/unit manually in the Admin viewer, compare against the PDF, use the canonical glossary and limited page 2 voice sample, inspect PT reflow, then save and reload. Do not auto-translate. See the workflow guide for exact steps and for the current limits of page status, glossary matching, overflow signals, and export.
 
-Run `python scripts/audit_translation_copyfit.py` to list expansion alerts by EN/PT unit; use `--output <path>` for a CSV. The scanner is read-only and reports character counts only. It cannot certify line breaks, glyph widths, frame fit, or page fidelity.
-
-The existing 20% value is a review threshold, not an automatic pass/fail for layout. A page can be under 20% and still overflow, or exceed it while fitting available leader space.
+`python scripts/audit_translation_copyfit.py` remains a read-only character-expansion scanner for curated Markdown drafts; it does not scan live Payload overrides or certify visual fit.
 
 ## Files
 
 - [`glossary.md`](glossary.md): project copy of the official glossary from `C:\Users\bruno\Middara\Rulebook 1.2\.agents\rules\glossary.md`.
+- [`manual-editor-workflow.md`](manual-editor-workflow.md): active manual translation workflow in the Admin RichSpanEditor.
 - [`glossary-candidates.md`](glossary-candidates.md): provisional, non-authoritative candidates and cross-page terminology conflicts found in the current drafts; requires team review before standardization.
 - [`references/page-2-voice-reference.md`](references/page-2-voice-reference.md): read-only scope and caveats for using the database translation on page 2.
 - [`pages/page-003.md`](pages/page-003.md): all 40 Contents labels and destinations rechecked against the PDF; PT draft exists, but six width alerts and a conflict with the saved title (`Índice` vs `Sumário`) keep the page from being approved or reimported.
