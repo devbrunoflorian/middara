@@ -51,6 +51,8 @@ export interface SpanData {
   origin?: [number, number];
   /** Exact PDF paint fragments when one extracted span contains multiple baselines. */
   sourceGlyphRuns?: Array<{ start: number; end: number; origin: [number, number]; advance: number }>;
+  /** Visible glyph width from PDF text traces when the extraction bbox includes a stripped line ending. */
+  sourceVisualWidthPt?: number;
   displayOverride?: string;
   /** Per-span replacement for symbol-font encodings that need a Unicode cmap codepoint. */
   pictogramDisplayOverride?: string;
@@ -96,6 +98,8 @@ export interface LineData {
   renderSourceGeometryThroughSpan?: number;
   /** Limit suppression of rasterized source text to the overlay's language. */
   rasterizedDuplicateLanguage?: 'en' | 'pt-BR' | 'all';
+  /** This extracted source line is already visible in a page-local raster asset. */
+  rasterizedDuplicate?: boolean;
   /** Keep the Admin duplicate marker off when it would spill beyond a tightly cropped source overlay. */
   hideRasterizedDuplicateAdminMarker?: boolean;
   dir?: [number, number];
@@ -1062,16 +1066,114 @@ function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 
   return <>{Array.from(legacy ? '\uFFFC' : segment.text).map((_,index)=><SemanticSymbol key={index} id={id} language={language} size={segment.size*scale} color={segment.color} geometryMode={geometryMode} metrics={segment.symbolMetrics} />)}{legacy ? segment.text.match(/\s+$/)?.[0] : null}</>;
 }
 
-/** Exact source rendering is available only when every extracted text run has its PDF origin. */
-function hasExactSourceGeometry(block: Block): boolean {
-  const spans = block.lines?.flatMap(line => line.spans) ?? [];
-  return spans.length > 0
-    && spans.some(span => !!span.semanticSymbolId || !!span.sourceCompoundSymbolId)
-    && spans.every(span => {
-      if (span.semanticSymbolId) return span.bbox.every(Number.isFinite);
-      return Array.isArray(span.origin) && span.origin.length === 2 && span.origin.every(Number.isFinite)
-        && span.bbox.every(Number.isFinite) && !span.pictogramSvgPath;
+/** Compare visible content and rich styles while ignoring source-only line wraps. */
+function sourceGeometrySignature(segments: Segment[]): string {
+  const signature: Array<{ text?: string; symbolId?: string; style: string | null }> = [];
+  let pendingSpace = false;
+
+  for (const segment of segments) {
+    const symbolId = segment.symbolId ?? resolveLegacySymbol(segment.font, segment.text)?.id;
+    const style = JSON.stringify({
+      font: segment.font,
+      size: Math.round(segment.size * 100) / 100,
+      color: (segment.color || '#231f20').toLowerCase(),
+      weight: segment.weight,
+      style: segment.style,
+      disableLigatures: segment.disableLigatures ?? false,
+      textStrokeWidthPt: segment.textStrokeWidthPt ?? null,
+      textStrokeColor: segment.textStrokeColor?.toLowerCase() ?? null,
     });
+
+    if (symbolId) {
+      if (pendingSpace && signature.length) signature.push({ text: ' ', style: null });
+      pendingSpace = false;
+      signature.push({ symbolId, style });
+      continue;
+    }
+
+    for (const character of Array.from(segment.text)) {
+      if (/\s/u.test(character)) {
+        if (signature.length) pendingSpace = true;
+        continue;
+      }
+      if (pendingSpace) signature.push({ text: ' ', style: null });
+      pendingSpace = false;
+      signature.push({ text: character, style });
+    }
+  }
+
+  return JSON.stringify(signature);
+}
+
+export function overrideIsSourceEquivalent(
+  override: SpanOverride,
+  sourceSegments: Segment[],
+  sourceLayout: { textAlign: TextAlignment; lineHeight: number },
+): boolean {
+  // A hard break in a saved override is an editorial choice, not a source
+  // extraction wrap, so keep that version on translated flow.
+  if (override.segments.some(segment => /[\r\n]/u.test(segment.text))) return false;
+  if (override.textAlign !== undefined && override.textAlign !== sourceLayout.textAlign) return false;
+  if (override.lineHeight !== undefined && Math.abs(override.lineHeight - sourceLayout.lineHeight) > 0.0001) return false;
+  return sourceGeometrySignature(override.segments)
+    === sourceGeometrySignature(normalizeParagraphSourceSegments(sourceSegments));
+}
+
+function isEnglishRasterizedDuplicateLine(line: LineData): boolean {
+  return !!line.rasterizedDuplicate
+    && (!line.rasterizedDuplicateLanguage || line.rasterizedDuplicateLanguage === 'all'
+      || line.rasterizedDuplicateLanguage === 'en');
+}
+
+function isEnglishSourceOverlayDuplicate(span: SpanData): boolean {
+  return !span.semanticSymbolId && !!span.renderAsSourceOverlayDuplicate
+    && (span.renderSourceOverlayLanguage === 'all' || span.renderSourceOverlayLanguage === 'en');
+}
+
+/** Exact source rendering is limited to horizontal source lines with measured run origins. */
+function hasExactSourceGeometry(block: Block): boolean {
+  const paintableSpans = (block.lines ?? [])
+    .filter(line => !isEnglishRasterizedDuplicateLine(line))
+    .flatMap(line => line.spans)
+    .filter(span => !span.renderOnlyStrokePass && !isEnglishSourceOverlayDuplicate(span)
+      && !span.sourceCompoundHidden && !span.sourceCompoundSymbolId && !span.sourceInlineCoveredBy);
+  const visibleSpans = paintableSpans.filter(span => !!span.semanticSymbolId || !!span.text.trim());
+  if (!visibleSpans.length) return false;
+
+  const allTextRunsHaveOrigins = paintableSpans.every(span => {
+    // Inline text-range replacements use the normal flow renderer to keep the
+    // source text advance and replacement object in one measured run.
+    if (span.sourceInlineObjects?.length) return false;
+    if (span.semanticSymbolId) return span.bbox.every(Number.isFinite);
+    // Editorial newline/whitespace runs carry flow semantics, but paint no
+    // glyph and therefore need no PDF text origin in the source SVG path.
+    if (!span.text.trim()) return true;
+    // Keep font-specific display substitutions on LineRenderer until their
+    // alternate glyph mapping can be represented and measured in SVG too.
+    if ((span.renderTextOverride ?? span.displayOverride ?? span.text) !== span.text) return false;
+    const text = (span.renderTextOverride ?? span.displayOverride ?? span.text).replace(/[\r\n]+$/g, '');
+    const multiBaselineText = /[\r\n]/.test(text);
+    const hasValidGlyphRuns = Array.isArray(span.sourceGlyphRuns) && span.sourceGlyphRuns.length > 1
+      && span.sourceGlyphRuns.every(run => run.start >= 0 && run.end <= text.length && run.end > run.start);
+    return Array.isArray(span.origin) && span.origin.length === 2 && span.origin.every(Number.isFinite)
+      && span.bbox.every(Number.isFinite) && !span.pictogramSvgPath
+      && (!multiBaselineText || hasValidGlyphRuns);
+  });
+  if (!allTextRunsHaveOrigins) return false;
+
+  return (block.lines ?? []).every(line => {
+    if (isEnglishRasterizedDuplicateLine(line)) return true;
+    const linePaintsText = line.spans.some(span => !span.renderOnlyStrokePass
+      && !isEnglishSourceOverlayDuplicate(span) && !span.sourceCompoundHidden && !span.sourceCompoundSymbolId
+      && !span.sourceInlineCoveredBy && !!span.text.trim());
+    const linePaintsSymbol = line.spans.some(span => !span.renderOnlyStrokePass
+      && !isEnglishSourceOverlayDuplicate(span) && !!span.semanticSymbolId);
+    if (!linePaintsText && !linePaintsSymbol) return true;
+    // SourceGeometryBlock paints horizontal SVG text. Rotated/vertical source
+    // labels stay on their existing renderer path until it can represent their
+    // baseline vectors without approximating their advances.
+    return !!line.dir && Math.abs(line.dir[0] - 1) <= 0.0001 && Math.abs(line.dir[1]) <= 0.0001;
+  });
 }
 
 /**
@@ -1092,12 +1194,14 @@ function SourceGeometryBlock({ block, scale, blockOriginX, blockOriginY }: {
       preserveAspectRatio="none" aria-hidden="false"
       style={{ position: 'absolute', inset: 0, overflow: 'visible', display: 'block' }}>
       {lines.map((line, lineIndex) => {
+        if (isEnglishRasterizedDuplicateLine(line)) return null;
         const baselines = line.spans.flatMap(span => span.origin ? [span.origin[1]] : []);
         return (
           <g key={line.id ?? lineIndex} data-source-line-id={line.id}
             data-source-baseline-y={baselines[0]}>
             {line.spans.map((span, spanIndex) => {
               if (span.renderOnlyStrokePass) return null;
+              if (isEnglishSourceOverlayDuplicate(span)) return null;
               // Source-compound text (for example, a letter inside a white
               // reference capsule) is painted by the page-coordinate vector
               // layer. Its extracted glyph must not be painted a second time.
@@ -1120,13 +1224,15 @@ function SourceGeometryBlock({ block, scale, blockOriginX, blockOriginY }: {
                 if (!visual.paths || !visual.viewBox) return null;
                 const [x0, y0, x1, y1] = span.bbox;
                 return (
-                  <svg key={`${line.id}:${spanIndex}`} data-source-symbol-id={span.semanticSymbolId}
-                    data-source-x={x0} data-source-y={y0} data-source-bbox={span.bbox.join(',')}
-                    x={x0 - blockOriginX} y={y0 - blockOriginY} width={x1 - x0} height={y1 - y0}
-                    viewBox={visual.viewBox.join(' ')} preserveAspectRatio="none"
-                    role="img" aria-label={symbol.labels.en} overflow="visible" style={{ color: span.color }}>
-                    {visual.paths.map((path, pathIndex) => <path key={pathIndex} {...path} />)}
-                  </svg>
+                  <g key={`${line.id}:${spanIndex}`} data-source-inline-semantic={span.semanticSymbolId}>
+                    <svg data-source-symbol-id={span.semanticSymbolId} data-symbol-id={span.semanticSymbolId}
+                      data-source-x={x0} data-source-y={y0} data-source-bbox={span.bbox.join(',')}
+                      x={x0 - blockOriginX} y={y0 - blockOriginY} width={x1 - x0} height={y1 - y0}
+                      viewBox={visual.viewBox.join(' ')} preserveAspectRatio="none"
+                      role="img" aria-label={symbol.labels.en} overflow="visible" style={{ color: span.color }}>
+                      {visual.paths.map((path, pathIndex) => <path key={pathIndex} {...path} />)}
+                    </svg>
+                  </g>
                 );
               }
 
@@ -1137,7 +1243,7 @@ function SourceGeometryBlock({ block, scale, blockOriginX, blockOriginY }: {
               const isOutlinedImportantGlyph = span.font?.includes('Webdings') && span.text === '\uF07E';
               const sourceText = span.pictogramDisplayOverride ?? text;
               if (!sourceText) return null;
-              const textLength = Math.max(0, span.bbox[2] - span.bbox[0]);
+              const textLength = Math.max(0, span.sourceVisualWidthPt ?? (span.bbox[2] - span.bbox[0]));
               const glyphRuns = sourceText === span.text ? span.sourceGlyphRuns : undefined;
               const textStyle = { fontFamily: span.pictogramFontOverride ? `'${span.pictogramFontOverride}', sans-serif` : mapped.family,
                 fontSize: span.renderSizeOverridePt ?? span.size,
@@ -2152,12 +2258,12 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     .find(span => needsEsmeraldaHeadingDrop(span.font, span.size, span.bbox[3] - span.bbox[1]));
 
   const sourceSegments = sourceSegmentsFromSpans(block.lines.flatMap(line => line.spans));
-  const sourceSignature = (segments: Segment[]) => segments
-    .map(segment => segment.symbolId ? `\uFFF9${segment.symbolId}\uFFFA` : segment.text)
-    .join('').replace(/[\s\u00a0]+/g, ' ').trim();
   const sourceOverrideIsUnchanged = !!currentOverride
-    && sourceSignature(currentOverride.segments) === sourceSignature(sourceSegments);
-  if (language === 'en' && hasExactSourceGeometry(block) && (!currentOverride || sourceOverrideIsUnchanged)) {
+    && overrideIsSourceEquivalent(currentOverride, sourceSegments, {
+      textAlign: block.layoutFrame?.textAlign ?? 'left',
+      lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+    });
+  if (!isAdmin && language === 'en' && hasExactSourceGeometry(block) && (!currentOverride || sourceOverrideIsUnchanged)) {
     return (
       <div className={`block-container ${blockHoverClass} ${overflowClass}`} data-render-mode="sourceGeometry"
         style={{ ...blockStyle, left: `${blockX * scale}px`, top: `${blockY * scale}px`, width: `${blockW * scale}px`, height: `${blockH * scale}px` }}
@@ -2750,6 +2856,20 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const selectedClass = selected ? 'credit-field-selected' : '';
   const overflowClass = isAdmin && (isOverflowing || flowOverflow) ? 'block-overflow' : '';
 
+  // Untouched English source has exact PDF run origins available for some
+  // editorial fields even when adjacent marker/furniture lines do not. Paint
+  // only this field's lines at their extracted source coordinates, preserving
+  // its independent editor hit target and leaving PT-BR on translated flow.
+  const sourceFieldBlock: Block = {
+    ...block,
+    bbox: [fieldX, fieldY, fieldX + fieldWidth, fieldY + fieldHeight],
+    lines,
+  };
+  const sourceFieldSegments = sourceSegmentsFromSpans(lines.flatMap(line => line.spans));
+  const sourceEquivalentOverride = override !== null && overrideIsSourceEquivalent(override, sourceFieldSegments, {
+    textAlign: field.frame.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
+    lineHeight: field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+  });
   const handleClick = (event: React.MouseEvent) => {
     if (!isAdmin) return;
     event.stopPropagation();
@@ -2759,6 +2879,20 @@ const CreditField: React.FC<CreditFieldProps> = ({
     }
     onBlockClick(extractCreditFieldInfo(spanKey, block, field, unitKind, unitLabel));
   };
+
+  if (language === 'en' && !isAdmin && (!override || sourceEquivalentOverride)
+    && hasExactSourceGeometry(sourceFieldBlock)) {
+    return (
+      <div
+        className={`credit-field ${sourceClass} ${selectedClass} ${overflowClass}`}
+        style={fieldStyle}
+        onClick={handleClick}
+        {...geometryAttributes}
+      >
+        <SourceGeometryBlock block={sourceFieldBlock} scale={scale} blockOriginX={fieldX} blockOriginY={fieldY} />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -2940,6 +3074,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
     return (
       <div 
         className={`realbox ${lineClassName}`}
+        data-source-line-id={line.id}
         data-ghost-status={confirmedGhostClass ? 'confirmed-duplicate' : undefined}
         title={ghostStatusLabel}
         aria-description={ghostStatusLabel}
@@ -2993,6 +3128,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
       style={{...lineStyle, paddingLeft: `${textOffset}px`, boxSizing: 'border-box'}}
       onClick={handleClick}
       className={lineClassName}
+      data-source-line-id={line.id}
       data-ghost-status={confirmedGhostClass ? 'confirmed-duplicate' : undefined}
       title={ghostStatusLabel}
       aria-description={ghostStatusLabel}
@@ -3151,7 +3287,9 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           whiteSpace: 'pre',
           fontVariantLigatures: 'none',
           fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
-          letterSpacing: useSourceGeometry ? 'normal' : '-0.015em',
+          // English source text keeps native advances even when span origins
+          // are unavailable and this line uses the source-line fallback.
+          letterSpacing: !override || useSourceGeometry ? 'normal' : '-0.015em',
           ...(useSourceGeometry ? {
             flex: `0 0 ${sourceAdvanceWidth}px`,
             marginInlineStart: `${sourceAdvanceGap}px`,

@@ -40,7 +40,7 @@ describe('typographic unit source fallback', () => {
     vi.unstubAllGlobals();
   });
 
-  it('paints untranslated source lines once when fixed indexes overlap editorial units', async () => {
+  it('uses exact source geometry once while keeping all editorial units editable in Admin', async () => {
     const pageData = readP50UnitFixture();
     container = document.createElement('div');
     document.body.appendChild(container);
@@ -50,14 +50,16 @@ describe('typographic unit source fallback', () => {
       root!.render(<PageRenderer pageData={pageData} isAdmin={false} language="en" />);
     });
 
-    // All 10 examples remain available through their editable-unit source
-    // fallback. The 19 fixed indexes overlap units 4–10 and must not paint a
-    // second copy of those same source lines.
-    expect(container.querySelectorAll('.credit-field')).toHaveLength(10);
+    // Viewer mode can paint the untouched EN block at exact source coordinates;
+    // overlapping fixed indexes must not cause a second copy of its lines.
+    expect(container.querySelector('[data-render-mode="sourceGeometry"]')).not.toBeNull();
+    expect(container.querySelectorAll('.credit-field')).toHaveLength(0);
     expect(container.querySelectorAll('.static-editor-line')).toHaveLength(0);
-    expect(container.querySelector('.credit-field')?.textContent).toContain('Example 1:');
-    expect(Array.from(container.querySelectorAll('.credit-field'))
-      .some(field => field.textContent?.includes('Example 10:'))).toBe(true);
+    for (const sourceLine of pageData.blocks[0].lines ?? []) {
+      expect(container.querySelectorAll(`[data-source-line-id="${sourceLine.id}"]`), sourceLine.id).toHaveLength(1);
+    }
+    expect(container.textContent).toContain('Example 1:');
+    expect(container.textContent).toContain('Example 10:');
 
     await act(async () => {
       root!.render(<PageRenderer pageData={pageData} isAdmin language="en" />);
