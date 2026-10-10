@@ -2,10 +2,13 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, type PageData, type PageFidelityOverlay } from './components/PageRenderer';
 import { AdminSymbolPalette, type AdminSymbolPaletteEditorState } from './components/AdminSymbolPalette';
 import { LocalSyncRecoveryControl } from './components/LocalSyncRecoveryControl';
+import { DevelopmentEnvironmentStatus } from './components/DevelopmentEnvironmentStatus';
+import { FaqDrawer } from './components/FaqDrawer';
+import { MiddaraMark } from './components/MiddaraMark';
 import { 
   ChevronLeft, ChevronRight, Edit3, 
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
-  BookOpen, Ruler, Move
+  CircleHelp, Ruler, Move
 } from 'lucide-react';
 import './App.css';
 import { attachSourceInlineElements, type SourceInlineElement } from './symbols/sourceInlineElements';
@@ -130,6 +133,7 @@ function App() {
   const [pageInput, setPageInput] = useState<string>('1');
   const [language, setLanguage] = useState<'en' | 'pt-BR'>('en');
   const [isSymbolPaletteOpen, setIsSymbolPaletteOpen] = useState(false);
+  const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [symbolAliasPreferences, setSymbolAliasPreferences] = useState<SymbolAliasPreferences>(getDefaultSymbolAliasPreferences);
   const [symbolAliasSettingsLoading, setSymbolAliasSettingsLoading] = useState(true);
   const [paletteEditorState, setPaletteEditorState] = useState<Pick<AdminSymbolPaletteEditorState, 'context' | 'canInsert' | 'canUndo' | 'status'> & { editorKey: string } | null>(null);
@@ -324,20 +328,28 @@ function App() {
   };
 
   return (
-    <div className={`app-container ${isAdmin ? 'admin-mode' : ''} theme-dark`}>
-      {import.meta.env.DEV && (
-        <div
-          className="dev-environment-indicator"
-          aria-label={`Development environment: web ${window.location.host}, API ${payloadApiOrigin}, locale ${language}, mode ${devMode}`}
-          data-web-origin={window.location.origin}
-          data-api-origin={payloadApiOrigin}
-          data-locale={language}
-          data-mode={devMode}
+    <div className={`app-container ${isAdmin ? 'admin-mode' : ''} ${isFaqOpen ? 'faq-open' : ''} theme-dark`}>
+      <div className="app-shell-faq-actions">
+        <button
+          className="shell-faq-trigger"
+          type="button"
+          onClick={() => setIsFaqOpen(true)}
+          title={language === 'pt-BR' ? 'Abrir FAQ oficial' : 'Open official FAQ'}
+          aria-label={language === 'pt-BR' ? 'Abrir FAQ oficial' : 'Open official FAQ'}
         >
-          <span>WEB {window.location.host}</span>
-          <span>API {payloadApiOrigin}</span>
-          <span>{language}</span>
-          <span>{devMode}</span>
+          <CircleHelp size={14} />
+          <span>FAQ</span>
+        </button>
+      </div>
+      {import.meta.env.DEV && (
+        <div className="app-shell-header-actions">
+          <DevelopmentEnvironmentStatus
+            webOrigin={window.location.origin}
+            apiOrigin={payloadApiOrigin}
+            locale={language}
+            isAdmin={isAdmin}
+            mode={devMode}
+          />
         </div>
       )}
       {/* Main Viewer Area */}
@@ -411,8 +423,8 @@ function App() {
       {/* Vertical Sidebar (Moved to Right) */}
       <aside className="pdf-sidebar">
         <div className="toolbar-section top">
-          <div className="brand" title="Middara Rulebook">
-            <BookOpen size={20} className="brand-icon" />
+          <div className="brand" title="Middara Rulebook" role="img" aria-label="Middara">
+            <MiddaraMark className="brand-icon" />
             <h1>Middara</h1>
           </div>
           <div className="divider"></div>
@@ -543,6 +555,7 @@ function App() {
           )}
         </div>
       </aside>
+      <FaqDrawer language={language} open={isFaqOpen} onOpenChange={setIsFaqOpen} />
       {isAdmin && (
         <AdminSymbolPalette
           language={language}
