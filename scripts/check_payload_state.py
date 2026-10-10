@@ -14,7 +14,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DB_ROOT = ROOT / "apps" / "admin"
-OUT = ROOT / "tmp" / "payload-recovery-2026-10-03"
+OUT_ROOT = ROOT / "output" / "backups" / "recovery-snapshots"
 
 
 def rows(connection: sqlite3.Connection, query: str) -> list[dict[str, Any]]:
@@ -28,9 +28,9 @@ def table_names(connection: sqlite3.Connection) -> list[str]:
     ).fetchall()]
 
 
-def snapshot_database(name: str) -> dict[str, Any]:
+def snapshot_database(name: str, out: Path) -> dict[str, Any]:
     source = DB_ROOT / name
-    destination = OUT / name
+    destination = out / name
     shutil.copy2(source, destination)
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     connection = sqlite3.connect(source)
@@ -56,8 +56,10 @@ def snapshot_database(name: str) -> dict[str, Any]:
 
 
 def main() -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
-    snapshots = [snapshot_database(name) for name in ("apps-admin.db", "middara.db")]
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H%M%SZ")
+    out = OUT_ROOT / f"payload-recovery-{stamp}"
+    out.mkdir(parents=True, exist_ok=False)
+    snapshots = [snapshot_database(name, out) for name in ("apps-admin.db", "middara.db")]
     manifest = {
         "createdAtUtc": datetime.now(timezone.utc).isoformat(),
         "writeMode": "read-only snapshot; source databases were not modified",
@@ -67,15 +69,15 @@ def main() -> None:
             "its old translation runs are preserved here for review and were not migrated automatically."
         ),
     }
-    (OUT / "payload-state.json").write_text(
+    (out / "payload-state.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
-    (OUT / "SHA256SUMS.txt").write_text(
+    (out / "SHA256SUMS.txt").write_text(
         "\n".join(f"{item['sha256']}  {item['backup']}" for item in snapshots) + "\n",
         encoding="utf-8",
     )
     print(json.dumps({
-        "output": str(OUT.resolve()),
+        "output": str(out.resolve()),
         "createdAtUtc": manifest["createdAtUtc"],
         "databases": [
             {"path": item["path"], "backup": item["backup"], "sha256": item["sha256"], "counts": item["counts"]}
