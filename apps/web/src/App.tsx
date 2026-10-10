@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import './App.css';
 import './ArcaneGothic.css';
+import './ArcaneGothicLayout.css';
 import { attachSourceInlineElements, type SourceInlineElement } from './symbols/sourceInlineElements';
 import { attachSourceCompoundElements, type SourceCompoundElement } from './symbols/sourceCompounds';
 import type { ContentsRowDefinition } from './contentsRows';
