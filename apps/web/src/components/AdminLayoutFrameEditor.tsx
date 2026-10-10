@@ -6,6 +6,7 @@ import './AdminLayoutFrameEditor.css';
 import './AdminOverlayLayers.css';
 
 interface AdminLayoutFrameEditorProps {
+  portalHost?: HTMLElement | null;
   pageElement: HTMLElement | null;
   pageWidth: number;
   pageHeight: number;
@@ -32,7 +33,7 @@ interface PageRect {
 }
 
 export function AdminLayoutFrameEditor({
-  pageElement, pageWidth, pageHeight, snapTargets, sourceBbox, unitKey, frame, language, hasOwnFrame, isDirty, isSaving, status,
+  portalHost = null, pageElement, pageWidth, pageHeight, snapTargets, sourceBbox, unitKey, frame, language, hasOwnFrame, isDirty, isSaving, status,
   onChange, onSave, onDiscard, onResetToEnglish, onSnapGuidesChange,
 }: AdminLayoutFrameEditorProps) {
   const [pageRect, setPageRect] = useState<PageRect | null>(null);
@@ -163,7 +164,7 @@ export function AdminLayoutFrameEditor({
             </div>
           )}
         </div>,
-        document.body,
+        portalHost ?? document.body,
       )}
       {createPortal(
         <div className="admin-layout-frame-panel-layer">
@@ -206,7 +207,7 @@ export function AdminLayoutFrameEditor({
             </div>
           </section>
         </div>,
-        document.body,
+        portalHost ?? document.body,
       )}
     </>
   );

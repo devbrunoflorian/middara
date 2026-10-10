@@ -9,6 +9,7 @@ const touchDrawerQuery = '(max-width: 700px), (hover: none) and (pointer: coarse
 interface ShellNavigationProps {
   active: ShellDestination;
   onSelect: (destination: ShellDestination) => void;
+  workspaceEditing?: boolean;
 }
 
 const destinations: Array<{ id: ShellDestination; label: string; icon: typeof BookOpen }> = [
@@ -18,7 +19,7 @@ const destinations: Array<{ id: ShellDestination; label: string; icon: typeof Bo
   { id: 'contents', label: 'Índice', icon: ListTree },
 ];
 
-export function ShellNavigation({ active, onSelect }: ShellNavigationProps) {
+export function ShellNavigation({ active, onSelect, workspaceEditing = false }: ShellNavigationProps) {
   const [isNarrow, setIsNarrow] = useState(() => typeof window !== 'undefined' && window.matchMedia(touchDrawerQuery).matches);
   const [hoverOpen, setHoverOpen] = useState(false);
   const [clickOpen, setClickOpen] = useState(false);
@@ -28,7 +29,7 @@ export function ShellNavigation({ active, onSelect }: ShellNavigationProps) {
   const panelRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstItemRef = useRef<HTMLButtonElement>(null);
-  const expanded = isNarrow ? mobileOpen : clickOpen || hoverOpen || focusOpen;
+  const expanded = isNarrow ? mobileOpen : clickOpen || (!workspaceEditing && (hoverOpen || focusOpen));
 
   useEffect(() => {
     const query = window.matchMedia(touchDrawerQuery);
@@ -79,6 +80,14 @@ export function ShellNavigation({ active, onSelect }: ShellNavigationProps) {
   useEffect(() => () => {
     if (closeTimerRef.current !== null) window.clearTimeout(closeTimerRef.current);
   }, []);
+
+  useEffect(() => {
+    if (!workspaceEditing) return;
+    cancelClose();
+    setHoverOpen(false);
+    setFocusOpen(false);
+    setClickOpen(false);
+  }, [workspaceEditing]);
 
   const cancelClose = () => {
     if (closeTimerRef.current !== null) window.clearTimeout(closeTimerRef.current);
@@ -131,7 +140,7 @@ export function ShellNavigation({ active, onSelect }: ShellNavigationProps) {
         className={`global-nav-panel arcane-glass-surface ${expanded ? 'is-expanded' : ''} ${isNarrow ? 'is-mobile' : ''}`}
         aria-label="Global navigation"
         onMouseEnter={() => {
-          if (isNarrow) return;
+          if (isNarrow || workspaceEditing) return;
           cancelClose();
           setHoverOpen(true);
         }}
@@ -139,7 +148,7 @@ export function ShellNavigation({ active, onSelect }: ShellNavigationProps) {
           if (!isNarrow && !clickOpen && !panelRef.current?.contains(document.activeElement)) scheduleClose();
         }}
         onFocusCapture={event => {
-          if (!isNarrow && event.target !== menuButtonRef.current) {
+          if (!isNarrow && !workspaceEditing && event.target !== menuButtonRef.current) {
             cancelClose();
             setFocusOpen(true);
           }

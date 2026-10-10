@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, type CSSProperties } from 'react';
 import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, type PageData, type PageFidelityOverlay } from './components/PageRenderer';
 import { AdminSymbolPalette, type AdminSymbolPaletteEditorState } from './components/AdminSymbolPalette';
 import { LocalSyncRecoveryControl } from './components/LocalSyncRecoveryControl';
@@ -10,13 +10,14 @@ import { AtmosphericParticles } from './components/AtmosphericParticles';
 import { 
   ChevronLeft, ChevronRight, Edit3, 
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
-  Ruler, Move
+  Ruler, Move, Shapes
 } from 'lucide-react';
 import './App.css';
 import './ArcaneGothic.css';
 import './ArcaneGothicLayout.css';
 import './ArcaneGothicGlass.css';
 import './ArcaneGothicAtmosphere.css';
+import './AdminWorkspace.css';
 import { attachSourceInlineElements, type SourceInlineElement } from './symbols/sourceInlineElements';
 import { attachSourceCompoundElements, type SourceCompoundElement } from './symbols/sourceCompounds';
 import type { ContentsRowDefinition } from './contentsRows';
@@ -126,8 +127,12 @@ async function loadPageData(pageNum: number): Promise<PageData> {
 }
 
 function App() {
+  const [overlayHost, setOverlayHost] = useState<HTMLDivElement | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isRichEditorOpen, setIsRichEditorOpen] = useState(false);
+  const [richEditorPanelWidth, setRichEditorPanelWidth] = useState(420);
+  const openEditorPagesRef = useRef(new Set<number>());
   const [isRulerVisible, setIsRulerVisible] = useState(false);
   const [isLayoutMode, setIsLayoutMode] = useState(false);
   const [isLayoutDirty, setIsLayoutDirty] = useState(false);
@@ -319,6 +324,12 @@ function App() {
     }
   }, []);
 
+  const handleEditorOpenChange = useCallback((pageNumber: number, open: boolean) => {
+    if (open) openEditorPagesRef.current.add(pageNumber);
+    else openEditorPagesRef.current.delete(pageNumber);
+    setIsRichEditorOpen(openEditorPagesRef.current.size > 0);
+  }, []);
+
   const handleSaveSymbolAlias = useCallback(async (symbolId: string, alias: string | null) => {
     const next = { ...symbolAliasPreferences };
     if (alias === null) next[symbolId] = getDefaultSymbolAliasPreferences()[symbolId];
@@ -472,7 +483,11 @@ function App() {
   };
 
   return (
-    <div className={`app-container ${isAdmin ? 'admin-mode' : ''} ${isFaqOpen ? 'faq-open' : ''} theme-dark`}>
+    <div
+      ref={setOverlayHost}
+      className={`app-container ${isAdmin ? 'admin-mode' : ''} ${isFaqOpen ? 'faq-open' : ''} ${isRichEditorOpen ? 'rich-editor-open' : ''} theme-dark`}
+      style={{ '--rich-editor-panel-width': `${richEditorPanelWidth}px` } as CSSProperties}
+    >
       <ArcaneGlassDefinitions />
       <AtmosphericParticles />
       {import.meta.env.DEV && (
@@ -488,6 +503,7 @@ function App() {
       )}
       <ShellNavigation
         active={isFaqOpen ? faqActiveType : currentPage === 3 ? 'contents' : 'rulebook'}
+        workspaceEditing={isRichEditorOpen}
         onSelect={(destination: ShellDestination) => {
           if (destination === 'faq' || destination === 'errata') {
             setFaqActiveType(destination);
@@ -511,6 +527,7 @@ function App() {
             ) : pageData ? (
               <PageRenderer 
                 key={`single-${currentPage}-${language}`}
+                overlayHost={overlayHost}
                 pageData={pageData} 
                 isAdmin={isAdmin}
                 showRuler={isAdmin && isRulerVisible}
@@ -530,6 +547,10 @@ function App() {
                 onResolveEditableNavigation={resolveEditablePageNavigation}
                 totalPages={TOTAL_PAGES}
                 editableNavigationEnabled={viewMode === 'single'}
+                editorPanelWidth={richEditorPanelWidth}
+                faqOpen={isFaqOpen}
+                onEditorPanelWidthChange={setRichEditorPanelWidth}
+                onEditorOpenChange={handleEditorOpenChange}
               />
             ) : null}
           </div>
@@ -548,6 +569,7 @@ function App() {
                 {scrollPages.has(num) ? (
                   <PageRenderer 
                     key={`scroll-${num}-${language}`}
+                    overlayHost={overlayHost}
                     pageData={scrollPages.get(num)!} 
                     isAdmin={isAdmin}
                     continuousScroll
@@ -560,6 +582,10 @@ function App() {
                     onPaletteEditorChange={handlePaletteEditorChange}
                     onTranslationDraftDirtyChange={setHasTranslationDraft}
                     editableNavigationEnabled={false}
+                    editorPanelWidth={richEditorPanelWidth}
+                    faqOpen={isFaqOpen}
+                    onEditorPanelWidthChange={setRichEditorPanelWidth}
+                    onEditorOpenChange={handleEditorOpenChange}
                   />
                 ) : (
                   <div className="placeholder-page" style={{ height: 1100 * zoomLevel, width: 820 * zoomLevel, background: '#111' }}></div>
@@ -671,6 +697,19 @@ function App() {
           <LocalSyncRecoveryControl visible={isAdmin} />
           {isAdmin && (
             <button
+              type="button"
+              className={`tool-btn admin-symbol-palette-toggle ${isSymbolPaletteOpen ? 'active' : ''}`}
+              aria-label={language === 'pt-BR' ? 'Abrir paleta de símbolos' : 'Open symbol palette'}
+              aria-expanded={isSymbolPaletteOpen}
+              aria-controls="admin-symbol-palette"
+              title={language === 'pt-BR' ? 'Símbolos especiais' : 'Special symbols'}
+              onClick={() => setIsSymbolPaletteOpen(open => !open)}
+            >
+              <Shapes size={16} aria-hidden="true" />
+            </button>
+          )}
+          {isAdmin && (
+            <button
               className={`tool-btn ${isRulerVisible ? 'active' : ''}`}
               onClick={() => setIsRulerVisible(visible => !visible)}
               title={isRulerVisible ? 'Hide page ruler' : 'Show page ruler'}
@@ -717,6 +756,7 @@ function App() {
           status={paletteEditorState?.status ?? null}
           aliasPreferences={symbolAliasPreferences}
           aliasesLoading={symbolAliasSettingsLoading}
+          showToggle={false}
           onOpenChange={setIsSymbolPaletteOpen}
           onInsert={symbolId => activePaletteEditorRef.current?.state.insert(symbolId)}
           onUndo={() => activePaletteEditorRef.current?.state.undo()}

@@ -10,6 +10,7 @@ interface AdminSymbolPaletteProps {
   canInsert: boolean;
   canUndo: boolean;
   status: string | null;
+  showToggle?: boolean;
   aliasPreferences: SymbolAliasPreferences;
   aliasesLoading: boolean;
   onOpenChange: (open: boolean) => void;
@@ -32,7 +33,7 @@ function isSymbolAvailableInPalette(symbol: typeof SEMANTIC_SYMBOLS[number], con
 }
 
 export function AdminSymbolPalette({
-  language, context, open, canInsert, canUndo, status, aliasPreferences, aliasesLoading, onOpenChange, onInsert, onUndo, onSaveAlias,
+  language, context, open, canInsert, canUndo, status, aliasPreferences, aliasesLoading, showToggle = true, onOpenChange, onInsert, onUndo, onSaveAlias,
 }: AdminSymbolPaletteProps) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('');
@@ -64,7 +65,7 @@ export function AdminSymbolPalette({
 
   return (
     <>
-      <button
+      {showToggle && <button
         type="button"
         className="admin-symbol-palette-toggle"
         aria-label={language === 'pt-BR' ? 'Abrir paleta de símbolos' : 'Open symbol palette'}
@@ -74,9 +75,9 @@ export function AdminSymbolPalette({
         onClick={() => onOpenChange(!open)}
       >
         ◈
-      </button>
+      </button>}
       {open && (
-        <aside className="admin-symbol-palette arcane-glass-surface" aria-label={language === 'pt-BR' ? 'Paleta de símbolos' : 'Symbol palette'}>
+        <aside id="admin-symbol-palette" className="admin-symbol-palette arcane-glass-surface" aria-label={language === 'pt-BR' ? 'Paleta de símbolos' : 'Symbol palette'}>
           <header className="admin-symbol-palette-header">
             <div>
               <strong>{language === 'pt-BR' ? 'Símbolos do livro' : 'Rulebook symbols'}</strong>

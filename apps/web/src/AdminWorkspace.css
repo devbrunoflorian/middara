@@ -1,0 +1,226 @@
+/* Admin workspace layout. The viewer, editor and right tools dock share the
+   flex row; panels only overlay the page when the measured viewer is narrow. */
+.viewer-main {
+  container-name: viewer-main;
+  container-type: inline-size;
+}
+
+/* Keep the drawer above fixed Admin overlays, which are rendered into the
+   application stacking context so they stay above the page but cannot cover
+   navigation or reference content. */
+.app-container .faq-dialog {
+  z-index: var(--layer-app-drawer, 30000) !important;
+}
+
+.page-renderer.editor-open {
+  position: relative;
+  min-width: 0;
+}
+
+.page-renderer.editor-open .page-stage {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.page-renderer.editor-open .rse-overlay {
+  box-sizing: border-box;
+  flex: 0 0 var(--rich-editor-effective-width, var(--rich-editor-panel-width, 420px));
+  width: var(--rich-editor-effective-width, var(--rich-editor-panel-width, 420px));
+  min-width: min(280px, 100%);
+  max-width: 560px;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.page-renderer.editor-open .rse-panel {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: transparent;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.rse-resize-handle {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 8px;
+  width: 8px;
+  min-width: 8px;
+  margin-inline: -1px;
+  cursor: col-resize;
+  touch-action: none;
+  user-select: none;
+  outline: none;
+}
+
+.rse-resize-handle::before {
+  position: absolute;
+  inset: 0 2px;
+  border-inline: 1px solid transparent;
+  background: linear-gradient(90deg, transparent, rgba(141, 212, 234, 0.28), transparent);
+  content: '';
+  opacity: 0.45;
+  transition: opacity 140ms ease, background-color 140ms ease;
+}
+
+.rse-resize-handle:hover::before,
+.rse-resize-handle:focus-visible::before,
+.rse-resize-handle:active::before {
+  border-color: rgba(141, 212, 234, 0.34);
+  background: rgba(69, 174, 207, 0.18);
+  opacity: 1;
+}
+
+.rse-resize-handle:focus-visible {
+  outline: 2px solid rgba(113, 221, 242, 0.72);
+  outline-offset: -2px;
+}
+
+@container viewer-main (max-width: 1024px) {
+  .page-renderer.editor-open {
+    --rich-editor-effective-width: min(var(--rich-editor-panel-width, 420px), 560px, calc(100cqw - 88px));
+  }
+
+  .page-renderer.editor-open.faq-open {
+    --rich-editor-effective-width: min(var(--rich-editor-panel-width, 420px), 320px, calc(100cqw - 88px));
+  }
+
+  .page-renderer.editor-open .rse-overlay {
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: 20000;
+    width: var(--rich-editor-effective-width);
+    min-width: min(280px, calc(100% - 48px));
+    max-width: min(560px, calc(100cqw - 48px));
+    box-shadow: -18px 0 46px rgba(0, 0, 0, 0.46);
+  }
+
+  .page-renderer.editor-open .rse-resize-handle {
+    position: absolute;
+    inset: 0 var(--rich-editor-effective-width) 0 auto;
+    z-index: 20001;
+  }
+
+  .page-renderer.editor-open.faq-open .rse-overlay {
+    min-width: min(220px, calc(100% - 48px));
+  }
+}
+
+/* On mid-size screens FAQ becomes a temporary glass sheet over the viewer.
+   Its measured width is reduced only while Admin is also active. */
+@media (min-width: 701px) and (max-width: 1600px) {
+  .app-container.admin-mode.faq-open {
+    --faq-panel-width: min(380px, calc(100vw - 120px));
+  }
+
+  .app-container.admin-mode.faq-open .viewer-main {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .app-container.faq-open .viewer-main { margin-left: 0; }
+
+  .app-container.admin-mode.faq-open.rich-editor-open {
+    --faq-panel-width: min(240px, calc(100vw - 120px));
+  }
+
+  .app-container.rich-editor-open .admin-symbol-palette {
+    right: calc(var(--arcane-dock-width, 52px) + var(--arcane-stage-inset, 16px) + min(var(--rich-editor-panel-width, 420px), 320px) + 16px);
+  }
+}
+
+/* Keep the character picker useful without letting long selections dominate
+   the editor. Its existing per-character hit targets and selection model stay intact. */
+.rse-char-grid {
+  align-content: flex-start;
+  max-height: clamp(116px, 28vh, 220px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  gap: 2px;
+  padding: 8px;
+}
+
+.rse-char {
+  min-width: 18px;
+  height: 28px;
+  padding-inline: 1px;
+  font-size: 16px;
+}
+
+.rse-char-symbol { min-width: 26px; }
+
+.rse-toolbar {
+  gap: 6px;
+  padding: 8px 12px;
+}
+
+.rse-toolbar-row { gap: 5px; }
+
+.rse-toolbar-groups {
+  align-items: stretch;
+  gap: 5px;
+}
+
+.rse-toolbar-group {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid rgba(154, 192, 214, 0.12);
+  border-radius: 6px;
+  background: rgba(4, 8, 18, 0.2);
+}
+
+.rse-toolbar-group select {
+  min-width: 0;
+  max-width: 148px;
+  padding: 5px 6px;
+}
+
+.rse-toolbar-group .rse-tool-btn { padding: 5px 8px; }
+.rse-toolbar-metrics { margin-left: auto; }
+.rse-toolbar-metrics .rse-size-input { width: 48px; }
+.rse-toolbar-metrics .rse-line-height-input { width: 52px; }
+.rse-toolbar-actions { align-items: center; }
+
+.admin-symbol-palette-toggle {
+  position: relative;
+  inset: auto;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  padding: 0;
+  transform: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.app-container.rich-editor-open .admin-symbol-palette {
+  right: calc(var(--arcane-dock-width, 52px) + var(--arcane-stage-inset, 16px) + var(--rich-editor-panel-width, 420px) + 16px);
+  left: auto;
+}
+
+.admin-symbol-palette {
+  right: calc(var(--arcane-dock-width, 52px) + 10px);
+  left: auto;
+  max-height: calc(100dvh - 32px);
+}
+
+@media (max-width: 700px) {
+  .rse-toolbar-group select { max-width: 112px; }
+  .rse-toolbar-metrics { margin-left: 0; }
+  .rse-toolbar-groups { align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rse-resize-handle::before { transition: none; }
+}

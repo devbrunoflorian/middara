@@ -992,6 +992,7 @@ interface SelectedSpanInfo {
 
 interface PageRendererProps {
   pageData: PageData;
+  overlayHost?: HTMLElement | null;
   isAdmin: boolean;
   showRuler?: boolean;
   layoutMode?: boolean;
@@ -1011,6 +1012,10 @@ interface PageRendererProps {
   onResolveEditableNavigation?: (requestId: number, found: boolean) => void;
   totalPages?: number;
   editableNavigationEnabled?: boolean;
+  editorPanelWidth?: number;
+  faqOpen?: boolean;
+  onEditorPanelWidthChange?: (width: number) => void;
+  onEditorOpenChange?: (pageNumber: number, open: boolean) => void;
 }
 
 type EditableNavigationDirection = 'previous' | 'next';
@@ -1376,13 +1381,17 @@ function hasInlineSemanticSymbol(segment: Segment): boolean {
 }
 
 export const PageRenderer: React.FC<PageRendererProps> = ({
-  pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, continuousScroll = false,
+  pageData, overlayHost = null, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, continuousScroll = false,
   focalZoomEnabled = false, focalZoomAnchor = null, onFocalZoomApplied,
   onNavigate, language = 'en', symbolAliasPreferences, onPaletteEditorChange,
   onTranslationDraftDirtyChange, pendingEditableNavigation, onRequestEditablePageNavigation,
   onResolveEditableNavigation, totalPages = 102, editableNavigationEnabled = true,
+  editorPanelWidth = 420, faqOpen = false, onEditorPanelWidthChange, onEditorOpenChange,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const workspaceRef = useRef<HTMLDivElement>(null);
+  const editorResizeDragRef = useRef<{ pointerId: number; width: number } | null>(null);
+  const editorIsOpenRef = useRef(false);
   const updateScaleRef = useRef<() => void>(() => {});
   const [pageElement, setPageElement] = useState<HTMLDivElement | null>(null);
   const [scale, setScale] = useState(1);
@@ -1408,6 +1417,69 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   const [isSavingLayout, setIsSavingLayout] = useState(false);
   const [layoutStatus, setLayoutStatus] = useState<string | null>(null);
   const [alignmentGuides, setAlignmentGuides] = useState<LayoutAlignmentGuide[]>([]);
+
+  const editorIsOpen = isAdmin && !!selectedSpan;
+  editorIsOpenRef.current = editorIsOpen;
+  useEffect(() => {
+    onEditorOpenChange?.(pageData.page_number, editorIsOpen);
+  }, [editorIsOpen, onEditorOpenChange, pageData.page_number]);
+  useEffect(() => () => {
+    if (editorIsOpenRef.current) onEditorOpenChange?.(pageData.page_number, false);
+  }, [onEditorOpenChange, pageData.page_number]);
+
+  const editorWidthLimits = () => {
+    const workspace = workspaceRef.current;
+    const workspaceWidth = workspace?.clientWidth ?? 900;
+    const viewerWidth = workspace?.closest<HTMLElement>('.viewer-main')?.clientWidth ?? workspaceWidth;
+    const overlayMode = viewerWidth <= 1024;
+    const min = overlayMode ? Math.min(280, Math.max(0, viewerWidth - 88)) : 280;
+    const availableWidth = overlayMode ? viewerWidth - 88 : workspaceWidth - 480;
+    const dualPanelLimit = faqOpen && overlayMode ? Math.min(320, viewerWidth * 0.36) : 560;
+    const max = Math.max(min, Math.min(560, availableWidth, dualPanelLimit));
+    return { min, max };
+  };
+  const resizeEditorTo = (clientX: number) => {
+    const workspace = workspaceRef.current;
+    const drag = editorResizeDragRef.current;
+    if (!workspace || !drag) return;
+    const { min, max } = editorWidthLimits();
+    drag.width = Math.min(max, Math.max(min, workspace.getBoundingClientRect().right - clientX - 4));
+    workspace.style.setProperty('--rich-editor-panel-width', `${drag.width}px`);
+  };
+  const handleEditorResizePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    editorResizeDragRef.current = { pointerId: event.pointerId, width: editorPanelWidth };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+  const handleEditorResizePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (editorResizeDragRef.current?.pointerId !== event.pointerId) return;
+    resizeEditorTo(event.clientX);
+  };
+  const handleEditorResizePointerEnd = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (editorResizeDragRef.current?.pointerId !== event.pointerId) return;
+    onEditorPanelWidthChange?.(editorResizeDragRef.current.width);
+    editorResizeDragRef.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+  };
+  const handleEditorResizePointerCancel = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (editorResizeDragRef.current?.pointerId !== event.pointerId) return;
+    const workspace = workspaceRef.current;
+    if (workspace) workspace.style.setProperty('--rich-editor-panel-width', `${editorPanelWidth}px`);
+    editorResizeDragRef.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+  };
+  const handleEditorResizeKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!onEditorPanelWidthChange) return;
+    const { min, max } = editorWidthLimits();
+    const step = event.shiftKey ? 32 : 16;
+    if (event.key === 'ArrowLeft') onEditorPanelWidthChange(Math.min(max, editorPanelWidth + step));
+    else if (event.key === 'ArrowRight') onEditorPanelWidthChange(Math.max(min, editorPanelWidth - step));
+    else if (event.key === 'Home') onEditorPanelWidthChange(min);
+    else if (event.key === 'End') onEditorPanelWidthChange(max);
+    else return;
+    event.preventDefault();
+    event.stopPropagation();
+  };
 
   useEffect(() => {
     let active = true;
@@ -1976,14 +2048,16 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
 
   return (
     <div
-      className={`page-renderer ${continuousScroll ? 'continuous-scroll-page' : ''} ${selectedSpan ? 'editor-open' : ''}`}
+      ref={workspaceRef}
+      className={`page-renderer ${continuousScroll ? 'continuous-scroll-page' : ''} ${editorIsOpen ? 'editor-open' : ''} ${faqOpen ? 'faq-open' : ''}`}
       style={{
         display: 'flex',
         width: '100%',
         height: '100%',
         alignItems: 'stretch',
         overflow: continuousScroll ? 'visible' : 'hidden',
-      }}
+        '--rich-editor-panel-width': `${editorPanelWidth}px`,
+      } as React.CSSProperties}
     >
       <div
         ref={containerRef}
@@ -2102,8 +2176,26 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           );
         })}
       </div>
-      {isAdmin && showRuler && <AdminRuler pageElement={pageElement} pageWidth={pageData.width} pageHeight={pageData.height} alignmentGuides={alignmentGuides} />}
+      {isAdmin && showRuler && <AdminRuler pageElement={pageElement} pageWidth={pageData.width} pageHeight={pageData.height} alignmentGuides={alignmentGuides} portalHost={overlayHost} />}
       </div>
+
+      {isAdmin && selectedSpan && onEditorPanelWidthChange && (
+        <div
+          className="rse-resize-handle"
+          role="separator"
+          aria-label={language === 'pt-BR' ? 'Redimensionar painel do editor' : 'Resize editor panel'}
+          aria-orientation="vertical"
+          aria-valuemin={editorWidthLimits().min}
+          aria-valuemax={editorWidthLimits().max}
+          aria-valuenow={Math.round(editorPanelWidth)}
+          tabIndex={0}
+          onPointerDown={handleEditorResizePointerDown}
+          onPointerMove={handleEditorResizePointerMove}
+          onPointerUp={handleEditorResizePointerEnd}
+          onPointerCancel={handleEditorResizePointerCancel}
+          onKeyDown={handleEditorResizeKeyDown}
+        />
+      )}
 
       {isAdmin && selectedSpan && (
         <RichSpanEditor
@@ -2139,6 +2231,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       )}
       {isAdmin && layoutMode && (
         <AdminLayoutFrameEditor
+          portalHost={overlayHost}
           pageElement={pageElement}
           pageWidth={pageData.width}
           pageHeight={pageData.height}

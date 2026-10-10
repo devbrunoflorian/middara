@@ -901,56 +901,60 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
         {/* Toolbar */}
         <div className="rse-toolbar">
-          <div className="rse-toolbar-row">
-            <select value={toolFont} onChange={e => { setToolFont(e.target.value); applyToSelection({font: e.target.value}); }} title="Font Family">
-              {AVAILABLE_FONTS.map(f => (
-                <option key={f.value} value={f.value}>{f.label}</option>
-              ))}
-            </select>
-            <select value={toolWeight} onChange={e => { setToolWeight(Number(e.target.value)); applyToSelection({weight: Number(e.target.value)}); }} title="Weight">
-              {FONT_WEIGHTS.map(w => (
-                <option key={w} value={w}>{w}</option>
-              ))}
-            </select>
-            <button
-              className={`rse-tool-btn ${toolWeight >= 600 ? 'active' : ''}`}
-              onClick={() => { const w = toolWeight >= 600 ? 400 : 700; setToolWeight(w); applyToSelection({weight: w}); }}
-              title="Bold"
-            ><strong>B</strong></button>
-            <button
-              className={`rse-tool-btn ${toolStyle === 'italic' ? 'active' : ''}`}
-              onClick={() => { const s = toolStyle === 'italic' ? 'normal' : 'italic'; setToolStyle(s); applyToSelection({style: s}); }}
-              title="Italic"
-            ><em>I</em></button>
-            <button
-              className={`rse-tool-btn ${toolLigatures ? 'active' : ''}`}
-              onClick={() => { setToolLigatures(!toolLigatures); applyToSelection({ligatures: !toolLigatures}); }}
-              title="Ligatures (ct, st, etc)"
-              style={{ fontFamily: 'EsmeraldaPro' }}
-            >fi</button>
-            <div className="rse-toolbar-divider" style={{ width: '1px', background: '#ccc', margin: '0 8px' }} />
-            <button className={`rse-tool-btn ${textAlign === 'left' ? 'active' : ''}`} onClick={() => changeTextAlign('left')} title="Align Left">⫷</button>
-            <button className={`rse-tool-btn ${textAlign === 'center' ? 'active' : ''}`} onClick={() => changeTextAlign('center')} title="Align Center">≡</button>
-            <button className={`rse-tool-btn ${textAlign === 'right' ? 'active' : ''}`} onClick={() => changeTextAlign('right')} title="Align Right">⫸</button>
-            <button className={`rse-tool-btn ${textAlign === 'justify' ? 'active' : ''}`} onClick={() => changeTextAlign('justify')} title="Justify">▤</button>
-            <div className="rse-toolbar-divider" style={{ width: '1px', background: '#ccc', margin: '0 8px' }} />
-            <input type="color" value={toolColor} onChange={e => { setToolColor(e.target.value); applyToSelection({color: e.target.value}); }} title="Color" className="rse-color-input" />
-            <input type="number" value={toolSize} onChange={e => { setToolSize(Number(e.target.value)); applyToSelection({size: Number(e.target.value)}); }} min={4} max={72} step={0.5} className="rse-size-input" title="Size (pt)" />
-            <label className="rse-line-height-control" title={language === 'pt-BR' ? 'Entrelinha (multiplicador)' : 'Line spacing (multiplier)'}>
-              <span aria-hidden="true">↕</span>
-              <input
-                type="number"
-                aria-label={language === 'pt-BR' ? 'Entrelinha' : 'Line spacing'}
-                value={lineHeight.toFixed(2)}
-                onChange={event => changeLineHeight(event.currentTarget.valueAsNumber)}
-                min={0.6}
-                max={2.5}
-                step={0.01}
-                className="rse-size-input rse-line-height-input"
-              />
-            </label>
+          <div className="rse-toolbar-row rse-toolbar-groups">
+            <div className="rse-toolbar-group" role="group" aria-label="Font and emphasis">
+              <select value={toolFont} onChange={e => { setToolFont(e.target.value); applyToSelection({font: e.target.value}); }} title="Font Family">
+                {AVAILABLE_FONTS.map(f => (
+                  <option key={f.value} value={f.value}>{f.label}</option>
+                ))}
+              </select>
+              <select value={toolWeight} onChange={e => { setToolWeight(Number(e.target.value)); applyToSelection({weight: Number(e.target.value)}); }} title="Weight">
+                {FONT_WEIGHTS.map(w => (
+                  <option key={w} value={w}>{w}</option>
+                ))}
+              </select>
+              <button
+                className={`rse-tool-btn ${toolWeight >= 600 ? 'active' : ''}`}
+                onClick={() => { const w = toolWeight >= 600 ? 400 : 700; setToolWeight(w); applyToSelection({weight: w}); }}
+                title="Bold"
+              ><strong>B</strong></button>
+              <button
+                className={`rse-tool-btn ${toolStyle === 'italic' ? 'active' : ''}`}
+                onClick={() => { const s = toolStyle === 'italic' ? 'normal' : 'italic'; setToolStyle(s); applyToSelection({style: s}); }}
+                title="Italic"
+              ><em>I</em></button>
+              <button
+                className={`rse-tool-btn ${toolLigatures ? 'active' : ''}`}
+                onClick={() => { setToolLigatures(!toolLigatures); applyToSelection({ligatures: !toolLigatures}); }}
+                title="Ligatures (ct, st, etc)"
+                style={{ fontFamily: 'EsmeraldaPro' }}
+              >fi</button>
+            </div>
+            <div className="rse-toolbar-group rse-toolbar-align" role="group" aria-label="Text alignment">
+              <button className={`rse-tool-btn ${textAlign === 'left' ? 'active' : ''}`} onClick={() => changeTextAlign('left')} title="Align Left">⫷</button>
+              <button className={`rse-tool-btn ${textAlign === 'center' ? 'active' : ''}`} onClick={() => changeTextAlign('center')} title="Align Center">≡</button>
+              <button className={`rse-tool-btn ${textAlign === 'right' ? 'active' : ''}`} onClick={() => changeTextAlign('right')} title="Align Right">⫸</button>
+              <button className={`rse-tool-btn ${textAlign === 'justify' ? 'active' : ''}`} onClick={() => changeTextAlign('justify')} title="Justify">▤</button>
+            </div>
+            <div className="rse-toolbar-group rse-toolbar-metrics" role="group" aria-label="Text metrics">
+              <input type="color" value={toolColor} onChange={e => { setToolColor(e.target.value); applyToSelection({color: e.target.value}); }} title="Color" className="rse-color-input" />
+              <input type="number" value={toolSize} onChange={e => { setToolSize(Number(e.target.value)); applyToSelection({size: Number(e.target.value)}); }} min={4} max={72} step={0.5} className="rse-size-input" title="Size (pt)" />
+              <label className="rse-line-height-control" title={language === 'pt-BR' ? 'Entrelinha (multiplicador)' : 'Line spacing (multiplier)'}>
+                <span aria-hidden="true">↕</span>
+                <input
+                  type="number"
+                  aria-label={language === 'pt-BR' ? 'Entrelinha' : 'Line spacing'}
+                  value={lineHeight.toFixed(2)}
+                  onChange={event => changeLineHeight(event.currentTarget.valueAsNumber)}
+                  min={0.6}
+                  max={2.5}
+                  step={0.01}
+                  className="rse-size-input rse-line-height-input"
+                />
+              </label>
+            </div>
           </div>
-          <div className="rse-toolbar-row">
+          <div className="rse-toolbar-row rse-toolbar-actions">
             <button className="rse-tool-btn" onClick={() => applyToSelection()} disabled={!hasSelection}>
               🎨 Apply to Selection
             </button>

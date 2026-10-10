@@ -4,6 +4,7 @@ import type { LayoutAlignmentGuide } from '../layoutFrameSnapping';
 import './AdminRuler.css';
 
 interface AdminRulerProps {
+  portalHost?: HTMLElement | null;
   pageElement: HTMLElement | null;
   pageWidth: number;
   pageHeight: number;
@@ -38,7 +39,7 @@ const LABEL_INTERVAL_PT = 100;
 const TICK_INTERVAL_PT = 10;
 const RULER_SIZE_PX = 22;
 
-export function AdminRuler({ pageElement, pageWidth, pageHeight, alignmentGuides = [] }: AdminRulerProps) {
+export function AdminRuler({ pageElement, pageWidth, pageHeight, alignmentGuides = [], portalHost = null }: AdminRulerProps) {
   const [pageRect, setPageRect] = useState<PageRect | null>(null);
   const [hoveredGeometry, setHoveredGeometry] = useState<HoveredBlockGeometry | null>(null);
 
@@ -267,6 +268,6 @@ export function AdminRuler({ pageElement, pageWidth, pageHeight, alignmentGuides
         </div>
       )}
     </>,
-    document.body,
+    portalHost ?? document.body,
   );
 }
