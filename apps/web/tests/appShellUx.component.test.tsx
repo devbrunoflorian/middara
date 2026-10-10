@@ -89,26 +89,35 @@ describe('application shell UX', () => {
     expect(queries.getByText('editor')).toBeTruthy();
   });
 
-  it('opens navigation temporarily on hover or click and closes by Escape or outside click', () => {
+  it('keeps desktop navigation hover-driven and closes after mouseleave, Escape, or outside click', () => {
+    vi.useFakeTimers();
     const onSelect = vi.fn();
     const queries = mount(<ShellNavigation active="rulebook" onSelect={onSelect} />);
     const panel = container.querySelector<HTMLElement>('.global-nav-panel')!;
     const slot = container.querySelector<HTMLElement>('.global-nav-slot')!;
+    const toggle = queries.getByRole('button', { name: 'Toggle navigation' });
 
     expect(slot.classList.contains('is-expanded')).toBe(false);
     act(() => fireEvent.mouseOver(panel));
     expect(panel.classList.contains('is-expanded')).toBe(true);
     expect(slot.classList.contains('is-expanded')).toBe(true);
 
-    act(() => fireEvent.click(queries.getByRole('button', { name: 'Toggle navigation' })));
+    act(() => fireEvent.click(toggle));
     expect(panel.classList.contains('is-expanded')).toBe(true);
     expect(slot.classList.contains('is-expanded')).toBe(true);
-    act(() => fireEvent.pointerDown(document.body));
+    act(() => fireEvent.mouseOut(panel, { relatedTarget: document.body }));
+    act(() => vi.advanceTimersByTime(221));
     expect(panel.classList.contains('is-expanded')).toBe(false);
 
-    act(() => fireEvent.click(queries.getByRole('button', { name: 'Toggle navigation' })));
-    expect(panel.classList.contains('is-expanded')).toBe(true);
+    act(() => fireEvent.click(toggle));
+    expect(panel.classList.contains('is-expanded')).toBe(false);
+
+    act(() => fireEvent.mouseOver(panel));
     act(() => fireEvent.keyDown(window, { key: 'Escape' }));
+    expect(panel.classList.contains('is-expanded')).toBe(false);
+
+    act(() => fireEvent.mouseOver(panel));
+    act(() => fireEvent.pointerDown(document.body));
     expect(panel.classList.contains('is-expanded')).toBe(false);
 
     act(() => fireEvent.click(queries.getByRole('button', { name: 'Errata' })));
@@ -244,11 +253,17 @@ describe('application shell UX', () => {
 
     await act(async () => root.render(<FaqDrawer language="en" open onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />));
     expect(queries.getByRole('dialog').hasAttribute('open')).toBe(true);
+    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Search the catalog' }), { target: { value: 'Gigas Grip' } }));
     act(() => fireEvent.click(queries.getByRole('button', { name: 'Close panel' })));
 
     expect(container.querySelector('dialog')?.hasAttribute('open')).toBe(false);
     expect(localStorage.getItem('fixture-key')).toBe(before);
     expect(onOpenChange).toHaveBeenCalledWith(false);
+
+    // Closing the FAQ to enter the editor does not unmount its catalog state.
+    await act(async () => root.render(<FaqDrawer language="en" open={false} onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />));
+    await act(async () => root.render(<FaqDrawer language="en" open onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />));
+    expect((queries.getByRole('searchbox', { name: 'Search the catalog' }) as HTMLInputElement).value).toBe('Gigas Grip');
   });
 
   it('navigates only to confirmed Rulebook references and leaves the desktop FAQ drawer open', () => {

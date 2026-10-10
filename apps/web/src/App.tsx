@@ -2,15 +2,14 @@ import { useState, useEffect, useRef, useCallback, type CSSProperties } from 're
 import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, type PageData, type PageFidelityOverlay } from './components/PageRenderer';
 import { AdminSymbolPalette, type AdminSymbolPaletteEditorState } from './components/AdminSymbolPalette';
 import { LocalSyncRecoveryControl } from './components/LocalSyncRecoveryControl';
-import { DevelopmentEnvironmentStatus } from './components/DevelopmentEnvironmentStatus';
 import { FaqDrawer } from './components/FaqDrawer';
 import { ShellNavigation, type ShellDestination } from './components/ShellNavigation';
 import { ArcaneGlassDefinitions } from './components/ArcaneGlassDefinitions';
 import { AtmosphericParticles } from './components/AtmosphericParticles';
-import { 
-  ChevronLeft, ChevronRight, Edit3, Menu,
+import {
+  ChevronLeft, ChevronRight, Diamond, Edit3, Menu,
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
-  Ruler, Move, Shapes
+  Ruler, Move
 } from 'lucide-react';
 import './App.css';
 import './ArcaneGothic.css';
@@ -23,7 +22,6 @@ import { attachSourceCompoundElements, type SourceCompoundElement } from './symb
 import type { ContentsRowDefinition } from './contentsRows';
 import { getDefaultSymbolAliasPreferences, getEditorAliasConflicts, getSemanticSymbol, normalizeEditorAlias, type SymbolAliasPreferences } from './symbols/semanticSymbols';
 import { loadSymbolAliasSettings, saveSymbolAliasSettings } from './symbols/symbolAliasSettings';
-import { payloadApiOrigin } from './config/payloadApi';
 import {
   captureDocumentFocalPoint,
   clampViewerZoom,
@@ -171,7 +169,6 @@ function App() {
   const [scrollPages, setScrollPages] = useState<Map<number, PageData>>(new Map());
 
   const mainRef = useRef<HTMLDivElement>(null);
-  const devMode = isLayoutMode ? 'layout' : paletteEditorState ? 'editor' : isAdmin ? 'admin' : 'viewer';
 
   useEffect(() => {
     zoomLevelRef.current = zoomLevel;
@@ -327,7 +324,10 @@ function App() {
   }, []);
 
   const handleEditorOpenChange = useCallback((pageNumber: number, open: boolean) => {
-    if (open) openEditorPagesRef.current.add(pageNumber);
+    if (open) {
+      openEditorPagesRef.current.add(pageNumber);
+      setIsFaqOpen(false);
+    }
     else openEditorPagesRef.current.delete(pageNumber);
     setIsRichEditorOpen(openEditorPagesRef.current.size > 0);
   }, []);
@@ -492,17 +492,6 @@ function App() {
     >
       <ArcaneGlassDefinitions />
       <AtmosphericParticles />
-      {import.meta.env.DEV && (
-        <div className="app-shell-header-actions">
-          <DevelopmentEnvironmentStatus
-            webOrigin={window.location.origin}
-            apiOrigin={payloadApiOrigin}
-            locale={language}
-            isAdmin={isAdmin}
-            mode={devMode}
-          />
-        </div>
-      )}
       <ShellNavigation
         active={isFaqOpen ? faqActiveType : currentPage === 3 ? 'contents' : 'rulebook'}
         workspaceEditing={isRichEditorOpen}
@@ -518,6 +507,21 @@ function App() {
           if (didNavigate) setIsFaqOpen(false);
         }}
       />
+      {isAdmin && isRichEditorOpen && (
+        <aside className="editing-symbol-rail" aria-label={language === 'pt-BR' ? 'Ferramentas de símbolos' : 'Symbol tools'}>
+          <button
+            type="button"
+            className={`tool-btn admin-symbol-palette-toggle ${isSymbolPaletteOpen ? 'active' : ''}`}
+            aria-label={language === 'pt-BR' ? 'Abrir paleta de símbolos' : 'Open symbol palette'}
+            aria-expanded={isSymbolPaletteOpen}
+            aria-controls="admin-symbol-palette"
+            title={language === 'pt-BR' ? 'Símbolos do livro' : 'Rulebook symbols'}
+            onClick={() => setIsSymbolPaletteOpen(open => !open)}
+          >
+            <Diamond size={16} aria-hidden="true" />
+          </button>
+        </aside>
+      )}
       {/* Main Viewer Area */}
       <main className={`viewer-main ${viewMode}`} ref={mainRef}>
         {viewMode === 'single' ? (
@@ -712,7 +716,7 @@ function App() {
             <span>Admin</span>
           </button>
           <LocalSyncRecoveryControl visible={isAdmin} />
-          {isAdmin && (
+          {isAdmin && !isRichEditorOpen && (
             <button
               type="button"
               className={`tool-btn admin-symbol-palette-toggle ${isSymbolPaletteOpen ? 'active' : ''}`}
@@ -722,7 +726,7 @@ function App() {
               title={language === 'pt-BR' ? 'Símbolos especiais' : 'Special symbols'}
               onClick={() => setIsSymbolPaletteOpen(open => !open)}
             >
-              <Shapes size={16} aria-hidden="true" />
+              <Diamond size={16} aria-hidden="true" />
             </button>
           )}
           {isAdmin && (

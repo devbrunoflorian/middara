@@ -5,9 +5,15 @@
   container-type: inline-size;
 }
 
+:root { --editing-symbol-rail-width: 48px; }
+
 /* Editing gives the whole left rail back to the document. Navigation remains
    available through its small fixed launcher and only opens on deliberate use. */
 .app-container.rich-editor-open { --left-nav-width: 0px; }
+
+/* An explicitly requested FAQ during editing is a temporary overlay. It must
+   not reserve a second column or squeeze the viewer/editor flex workspace. */
+.app-container.rich-editor-open.faq-open .viewer-main { margin-left: 0; }
 
 .global-nav-slot.is-editing {
   position: fixed;
@@ -50,6 +56,29 @@
 }
 
 .workspace-navigation-toggle { margin-bottom: 4px; }
+
+.editing-symbol-rail {
+  position: relative;
+  z-index: 1500;
+  display: flex;
+  flex: 0 0 var(--editing-symbol-rail-width);
+  width: var(--editing-symbol-rail-width);
+  min-width: var(--editing-symbol-rail-width);
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-top: 8px;
+  border-right: 1px solid rgba(105, 217, 235, 0.12);
+  background: linear-gradient(180deg, rgba(15, 16, 29, 0.54), rgba(10, 13, 23, 0.38));
+}
+
+.editing-symbol-rail .admin-symbol-palette-toggle {
+  width: 34px;
+  min-width: 34px;
+  height: 36px;
+  min-height: 36px;
+  color: var(--arcane-text-secondary, #c7bed5);
+}
 
 .pdf-sidebar {
   box-sizing: border-box;
@@ -188,7 +217,8 @@
   }
 
   .app-container.rich-editor-open .admin-symbol-palette {
-    right: calc(var(--arcane-dock-width, 52px) + var(--arcane-stage-inset, 16px) + min(var(--rich-editor-panel-width, 420px), 320px) + 16px);
+    right: auto;
+    left: calc(var(--editing-symbol-rail-width, 48px) + 8px);
   }
 }
 
@@ -262,8 +292,11 @@
 }
 
 .app-container.rich-editor-open .admin-symbol-palette {
-  right: calc(var(--arcane-dock-width, 52px) + var(--arcane-stage-inset, 16px) + var(--rich-editor-panel-width, 420px) + 16px);
-  left: auto;
+  top: max(56px, calc(env(safe-area-inset-top, 0px) + 48px));
+  bottom: 16px;
+  right: auto;
+  left: calc(var(--editing-symbol-rail-width, 48px) + 8px);
+  width: min(250px, calc(100vw - 64px));
 }
 
 .admin-symbol-palette {

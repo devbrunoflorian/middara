@@ -24,21 +24,25 @@ const destinations: Array<{ id: ShellDestination; label: string; icon: typeof Bo
 export function ShellNavigation({ active, onSelect, workspaceEditing = false, openRequest = 0, onExpandedChange }: ShellNavigationProps) {
   const [isNarrow, setIsNarrow] = useState(() => typeof window !== 'undefined' && window.matchMedia(touchDrawerQuery).matches);
   const [hoverOpen, setHoverOpen] = useState(false);
-  const [clickOpen, setClickOpen] = useState(false);
   const [focusOpen, setFocusOpen] = useState(false);
+  const [launcherOpen, setLauncherOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeTimerRef = useRef<number | null>(null);
   const handledOpenRequestRef = useRef(openRequest);
   const panelRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstItemRef = useRef<HTMLButtonElement>(null);
-  const expanded = isNarrow ? mobileOpen : clickOpen || (!workspaceEditing && (hoverOpen || focusOpen));
+  const expanded = isNarrow
+    ? mobileOpen
+    : workspaceEditing
+      ? launcherOpen
+      : hoverOpen || focusOpen;
 
   useEffect(() => {
     if (handledOpenRequestRef.current === openRequest) return;
     handledOpenRequestRef.current = openRequest;
     if (isNarrow) setMobileOpen(true);
-    else setClickOpen(true);
+    else setLauncherOpen(true);
   }, [isNarrow, openRequest]);
 
   useEffect(() => {
@@ -50,7 +54,7 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
     const update = () => {
       setIsNarrow(query.matches);
       setMobileOpen(false);
-      setClickOpen(false);
+      setLauncherOpen(false);
       setHoverOpen(false);
       setFocusOpen(false);
     };
@@ -67,7 +71,7 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
       if (!target || panelRef.current?.contains(target) || menuButtonRef.current?.contains(target)) return;
       if (isNarrow) closeMobileDrawer();
       else {
-        setClickOpen(false);
+        setLauncherOpen(false);
         setHoverOpen(false);
         setFocusOpen(false);
       }
@@ -77,7 +81,7 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
       event.preventDefault();
       if (isNarrow) closeMobileDrawer();
       else {
-        setClickOpen(false);
+        setLauncherOpen(false);
         setHoverOpen(false);
         setFocusOpen(false);
         menuButtonRef.current?.focus();
@@ -100,7 +104,7 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
     cancelClose();
     setHoverOpen(false);
     setFocusOpen(false);
-    setClickOpen(false);
+    setLauncherOpen(false);
   }, [workspaceEditing]);
 
   const cancelClose = () => {
@@ -112,7 +116,9 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
     cancelClose();
     closeTimerRef.current = window.setTimeout(() => {
       setHoverOpen(false);
-      setFocusOpen(current => current && Boolean(panelRef.current?.contains(document.activeElement)));
+      const focusRemainsInNavigation = Boolean(panelRef.current?.contains(document.activeElement));
+      setFocusOpen(current => current && focusRemainsInNavigation);
+      if (!focusRemainsInNavigation) setLauncherOpen(false);
       closeTimerRef.current = null;
     }, 220);
   };
@@ -127,13 +133,15 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
       setMobileOpen(open => !open);
       return;
     }
-    setClickOpen(open => !open);
+    // In the reading workspace desktop navigation is hover/focus driven.
+    // Only the deliberate editing-workspace launcher gets a click toggle.
+    if (workspaceEditing) setLauncherOpen(open => !open);
   };
 
   const handleSelect = (destination: ShellDestination) => {
     onSelect(destination);
     setHoverOpen(false);
-    setClickOpen(false);
+    setLauncherOpen(false);
     setFocusOpen(false);
     if (isNarrow) closeMobileDrawer();
   };
@@ -159,7 +167,7 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
           setHoverOpen(true);
         }}
         onMouseLeave={() => {
-          if (!isNarrow && !clickOpen && !panelRef.current?.contains(document.activeElement)) scheduleClose();
+          if (!isNarrow) scheduleClose();
         }}
         onFocusCapture={event => {
           if (!isNarrow && !workspaceEditing && event.target !== menuButtonRef.current) {
@@ -170,7 +178,7 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
         onBlurCapture={event => {
           if (isNarrow || event.currentTarget.contains(event.relatedTarget as Node | null)) return;
           setFocusOpen(false);
-          if (!clickOpen) scheduleClose();
+          scheduleClose();
         }}
       >
         <div className="global-nav-header">
@@ -189,7 +197,12 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
             aria-controls="global-navigation"
             title={isNarrow
               ? (mobileOpen ? 'Close navigation' : 'Open navigation')
-              : (clickOpen ? 'Close navigation' : 'Open navigation')}
+              : (workspaceEditing && launcherOpen ? 'Close navigation' : 'Navigation')}
+            onMouseDown={event => {
+              // Prevent mouse clicks from leaving keyboard focus in the
+              // hover menu, which would otherwise make mouseleave feel pinned.
+              if (!isNarrow) event.preventDefault();
+            }}
             onClick={handleMenuClick}
           >
             <Menu size={18} aria-hidden="true" />

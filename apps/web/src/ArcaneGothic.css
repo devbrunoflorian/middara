@@ -28,6 +28,11 @@
   --arcane-shadow: 0 18px 48px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(125, 81, 143, 0.12);
   --arcane-transition-fast: 140ms ease;
   --arcane-transition-ui: 180ms ease;
+  --arcane-scrollbar-size: 10px;
+  --arcane-scrollbar-track: #0a0c15;
+  --arcane-scrollbar-thumb: #34334a;
+  --arcane-scrollbar-thumb-hover: #4a5372;
+  --arcane-scrollbar-edge: rgba(151, 193, 220, 0.32);
 
   /* The app drawer sits above Admin overlays while open. */
   --layer-app-drawer: 30000;
@@ -38,6 +43,54 @@ body {
   background: var(--arcane-obsidian);
   color: var(--arcane-text);
   color-scheme: dark;
+}
+
+/* Shared, draggable Arcane Gothic scrollbars for every real scroll region. */
+* {
+  scrollbar-color: var(--arcane-scrollbar-thumb) var(--arcane-scrollbar-track);
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: var(--arcane-scrollbar-size);
+  height: var(--arcane-scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+  border: 1px solid rgba(105, 217, 235, 0.06);
+  border-radius: 6px;
+  background: var(--arcane-scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  min-height: 28px;
+  border: 2px solid var(--arcane-scrollbar-track);
+  border-radius: 6px;
+  background: linear-gradient(135deg, #414157, var(--arcane-scrollbar-thumb));
+  box-shadow: inset 0 0 0 1px var(--arcane-scrollbar-edge);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #58617d, var(--arcane-scrollbar-thumb-hover));
+  box-shadow: inset 0 0 0 1px rgba(105, 217, 235, 0.48), 0 0 8px rgba(21, 153, 189, 0.14);
+}
+
+::-webkit-scrollbar-corner { background: var(--arcane-scrollbar-track); }
+
+/* Keep viewport and panel widths stable when vertical overflow appears. */
+.viewer-main.scroll,
+.page-stage,
+.rse-panel,
+.rse-context-source,
+.rse-segments-list,
+.rse-char-grid,
+.faq-entry-list,
+.faq-errata-context,
+.admin-symbol-palette-list,
+.admin-layout-frame-panel,
+.font-editor-panel,
+.local-sync-dialog-body {
+  scrollbar-gutter: stable;
 }
 
 body,
@@ -409,7 +462,6 @@ html {
   background: linear-gradient(150deg, rgba(31, 23, 43, 0.985), rgba(15, 13, 23, 0.99));
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.52), inset 0 1px rgba(255, 255, 255, 0.045), 0 0 22px rgba(21, 153, 189, 0.06);
   pointer-events: auto;
-  scrollbar-color: rgba(167, 107, 181, 0.45) rgba(255, 255, 255, 0.035);
 }
 
 .admin-layout-frame-panel > strong {
