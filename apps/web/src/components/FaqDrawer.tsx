@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { ExternalLink, Search, X } from 'lucide-react';
+import { ChevronDown, ExternalLink, Search, X } from 'lucide-react';
 import {
   FAQ_REVIEWED_ON,
   FAQ_SOURCE_URL,
@@ -54,6 +54,7 @@ export function FaqDrawer({ language, open, onOpenChange }: FaqDrawerProps) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
   const [severity, setSeverity] = useState('all');
+  const [openEntryIds, setOpenEntryIds] = useState<Set<string>>(() => new Set());
   const isPortuguese = language === 'pt-BR';
   const entries = getCatalogEntries(activeType);
   const snapshot = getCatalogSnapshot();
@@ -83,6 +84,16 @@ export function FaqDrawer({ language, open, onOpenChange }: FaqDrawerProps) {
     setActiveType(type);
     setCategory('all');
     setSeverity('all');
+    setOpenEntryIds(new Set());
+  };
+
+  const toggleEntry = (entryId: string) => {
+    setOpenEntryIds(current => {
+      const next = new Set(current);
+      if (next.has(entryId)) next.delete(entryId);
+      else next.add(entryId);
+      return next;
+    });
   };
 
   const noResults = isPortuguese ? 'Nenhuma entrada corresponde aos filtros.' : 'No entries match these filters.';
@@ -165,13 +176,19 @@ export function FaqDrawer({ language, open, onOpenChange }: FaqDrawerProps) {
             <input
               type="search"
               value={query}
-              onChange={event => setQuery(event.target.value)}
+              onChange={event => {
+                setQuery(event.target.value);
+                setOpenEntryIds(new Set());
+              }}
               placeholder={isPortuguese ? 'Buscar título ou conteúdo' : 'Search titles and content'}
             />
           </label>
           <label className="faq-category-label">
             <span className="visually-hidden">{isPortuguese ? 'Categoria' : 'Category'}</span>
-            <select value={category} onChange={event => setCategory(event.target.value)}>
+            <select value={category} onChange={event => {
+              setCategory(event.target.value);
+              setOpenEntryIds(new Set());
+            }}>
               <option value="all">{isPortuguese ? 'Todas as categorias' : 'All categories'}</option>
               {categories.map(value => <option key={value} value={value}>{value}</option>)}
             </select>
@@ -179,7 +196,10 @@ export function FaqDrawer({ language, open, onOpenChange }: FaqDrawerProps) {
           {activeType === 'errata' && (
             <label className="faq-severity-label">
               <span className="visually-hidden">{isPortuguese ? 'Severidade' : 'Severity'}</span>
-              <select value={severity} onChange={event => setSeverity(event.target.value)}>
+              <select value={severity} onChange={event => {
+                setSeverity(event.target.value);
+                setOpenEntryIds(new Set());
+              }}>
                 <option value="all">{isPortuguese ? 'Todas as severidades' : 'All severities'}</option>
                 {['Critical', 'Major', 'Minor'].map(value => <option key={value} value={value}>{value}</option>)}
               </select>
@@ -191,47 +211,78 @@ export function FaqDrawer({ language, open, onOpenChange }: FaqDrawerProps) {
           {isPortuguese ? `${filteredEntries.length} entradas` : `${filteredEntries.length} entries`}
         </div>
 
-        <div className="faq-entry-list" aria-live="polite">
+        <div className="faq-entry-list">
           {filteredEntries.length ? filteredEntries.map(entry => {
             const content = resolveCatalogContent(entry, language);
             const label = statusLabel(entry, isPortuguese);
+            const isExpanded = openEntryIds.has(entry.id);
+            const safeEntryId = entry.id.replace(/[^a-zA-Z0-9_-]/g, '-');
+            const triggerId = `faq-entry-trigger-${safeEntryId}`;
+            const panelId = `faq-entry-panel-${safeEntryId}`;
             return (
-              <article className="faq-entry" key={entry.id}>
-                <div className="faq-entry-heading">
-                  <span className="faq-entry-category">{entry.category}</span>
-                  {activeType === 'errata' && entry.severity && <span className={`faq-severity ${entry.severity.toLowerCase()}`}>{entry.severity}</span>}
-                  {entry.spoiler && <span className="faq-spoiler-badge">{isPortuguese ? 'Spoiler' : 'Spoiler'}</span>}
+              <article className={`faq-entry${isExpanded ? ' is-open' : ''}`} key={entry.id}>
+                <h3 className="faq-entry-heading">
+                  <button
+                    aria-expanded={isExpanded}
+                    aria-controls={panelId}
+                    className="faq-entry-trigger"
+                    id={triggerId}
+                    type="button"
+                    onClick={() => toggleEntry(entry.id)}
+                  >
+                    {activeType === 'faq' ? (
+                      <span className="faq-entry-category">{entry.category}</span>
+                    ) : (
+                      <>
+                        {entry.severity && <span className={`faq-severity ${entry.severity.toLowerCase()}`}>{entry.severity}</span>}
+                        <span className="faq-entry-category">{entry.category}</span>
+                      </>
+                    )}
+                    <span className="faq-entry-title">{content.title}{entry.spoiler && <span className="faq-spoiler-badge">{isPortuguese ? 'Spoiler' : 'Spoiler'}</span>}</span>
+                    <ChevronDown className="faq-entry-chevron" size={16} aria-hidden="true" />
+                  </button>
+                </h3>
+                <div
+                  aria-labelledby={triggerId}
+                  className="faq-entry-content"
+                  hidden={!isExpanded}
+                  id={panelId}
+                  role="region"
+                >
+                  {isExpanded && (
+                    <>
+                      <p className="faq-entry-source">{sourceDescription(entry, isPortuguese)}{content.isFallback && <span className="faq-language-badge">{isPortuguese ? 'Fallback EN' : 'EN fallback'}</span>}</p>
+                      {label && <p className={`faq-status-badge ${entry.rulebook12Status === 'VERIFIED_IN_RULEBOOK_1_2' ? 'integrated' : ''}`}>{label}</p>}
+                      <div className="faq-entry-body"><ReactMarkdown>{content.text || (isPortuguese ? 'Conteúdo não disponível.' : 'No content available.')}</ReactMarkdown></div>
+                      {!!entry.pageReferences?.length && (
+                        <div className="faq-page-references" aria-label={isPortuguese ? 'Referências de página' : 'Page references'}>
+                          {entry.pageReferences.map(page => <span key={page}>PG. {page}</span>)}
+                        </div>
+                      )}
+                      {entry.sourceMetadata?.notesEn && <details className="faq-source-details"><summary>{isPortuguese ? 'Notas da fonte' : 'Source notes'}</summary><p>{entry.sourceMetadata.notesEn}</p></details>}
+                      {entry.sourceMetadata?.examplePageUrl && (
+                        <a className="faq-example-link" href={entry.sourceMetadata.examplePageUrl} target="_blank" rel="noreferrer">
+                          {isPortuguese ? 'Abrir exemplo oficial' : 'Open official example'} <ExternalLink size={13} aria-hidden="true" />
+                        </a>
+                      )}
+                      {!!entry.historicalRecords?.length && (
+                        <details className="faq-history-details">
+                          <summary>{isPortuguese ? `Fonte histórica 1.1 (${entry.historicalRecords.length})` : `Historical 1.1 source (${entry.historicalRecords.length})`}</summary>
+                          {entry.historicalRecords.map(history => (
+                            <section className="faq-history-record" key={history.id}>
+                              {history.titleEn !== entry.titleEn && <h4>{history.titleEn}</h4>}
+                              <p className="faq-entry-source">{sourceDescription({ ...entry, source: history.source }, isPortuguese)} · {history.transcription === 'OCR_TEXT_LAYER' ? (isPortuguese ? 'texto OCR da fonte' : 'source OCR text') : history.transcription === 'VISUALLY_REVIEWED' ? (isPortuguese ? 'revisado visualmente' : 'visually reviewed') : history.transcription}</p>
+                              <p className="faq-history-text">{history.bodyEn}</p>
+                            </section>
+                          ))}
+                        </details>
+                      )}
+                      {entry.status === 'HISTORICAL_ONLY' && entry.transcription === 'OCR_TEXT_LAYER' && (
+                        <p className="faq-ocr-note">{isPortuguese ? 'Transcrição do texto OCR do PDF histórico; consulte a origem para conferir caracteres possivelmente ambíguos.' : 'OCR text-layer transcription from the historical PDF; consult the source for ambiguous characters.'}</p>
+                      )}
+                    </>
+                  )}
                 </div>
-                <h3>{content.title}</h3>
-                <p className="faq-entry-source">{sourceDescription(entry, isPortuguese)}{content.isFallback && <span className="faq-language-badge">{isPortuguese ? 'Fallback EN' : 'EN fallback'}</span>}</p>
-                {label && <p className={`faq-status-badge ${entry.rulebook12Status === 'VERIFIED_IN_RULEBOOK_1_2' ? 'integrated' : ''}`}>{label}</p>}
-                <div className="faq-entry-body"><ReactMarkdown>{content.text || (isPortuguese ? 'Conteúdo não disponível.' : 'No content available.')}</ReactMarkdown></div>
-                {!!entry.pageReferences?.length && (
-                  <div className="faq-page-references" aria-label={isPortuguese ? 'Referências de página' : 'Page references'}>
-                    {entry.pageReferences.map(page => <span key={page}>PG. {page}</span>)}
-                  </div>
-                )}
-                {entry.sourceMetadata?.notesEn && <details className="faq-source-details"><summary>{isPortuguese ? 'Notas da fonte' : 'Source notes'}</summary><p>{entry.sourceMetadata.notesEn}</p></details>}
-                {entry.sourceMetadata?.examplePageUrl && (
-                  <a className="faq-example-link" href={entry.sourceMetadata.examplePageUrl} target="_blank" rel="noreferrer">
-                    {isPortuguese ? 'Abrir exemplo oficial' : 'Open official example'} <ExternalLink size={13} aria-hidden="true" />
-                  </a>
-                )}
-                {!!entry.historicalRecords?.length && (
-                  <details className="faq-history-details">
-                    <summary>{isPortuguese ? `Fonte histórica 1.1 (${entry.historicalRecords.length})` : `Historical 1.1 source (${entry.historicalRecords.length})`}</summary>
-                    {entry.historicalRecords.map(history => (
-                      <section className="faq-history-record" key={history.id}>
-                        {history.titleEn !== entry.titleEn && <h4>{history.titleEn}</h4>}
-                        <p className="faq-entry-source">{sourceDescription({ ...entry, source: history.source }, isPortuguese)} · {history.transcription === 'OCR_TEXT_LAYER' ? (isPortuguese ? 'texto OCR da fonte' : 'source OCR text') : history.transcription === 'VISUALLY_REVIEWED' ? (isPortuguese ? 'revisado visualmente' : 'visually reviewed') : history.transcription}</p>
-                        <p className="faq-history-text">{history.bodyEn}</p>
-                      </section>
-                    ))}
-                  </details>
-                )}
-                {entry.status === 'HISTORICAL_ONLY' && entry.transcription === 'OCR_TEXT_LAYER' && (
-                  <p className="faq-ocr-note">{isPortuguese ? 'Transcrição do texto OCR do PDF histórico; consulte a origem para conferir caracteres possivelmente ambíguos.' : 'OCR text-layer transcription from the historical PDF; consult the source for ambiguous characters.'}</p>
-                )}
               </article>
             );
           }) : <p className="faq-empty">{noResults}</p>}

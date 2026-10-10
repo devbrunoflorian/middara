@@ -4,7 +4,7 @@ import { fireEvent, getQueriesForElement } from '@testing-library/dom';
 import { createRoot, type Root } from 'react-dom/client';
 import { DevelopmentEnvironmentStatus } from '../src/components/DevelopmentEnvironmentStatus';
 import { FaqDrawer } from '../src/components/FaqDrawer';
-import { resolveFaqContent } from '../src/faq/faqContent';
+import { getCatalogEntries, resolveCatalogContent } from '../src/faq/faqContent';
 
 let container: HTMLDivElement;
 let root: Root;
@@ -79,10 +79,16 @@ describe('application shell UX', () => {
     expect(queries.getByText('editor')).toBeTruthy();
   });
 
-  it('uses explicit English fallback for PT-BR and supports case-insensitive local search', async () => {
-    expect(resolveFaqContent('en').isFallback).toBe(false);
-    expect(resolveFaqContent('pt-BR').isFallback).toBe(true);
-    expect(resolveFaqContent('pt-BR').entries[0].question).toMatch(/Reach/);
+  it('keeps FAQ answers collapsed by default, expands multiple entries, and resets them when search changes', async () => {
+    const [reachEntry, courageEntry] = getCatalogEntries('faq');
+    const reachEn = resolveCatalogContent(reachEntry, 'en');
+    const reachPt = resolveCatalogContent(reachEntry, 'pt-BR');
+    const courageEn = resolveCatalogContent(courageEntry, 'en');
+    const triggerForTitle = (title: string) => Array.from(container.querySelectorAll<HTMLButtonElement>('.faq-entry-trigger'))
+      .find(button => button.querySelector('.faq-entry-title')?.textContent === title);
+    expect(reachEn.isFallback).toBe(false);
+    expect(reachPt.isFallback).toBe(true);
+    expect(reachPt.title).toMatch(/Reach/);
 
     const onOpenChange = vi.fn();
     const queries = mount(<FaqDrawer language="pt-BR" open={false} onOpenChange={onOpenChange} />);
@@ -90,13 +96,51 @@ describe('application shell UX', () => {
 
     expect(queries.getByRole('dialog').hasAttribute('open')).toBe(true);
     expect(queries.getByRole('dialog').getAttribute('aria-modal')).toBe('false');
-    expect(queries.getByText(/Versão PT-BR oficial não encontrada/)).toBeTruthy();
-    expect(queries.getByText(/sem tradução automática/)).toBeTruthy();
+    expect(queries.getByText(/Entradas sem tradução PT-BR revisada aparecem em EN/)).toBeTruthy();
 
-    const search = queries.getByLabelText('Buscar na FAQ');
+    const reachTrigger = queries.getByRole('button', { name: /How does Reach and Flanking Work/ });
+    const courageTrigger = queries.getByRole('button', { name: /Casting Dice upgrade/ });
+    expect(reachTrigger.getAttribute('aria-expanded')).toBe('false');
+    expect(queries.queryByText(/So long as you're attacking an opponent/)).toBeNull();
+
+    act(() => fireEvent.click(reachTrigger));
+    expect(reachTrigger.getAttribute('aria-expanded')).toBe('true');
+    expect(queries.getByText('Fallback EN')).toBeTruthy();
+    expect(container.querySelector('.faq-entry-body')?.textContent).toMatch(/So long as you're attacking an opponent/);
+
+    act(() => fireEvent.click(courageTrigger));
+    expect(reachTrigger.getAttribute('aria-expanded')).toBe('true');
+    expect(courageTrigger.getAttribute('aria-expanded')).toBe('true');
+
+    const search = queries.getByRole('searchbox', { name: 'Buscar no catálogo' });
     act(() => fireEvent.change(search, { target: { value: 'rEaCh' } }));
-    expect(queries.getByText('How do Reach and flanking work together?')).toBeTruthy();
-    expect(queries.queryByText('What if equipped items no longer form a legal combination?')).toBeNull();
+    expect(queries.getByText(reachEn.title)).toBeTruthy();
+    expect(reachTrigger.getAttribute('aria-expanded')).toBe('false');
+    expect(queries.queryByRole('button', { name: /Courage Stifle/ })).toBeNull();
+    expect(container.querySelector('.faq-entry-content .faq-entry-body')).toBeNull();
+
+    act(() => fireEvent.change(search, { target: { value: '' } }));
+    expect(queries.getByText('77 entradas')).toBeTruthy();
+    expect(queries.getByRole('button', { name: /How does Reach and Flanking Work/ }).getAttribute('aria-expanded')).toBe('false');
+    expect(triggerForTitle(courageEn.title)?.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('uses the same collapsed interaction for Errata and keeps severity visible', () => {
+    const onOpenChange = vi.fn();
+    const queries = mount(<FaqDrawer language="en" open onOpenChange={onOpenChange} />);
+    const errataTab = queries.getByRole('tab', { name: /ERRATA/ });
+    act(() => fireEvent.click(errataTab));
+    expect(errataTab.getAttribute('aria-selected')).toBe('true');
+
+    const gigasTitle = getCatalogEntries('errata').find(entry => entry.titleEn.includes('Gigas Grip'))?.titleEn;
+    const gigasTrigger = gigasTitle && Array.from(container.querySelectorAll<HTMLButtonElement>('.faq-entry-trigger'))
+      .find(button => button.querySelector('.faq-entry-title')?.textContent === gigasTitle);
+    expect(gigasTrigger).toBeTruthy();
+    expect(gigasTrigger.getAttribute('aria-expanded')).toBe('false');
+    act(() => fireEvent.click(gigasTrigger));
+    expect(gigasTrigger.getAttribute('aria-expanded')).toBe('true');
+    expect(queries.getByText(/Official website · snapshot/)).toBeTruthy();
+    expect(container.querySelector('.faq-entry-content .faq-entry-body')?.textContent).toMatch(/This ability has historically caused many issues/);
   });
 
   it('opens and closes the FAQ without changing local translation storage', async () => {
@@ -107,7 +151,7 @@ describe('application shell UX', () => {
 
     await act(async () => root.render(<FaqDrawer language="en" open onOpenChange={onOpenChange} />));
     expect(queries.getByRole('dialog').hasAttribute('open')).toBe(true);
-    act(() => fireEvent.click(queries.getByRole('button', { name: 'Close FAQ' })));
+    act(() => fireEvent.click(queries.getByRole('button', { name: 'Close panel' })));
 
     expect(container.querySelector('dialog')?.hasAttribute('open')).toBe(false);
     expect(localStorage.getItem('fixture-key')).toBe(before);
