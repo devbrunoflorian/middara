@@ -140,7 +140,7 @@ export function LocalSyncRecoveryControl({ visible }: LocalSyncRecoveryControlPr
       </button>
       <dialog
         ref={dialogRef}
-        className="local-sync-dialog"
+        className="local-sync-dialog arcane-glass-surface"
         aria-labelledby="local-sync-dialog-title"
         onClose={() => setOpen(false)}
         onClick={event => { if (event.target === event.currentTarget) setOpen(false); }}

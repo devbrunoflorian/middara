@@ -26,7 +26,7 @@ export function DevelopmentEnvironmentStatus({
         <span className="dev-environment-dot" aria-hidden="true" />
         <span>DEV</span>
       </summary>
-      <div className="dev-environment-card" role="group" aria-label="Development environment details">
+      <div className="dev-environment-card arcane-glass-surface" role="group" aria-label="Development environment details">
         <p className="dev-environment-heading">Development environment</p>
         <dl>
           <div><dt>WEB</dt><dd><code>{webOrigin}</code></dd></div>

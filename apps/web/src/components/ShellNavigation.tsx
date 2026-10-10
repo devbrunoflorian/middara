@@ -7,9 +7,7 @@ export type ShellDestination = 'rulebook' | 'faq' | 'errata' | 'contents';
 const touchDrawerQuery = '(max-width: 700px), (hover: none) and (pointer: coarse)';
 
 interface ShellNavigationProps {
-  pinned: boolean;
   active: ShellDestination;
-  onPinnedChange: (pinned: boolean) => void;
   onSelect: (destination: ShellDestination) => void;
 }
 
@@ -20,21 +18,26 @@ const destinations: Array<{ id: ShellDestination; label: string; icon: typeof Bo
   { id: 'contents', label: 'Índice', icon: ListTree },
 ];
 
-export function ShellNavigation({ pinned, active, onPinnedChange, onSelect }: ShellNavigationProps) {
+export function ShellNavigation({ active, onSelect }: ShellNavigationProps) {
   const [isNarrow, setIsNarrow] = useState(() => typeof window !== 'undefined' && window.matchMedia(touchDrawerQuery).matches);
   const [hoverOpen, setHoverOpen] = useState(false);
+  const [clickOpen, setClickOpen] = useState(false);
+  const [focusOpen, setFocusOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeTimerRef = useRef<number | null>(null);
   const panelRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstItemRef = useRef<HTMLButtonElement>(null);
-  const expanded = isNarrow ? mobileOpen : pinned || hoverOpen;
+  const expanded = isNarrow ? mobileOpen : clickOpen || hoverOpen || focusOpen;
 
   useEffect(() => {
     const query = window.matchMedia(touchDrawerQuery);
     const update = () => {
       setIsNarrow(query.matches);
-      if (!query.matches) setMobileOpen(false);
+      setMobileOpen(false);
+      setClickOpen(false);
+      setHoverOpen(false);
+      setFocusOpen(false);
     };
     update();
     query.addEventListener('change', update);
@@ -42,20 +45,36 @@ export function ShellNavigation({ pinned, active, onPinnedChange, onSelect }: Sh
   }, []);
 
   useEffect(() => {
-    if (isNarrow && pinned) onPinnedChange(false);
-  }, [isNarrow, onPinnedChange, pinned]);
-
-  useEffect(() => {
-    if (!mobileOpen) return;
-    firstItemRef.current?.focus();
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return;
-      event.preventDefault();
-      closeMobileDrawer();
+    if (!expanded) return;
+    if (isNarrow && mobileOpen) firstItemRef.current?.focus();
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node | null;
+      if (!target || panelRef.current?.contains(target) || menuButtonRef.current?.contains(target)) return;
+      if (isNarrow) closeMobileDrawer();
+      else {
+        setClickOpen(false);
+        setHoverOpen(false);
+        setFocusOpen(false);
+      }
     };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || event.defaultPrevented) return;
+      event.preventDefault();
+      if (isNarrow) closeMobileDrawer();
+      else {
+        setClickOpen(false);
+        setHoverOpen(false);
+        setFocusOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener('pointerdown', onPointerDown);
     window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [mobileOpen]);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [expanded, isNarrow, mobileOpen]);
 
   useEffect(() => () => {
     if (closeTimerRef.current !== null) window.clearTimeout(closeTimerRef.current);
@@ -70,6 +89,7 @@ export function ShellNavigation({ pinned, active, onPinnedChange, onSelect }: Sh
     cancelClose();
     closeTimerRef.current = window.setTimeout(() => {
       setHoverOpen(false);
+      setFocusOpen(current => current && Boolean(panelRef.current?.contains(document.activeElement)));
       closeTimerRef.current = null;
     }, 220);
   };
@@ -84,17 +104,19 @@ export function ShellNavigation({ pinned, active, onPinnedChange, onSelect }: Sh
       setMobileOpen(open => !open);
       return;
     }
-    onPinnedChange(!pinned);
+    setClickOpen(open => !open);
   };
 
   const handleSelect = (destination: ShellDestination) => {
     onSelect(destination);
     setHoverOpen(false);
+    setClickOpen(false);
+    setFocusOpen(false);
     if (isNarrow) closeMobileDrawer();
   };
 
   return (
-    <div className={`global-nav-slot ${pinned && !isNarrow ? 'is-pinned' : ''}`}>
+    <div className="global-nav-slot">
       {isNarrow && mobileOpen && (
         <button
           className="global-nav-backdrop"
@@ -106,7 +128,7 @@ export function ShellNavigation({ pinned, active, onPinnedChange, onSelect }: Sh
       <aside
         ref={panelRef}
         id="global-navigation"
-        className={`global-nav-panel ${expanded ? 'is-expanded' : ''} ${pinned && !isNarrow ? 'is-pinned' : ''} ${isNarrow ? 'is-mobile' : ''}`}
+        className={`global-nav-panel arcane-glass-surface ${expanded ? 'is-expanded' : ''} ${isNarrow ? 'is-mobile' : ''}`}
         aria-label="Global navigation"
         onMouseEnter={() => {
           if (isNarrow) return;
@@ -114,12 +136,18 @@ export function ShellNavigation({ pinned, active, onPinnedChange, onSelect }: Sh
           setHoverOpen(true);
         }}
         onMouseLeave={() => {
-          if (!isNarrow && !pinned && !panelRef.current?.contains(document.activeElement)) scheduleClose();
+          if (!isNarrow && !clickOpen && !panelRef.current?.contains(document.activeElement)) scheduleClose();
         }}
-        onFocusCapture={() => { if (!isNarrow) { cancelClose(); setHoverOpen(true); } }}
+        onFocusCapture={event => {
+          if (!isNarrow && event.target !== menuButtonRef.current) {
+            cancelClose();
+            setFocusOpen(true);
+          }
+        }}
         onBlurCapture={event => {
           if (isNarrow || event.currentTarget.contains(event.relatedTarget as Node | null)) return;
-          if (!pinned) scheduleClose();
+          setFocusOpen(false);
+          if (!clickOpen) scheduleClose();
         }}
       >
         <div className="global-nav-header">
@@ -133,13 +161,12 @@ export function ShellNavigation({ pinned, active, onPinnedChange, onSelect }: Sh
             type="button"
             aria-label={isNarrow
               ? (mobileOpen ? 'Close navigation' : 'Open navigation')
-              : (pinned ? 'Unpin navigation open' : 'Pin navigation open')}
+              : 'Toggle navigation'}
             aria-expanded={expanded}
             aria-controls="global-navigation"
-            aria-pressed={!isNarrow && pinned}
             title={isNarrow
               ? (mobileOpen ? 'Close navigation' : 'Open navigation')
-              : (pinned ? 'Unpin navigation open' : 'Pin navigation open')}
+              : (clickOpen ? 'Close navigation' : 'Open navigation')}
             onClick={handleMenuClick}
           >
             <Menu size={18} aria-hidden="true" />

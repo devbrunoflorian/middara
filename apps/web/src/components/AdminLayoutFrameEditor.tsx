@@ -167,7 +167,7 @@ export function AdminLayoutFrameEditor({
       )}
       {createPortal(
         <div className="admin-layout-frame-panel-layer">
-          <section className="admin-layout-frame-panel" aria-label="Translation frame controls">
+          <section className="admin-layout-frame-panel arcane-glass-surface" aria-label="Translation frame controls">
             <strong>Moldura de tradução</strong>
             {unitKey && <code className="admin-layout-frame-unit-key">{unitKey}</code>}
             {frame ? (

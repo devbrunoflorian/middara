@@ -58,6 +58,7 @@ describe('application shell UX', () => {
   });
 
   afterEach(() => {
+    vi.useRealTimers();
     act(() => root?.unmount());
     container?.remove();
     vi.restoreAllMocks();
@@ -88,10 +89,9 @@ describe('application shell UX', () => {
     expect(queries.getByText('editor')).toBeTruthy();
   });
 
-  it('expands navigation as an overlay on hover and reserves workspace width only when pinned', () => {
-    const onPinnedChange = vi.fn();
+  it('opens navigation temporarily on hover or click and closes by Escape or outside click', () => {
     const onSelect = vi.fn();
-    const queries = mount(<ShellNavigation pinned={false} active="rulebook" onPinnedChange={onPinnedChange} onSelect={onSelect} />);
+    const queries = mount(<ShellNavigation active="rulebook" onSelect={onSelect} />);
     const panel = container.querySelector<HTMLElement>('.global-nav-panel')!;
     const slot = container.querySelector<HTMLElement>('.global-nav-slot')!;
 
@@ -100,22 +100,38 @@ describe('application shell UX', () => {
     expect(panel.classList.contains('is-expanded')).toBe(true);
     expect(slot.classList.contains('is-pinned')).toBe(false);
 
-    act(() => fireEvent.click(queries.getByRole('button', { name: 'Pin navigation open' })));
-    expect(onPinnedChange).toHaveBeenLastCalledWith(true);
-    act(() => root.render(<ShellNavigation pinned active="rulebook" onPinnedChange={onPinnedChange} onSelect={onSelect} />));
-    expect(slot.classList.contains('is-pinned')).toBe(true);
+    act(() => fireEvent.click(queries.getByRole('button', { name: 'Toggle navigation' })));
     expect(panel.classList.contains('is-expanded')).toBe(true);
+    expect(slot.classList.contains('is-pinned')).toBe(false);
+    act(() => fireEvent.pointerDown(document.body));
+    expect(panel.classList.contains('is-expanded')).toBe(false);
+
+    act(() => fireEvent.click(queries.getByRole('button', { name: 'Toggle navigation' })));
+    expect(panel.classList.contains('is-expanded')).toBe(true);
+    act(() => fireEvent.keyDown(window, { key: 'Escape' }));
+    expect(panel.classList.contains('is-expanded')).toBe(false);
 
     act(() => fireEvent.click(queries.getByRole('button', { name: 'Errata' })));
     expect(onSelect).toHaveBeenCalledWith('errata');
   });
 
+  it('closes hover-only navigation after its short leave delay', () => {
+    vi.useFakeTimers();
+    mount(<ShellNavigation active="rulebook" onSelect={vi.fn()} />);
+    const panel = container.querySelector<HTMLElement>('.global-nav-panel')!;
+    act(() => fireEvent.mouseOver(panel));
+    expect(panel.classList.contains('is-expanded')).toBe(true);
+    act(() => fireEvent.mouseOut(panel, { relatedTarget: document.body }));
+    expect(panel.classList.contains('is-expanded')).toBe(true);
+    act(() => vi.advanceTimersByTime(221));
+    expect(panel.classList.contains('is-expanded')).toBe(false);
+  });
+
   it('opens the navigation as a mobile drawer and closes it by backdrop or Escape', () => {
     const matchMedia = window.matchMedia as ReturnType<typeof vi.fn>;
     matchMedia.mockReturnValue({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() });
-    const onPinnedChange = vi.fn();
     const onSelect = vi.fn();
-    const queries = mount(<ShellNavigation pinned={false} active="rulebook" onPinnedChange={onPinnedChange} onSelect={onSelect} />);
+    const queries = mount(<ShellNavigation active="rulebook" onSelect={onSelect} />);
 
     act(() => fireEvent.click(queries.getByRole('button', { name: 'Open navigation' })));
     expect(container.querySelector('.global-nav-panel')?.classList.contains('is-expanded')).toBe(true);
@@ -127,7 +143,7 @@ describe('application shell UX', () => {
     act(() => fireEvent.click(queries.getByRole('button', { name: 'Open navigation' })));
     act(() => fireEvent.keyDown(window, { key: 'Escape' }));
     expect(container.querySelector('.global-nav-panel')?.classList.contains('is-expanded')).toBe(false);
-    expect(onPinnedChange).not.toHaveBeenCalled();
+    expect(container.querySelector('.global-nav-slot')?.classList.contains('is-pinned')).toBe(false);
   });
 
   it('keeps FAQ answers collapsed by default, expands multiple entries, and resets them when search changes', async () => {

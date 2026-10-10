@@ -76,7 +76,7 @@ export function AdminSymbolPalette({
         ◈
       </button>
       {open && (
-        <aside className="admin-symbol-palette" aria-label={language === 'pt-BR' ? 'Paleta de símbolos' : 'Symbol palette'}>
+        <aside className="admin-symbol-palette arcane-glass-surface" aria-label={language === 'pt-BR' ? 'Paleta de símbolos' : 'Symbol palette'}>
           <header className="admin-symbol-palette-header">
             <div>
               <strong>{language === 'pt-BR' ? 'Símbolos do livro' : 'Rulebook symbols'}</strong>

@@ -124,7 +124,7 @@ export function FaqDrawer({ language, open, activeType: requestedActiveType, onA
         if (event.target === event.currentTarget) dialogRef.current?.close();
       }}
     >
-      <section className="faq-panel">
+      <section className="faq-panel arcane-glass-surface">
         <header className="faq-panel-header">
           <div>
             <p className="faq-eyebrow">MIDDARA · {isPortuguese ? 'REFERÊNCIA OFICIAL' : 'OFFICIAL REFERENCE'}</p>

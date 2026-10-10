@@ -1,5 +1,66 @@
 /* Arcane Gothic 2.0 — one material language, deliberately tiered by use. */
 
+.arcane-glass-definitions {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Shared optical layer: backdrop effects live on pseudo-elements, leaving all
+   text and controls crisp above the glass. */
+.arcane-glass-surface {
+  isolation: isolate;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+.arcane-glass-surface::before,
+.arcane-glass-surface::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  content: '';
+  pointer-events: none;
+}
+
+.arcane-glass-surface::before {
+  z-index: 0;
+  background:
+    linear-gradient(145deg, rgba(35, 59, 86, 0.16), transparent 46%),
+    var(--arcane-glass-tint, rgba(15, 15, 27, 0.84));
+  backdrop-filter: blur(9px) saturate(126%);
+  -webkit-backdrop-filter: blur(9px) saturate(126%);
+}
+
+@supports (backdrop-filter: url(#middara-arcane-glass-refraction)) {
+  .arcane-glass-surface::before {
+    backdrop-filter: url(#middara-arcane-glass-refraction) blur(7px) saturate(126%);
+  }
+}
+
+.arcane-glass-surface::after {
+  z-index: 2;
+  border: 1px solid rgba(150, 214, 235, 0.17);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.13),
+    inset 1px 0 rgba(124, 204, 232, 0.07),
+    inset 0 0 18px rgba(73, 145, 195, 0.035);
+  background: linear-gradient(128deg, rgba(255, 255, 255, 0.06), transparent 22% 76%, rgba(93, 185, 220, 0.035));
+}
+
+.arcane-glass-surface > * { position: relative; z-index: 3; }
+.global-nav-panel.arcane-glass-surface { --arcane-glass-tint: rgba(12, 16, 29, 0.72); }
+.faq-panel.arcane-glass-surface { --arcane-glass-tint: rgba(15, 15, 27, 0.84); }
+.rse-panel.arcane-glass-surface { --arcane-glass-tint: rgba(14, 14, 24, 0.91); }
+.admin-layout-frame-panel.arcane-glass-surface,
+.admin-symbol-palette.arcane-glass-surface,
+.font-editor-panel.arcane-glass-surface,
+.dev-environment-card.arcane-glass-surface,
+.local-sync-dialog.arcane-glass-surface { --arcane-glass-tint: rgba(14, 14, 24, 0.92); }
+
 /* GLASS BASE: navigation chrome and always-visible controls. */
 .pdf-sidebar {
   border-left-color: var(--arcane-edge-soft);
@@ -61,26 +122,20 @@
 .font-editor-panel {
   border-color: var(--arcane-edge-soft);
   border-radius: var(--arcane-radius-feature);
-  background:
-    linear-gradient(145deg, rgba(37, 30, 50, 0.86), rgba(14, 13, 23, 0.92)),
-    var(--arcane-glass-elevated);
+  background: transparent;
   box-shadow: var(--arcane-depth-elevated);
-  backdrop-filter: blur(17px) saturate(118%);
-  -webkit-backdrop-filter: blur(17px) saturate(118%);
 }
 
 .faq-panel {
   border-right-color: rgba(168, 150, 190, 0.25);
-  background:
-    linear-gradient(180deg, rgba(31, 25, 43, 0.91), rgba(13, 12, 21, 0.94)),
-    var(--arcane-glass-elevated);
+  background: transparent;
   box-shadow: 14px 0 36px rgba(0, 0, 0, 0.34), inset -1px 0 rgba(137, 207, 227, 0.08);
 }
 
 .faq-panel-header {
   padding: 22px 22px 14px;
   border-bottom-color: var(--arcane-edge-soft);
-  background: linear-gradient(125deg, rgba(125, 81, 143, 0.13), transparent 72%);
+  background: linear-gradient(125deg, rgba(62, 134, 169, 0.11), transparent 72%);
 }
 
 .faq-panel-header h2 {
@@ -165,17 +220,15 @@
 .rse-panel {
   border-left-color: var(--arcane-edge-highlight);
   border-radius: var(--arcane-radius-feature) 0 0 var(--arcane-radius-feature);
-  background:
-    linear-gradient(180deg, rgba(28, 23, 39, 0.9), rgba(12, 12, 20, 0.94)),
-    var(--arcane-glass-elevated);
+  background: transparent;
   box-shadow: -12px 0 32px rgba(0, 0, 0, 0.3), inset 1px 0 rgba(255, 255, 255, 0.045);
-  backdrop-filter: blur(17px) saturate(118%);
-  -webkit-backdrop-filter: blur(17px) saturate(118%);
 }
+
+.font-editor-panel.arcane-glass-surface { position: relative; }
 
 .rse-header {
   padding: 16px 18px 12px;
-  background: linear-gradient(110deg, rgba(125, 81, 143, 0.13), transparent 80%);
+  background: linear-gradient(110deg, rgba(62, 134, 169, 0.1), transparent 80%);
 }
 
 .rse-header h3 {
@@ -253,15 +306,16 @@
 .admin-layout-frame-panel,
 .admin-symbol-palette,
 .admin-symbol-palette-toggle,
-.font-editor-panel,
-.dev-environment-card,
-.local-sync-dialog {
+.font-editor-panel {
   border-radius: var(--arcane-radius-surface);
   background: linear-gradient(150deg, rgba(32, 26, 44, 0.94), rgba(12, 12, 20, 0.97));
   box-shadow: var(--arcane-depth-floating);
   backdrop-filter: blur(13px) saturate(116%);
   -webkit-backdrop-filter: blur(13px) saturate(116%);
 }
+
+.dev-environment-card.arcane-glass-surface,
+.local-sync-dialog.arcane-glass-surface { background: transparent; }
 
 .admin-layout-frame-panel { padding: 12px; }
 .admin-layout-frame-fields input,
@@ -280,7 +334,7 @@
 
 .local-sync-dialog {
   border-color: var(--arcane-edge-soft);
-  background: linear-gradient(150deg, rgba(32, 26, 44, 0.97), rgba(12, 12, 20, 0.99));
+  background: transparent;
 }
 
 @media (max-width: 700px) {
@@ -320,6 +374,9 @@
 
 @media (prefers-reduced-transparency: reduce) {
   .pdf-sidebar { background: rgba(13, 14, 24, 0.95); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .arcane-glass-surface { background: rgba(13, 14, 24, 0.96) !important; }
+  .arcane-glass-surface::before { background: rgba(13, 14, 24, 0.96); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .arcane-glass-surface::after { background: none; }
   .faq-panel,
   .rse-panel,
   .admin-layout-frame-panel,

@@ -5,6 +5,7 @@ import { LocalSyncRecoveryControl } from './components/LocalSyncRecoveryControl'
 import { DevelopmentEnvironmentStatus } from './components/DevelopmentEnvironmentStatus';
 import { FaqDrawer } from './components/FaqDrawer';
 import { ShellNavigation, type ShellDestination } from './components/ShellNavigation';
+import { ArcaneGlassDefinitions } from './components/ArcaneGlassDefinitions';
 import { AtmosphericParticles } from './components/AtmosphericParticles';
 import { 
   ChevronLeft, ChevronRight, Edit3, 
@@ -151,7 +152,6 @@ function App() {
   const [isSymbolPaletteOpen, setIsSymbolPaletteOpen] = useState(false);
   const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [faqActiveType, setFaqActiveType] = useState<'faq' | 'errata'>('faq');
-  const [isNavigationPinned, setIsNavigationPinned] = useState(false);
   const [symbolAliasPreferences, setSymbolAliasPreferences] = useState<SymbolAliasPreferences>(getDefaultSymbolAliasPreferences);
   const [symbolAliasSettingsLoading, setSymbolAliasSettingsLoading] = useState(true);
   const [paletteEditorState, setPaletteEditorState] = useState<Pick<AdminSymbolPaletteEditorState, 'context' | 'canInsert' | 'canUndo' | 'status'> & { editorKey: string } | null>(null);
@@ -472,7 +472,8 @@ function App() {
   };
 
   return (
-    <div className={`app-container ${isAdmin ? 'admin-mode' : ''} ${isFaqOpen ? 'faq-open' : ''} ${isNavigationPinned ? 'nav-is-pinned' : ''} theme-dark`}>
+    <div className={`app-container ${isAdmin ? 'admin-mode' : ''} ${isFaqOpen ? 'faq-open' : ''} theme-dark`}>
+      <ArcaneGlassDefinitions />
       <AtmosphericParticles />
       {import.meta.env.DEV && (
         <div className="app-shell-header-actions">
@@ -486,17 +487,15 @@ function App() {
         </div>
       )}
       <ShellNavigation
-        pinned={isNavigationPinned}
         active={isFaqOpen ? faqActiveType : currentPage === 3 ? 'contents' : 'rulebook'}
-        onPinnedChange={setIsNavigationPinned}
         onSelect={(destination: ShellDestination) => {
           if (destination === 'faq' || destination === 'errata') {
             setFaqActiveType(destination);
             setIsFaqOpen(true);
             return;
           }
-          setIsFaqOpen(false);
-          if (destination === 'contents') navigateToPage(3);
+          const didNavigate = navigateToPage(destination === 'contents' ? 3 : 1);
+          if (didNavigate) setIsFaqOpen(false);
         }}
       />
       {/* Main Viewer Area */}

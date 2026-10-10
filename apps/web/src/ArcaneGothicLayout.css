@@ -46,17 +46,10 @@
   gap: var(--arcane-panel-gap);
 }
 
-/* With the editor docked, use the free edge of the page stage for the page.
-   Auto margins collapse to zero when the selected zoom makes it overflow. */
-.page-renderer.editor-open .page-stage {
-  justify-content: flex-start;
-  padding-inline-end: var(--arcane-panel-gap);
-}
-
-.page-renderer.editor-open .page-container {
-  margin-inline-start: auto !important;
-  margin-inline-end: 0 !important;
-}
+/* The page's auto margins center it when it fits the remaining stage (including
+   the docked editor width), and collapse to zero when it needs scrolling. */
+.page-renderer .page-stage { justify-content: flex-start; }
+.page-renderer .page-container { margin-inline: auto; }
 
 .scroll-container {
   padding-inline: clamp(12px, 2vw, 32px);

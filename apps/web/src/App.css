@@ -32,8 +32,6 @@ body, html {
   width: 100vw;
 }
 
-.app-container.nav-is-pinned { --left-nav-width: 224px; }
-
 .app-shell-faq-actions {
   position: fixed;
   top: 12px;
@@ -313,7 +311,6 @@ body, html {
 
 @media (max-width: 700px) {
   .app-container { --faq-panel-width: calc(100vw - var(--arcane-dock-width, 52px)); }
-  .app-container.nav-is-pinned { --left-nav-width: 48px; }
   .app-container .faq-dialog {
     inset: 0 var(--arcane-dock-width, 52px) 0 0;
     width: calc(100vw - var(--arcane-dock-width, 52px));

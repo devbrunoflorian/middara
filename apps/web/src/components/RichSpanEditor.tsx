@@ -833,7 +833,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
   return (
     <div className="rse-overlay" onClick={(e) => { if (e.target === e.currentTarget) requestClose(); }}>
-      <div className="rse-panel">
+      <div className="rse-panel arcane-glass-surface">
         {/* Header */}
         <div className="rse-header">
           <div>
