@@ -292,8 +292,19 @@
 
 @media (max-width: 540px) {
   .rse-overlay {
-    width: min(380px, calc(100vw - var(--arcane-dock-width)));
-    min-width: 0;
+    position: fixed;
+    z-index: 1500;
+    top: max(8px, env(safe-area-inset-top, 0px));
+    right: calc(var(--arcane-dock-width) + 8px);
+    bottom: max(8px, env(safe-area-inset-bottom, 0px));
+    width: min(380px, 68vw, calc(100vw - var(--arcane-dock-width) - 24px));
+    min-width: min(240px, calc(100vw - var(--arcane-dock-width) - 24px));
+    height: auto;
+  }
+
+  .rse-panel {
+    height: 100%;
+    max-height: calc(100dvh - 16px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
   }
 
   .faq-panel-header,
@@ -304,6 +315,7 @@
 
   .faq-panel-header { padding: 18px 16px 12px; }
   .faq-filters { padding-inline: 16px; }
+  .faq-filters:has(.faq-severity-label) { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (prefers-reduced-transparency: reduce) {
