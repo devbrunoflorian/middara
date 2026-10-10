@@ -358,19 +358,19 @@ function App() {
   }, [hasTranslationDraft, language]);
 
   // Navigate to a specific page (used by hyperlinks on Contents page)
-  const navigateToPage = useCallback((pageNum: number, draftAlreadyConfirmed = false) => {
+  const navigateToPage = useCallback((pageNum: number, draftAlreadyConfirmed = false): boolean => {
+    if (!Number.isInteger(pageNum) || pageNum < 1 || pageNum > TOTAL_PAGES) return false;
     if (pageNum !== currentPage && (!acceptLeavingLayout()
-      || (!draftAlreadyConfirmed && !acceptLeavingTranslationDraft()))) return;
-    if (pageNum >= 1 && pageNum <= TOTAL_PAGES) {
-      setCurrentPage(pageNum);
-      // If in scroll mode, scroll to that page
-      if (viewMode === 'scroll') {
-        setTimeout(() => {
-          const el = document.getElementById(`page-${pageNum}`);
-          el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      }
+      || (!draftAlreadyConfirmed && !acceptLeavingTranslationDraft()))) return false;
+    setCurrentPage(pageNum);
+    // If in scroll mode, scroll to that page
+    if (viewMode === 'scroll') {
+      setTimeout(() => {
+        const el = document.getElementById(`page-${pageNum}`);
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     }
+    return true;
   }, [viewMode, currentPage, acceptLeavingLayout, acceptLeavingTranslationDraft]);
 
   const requestEditablePageNavigation = useCallback((direction: 'previous' | 'next', fromPage: number) => {
@@ -694,7 +694,7 @@ function App() {
           )}
         </div>
       </aside>
-      <FaqDrawer language={language} open={isFaqOpen} onOpenChange={setIsFaqOpen} />
+      <FaqDrawer language={language} open={isFaqOpen} onOpenChange={setIsFaqOpen} onNavigateToPage={navigateToPage} />
       {isAdmin && (
         <AdminSymbolPalette
           language={language}

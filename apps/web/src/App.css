@@ -233,7 +233,7 @@ body, html {
 .faq-panel-header h2 { margin: 0; color: #f4effa; font-size: 21px; line-height: 1.2; font-weight: 600; letter-spacing: 0; }
 .faq-close { display: grid; place-items: center; width: 32px; height: 32px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,0.12); border-radius: 9px; background: transparent; color: #c8c1d3; cursor: pointer; }
 .faq-close:hover { background: rgba(255,255,255,0.08); color: white; }
-.faq-close:focus-visible, .faq-tabs button:focus-visible, .faq-panel-footer a:focus-visible, .faq-entry-trigger:focus-visible, .faq-source-details summary:focus-visible, .faq-history-details summary:focus-visible, .faq-errata-context summary:focus-visible { outline: 2px solid #bea8e0; outline-offset: 3px; }
+.faq-close:focus-visible, .faq-tabs button:focus-visible, .faq-panel-footer a:focus-visible, .faq-entry-trigger:focus-visible, .faq-page-reference-link:focus-visible, .faq-source-details summary:focus-visible, .faq-history-details summary:focus-visible, .faq-errata-context summary:focus-visible { outline: 2px solid #bea8e0; outline-offset: 3px; }
 .faq-source-note, .faq-locale-notice { margin: 14px 24px 0; font-size: 12px; line-height: 1.45; }
 .faq-source-note { color: #aaa3b8; }
 .faq-locale-notice { padding: 10px 12px; border: 1px solid rgba(190, 168, 224, 0.2); border-radius: 9px; background: rgba(190, 168, 224, 0.08); color: #e0d4ef; }
@@ -287,8 +287,11 @@ body, html {
 .faq-entry-body li + li { margin-top: 3px; }
 .faq-entry-body strong { color: #f3edf9; font-weight: 600; }
 .faq-entry-content .faq-entry-body { margin-top: 9px; }
-.faq-page-references { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-.faq-page-references span { padding: 3px 6px; border-radius: 5px; background: rgba(255,255,255,0.06); color: #bfb6ce; font-size: 9px; }
+.faq-page-references { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: 10px; }
+.faq-page-reference-link, .faq-page-reference-note { display: inline-flex; align-items: center; min-height: 23px; padding: 3px 7px; border: 1px solid rgba(190,168,224,0.2); border-radius: 6px; background: rgba(190,168,224,0.09); color: #d9c8ee; font: 600 10px 'Inter', sans-serif; }
+.faq-page-reference-link { cursor: pointer; text-decoration: none; transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease; }
+.faq-page-reference-link:hover { border-color: rgba(190,168,224,0.55); background: rgba(190,168,224,0.17); color: #fff; }
+.faq-page-reference-note { border-color: rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); color: #aaa3b8; font-weight: 400; }
 .faq-source-details, .faq-history-details { margin-top: 11px; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 9px; }
 .faq-source-details summary, .faq-history-details summary { color: #bca7d7; font-size: 10px; font-weight: 600; cursor: pointer; }
 .faq-source-details p { margin: 8px 0 0; color: #aaa3b8; font-size: 11px; line-height: 1.5; }

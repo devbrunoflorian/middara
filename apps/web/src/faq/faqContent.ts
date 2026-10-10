@@ -2,6 +2,16 @@ import catalogData from './faqCatalog.json';
 
 export type CatalogType = 'faq' | 'errata';
 export type AppLocale = 'en' | 'pt-BR';
+export const RULEBOOK_PAGE_COUNT = 102;
+export type PageReferenceTarget = 'rulebook-1.2' | 'other-book-or-component' | 'unverified';
+export interface CatalogPageReferenceDetail {
+  page: number;
+  sourceEntryId: string;
+  sourceType?: string;
+  sourceDocument?: string;
+  sourceDate?: string;
+  target: PageReferenceTarget;
+}
 
 export interface CatalogSource {
   type: 'official-website' | 'official-dropbox';
@@ -24,7 +34,7 @@ export interface HistoricalCatalogRecord {
   severity: 'Critical' | 'Major' | 'Minor' | null;
   source: CatalogSource;
   pageReferences: number[];
-  pageReferenceDetails?: Array<{ page: number; sourceEntryId: string; sourceType?: string; sourceDocument?: string; sourceDate?: string; target: 'rulebook-1.2' | 'other-book-or-component' | 'unverified' }>;
+  pageReferenceDetails?: CatalogPageReferenceDetail[];
   spoiler: boolean;
   status?: string;
   reconciliationStatus?: string;
@@ -45,7 +55,7 @@ export interface CatalogEntry {
   severity: 'Critical' | 'Major' | 'Minor' | null;
   source: CatalogSource;
   pageReferences: number[];
-  pageReferenceDetails?: Array<{ page: number; sourceEntryId: string; sourceType?: string; sourceDocument?: string; sourceDate?: string; target: 'rulebook-1.2' | 'other-book-or-component' | 'unverified' }>;
+  pageReferenceDetails?: CatalogPageReferenceDetail[];
   spoiler: boolean;
   status: 'CURRENT_MATCH' | 'CURRENT_MODIFIED' | 'CURRENT_ONLY' | 'HISTORICAL_ONLY' | 'AMBIGUOUS';
   rulebook12Status?: string;
@@ -103,4 +113,24 @@ export function getCatalogEntries(type: CatalogType): CatalogEntry[] {
 
 export function getCatalogSnapshot(): CatalogSnapshot {
   return catalog;
+}
+
+/** Only explicit Rulebook 1.2 targets and reviewed Rulebook 1.2 evidence become navigation. */
+export function getConfirmedRulebookPageReferences(entry: CatalogEntry, pageCount = RULEBOOK_PAGE_COUNT): number[] {
+  const pages = new Set<number>();
+  for (const reference of entry.pageReferenceDetails ?? []) {
+    if (reference.target === 'rulebook-1.2' && Number.isInteger(reference.page) && reference.page >= 1 && reference.page <= pageCount) {
+      pages.add(reference.page);
+    }
+  }
+
+  const evidencePage = entry.rulebook12Evidence?.page;
+  if (entry.rulebook12Status === 'VERIFIED_IN_RULEBOOK_1_2'
+    && Number.isInteger(evidencePage)
+    && evidencePage! >= 1
+    && evidencePage! <= pageCount) {
+    pages.add(evidencePage!);
+  }
+
+  return [...pages].sort((a, b) => a - b);
 }

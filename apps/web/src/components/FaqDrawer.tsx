@@ -6,6 +6,7 @@ import {
   FAQ_SOURCE_URL,
   getCatalogEntries,
   getCatalogSnapshot,
+  getConfirmedRulebookPageReferences,
   resolveCatalogContent,
   type AppLocale,
   type CatalogEntry,
@@ -16,6 +17,7 @@ interface FaqDrawerProps {
   language: AppLocale;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onNavigateToPage: (page: number) => boolean;
 }
 
 function allSearchableText(entry: CatalogEntry, title: string, body: string): string {
@@ -48,7 +50,7 @@ function statusLabel(entry: CatalogEntry, isPortuguese: boolean): string | null 
   return null;
 }
 
-export function FaqDrawer({ language, open, onOpenChange }: FaqDrawerProps) {
+export function FaqDrawer({ language, open, onOpenChange, onNavigateToPage }: FaqDrawerProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeType, setActiveType] = useState<CatalogType>('faq');
   const [query, setQuery] = useState('');
@@ -216,6 +218,21 @@ export function FaqDrawer({ language, open, onOpenChange }: FaqDrawerProps) {
             const content = resolveCatalogContent(entry, language);
             const label = statusLabel(entry, isPortuguese);
             const isExpanded = openEntryIds.has(entry.id);
+            const rulebookPages = getConfirmedRulebookPageReferences(entry);
+            const detailedPages = new Set((entry.pageReferenceDetails ?? []).map(reference => reference.page));
+            const pageReferenceMetadata = [
+              ...(entry.pageReferenceDetails ?? [])
+                .filter(reference => reference.target !== 'rulebook-1.2' || !rulebookPages.includes(reference.page))
+                .map(reference => ({
+                  page: reference.page,
+                  label: reference.target === 'other-book-or-component'
+                    ? (isPortuguese ? 'Outro livro/componente' : 'Other book/component')
+                    : (isPortuguese ? 'Referência sem destino confirmado' : 'Unconfirmed page reference'),
+                })),
+              ...(entry.pageReferences ?? [])
+                .filter(page => !detailedPages.has(page) && !rulebookPages.includes(page))
+                .map(page => ({ page, label: isPortuguese ? 'Referência sem destino confirmado' : 'Unconfirmed page reference' })),
+            ].filter((reference, index, references) => references.findIndex(candidate => candidate.page === reference.page && candidate.label === reference.label) === index);
             const safeEntryId = entry.id.replace(/[^a-zA-Z0-9_-]/g, '-');
             const triggerId = `faq-entry-trigger-${safeEntryId}`;
             const panelId = `faq-entry-panel-${safeEntryId}`;
@@ -254,9 +271,30 @@ export function FaqDrawer({ language, open, onOpenChange }: FaqDrawerProps) {
                       <p className="faq-entry-source">{sourceDescription(entry, isPortuguese)}{content.isFallback && <span className="faq-language-badge">{isPortuguese ? 'Fallback EN' : 'EN fallback'}</span>}</p>
                       {label && <p className={`faq-status-badge ${entry.rulebook12Status === 'VERIFIED_IN_RULEBOOK_1_2' ? 'integrated' : ''}`}>{label}</p>}
                       <div className="faq-entry-body"><ReactMarkdown>{content.text || (isPortuguese ? 'Conteúdo não disponível.' : 'No content available.')}</ReactMarkdown></div>
-                      {!!entry.pageReferences?.length && (
+                      {(rulebookPages.length > 0 || pageReferenceMetadata.length > 0) && (
                         <div className="faq-page-references" aria-label={isPortuguese ? 'Referências de página' : 'Page references'}>
-                          {entry.pageReferences.map(page => <span key={page}>PG. {page}</span>)}
+                          {rulebookPages.map(page => (
+                            <button
+                              className="faq-page-reference-link"
+                              key={`rulebook-${page}`}
+                              type="button"
+                              aria-label={isPortuguese ? `Abrir página ${page} do Rulebook 1.2` : `Open Rulebook 1.2 page ${page}`}
+                              title={isPortuguese ? `Ir para Rulebook 1.2 · p. ${page}` : `Go to Rulebook 1.2 · p. ${page}`}
+                              onClick={() => {
+                                const navigated = onNavigateToPage(page);
+                                if (navigated && typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 540px)').matches) {
+                                  dialogRef.current?.close();
+                                }
+                              }}
+                            >
+                              Rulebook · p. {page}
+                            </button>
+                          ))}
+                          {pageReferenceMetadata.map(reference => (
+                            <span className="faq-page-reference-note" key={`${reference.label}-${reference.page}`}>
+                              {reference.label} · p. {reference.page}
+                            </span>
+                          ))}
                         </div>
                       )}
                       {entry.sourceMetadata?.notesEn && <details className="faq-source-details"><summary>{isPortuguese ? 'Notas da fonte' : 'Source notes'}</summary><p>{entry.sourceMetadata.notesEn}</p></details>}
