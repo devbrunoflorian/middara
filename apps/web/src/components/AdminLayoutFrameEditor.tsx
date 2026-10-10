@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import type { LayoutFrame } from './PageRenderer';
 import { snapLayoutFrame, type LayoutAlignmentGuide, type SnapFrameRect } from '../layoutFrameSnapping';
 import './AdminLayoutFrameEditor.css';
+import './AdminOverlayLayers.css';
 
 interface AdminLayoutFrameEditorProps {
   pageElement: HTMLElement | null;
@@ -119,85 +120,94 @@ export function AdminLayoutFrameEditor({
     onChange({ ...frame, ...change });
   };
 
-  return createPortal(
-    <div className="admin-layout-frame-layer">
-      {sourceBbox && (
-        <div
-          className="admin-layout-source-ink-outline"
-          aria-hidden="true"
-          style={{
-            left: pageRect.left + sourceBbox.x * pageRect.scale,
-            top: pageRect.top + sourceBbox.y * pageRect.scale,
-            width: sourceBbox.width * pageRect.scale,
-            height: sourceBbox.height * pageRect.scale,
-          }}
-        />
-      )}
-      {frame && (
-        <div
-          className="admin-layout-frame-outline"
-          role="group"
-          aria-label="Selected translation layout frame. Use arrow keys to move by one PDF point; hold Shift for ten points."
-          tabIndex={0}
-          onKeyDown={nudge}
-          onPointerDown={event => beginDrag(event, false)}
-          style={{
-            left: pageRect.left + frame.x * pageRect.scale,
-            top: pageRect.top + frameY * pageRect.scale,
-            width: frame.width * pageRect.scale,
-            height: frameHeight * pageRect.scale,
-            transform: `rotate(${frame.rotation ?? 0}deg)`,
-          }}
-        >
-          <span className="admin-layout-frame-caption">Frame da tradução</span>
-          <button
-            type="button"
-            className="admin-layout-frame-resize"
-            aria-label="Resize translation frame"
-            onPointerDown={event => beginDrag(event, true)}
-            onClick={event => event.stopPropagation()}
-          />
-        </div>
-      )}
-      <section className="admin-layout-frame-panel" aria-label="Translation frame controls">
-        <strong>Moldura de tradução</strong>
-        {unitKey && <code className="admin-layout-frame-unit-key">{unitKey}</code>}
-        {frame ? (
-          <div className="admin-layout-frame-fields">
-            {([
-              ['X', 'x'], ['Y', 'y'], ['Largura', 'width'], ['Altura', 'height'], ['Rotação', 'rotation'],
-            ] as const).map(([label, field]) => (
-              <label key={field}>
-                <span>{label}{field === 'rotation' ? ' (°)' : ' (pt)'}</span>
-                <input
-                  type="number"
-                  step={field === 'rotation' ? 1 : 0.5}
-                  min={field === 'width' || field === 'height' ? 1 : field === 'rotation' ? 0 : 0}
-                  value={Number(((frame[field] ?? 0) as number).toFixed(2))}
-                  onChange={event => {
-                    const value = Number(event.currentTarget.value);
-                    if (!Number.isFinite(value)) return;
-                    onChange({ ...frame, [field]: field === 'rotation' ? ((value % 360) + 360) % 360 : Math.max(field === 'width' || field === 'height' ? 1 : 0, value) });
-                  }}
-                />
-              </label>
-            ))}
-          </div>
-        ) : (
-          <p>Clique em um bloco editável para selecionar sua moldura.</p>
-        )}
-        <div className="admin-layout-frame-actions">
-          <button type="button" onClick={onSave} disabled={!frame || !isDirty || isSaving}>{isSaving ? 'Salvando…' : 'Salvar'}</button>
-          <button type="button" onClick={onDiscard} disabled={!frame || !isDirty || isSaving}>Descartar</button>
-          {language === 'pt-BR' && hasOwnFrame && (
-            <button type="button" onClick={onResetToEnglish} disabled={isSaving}>Herdar EN</button>
+  return (
+    <>
+      {createPortal(
+        <div className="admin-layout-frame-layer">
+          {sourceBbox && (
+            <div
+              className="admin-layout-source-ink-outline"
+              aria-hidden="true"
+              style={{
+                left: pageRect.left + sourceBbox.x * pageRect.scale,
+                top: pageRect.top + sourceBbox.y * pageRect.scale,
+                width: sourceBbox.width * pageRect.scale,
+                height: sourceBbox.height * pageRect.scale,
+              }}
+            />
           )}
-        </div>
-        <div className="admin-layout-frame-feedback" role="status" aria-live="polite">
-          {status || (language === 'pt-BR' && !hasOwnFrame ? 'PT-BR herda a moldura EN até ser personalizada.' : 'Coordenadas em pontos PDF.')}
-        </div>
-      </section>
-    </div>,
-    document.body,
+          {frame && (
+            <div
+              className="admin-layout-frame-outline"
+              role="group"
+              aria-label="Selected translation layout frame. Use arrow keys to move by one PDF point; hold Shift for ten points."
+              tabIndex={0}
+              onKeyDown={nudge}
+              onPointerDown={event => beginDrag(event, false)}
+              style={{
+                left: pageRect.left + frame.x * pageRect.scale,
+                top: pageRect.top + frameY * pageRect.scale,
+                width: frame.width * pageRect.scale,
+                height: frameHeight * pageRect.scale,
+                transform: `rotate(${frame.rotation ?? 0}deg)`,
+              }}
+            >
+              <span className="admin-layout-frame-caption">Frame da tradução</span>
+              <button
+                type="button"
+                className="admin-layout-frame-resize"
+                aria-label="Resize translation frame"
+                onPointerDown={event => beginDrag(event, true)}
+                onClick={event => event.stopPropagation()}
+              />
+            </div>
+          )}
+        </div>,
+        document.body,
+      )}
+      {createPortal(
+        <div className="admin-layout-frame-panel-layer">
+          <section className="admin-layout-frame-panel" aria-label="Translation frame controls">
+            <strong>Moldura de tradução</strong>
+            {unitKey && <code className="admin-layout-frame-unit-key">{unitKey}</code>}
+            {frame ? (
+              <div className="admin-layout-frame-fields">
+                {([
+                  ['X', 'x'], ['Y', 'y'], ['Largura', 'width'], ['Altura', 'height'], ['Rotação', 'rotation'],
+                ] as const).map(([label, field]) => (
+                  <label key={field}>
+                    <span>{label}{field === 'rotation' ? ' (°)' : ' (pt)'}</span>
+                    <input
+                      type="number"
+                      step={field === 'rotation' ? 1 : 0.5}
+                      min={field === 'width' || field === 'height' ? 1 : field === 'rotation' ? 0 : 0}
+                      value={Number(((frame[field] ?? 0) as number).toFixed(2))}
+                      onChange={event => {
+                        const value = Number(event.currentTarget.value);
+                        if (!Number.isFinite(value)) return;
+                        onChange({ ...frame, [field]: field === 'rotation' ? ((value % 360) + 360) % 360 : Math.max(field === 'width' || field === 'height' ? 1 : 0, value) });
+                      }}
+                    />
+                  </label>
+                ))}
+              </div>
+            ) : (
+              <p>Clique em um bloco editável para selecionar sua moldura.</p>
+            )}
+            <div className="admin-layout-frame-actions">
+              <button type="button" onClick={onSave} disabled={!frame || !isDirty || isSaving}>{isSaving ? 'Salvando…' : 'Salvar'}</button>
+              <button type="button" onClick={onDiscard} disabled={!frame || !isDirty || isSaving}>Descartar</button>
+              {language === 'pt-BR' && hasOwnFrame && (
+                <button type="button" onClick={onResetToEnglish} disabled={isSaving}>Herdar EN</button>
+              )}
+            </div>
+            <div className="admin-layout-frame-feedback" role="status" aria-live="polite">
+              {status || (language === 'pt-BR' && !hasOwnFrame ? 'PT-BR herda a moldura EN até ser personalizada.' : 'Coordenadas em pontos PDF.')}
+            </div>
+          </section>
+        </div>,
+        document.body,
+      )}
+    </>
   );
 }

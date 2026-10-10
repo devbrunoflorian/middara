@@ -1,0 +1,22 @@
+/* Shared stacking order for viewport-level Admin overlays. Keep these layers
+   independent from the page canvas so controls cannot be trapped by it. */
+:root {
+  --layer-admin-frame: 20001;
+  --layer-admin-ruler: 20002;
+  --layer-admin-measurements: 20003;
+  --layer-admin-frame-panel: 20010;
+  --layer-admin-palette: 20020;
+}
+
+.admin-layout-frame-panel-layer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--layer-admin-frame-panel);
+  pointer-events: none;
+}
+
+.admin-layout-frame-layer { z-index: var(--layer-admin-frame); }
+.admin-ruler-layer { z-index: var(--layer-admin-ruler); }
+.admin-geometry-measurements { z-index: var(--layer-admin-measurements); }
+.admin-symbol-palette-toggle,
+.admin-symbol-palette { z-index: var(--layer-admin-palette); }
