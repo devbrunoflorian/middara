@@ -1,0 +1,317 @@
+/* Arcane Gothic 2.0 — one material language, deliberately tiered by use. */
+
+/* GLASS BASE: navigation chrome and always-visible controls. */
+.pdf-sidebar {
+  border-left-color: var(--arcane-edge-soft);
+  border-radius: var(--arcane-radius-feature) 0 0 var(--arcane-radius-feature);
+  background:
+    linear-gradient(165deg, rgba(29, 31, 48, 0.76), rgba(10, 13, 24, 0.78)),
+    var(--arcane-glass-base);
+  box-shadow: var(--arcane-depth-base), -8px 0 24px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(15px) saturate(124%);
+  -webkit-backdrop-filter: blur(15px) saturate(124%);
+}
+
+.pdf-sidebar::before {
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.085), transparent 22%),
+    linear-gradient(180deg, transparent 34%, rgba(105, 217, 235, 0.035) 72%, transparent);
+}
+
+.brand-icon { width: 34px; height: 34px; }
+
+.tool-group,
+.zoom-group,
+.pagination-group {
+  border-color: var(--arcane-edge-soft);
+  border-radius: var(--arcane-radius-feature);
+  background: linear-gradient(150deg, rgba(57, 63, 91, 0.22), rgba(12, 14, 25, 0.3));
+}
+
+.tool-btn,
+.nav-btn,
+.admin-toggle,
+.page-input,
+.language-select,
+.shell-faq-trigger,
+.dev-environment-status > summary {
+  border-radius: var(--arcane-radius-control) !important;
+}
+
+.tool-btn,
+.nav-btn { min-width: 29px; min-height: 29px; }
+
+.tool-btn.active {
+  box-shadow: inset 2px 0 rgba(132, 233, 247, 0.78), inset 0 1px rgba(255, 255, 255, 0.09);
+}
+
+.admin-toggle.active {
+  box-shadow: inset 2px 0 rgba(232, 203, 248, 0.8), 0 0 10px rgba(125, 81, 143, 0.16);
+}
+
+.divider {
+  width: 24px;
+  background: linear-gradient(90deg, transparent, rgba(178, 153, 199, 0.5), rgba(105, 217, 235, 0.4), transparent);
+}
+
+/* GLASS ELEVATED: reading and editing surfaces stay sufficiently opaque. */
+.faq-panel,
+.rse-panel,
+.admin-layout-frame-panel,
+.font-editor-panel {
+  border-color: var(--arcane-edge-soft);
+  border-radius: var(--arcane-radius-feature);
+  background:
+    linear-gradient(145deg, rgba(37, 30, 50, 0.86), rgba(14, 13, 23, 0.92)),
+    var(--arcane-glass-elevated);
+  box-shadow: var(--arcane-depth-elevated);
+  backdrop-filter: blur(17px) saturate(118%);
+  -webkit-backdrop-filter: blur(17px) saturate(118%);
+}
+
+.faq-panel {
+  border-right-color: rgba(168, 150, 190, 0.25);
+  background:
+    linear-gradient(180deg, rgba(31, 25, 43, 0.91), rgba(13, 12, 21, 0.94)),
+    var(--arcane-glass-elevated);
+  box-shadow: 14px 0 36px rgba(0, 0, 0, 0.34), inset -1px 0 rgba(137, 207, 227, 0.08);
+}
+
+.faq-panel-header {
+  padding: 22px 22px 14px;
+  border-bottom-color: var(--arcane-edge-soft);
+  background: linear-gradient(125deg, rgba(125, 81, 143, 0.13), transparent 72%);
+}
+
+.faq-panel-header h2 {
+  font-size: 20px;
+  letter-spacing: 0.04em;
+}
+
+.faq-tabs { padding-top: 10px; }
+.faq-tabs button { padding-inline: 11px; }
+.faq-tabs button.active {
+  border-bottom-color: var(--arcane-spectral);
+  box-shadow: inset 0 -1px rgba(105, 217, 235, 0.28);
+}
+
+.faq-filters { gap: 7px; }
+.faq-filters:not(:has(.faq-severity-label)) {
+  grid-template-columns: minmax(0, 1.45fr) minmax(138px, 1fr);
+}
+
+.faq-filters:has(.faq-severity-label) {
+  grid-template-columns: minmax(0, 1.3fr) minmax(124px, 0.8fr) minmax(124px, 0.8fr);
+}
+
+.faq-search,
+.faq-category-label,
+.faq-severity-label {
+  min-height: 36px;
+  border-radius: var(--arcane-radius-control);
+  background: rgba(8, 9, 16, 0.52);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.faq-search:focus-within,
+.faq-category-label select:focus-visible,
+.faq-severity-label select:focus-visible {
+  border-color: var(--arcane-edge-active);
+  outline: 2px solid rgba(105, 217, 235, 0.18);
+  outline-offset: 1px;
+}
+
+.faq-entry {
+  border-color: rgba(199, 190, 213, 0.13);
+  border-radius: var(--arcane-radius-surface);
+  background: linear-gradient(120deg, rgba(34, 27, 46, 0.68), rgba(13, 13, 21, 0.72));
+}
+
+.faq-entry:hover { border-color: rgba(170, 150, 192, 0.34); }
+.faq-entry.is-open {
+  border-color: rgba(105, 217, 235, 0.3);
+  box-shadow: inset 2px 0 rgba(105, 217, 235, 0.48);
+}
+
+.faq-entry-trigger { min-height: 40px; padding: 8px 10px; }
+.faq-entry-category,
+.faq-severity,
+.faq-spoiler-badge,
+.faq-language-badge { border-radius: 3px; }
+
+.faq-entry-content {
+  padding: 0 12px 13px;
+  color: var(--arcane-text-secondary);
+}
+
+.faq-entry-body {
+  color: #ded7e8;
+  line-height: 1.66;
+}
+
+.faq-source-note,
+.faq-locale-notice,
+.faq-errata-context { margin-inline: 22px; }
+.faq-locale-notice { border-radius: var(--arcane-radius-surface); }
+.faq-errata-context { border-radius: var(--arcane-radius-surface); }
+.faq-panel-footer { padding-inline: 22px; border-top-color: var(--arcane-edge-soft); }
+
+/* Editor dock: dense controls, steady opaque contrast, shared borders and focus. */
+.rse-overlay {
+  width: clamp(340px, 32vw, 420px);
+  min-width: min(280px, calc(100vw - var(--arcane-dock-width) - 24px));
+}
+
+.rse-panel {
+  border-left-color: var(--arcane-edge-highlight);
+  border-radius: var(--arcane-radius-feature) 0 0 var(--arcane-radius-feature);
+  background:
+    linear-gradient(180deg, rgba(28, 23, 39, 0.9), rgba(12, 12, 20, 0.94)),
+    var(--arcane-glass-elevated);
+  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.3), inset 1px 0 rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(17px) saturate(118%);
+  -webkit-backdrop-filter: blur(17px) saturate(118%);
+}
+
+.rse-header {
+  padding: 16px 18px 12px;
+  background: linear-gradient(110deg, rgba(125, 81, 143, 0.13), transparent 80%);
+}
+
+.rse-header h3 {
+  font-size: 15px;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.rse-subtitle { max-width: 100%; line-height: 1.45; }
+.rse-subtitle code { border-radius: 3px; overflow-wrap: anywhere; }
+.rse-close { border: 1px solid transparent; border-radius: var(--arcane-radius-control); }
+.rse-close:focus-visible { outline: 2px solid var(--arcane-focus); outline-offset: 2px; }
+
+.rse-unit-navigation,
+.rse-toolbar,
+.rse-translation-context,
+.rse-edit-text,
+.rse-section { padding-inline: 16px; }
+
+.rse-toolbar { gap: 7px; }
+.rse-toolbar-row { gap: 5px; }
+.rse-toolbar select,
+.rse-toolbar input[type="number"],
+.rse-lang-picker select,
+.rse-context-source,
+.rse-edit-text textarea,
+.rse-context-glossary li,
+.rse-unit-navigation button,
+.rse-tool-btn,
+.rse-edit-text-actions button,
+.rse-btn-reset,
+.rse-btn-save {
+  border-radius: var(--arcane-radius-control);
+}
+
+.rse-toolbar select,
+.rse-toolbar input[type="number"],
+.rse-unit-navigation button,
+.rse-tool-btn { min-height: 32px; }
+
+.rse-tool-btn.active,
+.rse-apply,
+.rse-btn-save {
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.12), 0 3px 10px rgba(21, 153, 189, 0.12);
+}
+
+.rse-context-source,
+.rse-edit-text textarea,
+.rse-toolbar select,
+.rse-toolbar input[type="number"],
+.rse-lang-picker select {
+  background-color: rgba(7, 8, 14, 0.78);
+}
+
+.rse-char-grid { border-radius: var(--arcane-radius-surface); }
+.rse-segment-chip { border-radius: var(--arcane-radius-surface); }
+.rse-footer {
+  padding: 12px 16px;
+  background: rgba(9, 10, 17, 0.64);
+}
+
+.rse-unit-navigation button:focus-visible,
+.rse-toolbar select:focus-visible,
+.rse-toolbar input:focus-visible,
+.rse-edit-text textarea:focus-visible,
+.rse-edit-text-actions button:focus-visible,
+.rse-tool-btn:focus-visible,
+.rse-btn-reset:focus-visible,
+.rse-btn-save:focus-visible {
+  outline: 2px solid var(--arcane-focus);
+  outline-offset: 2px;
+}
+
+/* GLASS FLOATING: tools and dialogs are opaque enough to read over a page. */
+.admin-layout-frame-panel,
+.admin-symbol-palette,
+.admin-symbol-palette-toggle,
+.font-editor-panel,
+.dev-environment-card,
+.local-sync-dialog {
+  border-radius: var(--arcane-radius-surface);
+  background: linear-gradient(150deg, rgba(32, 26, 44, 0.94), rgba(12, 12, 20, 0.97));
+  box-shadow: var(--arcane-depth-floating);
+  backdrop-filter: blur(13px) saturate(116%);
+  -webkit-backdrop-filter: blur(13px) saturate(116%);
+}
+
+.admin-layout-frame-panel { padding: 12px; }
+.admin-layout-frame-fields input,
+.admin-layout-frame-actions button,
+.admin-symbol-palette-search input,
+.admin-symbol-palette-search select,
+.admin-symbol-alias-editor input,
+.admin-symbol-palette-item,
+.admin-symbol-palette-history button,
+.local-sync-record-list li,
+.local-sync-record-list button,
+.local-sync-dialog-actions button,
+.font-editor-section select,
+.font-editor-section input,
+.font-editor-btn { border-radius: var(--arcane-radius-control); }
+
+.local-sync-dialog {
+  border-color: var(--arcane-edge-soft);
+  background: linear-gradient(150deg, rgba(32, 26, 44, 0.97), rgba(12, 12, 20, 0.99));
+}
+
+@media (max-width: 700px) {
+  .rse-overlay {
+    width: 45vw;
+    min-width: min(240px, calc(100vw - var(--arcane-dock-width) - 16px));
+  }
+}
+
+@media (max-width: 540px) {
+  .rse-overlay {
+    width: min(380px, calc(100vw - var(--arcane-dock-width)));
+    min-width: 0;
+  }
+
+  .faq-panel-header,
+  .faq-panel-footer,
+  .faq-source-note,
+  .faq-locale-notice,
+  .faq-errata-context { margin-inline: 0; }
+
+  .faq-panel-header { padding: 18px 16px 12px; }
+  .faq-filters { padding-inline: 16px; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .pdf-sidebar { background: rgba(13, 14, 24, 0.95); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .faq-panel,
+  .rse-panel,
+  .admin-layout-frame-panel,
+  .admin-symbol-palette,
+  .font-editor-panel,
+  .local-sync-dialog { backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
