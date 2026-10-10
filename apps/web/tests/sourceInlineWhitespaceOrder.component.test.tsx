@@ -4,7 +4,7 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import type { Segment } from '../src/components/RichSpanEditor';
-import { attachSourceInlineElements, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
+import { attachSourceInlineElements, sourceMaskClipPath, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
 import { sourceSpanRuns } from '../src/symbols/sourceRuns';
 import { editableTextForSegments, segmentsFromEditableText } from '../src/symbols/inlineCodec';
 import { getSymbolEditorToken, isSymbolAllowed, resolveLegacySymbol } from '../src/symbols/semanticSymbols';
@@ -18,6 +18,182 @@ const cases = [
 ];
 
 describe('source inline whitespace ordering', () => {
+  it('keeps trailing whitespace in the following text run without expanding the source cleanup circle', () => {
+    const pageDir = join(process.cwd(), 'public/pages', 'page_078');
+    const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
+    const target = elements.find(element => element.symbolId === 'attack.ranged'
+      && element.anchor.blockId === 'block_18' && element.anchor.lineId === 'line_18_4')!;
+    expect(target).toBeDefined();
+    expect(target.anchor.side).toBe('before');
+
+    const style = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
+    const token = getSymbolEditorToken('attack.ranged', 'en')!;
+    const variants = [
+      { value: `${token}Ranged`, before: '', after: 'Ranged' },
+      { value: `${token} Ranged`, before: '', after: ' Ranged' },
+      { value: `Weapon${token}`, before: 'Weapon', after: '' },
+      { value: `Weapon ${token}`, before: 'Weapon ', after: '' },
+      { value: `Weapon ${token} Ranged`, before: 'Weapon ', after: ' Ranged' },
+    ];
+    const parsed = variants.map(variant => segmentsFromEditableText(variant.value, style, 'en'));
+    for (const [index, variant] of variants.entries()) {
+      expect(parsed[index].map(run => run.symbolId ? `symbol:${run.symbolId}` : run.text).filter(Boolean)).toEqual([
+        ...(variant.before ? [variant.before] : []), 'symbol:attack.ranged', ...(variant.after ? [variant.after] : []),
+      ]);
+      expect(parsed[index].filter(run => run.symbolId).map(run => run.symbolId)).toEqual(['attack.ranged']);
+    }
+    const toggledBeforeSpace = [variants[4], variants[4], variants[4]].map((variant, index) =>
+      segmentsFromEditableText(index === 1 ? `Weapon${token} Ranged` : variant.value, style, 'en')
+        .map(run => run.symbolId ? `symbol:${run.symbolId}` : run.text).filter(Boolean),
+    );
+    expect(toggledBeforeSpace).toEqual([
+      ['Weapon ', 'symbol:attack.ranged', ' Ranged'],
+      ['Weapon', 'symbol:attack.ranged', ' Ranged'],
+      ['Weapon ', 'symbol:attack.ranged', ' Ranged'],
+    ]);
+    const toggledAfterSpace = [variants[4], variants[4], variants[4]].map((variant, index) =>
+      segmentsFromEditableText(index === 1 ? `Weapon ${token}Ranged` : variant.value, style, 'en')
+        .map(run => run.symbolId ? `symbol:${run.symbolId}` : run.text).filter(Boolean),
+    );
+    expect(toggledAfterSpace).toEqual([
+      ['Weapon ', 'symbol:attack.ranged', ' Ranged'],
+      ['Weapon ', 'symbol:attack.ranged', 'Ranged'],
+      ['Weapon ', 'symbol:attack.ranged', ' Ranged'],
+    ]);
+
+    const [maskX0, maskY0, maskX1, maskY1] = target.mask.bbox;
+    const [x0, y0, x1, y1] = target.bbox;
+    const clip = sourceMaskClipPath(target)!;
+    const match = clip.match(/^ellipse\(([\d.]+)% ([\d.]+)% at ([\d.]+)% ([\d.]+)%\)$/)!;
+    const maskWidth = maskX1 - maskX0;
+    const maskHeight = maskY1 - maskY0;
+    expect(Number(match[1]) * maskWidth / 100).toBeCloseTo((x1 - x0) / 2, 8);
+    expect(Number(match[2]) * maskHeight / 100).toBeCloseTo((y1 - y0) / 2, 8);
+    expect(Number(match[3])).toBeCloseTo(((x0 + x1) / 2 - maskX0) / maskWidth * 100, 8);
+    expect(Number(match[4])).toBeCloseTo(((y0 + y1) / 2 - maskY0) / maskHeight * 100, 8);
+
+    const otherAttackFamily = elements.find(element => element.symbolId === 'attack.melee-ranged'
+      && element.mask.clipShape === 'circle')!;
+    expect(otherAttackFamily).toBeDefined();
+    expect(sourceMaskClipPath(otherAttackFamily)).toMatch(/^ellipse\(/);
+    const nonCircularSemanticFamily = elements.find(element => element.symbolId === 'tag.important.icon')!;
+    expect(nonCircularSemanticFamily).toBeDefined();
+    expect(sourceMaskClipPath(nonCircularSemanticFamily)).toBeUndefined();
+
+    const pageCircleMasks = elements.filter(element => element.mask.clipShape === 'circle');
+    expect(pageCircleMasks).toHaveLength(18);
+    for (const circularElement of pageCircleMasks) {
+      const circleClip = sourceMaskClipPath(circularElement)!;
+      const circleMatch = circleClip.match(/^ellipse\(([\d.]+)% ([\d.]+)% at ([\d.]+)% ([\d.]+)%\)$/)!;
+      const [circleMaskX0, circleMaskY0, circleMaskX1, circleMaskY1] = circularElement.mask.bbox;
+      const [symbolX0, symbolY0, symbolX1, symbolY1] = circularElement.bbox;
+      expect(Number(circleMatch[1]) * (circleMaskX1 - circleMaskX0) / 100)
+        .toBeCloseTo((symbolX1 - symbolX0) / 2, 8);
+      expect(Number(circleMatch[2]) * (circleMaskY1 - circleMaskY0) / 100)
+        .toBeCloseTo((symbolY1 - symbolY0) / 2, 8);
+    }
+  });
+
+  it('keeps all circular attack-symbol masks within their source ink bounds', () => {
+    const pagesRoot = join(process.cwd(), 'public/pages');
+    const counts = new Map<string, number>();
+    const pages = new Set<number>();
+    let total = 0;
+
+    for (const pageDir of readdirSync(pagesRoot).filter(name => /^page_\d{3}$/.test(name))) {
+      const pageNumber = Number(pageDir.slice(-3));
+      const pagePath = join(pagesRoot, pageDir);
+      const sidecarPath = join(pagePath, 'inline_elements.json');
+      if (!existsSync(sidecarPath)) continue;
+      const sidecar = JSON.parse(readFileSync(sidecarPath, 'utf8')) as { elements: SourceInlineElement[] };
+      const elements = sidecar.elements.filter(element => element.mask.clipShape === 'circle');
+      if (!elements.length) continue;
+
+      pages.add(pageNumber);
+      const dom = JSON.parse(readFileSync(join(pagePath, `${pageDir}_dom.json`), 'utf8'));
+      const before = JSON.stringify(dom.blocks);
+      const anchorsBefore = JSON.stringify(sidecar.elements.map(element => element.anchor));
+      const attached = attachSourceInlineElements(dom.blocks, sidecar.elements);
+      expect(JSON.stringify(dom.blocks), `source DOM must remain immutable on p.${pageNumber}`).toBe(before);
+      expect(JSON.stringify(sidecar.elements.map(element => element.anchor)), `anchors must remain immutable on p.${pageNumber}`)
+        .toBe(anchorsBefore);
+
+      for (const element of elements) {
+        total++;
+        counts.set(element.symbolId, (counts.get(element.symbolId) ?? 0) + 1);
+        expect(['attack.melee', 'attack.ranged', 'attack.melee-ranged']).toContain(element.symbolId);
+        expect(element.bbox.every(Number.isFinite)).toBe(true);
+        expect(element.mask.bbox.every(Number.isFinite)).toBe(true);
+
+        const [x0, y0, x1, y1] = element.bbox;
+        const [maskX0, maskY0, maskX1, maskY1] = element.mask.bbox;
+        expect(x1).toBeGreaterThan(x0);
+        expect(y1).toBeGreaterThan(y0);
+        expect(maskX0).toBeLessThanOrEqual(x0);
+        expect(maskY0).toBeLessThanOrEqual(y0);
+        expect(maskX1).toBeGreaterThanOrEqual(x1);
+        expect(maskY1).toBeGreaterThanOrEqual(y1);
+
+        const maskFile = element.mask.url.split('/').at(-1)!;
+        const maskPath = join(pagePath, maskFile);
+        expect(existsSync(maskPath), `p.${pageNumber} missing ${maskFile}`).toBe(true);
+        const png = readFileSync(maskPath);
+        expect(png.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a');
+        expect(png.readUInt32BE(16)).toBeGreaterThan(0);
+        expect(png.readUInt32BE(20)).toBeGreaterThan(0);
+
+        const clip = sourceMaskClipPath(element);
+        expect(clip).toBeDefined();
+        const clipMatch = clip!.match(/^ellipse\(([-\d.]+)% ([-\d.]+)% at ([-\d.]+)% ([-\d.]+)%\)$/);
+        expect(clipMatch, `p.${pageNumber} ${element.symbolId} must have a bounded circular clip`).not.toBeNull();
+        const [, rxText, ryText, cxText, cyText] = clipMatch!;
+        const maskWidth = maskX1 - maskX0;
+        const maskHeight = maskY1 - maskY0;
+        const rx = Number(rxText) * maskWidth / 100;
+        const ry = Number(ryText) * maskHeight / 100;
+        const cx = maskX0 + Number(cxText) * maskWidth / 100;
+        const cy = maskY0 + Number(cyText) * maskHeight / 100;
+        expect(rx).toBeCloseTo((x1 - x0) / 2, 7);
+        expect(ry).toBeCloseTo((y1 - y0) / 2, 7);
+        expect(cx).toBeCloseTo((x0 + x1) / 2, 7);
+        expect(cy).toBeCloseTo((y0 + y1) / 2, 7);
+        expect(rx).toBeLessThan(maskWidth / 2);
+        expect(ry).toBeLessThan(maskHeight / 2);
+
+        const block = attached.find((candidate: { id: string }) => candidate.id === element.anchor.blockId);
+        const line = block?.lines?.find((candidate: { id: string }) => candidate.id === element.anchor.lineId);
+        expect(line, `p.${pageNumber} ${element.symbolId} anchor line should survive attachment`).toBeDefined();
+        const attachedSpans = line!.spans.filter((span: { semanticSymbolId?: string; bbox?: number[] }) =>
+          span.semanticSymbolId === element.symbolId && span.bbox?.every((value, index) => value === element.bbox[index]));
+        expect(attachedSpans, `p.${pageNumber} ${element.symbolId} anchor should attach exactly once`).toHaveLength(1);
+        const [span] = attachedSpans;
+        expect(span.bbox).toEqual(element.bbox);
+        const expectedMetrics = element.metrics ? {
+          ...element.metrics,
+          ...(element.anchor.gapPt !== undefined ? { gapEm: element.anchor.gapPt / element.anchor.sizePt } : {}),
+          ...(element.anchor.trailingGapPt !== undefined
+            ? { trailingGapEm: element.anchor.trailingGapPt / element.anchor.sizePt } : {}),
+        } : undefined;
+        expect(span.sourceSymbolMetrics).toEqual(expectedMetrics);
+
+        const sourceLine = dom.blocks.find((candidate: { id: string }) => candidate.id === element.anchor.blockId)
+          ?.lines.find((candidate: { id: string }) => candidate.id === element.anchor.lineId);
+        expect(sourceLine, `p.${pageNumber} source anchor line should exist`).toBeDefined();
+        const runs = sourceSpanRuns(line!.spans, mapFont);
+        const matchingRun = runs.filter(run => run.symbolId === element.symbolId);
+        expect(matchingRun.filter(run => run.symbolMetrics?.widthEm === element.metrics?.widthEm)).not.toHaveLength(0);
+      }
+    }
+
+    expect(total).toBe(44);
+    expect(pages.size).toBe(14);
+    expect(Object.fromEntries(counts)).toEqual({
+      'attack.melee': 25,
+      'attack.ranged': 11,
+      'attack.melee-ranged': 8,
+    });
+  });
+
   for (const item of cases) {
     it(`p${item.page} inserts ${item.symbolId} before its geometrically following space`, () => {
     const pageDir = join(process.cwd(), 'public/pages', `page_${String(item.page).padStart(3, '0')}`);

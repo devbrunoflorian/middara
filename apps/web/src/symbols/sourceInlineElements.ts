@@ -16,6 +16,25 @@ export interface SourceInlineElement {
   mask: { url: string; bbox: [number,number,number,number]; clipShape?: 'circle' };
 }
 
+/** Clip a cleanup patch to the source symbol's circular ink footprint. */
+export function sourceMaskClipPath(element: SourceInlineElement): string | undefined {
+  if (element.mask.clipShape !== 'circle') return undefined;
+  const [maskX0, maskY0, maskX1, maskY1] = element.mask.bbox;
+  const [x0, y0, x1, y1] = element.bbox;
+  const maskWidth = maskX1 - maskX0;
+  const maskHeight = maskY1 - maskY0;
+  if (maskWidth <= 0 || maskHeight <= 0) return undefined;
+
+  // The bitmap includes padding for antialiasing, but painting that padding
+  // creates a visible halo once ordinary whitespace separates the symbol from
+  // its following text. Keep cleanup paint inside the original circular ink.
+  const radiusX = Math.min(maskWidth / 2, (x1 - x0) / 2) / maskWidth * 100;
+  const radiusY = Math.min(maskHeight / 2, (y1 - y0) / 2) / maskHeight * 100;
+  const centerX = ((x0 + x1) / 2 - maskX0) / maskWidth * 100;
+  const centerY = ((y0 + y1) / 2 - maskY0) / maskHeight * 100;
+  return `ellipse(${radiusX}% ${radiusY}% at ${centerX}% ${centerY}%)`;
+}
+
 /** Virtual editor objects must not change advances in the untouched EN view. */
 export function previousSourceSpan(spans:SpanData[],index:number):SpanData|undefined {
   for(let i=index-1;i>=0;i--)if(!spans[i].semanticSymbolId)return spans[i];

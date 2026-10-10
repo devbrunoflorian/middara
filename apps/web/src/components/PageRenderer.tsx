@@ -15,7 +15,7 @@ import { calculateTypographicFlowPlan } from '../typographicReflow';
 import { getEditableNavigationIndex, getEditableNavigationTargets } from '../editableUnitNavigation';
 import { ContentsRowFlow } from './ContentsRowFlow';
 import { exposesNestedSpanTargets, hasPreservedLegacySpanOverride } from '../editorUnitCompatibility';
-import { sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
+import { sourceElementIsReplaced, sourceMaskClipPath, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
 import './PageRenderer.css';
 import './Toast.css';
 import { payloadApiUrl } from '../config/payloadApi';
@@ -1368,26 +1368,6 @@ function SourceCompoundVectorLayer({ elements, pageWidth, pageHeight, scale, lan
 
 function hasInlineSemanticSymbol(segment: Segment): boolean {
   return Boolean(segment.symbolId || resolveLegacySymbol(segment.font, segment.text));
-}
-
-/** Clip a cleanup patch to the source circle, not the padded rectangular PNG. */
-function sourceMaskClipPath(element: SourceInlineElement): string | undefined {
-  if (element.mask.clipShape !== 'circle') return undefined;
-  const [maskX0, maskY0, maskX1, maskY1] = element.mask.bbox;
-  const [x0, y0, x1, y1] = element.bbox;
-  const maskWidth = maskX1 - maskX0;
-  const maskHeight = maskY1 - maskY0;
-  if (maskWidth <= 0 || maskHeight <= 0) return undefined;
-  // Extend the cleanup circle through the available padding around the source
-  // ink so antialiased edges do not survive when the translated text reflows.
-  // Keep the ellipse inside the sampled patch; its nearest edge bounds bleed.
-  const bleedX = Math.max(0, Math.min(x0 - maskX0, maskX1 - x1));
-  const bleedY = Math.max(0, Math.min(y0 - maskY0, maskY1 - y1));
-  const radiusX = Math.min(maskWidth / 2, (x1 - x0) / 2 + bleedX) / maskWidth * 100;
-  const radiusY = Math.min(maskHeight / 2, (y1 - y0) / 2 + bleedY) / maskHeight * 100;
-  const centerX = ((x0 + x1) / 2 - maskX0) / maskWidth * 100;
-  const centerY = ((y0 + y1) / 2 - maskY0) / maskHeight * 100;
-  return `ellipse(${radiusX}% ${radiusY}% at ${centerX}% ${centerY}%)`;
 }
 
 export const PageRenderer: React.FC<PageRendererProps> = ({

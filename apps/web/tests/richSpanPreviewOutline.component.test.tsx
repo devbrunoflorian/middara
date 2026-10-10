@@ -5,7 +5,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { getQueriesForElement, fireEvent as dispatchEvent } from '@testing-library/dom';
 import { createRoot } from 'react-dom/client';
 import { PageRenderer, type PageData } from '../src/components/PageRenderer';
-import { attachSourceInlineElements, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
+import { attachSourceInlineElements, sourceMaskClipPath, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
+import { getSymbolEditorToken } from '../src/symbols/semanticSymbols';
 
 const rawPageData = JSON.parse(readFileSync(
   join(process.cwd(), 'public/pages/page_078/page_078_dom.json'), 'utf8',
@@ -71,6 +72,73 @@ function requireMetrics(element: SourceInlineElement) {
 }
 
 describe('RichSpanEditor live PageRenderer preview', () => {
+  it('keeps the p.78 ranged-symbol cleanup mask inside its ink while toggling the following space', async () => {
+    stubRangeClientRectsForJSDOM();
+    const initialStorage = JSON.stringify(Object.entries(window.localStorage));
+    const view = render(<PageRenderer pageData={pageData} isAdmin language="en" />);
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+
+    const spanKey = 'page_78_unit_p78-gigas-grip-equip-1hand-example__en';
+    const field = () => view.container.querySelector<HTMLElement>(`[data-admin-geometry-key="${spanKey}"]`);
+    expect(field()?.querySelector('.realbox')).toBeNull();
+    const target = inlineElements.elements.find(element => element.symbolId === 'attack.ranged'
+      && element.anchor.blockId === 'block_18' && element.anchor.lineId === 'line_18_4')!;
+    expect(target).toBeDefined();
+    const expectedClip = sourceMaskClipPath(target)!;
+
+    const openRewrite = async () => {
+      fireEvent.click(field()!);
+      fireEvent.click(await view.findByText('📝 Edit Text'));
+      return view.container.querySelector('.rse-edit-text textarea') as HTMLTextAreaElement;
+    };
+    const confirmRewrite = async (textarea: HTMLTextAreaElement, value: string) => {
+      fireEvent.change(textarea, { target: { value, selectionStart: value.length, selectionEnd: value.length } });
+      fireEvent.click(view.getByText('Confirm'));
+      await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+      const currentField = field()!;
+      const cleanup = view.container.querySelector<HTMLImageElement>('img[src$="inline-element-mask-013.png"]');
+      const symbols = currentField.querySelectorAll('svg[data-symbol-id="attack.ranged"]');
+      const slot = currentField.querySelector<HTMLElement>('.inline-semantic-symbol-slot');
+      expect(currentField.querySelector('.realbox')).not.toBeNull();
+      expect(cleanup).not.toBeNull();
+      expect(cleanup!.style.clipPath).toBe(expectedClip);
+      expect(symbols).toHaveLength(1);
+      expect(slot?.style.width).toBeTruthy();
+      return { clipPath: cleanup!.style.clipPath, advance: slot!.style.width };
+    };
+
+    const sourceText = (() => {
+      fireEvent.click(field()!);
+      fireEvent.click(view.getByText('📝 Edit Text'));
+      const textarea = view.container.querySelector('.rse-edit-text textarea') as HTMLTextAreaElement;
+      const value = textarea.value;
+      fireEvent.click(view.getByText('Cancel'));
+      return value;
+    })();
+    const token = getSymbolEditorToken('attack.ranged', 'en')!;
+    const tokenIndex = sourceText.indexOf(token);
+    expect(tokenIndex).toBeGreaterThanOrEqual(0);
+    expect(sourceText[tokenIndex + token.length]).toBe(' ');
+    const afterToken = tokenIndex + token.length;
+    const withSpace = `${sourceText} x`;
+    const withoutSpace = `${sourceText.slice(0, afterToken)}${sourceText.slice(afterToken + 1)} x`;
+
+    const firstWithSpace = await confirmRewrite(await openRewrite(), withSpace);
+    const withoutSpaceResult = await confirmRewrite(await openRewrite(), withoutSpace);
+    const reinsertedSpace = await confirmRewrite(await openRewrite(), withSpace);
+    expect(firstWithSpace).toEqual(withoutSpaceResult);
+    expect(reinsertedSpace).toEqual(firstWithSpace);
+
+    const restore = await openRewrite();
+    fireEvent.change(restore, { target: { value: sourceText, selectionStart: sourceText.length, selectionEnd: sourceText.length } });
+    fireEvent.click(view.getByText('Confirm'));
+    const restoredField = field()!;
+    expect(restoredField.querySelector('.realbox')).toBeNull();
+    expect(restoredField.querySelector('[data-source-line-id="line_18_3"]')).not.toBeNull();
+    expect(JSON.stringify(Object.entries(window.localStorage))).toBe(initialStorage);
+    expect(fetchMock.mock.calls.every(([, init]) => !init?.method || init.method.toUpperCase() === 'GET')).toBe(true);
+  }, 15_000);
+
   it('returns a reverted source-equivalent EN draft to the source-line composition', async () => {
     stubRangeClientRectsForJSDOM();
     const initialStorage = JSON.stringify(Object.entries(window.localStorage));
