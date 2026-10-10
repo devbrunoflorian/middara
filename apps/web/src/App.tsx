@@ -5,6 +5,7 @@ import { LocalSyncRecoveryControl } from './components/LocalSyncRecoveryControl'
 import { DevelopmentEnvironmentStatus } from './components/DevelopmentEnvironmentStatus';
 import { FaqDrawer } from './components/FaqDrawer';
 import { MiddaraMark } from './components/MiddaraMark';
+import { AtmosphericParticles } from './components/AtmosphericParticles';
 import { 
   ChevronLeft, ChevronRight, Edit3, 
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
@@ -14,6 +15,7 @@ import './App.css';
 import './ArcaneGothic.css';
 import './ArcaneGothicLayout.css';
 import './ArcaneGothicGlass.css';
+import './ArcaneGothicAtmosphere.css';
 import { attachSourceInlineElements, type SourceInlineElement } from './symbols/sourceInlineElements';
 import { attachSourceCompoundElements, type SourceCompoundElement } from './symbols/sourceCompounds';
 import type { ContentsRowDefinition } from './contentsRows';
@@ -468,6 +470,7 @@ function App() {
 
   return (
     <div className={`app-container ${isAdmin ? 'admin-mode' : ''} ${isFaqOpen ? 'faq-open' : ''} theme-dark`}>
+      <AtmosphericParticles />
       <div className="app-shell-faq-actions">
         <button
           className="shell-faq-trigger"
