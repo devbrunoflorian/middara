@@ -96,6 +96,10 @@ interface RichSpanEditorProps {
   overrideStatusLoading?: boolean;
   persistenceStatus?: LocalSyncState | 'sync_error' | 'inherited' | 'loading';
   onDraftChange?: (draft: SpanOverride | null) => void;
+  canNavigatePrevious?: boolean;
+  canNavigateNext?: boolean;
+  onNavigatePrevious?: () => void;
+  onNavigateNext?: () => void;
   singleLine?: boolean;
   editorContext?: InlineEditorContext;
   symbolAliasPreferences?: SymbolAliasPreferences;
@@ -146,6 +150,10 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   overrideStatusLoading = false,
   persistenceStatus,
   onDraftChange,
+  canNavigatePrevious = false,
+  canNavigateNext = false,
+  onNavigatePrevious,
+  onNavigateNext,
   singleLine = false,
   editorContext = 'paragraph',
   symbolAliasPreferences = getDefaultSymbolAliasPreferences(),
@@ -389,7 +397,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     || lineHeightMode !== baseLineHeightMode
     || JSON.stringify(managedSourceSymbols) !== JSON.stringify(baseManagedSourceSymbols);
   const translationState = hasDraftChanges
-    ? { label: 'PT-BR ALTERADO NA SESSÃO / NÃO SALVO', className: 'is-dirty' }
+    ? { label: language === 'pt-BR' ? 'PT-BR ALTERADO NA SESSÃO / NÃO SALVO' : 'EN ALTERADO NA SESSÃO / NÃO SALVO', className: 'is-dirty' }
     : persistenceStatus === 'sync_error'
       ? { label: 'ERRO DE SINCRONIZAÇÃO — cópia local preservada quando disponível', className: 'is-error' }
       : persistenceStatus === 'missing_remote'
@@ -411,7 +419,9 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
                       : { label: language === 'pt-BR' ? 'HERDANDO EN' : 'EN ORIGINAL', className: 'is-inherited' };
 
   const requestClose = useCallback(() => {
-    if (language === 'pt-BR' && hasDraftChanges && !window.confirm('Há alterações de tradução não salvas. Quer sair e descartá-las?')) {
+    if (hasDraftChanges && !window.confirm(language === 'pt-BR'
+      ? 'Há alterações de tradução não salvas. Quer sair e descartá-las?'
+      : 'There are unsaved text changes. Discard them and close the editor?')) {
       return;
     }
     onClose();
@@ -791,7 +801,9 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
   // Reset to original
   const handleReset = useCallback(() => {
-    if (language === 'pt-BR' && !window.confirm('Resetar esta tradução em português? O rascunho salvo desta unidade será removido.')) {
+    if (!window.confirm(language === 'pt-BR'
+      ? 'Resetar esta tradução em português? O rascunho salvo desta unidade será removido.'
+      : 'Reset this English override? The saved override for this unit will be removed.')) {
       return;
     }
     commitSegments(originalSegments?.length ? originalSegments.map(segment => ({ ...segment })) : [{
@@ -840,6 +852,18 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             <button className="rse-close" onClick={requestClose}>✕</button>
           </div>
         </div>
+
+        {(onNavigatePrevious || onNavigateNext) && (
+          <nav className="rse-unit-navigation" aria-label="Editable unit navigation">
+            <button type="button" onClick={onNavigatePrevious} disabled={!canNavigatePrevious}>
+              ← Anterior
+            </button>
+            <button type="button" onClick={onNavigateNext} disabled={!canNavigateNext}>
+              Próxima →
+            </button>
+            <span>Alt+Shift+↑ / ↓</span>
+          </nav>
+        )}
 
         {language === 'pt-BR' && (
           <details className="rse-translation-context">

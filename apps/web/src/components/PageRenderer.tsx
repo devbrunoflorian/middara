@@ -12,6 +12,7 @@ import { compoundElementIsReplaced, type SourceCompoundElement } from '../symbol
 import { decodeOverrideData, encodeOverrideData } from '../symbols/overrideData';
 import { contentsRowKey, contentsRowUsesLegacy, contentsRowLine, contentsLabelWidth, type ContentsRowDefinition } from '../contentsRows';
 import { calculateTypographicFlowPlan } from '../typographicReflow';
+import { getEditableNavigationIndex, getEditableNavigationTargets } from '../editableUnitNavigation';
 import { ContentsRowFlow } from './ContentsRowFlow';
 import { exposesNestedSpanTargets, hasPreservedLegacySpanOverride } from '../editorUnitCompatibility';
 import { sourceElementIsReplaced, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
@@ -516,6 +517,26 @@ function editableBlockLines(block: Block): LineData[] {
   return (block.lines ?? []).filter((_, index) => !staticIndexes.has(index));
 }
 
+function spansContainEditableText(spans: SpanData[]): boolean {
+  return spans.some(span => !span.renderOnlyStrokePass
+    && !span.semanticSymbolId
+    && !resolveLegacySymbol(span.font, span.text)
+    && !span.font.includes('Dingbat')
+    && (span.displayOverride ?? span.renderTextOverride ?? span.text).trim().length > 0);
+}
+
+function segmentsContainEditableText(segments?: Segment[]): boolean {
+  return !!segments?.some(segment => !segment.symbolId
+    && !resolveLegacySymbol(segment.font, segment.text)
+    && !segment.font.includes('Dingbat')
+    && segment.text.trim().length > 0);
+}
+
+function fieldContainsEditableText(block: Block, field: CreditFieldDefinition): boolean {
+  const lineIds = new Set(field.lineIds);
+  return (block.lines ?? []).some(line => lineIds.has(line.id) && spansContainEditableText(line.spans));
+}
+
 function normalizeStaticEditorPrefix(block: Block, override: SpanOverride | null): SpanOverride | null {
   const fixedIndexes = fixedEditorLineIndexes(block);
   if (!override || !block.lines || fixedIndexes.size === 0) return override;
@@ -979,7 +1000,15 @@ interface PageRendererProps {
   language?: 'en' | 'pt-BR';
   symbolAliasPreferences?: SymbolAliasPreferences;
   onPaletteEditorChange?: (editorKey: string, state: AdminSymbolPaletteEditorState | null) => void;
+  onTranslationDraftDirtyChange?: (dirty: boolean) => void;
+  pendingEditableNavigation?: { id: number; direction: 'previous' | 'next'; targetPage: number } | null;
+  onRequestEditablePageNavigation?: (direction: 'previous' | 'next', fromPage: number) => void;
+  onResolveEditableNavigation?: (requestId: number, found: boolean) => void;
+  totalPages?: number;
+  editableNavigationEnabled?: boolean;
 }
+
+type EditableNavigationDirection = 'previous' | 'next';
 
 function sourceLayoutFrame(block: Block): LayoutFrame {
   const firstLine = editableBlockLines(block)[0] ?? block.lines?.[0];
@@ -1361,7 +1390,12 @@ function sourceMaskClipPath(element: SourceInlineElement): string | undefined {
   return `ellipse(${radiusX}% ${radiusY}% at ${centerX}% ${centerY}%)`;
 }
 
-export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, onNavigate, language = 'en', symbolAliasPreferences, onPaletteEditorChange }) => {
+export const PageRenderer: React.FC<PageRendererProps> = ({
+  pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1,
+  onNavigate, language = 'en', symbolAliasPreferences, onPaletteEditorChange,
+  onTranslationDraftDirtyChange, pendingEditableNavigation, onRequestEditablePageNavigation,
+  onResolveEditableNavigation, totalPages = 102, editableNavigationEnabled = true,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [pageElement, setPageElement] = useState<HTMLDivElement | null>(null);
   const [scale, setScale] = useState(1);
@@ -1372,6 +1406,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
   const [payloadOverrideReadState, setPayloadOverrideReadState] = useState<'loading' | 'available' | 'unavailable'>('loading');
   const [overrideSyncStates, setOverrideSyncStates] = useState<Map<string, LocalSyncState | 'sync_error'>>(new Map());
   const [draftOverride, setDraftOverride] = useState<SpanOverride | null>(null);
+  const [unitNavigationAvailability, setUnitNavigationAvailability] = useState({ previous: false, next: false });
+  const pendingNavigationScrollKeyRef = useRef<string | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [layoutFrames, setLayoutFrames] = useState<Map<string, LayoutFrame>>(() => loadLocalLayoutFrames(pageData.page_number, language));
@@ -1653,23 +1689,114 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
     return () => window.removeEventListener('resize', updateScale);
   }, [pageData, zoomLevel, selectedSpan]);
 
+  const confirmDiscardTranslationDraft = useCallback(() => {
+    if (!draftOverride) return true;
+    const confirmed = window.confirm(language === 'pt-BR'
+      ? 'Há alterações de tradução não salvas. Quer descartá-las e continuar?'
+      : 'There are unsaved text changes. Discard them and continue?');
+    if (confirmed) {
+      setDraftOverride(null);
+      onTranslationDraftDirtyChange?.(false);
+    }
+    return confirmed;
+  }, [draftOverride, language, onTranslationDraftDirtyChange]);
+
   const handleSpanClick = useCallback((info: SelectedSpanInfo) => {
     if (!isAdmin) return;
     if (selectedSpan?.spanKey === info.spanKey) return;
-    if (
-      language === 'pt-BR' &&
-      draftOverride &&
-      !window.confirm('Há alterações de tradução não salvas. Quer descartá-las e abrir outro texto?')
-    ) {
-      return;
-    }
+    if (!confirmDiscardTranslationDraft()) return;
     setSelectedSpan(info);
     setDraftOverride(null);
-  }, [isAdmin, language, draftOverride, selectedSpan]);
+    onTranslationDraftDirtyChange?.(false);
+  }, [isAdmin, selectedSpan, confirmDiscardTranslationDraft, onTranslationDraftDirtyChange]);
+
+  const navigateEditableUnit = useCallback((direction: EditableNavigationDirection) => {
+    if (!isAdmin || layoutMode || isSaving || !pageElement) return;
+    const targets = getEditableNavigationTargets(pageElement);
+    const index = getEditableNavigationIndex(targets, selectedSpan?.spanKey ?? null);
+    const target = direction === 'next' ? targets[index + 1] : targets[index - 1];
+    if (target) {
+      const key = target.dataset.editableUnitKey;
+      if (key) {
+        pendingNavigationScrollKeyRef.current = key;
+        target.click();
+      }
+      return;
+    }
+    const canCrossPage = direction === 'next'
+      ? pageData.page_number < totalPages
+      : pageData.page_number > 1;
+    if (!canCrossPage || !onRequestEditablePageNavigation || !confirmDiscardTranslationDraft()) return;
+    // In continuous-scroll mode this PageRenderer stays mounted after moving
+    // pages. Close its editor so the pending target becomes the sole active
+    // selection when the next page resolves it.
+    setSelectedSpan(null);
+    onRequestEditablePageNavigation(direction, pageData.page_number);
+  }, [isAdmin, layoutMode, isSaving, pageElement, selectedSpan?.spanKey, pageData.page_number,
+    totalPages, onRequestEditablePageNavigation, confirmDiscardTranslationDraft]);
+
+  useEffect(() => {
+    if (!editableNavigationEnabled || !isAdmin || layoutMode || !pageElement || !selectedSpan || !overridesReady) {
+      setUnitNavigationAvailability({ previous: false, next: false });
+      return;
+    }
+    const targets = getEditableNavigationTargets(pageElement);
+    const index = getEditableNavigationIndex(targets, selectedSpan.spanKey);
+    setUnitNavigationAvailability({
+      previous: index > 0 || pageData.page_number > 1,
+      next: (index >= 0 && index < targets.length - 1) || pageData.page_number < totalPages,
+    });
+  }, [editableNavigationEnabled, isAdmin, layoutMode, pageElement, selectedSpan?.spanKey, overridesReady, pageData.page_number, totalPages]);
+
+  useEffect(() => {
+    const request = pendingEditableNavigation;
+    if (!request || request.targetPage !== pageData.page_number || !editableNavigationEnabled || !isAdmin || layoutMode || !pageElement || !overridesReady) return;
+    const targets = getEditableNavigationTargets(pageElement);
+    const target = request.direction === 'next' ? targets[0] : targets.at(-1);
+    if (!target) {
+      onResolveEditableNavigation?.(request.id, false);
+      return;
+    }
+    const key = target.dataset.editableUnitKey;
+    if (!key) {
+      onResolveEditableNavigation?.(request.id, false);
+      return;
+    }
+    pendingNavigationScrollKeyRef.current = key;
+    target.click();
+    onResolveEditableNavigation?.(request.id, true);
+  }, [pendingEditableNavigation?.id, pendingEditableNavigation?.direction, editableNavigationEnabled, isAdmin, layoutMode,
+    pendingEditableNavigation?.targetPage, pageData.page_number, pageElement, overridesReady, onResolveEditableNavigation]);
+
+  useEffect(() => {
+    const key = pendingNavigationScrollKeyRef.current;
+    if (!key || selectedSpan?.spanKey !== key || !pageElement) return;
+    pendingNavigationScrollKeyRef.current = null;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const target = getEditableNavigationTargets(pageElement)
+        .find(element => element.dataset.editableUnitKey === key);
+      target?.scrollIntoView?.({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    }));
+  }, [selectedSpan?.spanKey, pageElement]);
+
+  useEffect(() => {
+    if (!editableNavigationEnabled || !isAdmin || layoutMode) return;
+    const handleNavigationShortcut = (event: KeyboardEvent) => {
+      if (!event.altKey || !event.shiftKey || event.ctrlKey || event.metaKey) return;
+      if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+      const target = event.target;
+      if (target instanceof Element && target.closest('input, textarea, select, [contenteditable="true"], [role="textbox"]')) return;
+      event.preventDefault();
+      navigateEditableUnit(event.key === 'ArrowUp' ? 'previous' : 'next');
+    };
+    window.addEventListener('keydown', handleNavigationShortcut);
+    return () => window.removeEventListener('keydown', handleNavigationShortcut);
+  }, [editableNavigationEnabled, isAdmin, layoutMode, navigateEditableUnit]);
 
   const handleDraftChange = useCallback((draft: SpanOverride | null) => {
     setDraftOverride(draft);
-  }, []);
+    onTranslationDraftDirtyChange?.(draft !== null);
+  }, [onTranslationDraftDirtyChange]);
 
   const handleSaveOverride = useCallback(async (override: SpanOverride | null) => {
     if ((!override && !selectedSpan) || isSaving) return;
@@ -1731,12 +1858,14 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
     setIsSaving(false);
     setSelectedSpan(null);
     setDraftOverride(null);
-  }, [language, selectedSpan, overrides, isSaving]);
+    onTranslationDraftDirtyChange?.(false);
+  }, [language, selectedSpan, overrides, isSaving, onTranslationDraftDirtyChange]);
 
   const handleCloseEditor = useCallback(() => {
     setSelectedSpan(null);
     setDraftOverride(null);
-  }, []);
+    onTranslationDraftDirtyChange?.(false);
+  }, [onTranslationDraftDirtyChange]);
 
   const containerStyle: React.CSSProperties = {
     width: `${pageData.width * scale}px`,
@@ -1911,6 +2040,10 @@ export const PageRenderer: React.FC<PageRendererProps> = ({ pageData, isAdmin, s
           existingOverride={selectedExistingOverride}
           overrideStatusLoading={!overridesReady}
           persistenceStatus={selectedOverridePersistenceState ?? undefined}
+          canNavigatePrevious={editableNavigationEnabled && unitNavigationAvailability.previous && !isSaving}
+          canNavigateNext={editableNavigationEnabled && unitNavigationAvailability.next && !isSaving}
+          onNavigatePrevious={editableNavigationEnabled ? () => navigateEditableUnit('previous') : undefined}
+          onNavigateNext={editableNavigationEnabled ? () => navigateEditableUnit('next') : undefined}
           singleLine={selectedSpan.singleLine}
           editorContext={selectedSpan.editorContext ?? 'paragraph'}
           symbolAliasPreferences={symbolAliasPreferences}
@@ -1992,7 +2125,8 @@ function ContentsLabelBlock({
       <div className={`contents-label-field ${isAdmin ? 'credit-edit-field' : ''} ${selectedKey === key ? 'credit-field-selected' : ''}`}
         role={isAdmin ? 'button' : 'link'} tabIndex={0}
         style={{ position: 'absolute', left: x * scale, top: y * scale, width: width * scale, height: height * scale, zIndex: block.zIndex ?? 10 }}
-        {...attributes} onClick={click} onKeyDown={event => {
+        {...attributes} data-editable-unit-key={isAdmin && spansContainEditableText(line.spans) ? key : undefined}
+        onClick={click} onKeyDown={event => {
           if (event.key === 'Enter' || (isAdmin && event.key === ' ')) {
             event.preventDefault();
             select();
@@ -2278,6 +2412,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     : [];
 
   const blockCanEdit = isAdmin && !layoutMode && !block.adminReadOnly;
+  const editableNavigationKey = blockCanEdit && spansContainEditableText(
+    editableBlockLines(block).flatMap(line => line.spans),
+  ) ? blockKey : undefined;
   const blockCanSelectLayout = isAdmin && layoutMode && !block.adminReadOnly && !fixedEditorLineIndexes(block).size
     && !block.listFlowItem && !block.typographicUnits?.length && !block.creditUnits?.length && !block.creditUnit;
   const blockHoverClass = blockCanSelectLayout
@@ -2314,7 +2451,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     return (
       <div className={`block-container ${blockHoverClass} ${overflowClass}`} data-render-mode="sourceGeometry"
         style={{ ...blockStyle, left: `${blockX * scale}px`, top: `${blockY * scale}px`, width: `${blockW * scale}px`, height: `${blockH * scale}px` }}
-        onClick={handleBlockClick} {...geometryAttributes}>
+        onClick={handleBlockClick} {...geometryAttributes} data-editable-unit-key={editableNavigationKey}>
         <SourceGeometryBlock block={block} scale={scale} blockOriginX={blockX} blockOriginY={blockY} />
         {inlineSpanHitTargets.map(target => (
           <button
@@ -2322,6 +2459,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             type="button"
             className={`span-editable ${target.state.selected ? 'span-selected' : ''}`}
             data-source-inline-hit-target={target.spanKey}
+            data-editable-unit-key={target.spanKey}
             aria-label={`Edit text ${target.state.info.text.slice(0, 48)}`}
             title={target.state.info.text}
             style={{
@@ -2375,7 +2513,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     const blockLineW = rawWidth * scale;
 
     return (
-      <div className={`block-container ${blockHoverClass} ${overflowClass}`} style={translatedStyle} onClick={handleBlockClick} {...geometryAttributes}>
+      <div className={`block-container ${blockHoverClass} ${overflowClass}`} style={translatedStyle} onClick={handleBlockClick} {...geometryAttributes} data-editable-unit-key={editableNavigationKey}>
         {fixedLines.map(line => (
           <div
             key={`static-${line.id}`}
@@ -2450,7 +2588,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   }
 
   return (
-    <div className={`block-container ${blockHoverClass}`} style={blockStyle} onClick={handleBlockClick} {...geometryAttributes}>
+    <div className={`block-container ${blockHoverClass}`} style={blockStyle} onClick={handleBlockClick} {...geometryAttributes} data-editable-unit-key={editableNavigationKey}>
       {block.lines.map((line, lIdx) => {
         const lineId = line.id !== undefined ? line.id : lIdx;
         const isFixedLine = fixedLineIndexes.has(lIdx);
@@ -2965,6 +3103,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
         className={`credit-field ${sourceClass} ${selectedClass} ${overflowClass}`}
         style={fieldStyle}
         onClick={handleClick}
+        data-editable-unit-key={isAdmin && !layoutMode && fieldContainsEditableText(block, field) ? spanKey : undefined}
         {...geometryAttributes}
       >
         <SourceGeometryBlock block={sourceFieldBlock} scale={scale} blockOriginX={fieldX} blockOriginY={fieldY} />
@@ -2977,6 +3116,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
       className={`credit-field ${sourceClass} ${selectedClass} ${overflowClass}`}
       style={{ ...fieldStyle, cursor: layoutMode ? 'crosshair' : undefined }}
       onClick={handleClick}
+      data-editable-unit-key={isAdmin && !layoutMode && fieldContainsEditableText(block, field) ? spanKey : undefined}
       {...geometryAttributes}
     >
       {!useSourceLines ? (
@@ -3449,6 +3589,8 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           <span
             key={si}
             className={inlineUnitInteractive ? `span-editable ${inlineUnit?.selected ? 'span-selected' : ''}` : undefined}
+            data-editable-unit-key={inlineUnitInteractive && isAdmin && segmentsContainEditableText(inlineUnit?.info.sourceSegments)
+              ? inlineUnit!.spanKey : undefined}
             style={{ ...spanStyle, ...(inlineUnitInteractive && isAdmin ? { cursor: 'text' } : {}) }}
             onClick={inlineUnitInteractive && isAdmin ? event => {
               event.stopPropagation();

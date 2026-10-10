@@ -116,6 +116,13 @@ function App() {
   const [isRulerVisible, setIsRulerVisible] = useState(false);
   const [isLayoutMode, setIsLayoutMode] = useState(false);
   const [isLayoutDirty, setIsLayoutDirty] = useState(false);
+  const [hasTranslationDraft, setHasTranslationDraft] = useState(false);
+  const [pendingEditableNavigation, setPendingEditableNavigation] = useState<{
+    id: number;
+    direction: 'previous' | 'next';
+    targetPage: number;
+  } | null>(null);
+  const editableNavigationRequestId = useRef(0);
   const [isLoading, setIsLoading] = useState(true);
   // Start at 200% relative to the measured fit scale; Fit to Screen resets this multiplier to 100%.
   const [zoomLevel, setZoomLevel] = useState<number>(2);
@@ -201,20 +208,65 @@ function App() {
     return true;
   }, [isLayoutDirty]);
 
+  const acceptLeavingTranslationDraft = useCallback(() => {
+    if (!hasTranslationDraft) return true;
+    const confirmed = window.confirm(language === 'pt-BR'
+      ? 'Há alterações de tradução não salvas. Quer descartá-las e continuar?'
+      : 'There are unsaved text changes. Discard them and continue?');
+    if (confirmed) setHasTranslationDraft(false);
+    return confirmed;
+  }, [hasTranslationDraft, language]);
+
   // Navigate to a specific page (used by hyperlinks on Contents page)
-  const navigateToPage = useCallback((pageNum: number) => {
-    if (pageNum !== currentPage && !acceptLeavingLayout()) return;
+  const navigateToPage = useCallback((pageNum: number, draftAlreadyConfirmed = false) => {
+    if (pageNum !== currentPage && (!acceptLeavingLayout()
+      || (!draftAlreadyConfirmed && !acceptLeavingTranslationDraft()))) return;
     if (pageNum >= 1 && pageNum <= TOTAL_PAGES) {
       setCurrentPage(pageNum);
       // If in scroll mode, scroll to that page
       if (viewMode === 'scroll') {
         setTimeout(() => {
-          const el = document.getElementById(`scroll-page-${pageNum}`);
+          const el = document.getElementById(`page-${pageNum}`);
           el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
       }
     }
-  }, [viewMode, currentPage, acceptLeavingLayout]);
+  }, [viewMode, currentPage, acceptLeavingLayout, acceptLeavingTranslationDraft]);
+
+  const requestEditablePageNavigation = useCallback((direction: 'previous' | 'next', fromPage: number) => {
+    const targetPage = fromPage + (direction === 'next' ? 1 : -1);
+    if (targetPage < 1 || targetPage > TOTAL_PAGES || !acceptLeavingLayout()) return;
+    const id = ++editableNavigationRequestId.current;
+    setPendingEditableNavigation({ id, direction, targetPage });
+    if (viewMode === 'single') {
+      setCurrentPage(targetPage);
+      setPageInput(targetPage.toString());
+    } else {
+      document.getElementById(`page-${targetPage}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [acceptLeavingLayout, viewMode]);
+
+  const resolveEditablePageNavigation = useCallback((requestId: number, found: boolean) => {
+    if (!pendingEditableNavigation || pendingEditableNavigation.id !== requestId) return;
+    if (found) {
+      setPendingEditableNavigation(null);
+      return;
+    }
+    const nextPage = pendingEditableNavigation.targetPage
+      + (pendingEditableNavigation.direction === 'next' ? 1 : -1);
+    if (nextPage < 1 || nextPage > TOTAL_PAGES) {
+      setPendingEditableNavigation(null);
+      return;
+    }
+    setPendingEditableNavigation({ ...pendingEditableNavigation, targetPage: nextPage });
+    if (viewMode === 'single') {
+      setCurrentPage(nextPage);
+      setPageInput(nextPage.toString());
+    } else {
+      requestAnimationFrame(() => document.getElementById(`page-${nextPage}`)
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    }
+  }, [pendingEditableNavigation, viewMode]);
 
   // Single page loader
   useEffect(() => {
@@ -300,6 +352,7 @@ function App() {
               </div>
             ) : pageData ? (
               <PageRenderer 
+                key={`single-${currentPage}-${language}`}
                 pageData={pageData} 
                 isAdmin={isAdmin}
                 showRuler={isAdmin && isRulerVisible}
@@ -310,6 +363,12 @@ function App() {
                 language={language}
                 symbolAliasPreferences={symbolAliasPreferences}
                 onPaletteEditorChange={handlePaletteEditorChange}
+                onTranslationDraftDirtyChange={setHasTranslationDraft}
+                pendingEditableNavigation={pendingEditableNavigation}
+                onRequestEditablePageNavigation={requestEditablePageNavigation}
+                onResolveEditableNavigation={resolveEditablePageNavigation}
+                totalPages={TOTAL_PAGES}
+                editableNavigationEnabled={viewMode === 'single'}
               />
             ) : null}
           </div>
@@ -327,6 +386,7 @@ function App() {
                 <div className="scroll-page-label">Page {num}</div>
                 {scrollPages.has(num) ? (
                   <PageRenderer 
+                    key={`scroll-${num}-${language}`}
                     pageData={scrollPages.get(num)!} 
                     isAdmin={isAdmin}
                     showRuler={false}
@@ -336,6 +396,8 @@ function App() {
                     language={language}
                     symbolAliasPreferences={symbolAliasPreferences}
                     onPaletteEditorChange={handlePaletteEditorChange}
+                    onTranslationDraftDirtyChange={setHasTranslationDraft}
+                    editableNavigationEnabled={false}
                   />
                 ) : (
                   <div className="placeholder-page" style={{ height: 1100 * zoomLevel, width: 820 * zoomLevel, background: '#111' }}></div>
@@ -360,7 +422,7 @@ function App() {
             <button 
               className={`tool-btn ${viewMode === 'single' ? 'active' : ''}`}
               onClick={() => {
-                if (viewMode !== 'single' && !acceptLeavingLayout()) return;
+                if (viewMode !== 'single' && (!acceptLeavingLayout() || !acceptLeavingTranslationDraft())) return;
                 setViewMode('single');
               }}
               title="Single Page View"
@@ -370,7 +432,7 @@ function App() {
             <button 
               className={`tool-btn ${viewMode === 'scroll' ? 'active' : ''}`}
               onClick={() => {
-                if (viewMode !== 'scroll' && !acceptLeavingLayout()) return;
+                if (viewMode !== 'scroll' && (!acceptLeavingLayout() || !acceptLeavingTranslationDraft())) return;
                 setViewMode('scroll');
               }}
               title="Continuous Scroll"
@@ -422,7 +484,9 @@ function App() {
           <select 
             value={language} 
             onChange={(e) => {
-              if (e.target.value !== language && acceptLeavingLayout()) setLanguage(e.target.value as 'en' | 'pt-BR');
+              if (e.target.value !== language && acceptLeavingLayout() && acceptLeavingTranslationDraft()) {
+                setLanguage(e.target.value as 'en' | 'pt-BR');
+              }
             }}
             className="language-select"
             style={{ padding: '4px', borderRadius: '4px', border: '1px solid #444', background: '#333', color: '#fff', fontSize: '10px', width: '38px', appearance: 'none', textAlign: 'center' }}
