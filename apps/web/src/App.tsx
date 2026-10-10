@@ -17,6 +17,12 @@ import type { ContentsRowDefinition } from './contentsRows';
 import { getDefaultSymbolAliasPreferences, getEditorAliasConflicts, getSemanticSymbol, normalizeEditorAlias, type SymbolAliasPreferences } from './symbols/semanticSymbols';
 import { loadSymbolAliasSettings, saveSymbolAliasSettings } from './symbols/symbolAliasSettings';
 import { payloadApiOrigin } from './config/payloadApi';
+import {
+  captureDocumentFocalPoint,
+  clampViewerZoom,
+  ctrlWheelZoomLevel,
+  type DocumentFocalPoint,
+} from './focalZoom';
 
 const TOTAL_PAGES = 102; // Pages with extracted DOM
 
@@ -129,6 +135,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   // Start at 200% relative to the measured fit scale; Fit to Screen resets this multiplier to 100%.
   const [zoomLevel, setZoomLevel] = useState<number>(2);
+  const zoomLevelRef = useRef(zoomLevel);
+  const [focalZoomAnchor, setFocalZoomAnchor] = useState<{ id: number; pageNumber: number; focal: DocumentFocalPoint; resetPan?: boolean } | null>(null);
+  const focalZoomAnchorIdRef = useRef(0);
+  const pendingWheelZoomRef = useRef<{ zoomLevel: number; pageNumber: number; focal: DocumentFocalPoint } | null>(null);
+  const wheelAnimationFrameRef = useRef<number | null>(null);
   const [viewMode, setViewMode] = useState<'single' | 'scroll'>('single');
   const [pageInput, setPageInput] = useState<string>('1');
   const [language, setLanguage] = useState<'en' | 'pt-BR'>('en');
@@ -147,6 +158,131 @@ function App() {
 
   const mainRef = useRef<HTMLDivElement>(null);
   const devMode = isLayoutMode ? 'layout' : paletteEditorState ? 'editor' : isAdmin ? 'admin' : 'viewer';
+
+  useEffect(() => {
+    zoomLevelRef.current = zoomLevel;
+  }, [zoomLevel]);
+
+  const handleFocalZoomApplied = useCallback((id: number) => {
+    setFocalZoomAnchor(current => current?.id === id ? null : current);
+  }, []);
+
+  const changeZoomAroundCenter = useCallback((requestedZoom: number, resetPan = false) => {
+    const nextZoom = clampViewerZoom(requestedZoom);
+    const currentZoom = zoomLevelRef.current;
+    const zoomChanged = Math.abs(nextZoom - currentZoom) >= 0.000001;
+    if (!zoomChanged && !resetPan) return;
+
+    if (wheelAnimationFrameRef.current !== null) {
+      cancelAnimationFrame(wheelAnimationFrameRef.current);
+      wheelAnimationFrameRef.current = null;
+    }
+    pendingWheelZoomRef.current = null;
+    zoomLevelRef.current = nextZoom;
+    if (zoomChanged || resetPan) setZoomLevel(nextZoom);
+
+    if (viewMode !== 'single') {
+      setFocalZoomAnchor(null);
+      return;
+    }
+    const stage = mainRef.current?.querySelector<HTMLElement>('.page-stage');
+    const page = stage?.querySelector<HTMLElement>('.page-container');
+    if (!stage || !page) {
+      setFocalZoomAnchor(null);
+      return;
+    }
+    const stageRect = stage.getBoundingClientRect();
+    const pageRect = page.getBoundingClientRect();
+    const pageWidth = Number(page.dataset.pdfPageWidth);
+    const pageHeight = Number(page.dataset.pdfPageHeight);
+    const focal = resetPan
+      ? { pageX: pageWidth / 2, pageY: pageHeight / 2, viewportX: stage.clientWidth / 2, viewportY: stage.clientHeight / 2 }
+      : captureDocumentFocalPoint({
+        clientX: stageRect.left + stage.clientLeft + stage.clientWidth / 2,
+        clientY: stageRect.top + stage.clientTop + stage.clientHeight / 2,
+        viewport: { left: stageRect.left, top: stageRect.top, clientLeft: stage.clientLeft, clientTop: stage.clientTop },
+        page: { left: pageRect.left, top: pageRect.top, width: pageRect.width, height: pageRect.height },
+        pageWidth,
+        pageHeight,
+      });
+    if (focal) {
+      setFocalZoomAnchor({
+        id: ++focalZoomAnchorIdRef.current,
+        pageNumber: Number(page.dataset.pdfPageNumber),
+        focal,
+        resetPan,
+      });
+    } else {
+      setFocalZoomAnchor(null);
+    }
+  }, [viewMode]);
+
+  useEffect(() => {
+    const main = mainRef.current;
+    if (!main || viewMode !== 'single') return;
+
+    const onWheel = (event: WheelEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const stage = target.closest<HTMLElement>('.page-stage');
+      if (!stage || !main.contains(stage)) return;
+      const page = stage.querySelector<HTMLElement>('.page-container');
+      if (!page) return;
+
+      const nextZoom = ctrlWheelZoomLevel({
+        ctrlKey: event.ctrlKey,
+        cancelable: event.cancelable,
+        deltaY: event.deltaY,
+        deltaMode: event.deltaMode,
+        viewportHeight: stage.clientHeight,
+        currentZoom: zoomLevelRef.current,
+      });
+      if (nextZoom === null) return;
+
+      const stageRect = stage.getBoundingClientRect();
+      const pageRect = page.getBoundingClientRect();
+      const focal = captureDocumentFocalPoint({
+        clientX: event.clientX,
+        clientY: event.clientY,
+        viewport: { left: stageRect.left, top: stageRect.top, clientLeft: stage.clientLeft, clientTop: stage.clientTop },
+        page: { left: pageRect.left, top: pageRect.top, width: pageRect.width, height: pageRect.height },
+        pageWidth: Number(page.dataset.pdfPageWidth),
+        pageHeight: Number(page.dataset.pdfPageHeight),
+      });
+      if (!focal) return;
+
+      // Consume only a Ctrl+wheel gesture over the actual PDF page. Plain wheel
+      // continues to scroll normally, and continuous mode remains untouched.
+      event.preventDefault();
+      if (Math.abs(nextZoom - zoomLevelRef.current) < 0.000001) return;
+      zoomLevelRef.current = nextZoom;
+      pendingWheelZoomRef.current = {
+        zoomLevel: nextZoom,
+        pageNumber: Number(page.dataset.pdfPageNumber),
+        focal,
+      };
+      if (wheelAnimationFrameRef.current !== null) return;
+
+      wheelAnimationFrameRef.current = requestAnimationFrame(() => {
+        wheelAnimationFrameRef.current = null;
+        const pending = pendingWheelZoomRef.current;
+        pendingWheelZoomRef.current = null;
+        if (!pending) return;
+        setZoomLevel(pending.zoomLevel);
+        setFocalZoomAnchor({ id: ++focalZoomAnchorIdRef.current, ...pending });
+      });
+    };
+
+    main.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      main.removeEventListener('wheel', onWheel);
+      if (wheelAnimationFrameRef.current !== null) {
+        cancelAnimationFrame(wheelAnimationFrameRef.current);
+        wheelAnimationFrameRef.current = null;
+      }
+      pendingWheelZoomRef.current = null;
+    };
+  }, [viewMode]);
 
   useEffect(() => {
     let active = true;
@@ -371,6 +507,9 @@ function App() {
                 layoutMode={isAdmin && isLayoutMode}
                 onLayoutDirtyChange={setIsLayoutDirty}
                 zoomLevel={zoomLevel}
+                focalZoomEnabled
+                focalZoomAnchor={focalZoomAnchor}
+                onFocalZoomApplied={handleFocalZoomApplied}
                 onNavigate={navigateToPage}
                 language={language}
                 symbolAliasPreferences={symbolAliasPreferences}
@@ -479,14 +618,14 @@ function App() {
 
           {/* Zoom Controls */}
           <div className="zoom-group">
-            <button className="tool-btn" onClick={() => setZoomLevel(z => Math.min(4, z + 0.25))} title="Zoom In">
+            <button className="tool-btn" onClick={() => changeZoomAroundCenter(zoomLevelRef.current + 0.25)} title="Zoom In">
               <ZoomIn size={16} />
             </button>
             <span className="zoom-level">{Math.round(zoomLevel * 100)}%</span>
-            <button className="tool-btn" onClick={() => setZoomLevel(z => Math.max(0.25, z - 0.25))} title="Zoom Out">
+            <button className="tool-btn" onClick={() => changeZoomAroundCenter(zoomLevelRef.current - 0.25)} title="Zoom Out">
               <ZoomOut size={16} />
             </button>
-            <button className="tool-btn" onClick={() => setZoomLevel(1)} title="Fit to Screen">
+            <button className="tool-btn" onClick={() => changeZoomAroundCenter(1, true)} title="Fit to Screen">
               <Maximize size={16} />
             </button>
           </div>

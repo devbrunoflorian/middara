@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { RichSpanEditor, type Segment, type SpanOverride, type TextAlignment } from './RichSpanEditor';
 import type { AdminSymbolPaletteEditorState } from './AdminSymbolPalette';
 import { AdminRuler } from './AdminRuler';
@@ -13,6 +13,7 @@ import { decodeOverrideData, encodeOverrideData } from '../symbols/overrideData'
 import { contentsRowKey, contentsRowUsesLegacy, contentsRowLine, contentsLabelWidth, type ContentsRowDefinition } from '../contentsRows';
 import { calculateTypographicFlowPlan } from '../typographicReflow';
 import { getEditableNavigationIndex, getEditableNavigationTargets } from '../editableUnitNavigation';
+import { focalScrollOffsets, type DocumentFocalPoint } from '../focalZoom';
 import { ContentsRowFlow } from './ContentsRowFlow';
 import { exposesNestedSpanTargets, hasPreservedLegacySpanOverride } from '../editorUnitCompatibility';
 import { sourceElementIsReplaced, sourceMaskClipPath, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
@@ -996,6 +997,9 @@ interface PageRendererProps {
   layoutMode?: boolean;
   onLayoutDirtyChange?: (dirty: boolean) => void;
   zoomLevel?: number;
+  focalZoomEnabled?: boolean;
+  focalZoomAnchor?: { id: number; pageNumber: number; focal: DocumentFocalPoint; resetPan?: boolean } | null;
+  onFocalZoomApplied?: (id: number) => void;
   onNavigate?: (pageNum: number) => void;
   language?: 'en' | 'pt-BR';
   symbolAliasPreferences?: SymbolAliasPreferences;
@@ -1372,13 +1376,18 @@ function hasInlineSemanticSymbol(segment: Segment): boolean {
 
 export const PageRenderer: React.FC<PageRendererProps> = ({
   pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1,
+  focalZoomEnabled = false, focalZoomAnchor = null, onFocalZoomApplied,
   onNavigate, language = 'en', symbolAliasPreferences, onPaletteEditorChange,
   onTranslationDraftDirtyChange, pendingEditableNavigation, onRequestEditablePageNavigation,
   onResolveEditableNavigation, totalPages = 102, editableNavigationEnabled = true,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const updateScaleRef = useRef<() => void>(() => {});
   const [pageElement, setPageElement] = useState<HTMLDivElement | null>(null);
   const [scale, setScale] = useState(1);
+  const [focalPanOffset, setFocalPanOffset] = useState({ x: 0, y: 0 });
+  const appliedFocalZoomIdRef = useRef<number | null>(null);
+  const resetPanRequestIdRef = useRef<number | null>(null);
   const [selectedSpan, setSelectedSpan] = useState<SelectedSpanInfo | null>(null);
   const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => loadLocalOverrides(language));
   const [overridesLoadedLanguage, setOverridesLoadedLanguage] = useState<string | null>(null);
@@ -1646,7 +1655,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     return map;
   }, [pageData, onNavigate]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const stage = containerRef.current;
     if (!stage || !pageData) return;
 
@@ -1664,10 +1673,84 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       setScale(current => Math.abs(current - nextScale) < 0.0001 ? current : nextScale);
     };
 
+    updateScaleRef.current = updateScale;
     updateScale();
     window.addEventListener('resize', updateScale);
-    return () => window.removeEventListener('resize', updateScale);
-  }, [pageData, zoomLevel, selectedSpan]);
+    return () => {
+      window.removeEventListener('resize', updateScale);
+    };
+  }, [focalZoomEnabled, pageData, zoomLevel, selectedSpan]);
+
+  useEffect(() => {
+    if (!focalZoomEnabled || typeof ResizeObserver === 'undefined') return;
+    const stage = containerRef.current;
+    if (!stage) return;
+    const resizeObserver = new ResizeObserver(() => updateScaleRef.current());
+    resizeObserver.observe(stage);
+    return () => resizeObserver.disconnect();
+  }, [focalZoomEnabled]);
+
+  useLayoutEffect(() => {
+    if (!focalZoomAnchor) return;
+    if (appliedFocalZoomIdRef.current === focalZoomAnchor.id) return;
+    if (focalZoomAnchor.pageNumber !== pageData.page_number) {
+      appliedFocalZoomIdRef.current = focalZoomAnchor.id;
+      onFocalZoomApplied?.(focalZoomAnchor.id);
+      return;
+    }
+
+    if (focalZoomAnchor.resetPan && resetPanRequestIdRef.current !== focalZoomAnchor.id
+      && (focalPanOffset.x !== 0 || focalPanOffset.y !== 0)) {
+      resetPanRequestIdRef.current = focalZoomAnchor.id;
+      setFocalPanOffset({ x: 0, y: 0 });
+      return;
+    }
+
+    const stage = containerRef.current;
+    const page = pageElement;
+    if (!stage || !page) return;
+
+    const stageRect = stage.getBoundingClientRect();
+    const availableWidth = Math.max(1, stageRect.width - 48);
+    const availableHeight = Math.max(1, stageRect.height - 48);
+    const expectedScale = Math.min(availableWidth / pageData.width, availableHeight / pageData.height) * zoomLevel;
+    if (Math.abs(scale - expectedScale) >= 0.0001) return;
+
+    const pageRect = page.getBoundingClientRect();
+    const focal = focalZoomAnchor.resetPan
+      ? { pageX: pageData.width / 2, pageY: pageData.height / 2, viewportX: stage.clientWidth / 2, viewportY: stage.clientHeight / 2 }
+      : focalZoomAnchor.focal;
+    const offsets = focalScrollOffsets({
+      viewport: {
+        left: stageRect.left,
+        top: stageRect.top,
+        clientLeft: stage.clientLeft,
+        clientTop: stage.clientTop,
+        clientWidth: stage.clientWidth,
+        clientHeight: stage.clientHeight,
+        scrollLeft: stage.scrollLeft,
+        scrollTop: stage.scrollTop,
+        scrollWidth: stage.scrollWidth,
+        scrollHeight: stage.scrollHeight,
+      },
+      page: { left: pageRect.left, top: pageRect.top, width: pageRect.width, height: pageRect.height },
+      focal,
+      pageWidth: pageData.width,
+      pageHeight: pageData.height,
+    });
+    stage.scrollLeft = offsets.scrollLeft;
+    stage.scrollTop = offsets.scrollTop;
+    // A page that still fits the viewport cannot use scrollLeft/scrollTop for
+    // part of the focal correction. Shift only the page canvas for that
+    // residual; all document-space child coordinates and geometry stay intact.
+    const panDeltaX = offsets.scrollLeft - offsets.requestedScrollLeft;
+    const panDeltaY = offsets.scrollTop - offsets.requestedScrollTop;
+    if (Math.abs(panDeltaX) > 0.5 || Math.abs(panDeltaY) > 0.5) {
+      setFocalPanOffset(current => ({ x: current.x + panDeltaX, y: current.y + panDeltaY }));
+    }
+    appliedFocalZoomIdRef.current = focalZoomAnchor.id;
+    onFocalZoomApplied?.(focalZoomAnchor.id);
+  }, [focalPanOffset, focalZoomAnchor, onFocalZoomApplied, pageData, pageElement, scale, zoomLevel]);
 
   const confirmDiscardTranslationDraft = useCallback(() => {
     if (!draftOverride) return true;
@@ -1851,7 +1934,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     width: `${pageData.width * scale}px`,
     height: `${pageData.height * scale}px`,
     margin: 'auto',
-    transition: 'width 0.2s ease, height 0.2s ease',
+    transform: focalPanOffset.x || focalPanOffset.y
+      ? `translate(${focalPanOffset.x}px, ${focalPanOffset.y}px)`
+      : undefined,
     flexShrink: 0,
   };
 
@@ -1890,7 +1975,14 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   return (
     <div className={`page-renderer ${selectedSpan ? 'editor-open' : ''}`} style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'stretch', overflow: 'hidden' }}>
       <div ref={containerRef} className="page-stage">
-      <div ref={setPageElement} className="page-container" style={containerStyle}>
+      <div
+        ref={setPageElement}
+        className="page-container"
+        style={containerStyle}
+        data-pdf-page-number={pageData.page_number}
+        data-pdf-page-width={pageData.width}
+        data-pdf-page-height={pageData.height}
+      >
         {toast && (
           <div className={`toast-notification toast-${toast.type}`}>
             {toast.message}
