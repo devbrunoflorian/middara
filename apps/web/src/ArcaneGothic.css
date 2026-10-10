@@ -49,18 +49,56 @@ html {
   background: var(--arcane-obsidian);
 }
 
-/* Static, low-contrast fog and distant forest silhouettes; no extra paint layer or hit target. */
+/* A dark, atmospheric field around the document. The PDF remains the foreground. */
 .viewer-main {
+  isolation: isolate;
   background-color: var(--arcane-obsidian);
   background-image:
-    url('/brand/arcane-forest.svg?v=20261010'),
-    radial-gradient(ellipse 48% 60% at 4% 18%, rgba(21, 153, 189, 0.115), transparent 72%),
-    radial-gradient(ellipse 44% 55% at 98% 78%, rgba(125, 81, 143, 0.12), transparent 74%),
-    radial-gradient(ellipse 60% 38% at 52% 0%, rgba(167, 107, 181, 0.055), transparent 78%),
-    linear-gradient(180deg, rgba(19, 16, 28, 0.8), rgba(11, 11, 18, 0.98)),
-    linear-gradient(73deg, transparent 0 8%, rgba(105, 217, 235, 0.025) 8.08% 8.2%, transparent 8.28% 19%, rgba(167, 107, 181, 0.018) 19.1% 19.22%, transparent 19.3%),
-    linear-gradient(107deg, transparent 0 81%, rgba(105, 217, 235, 0.022) 81.08% 81.2%, transparent 81.28% 92%, rgba(167, 107, 181, 0.02) 92.08% 92.2%, transparent 92.28%);
+    radial-gradient(ellipse 74% 70% at 6% 22%, rgba(34, 28, 53, 0.48), transparent 76%),
+    radial-gradient(ellipse 62% 76% at 97% 80%, rgba(10, 37, 51, 0.38), transparent 77%),
+    radial-gradient(ellipse 44% 54% at 52% 0%, rgba(55, 32, 68, 0.2), transparent 78%),
+    linear-gradient(132deg, #080a12 0%, #100d19 46%, #0a0b13 100%);
   background-size: cover;
+}
+
+/* Soft shadow and spectral mist stay inside the viewer and never intercept input. */
+.viewer-main::before,
+.viewer-main::after {
+  position: absolute;
+  inset: 1.5%;
+  z-index: -1;
+  content: '';
+  pointer-events: none;
+  contain: paint;
+  will-change: transform, opacity;
+}
+
+.viewer-main::before {
+  background:
+    radial-gradient(ellipse 24% 68% at 4% 53%, rgba(4, 8, 17, 0.68), transparent 82%),
+    radial-gradient(ellipse 27% 58% at 96% 42%, rgba(6, 8, 18, 0.7), transparent 84%),
+    radial-gradient(ellipse 48% 30% at 52% 100%, rgba(9, 9, 20, 0.4), transparent 82%);
+  opacity: 0.78;
+  animation: arcane-shadow-drift 86s ease-in-out infinite alternate;
+}
+
+.viewer-main::after {
+  background:
+    radial-gradient(ellipse 39% 31% at 14% 34%, rgba(39, 153, 184, 0.12), transparent 78%),
+    radial-gradient(ellipse 34% 28% at 82% 65%, rgba(106, 68, 139, 0.13), transparent 80%),
+    radial-gradient(ellipse 24% 20% at 50% 8%, rgba(92, 146, 184, 0.08), transparent 82%);
+  opacity: 0.72;
+  animation: arcane-mist-drift 68s ease-in-out infinite alternate;
+}
+
+@keyframes arcane-shadow-drift {
+  from { opacity: 0.74; transform: translate3d(-0.35%, 0.2%, 0); }
+  to { opacity: 0.82; transform: translate3d(0.35%, -0.2%, 0); }
+}
+
+@keyframes arcane-mist-drift {
+  from { opacity: 0.64; transform: translate3d(0.45%, -0.25%, 0); }
+  to { opacity: 0.78; transform: translate3d(-0.45%, 0.25%, 0); }
 }
 
 .pdf-sidebar {
@@ -549,8 +587,10 @@ textarea { accent-color: var(--arcane-cyan); }
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
   }
+
+  .viewer-main::before,
+  .viewer-main::after { will-change: auto; }
 }
