@@ -541,6 +541,7 @@ function App() {
                     key={`scroll-${num}-${language}`}
                     pageData={scrollPages.get(num)!} 
                     isAdmin={isAdmin}
+                    continuousScroll
                     showRuler={false}
                     layoutMode={false}
                     zoomLevel={zoomLevel}

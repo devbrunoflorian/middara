@@ -997,6 +997,7 @@ interface PageRendererProps {
   layoutMode?: boolean;
   onLayoutDirtyChange?: (dirty: boolean) => void;
   zoomLevel?: number;
+  continuousScroll?: boolean;
   focalZoomEnabled?: boolean;
   focalZoomAnchor?: { id: number; pageNumber: number; focal: DocumentFocalPoint; resetPan?: boolean } | null;
   onFocalZoomApplied?: (id: number) => void;
@@ -1375,7 +1376,7 @@ function hasInlineSemanticSymbol(segment: Segment): boolean {
 }
 
 export const PageRenderer: React.FC<PageRendererProps> = ({
-  pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1,
+  pageData, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, continuousScroll = false,
   focalZoomEnabled = false, focalZoomAnchor = null, onFocalZoomApplied,
   onNavigate, language = 'en', symbolAliasPreferences, onPaletteEditorChange,
   onTranslationDraftDirtyChange, pendingEditableNavigation, onRequestEditablePageNavigation,
@@ -1973,8 +1974,21 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   const selectedLayoutHasOwnFrame = !!layoutUnitKey && layoutFrames.has(layoutUnitKey);
 
   return (
-    <div className={`page-renderer ${selectedSpan ? 'editor-open' : ''}`} style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'stretch', overflow: 'hidden' }}>
-      <div ref={containerRef} className="page-stage">
+    <div
+      className={`page-renderer ${continuousScroll ? 'continuous-scroll-page' : ''} ${selectedSpan ? 'editor-open' : ''}`}
+      style={{
+        display: 'flex',
+        width: '100%',
+        height: '100%',
+        alignItems: 'stretch',
+        overflow: continuousScroll ? 'visible' : 'hidden',
+      }}
+    >
+      <div
+        ref={containerRef}
+        className={`page-stage ${continuousScroll ? 'continuous-scroll-page-stage' : ''}`}
+        style={continuousScroll ? { overflow: 'visible', overscrollBehavior: 'auto' } : undefined}
+      >
       <div
         ref={setPageElement}
         className="page-container"

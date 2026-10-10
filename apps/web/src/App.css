@@ -464,6 +464,9 @@ body, html {
 .viewer-main.scroll {
   display: block;
   padding: 40px 0;
+  overflow-x: auto;
+  overflow-y: auto;
+  overscroll-behavior: auto;
 }
 
 .scroll-container {
