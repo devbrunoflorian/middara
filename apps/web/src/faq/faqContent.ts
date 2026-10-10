@@ -1,54 +1,106 @@
-export interface FaqEntry {
-  id: string;
-  category: string;
-  question: string;
-  answer: string;
+import catalogData from './faqCatalog.json';
+
+export type CatalogType = 'faq' | 'errata';
+export type AppLocale = 'en' | 'pt-BR';
+
+export interface CatalogSource {
+  type: 'official-website' | 'official-dropbox';
+  url?: string;
+  snapshotDate?: string;
+  document?: string;
+  date?: string;
+  historicalVersion?: string;
+  pdfPage?: number;
 }
 
-/** Concise English summaries of selected entries from the official FAQ. */
-export const FAQ_SOURCE_URL = 'https://middara.com/pages/faq';
-export const FAQ_REVIEWED_ON = '2026-10-10';
+export interface HistoricalCatalogRecord {
+  id: string;
+  type: CatalogType;
+  category: string;
+  titleEn: string;
+  bodyEn: string;
+  bodyPtBr: string | null;
+  bodyFormat?: 'plain' | 'markdown';
+  severity: 'Critical' | 'Major' | 'Minor' | null;
+  source: CatalogSource;
+  pageReferences: number[];
+  pageReferenceDetails?: Array<{ page: number; sourceEntryId: string; sourceType?: string; sourceDocument?: string; sourceDate?: string; target: 'rulebook-1.2' | 'other-book-or-component' | 'unverified' }>;
+  spoiler: boolean;
+  status?: string;
+  reconciliationStatus?: string;
+  transcription?: string;
+  rulebook12Status?: string;
+  rulebook12Evidence?: { page?: number; source?: string; note?: string } | null;
+  sourceExcerptEn?: string;
+}
 
-export const EN_FAQ_ENTRIES: FaqEntry[] = [
-  {
-    id: 'reach-and-flanking',
-    category: 'Abilities',
-    question: 'How do Reach and flanking work together?',
-    answer: 'Reach can put each attacker within Melee range. To flank, another ally must also be able to attack the same target from the opposite side or corner.',
-  },
-  {
-    id: 'reach-break-attacks',
-    category: 'Abilities',
-    question: 'Can Reach extend a Break Attack?',
-    answer: 'No. Reach does not extend Break Attack range; the official FAQ points to Provoke X for attacks made at a stated range.',
-  },
-  {
-    id: 'sinful-privilege-push-pull',
-    category: 'Abilities',
-    question: 'Whose position controls a push or pull from Sinful Privilege?',
-    answer: 'Measure the movement from the figure using Sinful Privilege, rather than from the ally involved in the effect.',
-  },
-  {
-    id: 'illegal-equipped-items',
-    category: 'General',
-    question: 'What if equipped items no longer form a legal combination?',
-    answer: 'End any current Action or Ability, then unequip items until the equipment combination follows the rules again.',
-  },
-  {
-    id: 'unique-item-availability',
-    category: 'General',
-    question: 'When does an unpurchased Unique Item remain available?',
-    answer: 'An unpurchased item remains available when returning to that same Story Round in the current Adventure. A purchased one is not replaced there until a different Story Round.',
-  },
-];
+export interface CatalogEntry {
+  id: string;
+  type: CatalogType;
+  category: string;
+  titleEn: string;
+  bodyEn: string;
+  bodyPtBr: string | null;
+  bodyFormat: 'plain' | 'markdown';
+  severity: 'Critical' | 'Major' | 'Minor' | null;
+  source: CatalogSource;
+  pageReferences: number[];
+  pageReferenceDetails?: Array<{ page: number; sourceEntryId: string; sourceType?: string; sourceDocument?: string; sourceDate?: string; target: 'rulebook-1.2' | 'other-book-or-component' | 'unverified' }>;
+  spoiler: boolean;
+  status: 'CURRENT_MATCH' | 'CURRENT_MODIFIED' | 'CURRENT_ONLY' | 'HISTORICAL_ONLY' | 'AMBIGUOUS';
+  rulebook12Status?: string;
+  rulebook12Evidence?: { page?: number; source?: string; note?: string } | null;
+  historicalRecords?: HistoricalCatalogRecord[];
+  sourceMetadata?: { sourceTextEn?: string | null; notesEn?: string | null; examplePageUrl?: string | null; componentAffected?: string };
+  transcription?: string;
+  translation?: { 'pt-BR'?: { status: string; titleText?: string | null; text: string | null; usesCanonicalGlossary: boolean } };
+}
 
-export interface ResolvedFaqContent {
-  entries: FaqEntry[];
-  sourceLocale: 'en';
+interface CatalogSnapshot {
+  schemaVersion: number;
+  canonicalSource: { url: string; snapshotDate: string; sourceLocale: 'en'; bundleUrl: string };
+  historicalSources: Array<{
+    file: string;
+    date: string;
+    version: string;
+    type: string;
+    textExtraction?: string;
+    severityDefinitions?: Record<string, string>;
+    official1_2Commitment?: string;
+  }>;
+  errataSourcePreface?: { titleEn: string; bodyEn: string; source: CatalogSource };
+  faqEntries: CatalogEntry[];
+  errataEntries: CatalogEntry[];
+}
+
+const catalog = catalogData as unknown as CatalogSnapshot;
+
+export const FAQ_SOURCE_URL = catalog.canonicalSource.url;
+export const FAQ_REVIEWED_ON = catalog.canonicalSource.snapshotDate;
+
+export interface DisplayContent {
+  title: string;
+  text: string;
+  sourceLocale: 'en' | 'pt-BR';
   isFallback: boolean;
 }
 
-/** English is the source of truth. No automatic translation is applied. */
-export function resolveFaqContent(locale: 'en' | 'pt-BR'): ResolvedFaqContent {
-  return { entries: EN_FAQ_ENTRIES, sourceLocale: 'en', isFallback: locale === 'pt-BR' };
+/** English remains canonical; PT-BR is used only after an entry is reviewed. */
+export function resolveCatalogContent(entry: CatalogEntry, locale: AppLocale): DisplayContent {
+  if (locale === 'pt-BR') {
+    const translation = entry.translation?.['pt-BR'];
+    if (translation?.status === 'reviewed' && translation.text) {
+      return { title: translation.titleText ?? entry.titleEn, text: translation.text, sourceLocale: 'pt-BR', isFallback: !translation.titleText };
+    }
+  }
+
+  return { title: entry.titleEn, text: entry.bodyEn, sourceLocale: 'en', isFallback: locale === 'pt-BR' };
+}
+
+export function getCatalogEntries(type: CatalogType): CatalogEntry[] {
+  return type === 'faq' ? catalog.faqEntries : catalog.errataEntries;
+}
+
+export function getCatalogSnapshot(): CatalogSnapshot {
+  return catalog;
 }
