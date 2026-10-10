@@ -10,6 +10,8 @@ interface ShellNavigationProps {
   active: ShellDestination;
   onSelect: (destination: ShellDestination) => void;
   workspaceEditing?: boolean;
+  openRequest?: number;
+  onExpandedChange?: (expanded: boolean) => void;
 }
 
 const destinations: Array<{ id: ShellDestination; label: string; icon: typeof BookOpen }> = [
@@ -19,17 +21,29 @@ const destinations: Array<{ id: ShellDestination; label: string; icon: typeof Bo
   { id: 'contents', label: 'Índice', icon: ListTree },
 ];
 
-export function ShellNavigation({ active, onSelect, workspaceEditing = false }: ShellNavigationProps) {
+export function ShellNavigation({ active, onSelect, workspaceEditing = false, openRequest = 0, onExpandedChange }: ShellNavigationProps) {
   const [isNarrow, setIsNarrow] = useState(() => typeof window !== 'undefined' && window.matchMedia(touchDrawerQuery).matches);
   const [hoverOpen, setHoverOpen] = useState(false);
   const [clickOpen, setClickOpen] = useState(false);
   const [focusOpen, setFocusOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeTimerRef = useRef<number | null>(null);
+  const handledOpenRequestRef = useRef(openRequest);
   const panelRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstItemRef = useRef<HTMLButtonElement>(null);
   const expanded = isNarrow ? mobileOpen : clickOpen || (!workspaceEditing && (hoverOpen || focusOpen));
+
+  useEffect(() => {
+    if (handledOpenRequestRef.current === openRequest) return;
+    handledOpenRequestRef.current = openRequest;
+    if (isNarrow) setMobileOpen(true);
+    else setClickOpen(true);
+  }, [isNarrow, openRequest]);
+
+  useEffect(() => {
+    onExpandedChange?.(expanded);
+  }, [expanded, onExpandedChange]);
 
   useEffect(() => {
     const query = window.matchMedia(touchDrawerQuery);
@@ -125,7 +139,7 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false }: 
   };
 
   return (
-    <div className="global-nav-slot">
+    <div className={`global-nav-slot ${expanded ? 'is-expanded' : ''} ${workspaceEditing ? 'is-editing' : ''}`}>
       {isNarrow && mobileOpen && (
         <button
           className="global-nav-backdrop"
@@ -137,7 +151,7 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false }: 
       <aside
         ref={panelRef}
         id="global-navigation"
-        className={`global-nav-panel arcane-glass-surface ${expanded ? 'is-expanded' : ''} ${isNarrow ? 'is-mobile' : ''}`}
+        className={`global-nav-panel arcane-glass-surface ${expanded ? 'is-expanded' : ''} ${isNarrow ? 'is-mobile' : ''} ${workspaceEditing ? 'is-editing' : ''}`}
         aria-label="Global navigation"
         onMouseEnter={() => {
           if (isNarrow || workspaceEditing) return;

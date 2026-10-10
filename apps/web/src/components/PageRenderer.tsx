@@ -1431,7 +1431,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     const workspace = workspaceRef.current;
     const workspaceWidth = workspace?.clientWidth ?? 900;
     const viewerWidth = workspace?.closest<HTMLElement>('.viewer-main')?.clientWidth ?? workspaceWidth;
-    const overlayMode = viewerWidth <= 1024;
+    const overlayMode = viewerWidth <= 950;
     const min = overlayMode ? Math.min(280, Math.max(0, viewerWidth - 88)) : 280;
     const availableWidth = overlayMode ? viewerWidth - 88 : workspaceWidth - 480;
     const dualPanelLimit = faqOpen && overlayMode ? Math.min(320, viewerWidth * 0.36) : 560;

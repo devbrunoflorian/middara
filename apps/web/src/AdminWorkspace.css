@@ -5,6 +5,60 @@
   container-type: inline-size;
 }
 
+/* Editing gives the whole left rail back to the document. Navigation remains
+   available through its small fixed launcher and only opens on deliberate use. */
+.app-container.rich-editor-open { --left-nav-width: 0px; }
+
+.global-nav-slot.is-editing {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 2200;
+  flex: none;
+  width: 0;
+  min-width: 0;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+  transition: none;
+}
+
+.global-nav-panel.is-editing:not(.is-expanded) {
+  display: none;
+}
+
+.global-nav-panel.is-editing.is-expanded:not(.is-mobile) {
+  position: fixed;
+  inset: 8px auto 8px 8px;
+  width: 216px;
+  height: auto;
+  max-height: calc(100dvh - 16px);
+  border-radius: 5px;
+}
+
+@media (max-width: 700px), (hover: none) and (pointer: coarse) {
+  .global-nav-slot.is-editing {
+    inset: 0 auto auto 0;
+  }
+
+  .global-nav-panel.is-editing.is-mobile.is-expanded {
+    position: fixed;
+    inset: max(8px, env(safe-area-inset-top, 0px)) auto max(8px, env(safe-area-inset-bottom, 0px)) 0;
+    width: min(260px, calc(100vw - 64px));
+    max-height: none;
+    border-radius: 0 5px 5px 0;
+  }
+}
+
+.workspace-navigation-toggle { margin-bottom: 4px; }
+
+.pdf-sidebar {
+  box-sizing: border-box;
+  align-self: stretch;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+}
+
 /* Keep the drawer above fixed Admin overlays, which are rendered into the
    application stacking context so they stay above the page but cannot cover
    navigation or reference content. */
@@ -81,7 +135,10 @@
   outline-offset: -2px;
 }
 
-@container viewer-main (max-width: 1024px) {
+/* Container queries use the viewer's content box, while the JS sizing logic
+   uses its client box (which includes stage padding). Keep the breakpoint
+   aligned with the 950px outer workspace threshold. */
+@container viewer-main (max-width: 886px) {
   .page-renderer.editor-open {
     --rich-editor-effective-width: min(var(--rich-editor-panel-width, 420px), 560px, calc(100cqw - 88px));
   }
@@ -113,7 +170,7 @@
 
 /* On mid-size screens FAQ becomes a temporary glass sheet over the viewer.
    Its measured width is reduced only while Admin is also active. */
-@media (min-width: 701px) and (max-width: 1600px) {
+@media (min-width: 701px) and (max-width: 1440px) {
   .app-container.admin-mode.faq-open {
     --faq-panel-width: min(380px, calc(100vw - 120px));
   }
@@ -222,5 +279,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rse-resize-handle::before { transition: none; }
+  .rse-resize-handle::before,
+  .global-nav-slot { transition: none; }
 }

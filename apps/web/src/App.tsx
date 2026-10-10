@@ -8,7 +8,7 @@ import { ShellNavigation, type ShellDestination } from './components/ShellNaviga
 import { ArcaneGlassDefinitions } from './components/ArcaneGlassDefinitions';
 import { AtmosphericParticles } from './components/AtmosphericParticles';
 import { 
-  ChevronLeft, ChevronRight, Edit3, 
+  ChevronLeft, ChevronRight, Edit3, Menu,
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
   Ruler, Move, Shapes
 } from 'lucide-react';
@@ -157,6 +157,8 @@ function App() {
   const [isSymbolPaletteOpen, setIsSymbolPaletteOpen] = useState(false);
   const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [faqActiveType, setFaqActiveType] = useState<'faq' | 'errata'>('faq');
+  const [navigationOpenRequest, setNavigationOpenRequest] = useState(0);
+  const [isNavigationExpanded, setIsNavigationExpanded] = useState(false);
   const [symbolAliasPreferences, setSymbolAliasPreferences] = useState<SymbolAliasPreferences>(getDefaultSymbolAliasPreferences);
   const [symbolAliasSettingsLoading, setSymbolAliasSettingsLoading] = useState(true);
   const [paletteEditorState, setPaletteEditorState] = useState<Pick<AdminSymbolPaletteEditorState, 'context' | 'canInsert' | 'canUndo' | 'status'> & { editorKey: string } | null>(null);
@@ -504,6 +506,8 @@ function App() {
       <ShellNavigation
         active={isFaqOpen ? faqActiveType : currentPage === 3 ? 'contents' : 'rulebook'}
         workspaceEditing={isRichEditorOpen}
+        openRequest={navigationOpenRequest}
+        onExpandedChange={setIsNavigationExpanded}
         onSelect={(destination: ShellDestination) => {
           if (destination === 'faq' || destination === 'errata') {
             setFaqActiveType(destination);
@@ -599,6 +603,19 @@ function App() {
       {/* Vertical Sidebar (Moved to Right) */}
       <aside className="pdf-sidebar">
         <div className="toolbar-section top">
+          {isRichEditorOpen && (
+            <button
+              type="button"
+              className={`tool-btn workspace-navigation-toggle ${isNavigationExpanded ? 'active' : ''}`}
+              aria-label={language === 'pt-BR' ? 'Abrir navegação' : 'Open navigation'}
+              aria-controls="global-navigation"
+              aria-expanded={isNavigationExpanded}
+              title={language === 'pt-BR' ? 'Navegação' : 'Navigation'}
+              onClick={() => setNavigationOpenRequest(request => request + 1)}
+            >
+              <Menu size={16} aria-hidden="true" />
+            </button>
+          )}
           {/* View Toggles */}
           <div className="tool-group">
             <button 

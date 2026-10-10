@@ -95,14 +95,14 @@ describe('application shell UX', () => {
     const panel = container.querySelector<HTMLElement>('.global-nav-panel')!;
     const slot = container.querySelector<HTMLElement>('.global-nav-slot')!;
 
-    expect(slot.classList.contains('is-pinned')).toBe(false);
+    expect(slot.classList.contains('is-expanded')).toBe(false);
     act(() => fireEvent.mouseOver(panel));
     expect(panel.classList.contains('is-expanded')).toBe(true);
-    expect(slot.classList.contains('is-pinned')).toBe(false);
+    expect(slot.classList.contains('is-expanded')).toBe(true);
 
     act(() => fireEvent.click(queries.getByRole('button', { name: 'Toggle navigation' })));
     expect(panel.classList.contains('is-expanded')).toBe(true);
-    expect(slot.classList.contains('is-pinned')).toBe(false);
+    expect(slot.classList.contains('is-expanded')).toBe(true);
     act(() => fireEvent.pointerDown(document.body));
     expect(panel.classList.contains('is-expanded')).toBe(false);
 
@@ -143,7 +143,31 @@ describe('application shell UX', () => {
     act(() => fireEvent.click(queries.getByRole('button', { name: 'Open navigation' })));
     act(() => fireEvent.keyDown(window, { key: 'Escape' }));
     expect(container.querySelector('.global-nav-panel')?.classList.contains('is-expanded')).toBe(false);
-    expect(container.querySelector('.global-nav-slot')?.classList.contains('is-pinned')).toBe(false);
+    expect(container.querySelector('.global-nav-slot')?.classList.contains('is-expanded')).toBe(false);
+  });
+
+  it('keeps editing navigation out of the workspace until the dock requests it', async () => {
+    const onSelect = vi.fn();
+    const onExpandedChange = vi.fn();
+    const queries = mount(<ShellNavigation active="rulebook" onSelect={onSelect} workspaceEditing openRequest={0} onExpandedChange={onExpandedChange} />);
+    const slot = container.querySelector<HTMLElement>('.global-nav-slot')!;
+    const panel = container.querySelector<HTMLElement>('.global-nav-panel')!;
+
+    expect(slot.classList.contains('is-editing')).toBe(true);
+    expect(slot.classList.contains('is-expanded')).toBe(false);
+    expect(panel.classList.contains('is-editing')).toBe(true);
+    expect(panel.classList.contains('is-expanded')).toBe(false);
+
+    await act(async () => root.render(<ShellNavigation active="rulebook" onSelect={onSelect} workspaceEditing openRequest={1} onExpandedChange={onExpandedChange} />));
+    expect(panel.classList.contains('is-expanded')).toBe(true);
+    expect(slot.classList.contains('is-expanded')).toBe(true);
+    expect(onExpandedChange).toHaveBeenLastCalledWith(true);
+    act(() => fireEvent.keyDown(window, { key: 'Escape' }));
+    expect(panel.classList.contains('is-expanded')).toBe(false);
+
+    await act(async () => root.render(<ShellNavigation active="rulebook" onSelect={onSelect} workspaceEditing openRequest={2} onExpandedChange={onExpandedChange} />));
+    act(() => fireEvent.click(queries.getByRole('button', { name: 'Errata' })));
+    expect(onSelect).toHaveBeenCalledWith('errata');
   });
 
   it('keeps FAQ answers collapsed by default, expands multiple entries, and resets them when search changes', async () => {
