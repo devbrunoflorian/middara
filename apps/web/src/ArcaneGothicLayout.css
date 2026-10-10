@@ -21,7 +21,7 @@
 }
 
 .app-container {
-  --faq-panel-width: min(490px, calc(100vw - var(--arcane-dock-width) - 16px));
+  --faq-panel-width: min(490px, calc(100vw - var(--left-nav-width, 52px) - var(--arcane-dock-width) - 16px));
 }
 
 .pdf-sidebar {
@@ -70,7 +70,7 @@
   }
 
   .app-container {
-    --faq-panel-width: min(450px, calc(100vw - var(--arcane-dock-width)));
+    --faq-panel-width: calc(100vw - var(--arcane-dock-width, 52px));
   }
 
   .page-renderer.editor-open .page-stage {

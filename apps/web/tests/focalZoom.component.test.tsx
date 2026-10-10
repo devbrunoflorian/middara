@@ -124,6 +124,35 @@ describe('focal zoom math', () => {
     expect(105 - 80 + focal.pageY * 1.5 + residualPanY).toBeCloseTo(focal.viewportY, 5);
   });
 
+  it('recenters fitting axes in the new viewport after a scrollbar appears, while preserving overflow axes', () => {
+    const viewportAfterVerticalScrollbar = {
+      left: 100,
+      top: 80,
+      clientWidth: 985,
+      clientHeight: 500,
+      scrollLeft: 0,
+      scrollTop: 200,
+      scrollWidth: 985,
+      scrollHeight: 1200,
+    };
+    const result = focalScrollOffsets({
+      viewport: viewportAfterVerticalScrollbar,
+      // The 400px page is auto-centered in the reduced 985px client width.
+      page: { left: 392.5, top: -120, width: 400, height: 1000 },
+      // X still fits; Y overflows. This focal point was captured against the
+      // wider viewport before the vertical scrollbar appeared.
+      focal: { pageX: 150, pageY: 400, viewportX: 500, viewportY: 250 },
+      pageWidth: 400,
+      pageHeight: 800,
+      centerAxesWhenFit: true,
+    });
+
+    expect(result.requestedScrollLeft).toBeCloseTo(0);
+    expect(result.scrollLeft).toBe(0);
+    expect(result.requestedScrollTop).toBeCloseTo(250);
+    expect(result.scrollTop).toBe(250);
+  });
+
   it('clamps zoom at the existing minimum and maximum without invalid numbers', () => {
     expect(clampViewerZoom(-100)).toBe(MIN_VIEWER_ZOOM);
     expect(clampViewerZoom(Number.NaN)).toBe(MIN_VIEWER_ZOOM);

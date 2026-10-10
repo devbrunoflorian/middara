@@ -4,12 +4,12 @@ import { AdminSymbolPalette, type AdminSymbolPaletteEditorState } from './compon
 import { LocalSyncRecoveryControl } from './components/LocalSyncRecoveryControl';
 import { DevelopmentEnvironmentStatus } from './components/DevelopmentEnvironmentStatus';
 import { FaqDrawer } from './components/FaqDrawer';
-import { MiddaraMark } from './components/MiddaraMark';
+import { ShellNavigation, type ShellDestination } from './components/ShellNavigation';
 import { AtmosphericParticles } from './components/AtmosphericParticles';
 import { 
   ChevronLeft, ChevronRight, Edit3, 
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
-  CircleHelp, Ruler, Move
+  Ruler, Move
 } from 'lucide-react';
 import './App.css';
 import './ArcaneGothic.css';
@@ -141,7 +141,7 @@ function App() {
   // Start at 200% relative to the measured fit scale; Fit to Screen resets this multiplier to 100%.
   const [zoomLevel, setZoomLevel] = useState<number>(2);
   const zoomLevelRef = useRef(zoomLevel);
-  const [focalZoomAnchor, setFocalZoomAnchor] = useState<{ id: number; pageNumber: number; focal: DocumentFocalPoint; resetPan?: boolean } | null>(null);
+  const [focalZoomAnchor, setFocalZoomAnchor] = useState<{ id: number; pageNumber: number; focal: DocumentFocalPoint; resetPan?: boolean; centerWhenFits?: boolean } | null>(null);
   const focalZoomAnchorIdRef = useRef(0);
   const pendingWheelZoomRef = useRef<{ zoomLevel: number; pageNumber: number; focal: DocumentFocalPoint } | null>(null);
   const wheelAnimationFrameRef = useRef<number | null>(null);
@@ -150,6 +150,8 @@ function App() {
   const [language, setLanguage] = useState<'en' | 'pt-BR'>('en');
   const [isSymbolPaletteOpen, setIsSymbolPaletteOpen] = useState(false);
   const [isFaqOpen, setIsFaqOpen] = useState(false);
+  const [faqActiveType, setFaqActiveType] = useState<'faq' | 'errata'>('faq');
+  const [isNavigationPinned, setIsNavigationPinned] = useState(false);
   const [symbolAliasPreferences, setSymbolAliasPreferences] = useState<SymbolAliasPreferences>(getDefaultSymbolAliasPreferences);
   const [symbolAliasSettingsLoading, setSymbolAliasSettingsLoading] = useState(true);
   const [paletteEditorState, setPaletteEditorState] = useState<Pick<AdminSymbolPaletteEditorState, 'context' | 'canInsert' | 'canUndo' | 'status'> & { editorKey: string } | null>(null);
@@ -216,6 +218,7 @@ function App() {
         pageNumber: Number(page.dataset.pdfPageNumber),
         focal,
         resetPan,
+        centerWhenFits: !resetPan,
       });
     } else {
       setFocalZoomAnchor(null);
@@ -469,20 +472,8 @@ function App() {
   };
 
   return (
-    <div className={`app-container ${isAdmin ? 'admin-mode' : ''} ${isFaqOpen ? 'faq-open' : ''} theme-dark`}>
+    <div className={`app-container ${isAdmin ? 'admin-mode' : ''} ${isFaqOpen ? 'faq-open' : ''} ${isNavigationPinned ? 'nav-is-pinned' : ''} theme-dark`}>
       <AtmosphericParticles />
-      <div className="app-shell-faq-actions">
-        <button
-          className="shell-faq-trigger"
-          type="button"
-          onClick={() => setIsFaqOpen(true)}
-          title={language === 'pt-BR' ? 'Abrir FAQ oficial' : 'Open official FAQ'}
-          aria-label={language === 'pt-BR' ? 'Abrir FAQ oficial' : 'Open official FAQ'}
-        >
-          <CircleHelp size={14} />
-          <span>FAQ</span>
-        </button>
-      </div>
       {import.meta.env.DEV && (
         <div className="app-shell-header-actions">
           <DevelopmentEnvironmentStatus
@@ -494,6 +485,20 @@ function App() {
           />
         </div>
       )}
+      <ShellNavigation
+        pinned={isNavigationPinned}
+        active={isFaqOpen ? faqActiveType : currentPage === 3 ? 'contents' : 'rulebook'}
+        onPinnedChange={setIsNavigationPinned}
+        onSelect={(destination: ShellDestination) => {
+          if (destination === 'faq' || destination === 'errata') {
+            setFaqActiveType(destination);
+            setIsFaqOpen(true);
+            return;
+          }
+          setIsFaqOpen(false);
+          if (destination === 'contents') navigateToPage(3);
+        }}
+      />
       {/* Main Viewer Area */}
       <main className={`viewer-main ${viewMode}`} ref={mainRef}>
         {viewMode === 'single' ? (
@@ -569,12 +574,6 @@ function App() {
       {/* Vertical Sidebar (Moved to Right) */}
       <aside className="pdf-sidebar">
         <div className="toolbar-section top">
-          <div className="brand" title="Middara Rulebook" role="img" aria-label="Middara">
-            <MiddaraMark className="brand-icon" />
-            <h1>Middara</h1>
-          </div>
-          <div className="divider"></div>
-          
           {/* View Toggles */}
           <div className="tool-group">
             <button 
@@ -701,7 +700,14 @@ function App() {
           )}
         </div>
       </aside>
-      <FaqDrawer language={language} open={isFaqOpen} onOpenChange={setIsFaqOpen} onNavigateToPage={navigateToPage} />
+      <FaqDrawer
+        language={language}
+        open={isFaqOpen}
+        activeType={faqActiveType}
+        onActiveTypeChange={setFaqActiveType}
+        onOpenChange={setIsFaqOpen}
+        onNavigateToPage={navigateToPage}
+      />
       {isAdmin && (
         <AdminSymbolPalette
           language={language}

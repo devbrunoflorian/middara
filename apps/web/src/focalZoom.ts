@@ -103,8 +103,18 @@ export function focalScrollOffsets(input: {
   focal: DocumentFocalPoint;
   pageWidth: number;
   pageHeight: number;
+  /** Recenter an axis after zoom when the page still fits in that axis. */
+  centerAxesWhenFit?: boolean;
 }): FocalScrollResult {
-  const { viewport, page, focal, pageWidth, pageHeight } = input;
+  const { viewport, page, pageWidth, pageHeight } = input;
+  const focal = input.centerAxesWhenFit
+    ? {
+      pageX: page.width <= viewport.clientWidth + 0.5 ? pageWidth / 2 : input.focal.pageX,
+      pageY: page.height <= viewport.clientHeight + 0.5 ? pageHeight / 2 : input.focal.pageY,
+      viewportX: page.width <= viewport.clientWidth + 0.5 ? viewport.clientWidth / 2 : input.focal.viewportX,
+      viewportY: page.height <= viewport.clientHeight + 0.5 ? viewport.clientHeight / 2 : input.focal.viewportY,
+    }
+    : input.focal;
   const scaleX = page.width / pageWidth;
   const scaleY = page.height / pageHeight;
   const pageOriginX = page.left - viewport.left - (viewport.clientLeft ?? 0);

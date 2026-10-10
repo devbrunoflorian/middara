@@ -999,7 +999,7 @@ interface PageRendererProps {
   zoomLevel?: number;
   continuousScroll?: boolean;
   focalZoomEnabled?: boolean;
-  focalZoomAnchor?: { id: number; pageNumber: number; focal: DocumentFocalPoint; resetPan?: boolean } | null;
+  focalZoomAnchor?: { id: number; pageNumber: number; focal: DocumentFocalPoint; resetPan?: boolean; centerWhenFits?: boolean } | null;
   onFocalZoomApplied?: (id: number) => void;
   onNavigate?: (pageNum: number) => void;
   language?: 'en' | 'pt-BR';
@@ -1738,6 +1738,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       focal,
       pageWidth: pageData.width,
       pageHeight: pageData.height,
+      centerAxesWhenFit: focalZoomAnchor.centerWhenFits,
     });
     stage.scrollLeft = offsets.scrollLeft;
     stage.scrollTop = offsets.scrollTop;

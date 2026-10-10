@@ -16,6 +16,8 @@ import {
 interface FaqDrawerProps {
   language: AppLocale;
   open: boolean;
+  activeType?: CatalogType;
+  onActiveTypeChange?: (type: CatalogType) => void;
   onOpenChange: (open: boolean) => void;
   onNavigateToPage: (page: number) => boolean;
 }
@@ -50,9 +52,10 @@ function statusLabel(entry: CatalogEntry, isPortuguese: boolean): string | null 
   return null;
 }
 
-export function FaqDrawer({ language, open, onOpenChange, onNavigateToPage }: FaqDrawerProps) {
+export function FaqDrawer({ language, open, activeType: requestedActiveType, onActiveTypeChange, onOpenChange, onNavigateToPage }: FaqDrawerProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [activeType, setActiveType] = useState<CatalogType>('faq');
+  const [uncontrolledActiveType, setUncontrolledActiveType] = useState<CatalogType>('faq');
+  const activeType = requestedActiveType ?? uncontrolledActiveType;
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
   const [severity, setSeverity] = useState('all');
@@ -71,6 +74,12 @@ export function FaqDrawer({ language, open, onOpenChange, onNavigateToPage }: Fa
     if (!open && dialog.open) dialog.close();
   }, [open]);
 
+  useEffect(() => {
+    setCategory('all');
+    setSeverity('all');
+    setOpenEntryIds(new Set());
+  }, [activeType]);
+
   const categories = useMemo(() => [...new Set(entries.map(entry => entry.category))].sort((a, b) => a.localeCompare(b)), [entries]);
   const filteredEntries = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase();
@@ -83,10 +92,8 @@ export function FaqDrawer({ language, open, onOpenChange, onNavigateToPage }: Fa
   }, [activeType, category, entries, language, query, severity]);
 
   const handleTabChange = (type: CatalogType) => {
-    setActiveType(type);
-    setCategory('all');
-    setSeverity('all');
-    setOpenEntryIds(new Set());
+    setUncontrolledActiveType(type);
+    onActiveTypeChange?.(type);
   };
 
   const toggleEntry = (entryId: string) => {
