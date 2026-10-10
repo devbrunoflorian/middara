@@ -837,7 +837,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         {/* Header */}
         <div className="rse-header">
           <div>
-            <h3>✏️ Rich Block Editor</h3>
+            <h3>Rich Block Editor</h3>
             <span className="rse-subtitle">
               Page {pageNumber} · {editorLabel ? editorLabel : <code>{spanKey}</code>}
             </span>
