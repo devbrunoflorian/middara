@@ -182,29 +182,11 @@ body, html {
 }
 
 .brand-icon {
-  width: 25px;
-  height: 25px;
-  color: #d8c7a5;
-  filter: drop-shadow(0 0 5px rgba(185, 154, 220, 0.2));
-}
-
-.middara-mark-frame {
-  stroke: currentColor;
-  stroke-width: 1.05;
-  stroke-linejoin: round;
-  opacity: 0.72;
-}
-
-.middara-mark-letter {
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: square;
-  stroke-linejoin: miter;
-}
-
-.middara-mark-sigil {
-  fill: #aa8aca;
-  opacity: 0.9;
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 3px rgba(26, 190, 245, 0.16));
 }
 
 .brand h1 {
