@@ -1,7 +1,7 @@
 # Página 005 — Component reference (no page-wide title)
 
 - **Origem EN:** transcrita diretamente do PDF oficial e cotejada com a página renderizada.
-- **Fidelidade EN:** aprovada anteriormente em revisão visual PDF↔app; referência em `docs/project-progress/CONTINUE-HERE.md` e no registro de auditoria do livro.
+- **Fidelidade EN:** aprovada anteriormente em revisão visual PDF↔app; consulte o [handoff atual](../../../PROJECT-HANDOFF.md) e o [índice de evidências do projeto](../../project-progress/README.md) para referências de auditoria.
 - **PT-BR:** primeiro rascunho abaixo; ainda precisa de preview em português.
 - **Escopo desta tradução:** os 12 blocos explicativos impressos nas duas colunas. Nomes e regras dentro das cartas/tokens ilustrados ficam fora desta tradução e exigem fluxo de localização de arte.
 - **Hierarquia:** cabeçalhos de seção preservados em negrito; ênfases em negrito/itálico e referências de página mantidas.

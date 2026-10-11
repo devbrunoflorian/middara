@@ -1,7 +1,7 @@
 # Página 004 — Summary of Components
 
 - **Origem EN:** transcrita diretamente do PDF oficial e cotejada com a página renderizada.
-- **Fidelidade EN:** aprovada em revisão visual anterior PDF↔app; os headings de 12 pt Cinzel têm o peso visual local já corrigido. Ver `docs/project-progress/CONTINUE-HERE.md` e `docs/project-progress/2026-10-01-book-wide-typographic-units.md`.
+- **Fidelidade EN:** aprovada em revisão visual anterior PDF↔app; os headings de 12 pt Cinzel têm o peso visual local já corrigido. Ver o [handoff atual](../../../PROJECT-HANDOFF.md) e o registro de [unidades tipográficas do livro](../../project-progress/2026-10-01-book-wide-typographic-units.md).
 - **PT-BR:** rascunho dos 14 blocos editoriais; preview PT ainda pendente.
 - **Hierarquia:** título `Summary of Components` em EsmeraldaPro 30 pt; headings de seção em Cinzel 12 pt, peso visual forte; corpo em Optima 10 pt. Preservar os headings em negrito e as ênfases inline.
 - **Arte:** nomes e regras legíveis dentro das cartas ilustradas, incluindo o nome Nightingale Arsen, pertencem às imagens. Este draft não os traduz nem altera; encaminhar para localização de arte.
