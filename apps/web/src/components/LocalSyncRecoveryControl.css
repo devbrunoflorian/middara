@@ -115,6 +115,7 @@
 
 .local-sync-record-list li {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -164,6 +165,106 @@
   font-size: 11px;
 }
 
+.local-sync-conflict-review {
+  flex: 1 0 100%;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #96764c66;
+  border-radius: 8px;
+  background: #110f1b66;
+}
+
+.local-sync-conflict-review > summary {
+  color: #f2d9a6;
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.local-sync-diff-paths {
+  margin: 10px 0;
+  color: #d6c3a0;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.local-sync-version-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.local-sync-version-grid section {
+  min-width: 0;
+}
+
+.local-sync-version-grid h3 {
+  margin: 0 0 5px;
+  color: #c9c0d7;
+  font-size: 11px;
+}
+
+.local-sync-version-grid pre {
+  max-height: 230px;
+  margin: 0;
+  padding: 8px;
+  overflow: auto;
+  border: 1px solid #ffffff20;
+  border-radius: 6px;
+  background: #090a12;
+  color: #ddd8e8;
+  font: 10px/1.4 ui-monospace, Consolas, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.local-sync-backup-button,
+.local-sync-resolution-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  margin-top: 9px;
+  padding: 6px 10px;
+  border: 1px solid #5b5d75;
+  border-radius: 7px;
+  background: #292a3a;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+
+.local-sync-backup-confirmation {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 9px;
+  color: #c9c5d4;
+  font-size: 11px;
+}
+
+.local-sync-backup-confirmation input {
+  margin-top: 2px;
+}
+
+.local-sync-resolution-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.local-sync-conflict-review > small {
+  display: block;
+  margin-top: 8px;
+  color: #b9bacb;
+}
+
+.local-sync-resolution-actions button:disabled,
+.local-sync-backup-button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
 .local-sync-notice {
   margin-top: 12px !important;
   color: #c4b5fd !important;
@@ -193,6 +294,10 @@
 }
 
 @media (max-width: 480px) {
+  .local-sync-version-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .local-sync-dialog-actions {
     flex-direction: column;
   }

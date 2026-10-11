@@ -46,7 +46,51 @@ export function saveLocalLayoutFrames(
   frames: Map<string, LayoutFrame>,
 ): boolean {
   try {
-    localStorage.setItem(layoutFrameStorageKey(pageNumber, language), JSON.stringify(Object.fromEntries(frames)));
+    const key = layoutFrameStorageKey(pageNumber, language);
+    const raw = localStorage.getItem(key);
+    const records: Record<string, LayoutFrame> = raw ? JSON.parse(raw) : {};
+    if (!records || typeof records !== 'object' || Array.isArray(records)) return false;
+    for (const [unitKey, frame] of frames) records[unitKey] = frame;
+    localStorage.setItem(key, JSON.stringify(records));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** Persist one frame without replacing sibling local frames with server-overlaid state. */
+export function saveLocalLayoutFrame(
+  pageNumber: number,
+  language: LayoutLanguage,
+  unitKey: string,
+  frame: LayoutFrame,
+  storage: Pick<Storage, 'getItem' | 'setItem'> = localStorage,
+): boolean {
+  try {
+    const key = layoutFrameStorageKey(pageNumber, language);
+    const raw = storage.getItem(key);
+    const records: Record<string, LayoutFrame> = raw ? JSON.parse(raw) : {};
+    if (!records || typeof records !== 'object' || Array.isArray(records)) return false;
+    records[unitKey] = frame;
+    storage.setItem(key, JSON.stringify(records));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function removeLocalLayoutFrame(
+  pageNumber: number,
+  language: LayoutLanguage,
+  unitKey: string,
+): boolean {
+  try {
+    const key = layoutFrameStorageKey(pageNumber, language);
+    const raw = localStorage.getItem(key);
+    const records: Record<string, LayoutFrame> = raw ? JSON.parse(raw) : {};
+    if (!records || typeof records !== 'object' || Array.isArray(records)) return false;
+    delete records[unitKey];
+    localStorage.setItem(key, JSON.stringify(records));
     return true;
   } catch {
     return false;

@@ -4,7 +4,7 @@ import type { AdminSymbolPaletteEditorState } from './AdminSymbolPalette';
 import { AdminRuler } from './AdminRuler';
 import { AdminLayoutFrameEditor } from './AdminLayoutFrameEditor';
 import type { LayoutAlignmentGuide, SnapFrameRect } from '../layoutFrameSnapping';
-import { deleteLayoutFrame, fetchLayoutFrames, loadLocalLayoutFrames, saveLayoutFrame, saveLocalLayoutFrames, type LayoutLanguage } from '../layoutFrames';
+import { deleteLayoutFrame, fetchLayoutFrames, loadLocalLayoutFrames, removeLocalLayoutFrame, saveLayoutFrame, saveLocalLayoutFrame, type LayoutLanguage } from '../layoutFrames';
 import { getSemanticSymbol, resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences } from '../symbols/semanticSymbols';
 import { SemanticSymbol } from '../symbols/SemanticSymbol';
 import { sourceSpanRuns } from '../symbols/sourceRuns';
@@ -24,9 +24,10 @@ import {
   dispatchLocalPersistenceChanged,
   loadLocalOverrides,
   LOCAL_PERSISTENCE_CHANGED_EVENT,
+  removeLocalOverrideEntry,
   persistOverrideToPayload,
   persistedOverridesEqual,
-  saveLocalOverrides,
+  saveLocalOverrideEntry,
   type LocalSyncState,
 } from '../localPersistence';
 
@@ -1680,12 +1681,19 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     setIsSavingLayout(true);
     const next = new Map(layoutFrames);
     next.set(layoutUnitKey, layoutDraft);
+    const savedLocally = saveLocalLayoutFrame(pageData.page_number, language, layoutUnitKey, layoutDraft);
+    if (!savedLocally) {
+      setLayoutStatus('Falha ao gravar localmente; o Payload não será alterado. O rascunho continua aberto.');
+      setIsSavingLayout(false);
+      return;
+    }
     setLayoutFrames(next);
-    const savedLocally = saveLocalLayoutFrames(pageData.page_number, language, next);
     setLayoutStatus(savedLocally
       ? 'SALVO LOCALMENTE / SINCRONIZAÇÃO PENDENTE.'
-      : 'A cópia local falhou; aguardando confirmação do Payload.');
-    const savedRemotely = await saveLayoutFrame({ unitKey: layoutUnitKey, pageNumber: pageData.page_number, language, frame: layoutDraft });
+      : 'Falha ao gravar localmente; o Payload não será alterado.');
+    const savedRemotely = savedLocally
+      ? await saveLayoutFrame({ unitKey: layoutUnitKey, pageNumber: pageData.page_number, language, frame: layoutDraft })
+      : false;
     if (savedLocally) dispatchLocalPersistenceChanged({
       kind: 'frame', language, unitKey: layoutUnitKey, pageNumber: pageData.page_number,
       data: layoutDraft, confirmed: savedRemotely,
@@ -1695,7 +1703,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     onLayoutDirtyChange?.(false);
     setLayoutStatus(savedRemotely ? 'SALVO / PAYLOAD CONFIRMADO.' : savedLocally
       ? 'ERRO DE SINCRONIZAÇÃO — moldura preservada localmente; Payload não confirmou.'
-      : 'ERRO DE SINCRONIZAÇÃO — falha ao salvar localmente e Payload não confirmou.');
+      : 'ERRO — gravação local falhou; Payload permaneceu sem alteração.');
     setIsSavingLayout(false);
   }, [layoutUnitKey, layoutDraft, layoutDirty, isSavingLayout, layoutFrames, pageData.page_number, language, onLayoutDirtyChange]);
 
@@ -1705,8 +1713,13 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     setIsSavingLayout(true);
     const next = new Map(layoutFrames);
     next.delete(layoutUnitKey);
+    const removedLocally = removeLocalLayoutFrame(pageData.page_number, language, layoutUnitKey);
+    if (!removedLocally) {
+      setLayoutStatus('Falha ao remover localmente; o Payload não será alterado. A moldura continua selecionada.');
+      setIsSavingLayout(false);
+      return;
+    }
     setLayoutFrames(next);
-    saveLocalLayoutFrames(pageData.page_number, language, next);
     const removedRemotely = await deleteLayoutFrame(layoutUnitKey, language);
     dispatchLocalPersistenceChanged();
     const inherited = inheritedLayoutFrames.get(layoutUnitKey)
@@ -1715,7 +1728,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     setLayoutDraft(inherited ? { ...inherited } : null);
     setLayoutDirty(false);
     onLayoutDirtyChange?.(false);
-    setLayoutStatus(removedRemotely ? 'PAYLOAD CONFIRMADO — moldura PT-BR removida; herdando EN.' : 'ERRO DE SINCRONIZAÇÃO — a remoção local não foi confirmada no Payload.');
+    setLayoutStatus(removedRemotely ? 'PAYLOAD CONFIRMADO — moldura PT-BR removida; herdando EN.' : removedLocally
+      ? 'ERRO DE SINCRONIZAÇÃO — Payload ainda não confirmou a remoção.'
+      : 'ERRO — remoção local falhou; Payload permaneceu sem alteração.');
     setIsSavingLayout(false);
   }, [layoutUnitKey, language, layoutFrames, isSavingLayout, pageData, inheritedLayoutFrames, onLayoutDirtyChange]);
 
@@ -1963,13 +1978,15 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     } else if (selectedSpan) {
       nextMap.delete(selectedSpan.spanKey);
     }
-    setOverrides(nextMap);
-    const savedLocally = saveLocalOverrides(language, nextMap);
+    const savedLocally = override
+      ? saveLocalOverrideEntry(language, override)
+      : selectedSpan ? removeLocalOverrideEntry(language, selectedSpan.spanKey) : false;
+    if (savedLocally) setOverrides(nextMap);
 
     if (override) {
       const syncKey = overrideSyncKey(language, override.spanKey);
       setOverrideSyncStates(current => new Map(current).set(syncKey, savedLocally ? 'missing_remote' : 'sync_error'));
-      const result = await persistOverrideToPayload(override, language);
+      const result = savedLocally ? await persistOverrideToPayload(override, language) : 'failed';
       if (savedLocally) dispatchLocalPersistenceChanged({
         kind: 'translation', language, spanKey: override.spanKey,
         data: encodeOverrideData(override), confirmed: result === 'confirmed',
@@ -1980,7 +1997,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
         setToast({
           message: savedLocally
             ? 'ERRO DE SINCRONIZAÇÃO — tradução salva localmente; Payload ainda não confirmou.'
-            : 'ERRO DE SINCRONIZAÇÃO — falhou o save local e o Payload.',
+            : 'ERRO — gravação local falhou; Payload permaneceu sem alteração.',
           type: 'error',
         });
         setTimeout(() => setToast(null), 5000);
@@ -1990,7 +2007,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
         setTimeout(() => setToast(null), 3000);
       }
     } else if (selectedSpan) {
-      const deletedOnServer = await deleteOverrideFromPayload(selectedSpan.spanKey, language);
+      const deletedOnServer = savedLocally ? await deleteOverrideFromPayload(selectedSpan.spanKey, language) : false;
       dispatchLocalPersistenceChanged();
       if (deletedOnServer) {
         setOverrideSyncStates(current => { const next = new Map(current); next.delete(overrideSyncKey(language, selectedSpan.spanKey)); return next; });
@@ -2001,6 +2018,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       setToast({
         message: deletedOnServer
           ? 'PAYLOAD CONFIRMADO — override removido.'
+          : !savedLocally
+            ? 'ERRO — remoção local falhou; Payload permaneceu sem alteração.'
           : savedLocally
             ? 'ERRO DE SINCRONIZAÇÃO — remoção local aplicada; o override ainda pode existir no Payload.'
             : 'ERRO DE SINCRONIZAÇÃO — falha ao remover o override.',
@@ -2010,6 +2029,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     }
 
     setIsSaving(false);
+    if (!savedLocally) return;
     setSelectedSpan(null);
     setDraftOverride(null);
     onTranslationDraftDirtyChange?.(false);

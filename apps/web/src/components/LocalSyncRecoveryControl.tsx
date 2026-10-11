@@ -5,6 +5,7 @@ import {
   createLocalRecoveryPackage,
   inspectLocalPersistence,
   LOCAL_PERSISTENCE_CHANGED_EVENT,
+  resolveDivergedLocalRecord,
   retryMissingLocalRecord,
   type LocalPersistenceEventDetail,
   type LocalPersistenceEntry,
@@ -43,6 +44,22 @@ function downloadRecovery(report: LocalPersistenceReport) {
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+function differencePaths(local: unknown, remote: unknown, path = '$'): string[] {
+  if (JSON.stringify(local) === JSON.stringify(remote)) return [];
+  if (local && remote && typeof local === 'object' && typeof remote === 'object'
+    && !Array.isArray(local) && !Array.isArray(remote)) {
+    const left = local as Record<string, unknown>;
+    const right = remote as Record<string, unknown>;
+    return [...new Set([...Object.keys(left), ...Object.keys(right)])]
+      .flatMap(key => differencePaths(left[key], right[key], `${path}.${key}`));
+  }
+  if (Array.isArray(local) && Array.isArray(remote)) {
+    const length = Math.max(local.length, remote.length);
+    return Array.from({ length }, (_, index) => differencePaths(local[index], remote[index], `${path}[${index}]`)).flat();
+  }
+  return [path];
+}
+
 export function LocalSyncRecoveryControl({ visible }: LocalSyncRecoveryControlProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const reportRef = useRef<LocalPersistenceReport | null>(null);
@@ -51,6 +68,9 @@ export function LocalSyncRecoveryControl({ visible }: LocalSyncRecoveryControlPr
   const [report, setReport] = useState<LocalPersistenceReport | null>(null);
   const [checking, setChecking] = useState(false);
   const [retryingId, setRetryingId] = useState<string | null>(null);
+  const [resolvingId, setResolvingId] = useState<string | null>(null);
+  const [downloadedBackups, setDownloadedBackups] = useState<Set<string>>(() => new Set());
+  const [confirmedBackups, setConfirmedBackups] = useState<Set<string>>(() => new Set());
   const [notice, setNotice] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
@@ -60,11 +80,17 @@ export function LocalSyncRecoveryControl({ visible }: LocalSyncRecoveryControlPr
     if (version !== refreshVersion.current) return;
     reportRef.current = result;
     setReport(result);
+    setDownloadedBackups(new Set());
+    setConfirmedBackups(new Set());
     setChecking(false);
   }, []);
 
   const onPersistenceChange = useCallback((event: Event) => {
     const detail = (event as CustomEvent<LocalPersistenceEventDetail | undefined>).detail;
+    if (detail && !detail.confirmed && !detail.deleted) {
+      void refresh();
+      return;
+    }
     if (detail && reportRef.current) {
       const updated = applyLocalPersistenceChange(reportRef.current, detail);
       if (updated) {
@@ -114,6 +140,23 @@ export function LocalSyncRecoveryControl({ visible }: LocalSyncRecoveryControlPr
             ? 'O registro local não está mais presente.'
             : 'ERRO DE SINCRONIZAÇÃO — Payload não confirmou o retry; os dados locais foram preservados.');
     setRetryingId(null);
+    await refresh();
+  }, [refresh]);
+
+  const resolve = useCallback(async (entry: LocalPersistenceEntry, resolution: 'local-to-payload' | 'payload-to-local') => {
+    const localChoice = resolution === 'local-to-payload';
+    const confirmation = localChoice
+      ? 'Aplicar a versão local ao Payload? Isso altera somente este registro. O estado atual do Payload será verificado novamente antes do PATCH.'
+      : 'Substituir somente este registro local pela versão atual do Payload? O backup exportado preserva a versão local anterior.';
+    if (!window.confirm(confirmation)) return;
+    setResolvingId(entry.id);
+    const result = await resolveDivergedLocalRecord(entry, resolution);
+    setNotice(result === 'confirmed'
+      ? localChoice ? 'Resolução aplicada e lida de volta do Payload.' : 'Cópia do Payload aplicada somente a este registro local.'
+      : result === 'stale' ? 'O Payload mudou desde esta comparação. Atualize a lista antes de decidir.'
+        : result === 'changed' ? 'A cópia local mudou desde esta comparação. Atualize a lista antes de decidir.'
+          : 'Não foi possível aplicar a resolução; as cópias foram preservadas.');
+    setResolvingId(null);
     await refresh();
   }, [refresh]);
 
@@ -176,8 +219,69 @@ export function LocalSyncRecoveryControl({ visible }: LocalSyncRecoveryControlPr
                       {retryingId === entry.id ? 'Enviando…' : 'Tentar sincronizar'}
                     </button>
                   ) : entry.syncState === 'diverged' ? (
-                    <span className="local-sync-conflict">Sem retry automático: versões divergentes.</span>
+                    <span className="local-sync-conflict">Revisão manual necessária.</span>
                   ) : null}
+                  {entry.syncState === 'diverged' && (
+                    <details className="local-sync-conflict-review">
+                      <summary>Revisar versões e diferenças</summary>
+                      <div className="local-sync-diff-paths">
+                        Diferenças: {differencePaths(entry.data, entry.payloadComparableData ?? entry.payloadData).join(', ') || 'nenhuma'}
+                      </div>
+                      <div className="local-sync-version-grid">
+                        <section>
+                          <h3>Local (navegador)</h3>
+                          <pre>{JSON.stringify(entry.data, null, 2)}</pre>
+                        </section>
+                        <section>
+                          <h3>Payload {entry.payloadId !== undefined && `· ID ${entry.payloadId}`}</h3>
+                          <pre>{JSON.stringify(entry.payloadData, null, 2)}</pre>
+                        </section>
+                      </div>
+                      <button
+                        type="button"
+                        className="local-sync-backup-button"
+                        disabled={!report}
+                        onClick={() => {
+                          if (!report) return;
+                          downloadRecovery(report);
+                          setDownloadedBackups(current => new Set(current).add(entry.id));
+                          setConfirmedBackups(current => { const next = new Set(current); next.delete(entry.id); return next; });
+                        }}
+                      >
+                        <Download size={14} aria-hidden="true" /> Baixar backup local + Payload
+                      </button>
+                      <label className="local-sync-backup-confirmation">
+                        <input
+                          type="checkbox"
+                          disabled={!downloadedBackups.has(entry.id)}
+                          checked={confirmedBackups.has(entry.id)}
+                          onChange={event => setConfirmedBackups(current => {
+                            const next = new Set(current);
+                            if (event.target.checked) next.add(entry.id); else next.delete(entry.id);
+                            return next;
+                          })}
+                        />
+                        Confirmei que salvei o backup recuperável desta divergência.
+                      </label>
+                      <div className="local-sync-resolution-actions">
+                        <button
+                          type="button"
+                          disabled={!confirmedBackups.has(entry.id) || resolvingId === entry.id || checking}
+                          onClick={() => void resolve(entry, 'local-to-payload')}
+                        >
+                          {resolvingId === entry.id ? 'Aplicando…' : 'Manter local no Payload'}
+                        </button>
+                        <button
+                          type="button"
+                          disabled={!confirmedBackups.has(entry.id) || resolvingId === entry.id || checking}
+                          onClick={() => void resolve(entry, 'payload-to-local')}
+                        >
+                          Usar Payload localmente
+                        </button>
+                      </div>
+                      <small>Uma divergência por vez. A resolução para o Payload confere ID, conteúdo e timestamp antes da gravação e verifica a leitura posterior.</small>
+                    </details>
+                  )}
                 </li>
               ))}
             </ul>

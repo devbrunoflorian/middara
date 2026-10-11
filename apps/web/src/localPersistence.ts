@@ -1,5 +1,6 @@
 import type { SpanOverride } from './components/RichSpanEditor';
 import type { LayoutFrame } from './components/PageRenderer';
+import { saveLocalLayoutFrame } from './layoutFrames';
 import { decodeOverrideData, encodeOverrideData } from './symbols/overrideData';
 import { payloadApiUrl } from './config/payloadApi';
 
@@ -27,7 +28,10 @@ export interface LocalPersistenceEntry {
   blockIndex?: number;
   editorialUnitId?: string;
   syncState: LocalSyncState;
+  payloadId?: string | number;
   payloadUpdatedAt?: string | null;
+  payloadData?: unknown;
+  payloadComparableData?: unknown;
   data: unknown;
 }
 
@@ -64,7 +68,7 @@ interface LocalFrame {
   data: LayoutFrame;
 }
 
-interface PayloadDocument {
+export interface PayloadDocument {
   id?: string | number;
   spanKey?: string;
   language?: string;
@@ -73,6 +77,7 @@ interface PayloadDocument {
   unitKey?: string;
   pageNumber?: number;
   updatedAt?: string;
+  rawData?: unknown;
 }
 
 function sortObjectKeys(value: unknown): unknown {
@@ -180,21 +185,25 @@ async function fetchCollection(slug: 'translations' | 'layout-frames', fetcher: 
 }
 
 function makeRemoteMaps(translations: PayloadDocument[], frames: PayloadDocument[]) {
-  const remoteTranslations = new Map<string, { data: unknown; updatedAt?: string }>();
+  const remoteTranslations = new Map<string, PayloadDocument>();
   for (const record of translations) {
     if (typeof record.spanKey !== 'string' || typeof record.language !== 'string') continue;
     const decoded = decodeOverrideData(record.data);
     if (!decoded) continue;
     const key = `${record.language}\0${clientSpanKey(record.spanKey, record.language)}`;
     if (remoteTranslations.has(key)) throw new Error(`Payload possui key de tradução duplicada: ${record.spanKey}.`);
-    remoteTranslations.set(key, { data: encodeOverrideData({ ...decoded, spanKey: clientSpanKey(record.spanKey, record.language) } as SpanOverride), updatedAt: record.updatedAt });
+    remoteTranslations.set(key, {
+      ...record,
+      rawData: record.data,
+      data: encodeOverrideData({ ...decoded, spanKey: clientSpanKey(record.spanKey, record.language) } as SpanOverride),
+    });
   }
-  const remoteFrames = new Map<string, { data: unknown; updatedAt?: string }>();
+  const remoteFrames = new Map<string, PayloadDocument>();
   for (const record of frames) {
     if (typeof record.unitKey !== 'string' || typeof record.language !== 'string' || !record.data || typeof record.data !== 'object') continue;
     const key = `${record.language}\0${record.unitKey}`;
     if (remoteFrames.has(key)) throw new Error(`Payload possui frame duplicado: ${record.frameKey ?? record.unitKey}.`);
-    remoteFrames.set(key, { data: record.data, updatedAt: record.updatedAt });
+    remoteFrames.set(key, { ...record, rawData: record.data });
   }
   return { remoteTranslations, remoteFrames };
 }
@@ -229,7 +238,10 @@ export async function inspectLocalPersistence(
           ...identity,
           syncState: !remoteRecord ? 'missing_remote' as const
             : stableJson(record.data) === stableJson(remoteRecord.data) ? 'confirmed' as const : 'diverged' as const,
+          payloadId: remoteRecord?.id,
           payloadUpdatedAt: remoteRecord?.updatedAt ?? null,
+          payloadData: remoteRecord?.rawData,
+          payloadComparableData: remoteRecord?.data,
           data: record.data,
         };
       }),
@@ -243,7 +255,10 @@ export async function inspectLocalPersistence(
           unitKey: record.unitKey,
           syncState: !remoteRecord ? 'missing_remote' as const
             : stableJson(record.data) === stableJson(remoteRecord.data) ? 'confirmed' as const : 'diverged' as const,
+          payloadId: remoteRecord?.id,
           payloadUpdatedAt: remoteRecord?.updatedAt ?? null,
+          payloadData: remoteRecord?.rawData,
+          payloadComparableData: remoteRecord?.data,
           data: record.data,
         };
       }),
@@ -306,7 +321,45 @@ export function saveLocalOverrides(
   storage: WritableStorageLike = window.localStorage,
 ): boolean {
   try {
-    storage.setItem(localOverridesStorageKey(language), JSON.stringify([...overrides.values()]));
+    // The map may come from a server-overlaid view. Treat it as explicit upserts;
+    // omitted local keys are never deletion instructions.
+    const key = localOverridesStorageKey(language);
+    const raw = storage.getItem(key);
+    const records: SpanOverride[] = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(records)) return false;
+    const next = [...records];
+    for (const override of overrides.values()) {
+      const matches = next.reduce((count, record) => count + (record?.spanKey === override.spanKey ? 1 : 0), 0);
+      if (matches > 1) return false;
+      const index = next.findIndex(record => record?.spanKey === override.spanKey);
+      if (index >= 0) next[index] = override;
+      else next.push(override);
+    }
+    storage.setItem(key, JSON.stringify(next));
+    return true;
+  } catch { return false; }
+}
+
+/** Update one local entry without serializing the server-overlaid in-memory map. */
+export function saveLocalOverrideEntry(
+  language: Locale,
+  override: SpanOverride,
+  storage: WritableStorageLike = window.localStorage,
+): boolean {
+  return saveLocalOverrides(language, new Map([[override.spanKey, override]]), storage);
+}
+
+export function removeLocalOverrideEntry(
+  language: Locale,
+  spanKey: string,
+  storage: WritableStorageLike = window.localStorage,
+): boolean {
+  try {
+    const key = localOverridesStorageKey(language);
+    const raw = storage.getItem(key);
+    const records: SpanOverride[] = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(records)) return false;
+    storage.setItem(key, JSON.stringify(records.filter(record => record?.spanKey !== spanKey)));
     return true;
   } catch { return false; }
 }
@@ -352,7 +405,98 @@ export async function persistOverrideToPayload(
   } catch { return 'failed'; }
 }
 
+export type DivergenceResolution = 'local-to-payload' | 'payload-to-local';
+export type DivergenceResolutionResult = 'confirmed' | 'stale' | 'changed' | 'failed';
+
+function normalizedRemoteData(entry: LocalPersistenceEntry, document: PayloadDocument): unknown | null {
+  if (entry.kind === 'frame') return document.data ?? null;
+  const decoded = decodeOverrideData(document.data);
+  return decoded && entry.spanKey
+    ? encodeOverrideData({ ...decoded, spanKey: entry.spanKey } as SpanOverride)
+    : null;
+}
+
+async function readCounterpart(entry: LocalPersistenceEntry, fetcher: FetchLike): Promise<PayloadDocument | null> {
+  for (const url of remoteLookupUrls(entry.kind, entry)) {
+    const response = await fetcher(url, { method: 'GET', signal: AbortSignal.timeout(15_000) });
+    if (!response.ok) throw new Error(`Payload lookup: HTTP ${response.status}.`);
+    const docs = (await response.json() as { docs?: PayloadDocument[] }).docs ?? [];
+    const match = docs.find(document => String(document.id) === String(entry.payloadId));
+    if (match) return match;
+  }
+  return null;
+}
+
+/** Resolve exactly one reviewed divergence. Payload REST has no atomic compare-and-swap;
+ * remote writes therefore recheck data + updatedAt immediately before PATCH and verify read-back. */
+export async function resolveDivergedLocalRecord(
+  entry: LocalPersistenceEntry,
+  resolution: DivergenceResolution,
+  storage: StorageLike & Pick<Storage, 'setItem'> = window.localStorage,
+  fetcher: FetchLike = fetch,
+): Promise<DivergenceResolutionResult> {
+  if (entry.syncState !== 'diverged' || entry.payloadId === undefined || !entry.payloadUpdatedAt
+    || entry.payloadData === undefined) return 'stale';
+
+  try {
+    const local = readLocalPersistenceRecords(storage);
+    const currentLocal = entry.kind === 'translation'
+      ? local.translations.find(record => record.language === entry.language && record.spanKey === entry.spanKey)?.data
+      : local.frames.find(record => record.language === entry.language && record.unitKey === entry.unitKey)?.data;
+    if (currentLocal === undefined || stableJson(currentLocal) !== stableJson(entry.data)) return 'changed';
+
+    const currentRemote = await readCounterpart(entry, fetcher);
+    if (!currentRemote || String(currentRemote.id) !== String(entry.payloadId)
+      || currentRemote.updatedAt !== entry.payloadUpdatedAt
+      || stableJson(normalizedRemoteData(entry, currentRemote)) !== stableJson(entry.payloadComparableData ?? entry.payloadData)) return 'stale';
+
+    if (resolution === 'payload-to-local') {
+      if (entry.kind === 'translation') {
+        const decoded = decodeOverrideData(entry.payloadData);
+        if (!decoded || !entry.spanKey) return 'failed';
+        const override = { ...decoded, spanKey: entry.spanKey } as SpanOverride;
+        if (!saveLocalOverrideEntry(entry.language, override, storage as WritableStorageLike)) return 'failed';
+      } else {
+        if (!entry.unitKey || !entry.pageNumber || !entry.payloadData || typeof entry.payloadData !== 'object') return 'failed';
+        if (!saveLocalLayoutFrame(entry.pageNumber, entry.language, entry.unitKey, entry.payloadData as LayoutFrame, storage)) return 'failed';
+      }
+      dispatchLocalPersistenceChanged({
+        kind: entry.kind, language: entry.language, spanKey: entry.spanKey, unitKey: entry.unitKey,
+        pageNumber: entry.pageNumber, data: entry.payloadData, confirmed: true,
+      });
+      return 'confirmed';
+    }
+
+    const url = payloadApiUrl(`${entry.kind === 'translation' ? 'translations' : 'layout-frames'}/${entry.payloadId}`);
+    const body = entry.kind === 'translation'
+      ? { language: entry.language, data: entry.data }
+      : {
+        frameKey: `${entry.unitKey}::${entry.language}`, unitKey: entry.unitKey,
+        pageNumber: entry.pageNumber, language: entry.language, data: entry.data,
+      };
+    const patched = await fetcher(url, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body), signal: AbortSignal.timeout(15_000),
+    });
+    if (!patched.ok) return 'failed';
+    const verified = await readCounterpart(entry, fetcher);
+    if (!verified || String(verified.id) !== String(entry.payloadId)
+      || stableJson(normalizedRemoteData(entry, verified)) !== stableJson(entry.data)) return 'failed';
+    dispatchLocalPersistenceChanged({
+      kind: entry.kind, language: entry.language, spanKey: entry.spanKey, unitKey: entry.unitKey,
+      pageNumber: entry.pageNumber, data: entry.data, confirmed: true,
+    });
+    return 'confirmed';
+  } catch { return 'failed'; }
+}
+
 export function createLocalRecoveryPackage(report: LocalPersistenceReport) {
+  const recoveryEntries = (kind: LocalRecordKind) => report.entries.filter(entry => entry.kind === kind)
+    .map(entry => {
+      const snapshot = { ...entry };
+      delete snapshot.payloadComparableData;
+      return snapshot;
+    });
   return {
     backupSchemaVersion: 1,
     kind: 'middara-browser-local-recovery',
@@ -360,9 +504,9 @@ export function createLocalRecoveryPackage(report: LocalPersistenceReport) {
     payloadComparison: report.payloadAvailable ? 'available' : 'unavailable',
     unsyncedLocalRecords: report.unsyncedCount,
     recordsIncluded: report.entries.length,
-    note: 'Local recovery data only. This JSON is not an importer and does not write to Payload.',
-    translations: report.entries.filter(entry => entry.kind === 'translation'),
-    frames: report.entries.filter(entry => entry.kind === 'frame'),
+    note: 'Recovery snapshot: local records plus read-only Payload counterparts where available. This JSON is not an importer and does not write to Payload.',
+    translations: recoveryEntries('translation'),
+    frames: recoveryEntries('frame'),
   };
 }
 
