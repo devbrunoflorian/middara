@@ -2,7 +2,7 @@
 /** Export one persisted rulebook page/language through the same React viewer. */
 
 import { chromium } from 'playwright';
-import { readFile, mkdir } from 'node:fs/promises';
+import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
@@ -15,13 +15,22 @@ function argsFrom(argv) {
     apiUrl: process.env.VITE_PAYLOAD_API_URL ?? 'http://localhost:3000',
     sourcePdf: process.env.MIDDARA_SOURCE_PDF_PATH ?? 'C:/Users/bruno/Downloads/Rulebook 1p2 Final Version 05-19-23 Optimized.pdf',
     executablePath: undefined,
+    debugScreenshot: undefined,
+    viewerScreenshot: undefined,
+    printScreenshot: undefined,
+    metricsOutput: undefined,
+    captureOnly: false,
   };
   for (let i = 0; i < argv.length; i += 1) {
     const key = argv[i];
     const value = argv[i + 1];
     if (!key.startsWith('--')) continue;
+    if (key === '--capture-only') {
+      result.captureOnly = true;
+      continue;
+    }
     if (value === undefined || value.startsWith('--')) throw new Error(`Missing value for ${key}`);
-    const name = ({ '--page': 'page', '--language': 'language', '--output': 'output', '--base-url': 'baseUrl', '--api-url': 'apiUrl', '--source-pdf': 'sourcePdf', '--browser': 'executablePath' })[key];
+    const name = ({ '--page': 'page', '--language': 'language', '--output': 'output', '--base-url': 'baseUrl', '--api-url': 'apiUrl', '--source-pdf': 'sourcePdf', '--browser': 'executablePath', '--debug-screenshot': 'debugScreenshot', '--viewer-screenshot': 'viewerScreenshot', '--print-screenshot': 'printScreenshot', '--metrics-output': 'metricsOutput' })[key];
     if (!name) throw new Error(`Unknown option: ${key}`);
     result[name] = name === 'page' ? Number(value) : value;
     i += 1;
@@ -101,16 +110,7 @@ try {
   if (!appResponse?.ok()) throw new Error(`Viewer returned ${appResponse?.status() ?? 'no response'} at ${config.baseUrl}`);
   await page.waitForFunction(() => !!document.querySelector('input.page-input') && !!document.querySelector('.page-container img'));
 
-  const initialDevEnvironment = await page.locator('.dev-environment-indicator').evaluate(element => ({
-    webOrigin: element.getAttribute('data-web-origin'),
-    apiOrigin: element.getAttribute('data-api-origin'),
-    locale: element.getAttribute('data-locale'),
-    mode: element.getAttribute('data-mode'),
-  })).catch(() => null);
   const expectedApiOrigin = normalizedOrigin(config.apiUrl);
-  if (initialDevEnvironment?.apiOrigin && normalizedOrigin(initialDevEnvironment.apiOrigin) !== expectedApiOrigin) {
-    throw new Error(`Viewer API origin ${initialDevEnvironment.apiOrigin} does not match export translation API ${expectedApiOrigin}.`);
-  }
 
   const pageInput = page.locator('input.page-input');
   await pageInput.fill(String(config.page));
@@ -124,13 +124,14 @@ try {
       && image.naturalWidth > 0;
   }, config.page, { timeout: 60000 });
 
+  const localeSelect = page.locator('select.language-select');
+  await localeSelect.selectOption(config.language);
+  await page.waitForFunction(
+    expected => document.querySelector('select.language-select')?.value === expected,
+    config.language,
+    { timeout: 10000 },
+  );
   if (config.language === 'pt-BR') {
-    await page.locator('select.language-select').selectOption('pt-BR');
-    await page.waitForFunction(
-      expected => document.querySelector('.dev-environment-indicator')?.getAttribute('data-locale') === expected,
-      config.language,
-      { timeout: 10000 },
-    );
     const expectedFragment = normalizeText(expectedTranslation).slice(0, 48);
     await page.waitForFunction(fragment => {
       const content = normalizeText(document.querySelector('.page-container')?.textContent ?? '');
@@ -139,27 +140,68 @@ try {
     }, expectedFragment, { timeout: 60000 });
   }
 
-  const devEnvironment = await page.locator('.dev-environment-indicator').evaluate(element => ({
-    webOrigin: element.getAttribute('data-web-origin'),
-    apiOrigin: element.getAttribute('data-api-origin'),
-    locale: element.getAttribute('data-locale'),
-    mode: element.getAttribute('data-mode'),
-  }));
-  if (devEnvironment.locale !== config.language) {
-    throw new Error(`Viewer locale ${devEnvironment.locale} does not match requested export language ${config.language}.`);
-  }
-  if (devEnvironment.apiOrigin && normalizedOrigin(devEnvironment.apiOrigin) !== expectedApiOrigin) {
-    throw new Error(`Viewer API origin ${devEnvironment.apiOrigin} does not match export translation API ${expectedApiOrigin}.`);
+  const viewerLocale = await localeSelect.inputValue();
+  if (viewerLocale !== config.language) {
+    throw new Error(`Viewer locale ${viewerLocale} does not match requested export language ${config.language}.`);
   }
 
   await page.evaluate(() => document.fonts.ready);
   await page.getByTitle('Fit to Screen').click();
   await page.waitForTimeout(300);
+
+  const capturePageMetrics = () => page.locator('.page-container').evaluate(container => {
+    const pageRect = container.getBoundingClientRect();
+    const relativeRect = element => {
+      const rect = element.getBoundingClientRect();
+      return { x: rect.left - pageRect.left, y: rect.top - pageRect.top, width: rect.width, height: rect.height };
+    };
+    const styleFor = element => {
+      const style = getComputedStyle(element);
+      return {
+        fontFamily: style.fontFamily, fontSize: style.fontSize, lineHeight: style.lineHeight,
+        letterSpacing: style.letterSpacing, wordSpacing: style.wordSpacing, margin: style.margin,
+        padding: style.padding, transform: style.transform, zIndex: style.zIndex,
+        clipPath: style.clipPath, maskImage: style.maskImage, width: style.width, height: style.height,
+      };
+    };
+    return {
+      rect: { x: pageRect.x, y: pageRect.y, width: pageRect.width, height: pageRect.height },
+      pageWidthPt: Number(container.dataset.pdfPageWidth),
+      pageHeightPt: Number(container.dataset.pdfPageHeight),
+      scaleX: pageRect.width / Number(container.dataset.pdfPageWidth),
+      scaleY: pageRect.height / Number(container.dataset.pdfPageHeight),
+      inlineWidth: container.style.width,
+      inlineHeight: container.style.height,
+      containerStyle: styleFor(container),
+      lines: [...container.querySelectorAll('[data-source-line-id]')].map(element => ({
+        id: element.getAttribute('data-source-line-id'),
+        baseline: element.getAttribute('data-source-baseline-y'),
+        rect: relativeRect(element),
+      })),
+      symbols: [...container.querySelectorAll('[data-symbol-id], [data-source-symbol-id]')].map(element => ({
+        id: element.getAttribute('data-symbol-id') ?? element.getAttribute('data-source-symbol-id'),
+        tag: element.tagName.toLowerCase(), rect: relativeRect(element), style: styleFor(element),
+      })),
+      images: [...container.querySelectorAll('img')].map(element => ({
+        src: element.getAttribute('src'),
+        className: typeof element.className === 'string' ? element.className : element.className.baseVal,
+        rect: relativeRect(element), style: styleFor(element),
+        naturalWidth: element.naturalWidth, naturalHeight: element.naturalHeight,
+      })),
+    };
+  });
+  const viewerMetrics = await capturePageMetrics();
+  if (config.viewerScreenshot) {
+    await mkdir(dirname(resolve(config.viewerScreenshot)), { recursive: true });
+    await page.locator('.page-container').screenshot({
+      path: resolve(config.viewerScreenshot), scale: 'css', animations: 'disabled', caret: 'hide',
+    });
+  }
+
   await page.emulateMedia({ media: 'print' });
-  // PageRenderer converts source points to CSS pixels at 96/72 and reserves
-  // 48 CSS px when fitting a page to its stage. Keep that extra room on the
-  // stage only; growing the printable root makes Chromium shrink the whole
-  // page to fit and exposes the app's dark background as an edge strip.
+  // PageRenderer converts points to CSS pixels at 96/72 and reserves 48 CSS
+  // px when fitting. Keep that fitting gutter inside the printable root by
+  // centering an unshrunk stage and offsetting its 24 px margin on each side.
   const cssWidth = pageData.width * (96 / 72);
   const cssHeight = pageData.height * (96 / 72);
   const stageCssWidth = cssWidth + 48;
@@ -174,11 +216,17 @@ try {
     .page-stage {
       width: ${stageCssWidth}px !important; height: ${stageCssHeight}px !important;
       min-width: 0 !important; min-height: 0 !important; max-width: none !important; max-height: none !important;
-      margin: 0 !important; padding: 0 !important; overflow: hidden !important; box-sizing: border-box !important;
+      flex: 0 0 auto !important; position: relative !important; left: -24px !important; top: -24px !important;
+      align-items: center !important; justify-content: center !important;
+      margin: 0 !important; padding: 0 !important; overflow: hidden !important; scrollbar-gutter: auto !important;
+      box-sizing: border-box !important;
     }
-    .app-container, .viewer-main, .page-wrapper, .page-renderer, .page-stage { display: block !important; }
-    .pdf-sidebar, .toast-notification, .translation-editor, .rich-block-editor, .block-editor { display: none !important; }
-    .dev-environment-indicator { display: none !important; }
+    .app-container { display: flex !important; flex-direction: row !important; }
+    .viewer-main.single, .page-wrapper, .page-renderer, .page-stage { display: flex !important; }
+    .global-nav-slot, .editing-symbol-rail, .pdf-sidebar, .app-shell-header-actions, .app-shell-faq-actions,
+    .floating-arrow, .toast-notification, .translation-editor, .rich-block-editor, .block-editor, .faq-dialog {
+      display: none !important;
+    }
     .page-container {
       width: ${pageData.width}pt !important; height: ${pageData.height}pt !important;
       max-width: none !important; max-height: none !important; margin: 0 !important;
@@ -189,6 +237,38 @@ try {
   await page.evaluate(() => window.dispatchEvent(new Event('resize')));
   await page.waitForTimeout(500);
   await page.evaluate(() => document.fonts.ready);
+  const printMetrics = await capturePageMetrics();
+  if (config.printScreenshot) {
+    await mkdir(dirname(resolve(config.printScreenshot)), { recursive: true });
+    await page.locator('.page-container').screenshot({
+      path: resolve(config.printScreenshot), scale: 'css', animations: 'disabled', caret: 'hide',
+    });
+  }
+  if (config.metricsOutput) {
+    await mkdir(dirname(resolve(config.metricsOutput)), { recursive: true });
+    await writeFile(resolve(config.metricsOutput), JSON.stringify({
+      page: config.page, language: config.language, viewer: viewerMetrics, print: printMetrics,
+    }, null, 2));
+  }
+  const printLayout = await page.evaluate(() => Object.fromEntries(
+    ['.app-container', '.viewer-main', '.page-wrapper', '.page-renderer', '.page-stage', '.page-container', '.page-container img']
+      .map(selector => {
+        const element = document.querySelector(selector);
+        if (!element) return [selector, null];
+        const rect = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        return [selector, {
+          rect: [rect.x, rect.y, rect.width, rect.height],
+          display: style.display,
+          visibility: style.visibility,
+          opacity: style.opacity,
+          position: style.position,
+          transform: style.transform,
+        }];
+      }),
+  ));
+  if (config.debugScreenshot) await page.screenshot({ path: resolve(config.debugScreenshot), fullPage: false });
+  console.log('[page-export] print layout diagnostic', JSON.stringify(printLayout));
 
   const textSanity = await page.evaluate(() => ({
     pageText: document.querySelector('.page-container')?.textContent ?? '',
@@ -204,14 +284,23 @@ try {
     throw new Error(`Expected one Payload/API origin ${expectedApiOrigin}; viewer queried ${actualApiOrigins.join(', ') || 'none'}.`);
   }
 
-  await mkdir(dirname(config.output), { recursive: true });
-  await page.pdf({
-    path: config.output,
-    preferCSSPageSize: true,
-    printBackground: true,
-    displayHeaderFooter: false,
-    margin: { top: 0, bottom: 0, left: 0, right: 0 },
-  });
+  const viewerStructure = await page.locator('.page-container').evaluate(container => ({
+    sourceGeometryLines: container.querySelectorAll('[data-source-line-id]').length,
+    semanticSymbols: container.querySelectorAll('svg[data-symbol-id], svg[data-source-symbol-id]').length,
+    renderedImages: [...container.querySelectorAll('img')].filter(image => image.naturalWidth > 0).length,
+    loadedFonts: [...document.fonts].filter(font => font.status === 'loaded').map(font => font.family),
+  }));
+
+  let pdfVerification = null;
+  if (!config.captureOnly) {
+    await mkdir(dirname(config.output), { recursive: true });
+    await page.pdf({
+      path: config.output,
+      preferCSSPageSize: true,
+      printBackground: true,
+      displayHeaderFooter: false,
+      margin: { top: 0, bottom: 0, left: 0, right: 0 },
+    });
   const normalizePageBox = spawnSync('python', [
     resolve('scripts/normalize_export_page_box.py'),
     config.output,
@@ -223,9 +312,30 @@ try {
   if (normalizePageBox.status !== 0) {
     throw new Error(`Could not normalize the exported MediaBox: ${normalizePageBox.stderr || normalizePageBox.stdout}`);
   }
+  const verificationArgs = [resolve('scripts/verify_page_pdf_export.py'), config.output, '--page', String(config.page)];
+  if (expectedTranslation) verificationArgs.push('--contains', normalizeText(expectedTranslation).slice(0, 48));
+  const verification = spawnSync('python', verificationArgs, { encoding: 'utf8' });
+  if (verification.status !== 0) {
+    throw new Error(`Exported PDF failed text/geometry verification: ${verification.stderr || verification.stdout}`);
+  }
+    pdfVerification = true;
+  }
+  const summarizeMetrics = metrics => ({
+    rect: metrics.rect,
+    scale: [metrics.scaleX, metrics.scaleY],
+    inlineSize: [metrics.inlineWidth, metrics.inlineHeight],
+    lineCount: metrics.lines.length,
+    symbolCount: metrics.symbols.length,
+    imageCount: metrics.images.length,
+  });
   console.log('[page-export] completed environment and result', JSON.stringify({
     viewerUrl: page.url(),
-    devEnvironment,
+    viewerOrigin: normalizedOrigin(page.url()),
+    viewerLocale,
+    viewerStructure,
+    viewerMetrics: summarizeMetrics(viewerMetrics),
+    printMetrics: summarizeMetrics(printMetrics),
+    printLayout: Object.fromEntries(Object.entries(printLayout).filter(([key]) => ['.page-stage', '.page-container'].includes(key))),
     translationApiOrigin: expectedApiOrigin,
     actualApiOrigins,
     sourcePdf: config.sourcePdf,
@@ -233,8 +343,9 @@ try {
     page: config.page,
     language: config.language,
     pageSizePt: [pageData.width, pageData.height],
-    normalizedMediaBox: true,
+    normalizedMediaBox: !config.captureOnly,
     verifiedTranslationRecords: config.language === 'pt-BR' ? true : undefined,
+    pdfVerification,
   }, null, 2));
 } finally {
   await browser.close();

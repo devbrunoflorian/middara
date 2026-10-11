@@ -1,14 +1,18 @@
 # Exportação de uma página em PDF
 
-**Status:** piloto técnico; ainda não é exportação de produção.
-**Primeira página produzida:** p. 2, PT-BR.
+**Status:** a geometria do palco de impressão foi corrigida; o aceite visual ainda está pendente.
+**Prova em revisão:** 11/10/2026 — p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN.
 **API:** não implementada; este documento prepara o fluxo para uma API futura.
 
-## Resultado do piloto
+## Correção de geometria de impressão — 11/10/2026
 
-O arquivo [page-002-pt-BR-editavel.pdf](../../output/pdf/page-002-pt-BR-editavel.pdf) foi impresso pelo Chromium a partir do viewer, usando a tradução salva no Payload. Ele tem uma página com texto vetorial selecionável e arte/composição raster preservada como imagem. A extração de texto confirmou os acentos do texto corrido; o título decorativo usa glifos PUA da fonte e pode ser copiado como caracteres de uso privado. Isso é esperado no arranjo tipográfico atual e precisa ser tratado antes de prometer edição semântica perfeita.
+O PDF de 10/10 foi reprovado visualmente e permanece apenas como histórico. A causa do reflow na impressão foi o flex shrink: `.page-stage` encolhia, enquanto `.page-container` conservava o tamanho CSS anterior. O exportador mantém agora o palco e seu contêiner coerentes durante a impressão, sem editar geometria do Viewer ou conteúdo salvo.
 
-O usuário observou uma borda/faixa preta à direita e embaixo. Ela foi confirmada na captura do PDF. É um defeito conhecido do protótipo de impressão, ainda sem correção: não entregar este piloto como arquivo de gráfica. A geometria do palco do viewer, do contêiner da página e do `@page` precisa ser alinhada e comparada de novo antes de expor o processo como API.
+Uma prova de cinco páginas exercita p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN. As métricas estruturais viewer/print mostram linhas e imagens alinhadas. Durante a revisão visual, porém, foi identificado um resíduo circular em máscaras dos símbolos semânticos na p. 78 PT-BR; a causa está no caminho de limpeza da fonte, não no flex de impressão. **Portanto, esta correção A não representa aceite visual completo**; a investigação e correção PT-BR permanecem separadas no Commit B.
+
+Na tentativa inicial desta execução, a regra de impressão mostrava apenas a shell escura: `.app-container` havia sido convertido em bloco e o viewer ficava fora da página. O exportador preserva agora o flex horizontal e remove apenas controles da shell. O teste foi repetido nas cinco páginas representativas.
+
+Fontes: parte dos textos usa fontes PDF Type3 com CharProcs vetoriais autocontidos; outras usam Type0 com programa incorporado. Todos os recursos tinham `/ToUnicode`, mas isso não equivale a incorporar uma face OpenType editável. Há glifos de símbolos/ornamentos em áreas PUA, que podem ser copiados como codepoints privados. Portanto, a prova demonstra texto real selecionável e extraível, não edição confiável de parágrafos no Acrobat nem compatibilidade com InDesign. O Acrobat Pro não está instalado neste ambiente e a edição direta não foi validada nele.
 
 ## Como reproduzir o piloto
 
@@ -32,25 +36,24 @@ Para outra página, troque `--page` e o nome de saída. `--language` aceita `en`
 
 ## Limites conhecidos do método
 
-- O arquivo atual é RGB gerado pelo browser. Não tem perfil CMYK/output intent, padrão PDF/X, sangria nem marcas de corte; essas escolhas ficam para a fase de impressão após a tradução e o briefing da gráfica.
-- O texto aparece como objetos de texto/vetores e pode ser selecionado. A edição direta num editor de PDF é limitada pelos recortes de fonte e pela estrutura do viewer; cartas, tokens, artwork e fundo são imagens completas e não devem ser convertidos em HTML editável.
+- O arquivo atual é RGB gerado pelo browser. Não tem perfil CMYK/output intent, padrão PDF/X, sangria adicionada nem marcas de corte. Os page boxes foram copiados da fonte; isso não cria área de bleed. Essas escolhas ficam para a fase de impressão após o briefing da gráfica.
+- O texto aparece como objetos de texto/vetores e a extração Unicode confirma a camada selecionável/copiável estruturalmente. A interação de seleção/clipboard e a edição direta em Acrobat não foram testadas; a edição é potencialmente limitada pelos recursos Type3/PUA e pela estrutura fragmentada em spans. Cartas, tokens, artwork e fundo são imagens/elementos vetoriais de página e não são objetos editoriais reestruturáveis.
+- Nesta prova, a camada raster de página chega a aproximadamente 79 ppi efetivos em alguns elementos; outros componentes chegam a 631 ppi. Isso atende a uma prova de leitura em tela, mas não estabelece resolução adequada para impressão.
 - O título da p. 2 usa caracteres PUA para reproduzir a forma decorativa. O piloto não tem caracteres U+FFFD, mas copiar o título pode retornar os codepoints PUA em vez de `Introdução`.
-- A borda preta à direita/embaixo é um defeito visual conhecido. O código mantém explicitamente a proporção de palco do piloto para facilitar a reprodução do estado; essa proporção é provisória e não deve virar contrato da futura API.
 - O PDF não captura rascunhos não salvos do editor. A fonte deve ser o conteúdo persistido no Payload; a página precisa ser conferida no viewer antes da impressão.
 
-## Editabilidade no Adobe — investigação relatada, pendente
+## Editabilidade no Adobe — evidência estrutural; validação de interface pendente
 
-O usuário informou em 05/10 que o PDF feito até agora foi aberto/tentado no Adobe e não ficou editável como esperado. Ainda não sabemos qual arquivo exato foi testado, qual aplicativo/produto Adobe e versão foram usados, qual ferramenta/ação foi tentada, nem qual definição de “editável” se aplica (selecionar/copiar texto, Editar PDF, importar para InDesign ou reflow de parágrafos). **Não mudar o exportador com base apenas no relato.**
+O usuário informou em 05/10 que um PDF anterior aberto no Adobe não ficou editável como esperado. A prova atual responde apenas à camada estrutural: texto é extraível e selecionável, mas há fontes Type3/PUA e segmentos independentes. Acrobat Pro não está instalado neste ambiente, então não foi possível verificar visualmente a ferramenta Editar PDF. Adobe documenta que a edição com a face tipográfica original depende de a fonte estar instalada; uma fonte apenas incorporada pode permitir alterações limitadas. Veja [Adobe: edição de texto em PDF](https://helpx.adobe.com/acrobat/using/edit-text-pdfs1.html). Não declarar editabilidade tipográfica geral com base só na extração.
 
 Na investigação futura:
 
-1. identificar/recuperar o PDF exato e reproduzir no mesmo Adobe app/versão e na mesma operação;
-2. inspecionar a estrutura real do PDF produzido: objetos de texto vs. paths/imagens, fontes incorporadas/subset, encoding e mapas `/ToUnicode`, glifos PUA, grupos/clips, transformações e ordem dos objetos;
-3. comparar o resultado contra uma página simples e outra com glifos/símbolos especiais, separando “texto selecionável” de “texto editável pelo Acrobat/InDesign”;
-4. consultar a documentação oficial da Adobe para a ferramenta reproduzida e identificar requisitos/limites de fonte e estrutura;
-5. propor a menor correção e verificar o PDF novamente no Adobe e com renderização lado a lado do viewer/PDF-fonte.
+1. identificar/recuperar o PDF anterior e registrar app/versão e a operação específica;
+2. instalar/usar Acrobat Pro disponível para verificar seleção e pequenas alterações em pelo menos uma página simples e outra com símbolo/fonte decorativa;
+3. inspecionar os objetos e fontes dessa edição e comparar aparência, seleção/cópia e round-trip;
+4. só então decidir se o export precisa de outra forma de construir texto ou se o limite é inerente a correções locais em PDF.
 
-O app já tem um piloto auditável em [`page-002-pt-BR-editavel.pdf`](../../output/pdf/page-002-pt-BR-editavel.pdf), que usa impressão Chromium; esta relação não prova a causa do problema nem que o arquivo piloto seja o arquivo reportado. A investigação fica fora da correção visual/dos símbolos em andamento e não autoriza modificar ou achatar PDFs agora.
+O app agora tem uma prova auditável de cinco páginas em [`middara-representative-export-proof-2026-10-10.pdf`](../../output/pdf/middara-representative-export-proof-2026-10-10.pdf), além do piloto p. 2 histórico. A extração/estrutura não substitui uma prova de edição no Acrobat e não autoriza modificar ou achatar PDFs-fonte.
 
 ## Preparação para a futura API
 
@@ -58,15 +61,15 @@ A API ainda não deve existir como parte deste piloto. Quando for criada, ela de
 
 Antes de implementar a API:
 
-1. resolver a borda preta e calibrar tamanho/fonte do PDF contra viewer e PDF-fonte;
-2. decidir como o texto decorativo PUA terá semântica adequada ao copiar/editar;
-3. conferir links internos e sua navegação no PDF;
-4. definir autenticação, fila, armazenamento, retenção e nome/versionamento de arquivos;
-5. manter a validação visual por página como etapa obrigatória e separada do preflight de gráfica.
+1. validar seleção e pequenas edições no Acrobat Pro e delimitar fontes instaladas/Type3/PUA;
+2. aumentar resolução efetiva de artwork de página onde o briefing de saída exigir;
+3. decidir semântica de cópia para glifos PUA e comportamento dos símbolos inline;
+4. conferir links internos e sua navegação no PDF;
+5. manter validação visual por página separada do preflight de gráfica; definir autenticação/fila/armazenamento somente se a API for aprovada.
 
 ## Critérios para aceitar a exportação individual
 
-- nenhuma faixa preta, corte ou espaço inesperado em torno da página;
+- caixas e composição de cada página comparadas com a fonte, sem cortes/faixas inesperadas;
 - tamanho físico igual à geometria da página-fonte;
 - uma página somente, com texto no idioma solicitado e acentos corretos ao copiar;
 - fontes carregadas e artwork/componentes completos, sem texto HTML fantasma sobre eles;

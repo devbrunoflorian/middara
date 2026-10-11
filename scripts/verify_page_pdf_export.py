@@ -4,12 +4,55 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 import pymupdf
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def font_evidence(document: pymupdf.Document, page: pymupdf.Page) -> list[dict[str, object]]:
+    result: list[dict[str, object]] = []
+    seen: set[int] = set()
+    for item in page.get_fonts(full=True):
+        xref, _, subtype, basefont, resource_name, encoding, _ = item
+        if not xref or xref in seen:
+            continue
+        seen.add(xref)
+        font_object = document.xref_object(xref)
+        related_objects: list[str] = []
+        references_to_visit = [xref]
+        visited_references: set[int] = set()
+        while references_to_visit:
+            reference = references_to_visit.pop()
+            if reference in visited_references:
+                continue
+            visited_references.add(reference)
+            try:
+                source = document.xref_object(reference)
+            except Exception:
+                continue
+            related_objects.append(source)
+            references_to_visit.extend(
+                int(value) for value in re.findall(r"(\d+)\s+\d+\s+R", source)
+            )
+        has_font_program = any(
+            re.search(r"/FontFile(?:2|3)?\s+\d+\s+\d+\s+R", source)
+            for source in related_objects
+        )
+        has_type3_glyph_program = subtype == "Type3" and "/CharProcs" in font_object
+        result.append({
+            "resource": resource_name,
+            "subtype": subtype,
+            "baseFont": basefont,
+            "encoding": encoding,
+            "toUnicode": "/ToUnicode" in font_object,
+            "embeddedFontProgram": bool(has_font_program),
+            "embeddedType3Glyphs": has_type3_glyph_program,
+        })
+    return result
 
 
 def main() -> None:
@@ -49,12 +92,16 @@ def main() -> None:
     if len(extracted.strip()) < 100:
         raise SystemExit(f"Too little selectable text was extracted ({len(extracted.strip())} characters).")
     if args.contains and args.contains not in extracted:
-        raise SystemExit(f"Required text was not found in the PDF: {args.contains!r}")
+        normalized_extracted = " ".join(extracted.split())
+        normalized_expected = " ".join(args.contains.split())
+        if normalized_expected not in normalized_extracted:
+            raise SystemExit(f"Required text was not found in the PDF: {args.contains!r}")
     if args.reject and args.reject in extracted:
         raise SystemExit(f"Unexpected text was found in the PDF: {args.reject!r}")
 
     private_use_count = sum(0xE000 <= ord(char) <= 0xF8FF for char in extracted)
     image_count = len(page.get_images(full=True))
+    font_rows = font_evidence(document, page)
     print(json.dumps({
         "pdf": str(pdf_path),
         "pages": document.page_count,
@@ -64,7 +111,9 @@ def main() -> None:
         "replacementCharacters": replacement_count,
         "privateUseCharacters": private_use_count,
         "embeddedImageObjects": image_count,
-        "fonts": [font[3] for font in page.get_fonts(full=True)],
+        "fonts": font_rows,
+        "textLines": sum(len(block.get("lines", [])) for block in page.get_text("dict")["blocks"]),
+        "selectableWords": len(page.get_text("words")),
     }, ensure_ascii=True, indent=2))
 
 

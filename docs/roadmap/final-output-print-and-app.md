@@ -10,7 +10,7 @@ O Rulebook App deve conseguir entregar dois produtos coerentes:
 1. um viewer web que preserve edição, hyperlinks, busca, áudio, voz e futuras animações;
 2. um PDF fechado, previsível e validado para uma gráfica.
 
-Um piloto separado de exportação de página individual já existe para investigar o caminho técnico. Seu processo e defeitos conhecidos estão em [`single-page-pdf-export.md`](single-page-pdf-export.md). Ele não altera a ordem do roadmap: terminar tradução e fidelidade vem antes da API de exportação ou da saída de gráfica.
+Uma prova representativa de cinco páginas já exercitou o caminho técnico (EN/PT-BR, conteúdo enriquecido, símbolos e artwork) e seus limites estão em [`single-page-pdf-export.md`](single-page-pdf-export.md). Ela não altera a ordem do roadmap: terminar tradução e fidelidade vem antes da API de exportação ou da saída de gráfica.
 
 O PDF de impressão não será uma captura de tela do browser. Ele deve ser composto a partir do mesmo modelo de página, com texto vetorial, fontes incorporadas, imagens rasterizadas na resolução final e regiões de componentes preservadas como imagens completas do PDF original. As cartas, tokens e outros componentes físicos continuam em inglês; a tradução PT-BR se aplica ao texto explicativo editável ao redor deles.
 
@@ -76,12 +76,12 @@ Nenhum exportador deve reextrair o PDF nem inferir novamente quais cartas são i
 - PDF/X, perfil ICC/output intent e conversão de cor escolhidos por preset de gráfica;
 - relatório de preflight e prova rasterizada para comparação visual.
 
-**Piloto de página individual (não é saída final)**
+**Prova representativa no viewer (não é saída final)**
 
-- usa o viewer e as traduções persistidas para imprimir uma página em PDF vetorial/raster;
-- é uma ferramenta de investigação manual; não há endpoint nem exportação de livro completo;
-- a primeira prova p. 2/PT-BR ainda tem uma borda preta à direita e embaixo e não está pronta para distribuição ou gráfica;
-- corrigir geometria de impressão e finalizar a revisão visual do livro antes de transformar o processo em API.
+- usa o viewer e traduções persistidas para imprimir cinco páginas selecionadas como PDF com texto e imagens;
+- é uma prova técnica; não há endpoint nem exportação de livro completo;
+- a composição das amostras e as caixas de página passaram verificação, mas fontes Type3/PUA, Acrobat e resolução raster ainda limitam o aceite;
+- concluir validação de edição no Acrobat e especificação de saída antes de transformar o processo em API ou gráfica.
 
 ## Fases
 
@@ -151,7 +151,7 @@ Depois da tradução e da entrega impressa estarem estáveis:
 ## Riscos e decisões pendentes
 
 - Sem briefing da gráfica, não escolher agora entre PDF/X-1a e PDF/X-4 nem fixar um perfil ICC.
-- O piloto do browser não é CMYK e não certifica fontes/cores para gráfica; a página p. 2 também mantém uma faixa preta de impressão pendente.
+- A prova do browser não é CMYK nem PDF/X e não certifica fontes/cores para gráfica; a camada raster chega a cerca de 79 ppi em partes da prova e requer revisão para o tamanho físico final.
 - A conversão de RGB para CMYK pode reduzir saturação e alterar pretos; a decisão deve ser validada por prova.
 - Transparências e blends podem exigir PDF/X-4 ou flattening controlado para X-1a.
 - Componentes em alta resolução têm custo de arquivo; a resolução será verificada no tamanho físico, não pela dimensão em pixels isolada.
