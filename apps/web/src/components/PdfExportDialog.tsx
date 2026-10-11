@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { CircleCheck, FileDown, LoaderCircle, TriangleAlert, X } from 'lucide-react'
+import { CircleCheck, CircleX, FileDown, LoaderCircle, TriangleAlert, X } from 'lucide-react'
 import { inspectLocalPersistence, type LocalPersistenceReport } from '../localPersistence'
 import { payloadApiOrigin, payloadApiUrl } from '../config/payloadApi'
 import { pdfExportBlockReason, type PdfExportJob, type PdfExportPageMode } from '../pdfExport'
@@ -233,14 +233,27 @@ export function PdfExportDialog({ open, currentLanguage, currentPage, hasUnsaved
         {job && (
           <section className={`pdf-export-job is-${job.status}`} aria-label={isPortuguese ? 'Progresso da exportação' : 'Export progress'}>
             <div className="pdf-export-job-heading">
-              {job.status === 'completed' ? <CircleCheck size={17} aria-hidden="true" /> : job.status === 'failed' ? <TriangleAlert size={17} aria-hidden="true" /> : <LoaderCircle className="pdf-export-spinner" size={17} aria-hidden="true" />}
+              {job.status === 'completed' ? <CircleCheck size={17} aria-hidden="true" /> : job.status === 'failed' ? <TriangleAlert size={17} aria-hidden="true" /> : job.status === 'cancelled' ? <CircleX size={17} aria-hidden="true" /> : <LoaderCircle className="pdf-export-spinner" size={17} aria-hidden="true" />}
               <strong>{job.stage}</strong>
             </div>
             <p className="pdf-export-job-detail" aria-live="polite">
-              {job.completedPages} / {job.totalPages} {isPortuguese ? 'páginas verificadas' : 'pages verified'}
+              {job.phase === 'verifying'
+                ? (isPortuguese ? 'Páginas renderizadas; verificando ordem, geometria e conteúdo do PDF completo…' : 'Pages rendered; verifying order, geometry, and content of the complete PDF…')
+                : job.phase === 'completed'
+                  ? (isPortuguese ? `${job.totalPages} / ${job.totalPages} páginas verificadas no PDF completo` : `${job.totalPages} / ${job.totalPages} pages verified in the complete PDF`)
+                  : `${job.completedPages} / ${job.totalPages} ${isPortuguese ? 'páginas renderizadas e verificadas individualmente' : 'pages rendered and verified individually'}`}
               {job.currentPage ? ` · ${isPortuguese ? 'página atual' : 'current page'} ${job.currentPage}` : ''}
             </p>
-            <progress value={job.completedPages} max={Math.max(1, job.totalPages)} aria-label={isPortuguese ? 'Páginas concluídas' : 'Pages completed'} />
+            <progress value={job.progressPercent} max={100} aria-label={isPortuguese ? 'Progresso total da exportação' : 'Overall export progress'} />
+            <span className="pdf-export-progress-percent">{job.progressPercent}%</span>
+            {job.status === 'completed' && (
+              <p className="pdf-export-job-detail">
+                {isPortuguese
+                  ? 'Verificação técnica de integridade concluída; isso não certifica preparação para gráfica.'
+                  : 'Technical integrity verification complete; this does not certify print-production readiness.'}
+              </p>
+            )}
+            {job.failedPage && <p className="pdf-export-job-error">{isPortuguese ? `Falha na página ${job.failedPage}.` : `Page ${job.failedPage} failed.`}</p>}
             {job.error && <p className="pdf-export-job-error" role="alert">{job.error}</p>}
           </section>
         )}

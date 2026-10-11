@@ -1,11 +1,12 @@
 import { createHash, randomUUID } from 'node:crypto'
 import { createReadStream } from 'node:fs'
-import { access, appendFile, cp, mkdir, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises'
+import { access, appendFile, cp, lstat, mkdir, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { spawn } from 'node:child_process'
+import { spawn, type ChildProcess } from 'node:child_process'
 import type { Payload } from 'payload'
 
 import { normalizePdfExportRequest, type PdfExportRequest } from './pdf-export-input'
+import { pdfExportProgressPercent, pdfExportRetentionDays, type PdfExportPhase } from './pdf-export-state'
 
 type JobDoc = {
   id: string | number
@@ -15,11 +16,17 @@ type JobDoc = {
   profile: 'visual' | 'editable'
   pages: number[]
   status: 'queued' | 'running' | 'completed' | 'failed' | 'cancelled'
+  phase?: PdfExportPhase
   completedPages: number
   totalPages: number
   currentPage?: number | null
+  failedPage?: number | null
   stage: string
   cancelRequested?: boolean
+  verificationSummary?: Record<string, unknown> | null
+  workerPid?: number | null
+  workerCommand?: string | null
+  workerProcessStartedAt?: string | null
   snapshotPath?: string | null
   snapshotHash?: string | null
   outputPath?: string | null
@@ -43,7 +50,9 @@ type SnapshotDoc = Record<string, unknown>
 
 const JOB_COLLECTION = 'pdf-export-jobs'
 const MAX_ACTIVE_JOBS = 1
-const JOB_TTL_DAYS = 7
+const DEFAULT_CLEANUP_INTERVAL_MS = 15 * 60 * 1000
+const DEFAULT_PAGE_TIMEOUT_MS = 5 * 60 * 1000
+const DEFAULT_PROCESS_TIMEOUT_MS = 15 * 60 * 1000
 const LOCAL_WEB_ORIGINS = [
   'http://localhost:8080', 'http://127.0.0.1:8080',
   'http://localhost:5173', 'http://127.0.0.1:5173',
@@ -51,16 +60,40 @@ const LOCAL_WEB_ORIGINS = [
 
 const globalCoordinator = globalThis as typeof globalThis & {
   __middaraPdfExportWorker?: { jobId: string; startedAt: number } | null
+  __middaraPdfExportProcess?: { jobId: string; child: ChildProcess; command: string } | null
   __middaraPdfExportReservation?: boolean
+  __middaraPdfExportMaintenanceTimer?: NodeJS.Timeout | null
+  __middaraPdfExportMaintenancePayload?: Payload | null
+  __middaraPdfExportMaintenanceRunning?: boolean
+  __middaraPdfExportMaintenanceLastRunAt?: number
+}
+
+class PdfExportCancelledError extends Error {
+  constructor() {
+    super('Exportação cancelada pelo usuário.')
+    this.name = 'PdfExportCancelledError'
+  }
+}
+
+function boundedEnvironmentInteger(value: string | undefined, fallback: number, minimum: number, maximum: number) {
+  const parsed = Number(value)
+  return Number.isInteger(parsed) ? Math.max(minimum, Math.min(maximum, parsed)) : fallback
+}
+
+function pdfExportCleanupIntervalMs() {
+  return boundedEnvironmentInteger(process.env.MIDDARA_PDF_EXPORT_CLEANUP_INTERVAL_MS, DEFAULT_CLEANUP_INTERVAL_MS, 60_000, 24 * 60 * 60 * 1000)
+}
+
+function pdfExportPageTimeoutMs() {
+  return boundedEnvironmentInteger(process.env.MIDDARA_PDF_EXPORT_PAGE_TIMEOUT_MS, DEFAULT_PAGE_TIMEOUT_MS, 30_000, 30 * 60 * 1000)
+}
+
+function pdfExportProcessTimeoutMs() {
+  return boundedEnvironmentInteger(process.env.MIDDARA_PDF_EXPORT_PROCESS_TIMEOUT_MS, DEFAULT_PROCESS_TIMEOUT_MS, 60_000, 60 * 60 * 1000)
 }
 
 function port(payload: Payload): PayloadJobPort {
   return payload as unknown as PayloadJobPort
-}
-
-function currentPdfExportWorkerJobId() {
-  return (globalThis as typeof globalThis & { __middaraPdfExportWorker?: { jobId: string } | null })
-    .__middaraPdfExportWorker?.jobId
 }
 
 export function pdfExportRepositoryRoot() {
@@ -69,6 +102,35 @@ export function pdfExportRepositoryRoot() {
 
 export function pdfExportJobsRoot() {
   return path.resolve(pdfExportRepositoryRoot(), 'output/pdf/jobs')
+}
+
+async function safePdfExportJobDirectory(jobId: string, create = false) {
+  if (!isValidPdfExportJobId(jobId)) return null
+  const root = path.resolve(pdfExportJobsRoot())
+  if (create) await mkdir(root, { recursive: true })
+  let rootInfo
+  try {
+    rootInfo = await lstat(root)
+  } catch {
+    return null
+  }
+  if (!rootInfo.isDirectory() || rootInfo.isSymbolicLink()) return null
+  const directory = path.resolve(root, jobId)
+  if (path.dirname(directory) !== root) return null
+  try {
+    const info = await lstat(directory)
+    if (!info.isDirectory() || info.isSymbolicLink()) return null
+  } catch (error) {
+    if (!create || (error as NodeJS.ErrnoException).code !== 'ENOENT') return null
+    try {
+      await mkdir(directory)
+    } catch (createError) {
+      if ((createError as NodeJS.ErrnoException).code !== 'EEXIST') return null
+    }
+    const info = await lstat(directory).catch(() => null)
+    if (!info?.isDirectory() || info.isSymbolicLink()) return null
+  }
+  return directory
 }
 
 export function pdfExportBaseUrl() {
@@ -159,38 +221,166 @@ async function updateJob(payload: Payload, job: JobDoc, data: Record<string, unk
 }
 
 async function findActiveJobs(payload: Payload) {
-  const result = await port(payload).find({
-    collection: JOB_COLLECTION,
-    where: { status: { in: ['queued', 'running'] } },
-    limit: 10,
-    overrideAccess: true,
-  })
-  return result.docs
+  const docs: JobDoc[] = []
+  let page = 1
+  while (true) {
+    const result = await port(payload).find({
+      collection: JOB_COLLECTION,
+      where: { status: { in: ['queued', 'running'] } },
+      limit: 250,
+      page,
+      pagination: true,
+      overrideAccess: true,
+    })
+    docs.push(...result.docs)
+    if (!result.hasNextPage || !result.nextPage) return docs
+    page = result.nextPage
+  }
 }
 
 async function cleanupExpiredExportArtifacts(payload: Payload) {
-  const result = await port(payload).find({
-    collection: JOB_COLLECTION,
-    where: {
-      status: { in: ['completed', 'failed', 'cancelled'] },
-      expiresAt: { less_than: new Date().toISOString() },
-    },
-    limit: 500,
-    overrideAccess: true,
-  })
-  const jobsRoot = path.resolve(pdfExportJobsRoot())
-  for (const job of result.docs) {
-    if (!isValidPdfExportJobId(job.jobId)) continue
-    const directory = path.resolve(jobsRoot, job.jobId)
-    if (path.dirname(directory) !== jobsRoot) continue
-    await rm(directory, { recursive: true, force: true })
-    await updateJob(payload, job, {
-      snapshotPath: null,
-      snapshotHash: null,
-      outputPath: null,
-      downloadName: null,
-      stage: 'Arquivos da exportação expirados e removidos',
+  while (true) {
+    const result = await port(payload).find({
+      collection: JOB_COLLECTION,
+      where: {
+        status: { in: ['completed', 'failed', 'cancelled'] },
+        expiresAt: { less_than: new Date().toISOString() },
+      },
+      limit: 250,
+      page: 1,
+      pagination: true,
+      overrideAccess: true,
     })
+    for (const job of result.docs) {
+      const directory = await safePdfExportJobDirectory(job.jobId)
+      if (directory) await rm(directory, { recursive: true, force: true })
+      await updateJob(payload, job, {
+        snapshotPath: null,
+        snapshotHash: null,
+        outputPath: null,
+        downloadName: null,
+        workerPid: null,
+        workerCommand: null,
+        workerProcessStartedAt: null,
+        expiresAt: null,
+        stage: 'Arquivos da exportação expirados e removidos',
+      })
+    }
+    if (result.docs.length === 0) break
+  }
+}
+
+async function cleanupIncompleteJobArtifacts(jobId: string) {
+  const directory = await safePdfExportJobDirectory(jobId)
+  if (!directory) return
+  for (const child of ['snapshot', 'parts', 'final.partial.pdf']) {
+    await rm(path.join(directory, child), { recursive: true, force: true })
+  }
+}
+
+async function cleanupFailedJobArtifacts(jobId: string) {
+  const directory = await safePdfExportJobDirectory(jobId)
+  if (!directory) return
+  await cleanupIncompleteJobArtifacts(jobId)
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    if (!entry.isFile() || !/^middara-rulebook-[a-z-]+-\d+-\d+\.pdf$/iu.test(entry.name)) continue
+    await rm(path.join(directory, entry.name), { force: true })
+  }
+}
+
+async function terminatePersistedWorker(job: JobDoc) {
+  const pid = job.workerPid
+  const startedAt = job.workerProcessStartedAt
+  const command = job.workerCommand
+  if (!pid || !Number.isSafeInteger(pid) || !startedAt || !command || process.platform !== 'win32') return false
+  if (!/^[a-z0-9_.-]+$/iu.test(command)) return false
+  const started = Date.parse(startedAt)
+  if (!Number.isFinite(started)) return false
+  const ps = [
+    '$ErrorActionPreference = \'Stop\'',
+    `$p = Get-CimInstance Win32_Process -Filter "ProcessId = ${pid}"`,
+    'if ($null -eq $p) { exit 0 }',
+    '$created = [Management.ManagementDateTimeConverter]::ToDateTime($p.CreationDate).ToUniversalTime()',
+    `$expected = [DateTimeOffset]::FromUnixTimeMilliseconds(${started}).UtcDateTime`,
+    'if ([Math]::Abs(($created - $expected).TotalSeconds) -gt 30) { exit 5 }',
+    `$needle = [regex]::Escape('${command}')`,
+    'if ($p.CommandLine -notmatch $needle) { exit 5 }',
+    `& taskkill.exe /PID ${pid} /T /F | Out-Null`,
+    'exit $LASTEXITCODE',
+  ].join('; ')
+  return await new Promise<boolean>(resolveKill => {
+    const child = spawn('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', ps], {
+      windowsHide: true,
+      stdio: 'ignore',
+    })
+    const timeout = setTimeout(() => { child.kill(); resolveKill(false) }, 5000)
+    child.once('error', () => { clearTimeout(timeout); resolveKill(false) })
+    child.once('close', code => { clearTimeout(timeout); resolveKill(code === 0) })
+  })
+}
+
+async function reconcileInterruptedJobs(payload: Payload) {
+  const jobs = await findActiveJobs(payload)
+  const localWorkerId = globalCoordinator.__middaraPdfExportWorker?.jobId
+  for (const job of jobs.filter(candidate => candidate.status === 'running')) {
+    if (localWorkerId === job.jobId) continue
+    await terminatePersistedWorker(job).catch(() => false)
+    await cleanupFailedJobArtifacts(job.jobId).catch(() => undefined)
+    await updateJob(payload, job, {
+      status: 'failed', phase: 'failed', currentPage: null,
+      failedPage: job.currentPage ?? null,
+      stage: job.currentPage
+        ? `Worker interrompido na página ${job.currentPage}; o parcial foi removido`
+        : 'Worker interrompido; o arquivo parcial foi removido',
+      error: 'O processo do backend foi reiniciado. Inicie uma nova exportação.',
+      outputPath: null, downloadName: null, snapshotPath: null, snapshotHash: null,
+      workerPid: null, workerCommand: null, workerProcessStartedAt: null,
+      completedAt: new Date().toISOString(), expiresAt: pdfExportTtlDate(),
+    })
+  }
+
+  if (globalCoordinator.__middaraPdfExportWorker || globalCoordinator.__middaraPdfExportReservation) return
+  const queued = jobs.filter(job => job.status === 'queued')
+  if (queued.length === 0) return
+  startPdfExportWorker(payload, queued[0].jobId)
+  for (const duplicate of queued.slice(1)) {
+    await updateJob(payload, duplicate, {
+      status: 'failed', phase: 'failed', stage: 'Job duplicado encontrado durante recuperação',
+      error: 'Outro job estava na fila. Inicie novamente após a exportação ativa terminar.',
+      completedAt: new Date().toISOString(), expiresAt: pdfExportTtlDate(),
+    })
+  }
+}
+
+async function runPdfExportMaintenance(payload: Payload) {
+  if (globalCoordinator.__middaraPdfExportMaintenanceRunning) return
+  globalCoordinator.__middaraPdfExportMaintenanceRunning = true
+  globalCoordinator.__middaraPdfExportMaintenanceLastRunAt = Date.now()
+  try {
+    await cleanupExpiredExportArtifacts(payload)
+    await reconcileInterruptedJobs(payload)
+  } catch (error) {
+    console.error('[pdf-export] background maintenance failed', error)
+  } finally {
+    globalCoordinator.__middaraPdfExportMaintenanceRunning = false
+  }
+}
+
+export async function initializePdfExportMaintenance(payload: Payload) {
+  globalCoordinator.__middaraPdfExportMaintenancePayload = payload
+  let initializeNow = false
+  if (!globalCoordinator.__middaraPdfExportMaintenanceTimer) {
+    const timer = setInterval(() => {
+      const currentPayload = globalCoordinator.__middaraPdfExportMaintenancePayload
+      if (currentPayload) void runPdfExportMaintenance(currentPayload)
+    }, pdfExportCleanupIntervalMs())
+    timer.unref()
+    globalCoordinator.__middaraPdfExportMaintenanceTimer = timer
+    initializeNow = true
+  }
+  const lastRunAt = globalCoordinator.__middaraPdfExportMaintenanceLastRunAt ?? 0
+  if (initializeNow || Date.now() - lastRunAt >= pdfExportCleanupIntervalMs()) {
+    await runPdfExportMaintenance(payload)
   }
 }
 
@@ -226,29 +416,10 @@ async function hashFile(filePath: string) {
   })
 }
 
-async function snapshotSourcePageBoxes(sourcePdf: string, pages: number[]) {
+async function snapshotSourcePageBoxes(payload: Payload, jobId: string, sourcePdf: string, pages: number[], logPath: string) {
   const helper = path.join(pdfExportRepositoryRoot(), 'scripts/snapshot_export_source_boxes.py')
-  return await new Promise<Record<string, Record<string, number[]>>>((resolveBoxes, rejectBoxes) => {
-    const child = spawn('python', [helper, sourcePdf, ...pages.map(String)], {
-      cwd: pdfExportRepositoryRoot(), windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'],
-    })
-    const stdout: Buffer[] = []
-    const stderr: Buffer[] = []
-    child.stdout.on('data', chunk => stdout.push(Buffer.from(chunk)))
-    child.stderr.on('data', chunk => stderr.push(Buffer.from(chunk)))
-    child.once('error', rejectBoxes)
-    child.once('exit', code => {
-      if (code !== 0) {
-        rejectBoxes(new Error(Buffer.concat(stderr).toString('utf8').trim() || 'Could not capture source page boxes.'))
-        return
-      }
-      try {
-        resolveBoxes(JSON.parse(Buffer.concat(stdout).toString('utf8')) as Record<string, Record<string, number[]>>)
-      } catch (error) {
-        rejectBoxes(error)
-      }
-    })
-  })
+  const result = await runWorkerProcess(payload, jobId, 'python', [helper, sourcePdf, ...pages.map(String)], logPath, pdfExportProcessTimeoutMs())
+  return JSON.parse(result.stdout) as Record<string, Record<string, number[]>>
 }
 
 async function listAssetHashes(directory: string, baseDirectory: string): Promise<Record<string, string>> {
@@ -270,9 +441,11 @@ async function createImmutableSnapshot(
   payload: Payload,
   jobId: string,
   request: PdfExportRequest,
+  logPath: string,
 ) {
   const root = pdfExportRepositoryRoot()
-  const jobDirectory = path.join(pdfExportJobsRoot(), jobId)
+  const jobDirectory = await safePdfExportJobDirectory(jobId, true)
+  if (!jobDirectory) throw new Error('Diretório isolado do job inválido ou indisponível.')
   const snapshotDirectory = path.join(jobDirectory, 'snapshot')
   const snapshotPages = path.join(snapshotDirectory, 'pages')
   const assetPages = [...new Set([1, ...request.pages])].sort((a, b) => a - b)
@@ -285,13 +458,15 @@ async function createImmutableSnapshot(
     readAll(payload, 'translations'),
     readAll(payload, 'layout-frames'),
     readAll(payload, 'symbol-alias-settings'),
-    snapshotSourcePageBoxes(source, request.pages),
+    snapshotSourcePageBoxes(payload, jobId, source, request.pages, logPath),
   ])
   if (await hashFile(source) !== sourcePdfSha256) {
     throw new Error('O PDF-fonte mudou durante a captura do snapshot; tente novamente.')
   }
   await mkdir(snapshotPages, { recursive: true })
   for (const pageNumber of assetPages) {
+    const current = await findJob(payload, jobId)
+    if (!current || current.cancelRequested) throw new PdfExportCancelledError()
     const name = `page_${String(pageNumber).padStart(3, '0')}`
     const sourceDirectory = path.join(canonicalPagesRoot, name)
     await access(path.join(sourceDirectory, `${name}_dom.json`))
@@ -328,6 +503,7 @@ export async function createPdfExportJob(
   value: unknown,
 ) {
   const input = validatePdfExportRequest(value)
+  await initializePdfExportMaintenance(payload)
   if (globalCoordinator.__middaraPdfExportReservation || globalCoordinator.__middaraPdfExportWorker) {
     const error = new Error('Já existe uma exportação em andamento. Aguarde ou cancele esse job.')
     Object.assign(error, { statusCode: 429 })
@@ -335,21 +511,6 @@ export async function createPdfExportJob(
   }
   globalCoordinator.__middaraPdfExportReservation = true
   try {
-    await cleanupExpiredExportArtifacts(payload)
-    const previousJobs = await findActiveJobs(payload)
-    const workerJobId = currentPdfExportWorkerJobId()
-    for (const previous of previousJobs) {
-      if (previous.status === 'running' && workerJobId !== previous.jobId) {
-        await updateJob(payload, previous, {
-          status: 'failed', currentPage: null,
-          stage: 'Worker interrompido; o arquivo parcial não foi publicado',
-          error: 'O processo do backend foi reiniciado. Inicie uma nova exportação.',
-          completedAt: new Date().toISOString(),
-        })
-      } else if (previous.status === 'queued' && !workerJobId) {
-        startPdfExportWorker(payload, previous.jobId)
-      }
-    }
     const active = await findActiveJobs(payload)
     if (active.length >= MAX_ACTIVE_JOBS) {
       const error = new Error('Já existe uma exportação em andamento. Aguarde ou cancele esse job.')
@@ -359,7 +520,7 @@ export async function createPdfExportJob(
 
     const jobId = randomUUID()
     const ownerId = await authenticatePdfExportRequest(payload, request)
-    const expiresAt = new Date(Date.now() + JOB_TTL_DAYS * 24 * 60 * 60 * 1000)
+    const expiresAt = pdfExportTtlDate()
     const created = await port(payload).create({
       collection: JOB_COLLECTION,
       overrideAccess: true,
@@ -370,11 +531,14 @@ export async function createPdfExportJob(
         profile: 'visual',
         pages: input.pages,
         status: 'queued',
+        phase: 'queued',
         completedPages: 0,
         totalPages: input.pages.length,
         stage: 'Aguardando worker de exportação',
         cancelRequested: false,
-        expiresAt: expiresAt.toISOString(),
+        failedPage: null,
+        verificationSummary: null,
+        expiresAt,
       },
     })
     startPdfExportWorker(payload, jobId)
@@ -384,15 +548,123 @@ export async function createPdfExportJob(
   }
 }
 
-async function runWorkerProcess(command: string, args: string[], logPath: string) {
-  await new Promise<void>((resolveProcess, rejectProcess) => {
-    const child = spawn(command, args, { cwd: pdfExportRepositoryRoot(), windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] })
-    const append = (chunk: Buffer) => { void appendFile(logPath, chunk).catch(() => undefined) }
-    child.stdout.on('data', append)
-    child.stderr.on('data', append)
-    child.once('error', rejectProcess)
-    child.once('exit', code => code === 0 ? resolveProcess() : rejectProcess(new Error(`Processo de exportação encerrou com código ${code ?? 'desconhecido'}.`)))
+async function terminateChildTree(child: ChildProcess) {
+  const pid = child.pid
+  if (!pid || child.exitCode !== null || child.signalCode !== null) return
+  if (process.platform === 'win32') {
+    await new Promise<void>(resolveKill => {
+      const killer = spawn('taskkill.exe', ['/PID', String(pid), '/T', '/F'], { windowsHide: true, stdio: 'ignore' })
+      const timeout = setTimeout(() => { killer.kill(); resolveKill() }, 5000)
+      killer.once('error', () => { clearTimeout(timeout); resolveKill() })
+      killer.once('close', () => { clearTimeout(timeout); resolveKill() })
+    })
+    if (child.exitCode === null && child.signalCode === null) child.kill('SIGKILL')
+    return
+  }
+
+  try { process.kill(-pid, 'SIGTERM') } catch { child.kill('SIGTERM') }
+  await new Promise<void>(resolveWait => {
+    const timeout = setTimeout(resolveWait, 1500)
+    child.once('close', () => { clearTimeout(timeout); resolveWait() })
   })
+  if (child.exitCode === null && child.signalCode === null) {
+    try { process.kill(-pid, 'SIGKILL') } catch { child.kill('SIGKILL') }
+  }
+}
+
+async function terminateActivePdfExportProcess(jobId: string) {
+  const active = globalCoordinator.__middaraPdfExportProcess
+  if (active?.jobId === jobId) await terminateChildTree(active.child)
+}
+
+async function runWorkerProcess(
+  payload: Payload,
+  jobId: string,
+  command: string,
+  args: string[],
+  logPath: string,
+  timeoutMs: number,
+) {
+  const child = spawn(command, args, {
+    cwd: pdfExportRepositoryRoot(),
+    windowsHide: true,
+    detached: process.platform !== 'win32',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  })
+  const managed = { jobId, child, command: path.basename(args[0] ?? command) }
+  globalCoordinator.__middaraPdfExportProcess = managed
+  const startedAt = new Date().toISOString()
+  let stdout = ''
+  let recentOutput = ''
+  let writeChain = Promise.resolve()
+  let timedOut = false
+  let spawnError: Error | null = null
+  const termination: { promise?: Promise<void> } = {}
+  const append = (chunk: Buffer) => {
+    const text = chunk.toString('utf8')
+    recentOutput = `${recentOutput}${text}`.slice(-3000)
+    writeChain = writeChain.then(() => appendFile(logPath, chunk)).catch(() => undefined)
+  }
+  child.stdout?.on('data', chunk => {
+    const text = Buffer.from(chunk).toString('utf8')
+    stdout = `${stdout}${text}`.slice(-100_000)
+    append(Buffer.from(chunk))
+  })
+  child.stderr?.on('data', chunk => append(Buffer.from(chunk)))
+  let timeout: NodeJS.Timeout | undefined
+  const resultPromise = new Promise<{ code: number | null; signal: NodeJS.Signals | null }>(resolveProcess => {
+    let settled = false
+    const finish = (result: { code: number | null; signal: NodeJS.Signals | null }) => {
+      if (settled) return
+      settled = true
+      resolveProcess(result)
+    }
+    child.once('error', error => {
+      spawnError = error
+      finish({ code: null, signal: null })
+    })
+    child.once('close', (code, signal) => finish({ code, signal }))
+  })
+  timeout = setTimeout(() => {
+    timedOut = true
+    termination.promise = terminateChildTree(child)
+  }, timeoutMs)
+
+  try {
+    const current = await findJob(payload, jobId)
+    if (current?.status === 'running') {
+      await updateJob(payload, current, {
+        workerPid: child.pid ?? null,
+        workerCommand: managed.command,
+        workerProcessStartedAt: startedAt,
+      })
+    }
+  } catch (error) {
+    termination.promise = terminateChildTree(child)
+    await resultPromise
+    if (timeout) clearTimeout(timeout)
+    if (globalCoordinator.__middaraPdfExportProcess === managed) globalCoordinator.__middaraPdfExportProcess = null
+    throw error
+  }
+
+  const result = await resultPromise.finally(() => {
+    if (timeout) clearTimeout(timeout)
+  })
+  if (termination.promise) await termination.promise.catch(() => undefined)
+
+  await writeChain
+  if (globalCoordinator.__middaraPdfExportProcess === managed) globalCoordinator.__middaraPdfExportProcess = null
+  const latest = await findJob(payload, jobId).catch(() => null)
+  if (latest && latest.workerPid === child.pid) {
+    await updateJob(payload, latest, { workerPid: null, workerCommand: null, workerProcessStartedAt: null }).catch(() => undefined)
+  }
+  if (spawnError) throw spawnError
+  if (timedOut) throw new Error(`Etapa excedeu o limite de ${Math.ceil(timeoutMs / 1000)} s e seus processos foram encerrados. ${recentOutput.trim()}`.trim())
+  if (result.code !== 0) {
+    if (latest?.cancelRequested) throw new PdfExportCancelledError()
+    throw new Error(`Processo de exportação encerrou com código ${result.code ?? result.signal ?? 'desconhecido'}. ${recentOutput.trim()}`.trim())
+  }
+  return { stdout }
 }
 
 async function verifySnapshotAssets(snapshotPath: string, manifest: Record<string, string>) {
@@ -408,21 +680,37 @@ async function verifySnapshotAssets(snapshotPath: string, manifest: Record<strin
 async function executePdfExportJob(payload: Payload, jobId: string) {
   let job = await findJob(payload, jobId)
   if (!job || job.status !== 'queued') return
-  const jobDirectory = path.join(pdfExportJobsRoot(), jobId)
+  const jobDirectory = await safePdfExportJobDirectory(jobId, true)
+  if (!jobDirectory) throw new Error('Diretório isolado do job inválido ou indisponível.')
   const logPath = path.join(jobDirectory, 'worker.log')
+  await writeFile(logPath, '', { flag: 'w' })
   job = await updateJob(payload, job, {
-    status: 'running', currentPage: null, stage: 'Capturando snapshot imutável das entradas',
-    startedAt: new Date().toISOString(), error: null,
+    status: 'running', phase: 'preparing', currentPage: null, failedPage: null,
+    stage: 'Preparando snapshot imutável das entradas',
+    startedAt: new Date().toISOString(), error: null, outputPath: null, downloadName: null,
   })
+  const afterStart = await findJob(payload, jobId)
+  if (!afterStart || afterStart.cancelRequested || afterStart.status === 'cancelled') {
+    if (afterStart && afterStart.status !== 'cancelled') {
+      await updateJob(payload, afterStart, {
+        status: 'cancelled', phase: 'cancelled', currentPage: null,
+        stage: 'Exportação cancelada antes da preparação', completedAt: new Date().toISOString(),
+        expiresAt: pdfExportTtlDate(),
+      })
+    }
+    await cleanupIncompleteJobArtifacts(jobId)
+    return
+  }
+  job = afterStart
   const capturedSnapshot = await createImmutableSnapshot(payload, jobId, {
     language: job.language,
     profile: 'visual',
     pages: job.pages,
-  })
+  }, logPath)
   job = await updateJob(payload, job, {
     snapshotPath: capturedSnapshot.snapshotPath,
     snapshotHash: capturedSnapshot.snapshotHash,
-    stage: 'Snapshot imutável confirmado; inicializando Chromium',
+    stage: 'Snapshot imutável confirmado',
   })
   const snapshotPath = capturedSnapshot.snapshotPath
   if (!(await ensurePdfExportSnapshotIntact(job))) throw new Error('Snapshot do job ausente ou inválido.')
@@ -433,10 +721,9 @@ async function executePdfExportJob(payload: Payload, jobId: string) {
   await verifySnapshotAssets(snapshotPath, snapshotData.pageAssetSha256)
 
   await mkdir(path.join(jobDirectory, 'parts'), { recursive: true })
-  await writeFile(logPath, '', { flag: 'w' })
   job = await updateJob(payload, job, {
-    status: 'running', currentPage: null, stage: 'Inicializando Chromium isolado',
-    startedAt: new Date().toISOString(), error: null,
+    status: 'running', phase: 'rendering', currentPage: null,
+    stage: 'Renderizando páginas com Chromium isolado',
   })
 
   const root = pdfExportRepositoryRoot()
@@ -446,19 +733,22 @@ async function executePdfExportJob(payload: Payload, jobId: string) {
     if (!refreshed) throw new Error('Job removido durante a exportação.')
     if (refreshed.cancelRequested) {
       await updateJob(payload, refreshed, {
-        status: 'cancelled', currentPage: null, stage: `Cancelado após ${index} de ${job.pages.length} páginas`,
-        completedAt: new Date().toISOString(),
+        status: 'cancelled', phase: 'cancelled', currentPage: null,
+        stage: `Cancelado após ${index} de ${job.pages.length} páginas`,
+        completedAt: new Date().toISOString(), expiresAt: pdfExportTtlDate(),
       })
+      await cleanupIncompleteJobArtifacts(jobId)
       return
     }
 
     const pageNumber = job.pages[index]
     const pageOutput = path.join(jobDirectory, 'parts', `page-${String(pageNumber).padStart(3, '0')}.pdf`)
     await updateJob(payload, refreshed, {
+      phase: 'rendering',
       currentPage: pageNumber,
-      stage: `Renderizando página ${pageNumber} de ${job.pages.length}`,
+      stage: `Renderizando lote ${index + 1} de ${job.pages.length} (Rulebook p. ${pageNumber})`,
     })
-    await runWorkerProcess(process.execPath, [
+    await runWorkerProcess(payload, jobId, process.execPath, [
       pageExporter,
       '--page', String(pageNumber),
       '--language', job.language,
@@ -467,12 +757,13 @@ async function executePdfExportJob(payload: Payload, jobId: string) {
       '--base-url', pdfExportBaseUrl(),
       '--api-url', pdfExportApiUrl(),
       '--snapshot', snapshotPath,
-    ], logPath)
+    ], logPath, pdfExportPageTimeoutMs())
 
     const afterPage = await findJob(payload, jobId)
     if (!afterPage) throw new Error('Job removido durante a exportação.')
     job = await updateJob(payload, afterPage, {
       completedPages: index + 1, currentPage: null,
+      phase: 'rendering',
       stage: `Página ${pageNumber} verificada (${index + 1}/${job.pages.length})`,
     })
   }
@@ -481,31 +772,48 @@ async function executePdfExportJob(payload: Payload, jobId: string) {
   if (!beforeMerge) throw new Error('Job removido antes da montagem final.')
   if (beforeMerge.cancelRequested) {
     await updateJob(payload, beforeMerge, {
-      status: 'cancelled', currentPage: null, stage: 'Cancelado antes da montagem final', completedAt: new Date().toISOString(),
+      status: 'cancelled', phase: 'cancelled', currentPage: null,
+      stage: 'Cancelado antes da montagem final', completedAt: new Date().toISOString(),
+      expiresAt: pdfExportTtlDate(),
     })
+    await cleanupIncompleteJobArtifacts(jobId)
     return
   }
   const finalName = `middara-rulebook-${job.language}-${job.pages[0]}-${job.pages[job.pages.length - 1]}.pdf`
   const partialOutput = path.join(jobDirectory, 'final.partial.pdf')
   const finalOutput = path.join(jobDirectory, finalName)
   const partPaths = job.pages.map(page => path.join(jobDirectory, 'parts', `page-${String(page).padStart(3, '0')}.pdf`))
-  await updateJob(payload, beforeMerge, { stage: 'Montando o PDF multipágina verificado' })
-  await runWorkerProcess('python', [path.join(root, 'scripts/merge_export_pages.py'), partialOutput, ...partPaths], logPath)
+  await updateJob(payload, beforeMerge, { phase: 'assembling', currentPage: null, stage: 'Montando o PDF multipágina' })
+  await runWorkerProcess(payload, jobId, 'python', [path.join(root, 'scripts/merge_export_pages.py'), partialOutput, ...partPaths], logPath, pdfExportProcessTimeoutMs())
+  const latestBeforeVerify = await findJob(payload, jobId)
+  if (!latestBeforeVerify) throw new Error('Job removido antes da verificação final.')
+  if (latestBeforeVerify.cancelRequested) throw new PdfExportCancelledError()
+  const verificationPath = path.join(jobDirectory, 'verification.json')
+  await updateJob(payload, latestBeforeVerify, { phase: 'verifying', stage: `Verificando arquivo, ordem, conteúdo e render das ${job.pages.length} páginas` })
+  await runWorkerProcess(payload, jobId, 'python', [
+    path.join(root, 'scripts/verify_full_pdf_export.py'), partialOutput, snapshotPath, verificationPath, ...partPaths,
+  ], logPath, pdfExportProcessTimeoutMs())
+  const verification = JSON.parse(await readFile(verificationPath, 'utf8')) as Record<string, unknown>
+  const verificationSummary = Object.fromEntries([
+    'pageCount', 'renderedAndVerifiedPages', 'pagesWithSelectableText',
+    'sourcePagesExpectedToContainText', 'technicalVerificationOnly',
+  ].filter(key => key in verification).map(key => [key, verification[key]]))
+  const afterVerify = await findJob(payload, jobId)
+  if (!afterVerify) throw new Error('Job removido após a verificação final.')
+  if (afterVerify.cancelRequested) throw new PdfExportCancelledError()
   await rename(partialOutput, finalOutput)
   const latest = await findJob(payload, jobId)
   if (!latest) throw new Error('Job removido ao concluir a montagem.')
   if (latest.cancelRequested) {
-    await updateJob(payload, latest, {
-      status: 'cancelled', currentPage: null, stage: 'Cancelado antes de publicar o download',
-      outputPath: null, completedAt: new Date().toISOString(),
-    })
-    return
+    throw new PdfExportCancelledError()
   }
   await updateJob(payload, latest, {
-    status: 'completed', completedPages: job.pages.length, totalPages: job.pages.length,
-    currentPage: null, stage: 'PDF completo e verificado', outputPath: finalOutput,
-    downloadName: finalName, completedAt: new Date().toISOString(), expiresAt: pdfExportTtlDate(),
+    status: 'completed', phase: 'completed', completedPages: job.pages.length, totalPages: job.pages.length,
+    currentPage: null, failedPage: null, stage: 'PDF completo e verificado tecnicamente', outputPath: finalOutput,
+    downloadName: finalName, verificationSummary, completedAt: new Date().toISOString(), expiresAt: pdfExportTtlDate(),
+    snapshotPath: null, snapshotHash: null, workerPid: null, workerCommand: null, workerProcessStartedAt: null,
   })
+  await cleanupIncompleteJobArtifacts(jobId)
 }
 
 function startPdfExportWorker(payload: Payload, jobId: string) {
@@ -518,50 +826,60 @@ function startPdfExportWorker(payload: Payload, jobId: string) {
         const current = await findJob(payload, jobId).catch(() => null)
         if (current && (current.status === 'queued' || current.status === 'running')) {
           const detail = error instanceof Error ? error.message : 'Falha desconhecida no worker.'
-          await updateJob(payload, current, {
-            status: 'failed', currentPage: null,
-            stage: 'Falha na exportação; arquivo parcial indisponível',
+          const cancelled = current.cancelRequested || error instanceof PdfExportCancelledError
+          await cleanupFailedJobArtifacts(jobId).catch(() => undefined)
+          await updateJob(payload, current, cancelled ? {
+            status: 'cancelled', phase: 'cancelled', currentPage: null, outputPath: null,
+            stage: `Exportação cancelada após ${current.completedPages} de ${current.totalPages} páginas`,
+            error: null, completedAt: new Date().toISOString(), expiresAt: pdfExportTtlDate(),
+            snapshotPath: null, snapshotHash: null, workerPid: null, workerCommand: null, workerProcessStartedAt: null,
+          } : {
+            status: 'failed', phase: 'failed', currentPage: null, failedPage: current.currentPage ?? null, outputPath: null,
+            stage: current.currentPage
+              ? `Falha ao exportar a página ${current.currentPage}`
+              : 'Falha na exportação; arquivo parcial indisponível',
             error: `${detail} Verifique o log do job e tente novamente.`.slice(0, 500),
-            completedAt: new Date().toISOString(),
+            completedAt: new Date().toISOString(), expiresAt: pdfExportTtlDate(),
+            snapshotPath: null, snapshotHash: null, workerPid: null, workerCommand: null, workerProcessStartedAt: null,
           }).catch(() => undefined)
         }
       })
       .finally(() => {
         if (globalCoordinator.__middaraPdfExportWorker === worker) globalCoordinator.__middaraPdfExportWorker = null
+        setImmediate(() => { void runPdfExportMaintenance(payload) })
       })
   })
 }
 
 export async function getPdfExportJob(payload: Payload, jobId: string) {
-  let job = await findJob(payload, jobId)
-  const worker = globalCoordinator.__middaraPdfExportWorker
-  if (job?.status === 'queued' && !worker) {
-    startPdfExportWorker(payload, jobId)
-  } else if (job?.status === 'running' && worker?.jobId !== jobId) {
-    job = await updateJob(payload, job, {
-      status: 'failed', currentPage: null,
-      stage: 'Worker interrompido; o arquivo parcial não foi publicado',
-      error: 'O processo do backend foi reiniciado. Inicie uma nova exportação.',
-      completedAt: new Date().toISOString(),
-    })
-  }
-  return job
+  await initializePdfExportMaintenance(payload)
+  return findJob(payload, jobId)
 }
 
 export async function requestPdfExportCancellation(payload: Payload, job: JobDoc) {
   if (job.status === 'queued') {
-    return updateJob(payload, job, {
-      status: 'cancelled', cancelRequested: true, currentPage: null,
+    const workerOwnsJob = globalCoordinator.__middaraPdfExportWorker?.jobId === job.jobId
+    const updated = await updateJob(payload, job, workerOwnsJob ? {
+      cancelRequested: true,
+      stage: 'Cancelamento solicitado antes da preparação',
+    } : {
+      status: 'cancelled', phase: 'cancelled', cancelRequested: true, currentPage: null,
       stage: 'Exportação cancelada antes do início', completedAt: new Date().toISOString(),
+      expiresAt: pdfExportTtlDate(),
     })
+    if (workerOwnsJob) await terminateActivePdfExportProcess(job.jobId)
+    else await cleanupIncompleteJobArtifacts(job.jobId)
+    return updated
   }
   if (job.status === 'running') {
-    return updateJob(payload, job, {
+    const updated = await updateJob(payload, job, {
       cancelRequested: true,
       stage: job.currentPage
-        ? `Cancelamento solicitado; concluindo a página ${job.currentPage}`
-        : 'Cancelamento solicitado; parando em um limite seguro',
+        ? `Encerrando os processos da página ${job.currentPage}`
+        : 'Encerrando os processos da etapa atual',
     })
+    await terminateActivePdfExportProcess(job.jobId)
+    return updated
   }
   return job
 }
@@ -569,16 +887,23 @@ export async function requestPdfExportCancellation(payload: Payload, job: JobDoc
 export function publicPdfExportJob(job: JobDoc, includeDownloadUrl = false) {
   const expiresAt = job.expiresAt ? Date.parse(job.expiresAt) : 0
   const hasDownload = job.status === 'completed' && !!job.outputPath && expiresAt > Date.now()
+  const phase = job.phase ?? (job.status === 'running'
+    ? (job.currentPage ? 'rendering' : 'preparing')
+    : job.status)
   return {
     id: job.jobId,
     language: job.language,
     profile: job.profile,
     pages: job.pages,
     status: job.status,
+    phase,
     completedPages: job.completedPages,
     totalPages: job.totalPages,
+    progressPercent: pdfExportProgressPercent(phase, job.completedPages, job.totalPages),
     currentPage: job.currentPage ?? null,
+    failedPage: job.failedPage ?? null,
     stage: job.stage,
+    verificationSummary: job.verificationSummary ?? null,
     cancelRequested: !!job.cancelRequested,
     error: job.error ?? null,
     createdAt: job.createdAt ?? null,
@@ -598,14 +923,15 @@ export function isValidPdfExportJobId(jobId: string) {
 
 export async function getSafePdfExportOutputPath(job: JobDoc) {
   if (!job.outputPath || !isValidPdfExportJobId(job.jobId)) return null
-  const jobDirectory = path.resolve(pdfExportJobsRoot(), job.jobId)
+  const safeDirectory = await safePdfExportJobDirectory(job.jobId)
+  if (!safeDirectory) return null
+  const jobDirectory = path.resolve(safeDirectory)
   const outputPath = path.resolve(job.outputPath)
   const relativePath = path.relative(jobDirectory, outputPath)
-  if (!relativePath || relativePath.startsWith('..') || path.isAbsolute(relativePath)) return null
-  if (!relativePath.toLowerCase().endsWith('.pdf')) return null
+  if (!/^middara-rulebook-[a-z-]+-\d+-\d+\.pdf$/iu.test(relativePath)) return null
   try {
-    const info = await stat(outputPath)
-    if (!info.isFile()) return null
+    const info = await lstat(outputPath)
+    if (!info.isFile() || info.isSymbolicLink()) return null
     return outputPath
   } catch {
     return null
@@ -642,7 +968,7 @@ export async function readPdfExportSnapshot(snapshotPath: string) {
 }
 
 export function pdfExportTtlDate() {
-  return new Date(Date.now() + JOB_TTL_DAYS * 24 * 60 * 60 * 1000).toISOString()
+  return new Date(Date.now() + pdfExportRetentionDays(process.env.MIDDARA_PDF_EXPORT_RETENTION_DAYS) * 24 * 60 * 60 * 1000).toISOString()
 }
 
 export type { JobDoc }

@@ -2,6 +2,7 @@ import type { LocalPersistenceReport } from './localPersistence'
 
 export type PdfExportPageMode = 'all' | 'current' | 'range'
 export type PdfExportStatus = 'queued' | 'running' | 'completed' | 'failed' | 'cancelled'
+export type PdfExportPhase = 'queued' | 'preparing' | 'rendering' | 'assembling' | 'verifying' | 'completed' | 'failed' | 'cancelled'
 
 export interface PdfExportJob {
   id: string
@@ -9,10 +10,14 @@ export interface PdfExportJob {
   profile: 'visual'
   pages: number[]
   status: PdfExportStatus
+  phase: PdfExportPhase
   completedPages: number
   totalPages: number
+  progressPercent: number
   currentPage: number | null
+  failedPage: number | null
   stage: string
+  verificationSummary: Record<string, unknown> | null
   cancelRequested: boolean
   error: string | null
   hasDownload: boolean

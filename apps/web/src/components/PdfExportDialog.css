@@ -105,8 +105,10 @@
 .pdf-export-job progress::-webkit-progress-bar { border-radius: 999px; background: rgba(4, 6, 13, 0.78); }
 .pdf-export-job progress::-webkit-progress-value { border-radius: 999px; background: linear-gradient(90deg, var(--arcane-cyan), var(--arcane-spectral)); }
 .pdf-export-job progress::-moz-progress-bar { border-radius: 999px; background: linear-gradient(90deg, var(--arcane-cyan), var(--arcane-spectral)); }
+.pdf-export-progress-percent { display: block; margin-top: 4px; color: var(--arcane-text-muted); font-size: 10px; text-align: right; }
 .pdf-export-job.is-completed { border-color: rgba(116, 208, 166, 0.34); background: rgba(54, 115, 85, 0.13); }
 .pdf-export-job.is-failed { border-color: rgba(255, 130, 149, 0.35); background: rgba(116, 35, 48, 0.13); }
+.pdf-export-job.is-cancelled { border-color: rgba(196, 177, 219, 0.32); background: rgba(76, 60, 92, 0.15); }
 .pdf-export-job-error,
 .pdf-export-error { margin: 8px 0 0; color: #ffb0ba; font-size: 11px; line-height: 1.45; }
 .pdf-export-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; padding-top: 3px; }

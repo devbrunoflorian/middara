@@ -13,6 +13,57 @@ import pymupdf
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def source_visible_text_character_count(value: object) -> int:
+    """Count text still expected to be selectable, excluding text already in page artwork."""
+    if isinstance(value, dict):
+        if value.get("hiddenFromPage") is True or value.get("rasterizedDuplicate") is True:
+            return 0
+        own_text = value.get("text")
+        own_count = len(own_text.strip()) if isinstance(own_text, str) else 0
+        return own_count + sum(
+            source_visible_text_character_count(item)
+            for key, item in value.items()
+            if key != "text"
+        )
+    if isinstance(value, list):
+        return sum(source_visible_text_character_count(item) for item in value)
+    return 0
+
+
+def validate_selectable_content(source: object, extracted: str, image_count: int) -> int:
+    expected_chars = source_visible_text_character_count(source)
+    extracted_chars = len(extracted.strip())
+    if expected_chars:
+        minimum = max(1, min(100, (expected_chars + 1) // 2))
+        if extracted_chars < minimum:
+            raise ValueError(
+                f"Too little selectable text was extracted ({extracted_chars} characters; "
+                f"at least {minimum} expected from visible source text)."
+            )
+    elif not extracted_chars and image_count == 0:
+        raise ValueError("The page has neither selectable source text nor embedded visual content.")
+    return expected_chars
+
+
+def contains_text_fragment(expected: str, extracted: str) -> bool:
+    """Match text while tolerating a lost separator after a styled list marker.
+
+    Chromium/PDF text extraction can join an alphabetic marker and the next
+    styled run (for example, ``b. Faça`` -> ``b.Faça``). Limit that tolerance
+    to a standalone lowercase marker immediately followed by an uppercase
+    word; ordinary prose whitespace remains strict.
+    """
+    normalized_expected = " ".join(expected.split())
+    normalized_extracted = " ".join(extracted.split())
+    if normalized_expected in normalized_extracted:
+        return True
+
+    def compact_list_marker_space(value: str) -> str:
+        return re.sub(r"(?<!\w)([a-z]\.)(\s+)(?=[A-Z\u00c0-\u00de])", r"\1", value)
+
+    return compact_list_marker_space(normalized_expected) in compact_list_marker_space(normalized_extracted)
+
+
 def font_evidence(document: pymupdf.Document, page: pymupdf.Page) -> list[dict[str, object]]:
     result: list[dict[str, object]] = []
     seen: set[int] = set()
@@ -89,18 +140,17 @@ def main() -> None:
     replacement_count = extracted.count("\ufffd")
     if replacement_count:
         raise SystemExit(f"Text map contains {replacement_count} replacement characters.")
-    if len(extracted.strip()) < 100:
-        raise SystemExit(f"Too little selectable text was extracted ({len(extracted.strip())} characters).")
-    if args.contains and args.contains not in extracted:
-        normalized_extracted = " ".join(extracted.split())
-        normalized_expected = " ".join(args.contains.split())
-        if normalized_expected not in normalized_extracted:
-            raise SystemExit(f"Required text was not found in the PDF: {args.contains!r}")
+    image_count = len(page.get_images(full=True))
+    try:
+        visible_source_characters = validate_selectable_content(source, extracted, image_count)
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
+    if args.contains and not contains_text_fragment(args.contains, extracted):
+        raise SystemExit(f"Required text was not found in the PDF: {args.contains!r}")
     if args.reject and args.reject in extracted:
         raise SystemExit(f"Unexpected text was found in the PDF: {args.reject!r}")
 
     private_use_count = sum(0xE000 <= ord(char) <= 0xF8FF for char in extracted)
-    image_count = len(page.get_images(full=True))
     font_rows = font_evidence(document, page)
     print(json.dumps({
         "pdf": str(pdf_path),
@@ -108,6 +158,7 @@ def main() -> None:
         "pageSizePt": [round(width, 3), round(height, 3)],
         "expectedPageSizePt": [round(expected_width, 3), round(expected_height, 3)],
         "selectableCharacters": len(extracted),
+        "visibleSourceCharactersExpected": visible_source_characters,
         "replacementCharacters": replacement_count,
         "privateUseCharacters": private_use_count,
         "embeddedImageObjects": image_count,

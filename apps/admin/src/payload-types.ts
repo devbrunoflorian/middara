@@ -329,11 +329,25 @@ export interface PdfExportJob {
     | boolean
     | null;
   status: 'queued' | 'running' | 'completed' | 'failed' | 'cancelled';
+  phase: 'queued' | 'preparing' | 'rendering' | 'assembling' | 'verifying' | 'completed' | 'failed' | 'cancelled';
   completedPages: number;
   totalPages: number;
   currentPage?: number | null;
+  failedPage?: number | null;
   stage: string;
   cancelRequested: boolean;
+  verificationSummary?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  workerPid?: number | null;
+  workerCommand?: string | null;
+  workerProcessStartedAt?: string | null;
   snapshotPath?: string | null;
   snapshotHash?: string | null;
   outputPath?: string | null;
@@ -592,11 +606,17 @@ export interface PdfExportJobsSelect<T extends boolean = true> {
   profile?: T;
   pages?: T;
   status?: T;
+  phase?: T;
   completedPages?: T;
   totalPages?: T;
   currentPage?: T;
+  failedPage?: T;
   stage?: T;
   cancelRequested?: T;
+  verificationSummary?: T;
+  workerPid?: T;
+  workerCommand?: T;
+  workerProcessStartedAt?: T;
   snapshotPath?: T;
   snapshotHash?: T;
   outputPath?: T;
