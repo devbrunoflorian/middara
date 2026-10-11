@@ -16,7 +16,7 @@ export interface SourceInlineElement {
   mask: { url: string; bbox: [number,number,number,number]; clipShape?: 'circle' };
 }
 
-/** Clip a cleanup patch to the source symbol's circular ink footprint. */
+/** Clip cleanup to the native circular ink while retaining the raster antialias edge. */
 export function sourceMaskClipPath(element: SourceInlineElement): string | undefined {
   if (element.mask.clipShape !== 'circle') return undefined;
   const [maskX0, maskY0, maskX1, maskY1] = element.mask.bbox;
@@ -25,11 +25,14 @@ export function sourceMaskClipPath(element: SourceInlineElement): string | undef
   const maskHeight = maskY1 - maskY0;
   if (maskWidth <= 0 || maskHeight <= 0) return undefined;
 
-  // The bitmap includes padding for antialiasing, but painting that padding
-  // creates a visible halo once ordinary whitespace separates the symbol from
-  // its following text. Keep cleanup paint inside the original circular ink.
-  const radiusX = Math.min(maskWidth / 2, (x1 - x0) / 2) / maskWidth * 100;
-  const radiusY = Math.min(maskHeight / 2, (y1 - y0) / 2) / maskHeight * 100;
+  // The native PDF's circular glyph ink is wider than the semantic SVG's
+  // visible bbox. Clipping to that SVG bbox leaves a thin rim of the original
+  // raster symbol behind in reflowed locales. The cleanup bitmap is tightly
+  // cropped on the source raster grid; keep a 1% inset from its edge so the
+  // patch covers the native antialias fringe without painting its padded edge.
+  const rasterInsetPercent = 1;
+  const radiusX = 50 - rasterInsetPercent;
+  const radiusY = 50 - rasterInsetPercent;
   const centerX = ((x0 + x1) / 2 - maskX0) / maskWidth * 100;
   const centerY = ((y0 + y1) / 2 - maskY0) / maskHeight * 100;
   return `ellipse(${radiusX}% ${radiusY}% at ${centerX}% ${centerY}%)`;

@@ -1,16 +1,18 @@
 # Exportação de uma página em PDF
 
-**Status:** a geometria do palco de impressão foi corrigida; o aceite visual ainda está pendente.
-**Prova em revisão:** 11/10/2026 — p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN.
+**Status:** prova visual representativa concluída; ainda não é exportação de produção.
+**Prova mais recente:** 11/10/2026 — p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN.
 **API:** não implementada; este documento prepara o fluxo para uma API futura.
 
-## Correção de geometria de impressão — 11/10/2026
+## Paridade visual representativa — 11/10/2026
 
-O PDF de 10/10 foi reprovado visualmente e permanece apenas como histórico. A causa do reflow na impressão foi o flex shrink: `.page-stage` encolhia, enquanto `.page-container` conservava o tamanho CSS anterior. O exportador mantém agora o palco e seu contêiner coerentes durante a impressão, sem editar geometria do Viewer ou conteúdo salvo.
+O PDF de 10/10 foi reprovado visualmente e permanece apenas como histórico. O arquivo [middara-representative-export-visual-parity-2026-10-11.pdf](../../output/pdf/middara-representative-export-visual-parity-2026-10-11.pdf) contém cinco páginas impressas pelo Chromium a partir do Viewer: p. 13, 24 e 42 em PT-BR; p. 78 em PT-BR e EN. Ele preserva texto como objetos PDF, imagens e marcadores por página.
 
-Uma prova de cinco páginas exercita p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN. As métricas estruturais viewer/print mostram linhas e imagens alinhadas. Durante a revisão visual, porém, foi identificado um resíduo circular em máscaras dos símbolos semânticos na p. 78 PT-BR; a causa está no caminho de limpeza da fonte, não no flex de impressão. **Portanto, esta correção A não representa aceite visual completo**; a investigação e correção PT-BR permanecem separadas no Commit B.
+O flex encolhia `.page-stage` enquanto `.page-container` conservava seu tamanho CSS, causando escalas divergentes e reflow/overlap na impressão. O exportador mantém ambos coerentes e preserva o flex horizontal da shell, removendo apenas controles de navegação. Não foi necessário alterar `PageRenderer`, geometria da página ou conteúdo salvo.
 
-Na tentativa inicial desta execução, a regra de impressão mostrava apenas a shell escura: `.app-container` havia sido convertido em bloco e o viewer ficava fora da página. O exportador preserva agora o flex horizontal e remove apenas controles da shell. O teste foi repetido nas cinco páginas representativas.
+Na revisão comparativa EN/PT-BR da p. 78, o Viewer PT-BR já mostrava um resíduo circular ao redor de algumas máscaras; o mesmo aparecia no PDF. Não era um defeito exclusivo de impressão, nem de tokenização, espaçamento, SVG, baseline ou advance. O patch de limpeza era limitado pelo bbox visível do SVG semântico, menor que a tinta circular do glifo raster original. `sourceMaskClipPath` agora cobre 49% do crop raster, centralizado no mesmo anchor (mantendo 1% de inset antialias). A correção remove o anel no Viewer e no PDF sem alterar conteúdo, bbox/advance dos símbolos, anchor ou formas canônicas. A comparação EN/PT-BR Viewer/PDF e a prova de cinco páginas estão em [p. 78 completo](../../output/pdf/middara-p78-en-ptbr-viewer-pdf-comparison-2026-10-11.png), [detalhe Gigas Grip](../../output/pdf/middara-p78-gigas-grip-en-ptbr-detail-2026-10-11.png) e [cinco páginas](../../output/pdf/middara-representative-five-page-viewer-pdf-comparison-2026-10-11.png).
+
+Na captura estrutural, contagem de linhas, símbolos e imagens coincide entre Viewer e impressão nas cinco páginas. Os retângulos normalizados diferem até 0,02 pt nas linhas de quatro amostras e 0,79 pt na p. 78 EN; símbolos, até 0,56 pt; imagens, até 0,01 pt. O PDF final foi renderizado de volta para a comparação visual, não inferido apenas de texto extraído. Isto é uma amostra representativa, não certificação de todas as 102 páginas.
 
 Fontes: parte dos textos usa fontes PDF Type3 com CharProcs vetoriais autocontidos; outras usam Type0 com programa incorporado. Todos os recursos tinham `/ToUnicode`, mas isso não equivale a incorporar uma face OpenType editável. Há glifos de símbolos/ornamentos em áreas PUA, que podem ser copiados como codepoints privados. Portanto, a prova demonstra texto real selecionável e extraível, não edição confiável de parágrafos no Acrobat nem compatibilidade com InDesign. O Acrobat Pro não está instalado neste ambiente e a edição direta não foi validada nele.
 
@@ -53,7 +55,7 @@ Na investigação futura:
 3. inspecionar os objetos e fontes dessa edição e comparar aparência, seleção/cópia e round-trip;
 4. só então decidir se o export precisa de outra forma de construir texto ou se o limite é inerente a correções locais em PDF.
 
-O app agora tem uma prova auditável de cinco páginas em [`middara-representative-export-proof-2026-10-10.pdf`](../../output/pdf/middara-representative-export-proof-2026-10-10.pdf), além do piloto p. 2 histórico. A extração/estrutura não substitui uma prova de edição no Acrobat e não autoriza modificar ou achatar PDFs-fonte.
+O app agora tem uma prova auditável de cinco páginas em [`middara-representative-export-visual-parity-2026-10-11.pdf`](../../output/pdf/middara-representative-export-visual-parity-2026-10-11.pdf), além do piloto p. 2 e do artefato de 10/10 reprovados, mantidos como histórico. A extração/estrutura não substitui uma prova de edição no Acrobat e não autoriza modificar ou achatar PDFs-fonte.
 
 ## Preparação para a futura API
 

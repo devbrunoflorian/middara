@@ -18,7 +18,7 @@ const cases = [
 ];
 
 describe('source inline whitespace ordering', () => {
-  it('keeps trailing whitespace in the following text run without expanding the source cleanup circle', () => {
+  it('preserves adjacent whitespace while cleaning the full native circular symbol ink', () => {
     const pageDir = join(process.cwd(), 'public/pages', 'page_078');
     const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
     const target = elements.find(element => element.symbolId === 'attack.ranged'
@@ -67,8 +67,12 @@ describe('source inline whitespace ordering', () => {
     const match = clip.match(/^ellipse\(([\d.]+)% ([\d.]+)% at ([\d.]+)% ([\d.]+)%\)$/)!;
     const maskWidth = maskX1 - maskX0;
     const maskHeight = maskY1 - maskY0;
-    expect(Number(match[1]) * maskWidth / 100).toBeCloseTo((x1 - x0) / 2, 8);
-    expect(Number(match[2]) * maskHeight / 100).toBeCloseTo((y1 - y0) / 2, 8);
+    expect(Number(match[1])).toBe(49);
+    expect(Number(match[2])).toBe(49);
+    expect(Number(match[1]) * maskWidth / 100).toBeGreaterThan((x1 - x0) / 2);
+    expect(Number(match[2]) * maskHeight / 100).toBeGreaterThan((y1 - y0) / 2);
+    expect(Number(match[1]) * maskWidth / 100).toBeLessThan(maskWidth / 2);
+    expect(Number(match[2]) * maskHeight / 100).toBeLessThan(maskHeight / 2);
     expect(Number(match[3])).toBeCloseTo(((x0 + x1) / 2 - maskX0) / maskWidth * 100, 8);
     expect(Number(match[4])).toBeCloseTo(((y0 + y1) / 2 - maskY0) / maskHeight * 100, 8);
 
@@ -88,13 +92,15 @@ describe('source inline whitespace ordering', () => {
       const [circleMaskX0, circleMaskY0, circleMaskX1, circleMaskY1] = circularElement.mask.bbox;
       const [symbolX0, symbolY0, symbolX1, symbolY1] = circularElement.bbox;
       expect(Number(circleMatch[1]) * (circleMaskX1 - circleMaskX0) / 100)
-        .toBeCloseTo((symbolX1 - symbolX0) / 2, 8);
+        .toBeCloseTo((circleMaskX1 - circleMaskX0) * 0.49, 8);
       expect(Number(circleMatch[2]) * (circleMaskY1 - circleMaskY0) / 100)
-        .toBeCloseTo((symbolY1 - symbolY0) / 2, 8);
+        .toBeCloseTo((circleMaskY1 - circleMaskY0) * 0.49, 8);
+      expect(Number(circleMatch[1]) * (circleMaskX1 - circleMaskX0) / 100).toBeGreaterThan((symbolX1 - symbolX0) / 2);
+      expect(Number(circleMatch[2]) * (circleMaskY1 - circleMaskY0) / 100).toBeGreaterThan((symbolY1 - symbolY0) / 2);
     }
   });
 
-  it('keeps all circular attack-symbol masks within their source ink bounds', () => {
+  it('keeps all 44 circular attack-symbol cleanup masks inside their raster crop padding', () => {
     const pagesRoot = join(process.cwd(), 'public/pages');
     const counts = new Map<string, number>();
     const pages = new Set<number>();
@@ -153,10 +159,12 @@ describe('source inline whitespace ordering', () => {
         const ry = Number(ryText) * maskHeight / 100;
         const cx = maskX0 + Number(cxText) * maskWidth / 100;
         const cy = maskY0 + Number(cyText) * maskHeight / 100;
-        expect(rx).toBeCloseTo((x1 - x0) / 2, 7);
-        expect(ry).toBeCloseTo((y1 - y0) / 2, 7);
+        expect(rx).toBeCloseTo(maskWidth * 0.49, 7);
+        expect(ry).toBeCloseTo(maskHeight * 0.49, 7);
         expect(cx).toBeCloseTo((x0 + x1) / 2, 7);
         expect(cy).toBeCloseTo((y0 + y1) / 2, 7);
+        expect(rx).toBeGreaterThan((x1 - x0) / 2);
+        expect(ry).toBeGreaterThan((y1 - y0) / 2);
         expect(rx).toBeLessThan(maskWidth / 2);
         expect(ry).toBeLessThan(maskHeight / 2);
 
