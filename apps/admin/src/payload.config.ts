@@ -14,6 +14,7 @@ import { RulebookBlocks } from './collections/Blocks'
 import { Translations } from './collections/Translations'
 import { LayoutFrames } from './collections/LayoutFrames'
 import { SymbolAliasSettings } from './collections/SymbolAliasSettings'
+import { PdfExportJobs } from './collections/PdfExportJobs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,7 +27,7 @@ export default buildConfig({
     },
   },
   cors: '*',
-  collections: [Users, Media, Books, Chapters, Pages, RulebookBlocks, Translations, LayoutFrames, SymbolAliasSettings],
+  collections: [Users, Media, Books, Chapters, Pages, RulebookBlocks, Translations, LayoutFrames, SymbolAliasSettings, PdfExportJobs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

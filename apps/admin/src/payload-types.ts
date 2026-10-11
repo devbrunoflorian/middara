@@ -76,6 +76,7 @@ export interface Config {
     translations: Translation;
     'layout-frames': LayoutFrame;
     'symbol-alias-settings': SymbolAliasSetting;
+    'pdf-export-jobs': PdfExportJob;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     translations: TranslationsSelect<false> | TranslationsSelect<true>;
     'layout-frames': LayoutFramesSelect<false> | LayoutFramesSelect<true>;
     'symbol-alias-settings': SymbolAliasSettingsSelect<false> | SymbolAliasSettingsSelect<true>;
+    'pdf-export-jobs': PdfExportJobsSelect<false> | PdfExportJobsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -309,6 +311,42 @@ export interface SymbolAliasSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pdf-export-jobs".
+ */
+export interface PdfExportJob {
+  id: number;
+  jobId: string;
+  ownerId?: string | null;
+  language: 'en' | 'pt-BR';
+  profile: 'visual' | 'editable';
+  pages:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  status: 'queued' | 'running' | 'completed' | 'failed' | 'cancelled';
+  completedPages: number;
+  totalPages: number;
+  currentPage?: number | null;
+  stage: string;
+  cancelRequested: boolean;
+  snapshotPath?: string | null;
+  snapshotHash?: string | null;
+  outputPath?: string | null;
+  downloadName?: string | null;
+  error?: string | null;
+  startedAt?: string | null;
+  completedAt?: string | null;
+  expiresAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -366,6 +404,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'symbol-alias-settings';
         value: number | SymbolAliasSetting;
+      } | null)
+    | ({
+        relationTo: 'pdf-export-jobs';
+        value: number | PdfExportJob;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -536,6 +578,33 @@ export interface LayoutFramesSelect<T extends boolean = true> {
 export interface SymbolAliasSettingsSelect<T extends boolean = true> {
   settingsKey?: T;
   aliases?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pdf-export-jobs_select".
+ */
+export interface PdfExportJobsSelect<T extends boolean = true> {
+  jobId?: T;
+  ownerId?: T;
+  language?: T;
+  profile?: T;
+  pages?: T;
+  status?: T;
+  completedPages?: T;
+  totalPages?: T;
+  currentPage?: T;
+  stage?: T;
+  cancelRequested?: T;
+  snapshotPath?: T;
+  snapshotHash?: T;
+  outputPath?: T;
+  downloadName?: T;
+  error?: T;
+  startedAt?: T;
+  completedAt?: T;
+  expiresAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

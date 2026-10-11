@@ -9,6 +9,7 @@ Copy CropBox, BleedBox, TrimBox, and ArtBox from the same source PDF page.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 from pathlib import Path
 import tempfile
@@ -21,23 +22,52 @@ def main() -> int:
     parser.add_argument("pdf", type=Path)
     parser.add_argument("width_pt", type=float)
     parser.add_argument("height_pt", type=float)
-    parser.add_argument("source_pdf", type=Path)
-    parser.add_argument("source_page", type=int)
+    parser.add_argument("source_pdf", type=Path, nargs="?")
+    parser.add_argument("source_page_positional", type=int, nargs="?")
+    parser.add_argument("--source-page-boxes-json", type=Path)
+    parser.add_argument("--source-page", type=int)
     args = parser.parse_args()
 
     document = pymupdf.open(args.pdf)
-    source_document = pymupdf.open(args.source_pdf)
+    source_document = None
+    source_page_number = args.source_page if args.source_page is not None else args.source_page_positional
+    if source_page_number is None:
+        raise ValueError("Specify a source page number.")
     try:
         if document.page_count != 1:
             raise ValueError(f"Expected one exported page, found {document.page_count}.")
-        if args.source_page < 1 or args.source_page > source_document.page_count:
-            raise ValueError(
-                f"Source page {args.source_page} is outside the PDF page range "
-                f"1-{source_document.page_count}."
-            )
         page = document[0]
-        source_page = source_document[args.source_page - 1]
-        source_media = source_page.mediabox
+        if args.source_page_boxes_json:
+            if args.source_pdf:
+                raise ValueError("Use either a source PDF or a page-box snapshot, not both.")
+            snapshot = json.loads(args.source_page_boxes_json.read_text(encoding="utf-8"))
+            page_boxes = snapshot.get("sourcePageBoxes", {}).get(str(source_page_number))
+            if not page_boxes:
+                raise ValueError(f"Source page {source_page_number} is missing from the immutable page-box snapshot.")
+            source_media = pymupdf.Rect(*page_boxes["mediaBox"])
+            expected_boxes = {
+                "cropbox": pymupdf.Rect(*page_boxes["cropBox"]),
+                "bleedbox": pymupdf.Rect(*page_boxes["bleedBox"]),
+                "trimbox": pymupdf.Rect(*page_boxes["trimBox"]),
+                "artbox": pymupdf.Rect(*page_boxes["artBox"]),
+            }
+        else:
+            if not args.source_pdf:
+                raise ValueError("Specify a source PDF or an immutable page-box snapshot.")
+            source_document = pymupdf.open(args.source_pdf)
+            if source_page_number < 1 or source_page_number > source_document.page_count:
+                raise ValueError(
+                    f"Source page {source_page_number} is outside the PDF page range "
+                    f"1-{source_document.page_count}."
+                )
+            source_page = source_document[source_page_number - 1]
+            source_media = source_page.mediabox
+            expected_boxes = {
+                "cropbox": source_page.cropbox,
+                "bleedbox": source_page.bleedbox,
+                "trimbox": source_page.trimbox,
+                "artbox": source_page.artbox,
+            }
         if (
             abs(source_media.width - args.width_pt) > 0.01
             or abs(source_media.height - args.height_pt) > 0.01
@@ -59,12 +89,6 @@ def main() -> int:
             )
 
         page.set_mediabox(pymupdf.Rect(0, 0, args.width_pt, args.height_pt))
-        expected_boxes = {
-            "cropbox": source_page.cropbox,
-            "bleedbox": source_page.bleedbox,
-            "trimbox": source_page.trimbox,
-            "artbox": source_page.artbox,
-        }
         page.set_cropbox(expected_boxes["cropbox"])
         page.set_bleedbox(expected_boxes["bleedbox"])
         page.set_trimbox(expected_boxes["trimbox"])
@@ -92,7 +116,8 @@ def main() -> int:
     finally:
         if not document.is_closed:
             document.close()
-        source_document.close()
+        if source_document is not None:
+            source_document.close()
 
     reopened = pymupdf.open(args.pdf)
     try:

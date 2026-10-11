@@ -3,11 +3,12 @@ import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, 
 import { AdminSymbolPalette, type AdminSymbolPaletteEditorState } from './components/AdminSymbolPalette';
 import { LocalSyncRecoveryControl } from './components/LocalSyncRecoveryControl';
 import { FaqDrawer } from './components/FaqDrawer';
+import { PdfExportDialog } from './components/PdfExportDialog';
 import { ShellNavigation, type ShellDestination } from './components/ShellNavigation';
 import { ArcaneGlassDefinitions } from './components/ArcaneGlassDefinitions';
 import { AtmosphericParticles } from './components/AtmosphericParticles';
 import {
-  ChevronLeft, ChevronRight, Diamond, Edit3, Menu,
+  ChevronLeft, ChevronRight, Diamond, Edit3, Menu, FileDown,
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
   Ruler, Move
 } from 'lucide-react';
@@ -154,6 +155,7 @@ function App() {
   const [language, setLanguage] = useState<'en' | 'pt-BR'>('en');
   const [isSymbolPaletteOpen, setIsSymbolPaletteOpen] = useState(false);
   const [isFaqOpen, setIsFaqOpen] = useState(false);
+  const [isPdfExportOpen, setIsPdfExportOpen] = useState(false);
   const [faqActiveType, setFaqActiveType] = useState<'faq' | 'errata'>('faq');
   const [navigationOpenRequest, setNavigationOpenRequest] = useState(0);
   const [isNavigationExpanded, setIsNavigationExpanded] = useState(false);
@@ -681,6 +683,17 @@ function App() {
               <Maximize size={16} />
             </button>
           </div>
+
+          <div className="divider"></div>
+          <button
+            type="button"
+            className="tool-btn pdf-export-trigger"
+            onClick={() => setIsPdfExportOpen(true)}
+            title={language === 'pt-BR' ? 'Exportar PDF' : 'Export PDF'}
+            aria-label={language === 'pt-BR' ? 'Exportar PDF visual' : 'Export visual PDF'}
+          >
+            <FileDown size={16} aria-hidden="true" />
+          </button>
         </div>
 
         <div className="toolbar-section bottom">
@@ -766,6 +779,13 @@ function App() {
         onActiveTypeChange={setFaqActiveType}
         onOpenChange={setIsFaqOpen}
         onNavigateToPage={navigateToPage}
+      />
+      <PdfExportDialog
+        open={isPdfExportOpen}
+        currentLanguage={language}
+        currentPage={currentPage}
+        hasUnsavedDraft={hasTranslationDraft || isLayoutDirty}
+        onClose={() => setIsPdfExportOpen(false)}
       />
       {isAdmin && (
         <AdminSymbolPalette

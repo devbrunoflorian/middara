@@ -2,14 +2,15 @@
 /** Export one persisted rulebook page/language through the same React viewer. */
 
 import { chromium } from 'playwright';
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { access, readFile, mkdir, writeFile } from 'node:fs/promises';
+import { dirname, resolve, relative as relativePath, sep } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function argsFrom(argv) {
   const result = {
     page: undefined,
     language: 'en',
+    profile: 'visual',
     output: undefined,
     baseUrl: 'http://127.0.0.1:8080',
     apiUrl: process.env.VITE_PAYLOAD_API_URL ?? 'http://localhost:3000',
@@ -20,6 +21,7 @@ function argsFrom(argv) {
     printScreenshot: undefined,
     metricsOutput: undefined,
     captureOnly: false,
+    snapshot: undefined,
   };
   for (let i = 0; i < argv.length; i += 1) {
     const key = argv[i];
@@ -30,15 +32,17 @@ function argsFrom(argv) {
       continue;
     }
     if (value === undefined || value.startsWith('--')) throw new Error(`Missing value for ${key}`);
-    const name = ({ '--page': 'page', '--language': 'language', '--output': 'output', '--base-url': 'baseUrl', '--api-url': 'apiUrl', '--source-pdf': 'sourcePdf', '--browser': 'executablePath', '--debug-screenshot': 'debugScreenshot', '--viewer-screenshot': 'viewerScreenshot', '--print-screenshot': 'printScreenshot', '--metrics-output': 'metricsOutput' })[key];
+    const name = ({ '--page': 'page', '--language': 'language', '--profile': 'profile', '--output': 'output', '--base-url': 'baseUrl', '--api-url': 'apiUrl', '--source-pdf': 'sourcePdf', '--browser': 'executablePath', '--debug-screenshot': 'debugScreenshot', '--viewer-screenshot': 'viewerScreenshot', '--print-screenshot': 'printScreenshot', '--metrics-output': 'metricsOutput', '--snapshot': 'snapshot' })[key];
     if (!name) throw new Error(`Unknown option: ${key}`);
     result[name] = name === 'page' ? Number(value) : value;
     i += 1;
   }
   if (!Number.isInteger(result.page) || result.page < 1 || result.page > 102) throw new Error('Use --page with an integer from 1 to 102.');
   if (!['en', 'pt-BR'].includes(result.language)) throw new Error('Use --language en or pt-BR.');
-  if (!result.output) result.output = `output/pdf/page-${String(result.page).padStart(3, '0')}-${result.language}-editavel.pdf`;
+  if (result.profile !== 'visual') throw new Error('Only the visual PDF profile is currently available.');
+  if (!result.output) result.output = `output/pdf/page-${String(result.page).padStart(3, '0')}-${result.language}-visual.pdf`;
   result.output = resolve(result.output);
+  if (result.snapshot) result.snapshot = resolve(result.snapshot);
   return result;
 }
 
@@ -58,28 +62,41 @@ function normalizedOrigin(value) {
 }
 
 const config = argsFrom(process.argv.slice(2));
+const immutableSnapshot = config.snapshot
+  ? JSON.parse(await readFile(config.snapshot, 'utf8'))
+  : null;
 console.log('[page-export] requested environment', JSON.stringify({
   viewerUrl: config.baseUrl,
   translationApiOrigin: normalizedOrigin(config.apiUrl),
   page: config.page,
   language: config.language,
+  profile: config.profile,
+  immutableSnapshot: !!immutableSnapshot,
 }, null, 2));
 const pageId = String(config.page).padStart(3, '0');
-const pageDataPath = resolve(`apps/web/public/pages/page_${pageId}/page_${pageId}_dom.json`);
+const snapshotDir = immutableSnapshot ? dirname(config.snapshot) : null;
+const pageDataPath = immutableSnapshot
+  ? resolve(snapshotDir, 'pages', `page_${pageId}`, `page_${pageId}_dom.json`)
+  : resolve(`apps/web/public/pages/page_${pageId}/page_${pageId}_dom.json`);
 const pageData = JSON.parse(await readFile(pageDataPath, 'utf8'));
 if (!(pageData.width > 0 && pageData.height > 0)) throw new Error(`Missing page dimensions in ${pageDataPath}`);
 
 let expectedTranslation = '';
 if (config.language === 'pt-BR') {
-  const url = new URL('/api/translations', config.apiUrl);
-  url.searchParams.set('where[language][equals]', 'pt-BR');
-  url.searchParams.set('limit', '5000');
-  const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
-  if (!response.ok) throw new Error(`Payload returned ${response.status} while loading PT-BR translations.`);
-  const payload = await response.json();
   const prefix = `page_${config.page}_`;
-  const docs = (payload.docs ?? []).filter(doc => String(doc.spanKey ?? '').startsWith(prefix));
-  if (!docs.length) throw new Error(`No saved PT-BR translation records found for page ${config.page}.`);
+  let docs;
+  if (immutableSnapshot) {
+    docs = (immutableSnapshot.translations ?? []).filter(doc => doc.language === 'pt-BR' && String(doc.spanKey ?? '').startsWith(prefix));
+  } else {
+    const url = new URL('/api/translations', config.apiUrl);
+    url.searchParams.set('where[language][equals]', 'pt-BR');
+    url.searchParams.set('limit', '5000');
+    const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
+    if (!response.ok) throw new Error(`Payload returned ${response.status} while loading PT-BR translations.`);
+    const payload = await response.json();
+    docs = (payload.docs ?? []).filter(doc => String(doc.spanKey ?? '').startsWith(prefix));
+  }
+  if (!docs.length && !immutableSnapshot) throw new Error(`No saved PT-BR translation records found for page ${config.page}.`);
   expectedTranslation = docs
     .map(doc => translationPlainText(doc.data))
     .filter(text => text.length >= 20 && !Array.from(text).some(char => {
@@ -87,7 +104,7 @@ if (config.language === 'pt-BR') {
       return code >= 0xE000 && code <= 0xF8FF;
     }))
     .sort((a, b) => b.length - a.length)[0] ?? '';
-  if (!expectedTranslation) throw new Error(`Page ${config.page} has no ordinary PT-BR prose to verify in the viewer.`);
+  if (!expectedTranslation && !immutableSnapshot) throw new Error(`Page ${config.page} has no ordinary PT-BR prose to verify in the viewer.`);
 }
 
 const launchOptions = { headless: true };
@@ -96,6 +113,69 @@ else if (process.platform === 'win32') launchOptions.executablePath = 'C:/Progra
 const browser = await chromium.launch(launchOptions);
 try {
   const context = await browser.newContext({ viewport: { width: 1600, height: 1400 }, deviceScaleFactor: 1 });
+  if (immutableSnapshot) {
+    const pageOrigin = normalizedOrigin(config.baseUrl);
+    const apiOrigin = normalizedOrigin(config.apiUrl);
+    await context.route('**/api/**', async route => {
+      const requestUrl = new URL(route.request().url());
+      if (requestUrl.origin !== apiOrigin || route.request().method() !== 'GET') {
+        await route.abort('blockedbyclient');
+        return;
+      }
+      const params = requestUrl.searchParams;
+      let docs = [];
+      if (requestUrl.pathname === '/api/translations') {
+        const language = params.get('where[language][equals]');
+        docs = immutableSnapshot.translations ?? [];
+        if (language) docs = docs.filter(doc => doc.language === language);
+      } else if (requestUrl.pathname === '/api/layout-frames') {
+        const requestedPage = Number(params.get('where[and][0][pageNumber][equals]') ?? params.get('where[pageNumber][equals]'));
+        const language = params.get('where[and][1][language][equals]') ?? params.get('where[language][equals]');
+        docs = (immutableSnapshot.layoutFrames ?? []).filter(doc =>
+          (!Number.isFinite(requestedPage) || Number(doc.pageNumber) === requestedPage)
+          && (!language || doc.language === language));
+      } else if (requestUrl.pathname === '/api/symbol-alias-settings') {
+        docs = immutableSnapshot.symbolAliasSettings ?? [];
+      } else {
+        await route.fulfill({ status: 404, contentType: 'application/json', body: JSON.stringify({ errors: [{ message: 'Not included in export snapshot.' }] }) });
+        return;
+      }
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        headers: { 'Access-Control-Allow-Origin': pageOrigin, 'Access-Control-Allow-Credentials': 'true', 'Vary': 'Origin' },
+        body: JSON.stringify({ docs, totalDocs: docs.length, limit: docs.length, page: 1, totalPages: 1, hasNextPage: false, hasPrevPage: false }),
+      });
+    });
+    await context.route('**/pages/page_*/*', async route => {
+      const requestUrl = new URL(route.request().url());
+      if (requestUrl.origin !== pageOrigin) {
+        await route.continue();
+        return;
+      }
+      const match = requestUrl.pathname.match(/^\/pages\/(page_\d{3})\/(.+)$/u);
+      if (!match || !immutableSnapshot.assetPages?.includes(Number(match[1].slice(-3)))) {
+        await route.abort('blockedbyclient');
+        return;
+      }
+      const filePath = resolve(snapshotDir, 'pages', match[1], decodeURIComponent(match[2]));
+      const allowedRoot = resolve(snapshotDir, 'pages', match[1]);
+      const relative = relativePath(allowedRoot, filePath);
+      if (!relative || relative.startsWith(`..${sep}`) || relative === '..') {
+        await route.abort('blockedbyclient');
+        return;
+      }
+      try {
+        await access(filePath);
+        await route.fulfill({ path: filePath });
+      } catch {
+        // Keep missing optional page sidecars equivalent to the static
+        // server's normal HTTP 404; aborting them becomes a browser
+        // requestfailed event and incorrectly fails an otherwise valid export.
+        await route.fulfill({ status: 404, body: 'Not found' });
+      }
+    });
+  }
   const page = await context.newPage();
   const failedRequests = [];
   const apiRequestOrigins = new Set();
@@ -301,14 +381,18 @@ try {
       displayHeaderFooter: false,
       margin: { top: 0, bottom: 0, left: 0, right: 0 },
     });
-  const normalizePageBox = spawnSync('python', [
+  const normalizeArgs = [
     resolve('scripts/normalize_export_page_box.py'),
     config.output,
     String(pageData.width),
     String(pageData.height),
-    config.sourcePdf,
-    String(config.page),
-  ], { encoding: 'utf8' });
+  ];
+  if (immutableSnapshot) {
+    normalizeArgs.push('--source-page-boxes-json', config.snapshot, '--source-page', String(config.page));
+  } else {
+    normalizeArgs.push(config.sourcePdf, String(config.page));
+  }
+  const normalizePageBox = spawnSync('python', normalizeArgs, { encoding: 'utf8' });
   if (normalizePageBox.status !== 0) {
     throw new Error(`Could not normalize the exported MediaBox: ${normalizePageBox.stderr || normalizePageBox.stdout}`);
   }
