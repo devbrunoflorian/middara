@@ -1,14 +1,15 @@
 # Estado atual do projeto
 
-**Atualizado:** 2026-10-09.
+**Atualizado:** 2026-10-11.
 
 ## Estado oficial
 
 - **EDITOR READY WITH KNOWN NON-BLOCKING ISSUES.** O editor passou pelos testes e fluxos manuais registrados; limitações conhecidas estão abaixo.
-- **MANUAL TRANSLATION WORKFLOW = COMPLETE.** A tradução manual está em andamento pelo usuário no Admin/RichSpanEditor.
+- **MANUAL TRANSLATION WORKFLOW = COMPLETE.** O fluxo continua disponível no Admin/RichSpanEditor; 13 registros locais ainda não sincronizados foram preservados, sem alteração nesta tarefa.
 - **TRANSLATION-FIRST / MAINTENANCE MODE.** Trabalhar em problemas concretos encontrados durante a tradução; não iniciar auditorias preventivas, tradução automática ou mudanças de conteúdo sem pedido.
 - **GLOBAL EN AUDIT 49–102 = COMPLETE WITH DOCUMENTED INCONCLUSIVE HOLDOUTS.** P. 84 e Note raster/tabela p. 100 continuam inconclusivas e preservadas; não são defeitos confirmados.
-- Nenhuma auditoria global preventiva está aberta. O export PT-BR integral não é o próximo gate atual.
+- **FULL PT-BR VISUAL PDF EXPORT = COMPLETE AND TECHNICALLY VERIFIED.** O job `8fa1a1f8-777a-4846-b9bc-321eae2133a9` gerou e verificou 102/102 páginas. O PDF e suas evidências permanecem preservados para revisão do usuário. Isso não certifica fidelidade visual integral contra a fonte, editabilidade no Acrobat ou prontidão para gráfica.
+- Nenhuma auditoria global preventiva está aberta; não refazer o export integral sem regressão concreta ou pedido.
 - Conteúdo e traduções aprovados das páginas 1–12 permanecem intocados.
 
 ## O que está implementado e aceito
@@ -28,12 +29,12 @@ Os detalhes e limites das validações permanecem nos [registros de progresso](p
 - **P. 97:** algumas células agrupam vários parágrafos/list items num campo editável; continuam editáveis e salváveis como célula. Avaliar segmentação somente quando o trabalho real nessa página mostrar necessidade. Ver [auditoria de confiabilidade](project-progress/2026-10-09-editor-reliability-audit.md).
 - **P. 84 e Note de tabela/raster p. 100:** `INCONCLUSIVE / PRESERVED`; não forçar classificação sem evidência nova. A ocorrência independente `action.exhaust` da p. 100 foi corrigida.
 - **Páginas 1–48:** há revisões de escopos diferentes, não uma certificação global uniforme. Isso não impede a tradução manual atual.
-- **Export final:** existem scripts de exportação de página e de livro completo, mas o PDF PT-BR completo não foi aceito como entrega final. O piloto de impressão também não equivale a PDF de gráfica. Retomar a validação quando houver um objetivo concreto de entrega; não é o gate atual da tradução.
+- **Export:** o serviço assíncrono visual e o job 1–102 estão tecnicamente validados. A revisão visual final do usuário continua pendente. O piloto de impressão não equivale a PDF de gráfica, e Acrobat Pro ainda não foi usado para comprovar edição/salvamento/reabertura.
 - O salvamento confirmado no Payload é a cópia sincronizada. O navegador mantém fallback local de traduções e molduras se a sincronização falhar; drafts ainda não salvos são estado de sessão. Consultar o toast do editor e o guia de workflow.
 
 ## Próximo passo seguro
 
-Continuar a tradução manual. Quando surgir um problema reproduzível, investigar a unidade afetada, corrigir a causa compartilhada quando cabível, validar uma ocorrência equivalente e retornar ao trabalho de tradução. Não reabrir mapper, auditorias globais ou holdouts sem evidência concreta e autorização.
+Próximo gate: aguardar/recolher a revisão do PDF integral pelo usuário. Enquanto isso, trabalhar apenas em regressões concretas solicitadas; não reabrir mapper, auditorias globais, export integral ou holdouts sem evidência e autorização.
 
 ## Invariantes
 

@@ -50,6 +50,10 @@ Os segmentos ricos guardam texto, fonte, tamanho, cor, peso/estilo e metadados c
 
 ## Export
 
-O export de página usa Chromium/Playwright e normaliza o PDF produzido para as dimensões físicas da página-fonte. `MediaBox`, escala de impressão, clipping e correspondência de overlays devem ser medidos. Screenshot de viewport não certifica export.
+O export visual usa Chromium/Playwright e normaliza cada PDF de página às dimensões físicas e caixas da fonte. A integração atual cria um job assíncrono no Payload, captura entradas num snapshot imutável por job, executa um worker sequencial limitado, publica apenas depois da verificação/merge, e oferece progresso, cancelamento, recuperação após restart, retenção de sete dias e download. A evidência técnica do job completo PT-BR 1–102 está em [full export hardening](../project-progress/2026-10-11-full-rulebook-export-hardening.md); ela comprova integridade/verificação estrutural e igualdade do merge com as partes, mas não certifica cada página visualmente contra a fonte, edição no Acrobat ou produção gráfica.
+
+O raster `background.webp` é um derivado de composição; dimensões do asset precisam representar o limite físico da página sem a amostra extra que `ceil` pode criar. A correção da borda da capa documentada em [workspace cleanup e regressões](../project-progress/2026-10-11-repository-cleanup-and-ui-regressions.md) alterou somente o derivado p. 1; o PDF fonte e a geometria editorial não foram alterados.
+
+`MediaBox`, escala de impressão, clipping e correspondência de overlays devem ser medidos. Screenshot de viewport não certifica export.
 
 Para procedimentos de QA, veja o [checklist de aceite](../QA/acceptance.md), subordinado à [rule 05](../../.agents/rules/05-processo-de-validacao-qa.md). Para escolhas aprovadas, consulte os [ADRs](decisions/README.md).

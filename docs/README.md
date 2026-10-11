@@ -33,6 +33,8 @@ Precedência: (1) instrução explícita atual do usuário; (2) `PROJECT-HANDOFF
 
 ## Histórico e evidência
 
+- [Export visual completo PT-BR 1–102](project-progress/2026-10-11-full-rulebook-export-hardening.md) — job tecnicamente verificado; limites de aceite visual integral, Acrobat e gráfica explícitos.
+- [Limpeza documental e regressões do workspace](project-progress/2026-10-11-repository-cleanup-and-ui-regressions.md) — inventário, evidência da capa/p. 41, ferramentas Admin e validação deste fechamento.
 - [Abordagens abandonadas e evolução](history/architecture-dead-ends.md) — o que falhou, sintomas, causa conhecida e alternativa atual.
 - [Índice de progresso](project-progress/README.md) — registros datados; são evidência de escopo, não estado global por si só.
 - [Status/disposição documental](history/documentation-dispositions.md) — arquivos obsoletos, consolidados e preservados.
