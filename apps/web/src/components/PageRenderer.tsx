@@ -374,6 +374,19 @@ function renderCreditSegments(
 ): React.ReactNode[] {
   const hasInlineSymbols = segments.some(hasInlineSemanticSymbol);
   const fullText = segments.map(segment => segment.text).join('');
+  // Legacy editorial list markers use a tab as a visual separator (for
+  // example `b.\tMake ...`). In translated-flow HTML that tab is interpreted
+  // as a CSS tab stop, whose advance depends on the current inline position;
+  // when the marker and body are separate rich runs it can collapse to nearly
+  // zero. Keep the stored/editor text untouched, but paint that marker boundary
+  // as one ordinary space. The same-length substitution keeps link ranges and
+  // segment offsets stable.
+  const markerSeparatorTabs = new Set<number>();
+  const markerTabPattern = /(?:^|[\r\n])[\t ]*(?:[a-z]|\d{1,2})[.)]\t/giu;
+  for (const match of fullText.matchAll(markerTabPattern)) {
+    const matchStart = match.index ?? 0;
+    markerSeparatorTabs.add(matchStart + match[0].lastIndexOf('\t'));
+  }
   const ranges: { start: number; end: number; href: string }[] = [];
   for (const link of links ?? []) {
     if (link.language !== language || !link.text) continue;
@@ -406,7 +419,11 @@ function renderCreditSegments(
       if (start === end) continue;
       const absoluteStart = globalOffset + start;
       const matchingRange = ranges.find(range => absoluteStart >= range.start && absoluteStart < range.end);
-      pieces.push({ segment, text: segment.text.slice(start, end), href: matchingRange?.href });
+      const pieceText = segment.text.slice(start, end);
+      const text = pieceText.split('').map((character, index) =>
+        character === '\t' && markerSeparatorTabs.has(absoluteStart + index) ? ' ' : character,
+      ).join('');
+      pieces.push({ segment, text, href: matchingRange?.href });
     }
     globalOffset += segment.text.length;
   });
