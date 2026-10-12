@@ -728,7 +728,7 @@ function App() {
             <Edit3 size={16} />
             <span>Admin</span>
           </button>
-          <LocalSyncRecoveryControl visible={isAdmin} />
+          <LocalSyncRecoveryControl visible={isAdmin} hasUnsavedDraft={hasTranslationDraft || isLayoutDirty} />
           {isAdmin && !isRichEditorOpen && (
             <button
               type="button"

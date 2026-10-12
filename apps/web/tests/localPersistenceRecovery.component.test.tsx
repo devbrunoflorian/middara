@@ -5,10 +5,12 @@ import { createRoot, type Root } from 'react-dom/client';
 import { LocalSyncRecoveryControl } from '../src/components/LocalSyncRecoveryControl';
 import {
   applyLocalPersistenceChange,
+  createLocalPersistenceEntryRecoveryPackage,
   createLocalRecoveryPackage,
   inspectLocalPersistence,
   loadLocalOverrides,
   persistOverrideToPayload,
+  removeLocalOverrideEntry,
   resolveDivergedLocalRecord,
   retryMissingLocalRecord,
   saveLocalOverrideEntry,
@@ -20,10 +22,11 @@ import { encodeOverrideData } from '../src/symbols/overrideData';
 
 class MemoryStorage {
   private values = new Map<string, string>();
+  failWrites = false;
   get length() { return this.values.size; }
   key(index: number) { return [...this.values.keys()][index] ?? null; }
   getItem(key: string) { return this.values.get(key) ?? null; }
-  setItem(key: string, value: string) { this.values.set(key, value); }
+  setItem(key: string, value: string) { if (this.failWrites) throw new Error('storage quota exceeded'); this.values.set(key, value); }
   removeItem(key: string) { this.values.delete(key); }
 }
 
@@ -143,6 +146,55 @@ describe('local save visibility and recovery', () => {
     const saved = loadLocalOverrides('pt-BR', storage);
     expect(saved.get(sibling.spanKey)?.segments[0].text).toBe('Keep me');
     expect(saved.get(edited.spanKey)?.segments[0].text).toBe('Current edit');
+  });
+
+  it('discards exactly one reviewed local translation and preserves sibling records, frames, and remote data', async () => {
+    const storage = new MemoryStorage();
+    const target = { ...symbolOverride, bbox: [1, 2, 30, 12] as [number, number, number, number] };
+    const sibling = { ...symbolOverride, spanKey: 'page_88_unit_keep__pt-BR', segments: [{ ...symbolOverride.segments[0], text: 'Keep this draft' }] };
+    const english = { ...symbolOverride, spanKey: 'page_88_unit_keep__en', segments: [{ ...symbolOverride.segments[0], text: 'Keep EN' }] };
+    const framesKey = 'middara-layout-frames-v1-pt-BR-page-88';
+    const frames = { 'page_88_unit_frame': { x: 11, y: 12, width: 13, height: 14 } };
+    storage.setItem('middara-lines-v2-pt-BR', JSON.stringify([target, sibling]));
+    storage.setItem('middara-lines-v2-en', JSON.stringify([english]));
+    storage.setItem(framesKey, JSON.stringify(frames));
+    const payload = fakePayload();
+    const report = await inspectLocalPersistence(storage, payload.fetcher);
+    const entry = report.entries.find(item => item.spanKey === target.spanKey)!;
+    expect(entry.localSnapshot).toEqual(target);
+    const recovery = createLocalPersistenceEntryRecoveryPackage(entry);
+    expect(recovery.entry.localSnapshot).toEqual(target);
+    expect(payload.translations).toHaveLength(0);
+
+    expect(removeLocalOverrideEntry('pt-BR', target.spanKey, entry.localSnapshot, storage)).toBe('removed');
+    expect(JSON.parse(storage.getItem('middara-lines-v2-pt-BR') ?? '[]')).toEqual([sibling]);
+    expect(JSON.parse(storage.getItem('middara-lines-v2-en') ?? '[]')).toEqual([english]);
+    expect(JSON.parse(storage.getItem(framesKey) ?? '{}')).toEqual(frames);
+    expect(payload.translations).toHaveLength(0);
+    expect(payload.fetcher.mock.calls.every(([, init]) => !['POST', 'PATCH', 'DELETE'].includes((init as RequestInit | undefined)?.method ?? 'GET'))).toBe(true);
+  });
+
+  it('aborts the discard when any rich span, style, or stored metadata differs from the reviewed snapshot', () => {
+    const storage = new MemoryStorage();
+    storage.setItem('middara-lines-v2-pt-BR', JSON.stringify([symbolOverride]));
+    const reviewed = structuredClone(symbolOverride);
+    const changed = structuredClone(symbolOverride);
+    changed.segments[1].symbolId = 'tag.other.icon';
+    changed.bbox[0] += 1;
+    storage.setItem('middara-lines-v2-pt-BR', JSON.stringify([changed]));
+
+    expect(removeLocalOverrideEntry('pt-BR', symbolOverride.spanKey, reviewed, storage)).toBe('changed');
+    expect(JSON.parse(storage.getItem('middara-lines-v2-pt-BR') ?? '[]')).toEqual([changed]);
+  });
+
+  it('does not report a discard when localStorage rejects the write', () => {
+    const storage = new MemoryStorage();
+    storage.setItem('middara-lines-v2-pt-BR', JSON.stringify([symbolOverride]));
+    storage.failWrites = true;
+
+    expect(removeLocalOverrideEntry('pt-BR', symbolOverride.spanKey, symbolOverride, storage)).toBe('failed');
+    storage.failWrites = false;
+    expect(JSON.parse(storage.getItem('middara-lines-v2-pt-BR') ?? '[]')).toEqual([symbolOverride]);
   });
 
   it('updates one local frame without deleting sibling frames', () => {
@@ -354,6 +406,103 @@ describe('local save visibility and recovery', () => {
     expect(view.getByRole('button', { name: 'Exportar recuperação JSON' })).toBeTruthy();
     fireEvent.click(view.getByRole('button', { name: 'Exportar recuperação JSON' }));
     expect(click).toHaveBeenCalledTimes(1);
+  });
+
+  it('requires a recoverable backup, explicit confirmation, and no active draft before discarding one entry in the panel', async () => {
+    const target = { ...symbolOverride, spanKey: 'page_88_unit_ui-discard__pt-BR' };
+    const sibling = { ...symbolOverride, spanKey: 'page_88_unit_ui-sibling__pt-BR', segments: [{ ...symbolOverride.segments[0], text: 'Preserve sibling' }] };
+    localStorage.setItem('middara-lines-v2-pt-BR', JSON.stringify([target, sibling]));
+    const payload = fakePayload();
+    vi.stubGlobal('fetch', payload.fetcher);
+    const NativeURL = URL;
+    class TestURL extends NativeURL { static createObjectURL() { return 'blob:entry-recovery'; } static revokeObjectURL() {} }
+    vi.stubGlobal('URL', TestURL);
+    const anchorClick = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
+    const originalShowModal = HTMLDialogElement.prototype.showModal;
+    const originalClose = HTMLDialogElement.prototype.close;
+    HTMLDialogElement.prototype.showModal = function showModal() { this.setAttribute('open', ''); };
+    HTMLDialogElement.prototype.close = function close() { this.removeAttribute('open'); this.dispatchEvent(new Event('close')); };
+    const view = render(<LocalSyncRecoveryControl visible hasUnsavedDraft />);
+    const cleanup = () => {
+      act(() => view.root.unmount()); view.container.remove(); anchorClick.mockRestore();
+      HTMLDialogElement.prototype.showModal = originalShowModal; HTMLDialogElement.prototype.close = originalClose;
+    };
+    cleanups.add(cleanup);
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+    fireEvent.click(view.getByRole('button', { name: 'UNSYNCED LOCAL RECORDS = 2' }));
+    expect(view.getByText(`translation · ${target.spanKey}`)).toBeTruthy();
+    const targetRow = view.getByText(`translation · ${target.spanKey}`).closest('li')!;
+    const targetQueries = getQueriesForElement(targetRow);
+    fireEvent.click(targetQueries.getByText('Revisar snapshot local completo antes de descartar'));
+    fireEvent.click(targetQueries.getByRole('button', { name: 'Baixar backup desta entrada' }));
+    expect(anchorClick).toHaveBeenCalledTimes(1);
+    const backupConfirmation = targetQueries.getByRole('checkbox', { name: `Confirmei que salvei o backup de pt-BR ${target.spanKey}` });
+    expect((backupConfirmation as HTMLInputElement).disabled).toBe(false);
+    fireEvent.click(backupConfirmation);
+    const discardButton = targetQueries.getByRole('button', { name: 'Revisar descarte desta pendência' }) as HTMLButtonElement;
+    expect(discardButton.disabled).toBe(true);
+
+    act(() => view.root.render(<LocalSyncRecoveryControl visible hasUnsavedDraft={false} />));
+    expect(discardButton.disabled).toBe(false);
+    fireEvent.click(discardButton);
+    expect(targetQueries.getByRole('heading', { name: 'Confirme o descarte individual' })).toBeTruthy();
+    expect(targetQueries.getByText(/O conteúdo salvo no Payload não será alterado/)).toBeTruthy();
+    await act(async () => {
+      fireEvent.click(targetQueries.getByRole('button', { name: 'Confirmar descarte individual' }));
+      await new Promise(resolve => setTimeout(resolve, 0));
+    });
+
+    expect(view.getByRole('button', { name: 'UNSYNCED LOCAL RECORDS = 1' })).toBeTruthy();
+    expect(view.container.textContent).toContain('Override local removido e verificado');
+    expect(JSON.parse(localStorage.getItem('middara-lines-v2-pt-BR') ?? '[]')).toEqual([sibling]);
+    expect(payload.translations).toHaveLength(0);
+    expect(payload.fetcher.mock.calls.every(([, init]) => !['POST', 'PATCH', 'DELETE'].includes((init as RequestInit | undefined)?.method ?? 'GET'))).toBe(true);
+  });
+
+  it('keeps the entry and reports failure when the panel discard cannot persist localStorage', async () => {
+    const local = { ...symbolOverride, spanKey: 'page_88_unit_ui-storage-failure__pt-BR' };
+    localStorage.setItem('middara-lines-v2-pt-BR', JSON.stringify([local]));
+    const payload = fakePayload();
+    vi.stubGlobal('fetch', payload.fetcher);
+    const NativeURL = URL;
+    class TestURL extends NativeURL { static createObjectURL() { return 'blob:entry-failure'; } static revokeObjectURL() {} }
+    vi.stubGlobal('URL', TestURL);
+    const anchorClick = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
+    const originalSetItem = Storage.prototype.setItem;
+    const originalShowModal = HTMLDialogElement.prototype.showModal;
+    const originalClose = HTMLDialogElement.prototype.close;
+    HTMLDialogElement.prototype.showModal = function showModal() { this.setAttribute('open', ''); };
+    HTMLDialogElement.prototype.close = function close() { this.removeAttribute('open'); this.dispatchEvent(new Event('close')); };
+    const view = render(<LocalSyncRecoveryControl visible />);
+    const cleanup = () => {
+      act(() => view.root.unmount()); view.container.remove(); anchorClick.mockRestore();
+      Storage.prototype.setItem = originalSetItem;
+      HTMLDialogElement.prototype.showModal = originalShowModal; HTMLDialogElement.prototype.close = originalClose;
+    };
+    cleanups.add(cleanup);
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+    fireEvent.click(view.getByRole('button', { name: 'UNSYNCED LOCAL RECORDS = 1' }));
+    const localRow = view.getByText(`translation · ${local.spanKey}`).closest('li')!;
+    const localQueries = getQueriesForElement(localRow);
+    fireEvent.click(localQueries.getByText('Revisar snapshot local completo antes de descartar'));
+    fireEvent.click(localQueries.getByRole('button', { name: 'Baixar backup desta entrada' }));
+    fireEvent.click(localQueries.getByRole('checkbox', { name: `Confirmei que salvei o backup de pt-BR ${local.spanKey}` }));
+    Storage.prototype.setItem = function setItem(key: string, value: string) {
+      if (key === 'middara-lines-v2-pt-BR') throw new Error('quota exceeded');
+      return originalSetItem.call(this, key, value);
+    };
+    const discardButton = localQueries.getByRole('button', { name: 'Revisar descarte desta pendência' }) as HTMLButtonElement;
+    expect(discardButton.disabled).toBe(false);
+    fireEvent.click(discardButton);
+    await act(async () => {
+      fireEvent.click(localQueries.getByRole('button', { name: 'Confirmar descarte individual' }));
+      await new Promise(resolve => setTimeout(resolve, 0));
+    });
+
+    expect(JSON.parse(localStorage.getItem('middara-lines-v2-pt-BR') ?? '[]')).toEqual([local]);
+    expect(view.container.textContent).toContain('Falha ao gravar ou verificar o armazenamento local');
+    expect(view.getByRole('button', { name: 'UNSYNCED LOCAL RECORDS = 1' })).toBeTruthy();
+    expect(payload.fetcher.mock.calls.every(([, init]) => !['POST', 'PATCH', 'DELETE'].includes((init as RequestInit | undefined)?.method ?? 'GET'))).toBe(true);
   });
 
   it('exposes both divergent versions and keeps resolution actions locked until a backup is downloaded and acknowledged', async () => {

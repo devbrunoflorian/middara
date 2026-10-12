@@ -137,6 +137,12 @@
   overflow-wrap: anywhere;
 }
 
+.local-sync-entry-key {
+  color: #b8dff0;
+  font: 10px/1.4 ui-monospace, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
 .local-sync-record-list button,
 .local-sync-dialog-actions button {
   display: inline-flex;
@@ -172,6 +178,70 @@
   border: 1px solid #96764c66;
   border-radius: 8px;
   background: #110f1b66;
+}
+
+.local-sync-discard-review {
+  flex: 1 0 100%;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #75638e88;
+  border-radius: 8px;
+  background: #110f1b66;
+}
+
+.local-sync-discard-review > summary {
+  color: #d9c5ed;
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.local-sync-discard-review > pre {
+  max-height: 230px;
+  margin: 10px 0;
+  padding: 8px;
+  overflow: auto;
+  border: 1px solid #ffffff20;
+  border-radius: 6px;
+  background: #090a12;
+  color: #ddd8e8;
+  font: 10px/1.4 ui-monospace, Consolas, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.local-sync-discard-review > p {
+  margin: 8px 0 0;
+  color: #c9c5d4;
+  font-size: 11px;
+}
+
+.local-sync-discard-review > .local-sync-discard-warning {
+  color: #fcd7a1;
+}
+
+.local-sync-discard-confirmation {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #b77a4b99;
+  border-radius: 7px;
+  background: #34231599;
+}
+
+.local-sync-discard-confirmation h3 {
+  margin: 0 0 6px;
+  color: #ffe0b5;
+  font-size: 12px;
+}
+
+.local-sync-discard-confirmation p + p {
+  margin-top: 6px;
+}
+
+.local-sync-discard-button {
+  margin-top: 9px;
+  border-color: #8f5367 !important;
+  background: #482333 !important;
+  color: #ffe9ee !important;
 }
 
 .local-sync-conflict-review > summary {

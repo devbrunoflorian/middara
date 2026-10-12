@@ -1978,9 +1978,12 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     } else if (selectedSpan) {
       nextMap.delete(selectedSpan.spanKey);
     }
+    const localRemoval = selectedSpan
+      ? removeLocalOverrideEntry(language, selectedSpan.spanKey, overrides.get(selectedSpan.spanKey))
+      : 'missing';
     const savedLocally = override
       ? saveLocalOverrideEntry(language, override)
-      : selectedSpan ? removeLocalOverrideEntry(language, selectedSpan.spanKey) : false;
+      : localRemoval === 'removed' || localRemoval === 'missing';
     if (savedLocally) setOverrides(nextMap);
 
     if (override) {

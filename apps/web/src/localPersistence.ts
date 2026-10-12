@@ -33,6 +33,8 @@ export interface LocalPersistenceEntry {
   payloadData?: unknown;
   payloadComparableData?: unknown;
   data: unknown;
+  /** Exact browser record captured for review; includes spanKey and all stored metadata. */
+  localSnapshot?: unknown;
 }
 
 export interface LocalPersistenceReport {
@@ -59,6 +61,7 @@ interface LocalTranslation {
   language: Locale;
   spanKey: string;
   data: unknown;
+  snapshot: SpanOverride;
 }
 
 interface LocalFrame {
@@ -126,7 +129,7 @@ function readLocalTranslations(storage: StorageLike): LocalTranslation[] {
       const override = item as SpanOverride;
       const data = encodeOverrideData(override);
       if (!Array.isArray(data.segments)) continue;
-      records.push({ language, spanKey: override.spanKey, data });
+      records.push({ language, spanKey: override.spanKey, data, snapshot: override });
     }
   }
   return records;
@@ -243,6 +246,7 @@ export async function inspectLocalPersistence(
           payloadData: remoteRecord?.rawData,
           payloadComparableData: remoteRecord?.data,
           data: record.data,
+          localSnapshot: record.snapshot,
         };
       }),
       ...local.frames.map(record => {
@@ -280,6 +284,7 @@ export async function inspectLocalPersistence(
         ...parseEditorIdentity(record.spanKey),
         syncState: 'unverified' as const,
         data: record.data,
+        localSnapshot: record.snapshot,
       })),
       ...local.frames.map(record => ({
         id: `frame:${record.language}:${record.unitKey}`,
@@ -349,19 +354,51 @@ export function saveLocalOverrideEntry(
   return saveLocalOverrides(language, new Map([[override.spanKey, override]]), storage);
 }
 
+export type RemoveLocalOverrideEntryResult = 'removed' | 'changed' | 'missing' | 'ambiguous' | 'failed';
+
+/** Remove one reviewed local translation override after an exact snapshot comparison. */
 export function removeLocalOverrideEntry(
   language: Locale,
   spanKey: string,
+  expectedSnapshot: unknown,
   storage: WritableStorageLike = window.localStorage,
-): boolean {
+): RemoveLocalOverrideEntryResult {
   try {
     const key = localOverridesStorageKey(language);
     const raw = storage.getItem(key);
     const records: SpanOverride[] = raw ? JSON.parse(raw) : [];
-    if (!Array.isArray(records)) return false;
-    storage.setItem(key, JSON.stringify(records.filter(record => record?.spanKey !== spanKey)));
-    return true;
-  } catch { return false; }
+    if (!Array.isArray(records)) return 'failed';
+    const matches = records.reduce((count, record) => count + Number(record?.spanKey === spanKey), 0);
+    if (matches === 0) return 'missing';
+    if (matches !== 1) return 'ambiguous';
+    if (!expectedSnapshot || typeof expectedSnapshot !== 'object'
+      || (expectedSnapshot as SpanOverride).spanKey !== spanKey) return 'failed';
+    const current = records.find(record => record?.spanKey === spanKey);
+    if (!current || stableJson(current) !== stableJson(expectedSnapshot)) return 'changed';
+
+    const next = records.filter(record => record?.spanKey !== spanKey);
+    storage.setItem(key, JSON.stringify(next));
+    const persistedRaw = storage.getItem(key);
+    const persisted: unknown = persistedRaw ? JSON.parse(persistedRaw) : [];
+    if (!Array.isArray(persisted) || persisted.some(record => record?.spanKey === spanKey)
+      || stableJson(persisted) !== stableJson(next)) return 'failed';
+
+    dispatchLocalPersistenceChanged({ kind: 'translation', language, spanKey, deleted: true });
+    return 'removed';
+  } catch { return 'failed'; }
+}
+
+/** Backup package for one exact local record before a reviewed discard. */
+export function createLocalPersistenceEntryRecoveryPackage(entry: LocalPersistenceEntry) {
+  const snapshot = { ...entry };
+  delete snapshot.payloadComparableData;
+  return {
+    backupSchemaVersion: 1,
+    kind: 'middara-single-local-entry-recovery',
+    generatedAt: new Date().toISOString(),
+    note: 'Exact local record snapshot and read-only Payload counterpart. This package is for recovery and does not write to Payload.',
+    entry: snapshot,
+  };
 }
 
 async function findPayloadOverride(spanKey: string, language: string, fetcher: FetchLike): Promise<PayloadDocument | null> {
