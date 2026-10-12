@@ -60,4 +60,25 @@ describe('card component content below the shared 4pt triage filter', () => {
       expect(container.textContent).toContain('Cuirass');
     }
   });
+
+  it('renders the p. 67 card rail above its overlapping caption in both locales', () => {
+    const { pageData, pageDir } = readPage(67);
+    const overlays = JSON.parse(readFileSync(join(pageDir, 'fidelity_overlays.json'), 'utf8')).overlays;
+    const rails = overlays.filter((overlay: { category?: string }) => overlay.category === 'card-rail');
+    expect(rails).toHaveLength(1);
+    expect(rails[0]).toMatchObject({
+      bbox: [77.28600311279297, 749.8930053710938, 199.39199829101562, 763.208984375],
+      sourceDrawingIds: ['pdf:p67:drawing:219', 'pdf:p67:drawing:219'],
+      zIndex: 10000,
+    });
+
+    for (const language of ['en', 'pt-BR'] as const) {
+      const markup = renderToStaticMarkup(<PageRenderer pageData={{ ...pageData, fidelityOverlays: overlays }} isAdmin={false} language={language} />);
+      const container = document.createElement('div');
+      container.innerHTML = markup;
+      const rail = container.querySelectorAll('img[src="/pages/page_067/fidelity-overlay-source-vector-p067-d0219.svg"]');
+      expect(rail).toHaveLength(1);
+      expect((rail[0] as HTMLImageElement).style.zIndex).toBe('10000');
+    }
+  });
 });
