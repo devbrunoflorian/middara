@@ -1,0 +1,318 @@
+{
+  "page": 44,
+  "unit": [
+    "p44-damage-redistribution-body",
+    "p44-damage-redistribution-example"
+  ],
+  "family": "Example label + body",
+  "status": "isolated-proposal-pending-copyfit-and-human-review",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "2C3F3A69537BB35F37232CA4C8F4406229EE885DC1904F49FF5E9A93E347A61B",
+    "dom": "587058372551787043BFED9FE74D5CC9A6CB0A40025AA884A71343135DD47A34",
+    "layoutFrames": "04FE56C0D62B56F3C4C52F51BE194E735F6FCF6B7CD45841B8E3AF25790DF81E"
+  },
+  "existingPayloadRecords": [],
+  "candidateRecordCount": 2,
+  "candidateKeysUnique": true,
+  "sourceText": {
+    "body": "An Ability that redistributes, moves, or otherwise changes Damage token totals on a Combatant without specifically using the word \"Damage\" or the Tag \"HEAL\" does not count as healing or dealing Damage. Likewise, Ability Conditions that require you to HEAL or deal Damage to be used cannot be used with such redistribution of Damage tokens.",
+    "example": "Example: Zeke uses a Vitality Juice Box on Nightingale. This Item allows Nightingale to HEAL 3. Nightingale currently has 2 Damage tokens on her card. Nightingale's player would remove the 2 Damage tokens from her card, bringing her to full HP. The 1 point of unused healing is lost."
+  },
+  "proposalText": {
+    "body": "Uma Habilidade que mova, redistribua ou altere o total de fichas de Dano de um Combatente sem mencionar especificamente a palavra “Dano” nem usar a Tag “CURAR” não conta como cura nem como Dano causado. Condições de Habilidade que exijam CURAR ou causar Dano para serem usadas também não podem ser usadas nessa redistribuição.",
+    "example": "Exemplo:\nZeke usa uma Vitality Juice Box em Nightingale. O Item permite que ela CURE 3. Nightingale tem atualmente 2 fichas de Dano em sua carta. O jogador de Nightingale removeria as 2 fichas de Dano, deixando-a com os PV completos. O 1 ponto de cura restante é perdido."
+  },
+  "terminologyPendingHumanReview": [
+    "Ability → Habilidade, Combatant → Combatente, Damage → Dano, Ability Conditions → Condições de Habilidade, healing → cura and deal Damage → causar Dano remain local proposals; Token → Ficha is confirmed in the current glossary, while the other cited terms were not found there.",
+    "HEAL tag/action → CURAR is a local proposal used elsewhere but is not confirmed in the current glossary.",
+    "HP → PV is proposed in the p.30 draft but is still marked for human confirmation.",
+    "Vitality Juice Box is preserved in English as a named Item pending terminology review; Nightingale is preserved as a source name."
+  ],
+  "copyfit": {
+    "sourceBodyLines": 5,
+    "sourceExampleLines": 5,
+    "lineHeight": 1.1,
+    "fontAndFrameUnchanged": true,
+    "status": "pending-v2-render"
+  },
+  "note": "Two structurally partitioned p.44 units are proposed in an isolated snapshot. No Payload, canonical sidecar, source PDF, or human translation was written.",
+  "candidates": [
+    {
+      "spanKey": "page_44_unit_p44-damage-redistribution-body__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_44_unit_p44-damage-redistribution-body__pt-BR",
+        "bbox": [
+          86.17019653320312,
+          665.3104248046875,
+          401.0491638183594,
+          721.2504272460938
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Uma Habilidade que mova, redistribua ou altere o total de fichas de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Dano",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "italic"
+          },
+          {
+            "text": " de um Combatente sem mencionar especificamente a palavra “",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Dano",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "” nem usar a Tag “",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "CURAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "” ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "não",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " conta como cura nem como Dano causado. Condições de Habilidade que exijam ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "CURAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ou causar Dano para serem usadas também não podem ser usadas nessa redistribuição.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "spanKey": "page_44_unit_p44-damage-redistribution-example__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_44_unit_p44-damage-redistribution-example__pt-BR",
+        "bbox": [
+          86.17290496826172,
+          724.4208984375,
+          404.12786865234375,
+          781.9189453125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Exemplo:\n",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "Zeke usa uma ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Vitality Juice Box",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "italic"
+          },
+          {
+            "text": " em Nightingale. O Item permite que ela ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "CURE 3",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ". Nightingale tem atualmente ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " fichas de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Dano",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "italic"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "em sua",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "italic"
+          },
+          {
+            "text": " carta. O jogador de Nightingale removeria as ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " fichas de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Dano",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "italic"
+          },
+          {
+            "text": ", deixando-a com os PV completos. O ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ponto de cura restante é perdido.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    }
+  ],
+  "revision": {
+    "basedOn": "p044-damage-redistribution-v1",
+    "reason": "v1 export clipped the example at the bottom page rule; v2 shortens wording while keeping source font, line height, and unit frames unchanged."
+  }
+}
