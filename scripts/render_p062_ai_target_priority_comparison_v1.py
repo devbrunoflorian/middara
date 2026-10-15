@@ -19,8 +19,9 @@ DEFAULT_EXPORT /= "p062-ai-target-priority-v1/page-062-pt-BR-proposal-v1.pdf"
 DEFAULT_OUTPUT = ROOT / "output/proofs/translation-readiness-2026-10-15/"
 DEFAULT_OUTPUT /= "p062-ai-target-priority-v1/source-vs-export-family-crop-v1.png"
 
-# Includes both target units and the next heading to make vertical fit visible.
-CROP = pymupdf.Rect(72, 228, 410, 365)
+# Defaults to the Body+Example pair and next heading. Pass --crop to expand this
+# comparison, for example to include the complete Targeting Priority section.
+DEFAULT_CROP = (72, 228, 410, 365)
 SCALE = 2.5
 HEADER_HEIGHT = 34
 GAP = 18
@@ -31,7 +32,9 @@ def main() -> None:
     parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     parser.add_argument("--export", type=Path, default=DEFAULT_EXPORT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--crop", type=float, nargs=4, default=DEFAULT_CROP, metavar=("X0", "Y0", "X1", "Y1"))
     args = parser.parse_args()
+    crop = pymupdf.Rect(args.crop)
 
     source_doc = pymupdf.open(args.source)
     export_doc = pymupdf.open(args.export)
@@ -43,11 +46,11 @@ def main() -> None:
         raise SystemExit("Source/export page geometry differs; refusing misleading crop.")
 
     matrix = pymupdf.Matrix(SCALE, SCALE)
-    source_pixmap = source_page.get_pixmap(matrix=matrix, clip=CROP, alpha=False)
+    source_pixmap = source_page.get_pixmap(matrix=matrix, clip=crop, alpha=False)
     source_image = Image.frombytes(
         "RGB", (source_pixmap.width, source_pixmap.height), source_pixmap.samples
     )
-    export_pixmap = export_page.get_pixmap(matrix=matrix, clip=CROP, alpha=False)
+    export_pixmap = export_page.get_pixmap(matrix=matrix, clip=crop, alpha=False)
     export_image = Image.frombytes(
         "RGB", (export_pixmap.width, export_pixmap.height), export_pixmap.samples
     )
@@ -77,7 +80,7 @@ def main() -> None:
     output.save(args.output)
     print(
         f"Rendered {args.output} at {SCALE:g}x; "
-        f"crop={tuple(CROP)}, each_panel={source_image.size}"
+        f"crop={tuple(crop)}, each_panel={source_image.size}"
     )
 
 
