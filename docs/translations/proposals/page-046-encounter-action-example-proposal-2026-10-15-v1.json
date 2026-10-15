@@ -1,0 +1,132 @@
+{
+  "page": 46,
+  "unit": [
+    "p46-encounter-action-body",
+    "p46-encounter-action-example"
+  ],
+  "family": "Example label + body",
+  "status": "isolated-proposal-copyfit-verified-pending-human-review",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "9BC239D68098C5C70D0DA0D4F4AEF46F01B4254822E10238C9B5B6673E4A7447",
+    "dom": "638D0DA3D290B8D6834B1F49615BAC16507A9AD46C0F13BEF0BB932EEEAA1AEF",
+    "inlineElements": "A70C035BD66FE703032B829D065CE7D93C596145BC1779DAACDC2A5C67D8D710",
+    "layoutFrames": "28DEBAAF1A99A8BEE710CC706E3A0FB1174B86E433687CE0B51BFB299DD59C59",
+    "fidelityOverlays": "942C9A27CD1DB849A30EA4FADF6BC645B0411A15E48514EB5722F9C97E663736"
+  },
+  "existingPayloadRecords": [],
+  "candidateRecordCount": 2,
+  "candidateKeysUnique": true,
+  "sourceText": {
+    "body": "In addition, an Encounter’s Special Encounter Rules will occasionally allow Adventurers to interact with Tiles in special ways. When this occurs, an Encounter will specifically say “As an Encounter Action” when referring to this Action.",
+    "example": "Example: In the example below, the Encounter’s Special Encounter Rules say:"
+  },
+  "proposalText": {
+    "body": "Além disso, as Regras Especiais de Encontro às vezes permitem que os Aventureiros interajam com Peças de formas especiais. Nesses casos, o Encontro dirá especificamente “Como uma Ação de Encontro” ao se referir a essa Ação.",
+    "example": "Exemplo:\nNo exemplo abaixo, as Regras Especiais de Encontro dizem:"
+  },
+  "terminologyPendingHumanReview": [
+    "Encounter → Encontro, Action → Ação and Encounter Action → Ação de Encontro are local proposals; no approved glossary entries were found for these terms.",
+    "Special Encounter Rules → Regras Especiais de Encontro and Tiles → Peças use the current approved glossary forms; Adventurers → Aventureiros is used in the glossary plural form."
+  ],
+  "copyfit": {
+    "sourceBodyLines": 4,
+    "sourceExampleLines": 3,
+    "lineHeight": 1.1,
+    "fontAndFrameUnchanged": true,
+    "revisionBudget": 2,
+    "currentAttempt": 1,
+    "status": "verified-in-isolated-viewer-and-pdf"
+  },
+  "note": "Only the two structurally partitioned p.46 editorial units are proposed. The quotation is bold-italic in the source and remains so. No Payload, canonical sidecar, source PDF, or human translation was written.",
+  "candidates": [
+    {
+      "spanKey": "page_46_unit_p46-encounter-action-body__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_46_unit_p46-encounter-action-body__pt-BR",
+        "bbox": [
+          103.84329986572266,
+          149.8179931640625,
+          388.95330810546875,
+          194.71800231933594
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Além disso, as Regras Especiais de Encontro às vezes permitem que os Aventureiros interajam com Peças de formas especiais. Nesses casos, o Encontro dirá especificamente “",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Como uma Ação de Encontro",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "italic"
+          },
+          {
+            "text": "” ao se referir a essa Ação.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "spanKey": "page_46_unit_p46-encounter-action-example__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_46_unit_p46-encounter-action-example__pt-BR",
+        "bbox": [
+          103.84329986572266,
+          197.88803100585938,
+          377.8448181152344,
+          233.3860321044922
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Exemplo:",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "\n",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "No exemplo abaixo, as Regras Especiais de Encontro dizem:",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    }
+  ]
+}
