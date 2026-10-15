@@ -7,10 +7,14 @@
 ## Verificações concluídas
 
 - Comparei a p.33 do PDF oficial com o Viewer normal em modo EN, na página inteira. Cabeçalhos, duas colunas, cards de exemplo, ilustração, diagrama inferior e chamadas A–E aparecem nas mesmas regiões. É uma conferência visual de composição; não certifica cada glifo por diff de pixels nem o PDF exportado.
-- Render da página oficial: [`p033-source-page.png`](../../../../output/proofs/translation-readiness-2026-10-15/p033-source-page.png). O PDF-fonte tem 102 páginas, caixa 820,346 × 820,346 pt e SHA-256 `A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351`.
+- Render da página oficial: [`p033-source-page.png`](../../../output/proofs/translation-readiness-2026-10-15/p033-source-page.png). O PDF-fonte tem 102 páginas, caixa 820,346 × 820,346 pt e SHA-256 `A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351`.
 - `fidelity_overlays.json` marca três recortes de carta como `languageInvariant`: *Magic Staff*, *Deflection Core* e *Quick Blow*. O texto impresso dentro dessas imagens continua em inglês e não está traduzido nesta proposta. A localização dessas três artes precisa de uma etapa própria; esta página não fica totalmente localizada até isso ser resolvido.
 - `inline_elements.json` tem dois placements `dice.white`, nos exemplos de *Magic Staff* e *Deflection Core*. Os trechos `PURPLE` aparecem como texto em negrito no DOM, sem `symbolId`; não inventei novos placements roxos.
-- O Viewer PT está sem o serviço Payload/Admin e, por isso, cai no EN. Copyfit da proposta, leitura de volta no Editor e PDF PT-BR permanecem pendentes. Nenhum texto foi salvo.
+- A divisão antiga por cinco chaves tipográficas continuava juntando trechos não contíguos em `block_35`. Acrescentei uma unidade editorial técnica, `p33-block-35-default-dice-paragraph`, que cobre em ordem as seis linhas de `line_35_0` a `line_35_5` e preserva as cinco `typographicSpanUnits` anteriores. O hash atual de `page_033_dom.json` é `881A9E6F8D759907140BC42CD47DFF820AE2C9489B10F23D044171D19464955D`; a cópia anterior e o procedimento estão no diretório de prova `p033-editorial-unit-repair-v1`.
+- Verificação no Viewer/Admin real com as chamadas de escrita da API bloqueadas: a unidade abriu no Rich Block Editor, a textarea continha o parágrafo EN completo e ordenado, e Cancel/fechamento não salvou alterações. A captura é [`page-033-editor-source-unit.png`](../../../output/proofs/translation-readiness-2026-10-15/p033-editorial-unit-repair-v1/page-033-editor-source-unit.png). O teste registrou somente requisições `GET`.
+- O exportador oficial também gerou uma prova PDF isolada com o override PT-BR proposto para essa unidade. A renderização [`page-033-pt-BR-pdf-render.png`](../../../output/proofs/translation-readiness-2026-10-15/p033-editorial-unit-repair-v1/page-033-pt-BR-pdf-render.png) mostra o parágrafo em quatro linhas dentro da região, preserva os dois dados brancos existentes e não colide com “Example on an Adventurer Card”. Isso prova o copyfit desta unidade no snapshot; não é uma exportação integral da p.33 traduzida nem aprovação editorial.
+- Com o serviço Payload/Admin desligado, o Viewer normal em PT-BR continua herdando EN. Nenhum texto foi salvo no Viewer, Payload ou banco local; a prova PT foi gerada a partir de snapshot isolado.
+- Testes: `sourceGeometryEditorialField.component.test.tsx` + `editableUnitNavigation.component.test.tsx` passaram **27/27**. Suíte web serial: **32 arquivos passaram, 1 falhou, 1 foi ignorado; 211 testes passaram, 1 falhou, 2 foram ignorados**. A única falha é a expectativa antiga de inventário inline `188/181/48`, enquanto os arquivos atuais da p.83 somam `190/183/49`; a divergência do rollback está registrada no checkpoint de progresso. A suíte paralela teve três timeouts que não se reproduziram serialmente.
 - Consulta somente leitura ao SQLite local (`apps/admin/apps-admin.db`) não encontrou registros cujas chaves comecem com `page_33` ou `p33`. O hash do banco após a sessão permaneceu `43D3223C87BB6DC902BE76162DD526D33776DE065486972D7296D5E20C8B7B12`.
 
 ## Texto editorial proposto
@@ -34,7 +38,9 @@
 | `block_27`, 11 — rótulo e explicação | TAGS: The Discipline Tree the card is from and its Level (LVL). | **TAGS:** Árvore de Disciplinas à qual a carta pertence e seu Nível (**LVL**). |
 | `block_28`, 12 — rótulo e explicação | ABILITY TEXT: This section of the card contains the Abilities on the Discipline Card, the rules for what they do, and any Conditions that must be met to use them. | **TEXTO DA HABILIDADE:** Esta seção da Carta de Disciplina contém as Habilidades, as regras que descrevem seus efeitos e as Condições que precisam ser atendidas para usá-las. |
 
-Os índices são posições atuais em `page_033_dom.json`, não IDs do aplicativo. A tabela agrupa cada rótulo com sua explicação para facilitar a revisão; vários blocos têm subtrechos tipográficos e o Rich Block Editor pode abrir uma chave filha. Antes de importar, reconciliar as chaves reais e a composição de cada unidade para não deixar fragmentos EN duplicados.
+Os índices são posições atuais em `page_033_dom.json`, não IDs do aplicativo. A tabela agrupa cada rótulo com sua explicação para facilitar a revisão; vários blocos têm subtrechos tipográficos e o Rich Block Editor pode abrir uma chave filha.
+
+**Estado técnico de `block_35`:** a chave antiga de 10 pt ainda representa refs descontínuas e não deve receber o parágrafo inteiro. A nova unidade semântica cobre as seis linhas, foi reconhecida pelo Editor e teve sua proposta renderizada na prova PDF isolada. O bloqueio de mapeamento dessa unidade está resolvido; as outras propostas da página ainda precisam ser mapeadas às chaves corretas. O copyfit do snapshot está demonstrado, sem equivaler à aprovação editorial ou à localização integral da página.
 
 ## Termos e limites
 
@@ -46,10 +52,10 @@ Os índices são posições atuais em `page_033_dom.json`, não IDs do aplicativ
 
 ## Gates pendentes
 
-- Reconciliar as 16 propostas de bloco com as unidades tipográficas expostas no Editor e com os dois dados brancos do sidecar.
+- Reconciliar as outras 15 propostas editoriais com as unidades tipográficas expostas no Editor e conferir seus dados brancos nos contextos correspondentes.
 - Localizar ou substituir as três imagens de carta que seguem em inglês, sem redesenhar a arte vizinha.
-- Conferir todos os trechos PT no Viewer real, incluindo ajustes de frame e ausência de clipping/colisão.
-- Exportar a p.33 PT-BR e comparar a página inteira com o PDF-fonte e o Viewer.
+- Conferir os demais trechos PT no Viewer real, incluindo ajustes de frame e ausência de clipping/colisão.
+- Exportar e revisar a p.33 completa depois de preparar as traduções restantes; a prova atual cobre somente o override de `block_35`.
 - Revisar termos e redação com a equipe editorial antes de qualquer gravação humana.
 
-Nenhuma tradução foi gravada no Payload ou na base local; nenhum sidecar, asset canônico ou dado humano foi alterado.
+Foi alterado somente o metadado técnico de unidade editorial em `page_033_dom.json` nesta etapa; nenhum asset ou tradução humana foi alterado, e nada foi gravado no Payload ou na base local. A proposta continua não aprovada.
