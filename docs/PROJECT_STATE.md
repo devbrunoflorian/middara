@@ -2,11 +2,13 @@
 
 **Atualizado:** 2026-10-15.
 
-## Atualização corrente — piloto canônico da p.83
+## Atualização corrente — ativações técnicas e propostas (15/10/2026)
 
-- `p083-i3` e `p083-v93` estão ativos no sidecar canônico da p.83; o sidecar contém exatamente esses dois placements e tem SHA-256 `23b0e8537465c849da8a9740e6a22b7050165a4b31acbf8e68311c6d41221284`. Os quatro assets correspondem aos hashes do receipt de aplicação.
-- Viewer normal, Editor Admin e PDF EN isolado foram conferidos. O Editor passou por remoção, reinserção, undo/redo, Cancel e reabertura, sem gravação de tradução. O PDF mostra os dois símbolos nos alvos; a diferença preexistente de cor nos dígitos 3–6 de `FINAL SPAWNS` segue como pendência independente. O rollback exato continua disponível.
-- Nenhum outro placement dos 111 foi ativado. Aguardar avaliação humana deste piloto antes de liberar outro lote. Ver [relatório do piloto p.83](project-progress/2026-10-15-p83-pilot-browser-verification.md) e [closeout com hashes e capturas](../output/proofs/translation-readiness-2026-10-15/p083-canonical-pilot/p083-pilot-closeout.md).
+- **p.83:** `p083-i3` e `p083-v93` estão ativos no sidecar canônico. O sidecar contém exatamente esses dois placements e tem SHA-256 `23b0e8537465c849da8a9740e6a22b7050165a4b31acbf8e68311c6d41221284`; os quatro assets correspondem aos hashes do receipt. Viewer normal, Editor Admin e PDF EN isolado foram conferidos. A diferença preexistente de cor nos dígitos 3–6 de `FINAL SPAWNS` permanece separada; rollback exato continua disponível. Ver [relatório do piloto p.83](project-progress/2026-10-15-p83-pilot-browser-verification.md).
+- **p.45:** 11 placements já existentes no inventário v22 foram ativados em um lote canônico restrito; os cinco elementos preexistentes do sidecar foram preservados. O sidecar resultante tem SHA-256 `55fb18cab2dbaac597918903001b32c5ee139b61c964d9322bc6c76cc84b08fc`; 22 assets correspondem ao receipt, o dry-run repetido foi idempotente e rollback exato está disponível. O lote está no commit `a24223f`. A página continua estruturalmente parcial, com o caso `p045-v126-129-n4`, texto de card em EN e colisões de `Defense Value` separados. Ver [closeout p.45](project-progress/2026-10-15-p045-symbol-activation-closeout.md).
+- **p.47:** a proposta dos campos TIP (`page_47_block_20` e `page_47_block_21`) foi renderizada em snapshot imutável e conferida no Viewer/print/PDF. Isso valida somente esses dois campos; `ATK ROLL`, `Exhaust` e `Attack` aguardam revisão terminológica, outros textos ainda estão em EN e os overlays dos cards permanecem em EN. Ver [proposta](translations/proposals/page-047-tip-callout-proposal-2026-10-15-v1.json) e [verificação](project-progress/2026-10-15-page47-tip-callout-copyfit.md).
+- Dos 111 placements preparados no v22, os dois da p.83 e os 11 da p.45 são os lotes descritos acima; não houve outra ativação canônica nesta atualização. Nenhum Payload ou tradução humana foi escrito. O rollback dos dois lotes permanece disponível.
+- Não liberar outro lote de símbolos antes da avaliação humana do piloto p.83. Propostas de tradução em unidades estruturalmente elegíveis podem continuar isoladas, sem escrita no Payload.
 
 ## Checkpoint v22 — estado histórico de 2026-10-14
 
