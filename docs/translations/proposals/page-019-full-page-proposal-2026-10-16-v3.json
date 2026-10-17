@@ -1160,7 +1160,64 @@
       "pendingTerms": [
         "Game Board → Tabuleiro é candidato contextual. A fonte junta “Encounter” e “being played” sem espaço; a proposta expressa “Encontro em andamento”."
       ],
-      "sourceLineCount": 8
+      "sourceLineCount": 8,
+      "sourcePdfVisualLineCount": 7,
+      "pageRendererVisualLineCount": 7,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "verified_copyfit_v3_live_viewer_visual_rows",
+        "sourcePdfVisualLineCount": 7,
+        "pageRendererVisualLineCount": 7,
+        "classification": "EXACT",
+        "method": "Counted official PDF text baselines and live PT-BR PageRenderer Range client rectangles; grouped rich spans and the inline list marker with the body when they share a visual baseline. No character count, explicit-string newline count, or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 19,
+          "pdfDocumentPageIndex": 18,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            381.3641052246094,
+            403.8821105957031,
+            462.09869384765625
+          ],
+          "visualBaselinesPt": [
+            390.554,
+            401.554,
+            412.554,
+            423.554,
+            437.389,
+            448.389,
+            459.389
+          ],
+          "listMarkerAndBodyGroupedAtBaselinePt": 437.389,
+          "visualRows": 7
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_19_unit_p19-block-35-paragraph-1__pt-BR",
+          "rangeRectFragments": 30,
+          "distinctVisualRows": 7,
+          "visualRowTopsCssPx": [
+            327.45,
+            336.35,
+            345.25,
+            354.15,
+            363.05,
+            371.95,
+            380.85
+          ],
+          "frameHeightCssPx": 62.3,
+          "fontCheck": "OptimaLTStd loaded",
+          "geometryChanged": false
+        },
+        "visualReview": "At 200% in the live Viewer, all seven target rows are inside the selected unit. The following paragraph remains outside; no clipping or neighboring collision was visible. Original font sizes, rich spans, list bullet and geometry were preserved.",
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 validation does not approve or publish the translation."
+      }
     },
     {
       "blockIndex": 12,
