@@ -463,6 +463,9 @@ body, html {
   /* .viewer-main already stops before the right dock. Subtract its width so
      the reserved stage ends exactly at the review panel's left edge. */
   margin-right: calc(var(--translation-review-panel-width) + var(--translation-review-dock-clearance) - var(--arcane-dock-width, 52px));
+  /* Remove the stage's right inset too: its scrollable PDF viewport otherwise
+     stays tucked inside the aligned outer edge. */
+  padding-inline-end: 0;
   transition: margin-right 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
