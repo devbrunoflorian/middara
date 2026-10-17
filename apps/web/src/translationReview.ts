@@ -136,6 +136,7 @@ export interface TranslationReviewRecord {
   copyfitMeasurementFingerprint?: string | null;
   underCompositionJustification?: string | null;
   approvalStatus: 'pending' | 'approved';
+  reviewDisposition?: 'active' | 'archived';
   approvedAt?: string | null;
   publication?: {
     translationId: string | number;
@@ -731,6 +732,52 @@ export async function persistTranslationReview(
       || payload?.message
       || `HTTP ${response.status}`;
     throw new Error(`Não foi possível salvar a revisão: ${reason}.`);
+  }
+  return payload.doc;
+}
+
+/** Archive a proposal from the active review queue without changing its book content. */
+export async function persistTranslationReviewDisposition(
+  candidate: TranslationReviewCandidate,
+  existing: TranslationReviewRecord | undefined,
+  disposition: 'active' | 'archived',
+): Promise<TranslationReviewRecord> {
+  if (existing?.approvalStatus === 'approved') {
+    throw new Error('Uma unidade aprovada e integrada não pode ser arquivada da revisão.');
+  }
+  if (!existing && (candidate.data === null || candidate.data === undefined)) {
+    throw new Error('A proposta não contém dados ricos para registrar o arquivamento.');
+  }
+  const body = existing ? { reviewDisposition: disposition } : {
+    reviewKey: candidate.reviewKey,
+    pageNumber: candidate.pageNumber,
+    spanKey: candidate.spanKey,
+    proposalId: candidate.proposalId,
+    proposalVersion: candidate.proposalVersion,
+    sourceText: candidate.sourceText,
+    proposalText: candidate.proposalText,
+    data: candidate.data,
+    technicalStatus: candidate.technicalStatus,
+    copyfitClassification: candidate.copyfitClassification ?? null,
+    copyfitSourcePdfLineCount: candidate.copyfitSourcePdfLineCount ?? null,
+    copyfitPageRendererLineCount: candidate.copyfitPageRendererLineCount ?? null,
+    copyfitMeasurementFingerprint: candidate.copyfitMeasurementFingerprint ?? null,
+    underCompositionJustification: candidate.underCompositionJustification ?? null,
+    approvalStatus: 'pending' as const,
+    approvedAt: null,
+    reviewDisposition: disposition,
+  };
+  const response = await fetch(payloadApiUrl(existing ? `translation-reviews/${existing.id}` : 'translation-reviews'), {
+    method: existing ? 'PATCH' : 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const payload = await response.json().catch(() => null) as { doc?: TranslationReviewRecord; errors?: Array<{ message?: string }>; message?: string } | null;
+  if (!response.ok || !payload?.doc) {
+    const reason = payload?.errors?.map(error => error.message).filter(Boolean).join('; ')
+      || payload?.message
+      || `HTTP ${response.status}`;
+    throw new Error(`Não foi possível atualizar a fila de revisão: ${reason}.`);
   }
   return payload.doc;
 }

@@ -6,7 +6,7 @@ export const TranslationReviews: CollectionConfig = {
   admin: {
     useAsTitle: 'reviewKey',
     defaultColumns: ['reviewKey', 'pageNumber', 'approvalStatus', 'updatedAt'],
-    description: 'Persistent proposal edits, explicit approval and a Payload receipt for the published translation.',
+    description: 'Persistent proposal edits, reversible review queue disposition, explicit approval and a Payload receipt for the published translation.',
   },
   access: {
     read: () => true,
@@ -45,6 +45,15 @@ export const TranslationReviews: CollectionConfig = {
       options: [
         { label: 'Pending human approval', value: 'pending' },
         { label: 'Approved', value: 'approved' },
+      ],
+    },
+    {
+      name: 'reviewDisposition',
+      type: 'select',
+      defaultValue: 'active',
+      options: [
+        { label: 'Active in review queue', value: 'active' },
+        { label: 'Archived from review queue', value: 'archived' },
       ],
     },
     { name: 'approvedAt', type: 'date' },

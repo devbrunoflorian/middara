@@ -303,6 +303,7 @@ export interface TranslationReview {
   copyfitMeasurementFingerprint?: string | null;
   underCompositionJustification?: string | null;
   approvalStatus: 'pending' | 'approved';
+  reviewDisposition?: 'active' | 'archived' | null;
   approvedAt?: string | null;
   publication?:
     | {
@@ -718,6 +719,7 @@ export interface TranslationReviewsSelect<T extends boolean = true> {
   copyfitMeasurementFingerprint?: T;
   underCompositionJustification?: T;
   approvalStatus?: T;
+  reviewDisposition?: T;
   approvedAt?: T;
   publication?: T;
   updatedAt?: T;

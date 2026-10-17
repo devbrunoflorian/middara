@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Check, ChevronRight, FileDown, X } from 'lucide-react';
+import { Archive, Check, ChevronRight, FileDown, RotateCcw, X } from 'lucide-react';
 import type {
   TranslationReviewCandidate,
   TranslationReviewCatalog,
@@ -39,6 +39,8 @@ interface TranslationReviewPanelProps {
   onOpenEditor: (candidate: TranslationReviewCandidate) => void;
   onOpenExceptionPage: (exception: TranslationReviewException) => void;
   onApprove: (candidate: TranslationReviewCandidate) => Promise<boolean>;
+  onSetArchived: (candidate: TranslationReviewCandidate, archived: boolean) => Promise<void>;
+  onClearSelection: () => void;
   onReopen: (candidate: TranslationReviewCandidate) => void;
   onCreateAIRequest: (request: NewTranslationReviewRequest) => Promise<TranslationReviewRequest>;
   onUpdateAIRequest: (request: TranslationReviewRequest, status: TranslationReviewRequestStatus, resultNote?: string) => Promise<void>;
@@ -164,7 +166,7 @@ export function TranslationReviewPanel({
   open, onClose, catalog, catalogError, records, requests, glossaryDecisions, persistenceError, persistenceAvailable,
   pageData,
   savedHumanTranslations, savedPayloadTranslations, selectedPage, selectedReviewKey, busyReviewKey, hasUnsavedDraft,
-  reviewStatus, onSelectCandidate, onOpenViewer, onOpenApprovedViewer, onOpenEditor, onOpenExceptionPage, onApprove, onReopen,
+  reviewStatus, onSelectCandidate, onOpenViewer, onOpenApprovedViewer, onOpenEditor, onOpenExceptionPage, onApprove, onSetArchived, onClearSelection, onReopen,
   onCreateAIRequest, onUpdateAIRequest, onCompleteAIRequestAsUser, onDecideGlossaryTerm,
 }: TranslationReviewPanelProps) {
   const [tab, setTab] = useState<PanelTab>('proposals');
@@ -179,6 +181,9 @@ export function TranslationReviewPanel({
   const [requestBusy, setRequestBusy] = useState(false);
   const [glossaryError, setGlossaryError] = useState<string | null>(null);
   const [glossaryBusyKey, setGlossaryBusyKey] = useState<string | null>(null);
+  const [showArchived, setShowArchived] = useState(false);
+  const [archiveError, setArchiveError] = useState<string | null>(null);
+  const [archiveNotice, setArchiveNotice] = useState<string | null>(null);
   const allCandidates = useMemo(() => catalog?.proposals.flatMap(proposal => proposal.candidates) ?? [], [catalog]);
   const approvedCandidates = useMemo(() => records.flatMap(record => {
     if (!record.publication) return [];
@@ -228,14 +233,23 @@ export function TranslationReviewPanel({
   const proposalRemainingCount = allCandidates.filter(candidate => {
     const record = reviewRecordForCandidate(records, candidate);
     return !(record?.approvalStatus === 'approved'
-      && (approvedKeys.has(candidate.reviewKey) || publishedUnits.has(reviewUnitIdentity(candidate))));
+      && (approvedKeys.has(candidate.reviewKey) || publishedUnits.has(reviewUnitIdentity(candidate))))
+      && record?.reviewDisposition !== 'archived';
   }).length;
   const visibleCandidates = allCandidates.filter(candidate => {
     if (pageValue !== 'all' && candidate.pageNumber !== Number(pageValue)) return false;
     const record = reviewRecordForCandidate(records, candidate);
     return !(record?.approvalStatus === 'approved'
-      && (approvedKeys.has(candidate.reviewKey) || publishedUnits.has(reviewUnitIdentity(candidate))));
+      && (approvedKeys.has(candidate.reviewKey) || publishedUnits.has(reviewUnitIdentity(candidate))))
+      && record?.reviewDisposition !== 'archived';
   });
+  const archivedCandidates = allCandidates.filter(candidate => {
+    const record = reviewRecordForCandidate(records, candidate);
+    return record?.reviewDisposition === 'archived'
+      && record.approvalStatus !== 'approved';
+  });
+  const visibleArchivedCandidates = archivedCandidates.filter(candidate =>
+    pageValue === 'all' || candidate.pageNumber === Number(pageValue));
   const visibleApproved = approvedCandidates.filter(candidate => pageValue === 'all' || candidate.pageNumber === Number(pageValue));
   const visibleExceptions = (catalog?.exceptions ?? []).filter(exception =>
     pageValue === 'all' || exception.pageNumber === Number(pageValue));
@@ -274,6 +288,7 @@ export function TranslationReviewPanel({
       .find(candidate => candidate.reviewKey === selectedReviewKey) ?? null;
   const visiblePendingTerms = pendingGlossaryRows(selectedCandidate?.pendingTerms ?? [], glossaryDecisions, catalog?.officialGlossaryTerms ?? []);
   const selectedRecord = selectedCandidate ? reviewRecordForCandidate(records, selectedCandidate) : undefined;
+  const selectedIsArchived = selectedRecord?.reviewDisposition === 'archived';
   const latestAIRevisionRequest = selectedCandidate && tab === 'proposals'
     ? requests.filter(request => request.status === 'completed'
       && request.completedBy === 'ai'
@@ -312,8 +327,32 @@ export function TranslationReviewPanel({
 
   const approveCandidate = async (candidate: TranslationReviewCandidate) => {
     if (await onApprove(candidate)) {
-      setTab('approved');
       setSelectedExceptionId(null);
+      const index = visibleCandidates.findIndex(item => item.reviewKey === candidate.reviewKey);
+      const next = index >= 0 ? visibleCandidates[index + 1] : undefined;
+      if (next) onSelectCandidate(next);
+      else onClearSelection();
+    }
+  };
+
+  const setCandidateArchived = async (candidate: TranslationReviewCandidate, archived: boolean) => {
+    setArchiveError(null);
+    setArchiveNotice(null);
+    const wasSelected = selectedReviewKey === candidate.reviewKey;
+    const index = visibleCandidates.findIndex(item => item.reviewKey === candidate.reviewKey);
+    const next = wasSelected && archived && index >= 0 ? visibleCandidates[index + 1] : undefined;
+    try {
+      await onSetArchived(candidate, archived);
+      setArchiveNotice(archived ? 'Unidade arquivada da revisão; conteúdo do livro preservado.' : 'Unidade restaurada na fila de revisão.');
+      setShowArchived(false);
+      if (archived) {
+        if (next) onSelectCandidate(next);
+        else if (wasSelected) onClearSelection();
+      } else {
+        onSelectCandidate(candidate);
+      }
+    } catch (error) {
+      setArchiveError(error instanceof Error ? error.message : 'Não foi possível atualizar a fila.');
     }
   };
 
@@ -473,7 +512,7 @@ export function TranslationReviewPanel({
       </p>
 
       <div className="translation-review-tabs" role="tablist" aria-label="Conteúdo de revisão">
-        <button type="button" role="tab" aria-selected={tab === 'proposals'} className={tab === 'proposals' ? 'active' : ''} onClick={() => { setTab('proposals'); setSelectedExceptionId(null); }}>
+        <button type="button" role="tab" aria-selected={tab === 'proposals'} className={tab === 'proposals' ? 'active' : ''} onClick={() => { setTab('proposals'); setShowArchived(false); setSelectedExceptionId(null); }}>
           Propostas <span>{catalog ? proposalRemainingCount : '…'}</span>
         </button>
         <button type="button" role="tab" aria-selected={tab === 'exceptions'} className={tab === 'exceptions' ? 'active' : ''} onClick={() => setTab('exceptions')}>
@@ -494,14 +533,26 @@ export function TranslationReviewPanel({
           <option value="all">Todas</option>
           {pageNumbers.map(page => <option key={page} value={page}>p. {page}</option>)}
         </select>
+        {tab === 'proposals' && (
+          <button
+            type="button"
+            className={`translation-review-archive-toggle ${showArchived ? 'active' : ''}`}
+            aria-pressed={showArchived}
+            onClick={() => { setShowArchived(value => !value); setArchiveError(null); setArchiveNotice(null); }}
+          >
+            {showArchived ? 'Voltar à fila' : 'Arquivadas'} <span>{visibleArchivedCandidates.length}</span>
+          </button>
+        )}
       </div>
 
       {catalogError && <p className="translation-review-error" role="alert">{catalogError}</p>}
       {persistenceError && <p className="translation-review-error" role="status">Revisões persistentes indisponíveis: {persistenceError}</p>}
       {!persistenceError && !persistenceAvailable && <p className="translation-review-status">Conectando ao armazenamento de revisão…</p>}
+      {archiveError && <p className="translation-review-error" role="alert">{archiveError}</p>}
+      {archiveNotice && <p className="translation-review-status" role="status">{archiveNotice}</p>}
 
       <div className="translation-review-layout">
-        <div className="translation-review-list" role="tabpanel" aria-label={tab === 'proposals' ? 'Unidades propostas' : tab === 'exceptions' ? 'Fila de exceções' : tab === 'approved' ? 'Unidades integradas ao livro' : 'Fila de pedidos de revisão'}>
+        <div className="translation-review-list" role="tabpanel" aria-label={tab === 'proposals' ? showArchived ? 'Unidades arquivadas da revisão' : 'Unidades propostas' : tab === 'exceptions' ? 'Fila de exceções' : tab === 'approved' ? 'Unidades integradas ao livro' : 'Fila de pedidos de revisão'}>
           {tab === 'approved' ? visibleApproved.map(candidate => {
             const active = selectedReviewKey === candidate.reviewKey;
             return (
@@ -519,26 +570,39 @@ export function TranslationReviewPanel({
                 </span>
               </button>
             );
-          }) : tab === 'proposals' ? visibleCandidates.map(candidate => {
+          }) : tab === 'proposals' ? (showArchived ? visibleArchivedCandidates : visibleCandidates).map(candidate => {
             const record = reviewRecordForCandidate(records, candidate);
             const active = selectedReviewKey === candidate.reviewKey;
             return (
-              <button
-                type="button"
-                key={candidate.reviewKey}
-                className={`translation-review-row ${active ? 'is-selected' : ''}`}
-                aria-pressed={active}
-                onClick={() => { setSelectedExceptionId(null); onSelectCandidate(candidate); }}
-              >
-                <span className="translation-review-row-heading">p. {candidate.pageNumber} · {candidateHeading(candidate)}</span>
-                <span className="translation-review-row-meta">
-                  {candidate.diagnosticBlank && <span className="translation-review-badge is-blank">Vazio no diagnóstico</span>}
-                  <span className={`translation-review-badge ${record?.approvalStatus === 'approved' ? 'is-approved' : ''}`}>
-                    {record?.approvalStatus === 'approved' ? 'Aprovada' : 'Pendente'}
+              <div className="translation-review-row-wrap" key={candidate.reviewKey}>
+                <button
+                  type="button"
+                  className={`translation-review-row ${active ? 'is-selected' : ''}`}
+                  aria-pressed={active}
+                  onClick={() => { setSelectedExceptionId(null); onSelectCandidate(candidate); }}
+                >
+                  <span className="translation-review-row-heading">p. {candidate.pageNumber} · {candidateHeading(candidate)}</span>
+                  <span className="translation-review-row-meta">
+                    {candidate.diagnosticBlank && <span className="translation-review-badge is-blank">Vazio no diagnóstico</span>}
+                    {showArchived
+                      ? <span className="translation-review-badge is-archived">Arquivada</span>
+                      : <span className={`translation-review-badge ${record?.approvalStatus === 'approved' ? 'is-approved' : ''}`}>
+                        {record?.approvalStatus === 'approved' ? 'Aprovada' : 'Pendente'}
+                      </span>}
+                    <ChevronRight size={14} aria-hidden="true" />
                   </span>
-                  <ChevronRight size={14} aria-hidden="true" />
-                </span>
-              </button>
+                </button>
+                <button
+                  type="button"
+                  className="translation-review-row-action"
+                  aria-label={showArchived ? `Restaurar p. ${candidate.pageNumber} na fila` : `Arquivar p. ${candidate.pageNumber} da revisão`}
+                  title={showArchived ? 'Restaurar na fila' : 'Arquivar da revisão'}
+                  disabled={!persistenceAvailable || busyReviewKey !== null || hasUnsavedDraft || record?.approvalStatus === 'approved'}
+                  onClick={() => void setCandidateArchived(candidate, !showArchived)}
+                >
+                  {showArchived ? <RotateCcw size={14} aria-hidden="true" /> : <Archive size={14} aria-hidden="true" />}
+                </button>
+              </div>
             );
           }) : tab === 'exceptions' ? visibleExceptions.map(exception => {
             const active = selectedExceptionId === exception.id;
@@ -582,7 +646,8 @@ export function TranslationReviewPanel({
               </button>
             );
           })}
-          {tab === 'proposals' && !visibleCandidates.length && !catalogError && <p className="translation-review-empty">Não há propostas nesta página.</p>}
+          {tab === 'proposals' && showArchived && !visibleArchivedCandidates.length && !catalogError && <p className="translation-review-empty">Não há unidades arquivadas nesta página.</p>}
+          {tab === 'proposals' && !showArchived && !visibleCandidates.length && !catalogError && <p className="translation-review-empty">Não há propostas nesta página.</p>}
           {tab === 'approved' && !visibleApproved.length && !catalogError && <p className="translation-review-empty">Não há unidades publicadas nesta página.</p>}
           {tab === 'exceptions' && !visibleExceptions.length && !catalogError && <p className="translation-review-empty">Não há exceções nesta página.</p>}
           {tab === 'requests' && !visibleRequests.length && <p className="translation-review-empty">Ainda não há pedidos de revisão nesta fila.</p>}
@@ -645,6 +710,7 @@ export function TranslationReviewPanel({
                 <p className="translation-review-eyebrow">p. {selectedCandidate.pageNumber} · {selectedCandidate.proposalTitle} · v{selectedCandidate.proposalVersion}</p>
                 <h3>{candidateHeading(selectedCandidate)}</h3>
               </div>
+              {tab === 'proposals' && selectedIsArchived && <p className="translation-review-queue-position">Arquivada da fila. O conteúdo desta unidade no livro foi preservado; você pode restaurá-la abaixo.</p>}
               <div className="translation-review-comparison">
                 <section>
                   <h4>EN · texto-fonte</h4>
@@ -678,8 +744,11 @@ export function TranslationReviewPanel({
               <dl className="translation-review-states">
                 <div><dt>Validação técnica</dt><dd>{technicalLabel(selectedRecord?.technicalStatus ?? selectedCandidate.technicalStatus)}{selectedRecordFromEarlierProposal ? ` · v${selectedRecord?.proposalVersion}` : ''}</dd></div>
                 <div><dt>Aprovação editorial</dt><dd>{tab === 'approved'
-                  ? selectedRecord?.approvalStatus === 'pending' ? 'Versão anterior integrada · nova revisão pendente' : 'Aprovada e integrada ao livro'
-                  : selectedRecord?.approvalStatus === 'approved' ? 'Aprovada e integrada ao livro' : 'Pendente'}</dd></div>
+                  ? selectedRecord?.approvalStatus === 'pending'
+                    ? selectedIsArchived ? 'Versão anterior integrada · nova revisão arquivada' : 'Versão anterior integrada · nova revisão pendente'
+                    : 'Aprovada e integrada ao livro'
+                  : selectedIsArchived ? 'Arquivada da revisão'
+                    : selectedRecord?.approvalStatus === 'approved' ? 'Aprovada e integrada ao livro' : 'Pendente'}</dd></div>
               </dl>
               {visiblePendingTerms.length > 0 && (
                 <details className="translation-review-pending" open>
@@ -747,7 +816,13 @@ export function TranslationReviewPanel({
                   {tab === 'approved' ? 'Editar em nova revisão no Rich Block Editor' : 'Abrir no Rich Block Editor'}
                 </button>
                 <button type="button" onClick={() => startAIRequest(targetForCandidate(selectedCandidate, pageData?.page_number === selectedCandidate.pageNumber ? pageData : null))}>Pedir revisão</button>
-                {tab === 'approved' ? null : selectedRecord?.approvalStatus === 'approved' ? (
+                {tab === 'proposals' && (
+                  <button type="button" className="is-secondary" disabled={!persistenceAvailable || busyReviewKey !== null || hasUnsavedDraft || (!selectedIsArchived && selectedRecord?.approvalStatus === 'approved')} onClick={() => void setCandidateArchived(selectedCandidate, !selectedIsArchived)}>
+                    {selectedIsArchived ? <RotateCcw size={14} aria-hidden="true" /> : <Archive size={14} aria-hidden="true" />}
+                    {selectedIsArchived ? 'Restaurar na fila' : 'Arquivar da revisão'}
+                  </button>
+                )}
+                {tab === 'approved' || selectedIsArchived ? null : selectedRecord?.approvalStatus === 'approved' ? (
                   <button type="button" className="is-secondary" disabled={!persistenceAvailable || isBusy || hasUnsavedDraft} onClick={() => onReopen(selectedCandidate)}>
                     Reabrir revisão
                   </button>
@@ -778,7 +853,10 @@ export function TranslationReviewPanel({
               </div>
             </>
           ) : (
-            <p className="translation-review-empty">Selecione uma proposta ou exceção para comparar e revisar.</p>
+            <>
+              {reviewStatus && <p className={`translation-review-status ${reviewStatus.startsWith('Erro ao aprovar.') ? 'is-error' : ''}`} role="status">{reviewStatus}</p>}
+              <p className="translation-review-empty">Selecione uma proposta ou exceção para comparar e revisar.</p>
+            </>
           )}
         </section>
       </div>

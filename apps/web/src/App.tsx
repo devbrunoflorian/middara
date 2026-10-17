@@ -39,6 +39,7 @@ import {
   loadTranslationReviewRecords,
   loadTranslationReviewRequests,
   persistTranslationReview,
+  persistTranslationReviewDisposition,
   persistTranslationReviewApproval,
   persistTranslationGlossaryDecision,
   persistTranslationReviewRequest,
@@ -1456,7 +1457,7 @@ function App() {
         return next;
       });
       setSelectedPublishedReviewKey(null);
-      setReviewStatus('Gravação confirmada no PT-BR. Unidade movida para Aprovados.');
+      setReviewStatus('Gravação confirmada no PT-BR.');
       return true;
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Não foi possível confirmar a publicação da unidade.';
@@ -1466,6 +1467,28 @@ function App() {
       setReviewWritingKey(null);
     }
   }, [hasTranslationDraft, pageData, reviewRecords]);
+
+  const handleSetTranslationReviewArchived = useCallback(async (
+    candidate: TranslationReviewCandidate,
+    archived: boolean,
+  ) => {
+    if (hasTranslationDraft) throw new Error('Salve ou descarte as alterações no Editor antes de alterar a fila.');
+    const existing = reviewRecordForCandidate(reviewRecords, candidate);
+    setReviewWritingKey(candidate.reviewKey);
+    setReviewStatus(null);
+    try {
+      const saved = await persistTranslationReviewDisposition(candidate, existing, archived ? 'archived' : 'active');
+      setReviewRecords(current => withUpdatedTranslationReviewRecord(current, saved));
+      setReviewPersistenceError(null);
+    } finally {
+      setReviewWritingKey(null);
+    }
+  }, [hasTranslationDraft, reviewRecords]);
+
+  const handleClearReviewSelection = useCallback(() => {
+    setSelectedReviewKey(null);
+    setSelectedPublishedReviewKey(null);
+  }, []);
 
   const handleReopenReviewCandidate = useCallback((candidate: TranslationReviewCandidate) => {
     void persistReviewState(candidate, 'pending');
@@ -2661,6 +2684,8 @@ function App() {
         onOpenEditor={handleOpenReviewEditor}
         onOpenExceptionPage={handleOpenReviewExceptionPage}
         onApprove={handleApproveReviewCandidate}
+        onSetArchived={handleSetTranslationReviewArchived}
+        onClearSelection={handleClearReviewSelection}
         onReopen={handleReopenReviewCandidate}
         onCreateAIRequest={handleCreateTranslationReviewRequest}
         onUpdateAIRequest={handleUpdateTranslationReviewRequest}
