@@ -779,7 +779,29 @@ export async function persistTranslationReviewDisposition(
       || `HTTP ${response.status}`;
     throw new Error(`Não foi possível atualizar a fila de revisão: ${reason}.`);
   }
-  return payload.doc;
+
+  // A stale Payload build can silently ignore a newly added field while still
+  // returning HTTP 200 and an updated document timestamp. Confirm the actual
+  // stored value before the UI removes the proposal from the active queue.
+  const confirmationResponse = await fetch(payloadApiUrl(`translation-reviews/${payload.doc.id}?depth=0`), {
+    method: 'GET',
+    cache: 'no-store',
+  });
+  const confirmation = await confirmationResponse.json().catch(() => null) as ({ doc?: TranslationReviewRecord; errors?: Array<{ message?: string }>; message?: string } & Partial<TranslationReviewRecord>) | null;
+  const confirmedRecord = confirmation?.doc
+    ?? (confirmation && confirmation.id !== undefined ? confirmation as TranslationReviewRecord : undefined);
+  if (!confirmationResponse.ok || !confirmedRecord) {
+    const reason = confirmation?.errors?.map(error => error.message).filter(Boolean).join('; ')
+      || confirmation?.message
+      || `HTTP ${confirmationResponse.status}`;
+    const queueName = disposition === 'archived' ? 'Propostas' : 'Arquivadas';
+    throw new Error(`A API não confirmou a alteração na fila: ${reason}. A unidade permanece em ${queueName}.`);
+  }
+  if (confirmedRecord.reviewDisposition !== disposition) {
+    const queueName = disposition === 'archived' ? 'Propostas' : 'Arquivadas';
+    throw new Error(`O armazenamento não confirmou ${disposition === 'archived' ? 'o arquivamento' : 'a restauração'} da unidade. Ela permanece em ${queueName}.`);
+  }
+  return confirmedRecord;
 }
 
 export interface PersistedTranslationApproval {
