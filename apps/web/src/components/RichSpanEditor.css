@@ -63,6 +63,33 @@
   font-size: 10px;
 }
 
+.rse-header-accessory {
+  padding: 6px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(12, 16, 31, 0.48);
+}
+
+.rse-header-accessory .editorial-experiment-switcher {
+  position: static;
+  width: 100%;
+  max-width: none;
+  grid-template-columns: 1fr;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.rse-header-accessory .editorial-experiment-heading,
+.rse-header-accessory .editorial-experiment-options {
+  flex-wrap: wrap;
+}
+
+.rse-header-accessory .editorial-experiment-heading { white-space: normal; }
+.rse-header-accessory .editorial-experiment-switcher small { white-space: normal; }
+
 .rse-close {
   background: none;
   border: none;
@@ -254,6 +281,18 @@
 }
 
 .rse-context-footnote { max-inline-size: 72ch; }
+
+.rse-rich-style-review {
+  margin: 10px 16px 0;
+  padding: 9px 11px;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  border-inline-start: 3px solid #d6a84f;
+  border-radius: 6px;
+  background: rgba(120, 82, 25, 0.16);
+  color: #ead9b5;
+  font-size: 12px;
+  line-height: 1.45;
+}
 
 .rse-context-glossary {
   display: flex;

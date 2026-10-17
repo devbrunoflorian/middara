@@ -18,6 +18,10 @@ export interface InlineSymbolMetrics {
   trailingGapEm?: number;
   /** Source composition style used by the same semantic symbol ID. */
   renderVariant?: string;
+  /** Audited occurrence artwork; the stable semantic ID still comes from the registry. */
+  sourceAssetUrl?: string;
+  /** Verified source topology/paint identity shared by equivalent occurrences. */
+  sourceAppearanceKey?: string;
 }
 
 export interface SemanticSymbolDefinition {
@@ -148,7 +152,7 @@ const PREFERRED_EDITOR_ALIASES: Record<string, string[]> = {
   'marker.checkbox': ['checklist-square', 'quadrado-de-checklist'],
   'tag.passive': ['passive', 'passivo'],
   'tag.status': ['status'],
-  'tag.exhaust': ['exhaust', 'exaustir'],
+  'tag.exhaust': ['exhaust', 'exaustar'],
   'tag.discard': ['discard', 'descartar'],
   'marker.reference.a': ['reference-a', 'referencia-a'],
   'marker.reference.b': ['reference-b', 'referencia-b'],

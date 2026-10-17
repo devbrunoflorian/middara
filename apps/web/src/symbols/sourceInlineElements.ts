@@ -9,6 +9,10 @@ export interface SourceInlineElement {
   sourceRendering?: 'semantic-inline';
   /** Source text glyphs that are visually part of this composite symbol. */
   coveredSourceText?: { lineId: string; spanIndex: number; text: string };
+  /** Text paint belonging to an artwork object, including another PDF block. */
+  coveredSourceTexts?: Array<{ blockId:string; lineId:string; spanIndex:number; text:string }>;
+  /** Source prose split into another PDF block by an intervening inline image. */
+  sourceTextCompanions?: Array<{ blockId:string; blockIndex:number; lineId:string; spanIndex:number; text:string }>;
   metrics?: InlineSymbolMetrics;
   color?: string;
   bbox: [number,number,number,number];
@@ -78,6 +82,36 @@ function includeInlineObjectsInSpanUnits(block: Block, elements: SourceInlineEle
     const objectRef = refAt(insertionIndex);
     if (units.some(unit => unit.spanRefs.includes(objectRef))) continue;
 
+    // Some source objects sit at the beginning of a visual line, while their
+    // semantic owner is the first prose span after them. Neighbor-only
+    // inference has no left span in that case and leaves the object outside
+    // the editable unit. Honor the source-traced owner when it is available.
+    const ownerRef = element.anchor.ownerSpanRef
+      ? `${element.anchor.ownerSpanRef.lineId}:${element.anchor.ownerSpanRef.spanIndex}`
+      : null;
+    const ownerIndex = element.anchor.ownerSpanRef?.lineId === line.id
+      ? element.anchor.ownerSpanRef.spanIndex
+      : -1;
+    const explicitOwner = ownerRef ? units.find(unit => unit.spanRefs.includes(ownerRef)) : undefined;
+    if (explicitOwner && ownerIndex < 0) {
+      explicitOwner.spanRefs.push(objectRef);
+      changed = true;
+      continue;
+    }
+    if (explicitOwner && ownerIndex !== insertionIndex && ownerIndex < line.spans.length) {
+      const from = Math.min(insertionIndex, ownerIndex);
+      const to = Math.max(insertionIndex, ownerIndex);
+      const intervening = line.spans.slice(from, to + 1);
+      if (intervening.every((span, offset) => from + offset === ownerIndex || !span.text.trim())) {
+        for (let index = from; index <= to; index++) {
+          const ref = refAt(index);
+          if (!explicitOwner.spanRefs.includes(ref)) explicitOwner.spanRefs.push(ref);
+        }
+        changed = true;
+        continue;
+      }
+    }
+
     let left = insertionIndex - 1;
     while (left >= 0 && !line.spans[left].text.trim()) left--;
     let right = insertionIndex;
@@ -109,12 +143,18 @@ function includeInlineObjectsInSpanUnits(block: Block, elements: SourceInlineEle
 
 /** Runtime augmentation: original JSON IDs, arrays and persisted keys stay intact. */
 export function attachSourceInlineElements(blocks: Block[], elements: SourceInlineElement[]): Block[] {
+  const coveredRefs=(e:SourceInlineElement)=>[...(e.coveredSourceTexts??[]),...(e.coveredSourceText?[{...e.coveredSourceText,blockId:e.anchor.blockId}]:[])];
+  const companionSpan=(e:SourceInlineElement,index:number)=> (e.sourceTextCompanions??[]).flatMap(ref=>{
+    const source=blocks.find(b=>b.id===ref.blockId)?.lines?.find(l=>l.id===ref.lineId)?.spans[ref.spanIndex];
+    if(!source||source.text!==ref.text)return [];
+    return [{...source,sourceSpanIndex:index,sourceEditorOnly:true,sourceTextCompanionFrom:{...ref,symbolId:e.symbolId}}];
+  });
   return blocks.map(block=>{
     const unitAwareBlock = includeInlineObjectsInSpanUnits(block, elements);
     return { ...unitAwareBlock,lines:unitAwareBlock.lines?.map(line=>{
     const lineElements=elements.filter(e=>e.anchor.blockId===block.id && e.anchor.lineId===line.id && getSemanticSymbol(e.symbolId));
     const requestedStart=lineElements.map(e=>e.anchor.lineStartX).filter((x):x is number=>x!==undefined);
-    const coveredLineElements=elements.filter(e=>e.anchor.blockId===block.id && e.coveredSourceText?.lineId===line.id);
+    const coveredLineRefs=elements.flatMap(e=>coveredRefs(e).filter(ref=>ref.blockId===block.id&&ref.lineId===line.id));
     const adjustedLine= requestedStart.length ? (()=>{
       const availableX=line.availableX ?? line.bbox[0];
       const availableWidth=line.availableWidth ?? line.bbox[2]-availableX;
@@ -122,22 +162,29 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
       const availableXNext=Math.min(...requestedStart);
       return {...line,availableX:availableXNext,availableWidth:Math.max(0,right-availableXNext)};
     })() : line;
+    const adjustedAvailableX=adjustedLine.availableX ?? adjustedLine.bbox[0];
+    const adjustedAvailableRight=adjustedAvailableX
+      +(adjustedLine.availableWidth ?? adjustedLine.bbox[2]-adjustedAvailableX);
+    const sourceInlineRight=lineElements.length ? Math.max(...lineElements.map(element=>element.bbox[2])) : adjustedAvailableRight;
+    const inlineAwareLine=sourceInlineRight>adjustedAvailableRight
+      ? {...adjustedLine,availableWidth:sourceInlineRight-adjustedAvailableX}
+      : adjustedLine;
     const sourceFlowStartPt = lineElements.length
       ? Math.min(...line.spans.filter(span=>!span.renderOnlyStrokePass).map(span=>span.bbox[0]),...lineElements.map(element=>element.bbox[0]))
-      : coveredLineElements.length ? Math.min(...coveredLineElements.map(element=>element.coveredSourceText!.spanIndex===0
+      : coveredLineRefs.length ? Math.min(...coveredLineRefs.map(ref=>ref.spanIndex===0
         ? line.spans[0]?.bbox[0] ?? line.bbox[0]
-        : line.spans[element.coveredSourceText!.spanIndex]?.bbox[0] ?? line.bbox[0]))
+        : line.spans[ref.spanIndex]?.bbox[0] ?? line.bbox[0]))
         : undefined;
-    const flowLine = lineElements.length && sourceFlowStartPt !== undefined && sourceFlowStartPt < (adjustedLine.availableX ?? adjustedLine.bbox[0])
-      ? { ...adjustedLine,
-        availableWidth: (adjustedLine.availableX ?? adjustedLine.bbox[0]) + (adjustedLine.availableWidth ?? adjustedLine.bbox[2] - (adjustedLine.availableX ?? adjustedLine.bbox[0])) - sourceFlowStartPt,
+    const flowLine = lineElements.length && sourceFlowStartPt !== undefined && sourceFlowStartPt < (inlineAwareLine.availableX ?? inlineAwareLine.bbox[0])
+      ? { ...inlineAwareLine,
+        availableWidth: (inlineAwareLine.availableX ?? inlineAwareLine.bbox[0]) + (inlineAwareLine.availableWidth ?? inlineAwareLine.bbox[2] - (inlineAwareLine.availableX ?? inlineAwareLine.bbox[0])) - sourceFlowStartPt,
         availableX: sourceFlowStartPt,
       }
-      : adjustedLine;
+      : inlineAwareLine;
     return {...flowLine,...(sourceFlowStartPt !== undefined ? {renderSourceSpanGeometry:true,renderSourceSpanStartPt:sourceFlowStartPt} : {}),spans:line.spans.flatMap((span,index)=>{
       const matches=lineElements.filter(e=>sourceObjectInsertionIndex(e,line.spans)===index);
-      const coveredBy=elements.find(e=>e.anchor.blockId===block.id && e.coveredSourceText?.lineId===line.id
-        && e.coveredSourceText.spanIndex===(span.sourceSpanIndex ?? index));
+      const coveredBy=elements.find(e=>coveredRefs(e).some(ref=>ref.blockId===block.id&&ref.lineId===line.id
+        &&ref.spanIndex===(span.sourceSpanIndex??index)&&ref.text===span.text));
       const metricsFor=(e:SourceInlineElement):InlineSymbolMetrics|undefined=>{
         if(!e.metrics)return undefined;
         return {...e.metrics,
@@ -150,18 +197,18 @@ export function attachSourceInlineElements(blocks: Block[], elements: SourceInli
       const sourceInlineObjects=matches.filter(e=>e.anchor.side==='replace-text' && e.anchor.textRange);
       const replacedLegacyGlyph=matches.find(e=>e.anchor.side==='replace' && e.anchor.spanIndex===index
         && resolveLegacySymbol(span.font,span.text)?.id===e.symbolId);
-      return [...matches.filter(e=>e.anchor.side==='before').map(e=>make(e,line.spans[e.anchor.spanIndex] ?? span,index)),{...span,sourceSpanIndex:index,
+      return [...matches.filter(e=>e.anchor.side==='before').flatMap(e=>[make(e,line.spans[e.anchor.spanIndex] ?? span,index),...companionSpan(e,index)]),{...span,sourceSpanIndex:index,
         ...(coveredBy ? {sourceInlineCoveredBy:coveredBy.symbolId} : {}),
         ...(replacedLegacyGlyph?.metrics ? {sourceSymbolMetrics:metricsFor(replacedLegacyGlyph)} : {}),
         ...(sourceInlineObjects.length?{sourceInlineObjects}:{}),
-      },...matches.filter(e=>e.anchor.side==='after').map(e=>make(e,line.spans[e.anchor.spanIndex] ?? span,index))];
+      },...matches.filter(e=>e.anchor.side==='after').flatMap(e=>[make(e,line.spans[e.anchor.spanIndex] ?? span,index),...companionSpan(e,index)])];
     })};
     })};
   });
 }
 
 export function sourceElementIsReplaced(element: SourceInlineElement, block: Block, page: number, language: string,
-  overrides: Map<string,SpanOverride>, selectedKey: string|null, draft: SpanOverride|null): boolean {
+  overrides: Map<string,SpanOverride>, selectedKey: string|null, draft: SpanOverride|null, ownedOverrideOnly=false): boolean {
   const overrideFor=(key:string)=>key===selectedKey && draft!==null ? draft : overrides.get(key);
   const has=(key:string)=> {
     const override=overrideFor(key);
@@ -180,11 +227,16 @@ export function sourceElementIsReplaced(element: SourceInlineElement, block: Blo
       .filter(field=>field.lineIds.includes(ownerLineId)).map(field=>`page_${page}_credit_${unit.id}_${field.id}__${language}`)),
   ];
   if(keys.some(has))return true;
-  // A semantic-source family replaces its PDF paint only when this language
-  // has no legacy override for the owner. Legacy prose without symbol IDs
-  // keeps the original ink until the editor explicitly adopts the symbol.
+  if(ownedOverrideOnly)return false;
+  // Once an occurrence is declared semantic-inline, keep its source cleanup
+  // mask active even when an override intentionally removes that symbol.
+  // The source raster is immutable; tying cleanup to the symbol's presence
+  // makes delete/reflow leave a visible orphan behind.
+  if((element.sourceRendering ?? getSemanticSymbol(element.symbolId)?.sourceRendering)==='semantic-inline')return true;
+  // Legacy prose without an explicit source symbol mapping keeps its original
+  // ink until the editor explicitly adopts the symbol.
   if(keys.some(key=>overrideFor(key)))return false;
-  return (element.sourceRendering ?? getSemanticSymbol(element.symbolId)?.sourceRendering)==='semantic-inline';
+  return false;
 }
 
 /** Cut only confirmed inline regions out of an existing source-art overlay. */

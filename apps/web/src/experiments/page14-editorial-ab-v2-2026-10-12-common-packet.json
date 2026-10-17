@@ -1,0 +1,1850 @@
+{
+  "experimentId": "page14-editorial-ab-v2-2026-10-12",
+  "commonInstruction": "Translate only the eight pre-registered p.14 units in PT-BR. Produce the best faithful editorial candidate for each; do not access or infer the other condition. Preserve all actors, modal force, negations, conditions, quantifiers, numbers, order, exceptions, references, and meaning. Match the source rich structure and editorial identity. Keep each existing baseline frame exactly unchanged. The source PDF and project glossary have authority. Page-2 voice is limited human context. The supplied Adventure Book workbook is comparative only. Do not change saved data, Payload, localStorage, canonical sidecars, geometry, PDF or other pages. Do not write files; return the requested JSON directly.",
+  "generation": "For every unit, allow one initial draft and no more than two self-revision attempts before freeze. You may use only resources assigned to your condition. Check your own output against the pre-registered semantic criteria and frame dimensions. Do not see other-condition output. Report any unresolved terminology or layout blocker. Output one JSON object with experiment id, self-reported model/config if exposed, exact files/resources read, revision count per unit, and for each unit: key, final proposedText, ordered richRuns as text/style anchors (sourcePhrase, targetPhrase, font role, size/weight/style/color preserved), semantic checklist pass/fail per prereg criterion with short evidence, terminology status, copyfit estimate/known uncertainty, blocker. No output file writes.",
+  "sourcePdf": "C:\\Users\\bruno\\Middara\\Rulebook 1.2\\Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "pageSidecar": "C:\\Users\\bruno\\Middara\\Rulebook App\\apps\\web\\public\\pages\\page_014\\page_014_dom.json",
+  "glossary": "C:\\Users\\bruno\\Middara\\Rulebook App\\docs\\translations\\glossary.md",
+  "humanVoice": "C:\\Users\\bruno\\Middara\\Rulebook App\\docs\\translations\\references\\page-2-voice-reference.md",
+  "projectRules": [
+    "C:\\Users\\bruno\\Middara\\Rulebook App\\.agents\\rules\\02-schema-e-modelagem-de-dados.md",
+    "C:\\Users\\bruno\\Middara\\Rulebook App\\.agents\\rules\\03-motor-de-renderizacao.md",
+    "C:\\Users\\bruno\\Middara\\Rulebook App\\.agents\\rules\\05-processo-de-validacao-qa.md",
+    "C:\\Users\\bruno\\Middara\\Rulebook App\\.agents\\rules\\06-comportamento-esperado-da-ia.md",
+    "C:\\Users\\bruno\\Middara\\Rulebook App\\.agents\\rules\\14-inline-semantic-elements.md"
+  ],
+  "workbookContext": {
+    "sheets": {
+      "Text Style Guide": [
+        {
+          "note": "B except page numbers and in Setup box; related +/- also bold",
+          "term": "Number",
+          "row": 10
+        },
+        {
+          "note": "B for Story Round phases",
+          "term": "Phase Name",
+          "row": 11
+        },
+        {
+          "note": "plain for Setup and phases of turns; this Adventure Book guide is not authority over the Rulebook PDF",
+          "term": "Phase Name",
+          "row": 12
+        },
+        {
+          "note": "B&I",
+          "term": "Rule Section Reference",
+          "row": 13
+        },
+        {
+          "note": "capitalized and italic",
+          "term": "Terrain Type",
+          "row": 15
+        },
+        {
+          "note": "capitalized and italic",
+          "term": "Token Name",
+          "row": 16
+        },
+        {
+          "note": "capitalized",
+          "term": "Adventure Mode",
+          "row": 31
+        },
+        {
+          "note": "capitalized",
+          "term": "Adventurer",
+          "row": 33
+        },
+        {
+          "note": "no extra rule",
+          "term": "Combatant",
+          "row": 56
+        },
+        {
+          "note": "capitalized with Physical/Magic/Irreducible",
+          "term": "Damage",
+          "row": 72
+        },
+        {
+          "note": "capitalized when Spell/Terrain effect; capitalized+italic for Effect tokens",
+          "term": "Effect(s)",
+          "row": 94
+        },
+        {
+          "note": "capitalized",
+          "term": "Encounter",
+          "row": 97
+        },
+        {
+          "note": "capitalized",
+          "term": "Encounter Setup",
+          "row": 100
+        },
+        {
+          "note": "capitalized",
+          "term": "End Condition",
+          "row": 101
+        },
+        {
+          "note": "bold",
+          "term": "HP",
+          "row": 132
+        },
+        {
+          "note": "no extra rule",
+          "term": "Lose Condition",
+          "row": 155
+        },
+        {
+          "note": "for Encounters",
+          "term": "Reward",
+          "row": 206
+        },
+        {
+          "note": "bold",
+          "term": "SP",
+          "row": 221
+        },
+        {
+          "note": "no extra rule",
+          "term": "Win Condition",
+          "row": 273
+        }
+      ],
+      "Nomes para Tradução": [
+        {
+          "term": "Setup",
+          "translation": "Preparação",
+          "row": 3
+        },
+        {
+          "term": "Tiles",
+          "translation": "Peças",
+          "row": 4
+        },
+        {
+          "term": "Terrain",
+          "translation": "Terrenos",
+          "row": 5
+        },
+        {
+          "term": "Figures",
+          "translation": "Miniaturas",
+          "row": 8
+        },
+        {
+          "term": "End Conditions",
+          "translation": "Condições Finais",
+          "row": 12
+        },
+        {
+          "term": "WIN CONDITION",
+          "translation": "CONDIÇÃO DE VITÓRIA",
+          "row": 13
+        },
+        {
+          "term": "LOSE CONDITION",
+          "translation": "CONDIÇÃO DE DERROTA",
+          "row": 14
+        },
+        {
+          "term": "Token",
+          "translation": "Ficha",
+          "row": 16
+        },
+        {
+          "term": "Adventurers",
+          "translation": "Aventureiros",
+          "row": 22
+        }
+      ]
+    },
+    "authority": "Same comparative human context is supplied to both conditions. It comes from the Adventure Book team; it does not override the Rulebook source PDF or the project glossary. In case of conflict, use the source PDF for printed rich style and the project glossary for approved PT-BR terminology.",
+    "source": "C:\\Users\\bruno\\Downloads\\Middara_Guia_Tradução (1).xlsx"
+  },
+  "units": [
+    {
+      "pageNumber": 14,
+      "printedPage": 14,
+      "blockIndex": 0,
+      "sidecarBlockId": "block_14",
+      "spanKey": "page_14_block_0",
+      "sourceText": "Whether playing the Crawl Mode or Adventure Mode, players will be instructed to set up Encounters. When setting up an Encounter, read the Special Rules of the Encounter and then go through the 4 Phases of setup as follows:",
+      "sourceLines": [
+        {
+          "text": "Whether playing the Crawl Mode or Adventure Mode, players will be ",
+          "bbox": [
+            86.17320251464844,
+            144.97418212890625,
+            386.1431884765625,
+            156.8741912841797
+          ]
+        },
+        {
+          "text": "instructed to set up Encounters. When setting up an Encounter, read the ",
+          "bbox": [
+            86.17320251464844,
+            155.97418212890625,
+            395.76312255859375,
+            167.8741912841797
+          ]
+        },
+        {
+          "text": "Special Rules of the Encounter and then go through the 4 Phases of setup ",
+          "bbox": [
+            86.17320251464844,
+            166.9541778564453,
+            402.4431457519531,
+            178.8741912841797
+          ]
+        },
+        {
+          "text": "as follows:",
+          "bbox": [
+            86.17320251464844,
+            177.97418212890625,
+            131.63319396972656,
+            189.8741912841797
+          ]
+        }
+      ],
+      "sourceRichSpans": [
+        {
+          "text": "Whether playing the Crawl Mode or Adventure Mode, players will be ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            86.17320251464844,
+            144.97418212890625,
+            386.1431884765625,
+            156.8741912841797
+          ]
+        },
+        {
+          "text": "instructed to set up Encounters. When setting up an Encounter, read the ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            86.17320251464844,
+            155.97418212890625,
+            395.76312255859375,
+            167.8741912841797
+          ]
+        },
+        {
+          "text": "Special Rules of the Encounter and then go through the ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            86.17320251464844,
+            166.97418212890625,
+            325.7331237792969,
+            178.8741912841797
+          ]
+        },
+        {
+          "text": "4",
+          "font": "OptimaLTStd-Bold",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            325.7331237792969,
+            166.9541778564453,
+            331.2931213378906,
+            178.8741912841797
+          ]
+        },
+        {
+          "text": " Phases of setup ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            331.2931213378906,
+            166.97418212890625,
+            402.4431457519531,
+            178.8741912841797
+          ]
+        },
+        {
+          "text": "as follows:",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            86.17320251464844,
+            177.97418212890625,
+            131.63319396972656,
+            189.8741912841797
+          ]
+        }
+      ],
+      "currentPtBr": "English fallback; no saved PT-BR translation record for p.14 was found in the read-only Payload query (0 p.14 translation docs).",
+      "editorialFamily": "left-column introductory prose",
+      "baseFrame": {
+        "x": 86.17320251464844,
+        "y": 144.97418212890625,
+        "width": 316.2699432373047,
+        "height": 44.90000915527344,
+        "rotation": 0
+      },
+      "baseFrameSource": "Current source sidecar bbox; PT currently inherits source geometry",
+      "semanticConstraints": [
+        "Both Crawl Mode and Adventure Mode are in scope.",
+        "Players will be instructed to set up Encounters.",
+        "When setting up an Encounter, read its Special Rules and then go through the four setup phases."
+      ],
+      "preregisteredCriteria": [
+        "Keep modes distinct and preserve the four-phase count.",
+        "Keep the reading instruction conditional on setting up an Encounter."
+      ]
+    },
+    {
+      "pageNumber": 14,
+      "printedPage": 14,
+      "blockIndex": 1,
+      "sidecarBlockId": "block_15",
+      "spanKey": "page_14_block_1",
+      "sourceText": "1.\tPREPARE PHASE: Each Adventurer removes their Used tokens from their Per Encounter Abilities and Un-Exhausts all cards. All Defeated Adventurers or Adventurers with more Damage tokens than half of their max HP remove Damage tokens until they have Damage tokens equal to half of their max HP. All Effect tokens are removed, and each Adventurer sets their Stamina Points (SP) to their Stamina Point Recovery Value (usually 3). ",
+      "sourceLines": [
+        {
+          "text": "1.\t",
+          "bbox": [
+            86.17320251464844,
+            200.87518310546875,
+            96.18119812011719,
+            211.60317993164062
+          ]
+        },
+        {
+          "text": "PREPARE PHASE: Each Adventurer removes their Used tokens from ",
+          "bbox": [
+            104.17320251464844,
+            199.93418884277344,
+            386.8099670410156,
+            211.8741912841797
+          ]
+        },
+        {
+          "text": "their Per Encounter Abilities and Un-Exhausts all cards. All Defeated ",
+          "bbox": [
+            104.16999816894531,
+            210.97418212890625,
+            399.208984375,
+            222.8741912841797
+          ]
+        },
+        {
+          "text": "Adventurers or Adventurers with more Damage tokens than half of ",
+          "bbox": [
+            104.16999816894531,
+            221.85418701171875,
+            392.0199890136719,
+            233.8741912841797
+          ]
+        },
+        {
+          "text": "their max HP remove Damage tokens until they have Damage tokens ",
+          "bbox": [
+            104.16999816894531,
+            232.93418884277344,
+            402.2591247558594,
+            244.8741912841797
+          ]
+        },
+        {
+          "text": "equal to half of their max HP. All Effect tokens are removed, and ",
+          "bbox": [
+            104.16910552978516,
+            243.93418884277344,
+            382.5189514160156,
+            255.8741912841797
+          ]
+        },
+        {
+          "text": "each Adventurer sets their Stamina Points (SP) to their Stamina Point ",
+          "bbox": [
+            104.16900634765625,
+            254.9541778564453,
+            396.9769287109375,
+            266.8741760253906
+          ]
+        },
+        {
+          "text": "Recovery Value (usually 3). ",
+          "bbox": [
+            104.17701721191406,
+            265.97418212890625,
+            222.50709533691406,
+            277.8741760253906
+          ]
+        }
+      ],
+      "sourceRichSpans": [
+        {
+          "text": "1.\t",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            86.17320251464844,
+            200.87518310546875,
+            96.18119812011719,
+            211.60317993164062
+          ]
+        },
+        {
+          "text": "PREPARE PHASE:",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            104.17320251464844,
+            200.87518310546875,
+            171.61019897460938,
+            211.60317993164062
+          ]
+        },
+        {
+          "text": " Each Adventurer removes their ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            171.61000061035156,
+            199.97418212890625,
+            308.2699890136719,
+            211.8741912841797
+          ]
+        },
+        {
+          "text": "Used",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            308.2699890136719,
+            199.93418884277344,
+            330.67999267578125,
+            211.81417846679688
+          ]
+        },
+        {
+          "text": " tokens from ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            330.67999267578125,
+            199.97418212890625,
+            386.8099670410156,
+            211.8741912841797
+          ]
+        },
+        {
+          "text": "their Per Encounter Abilities and Un-Exhausts all cards. All Defeated ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.16999816894531,
+            210.97418212890625,
+            399.208984375,
+            222.8741912841797
+          ]
+        },
+        {
+          "text": "Adventurers or Adventurers with ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.16999816894531,
+            221.97418212890625,
+            245.3499755859375,
+            233.8741912841797
+          ]
+        },
+        {
+          "text": "more",
+          "font": "OptimaLTStd-BoldItalic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 22,
+          "bbox": [
+            245.3499755859375,
+            221.85418701171875,
+            268.08001708984375,
+            233.80418395996094
+          ]
+        },
+        {
+          "text": " ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            268.08001708984375,
+            221.97418212890625,
+            270.8600158691406,
+            233.8741912841797
+          ]
+        },
+        {
+          "text": "Damage ",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            270.8600158691406,
+            221.93418884277344,
+            309.75,
+            233.81417846679688
+          ]
+        },
+        {
+          "text": "tokens than half of ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            309.75,
+            221.97418212890625,
+            392.0199890136719,
+            233.8741912841797
+          ]
+        },
+        {
+          "text": "their max ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.16999816894531,
+            232.97418212890625,
+            147.50999450683594,
+            244.8741912841797
+          ]
+        },
+        {
+          "text": "HP",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            147.5131072998047,
+            233.87518310546875,
+            159.51910400390625,
+            244.60317993164062
+          ]
+        },
+        {
+          "text": " remove ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            159.51910400390625,
+            232.97418212890625,
+            197.05911254882812,
+            244.8741912841797
+          ]
+        },
+        {
+          "text": "Damage ",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            197.05911254882812,
+            232.93418884277344,
+            235.94911193847656,
+            244.81417846679688
+          ]
+        },
+        {
+          "text": "tokens until they have ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            235.94911193847656,
+            232.97418212890625,
+            332.79913330078125,
+            244.8741912841797
+          ]
+        },
+        {
+          "text": "Damage",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            332.79913330078125,
+            232.93418884277344,
+            368.90911865234375,
+            244.81417846679688
+          ]
+        },
+        {
+          "text": " tokens ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            368.90911865234375,
+            232.97418212890625,
+            402.2591247558594,
+            244.8741912841797
+          ]
+        },
+        {
+          "text": "equal to half of their max ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.16910552978516,
+            243.97418212890625,
+            215.32908630371094,
+            255.8741912841797
+          ]
+        },
+        {
+          "text": "HP",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            215.33299255371094,
+            244.87518310546875,
+            227.3389892578125,
+            255.60317993164062
+          ]
+        },
+        {
+          "text": ". All ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            227.33900451660156,
+            243.97418212890625,
+            247.53900146484375,
+            255.8741912841797
+          ]
+        },
+        {
+          "text": "Effect",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            247.53900146484375,
+            243.93418884277344,
+            271.0589904785156,
+            255.81417846679688
+          ]
+        },
+        {
+          "text": " tokens are removed, and ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            271.0589904785156,
+            243.97418212890625,
+            382.5189514160156,
+            255.8741912841797
+          ]
+        },
+        {
+          "text": "each Adventurer sets their Stamina Points (",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.16900634765625,
+            254.97418212890625,
+            286.208984375,
+            266.8741760253906
+          ]
+        },
+        {
+          "text": "SP",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            286.2130126953125,
+            255.87518310546875,
+            295.7170104980469,
+            266.6031799316406
+          ]
+        },
+        {
+          "text": ")",
+          "font": "OptimaLTStd-Bold",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            295.7170104980469,
+            254.9541778564453,
+            299.0469970703125,
+            266.8741760253906
+          ]
+        },
+        {
+          "text": " to their Stamina Point ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            299.0469970703125,
+            254.97418212890625,
+            396.9769287109375,
+            266.8741760253906
+          ]
+        },
+        {
+          "text": "Recovery Value (usually ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.17701721191406,
+            265.97418212890625,
+            209.16700744628906,
+            277.8741760253906
+          ]
+        },
+        {
+          "text": "3",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            209.16310119628906,
+            266.87518310546875,
+            214.16709899902344,
+            277.6031799316406
+          ]
+        },
+        {
+          "text": "). ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            214.16709899902344,
+            265.97418212890625,
+            222.50709533691406,
+            277.8741760253906
+          ]
+        }
+      ],
+      "currentPtBr": "English fallback; no saved PT-BR translation record for p.14 was found in the read-only Payload query (0 p.14 translation docs).",
+      "editorialFamily": "left-column numbered setup-phase body",
+      "baseFrame": {
+        "x": 86.17320251464844,
+        "y": 199.93418884277344,
+        "width": 316.08592224121094,
+        "height": 77.93998718261719,
+        "rotation": 0
+      },
+      "baseFrameSource": "Current source sidecar bbox; PT currently inherits source geometry",
+      "semanticConstraints": [
+        "Each Adventurer removes Used tokens from Per Encounter Abilities and Un-Exhausts all cards.",
+        "All Defeated Adventurers OR Adventurers with more Damage tokens than half their max HP remove Damage until exactly half their max HP remains.",
+        "Remove all Effect tokens.",
+        "Each Adventurer sets SP to their Stamina Point Recovery Value, usually 3."
+      ],
+      "preregisteredCriteria": [
+        "Preserve All, Each, or, more than, half, until, exactly, all, and usually.",
+        "Preserve the fixed numbered marker 1. and the source distinction between number, phase heading, and body.",
+        "Preserve source italics/bold and abbreviations."
+      ]
+    },
+    {
+      "pageNumber": 14,
+      "printedPage": 14,
+      "blockIndex": 5,
+      "sidecarBlockId": "block_19",
+      "spanKey": "page_14_block_5",
+      "sourceText": "2.\tPLACEMENT PHASE: Set up the Tiles according to the Encounter Setup Diagram. Then, place all Encounter tokens, Terrain tokens, and figures as shown in the Encounter Setup Diagram. Adventurers may choose to place their figures in any of the spaces marked as the Starting Zone on the Encounter Setup Diagram. ",
+      "sourceLines": [
+        {
+          "text": "2.\t",
+          "bbox": [
+            86.17320251464844,
+            423.8988952636719,
+            96.18119812011719,
+            434.62689208984375
+          ]
+        },
+        {
+          "text": "PLACEMENT PHASE: Set up the Tiles according to the Encounter Setup ",
+          "bbox": [
+            104.17320251464844,
+            422.9978942871094,
+            401.659912109375,
+            434.89788818359375
+          ]
+        },
+        {
+          "text": "Diagram. Then, place all Encounter tokens, Terrain tokens, and figures ",
+          "bbox": [
+            104.16999053955078,
+            433.9578857421875,
+            407.27001953125,
+            445.89788818359375
+          ]
+        },
+        {
+          "text": "as shown in the Encounter Setup Diagram. Adventurers may choose ",
+          "bbox": [
+            104.16998291015625,
+            444.9978942871094,
+            397.26995849609375,
+            456.89788818359375
+          ]
+        },
+        {
+          "text": "to place their figures in any of the spaces marked as the Starting Zone ",
+          "bbox": [
+            104.16998291015625,
+            455.9978942871094,
+            405.20989990234375,
+            467.89788818359375
+          ]
+        },
+        {
+          "text": "on the Encounter Setup Diagram. ",
+          "bbox": [
+            104.16998291015625,
+            466.9978942871094,
+            249.6599578857422,
+            478.89788818359375
+          ]
+        }
+      ],
+      "sourceRichSpans": [
+        {
+          "text": "2.\t",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            86.17320251464844,
+            423.8988952636719,
+            96.18119812011719,
+            434.62689208984375
+          ]
+        },
+        {
+          "text": "PLACEMENT PHASE:",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            104.17320251464844,
+            423.8988952636719,
+            186.3701934814453,
+            434.62689208984375
+          ]
+        },
+        {
+          "text": " Set up the Tiles according to the Encounter Setup ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            186.3699951171875,
+            422.9978942871094,
+            401.659912109375,
+            434.89788818359375
+          ]
+        },
+        {
+          "text": "Diagram. Then, place all ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.16999053955078,
+            433.9978942871094,
+            212.2819366455078,
+            445.89788818359375
+          ]
+        },
+        {
+          "text": "Encounter",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            212.26998901367188,
+            433.9578857421875,
+            255.79998779296875,
+            445.837890625
+          ]
+        },
+        {
+          "text": " tokens, ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            255.79998779296875,
+            433.9978942871094,
+            291.9100036621094,
+            445.89788818359375
+          ]
+        },
+        {
+          "text": "Terrain",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            291.8900146484375,
+            433.9578857421875,
+            321.17999267578125,
+            445.837890625
+          ]
+        },
+        {
+          "text": " tokens, and figures ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            321.17999267578125,
+            433.9978942871094,
+            407.27001953125,
+            445.89788818359375
+          ]
+        },
+        {
+          "text": "as shown in the Encounter Setup Diagram. Adventurers may choose ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.16998291015625,
+            444.9978942871094,
+            397.26995849609375,
+            456.89788818359375
+          ]
+        },
+        {
+          "text": "to place their figures in any of the spaces marked as the Starting Zone ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.16998291015625,
+            455.9978942871094,
+            405.20989990234375,
+            467.89788818359375
+          ]
+        },
+        {
+          "text": "on the Encounter Setup Diagram. ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.16998291015625,
+            466.9978942871094,
+            249.6599578857422,
+            478.89788818359375
+          ]
+        }
+      ],
+      "currentPtBr": "English fallback; no saved PT-BR translation record for p.14 was found in the read-only Payload query (0 p.14 translation docs).",
+      "editorialFamily": "left-column numbered setup-phase body",
+      "baseFrame": {
+        "x": 86.17320251464844,
+        "y": 422.9978942871094,
+        "width": 321.09681701660156,
+        "height": 55.899993896484375,
+        "rotation": 0
+      },
+      "baseFrameSource": "Current source sidecar bbox; PT currently inherits source geometry",
+      "semanticConstraints": [
+        "Set up Tiles according to the Encounter Setup Diagram.",
+        "Then place all Encounter tokens, Terrain tokens, and figures as shown in the diagram.",
+        "Adventurers may choose any spaces marked as the Starting Zone."
+      ],
+      "preregisteredCriteria": [
+        "Keep sequence Set up, then place.",
+        "Preserve all components, may choose, any spaces, and the Starting Zone restriction.",
+        "Preserve marker 2. and source phase-heading style."
+      ]
+    },
+    {
+      "pageNumber": 14,
+      "printedPage": 14,
+      "blockIndex": 6,
+      "sidecarBlockId": "block_20",
+      "spanKey": "page_14_block_6",
+      "sourceText": "3.\tDISTRIBUTION PHASE: Distribute the Combatant Cards for the Combatants listed in the Encounter Setup. This may be done in any order; however, evenly distributing the Combatant Cards so that each player has a responsibility when it’s not their turn is recommended. ",
+      "sourceLines": [
+        {
+          "text": "3.\t",
+          "bbox": [
+            86.17320251464844,
+            484.5682067871094,
+            96.18119812011719,
+            495.29620361328125
+          ]
+        },
+        {
+          "text": "DISTRIBUTION PHASE: Distribute the Combatant Cards for the ",
+          "bbox": [
+            104.17320251464844,
+            483.6672058105469,
+            370.9256591796875,
+            495.56719970703125
+          ]
+        },
+        {
+          "text": "Combatants listed in the Encounter Setup. This may be done in any ",
+          "bbox": [
+            104.17569732666016,
+            494.6672058105469,
+            393.7556457519531,
+            506.56719970703125
+          ]
+        },
+        {
+          "text": "order; however, evenly distributing the Combatant Cards so that each ",
+          "bbox": [
+            104.17569732666016,
+            505.66717529296875,
+            404.1257019042969,
+            517.5671997070312
+          ]
+        },
+        {
+          "text": "player has a responsibility when it’s not their turn is recommended. ",
+          "bbox": [
+            104.17569732666016,
+            516.6671752929688,
+            394.9355773925781,
+            528.5671997070312
+          ]
+        }
+      ],
+      "sourceRichSpans": [
+        {
+          "text": "3.\t",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            86.17320251464844,
+            484.5682067871094,
+            96.18119812011719,
+            495.29620361328125
+          ]
+        },
+        {
+          "text": "DISTRIBUTION PHASE:",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            104.17320251464844,
+            484.5682067871094,
+            199.18617248535156,
+            495.29620361328125
+          ]
+        },
+        {
+          "text": " Distribute the Combatant Cards for the ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            199.18569946289062,
+            483.6672058105469,
+            370.9256591796875,
+            495.56719970703125
+          ]
+        },
+        {
+          "text": "Combatants listed in the Encounter Setup. This may be done in any ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.17569732666016,
+            494.6672058105469,
+            393.7556457519531,
+            506.56719970703125
+          ]
+        },
+        {
+          "text": "order; however, evenly distributing the Combatant Cards so that each ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.17569732666016,
+            505.66717529296875,
+            404.1257019042969,
+            517.5671997070312
+          ]
+        },
+        {
+          "text": "player has a responsibility when it’s not their turn is recommended. ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.17569732666016,
+            516.6671752929688,
+            394.9355773925781,
+            528.5671997070312
+          ]
+        }
+      ],
+      "currentPtBr": "English fallback; no saved PT-BR translation record for p.14 was found in the read-only Payload query (0 p.14 translation docs).",
+      "editorialFamily": "left-column numbered setup-phase body",
+      "baseFrame": {
+        "x": 86.17320251464844,
+        "y": 483.6672058105469,
+        "width": 317.95249938964844,
+        "height": 44.899993896484375,
+        "rotation": 0
+      },
+      "baseFrameSource": "Current source sidecar bbox; PT currently inherits source geometry",
+      "semanticConstraints": [
+        "Distribute Combatant Cards for listed Combatants.",
+        "Distribution may be in any order.",
+        "Even distribution is recommended so each player has a responsibility when it is not their turn."
+      ],
+      "preregisteredCriteria": [
+        "Preserve may permission, any order, recommendation rather than obligation, and each player.",
+        "Preserve marker 3. and source phase-heading style."
+      ]
+    },
+    {
+      "pageNumber": 14,
+      "printedPage": 14,
+      "blockIndex": 7,
+      "sidecarBlockId": "block_21",
+      "spanKey": "page_14_block_7",
+      "sourceText": "4.\tINITIATIVE PHASE: Players take the corresponding Initiative Card(s) for each Adventurer and Combatant in the Encounter and shuffle them. The players then deal the Initiative Cards out to make the Initiative Track. See The Initiative Track Pg. 36.",
+      "sourceLines": [
+        {
+          "text": "4.\t",
+          "bbox": [
+            86.17320251464844,
+            534.2374877929688,
+            96.18119812011719,
+            544.9655151367188
+          ]
+        },
+        {
+          "text": "INITIATIVE PHASE: Players take the corresponding Initiative Card(s) for ",
+          "bbox": [
+            104.17320251464844,
+            533.3364868164062,
+            404.9447326660156,
+            545.2365112304688
+          ]
+        },
+        {
+          "text": "each Adventurer and Combatant in the Encounter and shuffle them. ",
+          "bbox": [
+            104.17478942871094,
+            544.3364868164062,
+            396.7247009277344,
+            556.2365112304688
+          ]
+        },
+        {
+          "text": "The players then deal the Initiative Cards out to make the Initiative ",
+          "bbox": [
+            104.17478942871094,
+            555.3364868164062,
+            391.104736328125,
+            567.2365112304688
+          ]
+        },
+        {
+          "text": "Track. See The Initiative Track Pg. 36.",
+          "bbox": [
+            104.17478942871094,
+            566.2164916992188,
+            266.5647888183594,
+            578.2365112304688
+          ]
+        }
+      ],
+      "sourceRichSpans": [
+        {
+          "text": "4.\t",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            86.17320251464844,
+            534.2374877929688,
+            96.18119812011719,
+            544.9655151367188
+          ]
+        },
+        {
+          "text": "INITIATIVE PHASE:",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            104.17320251464844,
+            534.2374877929688,
+            181.19520568847656,
+            544.9655151367188
+          ]
+        },
+        {
+          "text": " Players take the corresponding Initiative Card(s) for ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            181.19479370117188,
+            533.3364868164062,
+            404.9447326660156,
+            545.2365112304688
+          ]
+        },
+        {
+          "text": "each Adventurer and Combatant in the Encounter and shuffle them. ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.17478942871094,
+            544.3364868164062,
+            396.7247009277344,
+            556.2365112304688
+          ]
+        },
+        {
+          "text": "The players then deal the Initiative Cards out to make the Initiative ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.17478942871094,
+            555.3364868164062,
+            391.104736328125,
+            567.2365112304688
+          ]
+        },
+        {
+          "text": "Track. See ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            104.17478942871094,
+            566.3364868164062,
+            150.3647918701172,
+            578.2365112304688
+          ]
+        },
+        {
+          "text": "The Initiative Track",
+          "font": "OptimaLTStd-BoldItalic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 22,
+          "bbox": [
+            150.3647918701172,
+            566.2164916992188,
+            233.76478576660156,
+            578.16650390625
+          ]
+        },
+        {
+          "text": " Pg. 36.",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            233.76478576660156,
+            566.3364868164062,
+            266.5647888183594,
+            578.2365112304688
+          ]
+        }
+      ],
+      "currentPtBr": "English fallback; no saved PT-BR translation record for p.14 was found in the read-only Payload query (0 p.14 translation docs).",
+      "editorialFamily": "left-column numbered setup-phase body with cross-reference",
+      "baseFrame": {
+        "x": 86.17320251464844,
+        "y": 533.3364868164062,
+        "width": 318.7715301513672,
+        "height": 44.9000244140625,
+        "rotation": 0
+      },
+      "baseFrameSource": "Current source sidecar bbox; PT currently inherits source geometry",
+      "semanticConstraints": [
+        "Players take the corresponding Initiative Card(s) for each Adventurer and Combatant in the Encounter and shuffle those cards.",
+        "Then players deal the Initiative Cards to make the Initiative Track.",
+        "Cross-reference The Initiative Track, page 36."
+      ],
+      "preregisteredCriteria": [
+        "Preserve sequence, each, Card(s), both actor categories, shuffle then deal, track purpose, and page 36.",
+        "Preserve marker 4., styled reference title, and source emphasis."
+      ]
+    },
+    {
+      "pageNumber": 14,
+      "printedPage": 14,
+      "blockIndex": 14,
+      "sidecarBlockId": "block_32",
+      "spanKey": "page_14_block_14",
+      "sourceText": "Each Encounter uses its own unique combination of Terrain tokens, Encounter tokens, and figures. The Setup box itemizes every component required to set up the Encounter. See section F in the Encounter Example Diagram on Pg. 15.",
+      "sourceLines": [
+        {
+          "text": "Each Encounter uses its own unique combination of Terrain tokens, ",
+          "bbox": [
+            415.8424987792969,
+            216.47593688964844,
+            706.1323852539062,
+            228.4159393310547
+          ]
+        },
+        {
+          "text": "Encounter tokens, and figures. The Setup box itemizes every component ",
+          "bbox": [
+            415.84228515625,
+            227.47593688964844,
+            728.3527221679688,
+            239.4159393310547
+          ]
+        },
+        {
+          "text": "required to set up the Encounter. See section F in the Encounter Example ",
+          "bbox": [
+            415.84228515625,
+            238.39593505859375,
+            730.6624755859375,
+            250.4159393310547
+          ]
+        },
+        {
+          "text": "Diagram on Pg. 15.",
+          "bbox": [
+            415.8421936035156,
+            249.51593017578125,
+            499.64215087890625,
+            261.4159240722656
+          ]
+        }
+      ],
+      "sourceRichSpans": [
+        {
+          "text": "Each Encounter uses its own unique combination of ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            415.8424987792969,
+            216.51593017578125,
+            641.2128295898438,
+            228.4159393310547
+          ]
+        },
+        {
+          "text": "Terrain ",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            641.2122802734375,
+            216.47593688964844,
+            673.2822875976562,
+            228.35592651367188
+          ]
+        },
+        {
+          "text": "tokens",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            673.2822875976562,
+            216.51593017578125,
+            701.0723266601562,
+            228.4159393310547
+          ]
+        },
+        {
+          "text": ", ",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            701.0723266601562,
+            216.47593688964844,
+            706.1323852539062,
+            228.35592651367188
+          ]
+        },
+        {
+          "text": "Encounter ",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            415.84228515625,
+            227.47593688964844,
+            462.1522521972656,
+            239.35592651367188
+          ]
+        },
+        {
+          "text": "tokens, and figures.",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            462.1522521972656,
+            227.51593017578125,
+            545.5223388671875,
+            239.4159393310547
+          ]
+        },
+        {
+          "text": " ",
+          "font": "OptimaLTStd-Italic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 6,
+          "bbox": [
+            545.5223388671875,
+            227.47593688964844,
+            548.3023681640625,
+            239.35592651367188
+          ]
+        },
+        {
+          "text": "The Setup box itemizes every component ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            548.3023681640625,
+            227.51593017578125,
+            728.3527221679688,
+            239.4159393310547
+          ]
+        },
+        {
+          "text": "required to set up the Encounter. See section ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            415.84228515625,
+            238.51593017578125,
+            609.6325073242188,
+            250.4159393310547
+          ]
+        },
+        {
+          "text": "F",
+          "font": "OptimaLTStd-Bold",
+          "size": 9.0,
+          "color": "#231f20",
+          "flags": 20,
+          "bbox": [
+            609.6322021484375,
+            239.41693115234375,
+            614.1322021484375,
+            250.14492797851562
+          ]
+        },
+        {
+          "text": " in the ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            614.1322021484375,
+            238.51593017578125,
+            644.15234375,
+            250.4159393310547
+          ]
+        },
+        {
+          "text": "Encounter Example",
+          "font": "OptimaLTStd-BoldItalic",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 22,
+          "bbox": [
+            644.15234375,
+            238.39593505859375,
+            727.8824462890625,
+            250.34593200683594
+          ]
+        },
+        {
+          "text": " ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            727.8824462890625,
+            238.51593017578125,
+            730.6624755859375,
+            250.4159393310547
+          ]
+        },
+        {
+          "text": "Diagram on Pg. 15.",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            415.8421936035156,
+            249.51593017578125,
+            499.64215087890625,
+            261.4159240722656
+          ]
+        }
+      ],
+      "currentPtBr": "English fallback; no saved PT-BR translation record for p.14 was found in the read-only Payload query (0 p.14 translation docs).",
+      "editorialFamily": "right-column ordinary prose with game terms and cross-reference",
+      "baseFrame": {
+        "x": 415.8421936035156,
+        "y": 216.47593688964844,
+        "width": 314.8202819824219,
+        "height": 44.93998718261719,
+        "rotation": 0
+      },
+      "baseFrameSource": "Current source sidecar bbox; PT currently inherits source geometry",
+      "semanticConstraints": [
+        "Each Encounter uses its own unique combination of Terrain tokens, Encounter tokens, and figures.",
+        "The Setup box itemizes every component required to set up the Encounter.",
+        "See section F in the Encounter Example Diagram on page 15."
+      ],
+      "preregisteredCriteria": [
+        "Preserve Each, own unique combination, every required component, and reference F/page 15.",
+        "Keep Terrain/Encounter token terminology distinct.",
+        "Preserve source italics, bold F, bold-italic title, and page-reference style."
+      ]
+    },
+    {
+      "pageNumber": 14,
+      "printedPage": 14,
+      "blockIndex": 16,
+      "sidecarBlockId": "block_35",
+      "spanKey": "page_14_block_16",
+      "sourceText": "Every Encounter has one or more End Conditions. As soon as one of these End Conditions is reached, the Encounter immediately ends and the players read the listed Reward beneath the End Condition that was met. ",
+      "sourceLines": [
+        {
+          "text": "Every Encounter has one or more End Conditions. As soon as one of ",
+          "bbox": [
+            415.84259033203125,
+            299.089111328125,
+            709.9330444335938,
+            310.9891052246094
+          ]
+        },
+        {
+          "text": "these End Conditions is reached, the Encounter immediately ends and the ",
+          "bbox": [
+            415.84259033203125,
+            310.089111328125,
+            734.6931762695312,
+            321.9891052246094
+          ]
+        },
+        {
+          "text": "players read the listed Reward beneath the End Condition that was met. ",
+          "bbox": [
+            415.84259033203125,
+            321.089111328125,
+            725.1331787109375,
+            332.9891052246094
+          ]
+        }
+      ],
+      "sourceRichSpans": [
+        {
+          "text": "Every Encounter has one or more End Conditions. As soon as one of ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            415.84259033203125,
+            299.089111328125,
+            709.9330444335938,
+            310.9891052246094
+          ]
+        },
+        {
+          "text": "these End Conditions is reached, the Encounter immediately ends and the ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            415.84259033203125,
+            310.089111328125,
+            734.6931762695312,
+            321.9891052246094
+          ]
+        },
+        {
+          "text": "players read the listed Reward beneath the End Condition that was met. ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            415.84259033203125,
+            321.089111328125,
+            725.1331787109375,
+            332.9891052246094
+          ]
+        }
+      ],
+      "currentPtBr": "English fallback; no saved PT-BR translation record for p.14 was found in the read-only Payload query (0 p.14 translation docs).",
+      "editorialFamily": "right-column ordinary prose with condition and consequence",
+      "baseFrame": {
+        "x": 415.84259033203125,
+        "y": 299.089111328125,
+        "width": 319.83,
+        "height": 33.899993896484375,
+        "rotation": 0.0
+      },
+      "baseFrameSource": "Current read-only Payload pt-BR frame override; updatedAt=10/12/2026 20:33:33",
+      "semanticConstraints": [
+        "Every Encounter has one or more End Conditions.",
+        "As soon as one is reached, the Encounter immediately ends.",
+        "Players read the listed Reward beneath the specific End Condition that was met."
+      ],
+      "preregisteredCriteria": [
+        "Preserve Every, one or more, as soon as, immediately, actor, and which Reward to read.",
+        "Use official End Conditions glossary term and preserve source capitalization where applicable."
+      ]
+    },
+    {
+      "pageNumber": 14,
+      "printedPage": 14,
+      "blockIndex": 18,
+      "sidecarBlockId": "block_37",
+      "spanKey": "page_14_block_18",
+      "sourceText": "Some Encounters have multiple Win and Lose Conditions. These Alternate End Conditions have their own separate Rewards listed. ",
+      "sourceLines": [
+        {
+          "text": "Some Encounters have multiple Win and Lose Conditions. These Alternate ",
+          "bbox": [
+            415.8411865234375,
+            387.42840576171875,
+            735.6717529296875,
+            399.3283996582031
+          ]
+        },
+        {
+          "text": "End Conditions have their own separate Rewards listed. ",
+          "bbox": [
+            415.8411865234375,
+            398.42840576171875,
+            656.7716674804688,
+            410.3283996582031
+          ]
+        }
+      ],
+      "sourceRichSpans": [
+        {
+          "text": "Some Encounters have multiple Win and Lose Conditions. These Alternate ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            415.8411865234375,
+            387.42840576171875,
+            735.6717529296875,
+            399.3283996582031
+          ]
+        },
+        {
+          "text": "End Conditions have their own separate Rewards listed. ",
+          "font": "OptimaLTStd",
+          "size": 10.0,
+          "color": "#231f20",
+          "flags": 4,
+          "bbox": [
+            415.8411865234375,
+            398.42840576171875,
+            656.7716674804688,
+            410.3283996582031
+          ]
+        }
+      ],
+      "currentPtBr": "English fallback; no saved PT-BR translation record for p.14 was found in the read-only Payload query (0 p.14 translation docs).",
+      "editorialFamily": "right-column ordinary prose with alternate conditions",
+      "baseFrame": {
+        "x": 415.8411865234375,
+        "y": 387.42840576171875,
+        "width": 319.83056640625,
+        "height": 22.899993896484375,
+        "rotation": 0
+      },
+      "baseFrameSource": "Current source sidecar bbox; PT currently inherits source geometry",
+      "semanticConstraints": [
+        "Some Encounters have multiple Win and Lose Conditions.",
+        "These Alternate End Conditions have their own separate Rewards listed."
+      ],
+      "preregisteredCriteria": [
+        "Preserve Some, multiple, both Win and Lose, Alternate, own, separate, and listed Rewards.",
+        "Do not collapse the distinction among End Conditions and Rewards."
+      ]
+    }
+  ],
+  "baselineFrames": {
+    "page_14_block_0": {
+      "x": 86.17320251464844,
+      "y": 144.97418212890625,
+      "width": 316.2699432373047,
+      "height": 44.90000915527344,
+      "rotation": 0
+    },
+    "page_14_block_1": {
+      "x": 86.17320251464844,
+      "y": 199.93418884277344,
+      "width": 316.08592224121094,
+      "height": 77.93998718261719,
+      "rotation": 0
+    },
+    "page_14_block_5": {
+      "x": 86.17320251464844,
+      "y": 422.9978942871094,
+      "width": 321.09681701660156,
+      "height": 55.899993896484375,
+      "rotation": 0
+    },
+    "page_14_block_6": {
+      "x": 86.17320251464844,
+      "y": 483.6672058105469,
+      "width": 317.95249938964844,
+      "height": 44.899993896484375,
+      "rotation": 0
+    },
+    "page_14_block_7": {
+      "x": 86.17320251464844,
+      "y": 533.3364868164062,
+      "width": 318.7715301513672,
+      "height": 44.9000244140625,
+      "rotation": 0
+    },
+    "page_14_block_14": {
+      "x": 415.8421936035156,
+      "y": 216.47593688964844,
+      "width": 314.8202819824219,
+      "height": 44.93998718261719,
+      "rotation": 0
+    },
+    "page_14_block_16": {
+      "x": 415.84259033203125,
+      "y": 299.089111328125,
+      "width": 319.83,
+      "height": 33.899993896484375,
+      "rotation": 0.0
+    },
+    "page_14_block_18": {
+      "x": 415.8411865234375,
+      "y": 387.42840576171875,
+      "width": 319.83056640625,
+      "height": 22.899993896484375,
+      "rotation": 0
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { BookOpen, CircleHelp, ListTree, Menu, ShieldAlert } from 'lucide-react';
+import { BookOpen, CircleHelp, ClipboardCheck, FileDown, ListTree, Menu, ShieldAlert } from 'lucide-react';
 import { MiddaraMark } from './MiddaraMark';
 import './ShellNavigation.css';
 
@@ -12,6 +12,10 @@ interface ShellNavigationProps {
   workspaceEditing?: boolean;
   openRequest?: number;
   onExpandedChange?: (expanded: boolean) => void;
+  language?: 'en' | 'pt-BR';
+  translationReviewOpen?: boolean;
+  onExportPdf?: () => void;
+  onToggleTranslationReview?: () => void;
 }
 
 const destinations: Array<{ id: ShellDestination; label: string; icon: typeof BookOpen }> = [
@@ -21,7 +25,17 @@ const destinations: Array<{ id: ShellDestination; label: string; icon: typeof Bo
   { id: 'contents', label: 'Índice', icon: ListTree },
 ];
 
-export function ShellNavigation({ active, onSelect, workspaceEditing = false, openRequest = 0, onExpandedChange }: ShellNavigationProps) {
+export function ShellNavigation({
+  active,
+  onSelect,
+  workspaceEditing = false,
+  openRequest = 0,
+  onExpandedChange,
+  language = 'en',
+  translationReviewOpen = false,
+  onExportPdf,
+  onToggleTranslationReview,
+}: ShellNavigationProps) {
   const [isNarrow, setIsNarrow] = useState(() => typeof window !== 'undefined' && window.matchMedia(touchDrawerQuery).matches);
   const [hoverOpen, setHoverOpen] = useState(false);
   const [focusOpen, setFocusOpen] = useState(false);
@@ -34,9 +48,7 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
   const firstItemRef = useRef<HTMLButtonElement>(null);
   const expanded = isNarrow
     ? mobileOpen
-    : workspaceEditing
-      ? launcherOpen
-      : hoverOpen || focusOpen;
+    : launcherOpen || hoverOpen || focusOpen;
 
   useEffect(() => {
     if (handledOpenRequestRef.current === openRequest) return;
@@ -118,7 +130,7 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
       setHoverOpen(false);
       const focusRemainsInNavigation = Boolean(panelRef.current?.contains(document.activeElement));
       setFocusOpen(current => current && focusRemainsInNavigation);
-      if (!focusRemainsInNavigation) setLauncherOpen(false);
+      if (!focusRemainsInNavigation && !launcherOpen) setLauncherOpen(false);
       closeTimerRef.current = null;
     }, 220);
   };
@@ -133,9 +145,13 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
       setMobileOpen(open => !open);
       return;
     }
-    // In the reading workspace desktop navigation is hover/focus driven.
-    // Only the deliberate editing-workspace launcher gets a click toggle.
-    if (workspaceEditing) setLauncherOpen(open => !open);
+    setLauncherOpen(open => !open);
+  };
+
+  const closeDesktopMenu = () => {
+    setLauncherOpen(false);
+    setHoverOpen(false);
+    setFocusOpen(false);
   };
 
   const handleSelect = (destination: ShellDestination) => {
@@ -184,7 +200,9 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
         <div className="global-nav-header">
           <div className="global-nav-brand" aria-label="Middara Rulebook">
             <MiddaraMark className="global-nav-mark" />
-            <span>Middara</span>
+            <span className="global-nav-brand-word" aria-hidden="true">
+              MIDDAR<span className="global-nav-brand-pua-a"></span>
+            </span>
           </div>
           <button
             ref={menuButtonRef}
@@ -225,6 +243,33 @@ export function ShellNavigation({ active, onSelect, workspaceEditing = false, op
             </button>
           ))}
         </nav>
+        <div className="global-nav-actions" aria-label={language === 'pt-BR' ? 'Ações do documento' : 'Document actions'}>
+          <button
+            type="button"
+            className="global-nav-action"
+            onClick={() => {
+              closeDesktopMenu();
+              onExportPdf?.();
+              if (isNarrow) closeMobileDrawer();
+            }}
+          >
+            <FileDown size={17} aria-hidden="true" />
+            <span>{language === 'pt-BR' ? 'Exportar PDF' : 'Export PDF'}</span>
+          </button>
+          <button
+            type="button"
+            className={`global-nav-action ${translationReviewOpen ? 'is-active' : ''}`}
+            aria-pressed={translationReviewOpen}
+            onClick={() => {
+              closeDesktopMenu();
+              onToggleTranslationReview?.();
+              if (isNarrow) closeMobileDrawer();
+            }}
+          >
+            <ClipboardCheck size={17} aria-hidden="true" />
+            <span>{language === 'pt-BR' ? 'Revisar traduções' : 'Review translations'}</span>
+          </button>
+        </div>
       </aside>
     </div>
   );

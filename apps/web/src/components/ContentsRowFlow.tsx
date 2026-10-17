@@ -41,12 +41,12 @@ export function ContentsRowFlow({ row, scale, sourceFontSize, isAdmin, text, chi
   return <div className="contents-row-flow" data-overflow={overflow || undefined}
     style={{ fontSize: `${sourceFontSize * scale}px` }}>
     <span ref={textRef} className="contents-row-text" title={text}>{children}</span>
-    <svg className="contents-row-leader" aria-hidden="true"
+    {row.leader.style !== 'none' && <svg className="contents-row-leader" aria-hidden="true"
       style={{ height, marginInlineStart: CONTENTS_LEADER_GAP_PT * scale }}>
       <line x1="0" x2="100%" y1={leaderY} y2={leaderY} stroke="#231f20"
         strokeWidth={row.leader.widthPt * scale} strokeLinecap="round"
-        strokeDasharray={`0 ${row.leader.periodPt * scale}`} />
-    </svg>
+        strokeDasharray={row.leader.style === 'solid' ? undefined : `0 ${row.leader.periodPt * scale}`} />
+    </svg>}
     {isAdmin && overflow && <span className="contents-row-overflow" role="status">
       Texto excede a largura máxima
     </span>}

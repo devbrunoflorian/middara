@@ -4,7 +4,7 @@ import puaMappingRaw from '../assets/pua_mapping.json';
 import type { AdminSymbolPaletteEditorState } from './AdminSymbolPalette';
 import { getDefaultSymbolAliasPreferences, getSemanticSymbol, getSymbolEditorToken, isSymbolAllowed, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences } from '../symbols/semanticSymbols';
 import { SemanticSymbol } from '../symbols/SemanticSymbol';
-import { SYMBOL_OBJECT_MARKER, editableTextForSegments, segmentsFromEditableText, replaceSegmentRange, insertEditorToken, deleteEditorToken, expandEditorTokenSelection, normalizeEditableInput } from '../symbols/inlineCodec';
+import { SYMBOL_OBJECT_MARKER, editableTextForSegments, segmentsFromEditableText, replaceSegmentRange, insertEditorToken, deleteEditorToken, expandEditorTokenSelection, normalizeEditableInput, needsManualRichStyleReview } from '../symbols/inlineCodec';
 import { collectManagedSourceSymbols, initialManagedSourceSymbols, createEditorOverride, lineHeightModeForOverride } from '../symbols/editorOverride';
 import { INLINE_CLIPBOARD_MIME, editableRangeToSegmentRange, sliceSegmentRange, encodeInlineClipboard, decodeInlineClipboard } from '../symbols/inlineClipboard';
 import { findGlossaryMatches } from '../translations/glossaryContext';
@@ -104,6 +104,9 @@ interface RichSpanEditorProps {
   editorContext?: InlineEditorContext;
   symbolAliasPreferences?: SymbolAliasPreferences;
   onPaletteEditorChange?: (editorKey: string, state: AdminSymbolPaletteEditorState | null) => void;
+  headerAccessory?: React.ReactNode;
+  /** Save into isolated in-memory experiment state instead of persistence. */
+  sessionOnly?: boolean;
 }
 
 interface EditorSnapshot {
@@ -158,6 +161,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   editorContext = 'paragraph',
   symbolAliasPreferences = getDefaultSymbolAliasPreferences(),
   onPaletteEditorChange,
+  headerAccessory,
+  sessionOnly = false,
 }) => {
   const normalizeText = useCallback((text: string) => (
     singleLine ? text.replace(/[\r\n]+/g, ' ').replace(/[\t ]+/g, ' ') : text
@@ -396,7 +401,18 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     || Math.abs(lineHeight - baseLineHeight) > 0.001
     || lineHeightMode !== baseLineHeightMode
     || JSON.stringify(managedSourceSymbols) !== JSON.stringify(baseManagedSourceSymbols);
-  const translationState = hasDraftChanges
+  const richStyleReviewRequired = useMemo(() => {
+    if (language !== 'pt-BR' || !hasDraftChanges) return false;
+    const candidateText = isEditingText
+      ? editText
+      : editableTextForSegments(segments, language, symbolAliasPreferences);
+    return needsManualRichStyleReview(sourceContextSegments, candidateText, symbolAliasPreferences);
+  }, [language, hasDraftChanges, isEditingText, editText, segments, sourceContextSegments, symbolAliasPreferences]);
+  const translationState = sessionOnly
+    ? hasDraftChanges
+      ? { label: 'RASCUNHO EXPERIMENTAL · NÃO APLICADO À PROVA', className: 'is-dirty' }
+      : { label: 'PROPOSTA EXPERIMENTAL · SOMENTE NESTA SESSÃO', className: 'is-pending' }
+    : hasDraftChanges
     ? { label: language === 'pt-BR' ? 'PT-BR ALTERADO NA SESSÃO / NÃO SALVO' : 'EN ALTERADO NA SESSÃO / NÃO SALVO', className: 'is-dirty' }
     : persistenceStatus === 'sync_error'
       ? { label: 'ERRO DE SINCRONIZAÇÃO — cópia local preservada quando disponível', className: 'is-error' }
@@ -749,8 +765,17 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     }
     if(event.key!=='Backspace' && event.key!=='Delete')return;
     const deleted=deleteEditorToken(editText,event.currentTarget.selectionStart,event.currentTarget.selectionEnd,event.key==='Backspace'?'backward':'forward',symbolAliasPreferences);
-    if(deleted) {event.preventDefault();updateEditableText(deleted);}
-  },[editText,undo,redo,updateEditableText,symbolAliasPreferences]);
+    if(deleted) {
+      event.preventDefault();
+      const selectionStart=event.currentTarget.selectionStart;
+      const selectionEnd=event.currentTarget.selectionEnd;
+      const rangeStart=selectionStart===selectionEnd && event.key==='Backspace'?Math.max(0,selectionStart-1):selectionStart;
+      const rangeEnd=selectionStart===selectionEnd && event.key==='Delete'?Math.min(editText.length,selectionEnd+1):selectionEnd;
+      const range=editableRangeToSegmentRange(editTextSegments,language,rangeStart,rangeEnd,symbolAliasPreferences);
+      const nextSegments=replaceSegmentRange(editTextSegments,range.start,range.end,[]);
+      updateEditableText({...deleted,segments:nextSegments});
+    }
+  },[editText,editTextSegments,language,undo,redo,updateEditableText,symbolAliasPreferences]);
 
   const handleEditableClipboard = useCallback((event:React.ClipboardEvent<HTMLTextAreaElement>,cut:boolean)=>{
     const {selectionStart,selectionEnd}=event.currentTarget;
@@ -759,7 +784,11 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     event.preventDefault();event.clipboardData.setData('text/plain',editText.slice(expanded.start,expanded.end));
     const range = editableRangeToSegmentRange(editTextSegments, language, expanded.start, expanded.end,symbolAliasPreferences);
     event.clipboardData.setData(INLINE_CLIPBOARD_MIME, encodeInlineClipboard(sliceSegmentRange(editTextSegments, range.start, range.end), language));
-    if(cut)updateEditableText(insertEditorToken(editText,expanded.start,expanded.end,'',symbolAliasPreferences));
+    if(cut) {
+      const nextSegments=replaceSegmentRange(editTextSegments,range.start,range.end,[]);
+      updateEditableText({text:editText.slice(0,expanded.start)+editText.slice(expanded.end),
+        caret:expanded.start,segments:nextSegments});
+    }
   },[editText, editTextSegments, language, symbolAliasPreferences, updateEditableText]);
 
   const handleEditablePaste = useCallback((event: React.ClipboardEvent<HTMLTextAreaElement>) => {
@@ -801,8 +830,10 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
   // Reset to original
   const handleReset = useCallback(() => {
-    if (!window.confirm(language === 'pt-BR'
-      ? 'Resetar esta tradução em português? O rascunho salvo desta unidade será removido.'
+    if (!window.confirm(sessionOnly
+      ? 'Restaurar o conteúdo inicial desta prova? Somente as alterações em memória desta unidade serão descartadas.'
+      : language === 'pt-BR'
+        ? 'Resetar esta tradução em português? O rascunho salvo desta unidade será removido.'
       : 'Reset this English override? The saved override for this unit will be removed.')) {
       return;
     }
@@ -818,7 +849,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setSelStart(null);
     setSelEnd(null);
     onSave(null);
-  }, [language, originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, originalLineHeight, onSave, commitSegments]);
+  }, [language, sessionOnly, originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, originalLineHeight, onSave, commitSegments]);
 
   const fontToCSS = (f: string) => {
     if (f.includes('Optima') || f === 'OptimaLTStd') return "'OptimaLTStd', serif";
@@ -852,6 +883,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             <button className="rse-close" onClick={requestClose}>✕</button>
           </div>
         </div>
+
+        {headerAccessory && <div className="rse-header-accessory">{headerAccessory}</div>}
 
         {(onNavigatePrevious || onNavigateNext) && (
           <nav className="rse-unit-navigation" aria-label="Editable unit navigation">
@@ -897,6 +930,12 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
               </p>
             </div>
           </details>
+        )}
+
+        {richStyleReviewRequired && (
+          <p className="rse-rich-style-review" role="note">
+            A origem contém ênfase sem correspondência textual exata nesta proposta. Confira o trecho equivalente pelo significado e aplique negrito/itálico manualmente; a tradução não herda estilos por posição.
+          </p>
         )}
 
         {/* Toolbar */}
@@ -955,6 +994,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             </div>
           </div>
           <div className="rse-toolbar-row rse-toolbar-actions">
+            <button className="rse-tool-btn" disabled={!undoHistory.length} onClick={undo} aria-label={language === 'pt-BR' ? 'Desfazer' : 'Undo'}>↶</button>
+            <button className="rse-tool-btn" disabled={!redoHistory.length} onClick={redo} aria-label={language === 'pt-BR' ? 'Refazer' : 'Redo'}>↷</button>
             <button className="rse-tool-btn" onClick={() => applyToSelection()} disabled={!hasSelection}>
               🎨 Apply to Selection
             </button>
@@ -1073,8 +1114,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         {/* Footer: Save */}
         <div className="rse-footer">
           <div className="rse-footer-actions">
-            <button className="rse-btn-reset" onClick={handleReset}>Reset</button>
-            <button className="rse-btn-save" onClick={handleSave}>💾 Save</button>
+            <button className="rse-btn-reset" onClick={handleReset}>{sessionOnly ? 'Restaurar proposta' : 'Reset'}</button>
+            <button className="rse-btn-save" onClick={handleSave}>{sessionOnly ? 'Aplicar à prova' : '💾 Save'}</button>
           </div>
         </div>
       </div>

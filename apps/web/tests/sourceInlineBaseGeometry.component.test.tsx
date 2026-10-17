@@ -103,8 +103,8 @@ describe('source inline symbol base geometry', () => {
       }
     }
 
-    // The two restored action.exhaust source placements (pp. 37 and 100) add
-    // two inline elements and two distinct source lines to the accepted inventory.
-    expect({ elementCount, lineCount: seenLines.size, affectedPages }).toEqual({ elementCount: 180, lineCount: 173, affectedPages: 48 });
+    // HEAD includes the authorized p. 83 pilot and the later p. 45/p. 50
+    // activations. The local p. 52 worktree adds eight more source placements.
+    expect({ elementCount, lineCount: seenLines.size, affectedPages }).toEqual({ elementCount: 203, lineCount: 196, affectedPages: 49 });
   });
 });

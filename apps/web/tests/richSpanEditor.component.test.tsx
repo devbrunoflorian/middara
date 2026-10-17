@@ -5,7 +5,7 @@ import { createRoot } from 'react-dom/client';
 import { RichSpanEditor, type Segment, type SpanOverride } from '../src/components/RichSpanEditor';
 import { AdminSymbolPalette, type AdminSymbolPaletteEditorState } from '../src/components/AdminSymbolPalette';
 import { getDefaultSymbolAliasPreferences } from '../src/symbols/semanticSymbols';
-import { editableTextForSegments } from '../src/symbols/inlineCodec';
+import { editableTextForSegments, needsManualRichStyleReview, segmentsFromEditableText } from '../src/symbols/inlineCodec';
 import { decodeOverrideData, encodeOverrideData } from '../src/symbols/overrideData';
 import { INLINE_CLIPBOARD_MIME } from '../src/symbols/inlineClipboard';
 
@@ -287,6 +287,56 @@ describe.each(['en', 'pt-BR'] as const)('RichSpanEditor mounted regression %s', 
     expect(decoded.managedSourceSymbols).toEqual(['tag.status.icon']);
   });
 
+  it('cutting and pasting a middle duplicate keeps each source appearance with its own occurrence', () => {
+    const sourceOccurrence = (appearance: string): Segment => ({ ...style, text: '\uFFFC', symbolId: 'attack.melee',
+      symbolMetrics: { widthEm: 1, heightEm: 1, verticalAlignEm: 0,
+        sourceAssetUrl: `/source-${appearance}.svg`, sourceAppearanceKey: appearance } });
+    const first = sourceOccurrence('appearance-a');
+    const middle = sourceOccurrence('appearance-b');
+    const last = sourceOccurrence('appearance-c');
+    const v = mount(language, [plain('First '), first, plain(' middle '), middle, plain(' last '), last]);
+    const token = editableTextForSegments([middle], language);
+    const middleStart = v.textarea.value.indexOf(token, v.textarea.value.indexOf(token) + token.length);
+    expect(middleStart).toBeGreaterThan(0);
+    const clipboardValues = new Map<string, string>();
+    const clipboard = { setData: vi.fn((mime: string, value: string) => clipboardValues.set(mime, value)),
+      getData: (mime: string) => clipboardValues.get(mime) ?? '' };
+
+    v.textarea.setSelectionRange(middleStart + 1, middleStart + token.length - 1);
+    fireEvent.select(v.textarea);
+    fireEvent.cut(v.textarea, { clipboardData: clipboard });
+    const afterCutText = v.textarea.value;
+    expect(v.draft()!.segments.filter(run => run.symbolId).map(run => run.symbolMetrics?.sourceAppearanceKey))
+      .toEqual(['appearance-a', 'appearance-c']);
+
+    v.textarea.setSelectionRange(v.textarea.value.length, v.textarea.value.length);
+    fireEvent.select(v.textarea);
+    fireEvent.paste(v.textarea, { clipboardData: clipboard });
+    expect(v.draft()!.segments.filter(run => run.symbolId).map(run => run.symbolMetrics?.sourceAppearanceKey))
+      .toEqual(['appearance-a', 'appearance-c', 'appearance-b']);
+    expect(v.draft()!.segments.filter(run => run.symbolId).map(run => run.symbolMetrics?.sourceAssetUrl))
+      .toEqual(['/source-appearance-a.svg', '/source-appearance-c.svg', '/source-appearance-b.svg']);
+    expect(v.textarea.value).toBe(`${afterCutText}${token}`);
+  });
+
+  it('deleting a middle duplicate by keyboard does not reassign the next source appearance', () => {
+    const sourceOccurrence = (appearance: string): Segment => ({ ...style, text: '\uFFFC', symbolId: 'attack.melee',
+      symbolMetrics: { widthEm: 1, heightEm: 1, verticalAlignEm: 0,
+        sourceAssetUrl: `/source-${appearance}.svg`, sourceAppearanceKey: appearance } });
+    const first = sourceOccurrence('appearance-a');
+    const middle = sourceOccurrence('appearance-b');
+    const last = sourceOccurrence('appearance-c');
+    const v = mount(language, [plain('First '), first, plain(' middle '), middle, plain(' last '), last]);
+    const token = editableTextForSegments([middle], language);
+    const middleStart = v.textarea.value.indexOf(token, v.textarea.value.indexOf(token) + token.length);
+    v.textarea.setSelectionRange(middleStart + token.length, middleStart + token.length);
+    fireEvent.keyDown(v.textarea, { key: 'Backspace' });
+
+    expect(v.draft()!.segments.filter(run => run.symbolId).map(run => run.symbolMetrics?.sourceAppearanceKey))
+      .toEqual(['appearance-a', 'appearance-c']);
+    expect(v.textarea.value).toBe(`First ${token} middle  last ${token}`);
+  });
+
   it('partial token replacement removes the entire object and cancel restores adoption', () => {
     const v = mount(language, [plain('Before '), symbol(), plain(' after')]);
     const token = editableTextForSegments([symbol()], language);
@@ -305,6 +355,94 @@ describe.each(['en', 'pt-BR'] as const)('RichSpanEditor mounted regression %s', 
     expect(v.draft()!.managedSourceSymbols).toEqual([]);
     expect(v.draft()!.segments.some(r => r.symbolId)).toBe(false);
   });
+});
+
+it('keeps an IMPORTANT outline on the translated label when lightning aliases collapse to one object', () => {
+  const label: Segment = { ...plain('IMPORTANT:'), font: 'OptimaLTStd-Black', color: '#b91d23', weight: 900,
+    textStrokeWidthPt: 2, textStrokeColor: '#ffffff', disableLigatures: true };
+  const source: Segment[] = [
+    { ...plain('\uFFFC'), symbolId: 'tag.important.icon' }, label, plain(' '),
+    { ...plain('Ability '), style: 'italic' }, plain('tokens are '),
+    { ...plain('not'), weight: 700 }, plain(' removed during this Phase.'),
+  ];
+  const result = segmentsFromEditableText('[[lightning]]IMPORTANTE: Não remova Fichas de Habilidade nesta Fase.',
+    style, 'pt-BR', source, 'paragraph', undefined, source);
+  const textRuns = result.filter(run => !run.symbolId);
+  expect(result.filter(run => run.symbolId === 'tag.important.icon')).toHaveLength(1);
+  expect(textRuns.map(run => run.text).join('')).toBe('IMPORTANTE: Não remova Fichas de Habilidade nesta Fase.');
+  const labelRuns = textRuns.filter(run => run.text.includes('IMPORTANTE:'));
+  expect(labelRuns.map(run => run.text).join('')).toBe('IMPORTANTE:');
+  expect(labelRuns.every(run => run.color === '#b91d23' && run.weight === 900
+    && run.textStrokeWidthPt === 2 && run.textStrokeColor === '#ffffff' && run.disableLigatures === true)).toBe(true);
+  const bodyRuns = textRuns.filter(run => run.text && !run.text.includes('IMPORTANTE:'));
+  expect(bodyRuns.length).toBeGreaterThan(0);
+  expect(bodyRuns.every(run => run.color !== '#b91d23' && run.textStrokeWidthPt === undefined
+    && run.textStrokeColor === undefined)).toBe(true);
+  const naoRun = bodyRuns.find(run => run.text.includes('Não'))!;
+  expect(naoRun.style).toBe('normal');
+  expect(naoRun.weight).toBe(400);
+  expect(needsManualRichStyleReview(source, '[[lightning]]IMPORTANTE: Não remova Fichas de Habilidade nesta Fase.')).toBe(true);
+
+  const richUnit = segmentsFromEditableText('[[lightning]]IMPORTANTE: Não remova Fichas de Habilidade nesta Fase.',
+    style, 'pt-BR', source, 'span-unit', undefined, source);
+  expect(richUnit.filter(run => run.symbolId === 'tag.important.icon')).toHaveLength(1);
+  const richLabel = richUnit.filter(run => run.text.includes('IMPORTANTE:'));
+  expect(richLabel.map(run => run.text).join('')).toBe('IMPORTANTE:');
+  expect(richLabel.every(run => run.textStrokeWidthPt === 2 && run.textStrokeColor === '#ffffff'
+    && run.color === '#b91d23' && run.weight === 900)).toBe(true);
+  expect(richUnit.find(run => run.text.includes('Não'))?.style).toBe('normal');
+});
+
+it('warns when a Portuguese rewrite has no exact anchor for emphasized source text', () => {
+  const source: Segment[] = [
+    { ...plain('\uFFFC'), symbolId: 'tag.important.icon' },
+    { ...plain('IMPORTANT:'), font: 'OptimaLTStd-Black', color: '#b91d23', weight: 900,
+      textStrokeWidthPt: 2, textStrokeColor: '#ffffff' },
+    plain(' '), { ...plain('Ability '), style: 'italic' }, plain('tokens are '),
+    { ...plain('not'), weight: 700 }, plain(' removed during this Phase.'),
+  ];
+  const v = mount('pt-BR', source);
+  v.edit('[[lightning]]IMPORTANTE: Não remova Fichas de Habilidade nesta Fase.');
+  expect(v.container.querySelector('.rse-rich-style-review')?.textContent)
+    .toContain('a tradução não herda estilos por posição');
+  expect(v.draft()!.segments.filter(run => run.symbolId).map(run => run.symbolId)).toEqual(['tag.important.icon']);
+  const naoRun = v.draft()!.segments.find(run => run.text.includes('Não'))!;
+  expect(naoRun.style).toBe('normal');
+  expect(naoRun.textStrokeWidthPt).toBeUndefined();
+  expect(v.onSave).not.toHaveBeenCalled();
+});
+
+it('keeps p.13 and p.100 translated emphasis neutral until a person maps it semantically', () => {
+  const lightning: Segment = { ...plain('\uFFFC'), symbolId: 'tag.important.icon' };
+  const label: Segment = { ...plain('IMPORTANT:'), font: 'OptimaLTStd-Black', color: '#b91d23', weight: 900,
+    textStrokeWidthPt: 2, textStrokeColor: '#ffffff' };
+  const p13Source: Segment[] = [lightning, label, plain(' '), plain('Draw '),
+    { ...plain('non-unique'), weight: 700 }, plain(' cards for this Tier.')];
+  const p13Target = '[[lightning]]IMPORTANTE: Compre cartas não únicas para este Nível.';
+  const p13 = segmentsFromEditableText(p13Target, style, 'pt-BR', p13Source, 'paragraph', undefined, p13Source);
+  expect(p13.filter(run => run.text.includes('não') || run.text.includes('únicas'))
+    .every(run => run.weight === 400 && run.style === 'normal')).toBe(true);
+  expect(needsManualRichStyleReview(p13Source, p13Target)).toBe(true);
+
+  const p100Source: Segment[] = [lightning, label, plain(' Adventurers do '), { ...plain('not'), weight: 700 },
+    plain(' Gain '), { ...plain('SP'), weight: 700 }, plain(' during the Refresh Phase of their '),
+    { ...plain('1st'), weight: 700 }, plain(' turn of an Encounter. See '),
+    { ...plain('Prepare Phase'), weight: 700 }, plain(' Pg. 14.')];
+  const p100Target = '[[lightning]]IMPORTANTE: Aventureiros não recebem SP durante a Fase de Refresh de seu 1º turno de um Encontro. Veja a Fase de Preparação Pg. 14.';
+  const p100 = segmentsFromEditableText(p100Target, style, 'pt-BR', p100Source, 'paragraph', undefined, p100Source);
+  expect(p100.filter(run => run.text.includes('Preparação'))
+    .every(run => run.weight === 400 && run.style === 'normal')).toBe(true);
+  expect(p100.find(run => run.text === 'SP')?.weight).toBe(700);
+  expect(p100.find(run => run.text === 'Pg. 14.')?.weight).toBe(400);
+  expect(needsManualRichStyleReview(p100Source, p100Target)).toBe(true);
+
+  const numericSource: Segment[] = [plain('Gain '), { ...plain('SP'), weight: 700 }, plain(' after the '),
+    { ...plain('1st'), weight: 700 }, plain(' turn.')];
+  const numericTarget = 'Recupere SP após o 1º turno.';
+  const numeric = segmentsFromEditableText(numericTarget, style, 'pt-BR', numericSource, 'paragraph', undefined, numericSource);
+  expect(numeric.find(run => run.text === 'SP')?.weight).toBe(700);
+  expect(numeric.find(run => run.text.includes('1º'))?.weight).toBe(400);
+  expect(needsManualRichStyleReview(numericSource, numericTarget)).toBe(true);
 });
 
 describe('RichSpanEditor translation context and state', () => {

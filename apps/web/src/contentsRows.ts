@@ -10,7 +10,10 @@ export interface ContentsRowDefinition {
   numberLineId: string;
   numberBBox: [number, number, number, number];
   targetPage: number;
-  leader: { bbox: number[]; yPt: number; periodPt: number; widthPt: number };
+  overlaySource?: boolean;
+  sourceText?: string;
+  sourceReference?: string;
+  leader: { bbox: number[]; yPt: number; periodPt: number; widthPt: number; style?: 'dotted' | 'solid' | 'none' };
   mask: { url: string; bbox: number[] };
 }
 export function contentsRowKey(row: ContentsRowDefinition, language: 'en' | 'pt-BR') {

@@ -65,12 +65,39 @@
   z-index: 1000 !important;
 }
 
+.proposal-review-highlight {
+  outline: 2px solid #007bff !important;
+  outline-offset: 1px;
+  background-color: rgba(0, 123, 255, 0.1) !important;
+  z-index: 1000 !important;
+}
+
+.contents-label-field.proposal-review-highlight {
+  z-index: 1003 !important;
+}
+
+.span-inline-overflow {
+  outline: 2px solid #ff6b6b !important;
+  background-color: rgba(255, 107, 107, 0.14) !important;
+  z-index: 1001 !important;
+}
+
 /* Confirmed raster duplicates stay available to inspect/edit in Admin only. */
 .ghost-confirmed {
   outline: 2px dashed #d12f37 !important;
   outline-offset: 1px;
   background-color: rgba(209, 47, 55, 0.24) !important;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+}
+
+/* During proposal review/editing, keep attention on the selected unit instead
+   of unrelated raster-duplicate diagnostics. Normal Admin mode retains them. */
+.translation-review-open .ghost-confirmed,
+.translation-review-editor-open .ghost-confirmed {
+  outline: none !important;
+  outline-offset: 0;
+  background-color: transparent !important;
+  box-shadow: none;
 }
 
 .block-editable {

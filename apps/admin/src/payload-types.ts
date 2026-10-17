@@ -74,6 +74,9 @@ export interface Config {
     pages: Page;
     'rulebook-blocks': RulebookBlock;
     translations: Translation;
+    'translation-reviews': TranslationReview;
+    'translation-review-requests': TranslationReviewRequest;
+    'translation-glossary-decisions': TranslationGlossaryDecision;
     'layout-frames': LayoutFrame;
     'symbol-alias-settings': SymbolAliasSetting;
     'pdf-export-jobs': PdfExportJob;
@@ -91,6 +94,9 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     'rulebook-blocks': RulebookBlocksSelect<false> | RulebookBlocksSelect<true>;
     translations: TranslationsSelect<false> | TranslationsSelect<true>;
+    'translation-reviews': TranslationReviewsSelect<false> | TranslationReviewsSelect<true>;
+    'translation-review-requests': TranslationReviewRequestsSelect<false> | TranslationReviewRequestsSelect<true>;
+    'translation-glossary-decisions': TranslationGlossaryDecisionsSelect<false> | TranslationGlossaryDecisionsSelect<true>;
     'layout-frames': LayoutFramesSelect<false> | LayoutFramesSelect<true>;
     'symbol-alias-settings': SymbolAliasSettingsSelect<false> | SymbolAliasSettingsSelect<true>;
     'pdf-export-jobs': PdfExportJobsSelect<false> | PdfExportJobsSelect<true>;
@@ -267,6 +273,113 @@ export interface Translation {
   createdAt: string;
 }
 /**
+ * Persistent proposal edits, explicit approval and a Payload receipt for the published translation.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-reviews".
+ */
+export interface TranslationReview {
+  id: number;
+  reviewKey: string;
+  pageNumber: number;
+  spanKey: string;
+  proposalId: string;
+  proposalVersion: string;
+  sourceText?: string | null;
+  proposalText?: string | null;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  technicalStatus: string;
+  copyfitClassification?: 'EXACT' | 'UNDER' | 'OVER' | null;
+  copyfitSourcePdfLineCount?: number | null;
+  copyfitPageRendererLineCount?: number | null;
+  copyfitMeasurementFingerprint?: string | null;
+  underCompositionJustification?: string | null;
+  approvalStatus: 'pending' | 'approved';
+  approvedAt?: string | null;
+  publication?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Human requests for AI corrections; ordered by creation time and separate from proposals and published translations.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-review-requests".
+ */
+export interface TranslationReviewRequest {
+  id: number;
+  referenceType: 'proposal' | 'exception' | 'page';
+  pageNumber: number;
+  referenceTitle: string;
+  reviewKey?: string | null;
+  spanKey?: string | null;
+  sourceBlockId?: string | null;
+  exceptionId?: string | null;
+  proposalId?: string | null;
+  proposalVersion?: string | null;
+  translationSpanKey?: string | null;
+  requestText: string;
+  requestContext?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  status: 'pending' | 'in_progress' | 'completed';
+  resultNote?: string | null;
+  handledAt?: string | null;
+  completedBy?: 'ai' | 'user' | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Persistent human terminology decisions and their translation evidence.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-glossary-decisions".
+ */
+export interface TranslationGlossaryDecision {
+  id: number;
+  decisionKey: string;
+  sourceTerm: string;
+  targetTerm: string;
+  normalizedSourceTerm: string;
+  normalizedTargetTerm: string;
+  decisionStatus: 'approved' | 'rejected';
+  occurrences:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  decisionNote?: string | null;
+  decidedAt: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "layout-frames".
  */
@@ -410,6 +523,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'translations';
         value: number | Translation;
+      } | null)
+    | ({
+        relationTo: 'translation-reviews';
+        value: number | TranslationReview;
+      } | null)
+    | ({
+        relationTo: 'translation-review-requests';
+        value: number | TranslationReviewRequest;
+      } | null)
+    | ({
+        relationTo: 'translation-glossary-decisions';
+        value: number | TranslationGlossaryDecision;
       } | null)
     | ({
         relationTo: 'layout-frames';
@@ -569,6 +694,72 @@ export interface TranslationsSelect<T extends boolean = true> {
   spanKey?: T;
   language?: T;
   data?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-reviews_select".
+ */
+export interface TranslationReviewsSelect<T extends boolean = true> {
+  reviewKey?: T;
+  pageNumber?: T;
+  spanKey?: T;
+  proposalId?: T;
+  proposalVersion?: T;
+  translationSpanKey?: T;
+  sourceText?: T;
+  proposalText?: T;
+  data?: T;
+  technicalStatus?: T;
+  copyfitClassification?: T;
+  copyfitSourcePdfLineCount?: T;
+  copyfitPageRendererLineCount?: T;
+  copyfitMeasurementFingerprint?: T;
+  underCompositionJustification?: T;
+  approvalStatus?: T;
+  approvedAt?: T;
+  publication?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-review-requests_select".
+ */
+export interface TranslationReviewRequestsSelect<T extends boolean = true> {
+  referenceType?: T;
+  pageNumber?: T;
+  referenceTitle?: T;
+  reviewKey?: T;
+  spanKey?: T;
+  sourceBlockId?: T;
+  exceptionId?: T;
+  proposalId?: T;
+  proposalVersion?: T;
+  requestText?: T;
+  requestContext?: T;
+  status?: T;
+  resultNote?: T;
+  handledAt?: T;
+  completedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-glossary-decisions_select".
+ */
+export interface TranslationGlossaryDecisionsSelect<T extends boolean = true> {
+  decisionKey?: T;
+  sourceTerm?: T;
+  targetTerm?: T;
+  normalizedSourceTerm?: T;
+  normalizedTargetTerm?: T;
+  decisionStatus?: T;
+  occurrences?: T;
+  decisionNote?: T;
+  decidedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

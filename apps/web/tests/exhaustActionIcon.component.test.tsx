@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { PageRenderer, type PageData } from '../src/components/PageRenderer';
-import { getSemanticSymbol, getSymbolEditorToken } from '../src/symbols/semanticSymbols';
+import { findSymbolByAlias, getSemanticSymbol, getSymbolEditorToken } from '../src/symbols/semanticSymbols';
 import { attachSourceInlineElements, sourceElementIsReplaced, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
 
 function readSourcePage(pageNumber: number) {
@@ -15,6 +15,23 @@ function readSourcePage(pageNumber: number) {
 }
 
 describe('source exhaust action icon', () => {
+  it('uses the approved EXAUSTAR label and generated Portuguese vector variants', () => {
+    const tag = getSemanticSymbol('tag.exhaust');
+
+    expect(tag).toBeDefined();
+    expect(tag?.labels['pt-BR']).toBe('EXAUSTAR');
+    expect(tag?.editorTokens['pt-BR']).toBe('⟦EXAUSTAR⟧');
+    expect(tag?.searchTerms['pt-BR']).toContain('exaustar');
+    expect(tag?.description?.['pt-BR']).not.toContain('provisório');
+    expect(tag?.composition?.localizedLabel['pt-BR']).toBe('EXAUSTAR');
+    expect(findSymbolByAlias('exaustar')?.id).toBe('tag.exhaust');
+
+    const full = tag!.render.localized?.['pt-BR'];
+    const compact = tag!.render.variants?.['prose-6.62pt']?.localized?.['pt-BR'];
+    expect(full?.viewBox?.[2]).toBeGreaterThan(tag!.render.viewBox?.[2] ?? 0);
+    expect(compact?.viewBox?.[2]).toBeGreaterThan(tag!.render.variants?.['prose-6.62pt']?.viewBox?.[2] ?? 0);
+  });
+
   it('keeps a standalone semantic identity distinct from the composite EXHAUST tag', () => {
     const icon = getSemanticSymbol('action.exhaust');
     const tag = getSemanticSymbol('tag.exhaust');

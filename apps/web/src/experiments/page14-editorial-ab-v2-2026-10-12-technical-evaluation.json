@@ -1,0 +1,42 @@
+{
+  "experimentId": "page14-editorial-ab-v2-2026-10-12",
+  "status": "blind-live-evaluation-complete-pending-human-votes",
+  "humanPreferences": null,
+  "method": {
+    "renderer": "Existing PageRenderer in the Chrome Viewer; no alternate renderer or export path.",
+    "page": 14,
+    "zoom": "200%",
+    "frameControl": "Both variants use the same eight frozen source frames recorded in blind-snapshot.json.",
+    "overflowSignal": "Admin red marker from the existing PageRenderer measurement: rendered scrollHeight compared with the fixed frame height and 2 CSS px tolerance.",
+    "lineCountLimit": "Visible wraps were counted from the live Chrome screenshots; counts are observational and may vary with browser font availability and display scale. Overflow flags are the renderer's measured signal.",
+    "changesDuringEvaluation": "No proposal, frame, source, or canonical content was changed. No human vote was saved."
+  },
+  "variants": {
+    "X": {
+      "summary": "Same PageRenderer, page, 200% zoom, and source frames as Y. The live Admin overflow marker appeared on 3 of 8 units: page_14_block_5, page_14_block_6, and page_14_block_18. Wrap counts below are visual counts from this Chrome session, not viewport-independent typography guarantees. Blind semantic review found no dropped core condition or number; remaining editorial concerns are recorded per unit. This is not a human approval or a causal verdict about skills.",
+      "units": {
+        "page_14_block_0": "About 4 visible lines; no Admin overflow marker. Preserves both play modes, the instruction to prepare Encounters, the Special Encounter Rules, and the four setup phases. Uses plural imperatives for the addressed players.",
+        "page_14_block_1": "About 7 visible lines; no Admin overflow marker. Preserves each Adventurer, the Used-token/card reset, the defeated-or-above-half-HP condition, the half-HP stopping value, removal of all Effect tokens, SP, and usually 3. ‘Desexausta’ is awkward/nonstandard Portuguese; ‘Pontos de Stamina’ differs from the p.6 draft’s observed ‘Pontos de Vigor’ wording and needs terminology review.",
+        "page_14_block_5": "About 6 visible lines; Admin overflow marker present against the 55.90 pt fixed frame. Preserves Tiles, all Encounter/Terrain tokens and figures, and any Starting Zone spaces. No frame change was made.",
+        "page_14_block_6": "About 5 visible lines; Admin overflow marker present against the 44.90 pt fixed frame. Preserves that any order is allowed and even distribution is recommended; the reason about each player's responsibility is retained.",
+        "page_14_block_7": "About 4 visible lines; no Admin overflow marker. Preserves corresponding cards for each Adventurer and Combatant, shuffling, dealing to form the Initiative Track, and page 36. The style range covers ‘Trilha de Iniciativa’ but not the preceding article ‘A’; verify title styling in human review.",
+        "page_14_block_14": "About 4 visible lines; no Admin overflow marker. Preserves each Encounter's own unique combination, every required component, section F, and page 15; source bold/italic roles were projected onto the matching phrase spans.",
+        "page_14_block_16": "About 3 visible lines; no Admin overflow marker. Preserves one or more, as-soon-as, immediate ending, the players as readers, and the Reward beneath the condition that was met.",
+        "page_14_block_18": "About 3 visible lines; Admin overflow marker present against the 22.90 pt fixed frame. Preserves multiple Win and Lose Conditions, Alternate End Conditions, and their own separate listed Rewards."
+      }
+    },
+    "Y": {
+      "summary": "Same PageRenderer, page, 200% zoom, and source frames as X. The live Admin overflow marker appeared on 5 of 8 units: page_14_block_1, page_14_block_5, page_14_block_6, page_14_block_16, and page_14_block_18. Wrap counts below are visual counts from this Chrome session, not viewport-independent typography guarantees. Blind semantic review found no dropped core condition or number; remaining editorial concerns are recorded per unit. This is not a human approval or a causal verdict about skills.",
+      "units": {
+        "page_14_block_0": "About 4 visible lines; no Admin overflow marker. Preserves both play modes, the instruction to prepare Encounters, the Special Encounter Rules, and the four setup phases. The singular ‘leia/siga’ is a register choice while the sentence addresses players collectively.",
+        "page_14_block_1": "About 8 visible lines; Admin overflow marker present against the 77.94 pt fixed frame. Preserves each Adventurer, the Used-token/card reset, the defeated-or-above-half-HP condition, the half-HP stopping value, all Effect tokens, SP, and usually 3. ‘Pontos de Vigor’ matches wording observed in the p.6 draft, but is not a newly approved glossary decision; title-case ‘Fichas’ capitalization should be checked for consistency.",
+        "page_14_block_5": "About 6 visible lines; Admin overflow marker present against the 55.90 pt fixed frame. Preserves Tiles, all Encounter/Terrain tokens and figures, and any Starting Zone spaces. No frame change was made.",
+        "page_14_block_6": "About 5 visible lines; Admin overflow marker present against the 44.90 pt fixed frame. Preserves may/any order and the recommendation to distribute evenly. ‘Igualmente’ can read as equal amounts; review whether it conveys the intended balanced allocation.",
+        "page_14_block_7": "About 4 visible lines; no Admin overflow marker. Preserves corresponding cards for each Adventurer and Combatant, shuffling, dealing to form the Initiative Track, and page 36. The style range covers ‘Trilha de Iniciativa’ but not the preceding article ‘a’; verify title styling in human review.",
+        "page_14_block_14": "About 4 visible lines; no Admin overflow marker. Preserves each Encounter's unique combination, each required component, section F, and page 15. ‘Discrimina’ is less natural in this ‘itemizes’ context; source bold/italic roles were projected onto matching phrases.",
+        "page_14_block_16": "About 4 visible lines; Admin overflow marker present against the 33.90 pt fixed frame. Preserves every/one-or-more, as-soon-as, immediate ending, the players as readers, and the listed Reward under the condition met.",
+        "page_14_block_18": "About 3 visible lines; Admin overflow marker present against the 22.90 pt fixed frame. Preserves multiple Win and Lose Conditions, Alternate End Conditions, own Rewards, and separate listing."
+      }
+    }
+  }
+}
