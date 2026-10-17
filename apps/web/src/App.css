@@ -26,7 +26,7 @@ body, html {
 .app-container {
   --left-nav-width: 52px;
   --faq-panel-width: min(490px, calc(100vw - var(--left-nav-width) - var(--arcane-dock-width, 52px) - 16px));
-  --translation-review-panel-width: min(920px, max(320px, calc(100vw - 480px)));
+  --translation-review-panel-width: min(760px, max(320px, calc(100vw - 480px)));
   --translation-review-dock-clearance: 62px;
   display: flex;
   flex-direction: row;

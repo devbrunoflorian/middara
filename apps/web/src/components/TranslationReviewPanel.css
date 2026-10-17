@@ -5,7 +5,7 @@
   z-index: 12000;
   display: flex;
   flex-direction: column;
-  width: var(--translation-review-panel-width, min(920px, calc(100vw - 88px)));
+  width: var(--translation-review-panel-width, min(760px, calc(100vw - 88px)));
   min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(218, 196, 255, 0.2);
@@ -46,7 +46,7 @@
 .translation-review-error { border: 1px solid rgba(233, 112, 112, 0.25); color: #ffb7b7; }
 .translation-review-status.is-error { border: 1px solid rgba(233, 112, 112, 0.35); color: #ffb7b7; }
 .translation-review-status.is-warning { color: #f2cf94; }
-.translation-review-layout { display: grid; flex: 1 1 auto; grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.65fr); min-height: 0; overflow: hidden; }
+.translation-review-layout { display: grid; flex: 1 1 auto; grid-template-columns: minmax(190px, 0.85fr) minmax(0, 1.4fr); min-height: 0; overflow: hidden; }
 .translation-review-list { min-width: 0; min-height: 0; padding: 5px 8px 12px 12px; overflow: auto; scrollbar-gutter: stable; overscroll-behavior: contain; border-right: 1px solid rgba(255,255,255,0.08); }
 .translation-review-row-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 34px; align-items: stretch; gap: 4px; margin: 4px 0; }
 .translation-review-row { display: grid; min-width: 0; width: 100%; gap: 7px; margin: 0; padding: 10px 9px; border: 1px solid transparent; border-radius: 9px; background: rgba(255,255,255,0.025); color: inherit; text-align: left; cursor: pointer; }
