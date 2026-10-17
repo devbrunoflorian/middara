@@ -39,12 +39,14 @@ Empurrar, Puxar e Comandar são formas de Movimento Livre. O alvo não provoca u
 ## Evidências
 
 - [Viewer normal PT-BR](../../../output/proofs/translation-readiness-2026-10-15/p040-movement-rules-v2/page-040-pt-BR-viewer-v2.png)
+- [Viewer/Admin com snapshot GET-only](../../../output/proofs/translation-readiness-2026-10-15/p040-movement-rules-v2/normal-viewer-p040-pt-BR-snapshot-overlay-v1.png)
 - [Rasterização do PDF efetivamente exportado](../../../output/proofs/translation-readiness-2026-10-15/p040-movement-rules-v2/page-040-pt-BR-pdf-raster-v2.png)
 - [Comparação da fonte EN, Viewer e PDF na seção inferior](../../../output/proofs/translation-readiness-2026-10-15/p040-movement-rules-v2/page-040-lower-source-viewer-pdf-v2.png)
 - [PDF isolado](../../../output/proofs/translation-readiness-2026-10-15/p040-movement-rules-v2/page-040-pt-BR-movement-rules-v2.pdf) · SHA-256 `11FEC65197267D21662AEEB4FA2769ED06948669A05808BB4F314C7D956819B6`.
 - [Relatório independente de verificação](../../../output/proofs/translation-readiness-2026-10-15/p040-movement-rules-v2/verification-movement-rules-v2.json).
+- [Receipt do Editor read-only](../../../output/proofs/translation-readiness-2026-10-15/p040-movement-rules-v2/editor-readonly-receipt-v1.json).
 
-O Viewer normal confirmou os 11 registros, dez símbolos e quatro imagens. O verificador independente encontrou todos os textos propostos no PDF real, sem caracteres de substituição ou PUA, e confirmou a caixa de `820.346 × 820.346 pt`. A inspeção visual não encontrou título sobre a prosa, cópia cortada, marcador duplicado ou artefato visível de máscara nas áreas avaliadas. A interação do Rich Block Editor não foi verificada.
+O Viewer normal confirmou os 11 registros, dez símbolos e quatro imagens. O verificador independente encontrou todos os textos propostos no PDF real, sem caracteres de substituição ou PUA, e confirmou a caixa de `820.346 × 820.346 pt`. A inspeção visual não encontrou título sobre a prosa, cópia cortada, marcador duplicado ou artefato visível de máscara nas áreas avaliadas. No Editor normal, em overlay GET-only, os 11 campos carregaram o texto exato e permaneceram editáveis; os dez marcadores passaram por remoção, Undo/Redo, reinserção única e Cancel. Payload ficou sem registros p.40 antes/depois; hashes canônicos não mudaram. Não houve Save.
 
 ## Termos e decisões pendentes
 
@@ -55,4 +57,4 @@ O Viewer normal confirmou os 11 registros, dez símbolos e quatro imagens. O ver
 
 ## Integridade
 
-Não alterei sidecars canônicos, DOM, compostos, frames, overlays, fundo, PDF-fonte, Payload ou traduções humanas. A prova usa snapshot imutável isolado; nada foi salvo no Editor.
+Não alterei sidecars canônicos, DOM, compostos, frames, overlays, fundo, PDF-fonte, Payload ou traduções humanas. A prova usa snapshot imutável isolado; nada foi salvo no Editor. `english_fidelity` segue `not_certified`: a proposta PT-BR foi verificada, mas isso não certifica a estrutura completa da página.

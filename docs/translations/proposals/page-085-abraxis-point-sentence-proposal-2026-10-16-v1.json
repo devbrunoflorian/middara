@@ -1,0 +1,96 @@
+{
+  "proposalId": "p085-abraxis-point-sentence",
+  "version": "1",
+  "title": "Ganho de Ponto de Abraxis — p. 85",
+  "page": 85,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "CC38BF0D0F3FE31609CEB757B3FEA49D052A09A9A7A76B1AB77017650BB46303",
+    "pageDom": "9EF9F3B99B7A9227EAC8D62BD57C473AE2C145745C9275ECF349FACCDA2383E9",
+    "inlineElements": "EA126570E45BA1E0D3013319FD162E64DB70B10578329C1E63D9FD80545FB180",
+    "fidelityOverlays": null
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 1,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 1,
+    "existingHumanTranslationSpanKeys": [
+      "page_85_block_38__pt-BR"
+    ],
+    "existingHumanTranslationDataSha256": "99d65d2990100aed961a34fdaea5c4205e790364b59ec1685f8dcf71613cc2f3"
+  },
+  "scopeLimits": [
+    "Somente a frase block_27 / DOM index 18 foi incluída. Os dados, o diagrama, as demais regras e a estrutura tipográfica da página 85 não fazem parte deste recorte.",
+    "A tradução humana preexistente da chave page_85_block_38__pt-BR (ID 143) foi conferida por GET e preservada; esta proposta usa uma chave distinta e nenhuma tradução final foi escrita.",
+    "Gain → ganhar e Abraxis Point → Ponto de Abraxis são formas locais candidatas; não são canonizadas pelo recorte. Adventurer → Aventureiro e Symbol → Símbolo permanecem conforme o texto de trabalho, sem aprovação global nova.",
+    "A página continua bloqueada para prévia integral por seis placements de dados (branco e laranja sem mapeamento) e por revisão das origens do block_10. Este recorte isolado não remove esses bloqueios.",
+    "O agente crítico confirmou comparação EN/PT completa, duas linhas legíveis dentro do contorno exato e sem colisão com “3. END OF ROUND” em 100/125/150/200%. Copyfit V3 independente, Editor, PDF, fidelidade integral e aprovação humana continuam pendentes."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 18,
+      "sourceBlockId": "block_27",
+      "sourceUnitId": null,
+      "spanKey": "page_85_block_18__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "If an Adventurer matches the Abraxis card's Symbols exactly, they Gain 1 Abraxis Point.",
+      "proposalText": "Se um Aventureiro corresponder exatamente aos Símbolos da carta de Abraxis, ganha 1 Ponto de Abraxis.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_85_block_18__pt-BR",
+        "bbox": [
+          416.1493225097656,
+          170.8976593017578,
+          732.2699584960938,
+          193.8176727294922
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Se um Aventureiro corresponder exatamente aos Símbolos da carta de Abraxis, ganha ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " Ponto de Abraxis.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_live_viewer_comparison_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Gain → ganhar e Abraxis Point → Ponto de Abraxis são formas locais candidatas nesta frase, sem canonização global.",
+        "Símbolos mantém a capitalização desta unidade; confirme consistência editorial com as demais regras da p.85."
+      ]
+    }
+  ],
+  "note": "Recorte isolado da condição de ganho de ponto. Preserva a ênfase da fonte no numeral 1. A proposta não publica no Viewer final nem substitui a tradução humana de outro bloco; os termos continuam pendentes de decisão editorial.",
+  "revisions": []
+}

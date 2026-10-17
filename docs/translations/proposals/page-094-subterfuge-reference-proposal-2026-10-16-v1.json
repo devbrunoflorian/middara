@@ -1,0 +1,104 @@
+{
+  "proposalId": "p094-subterfuge-reference",
+  "version": "1",
+  "title": "SUBTERFUGE — referência de Árvore de Disciplina, p. 94",
+  "page": 94,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "2264A20825AA78DC11EE9AA90F4914C2850DA8B42458DAFB135AC2E807370E6D",
+    "pageDom": "ABC40F1E7554383A9430C4BE3B64255EBB515CEBB09FB5578FCBD9B189734FE1",
+    "fidelityOverlays": "1F73E8874E9B14F2BF803820712A85691259B28C663D1F4A0E3847360771BC19"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "GET somente leitura ao Payload encontrou 326 traduções PT-BR no total, zero traduções nas chaves page_94_* e zero revisões p.94. Esta proposta não escreve na coleção final; overrides humanos locais mantêm prioridade no Viewer.",
+    "Este recorte cobre apenas a definição SUBTERFUGE e sua referência a Discipline Trees; a p.94 continua parcial.",
+    "SUBTERFUGE → Subterfúgio e Discipline Trees → Árvores de Disciplina permanecem candidatas locais até confirmação humana no glossário.",
+    "A revisão visual inglesa da p.94 está registrada em docs/project-progress/2026-10-04-page94-visual-review.md. Este lote requer verificação de fit no Viewer e comparação PT-BR com o PDF."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 1,
+      "sourceBlockId": "block_12",
+      "sourceUnitId": null,
+      "spanKey": "page_94_block_1__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "SUBTERFUGE: \nA Discipline Tree. See Discipline Trees Pg. 32.",
+      "proposalText": "SUBTERFÚGIO: Uma Árvore de Disciplina. Veja Árvores de Disciplina, pág. 32.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_94_block_1__pt-BR",
+        "bbox": [
+          81.17289733886719,
+          279.8431091308594,
+          279.7528381347656,
+          302.7630920410156
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "SUBTERFÚGIO: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Uma Árvore de Disciplina. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Árvores de Disciplina",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "weight": 700,
+            "style": "italic",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 32.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Subterfuge → Subterfúgio é candidata local para o nome da Árvore, pendente de aprovação humana.",
+        "Discipline Trees → Árvores de Disciplina é candidata local para o título da seção, pendente de confirmação no glossário."
+      ]
+    }
+  ],
+  "note": "Unidade curta de referência da p.94. Preserva bold no nome da Tag e bold-italic no título da seção; nenhuma aprovação ou tradução final é registrada.",
+  "revisions": []
+}

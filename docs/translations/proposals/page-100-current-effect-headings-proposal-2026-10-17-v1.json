@@ -1,0 +1,336 @@
+{
+  "proposalId": "p100-current-effect-headings",
+  "version": "1",
+  "title": "Cabeçalhos de efeitos das Correntes — p. 100",
+  "page": 100,
+  "status": "pending_human_review",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 2,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 2,
+    "rule": "Render every complete natural alternative with the same original typography and source column frame before retaining it. Do not omit meaning, change fonts, resize frames, or add artificial spacing to force a line count."
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "40372696A229A9E0C1E211C5D36DE4971B4AF38369FA9514210D497ED0C1DF7E",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 2,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This proposal covers only the two independent Table 10 column headings in block_11. No neighboring prose, art, or final translation is changed.",
+    "Each heading stays on its original baseline and retains its Optima Bold 8 pt, white color, capitalization, source glyph origin, and column-specific available frame.",
+    "Correntes is a local contextual term proposal, not a glossary decision.",
+    "These are review candidates. Payload is read-only during measurement; human approval and final translation writes are not part of this proposal."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_11",
+      "sourceUnitId": "p100-not-moved-by-currents-heading",
+      "sourceLineIds": [
+        "line_11_0"
+      ],
+      "spanKey": "page_100_unit_p100-not-moved-by-currents-heading__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "NOT MOVED BY CURRENTS",
+      "sourcePdfVisualLineCount": 1,
+      "sourceBboxes": [
+        [
+          89.80079650878906,
+          71.12779235839844,
+          192.248779296875,
+          80.66378784179688
+        ]
+      ],
+      "proposalText": "NÃO LEVADOS POR CORRENTES",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-not-moved-by-currents-heading__pt-BR",
+        "bbox": [
+          89.80079650878906,
+          71.12779235839844,
+          192.248779296875,
+          80.66378784179688
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "NÃO LEVADOS POR CORRENTES",
+            "font": "OptimaLTStd-Bold",
+            "size": 8,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 1,
+      "technicalStatus": "pending_editor_and_pdf_validation_after_critical_pass_v3_exact",
+      "pendingTerms": [
+        "Current(s) → Corrente(s) is a local proposal based on this page’s moving-water mechanic; it is not an approved glossary decision.",
+        "Plural agreement refers to the categorized tokens/items. The table heading supplies the omitted subject and mechanic context; the local Current(s) → Correntes form remains pending human terminology review."
+      ],
+      "sourceCell": "left",
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT at 100% and 200%",
+        "method": "PDF-derived source baselines versus live PageRenderer DOM Range rectangles grouped by the shared Copyfit V3 visual-row helper; no character counts, explicit string breaks, or height estimates.",
+        "environment": {
+          "viewportCssPixels": "2400x1400",
+          "deviceScaleFactor": 1,
+          "language": "pt-BR",
+          "zooms": [
+            "100%",
+            "200%"
+          ],
+          "fontLoaded": true
+        },
+        "geometry": "Original OptimaLTStd-Bold 8 pt, source glyph origin and source-derived column frame are preserved. The PageRenderer now uses the measured remaining line width without an unscaled fixed 12 CSS-px inset.",
+        "samplesByZoom": [
+          {
+            "zoomPercent": 100,
+            "sourcePdfVisualBaselines": 1,
+            "renderedVisualBaselines": 1,
+            "classification": "EXACT",
+            "fontLoaded": true,
+            "textEscapesFrame": false,
+            "blockedWrites": 0,
+            "pageErrors": 0,
+            "result": "PASS",
+            "inkRects": [
+              {
+                "x": 691.984375,
+                "y": 189.671875,
+                "width": 183.734375,
+                "height": 15
+              }
+            ],
+            "frame": {
+              "x": 691.984375,
+              "y": 191.671875,
+              "width": 192.234375,
+              "height": 14.97186754130044
+            }
+          },
+          {
+            "zoomPercent": 200,
+            "sourcePdfVisualBaselines": 1,
+            "renderedVisualBaselines": 1,
+            "classification": "EXACT",
+            "fontLoaded": true,
+            "textEscapesFrame": false,
+            "blockedWrites": 0,
+            "pageErrors": 0,
+            "result": "PASS",
+            "inkRects": [
+              {
+                "x": 365.984375,
+                "y": 252.34375,
+                "width": 367.46875,
+                "height": 30
+              }
+            ],
+            "frame": {
+              "x": 365.984375,
+              "y": 255.34375,
+              "width": 384.46875,
+              "height": 29.94373508260088
+            }
+          }
+        ],
+        "evidence": {
+          "measurementFiles": [
+            "apps/web/output/p100-block_11-copyfit-v1/n-o-levados-por-correntes-100pct-measurement.json",
+            "apps/web/output/p100-block_11-copyfit-v1/n-o-levados-por-correntes-200pct-measurement.json"
+          ],
+          "screenshots": [
+            "apps/web/output/p100-block_11-copyfit-v1/viewer-ptbr-n-o-levados-por-correntes-100pct.png",
+            "apps/web/output/p100-block_11-copyfit-v1/viewer-ptbr-n-o-levados-por-correntes-200pct.png"
+          ]
+        }
+      }
+    },
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_11",
+      "sourceUnitId": "p100-moved-by-currents-heading",
+      "sourceLineIds": [
+        "line_11_1"
+      ],
+      "spanKey": "page_100_unit_p100-moved-by-currents-heading__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "MOVED BY CURRENTS",
+      "sourcePdfVisualLineCount": 1,
+      "sourceBboxes": [
+        [
+          266.456787109375,
+          71.12779235839844,
+          349.58477783203125,
+          80.66378784179688
+        ]
+      ],
+      "proposalText": "MOVIDOS PELAS CORRENTES",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-moved-by-currents-heading__pt-BR",
+        "bbox": [
+          266.456787109375,
+          71.12779235839844,
+          349.58477783203125,
+          80.66378784179688
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "MOVIDOS PELAS CORRENTES",
+            "font": "OptimaLTStd-Bold",
+            "size": 8,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 1,
+      "technicalStatus": "pending_editor_and_pdf_validation_after_critical_pass_v3_exact",
+      "pendingTerms": [
+        "Current(s) → Corrente(s) is a local proposal based on this page’s moving-water mechanic; it is not an approved glossary decision.",
+        "Plural agreement refers to the categorized tokens/items. The local Current(s) → Correntes form remains pending human terminology review."
+      ],
+      "sourceCell": "right",
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT at 100% and 200%",
+        "method": "PDF-derived source baselines versus live PageRenderer DOM Range rectangles grouped by the shared Copyfit V3 visual-row helper; no character counts, explicit string breaks, or height estimates.",
+        "environment": {
+          "viewportCssPixels": "2400x1400",
+          "deviceScaleFactor": 1,
+          "language": "pt-BR",
+          "zooms": [
+            "100%",
+            "200%"
+          ],
+          "fontLoaded": true
+        },
+        "geometry": "Original OptimaLTStd-Bold 8 pt, source glyph origin and source-derived column frame are preserved. The PageRenderer now uses the measured remaining line width without an unscaled fixed 12 CSS-px inset.",
+        "samplesByZoom": [
+          {
+            "zoomPercent": 100,
+            "sourcePdfVisualBaselines": 1,
+            "renderedVisualBaselines": 1,
+            "classification": "EXACT",
+            "fontLoaded": true,
+            "textEscapesFrame": false,
+            "blockedWrites": 0,
+            "pageErrors": 0,
+            "result": "PASS",
+            "inkRects": [
+              {
+                "x": 969.34375,
+                "y": 189.671875,
+                "width": 166.65625,
+                "height": 15
+              }
+            ],
+            "frame": {
+              "x": 969.3408498697438,
+              "y": 191.671875,
+              "width": 179.4817278100884,
+              "height": 14.97186754130044
+            }
+          },
+          {
+            "zoomPercent": 200,
+            "sourcePdfVisualBaselines": 1,
+            "renderedVisualBaselines": 1,
+            "classification": "EXACT",
+            "fontLoaded": true,
+            "textEscapesFrame": false,
+            "blockedWrites": 0,
+            "pageErrors": 0,
+            "result": "PASS",
+            "inkRects": [
+              {
+                "x": 920.703125,
+                "y": 252.34375,
+                "width": 333.296875,
+                "height": 30
+              }
+            ],
+            "frame": {
+              "x": 920.6973247394876,
+              "y": 255.34375,
+              "width": 358.9634556201768,
+              "height": 29.94373508260088
+            }
+          }
+        ],
+        "evidence": {
+          "measurementFiles": [
+            "apps/web/output/p100-block_11-copyfit-v1/movidos-pelas-correntes-100pct-measurement.json",
+            "apps/web/output/p100-block_11-copyfit-v1/movidos-pelas-correntes-200pct-measurement.json"
+          ],
+          "screenshots": [
+            "apps/web/output/p100-block_11-copyfit-v1/viewer-ptbr-movidos-pelas-correntes-100pct.png",
+            "apps/web/output/p100-block_11-copyfit-v1/viewer-ptbr-movidos-pelas-correntes-200pct.png"
+          ]
+        }
+      }
+    }
+  ],
+  "revisions": [
+    {
+      "attempt": 1,
+      "sourceUnitId": "p100-not-moved-by-currents-heading",
+      "text": "NÃO MOVIDOS PELAS CORRENTES",
+      "result": "OVER: 1 source-PDF row / 2 PageRenderer rows at 100% and 200%; its last line extends below the single-row source frame. The full-meaning draft and its evidence remain available; no font, frame, or source content was changed.",
+      "measurements": [
+        "apps/web/output/p100-block_11-copyfit-v1/n-o-movidos-pelas-correntes-100pct-measurement.json",
+        "apps/web/output/p100-block_11-copyfit-v1/n-o-movidos-pelas-correntes-200pct-measurement.json"
+      ]
+    },
+    {
+      "attempt": 2,
+      "sourceUnitId": "p100-not-moved-by-currents-heading",
+      "text": "NÃO MOVIDOS POR CORRENTES",
+      "result": "OVER: 1 source-PDF row / 2 PageRenderer rows at 100% and 200%. The final word wrapped to a second baseline inside the original cell; the complete draft was retained, and typography and frame were unchanged.",
+      "measurements": [
+        "apps/web/output/p100-block_11-copyfit-v1/n-o-movidos-por-correntes-100pct-measurement.json",
+        "apps/web/output/p100-block_11-copyfit-v1/n-o-movidos-por-correntes-200pct-measurement.json"
+      ]
+    }
+  ],
+  "note": "The headings classify the two Table 10 columns. Measure the two units separately against their respective source PDF visual baselines and the live PageRenderer.",
+  "criticalReview": {
+    "result": "PASS",
+    "reviewer": "independent critical agent",
+    "finding": "Both Table 10 headings measure 1 source-PDF baseline / 1 PageRenderer row (EXACT) at 100% and 200%, with no frame escape, page error, blocked write, or visible collision. The left heading fits in the existing 192.234 px source frame at 100% after removing the renderer’s unscaled 12 CSS-px width deduction; no font, size, or source geometry changed. Read-only preflight found no saved human translation for either key. Editor/PDF validation and human terminology decisions remain pending."
+  },
+  "rendererCorrection": {
+    "finding": "The inline unit cap subtracted a constant 12 CSS px, which reduced usable width disproportionately at 100% and caused a false wrap. The PageRenderer now respects the remaining source-measured line width.",
+    "scope": "All inline translation units use the available source line width; source geometry, fonts and sizes were not modified.",
+    "evidence": "apps/web/output/p100-block_11-copyfit-v1/"
+  }
+}

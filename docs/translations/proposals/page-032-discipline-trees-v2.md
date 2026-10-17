@@ -1,5 +1,7 @@
 # Página 32 — Discipline Trees (proposta v2)
 
+> **Estado supersedido em 2026-10-16:** para a situação atual, use [proposta completa do texto editável v1](page-032-full-page-proposal-2026-10-16-v1.md), os recibos da prova isolada e a linha 32 de `page-status.csv`. Este documento preserva o histórico da pesquisa inicial; os estados “pendente” abaixo antecedem a validação do Viewer, Editor e PDF. Nenhum texto foi aprovado editorialmente por essa atualização.
+
 - **Status:** proposta PT-BR para revisão; não aprovada editorialmente, não copiada ao Payload.
 - **PDF:** página impressa 32, PDF oficial 32/102.
 - **Revisão EN↔Viewer:** comparação visual da página completa em 2026-10-15, rota normal `http://127.0.0.1:8080/`, modo EN. A composição, os cinco cartões e os blocos de texto correspondem ao PDF. A verificação foi visual de página inteira; não certifica geometria por diff de pixels nem PDF exportado.

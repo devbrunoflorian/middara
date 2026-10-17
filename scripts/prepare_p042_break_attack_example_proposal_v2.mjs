@@ -9,8 +9,7 @@ const root = process.cwd();
 const proofDir = resolve(root, 'output/proofs/translation-readiness-2026-10-15/p042-break-attack-v2');
 const snapshotDir = join(proofDir, 'snapshot');
 const sourceDir = resolve(root, 'apps/web/public/pages/page_042');
-const sourcePdfPath = process.env.MIDDARA_SOURCE_PDF_PATH;
-assert.ok(sourcePdfPath, 'Set MIDDARA_SOURCE_PDF_PATH to the official English source PDF');
+const sourcePdfPath = 'C:/Users/bruno/Downloads/Rulebook 1p2 Final Version 05-19-23 Optimized.pdf';
 const apiUrl = process.env.VITE_PAYLOAD_API_URL ?? 'http://localhost:3000';
 const expected = {
   sourcePdf: 'A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351',
@@ -77,7 +76,7 @@ const candidate = {
     lineHeightMode: 'custom',
     segments: [
       { text: 'Exemplo: ', font: 'AGaramondPro-Bold', size: 12, color: '#ffffff', weight: 700, style: 'normal' },
-      { text: 'Se ainda não tiver feito um Ataque de Oportunidade neste turno, Nightingale provocaria um Ataque de Oportunidade de cada um dos dois Cave Sickles ao entrar em qualquer espaço.', font: 'OptimaLTStd', size: 10, color: '#ffffff', weight: 400, style: 'normal' },
+      { text: 'Se Nightingale ainda não tiver feito um Ataque de Oportunidade neste turno, ao entrar em qualquer espaço provocará um de cada um dos dois Cave Sickles.', font: 'OptimaLTStd', size: 10, color: '#ffffff', weight: 400, style: 'normal' },
     ],
     managedSourceSymbols: [],
   },

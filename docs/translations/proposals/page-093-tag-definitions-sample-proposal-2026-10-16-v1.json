@@ -1,0 +1,135 @@
+{
+  "proposalId": "p093-tag-definitions-sample",
+  "version": "1",
+  "title": "Definições de Tags — amostra p. 93",
+  "page": 93,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "940500D13AD274B2EC859D74C89981180C349B51B9BDCB98194D149A044A9325",
+    "pageDom": "46CB6BB0070E2896B499850F894A53060ADED184DB5C869AC56B221258EBB34E",
+    "inlineElements": "6BD80179ABB0727CEDDCEFB15A621A5B6FEE7BD001C23AABAA75FB0FEE7957FF",
+    "fidelityOverlays": "D938B214CA607E48E5D886BC8E61E1B7D63D9FB4431F7DF5AB89FA45F746FFC1"
+  },
+  "counts": {
+    "candidates": 2,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "GET somente leitura ao Payload encontrou 326 traduções PT-BR no total, 0 nas chaves page_93_* e 0 revisões p.93. A proposta não escreveu traduções finais; overrides humanos locais mantêm prioridade no Viewer.",
+    "Este recorte cobre somente as definições HULKING e LIGHT da p. 93. As demais definições, símbolos inline e conteúdo restante seguem em lotes separados; a página continua parcial.",
+    "HULKING → Grandalhão e LIGHT → Luz são candidatas locais para as Tags, pendentes de aprovação humana no glossário.",
+    "A revisão visual inglesa da página está registrada em docs/project-progress/2026-10-04-page93-visual-review.md. Este lote requer validação de fit no Viewer e comparação PT-BR com o PDF."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 1,
+      "sourceBlockId": "block_3",
+      "sourceUnitId": null,
+      "spanKey": "page_93_block_1__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "HULKING: \nFigures with this Tag cannot be moved by opposing Abilities or Currents for any reason.",
+      "proposalText": "GRANDALHÃO: Miniaturas com esta Tag não podem ser movidas por Habilidades ou Correntes de oponentes, por motivo algum.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_93_block_1__pt-BR",
+        "bbox": [
+          81.17320251464844,
+          200.01698303222656,
+          405.8331604003906,
+          233.93699645996094
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "GRANDALHÃO: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Miniaturas com esta Tag não podem ser movidas por Habilidades ou Correntes de oponentes, por motivo algum.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Hulking → Grandalhão é uma candidata local para o nome da Tag; depende de aprovação humana no glossário."
+      ]
+    },
+    {
+      "blockIndex": 6,
+      "sourceBlockId": "block_8",
+      "sourceUnitId": null,
+      "spanKey": "page_93_block_6__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "LIGHT: \nSome Condition Tags and Disciplines require this Tag to use their Ability. ",
+      "proposalText": "LUZ: Algumas Tags de Condição e Disciplinas exigem esta Tag para usar suas Habilidades.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_93_block_6__pt-BR",
+        "bbox": [
+          81.17330932617188,
+          538.781494140625,
+          394.333251953125,
+          561.7015380859375
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "LUZ: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Algumas Tags de Condição e Disciplinas exigem esta Tag para usar suas Habilidades.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Light → Luz é uma candidata local para o nome da Tag; depende de aprovação humana no glossário."
+      ]
+    }
+  ],
+  "note": "Amostra incremental de duas definições curtas da p. 93. Preserva as ênfases dos rótulos; nomes das Tags seguem candidatos locais até aprovação humana.",
+  "revisions": []
+}

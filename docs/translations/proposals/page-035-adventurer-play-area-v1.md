@@ -1,7 +1,7 @@
 # p.35 — Proposta PT-BR: Área de Jogo do Aventureiro
 
-- **Versão:** 1
-- **Estado:** proposta editorial não aprovada; snapshot isolado, não importado no aplicativo
+- **Versão da proposta:** v3
+- **Estado:** proposta integral do texto editável; snapshot isolado, não importado no aplicativo; revisão humana pendente
 - **Fonte:** PDF oficial EN, p.35; página local `page_035_dom.json`
 - **Cobertura:** título e 16 campos de legenda/corpo (17 overrides PT-BR); arte do diagrama permanece em inglês
 
@@ -38,6 +38,8 @@ O marcador **E** permanece como está no campo editável separado `page_35_unit_
 - PDF isolado: [`page-035-pt-BR-proposal-v3.pdf`](../../../output/proofs/translation-readiness-2026-10-15/p035-adventurer-play-area-v1/page-035-pt-BR-proposal-v3.pdf), SHA-256 `E2BF73AF701736A8A101384F722C225028D53C99040E36D4F42F7DD5B3E3755E`. Render Poppler: [`page-035-pt-BR-pdf-render-v3.png`](../../../output/proofs/translation-readiness-2026-10-15/p035-adventurer-play-area-v1/page-035-pt-BR-pdf-render-v3.png), SHA-256 `89A722F9035EFA4AFB3E97B5A7CA8837EBEB68B483F21D185D490DC1B37DD5F0`.
 - O gerador reproduzível do snapshot é [`prepare_snapshot.mjs`](../../../output/proofs/translation-readiness-2026-10-15/p035-adventurer-play-area-v1/prepare_snapshot.mjs); os hashes dos sete arquivos de página estão em [`source-hashes.json`](../../../output/proofs/translation-readiness-2026-10-15/p035-adventurer-play-area-v1/source-hashes.json). O snapshot v3 copia os assets de origem e recusa substituir arquivos que tenham mudado.
 - Registro reproduzível de hashes e verificações: [`proof-receipt-v3.json`](../../../output/proofs/translation-readiness-2026-10-15/p035-adventurer-play-area-v1/proof-receipt-v3.json).
+- O receipt v3 confirma 17 overrides, 17 campos editáveis no Admin read-only, exportação de uma página e inspeção visual Viewer/PDF. O manifesto de origem tem sete arquivos; todos os sete hashes correspondem aos arquivos canônicos atuais. O histórico de v1/v2 foi preservado junto à v3.
+- Revalidação em 16/10 no renderer atual: [`verification.json`](../../../output/proofs/translation-readiness-2026-10-16/p035-v3-revalidation/verification.json). O Viewer e o raster Poppler do PDF exibem os 17 registros sem corte/colisão; a exportação oficial verificou os registros, `pdfVerification: true` e `normalizedMediaBox: true`. O Admin read-only reconheceu 17 campos, abriu o corpo do Baralho de Saque e fechou sem alterações; requisições de escrita foram bloqueadas.
 
 ## Termos e limites
 

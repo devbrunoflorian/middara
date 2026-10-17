@@ -1,0 +1,120 @@
+{
+  "proposalId": "p100-table10-note-combatant-currents",
+  "version": "1",
+  "title": "Nota da Tabela 10 — Fichas e Correntes — p. 100",
+  "page": 100,
+  "status": "pending_copyfit_v3",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch covers only the editable Table 10 note at page_100_block_10__pt-BR.",
+    "The original bold label and bold-italic cross-reference remain rich spans; source font sizes, colors, frame, and line-height are unchanged.",
+    "Combatant token(s) → ficha(s) de Combatente and Current(s) → Corrente(s) remain contextual candidates; no glossary record is created.",
+    "This is a review proposal, not a final translation or publication."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 10,
+      "sourceBlockId": "block_21",
+      "sourceUnitId": null,
+      "spanKey": "page_100_block_10__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "NOTE: Combatant tokens may or may not be moved by currents. See Table 9, Pg. 97 for details.",
+      "proposalText": "NOTA: Fichas de Combatente podem ou não ser movidas pelas Correntes. Consulte a Tabela 9, pág. 97, para detalhes.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_10__pt-BR",
+        "bbox": [
+          57.27650451660156,
+          232.548828125,
+          312.9485778808594,
+          254.17684936523438
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "NOTA:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fichas de Combatente podem ou não ser movidas pelas Correntes. Consulte a ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Tabela 9, pág. 97",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": ", para detalhes.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "measurementSource": "Original PDF geometry and live PageRenderer DOM Range rectangles grouped by groupPageRendererVisualLines",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "environment": "PT-BR, viewport 2400x1400 CSS px, DPR 1, 100% and 200% Viewer zoom, OptimaLTStd fonts loaded",
+        "geometry": "Original bbox retained: [57.2765, 232.5488, 312.9486, 254.1768] pt. Candidate ink remains within the source frame at both scales, and the two visual rows match the PDF.",
+        "evidence": [
+          "apps/web/output/p100-block_21-copyfit-v1/viewer-ptbr-nota-fichas-de-combatente-podem-ou-n-o-ser-movidas-pelas-correntes-consulte-a-tabela-9-p-g-97-para-detalhes-100pct.png",
+          "apps/web/output/p100-block_21-copyfit-v1/nota-fichas-de-combatente-podem-ou-n-o-ser-movidas-pelas-correntes-consulte-a-tabela-9-p-g-97-para-detalhes-100pct-measurement.json",
+          "apps/web/output/p100-block_21-copyfit-v1/viewer-ptbr-nota-fichas-de-combatente-podem-ou-n-o-ser-movidas-pelas-correntes-consulte-a-tabela-9-p-g-97-para-detalhes-200pct.png",
+          "apps/web/output/p100-block_21-copyfit-v1/nota-fichas-de-combatente-podem-ou-n-o-ser-movidas-pelas-correntes-consulte-a-tabela-9-p-g-97-para-detalhes-200pct-measurement.json"
+        ]
+      },
+      "technicalStatus": "fit-awaiting-human-review",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "EXACT copyfit candidate visible in the PT-BR Viewer for human review; no final translation or publication is implied.",
+      "pendingTerms": [
+        "Combatant token(s) → Ficha(s) de Combatente: local compound proposal; confirm against approved use.",
+        "Current(s) → Corrente(s): proposed for the moving-water mechanic on this page; not added to the glossary."
+      ]
+    }
+  ],
+  "note": "The unit cannot be marked fit-ready until actual source PDF and PageRenderer visual-line counts and the independent page-composition checks are recorded.",
+  "sourceHashes": {
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  }
+}

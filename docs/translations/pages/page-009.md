@@ -102,3 +102,11 @@ Four fixed bullet items follow. The bullet dots are decorative/static page eleme
 - Após restaurar Optima 10 pt nos corpos dos bullets, o texto inicial de `SHOP AND TRAIN` colidia com `CONTINUE`. O texto foi condensado de 274 para 242 caracteres sem perder as duas instruções, salvo com backup e conferido novamente no Payload. A captura pós-gravação mostra quatro linhas do corpo mais a referência, sem colisão com `CONTINUE`.
 - A hierarquia dos quatro itens agora acompanha a fonte: rótulos 9 pt negrito; corpo/referências 10 pt; `XP` internos de 9 pt negrito onde a fonte os reduz. Pontos fixos continuam fora do Rich Span.
 - O termo de modo ainda precisa ser padronizado entre páginas antes da aprovação editorial do pacote PT-BR. A captura atual verifica layout; não transforma o draft em aprovação editorial global.
+
+## Revalidação integral do estado atual (2026-10-16)
+
+- A página-fonte contém 17 blocos textuais; o Payload atual contém 18 registros PT-BR únicos. Eles cobrem os 16 blocos individuais e as duas unidades tipográficas do bloco 34, sem duplicidade. A captura read-only, hashes e snapshot imutável estão em `output/proofs/translation-readiness-2026-10-16/p009-current-payload-recheck-v1/`.
+- Reexportei pelo Viewer normal a partir do Payload atual e, separadamente, do snapshot imutável. O exportador verificou 18/18 registros. Os PDFs têm MediaBox `820.346 × 820.346 pt`; os rasters independentes a 155 dpi dos dois PDFs são pixel a pixel idênticos. A página PT-BR foi comparada integralmente à página inglesa, sem corte, colisão ou deslocamento visível de arte e elementos fixos.
+- Abri os 18 alvos no Rich Block Editor: identidade e texto coincidiram em 18/18. Fechei cada editor por Cancel; os hashes dos 18 registros ficaram idênticos antes/depois, e a automação bloqueou todas as tentativas de escrita. Não alterei o Payload.
+- O conteúdo está integralmente traduzido e tecnicamente validado para revisão humana. A aprovação editorial segue pendente, em especial para `Crawl Mode`/`Epic Crawl Mode`, `Rank`, `Loot Level` e `Tuck Bag`; não tratei essas formas como decisões do glossário.
+- Evidência reproduzível: `page-009-validation-receipt-v1.json`, `snapshot/snapshot.json`, `payload-baseline-v1.json`, `editor-readonly-receipt-v2.json`, PDF exportado e rasters Viewer/PDF/fonte no diretório acima.

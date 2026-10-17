@@ -1,0 +1,96 @@
+{
+  "proposalId": "p079-loot-level-spawn-threshold",
+  "version": "1",
+  "title": "Nível de Saque e surgimento de Combatentes — p. 79",
+  "page": 79,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "4B9ED41491A012626E2AC14A6E42B1F60CB2E73ECBE0D47D61F27259EDC819EF",
+    "pageDom": "45C089FD7394701427B0FE523880CED69E4EDD350AA940D75163E68AB5FEA6FA",
+    "inlineElements": null,
+    "fidelityOverlays": "A86D163C3A8EC2D9C2154C1CDE6FC526EA91E2F1BA772C9BD8C204B5DB6FEB7B"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2e0efc6c6f6f0"
+  },
+  "scopeLimits": [
+    "Somente o parágrafo block_19 / DOM index 5 sobre a relação entre Loot Level do Combatente e do Encontro entra neste lote. Os cartões, variações, outras regras e imagens seguem fora do escopo.",
+    "Loot Level -> Nível de Saque é um termo local candidato e permanece pendente de aprovação no glossário; a proposta não canoniza a equivalência.",
+    "GETs confirmaram zero traduções PT-BR e zero reviews da p.79 antes desta proposta. Nenhuma tradução final é publicada ou sobrescrita.",
+    "Viewer, comparação e highlight foram verificados; Copyfit V3, Editor, PDF, fidelidade integral e aprovação editorial aguardam verificação."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 5,
+      "sourceBlockId": "block_19",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_5__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "The higher the Loot Level a Combatant Card has, the higher the Loot Level an Encounter must be for it to Spawn.",
+      "proposalText": "Quanto maior o Nível de Saque na Carta do Combatente, maior deve ser o do Encontro para o Combatente surgir.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_5__pt-BR",
+        "bbox": [
+          85.76909637451172,
+          489.36981201171875,
+          382.54901123046875,
+          512.2698364257812
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Quanto maior o Nível de Saque na Carta do Combatente, maior deve ser o do Encontro para o Combatente surgir.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_live_viewer_comparison_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level -> Nível de Saque: equivalência local candidata; glossário oficial ainda não a canoniza."
+      ]
+    }
+  ],
+  "viewerVerification": {
+    "result": "passed",
+    "comparison": "Complete EN/PT-BR comparison was visible in the live review panel.",
+    "highlight": "Only block_19 / DOM index 5 was highlighted; the heading and neighboring blocks were not included.",
+    "readability": "Readable at 100% Viewer zoom with no visible clipping, collision, or overlap.",
+    "translationRecordsTotal": 326,
+    "pageTranslationRecords": 0,
+    "pageReviewRecords": 0,
+    "writesOrApproval": 0,
+    "copyfitV3": false,
+    "editor": false,
+    "pdf": false,
+    "humanEditorialApproval": false,
+    "terminology": "Loot Level → Nível de Saque remains a local candidate pending human glossary decision."
+  },
+  "note": "Recorte de uma frase da seção Loot Level. A redação concisa mantém Loot Level como candidato local explícito e reduz expansão para revisão visual. A decisão terminológica continua humana.",
+  "revisions": [
+    {
+      "version": 2,
+      "note": "Redação encurtada para caber no frame mantendo o limiar de Nível de Saque e o Combatente como referente do surgimento."
+    }
+  ]
+}

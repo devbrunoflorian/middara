@@ -1,0 +1,79 @@
+{
+  "proposalId": "p089-presence-definition",
+  "version": "1",
+  "title": "Definição de Presença — p. 89",
+  "page": 89,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "D9FFC673765A8ACCCC781B07414D621C1D5A0C60E8BD99B9F019691CFC9AE993",
+    "pageDom": "29A0EC0C9CD195C52EF4D3DDF8DA931D43C844DA16B1B0AE04CC05AEE7BBF165",
+    "inlineElements": "31BC531CB6513E0EAFB58F544EA1182302CCCC215D827D25371B7EE05F1C243B",
+    "fidelityOverlays": "727EE9A9574F5A53A6F4C426BD2DA695D9DACB7B197A73E8F4EAF222541D4B94"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "Somente o título Presence e sua definição em block_12 foram incluídos. Os outros atributos, descrições de ícones, regras de armas e a tradução integral da p.89 permanecem fora deste recorte.",
+    "A revisão visual completa do inglês da p.89 contra o PDF oficial está registrada em docs/project-progress/2026-10-04-page89-visual-review.md. Esta proposta isolada não certifica a localização integral nem a revisão editorial da página.",
+    "Presence → Presença é uma equivalência candidata local; não foi adicionada ao glossário. Nenhuma decisão terminológica global foi criada.",
+    "GETs somente leitura encontraram zero traduções humanas e zero revisões na p.89. Nenhuma tradução final foi escrita."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 6,
+      "sourceBlockId": "block_12",
+      "sourceUnitId": null,
+      "spanKey": "page_89_block_6__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Presence: \nThe degree to which others notice the Adventurer.",
+      "proposalText": "Presença:\nO quanto os outros notam o Aventureiro.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_89_block_6__pt-BR",
+        "bbox": [456.0711975097656, 414.3247375488281, 669.9916381835938, 437.2447204589844],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Presença:\n",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "O quanto os outros notam o Aventureiro.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Presence → Presença é uma equivalência local candidata para o nome do atributo e ainda não consta no glossário oficial."
+      ]
+    }
+  ],
+  "note": "Recorte incremental de uma definição curta de atributo. Mantém a forma do título e esclarece o grau em que outras pessoas notam o Aventureiro.",
+  "revisions": []
+}

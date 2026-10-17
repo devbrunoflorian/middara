@@ -1,0 +1,161 @@
+{
+  "proposalId": "p102-skull-label",
+  "version": "1",
+  "title": "Rótulo SKULL do Dice Breakdown — p.102",
+  "page": 102,
+  "status": "failed_dtp_frame_overflow_open_exception_human_review_pending",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 0
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHash": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+  "scopeLimits": [
+    "This proposal covers only the vertical SKULL label beside the skull die face in the p.102 Dice Breakdown.",
+    "The source line direction and ink bbox remain unchanged. Its derived horizontal translation frame is centered and rotated into that same source box; no source font, size, or page geometry is edited.",
+    "CAVEIRA is a local candidate informed by existing human usage of caveiras for skull results; it is not an approved glossary decision. CRÂNIO remains a contextual alternative for human review.",
+    "No final PT-BR translation, human edit, approval, geometry, or Payload record is changed."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 12,
+      "sourceBlockId": "block_20",
+      "sourceUnitId": "p102-skull-vertical-label",
+      "spanKey": "page_102_unit_p102-skull-vertical-label__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "SKULL",
+      "proposalText": "CAVEIRA",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_unit_p102-skull-vertical-label__pt-BR",
+        "bbox": [
+          572.4742431640625,
+          105.53192138671875,
+          582.01025390625,
+          129.4439697265625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "CAVEIRA",
+            "font": "OptimaLTStd-Bold",
+            "size": 8,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfLineIds": [
+        "line_20_0"
+      ],
+      "sourceBboxes": [
+        [
+          572.4742431640625,
+          105.53192138671875,
+          582.01025390625,
+          129.4439697265625
+        ]
+      ],
+      "sourceTextDirection": [
+        0,
+        1
+      ],
+      "technicalStatus": "failed_dtp_frame_overflow",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "blank PT-BR field in the diagnostic Viewer; no English fallback; the complete proposal remains available in review.",
+      "pendingTerms": [
+        "SKULL → CAVEIRA is a local label proposal, not an approved glossary decision; compare CRÂNIO in context."
+      ],
+      "copyfitClassification": "EXACT",
+      "copyfitEvidence": [
+        "CAVEIRA and CRÂNIO both retain one visual baseline (EXACT) at 100% and 200%, but their ink rectangles exceed the fixed translated frame by about 7.5 pt and 6.5 pt; exact line count does not pass the frame-fit gate.",
+        "Independent critical review confirms the extensions are real relative to the source frame, although both words remain visible and do not collide with the skull tile or neighboring rows in the page context.",
+        "No font-size reduction, geometry change, Payload write, human-translation overwrite, or English fallback was used."
+      ],
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "frameFit": false,
+        "method": "Original PDF visual baseline plus live PageRenderer DOM Range rectangles grouped along the rotated visual-line axis; separately compare rendered ink bounds to the fixed source frame.",
+        "sourceFramePt": [
+          572.4742431640625,
+          105.53192138671875,
+          582.01025390625,
+          129.4439697265625
+        ],
+        "environment": {
+          "viewportCssPixels": "2400x1400",
+          "deviceScaleFactor": 1,
+          "language": "pt-BR",
+          "zooms": [
+            "100%",
+            "200%"
+          ],
+          "fontLoaded": true
+        },
+        "alternatives": {
+          "CAVEIRA": {
+            "classification": "EXACT",
+            "measurements": [
+              {
+                "zoomPercent": 100,
+                "renderedVisualBaselines": 1,
+                "renderedInkHeightCssPx": 49.34375,
+                "frameHeightCssPx": 37.53125,
+                "exceedsFramePt": 7.53,
+                "textEscapesField": true,
+                "screenshot": "apps/web/output/p102-skull-label-copyfit-v1/viewer-ptbr-caveira-100pct.png",
+                "measurementFile": "apps/web/output/p102-skull-label-copyfit-v1/caveira-100pct-measurement.json"
+              },
+              {
+                "zoomPercent": 200,
+                "renderedVisualBaselines": 1,
+                "renderedInkHeightCssPx": 98.671875,
+                "frameHeightCssPx": 75.078125,
+                "exceedsFramePt": 7.51,
+                "textEscapesField": true,
+                "screenshot": "apps/web/output/p102-skull-label-copyfit-v1/viewer-ptbr-caveira-200pct.png",
+                "measurementFile": "apps/web/output/p102-skull-label-copyfit-v1/caveira-200pct-measurement.json"
+              }
+            ]
+          },
+          "CRÂNIO": {
+            "classification": "EXACT",
+            "measurements": [
+              {
+                "zoomPercent": 100,
+                "renderedVisualBaselines": 1,
+                "renderedInkHeightCssPx": 47.71875,
+                "frameHeightCssPx": 37.53125,
+                "exceedsFramePt": 6.49,
+                "textEscapesField": true,
+                "screenshot": "apps/web/output/p102-skull-label-copyfit-v1/viewer-ptbr-cr-nio-100pct.png",
+                "measurementFile": "apps/web/output/p102-skull-label-copyfit-v1/cr-nio-100pct-measurement.json"
+              },
+              {
+                "zoomPercent": 200,
+                "renderedVisualBaselines": 1,
+                "renderedInkHeightCssPx": 95.4375,
+                "frameHeightCssPx": 75.078125,
+                "exceedsFramePt": 6.48,
+                "textEscapesField": true,
+                "screenshot": "apps/web/output/p102-skull-label-copyfit-v1/viewer-ptbr-cr-nio-200pct.png",
+                "measurementFile": "apps/web/output/p102-skull-label-copyfit-v1/cr-nio-200pct-measurement.json"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "note": "Both full semantic candidates preserve the exact one-line count but exceed the immutable source frame. The PT-BR field remains blank in diagnostic rendering, with no English fallback; both candidates and measurements remain available for review."
+}

@@ -1,0 +1,152 @@
+{
+  "proposalId": "p102-conviction-casting-value-heading",
+  "version": "2",
+  "title": "Valor de Convicção e Conjuração — cabeçalho da p.102 (v2)",
+  "page": 102,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "9F6EE3306F10136DB1CCD7DABDEAC994C322D6DFAA807B14382962A180CCA2DD",
+    "pageDom": "97EA10EB5B36E0A36A4DA1339C2D7D72892DB7F3142D92BC8DA01169F89C5548"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 1
+  },
+  "scopeLimits": [
+    "Somente o cabeçalho block_27 foi proposto. O texto de regras, tabela, cores e símbolos permanece fora deste recorte.",
+    "Fonte Cinzel-Regular, tamanho, posição e caixa originais foram preservados; a contagem PT-BR e o copyfit V3 ainda precisam de medição no Viewer/Editor/PDF.",
+    "Conjuração é coerente com as propostas adjacentes da página, mas permanece forma local sujeita a revisão terminológica.",
+    "Nenhuma tradução humana, revisão anterior ou texto final foi alterado."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 16,
+      "sourceBlockId": "block_27",
+      "sourceUnitId": null,
+      "spanKey": "page_102_block_16__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Conviction and Casting Value",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfLineIds": [
+        "line_27_0"
+      ],
+      "proposalText": "Valor de Convicção/Conjuração",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_block_16__pt-BR",
+        "bbox": [
+          258.44000244140625,
+          572.8402099609375,
+          561.5060424804688,
+          597.1041870117188
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Valor de Convicção/Conjuração",
+            "font": "Cinzel-Regular",
+            "size": 18.0,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "blocked_copyfit_v3_over_source_1_target_2; dtp_exception_open",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "blank_whole_unit_diagnostic_only; no English fallback; full proposal retained",
+      "pendingTerms": [
+        "Conviction → Convicção follows the official glossary. Casting → Conjuração follows the current p.102 candidate wording and remains a local term awaiting editorial confirmation."
+      ],
+      "copyfitAttempts": [
+        {
+          "proposalVersion": "1",
+          "proposalText": "Valor de Convicção e Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "measurementEnvironment": {
+            "viewport": "1280x720 CSS px",
+            "devicePixelRatio": 1.25,
+            "zoomPercent": 200,
+            "measurement": "live PageRenderer text rects grouped by distinct rendered Y/baseline; critical-agent read-only check after reload"
+          },
+          "sourceFrameProjectedPx": {
+            "left": 129.34,
+            "top": 455.84,
+            "right": 317.6,
+            "bottom": 470.9
+          },
+          "renderedLineRectsPx": [
+            {
+              "left": 129.34,
+              "top": 454.24,
+              "right": 261.58,
+              "bottom": 467.84
+            },
+            {
+              "left": 129.34,
+              "top": 465.43,
+              "right": 202.76,
+              "bottom": 479.03
+            }
+          ],
+          "bottomOverflowPx": 8.13
+        },
+        {
+          "proposalVersion": "2",
+          "proposalText": "Valor de Convicção/Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "measurementEnvironment": {
+            "viewport": "1280x720 CSS px",
+            "devicePixelRatio": 1.25,
+            "zoomPercent": 200,
+            "measurement": "live PageRenderer text rects grouped by distinct rendered Y/baseline; critical-agent read-only check after reload"
+          },
+          "sourceFrameProjectedPx": {
+            "left": 129.34,
+            "top": 455.84,
+            "right": 317.6,
+            "bottom": 470.9
+          },
+          "frameOverflowConfirmed": true,
+          "exactV2OverflowPx": "not separately returned by the read-only measurement report"
+        }
+      ],
+      "copyfitLineCount": "pending_live_measurement",
+      "pageRendererVisualLineCount": 2,
+      "copyfitLineCountClassification": "OVER",
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 2,
+        "classification": "OVER",
+        "measurementEnvironment": {
+          "viewport": "1280x720 CSS px",
+          "devicePixelRatio": 1.25,
+          "zoomPercent": 200,
+          "measurement": "live PageRenderer text rects grouped by distinct rendered Y/baseline; critical-agent read-only check after reload"
+        },
+        "sourceFrameProjectedPx": {
+          "left": 129.34,
+          "top": 455.84,
+          "right": 317.6,
+          "bottom": 470.9
+        },
+        "attemptCount": 2
+      }
+    }
+  ],
+  "note": "Copyfit V3 revision after live Viewer measurement. Prior draft and its OVER classification are preserved in candidate copyfitAttempts; v2 remains pending live verification and human editorial review.",
+  "revisions": []
+}

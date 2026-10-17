@@ -1,0 +1,152 @@
+{
+  "proposalId": "p102-conviction-casting-values",
+  "version": "1",
+  "title": "Valores de Convicção e Conjuração — duas frases, p. 102",
+  "page": 102,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "9F6EE3306F10136DB1CCD7DABDEAC994C322D6DFAA807B14382962A180CCA2DD",
+    "pageDom": "97EA10EB5B36E0A36A4DA1339C2D7D72892DB7F3142D92BC8DA01169F89C5548"
+  },
+  "counts": {
+    "candidates": 2,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "Lote isolado de duas frases. As cartas, tabela de classificações, valores, dados/símbolos e restante da página ficam fora desta proposta.",
+    "Copyfit V3, exportação PDF e comparação visual registrados nas provas de origem; editor normal conferido por overlay somente leitura. Os candidatos continuam pendentes de revisão e terminologia humana.",
+    "As traduções humanas e revisões da p. 102 estavam ausentes nas provas de origem; nenhuma tradução final ou decisão editorial foi escrita."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_8",
+      "sourceUnitId": "p102-conviction-value-body",
+      "spanKey": "page_102_unit_p102-conviction-value-body__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Some Abilities, Conditions, or AI Steps may reference a figure's Conviction Value or Casting Value. The Conviction Value or Casting Value is calculated by adding the figure's best dice of the appropriate type according to the rating list on the left.",
+      "proposalText": "Algumas Habilidades, Condições ou Etapas de IA podem se referir ao Valor de Convicção ou ao Valor de Conjuração de uma miniatura. Esse valor é calculado somando os melhores dados da miniatura do tipo adequado, conforme a lista de classificações à esquerda.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_unit_p102-conviction-value-body__pt-BR",
+        "bbox": [
+          419.74951171875,
+          623.8046875,
+          630.7799072265625,
+          690.7247314453125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Algumas Habilidades, Condições ou Etapas de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "IA",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " podem se referir ao Valor de Convicção ou ao Valor de Conjuração de uma miniatura. Esse valor é calculado somando os melhores dados da miniatura do tipo adequado, conforme a lista de classificações à esquerda.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "copyfit_v3_verified_pending_live_review_panel",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Etapas de IA",
+        "Valor de Convicção",
+        "Valor de Conjuração",
+        "lista de classificações"
+      ]
+    },
+    {
+      "blockIndex": 1,
+      "sourceBlockId": "block_9",
+      "sourceUnitId": null,
+      "spanKey": "page_102_block_1__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Since Casting only uses 1 die, the Casting Value is simply the value of the single die.",
+      "proposalText": "Como a Conjuração usa só 1 dado, o Valor de Conjuração é simplesmente o valor desse dado.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_block_1__pt-BR",
+        "bbox": [
+          419.7532043457031,
+          736.1439819335938,
+          627.2736206054688,
+          759.0640258789062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Como a Conjuração usa só ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " dado, o Valor de Conjuração é simplesmente o valor desse dado.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "copyfit_v3_verified_pending_live_review_panel",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Casting → Conjuração",
+        "Casting Value → Valor de Conjuração"
+      ]
+    }
+  ],
+  "note": "As duas unidades pertencem ao bloco explicativo de Conviction and Casting Value. A redação, rich text, seis linhas do corpo e duas linhas da frase final constam nas provas preservadas.",
+  "evidence": [
+    "docs/translations/proposals/page-102-conviction-value-body-proposal-2026-10-15-v1.json",
+    "docs/translations/proposals/page-102-conviction-and-casting-value-proposal-2026-10-15-v1.json"
+  ],
+  "revisions": []
+}

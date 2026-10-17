@@ -5,7 +5,7 @@
     "p58-activation-numbers-example"
   ],
   "family": "Example label + body",
-  "status": "isolated-proposal-copyfit-verified-pending-human-review",
+  "status": "pending_human_review",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
     "background": "32F147D3705A0564F2551A4B02D3172D51B7CD022F241A984D1E9C42D1F87001",
@@ -159,7 +159,18 @@
           }
         ],
         "managedSourceSymbols": []
-      }
+      },
+      "blockIndex": 13,
+      "sourceBlockId": "block_23",
+      "sourceUnitId": "p58-activation-numbers-body",
+      "sourceText": "Intelligent Combatants with more than 3 copies of the same figure will have 2 or more copies of their Combatant Card. These cards will have a different set of Activation Numbers on each Combatant Card. In addition, these Combatant Cards will have 2 or more different Initiative Cards with matching Activation Numbers.",
+      "proposalText": "Combatentes Inteligentes com mais de 3 cópias da mesma miniatura terão 2 ou mais cópias de sua Carta de Combatente. Cada Carta de Combatente terá um conjunto diferente de Números de Ativação. Além disso, essas Cartas de Combatente terão 2 ou mais Cartas de Iniciativa distintas, com Números de Ativação correspondentes.",
+      "technicalStatus": "verified_live_viewer_highlight_copyfit_evidence",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Intelligent Combatants → Combatentes Inteligentes; Activation Numbers → Números de Ativação; Combatant Card → Carta de Combatente; Initiative Card → Carta de Iniciativa; Encounter → Encontro"
+      ]
     },
     {
       "spanKey": "page_58_unit_p58-activation-numbers-example__pt-BR",
@@ -403,7 +414,41 @@
           }
         ],
         "managedSourceSymbols": []
-      }
+      },
+      "blockIndex": 13,
+      "sourceBlockId": "block_23",
+      "sourceUnitId": "p58-activation-numbers-example",
+      "sourceText": "Example: 6 Cave Sickles start on the board during an Encounter. One player would manage the Combatant Card for Cave Sickles 1, 2, and 3, and another player would manage the card for Cave Sickles 4, 5, and 6. Since each Cave Sickle Group has a different Initiative Card, Cave Sickle 1, 2, and 3 will activate at a different time than Cave Sickle 4, 5, and 6.",
+      "proposalText": "Exemplo: 6 Cave Sickles começam no tabuleiro durante um Encontro. Um jogador cuidaria da Carta de Combatente dos Cave Sickles 1, 2 e 3, e outro cuidaria da carta dos Cave Sickles 4, 5 e 6. Como cada grupo de Cave Sickles tem uma Carta de Iniciativa diferente, os Cave Sickles 1, 2 e 3 serão ativados em um momento diferente dos Cave Sickles 4, 5 e 6.",
+      "technicalStatus": "verified_live_viewer_highlight_copyfit_evidence",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Cave Sickle Group → grupo de Cave Sickles; Encounter → Encontro; Combatant Card → Carta de Combatente; Initiative Card → Carta de Iniciativa"
+      ]
     }
-  ]
+  ],
+  "proposalId": "p058-activation-numbers-2026-10-15-v1",
+  "version": "1",
+  "title": "Números de Ativação e exemplo — p. 58",
+  "viewerVerification": {
+    "status": "verified_live_viewer_highlight_copyfit_evidence",
+    "verifiedOn": "2026-10-16",
+    "independentCriticalReview": true,
+    "pageNumber": 58,
+    "candidatesVerified": 2,
+    "correctHighlights": 2,
+    "englishAndPortugueseTextPresent": 2,
+    "readableAt100Percent": true,
+    "visibleClippingOrCollision": false,
+    "exampleLabelAndNumeralEmphasisPreserved": true,
+    "sourceArtworkPreserved": true,
+    "payloadTranslationCount": 326,
+    "existingReviewRecordCount": 6,
+    "pageReviewRecordsCreated": 0,
+    "saveApproveOrRequestActions": 0,
+    "isolatedCopyfitProofIncludesViewerEditorAndOfficialPdf": true,
+    "copyfitV3Verified": false,
+    "editorialApproval": false
+  }
 }

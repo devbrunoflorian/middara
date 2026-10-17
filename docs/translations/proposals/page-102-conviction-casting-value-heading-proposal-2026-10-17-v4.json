@@ -1,0 +1,846 @@
+{
+  "proposalId": "p102-conviction-casting-value-heading",
+  "version": "4",
+  "title": "Valor de Convicção e Conjuração — cabeçalho da p.102 (v4)",
+  "page": 102,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "9F6EE3306F10136DB1CCD7DABDEAC994C322D6DFAA807B14382962A180CCA2DD",
+    "pageDom": "97EA10EB5B36E0A36A4DA1339C2D7D72892DB7F3142D92BC8DA01169F89C5548"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "Only the block_27 heading is proposed; rule text, table, color labels, and symbols remain outside this unit.",
+    "Source font family, 18 pt size, bold render weight, source frame, and centered composition were preserved during measurement.",
+    "Conjuração remains a local candidate term awaiting editorial confirmation.",
+    "No human translation, editorial approval, final translation, or Payload record was changed.",
+    "A semantic-width preflight established a centered 332.4979 pt candidate frame inside the evidence-bounded corridor; the candidate now measures EXACT (1/1 visual rows) at 100% and 200%.",
+    "Only the proposal candidate frame X/width changed; the original font, size, rich segments, text, vertical geometry, and final Payload translation remain untouched. Editorial approval is still pending."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 16,
+      "sourceBlockId": "block_27",
+      "sourceUnitId": null,
+      "spanKey": "page_102_block_16__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Conviction and Casting Value",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfLineIds": [
+        "line_27_0"
+      ],
+      "copyfitSemanticFlow": {
+        "version": 1,
+        "flowRegion": {
+          "id": "p102-conviction-casting-header-band",
+          "semanticOwner": "p102-conviction-casting-value-heading",
+          "leftBoundaryEvidence": [
+            {
+              "valuePt": 122,
+              "kind": "artwork-occupancy",
+              "detail": "Right edge of the lower-left ornamental flourish",
+              "sourceId": "pdf:page102-lower-left-flourish-edge"
+            },
+            {
+              "valuePt": 122,
+              "kind": "visual-boundary",
+              "detail": "Ornament edge confirmed in the source PDF and Viewer",
+              "sourceId": "viewer:page102-lower-left-flourish-edge"
+            }
+          ],
+          "rightBoundaryEvidence": [
+            {
+              "valuePt": 650,
+              "kind": "artwork-occupancy",
+              "detail": "First blue-toned background-art pixels in this vertical band",
+              "sourceId": "pdf:page102-blue-art-left-edge"
+            },
+            {
+              "valuePt": 650,
+              "kind": "background-image-boundary",
+              "detail": "Right-side artwork begins near x=650 pt in the source page raster",
+              "sourceId": "viewer:page102-blue-art-left-edge"
+            }
+          ],
+          "paddingLeftPt": 8,
+          "paddingRightPt": 10,
+          "textBandTopPt": 572.8402,
+          "textBandBottomPt": 597.1042,
+          "evidence": [
+            {
+              "kind": "semantic-parent",
+              "owner": "p102-conviction-casting-value-heading",
+              "detail": "The heading occupies the centered lower header band"
+            },
+            {
+              "kind": "source-baselines",
+              "detail": "The official PDF contains one heading baseline at the preserved center x=409.973 pt"
+            },
+            {
+              "kind": "artwork-occupancy",
+              "detail": "Lower ornaments bound the left and right composition edges"
+            },
+            {
+              "kind": "background-image-boundary",
+              "detail": "The live page raster has no blue-toned artwork before about x=650 pt in this heading band"
+            }
+          ]
+        },
+        "alignmentAnchor": "center",
+        "centerAnchorPt": 409.973,
+        "obstacles": [
+          {
+            "id": "p102-blue-toned-background-art",
+            "semanticRelation": "independent-flow-owner",
+            "bboxPt": [
+              650,
+              572.8402,
+              740,
+              599.2
+            ],
+            "requiredGapPt": 10,
+            "detail": "The tested corridor ends at x=640 pt, preserving a 10 pt gap to the measured artwork edge"
+          }
+        ],
+        "evidenceSources": [
+          "apps/web/public/pages/page_102/fidelity_overlays.json",
+          "apps/web/public/pages/page_102/page_102_dom.json",
+          "apps/web/public/pages/page_102/background.webp",
+          "Official PDF artwork and neighboring-block bounds independently reviewed by the critical agent"
+        ]
+      },
+      "proposalText": "Valor de Convicção e Conjuração",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_block_16__pt-BR",
+        "bbox": [
+          243.7240482639524,
+          572.8402099609375,
+          576.2219517360477,
+          597.1041870117188
+        ],
+        "textAlign": "center",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Valor de Convicção e Conjuração",
+            "font": "Cinzel-Regular",
+            "size": 18,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "validated_copyfit_v3_semantic_width_exact_pending_human_review",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "Normal PT-BR proposal preview; candidate-only semantic frame; not published; editorial approval pending.",
+      "pendingTerms": [
+        "Conviction → Convicção follows the official glossary. Casting → Conjuração follows the current p.102 candidate wording and remains a local term awaiting editorial confirmation."
+      ],
+      "copyfitAttempts": [
+        {
+          "proposalVersion": "1",
+          "proposalText": "Valor de Convicção e Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "measurementEnvironment": {
+            "viewport": "1280x720 CSS px",
+            "devicePixelRatio": 1.25,
+            "zoomPercent": 200,
+            "measurement": "live PageRenderer text rects grouped by distinct rendered Y/baseline; critical-agent read-only check after reload"
+          },
+          "sourceFrameProjectedPx": {
+            "left": 129.34,
+            "top": 455.84,
+            "right": 317.6,
+            "bottom": 470.9
+          },
+          "renderedLineRectsPx": [
+            {
+              "left": 129.34,
+              "top": 454.24,
+              "right": 261.58,
+              "bottom": 467.84
+            },
+            {
+              "left": 129.34,
+              "top": 465.43,
+              "right": 202.76,
+              "bottom": 479.03
+            }
+          ],
+          "bottomOverflowPx": 8.13
+        },
+        {
+          "proposalVersion": "2",
+          "proposalText": "Valor de Convicção/Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "measurementEnvironment": {
+            "viewport": "1280x720 CSS px",
+            "devicePixelRatio": 1.25,
+            "zoomPercent": 200,
+            "measurement": "live PageRenderer text rects grouped by distinct rendered Y/baseline; critical-agent read-only check after reload"
+          },
+          "sourceFrameProjectedPx": {
+            "left": 129.34,
+            "top": 455.84,
+            "right": 317.6,
+            "bottom": 470.9
+          },
+          "frameOverflowConfirmed": true,
+          "exactV2OverflowPx": "not separately returned by the read-only measurement report"
+        },
+        {
+          "proposalVersion": "3-live-viewer",
+          "variant": "valor-de-conviccao-e-conjuracao",
+          "proposalText": "Valor de Convicção e Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "zoomPercent": 100,
+          "measurementMethod": "source PDF baseline geometry and Copyfit V3 PageRenderer DOM Range rows; source .realbox frame",
+          "measured": {
+            "text": "Valor de Convicção e Conjuração",
+            "rects": [
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1030.578125,
+                "right": 1358.765625
+              },
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1358.765625,
+                "right": 1365.421875
+              },
+              {
+                "top": 1004.65625,
+                "bottom": 1038.65625,
+                "left": 1101.15625,
+                "right": 1288.1875
+              },
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1030.578125,
+                "right": 1358.765625
+              },
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1358.765625,
+                "right": 1365.421875
+              },
+              {
+                "top": 1004.65625,
+                "bottom": 1038.65625,
+                "left": 1101.15625,
+                "right": 1288.1875
+              }
+            ],
+            "field": {
+              "top": 979.390625,
+              "bottom": 1035.921875,
+              "left": 956.765625,
+              "right": 1432.59375
+            },
+            "frameElement": "realbox",
+            "font": "700 28.2612px CinzelLocal, Cinzel, serif",
+            "fontLoaded": true,
+            "color": "rgb(255, 255, 255)"
+          },
+          "renderedRows": [
+            {
+              "groupTop": 976.390625,
+              "top": 976.390625,
+              "bottom": 1010.390625,
+              "left": 1030.578125,
+              "right": 1365.421875
+            },
+            {
+              "groupTop": 1004.65625,
+              "top": 1004.65625,
+              "bottom": 1038.65625,
+              "left": 1101.15625,
+              "right": 1288.1875
+            }
+          ],
+          "frameOverrun": {
+            "left": 0,
+            "right": 0,
+            "top": 3,
+            "bottom": 2.734375
+          },
+          "frameOverflow": true,
+          "decorativeDividerCollision": true,
+          "screenshot": "apps/web/output/p102-conviction-casting-value-heading-copyfit-v1/valor-de-conviccao-e-conjuracao-100pct.png",
+          "blockedWrites": [],
+          "pageErrors": []
+        },
+        {
+          "proposalVersion": "3-live-viewer",
+          "variant": "valor-de-conviccao-e-conjuracao",
+          "proposalText": "Valor de Convicção e Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "zoomPercent": 200,
+          "measurementMethod": "source PDF baseline geometry and Copyfit V3 PageRenderer DOM Range rows; source .realbox frame",
+          "measured": {
+            "text": "Valor de Convicção e Conjuração",
+            "rects": [
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1043.171875,
+                "right": 1699.546875
+              },
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1699.546875,
+                "right": 1712.84375
+              },
+              {
+                "top": 1881.3125,
+                "bottom": 1949.3125,
+                "left": 1184.328125,
+                "right": 1558.390625
+              },
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1043.171875,
+                "right": 1699.546875
+              },
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1699.546875,
+                "right": 1712.84375
+              },
+              {
+                "top": 1881.3125,
+                "bottom": 1949.3125,
+                "left": 1184.328125,
+                "right": 1558.390625
+              }
+            ],
+            "field": {
+              "top": 1830.796875,
+              "bottom": 1943.828125,
+              "left": 895.53125,
+              "right": 1847.1875
+            },
+            "frameElement": "realbox",
+            "font": "700 56.5225px CinzelLocal, Cinzel, serif",
+            "fontLoaded": true,
+            "color": "rgb(255, 255, 255)"
+          },
+          "renderedRows": [
+            {
+              "groupTop": 1824.796875,
+              "top": 1824.796875,
+              "bottom": 1892.796875,
+              "left": 1043.171875,
+              "right": 1712.84375
+            },
+            {
+              "groupTop": 1881.3125,
+              "top": 1881.3125,
+              "bottom": 1949.3125,
+              "left": 1184.328125,
+              "right": 1558.390625
+            }
+          ],
+          "frameOverrun": {
+            "left": 0,
+            "right": 0,
+            "top": 6,
+            "bottom": 5.484375
+          },
+          "frameOverflow": true,
+          "decorativeDividerCollision": true,
+          "screenshot": "apps/web/output/p102-conviction-casting-value-heading-copyfit-v1/valor-de-conviccao-e-conjuracao-200pct.png",
+          "blockedWrites": [],
+          "pageErrors": []
+        },
+        {
+          "proposalVersion": "3-live-viewer",
+          "variant": "valor-de-conviccao-conjuracao",
+          "proposalText": "Valor de Convicção/Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "zoomPercent": 100,
+          "measurementMethod": "source PDF baseline geometry and Copyfit V3 PageRenderer DOM Range rows; source .realbox frame",
+          "measured": {
+            "text": "Valor de Convicção/Conjuração",
+            "rects": [
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1129.328125,
+                "right": 1260.015625
+              },
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1260.015625,
+                "right": 1266.671875
+              },
+              {
+                "top": 1004.65625,
+                "bottom": 1038.65625,
+                "left": 1010.984375,
+                "right": 1378.375
+              },
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1129.328125,
+                "right": 1260.015625
+              },
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1260.015625,
+                "right": 1266.671875
+              },
+              {
+                "top": 1004.65625,
+                "bottom": 1038.65625,
+                "left": 1010.984375,
+                "right": 1378.375
+              }
+            ],
+            "field": {
+              "top": 979.390625,
+              "bottom": 1035.921875,
+              "left": 956.765625,
+              "right": 1432.59375
+            },
+            "frameElement": "realbox",
+            "font": "700 28.2612px CinzelLocal, Cinzel, serif",
+            "fontLoaded": true,
+            "color": "rgb(255, 255, 255)"
+          },
+          "renderedRows": [
+            {
+              "groupTop": 976.390625,
+              "top": 976.390625,
+              "bottom": 1010.390625,
+              "left": 1129.328125,
+              "right": 1266.671875
+            },
+            {
+              "groupTop": 1004.65625,
+              "top": 1004.65625,
+              "bottom": 1038.65625,
+              "left": 1010.984375,
+              "right": 1378.375
+            }
+          ],
+          "frameOverrun": {
+            "left": 0,
+            "right": 0,
+            "top": 3,
+            "bottom": 2.734375
+          },
+          "frameOverflow": true,
+          "decorativeDividerCollision": true,
+          "screenshot": "apps/web/output/p102-conviction-casting-value-heading-copyfit-v1/valor-de-conviccao-conjuracao-100pct.png",
+          "blockedWrites": [],
+          "pageErrors": []
+        },
+        {
+          "proposalVersion": "3-live-viewer",
+          "variant": "valor-de-conviccao-conjuracao",
+          "proposalText": "Valor de Convicção/Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "zoomPercent": 200,
+          "measurementMethod": "source PDF baseline geometry and Copyfit V3 PageRenderer DOM Range rows; source .realbox frame",
+          "measured": {
+            "text": "Valor de Convicção/Conjuração",
+            "rects": [
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1240.671875,
+                "right": 1502.03125
+              },
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1502.03125,
+                "right": 1515.328125
+              },
+              {
+                "top": 1881.3125,
+                "bottom": 1949.3125,
+                "left": 1003.96875,
+                "right": 1738.734375
+              },
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1240.671875,
+                "right": 1502.03125
+              },
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1502.03125,
+                "right": 1515.328125
+              },
+              {
+                "top": 1881.3125,
+                "bottom": 1949.3125,
+                "left": 1003.96875,
+                "right": 1738.734375
+              }
+            ],
+            "field": {
+              "top": 1830.796875,
+              "bottom": 1943.828125,
+              "left": 895.53125,
+              "right": 1847.1875
+            },
+            "frameElement": "realbox",
+            "font": "700 56.5225px CinzelLocal, Cinzel, serif",
+            "fontLoaded": true,
+            "color": "rgb(255, 255, 255)"
+          },
+          "renderedRows": [
+            {
+              "groupTop": 1824.796875,
+              "top": 1824.796875,
+              "bottom": 1892.796875,
+              "left": 1240.671875,
+              "right": 1515.328125
+            },
+            {
+              "groupTop": 1881.3125,
+              "top": 1881.3125,
+              "bottom": 1949.3125,
+              "left": 1003.96875,
+              "right": 1738.734375
+            }
+          ],
+          "frameOverrun": {
+            "left": 0,
+            "right": 0,
+            "top": 6,
+            "bottom": 5.484375
+          },
+          "frameOverflow": true,
+          "decorativeDividerCollision": true,
+          "screenshot": "apps/web/output/p102-conviction-casting-value-heading-copyfit-v1/valor-de-conviccao-conjuracao-200pct.png",
+          "blockedWrites": [],
+          "pageErrors": []
+        },
+        {
+          "proposalVersion": "3-live-viewer",
+          "variant": "conviccao-e-valor-de-conjuracao",
+          "proposalText": "Convicção e Valor de Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "zoomPercent": 100,
+          "measurementMethod": "source PDF baseline geometry and Copyfit V3 PageRenderer DOM Range rows; source .realbox frame",
+          "measured": {
+            "text": "Convicção e Valor de Conjuração",
+            "rects": [
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1030.578125,
+                "right": 1358.765625
+              },
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1358.765625,
+                "right": 1365.421875
+              },
+              {
+                "top": 1004.65625,
+                "bottom": 1038.65625,
+                "left": 1101.15625,
+                "right": 1288.1875
+              },
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1030.578125,
+                "right": 1358.765625
+              },
+              {
+                "top": 976.390625,
+                "bottom": 1010.390625,
+                "left": 1358.765625,
+                "right": 1365.421875
+              },
+              {
+                "top": 1004.65625,
+                "bottom": 1038.65625,
+                "left": 1101.15625,
+                "right": 1288.1875
+              }
+            ],
+            "field": {
+              "top": 979.390625,
+              "bottom": 1035.921875,
+              "left": 956.765625,
+              "right": 1432.59375
+            },
+            "frameElement": "realbox",
+            "font": "700 28.2612px CinzelLocal, Cinzel, serif",
+            "fontLoaded": true,
+            "color": "rgb(255, 255, 255)"
+          },
+          "renderedRows": [
+            {
+              "groupTop": 976.390625,
+              "top": 976.390625,
+              "bottom": 1010.390625,
+              "left": 1030.578125,
+              "right": 1365.421875
+            },
+            {
+              "groupTop": 1004.65625,
+              "top": 1004.65625,
+              "bottom": 1038.65625,
+              "left": 1101.15625,
+              "right": 1288.1875
+            }
+          ],
+          "frameOverrun": {
+            "left": 0,
+            "right": 0,
+            "top": 3,
+            "bottom": 2.734375
+          },
+          "frameOverflow": true,
+          "decorativeDividerCollision": true,
+          "screenshot": "apps/web/output/p102-conviction-casting-value-heading-copyfit-v1/conviccao-e-valor-de-conjuracao-100pct.png",
+          "blockedWrites": [],
+          "pageErrors": []
+        },
+        {
+          "proposalVersion": "3-live-viewer",
+          "variant": "conviccao-e-valor-de-conjuracao",
+          "proposalText": "Convicção e Valor de Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "zoomPercent": 200,
+          "measurementMethod": "source PDF baseline geometry and Copyfit V3 PageRenderer DOM Range rows; source .realbox frame",
+          "measured": {
+            "text": "Convicção e Valor de Conjuração",
+            "rects": [
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1043.171875,
+                "right": 1699.546875
+              },
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1699.546875,
+                "right": 1712.84375
+              },
+              {
+                "top": 1881.3125,
+                "bottom": 1949.3125,
+                "left": 1184.328125,
+                "right": 1558.390625
+              },
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1043.171875,
+                "right": 1699.546875
+              },
+              {
+                "top": 1824.796875,
+                "bottom": 1892.796875,
+                "left": 1699.546875,
+                "right": 1712.84375
+              },
+              {
+                "top": 1881.3125,
+                "bottom": 1949.3125,
+                "left": 1184.328125,
+                "right": 1558.390625
+              }
+            ],
+            "field": {
+              "top": 1830.796875,
+              "bottom": 1943.828125,
+              "left": 895.53125,
+              "right": 1847.1875
+            },
+            "frameElement": "realbox",
+            "font": "700 56.5225px CinzelLocal, Cinzel, serif",
+            "fontLoaded": true,
+            "color": "rgb(255, 255, 255)"
+          },
+          "renderedRows": [
+            {
+              "groupTop": 1824.796875,
+              "top": 1824.796875,
+              "bottom": 1892.796875,
+              "left": 1043.171875,
+              "right": 1712.84375
+            },
+            {
+              "groupTop": 1881.3125,
+              "top": 1881.3125,
+              "bottom": 1949.3125,
+              "left": 1184.328125,
+              "right": 1558.390625
+            }
+          ],
+          "frameOverrun": {
+            "left": 0,
+            "right": 0,
+            "top": 6,
+            "bottom": 5.484375
+          },
+          "frameOverflow": true,
+          "decorativeDividerCollision": true,
+          "screenshot": "apps/web/output/p102-conviction-casting-value-heading-copyfit-v1/conviccao-e-valor-de-conjuracao-200pct.png",
+          "blockedWrites": [],
+          "pageErrors": []
+        },
+        {
+          "proposalVersion": "4-semantic-width-preflight",
+          "proposalText": "Valor de Convicção e Conjuração",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "selectedFramePt": {
+            "x": 243.7240482639524,
+            "y": 572.8402099609375,
+            "width": 332.4979034720953,
+            "height": 24.26397705078125,
+            "centerX": 409.97300000000007
+          },
+          "rollbackFramePt": [
+            258.44000244140625,
+            572.8402099609375,
+            561.5060424804688,
+            597.1041870117188
+          ],
+          "measurement": "Live PageRenderer at 100% and 200%; same text/font/segments; centered in measured safe semantic flow corridor; no collision or overflow.",
+          "evidence": [
+            {
+              "zoomPercent": 100,
+              "screenshot": "apps/web/output/p102-block_27-copyfit-v1/viewer-ptbr-valor-de-convic-o-e-conjura-o-semantic-width-selected-100pct.png",
+              "measurement": "apps/web/output/p102-block_27-copyfit-v1/valor-de-convic-o-e-conjura-o-100pct-measurement.json"
+            },
+            {
+              "zoomPercent": 200,
+              "screenshot": "apps/web/output/p102-block_27-copyfit-v1/viewer-ptbr-valor-de-convic-o-e-conjura-o-semantic-width-selected-200pct.png",
+              "measurement": "apps/web/output/p102-block_27-copyfit-v1/valor-de-convic-o-e-conjura-o-200pct-measurement.json"
+            }
+          ]
+        }
+      ],
+      "copyfitLineCount": "1/1 (EXACT)",
+      "pageRendererVisualLineCount": 1,
+      "copyfitLineCountClassification": "EXACT",
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "Live PageRenderer DOM Range line rectangles grouped with the shared Copyfit V3 visual-row grouper; semantic corridor boundaries and obstacles checked against the official PDF and page raster.",
+        "candidateFramePt": {
+          "x": 243.7240482639524,
+          "y": 572.8402099609375,
+          "width": 332.4979034720953,
+          "height": 24.26397705078125,
+          "centerX": 409.97300000000007
+        },
+        "rollbackFramePt": [
+          258.44000244140625,
+          572.8402099609375,
+          561.5060424804688,
+          597.1041870117188
+        ],
+        "zoomMeasurements": [
+          {
+            "zoomPercent": 100,
+            "sourceLines": 1,
+            "pageRendererLines": 1,
+            "classification": "EXACT",
+            "fontLoaded": true,
+            "geometryPass": true,
+            "overflow": false,
+            "collision": false,
+            "screenshot": "apps/web/output/p102-block_27-copyfit-v1/viewer-ptbr-valor-de-convic-o-e-conjura-o-semantic-width-selected-100pct.png",
+            "measurement": "apps/web/output/p102-block_27-copyfit-v1/valor-de-convic-o-e-conjura-o-100pct-measurement.json"
+          },
+          {
+            "zoomPercent": 200,
+            "sourceLines": 1,
+            "pageRendererLines": 1,
+            "classification": "EXACT",
+            "fontLoaded": true,
+            "geometryPass": true,
+            "overflow": false,
+            "collision": false,
+            "screenshot": "apps/web/output/p102-block_27-copyfit-v1/viewer-ptbr-valor-de-convic-o-e-conjura-o-semantic-width-selected-200pct.png",
+            "measurement": "apps/web/output/p102-block_27-copyfit-v1/valor-de-convic-o-e-conjura-o-200pct-measurement.json"
+          }
+        ],
+        "semanticFlowRegion": "p102-conviction-casting-header-band",
+        "candidateTextAndRichSegmentsUnchanged": true,
+        "payloadWrite": false
+      },
+      "copyfitClassification": "EXACT",
+      "reviewLayoutFrame": {
+        "x": 243.7240482639524,
+        "y": 572.8402099609375,
+        "width": 332.49790347209523,
+        "height": 24.26397705078125,
+        "rotation": 0,
+        "textAlign": "center",
+        "lineHeight": 1
+      }
+    }
+  ],
+  "note": "Copyfit V3 semantic-width preflight changed only the unapproved proposal frame: the candidate is now EXACT at both zooms with the source font and rich segments intact, no overflow/collision, and the preserved center anchor. The original frame is recorded for rollback. Editorial and terminology review remain pending; no final translation or Payload record was written.",
+  "revisions": [
+    {
+      "version": "3",
+      "date": "2026-10-17",
+      "summary": "Measured three complete natural variants at 100% and 200% in the live Viewer; all failed Copyfit V3 as OVER and exceeded the source realbox, with visible divider collision. Open DTP exception retained."
+    },
+    {
+      "version": "4",
+      "date": "2026-10-17",
+      "summary": "Retrospective semantic-width preflight found a safe centered candidate frame that restores EXACT 1/1 visual-row parity at 100% and 200%; previous OVER measurements are retained, with original-frame rollback evidence."
+    }
+  ]
+}

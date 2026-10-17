@@ -1,0 +1,296 @@
+{
+  "proposalId": "p100-stamina-recovery-step",
+  "version": "1",
+  "title": "Recuperação de Pontos de Vigor — p. 100",
+  "page": 100,
+  "status": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 0
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 2,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch covers only step A and its explanatory paragraph in the Refresh Phase on page 100.",
+    "The bold step heading and three-line body are separate source-backed typographic units, preserving the original hierarchy and rich emphasis.",
+    "Original OptimaLTStd 9 pt styles, source geometry, and frames are preserved.",
+    "The abbreviation SP remains as printed in the English source. Pontos de Vigor and Barra de Recuperação de Vigor are local terminology candidates, not glossary approvals."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 15,
+      "sourceBlockId": "block_26",
+      "sourceUnitId": "p100-recover-stamina-points-heading",
+      "spanKey": "page_100_unit_p100-recover-stamina-points-heading__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "A. Recover Stamina Points (SP):",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfLineIds": [
+        "line_26_0"
+      ],
+      "proposalText": "A. Recuperar Pontos de Vigor (SP):",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-recover-stamina-points-heading__pt-BR",
+        "bbox": [
+          447.31781005859375,
+          177.83966064453125,
+          572.7418212890625,
+          188.56765747070312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "A.",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Recuperar Pontos de Vigor (SP):",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "technicalStatus": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Stamina Points → Pontos de Vigor is a local candidate; preserve the source abbreviation SP pending terminology approval."
+      ],
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "live PageRenderer DOM Range client rects grouped by shared V3 baseline helper; source count from PDF-derived page_100_dom.json geometry",
+        "environment": {
+          "viewportCssPixels": "2400x1400",
+          "deviceScaleFactor": 1,
+          "language": "pt-BR",
+          "zooms": [
+            "100%",
+            "200%"
+          ],
+          "fontLoaded": true
+        },
+        "geometry": "The source-backed unit remains within its original field; both proposal units were rendered together and critical review found no clipping or collision.",
+        "evidence": {
+          "measurementFiles": [
+            "apps/web/output/p100-block_26-copyfit-v1/a-recuperar-pontos-de-vigor-sp-100pct-measurement.json",
+            "apps/web/output/p100-block_26-copyfit-v1/a-recuperar-pontos-de-vigor-sp-200pct-measurement.json"
+          ],
+          "screenshots": [
+            "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-recuperar-pontos-de-vigor-sp-100pct.png",
+            "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-recuperar-pontos-de-vigor-sp-200pct.png"
+          ]
+        },
+        "samplesByZoom": [
+          {
+            "zoomPercent": 100,
+            "renderedVisualBaselines": 1,
+            "textEscapesFrame": false
+          },
+          {
+            "zoomPercent": 200,
+            "renderedVisualBaselines": 1,
+            "textEscapesFrame": false
+          }
+        ]
+      }
+    },
+    {
+      "blockIndex": 15,
+      "sourceBlockId": "block_26",
+      "sourceUnitId": "p100-recover-stamina-points-description",
+      "spanKey": "page_100_unit_p100-recover-stamina-points-description__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Each Adventurer’s Stamina Recovery Bar determines how many SP they receive during this step, as well as how many SP they may have at any given time. See A: Stamina Recovery Bar on Pg. 25.",
+      "sourcePdfVisualLineCount": 3,
+      "sourcePdfLineIds": [
+        "line_26_1",
+        "line_26_2",
+        "line_26_3"
+      ],
+      "proposalText": "A Barra de Recuperação de Vigor de cada Aventureiro determina quantos SP ele recebe nesta etapa e quantos SP pode ter a qualquer momento. Consulte A: Barra de Recuperação de Vigor, p. 25.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-recover-stamina-points-description__pt-BR",
+        "bbox": [
+          447.31781005859375,
+          187.83868408203125,
+          755.9719848632812,
+          218.56472778320312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "A Barra de Recuperação de Vigor de cada Aventureiro determina quantos ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " ele recebe nesta etapa e quantos ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " pode ter a qualquer momento. Consulte ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "A:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " Barra de Recuperação de Vigor",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": ", p. 25.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "technicalStatus": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Stamina Recovery Bar → Barra de Recuperação de Vigor is a local candidate, not an approved glossary entry.",
+        "Stamina Points → Pontos de Vigor (SP) is a local candidate, not an approved glossary entry."
+      ],
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 3,
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "live PageRenderer DOM Range client rects grouped by shared V3 baseline helper; source count from PDF-derived page_100_dom.json geometry",
+        "environment": {
+          "viewportCssPixels": "2400x1400",
+          "deviceScaleFactor": 1,
+          "language": "pt-BR",
+          "zooms": [
+            "100%",
+            "200%"
+          ],
+          "fontLoaded": true
+        },
+        "geometry": "The source-backed unit remains within its original field; both proposal units were rendered together and critical review found no clipping or collision.",
+        "evidence": {
+          "measurementFiles": [
+            "apps/web/output/p100-block_26-copyfit-v1/a-barra-de-recupera-o-de-vigor-de-cada-aventureiro-determina-quantos-sp-ele-recebe-nesta-etapa-e-quantos-sp-pode-ter-a-qualquer-momento-consulte-a-barra-de-recupera-o-de-vigor-p-25-100pct-measurement.json",
+            "apps/web/output/p100-block_26-copyfit-v1/a-barra-de-recupera-o-de-vigor-de-cada-aventureiro-determina-quantos-sp-ele-recebe-nesta-etapa-e-quantos-sp-pode-ter-a-qualquer-momento-consulte-a-barra-de-recupera-o-de-vigor-p-25-200pct-measurement.json"
+          ],
+          "screenshots": [
+            "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-barra-de-recupera-o-de-vigor-de-cada-aventureiro-determina-quantos-sp-ele-recebe-nesta-etapa-e-quantos-sp-pode-ter-a-qualquer-momento-consulte-a-barra-de-recupera-o-de-vigor-p-25-100pct.png",
+            "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-barra-de-recupera-o-de-vigor-de-cada-aventureiro-determina-quantos-sp-ele-recebe-nesta-etapa-e-quantos-sp-pode-ter-a-qualquer-momento-consulte-a-barra-de-recupera-o-de-vigor-p-25-200pct.png"
+          ]
+        },
+        "samplesByZoom": [
+          {
+            "zoomPercent": 100,
+            "renderedVisualBaselines": 3,
+            "textEscapesFrame": false
+          },
+          {
+            "zoomPercent": 200,
+            "renderedVisualBaselines": 3,
+            "textEscapesFrame": false
+          }
+        ]
+      }
+    }
+  ],
+  "note": "Both source-backed units were rendered together. Copyfit V3 measured the heading 1→1 EXACT and the body 3→3 EXACT at 100% and 200%, preserving rich emphasis and source fonts. Independent critical review confirmed the meaning, hierarchy, and separation from the IMPORTANT notice and step B; terminology decisions and human approval remain pending.",
+  "criticalReview": {
+    "result": "PASS",
+    "finding": "The heading preserves bold hierarchy; the body preserves both bold SP instances and the bold A: Barra de Recuperação de Vigor reference. Meaning is intact. The body remains three lines and separate from the IMPORTANT notice and step B, without visible collision at 100% or 200%. Local terminology candidates remain pending editorial approval.",
+    "evidence": [
+      "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-recuperar-pontos-de-vigor-sp-100pct.png",
+      "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-recuperar-pontos-de-vigor-sp-200pct.png",
+      "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-barra-de-recupera-o-de-vigor-de-cada-aventureiro-determina-quantos-sp-ele-recebe-nesta-etapa-e-quantos-sp-pode-ter-a-qualquer-momento-consulte-a-barra-de-recupera-o-de-vigor-p-25-100pct.png",
+      "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-barra-de-recupera-o-de-vigor-de-cada-aventureiro-determina-quantos-sp-ele-recebe-nesta-etapa-e-quantos-sp-pode-ter-a-qualquer-momento-consulte-a-barra-de-recupera-o-de-vigor-p-25-200pct.png"
+    ]
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "proposalId": "p102-conviction-example",
+  "version": "1",
+  "title": "Exemplo dos dados de Convicção — p. 102",
+  "page": 102,
+  "status": "viewer_copyfit_v3_exact_pdf_export_verified_pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "9F6EE3306F10136DB1CCD7ABDEAC994C322D6DFAA807B14382962A180CCA2DD",
+    "pageDom": "97EA10EB5B36E0A36A4DA1339C2D7D72892DB7F3142D92BC8DA01169F89C5548"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "Only the example paragraph at the bottom of page 102 is proposed. The preceding body, color-rating labels, headings, and page artwork are unchanged.",
+    "The original editorial unit occupies three source visual baselines. Source text styles, type sizes, the frame, and the two colored die symbols are preserved as separate rich spans and semantic inline elements.",
+    "The active Viewer candidate has passed Copyfit V3 at 100% and 200% (EXACT, three visual lines, no frame overflow). The isolated immutable-snapshot PDF export passed text/order and geometry verification. The Rich Block Editor was not opened for this proposal; it remains unapproved and no Payload/final translation was written.",
+    "The die colors and Conviction terminology follow current local page wording and remain pending human editorial review; the official glossary was not changed."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_8",
+      "sourceUnitId": "p102-conviction-value-example",
+      "spanKey": "page_102_unit_p102-conviction-value-example__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Example: If the figure had ORANGE [orange die] and RED [red die] Conviction dice, their Conviction Value would be 8 (5 + 3).",
+      "sourcePdfVisualLineCount": 3,
+      "sourcePdfLineIds": [
+        [
+          "line_8_6",
+          "line_8_7"
+        ],
+        [
+          "line_8_8",
+          "line_8_9"
+        ],
+        [
+          "line_8_10"
+        ]
+      ],
+      "proposalText": "Exemplo: Se a miniatura tivesse um dado de Convicção laranja [dado laranja] e outro vermelho [dado vermelho], seu Valor de Convicção seria 8 (5 + 3).",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_unit_p102-conviction-value-example__pt-BR",
+        "bbox": [
+          419.7499084472656,
+          693.89599609375,
+          626.5799560546875,
+          731.39404296875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Exemplo:",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff"
+          },
+          {
+            "text": " Se a miniatura tivesse um dado de Convicção ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff"
+          },
+          {
+            "text": "laranja",
+            "font": "OptimaLTStd-Bold",
+            "size": 8.847700119018555,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8.847700119018555,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "symbolId": "dice.orange",
+            "symbolMetrics": {
+              "widthEm": 1.2896006698366311,
+              "heightEm": 1.3302892098139496,
+              "advanceEm": 1.2896006698366311,
+              "verticalAlignEm": 0.20637894360605777
+            }
+          },
+          {
+            "text": " e outro ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff"
+          },
+          {
+            "text": "vermelho",
+            "font": "OptimaLTStd-Bold",
+            "size": 8.847700119018555,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8.847700119018555,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "symbolId": "dice.red",
+            "symbolMetrics": {
+              "widthEm": 1.2229166737626975,
+              "heightEm": 1.3302892098139496,
+              "advanceEm": 1.2229166737626975,
+              "verticalAlignEm": 0.2934072096686507
+            }
+          },
+          {
+            "text": ", seu Valor de Convicção seria ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff"
+          },
+          {
+            "text": "8",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff"
+          },
+          {
+            "text": " (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff"
+          },
+          {
+            "text": "5 + 3",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff"
+          },
+          {
+            "text": ").",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff"
+          }
+        ],
+        "managedSourceSymbols": [
+          "dice.orange",
+          "dice.red"
+        ]
+      },
+      "technicalStatus": "viewer_copyfit_v3_exact_100_200_pdf_export_verified; editor_not_used",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Conviction → Convicção follows the official glossary; the source dice colors are rendered as semantic dice.orange and dice.red symbols."
+      ],
+      "copyfitLineCount": "3 source / 3 target (EXACT)",
+      "pageRendererVisualLineCount": 3,
+      "copyfitLineCountClassification": "EXACT",
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "measurementEnvironment": {
+          "viewport": "2400x1400 CSS px",
+          "devicePixelRatio": 1,
+          "measurement": "Original PDF span origins grouped by baseline; live PageRenderer text fragments and semantic symbol rectangles grouped by the existing Copyfit V3 visual-row grouper"
+        },
+        "samplesByZoom": [
+          {
+            "zoomPercent": 100,
+            "sourceVisualBaselines": 3,
+            "renderedVisualBaselines": 3,
+            "frameRect": {
+              "top": 1169.453125,
+              "bottom": 1228.3125,
+              "left": 1210.03125,
+              "right": 1541.359375
+            },
+            "renderedVisualRows": [
+              {
+                "groupTop": 1169.453125,
+                "top": 1169.453125,
+                "bottom": 1188.453125,
+                "left": 1210.03125,
+                "right": 1511.609375
+              },
+              {
+                "groupTop": 1189.171875,
+                "top": 1187.5625,
+                "bottom": 1207.25,
+                "left": 1210.03125,
+                "right": 1512.78125
+              },
+              {
+                "groupTop": 1206.4375,
+                "top": 1206.4375,
+                "bottom": 1224.4375,
+                "left": 1210.03125,
+                "right": 1437.171875
+              }
+            ],
+            "frameOverflow": false,
+            "semanticSymbolsMatch": true,
+            "fontsLoaded": true
+          },
+          {
+            "zoomPercent": 200,
+            "sourceVisualBaselines": 3,
+            "renderedVisualBaselines": 3,
+            "frameRect": {
+              "top": 2210.921875,
+              "bottom": 2328.65625,
+              "left": 1402.0625,
+              "right": 2064.71875
+            },
+            "renderedVisualRows": [
+              {
+                "groupTop": 2210.921875,
+                "top": 2210.921875,
+                "bottom": 2249.921875,
+                "left": 1402.0625,
+                "right": 2005.171875
+              },
+              {
+                "groupTop": 2250.375,
+                "top": 2248.15625,
+                "bottom": 2288.375,
+                "left": 1402.0625,
+                "right": 2007.5625
+              },
+              {
+                "groupTop": 2284.921875,
+                "top": 2284.921875,
+                "bottom": 2322.921875,
+                "left": 1402.0625,
+                "right": 1856.328125
+              }
+            ],
+            "frameOverflow": false,
+            "semanticSymbolsMatch": true,
+            "fontsLoaded": true
+          }
+        ],
+        "semanticSymbols": {
+          "dice.orange": 1,
+          "dice.red": 1
+        },
+        "boldRunsPreserved": [
+          "Exemplo:",
+          "laranja",
+          "vermelho",
+          "8",
+          "5 + 3"
+        ],
+        "adjacentSourceTextIntact": true,
+        "evidence": "apps/web/output/p102-conviction-value-example-copyfit-v1",
+        "pdfExport": {
+          "path": "apps/web/output/p102-conviction-value-example-copyfit-v1/pdf-proof/p102-ptbr-isolated-candidate.pdf",
+          "isolatedImmutableSnapshot": true,
+          "renderedCandidateRecordCount": 1,
+          "snapshotTextAndSymbolOrderVerified": true,
+          "pdfTextAndGeometryVerification": true,
+          "pageSizePt": [
+            820.3460083007812,
+            820.3460083007812
+          ],
+          "sourceTranslationRecordsWritten": 0,
+          "humanApprovalWritten": false
+        }
+      }
+    }
+  ],
+  "note": "The source PDF spans were grouped into three visual baselines from their extracted origins; five source span records share those baselines. The preferred PT-BR candidate was measured with the existing Copyfit V3 PageRenderer text-and-symbol visual-row grouper at 100% and 200%. Both semantic die symbols, source emphasis, font families, sizes, and source frame are preserved.",
+  "revisions": [
+    {
+      "date": "2026-10-17",
+      "note": "Fixed the candidate's sourceUnitId/spanKey to the canonical p102-conviction-value-example unit after the critical Viewer check found the proposed text was not attached to the PT-BR renderer. Hard-reload verification confirms the PT text, both semantic dice, emphasis, and three visual baselines in the Viewer at 100% and 200%; source-adjacent glyphs remain intact. Editor and PDF export remain pending. No Payload or final translation write was made."
+    },
+    {
+      "date": "2026-10-17",
+      "note": "Applied Copyfit V3 EXACT as the required line-count target. Natural sentence-case color labels produced three rendered visual lines for three source lines at 100% and 200%, with both semantic dice intact and no frame overflow. Added the isolated PDF export verification as the remaining technical check. No Payload/final translation write or human approval was made."
+    },
+    {
+      "date": "2026-10-17",
+      "note": "The isolated PT-BR PDF export rendered this proposal from an immutable one-record snapshot. The exporter verified snapshot text/symbol order, page size, and exported PDF text/geometry. The Viewer/print export includes the candidate’s two semantic dice and existing page artwork. No translation or review record was written to Payload and no human approval was recorded."
+    }
+  ]
+}

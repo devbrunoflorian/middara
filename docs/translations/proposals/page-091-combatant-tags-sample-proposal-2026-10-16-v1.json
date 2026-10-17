@@ -1,0 +1,125 @@
+{
+  "proposalId": "p091-combatant-tags-sample",
+  "version": "1",
+  "title": "Tags de Combatente — amostra p. 91",
+  "page": 91,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "D9620AF4B72FCA5C1EC59DFE3D2D1D7A13DD1310F1E8FBC2F4EE1D717F77BD98",
+    "pageDom": "D299C68EAAAF21B40D90A9905539A2D26B91822EB1D5987492BB72860C3B4A7E",
+    "fidelityOverlays": "A7B5B0838201B2F197D095E0BB0BBA66FAF4708A19490EDA9F9517F58E411363"
+  },
+  "counts": {
+    "candidates": 2,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "GET somente leitura ao Payload encontrou zero traduções PT-BR remotas nas chaves page_91_*. A proposta é somente de revisão e não escreve na coleção final; overrides humanos locais mantêm prioridade.",
+    "Este lote cobre o título e a definição GILDED. Os outros nomes e definições de Tags da p.91 permanecem fora deste recorte e a página segue parcial.",
+    "Gilded → Dourado e os nomes de categorias de Saque são escolhas locais candidatas, sem aprovação global no glossário.",
+    "A comparação visual inglesa completa da p.91 está registrada em docs/project-progress/2026-10-04-page91-visual-review.md. A proposta ainda exige Copyfit V3, Viewer, Editor e PDF."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_11",
+      "sourceUnitId": null,
+      "spanKey": "page_91_block_0__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Combatant Tags",
+      "proposalText": "Tags de Combatente",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_91_block_0__pt-BR",
+        "bbox": [
+          330.38531494140625,
+          429.05181884765625,
+          489.5594177246094,
+          453.3158264160156
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Tags de Combatente",
+            "font": "Cinzel-Regular",
+            "size": 18,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Combatant Tag → Tag de Combatente é forma local candidata, pendente de aprovação no glossário."
+      ]
+    },
+    {
+      "blockIndex": 7,
+      "sourceBlockId": "block_18",
+      "sourceUnitId": null,
+      "spanKey": "page_91_block_7__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "GILDED: \nThese Combatants always give their Monster Loot instead of a Combatant Loot Card.",
+      "proposalText": "DOURADO: Estes Combatentes sempre dão Saque de Monstro em vez de uma Carta de Saque de Combatente.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_91_block_7__pt-BR",
+        "bbox": [
+          416.21588134765625,
+          467.76031494140625,
+          733.446533203125,
+          501.6802978515625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "DOURADO: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Estes Combatentes sempre dão Saque de Monstro em vez de uma Carta de Saque de Combatente.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Gilded → Dourado é proposta local para o nome da Tag; Monster Loot → Saque de Monstro e Combatant Loot Card → Carta de Saque de Combatente seguem Loot → Saque, ainda pendentes de revisão contextual do glossário."
+      ]
+    }
+  ],
+  "note": "Amostra incremental de nomenclatura e regra de Tag de Combatente; as definições restantes serão propostas em lotes independentes.",
+  "revisions": []
+}

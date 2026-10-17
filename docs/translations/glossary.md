@@ -62,3 +62,13 @@
 | **RELENTLESS** | INCANSÁVEL |
 | **CRUSH** | ESMAGAR/ESMAGAMENTO |
 | **Party Stash** | Estoque do Grupo |
+| **Refresh Phase** *(nome da fase)* | Fase de Manutenção |
+| **Exhaust** *(mecânica de Tag/Habilidade)* | Exaustar |
+
+Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir automaticamente o verbo isolado *refresh* como “manutenção”; avaliar cada ocorrência pelo contexto.
+
+**Decisão do usuário (15/10/2026):** para a mecânica *Exhaust*, usar o verbo **exaustar**; em rótulos de Tag, manter a forma verbal/capitalização natural, por exemplo **EXAUSTAR**. Esta decisão não renomeia IDs semânticos como `action.exhaust` e não autoriza sobrescrever traduções humanas já salvas.
+
+## Decisões complementares registradas na central
+
+Quando uma pessoa aprovar uma equivalência na central de revisão do aplicativo, o registro `approved` da coleção Payload `translation-glossary-decisions` passa a ser uma decisão humana complementar para o glossário. Ela vale para ocorrências idênticas atuais e propostas futuras, e tem prioridade sobre propostas novas de agentes. Se conflitar com uma entrada desta tabela ou com texto humano já salvo, preserve o conteúdo existente e encaminhe o conflito para revisão; não resolva por inferência. Formas `rejected` não devem ser reapresentadas como equivalência aprovada. O botão **Exportar documento de decisões** gera o comprovante com data, escolha, unidades e trechos EN/PT-BR; essas decisões não publicam nem substituem traduções finais automaticamente.

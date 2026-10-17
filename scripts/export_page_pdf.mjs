@@ -5,6 +5,7 @@ import { chromium } from 'playwright';
 import { access, readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative as relativePath, sep } from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { verifySnapshotRenderTargets } from './lib/snapshot-render-verification.mjs';
 
 function argsFrom(argv) {
   const result = {
@@ -155,7 +156,12 @@ try {
       }
       const match = requestUrl.pathname.match(/^\/pages\/(page_\d{3})\/(.+)$/u);
       if (!match || !immutableSnapshot.assetPages?.includes(Number(match[1].slice(-3)))) {
-        await route.abort('blockedbyclient');
+        // Snapshot exports intentionally omit unrelated pages. Return the
+        // static server's ordinary not-found response instead of aborting the
+        // request, so the exporter does not treat its own isolation boundary
+        // (for example the viewer's initial page-1 bootstrap) as a network
+        // failure.
+        await route.fulfill({ status: 404, body: 'Not included in export snapshot.' });
         return;
       }
       const filePath = resolve(snapshotDir, 'pages', match[1], decodeURIComponent(match[2]));
@@ -229,6 +235,54 @@ try {
   await page.getByTitle('Fit to Screen').click();
   await page.waitForTimeout(300);
 
+  if (immutableSnapshot?.verifyRenderedSnapshot) {
+    const snapshotRecords=immutableSnapshot.translations??[];
+    const snapshotKeys=new Set(snapshotRecords
+      .filter(doc=>doc.language===config.language)
+      .map(doc=>doc.spanKey));
+    const supersededLegacyKeys=new Set();
+    for(const [blockIndex,block] of (pageData.blocks??[]).entries()){
+      const units=block.typographicUnits??[];
+      if(!units.length)continue;
+      const completeChildOverrides=units.every(unit=>
+        snapshotKeys.has(`page_${config.page}_unit_${unit.id}__${config.language}`),
+      );
+      if(completeChildOverrides){
+        supersededLegacyKeys.add(`${block.editorKey??`page_${config.page}_block_${blockIndex}`}__${config.language}`);
+      }
+    }
+    // Preserve legacy parent records in the snapshot, but don't require them
+    // to render once every child editorial unit has its own active override.
+    const expectedRecords=snapshotRecords.filter(doc=>
+      doc.language===config.language&&!supersededLegacyKeys.has(doc.spanKey),
+    );
+    const snapshotChecks=expectedRecords.map(doc=>({
+      spanKey:doc.spanKey,
+      expected:normalizeText((doc.data.segments??[]).map(s=>s.symbolId?`[symbol:${s.symbolId}]`:s.text||'').join('')),
+    }));
+    const renderedTargets=await page.locator('.page-container').evaluate(container=>{
+      const normalize=value=>value.replace(/\s+/gu,' ').trim();
+      const walk=node=>{
+        if(node.nodeType===Node.TEXT_NODE)return node.textContent||'';
+        if(!(node instanceof Element))return '';
+        if(node.getAttribute('aria-hidden')==='true'||getComputedStyle(node).visibility==='hidden')return '';
+        const id=node.getAttribute('data-symbol-id');if(id)return `[symbol:${id}]`;
+        return [...node.childNodes].map(walk).join('');
+      };
+      return [...container.querySelectorAll('[data-rendered-translation-key]')].map(element=>({
+        spanKey:element.getAttribute('data-rendered-translation-key'),
+        text:normalize(walk(element)),
+      }));
+    });
+    const verification=verifySnapshotRenderTargets(snapshotChecks,renderedTargets);
+    for(const check of verification){
+      if(check.matchCount!==1){
+        throw new Error(`Requested snapshot ${check.spanKey} is not rendered exactly once with the expected text/symbol order; refusing source fallback. ${JSON.stringify(check)}`);
+      }
+    }
+    console.log('[page-export] edited snapshot text/symbol order verified',expectedRecords.length);
+  }
+
   const capturePageMetrics = () => page.locator('.page-container').evaluate(container => {
     const pageRect = container.getBoundingClientRect();
     const relativeRect = element => {
@@ -244,6 +298,57 @@ try {
         clipPath: style.clipPath, maskImage: style.maskImage, width: style.width, height: style.height,
       };
     };
+    const toPtRect = rect => ({
+      x: (rect.left - pageRect.left) / (pageRect.width / Number(container.dataset.pdfPageWidth)),
+      y: (rect.top - pageRect.top) / (pageRect.height / Number(container.dataset.pdfPageHeight)),
+      width: rect.width / (pageRect.width / Number(container.dataset.pdfPageWidth)),
+      height: rect.height / (pageRect.height / Number(container.dataset.pdfPageHeight)),
+    });
+    const translationTargets = [...container.querySelectorAll('[data-rendered-translation-key]')].map(element => {
+      const frame = element.closest('.block-container,.credit-field') ?? element;
+      const frameRect = toPtRect(frame.getBoundingClientRect());
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      const fragments = [...range.getClientRects()].filter(rect => rect.width > 0 && rect.height > 0);
+      const lines = [];
+      for (const fragment of fragments) {
+        const top = fragment.top - pageRect.top;
+        let line = lines.find(candidate => Math.abs(candidate.topPx - top) < 1);
+        if (!line) {
+          line = { topPx: top, leftPx: fragment.left - pageRect.left, rightPx: fragment.right - pageRect.left,
+            bottomPx: fragment.bottom - pageRect.top };
+          lines.push(line);
+        } else {
+          line.leftPx = Math.min(line.leftPx, fragment.left - pageRect.left);
+          line.rightPx = Math.max(line.rightPx, fragment.right - pageRect.left);
+          line.bottomPx = Math.max(line.bottomPx, fragment.bottom - pageRect.top);
+        }
+      }
+      const contentBounds = lines.length ? toPtRect({
+        left: pageRect.left + Math.min(...lines.map(line => line.leftPx)),
+        top: pageRect.top + Math.min(...lines.map(line => line.topPx)),
+        right: pageRect.left + Math.max(...lines.map(line => line.rightPx)),
+        bottom: pageRect.top + Math.max(...lines.map(line => line.bottomPx)),
+        width: Math.max(...lines.map(line => line.rightPx)) - Math.min(...lines.map(line => line.leftPx)),
+        height: Math.max(...lines.map(line => line.bottomPx)) - Math.min(...lines.map(line => line.topPx)),
+      }) : null;
+      return {
+        spanKey: element.getAttribute('data-rendered-translation-key'),
+        text: (element.textContent ?? '').replace(/\s+/gu, ' ').trim(),
+        elementRectPt: toPtRect(element.getBoundingClientRect()),
+        frameRectPt: frameRect,
+        lineCount: lines.length,
+        widestLinePt: lines.length ? Math.max(...lines.map(line => line.rightPx - line.leftPx))
+          / (pageRect.width / Number(container.dataset.pdfPageWidth)) : 0,
+        contentBoundsPt: contentBounds,
+        edgeExcessPt: contentBounds ? {
+          left: Math.max(0, frameRect.x - contentBounds.x),
+          top: Math.max(0, frameRect.y - contentBounds.y),
+          right: Math.max(0, contentBounds.x + contentBounds.width - frameRect.x - frameRect.width),
+          bottom: Math.max(0, contentBounds.y + contentBounds.height - frameRect.y - frameRect.height),
+        } : { left: 0, top: 0, right: 0, bottom: 0 },
+      };
+    });
     return {
       rect: { x: pageRect.x, y: pageRect.y, width: pageRect.width, height: pageRect.height },
       pageWidthPt: Number(container.dataset.pdfPageWidth),
@@ -258,6 +363,7 @@ try {
         baseline: element.getAttribute('data-source-baseline-y'),
         rect: relativeRect(element),
       })),
+      translationTargets,
       symbols: [...container.querySelectorAll('[data-symbol-id], [data-source-symbol-id]')].map(element => ({
         id: element.getAttribute('data-symbol-id') ?? element.getAttribute('data-source-symbol-id'),
         tag: element.tagName.toLowerCase(), rect: relativeRect(element), style: styleFor(element),
@@ -304,7 +410,8 @@ try {
     .app-container { display: flex !important; flex-direction: row !important; }
     .viewer-main.single, .page-wrapper, .page-renderer, .page-stage { display: flex !important; }
     .global-nav-slot, .editing-symbol-rail, .pdf-sidebar, .app-shell-header-actions, .app-shell-faq-actions,
-    .floating-arrow, .toast-notification, .translation-editor, .rich-block-editor, .block-editor, .faq-dialog {
+    .floating-arrow, .toast-notification, .translation-editor, .rich-block-editor, .block-editor, .faq-dialog,
+    .editorial-experiment-rail, .editorial-experiment-switcher {
       display: none !important;
     }
     .page-container {

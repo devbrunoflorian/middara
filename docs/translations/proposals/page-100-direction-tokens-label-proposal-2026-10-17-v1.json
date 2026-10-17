@@ -1,0 +1,138 @@
+{
+  "proposalId": "p100-direction-tokens-label",
+  "version": "1",
+  "title": "Fichas de Direção — rótulo da Tabela 10, p. 100",
+  "page": 100,
+  "status": "pending_human_review",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 0
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "40372696A229A9E0C1E211C5D36DE4971B4AF38369FA9514210D497ED0C1DF7E",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch translates only the left-cell DIRECTION TOKENS label in the Table 10 diagram; LOA CRYSTAL TOKEN and neighboring artwork remain separate and unchanged.",
+    "Token → Ficha is glossary-approved. Direction → Direção is a local term candidate and remains pending human review.",
+    "The source span bbox, OptimaLTStd-Bold 9 pt, color, capitalization, and one-baseline composition are preserved.",
+    "Live PageRenderer Copyfit V3 measured one source PDF visual line and one PT-BR visual line at 100% and 200%, preserving the original typography and left-cell geometry. Editor round-trip, exported-PDF, and human review remain pending. No final translation is written."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 7,
+      "sourceBlockId": "block_18",
+      "sourceUnitId": "p100-direction-tokens-label",
+      "sourceLineIds": [
+        "line_18_0"
+      ],
+      "spanKey": "page_100_unit_p100-direction-tokens-label__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "DIRECTION TOKENS",
+      "sourcePdfVisualLineCount": 1,
+      "sourceBboxes": [
+        [
+          61.527496337890625,
+          203.91632080078125,
+          145.4344940185547,
+          214.64431762695312
+        ]
+      ],
+      "proposalText": "FICHAS DE DIREÇÃO",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-direction-tokens-label__pt-BR",
+        "bbox": [
+          61.527496337890625,
+          203.91632080078125,
+          145.4344940185547,
+          214.64431762695312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "FICHAS DE DIREÇÃO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "PDF-derived source visual baselines and live PageRenderer DOM Range rectangles grouped by the shared Copyfit V3 visual-row helper; no character, string-break, or height estimate.",
+        "environment": {
+          "viewportCssPixels": "2400x1400",
+          "deviceScaleFactor": 1,
+          "language": "pt-BR",
+          "zooms": [
+            "100%",
+            "200%"
+          ],
+          "fontLoaded": true
+        },
+        "geometry": "Preserves the source OptimaLTStd-Bold 9 pt typography, source bbox, and left-cell frame. The shared PageRenderer container spans the row; the effective frame is derived from the selected PDF source line and its available width. The label remains inside that frame without visible clipping or collision.",
+        "evidence": {
+          "measurementFiles": [
+            "apps/web/output/p100-block_18-copyfit-v1/fichas-de-dire-o-100pct-measurement.json",
+            "apps/web/output/p100-block_18-copyfit-v1/fichas-de-dire-o-200pct-measurement.json"
+          ],
+          "screenshots": [
+            "apps/web/output/p100-block_18-copyfit-v1/viewer-ptbr-fichas-de-dire-o-100pct.png",
+            "apps/web/output/p100-block_18-copyfit-v1/viewer-ptbr-fichas-de-dire-o-200pct.png"
+          ]
+        },
+        "samplesByZoom": [
+          {
+            "zoomPercent": 100,
+            "renderedVisualBaselines": 1,
+            "fontLoaded": true,
+            "visibleClipping": false
+          },
+          {
+            "zoomPercent": 200,
+            "renderedVisualBaselines": 1,
+            "fontLoaded": true,
+            "visibleClipping": false
+          }
+        ]
+      },
+      "technicalStatus": "pending_editor_and_pdf_validation_after_viewer_copyfit_v3_exact",
+      "editorialStatus": "pending_human_review",
+      "copyfitClassification": "EXACT",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Direction → Direção is a local term candidate, not yet approved in the glossary."
+      ]
+    }
+  ],
+  "note": "One left-cell table label is proposed in this increment. LOA CRYSTAL TOKEN remains a separate unit for terminology review.",
+  "criticalReview": {
+    "result": "PASS",
+    "finding": "The independent critical agent confirmed the candidate maps only to block_18 / line_18_0 in the left cell; LOA CRYSTAL TOKEN remains on line_18_1 in the separate right cell. The selected PDF source line provides a 161.07 pt left-cell width, separate from the 155.27 pt right cell. Live PageRenderer receipts at 100% and 200% both measure 1→1 EXACT with Optima loaded, no frame escape, no blocked writes, and no page errors. Captures show no visible clipping or collision, and the neighbor remains intact. Direction → Direção is still a local term pending human review. Editor round-trip and exported-PDF validation also remain pending."
+  },
+  "revisions": [
+    {
+      "text": "FICHAS DE DIREÇÃO",
+      "result": "Natural equivalent preserving the source label's item class, plural form, uppercase styling, and one baseline; Token follows the approved glossary and Direction awaits review."
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "proposalId": "p096-normal-terrain-row",
+  "version": "1",
+  "title": "Terreno Normal — linha da Tabela 7, p. 96",
+  "page": 96,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "38A10D3F3739FB9EC52265532805A0A27E0DF3D0B69AAE7BFC217244B8D01CF7",
+    "pageDom": "2086E9F5AA4600584A64C0A531BB53C9C0F01332AA7FC140DC37753E4B8E6F10",
+    "inlineElements": "425685FE90673AC94428281370D6B009DFCB22ADE1B81CBD0391662826C923B0",
+    "fidelityOverlays": "5278F8804FC4E044484FE858FBF325E743978B557F6DFB2D31DF45F34D40BCA1"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "GET somente leitura ao Payload encontrou 326 traduções PT-BR no total, zero nas chaves page_96_* e zero revisões p.96. A proposta não escreveu na coleção final; overrides humanos locais mantêm prioridade no Viewer.",
+    "Este recorte cobre apenas a definição NORMAL na Tabela 7. Outros tipos de terreno, tabelas de ações e referência de restauração continuam em lotes separados; a p.96 permanece parcial.",
+    "Terrain → Terreno segue o glossário oficial; NORMAL permanece inalterado como nome do tipo nesta linha.",
+    "A revisão visual inglesa da p.96 está registrada em docs/project-progress/2026-10-04-page96-visual-review.md. Os pictogramas vetoriais de outras células têm overlays de fidelidade; este lote ainda requer verificação de alinhamento/copyfit no Viewer."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 21,
+      "sourceBlockId": "block_40",
+      "sourceUnitId": null,
+      "spanKey": "page_96_block_21__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "NORMAL: No special effects. Can be replaced by all Terrain types.",
+      "proposalText": "NORMAL: Sem efeitos especiais. Pode ser substituído por todos os tipos de Terreno.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_96_block_21__pt-BR",
+        "bbox": [
+          101.5790023803711,
+          380.0276184082031,
+          383.41265869140625,
+          391.9276123046875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "NORMAL:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " Sem efeitos especiais. Pode ser substituído por todos os tipos de Terreno.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": []
+    }
+  ],
+  "note": "Unidade curta da primeira linha da Tabela 7. Preserva bold do rótulo e cor escura sobre a célula clara; não altera símbolos, outros textos nem layout.",
+  "revisions": []
+}

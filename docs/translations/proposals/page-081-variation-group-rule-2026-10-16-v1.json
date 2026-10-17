@@ -1,0 +1,82 @@
+{
+  "proposalId": "p081-variation-group-rule",
+  "version": "1",
+  "title": "Regras de Grupo para Variações — p. 81",
+  "page": 81,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "E02C640B5F9D9E250A32283AEA2713463D96563130713858E1375BBB0BFDC0DC",
+    "pageDom": "16B6D3DC6A018CB07917EB12A21912B665ADCCCC9EB322E4EEAE6E452D798659",
+    "inlineElements": "10BEE753B09FC3C42E62CBCC481A4BB8468CAB426080B08891D28D995095BB41",
+    "fidelityOverlays": null
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2e0efc6c6f6f0"
+  },
+  "scopeLimits": [
+    "Somente a regra isolada block_14 / DOM index 2 sobre equivalência de Grupos entre Combatentes e Variações foi incluída. Os exemplos extensos, cartas e arte seguem fora deste lote.",
+    "Variation Tag → Tag de Variação, Base Combatant → Combatente de Base, Activation Number → Número de Ativação, Group → Grupo e Possible Spawn → opção de surgimento são formas locais candidatas e aguardam decisão humana; nenhuma foi canonizada.",
+    "Spawn → surgir segue a forma verbal registrada no glossário oficial.",
+    "GETs confirmaram zero traduções PT-BR e zero revisões da p.81 antes da proposta. Nenhuma tradução final é publicada ou sobrescrita.",
+    "Copyfit V3, Viewer, Editor, PDF, fidelidade integral e aprovação editorial aguardam verificação."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 2,
+      "sourceBlockId": "block_14",
+      "sourceUnitId": null,
+      "spanKey": "page_81_block_2__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Combatants being Spawned that have 1 or more Activation Number must still adhere to all the Group rules as if their Variation Counterparts counted as the same corresponding Group(s). Meaning, you may not shuffle a Combatant Card with the Variation Tag as a Possible Spawn if the corresponding Base Combatant they replace is already on the board, or vice versa.",
+      "proposalText": "Combatentes que surgirem e tiverem 1 ou mais Números de Ativação ainda devem seguir todas as regras de Grupo, como se suas Variações correspondentes pertencessem aos mesmos Grupos. Ou seja, você não pode embaralhar uma Carta de Combatente com o Tag de Variação como opção de surgimento se o Combatente de Base correspondente que ela substitui já estiver no tabuleiro, nem o contrário.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_81_block_2__pt-BR",
+        "bbox": [
+          85.76909637451172,
+          154.58888244628906,
+          399.5790100097656,
+          221.50889587402344
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          { "text": "Combatentes que surgirem e tiverem ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
+          { "text": "1", "font": "OptimaLTStd-Bold", "size": 10, "color": "#231f20", "weight": 700, "style": "normal" },
+          { "text": " ou mais Números de Ativação ainda devem seguir todas as regras de Grupo, como se suas ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
+          { "text": "Variações", "font": "OptimaLTStd-Bold", "size": 10, "color": "#231f20", "weight": 700, "style": "normal" },
+          { "text": " correspondentes pertencessem aos mesmos Grupos. Ou seja, você não pode embaralhar uma Carta de Combatente com o Tag de ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
+          { "text": "Variação", "font": "OptimaLTStd-Bold", "size": 10, "color": "#231f20", "weight": 700, "style": "normal" },
+          { "text": " como ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
+          { "text": "opção de surgimento", "font": "OptimaLTStd-Italic", "size": 10, "color": "#231f20", "weight": 400, "style": "italic" },
+          { "text": " se o ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
+          { "text": "Combatente de Base", "font": "OptimaLTStd-BoldItalic", "size": 10, "color": "#231f20", "weight": 700, "style": "italic" },
+          { "text": " correspondente que ela substitui já estiver no tabuleiro, nem o contrário.", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_live_viewer_comparison_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Variation Tag → Tag de Variação: candidata local para decisão humana.",
+        "Base Combatant → Combatente de Base; Activation Number → Número de Ativação; Group → Grupo; Possible Spawn → opção de surgimento: candidatas locais, sem canonização.",
+        "Spawn → surgir segue glossário oficial."
+      ]
+    }
+  ],
+  "note": "A redação preserva a relação de equivalência de Grupo entre Combatentes e Variações e a proibição de misturá-los no conjunto de surgimento quando o correspondente já está no tabuleiro. Os termos locais continuam pendentes.",
+  "revisions": []
+}

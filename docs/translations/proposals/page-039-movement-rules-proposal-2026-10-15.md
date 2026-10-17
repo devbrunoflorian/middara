@@ -36,6 +36,8 @@ A sequência semântica exportada é um `terrain.red-border`, seguido por três 
 A v1 foi mantida como evidência histórica. Nela, a proibição apareceu como “pode não”, o título do diagrama quebrou sobre o ornamento, as legendas A/B colidiram e o callout PESADO escapou do fundo. Na v2, “não pode” corrige a regra; o título curto **Adjacência** e as legendas reduzidas cabem nas áreas; e o texto de PESADO foi condensado sem mudar a regra.
 
 - [Viewer normal PT-BR, página inteira](../../../output/proofs/translation-readiness-2026-10-15/p039-movement-rules-v2/page-039-pt-BR-movement-rules-viewer-final-v2.png)
+- [Viewer/Admin com a proposta no overlay GET-only](../../../output/proofs/translation-readiness-2026-10-15/p039-movement-rules-v2/normal-viewer-p039-pt-BR-snapshot-overlay-v1.png)
+- Receipt do Editor read-only: `../../../output/proofs/translation-readiness-2026-10-15/p039-movement-rules-v2/editor-readonly-receipt-v1.json`
 - [Rasterização do PDF realmente exportado](../../../output/proofs/translation-readiness-2026-10-15/p039-movement-rules-v2/page-039-pt-BR-movement-rules-pdf-final-v2.png)
 - [Comparação ampliada da fonte EN, Viewer e PDF](../../../output/proofs/translation-readiness-2026-10-15/p039-movement-rules-v2/page-039-movement-rules-lower-source-viewer-pdf-v2.png)
 - [PDF isolado da p.39](../../../output/proofs/translation-readiness-2026-10-15/p039-movement-rules-v2/page-039-pt-BR-movement-rules-final-v2.pdf) · SHA-256 `2084BD9B6BE5AA3868E708ED1151D952F29F566D717041ACC0E3EBEE72806A99`
@@ -47,6 +49,6 @@ O PDF tem uma página de `820.346 × 820.346 pt`. O exportador verificou os 22 r
 
 `Ação de Movimento`, `Movimento Livre`, `Movimento Diagonal`, `PESADO`, `Pontos de Movimento` e o uso de caixa alta/capitalização precisam de revisão terminológica/editorial. As formulações de “espaços adjacentes” nas legendas também ficam abertas à preferência humana. Não alterei o glossário.
 
-O teste focado `page39SourceFields.test.ts` passou (3/3). A suíte completa não foi executada. O Rich Block Editor, seleção/edição, remoção e reinserção de símbolos, undo/redo, Cancel e salvar/reabrir não foram validados nesta rodada: a prova usa snapshot imutável isolado e não salva conteúdo no aplicativo.
+O teste focado `page39SourceFields.test.ts` passou (3/3); a suíte serial completa registrada no checkpoint passou com 212 testes, 2 ignorados e zero falhas. O Editor normal foi conferido em overlay GET-only: 22/22 campos bateram com o JSON PT-BR e permaneceram editáveis; os quatro símbolos passaram por remoção, Undo/Redo, reinserção única e Cancel. Payload ficou sem registros p.39 antes/depois e os hashes canônicos não mudaram. Não houve Save; portanto, a reabertura depois de Save continua pendente.
 
-Não houve alteração no Payload, nos sidecars canônicos, em tradução humana, no DOM, nos frames, nos overlays, no fundo, no PDF-fonte ou no código do aplicativo. O snapshot impede operações de escrita no API; os arquivos de prova ficam em `output/proofs/`, ignorado pelo Git.
+`english_fidelity` da página segue `not_certified`: as provas validam a proposta e as áreas descritas, não a estrutura integral da p.39. Não houve alteração no Payload, nos sidecars canônicos, em tradução humana, no DOM, nos frames, nos overlays, no fundo, no PDF-fonte ou no código do aplicativo. O snapshot impede operações de escrita no API; os arquivos de prova ficam em `output/proofs/`, ignorado pelo Git.

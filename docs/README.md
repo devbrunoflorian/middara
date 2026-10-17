@@ -29,7 +29,7 @@ Precedência: (1) instrução explícita atual do usuário; (2) `PROJECT-HANDOFF
 - [Fidelidade visual](QA/FIDELITY_QA_PROCESS.md) — entrada curta para o processo de QA atual.
 - [Princípios de debugging](debugging-principles.md) — investigação de layout sem ajustes por palpite.
 - [Regras do projeto](../.agents/rules/00-README.md) e [skills](../.agents/skills/README.md) — contratos normativos, procedimentos ativos, precedência e dependências.
-- [Glossário PT-BR](translations/glossary.md) e [fluxo editorial](translations/production-workflow.md) — trabalho de tradução.
+- [Glossário PT-BR](translations/glossary.md), [fluxo editorial](translations/production-workflow.md) e [registro de casos editoriais](translations/editorial-casebook.md) — trabalho de tradução, decisões com estado e exemplos verificáveis.
 
 ## Histórico e evidência
 

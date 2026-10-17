@@ -1,0 +1,307 @@
+{
+  "proposalId": "p092-damage-tags-sample",
+  "version": "1",
+  "title": "Tags de Dano — amostra p. 92",
+  "page": 92,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "5E3519B3625B07EC5BFE2307C01A53B56A7F5AAAC0E774709022A7ABE030C98D",
+    "pageDom": "E4317422B88333E0F2F6FED73B60D600568A622079F1DDF348D77F4861316D08",
+    "fidelityOverlays": "4F6E7D4B8EB4AB546A0459310B93DFC33BF4A0BCBC08DBF6FB33C475729FFE09"
+  },
+  "counts": {
+    "candidates": 4,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "GET somente leitura ao Payload encontrou zero traduções PT-BR remotas e zero revisões nas chaves page_92_*. A proposta é somente de revisão; nenhuma tradução final foi escrita e overrides humanos locais mantêm prioridade no Viewer.",
+    "Este recorte cobre as quatro primeiras definições de Tag na p. 92. As demais definições, inclusive as que contêm símbolos inline, seguem para lotes separados; a página permanece parcial.",
+    "Armor Piercing, formas de dano e o título Damage Types permanecem candidatos locais pendentes de aprovação humana no glossário.",
+    "A revisão visual da fonte inglesa está registrada em docs/project-progress/2026-10-04-page92-visual-review.md. Este lote requer verificação de fit no Viewer e comparação PT-BR com o PDF."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_11",
+      "sourceUnitId": null,
+      "spanKey": "page_92_block_0__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "+(X) ARMOR PIERCING: \nThe amount of Armor this Weapon ignores during the Subtract Armor step of an Attack.",
+      "proposalText": "+(X) PERFURAÇÃO DE ARMADURA: A quantidade de Armadura que esta Arma ignora durante a etapa de Subtrair Armadura de um Ataque.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_92_block_0__pt-BR",
+        "bbox": [
+          81.17289733886719,
+          92.5130844116211,
+          402.77288818359375,
+          126.4330825805664
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "+(X) PERFURAÇÃO DE ARMADURA: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "A quantidade de Armadura que esta Arma ignora durante a etapa de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Subtrair Armadura",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": " de um Ataque.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Armor Piercing → Perfuração de Armadura é candidata local pendente de glossário."
+      ]
+    },
+    {
+      "blockIndex": 1,
+      "sourceBlockId": "block_12",
+      "sourceUnitId": null,
+      "spanKey": "page_92_block_1__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "+(X) PHYSICAL DMG: \nThis Tag is used to denote Physical Damage. See Damage Types Pg. 43.",
+      "proposalText": "+(X) DANO FÍSICO: Esta Tag indica Dano Físico. Veja Tipos de Dano, pág. 43.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_92_block_1__pt-BR",
+        "bbox": [
+          81.17289733886719,
+          131.1830596923828,
+          386.9128723144531,
+          154.1030731201172
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "+(X) DANO FÍSICO: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Esta Tag indica Dano Físico. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Tipos de Dano",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "weight": 700,
+            "style": "italic",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 43.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Physical DMG → Dano Físico é candidata local pendente de glossário.",
+        "Damage Types → Tipos de Dano é candidata local para o título da seção."
+      ]
+    },
+    {
+      "blockIndex": 2,
+      "sourceBlockId": "block_13",
+      "sourceUnitId": null,
+      "spanKey": "page_92_block_2__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "+(X) IRREDUCIBLE DMG: \nThis Tag is used to denote Irreducible Damage. See Damage Types Pg. 43.",
+      "proposalText": "+(X) DANO IRREDUTÍVEL: Esta Tag indica Dano Irredutível. Veja Tipos de Dano, pág. 43.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_92_block_2__pt-BR",
+        "bbox": [
+          81.17289733886719,
+          158.85304260253906,
+          391.3927307128906,
+          181.77305603027344
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "+(X) DANO IRREDUTÍVEL: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Esta Tag indica Dano Irredutível. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Tipos de Dano",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "weight": 700,
+            "style": "italic",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 43.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Irreducible DMG → Dano Irredutível é candidata local pendente de glossário.",
+        "Damage Types → Tipos de Dano é candidata local para o título da seção."
+      ]
+    },
+    {
+      "blockIndex": 3,
+      "sourceBlockId": "block_14",
+      "sourceUnitId": null,
+      "spanKey": "page_92_block_3__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "+(X) MAGIC DMG: \nThis Tag is used to denote Magic Damage. See Damage Types Pg. 43.",
+      "proposalText": "+(X) DANO MÁGICO: Esta Tag indica Dano Mágico. Veja Tipos de Dano, pág. 43.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_92_block_3__pt-BR",
+        "bbox": [
+          81.17289733886719,
+          186.5230255126953,
+          378.3828430175781,
+          209.4430389404297
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "+(X) DANO MÁGICO: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Esta Tag indica Dano Mágico. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Tipos de Dano",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "weight": 700,
+            "style": "italic",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 43.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Magic DMG → Dano Mágico é candidata local pendente de glossário.",
+        "Damage Types → Tipos de Dano é candidata local para o título da seção."
+      ]
+    }
+  ],
+  "note": "Amostra incremental das quatro primeiras definições de dano da p. 92. Preserva fórmula, ênfase da etapa Subtract Armor e estilo do título de referência; todas as decisões terminológicas permanecem locais até aprovação humana.",
+  "revisions": []
+}

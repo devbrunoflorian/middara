@@ -22,6 +22,7 @@ A medida vertical do SVG não deve crescer o `line-height` automaticamente. O av
 - Em SOURCE/EN intacto, desenhar pela bbox/origin/variante exata da ocorrência quando os dados estão disponíveis; preservar glifo-fonte ou advance que ainda seja necessário ao fluxo.
 - Em texto editado, o objeto semântico deve ocupar um token no `Segment[]`; o renderer usa os metadados ricos e a métrica da ocorrência ou do registry.
 - A âncora pode referenciar texto original sem repintar o glifo duas vezes. Não apague caracteres fonte nem mude largura sem provar o advance subsequente.
+- No fluxo traduzido, o bbox extraído da prosa pode terminar ligeiramente antes do desenho de um símbolo fonte ancorado depois dela. Se o bbox do objeto ultrapassar a largura da linha, estenda o espaço disponível somente até a borda direita medida desse objeto; assim o rótulo não quebra antes do símbolo por um corte de extração. A regressão está em `apps/web/tests/sourceInlineElements.component.test.tsx`, e a prova p.102 em `output/proofs/translation-readiness-2026-10-14/source-position-reproof-v1/` registra a comparação fonte/PDF.
 - Máscara/overlay de origem e adoção da tradução são estados explícitos; a ausência de `symbolId` em override legado não significa que o tradutor apagou o símbolo.
 - Adapters exigem contexto e comparação com a fonte. Vetores próximos a prosa podem pertencer a uma carta, diagrama, ornamentação ou glifo do texto.
 

@@ -17,7 +17,7 @@ NS = {'s': 'http://www.w3.org/2000/svg'}
 SPECS = [
     ('tag.passive', 'PASSIVE', 'PASSIVO', 97, '✤'),
     ('tag.status', 'STATUS', 'STATUS', 105, '✜'),
-    ('tag.exhaust', 'EXHAUST', 'EXAURIR', 106, None),
+    ('tag.exhaust', 'EXHAUST', 'EXAUSTAR', 106, None),
     ('tag.discard', 'DISCARD', 'DESCARTAR', 109, '✘'),
 ]
 
@@ -127,6 +127,8 @@ def compound_definitions(doc, vector_path, native_paint_colors, definition):
             sourceLabelBbox=list(trace['bbox']), sourceLabelOrigin=list(origin), sourceLabelSize=size)
         entry['description'] = {'en': en+' complete tag: background, icon and localized label.',
             'pt-BR': pt+' — tag completa: fundo, ícone e rótulo localizado. Termo PT editorial provisório.'}
+        if id == 'tag.exhaust':
+            entry['description']['pt-BR'] = 'EXAUSTAR — tag completa: fundo, ícone e rótulo localizado. Termo PT aprovado pelo usuário.'
         entries.append(entry)
     status = next(entry for entry in entries if entry['id'] == 'tag.status')
     compact_status = compact_status_variant(doc, vector_path, native_paint_colors)
@@ -483,7 +485,7 @@ def prose_exhaust_variant(doc, vector_path, native_paint_colors, font):
     size = label['size']
     local_origin = [origin[0]-rect.x0, origin[1]-rect.y0]
     # Source pair spacing averages just under 0.3 pt on this 6.86pt tag.
-    translated, translated_width = localized_label(font, 'EXAURIR', size, local_origin, '#ffffff', .3)
+    translated, translated_width = localized_label(font, 'EXAUSTAR', size, local_origin, '#ffffff', .3)
     source_width = label['bbox'][2] - label['bbox'][0]
     delta = max(0, translated_width - source_width)
     localized_width = rect.width + delta
