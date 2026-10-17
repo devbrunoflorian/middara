@@ -90,7 +90,7 @@ export function resolveCanonicalCopyfitEvidence(
   if (!proposalId || !proposalVersion
     || (identity.proposalId && identity.proposalId !== proposalId)
     || (identity.proposalVersion && identity.proposalVersion !== proposalVersion)) return null
-  if (/changed[_-]since[_-]technical[_-]validation/iu.test(String(candidate.technicalStatus ?? ''))) return null
+  if (/changed[_-]since[_-]technical[_-]validation|stale[_-]review[_-]version/iu.test(String(candidate.technicalStatus ?? ''))) return null
   const sourcePdfLineCount = positiveLineCount(candidate.copyfitSourcePdfLineCount)
   const pageRendererLineCount = positiveLineCount(candidate.copyfitPageRendererLineCount)
   if (!sourcePdfLineCount || !pageRendererLineCount) return null
@@ -101,7 +101,18 @@ export function resolveCanonicalCopyfitEvidence(
 
   const fingerprint = typeof candidate.copyfitMeasurementFingerprint === 'string'
     ? candidate.copyfitMeasurementFingerprint : null
-  const catalogFingerprint = copyfitMeasurementFingerprint(candidate.data)
+  const canonicalSpanKey = typeof candidate.copyfitCanonicalSpanKey === 'string'
+    ? candidate.copyfitCanonicalSpanKey : null
+  const canonicalBbox = Array.isArray(candidate.copyfitCanonicalBbox)
+    && candidate.copyfitCanonicalBbox.length === 4
+    && candidate.copyfitCanonicalBbox.every(value => typeof value === 'number' && Number.isFinite(value))
+    && candidate.copyfitCanonicalBbox[2] > candidate.copyfitCanonicalBbox[0]
+    && candidate.copyfitCanonicalBbox[3] > candidate.copyfitCanonicalBbox[1]
+    ? candidate.copyfitCanonicalBbox as [number, number, number, number]
+    : null
+  if (!canonicalSpanKey || !canonicalBbox || !isRecord(candidate.data) || !Array.isArray(candidate.data.segments)) return null
+  const canonicalData = { ...candidate.data, spanKey: canonicalSpanKey, bbox: canonicalBbox }
+  const catalogFingerprint = copyfitMeasurementFingerprint(canonicalData)
   const submittedFingerprint = copyfitMeasurementFingerprint(identity.data)
   if (!fingerprint || fingerprint !== catalogFingerprint || fingerprint !== submittedFingerprint) return null
 
@@ -117,7 +128,7 @@ export function resolveCanonicalCopyfitEvidence(
 }
 
 function isTechnicallyBlocked(status: string): boolean {
-  return /^(?:blocked|failed)(?:[_-]|$)|(?:^|[_-])dtp[_-]exception[_-]open/iu.test(status)
+  return /^(?:blocked|failed)(?:[_-]|$)|(?:^|[_-])dtp[_-]exception[_-]open|stale[_-]review[_-]version/iu.test(status)
 }
 
 async function readCanonicalReviewCatalog(): Promise<unknown> {
@@ -221,8 +232,8 @@ async function approve(req: PayloadRequest): Promise<Response> {
     }
     const reviewTechnicalStatus = typeof review?.technicalStatus === 'string' ? review.technicalStatus : ''
     const requestedTechnicalStatus = typeof body.technicalStatus === 'string' ? body.technicalStatus : ''
-    if (!legacyApproval && /changed[_-]since[_-]technical[_-]validation/iu.test(`${reviewTechnicalStatus} ${requestedTechnicalStatus}`)) {
-      throw Object.assign(new Error('O texto mudou depois da medição Copyfit V3. Valide a versão atual antes de aprovar.'), { status: 409 })
+    if (!legacyApproval && /changed[_-]since[_-]technical[_-]validation|stale[_-]review[_-]version/iu.test(`${reviewTechnicalStatus} ${requestedTechnicalStatus}`)) {
+      throw Object.assign(new Error('A proposta, o texto ou a geometria mudou depois da medição Copyfit V3. Valide novamente esta versão antes de aprovar.'), { status: 409 })
     }
     const requestPageNumber = Number(review?.pageNumber ?? body.pageNumber)
     const requestSpanKey = typeof body.spanKey === 'string' ? body.spanKey : review?.spanKey ?? ''

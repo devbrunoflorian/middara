@@ -12,7 +12,7 @@ import type {
   TranslationGlossaryDecisionStatus,
 } from '../translationReview';
 import type { PageData } from './PageRenderer';
-import { candidateForReviewException, copyfitApprovalBlockReason, glossaryDecisionKey, normalizeGlossaryTerm, parseGlossaryTermCandidates, rendererKeyForReviewCandidate, reviewRecordForCandidate, reviewRequestMatchesUnit, textForReviewData, translationDataMatches } from '../translationReview';
+import { candidateForReviewException, copyfitApprovalBlockReason, copyfitCanonicalEvidenceBlockReason, glossaryDecisionKey, normalizeGlossaryTerm, parseGlossaryTermCandidates, rendererKeyForReviewCandidate, reviewRecordForCandidate, reviewRequestMatchesUnit, spanOverrideForReviewCandidate, textForReviewData, translationDataMatches } from '../translationReview';
 import './TranslationReviewPanel.css';
 
 interface TranslationReviewPanelProps {
@@ -303,21 +303,34 @@ export function TranslationReviewPanel({
   const selectedRecordFromEarlierProposal = !!selectedRecord && !!selectedCandidate
     && (selectedRecord.proposalId !== selectedCandidate.proposalId
       || selectedRecord.proposalVersion !== selectedCandidate.proposalVersion);
-  const copyfitBlockReason = selectedCandidate ? copyfitApprovalBlockReason(
-    selectedRecord && !selectedRecordFromEarlierProposal
-      ? selectedRecord.copyfitClassification ?? selectedCandidate.copyfitClassification
-      : selectedCandidate.copyfitClassification,
-    selectedRecord && !selectedRecordFromEarlierProposal ? selectedRecord.technicalStatus : selectedCandidate.technicalStatus,
-    selectedRecord && !selectedRecordFromEarlierProposal
-      ? selectedRecord.underCompositionJustification ?? selectedCandidate.underCompositionJustification
-      : selectedCandidate.underCompositionJustification,
-    selectedRecord && !selectedRecordFromEarlierProposal
-      ? selectedRecord.copyfitSourcePdfLineCount ?? selectedCandidate.copyfitSourcePdfLineCount
-      : selectedCandidate.copyfitSourcePdfLineCount,
-    selectedRecord && !selectedRecordFromEarlierProposal
-      ? selectedRecord.copyfitPageRendererLineCount ?? selectedCandidate.copyfitPageRendererLineCount
-      : selectedCandidate.copyfitPageRendererLineCount,
-  ) : null;
+  const currentReviewData = selectedCandidate
+    ? spanOverrideForReviewCandidate(
+      selectedCandidate,
+      rendererKeyForReviewCandidate(selectedCandidate, pageData),
+      selectedRecord?.data ?? selectedCandidate.data,
+      pageData,
+    )
+    : null;
+  const copyfitBlockReason = selectedCandidate
+    ? copyfitCanonicalEvidenceBlockReason(selectedCandidate, currentReviewData)
+      ?? copyfitApprovalBlockReason(
+        selectedRecord && !selectedRecordFromEarlierProposal
+          ? selectedRecord.copyfitClassification ?? selectedCandidate.copyfitClassification
+          : selectedCandidate.copyfitClassification,
+        selectedRecordFromEarlierProposal
+          ? 'stale_review_version'
+          : selectedRecord ? selectedRecord.technicalStatus : selectedCandidate.technicalStatus,
+        selectedRecord && !selectedRecordFromEarlierProposal
+          ? selectedRecord.underCompositionJustification ?? selectedCandidate.underCompositionJustification
+          : selectedCandidate.underCompositionJustification,
+        selectedRecord && !selectedRecordFromEarlierProposal
+          ? selectedRecord.copyfitSourcePdfLineCount ?? selectedCandidate.copyfitSourcePdfLineCount
+          : selectedCandidate.copyfitSourcePdfLineCount,
+        selectedRecord && !selectedRecordFromEarlierProposal
+          ? selectedRecord.copyfitPageRendererLineCount ?? selectedCandidate.copyfitPageRendererLineCount
+          : selectedCandidate.copyfitPageRendererLineCount,
+      )
+    : null;
   const humanText = selectedCandidate ? savedHumanTranslations.get(selectedCandidate.spanKey)
     ?? savedHumanTranslations.get(selectedCandidate.spanKey.replace(/__pt-BR$/u, '')) : undefined;
   const isBusy = selectedCandidate !== null && busyReviewKey === selectedCandidate.reviewKey;
@@ -803,7 +816,7 @@ export function TranslationReviewPanel({
               {copyfitBlockReason === 'MEASUREMENT_MISMATCH' && <p className="translation-review-error" role="alert">A classificação Copyfit V3 não corresponde às contagens de linhas registradas. Atualize a medição antes de aprovar.</p>}
               {copyfitBlockReason === 'UNDER_WITHOUT_COMPOSITION_RATIONALE' && <p className="translation-review-error" role="alert">Copyfit V3: UNDER — registre uma justificativa explícita de composição antes de aprovar esta versão.</p>}
               {copyfitBlockReason === 'UNMEASURED' && <p className="translation-review-error" role="alert">Copyfit V3 ainda não mediu as linhas visuais do PDF-fonte e do PageRenderer para esta unidade. A aprovação permanece bloqueada.</p>}
-              {copyfitBlockReason === 'STALE_MEASUREMENT' && <p className="translation-review-error" role="alert">Esta unidade foi editada depois da medição. A contagem anterior foi invalidada; valide a versão atual antes de aprovar.</p>}
+              {copyfitBlockReason === 'STALE_MEASUREMENT' && <p className="translation-review-error" role="alert">A proposta, o texto ou a geometria mudou depois da medição. A contagem anterior não vale para esta versão; valide novamente antes de aprovar.</p>}
               {copyfitBlockReason === 'TECHNICAL_FAILURE' && <p className="translation-review-error" role="alert">A validação técnica desta proposta está bloqueada. Corrija a falha registrada antes de aprovar.</p>}
 
               <div className="translation-review-actions">

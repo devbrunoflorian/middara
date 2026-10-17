@@ -51,6 +51,7 @@ import {
   parseGlossaryTermCandidates,
   withUpdatedTranslationReviewRecord,
   normalizeGlossaryTerm,
+  copyfitCanonicalEvidenceBlockReason,
   copyfitApprovalBlockReason,
   type TranslationReviewCandidate,
   type TranslationReviewCatalog,
@@ -1411,7 +1412,7 @@ function App() {
       ? sameReviewedVersion ? existing.technicalStatus : 'stale_review_version'
       : candidate.technicalStatus;
     const currentCopyfit = sameReviewedVersion && existing ? existing : candidate;
-    const copyfitBlock = copyfitApprovalBlockReason(
+    const copyfitBlock = copyfitCanonicalEvidenceBlockReason(candidate, data) ?? copyfitApprovalBlockReason(
       currentCopyfit.copyfitClassification ?? candidate.copyfitClassification,
       technicalStatus,
       currentCopyfit.underCompositionJustification ?? candidate.underCompositionJustification,
@@ -1426,7 +1427,7 @@ function App() {
         : copyfitBlock === 'UNDER_WITHOUT_COMPOSITION_RATIONALE'
           ? 'Copyfit V3: UNDER exige uma justificativa explícita de composição antes da aprovação.'
           : copyfitBlock === 'STALE_MEASUREMENT'
-            ? 'O texto mudou depois da medição. Execute novamente o Copyfit V3 antes de aprovar.'
+            ? 'A proposta, o texto ou a geometria mudou depois da medição. Valide novamente esta versão antes de aprovar.'
             : 'A medição visual Copyfit V3 ainda está pendente. A unidade continua em Propostas.');
       return false;
     }

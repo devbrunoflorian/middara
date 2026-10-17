@@ -18,6 +18,21 @@ vi.mock('payload', () => ({
 import { approveTranslationReviewEndpoint } from '../../src/endpoints/approveTranslationReview'
 
 type CopyfitClass = 'EXACT' | 'UNDER' | 'OVER'
+type CandidateFixture = {
+  reviewKey: string
+  proposalId: string
+  proposalVersion: string
+  pageNumber: number
+  spanKey: string
+  data: Record<string, any>
+  sourceLines: number | null
+  renderedLines: number | null
+  classification: CopyfitClass | null
+  fingerprint: string | null
+  canonicalSpanKey: string
+  canonicalBbox: number[]
+  requestData?: Record<string, unknown> | null
+}
 
 function canonical(value: unknown): string {
   if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`
@@ -46,7 +61,7 @@ function candidate(
   sourceLines: number | null,
   renderedLines: number | null,
   classification: CopyfitClass | null,
-) {
+): CandidateFixture {
   const spanKey = `page_100_block_${name}__pt-BR`
   const data = {
     schemaVersion: 2,
@@ -69,10 +84,13 @@ function candidate(
     renderedLines,
     classification,
     fingerprint: sourceLines && renderedLines ? fingerprint(data) : null,
+    canonicalSpanKey: spanKey,
+    canonicalBbox: data.bbox,
+    requestData: null as Record<string, unknown> | null,
   }
 }
 
-function catalogFor(candidates: ReturnType<typeof candidate>[]) {
+function catalogFor(candidates: CandidateFixture[]) {
   return {
     proposals: [{
       proposalId: 'p100-test',
@@ -89,6 +107,8 @@ function catalogFor(candidates: ReturnType<typeof candidate>[]) {
         copyfitPageRendererLineCount: item.renderedLines,
         copyfitClassification: item.classification,
         copyfitMeasurementFingerprint: item.fingerprint,
+        copyfitCanonicalSpanKey: item.canonicalSpanKey,
+        copyfitCanonicalBbox: item.canonicalBbox,
         technicalStatus: item.classification ? 'fit-awaiting-human-review' : 'pending-live-viewer-copyfit-v3',
       })),
     }],
@@ -126,7 +146,7 @@ function fakePayload() {
   }
 }
 
-async function approve(item: ReturnType<typeof candidate>, overrides: Record<string, unknown> = {}) {
+async function approve(item: CandidateFixture, overrides: Record<string, unknown> = {}) {
   const payload = fakePayload()
   const body = {
     reviewKey: item.reviewKey,
@@ -136,7 +156,7 @@ async function approve(item: ReturnType<typeof candidate>, overrides: Record<str
     proposalVersion: '1',
     sourceText: 'Source',
     proposalText: item.data.segments[0].text,
-    data: item.data,
+    data: item.requestData ?? item.data,
     technicalStatus: 'fit-awaiting-human-review',
     copyfitClassification: item.classification,
     copyfitSourcePdfLineCount: item.sourceLines,
@@ -195,6 +215,36 @@ describe('server-side Copyfit V3 approval evidence', () => {
       copyfitSourcePdfLineCount: 1,
       copyfitPageRendererLineCount: 1,
     })
+  })
+
+  it('accepts inherited canonical geometry while rejecting geometry changed after measurement', async () => {
+    const measured = candidate('inherited-geometry', 1, 1, 'EXACT')
+    const canonicalData = measured.data
+    const rawProposalData: Record<string, unknown> = { ...canonicalData }
+    delete rawProposalData.spanKey
+    delete rawProposalData.bbox
+    const inheritedGeometry = {
+      ...measured,
+      data: rawProposalData,
+      requestData: canonicalData,
+      fingerprint: fingerprint(canonicalData),
+      canonicalSpanKey: canonicalData.spanKey,
+      canonicalBbox: canonicalData.bbox,
+    }
+    await setCatalog(catalogFor([inheritedGeometry]))
+
+    const accepted = await approve(inheritedGeometry)
+    expect(accepted.response.status).toBe(200)
+    expect(payloadState.translations[0].data).toEqual(canonicalData)
+
+    payloadState.reviews = []
+    payloadState.translations = []
+    const changedGeometry = await approve(inheritedGeometry, {
+      data: { ...canonicalData, bbox: [40, 50, 181, 64] },
+    })
+    expect(changedGeometry.response.status).toBe(409)
+    expect(changedGeometry.body.error).toMatch(/medição Copyfit V3 canônica/u)
+    expect(payloadState.translations).toHaveLength(0)
   })
 
   it('preserves a conflicting saved human translation when approval is attempted', async () => {
@@ -284,6 +334,42 @@ describe('server-side Copyfit V3 approval evidence', () => {
     expect(result.response.status).toBe(409)
     expect(result.body.error).toMatch(/validação técnica.*bloqueada/u)
     expect(payloadState.translations).toHaveLength(0)
+  })
+
+  it.each([
+    { source: 'persisted review receipt', reviewStatus: 'stale_review_version', requestStatus: 'fit-awaiting-human-review' },
+    { source: 'approval request', reviewStatus: 'fit-awaiting-human-review', requestStatus: 'stale_review_version' },
+  ])('rejects stale Copyfit versions from the $source before publication', async ({ reviewStatus, requestStatus }) => {
+    const exact = candidate('stale-review-version', 1, 1, 'EXACT')
+    await setCatalog(catalogFor([exact]))
+    const preservedHumanDraft = {
+      ...exact.data,
+      segments: [{ ...exact.data.segments[0], text: 'Human draft from the earlier proposal version' }],
+    }
+    payloadState.reviews.push({
+      id: 'stale-review',
+      reviewKey: exact.reviewKey,
+      pageNumber: exact.pageNumber,
+      spanKey: exact.spanKey,
+      proposalId: exact.proposalId,
+      proposalVersion: exact.proposalVersion,
+      data: preservedHumanDraft,
+      technicalStatus: reviewStatus,
+      approvalStatus: 'pending',
+      updatedAt: '2026-10-17T12:00:00.000Z',
+    })
+
+    const result = await approve(exact, {
+      technicalStatus: requestStatus,
+      expectedUpdatedAt: '2026-10-17T12:00:00.000Z',
+    })
+
+    expect(result.response.status).toBe(409)
+    expect(result.body.error).toMatch(/mudou depois da medição Copyfit V3/u)
+    expect(payloadState.translations).toHaveLength(0)
+    expect(payloadState.reviews).toHaveLength(1)
+    expect(payloadState.reviews[0].approvalStatus).toBe('pending')
+    expect(payloadState.reviews[0].data).toEqual(preservedHumanDraft)
   })
 
   it('rejects an unmeasured candidate even when the request supplies counts and a fingerprint', async () => {

@@ -1,7 +1,49 @@
 import { describe, expect, it, vi } from 'vitest';
-import { candidateRequiresDiagnosticBlank, copyfitApprovalBlockReason, exceptionRequiresDiagnosticBlank, layoutFrameForReviewOverride, persistTranslationReview, reviewRequestMatchesUnit, type TranslationReviewCandidate } from '../src/translationReview';
+import { candidateRequiresDiagnosticBlank, copyfitApprovalBlockReason, copyfitCanonicalEvidenceBlockReason, copyfitMeasurementDataMatches, exceptionRequiresDiagnosticBlank, layoutFrameForReviewOverride, persistTranslationReview, rendererKeyForReviewCandidate, reviewRequestMatchesUnit, spanOverrideForReviewCandidate, type TranslationReviewCandidate } from '../src/translationReview';
+import type { PageData } from '../src/components/PageRenderer';
 
 describe('translation review proposal geometry', () => {
+  it('uses the measured canonical unit box when proposal data inherits its source geometry', () => {
+    const unitKey = 'page_19_unit_p19-block-21-paragraph-3__pt-BR';
+    const canonicalBbox: [number, number, number, number] = [418.67, 279.4, 739.5, 347.2];
+    const candidate: TranslationReviewCandidate = {
+      reviewKey: `p19-test@1::${unitKey}`,
+      pageNumber: 19,
+      proposalId: 'p19-test',
+      proposalVersion: '1',
+      proposalTitle: 'Page 19 test',
+      proposalFile: 'p19-test.json',
+      index: 0,
+      spanKey: unitKey,
+      blockIndex: 3,
+      sourceBlockId: 'block_21',
+      sourceUnitId: null,
+      sourceText: 'Source',
+      proposalText: 'Translation',
+      data: { schemaVersion: 2, segments: [{ text: 'Translation', font: 'Test', size: 10 }] },
+      technicalStatus: 'fit-awaiting-human-review',
+      copyfitClassification: 'EXACT',
+      copyfitSourcePdfLineCount: 6,
+      copyfitPageRendererLineCount: 6,
+      copyfitMeasurementFingerprint: 'canonical-measurement',
+      copyfitCanonicalSpanKey: unitKey,
+      copyfitCanonicalBbox: canonicalBbox,
+      editorialStatus: 'pending_human_review',
+      diagnosticRendering: 'proposal',
+      pendingTerms: [],
+      diagnosticBlank: null,
+    };
+    const pageData = {
+      page_number: 19,
+      blocks: [{ id: 'block_21', bbox: [400, 210, 750, 420], typographicUnits: [] }],
+    } as unknown as PageData;
+    const rendererKey = rendererKeyForReviewCandidate(candidate, pageData);
+    const override = spanOverrideForReviewCandidate(candidate, rendererKey, candidate.data, pageData);
+
+    expect(rendererKey).toBe(unitKey);
+    expect(override?.bbox).toEqual(canonicalBbox);
+  });
+
   it('maps proposal bbox to a viewer frame without changing alignment or line height', () => {
     expect(layoutFrameForReviewOverride({
       x: 243.724,
@@ -98,7 +140,51 @@ describe('translation review copyfit approval guard', () => {
   it('blocks an unmeasured unit and invalidates measurements after text edits', () => {
     expect(copyfitApprovalBlockReason(null, 'pending-live-viewer-copyfit-v3')).toBe('UNMEASURED');
     expect(copyfitApprovalBlockReason('EXACT', 'changed_since_technical_validation', null, 1, 1)).toBe('STALE_MEASUREMENT');
+    expect(copyfitApprovalBlockReason('EXACT', 'stale_review_version', null, 1, 1)).toBe('STALE_MEASUREMENT');
     expect(copyfitApprovalBlockReason('EXACT', 'blocked_dtp_geometry_after_exact_line_count', null, 1, 1)).toBe('TECHNICAL_FAILURE');
+  });
+
+  it('requires canonical Copyfit evidence and exact draft data before approval', () => {
+    const measuredData = {
+      spanKey: 'page_19_unit_test__pt-BR',
+      bbox: [10, 20, 210, 40],
+      textAlign: 'left',
+      lineHeight: 1.1,
+      lineHeightMode: 'source',
+      managedSourceSymbols: [],
+      segments: [{ text: 'Measured proposal', font: 'Test', size: 10 }],
+    };
+    const candidate: TranslationReviewCandidate = {
+      reviewKey: 'p19-test@1::unit', pageNumber: 19, proposalId: 'p19-test', proposalVersion: '1',
+      proposalTitle: 'Page 19 test', proposalFile: 'p19-test.json', index: 0,
+      spanKey: 'page_19_unit_test__pt-BR', blockIndex: 1, sourceBlockId: 'block_1', sourceUnitId: 'unit',
+      sourceText: 'Source', proposalText: 'Measured proposal', data: measuredData,
+      technicalStatus: 'fit-awaiting-human-review', copyfitClassification: 'EXACT',
+      copyfitSourcePdfLineCount: 1, copyfitPageRendererLineCount: 1,
+      copyfitMeasurementFingerprint: 'canonical-measurement',
+      copyfitCanonicalSpanKey: 'page_19_unit_test__pt-BR',
+      copyfitCanonicalBbox: [10, 20, 210, 40],
+      editorialStatus: 'pending_human_review', diagnosticRendering: 'proposal', pendingTerms: [], diagnosticBlank: null,
+    };
+
+    expect(copyfitMeasurementDataMatches(measuredData, measuredData)).toBe(true);
+    expect(copyfitCanonicalEvidenceBlockReason(candidate, measuredData)).toBeNull();
+    expect(copyfitCanonicalEvidenceBlockReason(candidate, {
+      ...measuredData,
+      segments: [{ text: 'Human-edited proposal', font: 'Test', size: 10 }],
+    })).toBe('STALE_MEASUREMENT');
+    expect(copyfitCanonicalEvidenceBlockReason(candidate, {
+      ...measuredData,
+      bbox: [10, 20, 220, 40],
+    })).toBe('STALE_MEASUREMENT');
+    expect(copyfitCanonicalEvidenceBlockReason({
+      ...candidate,
+      copyfitMeasurementFingerprint: null,
+    }, measuredData)).toBe('UNMEASURED');
+    expect(copyfitCanonicalEvidenceBlockReason({
+      ...candidate,
+      copyfitCanonicalBbox: null,
+    }, measuredData)).toBe('UNMEASURED');
   });
 
   it('blanks failed PT-BR diagnostics even when the catalog omitted diagnosticBlank metadata', () => {
@@ -148,6 +234,45 @@ describe('translation review copyfit approval guard', () => {
       const requestBody = JSON.parse(fetchMock.mock.calls[0][1].body as string);
       expect(requestBody).toMatchObject({
         technicalStatus: 'changed_since_technical_validation',
+        copyfitClassification: null,
+        copyfitSourcePdfLineCount: null,
+        copyfitPageRendererLineCount: null,
+        copyfitMeasurementFingerprint: null,
+      });
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('clears a newer proposal measurement when preserving an older human draft', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ doc: { id: 1, reviewKey: 'p14-test', approvalStatus: 'pending' } }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    const candidate: TranslationReviewCandidate = {
+      reviewKey: 'p14-test', pageNumber: 14, proposalId: 'p14-new', proposalVersion: '2',
+      proposalTitle: 'Test', proposalFile: 'test.json', index: 0, spanKey: 'page_14_block_1__pt-BR',
+      blockIndex: 1, sourceBlockId: 'block_1', sourceUnitId: null, sourceText: 'Source',
+      proposalText: 'New proposal', data: { schemaVersion: 2, spanKey: 'page_14_block_1__pt-BR',
+        bbox: [1, 1, 100, 20], segments: [{ text: 'New proposal', font: 'Test', size: 10 }] },
+      technicalStatus: 'fit-awaiting-human-review', copyfitClassification: 'EXACT',
+      copyfitSourcePdfLineCount: 1, copyfitPageRendererLineCount: 1,
+      copyfitMeasurementFingerprint: 'measurement-for-new-proposal',
+      editorialStatus: 'pending_human_review', diagnosticRendering: 'proposal', pendingTerms: [], diagnosticBlank: null,
+    };
+    const preservedDraft = { spanKey: candidate.spanKey, bbox: [1, 1, 100, 20],
+      segments: [{ text: 'Human draft from v1', font: 'Test', size: 10 }] };
+
+    try {
+      await persistTranslationReview(candidate, preservedDraft as any, {
+        id: 1, reviewKey: 'p14-test', pageNumber: 14, spanKey: candidate.spanKey,
+        proposalId: 'p14-old', proposalVersion: '1', data: preservedDraft,
+      } as any, 'pending', 'stale_review_version');
+      const requestBody = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+      expect(requestBody.data.segments[0].text).toBe('Human draft from v1');
+      expect(requestBody).toMatchObject({
+        technicalStatus: 'stale_review_version',
         copyfitClassification: null,
         copyfitSourcePdfLineCount: null,
         copyfitPageRendererLineCount: null,

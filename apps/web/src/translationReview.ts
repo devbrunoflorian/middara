@@ -33,6 +33,8 @@ export interface TranslationReviewCandidate {
   copyfitSourcePdfLineCount?: number | null;
   copyfitPageRendererLineCount?: number | null;
   copyfitMeasurementFingerprint?: string | null;
+  copyfitCanonicalSpanKey?: string | null;
+  copyfitCanonicalBbox?: [number, number, number, number] | null;
   underCompositionJustification?: string | null;
   editorialStatus: string;
   diagnosticRendering: string;
@@ -62,7 +64,7 @@ export function copyfitApprovalBlockReason(
   sourcePdfLineCount?: number | null,
   pageRendererLineCount?: number | null,
 ): CopyfitApprovalBlockReason {
-  if (/changed[_-]since[_-]technical[_-]validation/iu.test(String(technicalStatus ?? ''))) return 'STALE_MEASUREMENT';
+  if (/changed[_-]since[_-]technical[_-]validation|stale[_-]review[_-]version/iu.test(String(technicalStatus ?? ''))) return 'STALE_MEASUREMENT';
   const statusOver = /blocked[-_]line[-_]count[-_]over|blocked[-_]copyfit[-_]v3[-_]over/iu.test(String(technicalStatus ?? ''));
   const hasValidCounts = Number.isInteger(sourcePdfLineCount) && Number(sourcePdfLineCount) >= 1
     && Number.isInteger(pageRendererLineCount) && Number(pageRendererLineCount) >= 1;
@@ -77,6 +79,59 @@ export function copyfitApprovalBlockReason(
   if ((classification === 'UNDER' || /pending-under-composition-justification/iu.test(String(technicalStatus ?? '')))
     && !String(underCompositionJustification ?? '').trim()) return 'UNDER_WITHOUT_COMPOSITION_RATIONALE';
   return null;
+}
+
+function canonicalCopyfitValue(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(canonicalCopyfitValue).join(',')}]`;
+  if (isRecord(value)) {
+    return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${canonicalCopyfitValue(value[key])}`).join(',')}}`;
+  }
+  return JSON.stringify(value) ?? 'undefined';
+}
+
+function copyfitMeasurementSnapshot(data: unknown): Record<string, unknown> | null {
+  if (!isRecord(data) || !Array.isArray(data.segments)) return null;
+  return {
+    spanKey: data.spanKey,
+    bbox: data.bbox,
+    textAlign: data.textAlign,
+    lineHeight: data.lineHeight,
+    lineHeightMode: data.lineHeightMode,
+    managedSourceSymbols: data.managedSourceSymbols ?? [],
+    segments: data.segments,
+  };
+}
+
+/** Keep the review action disabled when the draft diverges from the server-built measurement. */
+export function copyfitMeasurementDataMatches(measuredData: unknown, currentData: unknown): boolean {
+  const measured = copyfitMeasurementSnapshot(measuredData);
+  const current = copyfitMeasurementSnapshot(currentData);
+  return !!measured && !!current && canonicalCopyfitValue(measured) === canonicalCopyfitValue(current);
+}
+
+/** Require the current review draft to match the catalog's canonical measurement before offering approval. */
+export function copyfitCanonicalEvidenceBlockReason(
+  candidate: TranslationReviewCandidate,
+  currentData: unknown,
+): CopyfitApprovalBlockReason {
+  const bbox = candidate.copyfitCanonicalBbox;
+  const hasCanonicalBbox = Array.isArray(bbox) && bbox.length === 4
+    && bbox.every(value => typeof value === 'number' && Number.isFinite(value))
+    && bbox[2] > bbox[0] && bbox[3] > bbox[1];
+  if (!candidate.copyfitMeasurementFingerprint?.trim()
+    || !candidate.copyfitCanonicalSpanKey
+    || candidate.copyfitCanonicalSpanKey !== candidate.spanKey
+    || !hasCanonicalBbox
+    || !isRecord(candidate.data)
+    || !Array.isArray(candidate.data.segments)) return 'UNMEASURED';
+
+  const measuredData = {
+    ...candidate.data,
+    spanKey: candidate.copyfitCanonicalSpanKey,
+    bbox: candidate.copyfitCanonicalBbox,
+  };
+  if (!copyfitMeasurementSnapshot(measuredData) || !copyfitMeasurementSnapshot(currentData)) return 'UNMEASURED';
+  return copyfitMeasurementDataMatches(measuredData, currentData) ? null : 'STALE_MEASUREMENT';
 }
 
 export interface TranslationReviewProposal {
@@ -525,6 +580,9 @@ export async function loadSavedPortugueseTranslations(): Promise<SavedPortuguese
 }
 
 export function rendererKeyForReviewCandidate(candidate: TranslationReviewCandidate, pageData?: PageData | null): string {
+  if (typeof candidate.copyfitCanonicalSpanKey === 'string' && candidate.copyfitCanonicalSpanKey) {
+    return candidate.copyfitCanonicalSpanKey;
+  }
   if (/^page_\d+_unit_/u.test(candidate.spanKey)) {
     return candidate.spanKey.endsWith('__pt-BR') ? candidate.spanKey : `${candidate.spanKey}__pt-BR`;
   }
@@ -560,11 +618,13 @@ export function spanOverrideForReviewCandidate(
   const sourceBlock = pageData?.page_number === candidate.pageNumber && blockIndex !== null && blockIndex >= 0
     ? pageData.blocks[blockIndex]
     : undefined;
-  const sourceUnit = candidate.sourceUnitId
-    ? sourceBlock?.typographicUnits?.find(unit => unit.id === candidate.sourceUnitId)
+  const sourceUnitId = candidate.sourceUnitId
+    ?? candidate.spanKey.match(/^page_\d+_unit_(.+?)(?:__pt-BR)?$/u)?.[1];
+  const sourceUnit = sourceUnitId
+    ? sourceBlock?.typographicUnits?.find(unit => unit.id === sourceUnitId)
     : undefined;
   const proposalSourceBox = candidate.sourceBboxes?.find(isBbox);
-  const bbox = [storedBox, candidateBox, proposalSourceBox, sourceUnit?.field.bbox, sourceBlock?.bbox].find(isBbox)
+  const bbox = [storedBox, candidateBox, candidate.copyfitCanonicalBbox, proposalSourceBox, sourceUnit?.field.bbox, sourceBlock?.bbox].find(isBbox)
     ?? [0, 0, 0, 0];
   return { ...decoded, spanKey: rendererKey, bbox };
 }
@@ -700,7 +760,7 @@ export async function persistTranslationReview(
   approvalStatus: 'pending' | 'approved',
   technicalStatus = existing?.technicalStatus ?? candidate.technicalStatus,
 ): Promise<TranslationReviewRecord> {
-  const copyfitIsStale = /changed[_-]since[_-]technical[_-]validation/iu.test(technicalStatus);
+  const copyfitIsStale = /changed[_-]since[_-]technical[_-]validation|stale[_-]review[_-]version/iu.test(technicalStatus);
   const body = {
     reviewKey: candidate.reviewKey,
     pageNumber: candidate.pageNumber,

@@ -20,6 +20,7 @@ const officialGlossaryTerms = glossaryText.split(/\r?\n/u).flatMap(line => {
 });
 const exceptionItems = Array.isArray(queue.items) ? queue.items : [];
 const candidatesByFamily = new Map();
+const pageDomCache = new Map();
 
 function versionFromPath(value) {
   return Number(value.match(/-v(\d+)(?:-corrected)?\.json$/iu)?.[1] ?? 0);
@@ -77,6 +78,62 @@ function copyfitMeasurementFingerprint(data) {
   return createHash('sha256').update(canonical(snapshot)).digest('hex');
 }
 
+function validBbox(value) {
+  return Array.isArray(value) && value.length === 4
+    && value.every(coordinate => typeof coordinate === 'number' && Number.isFinite(coordinate))
+    && value[2] > value[0] && value[3] > value[1];
+}
+
+function pageDom(pageNumber) {
+  if (pageDomCache.has(pageNumber)) return pageDomCache.get(pageNumber);
+  const pageDirectory = `page_${String(pageNumber).padStart(3, '0')}`;
+  const pagePath = path.join(root, 'apps/web/public/pages', pageDirectory, `${pageDirectory}_dom.json`);
+  try {
+    const data = JSON.parse(fs.readFileSync(pagePath, 'utf8'));
+    pageDomCache.set(pageNumber, data);
+    return data;
+  } catch {
+    pageDomCache.set(pageNumber, null);
+    return null;
+  }
+}
+
+/** Resolve the same persisted span identity and page-space box used by the Viewer before issuing Copyfit evidence. */
+function canonicalCopyfitGeometry(candidate, pageNumber, spanKey) {
+  const page = pageDom(pageNumber);
+  const blocks = Array.isArray(page?.blocks) ? page.blocks : [];
+  const keyBlockIndex = Number(spanKey.match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u)?.[1]);
+  const blockIndex = Number.isInteger(candidate.blockIndex)
+    ? candidate.blockIndex
+    : Number.isInteger(keyBlockIndex)
+      ? keyBlockIndex
+      : candidate.sourceBlockId ? blocks.findIndex(block => block?.id === candidate.sourceBlockId) : -1;
+  const sourceBlock = blockIndex >= 0 && blockIndex < blocks.length ? blocks[blockIndex] : null;
+  const sourceUnitKey = spanKey.match(/^page_\d+_unit_(.+?)(?:__pt-BR)?$/u)?.[1];
+  const sourceUnitId = candidate.sourceUnitId ?? sourceUnitKey;
+  const sourceUnit = sourceUnitId && Array.isArray(sourceBlock?.typographicUnits)
+    ? sourceBlock.typographicUnits.find(unit => unit?.id === sourceUnitId)
+    : null;
+  const sourceBbox = Array.isArray(candidate.sourceBboxes)
+    ? candidate.sourceBboxes.find(validBbox)
+    : null;
+  const rawData = candidate.data && typeof candidate.data === 'object' && !Array.isArray(candidate.data)
+    ? candidate.data
+    : null;
+  const bbox = [rawData?.bbox, sourceBbox, sourceUnit?.field?.bbox, sourceBlock?.bbox].find(validBbox);
+
+  let canonicalSpanKey = spanKey;
+  if (/^page_\d+_unit_/u.test(spanKey)) {
+    canonicalSpanKey = spanKey.endsWith('__pt-BR') ? spanKey : `${spanKey}__pt-BR`;
+  } else if (blockIndex >= 0) {
+    canonicalSpanKey = sourceBlock?.editorKey
+      ? `${sourceBlock.editorKey}__pt-BR`
+      : `page_${pageNumber}_block_${blockIndex}__pt-BR`;
+  }
+
+  return validBbox(bbox) ? { spanKey: canonicalSpanKey, bbox } : null;
+}
+
 for (const relativePath of queue.sourceProposals ?? []) {
   if (!relativePath.toLowerCase().endsWith('.json')) continue;
   const absolutePath = path.resolve(root, relativePath);
@@ -100,8 +157,8 @@ const proposals = [...candidatesByFamily.values()]
     const proposalVersion = String(proposal.version ?? (versionFromPath(relativePath) || 'draft'));
     const candidates = proposal.candidates.flatMap((candidate, index) => {
       const spanKey = String(candidate.spanKey ?? candidate.spanKeys?.[0] ?? '');
-      const data = candidate.data;
-      if (!spanKey || !data || (!Array.isArray(data) && !Array.isArray(data.segments))) return [];
+      const sourceData = candidate.data;
+      if (!spanKey || !sourceData || (!Array.isArray(sourceData) && !Array.isArray(sourceData.segments))) return [];
       const candidateKey = `${proposalId}@${proposalVersion}::${spanKey}`;
       const matchingExceptions = exceptionItems.filter(item => {
         if (item.page !== pageNumber) return false;
@@ -118,6 +175,13 @@ const proposals = [...candidatesByFamily.values()]
       const blankException = matchingExceptions.find(item => item.status !== 'resolved'
         && isBlankDiagnostic(item.diagnosticRendering));
       const lineCounts = candidateCopyfitLineCounts(candidate);
+      const geometry = canonicalCopyfitGeometry(candidate, pageNumber, spanKey);
+      const data = geometry && !Array.isArray(sourceData)
+        ? { ...sourceData, spanKey: geometry.spanKey, bbox: geometry.bbox }
+        : sourceData;
+      const measuredClassification = lineCounts.source && lineCounts.target && geometry
+        ? copyfitClassification(candidate)
+        : lineCounts.source && lineCounts.target ? 'UNMEASURED' : copyfitClassification(candidate);
       return [{
         reviewKey: candidateKey,
         pageNumber,
@@ -137,10 +201,12 @@ const proposals = [...candidatesByFamily.values()]
           ? candidate.reviewLayoutFrame : null,
         sourceBboxes: Array.isArray(candidate.sourceBboxes) ? candidate.sourceBboxes : [],
         technicalStatus: String(candidate.technicalStatus ?? 'not_recorded'),
-        copyfitClassification: copyfitClassification(candidate),
+        copyfitClassification: measuredClassification,
         copyfitSourcePdfLineCount: lineCounts.source,
         copyfitPageRendererLineCount: lineCounts.target,
-        copyfitMeasurementFingerprint: lineCounts.source && lineCounts.target
+        copyfitCanonicalSpanKey: geometry?.spanKey ?? null,
+        copyfitCanonicalBbox: geometry?.bbox ?? null,
+        copyfitMeasurementFingerprint: lineCounts.source && lineCounts.target && geometry
           ? copyfitMeasurementFingerprint(data) : null,
         underCompositionJustification: String(candidate.underCompositionJustification ?? ''),
         editorialStatus: String(candidate.editorialStatus ?? candidate.status ?? 'pending_human_review'),
