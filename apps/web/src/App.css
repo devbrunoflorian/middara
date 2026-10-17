@@ -460,7 +460,9 @@ body, html {
 }
 
 .app-container.translation-review-open:not(.rich-editor-open):not(.faq-open) .viewer-main {
-  margin-right: calc(var(--translation-review-panel-width) + var(--translation-review-dock-clearance));
+  /* .viewer-main already stops before the right dock. Subtract its width so
+     the reserved stage ends exactly at the review panel's left edge. */
+  margin-right: calc(var(--translation-review-panel-width) + var(--translation-review-dock-clearance) - var(--arcane-dock-width, 52px));
   transition: margin-right 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
