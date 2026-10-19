@@ -69,7 +69,49 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Shuffle → embaralhar e draw a card → comprar uma carta são formas locais nesta unidade, sem canonização global."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 84,
+          "pdfDocumentPageIndex": 83,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            96.37799835205078,
+            493.5976257324219,
+            350.2069091796875,
+            505.49761962890625
+          ],
+          "visualBaselinesPt": [
+            502.788
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_84_block_10__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            426.59
+          ],
+          "frameHeightCssPx": 9.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "note": "A v1 foi preservada após a checagem real encontrar a segunda linha “acaso.” fora do contorno azul e encostando na linha inglesa seguinte. Esta versão mantém embaralhar estas cartas e comprar uma ao acaso em redação direta e mais curta; o ajuste visual ainda precisa ser conferido.",

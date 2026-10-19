@@ -1,5 +1,5 @@
 {
-  "proposalId": "page-013-full-page-text-proposal-2026-10-16-v3",
+  "proposalId": "p013-full-page-text",
   "page": 13,
   "locale": "pt-BR",
   "status": "isolated-full-page-proposal-v3-technically-validated-awaiting-human-editorial-review",
@@ -54,7 +54,7 @@
     ],
     "payloadWrites": 0
   },
-  "candidateCount": 26,
+  "candidateCount": 24,
   "candidates": [
     {
       "spanKey": "page_13_block_0__pt-BR",
@@ -90,6 +90,67 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Marcadores",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_13",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            87.2121353149414,
+            137.64549255371094,
+            103.38813018798828
+          ],
+          "visualBaselinesPt": [
+            98.924
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_0__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            96.27
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -98,8 +159,8 @@
       "blockId": "block_24",
       "unitId": "p13-story-round-2-step-1",
       "sourceText": "SHOP AND TRAIN: During this Phase, players will create a Store and spend their acquired Gold to buy Items and Item Upgrades. In addition, Adventurers may spend XP to learn new Disciplines. Players may also sell Items (other than Story Items) for Gold. Once Adventurers have spent all the Gold and XP they wish to spend, they proceed to the next Phase. See Building a Store Pg. 13.",
-      "proposalText": "1. COMPRAR E TREINAR: Durante esta Fase, os jogadores montam uma Loja e gastam o Ouro obtido para comprar Itens e Aprimoramentos de Item. Além disso, os Aventureiros podem gastar XP para aprender novas Disciplinas. Os jogadores também podem vender Itens, exceto Itens de História, por Ouro. Quando terminarem de gastar o Ouro e o XP que desejarem, passam à próxima Fase. Consulte Montar uma Loja, pág. 13.",
-      "proposalMarkup": "1. **COMPRAR E TREINAR:** Durante esta Fase, os jogadores montam uma Loja e gastam o Ouro obtido para comprar Itens e Aprimoramentos de Item. Além disso, os Aventureiros podem gastar **XP** para aprender novas Disciplinas. Os jogadores também podem vender Itens, exceto Itens de História, por Ouro. Quando terminarem de gastar o Ouro e o **XP** que desejarem, passam à próxima Fase. Consulte ***Montar uma Loja***, pág. 13.",
+      "proposalText": "COMPRAR E TREINAR: Durante esta Fase, os jogadores montam uma Loja e gastam o Ouro obtido para comprar Itens e Aprimoramentos de Item. Além disso, os Aventureiros podem gastar XP para aprender novas Disciplinas. Os jogadores também podem vender Itens, exceto Itens de História, por Ouro. Quando terminarem de gastar o Ouro e o XP que desejarem, passam à próxima Fase. Consulte Montar uma Loja, pág. 13.",
+      "proposalMarkup": "**COMPRAR E TREINAR:** Durante esta Fase, os jogadores montam uma Loja e gastam o Ouro obtido para comprar Itens e Aprimoramentos de Item. Além disso, os Aventureiros podem gastar **XP** para aprender novas Disciplinas. Os jogadores também podem vender Itens, exceto Itens de História, por Ouro. Quando terminarem de gastar o Ouro e o **XP** que desejarem, passam à próxima Fase. Consulte ***Montar uma Loja***, pág. 13.",
       "terms": [
         "Adventure Mechanic → Mecânica da Aventura; revisar consistência em contexto."
       ],
@@ -118,15 +179,6 @@
         "data": {
           "schemaVersion": 2,
           "segments": [
-            {
-              "text": "1. ",
-              "font": "OptimaLTStd",
-              "size": 9,
-              "color": "#231f20",
-              "weight": 400,
-              "style": "normal",
-              "disableLigatures": true
-            },
             {
               "text": "COMPRAR E TREINAR:",
               "font": "OptimaLTStd-Bold",
@@ -205,6 +257,140 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "COMPRAR E TREINAR:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Durante esta Fase, os jogadores montam uma Loja e gastam o Ouro obtido para comprar Itens e Aprimoramentos de Item. Além disso, os Aventureiros podem gastar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "XP",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " para aprender novas Disciplinas. Os jogadores também podem vender Itens, exceto Itens de História, por Ouro. Quando terminarem de gastar o Ouro e o ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "XP",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " que desejarem, passam à próxima Fase. Consulte ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Montar uma Loja",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 13.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_24",
+      "sourcePdfVisualLineCount": 6,
+      "pageRendererVisualLineCount": 6,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 6,
+        "pageRendererVisualLineCount": 6,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            104.17300415039062,
+            439.1578063964844,
+            400.14599609375,
+            506.05780029296875
+          ],
+          "visualBaselinesPt": [
+            448.348,
+            459.348,
+            470.348,
+            481.348,
+            492.348,
+            503.348
+          ],
+          "spans": 13,
+          "visualRows": 6
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_unit_p13-story-round-2-step-1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 19,
+          "distinctVisualRows": 6,
+          "visualRowTopsCssPx": [
+            382.48,
+            391.39,
+            400.3,
+            409.2,
+            418.11,
+            427.02
+          ],
+          "frameHeightCssPx": 54.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -213,8 +399,8 @@
       "blockId": "block_24",
       "unitId": "p13-story-round-2-step-2-body",
       "sourceText": "EXPLORE (SIDE QUESTS): During this Phase, players may select from a list of optional Side Quests. Each Side Quest can only be attempted once. When completed, most Side Quests will return players back to the Story Round and allow them to go through all the Phases once again. Once players have attempted all the Side Quests, or if they choose not to attempt a Side Quest, they proceed to the next Phase.",
-      "proposalText": "2. EXPLORAR (MISSÕES SECUNDÁRIAS): Durante esta Fase, os jogadores escolhem uma Missão Secundária em uma lista de opções. Cada missão só pode ser tentada uma vez. Ao concluí-la, na maioria dos casos retornam à Rodada de História e podem passar por todas as Fases novamente. Depois de tentarem todas as missões, ou decidirem não tentar uma, seguem para a próxima Fase.",
-      "proposalMarkup": "2. **EXPLORAR (MISSÕES SECUNDÁRIAS):** Durante esta Fase, os jogadores escolhem uma Missão Secundária em uma lista de opções. Cada missão só pode ser tentada uma vez. Ao concluí-la, na maioria dos casos retornam à Rodada de História e podem passar por todas as Fases novamente. Depois de tentarem todas as missões, ou decidirem não tentar uma, seguem para a próxima Fase.",
+      "proposalText": "EXPLORAR (MISSÕES SECUNDÁRIAS): Durante esta Fase, os jogadores escolhem uma Missão Secundária em uma lista de opções. Cada missão só pode ser tentada uma vez. Ao concluí-la, na maioria dos casos retornam à Rodada de História e podem passar por todas as Fases novamente. Depois de tentarem todas as missões, ou decidirem não tentar uma, seguem para a próxima Fase.",
+      "proposalMarkup": "**EXPLORAR (MISSÕES SECUNDÁRIAS):** Durante esta Fase, os jogadores escolhem uma Missão Secundária em uma lista de opções. Cada missão só pode ser tentada uma vez. Ao concluí-la, na maioria dos casos retornam à Rodada de História e podem passar por todas as Fases novamente. Depois de tentarem todas as missões, ou decidirem não tentar uma, seguem para a próxima Fase.",
       "terms": [
         "Side Quest → Missão Secundária; revisar consistência em contexto."
       ],
@@ -233,15 +419,6 @@
         "data": {
           "schemaVersion": 2,
           "segments": [
-            {
-              "text": "2. ",
-              "font": "OptimaLTStd",
-              "size": 9,
-              "color": "#231f20",
-              "weight": 400,
-              "style": "normal",
-              "disableLigatures": true
-            },
             {
               "text": "EXPLORAR (MISSÕES SECUNDÁRIAS):",
               "font": "OptimaLTStd-Bold",
@@ -266,6 +443,86 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "EXPLORAR (MISSÕES SECUNDÁRIAS):",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Durante esta Fase, os jogadores escolhem uma Missão Secundária em uma lista de opções. Cada missão só pode ser tentada uma vez. Ao concluí-la, na maioria dos casos retornam à Rodada de História e podem passar por todas as Fases novamente. Depois de tentarem todas as missões, ou decidirem não tentar uma, seguem para a próxima Fase.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_24",
+      "sourcePdfVisualLineCount": 6,
+      "pageRendererVisualLineCount": 6,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 6,
+        "pageRendererVisualLineCount": 6,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            104.17320251464844,
+            507.99249267578125,
+            401.6239013671875,
+            574.8925170898438
+          ],
+          "visualBaselinesPt": [
+            517.182,
+            528.182,
+            539.182,
+            550.182,
+            561.182,
+            572.182
+          ],
+          "spans": 7,
+          "visualRows": 6
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_unit_p13-story-round-2-step-2-body__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 13,
+          "distinctVisualRows": 6,
+          "visualRowTopsCssPx": [
+            438.58,
+            447.48,
+            456.39,
+            465.3,
+            474.2,
+            483.11
+          ],
+          "frameHeightCssPx": 54.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -274,8 +531,8 @@
       "blockId": "block_24",
       "unitId": "p13-story-round-2-step-3",
       "sourceText": "VENTURE FORTH: During this Phase, the players continue the Adventure. Once players Venture Forth, they will no longer be able to return to the current Story Round.",
-      "proposalText": "3. AVENTURAR-SE: Nesta Fase, os jogadores continuam a Aventura. Depois de Aventurarem-se, não poderão retornar à Rodada de História atual.",
-      "proposalMarkup": "3. **AVENTURAR-SE:** Nesta Fase, os jogadores continuam a Aventura. Depois de **Aventurarem-se**, não poderão retornar à Rodada de História atual.",
+      "proposalText": "AVENTURAR-SE: Durante esta Fase, os jogadores prosseguem com a Aventura. Uma vez que os jogadores decidam Aventurar-se, eles não poderão mais retornar à Rodada de História atual em andamento.",
+      "proposalMarkup": "**AVENTURAR-SE:** Durante esta Fase, os jogadores prosseguem com a Aventura. Uma vez que os jogadores decidam **Aventurar-se**, eles não poderão mais retornar à Rodada de História atual em andamento.",
       "terms": [],
       "replacesExistingPayloadRecordId": null,
       "sourceLineIds": [
@@ -290,15 +547,6 @@
           "schemaVersion": 2,
           "segments": [
             {
-              "text": "3. ",
-              "font": "OptimaLTStd",
-              "size": 9,
-              "color": "#231f20",
-              "weight": 400,
-              "style": "normal",
-              "disableLigatures": true
-            },
-            {
               "text": "AVENTURAR-SE:",
               "font": "OptimaLTStd-Bold",
               "size": 9,
@@ -308,7 +556,7 @@
               "disableLigatures": true
             },
             {
-              "text": " Nesta Fase, os jogadores continuam a Aventura. Depois de ",
+              "text": " Durante esta Fase, os jogadores prosseguem com a Aventura. Uma vez que os jogadores decidam ",
               "font": "OptimaLTStd",
               "size": 10,
               "color": "#231f20",
@@ -317,7 +565,7 @@
               "disableLigatures": true
             },
             {
-              "text": "Aventurarem-se",
+              "text": "Aventurar-se",
               "font": "OptimaLTStd-Bold",
               "size": 10,
               "color": "#231f20",
@@ -326,7 +574,7 @@
               "disableLigatures": true
             },
             {
-              "text": ", não poderão retornar à Rodada de História atual.",
+              "text": ", eles não poderão mais retornar à Rodada de História atual em andamento.",
               "font": "OptimaLTStd",
               "size": 10,
               "color": "#231f20",
@@ -340,7 +588,100 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
-      }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "AVENTURAR-SE:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Durante esta Fase, os jogadores prosseguem com a Aventura. Uma vez que os jogadores decidam ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Aventurar-se",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", eles não poderão mais retornar à Rodada de História atual em andamento.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_24",
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            104.16900634765625,
+            600.8270874023438,
+            397.07891845703125,
+            634.7271118164062
+          ],
+          "visualBaselinesPt": [
+            610.017,
+            621.017,
+            632.017
+          ],
+          "spans": 4,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_unit_p13-story-round-2-step-3__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            513.5,
+            522.41,
+            531.31
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "underCompositionJustification": "Unidade ajustada para 3 linhas visuais idênticas ao original em inglês, mantendo a regra de Rodada de História intacta."
     },
     {
       "spanKey": "page_13_block_10__pt-BR",
@@ -376,6 +717,67 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Disciplinas e Itens de História",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_27",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            642.3051147460938,
+            270.4200134277344,
+            658.4810791015625
+          ],
+          "visualBaselinesPt": [
+            654.017
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_10__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            546.11
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -473,6 +875,131 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Algumas Mecânicas da Aventura concedem recompensas, como Ouro, ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "XP",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", novos Itens e Habilidades. As Disciplinas de História e os Itens de História são cartas que só podem ser adquiridas por meio das Mecânicas da Aventura ou das Regras Especiais de Encontro da Aventura a que pertencem. Todas ficam em baralhos de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Cartas Ocultas",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " no início da Aventura e só devem ser ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Reveladas",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " quando houver instrução específica.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_29",
+      "sourcePdfVisualLineCount": 6,
+      "pageRendererVisualLineCount": 6,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 6,
+        "pageRendererVisualLineCount": 6,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17306518554688,
+            665.8070678710938,
+            395.1929931640625,
+            732.7271118164062
+          ],
+          "visualBaselinesPt": [
+            675.017,
+            686.017,
+            697.017,
+            708.017,
+            719.017,
+            730.017
+          ],
+          "spans": 10,
+          "visualRows": 6
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_unit_p13-block-29-paragraph-1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 15,
+          "distinctVisualRows": 6,
+          "visualRowTopsCssPx": [
+            566.16,
+            575.06,
+            583.97,
+            592.88,
+            601.78,
+            610.69
+          ],
+          "frameHeightCssPx": 54.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -586,6 +1113,145 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "As Disciplinas de História são identificadas pela palavra “Story” no lugar do Nível (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "LVL",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ") e do ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Tier",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " que normalmente indicariam. Itens de História nunca podem ser vendidos durante a Fase de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Comprar e Treinar",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", e Disciplinas de História nunca podem ser compradas com ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "XP",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_29",
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17306518554688,
+            734.6571044921875,
+            406.6973876953125,
+            779.5617065429688
+          ],
+          "visualBaselinesPt": [
+            743.847,
+            754.847,
+            765.852,
+            776.852
+          ],
+          "spans": 10,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_unit_p13-block-29-paragraph-2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 13,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            621.94,
+            630.84,
+            639.75,
+            648.66
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -622,6 +1288,67 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Finais",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_30",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            87.2121353149414,
+            473.0224914550781,
+            103.38813018798828
+          ],
+          "visualBaselinesPt": [
+            98.924
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_12__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            96.27
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -699,6 +1426,109 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Cada Aventura de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Middara",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " tem vários Finais. Um Final é uma Cena especial que encerra a Aventura atual. A maioria das Cenas de Final resulta em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fim de Jogo",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Nesse caso, os jogadores podem tentar novamente ou, se preferirem, recomeçar a Aventura.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_32",
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            110.6141357421875,
+            731.133544921875,
+            155.63414001464844
+          ],
+          "visualBaselinesPt": [
+            119.924,
+            130.924,
+            141.924,
+            152.924
+          ],
+          "spans": 8,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_13__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 11,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            116.23,
+            125.34,
+            133.45,
+            141.56
+          ],
+          "frameHeightCssPx": 36.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -735,6 +1565,67 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Montar uma Loja",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_33",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            161.28140258789062,
+            529.5545043945312,
+            177.45741271972656
+          ],
+          "visualBaselinesPt": [
+            172.993
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_14__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            156.3
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -809,6 +1700,107 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "A Loja é o conjunto de Cartas de Item que os Aventureiros podem comprar durante a Fase de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Comprar e Treinar",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " de uma Rodada de História ou quando receberem instruções para ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Comprar e Treinar",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_35",
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8423156738281,
+            184.76341247558594,
+            734.48291015625,
+            218.7034149169922
+          ],
+          "visualBaselinesPt": [
+            193.993,
+            204.993,
+            215.993
+          ],
+          "spans": 9,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_15__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            176.31,
+            184.42,
+            192.53
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -854,6 +1846,76 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Por exemplo:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " a Loja contém os seguintes Itens à venda:",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_36",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8423156738281,
+            223.45338439941406,
+            675.512939453125,
+            235.37339782714844
+          ],
+          "visualBaselinesPt": [
+            232.663
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_16__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            207.67
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -891,6 +1953,67 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "TODOS OS MUNDANOS E COMUNS",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_37",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            241.04302978515625,
+            593.4306030273438,
+            251.77102661132812
+          ],
+          "visualBaselinesPt": [
+            249.332
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_17__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            221.92
+          ],
+          "frameHeightCssPx": 8.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -930,6 +2053,67 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "MELHORIAS LIBERADAS POR JOGADORES",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_38",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            256.81121826171875,
+            612.22265625,
+            268.7112121582031
+          ],
+          "visualBaselinesPt": [
+            266.001
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_18__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            234.7
+          ],
+          "frameHeightCssPx": 9.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -967,6 +2151,67 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "1 ITEM ÚNICO COMUM ALEATÓRIO (LIMITE: 1)",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_39",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            274.38153076171875,
+            629.6998901367188,
+            285.1095275878906
+          ],
+          "visualBaselinesPt": [
+            282.671
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_19__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            248.95
+          ],
+          "frameHeightCssPx": 8.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -975,7 +2220,7 @@
       "blockId": "block_40",
       "unitId": "p13-block-40-paragraph-1",
       "sourceText": "Most Stores will contain 1 random Unique Item. In this case, for the random Unique Item, shuffle all Common Unique Items and draw from the bottom.",
-      "proposalText": "A maioria das Lojas terá 1 Item Único aleatório. Nesse caso, embaralhe todas as Cartas de Item Único Comum e compre uma do fundo do baralho.",
+      "proposalText": "A grande maioria das Lojas conterá 1 Item Único aleatório. Nesse caso, para determinar o Item Único aleatório, embaralhe todas as Cartas de Item Único Comum e compre 1 carta diretamente do fundo do baralho.",
       "proposalMarkup": "A maioria das Lojas terá 1 Item Único aleatório. Nesse caso, embaralhe todas as Cartas de Item Único Comum e compre uma do fundo do baralho.",
       "terms": [
         "Draw → “compre” segue o glossário; distinguir compra de Item de retirar do baralho ainda aguarda reconciliação humana."
@@ -993,7 +2238,7 @@
           "schemaVersion": 2,
           "segments": [
             {
-              "text": "A maioria das Lojas terá 1 Item Único aleatório. Nesse caso, embaralhe todas as Cartas de Item Único Comum e compre uma do fundo do baralho.",
+              "text": "A grande maioria das Lojas conterá 1 Item Único aleatório. Nesse caso, para determinar o Item Único aleatório, embaralhe todas as Cartas de Item Único Comum e compre 1 carta diretamente do fundo do baralho.",
               "font": "OptimaLTStd",
               "size": 10,
               "color": "#231f20",
@@ -1007,7 +2252,74 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
-      }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "A grande maioria das Lojas conterá 1 Item Único aleatório. Nesse caso, para determinar o Item Único aleatório, embaralhe todas as Cartas de Item Único Comum e compre 1 carta diretamente do fundo do baralho.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_40",
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            290.1497802734375,
+            724.9857788085938,
+            324.0497741699219
+          ],
+          "visualBaselinesPt": [
+            299.34,
+            310.34,
+            321.34
+          ],
+          "spans": 5,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_unit_p13-block-40-paragraph-1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            261.72,
+            270.63,
+            279.53,
+            288.44
+          ],
+          "frameHeightCssPx": 35.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "underCompositionJustification": ""
     },
     {
       "spanKey": "page_13_unit_p13-block-40-paragraph-2__pt-BR",
@@ -1067,6 +2379,93 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Itens Únicos não são sorteados de novo e ficam na Loja por toda a Rodada de História. Até a próxima Rodada de História nomeada, nenhum outro Item Único fica disponível para compra, mesmo que o grupo compre este. Este também fica indisponível em Encontros que sorteiem outro Item Único aleatório do mesmo ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Tier",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_40",
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8462219238281,
+            325.9797668457031,
+            735.016845703125,
+            381.8797607421875
+          ],
+          "visualBaselinesPt": [
+            335.17,
+            346.17,
+            357.17,
+            368.17,
+            379.17
+          ],
+          "spans": 5,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_unit_p13-block-40-paragraph-2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 11,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            291.75,
+            300.66,
+            309.56,
+            318.47,
+            327.38
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -1105,6 +2504,67 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Recompensas",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_42",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.84259033203125,
+            453.8011169433594,
+            478.48260498046875,
+            469.97711181640625
+          ],
+          "visualBaselinesPt": [
+            465.513
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_22__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            393.34
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -1113,8 +2573,8 @@
       "blockId": "block_44",
       "unitId": null,
       "sourceText": "Many Story Rounds include the opportunity to tackle a special Bounty Side Quest. A Bounty is a set of encounters that can be attempted once during the Explore Phase of a named Story Round. Only one Bounty may be attempted each named Story Round. If you own more than one Bounty, you may only choose ONE to attempt during a single named Story Round.",
-      "proposalText": "Muitas Rodadas de História permitem tentar uma Missão Secundária especial: uma Recompensa. Cada Recompensa é um conjunto de Encontros tentado uma vez na Fase de Explorar de uma Rodada de História nomeada. Só é possível tentar uma Recompensa por Rodada de História nomeada. Se o grupo tiver mais de uma, escolha apenas UMA para tentar naquela Rodada de História.",
-      "proposalMarkup": "Muitas Rodadas de História permitem tentar uma Missão Secundária especial: uma **Recompensa**. Cada **Recompensa** é um conjunto de Encontros tentado uma vez na Fase de ***Explorar*** de uma Rodada de História nomeada. Só é possível tentar uma **Recompensa** por Rodada de História nomeada. Se o grupo tiver mais de uma, escolha apenas **UMA** para tentar naquela Rodada de História.",
+      "proposalText": "Muitas Rodadas de História permitem tentar uma Missão Secundária especial de Recompensa. Cada Recompensa é um conjunto de Encontros tentado uma vez na Fase de Explorar de uma Rodada de História nomeada. Só é possível tentar uma Recompensa por Rodada de História nomeada. Se o grupo tiver mais de uma, escolha apenas UMA para tentar naquela Rodada de História.",
+      "proposalMarkup": "Muitas Rodadas de História permitem tentar uma Missão Secundária especial de **Recompensa**. Cada **Recompensa** é um conjunto de Encontros tentado uma vez na Fase de *Explorar* de uma Rodada de História nomeada. Só é possível tentar uma **Recompensa** por Rodada de História nomeada. Se o grupo tiver mais de uma, escolha apenas **UMA** para tentar naquela Rodada de História.",
       "terms": [
         "Bounty → Recompensa; candidato sem aprovação terminológica."
       ],
@@ -1134,7 +2594,7 @@
           "schemaVersion": 2,
           "segments": [
             {
-              "text": "Muitas Rodadas de História permitem tentar uma Missão Secundária especial: uma ",
+              "text": "Muitas Rodadas de História permitem tentar uma Missão Secundária especial de ",
               "font": "OptimaLTStd",
               "size": 10,
               "color": "#231f20",
@@ -1238,6 +2698,167 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Muitas Rodadas de História permitem tentar uma Missão Secundária especial de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Recompensa",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Cada ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Recompensa",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " é um conjunto de Encontros tentado uma vez na Fase de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Explorar",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " de uma Rodada de História nomeada. Só é possível tentar uma ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Recompensa",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " por Rodada de História nomeada. Se o grupo tiver mais de uma, escolha apenas ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "UMA",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " para tentar naquela Rodada de História.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_44",
+      "sourcePdfVisualLineCount": 6,
+      "pageRendererVisualLineCount": 6,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 6,
+        "pageRendererVisualLineCount": 6,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8421630859375,
+            477.3031311035156,
+            723.9327392578125,
+            544.22314453125
+          ],
+          "visualBaselinesPt": [
+            486.513,
+            497.513,
+            508.513,
+            519.513,
+            530.513,
+            541.513
+          ],
+          "spans": 15,
+          "visualRows": 6
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_23__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 20,
+          "distinctVisualRows": 6,
+          "visualRowTopsCssPx": [
+            413.39,
+            421.5,
+            429.61,
+            438.72,
+            446.83,
+            454.94
+          ],
+          "frameHeightCssPx": 54.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -1245,15 +2866,16 @@
       "blockIndex": 24,
       "blockId": "block_45",
       "unitId": null,
-      "sourceText": "Story Rounds will specify the Bounties that can be attempted based on",
-      "proposalText": "A Rodada de História define as Recompensas possíveis",
-      "proposalMarkup": "A Rodada de História define as **Recompensas** possíveis",
+      "sourceText": "Story Rounds will specify the Bounties that can be attempted based on the difficulty rating listed as a [skull2] symbol. Players may not attempt a",
+      "proposalText": "As Rodadas de História definem as Recompensas possíveis pelo nível de dificuldade indicado pelo símbolo ￼. Não se pode tentar uma",
+      "proposalMarkup": "As Rodadas de História definem as **Recompensas** possíveis pelo nível de dificuldade indicado pelo símbolo {{symbol:combat.skull2}}. Não se pode tentar uma",
       "terms": [
         "Bounty → Recompensa; candidato sem aprovação terminológica."
       ],
       "replacesExistingPayloadRecordId": null,
       "sourceLineIds": [
-        "line_45_0"
+        "line_45_0",
+        "line_46_0"
       ],
       "candidate": {
         "spanKey": "page_13_block_24__pt-BR",
@@ -1262,7 +2884,7 @@
           "schemaVersion": 2,
           "segments": [
             {
-              "text": "A Rodada de História define as ",
+              "text": "As Rodadas de História definem as ",
               "font": "OptimaLTStd",
               "size": 10,
               "color": "#231f20",
@@ -1280,86 +2902,7 @@
               "disableLigatures": true
             },
             {
-              "text": " possíveis",
-              "font": "OptimaLTStd",
-              "size": 10,
-              "color": "#231f20",
-              "weight": 400,
-              "style": "normal",
-              "disableLigatures": true
-            }
-          ],
-          "textAlign": "left",
-          "lineHeight": 1,
-          "lineHeightMode": "source",
-          "managedSourceSymbols": []
-        }
-      }
-    },
-    {
-      "spanKey": "page_13_block_25__pt-BR",
-      "blockIndex": 25,
-      "blockId": "block_46",
-      "unitId": null,
-      "sourceText": "the difficulty rating listed as a",
-      "proposalText": "segundo a dificuldade do",
-      "proposalMarkup": "segundo a dificuldade do",
-      "terms": [],
-      "replacesExistingPayloadRecordId": null,
-      "sourceLineIds": [
-        "line_46_0"
-      ],
-      "candidate": {
-        "spanKey": "page_13_block_25__pt-BR",
-        "language": "pt-BR",
-        "data": {
-          "schemaVersion": 2,
-          "segments": [
-            {
-              "text": "segundo a dificuldade do",
-              "font": "OptimaLTStd",
-              "size": 10,
-              "color": "#231f20",
-              "weight": 400,
-              "style": "normal",
-              "disableLigatures": true
-            }
-          ],
-          "textAlign": "left",
-          "lineHeight": 1,
-          "lineHeightMode": "source",
-          "managedSourceSymbols": []
-        }
-      }
-    },
-    {
-      "spanKey": "page_13_block_26__pt-BR",
-      "blockIndex": 26,
-      "blockId": "block_48",
-      "unitId": null,
-      "sourceText": "symbol. Players may not attempt a",
-      "proposalText": " símbolo. Não se pode tentar uma",
-      "proposalMarkup": "{{symbol:combat.skull}} símbolo. Não se pode tentar uma",
-      "terms": [],
-      "replacesExistingPayloadRecordId": null,
-      "sourceLineIds": [
-        "line_48_0"
-      ],
-      "candidate": {
-        "spanKey": "page_13_block_26__pt-BR",
-        "language": "pt-BR",
-        "data": {
-          "schemaVersion": 2,
-          "segments": [
-            {
-              "text": "￼",
-              "symbolId": "combat.skull",
-              "symbolMetrics": {
-                "widthEm": 1.3851806640625,
-                "heightEm": 2.0462890625,
-                "verticalAlignEm": 0.700006103515625,
-                "renderVariant": "bounty-red-raster"
-              },
+              "text": " possíveis pelo nível de dificuldade indicado pelo símbolo ",
               "font": "OptimaLTStd",
               "size": 10,
               "color": "#231f20",
@@ -1368,7 +2911,18 @@
               "disableLigatures": true
             },
             {
-              "text": " símbolo. Não se pode tentar uma",
+              "text": "￼",
+              "symbolId": "combat.skull2",
+              "symbolMetrics": {
+                "widthEm": 1.38518,
+                "heightEm": 2.04629,
+                "verticalAlignEm": 0.70001
+              },
+              "font": "OptimaLTStd",
+              "size": 10
+            },
+            {
+              "text": ". Não se pode tentar uma",
               "font": "OptimaLTStd",
               "size": 10,
               "color": "#231f20",
@@ -1378,12 +2932,114 @@
             }
           ],
           "textAlign": "left",
-          "lineHeight": 1,
-          "lineHeightMode": "source",
+          "lineHeight": 1.4,
+          "lineHeightMode": "custom",
           "managedSourceSymbols": [
-            "combat.skull"
+            "combat.skull2"
           ]
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "As Rodadas de História definem as ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Recompensas",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " possíveis pelo nível de dificuldade indicado pelo símbolo ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "combat.skull2",
+            "symbolMetrics": {
+              "widthEm": 1.38518,
+              "heightEm": 2.04629,
+              "verticalAlignEm": 0.70001
+            },
+            "font": "OptimaLTStd",
+            "size": 10
+          },
+          {
+            "text": ". Não se pode tentar uma",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.4,
+        "lineHeightMode": "custom",
+        "managedSourceSymbols": [
+          "combat.skull2"
+        ]
+      },
+      "sourceBlockId": "block_45",
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8421630859375,
+            548.9730834960938,
+            721.5326538085938,
+            560.8931274414062
+          ],
+          "visualBaselinesPt": [
+            558.183,
+            574.183
+          ],
+          "spans": 3,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_24__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            471.47
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -1432,6 +3088,78 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Recompensa",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " acima da dificuldade permitida pela Rodada de História (por exemplo, com mais caveiras).",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_49",
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            580.9722900390625,
+            718.0732421875,
+            603.892333984375
+          ],
+          "visualBaselinesPt": [
+            590.182,
+            601.182
+          ],
+          "spans": 5,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_27__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 4,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            497.41,
+            505.52
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -1528,6 +3256,129 @@
           "lineHeightMode": "source",
           "managedSourceSymbols": []
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Depois de concluir uma ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Recompensa",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", os Aventureiros nunca mais podem tentá-la naquela Aventura. Se perderem uma ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Recompensa",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", podem tentar concluí-la novamente na próxima Rodada de História nomeada que permita aquela dificuldade ou uma menor. Nesse caso, começam a ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Recompensa",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " do início.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "sourceBlockId": "block_51",
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8423767089844,
+            679.9801635742188,
+            732.0631713867188,
+            735.9002075195312
+          ],
+          "visualBaselinesPt": [
+            689.19,
+            700.19,
+            711.19,
+            722.19,
+            733.19
+          ],
+          "spans": 9,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_28__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 13,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            577.64,
+            585.75,
+            593.86,
+            601.97,
+            610.08
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -1617,6 +3468,121 @@
             "tag.important.icon"
           ]
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "tag.important.icon",
+            "symbolMetrics": {
+              "widthEm": 1,
+              "heightEm": 1,
+              "verticalAlignEm": 0.2
+            }
+          },
+          {
+            "text": "IMPORTANTE:",
+            "font": "OptimaLTStd-Black",
+            "size": 10,
+            "color": "#b91d23",
+            "weight": 900,
+            "style": "normal",
+            "disableLigatures": true,
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#ffffff"
+          },
+          {
+            "text": " Itens Únicos só podem ser obtidos quando houver uma instrução específica para isso. Sempre que uma Mecânica de Aventura instruir os jogadores a ganhar, retirar do baralho ou comprar um Item de determinado Tier ou tipo, os jogadores terão acesso a todas as cartas ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "não únicas",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " desses Tiers ou tipos.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "managedSourceSymbols": [
+          "tag.important.icon"
+        ]
+      },
+      "sourceBlockId": "block_41",
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            421.5115051269531,
+            389.42840576171875,
+            733.332275390625,
+            445.3883972167969
+          ],
+          "visualBaselinesPt": [
+            398.678,
+            409.678,
+            420.678,
+            431.678,
+            442.678
+          ],
+          "spans": 10,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_21__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 12,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            342.19,
+            351.09,
+            360,
+            368.91,
+            377.81
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -1625,8 +3591,8 @@
       "blockId": "block_52",
       "unitId": null,
       "sourceText": "IMPORTANT:IMPORTANT: Any rewards earned during a Bounty are kept by Adventurers even if they fail a Bounty. Meaning, any rewards earned up to that point are retained.",
-      "proposalText": "IMPORTANTE: Recompensas recebidas durante uma Bounty ficam com os Aventureiros, mesmo que eles fracassem na Bounty. Ou seja, as recompensas recebidas até aquele momento são mantidas.",
-      "proposalMarkup": null,
+      "proposalText": "IMPORTANTE: Mesmo que os Aventureiros fracassem em uma Recompensa, eles mantêm todos os prêmios obtidos durante ela. Ou seja, nada do que conquistaram até aquele momento será perdido.",
+      "proposalMarkup": "{{symbol:tag.important.icon}}**IMPORTANTE:** Mesmo que os Aventureiros fracassem em uma **Recompensa**, eles mantêm todos os prêmios obtidos durante ela. Ou seja, nada do que conquistaram até aquele momento será perdido.",
       "terms": [
         "Callout PT-BR reciclado da prova isolada validada; revisão terminológica humana continua pendente."
       ],
@@ -1670,7 +3636,7 @@
               "textStrokeColor": "#ffffff"
             },
             {
-              "text": " Recompensas recebidas durante uma ",
+              "text": " Mesmo que os Aventureiros fracassem em uma ",
               "font": "OptimaLTStd",
               "size": 10,
               "color": "#231f20",
@@ -1679,7 +3645,7 @@
               "disableLigatures": true
             },
             {
-              "text": "Bounty",
+              "text": "Recompensa",
               "font": "OptimaLTStd-Bold",
               "size": 10,
               "color": "#231f20",
@@ -1688,7 +3654,7 @@
               "disableLigatures": true
             },
             {
-              "text": " ficam com os Aventureiros, mesmo que eles fracassem na Bounty. Ou seja, as recompensas recebidas até aquele momento são mantidas.",
+              "text": ", eles mantêm todos os prêmios obtidos durante ela. Ou seja, nada do que conquistaram até aquele momento será perdido.",
               "font": "OptimaLTStd",
               "size": 10,
               "color": "#231f20",
@@ -1704,6 +3670,117 @@
             "tag.important.icon"
           ]
         }
+      },
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "tag.important.icon",
+            "symbolMetrics": {
+              "widthEm": 1,
+              "heightEm": 1,
+              "verticalAlignEm": 0.2
+            }
+          },
+          {
+            "text": "IMPORTANTE:",
+            "font": "OptimaLTStd-Black",
+            "size": 10,
+            "color": "#b91d23",
+            "weight": 900,
+            "style": "normal",
+            "disableLigatures": true,
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#ffffff"
+          },
+          {
+            "text": " Mesmo que os Aventureiros fracassem em uma ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Recompensa",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", eles mantêm todos os prêmios obtidos durante ela. Ou seja, nada do que conquistaram até aquele momento será perdido.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "managedSourceSymbols": [
+          "tag.important.icon"
+        ]
+      },
+      "sourceBlockId": "block_52",
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 13,
+          "pdfDocumentPageIndex": 12,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            421.5115051269531,
+            747.113525390625,
+            719.10205078125,
+            783.0735473632812
+          ],
+          "visualBaselinesPt": [
+            756.364,
+            768.364,
+            780.364
+          ],
+          "spans": 8,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_13_block_29__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 8,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            632.05,
+            640.95,
+            649.86
+          ],
+          "frameHeightCssPx": 29.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     }
   ],
@@ -1870,5 +3947,7 @@
       "commit": false,
       "push": false
     }
-  }
+  },
+  "version": "3",
+  "title": "Regras de Encontro e Marcadores — p. 13"
 }

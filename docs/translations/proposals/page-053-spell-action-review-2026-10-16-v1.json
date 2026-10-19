@@ -64,7 +64,49 @@
       "pendingTerms": [
         "cast → conjurar (glossário oficial)",
         "Spell → Feitiço (glossário oficial)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            91.2121353149414,
+            253.08009338378906,
+            107.38813018798828
+          ],
+          "visualBaselinesPt": [
+            102.924
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_0__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            99.5
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 1,
@@ -72,7 +114,7 @@
       "sourceText": "Many Abilities allow a figure to cast Spells. Whenever a figure uses an Ability that instructs them to \"Cast a SPELL (X)\", they make a Spell Action to determine if the Spell affected the target. Anytime a Spell is called for, the figure casting the Spell will follow these steps.",
       "spanKey": "page_53_block_1__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Muitas Habilidades permitem que uma Miniatura conjure Feitiços. Sempre que uma Miniatura usa uma Habilidade que instrui a “Conjurar FEITIÇO (X)”, ela realiza uma Ação de Feitiço para determinar se o Feitiço afetou o alvo. Sempre que um Feitiço é indicado, a Miniatura que o conjura segue estas etapas.",
+      "proposalText": "Muitas Habilidades permitem conjurar Feitiços. Quando uma Habilidade instrui a “Conjurar FEITIÇO (X)”, a Miniatura faz uma Ação de Feitiço para verificar se o Feitiço afetou o alvo, seguindo estas etapas:",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_1__pt-BR",
@@ -87,7 +129,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Muitas Habilidades permitem que uma Miniatura conjure Feitiços. Sempre que uma Miniatura usa uma Habilidade que instrui a “Conjurar ",
+            "text": "Muitas Habilidades permitem conjurar Feitiços. Quando uma Habilidade instrui a “Conjurar ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -105,7 +147,7 @@
             "disableLigatures": true
           },
           {
-            "text": "”, ela realiza uma Ação de Feitiço para determinar se o Feitiço afetou o alvo. Sempre que um Feitiço é indicado, a Miniatura que o conjura segue estas etapas.",
+            "text": "”, a Miniatura faz uma Ação de Feitiço para verificar se o Feitiço afetou o alvo, seguindo estas etapas:",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -124,7 +166,98 @@
         "Spell → Feitiço (glossário oficial)",
         "cast → conjurar (glossário oficial)",
         "Spell Action → Ação de Feitiço; forma local, revisar caixa do termo mecânico"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17140197753906,
+            114.40338134765625,
+            398.891357421875,
+            159.3033905029297
+          ],
+          "visualBaselinesPt": [
+            123.593,
+            134.593,
+            145.593,
+            156.593
+          ],
+          "spans": 6,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 6,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            119.3,
+            128.2,
+            137.13,
+            146.03
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_53_block_1__pt-BR",
+        "bbox": [
+          86.17140197753906,
+          114.40338134765625,
+          398.891357421875,
+          159.3033905029297
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Muitas Habilidades permitem conjurar Feitiços. Quando uma Habilidade instrui a “Conjurar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FEITIÇO (X)",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "”, a Miniatura faz uma Ação de Feitiço para verificar se o Feitiço afetou o alvo, seguindo estas etapas:",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     },
     {
       "blockIndex": 2,
@@ -236,7 +369,55 @@
       "pendingTerms": [
         "figure → Miniatura (glossário oficial)",
         "SOI → Sphere of Influence; manter sigla e revisar nome por extenso"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            167.74200439453125,
+            392.31475830078125,
+            212.6420135498047
+          ],
+          "visualBaselinesPt": [
+            176.932,
+            187.932,
+            198.932,
+            209.932
+          ],
+          "spans": 11,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 14,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            162.53,
+            170.64,
+            178.75,
+            186.86
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 3,
@@ -312,7 +493,53 @@
       "pendingTerms": [
         "Spell → Feitiço (glossário oficial)",
         "Force / Force Pool / Force Value → Força / Reserva de Força / Valor de Força (formas propostas)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            217.0606231689453,
+            403.5671691894531,
+            250.9806365966797
+          ],
+          "visualBaselinesPt": [
+            226.271,
+            237.271,
+            248.271
+          ],
+          "spans": 6,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_3__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            202.5,
+            211.42,
+            220.34
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 4,
@@ -320,7 +547,7 @@
       "sourceText": "a.\tBUILD FORCE POOL: A Force Pool consists of a figure's printed Casting Die or Upgrade.",
       "spanKey": "page_53_block_4__pt-BR",
       "language": "pt-BR",
-      "proposalText": "a. MONTAR A RESERVA DE FORÇA: Uma Reserva de Força consiste no Dado de Conjuração ou no Aprimoramento impresso da Miniatura.",
+      "proposalText": "a.  MONTAR A RESERVA DE FORÇA: A Reserva de Força consiste no Dado ou Aprimoramento de Conjuração impresso da Miniatura.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_4__pt-BR",
@@ -353,7 +580,7 @@
             "disableLigatures": true
           },
           {
-            "text": "Uma Reserva de Força consiste no Dado de Conjuração ou no Aprimoramento impresso da Miniatura.",
+            "text": "A Reserva de Força consiste no Dado ou Aprimoramento de Conjuração impresso da Miniatura.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -372,7 +599,94 @@
         "Casting Die → Dado de Conjuração (glossário oficial)",
         "figure → Miniatura (glossário oficial)",
         "Upgrade → Aprimoramento (forma contextual proposta)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            103.18109893798828,
+            255.72987365722656,
+            383.9222106933594,
+            278.6498718261719
+          ],
+          "visualBaselinesPt": [
+            264.94,
+            275.94
+          ],
+          "spans": 3,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_4__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            233.83,
+            241.94
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_53_block_4__pt-BR",
+        "bbox": [
+          103.18109893798828,
+          255.72987365722656,
+          383.9222106933594,
+          278.6498718261719
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "a.  ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "MONTAR A RESERVA DE FORÇA: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "A Reserva de Força consiste no Dado ou Aprimoramento de Conjuração impresso da Miniatura.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     },
     {
       "blockIndex": 6,
@@ -380,7 +694,7 @@
       "sourceText": "Intelligent Combatants will only EMPOWER if they have an Ability that specifically allows them to. See Empower Pg. 52.",
       "spanKey": "page_53_block_6__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Combatentes Inteligentes só podem FORTALECER se tiverem uma Habilidade que permita isso especificamente. Veja Fortalecer, pág. 52.",
+      "proposalText": "Combatentes Inteligentes só podem FORTALECER com Habilidade específica para isso. Veja Fortalecer, pág. 52.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_6__pt-BR",
@@ -413,7 +727,7 @@
             "disableLigatures": true
           },
           {
-            "text": " se tiverem uma Habilidade que permita isso especificamente. Veja ",
+            "text": " com Habilidade específica para isso. Veja ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -448,7 +762,112 @@
       "pendingTerms": [
         "Empower → Fortalecer; forma ainda pendente de canonização humana",
         "Intelligent Combatants → Combatentes Inteligentes (uso existente; canon global pendente)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            114.518310546875,
+            322.0884094238281,
+            397.6883239746094,
+            344.9884033203125
+          ],
+          "visualBaselinesPt": [
+            331.278,
+            342.278
+          ],
+          "spans": 6,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_6__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            287.61,
+            295.72
+          ],
+          "frameHeightCssPx": 18.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_53_block_6__pt-BR",
+        "bbox": [
+          114.518310546875,
+          322.0884094238281,
+          397.6883239746094,
+          344.9884033203125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Combatentes Inteligentes só podem ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FORTALECER",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " com Habilidade específica para isso. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fortalecer",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 52.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     },
     {
       "blockIndex": 7,
@@ -456,7 +875,7 @@
       "sourceText": "c.\tROLL TO DETERMINE YOUR FORCE: Finally, the figure Casting the SPELL rolls their Casting die and Empower Die if applicable, and adds the printed X value on the Spell to the result. (Usually 6).",
       "spanKey": "page_53_block_7__pt-BR",
       "language": "pt-BR",
-      "proposalText": "c. ROLAR PARA DETERMINAR SUA FORÇA: Por fim, a Miniatura que conjura o FEITIÇO rola seu Dado de Conjuração e o Dado de Fortalecimento, se aplicável, e soma ao resultado o valor de X impresso no Feitiço (geralmente 6).",
+      "proposalText": "c.  DETERMINAR A FORÇA: A Miniatura que conjura o FEITIÇO rola o Dado de Conjuração (e o de Fortalecimento, se houver) e soma o valor X do Feitiço (geralmente 6).",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_7__pt-BR",
@@ -480,7 +899,124 @@
             "disableLigatures": true
           },
           {
-            "text": "ROLAR PARA DETERMINAR SUA FORÇA: ",
+            "text": "DETERMINAR A FORÇA: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "A Miniatura que conjura o ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FEITIÇO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " rola o Dado de Conjuração (e o de Fortalecimento, se houver) e soma o valor X do Feitiço (geralmente 6).",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_recorded",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "cast → conjurar (glossário oficial)",
+        "Spell → Feitiço (glossário oficial)",
+        "Casting Die → Dado de Conjuração (glossário oficial)",
+        "Empower → Fortalecer; forma ainda pendente de canonização humana",
+        "Force / Force Pool / Force Value → Força / Reserva de Força / Valor de Força (formas propostas)"
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            103.18109893798828,
+            349.73773193359375,
+            392.51361083984375,
+            383.65771484375
+          ],
+          "visualBaselinesPt": [
+            358.948,
+            369.948,
+            380.948
+          ],
+          "spans": 9,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_7__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 11,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            310.02,
+            318.94,
+            327.84
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_53_block_7__pt-BR",
+        "bbox": [
+          103.18109893798828,
+          349.73773193359375,
+          392.51361083984375,
+          383.65771484375
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "c.  ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "ROLAR PARA DETERMINAR A FORÇA: ",
             "font": "OptimaLTStd-Bold",
             "size": 9,
             "color": "#231f20",
@@ -507,7 +1043,7 @@
             "disableLigatures": true
           },
           {
-            "text": " rola seu Dado de Conjuração e o Dado de Fortalecimento, se aplicável, e soma ao resultado o valor de X impresso no Feitiço (geralmente 6).",
+            "text": " rola o Dado de Conjuração (e o de Fortalecimento, se houver) e soma o valor de X do Feitiço (geralmente 6).",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -518,16 +1054,7 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
-      "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "cast → conjurar (glossário oficial)",
-        "Spell → Feitiço (glossário oficial)",
-        "Casting Die → Dado de Conjuração (glossário oficial)",
-        "Empower → Fortalecer; forma ainda pendente de canonização humana",
-        "Force / Force Pool / Force Value → Força / Reserva de Força / Valor de Força (formas propostas)"
-      ]
+      "proposalMarkup": "c.  DETERMINAR A FORÇA: A Miniatura que conjura o FEITIÇO rola o Dado de Conjuração (e o de Fortalecimento, se houver) e soma o valor X do Feitiço (geralmente 6)."
     },
     {
       "blockIndex": 8,
@@ -607,7 +1134,69 @@
         "Conviction Check → Teste de Convicção (forma proposta)",
         "Force / Force Pool / Force Value → Força / Reserva de Força / Valor de Força (formas propostas)",
         "Combatant Card → Cartão de Combatente (forma proposta)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 11,
+      "pageRendererVisualLineCount": 11,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 11,
+        "pageRendererVisualLineCount": 11,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            391.0963134765625,
+            403.3271789550781,
+            515.996337890625
+          ],
+          "visualBaselinesPt": [
+            400.286,
+            411.286,
+            422.286,
+            433.286,
+            444.286,
+            455.286,
+            469.286,
+            480.286,
+            491.286,
+            502.286,
+            513.286
+          ],
+          "spans": 14,
+          "visualRows": 11
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_8__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 15,
+          "distinctVisualRows": 11,
+          "visualRowTopsCssPx": [
+            343.53,
+            352.44,
+            361.36,
+            370.27,
+            379.19,
+            388.09,
+            399.44,
+            408.36,
+            417.27,
+            426.19,
+            435.09
+          ],
+          "frameHeightCssPx": 101.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 9,
@@ -685,7 +1274,57 @@
         "Conviction Check → Teste de Convicção (forma proposta)",
         "Action → Ação (capitalização mecânica ainda requer revisão)",
         "Spell Action → Ação de Feitiço; forma local"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            523.4348754882812,
+            407.2821044921875,
+            579.3348999023438
+          ],
+          "visualBaselinesPt": [
+            532.625,
+            543.625,
+            554.625,
+            565.625,
+            576.625
+          ],
+          "spans": 8,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_9__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            450.78,
+            459.69,
+            468.61,
+            477.52,
+            486.44
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 10,
@@ -693,7 +1332,7 @@
       "sourceText": "IMPORTANT SPELL RULES:•\tItems and Abilities can upgrade an Adventurer’s Casting and Conviction dice to improve their chances of inflicting and \nresisting Spells. See Conviction & Casting Upgrades Pg. 33.•\tThe Spell Action is not a Standard Action and can only be made when an Ability specifically calls for a Spell Action via the SPELL Tag. •\tAbilities that use the Spell Action do not require any specific Weapon Icons to be used. •\tSpells share a special type of Range and Line of Sight called Sphere of Influence (SOI). See Sphere of Influence (SOI) Pg. 43. •\tSpells have their own steps that a figure must go through when instructed to \"Cast a SPELL (X)\". •\tSpells have a Force Value that must be overcome by the target via a Conviction Check to resist the effects of the Spell.•\tAllies may purposely fail Conviction Checks when being targeted by other allies.",
       "spanKey": "page_53_block_10__pt-BR",
       "language": "pt-BR",
-      "proposalText": "REGRAS IMPORTANTES SOBRE FEITIÇOS:\n• Itens e Habilidades podem aprimorar os dados de Conjuração e de Convicção de um Aventureiro para aumentar suas chances de infligir e resistir a Feitiços. Veja Aprimoramentos de Convicção e Conjuração, pág. 33.\n• A Ação de Feitiço não é uma Ação Padrão e só pode ser realizada quando uma Habilidade a solicitar especificamente por meio da Tag FEITIÇO.\n• Habilidades que usam a Ação de Feitiço não exigem Ícones de Arma específicos.\n• Feitiços compartilham um tipo especial de Alcance e Linha de Visão chamado Esfera de Influência (SOI). Veja Esfera de Influência (SOI), pág. 43.\n• Feitiços têm etapas próprias, que uma Miniatura deve seguir quando instruída a “Conjurar FEITIÇO (X)”.\n• O Valor de Força de um Feitiço deve ser superado pelo alvo em um Teste de Convicção para resistir aos efeitos.\n• Aliados podem escolher falhar em Testes de Convicção quando forem alvos de outros aliados.",
+      "proposalText": "REGRAS IMPORTANTES SOBRE FEITIÇOS:\n• Itens e Habilidades aprimoram dados de Conjuração e Convicção para aumentar as chances de infligir e resistir a Feitiços. Veja Aprimoramentos de Convicção e Conjuração, pág. 33.\n• A Ação de Feitiço não é uma Ação Padrão e só pode ser realizada quando uma Habilidade a solicitar especificamente por meio da Tag FEITIÇO.\n• Habilidades que usam a Ação de Feitiço não exigem Ícones de Arma específicos.\n• Feitiços compartilham um tipo especial de Alcance e Linha de Visão chamado Esfera de Influência (SOI). Veja Esfera de Influência (SOI), pág. 43.\n• Feitiços têm etapas próprias, que uma Miniatura deve seguir quando instruída a “Conjurar FEITIÇO (X)”.\n• O Valor de Força de um Feitiço deve ser superado pelo alvo em um Teste de Convicção para resistir aos efeitos.\n• Aliados podem escolher falhar em Testes de Convicção quando forem alvos de outros aliados.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_10__pt-BR",
@@ -717,13 +1356,12 @@
             "disableLigatures": true
           },
           {
-            "text": "\n• Itens e Habilidades podem aprimorar os dados de Conjuração e de Convicção de um Aventureiro para aumentar suas chances de infligir e resistir a Feitiços. Veja Aprimoramentos de Convicção e Conjuração, pág. 33.",
+            "text": "\n• Itens e Habilidades aprimoram dados de Conjuração e Convicção para aumentar as chances de infligir e resistir a Feitiços. Veja Aprimoramentos de Convicção e Conjuração, pág. 33.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
             "weight": 400,
-            "style": "normal",
-            "disableLigatures": true
+            "style": "normal"
           },
           {
             "text": "\n• A Ação de Feitiço não é uma Ação Padrão e só pode ser realizada quando uma Habilidade a solicitar especificamente por meio da Tag ",
@@ -856,7 +1494,229 @@
         "Standard Action → Ação Padrão (forma proposta)",
         "Weapon Icon → Ícone de Arma (forma proposta)",
         "Sphere of Influence → Esfera de Influência (forma proposta)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 16,
+      "pageRendererVisualLineCount": 16,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 16,
+        "pageRendererVisualLineCount": 16,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            589.3438110351562,
+            405.2531433105469,
+            777.02783203125
+          ],
+          "visualBaselinesPt": [
+            597.633,
+            610.302,
+            620.302,
+            630.302,
+            644.971,
+            653.971,
+            668.641,
+            677.641,
+            692.31,
+            703.31,
+            717.979,
+            726.979,
+            741.649,
+            750.649,
+            765.318,
+            774.318
+          ],
+          "spans": 41,
+          "visualRows": 16
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_10__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 32,
+          "distinctVisualRows": 16,
+          "visualRowTopsCssPx": [
+            504.19,
+            512.3,
+            520.41,
+            528.52,
+            536.63,
+            544.73,
+            552.84,
+            560.95,
+            569.06,
+            577.17,
+            586.28,
+            594.39,
+            602.5,
+            610.61,
+            618.72,
+            626.83
+          ],
+          "frameHeightCssPx": 152.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_53_block_10__pt-BR",
+        "bbox": [
+          86.17320251464844,
+          589.3438110351562,
+          405.2531433105469,
+          777.02783203125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "REGRAS IMPORTANTES SOBRE FEITIÇOS:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Itens e Habilidades aprimoram dados de Conjuração e Convicção para aumentar as chances de infligir e resistir a Feitiços. Veja Aprimoramentos de Convicção e Conjuração, pág. 33.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "\n• A Ação de Feitiço não é uma Ação Padrão e só pode ser realizada quando uma Habilidade a solicitar especificamente por meio da Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FEITIÇO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".\n• Habilidades que usam a Ação de Feitiço não exigem Ícones de Arma específicos.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Feitiços compartilham um tipo especial de Alcance e Linha de Visão chamado Esfera de Influência (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "SOI",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "). Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Esfera de Influência (SOI)",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 43.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Feitiços têm etapas próprias, que uma Miniatura deve seguir quando instruída a “Conjurar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FEITIÇO (X)",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "”.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• O Valor de Força de um Feitiço deve ser superado pelo alvo em um Teste de Convicção para resistir aos efeitos.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Aliados podem escolher falhar em Testes de Convicção quando forem alvos de outros aliados.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     },
     {
       "blockIndex": 11,
@@ -895,7 +1755,49 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Spell-Like Ability → Habilidade Semelhante a Feitiço (proposta local; canon pendente)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            91.2121353149414,
+            541.5064697265625,
+            107.38813018798828
+          ],
+          "visualBaselinesPt": [
+            102.924
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_11__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            99.5
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 12,
@@ -903,7 +1805,7 @@
       "sourceText": "Many Abilities have FORCE (X) printed on them. These are called Spell-Like Abilities. Whenever an Adventurer uses an Ability or Follow Up Ability that has a Force Value listed, they go through the following steps.",
       "spanKey": "page_53_block_12__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Muitas Habilidades têm FORÇA (X) impressa nelas. Elas são chamadas de Habilidades Semelhantes a Feitiços. Quando um Aventureiro usa uma Habilidade ou Habilidade de Continuação com um Valor de Força indicado, segue as etapas abaixo.",
+      "proposalText": "Muitas Habilidades trazem FORÇA (X) impressa: são as Habilidades Semelhantes a Feitiços. Ao usar uma Habilidade ou Continuação com Valor de Força, o Aventureiro segue estas etapas:",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_12__pt-BR",
@@ -918,7 +1820,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Muitas Habilidades têm ",
+            "text": "Muitas Habilidades trazem ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -936,7 +1838,7 @@
             "disableLigatures": true
           },
           {
-            "text": " impressa nelas. Elas são chamadas de Habilidades Semelhantes a Feitiços. Quando um Aventureiro usa uma Habilidade ou Habilidade de Continuação com um Valor de Força indicado, segue as etapas abaixo.",
+            "text": " impressa: são as Habilidades Semelhantes a Feitiços. Ao usar uma Habilidade ou Continuação com Valor de Força, o Aventureiro segue estas etapas:",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -954,7 +1856,96 @@
         "Spell-Like Ability → Habilidade Semelhante a Feitiço (proposta local; canon pendente)",
         "Force / Force Pool / Force Value → Força / Reserva de Força / Valor de Força (formas propostas)",
         "Follow Up Ability → Habilidade de Continuação (forma proposta)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            114.6141357421875,
+            725.5068969726562,
+            148.63414001464844
+          ],
+          "visualBaselinesPt": [
+            123.924,
+            134.924,
+            145.924
+          ],
+          "spans": 11,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_12__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            119.47,
+            127.58,
+            135.69
+          ],
+          "frameHeightCssPx": 27.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_53_block_12__pt-BR",
+        "bbox": [
+          415.8424987792969,
+          114.6141357421875,
+          725.5068969726562,
+          148.63414001464844
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Muitas Habilidades trazem ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FORÇA (X)",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " impressa: são as Habilidades Semelhantes a Feitiços. Ao usar uma Habilidade ou Continuação com Valor de Força, o Aventureiro segue estas etapas:",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     },
     {
       "blockIndex": 13,
@@ -962,7 +1953,7 @@
       "sourceText": "1.\t IDENTIFY TARGETS: \nSpell-Like Abilities printed on Follow Up Abilities must always be used against the figure that was the target of the Attack. Spell-Like Abilities used under other Conditions will always specify their target(s).",
       "spanKey": "page_53_block_13__pt-BR",
       "language": "pt-BR",
-      "proposalText": "1. IDENTIFICAR OS ALVOS: Habilidades Semelhantes a Feitiços impressas em Habilidades de Continuação sempre devem ser usadas contra a Miniatura que foi alvo do Ataque. Habilidades Semelhantes a Feitiços usadas sob outras Condições sempre especificam seu(s) alvo(s).",
+      "proposalText": "1.  IDENTIFICAR OS ALVOS:\nHabilidades Semelhantes a Feitiços impressas em Habilidades de Continuação sempre devem ser usadas contra a Miniatura que foi alvo do Ataque. Habilidades Semelhantes a Feitiços usadas sob quaisquer outras Condições sempre especificarão o(s) seu(s) alvo(s).",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_13__pt-BR",
@@ -986,7 +1977,7 @@
             "disableLigatures": true
           },
           {
-            "text": "IDENTIFICAR OS ALVOS: ",
+            "text": "IDENTIFICAR OS ALVOS:\n",
             "font": "OptimaLTStd-Bold",
             "size": 9,
             "color": "#231f20",
@@ -995,7 +1986,7 @@
             "disableLigatures": true
           },
           {
-            "text": "Habilidades Semelhantes a Feitiços impressas em Habilidades de Continuação sempre devem ser usadas contra a Miniatura que foi alvo do Ataque. Habilidades Semelhantes a Feitiços usadas sob outras Condições sempre especificam seu(s) alvo(s).",
+            "text": "Habilidades Semelhantes a Feitiços impressas em Habilidades de Continuação sempre devem ser usadas contra a Miniatura que foi alvo do Ataque. Habilidades Semelhantes a Feitiços usadas sob quaisquer outras Condições sempre especificarão o(s) seu(s) alvo(s).",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1013,7 +2004,57 @@
         "Spell-Like Ability → Habilidade Semelhante a Feitiço (proposta local; canon pendente)",
         "figure → Miniatura (glossário oficial)",
         "Follow Up Ability → Habilidade de Continuação (forma proposta)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424072265625,
+            156.23797607421875,
+            717.4247436523438,
+            212.1379852294922
+          ],
+          "visualBaselinesPt": [
+            165.428,
+            176.428,
+            187.428,
+            198.428,
+            209.428
+          ],
+          "spans": 9,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_13__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            153.2,
+            161.31,
+            169.42,
+            177.53
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "proposalMarkup": "1.  IDENTIFICAR OS ALVOS:\nHabilidades Semelhantes a Feitiços impressas em Habilidades de Continuação sempre devem ser usadas contra a Miniatura que foi alvo do Ataque. Habilidades Semelhantes a Feitiços usadas sob quaisquer outras Condições sempre especificarão o(s) seu(s) alvo(s)."
     },
     {
       "blockIndex": 14,
@@ -1071,7 +2112,53 @@
       "pendingTerms": [
         "Spell-Like Ability → Habilidade Semelhante a Feitiço (proposta local; canon pendente)",
         "Force / Force Pool / Force Value → Força / Reserva de Força / Valor de Força (formas propostas)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424072265625,
+            217.7218780517578,
+            705.836669921875,
+            251.6418914794922
+          ],
+          "visualBaselinesPt": [
+            226.932,
+            237.932,
+            248.932
+          ],
+          "spans": 6,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_14__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            203.03,
+            211.86,
+            220.88
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 15,
@@ -1079,7 +2166,7 @@
       "sourceText": "a.\tFORCE (X) + DIFFERENCE HIT: These Spell-Like Abilities represent effects that occur after making Attacks with Weapons and will only be listed on Follow Up Abilities. To determine the Force of the Spell-Like Ability, the figure that made the Attack adds the difference by which their Attack hit the target to the printed Force on the Ability.",
       "spanKey": "page_53_block_15__pt-BR",
       "language": "pt-BR",
-      "proposalText": "a. FORÇA (X) + DIFERENÇA DO ACERTO: Essas Habilidades Semelhantes a Feitiços representam efeitos que ocorrem após Ataques com Armas e só aparecem em Habilidades de Continuação. Para determinar a Força da Habilidade Semelhante a Feitiço, a Miniatura que fez o Ataque soma à Força impressa na Habilidade a diferença pela qual seu Ataque acertou o alvo.",
+      "proposalText": "a.  FORÇA (X) + DIFERENÇA DO ACERTO: Efeitos que ocorrem após Ataques com Armas, presentes apenas em Habilidades de Continuação. A Miniatura que atacou soma a diferença pela qual o Ataque acertou o alvo à Força impressa na Habilidade.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_15__pt-BR",
@@ -1112,7 +2199,7 @@
             "disableLigatures": true
           },
           {
-            "text": "Essas Habilidades Semelhantes a Feitiços representam efeitos que ocorrem após Ataques com Armas e só aparecem em Habilidades de Continuação. Para determinar a Força da Habilidade Semelhante a Feitiço, a Miniatura que fez o Ataque soma à Força impressa na Habilidade a diferença pela qual seu Ataque acertou o alvo.",
+            "text": "Efeitos que ocorrem após Ataques com Armas, presentes apenas em Habilidades de Continuação. A Miniatura que atacou soma a diferença pela qual o Ataque acertou o alvo à Força impressa na Habilidade.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1132,7 +2219,100 @@
         "figure → Miniatura (glossário oficial)",
         "Follow Up Ability → Habilidade de Continuação (forma proposta)",
         "Difference Hit → Diferença do Acerto (forma proposta)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            430.5546875,
+            256.41119384765625,
+            716.1694946289062,
+            312.3111877441406
+          ],
+          "visualBaselinesPt": [
+            265.097,
+            276.601,
+            287.601,
+            298.601,
+            309.601
+          ],
+          "spans": 10,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_15__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 12,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            234.39,
+            243.3,
+            252.11,
+            261.03,
+            270.05
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_53_block_15__pt-BR",
+        "bbox": [
+          430.5546875,
+          256.41119384765625,
+          716.1694946289062,
+          312.3111877441406
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "a.  ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FORÇA (X) + DIFERENÇA DO ACERTO: ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Efeitos que ocorrem após Ataques com Armas, presentes apenas em Habilidades de Continuação. A Miniatura que atacou soma a diferença pela qual o Ataque acertou o alvo à Força impressa na Habilidade.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     },
     {
       "blockIndex": 16,
@@ -1140,7 +2320,7 @@
       "sourceText": "b.\tFORCE (X): If the Ability does not have + DIFFERENCE HIT, then the figure using this Ability does not add anything to the Force Value.",
       "spanKey": "page_53_block_16__pt-BR",
       "language": "pt-BR",
-      "proposalText": "b. FORÇA (X): Se a Habilidade não indicar + DIFERENÇA DO ACERTO, a Miniatura que a usa não adiciona nada ao Valor de Força.",
+      "proposalText": "b.  FORÇA (X): Se a Habilidade não trouxer + DIFERENÇA DO ACERTO, a Miniatura não soma nada ao Valor de Força.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_16__pt-BR",
@@ -1173,7 +2353,7 @@
             "disableLigatures": true
           },
           {
-            "text": "Se a Habilidade não indicar ",
+            "text": "Se a Habilidade não trouxer ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1191,7 +2371,7 @@
             "disableLigatures": true
           },
           {
-            "text": ", a Miniatura que a usa não adiciona nada ao Valor de Força.",
+            "text": ", a Miniatura não soma nada ao Valor de Força.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1209,7 +2389,112 @@
         "figure → Miniatura (glossário oficial)",
         "Force / Force Pool / Force Value → Força / Reserva de Força / Valor de Força (formas propostas)",
         "Difference Hit → Diferença do Acerto (forma proposta)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            430.5187072753906,
+            316.96051025390625,
+            710.8933715820312,
+            339.9804992675781
+          ],
+          "visualBaselinesPt": [
+            325.771,
+            337.271
+          ],
+          "spans": 9,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_16__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            283.45,
+            291.56
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_53_block_16__pt-BR",
+        "bbox": [
+          430.5187072753906,
+          316.96051025390625,
+          710.8933715820312,
+          339.9804992675781
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "b.  ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FORÇA (X): ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Se a Habilidade não trouxer ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "+ DIFERENÇA DO ACERTO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", a Miniatura não soma nada ao Valor de Força.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     },
     {
       "blockIndex": 17,
@@ -1217,7 +2502,7 @@
       "sourceText": "IMPORTANT:IMPORTANT: You may not EMPOWER Spell-Like Abilities.",
       "spanKey": "page_53_block_17__pt-BR",
       "language": "pt-BR",
-      "proposalText": "IMPORTANTE: Você não pode FORTALECER Habilidades Semelhantes a Feitiços.",
+      "proposalText": "￼IMPORTANTE: Não é permitido FORTALECER essas Habilidades.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_17__pt-BR",
@@ -1258,7 +2543,127 @@
             "disableLigatures": true
           },
           {
-            "text": " Você não pode ",
+            "text": " Não é permitido ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FORTALECER",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " essas Habilidades.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": [
+          "tag.important.icon"
+        ]
+      },
+      "technicalStatus": "not_recorded",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Empower → Fortalecer; forma ainda pendente de canonização humana",
+        "Spell-Like Ability → Habilidade Semelhante a Feitiço (proposta local; canon pendente)"
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            438.51959228515625,
+            350.3591003417969,
+            690.157958984375,
+            362.339111328125
+          ],
+          "visualBaselinesPt": [
+            359.609
+          ],
+          "spans": 6,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_17__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            310.52
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_53_block_17__pt-BR",
+        "bbox": [
+          438.51959228515625,
+          350.3591003417969,
+          690.157958984375,
+          362.339111328125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "￼",
+            "symbolId": "tag.important.icon",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolMetrics": {
+              "widthEm": 1,
+              "heightEm": 1,
+              "verticalAlignEm": 0.2
+            },
+            "disableLigatures": true
+          },
+          {
+            "text": "IMPORTANTE:",
+            "font": "OptimaLTStd-Black",
+            "size": 10,
+            "color": "#b91d23",
+            "weight": 900,
+            "style": "normal",
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": " Não é permitido ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1289,13 +2694,7 @@
           "tag.important.icon"
         ]
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
-      "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Empower → Fortalecer; forma ainda pendente de canonização humana",
-        "Spell-Like Ability → Habilidade Semelhante a Feitiço (proposta local; canon pendente)"
-      ]
+      "proposalMarkup": "￼IMPORTANTE: Não é permitido FORTALECER essas Habilidades."
     },
     {
       "blockIndex": 18,
@@ -1353,7 +2752,53 @@
       "pendingTerms": [
         "Conviction Check → Teste de Convicção (forma proposta)",
         "Spell Action → Ação de Feitiço (forma proposta)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            375.5923156738281,
+            718.8929443359375,
+            409.4923095703125
+          ],
+          "visualBaselinesPt": [
+            384.782,
+            395.782,
+            406.782
+          ],
+          "spans": 6,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_18__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            330.97,
+            339.08,
+            347.19
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 19,
@@ -1411,7 +2856,53 @@
       "pendingTerms": [
         "Spell-Like Ability → Habilidade Semelhante a Feitiço (proposta local; canon pendente)",
         "Conviction Check → Teste de Convicção (forma proposta)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            417.0963134765625,
+            733.1537475585938,
+            450.9963073730469
+          ],
+          "visualBaselinesPt": [
+            426.286,
+            437.286,
+            448.286
+          ],
+          "spans": 6,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_19__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            364.61,
+            372.72,
+            380.83
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 20,
@@ -1419,7 +2910,7 @@
       "sourceText": "IMPORTANT:IMPORTANT: Spell-Like Abilities do not count as an Action.",
       "spanKey": "page_53_block_20__pt-BR",
       "language": "pt-BR",
-      "proposalText": "IMPORTANTE: Habilidades Semelhantes a Feitiços não contam como uma Ação.",
+      "proposalText": "￼IMPORTANTE: Habilidades Semelhantes não contam como Ação.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_20__pt-BR",
@@ -1460,7 +2951,7 @@
             "disableLigatures": true
           },
           {
-            "text": " Habilidades Semelhantes a Feitiços não contam como uma Ação.",
+            "text": " Habilidades Semelhantes não contam como Ação.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1479,7 +2970,103 @@
       "pendingTerms": [
         "Spell-Like Ability → Habilidade Semelhante a Feitiço (proposta local; canon pendente)",
         "Action → Ação (capitalização mecânica ainda requer revisão)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            438.51971435546875,
+            461.3148193359375,
+            697.5393676757812,
+            473.3548278808594
+          ],
+          "visualBaselinesPt": [
+            470.625
+          ],
+          "spans": 7,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_20__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 6,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            400.44
+          ],
+          "frameHeightCssPx": 9.8
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_53_block_20__pt-BR",
+        "bbox": [
+          438.51971435546875,
+          461.3148193359375,
+          697.5393676757812,
+          473.3548278808594
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "￼",
+            "symbolId": "tag.important.icon",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolMetrics": {
+              "widthEm": 1,
+              "heightEm": 1,
+              "verticalAlignEm": 0.2
+            },
+            "disableLigatures": true
+          },
+          {
+            "text": "IMPORTANTE:",
+            "font": "OptimaLTStd-Black",
+            "size": 10,
+            "color": "#b91d23",
+            "weight": 900,
+            "style": "normal",
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": " Habilidades Semelhantes a Feitiços não contam como Ação.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": [
+          "tag.important.icon"
+        ]
+      },
+      "proposalMarkup": "￼IMPORTANTE: Habilidades Semelhantes não contam como Ação."
     },
     {
       "blockIndex": 22,
@@ -1487,7 +3074,7 @@
       "sourceText": "Spell Example: \nGore Shot is a Discipline that has no SP cost. When Exhausted it allows an Adventurer to Cast a SPELL 6.",
       "spanKey": "page_53_block_22__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Exemplo de Feitiço: Gore Shot é uma Disciplina sem custo de SP. Ao ser Exaustada, permite que um Aventureiro conjure FEITIÇO 6.",
+      "proposalText": "Exemplo de Feitiço:\nGore Shot é uma Disciplina que não possui custo de SP. Ao ser Exaustada, ela permite a um Aventureiro Conjurar FEITIÇO 6.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_53_block_22__pt-BR",
@@ -1502,7 +3089,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Exemplo de Feitiço: ",
+            "text": "Exemplo de Feitiço:\n",
             "font": "OptimaLTStd-Bold",
             "size": 10,
             "color": "#231f20",
@@ -1520,7 +3107,7 @@
             "disableLigatures": true
           },
           {
-            "text": " é uma Disciplina sem custo de ",
+            "text": " é uma Disciplina que não possui custo de ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1538,7 +3125,7 @@
             "disableLigatures": true
           },
           {
-            "text": ". Ao ser Exaustada, permite que um Aventureiro conjure ",
+            "text": ". Ao ser Exaustada, ela permite a um Aventureiro Conjurar ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1575,7 +3162,53 @@
         "cast → conjurar (glossário oficial)",
         "Exhaust → Exaustar (decisão humana registrada)",
         "Gore Shot → nome próprio de Disciplina; preservar até haver canon"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            433.8424987792969,
+            615.191162109375,
+            713.0563354492188,
+            665.689208984375
+          ],
+          "visualBaselinesPt": [
+            636.983,
+            649.979,
+            662.979
+          ],
+          "spans": 8,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_22__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            525.14,
+            534.25
+          ],
+          "frameHeightCssPx": 40.9
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "proposalMarkup": "Exemplo de Feitiço:\nGore Shot é uma Disciplina que não possui custo de SP. Ao ser Exaustada, ela permite a um Aventureiro Conjurar FEITIÇO 6."
     },
     {
       "blockIndex": 23,
@@ -1645,7 +3278,55 @@
         "Force / Force Pool / Force Value → Força / Reserva de Força / Valor de Força (formas propostas)",
         "Action → Ação (capitalização mecânica ainda requer revisão)",
         "Great Hammer → nome próprio de Arma; preservar até haver canon"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            433.8424987792969,
+            735.3215942382812,
+            727.9931640625,
+            784.03564453125
+          ],
+          "visualBaselinesPt": [
+            746.326,
+            759.326,
+            770.326,
+            781.326
+          ],
+          "spans": 7,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_23__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 10,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            622.5,
+            630.61,
+            638.72,
+            646.83
+          ],
+          "frameHeightCssPx": 39.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 24,
@@ -1684,7 +3365,49 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Spell Action → Ação de Feitiço (forma local; revisar canon editorial)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            85.88189697265625,
+            56.69243621826172,
+            250.83392333984375,
+            80.95643615722656
+          ],
+          "visualBaselinesPt": [
+            74.26
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_24__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            71.53
+          ],
+          "frameHeightCssPx": 19.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 32,
@@ -1709,7 +3432,7 @@
           {
             "text": "Feitiços vs. Habilidades Semelhantes a Feitiços",
             "font": "Cinzel-Regular",
-            "size": 14,
+            "size": 11.5,
             "color": "#231f20",
             "weight": 400,
             "style": "normal",
@@ -1724,7 +3447,49 @@
       "pendingTerms": [
         "Spell → Feitiço (glossário oficial)",
         "Spell-Like Ability → Habilidade Semelhante a Feitiço (proposta local; canon pendente)"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 53,
+          "pdfDocumentPageIndex": 52,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            478.8212890625,
+            499.62939453125,
+            691.6072387695312,
+            518.5014038085938
+          ],
+          "visualBaselinesPt": [
+            513.293
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_53_block_32__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            431.48
+          ],
+          "frameHeightCssPx": 15.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ]
 }

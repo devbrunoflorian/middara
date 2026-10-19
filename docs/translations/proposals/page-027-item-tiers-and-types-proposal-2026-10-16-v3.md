@@ -1,4 +1,4 @@
-# p.27 — proposta PT-BR “Níveis e Tipos de Itens” v3
+# p.27 — proposta PT-BR “Tiers e Tipos de Itens” v3
 
 **Estado:** 30 unidades textuais têm proposta; Viewer, Editor, copyfit e PDF de uma página ainda precisam ser verificados. Três pares de cartas seguem como exceções de arte. Zero traduções humanas preexistentes e zero writes no Payload.
 
@@ -32,7 +32,7 @@
 
 **EN:** As the game progresses, Adventurers may find some of the Items they own are no longer useful. Adventurers may sell their old Items whenever they are able to Shop and Train. See Story Rounds Pg. 13. Use the chart below to determine how much Gold is Gained from each Item sold.
 
-**PT-BR proposto:** À medida que o jogo avança, Aventureiros podem descobrir que alguns de seus Itens já não são úteis. Eles podem vender Itens antigos sempre que puderem Comprar e Treinar. Consulte Rodadas de História, p. 13. Use a tabela abaixo para determinar quanto Ouro é recebido por cada Item vendido.
+**PT-BR proposto:** À medida que o jogo avança, Aventureiros podem descobrir que alguns de seus Itens já não são úteis. Eles podem vender Itens antigos sempre que puderem Comprar e Treinar. Veja Rodadas de História, p. 13. Use a tabela abaixo para determinar quanto Ouro é recebido por cada Item vendido.
 
 **Revisão pendente:** Item; Aventureiros; Comprar e Treinar; Rodadas de História; Ouro; Gained
 
@@ -42,7 +42,7 @@
 
 **PT-BR proposto:** • Cada Aprimoramento de Item equipado concede 5 de Ouro extra. Para vendê-lo, também é preciso vender o Item ao qual está ligado.
 • Consumíveis valem 1 de Ouro, qualquer que seja seu Nível de Saque. Os que não estiverem equipados ou não forem vendidos na Rodada de História são descartados ao fim de Comprar e Treinar.
-• Para o preço do Saque de Monstro, consulte Aprimoramentos de Item, p. 28.
+• Para o preço do Saque de Monstro, veja Aprimoramentos de Item, p. 28.
 • Acessórios valem o preço de Item do Nível de Saque atual ou o custo impresso na carta, o que for menor.
 • Itens Únicos vendidos são removidos da Aventura.
 • Itens de História nunca podem ser vendidos.
@@ -101,7 +101,7 @@
 
 **EN:** There are 4 different Tiers of Items in Act 1 of Middara.
 
-**PT-BR proposto:** Há 4 Níveis diferentes de Itens no Ato 1 de Middara.
+**PT-BR proposto:** Há 4 Tiers diferentes de Itens no Ato 1 de Middara.
 
 **Revisão pendente:** Tier → Nível; Act → Ato; Item
 
@@ -141,7 +141,7 @@
 
 **EN:** UNIQUE: All of the above Tiers have a Unique version of the cards available. Unique Items represent an Item with a unique history behind its existence. See Unique Loot Pg. 57.
 
-**PT-BR proposto:** ÚNICO: Todas as categorias acima têm versões Únicas. São Itens com história própria. Consulte Saque Único, p. 57.
+**PT-BR proposto:** ÚNICO: Todos os Tiers acima têm versões Únicas. São Itens com história própria. Veja Saque Único, p. 57.
 
 **Revisão pendente:** Unique → Único; Tier → Nível; Unique Loot → Saque Único
 
@@ -186,7 +186,7 @@ Acessórios: Ajudam a evitar dano e têm propriedades únicas.
 
 **EN:** Item Tiers and Types
 
-**PT-BR proposto:** Níveis e Tipos de Itens
+**PT-BR proposto:** Tiers e Tipos de Itens
 
 **Revisão pendente:** Tier → Nível; Item(s)
 

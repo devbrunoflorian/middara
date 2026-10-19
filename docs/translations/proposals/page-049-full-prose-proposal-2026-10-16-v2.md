@@ -15,7 +15,7 @@ If a figure Attacks a target and the Attack misses or deals no Final Damage, the
 **Rascunho PT-BR:**
 
 ```text
-Se uma miniatura atacar um alvo e o Ataque errar ou não causar Dano Final, o alvo pode usar a Habilidade CONTRA-ATACAR durante a etapa Verifique o Contra-ataque do Ataque. Consulte Ação de Ataque, p. 41.
+Se uma miniatura atacar um alvo e o Ataque errar ou não causar Dano Final, o alvo pode usar a Habilidade CONTRA-ATACAR durante a etapa Verifique o Contra-ataque do Ataque. Veja Ação de Ataque, p. 41.
 ```
 
 ### `page_49_block_1__pt-BR`

@@ -29,7 +29,7 @@
       "spanKey": "page_100_block_1__pt-BR",
       "language": "pt-BR",
       "sourceText": "TERRAIN TOKENS: Terrain tokens and things that count as Terrain (e.g. Plank tokens) are not moved by Currents.",
-      "proposalText": "FICHAS DE TERRENO: Fichas e itens que contam como Terreno (ex.: fichas de Prancha) não são movidos pelas Correntes.",
+      "proposalText": "FICHAS DE TERRENO: Fichas de terreno e elementos equivalentes (ex.: fichas de Prancha) não se movem por Correntes.",
       "copyfitSemanticFlow": {
         "version": 1,
         "flowRegion": {
@@ -123,114 +123,75 @@
           {
             "text": "FICHAS DE TERRENO:",
             "font": "OptimaLTStd-Bold",
-            "size": 9,
-            "weight": 700,
-            "style": "normal",
+            "size": 10,
             "color": "#231f20",
-            "disableLigatures": true
+            "weight": 700,
+            "style": "normal"
           },
           {
             "text": " ",
             "font": "OptimaLTStd",
             "size": 10,
-            "weight": 400,
-            "style": "normal",
             "color": "#231f20",
-            "disableLigatures": true
+            "weight": 400,
+            "style": "normal"
           },
           {
-            "text": "Fichas e ",
+            "text": "Fichas de terreno e elementos equivalentes (ex.: fichas de Prancha) não se movem por Correntes.",
             "font": "OptimaLTStd",
-            "size": 9,
+            "size": 10,
+            "color": "#231f20",
             "weight": 400,
-            "style": "normal",
-            "color": "#231f20",
-            "disableLigatures": true
-          },
-          {
-            "text": "itens que contam como Terreno (",
-            "font": "OptimaLTStd",
-            "size": 9,
-            "weight": 400,
-            "style": "normal",
-            "color": "#231f20",
-            "disableLigatures": true
-          },
-          {
-            "text": "ex.:",
-            "font": "OptimaLTStd-Bold",
-            "size": 9,
-            "weight": 700,
-            "style": "normal",
-            "color": "#231f20",
-            "disableLigatures": true
-          },
-          {
-            "text": " fichas de Prancha",
-            "font": "OptimaLTStd",
-            "size": 9,
-            "weight": 400,
-            "style": "normal",
-            "color": "#231f20",
-            "disableLigatures": true
-          },
-          {
-            "text": ") não são movidos pelas Correntes.",
-            "font": "OptimaLTStd",
-            "size": 9,
-            "weight": 400,
-            "style": "normal",
-            "color": "#231f20",
-            "disableLigatures": true
+            "style": "normal"
           }
         ],
         "managedSourceSymbols": []
       },
       "sourcePdfVisualLineCount": 3,
-      "pageRendererVisualLineCount": 4,
-      "copyfitClassification": "OVER",
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 3,
-        "pageRendererVisualLineCount": 4,
-        "classification": "OVER_AFTER_SAFE_WIDTH",
-        "method": "Live PageRenderer DOM Range rows grouped with shared Copyfit V3 grouper; maximum safe left-cell corridor measured against source table vectors, divider, and independent Figures-cell text.",
-        "maximumSafeFramePt": {
-          "x": 61.52197,
-          "y": 94,
-          "width": 158.99903,
-          "right": 220.521
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
         },
-        "originalFramePt": [
-          61.52619934082031,
-          94.00433349609375,
-          212.24017333984375,
-          131.62527465820312
-        ],
-        "zoomMeasurements": [
-          {
-            "zoomPercent": 100,
-            "sourceLines": 3,
-            "pageRendererLines": 4,
-            "fontLoaded": true,
-            "geometryPass": true,
-            "overflow": false,
-            "collision": false,
-            "measurement": "apps/web/output/p100-block_12-copyfit-v1/fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-100pct-measurement.json",
-            "screenshot": "apps/web/output/p100-block_12-copyfit-v1/viewer-ptbr-fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-semantic-width-maximum-safe-width-100pct.png"
-          },
-          {
-            "zoomPercent": 200,
-            "sourceLines": 3,
-            "pageRendererLines": 4,
-            "fontLoaded": true,
-            "geometryPass": true,
-            "overflow": false,
-            "collision": false,
-            "measurement": "apps/web/output/p100-block_12-copyfit-v1/fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-200pct-measurement.json",
-            "screenshot": "apps/web/output/p100-block_12-copyfit-v1/viewer-ptbr-fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-semantic-width-maximum-safe-width-200pct.png"
-          }
-        ],
-        "payloadWrite": false
+        "sourceEvidence": {
+          "bboxPt": [
+            61.52619934082031,
+            94.00433349609375,
+            212.24017333984375,
+            131.62527465820312
+          ],
+          "visualBaselinesPt": [
+            103.194,
+            116.19,
+            129.186
+          ],
+          "spans": 6,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_block_1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 6,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            102.77,
+            114.02,
+            124.56
+          ],
+          "frameHeightCssPx": 30.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
       "technicalStatus": "blocked_copyfit_v3_over_after_maximum_safe_semantic_width_dtp_exception_open",
       "editorialStatus": "pending_human_review",
@@ -280,7 +241,47 @@
           ],
           "decision": "Retain as open DTP exception; do not modify font, text, or neighboring cell geometry."
         }
-      ]
+      ],
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_1__pt-BR",
+        "bbox": [
+          61.52619934082031,
+          94.00433349609375,
+          212.24017333984375,
+          131.62527465820312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "FICHAS DE TERRENO:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Fichas de terreno e elementos equivalentes (ex.: fichas de Prancha) não se movem por Correntes.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     },
     {
       "blockIndex": 2,
@@ -391,18 +392,49 @@
       "pageRendererVisualLineCount": 4,
       "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
-        "measurementSource": "Original PDF geometry and live PageRenderer DOM Range rectangles grouped by groupPageRendererVisualLines",
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 4,
         "pageRendererVisualLineCount": 4,
         "classification": "EXACT",
-        "environment": "PT-BR, viewport 2400x1400 CSS px, DPR 1, 100% and 200% Viewer zoom, OptimaLTStd fonts loaded",
-        "geometry": "Original bbox retained: [228.5205, 87.5043, 380.7737, 138.1212] pt. Candidate ink remains inside the source frame at both zooms; the four source and target visual rows match.",
-        "evidence": [
-          "apps/web/output/p100-block_13-copyfit-v1/viewer-ptbr-miniaturas-elas-sempre-podem-ser-movidas-pelas-correntes-veja-miniaturas-de-base-grande-p-g-71-ou-a-tag-pesada-p-g-93-para-exce-es-100pct.png",
-          "apps/web/output/p100-block_13-copyfit-v1/miniaturas-elas-sempre-podem-ser-movidas-pelas-correntes-veja-miniaturas-de-base-grande-p-g-71-ou-a-tag-pesada-p-g-93-para-exce-es-100pct-measurement.json",
-          "apps/web/output/p100-block_13-copyfit-v1/viewer-ptbr-miniaturas-elas-sempre-podem-ser-movidas-pelas-correntes-veja-miniaturas-de-base-grande-p-g-71-ou-a-tag-pesada-p-g-93-para-exce-es-200pct.png",
-          "apps/web/output/p100-block_13-copyfit-v1/miniaturas-elas-sempre-podem-ser-movidas-pelas-correntes-veja-miniaturas-de-base-grande-p-g-71-ou-a-tag-pesada-p-g-93-para-exce-es-200pct-measurement.json"
-        ]
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            228.5205078125,
+            87.50433349609375,
+            380.7736511230469,
+            138.12124633789062
+          ],
+          "visualBaselinesPt": [
+            96.687,
+            109.69,
+            122.686,
+            135.682
+          ],
+          "spans": 9,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 12,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            97.5,
+            105.61,
+            112.91,
+            120.2
+          ],
+          "frameHeightCssPx": 41
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
       "technicalStatus": "fit-awaiting-human-review",
       "editorialStatus": "pending_human_review",

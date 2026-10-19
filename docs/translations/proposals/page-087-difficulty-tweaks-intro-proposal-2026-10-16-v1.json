@@ -74,7 +74,59 @@
       "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": []
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 87,
+          "pdfDocumentPageIndex": 86,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            360.8241882324219,
+            407.50390625,
+            466.9061584472656
+          ],
+          "visualBaselinesPt": [
+            372.536,
+            392.536,
+            403.536,
+            414.536,
+            428.366,
+            439.366,
+            450.366,
+            464.196
+          ],
+          "spans": 9,
+          "visualRows": 8
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_87_unit_p87-block-15-font-size-10pt-unit-01__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 11,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            337.14,
+            347.25,
+            356.36
+          ],
+          "frameHeightCssPx": 27.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Source line count calibrated to 3 lines (the actual paragraph in sourceText), excluding heading and following paragraph erroneously encompassed by the bounding box."
+      }
     }
   ],
   "note": "Recorte incremental de um parágrafo completo de contextualização. O texto mantém o sentido de que as regras a seguir permitem ajustar a dificuldade para jogadores com preferências diferentes.",

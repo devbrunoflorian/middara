@@ -1,4 +1,4 @@
-# p.27 — proposta PT-BR “Níveis e Tipos de Itens” v9
+# p.27 — proposta PT-BR “Tiers e Tipos de Itens” v9
 
 **Estado:** 30 unidades textuais têm proposta; 28 aparecem no diagnóstico PT-BR e duas falhas de copyfit ficam em branco apenas no snapshot. Três pares de cartas seguem como exceções de arte. Revisão humana pendente; zero writes no Payload.
 
@@ -101,7 +101,7 @@
 
 **EN:** There are 4 different Tiers of Items in Act 1 of Middara.
 
-**PT-BR proposto:** Há 4 Níveis diferentes de Itens no Ato 1 de Middara.
+**PT-BR proposto:** Há 4 Tiers diferentes de Itens no Ato 1 de Middara.
 
 **Revisão pendente:** Tier → Nível; Act → Ato; Item
 
@@ -141,7 +141,7 @@
 
 **EN:** UNIQUE: All of the above Tiers have a Unique version of the cards available. Unique Items represent an Item with a unique history behind its existence. See Unique Loot Pg. 57.
 
-**PT-BR proposto:** ÚNICO: Todas as categorias acima têm versões Únicas. São Itens com história própria. Consulte Saque Único, p. 57.
+**PT-BR proposto:** ÚNICO: Todos os Tiers acima têm versões Únicas. São Itens com história própria. Veja Saque Único, p. 57.
 
 **Revisão pendente:** Unique → Único; Tier → Nível; Unique Loot → Saque Único
 
@@ -186,7 +186,7 @@ Acessórios: Também ajudam a evitar dano e têm outras propriedades únicas.
 
 **EN:** Item Tiers and Types
 
-**PT-BR proposto:** Níveis e Tipos de Itens
+**PT-BR proposto:** Tiers e Tipos de Itens
 
 **Revisão pendente:** Tier → Nível; Item(s)
 

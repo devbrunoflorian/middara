@@ -140,7 +140,51 @@
       "pendingTerms": [
         "Casting → Conjuração",
         "Casting Value → Valor de Conjuração"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 102,
+          "pdfDocumentPageIndex": 101,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            419.7532043457031,
+            736.1439819335938,
+            627.2736206054688,
+            759.0640258789062
+          ],
+          "visualBaselinesPt": [
+            745.354,
+            756.354
+          ],
+          "spans": 4,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_102_block_1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            623.16,
+            632.06
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "note": "As duas unidades pertencem ao bloco explicativo de Conviction and Casting Value. A redação, rich text, seis linhas do corpo e duas linhas da frase final constam nas provas preservadas.",

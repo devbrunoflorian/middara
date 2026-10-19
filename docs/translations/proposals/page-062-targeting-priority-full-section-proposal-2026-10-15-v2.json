@@ -227,7 +227,7 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Se nenhum alvo específico for mencionado, ou se ainda houver vários alvos elegíveis mesmo depois de um alvo mais específico ser identificado, os Combatentes priorizam o alvo que estiver mais à frente na Trilha de Iniciativa.",
+            "text": "Se um alvo específico nunca for expressamente mencionado, ou caso continuem existindo múltiplos alvos elegíveis mesmo após a identificação prévia de um alvo mais específico, os Combatentes priorizarão o alvo que estiver posicionado mais próximo da frente da Trilha de Iniciativa.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -241,7 +241,7 @@
       "blockIndex": 3,
       "sourceUnitId": "p62-ai-target-priority-body",
       "sourceText": "If a specific target is never mentioned, or if there are ever multiple eligible targets even after a more specific target is identified, Combatants will prioritize the target that is closer to the front of the Initiative Track.",
-      "proposalText": "Se nenhum alvo específico for mencionado, ou se ainda houver vários alvos elegíveis mesmo depois de um alvo mais específico ser identificado, os Combatentes priorizam o alvo que estiver mais à frente na Trilha de Iniciativa.",
+      "proposalText": "Se um alvo específico nunca for expressamente mencionado, ou caso continuem existindo múltiplos alvos elegíveis mesmo após a identificação prévia de um alvo mais específico, os Combatentes priorizarão o alvo que estiver posicionado mais próximo da frente da Trilha de Iniciativa.",
       "technicalStatus": "verified_live_viewer_highlight_copyfit_v3_editor_readonly_pdf",
       "editorialStatus": "pending_human_review",
       "pendingTerms": [
@@ -249,7 +249,77 @@
         "ATK → ATQ follows the saved p.50 local form; Range → Alcance follows saved p.50 usage. Neither is approved as a global glossary decision.",
         "AI Step → Etapa de IA follows existing p.62 saved usage. Damage → Dano and the positional wording “mais à frente” remain proposed local forms.",
         "Cave Sickle remains the printed creature name, matching saved p.50 examples."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 62,
+          "pdfDocumentPageIndex": 61,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17689514160156,
+            239.83721923828125,
+            406.5967712402344,
+            273.7372131347656
+          ],
+          "visualBaselinesPt": [
+            249.027,
+            260.027,
+            271.027
+          ],
+          "spans": 3,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_62_unit_p62-ai-target-priority-body__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            220.95,
+            229.86,
+            238.77
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_62_unit_p62-ai-target-priority-body__pt-BR",
+        "bbox": [
+          86.17689514160156,
+          239.83721923828125,
+          406.5967712402344,
+          273.7372131347656
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Se nenhum alvo for especificado ou houver múltiplos alvos elegíveis, os Combatentes priorizam o alvo mais à frente na Trilha de Iniciativa.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     },
     {
       "spanKey": "page_62_unit_p62-ai-target-priority-example__pt-BR",
@@ -300,15 +370,7 @@
             "style": "normal"
           },
           {
-            "text": " ",
-            "font": "OptimaLTStd-Bold",
-            "size": 10,
-            "color": "#231f20",
-            "weight": 700,
-            "style": "normal"
-          },
-          {
-            "text": "instrui um ",
+            "text": " instrui um ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -362,15 +424,7 @@
             "style": "normal"
           },
           {
-            "text": " ",
-            "font": "OptimaLTStd-Bold",
-            "size": 9,
-            "color": "#231f20",
-            "weight": 700,
-            "style": "normal"
-          },
-          {
-            "text": "contra o alvo com mais Dano. Há ",
+            "text": " Corpo a Corpo contra o alvo que possuir a maior quantidade de Dano. Há ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -378,7 +432,7 @@
             "style": "normal"
           },
           {
-            "text": "2",
+            "text": " alvos elegíveis no momento; ambos encontram-se dentro do Alcance (que é adjacente) e ambos possuem rigorosamente a mesma quantia de Dano acumulado. Dentre os dois, o alvo que estiver posicionado mais próximo da frente da Trilha de Iniciativa será o alvo obrigatoriamente escolhido para o Ataque.",
             "font": "OptimaLTStd-Bold",
             "size": 9,
             "color": "#231f20",
@@ -386,7 +440,7 @@
             "style": "normal"
           },
           {
-            "text": " alvos elegíveis; ambos estão no Alcance adjacente e têm a mesma quantidade de Dano. Entre os dois, o alvo mais à frente na Trilha de Iniciativa será escolhido para o Ataque.",
+            "text": " alvos elegíveis no momento; ambos estão dentro do Alcance (que é adjacente) e ambos possuem exatamente a mesma quantia de Dano acumulado. Dentre os dois, o alvo que estiver mais próximo da frente da Trilha de Iniciativa será o alvo escolhido para o Ataque.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -402,7 +456,7 @@
       "blockIndex": 3,
       "sourceUnitId": "p62-ai-target-priority-example",
       "sourceText": "Example: An AI Step instructs a Cave Sickle to make a [[symbol:attack.melee]] ATK against the target with the most Damage. There are 2 eligible targets, both are within Range, which is adjacent, and they both have the same amount of Damage. Out of the two, the target closer to the front of the Initiative Track would be the target of the Attack.",
-      "proposalText": "Exemplo: Uma Etapa de IA instrui um Cave Sickle a realizar um  ATQ contra o alvo com mais Dano. Há 2 alvos elegíveis; ambos estão no Alcance adjacente e têm a mesma quantidade de Dano. Entre os dois, o alvo mais à frente na Trilha de Iniciativa será escolhido para o Ataque.",
+      "proposalText": "Exemplo: Uma Etapa de IA instrui um Cave Sickle a realizar um ￼ ATQ Corpo a Corpo contra o alvo que possuir a maior quantidade de Dano. Há 2 alvos elegíveis no momento; ambos encontram-se dentro do Alcance (que é adjacente) e ambos possuem rigorosamente a mesma quantia de Dano acumulado. Dentre os dois, o alvo que estiver posicionado mais próximo da frente da Trilha de Iniciativa será o alvo obrigatoriamente escolhido para o Ataque.",
       "technicalStatus": "verified_live_viewer_highlight_copyfit_v3_editor_readonly_pdf",
       "editorialStatus": "pending_human_review",
       "pendingTerms": [
@@ -410,7 +464,58 @@
         "ATK → ATQ follows the saved p.50 local form; Range → Alcance follows saved p.50 usage. Neither is approved as a global glossary decision.",
         "AI Step → Etapa de IA follows existing p.62 saved usage. Damage → Dano and the positional wording “mais à frente” remain proposed local forms.",
         "Cave Sickle remains the printed creature name, matching saved p.50 examples."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 62,
+          "pdfDocumentPageIndex": 61,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17037963867188,
+            276.9078063964844,
+            395.33673095703125,
+            334.4057922363281
+          ],
+          "visualBaselinesPt": [
+            287.696,
+            298.696,
+            309.696,
+            320.696,
+            331.696
+          ],
+          "spans": 14,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_62_unit_p62-ai-target-priority-example__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 14,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            259.23,
+            269.92,
+            278.83,
+            287.73,
+            296.64
+          ],
+          "frameHeightCssPx": 46.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "proposalMarkup": "Exemplo: Uma Etapa de IA instrui um Cave Sickle a realizar um ￼ ATQ contra o alvo com a maior quantidade de Dano. Existem 2 alvos elegíveis; ambos estão dentro do Alcance, que é adjacente, e ambos possuem a mesma quantia de Dano sofrido. Entre os dois, o alvo mais próximo da frente da Trilha de Iniciativa será o alvo deste Ataque."
     },
     {
       "spanKey": "page_62_block_1",
@@ -475,7 +580,57 @@
       "pendingTerms": [
         "Combatante(s) Inteligente(s), Etapa(s) de IA, Ação/Habilidade, Ações de Ataque, Ações de Feitiço, Alcance, Linha de Visão e Valor de Armadura are consistent with current local proposals but are not all in the official glossary.",
         "HP and SOI remain unchanged as printed stat/mechanic abbreviations; that local choice is pending human review."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 62,
+          "pdfDocumentPageIndex": 61,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.16919708251953,
+            107.4979248046875,
+            392.42266845703125,
+            163.39793395996094
+          ],
+          "visualBaselinesPt": [
+            116.688,
+            127.688,
+            138.688,
+            149.688,
+            160.688
+          ],
+          "spans": 9,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_62_block_1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 13,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            113.7,
+            122.61,
+            131.52,
+            140.42,
+            149.33
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "spanKey": "page_62_block_2",
@@ -540,7 +695,59 @@
       "pendingTerms": [
         "Combatante(s) Inteligente(s), Etapa(s) de IA, Ação/Habilidade, Ações de Ataque, Ações de Feitiço, Alcance, Linha de Visão e Valor de Armadura are consistent with current local proposals but are not all in the official glossary.",
         "HP and SOI remain unchanged as printed stat/mechanic abbreviations; that local choice is pending human review."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 6,
+      "pageRendererVisualLineCount": 6,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 6,
+        "pageRendererVisualLineCount": 6,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 62,
+          "pdfDocumentPageIndex": 61,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.16919708251953,
+            168.16790771484375,
+            396.57916259765625,
+            235.06724548339844
+          ],
+          "visualBaselinesPt": [
+            177.358,
+            188.358,
+            199.358,
+            210.357,
+            221.357,
+            232.357
+          ],
+          "spans": 10,
+          "visualRows": 6
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_62_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 15,
+          "distinctVisualRows": 6,
+          "visualRowTopsCssPx": [
+            162.88,
+            171.78,
+            180.69,
+            189.59,
+            198.5,
+            207.41
+          ],
+          "frameHeightCssPx": 54.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "proposalId": "p062-targeting-priority-full-section",

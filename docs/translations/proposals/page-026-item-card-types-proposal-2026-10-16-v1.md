@@ -120,7 +120,7 @@
 
 **EN:** ITEM TIER AND TYPE:
 
-**PT-BR:** NÍVEL E TIPO DO ITEM:
+**PT-BR:** TIER E TIPO DO ITEM:
 
 **Revisão pendente:** Tier → Nível segue a proposta contextual de glossary-candidates.md e continua sem aprovação.
 
@@ -128,7 +128,7 @@
 
 **EN:** An Item’s Tier and type are listed here.
 
-**PT-BR:** O Nível e o tipo do Item estão indicados aqui.
+**PT-BR:** O Tier e o tipo do Item estão indicados aqui.
 
 **Revisão pendente:** Tier → Nível permanece candidato contextual; Item → Item aguarda decisão humana.
 

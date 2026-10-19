@@ -42,7 +42,12 @@
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_89_block_6__pt-BR",
-        "bbox": [456.0711975097656, 414.3247375488281, 669.9916381835938, 437.2447204589844],
+        "bbox": [
+          456.0711975097656,
+          414.3247375488281,
+          669.9916381835938,
+          437.2447204589844
+        ],
         "textAlign": "left",
         "lineHeight": 1.1,
         "lineHeightMode": "custom",
@@ -71,7 +76,51 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Presence → Presença é uma equivalência local candidata para o nome do atributo e ainda não consta no glossário oficial."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 89,
+          "pdfDocumentPageIndex": 88,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            456.0711975097656,
+            414.3247375488281,
+            669.9916381835938,
+            437.2447204589844
+          ],
+          "visualBaselinesPt": [
+            423.535,
+            434.535
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_89_block_6__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            362.36,
+            371.27
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "note": "Recorte incremental de uma definição curta de atributo. Mantém a forma do título e esclarece o grau em que outras pessoas notam o Aventureiro.",

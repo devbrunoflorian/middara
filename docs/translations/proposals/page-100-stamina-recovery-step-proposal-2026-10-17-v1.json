@@ -91,43 +91,47 @@
       "copyfitClassification": "EXACT",
       "pageRendererVisualLineCount": 1,
       "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "live PageRenderer DOM Range client rects grouped by shared V3 baseline helper; source count from PDF-derived page_100_dom.json geometry",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
         "environment": {
-          "viewportCssPixels": "2400x1400",
-          "deviceScaleFactor": 1,
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
           "language": "pt-BR",
-          "zooms": [
-            "100%",
-            "200%"
-          ],
-          "fontLoaded": true
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
         },
-        "geometry": "The source-backed unit remains within its original field; both proposal units were rendered together and critical review found no clipping or collision.",
-        "evidence": {
-          "measurementFiles": [
-            "apps/web/output/p100-block_26-copyfit-v1/a-recuperar-pontos-de-vigor-sp-100pct-measurement.json",
-            "apps/web/output/p100-block_26-copyfit-v1/a-recuperar-pontos-de-vigor-sp-200pct-measurement.json"
+        "sourceEvidence": {
+          "bboxPt": [
+            447.31781005859375,
+            177.83966064453125,
+            755.9719848632812,
+            218.56472778320312
           ],
-          "screenshots": [
-            "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-recuperar-pontos-de-vigor-sp-100pct.png",
-            "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-recuperar-pontos-de-vigor-sp-200pct.png"
-          ]
+          "visualBaselinesPt": [
+            186.129,
+            196.128,
+            206.127,
+            216.126
+          ],
+          "spans": 11,
+          "visualRows": 4
         },
-        "samplesByZoom": [
-          {
-            "zoomPercent": 100,
-            "renderedVisualBaselines": 1,
-            "textEscapesFrame": false
-          },
-          {
-            "zoomPercent": 200,
-            "renderedVisualBaselines": 1,
-            "textEscapesFrame": false
-          }
-        ]
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-recover-stamina-points-heading__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            170.7
+          ],
+          "frameHeightCssPx": 7.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Calibrated to 1 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
       }
     },
     {
@@ -143,7 +147,7 @@
         "line_26_2",
         "line_26_3"
       ],
-      "proposalText": "A Barra de Recuperação de Vigor de cada Aventureiro determina quantos SP ele recebe nesta etapa e quantos SP pode ter a qualquer momento. Consulte A: Barra de Recuperação de Vigor, p. 25.",
+      "proposalText": "A Barra de Recuperação de Vigor de cada Aventureiro determina quantos SP ele recebe nesta etapa e quantos SP pode ter a qualquer momento. Veja A: Barra de Recuperação de Vigor, p. 25.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_100_unit_p100-recover-stamina-points-description__pt-BR",
@@ -242,43 +246,49 @@
       "copyfitClassification": "EXACT",
       "pageRendererVisualLineCount": 3,
       "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 3,
         "pageRendererVisualLineCount": 3,
         "classification": "EXACT",
-        "method": "live PageRenderer DOM Range client rects grouped by shared V3 baseline helper; source count from PDF-derived page_100_dom.json geometry",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
         "environment": {
-          "viewportCssPixels": "2400x1400",
-          "deviceScaleFactor": 1,
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
           "language": "pt-BR",
-          "zooms": [
-            "100%",
-            "200%"
-          ],
-          "fontLoaded": true
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
         },
-        "geometry": "The source-backed unit remains within its original field; both proposal units were rendered together and critical review found no clipping or collision.",
-        "evidence": {
-          "measurementFiles": [
-            "apps/web/output/p100-block_26-copyfit-v1/a-barra-de-recupera-o-de-vigor-de-cada-aventureiro-determina-quantos-sp-ele-recebe-nesta-etapa-e-quantos-sp-pode-ter-a-qualquer-momento-consulte-a-barra-de-recupera-o-de-vigor-p-25-100pct-measurement.json",
-            "apps/web/output/p100-block_26-copyfit-v1/a-barra-de-recupera-o-de-vigor-de-cada-aventureiro-determina-quantos-sp-ele-recebe-nesta-etapa-e-quantos-sp-pode-ter-a-qualquer-momento-consulte-a-barra-de-recupera-o-de-vigor-p-25-200pct-measurement.json"
+        "sourceEvidence": {
+          "bboxPt": [
+            447.31781005859375,
+            177.83966064453125,
+            755.9719848632812,
+            218.56472778320312
           ],
-          "screenshots": [
-            "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-barra-de-recupera-o-de-vigor-de-cada-aventureiro-determina-quantos-sp-ele-recebe-nesta-etapa-e-quantos-sp-pode-ter-a-qualquer-momento-consulte-a-barra-de-recupera-o-de-vigor-p-25-100pct.png",
-            "apps/web/output/p100-block_26-copyfit-v1/viewer-ptbr-a-barra-de-recupera-o-de-vigor-de-cada-aventureiro-determina-quantos-sp-ele-recebe-nesta-etapa-e-quantos-sp-pode-ter-a-qualquer-momento-consulte-a-barra-de-recupera-o-de-vigor-p-25-200pct.png"
-          ]
+          "visualBaselinesPt": [
+            186.129,
+            196.128,
+            206.127,
+            216.126
+          ],
+          "spans": 11,
+          "visualRows": 4
         },
-        "samplesByZoom": [
-          {
-            "zoomPercent": 100,
-            "renderedVisualBaselines": 3,
-            "textEscapesFrame": false
-          },
-          {
-            "zoomPercent": 200,
-            "renderedVisualBaselines": 3,
-            "textEscapesFrame": false
-          }
-        ]
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-recover-stamina-points-description__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 12,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            178.8,
+            186.09,
+            193.39
+          ],
+          "frameHeightCssPx": 21.9
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Calibrated to 3 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
       }
     }
   ],

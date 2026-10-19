@@ -16,7 +16,7 @@
 
 **Exemplo de Movimento:** Na Fase de Ação de Zeke, ele quer chegar à ficha de Saque a oeste de Remi. Ele gasta **1 SP** para realizar uma Ação de Movimento e recebe Pontos de Movimento iguais ao Valor de Movimento da Carta de Aventureiro: **6**. Como miniaturas não se movem na diagonal, deve escolher entre a rota curta a oeste, pelo Terreno Difícil (termina em `[B]`), e a longa ao sul, até `[D]`.
 
-Se Zeke seguir pela rota curta até `[B]`, o Animado fará um Ataque de Oportunidade quando ele sair de `[C]` (consulte *Diagonais e Ataques de Oportunidade*, pág. **42**). Se for até `[D]`, evitará o perigo, mas terminará mais longe do objetivo.
+Se Zeke seguir pela rota curta até `[B]`, o Animado fará um Ataque de Oportunidade quando ele sair de `[C]` (veja *Diagonais e Ataques de Oportunidade*, pág. **42**). Se for até `[D]`, evitará o perigo, mas terminará mais longe do objetivo.
 
 Após passar pelo Animado e pelo Terreno Difícil até `[B]`, Zeke pode gastar mais SP para receber **2** Pontos de Movimento e atravessar o espaço de Remi. Por ela ser aliada, Zeke pode atravessar o espaço, mas não parar nele. Sair do espaço de uma aliada custa **2** Pontos de Movimento; então, ele só alcançará `[A]` se gastar mais **2 SP** para receber **4** Pontos de Movimento. Ao chegar a `[A]`, ainda terá **1** Ponto de Movimento.
 

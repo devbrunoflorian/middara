@@ -112,43 +112,49 @@
       "copyfitClassification": "EXACT",
       "pageRendererVisualLineCount": 3,
       "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 3,
         "pageRendererVisualLineCount": 3,
         "classification": "EXACT",
-        "method": "live PageRenderer DOM Range client rects grouped by shared V3 baseline helper; source count from PDF-derived page_100_dom.json geometry",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
         "environment": {
-          "viewportCssPixels": "2400x1400",
-          "deviceScaleFactor": 1,
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
           "language": "pt-BR",
-          "zooms": [
-            "100%",
-            "200%"
-          ],
-          "fontLoaded": true
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
         },
-        "geometry": "The three-line body remains within the source frame at both scales with both source SP emphasis spans preserved.",
-        "evidence": {
-          "measurementFiles": [
-            "apps/web/output/p100-block_28-copyfit-v1/durante-a-fase-de-a-o-o-aventureiro-pode-gastar-sp-para-realizar-a-es-e-ou-usar-habilidades-quando-n-o-quiser-mais-gastar-sp-realizar-a-es-ou-usar-habilidades-a-aventura-segue-para-a-fase-de-fim-do-turno-100pct-measurement.json",
-            "apps/web/output/p100-block_28-copyfit-v1/durante-a-fase-de-a-o-o-aventureiro-pode-gastar-sp-para-realizar-a-es-e-ou-usar-habilidades-quando-n-o-quiser-mais-gastar-sp-realizar-a-es-ou-usar-habilidades-a-aventura-segue-para-a-fase-de-fim-do-turno-200pct-measurement.json"
+        "sourceEvidence": {
+          "bboxPt": [
+            435.9742126464844,
+            282.17987060546875,
+            755.9225463867188,
+            322.9048767089844
           ],
-          "screenshots": [
-            "apps/web/output/p100-block_28-copyfit-v1/viewer-ptbr-durante-a-fase-de-a-o-o-aventureiro-pode-gastar-sp-para-realizar-a-es-e-ou-usar-habilidades-quando-n-o-quiser-mais-gastar-sp-realizar-a-es-ou-usar-habilidades-a-aventura-segue-para-a-fase-de-fim-do-turno-100pct.png",
-            "apps/web/output/p100-block_28-copyfit-v1/viewer-ptbr-durante-a-fase-de-a-o-o-aventureiro-pode-gastar-sp-para-realizar-a-es-e-ou-usar-habilidades-quando-n-o-quiser-mais-gastar-sp-realizar-a-es-ou-usar-habilidades-a-aventura-segue-para-a-fase-de-fim-do-turno-200pct.png"
-          ]
+          "visualBaselinesPt": [
+            290.469,
+            300.468,
+            310.467,
+            320.466
+          ],
+          "spans": 8,
+          "visualRows": 4
         },
-        "samplesByZoom": [
-          {
-            "zoomPercent": 100,
-            "renderedVisualBaselines": 3,
-            "textEscapesFrame": false
-          },
-          {
-            "zoomPercent": 200,
-            "renderedVisualBaselines": 3,
-            "textEscapesFrame": false
-          }
-        ]
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-action-phase-description__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            263.36,
+            270.66,
+            277.95
+          ],
+          "frameHeightCssPx": 21.9
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Calibrated to 3 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
       }
     }
   ],

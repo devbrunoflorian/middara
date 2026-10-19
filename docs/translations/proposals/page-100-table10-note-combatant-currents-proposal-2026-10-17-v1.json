@@ -25,7 +25,7 @@
       "spanKey": "page_100_block_10__pt-BR",
       "language": "pt-BR",
       "sourceText": "NOTE: Combatant tokens may or may not be moved by currents. See Table 9, Pg. 97 for details.",
-      "proposalText": "NOTA: Fichas de Combatente podem ou não ser movidas pelas Correntes. Consulte a Tabela 9, pág. 97, para detalhes.",
+      "proposalText": "NOTA: Fichas de Combatente podem ou não ser movidas pelas Correntes. Veja Tabela 9, pág. 97, para detalhes.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_100_block_10__pt-BR",
@@ -91,18 +91,45 @@
       "pageRendererVisualLineCount": 2,
       "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
-        "measurementSource": "Original PDF geometry and live PageRenderer DOM Range rectangles grouped by groupPageRendererVisualLines",
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 2,
         "pageRendererVisualLineCount": 2,
         "classification": "EXACT",
-        "environment": "PT-BR, viewport 2400x1400 CSS px, DPR 1, 100% and 200% Viewer zoom, OptimaLTStd fonts loaded",
-        "geometry": "Original bbox retained: [57.2765, 232.5488, 312.9486, 254.1768] pt. Candidate ink remains within the source frame at both scales, and the two visual rows match the PDF.",
-        "evidence": [
-          "apps/web/output/p100-block_21-copyfit-v1/viewer-ptbr-nota-fichas-de-combatente-podem-ou-n-o-ser-movidas-pelas-correntes-consulte-a-tabela-9-p-g-97-para-detalhes-100pct.png",
-          "apps/web/output/p100-block_21-copyfit-v1/nota-fichas-de-combatente-podem-ou-n-o-ser-movidas-pelas-correntes-consulte-a-tabela-9-p-g-97-para-detalhes-100pct-measurement.json",
-          "apps/web/output/p100-block_21-copyfit-v1/viewer-ptbr-nota-fichas-de-combatente-podem-ou-n-o-ser-movidas-pelas-correntes-consulte-a-tabela-9-p-g-97-para-detalhes-200pct.png",
-          "apps/web/output/p100-block_21-copyfit-v1/nota-fichas-de-combatente-podem-ou-n-o-ser-movidas-pelas-correntes-consulte-a-tabela-9-p-g-97-para-detalhes-200pct-measurement.json"
-        ]
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            57.27650451660156,
+            232.548828125,
+            312.9485778808594,
+            254.17684936523438
+          ],
+          "visualBaselinesPt": [
+            241.739,
+            251.738
+          ],
+          "spans": 5,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_block_10__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 6,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            215.05,
+            223.16
+          ],
+          "frameHeightCssPx": 17.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
       "technicalStatus": "fit-awaiting-human-review",
       "editorialStatus": "pending_human_review",

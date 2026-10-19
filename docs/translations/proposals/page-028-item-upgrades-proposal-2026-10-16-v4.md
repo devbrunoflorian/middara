@@ -162,7 +162,7 @@
 
 **EN:** The cost of applying an Item Upgrade to an Item varies depending on the Tier of the Item being Upgraded. Unique Items do not cost more to Upgrade than their non-Unique counterparts. Story and Monster Loot Items are considered to be Items in your current Loot LVL.
 
-**PT-BR proposto:** O custo para aplicar um Aprimoramento de Item varia conforme o Nível do Item. Itens Únicos custam o mesmo que os não Únicos. Itens de História e de Saque de Monstro são considerados do Nível de Saque atual.
+**PT-BR proposto:** O custo para aplicar um Aprimoramento de Item varia conforme o Tier do Item. Itens Únicos custam o mesmo que os não Únicos. Itens de História e de Saque de Monstro são considerados do Nível de Saque atual.
 
 **Revisão pendente:** Tier → Nível é candidato contextual; Unique, Story Item, Monster Loot Item e Loot LVL aguardam revisão humana.
 
@@ -170,7 +170,7 @@
 
 **EN:** The chart below lists the Gold cost to apply any Unlocked Item Upgrade to an Item by their Tier.
 
-**PT-BR proposto:** A tabela abaixo mostra o custo em Ouro para aplicar a um Item qualquer Aprimoramento de Item desbloqueado, conforme o Nível do Item.
+**PT-BR proposto:** A tabela abaixo mostra o custo em Ouro para aplicar a um Item qualquer Aprimoramento de Item desbloqueado, conforme o Tier do Item.
 
 **Revisão pendente:** Gold → Ouro; Tier → Nível (candidato contextual); “Unlocked” modifica Aprimoramento de Item.
 

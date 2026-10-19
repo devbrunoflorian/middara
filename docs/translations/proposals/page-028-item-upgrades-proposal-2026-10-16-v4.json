@@ -768,7 +768,57 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            563.3621826171875,
+            386.9111022949219,
+            732.442626953125,
+            442.81109619140625
+          ],
+          "visualBaselinesPt": [
+            396.101,
+            407.101,
+            418.101,
+            429.101,
+            440.101
+          ],
+          "spans": 8,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_0__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 10,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            340.14,
+            349.05,
+            357.95,
+            367.86,
+            376.77
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_9",
@@ -975,7 +1025,57 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            563.3621826171875,
+            447.46112060546875,
+            728.85400390625,
+            503.48040771484375
+          ],
+          "visualBaselinesPt": [
+            456.771,
+            467.771,
+            478.771,
+            489.77,
+            500.77
+          ],
+          "spans": 11,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 11,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            389.2,
+            398.2,
+            407.13,
+            416.03,
+            424.86
+          ],
+          "frameHeightCssPx": 45.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_10",
@@ -1117,7 +1217,61 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 7,
+      "pageRendererVisualLineCount": 7,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 7,
+        "pageRendererVisualLineCount": 7,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            563.3638916015625,
+            508.25042724609375,
+            720.5344848632812,
+            586.1504516601562
+          ],
+          "visualBaselinesPt": [
+            517.44,
+            528.44,
+            539.44,
+            550.44,
+            561.44,
+            572.44,
+            583.44
+          ],
+          "spans": 8,
+          "visualRows": 7
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 8,
+          "distinctVisualRows": 7,
+          "visualRowTopsCssPx": [
+            438.47,
+            447.38,
+            456.3,
+            465.2,
+            474.13,
+            483.03,
+            491.94
+          ],
+          "frameHeightCssPx": 63.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_11",
@@ -1282,7 +1436,55 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            452.80389404296875,
+            604.3504028320312,
+            619.7841796875,
+            649.3704223632812
+          ],
+          "visualBaselinesPt": [
+            613.66,
+            624.66,
+            635.66,
+            646.66
+          ],
+          "spans": 8,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_3__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 11,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            516.36,
+            526.27,
+            535.17,
+            544.08
+          ],
+          "frameHeightCssPx": 36.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_12",
@@ -1495,7 +1697,59 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 6,
+      "pageRendererVisualLineCount": 6,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 6,
+        "pageRendererVisualLineCount": 6,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            452.80450439453125,
+            654.1400756835938,
+            620.8347778320312,
+            721.0394287109375
+          ],
+          "visualBaselinesPt": [
+            663.33,
+            674.329,
+            685.329,
+            696.329,
+            707.329,
+            718.329
+          ],
+          "spans": 12,
+          "visualRows": 6
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_4__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 16,
+          "distinctVisualRows": 6,
+          "visualRowTopsCssPx": [
+            556.7,
+            565.61,
+            574.52,
+            583.42,
+            592.33,
+            602.23
+          ],
+          "frameHeightCssPx": 54.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_13",
@@ -1685,7 +1939,53 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            452.80450439453125,
+            725.6893920898438,
+            615.584716796875,
+            759.7094116210938
+          ],
+          "visualBaselinesPt": [
+            734.999,
+            745.999,
+            756.999
+          ],
+          "spans": 6,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_5__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            614.69,
+            624.59,
+            634.5
+          ],
+          "frameHeightCssPx": 27.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_17",
@@ -1767,7 +2067,53 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.1339111328125,
+            154.03326416015625,
+            394.0138854980469,
+            187.9332733154297
+          ],
+          "visualBaselinesPt": [
+            163.223,
+            174.223,
+            185.223
+          ],
+          "spans": 3,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_7__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            151.42,
+            160.33,
+            169.23
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_21",
@@ -1879,7 +2225,49 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.13390350341797,
+            255.7511749267578,
+            164.17388916015625,
+            267.6711730957031
+          ],
+          "visualBaselinesPt": [
+            264.961
+          ],
+          "spans": 4,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_9__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            233.84
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_22",
@@ -1961,7 +2349,51 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.13390350341797,
+            272.4205017089844,
+            401.9338073730469,
+            295.3404846191406
+          ],
+          "visualBaselinesPt": [
+            281.63,
+            292.63
+          ],
+          "spans": 5,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_10__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            247.36,
+            256.27
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_23",
@@ -2037,7 +2469,49 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.13390350341797,
+            300.10980224609375,
+            297.9938659667969,
+            312.0097961425781
+          ],
+          "visualBaselinesPt": [
+            309.3
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_11__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            269.8
+          ],
+          "frameHeightCssPx": 9.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_24",
@@ -2191,7 +2665,53 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.13390350341797,
+            316.7798156738281,
+            395.4538269042969,
+            350.6798095703125
+          ],
+          "visualBaselinesPt": [
+            325.97,
+            336.97,
+            347.97
+          ],
+          "spans": 7,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_12__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            283.31,
+            292.22,
+            301.13
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_25",
@@ -2273,14 +2793,60 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.13389587402344,
+            355.4498291015625,
+            397.7138366699219,
+            389.3498229980469
+          ],
+          "visualBaselinesPt": [
+            364.64,
+            375.64,
+            386.64
+          ],
+          "spans": 3,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_13__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            314.64,
+            323.55,
+            332.45
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_29",
       "sourceUnitIds": [],
       "blockIndex": 15,
       "sourceText": "The cost of applying an Item Upgrade to an Item varies depending on the Tier of the Item being Upgraded. Unique Items do not cost more to Upgrade than their non-Unique counterparts. Story and Monster Loot Items are considered to be Items in your current Loot LVL.",
-      "proposalText": "O custo para aplicar um Aprimoramento de Item varia conforme o Nível do Item. Itens Únicos custam o mesmo que os não Únicos. Itens de História e de Saque de Monstro são considerados do Nível de Saque atual.",
+      "proposalText": "O custo para aplicar um Aprimoramento de Item varia conforme o Tier do Item. Itens Únicos custam o mesmo que os não Únicos. Itens de História e de Saque de Monstro são considerados do Nível de Saque atual.",
       "proposalMarkup": "O custo para aplicar um Aprimoramento de Item varia conforme o Nível do Item. Itens Únicos custam o mesmo que os não Únicos. Itens de História e de Saque de Monstro são considerados do Nível de Saque atual.",
       "spanKey": "page_28_block_15",
       "legacyBlockSpanKey": "page_28_block_15__pt-BR",
@@ -2296,7 +2862,7 @@
             "weight": 400,
             "style": "normal",
             "disableLigatures": true,
-            "text": "O custo para aplicar um Aprimoramento de Item varia conforme o Nível do Item. Itens Únicos custam o mesmo que os não Únicos. Itens de História e de Saque de Monstro são considerados do "
+            "text": "O custo para aplicar um Aprimoramento de Item varia conforme o Tier do Item. Itens Únicos custam o mesmo que os não Únicos. Itens de História e de Saque de Monstro são considerados do "
           },
           {
             "font": "OptimaLTStd-Bold",
@@ -2397,14 +2963,62 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.1339111328125,
+            451.7877197265625,
+            386.3338317871094,
+            496.6877136230469
+          ],
+          "visualBaselinesPt": [
+            460.978,
+            471.978,
+            482.978,
+            493.978
+          ],
+          "spans": 6,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_15__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 8,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            392.72,
+            401.63,
+            410.53,
+            419.44
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_30",
       "sourceUnitIds": [],
       "blockIndex": 16,
       "sourceText": "The chart below lists the Gold cost to apply any Unlocked Item Upgrade to an Item by their Tier.",
-      "proposalText": "A tabela abaixo mostra o custo em Ouro para aplicar a um Item qualquer Aprimoramento de Item desbloqueado, conforme o Nível do Item.",
+      "proposalText": "A tabela abaixo mostra o custo em Ouro para aplicar a um Item qualquer Aprimoramento de Item desbloqueado, conforme o Tier do Item.",
       "proposalMarkup": "A tabela abaixo mostra o custo em Ouro para aplicar a um Item qualquer Aprimoramento de Item desbloqueado, conforme o Nível do Item.",
       "spanKey": "page_28_block_16",
       "legacyBlockSpanKey": "page_28_block_16__pt-BR",
@@ -2420,7 +3034,7 @@
             "weight": 400,
             "style": "normal",
             "disableLigatures": true,
-            "text": "A tabela abaixo mostra o custo em Ouro para aplicar a um Item qualquer Aprimoramento de Item desbloqueado, conforme o Nível do Item."
+            "text": "A tabela abaixo mostra o custo em Ouro para aplicar a um Item qualquer Aprimoramento de Item desbloqueado, conforme o Tier do Item."
           }
         ],
         "textAlign": "left",
@@ -2473,7 +3087,51 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.13392639160156,
+            501.4577331542969,
+            395.0438537597656,
+            524.3577270507812
+          ],
+          "visualBaselinesPt": [
+            510.648,
+            521.648
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_16__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            432.97,
+            441.88
+          ],
+          "frameHeightCssPx": 18.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_31",
@@ -2600,7 +3258,49 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            196.54989624023438,
+            532.1055297851562,
+            295.37188720703125,
+            544.0255737304688
+          ],
+          "visualBaselinesPt": [
+            541.316
+          ],
+          "spans": 4,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_17__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 4,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            457.81
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_32",
@@ -2727,7 +3427,49 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            197.58059692382812,
+            547.1055297851562,
+            294.3412780761719,
+            559.0255737304688
+          ],
+          "visualBaselinesPt": [
+            556.316
+          ],
+          "spans": 4,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_18__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 4,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            469.97
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_33",
@@ -2854,7 +3596,49 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            190.57859802246094,
+            562.10546875,
+            301.3432922363281,
+            574.0255126953125
+          ],
+          "visualBaselinesPt": [
+            571.315
+          ],
+          "spans": 4,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_19__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 4,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            482.13
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_34",
@@ -2981,7 +3765,49 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            208.83050537109375,
+            577.10546875,
+            283.0912780761719,
+            589.0255126953125
+          ],
+          "visualBaselinesPt": [
+            586.315
+          ],
+          "spans": 4,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_20__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 4,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            494.28
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_38",
@@ -3208,7 +4034,51 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.13180541992188,
+            662.444091796875,
+            383.8017272949219,
+            685.3641357421875
+          ],
+          "visualBaselinesPt": [
+            671.654,
+            682.654
+          ],
+          "spans": 9,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_22__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            563.44,
+            572.36
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_39",
@@ -3302,7 +4172,57 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.13780212402344,
+            690.1340942382812,
+            394.24774169921875,
+            746.0341186523438
+          ],
+          "visualBaselinesPt": [
+            699.324,
+            710.324,
+            721.324,
+            732.324,
+            743.324
+          ],
+          "spans": 5,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_23__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            585.88,
+            594.78,
+            603.7,
+            612.61,
+            621.53
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_40",
@@ -3384,7 +4304,53 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.13780212402344,
+            750.8041381835938,
+            386.5277099609375,
+            784.7041625976562
+          ],
+          "visualBaselinesPt": [
+            759.994,
+            770.994,
+            781.994
+          ],
+          "spans": 3,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_24__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            635.05,
+            643.95,
+            652.86
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_41",
@@ -3454,7 +4420,49 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            79.37000274658203,
+            56.69243621826172,
+            221.8382110595703,
+            80.95643615722656
+          ],
+          "visualBaselinesPt": [
+            74.26
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_25__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            72.53
+          ],
+          "frameHeightCssPx": 19.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "sourceBlockId": "block_109",
@@ -3524,7 +4532,49 @@
         "read-only Admin Editor v1",
         "Copyfit V3 v4 metrics",
         "isolated one-page PT-BR PDF v4 and raster"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 28,
+          "pdfDocumentPageIndex": 27,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            472.8030090332031,
+            91.84133911132812,
+            691.0748901367188,
+            113.40933990478516
+          ],
+          "visualBaselinesPt": [
+            107.457
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_28_block_34__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            101.02
+          ],
+          "frameHeightCssPx": 17.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "artworkExceptions": [],

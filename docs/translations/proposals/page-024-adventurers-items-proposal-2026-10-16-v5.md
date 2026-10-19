@@ -153,7 +153,7 @@
 
 **EN:** During a Story Round, all Consumable Items that are not sold or equipped are discarded. See Selling Items Pg. 27.
 
-**PT-BR:** IMPORTANTE: Durante uma Rodada de História, todos os Itens Consumíveis que não forem vendidos ou equipados são descartados. Consulte Venda de Itens, pág. 27.
+**PT-BR:** IMPORTANTE: Durante uma Rodada de História, todos os Itens Consumíveis que não forem vendidos ou equipados são descartados. Veja Venda de Itens, pág. 27.
 
 **Revisão pendente:** Consumable Items → Itens Consumíveis e Selling Items → Venda de Itens são formas locais; Story Round → Rodada de História segue o glossário oficial.
 
@@ -241,7 +241,7 @@
 
 **EN:** In Adventure Mode, this will typically occur during the Shop and Train Phase of a Story Round. See Story Rounds Pg. 13.
 
-**PT-BR:** No Modo Aventura, isso costuma ocorrer na Fase de Comprar e Treinar da Rodada de História. Consulte Rodadas de História, pág. 13.
+**PT-BR:** No Modo Aventura, isso costuma ocorrer na Fase de Comprar e Treinar da Rodada de História. Veja Rodadas de História, pág. 13.
 
 **Revisão pendente:** Adventure Mode → Modo Aventura é forma local; Shop and Train e Story Round seguem o glossário oficial.
 

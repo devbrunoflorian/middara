@@ -87,135 +87,43 @@
       "copyfitClassification": "EXACT",
       "pageRendererVisualLineCount": 1,
       "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
-        "classification": "EXACT at 100%, 150%, and 200%",
-        "method": "Official-PDF source baseline versus live PageRenderer DOM Range rectangles grouped by the shared Copyfit V3 visual-row helper; no character count, string newline, or height estimate.",
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
         "environment": {
-          "viewportCssPixels": "2400x1400",
-          "deviceScaleFactor": 1,
+          "pageNumber": 98,
+          "pdfDocumentPageIndex": 97,
           "language": "pt-BR",
-          "zooms": [
-            "100%",
-            "150%",
-            "200%"
-          ],
-          "fontLoaded": true
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
         },
-        "geometry": "The source title occupies one 12 pt visual row with a bold AGaramondPro prefix and Cinzel title text. The proposal retains the same source fonts, sizes, color, line frame, and hierarchy; no forced line breaks or geometry changes.",
-        "evidence": {
-          "measurementFiles": [
-            "apps/web/output/p98-block_21-copyfit-v1/tabela-9-continua-o-100pct-measurement.json",
-            "apps/web/output/p98-block_21-copyfit-v1/tabela-9-continua-o-150pct-measurement.json",
-            "apps/web/output/p98-block_21-copyfit-v1/tabela-9-continua-o-200pct-measurement.json"
+        "sourceEvidence": {
+          "bboxPt": [
+            58.6693000793457,
+            39.970924377441406,
+            303.2053527832031,
+            56.14692306518555
           ],
-          "screenshots": [
-            "apps/web/output/p98-block_21-copyfit-v1/viewer-ptbr-tabela-9-continua-o-100pct.png",
-            "apps/web/output/p98-block_21-copyfit-v1/viewer-ptbr-tabela-9-continua-o-200pct.png"
+          "visualBaselinesPt": [
+            51.683
           ],
-          "sourceComparisons": [
-            "apps/web/output/p098-table9-header-labels-copyfit-v1/official-pdf-vs-live-viewer-title-100pct.png",
-            "apps/web/output/p098-table9-header-labels-copyfit-v1/official-pdf-vs-live-viewer-title-200pct.png"
-          ]
+          "spans": 2,
+          "visualRows": 1
         },
-        "samplesByZoom": [
-          {
-            "zoomPercent": 100,
-            "sourcePdfVisualBaselines": 1,
-            "renderedVisualBaselines": 1,
-            "classification": "EXACT",
-            "fontLoaded": true,
-            "textEscapesFrame": false,
-            "translatedWrapperStrokeIsolation": "PASS",
-            "blockedWrites": 0,
-            "pageErrors": 0,
-            "result": "PASS",
-            "inkRects": [
-              {
-                "x": 643.109375,
-                "y": 144.75,
-                "width": 70.859375,
-                "height": 19
-              },
-              {
-                "x": 713.96875,
-                "y": 139.75,
-                "width": 137.09375,
-                "height": 23
-              }
-            ],
-            "frame": {
-              "x": 643.109375,
-              "y": 142.75,
-              "width": 383.9375,
-              "height": 25.390625
-            }
-          },
-          {
-            "zoomPercent": 150,
-            "sourcePdfVisualBaselines": 1,
-            "renderedVisualBaselines": 1,
-            "classification": "EXACT",
-            "fontLoaded": true,
-            "textEscapesFrame": false,
-            "translatedWrapperStrokeIsolation": "PASS",
-            "blockedWrites": 0,
-            "pageErrors": 0,
-            "result": "PASS",
-            "inkRects": [
-              {
-                "x": 367.171875,
-                "y": 298.125,
-                "width": 106.296875,
-                "height": 28
-              },
-              {
-                "x": 473.46875,
-                "y": 290.125,
-                "width": 205.625,
-                "height": 34
-              }
-            ],
-            "frame": {
-              "x": 367.171875,
-              "y": 293.125,
-              "width": 575.90625,
-              "height": 38.09375
-            }
-          },
-          {
-            "zoomPercent": 200,
-            "sourcePdfVisualBaselines": 1,
-            "renderedVisualBaselines": 1,
-            "classification": "EXACT",
-            "fontLoaded": true,
-            "textEscapesFrame": false,
-            "translatedWrapperStrokeIsolation": "PASS",
-            "blockedWrites": 0,
-            "pageErrors": 0,
-            "result": "PASS",
-            "inkRects": [
-              {
-                "x": 268.21875,
-                "y": 163.5,
-                "width": 141.71875,
-                "height": 37
-              },
-              {
-                "x": 409.9375,
-                "y": 152.5,
-                "width": 274.171875,
-                "height": 46
-              }
-            ],
-            "frame": {
-              "x": 268.21875,
-              "y": 157.5,
-              "width": 767.875,
-              "height": 50.78125
-            }
-          }
-        ]
+        "pageRendererEvidence": {
+          "spanKey": "page_98_block_7__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            57.98
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
       "copyfitSourcePdfLineCount": 1,
       "copyfitPageRendererLineCount": 1,

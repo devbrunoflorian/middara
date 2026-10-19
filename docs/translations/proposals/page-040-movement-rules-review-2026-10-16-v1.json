@@ -66,7 +66,49 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            91.41329956054688,
+            293.2881164550781,
+            197.14840698242188,
+            307.7001037597656
+          ],
+          "visualBaselinesPt": [
+            304.076
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_unit_p40-block-8-heading-size-12pt__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            264.27
+          ],
+          "frameHeightCssPx": 11.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": null,
@@ -75,8 +117,8 @@
       "sourceText": "During Zeke's Action Phase, he wants to move to the Loot token to the west of Remi. He spends 1 SP to make a Move Action and Gains Movement Points equal to his Movement Value printed on his Adventurer Card, in this case, 6. Since figures cannot move diagonally, he must choose between the shorter route heading west through Hindering Terrain (finishing at B ), or the longer route heading south and moving to D.",
       "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Na Fase de Ação de Zeke, ele quer chegar à ficha de Saque a oeste de Remi. Ele gasta 1 SP para realizar uma Ação de Movimento e recebe Pontos de Movimento iguais ao Valor de Movimento da Carta de Aventureiro: 6. Como miniaturas não se movem na diagonal, deve escolher entre a rota curta a oeste, pelo Terreno Difícil (termina em [[symbol:marker.reference.b]]), e a longa ao sul, até [[symbol:marker.reference.d]].",
-      "proposalMarkup": "Na Fase de Ação de Zeke, ele quer chegar à ficha de Saque a oeste de Remi. Ele gasta 1 SP para realizar uma Ação de Movimento e recebe Pontos de Movimento iguais ao Valor de Movimento da Carta de Aventureiro: 6. Como miniaturas não se movem na diagonal, deve escolher entre a rota curta a oeste, pelo Terreno Difícil (termina em [[symbol:marker.reference.b]]), e a longa ao sul, até [[symbol:marker.reference.d]].",
+      "proposalText": "Durante a Fase de Ação de Zeke, ele quer alcançar a ficha de Saque localizada a oeste de Remi. Ele gasta 1 SP para realizar uma Ação de Movimento e Ganha Pontos de Movimento iguais ao Valor de Movimento impresso em sua Carta de Aventureiro — neste caso, 6. Como as miniaturas não podem se mover na diagonal, ele deve escolher entre a rota mais curta em direção ao oeste, pelo Terreno Difícil (terminando em ￼), ou a rota mais longa em direção ao sul, movendo-se até ￼.",
+      "proposalMarkup": "Durante a Fase de Ação de Zeke, ele quer alcançar a ficha de Saque localizada a oeste de Remi. Ele gasta 1 SP para realizar uma Ação de Movimento e Ganha Pontos de Movimento iguais ao Valor de Movimento impresso em sua Carta de Aventureiro — neste caso, 6. Como as miniaturas não podem se mover na diagonal, ele deve escolher entre a rota mais curta em direção ao oeste, pelo Terreno Difícil (terminando em ￼), ou a rota mais longa em direção ao sul, movendo-se até ￼.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
@@ -91,7 +133,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Na Fase de Ação de Zeke, ele quer chegar à ficha de Saque a oeste de Remi. Ele gasta ",
+            "text": "Durante a Fase de Ação de Zeke, ele quer alcançar a ficha de Saque localizada a oeste de Remi. Ele gasta ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -107,7 +149,7 @@
             "style": "normal"
           },
           {
-            "text": " para realizar uma Ação de Movimento e recebe Pontos de Movimento iguais ao Valor de Movimento da Carta de Aventureiro: ",
+            "text": " para realizar uma Ação de Movimento e Ganha Pontos de Movimento iguais ao Valor de Movimento impresso em sua Carta de Aventureiro — neste caso, ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -123,7 +165,7 @@
             "style": "normal"
           },
           {
-            "text": ". Como miniaturas não se movem na diagonal, deve escolher entre a rota curta a oeste, pelo Terreno Difícil (termina em ",
+            "text": ". Como as miniaturas não podem se mover na diagonal, ele deve escolher entre a rota mais curta em direção ao oeste, pelo Terreno Difícil (terminando em ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -145,7 +187,7 @@
             }
           },
           {
-            "text": "), e a longa ao sul, até ",
+            "text": "), ou a rota mais longa em direção ao sul, movendo-se até ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -189,7 +231,54 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            91.40840148925781,
+            305.8460998535156,
+            724.6871948242188,
+            339.7861022949219
+          ],
+          "visualBaselinesPt": [
+            315.076,
+            326.076,
+            336.01,
+            337.076
+          ],
+          "spans": 14,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 11,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            274.44,
+            282.55,
+            290.66
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 1,
@@ -198,7 +287,7 @@
       "sourceText": "If Zeke chooses the short route to B, the Animate will get a Break Attack against him when he moves out of C (See Diagonals and Break Attacks Pg. 42). If he chooses to move to D, he avoids this danger, but ends up farther from his goal.",
       "spanKey": "page_40_block_1__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Se Zeke seguir pela rota curta até [[symbol:marker.reference.b]], o Animado fará um Ataque de Oportunidade quando ele sair de [[symbol:marker.reference.c]] (consulte Diagonais e Ataques de Oportunidade, pág. 42). Se for até [[symbol:marker.reference.d]], evitará o perigo, mas terminará mais longe do objetivo.",
+      "proposalText": "Se Zeke seguir pela rota curta até [[symbol:marker.reference.b]], o Animado fará um Ataque de Oportunidade quando ele sair de [[symbol:marker.reference.c]] (veja Diagonais e Ataques de Oportunidade, pág. 42). Se for até [[symbol:marker.reference.d]], evitará o perigo, mas terminará mais longe do objetivo.",
       "proposalMarkup": "Se Zeke seguir pela rota curta até [[symbol:marker.reference.b]], o Animado fará um Ataque de Oportunidade quando ele sair de [[symbol:marker.reference.c]] (consulte Diagonais e Ataques de Oportunidade, pág. 42). Se for até [[symbol:marker.reference.d]], evitará o perigo, mas terminará mais longe do objetivo.",
       "data": {
         "schemaVersion": 2,
@@ -258,7 +347,7 @@
             }
           },
           {
-            "text": " (consulte ",
+            "text": " (veja ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -335,7 +424,53 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            91.41448974609375,
+            343.48931884765625,
+            717.0252685546875,
+            367.4554138183594
+          ],
+          "visualBaselinesPt": [
+            352.679,
+            353.745,
+            363.679,
+            364.745
+          ],
+          "spans": 13,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_block_1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 10,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            304.95,
+            313.86
+          ],
+          "frameHeightCssPx": 19.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 2,
@@ -344,7 +479,7 @@
       "sourceText": "After moving to B by traveling past the Animate and through Hindering Terrain, Zeke could spend an additional SP to Gain 2 more Movement Points and move through Remi. But, because Remi is an ally, he can move through – but not stop in – her space, and since the space that allies occupy take 2 Movement Points to move out of, Zeke would not be able to reach A without spending a total of 2 more SP for 4 more Movement Points. After reaching A Zeke would have 1 remaining Movement Point.",
       "spanKey": "page_40_block_2__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Após passar pelo Animado e pelo Terreno Difícil até [[symbol:marker.reference.b]], Zeke pode gastar mais SP para receber 2 Pontos de Movimento e atravessar o espaço de Remi. Por ela ser aliada, Zeke pode atravessar o espaço, mas não parar nele. Sair do espaço de uma aliada custa 2 Pontos de Movimento; então, ele só alcançará [[symbol:marker.reference.a]] se gastar mais 2 SP para receber 4 Pontos de Movimento. Ao chegar a [[symbol:marker.reference.a]], ainda terá 1 Ponto de Movimento.",
+      "proposalText": "Após deslocar-se até o espaço [[symbol:marker.reference.b]] passando perto do Animado e atravessando o Terreno Difícil, Zeke poderia gastar 1 SP adicional para receber mais 2 Pontos de Movimento e atravessar o espaço ocupado por Remi. Contudo, por Remi ser uma aliada, ele pode passar pelo espaço dela — mas nunca terminar seu movimento nele —, e como sair de um espaço ocupado por aliados custa 2 Pontos de Movimento adicionais, Zeke não conseguiria alcançar o espaço [[symbol:marker.reference.a]] sem gastar um total de 2 SP extras para obter mais 4 Pontos de Movimento. Ao alcançar finalmente o espaço [[symbol:marker.reference.a]], Zeke ainda conservará 1 Ponto de Movimento restante.",
       "proposalMarkup": "Após passar pelo Animado e pelo Terreno Difícil até [[symbol:marker.reference.b]], Zeke pode gastar mais SP para receber 2 Pontos de Movimento e atravessar o espaço de Remi. Por ela ser aliada, Zeke pode atravessar o espaço, mas não parar nele. Sair do espaço de uma aliada custa 2 Pontos de Movimento; então, ele só alcançará [[symbol:marker.reference.a]] se gastar mais 2 SP para receber 4 Pontos de Movimento. Ao chegar a [[symbol:marker.reference.a]], ainda terá 1 Ponto de Movimento.",
       "data": {
         "schemaVersion": 2,
@@ -360,7 +495,7 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Após passar pelo Animado e pelo Terreno Difícil até ",
+            "text": "Após deslocar-se até o espaço [[symbol:marker.reference.b]] passando perto do Animado e atravessando o Terreno Difícil, Zeke poderia gastar 1 SP adicional para receber mais 2 Pontos de Movimento e atravessar o espaço ocupado por Remi. Contudo, por Remi ser uma aliada, ele pode passar pelo espaço dela — mas nunca terminar seu movimento nele —, e como sair de um espaço ocupado por aliados custa 2 Pontos de Movimento adicionais, Zeke não conseguiria alcançar o espaço [[symbol:marker.reference.a]] sem gastar um total de 2 SP extras para obter mais 4 Pontos de Movimento. Ao alcançar finalmente o espaço [[symbol:marker.reference.a]], Zeke ainda conservará 1 Ponto de Movimento restante.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -528,7 +663,58 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            91.4093017578125,
+            372.2247009277344,
+            713.9710693359375,
+            417.12469482421875
+          ],
+          "visualBaselinesPt": [
+            380.349,
+            381.415,
+            392.415,
+            402.349,
+            403.415,
+            413.349,
+            414.415
+          ],
+          "spans": 24,
+          "visualRows": 7
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 21,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            328.23,
+            337.14,
+            346.05,
+            354.97
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 8,
@@ -580,7 +766,53 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            342.8955993652344,
+            465.8360290527344,
+            763.8363037109375,
+            499.7560119628906
+          ],
+          "visualBaselinesPt": [
+            475.046,
+            486.046,
+            497.046
+          ],
+          "spans": 13,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_block_8__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 6,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            404.11,
+            413.02,
+            421.92
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 9,
@@ -632,7 +864,55 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            342.8935852050781,
+            504.5052185058594,
+            764.4442749023438,
+            549.4252319335938
+          ],
+          "visualBaselinesPt": [
+            513.715,
+            524.715,
+            535.715,
+            546.715
+          ],
+          "spans": 11,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_block_9__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 8,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            435.44,
+            444.34,
+            453.25,
+            462.16
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 10,
@@ -684,7 +964,51 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            342.89630126953125,
+            554.1744995117188,
+            744.5667114257812,
+            577.0945434570312
+          ],
+          "visualBaselinesPt": [
+            563.385,
+            574.385
+          ],
+          "spans": 5,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_block_10__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 4,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            475.69,
+            484.59
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 11,
@@ -693,7 +1017,7 @@
       "sourceText": "If the target of a Push, Pull, or Command is an Adventurer who is positioned diagonally or has more than one option based on their position in relation to the opponent using Push, Pull, or Command, then the Adventurer must choose the most detrimental direction to move. See Towards & Away Pg. 62.",
       "spanKey": "page_40_block_11__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Se o alvo de Empurrar, Puxar ou Comandar for um Aventureiro posicionado na diagonal ou com mais de uma opção em relação ao oponente que usa a Habilidade, o Aventureiro deve escolher a direção de movimento mais prejudicial. Consulte Em Direção e Para Longe, pág. 62.",
+      "proposalText": "Se o alvo de uma Habilidade de Empurrar, Puxar ou Comandar for um Aventureiro que esteja posicionado em diagonal ou que possua mais de uma opção viável de trajeto com base em sua posição relativa ao oponente que ativou a Habilidade, então o Aventureiro é obrigado a escolher a direção de movimento que for mais prejudicial para si. Veja Em Direção e Para Longe, pág. 62.",
       "proposalMarkup": "Se o alvo de Empurrar, Puxar ou Comandar for um Aventureiro posicionado na diagonal ou com mais de uma opção em relação ao oponente que usa a Habilidade, o Aventureiro deve escolher a direção de movimento mais prejudicial. Consulte Em Direção e Para Longe, pág. 62.",
       "data": {
         "schemaVersion": 2,
@@ -709,7 +1033,7 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Se o alvo de Empurrar, Puxar ou Comandar for um Aventureiro posicionado na diagonal ou com mais de uma opção em relação ao oponente que usa a Habilidade, o Aventureiro deve escolher a direção de movimento mais prejudicial. Consulte ",
+            "text": "Se o alvo de uma Habilidade de Empurrar, Puxar ou Comandar for um Aventureiro que esteja posicionado em diagonal ou que possua mais de uma opção viável de trajeto com base em sua posição relativa ao oponente que ativou a Habilidade, então o Aventureiro é obrigado a escolher a direção de movimento que for mais prejudicial para si. Veja Em Direção e Para Longe, pág. 62.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -760,7 +1084,54 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            342.89630126953125,
+            581.864501953125,
+            767.177001953125,
+            626.7645263671875
+          ],
+          "visualBaselinesPt": [
+            591.055,
+            602.055,
+            613.055,
+            624.055
+          ],
+          "spans": 8,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_block_11__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            498.13,
+            507.03,
+            515.94
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": null,
@@ -820,7 +1191,59 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 6,
+      "pageRendererVisualLineCount": 6,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 6,
+        "pageRendererVisualLineCount": 6,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            342.89630126953125,
+            631.5344848632812,
+            768.3058471679688,
+            698.4331665039062
+          ],
+          "visualBaselinesPt": [
+            640.724,
+            651.724,
+            662.724,
+            673.723,
+            684.723,
+            695.723
+          ],
+          "spans": 10,
+          "visualRows": 6
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_unit_p40-free-movement-body__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 13,
+          "distinctVisualRows": 6,
+          "visualRowTopsCssPx": [
+            538.39,
+            547.3,
+            556.2,
+            565.11,
+            574.02,
+            582.92
+          ],
+          "frameHeightCssPx": 54.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": null,
@@ -999,7 +1422,61 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 7,
+      "pageRendererVisualLineCount": 7,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 7,
+        "pageRendererVisualLineCount": 7,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            342.8935852050781,
+            701.6043701171875,
+            764.0292358398438,
+            781.1024169921875
+          ],
+          "visualBaselinesPt": [
+            712.392,
+            723.392,
+            733.326,
+            734.392,
+            745.392,
+            756.392,
+            767.326,
+            778.392
+          ],
+          "spans": 27,
+          "visualRows": 8
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_unit_p40-free-movement-example__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 23,
+          "distinctVisualRows": 7,
+          "visualRowTopsCssPx": [
+            596.17,
+            605.86,
+            614.77,
+            623.67,
+            632.58,
+            641.48
+          ],
+          "frameHeightCssPx": 64.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 15,
@@ -1043,7 +1520,49 @@
         "Push/Pull/Command → Empurrar/Puxar/Comandar",
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 40,
+          "pdfDocumentPageIndex": 39,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            433.3559875488281,
+            434.8735046386719,
+            683.3219604492188,
+            459.13751220703125
+          ],
+          "visualBaselinesPt": [
+            452.441
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_40_block_15__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            379.02
+          ],
+          "frameHeightCssPx": 19.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "terminologyStatus": "pending_human_review",

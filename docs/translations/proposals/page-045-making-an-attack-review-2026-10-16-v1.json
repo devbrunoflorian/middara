@@ -60,7 +60,49 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Attack → Ataque; Attack Action → Ação de Ataque"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            321.5777893066406,
+            56.69243621826172,
+            498.7698974609375,
+            80.95643615722656
+          ],
+          "visualBaselinesPt": [
+            74.26
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_49__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            71.53
+          ],
+          "frameHeightCssPx": 19.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 0,
@@ -69,7 +111,7 @@
       "sourceText": "Between the 2 Combat Dice, she rolled 2 [Page], 3 [Shield], and 1 [Damage Star]. Nightingale’s Longsword and Katar both have a Symbol Ability that allows her to add +2 PHYSICAL DMG by spending 2 [Shield]. The Longsword has a Symbol Ability to add +1 PHYSICAL DMG by spending 1 [Damage Star].",
       "spanKey": "page_45_block_0__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Nos 2 Dados de Combate, Nightingale obteve 2 [símbolo de página], 3 [símbolo de escudo] e 1 [símbolo de estrela de dano]. A Espada Longa e o Katar têm uma Habilidade de Símbolo que permite acrescentar +2 DANO FÍSICO ao gastar 2 [símbolo de escudo]. A Espada Longa também permite acrescentar +1 DANO FÍSICO ao gastar 1 [símbolo de estrela de dano].",
+      "proposalText": "Entre os 2 Dados de Combate rolados, Nightingale obteve 2 ￼, 3 ￼ e 1 ￼. Tanto a sua Espada Longa quanto o seu Katar possuem uma Habilidade de Símbolo que permite adicionar +2 de DANO FÍSICO ao gastar 2 ￼. Além disso, a Espada Longa possui uma Habilidade de Símbolo própria para adicionar +1 de DANO FÍSICO adicional ao gastar 1 ￼.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_45_block_0__pt-BR",
@@ -84,7 +126,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Nos 2 Dados de Combate, Nightingale obteve 2 ",
+            "text": "Entre os 2 Dados de Combate rolados, Nightingale obteve 2 ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -162,7 +204,7 @@
             }
           },
           {
-            "text": ". A Espada Longa e o Katar têm uma Habilidade de Símbolo que permite acrescentar +2 DANO FÍSICO ao gastar 2 ",
+            "text": ". Tanto a sua Espada Longa quanto o seu Katar possuem uma Habilidade de Símbolo que permite adicionar +2 de DANO FÍSICO ao gastar 2 ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -188,7 +230,7 @@
             }
           },
           {
-            "text": ". A Espada Longa também permite acrescentar +1 DANO FÍSICO ao gastar 1 ",
+            "text": ". Além disso, a Espada Longa possui uma Habilidade de Símbolo própria para adicionar +1 de DANO FÍSICO adicional ao gastar 1 ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -233,7 +275,57 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Combat Dice → Dados de Combate; Symbol Ability → Habilidade de Símbolo; PHYSICAL DMG → DANO FÍSICO"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            417.39874267578125,
+            466.4945983886719,
+            735.1400756835938,
+            512.224609375
+          ],
+          "visualBaselinesPt": [
+            475.685,
+            477.685,
+            486.685,
+            497.685,
+            508.685
+          ],
+          "spans": 24,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_0__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 24,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            404.64,
+            413.45,
+            422.47,
+            431.38
+          ],
+          "frameHeightCssPx": 37
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "proposalMarkup": "Entre os 2 Dados de Combate rolados, Nightingale obteve 2 ￼, 3 ￼ e 1 ￼. Tanto a sua Espada Longa quanto o seu Katar possuem uma Habilidade de Símbolo que permite adicionar +2 de DANO FÍSICO ao gastar 2 ￼. Além disso, a Espada Longa possui uma Habilidade de Símbolo própria para adicionar +1 de DANO FÍSICO adicional ao gastar 1 ￼."
     },
     {
       "blockIndex": 1,
@@ -272,7 +364,55 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Ability → Habilidade; Condition → Condição; Exhaust → Exaustar; Flip → Virar; Symbols → Símbolos"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            417.4017028808594,
+            516.1638793945312,
+            736.8220825195312,
+            561.0639038085938
+          ],
+          "visualBaselinesPt": [
+            525.354,
+            536.354,
+            547.354,
+            558.354
+          ],
+          "spans": 4,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            444.89,
+            453,
+            461.11,
+            469.22
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 2,
@@ -281,7 +421,7 @@
       "sourceText": "Nightingale decides to spend 2 [Shield] from her Combat Dice for +2 PHYSICAL DMG and 1 [Damage Star] for an additional +1 PHYSICAL DMG. This leaves her with 2 [Page] and 1 [Shield].",
       "spanKey": "page_45_block_2__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Nightingale decide gastar 2 [símbolo de escudo] dos Dados de Combate para acrescentar +2 DANO FÍSICO e 1 [símbolo de estrela de dano] para mais +1 DANO FÍSICO. Restam 2 [símbolo de página] e 1 [símbolo de escudo].",
+      "proposalText": "Nightingale decide então gastar 2 ￼ dos seus Dados de Combate para obter +2 de DANO FÍSICO e 1 ￼ para obter +1 de DANO FÍSICO adicional. Isso a deixa com 2 ￼ e 1 ￼ restantes em sua reserva.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_45_block_2__pt-BR",
@@ -296,7 +436,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Nightingale decide gastar 2 ",
+            "text": "Nightingale decide então gastar 2 ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -322,7 +462,7 @@
             }
           },
           {
-            "text": " dos Dados de Combate para acrescentar +2 DANO FÍSICO e 1 ",
+            "text": " dos seus Dados de Combate para obter +2 de DANO FÍSICO e 1 ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -348,7 +488,7 @@
             }
           },
           {
-            "text": " para mais +1 DANO FÍSICO. Restam 2 ",
+            "text": " para obter +1 de DANO FÍSICO adicional. Isso a deixa com 2 ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -400,7 +540,7 @@
             }
           },
           {
-            "text": ".",
+            "text": " restantes em sua reserva.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -419,7 +559,54 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Combat Dice → Dados de Combate; PHYSICAL DMG → DANO FÍSICO"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            417.39874267578125,
+            565.8131713867188,
+            735.8314819335938,
+            605.7332153320312
+          ],
+          "visualBaselinesPt": [
+            575.023,
+            588.019,
+            601.019
+          ],
+          "spans": 17,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 17,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            485.13,
+            495.66,
+            506.2
+          ],
+          "frameHeightCssPx": 32.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "proposalMarkup": "Nightingale decide então gastar 2 ￼ dos seus Dados de Combate para obter +2 de DANO FÍSICO e 1 ￼ para obter +1 de DANO FÍSICO adicional. Isso a deixa com 2 ￼ e 1 ￼ restantes em sua reserva."
     },
     {
       "blockIndex": 3,
@@ -458,7 +645,59 @@
       "diagnosticRendering": "blank — As duas âncoras de ícone de Valor de Armadura são fixas e sem posição reflowável nesta unidade. O texto integral permanece na proposta; somente o diagnóstico do Viewer omite o bloco até a âncora ser recuperada.",
       "pendingTerms": [
         "PHYSICAL DMG → DANO FÍSICO; Armor Value → Valor de Armadura; Armor Piercing → Perfuração de Armadura; Passive Ability → Habilidade Passiva"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 6,
+      "pageRendererVisualLineCount": 6,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 6,
+        "pageRendererVisualLineCount": 6,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            417.400390625,
+            608.5025024414062,
+            733.2861938476562,
+            677.4025268554688
+          ],
+          "visualBaselinesPt": [
+            617.693,
+            629.693,
+            640.693,
+            652.693,
+            663.693,
+            674.693
+          ],
+          "spans": 22,
+          "visualRows": 6
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_3__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 22,
+          "distinctVisualRows": 6,
+          "visualRowTopsCssPx": [
+            519.72,
+            529.42,
+            538.34,
+            547.98,
+            556.98,
+            565.91
+          ],
+          "frameHeightCssPx": 55.8
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 4,
@@ -497,7 +736,55 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Final Damage → Dano Final; Damage → Dano; Armor → Armadura; Damage tokens → Fichas de Dano"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            417.39898681640625,
+            682.1724853515625,
+            723.5868530273438,
+            727.0718383789062
+          ],
+          "visualBaselinesPt": [
+            691.362,
+            702.362,
+            713.362,
+            724.362
+          ],
+          "spans": 15,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_4__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            579.42,
+            587.53,
+            595.64,
+            603.75
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 5,
@@ -536,7 +823,51 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Follow Up step → Etapa de Continuação; Ability → Habilidade; Attack Action → Ação de Ataque"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            417.39971923828125,
+            731.82177734375,
+            736.7105102539062,
+            754.7418212890625
+          ],
+          "visualBaselinesPt": [
+            741.032,
+            752.032
+          ],
+          "spans": 4,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_5__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            619.66,
+            627.77
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 6,
@@ -575,7 +906,49 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Attack → Ataque; target → alvo; SP (sigla de regra) precisa de confirmação de forma/capitalização."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.16970825195312,
+            371.197021484375,
+            406.3330993652344,
+            383.1217956542969
+          ],
+          "visualBaselinesPt": [
+            380.407
+          ],
+          "spans": 6,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_6__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            327.41
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 7,
@@ -638,7 +1011,53 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Weapon → Arma; Katar → Katar; Longsword → Espada Longa; Range → Alcance; adjacent → adjacente; Animate → Animado"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.173095703125,
+            388.76629638671875,
+            405.7615661621094,
+            422.7862854003906
+          ],
+          "visualBaselinesPt": [
+            398.076,
+            409.076,
+            420.076
+          ],
+          "spans": 10,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_7__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 6,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            341.64,
+            349.75,
+            357.86
+          ],
+          "frameHeightCssPx": 27.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 8,
@@ -746,7 +1165,55 @@
       "diagnosticRendering": "blank — O texto-fonte inclui um segundo dado branco sem placement semântico em inline_elements.json. A região inteira fica em branco somente no diagnóstico para evitar posição e reflow incorretos; proposta integral e âncoras já identificadas continuam preservadas.",
       "pendingTerms": [
         "Combat Dice Pool → Reserva de Dados de Combate; WHITE → BRANCO; LIGHT → LEVE; Condition Tag → Tag de Condição; COMBO → COMBO; FINESSE → FINESSE; ORANGE → LARANJA"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17108154296875,
+            428.5563049316406,
+            404.9210510253906,
+            478.2856140136719
+          ],
+          "visualBaselinesPt": [
+            437.746,
+            449.746,
+            461.746,
+            474.746
+          ],
+          "spans": 21,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_8__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 21,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            373.89,
+            383.61,
+            392.78,
+            403.31
+          ],
+          "frameHeightCssPx": 40.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 9,
@@ -813,7 +1280,51 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "EMPOWER → FORTALECER; Attack → Ataque; BLACK → PRETO"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17310333251953,
+            483.2048034667969,
+            378.9140930175781,
+            508.3263244628906
+          ],
+          "visualBaselinesPt": [
+            492.415,
+            505.415
+          ],
+          "spans": 7,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_9__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 4,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            418.17,
+            426.28
+          ],
+          "frameHeightCssPx": 20.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 10,
@@ -852,7 +1363,53 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "DODGE → ESQUIVAR; Intelligent Combatant → Combatente Inteligente; Ability → Habilidade"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17479705810547,
+            512.8742065429688,
+            390.585693359375,
+            546.7942504882812
+          ],
+          "visualBaselinesPt": [
+            522.084,
+            533.084,
+            544.084
+          ],
+          "spans": 10,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_10__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            442.22,
+            450.33,
+            458.44
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 12,
@@ -942,7 +1499,57 @@
       "diagnosticRendering": "blank — As duas âncoras de Valor de Defesa são ícones fixos e não acompanham o reflow do texto. A unidade permanece integral na proposta e fica em branco somente no Viewer de diagnóstico até que as âncoras sejam modeladas.",
       "pendingTerms": [
         "ORANGE → LARANJA; WHITE → BRANCO; Defense Value → Valor de Defesa; Combat Dice Pool → Reserva de Dados de Combate"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17379760742188,
+            612.5712890625,
+            406.4837646484375,
+            673.4713134765625
+          ],
+          "visualBaselinesPt": [
+            621.761,
+            634.761,
+            647.761,
+            659.761,
+            670.761
+          ],
+          "spans": 22,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_12__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 22,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            523.02,
+            532.98,
+            544.06,
+            553.78,
+            562.72
+          ],
+          "frameHeightCssPx": 49.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 13,
@@ -981,7 +1588,53 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "TO THE ATK ROLL → À ROLAGEM DE ATAQUE; Determine Damage → Determinar Dano; Attack → Ataque; Ability → Habilidade"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17001342773438,
+            678.2406005859375,
+            398.8600158691406,
+            712.140625
+          ],
+          "visualBaselinesPt": [
+            687.431,
+            698.431,
+            709.431
+          ],
+          "spans": 6,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_13__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            576.23,
+            584.34,
+            592.45
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 14,
@@ -1020,7 +1673,51 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Determine Damage → Determinar Dano; Damage → Dano"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17001342773438,
+            719.7205810546875,
+            406.9700012207031,
+            742.6446533203125
+          ],
+          "visualBaselinesPt": [
+            728.931,
+            739.931
+          ],
+          "spans": 10,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_14__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            609.84,
+            617.95
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 15,
@@ -1029,7 +1726,7 @@
       "sourceText": "Next, Nightingale can spend Symbols and use Abilities that add Damage.",
       "spanKey": "page_45_block_15__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Em seguida, Nightingale pode gastar Símbolos e usar Habilidades que acrescentem Dano.",
+      "proposalText": "Nightingale pode gastar Símbolos e usar Habilidades para somar Dano.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_45_block_15__pt-BR",
@@ -1044,10 +1741,10 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Em seguida, Nightingale pode gastar Símbolos e usar Habilidades que acrescentem Dano.",
+            "text": "Nightingale pode gastar Símbolos e usar Habilidades para somar Dano.",
             "font": "OptimaLTStd",
             "size": 10,
-            "color": "#ffffff",
+            "color": "#231f20",
             "weight": 400,
             "style": "normal"
           }
@@ -1059,7 +1756,74 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Symbols → Símbolos; Ability → Habilidade; Damage → Dano"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 45,
+          "pdfDocumentPageIndex": 44,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17169189453125,
+            747.4146118164062,
+            403.711669921875,
+            759.3146362304688
+          ],
+          "visualBaselinesPt": [
+            756.605
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_45_block_15__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            632.3
+          ],
+          "frameHeightCssPx": 9.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_45_block_15__pt-BR",
+        "bbox": [
+          86.17169189453125,
+          747.4146118164062,
+          403.711669921875,
+          759.3146362304688
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "A seguir, Nightingale pode gastar Símbolos e usar Habilidades que somam Dano.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "proposalMarkup": "Nightingale pode gastar Símbolos e usar Habilidades para somar Dano."
     }
   ]
 }

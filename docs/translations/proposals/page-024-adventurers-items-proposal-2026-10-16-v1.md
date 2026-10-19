@@ -142,7 +142,7 @@ NaN## Unidades propostas
 
 **EN:** During a Story Round, all Consumable Items that are not sold or equipped are discarded. See Selling Items Pg. 27.
 
-**PT-BR:** IMPORTANTE: Durante uma Rodada de História, todos os Itens Consumíveis que não forem vendidos ou equipados são descartados. Consulte Venda de Itens, pág. 27.
+**PT-BR:** IMPORTANTE: Durante uma Rodada de História, todos os Itens Consumíveis que não forem vendidos ou equipados são descartados. Veja Venda de Itens, pág. 27.
 
 **Revisão pendente:** Consumable Items → Itens Consumíveis e Selling Items → Venda de Itens são formas locais; Story Round → Rodada de História segue o glossário oficial.
 
@@ -230,7 +230,7 @@ NaN## Unidades propostas
 
 **EN:** In Adventure Mode, this will typically occur during the Shop and Train Phase of a Story Round. See Story Rounds Pg. 13.
 
-**PT-BR:** No Modo Aventura, isso costuma ocorrer durante a Fase de Comprar e Treinar de uma Rodada de História. Consulte Rodadas de História, pág. 13.
+**PT-BR:** No Modo Aventura, isso costuma ocorrer durante a Fase de Comprar e Treinar de uma Rodada de História. Veja Rodadas de História, pág. 13.
 
 **Revisão pendente:** Adventure Mode → Modo Aventura é forma local; Shop and Train e Story Round seguem o glossário oficial.
 
@@ -238,7 +238,7 @@ NaN## Unidades propostas
 
 **EN:** In Crawl Mode, Shop and Train is often listed as a reward when completing an Encounter or Scenario. See Encounter Rewards Pg. 9.
 
-**PT-BR:** No Modo Crawl, Comprar e Treinar costuma aparecer como recompensa por concluir um Encontro ou Cenário. Consulte Recompensas de Encontro, pág. 9.
+**PT-BR:** No Modo Crawl, Comprar e Treinar costuma aparecer como recompensa por concluir um Encontro ou Cenário. Veja Recompensas de Encontro, pág. 9.
 
 **Revisão pendente:** Crawl Mode → Modo Crawl e Encounter Rewards → Recompensas de Encontro são formas locais propostas; Shop and Train segue o glossário oficial.
 

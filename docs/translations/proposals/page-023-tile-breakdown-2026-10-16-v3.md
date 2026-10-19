@@ -81,7 +81,7 @@
 
 **EN:** Some spaces have special area effects called Terrain (see Terrain types Pg. 21). Spaces that contain Terrain have a colored hatched border surrounding the square as well as a small symbol on the space representing the type of Terrain.
 
-**PT-BR:** Alguns espaços têm efeitos de área especiais chamados Terrenos (consulte “Tipos de Terreno”, p. 21). Os espaços com Terreno exibem uma borda colorida e hachurada ao redor do quadrado e um pequeno símbolo que indica o tipo de Terreno.
+**PT-BR:** Alguns espaços têm efeitos de área especiais chamados Terrenos (veja “Tipos de Terreno”, p. 21). Os espaços com Terreno exibem uma borda colorida e hachurada ao redor do quadrado e um pequeno símbolo que indica o tipo de Terreno.
 
 **Termos pendentes:** Terrain → Terrenos segue o glossário; revisar o singular “Terreno” no contexto da frase e o título citado “Tipos de Terreno”.
 

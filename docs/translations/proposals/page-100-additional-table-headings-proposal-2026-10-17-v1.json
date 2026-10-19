@@ -66,36 +66,43 @@
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
-        "measurementSource": "Live PageRenderer effective frame plus DOM Range rectangles grouped by Copyfit V3 visual-line helper; original PDF source geometry; independent 100% and 200% receipts.",
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "environment": "PT-BR, viewport 2400x1400 CSS px, DPR 1; 100% and 200% Viewer zoom; AGaramondPro loaded.",
-        "effectiveFramePt": {
-          "x": 57.2726,
-          "y": 50.167,
-          "width": 335.644,
-          "height": 16.1717,
-          "originalGeometryPreserved": true
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
         },
-        "semanticCorridor": {
-          "status": "CURRENT_FRAME_WITHIN_BOUNDARY_TOLERANCE",
-          "confidence": "high",
-          "owner": "p100-table10",
-          "rightEdgePt": 391.52,
-          "frameRightPt": 392.9166,
-          "frameOverhangPt": { "left": 0, "right": 1.3966 },
-          "boundaryTolerancePt": 1.5,
-          "adjacentTable12StartsPt": 431.7254,
-          "gutterBorrowed": false
+        "sourceEvidence": {
+          "bboxPt": [
+            57.2775993347168,
+            50.172828674316406,
+            213.92440795898438,
+            66.34882354736328
+          ],
+          "visualBaselinesPt": [
+            61.885
+          ],
+          "spans": 2,
+          "visualRows": 1
         },
-        "geometry": "The live effective frame already renders the complete proposal on one visual row. No frame, font, size, rich span, symbol, or translation value was changed. DOM geometry reports no overflow, escape, or collision at either zoom.",
-        "evidence": [
-          "apps/web/output/p100-block_20-copyfit-v1/tabela-10-efeitos-das-correntes-100pct-measurement.json",
-          "apps/web/output/p100-block_20-copyfit-v1/tabela-10-efeitos-das-correntes-200pct-measurement.json",
-          "apps/web/output/p100-block_20-copyfit-v1/viewer-ptbr-tabela-10-efeitos-das-correntes-100pct.png",
-          "apps/web/output/p100-block_20-copyfit-v1/viewer-ptbr-tabela-10-efeitos-das-correntes-semantic-width-selected-100pct.png"
-        ]
+        "pageRendererEvidence": {
+          "spanKey": "page_100_block_9__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            66.25
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
       "copyfitSemanticFlow": {
         "version": 1,

@@ -155,14 +155,14 @@
       "unitId": "p19-block-21-paragraph-2",
       "label": "p19-block-21-paragraph-2",
       "sourceText": "If a player Spawns a Combatant via a Totem or otherwise, and if the Combatant’s Initiative Card is not in the Initiative Track already, place the Combatant's Initiative Card directly after the Initiative Card of the figure who's currently taking their turn. If the current turn is ambiguous, place the Initiative Card at the back of the Initiative Track instead. The figure will take it's turn the next time its Initiative Card would normally dictate that its turn begins.",
-      "proposalText": "Se um jogador fizer surgir um Combatente por meio de um Totem ou de outra forma, e a Carta de Iniciativa dele ainda não estiver na Trilha de Iniciativa, coloque-a imediatamente após a Carta de Iniciativa da miniatura cujo turno está em andamento. Se não estiver claro qual é o turno, coloque-a no fim da Trilha. A miniatura terá seu turno na próxima vez em que sua Carta de Iniciativa normalmente indicar o início dele.",
+      "proposalText": "Se um jogador fizer surgir um Combatente por meio de um Totem ou de qualquer outra forma, e a Carta de Iniciativa dele ainda não estiver presente na Trilha de Iniciativa, coloque-a imediatamente após a Carta de Iniciativa da miniatura cujo turno está em andamento no momento. Se não estiver claro qual é o turno atual, coloque a carta no fim da Trilha de Iniciativa. A miniatura realizará o seu turno na próxima vez em que a sua Carta de Iniciativa normalmente indicar o início da sua ativação.",
       "spanKey": "page_19_unit_p19-block-21-paragraph-2__pt-BR",
       "language": "pt-BR",
       "data": {
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "Se um jogador fizer surgir um Combatente por meio de um Totem ou de outra forma, e a Carta de Iniciativa dele ainda não estiver na Trilha de Iniciativa, coloque-a imediatamente após a Carta de Iniciativa da miniatura cujo turno está em andamento. Se não estiver claro qual é o turno, coloque-a no fim da Trilha. A miniatura terá seu turno na próxima vez em que sua Carta de Iniciativa normalmente indicar o início dele.",
+            "text": "Se um jogador fizer surgir um Combatente por meio de um Totem ou de qualquer outra forma, e a Carta de Iniciativa dele ainda não estiver presente na Trilha de Iniciativa, coloque-a imediatamente após a Carta de Iniciativa da miniatura cujo turno está em andamento no momento. Se não estiver claro qual é o turno atual, coloque a carta no fim da Trilha de Iniciativa. A miniatura realizará o seu turno na próxima vez em que a sua Carta de Iniciativa normalmente indicar o início da sua ativação.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -191,7 +191,10 @@
         "sourcePdfVisualLineCount": 7,
         "pageRendererVisualLineCount": 7,
         "classification": "EXACT",
-        "viewerScalesPercent": [125, 200],
+        "viewerScalesPercent": [
+          125,
+          200
+        ],
         "evidenceRequestId": 8,
         "evidenceProposalId": "page-019-full-page-proposal-2026-10-16-v2",
         "evidenceProposalVersion": "2",
@@ -282,7 +285,10 @@
         "method": "Counted actual wrapped rows in the live PT-BR Viewer at 75% and 200%; semantic rich-text runs were grouped by their shared visual row. No character count, source-string newline count, or height estimate was used.",
         "environment": {
           "language": "pt-BR",
-          "zooms": ["75%", "200%"],
+          "zooms": [
+            "75%",
+            "200%"
+          ],
           "fontLoaded": true
         },
         "geometry": "The critical visual review found the six-row paragraph inside its selected Viewer highlight, with no apparent clipping or neighboring collision. No font, size, frame, or translation geometry was changed.",
@@ -593,7 +599,10 @@
         "method": "Counted actual wrapped rows in the live PT-BR Viewer at 75% and 200%; the semantic IMPORTANT icon and label share their source visual row, and rich-text spans were grouped by rendered row. No character count, source-string newline count, or height estimate was used.",
         "environment": {
           "language": "pt-BR",
-          "zooms": ["75%", "200%"],
+          "zooms": [
+            "75%",
+            "200%"
+          ],
           "fontLoaded": true
         },
         "geometry": "The critical visual review found all five rows inside the selected Viewer highlight, with no apparent clipping or collision with the next callout. The icon, outlined label, and bold digits 2, 3, 1, and 4 are preserved. No font, size, frame, or translation geometry was changed.",
@@ -811,7 +820,10 @@
         "method": "Counted actual wrapped rows in the live PT-BR Viewer at 75% and 200%; semantic rich-text runs were grouped by their shared visual row. No character count, source-string newline count, or height estimate was used.",
         "environment": {
           "language": "pt-BR",
-          "zooms": ["75%", "200%"],
+          "zooms": [
+            "75%",
+            "200%"
+          ],
           "fontLoaded": true
         },
         "geometry": "The critical visual review found all eight rows within the selected Viewer highlight; the following paragraph remained outside it, with no apparent clipping or neighboring collision. No font, size, frame, or translation geometry was changed.",
@@ -1165,19 +1177,18 @@
       "pageRendererVisualLineCount": 7,
       "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
-        "status": "verified_copyfit_v3_live_viewer_visual_rows",
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 7,
         "pageRendererVisualLineCount": 7,
         "classification": "EXACT",
-        "method": "Counted official PDF text baselines and live PT-BR PageRenderer Range client rectangles; grouped rich spans and the inline list marker with the body when they share a visual baseline. No character count, explicit-string newline count, or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 19,
           "pdfDocumentPageIndex": 18,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25,
-          "fontLoaded": true
+          "devicePixelRatio": 1.25
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -1195,28 +1206,26 @@
             448.389,
             459.389
           ],
-          "listMarkerAndBodyGroupedAtBaselinePt": 437.389,
+          "spans": 12,
           "visualRows": 7
         },
         "pageRendererEvidence": {
           "spanKey": "page_19_unit_p19-block-35-paragraph-1__pt-BR",
-          "rangeRectFragments": 30,
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 14,
           "distinctVisualRows": 7,
           "visualRowTopsCssPx": [
-            327.45,
-            336.35,
-            345.25,
-            354.15,
-            363.05,
-            371.95,
-            380.85
+            335.64,
+            344.55,
+            353.45,
+            362.36,
+            371.27,
+            380.17,
+            389.08
           ],
-          "frameHeightCssPx": 62.3,
-          "fontCheck": "OptimaLTStd loaded",
-          "geometryChanged": false
+          "frameHeightCssPx": 65.4
         },
-        "visualReview": "At 200% in the live Viewer, all seven target rows are inside the selected unit. The following paragraph remains outside; no clipping or neighboring collision was visible. Original font sizes, rich spans, list bullet and geometry were preserved.",
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 validation does not approve or publish the translation."
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -1225,14 +1234,14 @@
       "unitId": "p19-block-35-paragraph-2",
       "label": "p19-block-35-paragraph-2",
       "sourceText": "For example, if a Loot token is activated and an Adventurer is instructed to remove it from the game, that Loot token will not be available to Spawn if the Encounter reveals another random Loot token at a later point. In this case, the random Loot token needed would be drawn from the remaining Loot tokens instead. • Item Cards: All Item Cards not currently in an Adventurer's possession or in the Party Stash are always available to be drawn when you are instructed to draw a card from their corresponding stack. • Permanent Removal: If a component is permanently removed from the game, it will no longer be used and should be left in the game box for the remainder of the Adventure.",
-      "proposalText": "Por exemplo, se um Aventureiro receber instrução para remover do jogo uma Ficha de Saque ativada, ela não estará disponível quando o Encontro revelar outra Ficha de Saque aleatória mais tarde; nesse caso, retire a nova ficha de Saque das restantes.\n• Cartas de Item: as Cartas de Item que não estejam com um Aventureiro nem no Estoque do Grupo ficam disponíveis para compra no monte correspondente.\n• Remoção Permanente: se um componente for removido permanentemente, ele não será usado novamente e deve ficar na caixa do jogo até o fim da Aventura.",
+      "proposalText": "Por exemplo: se uma Ficha de Saque for ativada e um Aventureiro for instruído a removê-la do jogo, essa ficha não poderá Surgir se o Encontro revelar outra Ficha de Saque aleatória mais tarde. Nesse caso, a ficha necessária deverá ser comprada das fichas de Saque restantes.\n• Cartas de Item: Todas as Cartas de Item fora da posse de um Aventureiro ou do Estoque do Grupo estão sempre disponíveis para serem compradas quando instruído a comprar de sua respectiva pilha.\n• Remoção Permanente: Se um componente for removido permanentemente do jogo, ele não será mais utilizado e deve ser deixado na caixa pelo restante da Aventura.",
       "spanKey": "page_19_unit_p19-block-35-paragraph-2__pt-BR",
       "language": "pt-BR",
       "data": {
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "Por exemplo, se um Aventureiro receber instrução para remover do jogo uma Ficha de ",
+            "text": "Por exemplo: se uma Ficha de ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1250,7 +1259,7 @@
             "disableLigatures": true
           },
           {
-            "text": " ativada, ela não estará disponível quando o Encontro revelar outra Ficha de ",
+            "text": " for ativada e um Aventureiro for instruído a removê-la do jogo, essa ficha não poderá Surgir se o Encontro revelar outra Ficha de ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1268,7 +1277,7 @@
             "disableLigatures": true
           },
           {
-            "text": " aleatória mais tarde; nesse caso, retire a nova ficha de ",
+            "text": " aleatória mais tarde. Nesse caso, a ficha necessária deverá ser comprada das fichas de ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1286,7 +1295,7 @@
             "disableLigatures": true
           },
           {
-            "text": " das restantes.\n",
+            "text": " restantes.\n",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1313,7 +1322,7 @@
             "disableLigatures": true
           },
           {
-            "text": " as Cartas de Item que não estejam com um Aventureiro nem no Estoque do Grupo ficam disponíveis para compra no monte correspondente.\n",
+            "text": " Todas as Cartas de Item fora da posse de um Aventureiro ou do Estoque do Grupo estão sempre disponíveis para serem compradas quando instruído a comprar de sua respectiva pilha.\n",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1340,7 +1349,7 @@
             "disableLigatures": true
           },
           {
-            "text": " se um componente for removido ",
+            "text": " Se um componente for removido ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1358,7 +1367,7 @@
             "disableLigatures": true
           },
           {
-            "text": ", ele não será usado novamente e deve ficar na caixa do jogo até o fim da Aventura.",
+            "text": " do jogo, ele não será mais utilizado e deve ser deixado na caixa pelo restante da Aventura.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1377,7 +1386,71 @@
       "pendingTerms": [
         "Loot → Saque segue o glossário; Draw → comprar segue a forma mecânica já usada nas propostas. Item Cards, Party Stash e Permanent Removal são candidatos contextuais."
       ],
-      "sourceLineCount": 14
+      "sourceLineCount": 14,
+      "sourcePdfVisualLineCount": 12,
+      "pageRendererVisualLineCount": 12,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 12,
+        "pageRendererVisualLineCount": 12,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 19,
+          "pdfDocumentPageIndex": 18,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            465.15869140625,
+            393.68310546875,
+            603.7680053710938
+          ],
+          "visualBaselinesPt": [
+            474.389,
+            485.389,
+            496.389,
+            507.389,
+            518.389,
+            532.223,
+            543.223,
+            554.223,
+            565.223,
+            579.058,
+            590.058,
+            601.058
+          ],
+          "spans": 27,
+          "visualRows": 12
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_19_unit_p19-block-35-paragraph-2__pt-BR",
+          "readingMethod": "text rects of the review-highlighted unit",
+          "rangeRectFragments": 27,
+          "distinctVisualRows": 12,
+          "visualRowTopsCssPx": [
+            403.55,
+            412.45,
+            421.36,
+            430.27,
+            439.17,
+            448.08,
+            456.98,
+            465.89,
+            474.8,
+            483.7
+          ],
+          "frameHeightCssPx": 112.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "underCompositionJustification": ""
     },
     {
       "blockIndex": 13,
@@ -1746,7 +1819,55 @@
       "pendingTerms": [
         "Exit Token → Ficha de Saída e End Condition → Condição Final seguem o glossário; revisar capitalização de “Condição Final”."
       ],
-      "sourceLineCount": 4
+      "sourceLineCount": 4,
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 19,
+          "pdfDocumentPageIndex": 18,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            703.45703125,
+            394.463134765625,
+            747.3570556640625
+          ],
+          "visualBaselinesPt": [
+            712.647,
+            723.647,
+            734.647,
+            744.647
+          ],
+          "spans": 6,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_19_block_21__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            596.67,
+            605.58,
+            614.48,
+            623.39
+          ],
+          "frameHeightCssPx": 35.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 22,
@@ -1788,7 +1909,49 @@
       "pendingTerms": [
         "Reading Encounters → Lendo Encontros é candidato de título local."
       ],
-      "sourceLineCount": 1
+      "sourceLineCount": 1,
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 19,
+          "pdfDocumentPageIndex": 18,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.11810302734375,
+            56.35393524169922,
+            364.13189697265625,
+            80.61793518066406
+          ],
+          "visualBaselinesPt": [
+            73.922
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_19_block_22__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            71.25
+          ],
+          "frameHeightCssPx": 19.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "layoutFrames": [

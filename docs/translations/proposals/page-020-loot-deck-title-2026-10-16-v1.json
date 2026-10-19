@@ -90,15 +90,62 @@
           "frameWidthPt": 600,
           "visualCollision": false,
           "clipping": false,
-          "sourceLayoutFrame": { "x": 90.972, "width": 615, "textAlign": "left" },
+          "sourceLayoutFrame": {
+            "x": 90.972,
+            "width": 615,
+            "textAlign": "left"
+          },
           "sourceTextCenterPt": 415.972,
           "sourceBaselinePt": 61.136,
           "targetTextCenterPt": 410.288,
           "targetBaselinePt": 60.266,
           "centerDeltaPt": -5.684,
-          "baselineDeltaPt": -0.870,
+          "baselineDeltaPt": -0.87,
           "alignmentNote": "PT title is centered on the existing decorative banner; the isolated frame differs from the source layout frame and shifts the text slightly left/up. Visual review found no visible defect."
         }
+      },
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 20,
+          "pdfDocumentPageIndex": 19,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": false
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            276.760986328125,
+            43.56768035888672,
+            555.1832275390625,
+            67.83168029785156
+          ],
+          "visualBaselinesPt": [
+            61.136
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_20_block_74__pt-BR",
+          "readingMethod": "text rects of the review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            61.86
+          ],
+          "frameHeightCssPx": 19.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     }
   ],

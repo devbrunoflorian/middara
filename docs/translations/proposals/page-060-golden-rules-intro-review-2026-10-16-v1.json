@@ -90,7 +90,53 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "AI → IA; Intelligent Combatant → Combatente Inteligente"
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 60,
+          "pdfDocumentPageIndex": 59,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            439.3700256347656,
+            305.67840576171875,
+            688.3605346679688,
+            339.598388671875
+          ],
+          "visualBaselinesPt": [
+            314.888,
+            325.888,
+            336.888
+          ],
+          "spans": 7,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_60_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 8,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            274.31,
+            282.42,
+            290.53
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "note": "Proposta diagnóstica somente; não publica nem grava tradução final. Preserva o negrito de AI/IA e do numeral 4.",

@@ -31,7 +31,7 @@
       "spanKey": "page_66_block_18__pt-BR",
       "language": "pt-BR",
       "sourceText": "This AI Step starts a Spell Action by Determining the Force of the Spell.",
-      "proposalText": "Esta Etapa de IA inicia uma Ação de Feitiço ao determinar a Força do Feitiço.",
+      "proposalText": "Esta Etapa de IA inicia uma Ação de Feitiço determinando a Força do Feitiço.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_66_block_18__pt-BR",
@@ -46,10 +46,10 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Esta Etapa de IA inicia uma Ação de Feitiço ao determinar a Força do Feitiço.",
+            "text": "Esta Etapa de IA inicia uma Ação de Feitiço determinando a Força do Feitiço.",
             "font": "OptimaLTStd",
             "size": 10,
-            "color": "#ffffff",
+            "color": "#231f20",
             "weight": 400,
             "style": "normal"
           }
@@ -62,7 +62,73 @@
       "pendingTerms": [
         "AI Step → Etapa de IA: forma local usada na p.62, decisão global pendente.",
         "Spell Action → Ação de Feitiço; Determining the Force → determinar a Força: termos mecânicos candidatos, ainda sem aprovação global."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 66,
+          "pdfDocumentPageIndex": 65,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8385925292969,
+            493.8072204589844,
+            721.7330322265625,
+            505.7279052734375
+          ],
+          "visualBaselinesPt": [
+            503.017
+          ],
+          "spans": 3,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_66_block_7__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            426.77
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_66_block_18__pt-BR",
+        "bbox": [
+          415.8385925292969,
+          493.8072204589844,
+          721.7330322265625,
+          505.7279052734375
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Esta Etapa de IA inicia uma Ação de Feitiço determinando a Força do Feitiço.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     }
   ],
   "note": "Proposta inicial para revisão. Não grava tradução final.",

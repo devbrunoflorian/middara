@@ -96,7 +96,51 @@
       "pendingTerms": [
         "Subterfuge → Subterfúgio é candidata local para o nome da Árvore, pendente de aprovação humana.",
         "Discipline Trees → Árvores de Disciplina é candidata local para o título da seção, pendente de confirmação no glossário."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 94,
+          "pdfDocumentPageIndex": 93,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.17289733886719,
+            279.8431091308594,
+            279.7528381347656,
+            302.7630920410156
+          ],
+          "visualBaselinesPt": [
+            289.053,
+            300.053
+          ],
+          "spans": 5,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_94_block_1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 6,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            253.38,
+            262.28
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "note": "Unidade curta de referência da p.94. Preserva bold no nome da Tag e bold-italic no título da seção; nenhuma aprovação ou tradução final é registrada.",

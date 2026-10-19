@@ -47,7 +47,7 @@
 
 Se a Miniatura não puder se mover por qualquer motivo, sofre DANO IRREDUTÍVEL igual ao número de espaços que não conseguiu percorrer. Se uma Corrente empurrar Miniaturas até a borda do Encontro, elas não poderão se mover e sofrerão DANO IRREDUTÍVEL.
 
-Miniaturas que sejam passivamente imunes a um tipo específico de Terreno também ignoram as Correntes desse tipo de Terreno. Algumas Fichas são afetadas por Correntes; outras, não. Consulte a Tabela 10: Efeitos das Correntes, pág. 100, para descobrir rapidamente se uma Ficha é movida por Correntes.
+Miniaturas que sejam passivamente imunes a um tipo específico de Terreno também ignoram as Correntes desse tipo de Terreno. Algumas Fichas são afetadas por Correntes; outras, não. Veja Tabela 10: Efeitos das Correntes, pág. 100, para descobrir rapidamente se uma Ficha é movida por Correntes.
 
 Como as Fichas não têm turnos, elas são sempre movidas ao fim de cada rodada.
 

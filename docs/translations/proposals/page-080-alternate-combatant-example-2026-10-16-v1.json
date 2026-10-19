@@ -53,12 +53,54 @@
         "lineHeight": 1.1,
         "lineHeightMode": "custom",
         "segments": [
-          { "text": "Exemplo:", "font": "OptimaLTStd-Bold", "size": 10, "color": "#231f20", "weight": 700, "style": "normal" },
-          { "text": " a Carta de Combatente ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
-          { "text": "Cave Sickle Warrior", "font": "OptimaLTStd-BoldItalic", "size": 10, "color": "#231f20", "weight": 700, "style": "italic" },
-          { "text": " mostrada acima poderia surgir no lugar das ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
-          { "text": "Cave Sickles", "font": "OptimaLTStd-BoldItalic", "size": 10, "color": "#231f20", "weight": 700, "style": "italic" },
-          { "text": ".", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" }
+          {
+            "text": "Exemplo:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " a Carta de Combatente ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Cave Sickle Warrior",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic"
+          },
+          {
+            "text": " mostrada acima poderia surgir no lugar das ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Cave Sickles",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic"
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
         ],
         "managedSourceSymbols": []
       },
@@ -69,7 +111,51 @@
         "Cave Sickle Warrior e Cave Sickles são nomes próprios mantidos no original.",
         "Combatant Card → Carta de Combatente segue uso local de propostas anteriores, sem decisão humana global nesta unidade.",
         "Spawn → surgir corresponde à entrada oficial do glossário."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 80,
+          "pdfDocumentPageIndex": 79,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            71.0216064453125,
+            280.13653564453125,
+            352.631591796875,
+            303.1565246582031
+          ],
+          "visualBaselinesPt": [
+            289.447,
+            300.447
+          ],
+          "spans": 7,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_80_block_4__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 8,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            253.61,
+            263.52
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "note": "Recorte de uma frase do exemplo da carta Cave Sickle Warrior. Os segmentos preservam o rótulo Exemplo em negrito e os nomes das cartas em negrito e itálico.",

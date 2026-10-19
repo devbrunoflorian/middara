@@ -176,7 +176,55 @@
         "Ability / Passive Ability → Habilidade / Habilidade Passiva: formas candidatas, pendentes de decisão editorial.",
         "Damage token → ficha de Dano: Token → Ficha é aprovado no glossário; o composto e capitalização de Dano não foram aprovados globalmente.",
         "AI Steps → Etapas de IA: uso local da p.62, decisão global pendente."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 64,
+          "pdfDocumentPageIndex": 63,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            85.96786499023438,
+            109.2913818359375,
+            735.2676391601562,
+            154.31309509277344
+          ],
+          "visualBaselinesPt": [
+            118.601,
+            129.601,
+            140.601,
+            151.601
+          ],
+          "spans": 14,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_64_block_11__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 21,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            115.16,
+            124.06,
+            132.97,
+            141.88
+          ],
+          "frameHeightCssPx": 36.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "note": "Prévia diagnóstica parcial para revisão. Nenhuma escrita de tradução final; os termos e o copyfit ainda requerem validação.",

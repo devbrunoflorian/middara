@@ -78,7 +78,53 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Hulking → Grandalhão é uma candidata local para o nome da Tag; depende de aprovação humana no glossário."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 93,
+          "pdfDocumentPageIndex": 92,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.17320251464844,
+            200.01698303222656,
+            405.8331604003906,
+            233.93699645996094
+          ],
+          "visualBaselinesPt": [
+            209.227,
+            220.227,
+            231.227
+          ],
+          "spans": 4,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_93_block_1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 4,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            188.69,
+            197.61,
+            206.53
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 6,
@@ -127,7 +173,51 @@
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Light → Luz é uma candidata local para o nome da Tag; depende de aprovação humana no glossário."
-      ]
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 93,
+          "pdfDocumentPageIndex": 92,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            81.17330932617188,
+            538.781494140625,
+            394.333251953125,
+            561.7015380859375
+          ],
+          "visualBaselinesPt": [
+            547.992,
+            558.992
+          ],
+          "spans": 3,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_93_block_6__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 4,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            463.22,
+            472.13
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     }
   ],
   "note": "Amostra incremental de duas definições curtas da p. 93. Preserva as ênfases dos rótulos; nomes das Tags seguem candidatos locais até aprovação humana.",

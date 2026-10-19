@@ -37,7 +37,7 @@
       "spanKey": "page_69_block_4__pt-BR",
       "language": "pt-BR",
       "sourceText": "Adventurers and Combatants have allies and opponents and depending on the figure, these opponents and allies can change. A figure’s opponent is any figure with an opposing goal. A figure’s ally is any figure that shares the same goal and has no reason to hinder them in achieving their goal.",
-      "proposalText": "Os Aventureiros e Combatentes têm aliados e oponentes, que podem variar conforme a Miniatura. O oponente de uma Miniatura é qualquer Miniatura com um objetivo oposto ao dela. O aliado de uma Miniatura é qualquer Miniatura que compartilhe o mesmo objetivo e não tenha motivo para impedi-la de alcançá-lo.",
+      "proposalText": "Aventureiros e Combatentes têm aliados e oponentes, que variam conforme a Miniatura. O oponente é qualquer miniatura com objetivo oposto ao seu. O aliado é qualquer miniatura com o mesmo objetivo, sem motivo para impedi-la de alcançá-lo.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_69_block_4__pt-BR",
@@ -52,7 +52,7 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Os Aventureiros e Combatentes têm aliados e oponentes, que podem variar conforme a Miniatura. O oponente de uma Miniatura é qualquer Miniatura com um objetivo oposto ao dela. O aliado de uma Miniatura é qualquer Miniatura que compartilhe o mesmo objetivo e não tenha motivo para impedi-la de alcançá-lo.",
+            "text": "Aventureiros e Combatentes têm aliados e oponentes, que variam conforme a Miniatura. O oponente é qualquer miniatura com objetivo oposto ao seu. O aliado é qualquer miniatura com o mesmo objetivo, sem motivo para impedi-la de alcançá-lo.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -65,7 +65,79 @@
       "technicalStatus": "verified_live_viewer_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": []
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 69,
+          "pdfDocumentPageIndex": 68,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            588.7507934570312,
+            405.7731628417969,
+            633.6508178710938
+          ],
+          "visualBaselinesPt": [
+            597.941,
+            608.941,
+            619.941,
+            630.941
+          ],
+          "spans": 4,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_69_block_4__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 4,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            503.72,
+            512.63,
+            521.55,
+            530.45
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_69_block_4__pt-BR",
+        "bbox": [
+          86.17320251464844,
+          588.7507934570312,
+          405.7731628417969,
+          633.6508178710938
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Aventureiros e Combatentes têm aliados e oponentes, que variam conforme a Miniatura. O oponente é qualquer miniatura com objetivo oposto ao seu. O aliado é qualquer miniatura com o mesmo objetivo, sem motivo para impedi-la de alcançá-lo.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     }
   ],
   "note": "Parágrafo isolado de prosa como próximo lote seguro. A prévia é proposta; não publica tradução e não substitui decisão editorial humana.",

@@ -38,7 +38,7 @@
       "spanKey": "page_96_block_21__pt-BR",
       "language": "pt-BR",
       "sourceText": "NORMAL: No special effects. Can be replaced by all Terrain types.",
-      "proposalText": "NORMAL: Sem efeitos especiais. Pode ser substituído por todos os tipos de Terreno.",
+      "proposalText": "NORMAL: Sem efeitos especiais. É substituído por todos os tipos de Terreno.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_96_block_21__pt-BR",
@@ -62,7 +62,7 @@
             "disableLigatures": true
           },
           {
-            "text": " Sem efeitos especiais. Pode ser substituído por todos os tipos de Terreno.",
+            "text": " Sem efeitos especiais. É substituído por todos os tipos de Terreno.",
             "font": "OptimaLTStd",
             "size": 10,
             "weight": 400,
@@ -76,7 +76,83 @@
       "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": []
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 96,
+          "pdfDocumentPageIndex": 95,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            101.5790023803711,
+            380.0276184082031,
+            383.41265869140625,
+            391.9276123046875
+          ],
+          "visualBaselinesPt": [
+            389.218
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_96_block_21__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            334.56
+          ],
+          "frameHeightCssPx": 9.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_96_block_21__pt-BR",
+        "bbox": [
+          101.5790023803711,
+          380.0276184082031,
+          383.41265869140625,
+          391.9276123046875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "NORMAL:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " Sem efeitos especiais. É substituído por todos os tipos de Terreno.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
     }
   ],
   "note": "Unidade curta da primeira linha da Tabela 7. Preserva bold do rótulo e cor escura sobre a célula clara; não altera símbolos, outros textos nem layout.",

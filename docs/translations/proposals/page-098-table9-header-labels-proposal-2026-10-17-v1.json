@@ -85,91 +85,43 @@
       ],
       "pageRendererVisualLineCount": 1,
       "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
-        "classification": "EXACT at 100% and 200%",
-        "method": "Official-PDF source baselines versus live PageRenderer DOM Range rectangles grouped by the shared Copyfit V3 visual-row helper; no character count, string newline, or height estimate.",
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
         "environment": {
-          "viewportCssPixels": "2400x1400",
-          "deviceScaleFactor": 1,
+          "pageNumber": 98,
+          "pdfDocumentPageIndex": 97,
           "language": "pt-BR",
-          "zooms": [
-            "100%",
-            "200%"
-          ],
-          "fontLoaded": true
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
         },
-        "geometry": "Original OptimaLTStd-Bold 8 pt, white color, PDF baseline and source positions are preserved. The existing PageDOM frames are unchanged. EFFECT fits the measured remaining source line width at both scales without wrapping or escaping. All three proposals were rendered together; neighboring table cells remain separate.",
-        "evidence": {
-          "measurementFiles": [
-            "apps/web/output/p98-block_11-copyfit-v1/nome-100pct-measurement.json",
-            "apps/web/output/p98-block_11-copyfit-v1/nome-200pct-measurement.json"
+        "sourceEvidence": {
+          "bboxPt": [
+            78.78160095214844,
+            59.46403121948242,
+            485.02960205078125,
+            69.00003051757812
           ],
-          "screenshots": [
-            "apps/web/output/p98-block_11-copyfit-v1/viewer-ptbr-nome-100pct.png",
-            "apps/web/output/p98-block_11-copyfit-v1/viewer-ptbr-nome-200pct.png"
+          "visualBaselinesPt": [
+            66.832
           ],
-          "sourceComparisons": [
-            "apps/web/output/p098-table9-header-labels-copyfit-v1/official-pdf-vs-live-viewer-100pct.png",
-            "apps/web/output/p098-table9-header-labels-copyfit-v1/official-pdf-vs-live-viewer-200pct.png"
-          ]
+          "spans": 3,
+          "visualRows": 1
         },
-        "samplesByZoom": [
-          {
-            "zoomPercent": 100,
-            "sourcePdfVisualBaselines": 1,
-            "renderedVisualBaselines": 1,
-            "classification": "EXACT",
-            "fontLoaded": true,
-            "textEscapesFrame": false,
-            "translatedWrapperStrokeIsolation": "PASS",
-            "blockedWrites": 0,
-            "pageErrors": 0,
-            "result": "PASS",
-            "inkRects": [
-              {
-                "x": 674.6875,
-                "y": 171.359375,
-                "width": 36.9375,
-                "height": 15
-              }
-            ],
-            "frame": {
-              "x": 674.6875,
-              "y": 173.359375,
-              "width": 637.828125,
-              "height": 14.971959334832462
-            },
-            "simultaneousProposalUnits": 3
-          },
-          {
-            "zoomPercent": 200,
-            "sourcePdfVisualBaselines": 1,
-            "renderedVisualBaselines": 1,
-            "classification": "EXACT",
-            "fontLoaded": true,
-            "textEscapesFrame": false,
-            "translatedWrapperStrokeIsolation": "PASS",
-            "blockedWrites": 0,
-            "pageErrors": 0,
-            "result": "PASS",
-            "inkRects": [
-              {
-                "x": 331.375,
-                "y": 215.71875,
-                "width": 73.859375,
-                "height": 30
-              }
-            ],
-            "frame": {
-              "x": 331.375,
-              "y": 218.71875,
-              "width": 1275.671875,
-              "height": 29.944285440673326
-            },
-            "simultaneousProposalUnits": 3
-          }
-        ]
+        "pageRendererEvidence": {
+          "spanKey": "page_98_unit_p98-table9-name-header__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            74.78
+          ],
+          "frameHeightCssPx": 6.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -223,91 +175,43 @@
       ],
       "pageRendererVisualLineCount": 1,
       "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
-        "classification": "EXACT at 100% and 200%",
-        "method": "Official-PDF source baselines versus live PageRenderer DOM Range rectangles grouped by the shared Copyfit V3 visual-row helper; no character count, string newline, or height estimate.",
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
         "environment": {
-          "viewportCssPixels": "2400x1400",
-          "deviceScaleFactor": 1,
+          "pageNumber": 98,
+          "pdfDocumentPageIndex": 97,
           "language": "pt-BR",
-          "zooms": [
-            "100%",
-            "200%"
-          ],
-          "fontLoaded": true
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
         },
-        "geometry": "Original OptimaLTStd-Bold 8 pt, white color, PDF baseline and source positions are preserved. The existing PageDOM frames are unchanged. EFFECT fits the measured remaining source line width at both scales without wrapping or escaping. All three proposals were rendered together; neighboring table cells remain separate.",
-        "evidence": {
-          "measurementFiles": [
-            "apps/web/output/p98-block_11-copyfit-v1/ficha-100pct-measurement.json",
-            "apps/web/output/p98-block_11-copyfit-v1/ficha-200pct-measurement.json"
+        "sourceEvidence": {
+          "bboxPt": [
+            78.78160095214844,
+            59.46403121948242,
+            485.02960205078125,
+            69.00003051757812
           ],
-          "screenshots": [
-            "apps/web/output/p98-block_11-copyfit-v1/viewer-ptbr-nome-100pct.png",
-            "apps/web/output/p98-block_11-copyfit-v1/viewer-ptbr-nome-200pct.png"
+          "visualBaselinesPt": [
+            66.832
           ],
-          "sourceComparisons": [
-            "apps/web/output/p098-table9-header-labels-copyfit-v1/official-pdf-vs-live-viewer-100pct.png",
-            "apps/web/output/p098-table9-header-labels-copyfit-v1/official-pdf-vs-live-viewer-200pct.png"
-          ]
+          "spans": 3,
+          "visualRows": 1
         },
-        "samplesByZoom": [
-          {
-            "zoomPercent": 100,
-            "sourcePdfVisualBaselines": 1,
-            "renderedVisualBaselines": 1,
-            "classification": "EXACT",
-            "fontLoaded": true,
-            "textEscapesFrame": false,
-            "translatedWrapperStrokeIsolation": "PASS",
-            "blockedWrites": 0,
-            "pageErrors": 0,
-            "result": "PASS",
-            "inkRects": [
-              {
-                "x": 758.609375,
-                "y": 171.359375,
-                "width": 36.0625,
-                "height": 15
-              }
-            ],
-            "frame": {
-              "x": 674.6875,
-              "y": 173.359375,
-              "width": 637.828125,
-              "height": 14.971959334832462
-            },
-            "simultaneousProposalUnits": 3
-          },
-          {
-            "zoomPercent": 200,
-            "sourcePdfVisualBaselines": 1,
-            "renderedVisualBaselines": 1,
-            "classification": "EXACT",
-            "fontLoaded": true,
-            "textEscapesFrame": false,
-            "translatedWrapperStrokeIsolation": "PASS",
-            "blockedWrites": 0,
-            "pageErrors": 0,
-            "result": "PASS",
-            "inkRects": [
-              {
-                "x": 499.21875,
-                "y": 215.71875,
-                "width": 72.109375,
-                "height": 30
-              }
-            ],
-            "frame": {
-              "x": 331.375,
-              "y": 218.71875,
-              "width": 1275.671875,
-              "height": 29.944285440673326
-            },
-            "simultaneousProposalUnits": 3
-          }
-        ]
+        "pageRendererEvidence": {
+          "spanKey": "page_98_unit_p98-table9-token-header__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            74.78
+          ],
+          "frameHeightCssPx": 6.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {
@@ -361,91 +265,43 @@
       ],
       "pageRendererVisualLineCount": 1,
       "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
-        "classification": "EXACT at 100% and 200%",
-        "method": "Official-PDF source baselines versus live PageRenderer DOM Range rectangles grouped by the shared Copyfit V3 visual-row helper; no character count, string newline, or height estimate.",
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
         "environment": {
-          "viewportCssPixels": "2400x1400",
-          "deviceScaleFactor": 1,
+          "pageNumber": 98,
+          "pdfDocumentPageIndex": 97,
           "language": "pt-BR",
-          "zooms": [
-            "100%",
-            "200%"
-          ],
-          "fontLoaded": true
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
         },
-        "geometry": "Original OptimaLTStd-Bold 8 pt, white color, PDF baseline and source positions are preserved. The existing PageDOM frames are unchanged. EFFECT fits the measured remaining source line width at both scales without wrapping or escaping. All three proposals were rendered together; neighboring table cells remain separate.",
-        "evidence": {
-          "measurementFiles": [
-            "apps/web/output/p98-block_11-copyfit-v1/efeito-100pct-measurement.json",
-            "apps/web/output/p98-block_11-copyfit-v1/efeito-200pct-measurement.json"
+        "sourceEvidence": {
+          "bboxPt": [
+            78.78160095214844,
+            59.46403121948242,
+            485.02960205078125,
+            69.00003051757812
           ],
-          "screenshots": [
-            "apps/web/output/p98-block_11-copyfit-v1/viewer-ptbr-nome-100pct.png",
-            "apps/web/output/p98-block_11-copyfit-v1/viewer-ptbr-nome-200pct.png"
+          "visualBaselinesPt": [
+            66.832
           ],
-          "sourceComparisons": [
-            "apps/web/output/p098-table9-header-labels-copyfit-v1/official-pdf-vs-live-viewer-100pct.png",
-            "apps/web/output/p098-table9-header-labels-copyfit-v1/official-pdf-vs-live-viewer-200pct.png"
-          ]
+          "spans": 3,
+          "visualRows": 1
         },
-        "samplesByZoom": [
-          {
-            "zoomPercent": 100,
-            "sourcePdfVisualBaselines": 1,
-            "renderedVisualBaselines": 1,
-            "classification": "EXACT",
-            "fontLoaded": true,
-            "textEscapesFrame": false,
-            "translatedWrapperStrokeIsolation": "PASS",
-            "blockedWrites": 0,
-            "pageErrors": 0,
-            "result": "PASS",
-            "inkRects": [
-              {
-                "x": 1272.03125,
-                "y": 171.359375,
-                "width": 38.96875,
-                "height": 15
-              }
-            ],
-            "frame": {
-              "x": 674.6875,
-              "y": 173.359375,
-              "width": 637.828125,
-              "height": 14.971959334832462
-            },
-            "simultaneousProposalUnits": 3
-          },
-          {
-            "zoomPercent": 200,
-            "sourcePdfVisualBaselines": 1,
-            "renderedVisualBaselines": 1,
-            "classification": "EXACT",
-            "fontLoaded": true,
-            "textEscapesFrame": false,
-            "translatedWrapperStrokeIsolation": "PASS",
-            "blockedWrites": 0,
-            "pageErrors": 0,
-            "result": "PASS",
-            "inkRects": [
-              {
-                "x": 1526.078125,
-                "y": 215.71875,
-                "width": 77.9375,
-                "height": 30
-              }
-            ],
-            "frame": {
-              "x": 331.375,
-              "y": 218.71875,
-              "width": 1275.671875,
-              "height": 29.944285440673326
-            },
-            "simultaneousProposalUnits": 3
-          }
-        ]
+        "pageRendererEvidence": {
+          "spanKey": "page_98_unit_p98-table9-effect-header__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            74.78
+          ],
+          "frameHeightCssPx": 6.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     }
   ],
