@@ -273,7 +273,7 @@ export interface Translation {
   createdAt: string;
 }
 /**
- * Persistent proposal edits, explicit approval and a Payload receipt for the published translation.
+ * Persistent proposal edits, reversible review queue disposition, explicit approval and a Payload receipt for the published translation.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "translation-reviews".
@@ -297,13 +297,13 @@ export interface TranslationReview {
     | boolean
     | null;
   technicalStatus: string;
-  copyfitClassification?: 'EXACT' | 'UNDER' | 'OVER' | null;
+  copyfitClassification?: ('EXACT' | 'UNDER' | 'OVER') | null;
   copyfitSourcePdfLineCount?: number | null;
   copyfitPageRendererLineCount?: number | null;
   copyfitMeasurementFingerprint?: string | null;
   underCompositionJustification?: string | null;
   approvalStatus: 'pending' | 'approved';
-  reviewDisposition?: 'active' | 'archived' | null;
+  reviewDisposition?: ('active' | 'archived') | null;
   approvedAt?: string | null;
   publication?:
     | {
@@ -348,7 +348,7 @@ export interface TranslationReviewRequest {
   status: 'pending' | 'in_progress' | 'completed';
   resultNote?: string | null;
   handledAt?: string | null;
-  completedBy?: 'ai' | 'user' | null;
+  completedBy?: ('ai' | 'user') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -708,7 +708,6 @@ export interface TranslationReviewsSelect<T extends boolean = true> {
   spanKey?: T;
   proposalId?: T;
   proposalVersion?: T;
-  translationSpanKey?: T;
   sourceText?: T;
   proposalText?: T;
   data?: T;
@@ -739,6 +738,7 @@ export interface TranslationReviewRequestsSelect<T extends boolean = true> {
   exceptionId?: T;
   proposalId?: T;
   proposalVersion?: T;
+  translationSpanKey?: T;
   requestText?: T;
   requestContext?: T;
   status?: T;

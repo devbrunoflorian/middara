@@ -33,6 +33,10 @@ function response(body: JsonRecord, status = 200): Response {
   return Response.json(body, { status })
 }
 
+function normalizeSpanKey(key: unknown): string {
+  return String(key ?? '').replace(/__pt-BR$/u, '')
+}
+
 async function findReview(req: PayloadRequest, reviewKey: string) {
   const result = await req.payload.find({
     collection: 'translation-reviews',
@@ -47,15 +51,28 @@ async function findReview(req: PayloadRequest, reviewKey: string) {
 }
 
 async function findTranslation(req: PayloadRequest, spanKey: string) {
+  const normalizedKey = normalizeSpanKey(spanKey)
+  const candidateKeys = Array.from(new Set([spanKey, normalizedKey, `${normalizedKey}__pt-BR`]))
   const result = await req.payload.find({
     collection: 'translations',
-    where: { and: [{ spanKey: { equals: spanKey } }, { language: { equals: 'pt-BR' } }] },
-    limit: 2,
+    where: {
+      and: [
+        { spanKey: { in: candidateKeys } },
+        { language: { equals: 'pt-BR' } },
+      ],
+    },
+    limit: 5,
     depth: 0,
     overrideAccess: true,
     req,
   })
-  if (result.docs.length > 1) throw new Error('Há mais de uma tradução final para esta unidade.')
+  if (result.docs.length > 1) {
+    const exact = result.docs.find(doc => doc.spanKey === spanKey)
+    if (exact) return exact
+    const withSuffix = result.docs.find(doc => doc.spanKey === `${normalizedKey}__pt-BR`)
+    if (withSuffix) return withSuffix
+    return result.docs[0]
+  }
   return result.docs[0] ?? null
 }
 
@@ -88,13 +105,15 @@ function validateFinalData(data: unknown, pageNumber: number, translationSpanKey
   if (!isRecord(data) || data.schemaVersion !== 2 || !Array.isArray(data.segments) || !data.segments.length) {
     throw Object.assign(new Error('A tradução salva não contém segmentos ricos editáveis; conclua pela aprovação explícita da proposta.'), { status: 409 })
   }
-  if (typeof data.spanKey === 'string' && !data.spanKey.startsWith(`page_${pageNumber}_`)) {
+  const normDataKey = normalizeSpanKey(data.spanKey)
+  const normTransKey = normalizeSpanKey(translationSpanKey)
+  if (normDataKey && !normDataKey.startsWith(`page_${pageNumber}_`)) {
     throw Object.assign(new Error('A tradução salva não tem uma chave de renderização verificável para esta unidade.'), { status: 409 })
   }
-  if (typeof data.spanKey === 'string' && data.spanKey !== translationSpanKey) {
+  if (normDataKey && normDataKey !== normTransKey) {
     throw Object.assign(new Error('A chave da tradução PT-BR salva não corresponde à unidade do pedido.'), { status: 409 })
   }
-  if (typeof data.spanKey !== 'string' && !legacyFrame) {
+  if (!normDataKey && !legacyFrame) {
     throw Object.assign(new Error('A tradução salva não tem uma chave de renderização verificável para esta unidade.'), { status: 409 })
   }
   const bbox = data.bbox
@@ -210,8 +229,8 @@ async function completeAsUser(req: PayloadRequest): Promise<Response> {
     const requestedSpanKey = typeof body.spanKey === 'string' && body.spanKey.trim()
       ? body.spanKey.trim()
       : reviewRequest.spanKey
-    const requestUnitKey = reviewRequest.spanKey.replace(/__pt-BR$/u, '')
-    const requestedUnitKey = requestedSpanKey.replace(/__pt-BR$/u, '')
+    const requestUnitKey = normalizeSpanKey(reviewRequest.spanKey)
+    const requestedUnitKey = normalizeSpanKey(requestedSpanKey)
     const sameSourceBlock = typeof body.sourceBlockId === 'string'
       && !!reviewRequest.sourceBlockId
       && body.sourceBlockId === reviewRequest.sourceBlockId
@@ -236,26 +255,59 @@ async function completeAsUser(req: PayloadRequest): Promise<Response> {
       ?? reviewDataSpanKey
       ?? requestedTranslationSpanKey
       ?? requestedSpanKey.replace(/__pt-BR$/u, '')
-    if (requestedTranslationSpanKey && requestedTranslationSpanKey !== translationSpanKey) {
+    if (requestedTranslationSpanKey && normalizeSpanKey(requestedTranslationSpanKey) !== normalizeSpanKey(translationSpanKey)) {
       throw Object.assign(new Error('A chave da unidade mudou desde a criação do pedido. Reabra a unidade vinculada antes de concluir.'), { status: 409 })
     }
-    const translation = await findTranslation(req, translationSpanKey)
-    if (!translation) {
-      throw Object.assign(new Error('Não encontrei a tradução PT-BR salva no Payload. Salve e aprove a unidade no Editor antes de concluir o pedido como usuário.'), { status: 409 })
-    }
-    if (translation.language !== 'pt-BR' || translation.spanKey !== translationSpanKey) {
-      throw Object.assign(new Error('A tradução localizada não é uma unidade PT-BR correspondente ao pedido.'), { status: 409 })
-    }
 
+    const existingTranslation = await findTranslation(req, translationSpanKey)
     const pageNumber = Number(reviewRequest.pageNumber)
     const layoutFrame = await findLayoutFrame(req, translationSpanKey, pageNumber)
-    const translationData = isRecord(translation.data) ? translation.data : null
-    const needsLegacyFrame = !translationData || typeof translationData.spanKey !== 'string'
-      || !Array.isArray(translationData.bbox)
+
+    const rawCandidateData = (isRecord(body.data) && Array.isArray(body.data.segments) ? body.data : null)
+      ?? (isRecord(review?.data) && Array.isArray(review.data.segments) ? review.data : null)
+      ?? (existingTranslation && isRecord(existingTranslation.data) && Array.isArray(existingTranslation.data.segments) ? existingTranslation.data : null)
+
+    if (!rawCandidateData) {
+      throw Object.assign(new Error('Não encontrei a tradução PT-BR salva ou ajustada no pedido. Ajuste a tradução na revisão antes de concluir o pedido como usuário.'), { status: 409 })
+    }
+
+    const needsLegacyFrame = typeof rawCandidateData.spanKey !== 'string' || !Array.isArray(rawCandidateData.bbox)
     if (needsLegacyFrame && !layoutFrame) {
       throw Object.assign(new Error('A unidade legada não tem um quadro X/Y/largura/altura salvo e verificável.'), { status: 409 })
     }
-    validateFinalData(translation.data, pageNumber, translationSpanKey, !!layoutFrame)
+    validateFinalData(rawCandidateData, pageNumber, translationSpanKey, !!layoutFrame)
+
+    const targetSpanKey = existingTranslation?.spanKey
+      ?? (translationSpanKey.endsWith('__pt-BR') ? translationSpanKey : `${translationSpanKey.replace(/__pt-BR$/u, '')}__pt-BR`)
+    const finalData: JsonRecord = {
+      ...rawCandidateData,
+      spanKey: targetSpanKey,
+    }
+
+    let translation = existingTranslation
+    if (!translation) {
+      translation = await req.payload.create({
+        collection: 'translations',
+        data: { spanKey: targetSpanKey, language: 'pt-BR', data: finalData },
+        depth: 0,
+        overrideAccess: true,
+        req,
+      })
+    } else if (canonical(existingTranslation.data) !== canonical(finalData)) {
+      translation = await req.payload.update({
+        collection: 'translations',
+        id: existingTranslation.id,
+        data: { data: finalData },
+        depth: 0,
+        overrideAccess: true,
+        req,
+      })
+    }
+
+    if (translation.language !== 'pt-BR' || normalizeSpanKey(translation.spanKey) !== normalizeSpanKey(translationSpanKey)) {
+      throw Object.assign(new Error('A tradução localizada não é uma unidade PT-BR correspondente ao pedido.'), { status: 409 })
+    }
+
     const now = new Date().toISOString()
     const previousPublication = isRecord(review?.publication)
       ? review.publication as unknown as ReviewPublication
@@ -330,7 +382,7 @@ async function completeAsUser(req: PayloadRequest): Promise<Response> {
         spanKey: requestedSpanKey,
         proposalId,
         proposalVersion,
-        translationSpanKey,
+        translationSpanKey: translation.spanKey,
         status: 'completed',
         completedBy: 'user',
         resultNote,
@@ -343,7 +395,7 @@ async function completeAsUser(req: PayloadRequest): Promise<Response> {
 
     const [verifiedReview, verifiedTranslation, verifiedRequest] = await Promise.all([
       findReview(req, reviewKey),
-      findTranslation(req, translationSpanKey),
+      findTranslation(req, translation.spanKey),
       req.payload.findByID({ collection: 'translation-review-requests', id: reviewRequest.id, depth: 0, overrideAccess: true, req }),
     ])
     if (!verifiedReview || !verifiedTranslation || !verifiedRequest

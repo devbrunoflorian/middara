@@ -33,10 +33,14 @@ function canonical(value: unknown): string {
   return JSON.stringify(value)
 }
 
+function normalizeSpanKeyForComparison(key: unknown): string {
+  return String(key ?? '').replace(/__pt-BR$/u, '')
+}
+
 function copyfitMeasurementFingerprint(data: unknown): string | null {
   if (!isRecord(data) || !Array.isArray(data.segments)) return null
   const snapshot = {
-    spanKey: data.spanKey,
+    spanKey: normalizeSpanKeyForComparison(data.spanKey),
     bbox: data.bbox,
     textAlign: data.textAlign,
     lineHeight: data.lineHeight,
@@ -55,6 +59,8 @@ type CanonicalCopyfitEvidence = {
   pageRendererLineCount: number
   fingerprint: string
   technicalStatus: string
+  canonicalSpanKey: string
+  canonicalBbox: [number, number, number, number]
 }
 
 type CopyfitEvidenceIdentity = {
@@ -113,7 +119,16 @@ export function resolveCanonicalCopyfitEvidence(
   if (!canonicalSpanKey || !canonicalBbox || !isRecord(candidate.data) || !Array.isArray(candidate.data.segments)) return null
   const canonicalData = { ...candidate.data, spanKey: canonicalSpanKey, bbox: canonicalBbox }
   const catalogFingerprint = copyfitMeasurementFingerprint(canonicalData)
-  const submittedFingerprint = copyfitMeasurementFingerprint(identity.data)
+  const submittedData = isRecord(identity.data)
+    ? {
+        ...identity.data,
+        spanKey: normalizeSpanKeyForComparison(identity.data.spanKey) === normalizeSpanKeyForComparison(canonicalSpanKey)
+          ? canonicalSpanKey
+          : identity.data.spanKey,
+        bbox: canonicalBbox,
+      }
+    : identity.data
+  const submittedFingerprint = copyfitMeasurementFingerprint(submittedData)
   if (!fingerprint || fingerprint !== catalogFingerprint || fingerprint !== submittedFingerprint) return null
 
   return {
@@ -124,6 +139,8 @@ export function resolveCanonicalCopyfitEvidence(
     pageRendererLineCount,
     fingerprint,
     technicalStatus: typeof candidate.technicalStatus === 'string' ? candidate.technicalStatus : '',
+    canonicalSpanKey,
+    canonicalBbox,
   }
 }
 
@@ -133,9 +150,21 @@ function isTechnicallyBlocked(status: string): boolean {
 
 async function readCanonicalReviewCatalog(): Promise<unknown> {
   const endpointDirectory = path.dirname(fileURLToPath(import.meta.url))
-  const catalogPath = process.env.MIDDARA_REVIEW_CATALOG_PATH
-    ?? path.resolve(endpointDirectory, '../../../web/public/translation-review/catalog.json')
-  return JSON.parse(await readFile(catalogPath, 'utf8')) as unknown
+  const candidatePaths = [
+    process.env.MIDDARA_REVIEW_CATALOG_PATH,
+    path.resolve(process.cwd(), '../web/public/translation-review/catalog.json'),
+    path.resolve(process.cwd(), 'apps/web/public/translation-review/catalog.json'),
+    path.resolve(endpointDirectory, '../../../web/public/translation-review/catalog.json'),
+  ].filter(Boolean) as string[]
+
+  for (const catalogPath of candidatePaths) {
+    try {
+      return JSON.parse(await readFile(catalogPath, 'utf8')) as unknown
+    } catch {
+      // try next candidate path
+    }
+  }
+  throw new Error('Canonical catalog not found.')
 }
 
 function response(body: JsonRecord, status = 200): Response {
@@ -156,15 +185,28 @@ async function findReview(req: PayloadRequest, reviewKey: string) {
 }
 
 async function findTranslation(req: PayloadRequest, spanKey: string) {
+  const normalizedKey = normalizeSpanKeyForComparison(spanKey)
+  const candidateKeys = Array.from(new Set([spanKey, normalizedKey, `${normalizedKey}__pt-BR`]))
   const result = await req.payload.find({
     collection: 'translations',
-    where: { and: [{ spanKey: { equals: spanKey } }, { language: { equals: 'pt-BR' } }] },
-    limit: 2,
+    where: {
+      and: [
+        { spanKey: { in: candidateKeys } },
+        { language: { equals: 'pt-BR' } },
+      ],
+    },
+    limit: 5,
     depth: 0,
     overrideAccess: true,
     req,
   })
-  if (result.docs.length > 1) throw new Error('Há mais de uma tradução final para esta unidade.')
+  if (result.docs.length > 1) {
+    const exact = result.docs.find(doc => doc.spanKey === spanKey)
+    if (exact) return exact
+    const withSuffix = result.docs.find(doc => doc.spanKey === `${normalizedKey}__pt-BR`)
+    if (withSuffix) return withSuffix
+    return result.docs[0]
+  }
   return result.docs[0] ?? null
 }
 
@@ -315,6 +357,10 @@ async function approve(req: PayloadRequest): Promise<Response> {
     }
     const data = legacyApproval ? review!.data : body.data
     validateTranslationData(data, pageNumber)
+    if (!legacyApproval && canonicalEvidence?.canonicalSpanKey && isRecord(data)) {
+      data.spanKey = canonicalEvidence.canonicalSpanKey
+      if (canonicalEvidence.canonicalBbox) data.bbox = canonicalEvidence.canonicalBbox
+    }
     const expectedMeasurementFingerprint = legacyApproval
       ? requestedFingerprint ?? storedFingerprint
       : canonicalEvidence!.fingerprint
@@ -325,7 +371,7 @@ async function approve(req: PayloadRequest): Promise<Response> {
     if (expectedMeasurementFingerprint && actualMeasurementFingerprint !== expectedMeasurementFingerprint) {
       throw Object.assign(new Error('Os segmentos, estilos ou geometria mudaram depois da medição Copyfit V3. Valide esta versão antes de aprovar.'), { status: 409 })
     }
-    const targetSpanKey = String(data.spanKey)
+    const targetSpanKey = canonicalEvidence?.canonicalSpanKey ?? String(data.spanKey)
     const existingTranslation = await findTranslation(req, targetSpanKey)
     const reviewPublication = review?.publication
     const existingPublication = isRecord(reviewPublication)
