@@ -64,10 +64,16 @@
 | **Party Stash** | Estoque do Grupo |
 | **Refresh Phase** *(nome da fase)* | Fase de Manutenção |
 | **Exhaust** *(mecânica de Tag/Habilidade)* | Exaustar |
+| **Tier** | Tier |
+| **See** *(referência editorial: página, seção, tabela, diagrama)* | Veja |
 
 Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir automaticamente o verbo isolado *refresh* como “manutenção”; avaliar cada ocorrência pelo contexto.
 
 **Decisão do usuário (15/10/2026):** para a mecânica *Exhaust*, usar o verbo **exaustar**; em rótulos de Tag, manter a forma verbal/capitalização natural, por exemplo **EXAUSTAR**. Esta decisão não renomeia IDs semânticos como `action.exhaust` e não autoriza sobrescrever traduções humanas já salvas.
+
+**Decisão do usuário (18/10/2026):** para a classificação de itens (*Mundane, Common, Uncommon, Rare*) e faixas de recompensa, o termo **Tier** é fixado canonicamente como **Tier** (mantendo-se no plural **Tiers**). Esta decisão preserva a distinção mecânica essencial em relação a **Nível / LVL** (*Loot Level* → Nível de Saque, *Discipline Level* → Nível de Disciplina, *Elevation Level* → Nível de Elevação).
+
+**Decisão do usuário (19/10/2026):** em referências editoriais cruzadas a páginas, seções, tabelas, diagramas e outras partes do manual, traduzir sempre "See" como **Veja**. Não utilizar "Consulte" nem "Veja em". Esta regra se aplica estritamente a referências editoriais e não altera ocorrências conversacionais de outros sentidos do verbo consultar. Preservar o formato, pontuação e o alvo da referência.
 
 ## Decisões complementares registradas na central
 

@@ -133,7 +133,7 @@
 
 **EN:** **ITEM TIERS AND TYPES**
 
-**PT-BR (rascunho):** **NÍVEIS E TIPOS DE ITEM**
+**PT-BR (rascunho):** **TIERS E TIPOS DE ITEM**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 

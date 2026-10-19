@@ -5,7 +5,7 @@ This is a review queue, **not an addition to the official glossary**. The offici
 | English term/concept | Current draft rendering | Pages | Review note |
 |---|---|---:|---|
 | Adventure Mode | `Modo Aventura`; `Modo Aventureiro` | 4–6, 10, 13, 85 | Inconsistent between drafts. **Recommendation:** standardize on `Modo Aventura`; the other wording changes the sense from a game mode to a person. |
-| Tier | `Nível`; `Categoria` | 4, 13 | Context-sensitive and not in the official glossary. Keep unresolved until the card/rules usage is agreed. |
+| Tier | `Tier` | 3, 4, 13, 17, 26, 27, 28, 57, 85, 94, 101 | **Decidido canonicamente (18/10/2026):** `Tier → Tier` para classificação de itens e premiações em faixa, mantendo distinção estrita com `Level/LVL → Nível`. Incorporado ao glossário oficial. |
 | Bounty | `Recompensa`; `Livro de Recompensas` | 4, 7, 13 | Same proposed root appears in the mode, heading, and book name; confirm the game's intended PT term. |
 | Crawl Mode / Epic Crawl Mode | `Modo Crawl`; `Modo Exploração`; `Modo de Exploração`; `Modo de Exploração Épica` | 4–9 | The official glossary has no entry. P. 8 Payload uses `Modo Exploração` as a heading and `Modo de Exploração` in body text; p. 8–9 drafts use the latter. Decide whether this is a translated descriptive mode or a proper game-mode name before standardizing. |
 | Rank | `Nível` | 9 | Not in the official glossary. Keep distinct from `Tier`/`Loot Level`; confirm whether `Rank` is best rendered as `Nível`, `Patamar`, or another rules term. |
@@ -30,6 +30,6 @@ This is a review queue, **not an addition to the official glossary**. The offici
 
 ## Already governed by the official glossary
 
-Do not re-decide these through this candidate list: `Tiles → Peças`, `Standup(s) → Miniatura(s) de Papel`, `Loot → Saque`, `Adventurers → Aventureiros`, `Terrain → Terrenos`, `Token → Ficha`, `Draw → Compre`, `Story Round → Rodada de História`, `Shop and Train → Comprar e Treinar`, `Explore → Explorar`, `Venture Forth → Aventurar-se`, `Special Encounter Rules → Regras Especiais de Encontro`, and `Item Upgrade → Aprimoramento de Item`.
+Do not re-decide these through this candidate list: `Tiles → Peças`, `Standup(s) → Miniatura(s) de Papel`, `Loot → Saque`, `Adventurers → Aventureiros`, `Terrain → Terrenos`, `Token → Ficha`, `Draw → Compre`, `Story Round → Rodada de História`, `Shop and Train → Comprar e Treinar`, `Explore → Explorar`, `Venture Forth → Aventurar-se`, `Special Encounter Rules → Regras Especiais de Encontro`, `Item Upgrade → Aprimoramento de Item`, and `Tier → Tier`.
 
 When a team decision arrives, update this register with the decision and date, then update affected page drafts and the maintained official glossary only if the glossary owner approves the change.

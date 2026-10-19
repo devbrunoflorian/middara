@@ -112,7 +112,7 @@
 
 **EN:** Item Cards represent all the gear Adventurers can earn or buy. These cards are separated by Tier: Mundane, Common, Uncommon, and Rare. Item Cards also come in **6** different types: Weapon, Armor, Core, Relic, Accessory, and Consumable. See ***Items Tiers and Types*** Pg. 27.
 
-**PT-BR (rascunho):** As Cartas de Item representam todos os equipamentos que os Aventureiros podem ganhar ou comprar. Elas são divididas por Nível: Mundano, Comum, Incomum e Raro. Também há **6** tipos de Carta de Item: Arma, Armadura, Núcleo, Relíquia, Acessório e Consumível. Consulte ***Níveis e Tipos de Item***, pág. 27.
+**PT-BR (rascunho):** As Cartas de Item representam todos os equipamentos que os Aventureiros podem ganhar ou comprar. Elas são divididas por Tier: Mundano, Comum, Incomum e Raro. Também há **6** tipos de Carta de Item: Arma, Armadura, Núcleo, Relíquia, Acessório e Consumível. Consulte ***Tiers e Tipos de Item***, pág. 27.
 
 **Referência cruzada:** a linha do PDF na p. 4 imprime “Items Tiers and Types”, mas o título no sumário da p. 3 e a seção correspondente estão no singular, “Item Tiers and Types”. A tradução usa o nome de seção da p. 3.
 
