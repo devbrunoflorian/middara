@@ -129,3 +129,48 @@ apps/web/public/brand/*
 !apps/web/public/android-chrome-192x192.png
 !apps/web/public/android-chrome-512x512.png
 !apps/web/public/pages/page_037/fidelity-overlay-component-source-zapf-glyphs.svg
+
+# ==============================================================================
+# Pente Fino: Bancos de Dados, Caches, Logs e Artefatos Gerados
+# ==============================================================================
+
+# Bancos de dados locais e SQLite (Payload, dev databases, journals e locks)
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+
+# Build caches, TypeScript e Monorepo
+*.tsbuildinfo
+.turbo/
+.cache/
+.parcel-cache/
+
+# Testes automatizados, Playwright e relatórios
+test-results/
+playwright-report/
+.playwright/
+coverage/
+
+# Diretórios de saída e relatórios de execução locais
+output/
+**/output/
+tmp/
+**/tmp/
+
+# Logs de ambiente e execução
+*.log
+!docs/**/*.log
+
+# Metadados e lixo de sistema operacional
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Armazenamento temporário de agentes e mídia de depuração
+.tempmediaStorage/
+.user_uploaded/
