@@ -64,10 +64,14 @@ function canonical(value) {
   return JSON.stringify(value);
 }
 
+function normalizeSpanKeyForComparison(key) {
+  return String(key ?? '').replace(/__pt-BR$/u, '');
+}
+
 function copyfitMeasurementFingerprint(data) {
   if (!data || typeof data !== 'object' || !Array.isArray(data.segments)) return null;
   const snapshot = {
-    spanKey: data.spanKey,
+    spanKey: normalizeSpanKeyForComparison(data.spanKey),
     bbox: data.bbox,
     textAlign: data.textAlign,
     lineHeight: data.lineHeight,
@@ -82,6 +86,19 @@ function validBbox(value) {
   return Array.isArray(value) && value.length === 4
     && value.every(coordinate => typeof coordinate === 'number' && Number.isFinite(coordinate))
     && value[2] > value[0] && value[3] > value[1];
+}
+
+function checkEditorialCrossReference(sourceText, proposalText) {
+  const issues = [];
+  if (/\bconsulte\b/iu.test(proposalText)) {
+    if (/\bsee\b/iu.test(sourceText) || /\bconsulte\s+([A-ZÀ-Ú][^.,;]+,\s*(?:pág\.|p\.|pg\.)\s*\d+|\w+\s+\d+)/iu.test(proposalText)) {
+      issues.push('Editorial cross-reference uses forbidden "Consulte". Regra canônica: use "Veja".');
+    }
+  }
+  if (/\bveja\s+em\s+(?:pág|p\.|pg\.|tabela|seção|diagrama)/iu.test(proposalText)) {
+    issues.push('Editorial cross-reference uses forbidden "Veja em". Regra canônica: utilize a forma direta "Veja".');
+  }
+  return issues;
 }
 
 function pageDom(pageNumber) {
@@ -114,13 +131,23 @@ function canonicalCopyfitGeometry(candidate, pageNumber, spanKey) {
   const sourceUnit = sourceUnitId && Array.isArray(sourceBlock?.typographicUnits)
     ? sourceBlock.typographicUnits.find(unit => unit?.id === sourceUnitId)
     : null;
-  const sourceBbox = Array.isArray(candidate.sourceBboxes)
-    ? candidate.sourceBboxes.find(validBbox)
+  const validBboxes = Array.isArray(candidate.sourceBboxes)
+    ? candidate.sourceBboxes.filter(validBbox)
+    : [];
+  const sourceBboxUnion = validBboxes.length > 0
+    ? [
+        Math.min(...validBboxes.map(b => b[0])),
+        Math.min(...validBboxes.map(b => b[1])),
+        Math.max(...validBboxes.map(b => b[2])),
+        Math.max(...validBboxes.map(b => b[3])),
+      ]
     : null;
   const rawData = candidate.data && typeof candidate.data === 'object' && !Array.isArray(candidate.data)
     ? candidate.data
     : null;
-  const bbox = [rawData?.bbox, sourceBbox, sourceUnit?.field?.bbox, sourceBlock?.bbox].find(validBbox);
+  const bbox = sourceUnit
+    ? [sourceUnit.field?.bbox, sourceBboxUnion, rawData?.bbox, sourceBlock?.bbox].find(validBbox)
+    : [sourceBlock?.bbox, sourceBboxUnion, rawData?.bbox].find(validBbox);
 
   let canonicalSpanKey = spanKey;
   if (/^page_\d+_unit_/u.test(spanKey)) {
@@ -182,6 +209,12 @@ const proposals = [...candidatesByFamily.values()]
       const measuredClassification = lineCounts.source && lineCounts.target && geometry
         ? copyfitClassification(candidate)
         : lineCounts.source && lineCounts.target ? 'UNMEASURED' : copyfitClassification(candidate);
+      const sourceText = String(candidate.sourceText ?? '');
+      const proposalText = String(candidate.proposalText ?? candidate.proposedText ?? '');
+      const termIssues = checkEditorialCrossReference(sourceText, proposalText);
+      for (const issue of termIssues) {
+        console.warn(`[TERMINOLOGY WARNING] ${candidateKey}: ${issue}`);
+      }
       return [{
         reviewKey: candidateKey,
         pageNumber,
@@ -194,8 +227,8 @@ const proposals = [...candidatesByFamily.values()]
         blockIndex: Number.isInteger(candidate.blockIndex) ? candidate.blockIndex : null,
         sourceBlockId: candidate.sourceBlockId ?? null,
         sourceUnitId: candidate.sourceUnitId ?? null,
-        sourceText: String(candidate.sourceText ?? ''),
-        proposalText: String(candidate.proposalText ?? candidate.proposedText ?? ''),
+        sourceText,
+        proposalText,
         data,
         reviewLayoutFrame: candidate.reviewLayoutFrame && typeof candidate.reviewLayoutFrame === 'object'
           ? candidate.reviewLayoutFrame : null,
