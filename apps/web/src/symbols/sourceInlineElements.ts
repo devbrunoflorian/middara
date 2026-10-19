@@ -241,10 +241,10 @@ export function sourceElementIsReplaced(element: SourceInlineElement, block: Blo
 
 /** Cut only confirmed inline regions out of an existing source-art overlay. */
 export function sourceOverlayMask(bbox: number[], elements: SourceInlineElement[]): string|undefined {
-  const [x0,y0,x1,y1]=bbox;const holes=elements.filter(e=>e.mask.bbox[0]<x1 && e.mask.bbox[2]>x0 && e.mask.bbox[1]<y1 && e.mask.bbox[3]>y0);
+  const [x0,y0,x1,y1]=bbox;const holes=elements.filter(e=>e.mask?.bbox && e.mask.bbox[0]<x1 && e.mask.bbox[2]>x0 && e.mask.bbox[1]<y1 && e.mask.bbox[3]>y0);
   if (!holes.length)return undefined;
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${x1-x0} ${y1-y0}"><mask id="m"><rect width="100%" height="100%" fill="white"/>${holes.map(e=>{
-    const [a,b,c,d]=e.mask.bbox;return `<rect x="${a-x0}" y="${b-y0}" width="${c-a}" height="${d-b}" fill="black"/>`;
+    const [a,b,c,d]=e.mask!.bbox;return `<rect x="${a-x0}" y="${b-y0}" width="${c-a}" height="${d-b}" fill="black"/>`;
   }).join('')}</mask><rect width="100%" height="100%" fill="white" mask="url(#m)"/></svg>`;
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }

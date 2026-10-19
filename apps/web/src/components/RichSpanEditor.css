@@ -645,3 +645,56 @@
   transform: translateY(-1px);
   box-shadow: 0 4px 16px rgba(108, 99, 255, 0.4);
 }
+
+
+/* Block Editor Language Toggle */
+.rse-lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 4px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-left: 2px;
+}
+
+.rse-lang-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #aaa;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.rse-lang-btn:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.rse-lang-btn.is-active {
+  background: #6c63ff;
+  color: #fff;
+  border-color: #7b73ff;
+  box-shadow: 0 0 8px rgba(108, 99, 255, 0.4);
+}
+
+.rse-lang-divider {
+  color: #888;
+  font-size: 11px;
+  user-select: none;
+}
+
+.rse-lang-banner {
+  padding: 6px 20px;
+  background: rgba(108, 99, 255, 0.12);
+  border-bottom: 1px solid rgba(108, 99, 255, 0.25);
+  color: #c4b5fd;
+  font-size: 11px;
+  line-height: 1.4;
+}

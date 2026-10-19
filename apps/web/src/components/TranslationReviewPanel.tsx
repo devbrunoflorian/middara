@@ -33,9 +33,11 @@ interface TranslationReviewPanelProps {
   busyReviewKey: string | null;
   hasUnsavedDraft: boolean;
   reviewStatus: string | null;
+  language?: 'en' | 'pt-BR';
+  onToggleLanguage?: (language: 'en' | 'pt-BR') => void;
   onSelectCandidate: (candidate: TranslationReviewCandidate) => void;
-  onOpenViewer: (candidate: TranslationReviewCandidate, diagnosticBlank: boolean) => void;
-  onOpenApprovedViewer: (candidate: TranslationReviewCandidate) => void;
+  onOpenViewer?: (candidate: TranslationReviewCandidate, diagnosticBlank: boolean) => void;
+  onOpenApprovedViewer?: (candidate: TranslationReviewCandidate) => void;
   onOpenEditor: (candidate: TranslationReviewCandidate) => void;
   onOpenExceptionPage: (exception: TranslationReviewException) => void;
   onApprove: (candidate: TranslationReviewCandidate) => Promise<boolean>;
@@ -166,7 +168,7 @@ export function TranslationReviewPanel({
   open, onClose, catalog, catalogError, records, requests, glossaryDecisions, persistenceError, persistenceAvailable,
   pageData,
   savedHumanTranslations, savedPayloadTranslations, selectedPage, selectedReviewKey, busyReviewKey, hasUnsavedDraft,
-  reviewStatus, onSelectCandidate, onOpenViewer, onOpenApprovedViewer, onOpenEditor, onOpenExceptionPage, onApprove, onSetArchived, onClearSelection, onReopen,
+  reviewStatus, language = 'pt-BR', onToggleLanguage, onSelectCandidate, onOpenViewer, onOpenApprovedViewer, onOpenEditor, onOpenExceptionPage, onApprove, onSetArchived, onClearSelection, onReopen,
   onCreateAIRequest, onUpdateAIRequest, onCompleteAIRequestAsUser, onDecideGlossaryTerm,
 }: TranslationReviewPanelProps) {
   const [tab, setTab] = useState<PanelTab>('proposals');
@@ -185,41 +187,74 @@ export function TranslationReviewPanel({
   const [archiveError, setArchiveError] = useState<string | null>(null);
   const [archiveNotice, setArchiveNotice] = useState<string | null>(null);
   const allCandidates = useMemo(() => catalog?.proposals.flatMap(proposal => proposal.candidates) ?? [], [catalog]);
-  const approvedCandidates = useMemo(() => records.flatMap(record => {
-    if (!record.publication) return [];
-    const publicationKey = (record.publication.data as { spanKey?: string } | null)?.spanKey ?? record.spanKey;
-    if (typeof publicationKey !== 'string') return [];
-    const payloadTranslation = savedPayloadTranslations.get(publicationKey)
-      ?? savedPayloadTranslations.get(publicationKey.replace(/__pt-BR$/u, ''));
-    if (!payloadTranslation
-      || String(payloadTranslation.id) !== String(record.publication.translationId)
-      || !translationDataMatches(payloadTranslation.data, record.publication.data)) return [];
-    const source = allCandidates.find(candidate => reviewRecordForCandidate(records, candidate)?.id === record.id);
-    const blockIndex = Number(record.spanKey.match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u)?.[1]);
-    const proposalText = textForReviewData(record.publication.data);
-    return [{
-      ...(source ?? {}),
-      reviewKey: record.reviewKey,
-      pageNumber: record.pageNumber,
-      proposalId: record.proposalId,
-      proposalVersion: record.proposalVersion,
-      proposalTitle: source?.proposalTitle ?? 'Unidade aprovada',
-      proposalFile: source?.proposalFile ?? '',
-      index: source?.index ?? 0,
-      spanKey: record.spanKey,
-      blockIndex: source?.blockIndex ?? (Number.isInteger(blockIndex) ? blockIndex : null),
-      sourceBlockId: source?.sourceBlockId ?? null,
-      sourceUnitId: source?.sourceUnitId ?? null,
-      sourceText: record.sourceText ?? source?.sourceText ?? '',
-      proposalText,
-      data: record.publication.data,
-      technicalStatus: record.technicalStatus,
-      editorialStatus: 'approved',
-      diagnosticRendering: source?.diagnosticRendering ?? '',
-      pendingTerms: source?.pendingTerms ?? [],
-      diagnosticBlank: source?.diagnosticBlank ?? null,
-    } satisfies TranslationReviewCandidate];
-  }), [records, savedPayloadTranslations, allCandidates]);
+  const approvedCandidates = useMemo(() => {
+    const list: TranslationReviewCandidate[] = [];
+    const seenUnits = new Set<string>();
+
+    for (const record of records) {
+      if (!record.publication || record.approvalStatus !== 'approved') continue;
+      const publicationKey = (record.publication.data as { spanKey?: string } | null)?.spanKey ?? record.spanKey;
+      if (typeof publicationKey !== 'string') continue;
+
+      // Find in savedPayloadTranslations by translationId or by span key variants
+      const payloadById = [...savedPayloadTranslations.values()].find(
+        p => String(p.id) === String(record.publication?.translationId)
+      );
+      const payloadByKey = savedPayloadTranslations.get(publicationKey)
+        ?? savedPayloadTranslations.get(clientSpanKey(publicationKey, 'pt-BR'))
+        ?? savedPayloadTranslations.get(publicationKey.replace(/__pt-BR$/u, ''))
+        ?? savedPayloadTranslations.get(record.spanKey)
+        ?? savedPayloadTranslations.get(clientSpanKey(record.spanKey, 'pt-BR'))
+        ?? savedPayloadTranslations.get(record.spanKey.replace(/__pt-BR$/u, ''));
+
+      const payloadTranslation = payloadById ?? payloadByKey;
+      if (!payloadTranslation) continue; // Inconsistent: not found in Payload
+
+      // If both publication translationId and payloadTranslation.id exist, ensure they don't conflict
+      if (record.publication.translationId && payloadTranslation.id && String(record.publication.translationId) !== String(payloadTranslation.id)) {
+        const normalizedPayloadKey = payloadTranslation.spanKey.replace(/__pt-BR$/u, '');
+        const normalizedRecordKey = record.spanKey.replace(/__pt-BR$/u, '');
+        if (normalizedPayloadKey !== normalizedRecordKey) continue;
+      }
+
+      const unitId = `${record.pageNumber}:${record.spanKey.replace(/__pt-BR$/u, '')}`;
+      if (seenUnits.has(unitId)) continue;
+      seenUnits.add(unitId);
+
+      const source = allCandidates.find(candidate => {
+        const rec = reviewRecordForCandidate(records, candidate);
+        return rec?.id === record.id || candidate.reviewKey === record.reviewKey;
+      });
+
+      const blockIndex = Number(record.spanKey.match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u)?.[1]);
+      const activeData = payloadTranslation.data ?? record.publication.data;
+      const proposalText = textForReviewData(activeData);
+
+      list.push({
+        ...(source ?? {}),
+        reviewKey: record.reviewKey,
+        pageNumber: record.pageNumber,
+        proposalId: record.proposalId,
+        proposalVersion: record.proposalVersion,
+        proposalTitle: source?.proposalTitle ?? 'Unidade aprovada',
+        proposalFile: source?.proposalFile ?? '',
+        index: source?.index ?? 0,
+        spanKey: record.spanKey,
+        blockIndex: source?.blockIndex ?? (Number.isInteger(blockIndex) ? blockIndex : null),
+        sourceBlockId: source?.sourceBlockId ?? null,
+        sourceUnitId: source?.sourceUnitId ?? null,
+        sourceText: record.sourceText ?? source?.sourceText ?? '',
+        proposalText,
+        data: activeData,
+        technicalStatus: record.technicalStatus,
+        editorialStatus: 'approved',
+        diagnosticRendering: source?.diagnosticRendering ?? '',
+        pendingTerms: source?.pendingTerms ?? [],
+        diagnosticBlank: source?.diagnosticBlank ?? null,
+      } satisfies TranslationReviewCandidate);
+    }
+    return list;
+  }, [records, savedPayloadTranslations, allCandidates]);
   const pageNumbers = useMemo(() => [...new Set([
     ...allCandidates.map(candidate => candidate.pageNumber),
     ...approvedCandidates.map(candidate => candidate.pageNumber),
@@ -230,18 +265,31 @@ export function TranslationReviewPanel({
     : pageFilter;
   const approvedKeys = new Set(approvedCandidates.map(candidate => candidate.reviewKey));
   const publishedUnits = new Set(approvedCandidates.map(reviewUnitIdentity));
+
+  const isCandidateApproved = (candidate: TranslationReviewCandidate) => {
+    const record = reviewRecordForCandidate(records, candidate);
+    return approvedKeys.has(candidate.reviewKey)
+      || publishedUnits.has(reviewUnitIdentity(candidate))
+      || (record?.approvalStatus === 'approved' && (approvedKeys.has(record.reviewKey) || publishedUnits.has(`${record.pageNumber}:${record.spanKey.replace(/__pt-BR$/u, '')}`)));
+  };
+
+  // A unit with an open (pending / in progress) review request belongs to the
+  // Pedidos de Revisão queue and returns to Propostas once the request completes.
+  const openRequests = requests.filter(request => request.status !== 'completed');
+  const hasOpenRequest = (candidate: TranslationReviewCandidate) =>
+    openRequests.some(request => reviewRequestMatchesUnit(request, candidate, allCandidates));
   const proposalRemainingCount = allCandidates.filter(candidate => {
     const record = reviewRecordForCandidate(records, candidate);
-    return !(record?.approvalStatus === 'approved'
-      && (approvedKeys.has(candidate.reviewKey) || publishedUnits.has(reviewUnitIdentity(candidate))))
-      && record?.reviewDisposition !== 'archived';
+    return !isCandidateApproved(candidate)
+      && record?.reviewDisposition !== 'archived'
+      && !hasOpenRequest(candidate);
   }).length;
   const visibleCandidates = allCandidates.filter(candidate => {
     if (pageValue !== 'all' && candidate.pageNumber !== Number(pageValue)) return false;
     const record = reviewRecordForCandidate(records, candidate);
-    return !(record?.approvalStatus === 'approved'
-      && (approvedKeys.has(candidate.reviewKey) || publishedUnits.has(reviewUnitIdentity(candidate))))
-      && record?.reviewDisposition !== 'archived';
+    return !isCandidateApproved(candidate)
+      && record?.reviewDisposition !== 'archived'
+      && !hasOpenRequest(candidate);
   });
   const archivedCandidates = allCandidates.filter(candidate => {
     const record = reviewRecordForCandidate(records, candidate);
@@ -572,6 +620,7 @@ export function TranslationReviewPanel({
               <button
                 type="button"
                 key={`approved-${candidate.reviewKey}`}
+                data-review-key={candidate.reviewKey}
                 className={`translation-review-row ${active ? 'is-selected' : ''}`}
                 aria-pressed={active}
                 onClick={() => { setSelectedExceptionId(null); onSelectCandidate(candidate); }}
@@ -587,9 +636,10 @@ export function TranslationReviewPanel({
             const record = reviewRecordForCandidate(records, candidate);
             const active = selectedReviewKey === candidate.reviewKey;
             return (
-              <div className="translation-review-row-wrap" key={candidate.reviewKey}>
+              <div className="translation-review-row-wrap" key={candidate.reviewKey} data-review-key={candidate.reviewKey}>
                 <button
                   type="button"
+                  data-review-key={candidate.reviewKey}
                   className={`translation-review-row ${active ? 'is-selected' : ''}`}
                   aria-pressed={active}
                   onClick={() => { setSelectedExceptionId(null); onSelectCandidate(candidate); }}
@@ -820,11 +870,25 @@ export function TranslationReviewPanel({
               {copyfitBlockReason === 'TECHNICAL_FAILURE' && <p className="translation-review-error" role="alert">A validação técnica desta proposta está bloqueada. Corrija a falha registrada antes de aprovar.</p>}
 
               <div className="translation-review-actions">
-                {tab === 'approved' ? (
-                  <button type="button" onClick={() => onOpenApprovedViewer(selectedCandidate)}>Ver versão aprovada no Viewer PT-BR</button>
-                ) : (
-                  <button type="button" onClick={() => onOpenViewer(selectedCandidate, !!selectedCandidate.diagnosticBlank)}>Ver no Viewer PT-BR</button>
-                )}
+                <div className="translation-review-lang-toggle" role="group" aria-label="Alternar idioma">
+                  <button
+                    type="button"
+                    className={`translation-review-lang-btn ${language === 'en' ? 'is-active' : ''}`}
+                    onClick={() => onToggleLanguage?.('en')}
+                    title="Visualizar original EN/US"
+                  >
+                    EN/US
+                  </button>
+                  <span className="translation-review-lang-divider">↔</span>
+                  <button
+                    type="button"
+                    className={`translation-review-lang-btn ${language === 'pt-BR' ? 'is-active' : ''}`}
+                    onClick={() => onToggleLanguage?.('pt-BR')}
+                    title="Visualizar tradução PT/BR"
+                  >
+                    PT/BR
+                  </button>
+                </div>
                 <button type="button" onClick={() => onOpenEditor(selectedCandidate)}>
                   {tab === 'approved' ? 'Editar em nova revisão no Rich Block Editor' : 'Abrir no Rich Block Editor'}
                 </button>

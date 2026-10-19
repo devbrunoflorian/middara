@@ -144,3 +144,46 @@
   .translation-review-states { grid-template-columns: 1fr; }
   .translation-review-actions { display: grid; }
 }
+
+.translation-review-lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 38px;
+  padding: 3px 6px;
+  border: 1px solid rgba(198, 174, 227, 0.28);
+  border-radius: 8px;
+  background: rgba(177, 149, 211, 0.08);
+}
+
+.translation-review-lang-btn {
+  min-height: 28px !important;
+  padding: 4px 8px !important;
+  border: 1px solid transparent !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  color: #c9bfd7 !important;
+  font: 600 10px 'Inter', sans-serif !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.translation-review-lang-btn:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+}
+
+.translation-review-lang-btn.is-active {
+  border-color: rgba(198, 174, 227, 0.5) !important;
+  background: rgba(164, 132, 203, 0.35) !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px rgba(164, 132, 203, 0.3);
+}
+
+.translation-review-lang-divider {
+  color: #bea8df;
+  font-size: 11px;
+  user-select: none;
+  padding-inline: 1px;
+}
+

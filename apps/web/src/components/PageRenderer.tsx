@@ -121,6 +121,7 @@ export interface LayoutFrame {
   rotation?: number;
   textAlign?: TextAlignment;
   lineHeight?: number;
+  hidden?: boolean;
 }
 
 export interface Block {
@@ -1050,6 +1051,7 @@ interface PageRendererProps {
   onFocalZoomApplied?: (id: number) => void;
   onNavigate?: (pageNum: number) => void;
   language?: 'en' | 'pt-BR';
+  onToggleLanguage?: (language: 'en' | 'pt-BR') => void;
   symbolAliasPreferences?: SymbolAliasPreferences;
   onPaletteEditorChange?: (editorKey: string, state: AdminSymbolPaletteEditorState | null) => void;
   onTranslationDraftDirtyChange?: (dirty: boolean) => void;
@@ -1347,7 +1349,8 @@ function SourceGeometryBlock({ block, scale, blockOriginX, blockOriginY }: {
                   ? symbol.render.variants?.[span.sourceSymbolMetrics.renderVariant] ?? symbol.render
                   : symbol.render;
                 const visual = sourceRender.localized?.en ?? sourceRender;
-                const sourceAsset = span.sourceSymbolMetrics?.sourceAssetUrl;
+                const visualAssetUrl = 'assetUrl' in visual ? visual.assetUrl : undefined;
+                const sourceAsset = span.sourceSymbolMetrics?.sourceAssetUrl ?? visualAssetUrl ?? symbol.assetUrl;
                 if (!sourceAsset && (!visual.paths || !visual.viewBox)) return null;
                 const [x0, y0, x1, y1] = span.bbox;
                 return (
@@ -1460,7 +1463,7 @@ function hasInlineSemanticSymbol(segment: Segment): boolean {
 export const PageRenderer: React.FC<PageRendererProps> = ({
   pageData, overlayHost = null, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, continuousScroll = false,
   focalZoomEnabled = false, focalZoomAnchor = null, onFocalZoomApplied,
-  onNavigate, language = 'en', symbolAliasPreferences, onPaletteEditorChange,
+  onNavigate, language = 'en', onToggleLanguage, symbolAliasPreferences, onPaletteEditorChange,
   onTranslationDraftDirtyChange, pendingEditableNavigation, onRequestEditablePageNavigation,
   onResolveEditableNavigation, totalPages = 102, editableNavigationEnabled = true,
   editorPanelWidth = 420, faqOpen = false, onEditorPanelWidthChange, onEditorOpenChange,
@@ -1484,6 +1487,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   useEffect(() => {
     onExperimentalUnitSelect?.(selectedSpan?.spanKey ?? null);
   }, [onExperimentalUnitSelect, selectedSpan?.spanKey]);
+
   const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => isolatedSnapshot ? new Map() : loadLocalOverrides(language));
   const [overridesLoadedLanguage, setOverridesLoadedLanguage] = useState<string | null>(null);
   const [payloadOverrides, setPayloadOverrides] = useState<Map<string, SpanOverride> | null>(null);
@@ -1511,6 +1515,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       proposalReviewOverrides.forEach((override, key) => {
         // A local or Payload translation is human-owned; it stays visible over a proposal preview.
         if (!overrides.has(key)) next!.set(key, override);
+        const clientKey = clientSpanKey(key, language);
+        if (clientKey !== key && !overrides.has(clientKey)) next!.set(clientKey, { ...override, spanKey: clientKey });
       });
     }
     if (readOnlyExperiment && experimentalOverrides?.size) {
@@ -1670,6 +1676,34 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   },[pageData.blocks,pageData.inlineElements,pageData.page_number,renderOverrides,selectedSpan?.spanKey,draftOverride,language]);
 
   useEffect(() => {
+    if (!selectedSpan) return;
+    const baseKey = selectedSpan.spanKey.replace(/__(?:pt-BR|en)$/u, '');
+    for (const [blockIndex, block] of companionBlocks.entries()) {
+      const currentBlockBase = block.editorKey ?? `page_${pageData.page_number}_block_${blockIndex}`;
+      if (currentBlockBase === baseKey || block.editorKey === baseKey) {
+        const newBlockKey = block.editorKey ? `${block.editorKey}__${language}` : `page_${pageData.page_number}_block_${blockIndex}`;
+        if (newBlockKey !== selectedSpan.spanKey) {
+          const updated = extractBlockInfo(newBlockKey, block);
+          setSelectedSpan(prev => prev ? { ...prev, spanKey: newBlockKey, bbox: updated.bbox } : null);
+        }
+        return;
+      }
+      const typographicUnit = block.typographicUnits?.find(candidate => {
+        const uBase = `page_${pageData.page_number}_unit_${candidate.id}`;
+        return uBase === baseKey;
+      });
+      if (typographicUnit) {
+        const newUnitKey = `page_${pageData.page_number}_unit_${typographicUnit.id}__${language}`;
+        if (newUnitKey !== selectedSpan.spanKey) {
+          const updated = extractCreditFieldInfo(newUnitKey, block, typographicUnit);
+          setSelectedSpan(prev => prev ? { ...prev, spanKey: newUnitKey, bbox: updated.bbox } : null);
+        }
+        return;
+      }
+    }
+  }, [language, companionBlocks, pageData.page_number]);
+
+  useEffect(() => {
     if (isolatedSnapshot) {
       setLayoutFrames(new Map());
       setInheritedLayoutFrames(new Map());
@@ -1758,6 +1792,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     if (fixedEditorLineIndexes(block).size) return [];
     const key = frameUnitKey(pageData.page_number, block, index);
     const frame = effectiveFrameFor(key, sourceLayoutFrame(block));
+    if (frame.hidden) return [];
     return [{
       key,
       label: `Bloco ${index + 1}`,
@@ -2005,28 +2040,45 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
 
   const handleSpanClick = useCallback((info: SelectedSpanInfo) => {
     if (!isAdmin) return;
-    if (proposalReviewSelectionKey && info.spanKey !== proposalReviewSelectionKey) return;
+    if (proposalReviewSelectionKey) {
+      const targetNormalized = clientSpanKey(proposalReviewSelectionKey, language);
+      const clickedNormalized = clientSpanKey(info.spanKey, language);
+      const isTargetMatch = info.spanKey === proposalReviewSelectionKey
+        || clickedNormalized === targetNormalized
+        || info.spanKey === targetNormalized
+        || clickedNormalized === proposalReviewSelectionKey;
+      if (!isTargetMatch) {
+        if (selectedSpan) return;
+        onProposalReviewEditorClose?.();
+      }
+    }
     if (selectedSpan?.spanKey === info.spanKey) return;
     if (!confirmDiscardTranslationDraft()) return;
     setSelectedSpan(info);
     setDraftOverride(null);
     onTranslationDraftDirtyChange?.(false);
-  }, [isAdmin, proposalReviewSelectionKey, selectedSpan, confirmDiscardTranslationDraft, onTranslationDraftDirtyChange]);
+  }, [isAdmin, proposalReviewSelectionKey, selectedSpan, confirmDiscardTranslationDraft, onTranslationDraftDirtyChange, language, onProposalReviewEditorClose]);
 
   useEffect(() => {
     if (!experimentalEditorMode || !isAdmin || !experimentalEditorSelectionKey) return;
+    const targetNormalized = clientSpanKey(experimentalEditorSelectionKey, language);
+    const matchesTarget = (key: string) =>
+      key === experimentalEditorSelectionKey || key === targetNormalized || clientSpanKey(key, language) === targetNormalized;
+
     for (const [blockIndex, block] of companionBlocks.entries()) {
       const blockKey = block.editorKey ? `${block.editorKey}__${language}` : `page_${pageData.page_number}_block_${blockIndex}`;
-      if (blockKey === experimentalEditorSelectionKey) {
+      if (matchesTarget(blockKey)) {
         handleSpanClick(extractBlockInfo(blockKey, block));
         return;
       }
-      const typographicUnit = block.typographicUnits?.find(candidate =>
-        `page_${pageData.page_number}_unit_${candidate.id}__${language}` === experimentalEditorSelectionKey,
-      );
+      const typographicUnit = block.typographicUnits?.find(candidate => {
+        const uKey = `page_${pageData.page_number}_unit_${candidate.id}__${language}`;
+        return matchesTarget(uKey);
+      });
       if (typographicUnit) {
+        const unitKey = `page_${pageData.page_number}_unit_${typographicUnit.id}__${language}`;
         handleSpanClick(extractCreditFieldInfo(
-          experimentalEditorSelectionKey,
+          unitKey,
           block,
           typographicUnit.field,
           typographicUnit.kind,
@@ -2034,15 +2086,20 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
         ));
         return;
       }
-      const unit = block.typographicSpanUnits?.find(candidate =>
-        `page_${pageData.page_number}_unit_${candidate.id}__${language}` === experimentalEditorSelectionKey,
-      );
+      const unit = block.typographicSpanUnits?.find(candidate => {
+        const uKey = `page_${pageData.page_number}_unit_${candidate.id}__${language}`;
+        return matchesTarget(uKey);
+      });
       if (!unit) continue;
-      handleSpanClick(extractInlineSpanUnitInfo(experimentalEditorSelectionKey, block, unit));
+      const unitKey = `page_${pageData.page_number}_unit_${unit.id}__${language}`;
+      handleSpanClick(extractInlineSpanUnitInfo(unitKey, block, unit));
       return;
     }
     const target = Array.from(pageElement?.querySelectorAll<HTMLElement>('[data-editable-unit-key]') ?? [])
-      .find(element => element.dataset.editableUnitKey === experimentalEditorSelectionKey);
+      .find(element => {
+        const k = element.dataset.editableUnitKey;
+        return k ? matchesTarget(k) : false;
+      });
     target?.click();
   }, [experimentalEditorMode, isAdmin, experimentalEditorSelectionKey, companionBlocks, pageData.page_number, language, handleSpanClick, pageElement]);
 
@@ -2315,6 +2372,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           />
         )}
 
+
         {companionBlocks.map((sourceBlock, bIdx) => {
           const sourceBlockKey = `page_${pageData.page_number}_block_${bIdx}`;
           const applyExperimentalHangingIndent = readOnlyExperiment
@@ -2392,8 +2450,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           return !!block && !compoundElementIsReplaced(element, block, pageData.page_number, language, renderOverrides,
             selectedSpan?.spanKey ?? null, draftOverride);
         })} pageWidth={pageData.width} pageHeight={pageData.height} scale={scale} language={language} />
-        {replacedInlineElements.map(element=><img key={element.mask.url} src={element.mask.url} alt="" aria-hidden="true" draggable={false}
-          style={{position:'absolute',left:element.mask.bbox[0]*scale,top:element.mask.bbox[1]*scale,width:(element.mask.bbox[2]-element.mask.bbox[0])*scale,height:(element.mask.bbox[3]-element.mask.bbox[1])*scale,
+        {replacedInlineElements.filter(element => Boolean(element.mask?.url && element.mask?.bbox)).map(element=><img key={element.mask!.url} src={element.mask!.url} alt="" aria-hidden="true" draggable={false}
+          style={{position:'absolute',left:element.mask!.bbox[0]*scale,top:element.mask!.bbox[1]*scale,width:(element.mask!.bbox[2]-element.mask!.bbox[0])*scale,height:(element.mask!.bbox[3]-element.mask!.bbox[1])*scale,
             // Paint the cleanup over the page raster but below source blocks;
             // same-level masks painted after a z-index-2 block can hide its inline symbol.
             clipPath:sourceMaskClipPath(element),zIndex:1,pointerEvents:'none'}} />)}
@@ -2479,6 +2537,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           symbolAliasPreferences={symbolAliasPreferences}
           onPaletteEditorChange={onPaletteEditorChange}
           headerAccessory={editorHeaderAccessory}
+          onToggleLanguage={onToggleLanguage}
           sessionOnly={experimentalEditorMode}
         />
       )}
@@ -2645,7 +2704,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   const blockKey = block.editorKey
     ? `${block.editorKey}__${language}`
     : `page_${pageNumber}_block_${blockIdx}`;
-  const reviewBlockHighlighted = proposalReviewHighlightKey === blockKey;
+  const reviewBlockHighlighted = proposalReviewHighlightKey === blockKey || (proposalReviewHighlightKey ? clientSpanKey(proposalReviewHighlightKey, language) === blockKey : false);
   const reviewBlockHighlightClass = reviewBlockHighlighted ? 'proposal-review-highlight' : '';
   const isDiagnosticBlank = proposalReviewDiagnosticBlankKeys?.has(blockKey) ?? false;
 
@@ -2687,12 +2746,41 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     }
   }, [isDiagnosticBlank, currentOverride, scale, translatedHeight, translatedWidth]);
 
+  const isHidden = Boolean(translatedFrame?.hidden || layoutFrameOverride?.hidden || block.layoutFrame?.hidden || block.hiddenFromPage);
+  if (isHidden) {
+    if (!layoutMode) return null;
+    return (
+      <div
+        className={`block-container admin-hidden-block ${reviewBlockHighlightClass}`}
+        data-admin-hidden-block={blockKey}
+        data-translation-review-highlight={reviewBlockHighlighted ? (proposalReviewHighlightKey ?? blockKey) : undefined}
+        style={{
+          ...translatedStyle,
+          border: '1.5px dashed #ef4444',
+          background: 'rgba(239, 68, 68, 0.08)',
+          cursor: 'pointer',
+          zIndex: 100,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxSizing: 'border-box',
+        }}
+        onClick={() => onSelectLayoutFrame?.(layoutUnitKey, layoutFrameForSelection)}
+        title="Bloco Oculto (clique para reexibir ou ajustar moldura)"
+      >
+        <span style={{ fontSize: '10px', fontWeight: 600, color: '#ef4444', background: 'rgba(15, 23, 32, 0.85)', padding: '2px 6px', borderRadius: '4px', border: '1px solid rgba(239, 68, 68, 0.4)' }}>
+          🗑️ Oculto
+        </span>
+      </div>
+    );
+  }
+
   if (isDiagnosticBlank) {
     return (
       <div
         className={`block-container translation-review-diagnostic-blank ${reviewBlockHighlightClass}`}
         data-translation-review-diagnostic-blank={blockKey}
-        data-translation-review-highlight={reviewBlockHighlighted ? blockKey : undefined}
+        data-translation-review-highlight={reviewBlockHighlighted ? (proposalReviewHighlightKey ?? blockKey) : undefined}
         aria-label="Unidade vazia na prévia diagnóstica; a proposta completa permanece no painel de revisão."
         style={blockStyle}
       />
@@ -2920,7 +3008,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     && (!currentOverride || sourceOverrideIsUnchanged) && nestedOverridesAreSourceEquivalent) {
     return (
       <div className={`block-container ${blockHoverClass} ${overflowClass} ${reviewBlockHighlightClass}`} data-render-mode="sourceGeometry"
-        data-translation-review-highlight={reviewBlockHighlighted ? blockKey : undefined}
+        data-translation-review-highlight={reviewBlockHighlighted ? (proposalReviewHighlightKey ?? blockKey) : undefined}
         data-proof-block-id={pageNumber === 14 && (block.id === 'block_16' || block.id === 'block_17') ? block.id : undefined}
         style={{ ...blockStyle, left: `${blockX * scale}px`, top: `${blockY * scale}px`, width: `${blockW * scale}px`, height: `${blockH * scale}px` }}
         onClick={handleBlockClick} {...geometryAttributes} data-editable-unit-key={editableNavigationKey}>
@@ -3006,7 +3094,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
     return (
       <div className={`block-container ${blockHoverClass} ${overflowClass}`} style={translatedStyle} onClick={handleBlockClick} {...geometryAttributes} data-editable-unit-key={editableNavigationKey}
-        data-translation-review-highlight={reviewBlockHighlighted ? blockKey : undefined}
+        data-translation-review-highlight={reviewBlockHighlighted ? (proposalReviewHighlightKey ?? blockKey) : undefined}
         data-source-list-body-start-x={experimentalListBodySourceLine?.bbox[0]}
         data-proof-block-id={pageNumber === 14 && (block.id === 'block_16' || block.id === 'block_17') ? block.id : undefined}>
         {fixedLineEntries.map(({ line, index }) => (
@@ -3103,7 +3191,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
   return (
     <div className={`block-container ${blockHoverClass} ${reviewBlockHighlightClass}`} style={blockStyle} onClick={handleBlockClick} {...geometryAttributes} data-editable-unit-key={editableNavigationKey}
-      data-translation-review-highlight={reviewBlockHighlighted ? blockKey : undefined}
+      data-translation-review-highlight={reviewBlockHighlighted ? (proposalReviewHighlightKey ?? blockKey) : undefined}
       data-proof-block-id={pageNumber === 14 && (block.id === 'block_16' || block.id === 'block_17') ? block.id : undefined}>
       {block.lines.map((line, lIdx) => {
         const lineId = line.id !== undefined ? line.id : lIdx;
@@ -3380,9 +3468,17 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
   const flowUnits = units.filter(unit => !unit.fixedPosition);
   const frameForUnit = (unit: TypographicUnitDefinition): LayoutFrame | undefined => {
     const key = typographicUnitFrameKey(pageNumber, unit);
+    const base = block.layoutFrame
+      ? {
+          ...sourceLayoutFrameForField(unit.field),
+          x: block.layoutFrame.x ?? unit.field.frame.x,
+          width: block.layoutFrame.width ?? unit.field.frame.width,
+          textAlign: block.layoutFrame.textAlign ?? unit.field.frame.textAlign,
+        }
+      : undefined;
     return layoutMode && layoutUnitKey === key && layoutDraft
       ? layoutDraft
-      : layoutFrames.get(key) ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(key) : undefined);
+      : layoutFrames.get(key) ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(key) : undefined) ?? base;
   };
   const flowPlan = calculateTypographicFlowPlan(
     flowUnits.map(unit => ({
@@ -3439,10 +3535,18 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
         if (language === 'pt-BR' && proposalReviewDiagnosticBlankKeys?.has(spanKey)) return null;
         const frameKey = typographicUnitFrameKey(pageNumber, unit);
         const sourceFrame = sourceLayoutFrameForField(unit.field);
-        const frameForSelection = frameForUnit(unit) ?? sourceFrame;
+        const baseFrame = block.layoutFrame
+          ? {
+              ...sourceFrame,
+              x: block.layoutFrame.x ?? sourceFrame.x,
+              width: block.layoutFrame.width ?? sourceFrame.width,
+              textAlign: block.layoutFrame.textAlign ?? sourceFrame.textAlign,
+            }
+          : sourceFrame;
+        const frameForSelection = frameForUnit(unit) ?? baseFrame;
         const frameOverride = layoutMode && layoutUnitKey === frameKey && layoutDraft
           ? layoutDraft
-          : layoutFrames.get(frameKey) ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(frameKey) : undefined);
+          : layoutFrames.get(frameKey) ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(frameKey) : undefined) ?? baseFrame;
         const override = selectedBlockKey === spanKey && draftOverride
           ? draftOverride
           : overrides.get(spanKey) || null;

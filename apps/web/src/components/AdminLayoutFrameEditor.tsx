@@ -171,6 +171,11 @@ export function AdminLayoutFrameEditor({
           <section className="admin-layout-frame-panel arcane-glass-surface" aria-label="Translation frame controls">
             <strong>Moldura de tradução</strong>
             {unitKey && <code className="admin-layout-frame-unit-key">{unitKey}</code>}
+            {frame?.hidden && (
+              <div className="admin-layout-frame-hidden-badge" role="alert">
+                ⚠️ Bloco Oculto da Página
+              </div>
+            )}
             {frame ? (
               <div className="admin-layout-frame-fields">
                 {([
@@ -198,6 +203,17 @@ export function AdminLayoutFrameEditor({
             <div className="admin-layout-frame-actions">
               <button type="button" onClick={onSave} disabled={!frame || !isDirty || isSaving}>{isSaving ? 'Salvando…' : 'Salvar'}</button>
               <button type="button" onClick={onDiscard} disabled={!frame || !isDirty || isSaving}>Descartar</button>
+              {frame && (
+                <button
+                  type="button"
+                  className={`admin-layout-frame-toggle-hidden ${frame.hidden ? 'is-hidden' : ''}`}
+                  onClick={() => onChange({ ...frame, hidden: !frame.hidden })}
+                  disabled={isSaving}
+                  title={frame.hidden ? 'Tornar este bloco visível novamente' : 'Ocultar este bloco da leitura e prévia'}
+                >
+                  {frame.hidden ? '👁️ Reexibir' : '🗑️ Ocultar'}
+                </button>
+              )}
               {language === 'pt-BR' && hasOwnFrame && (
                 <button type="button" onClick={onResetToEnglish} disabled={isSaving}>Herdar EN</button>
               )}

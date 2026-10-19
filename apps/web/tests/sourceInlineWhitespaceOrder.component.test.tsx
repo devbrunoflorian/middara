@@ -347,33 +347,6 @@ describe('source inline whitespace ordering', () => {
     });
   }
 
-  it('restores the p. 13 bounty skull source image variant after [[skull]] reinsertion', () => {
-    const pageDir = join(process.cwd(), 'public/pages', 'page_013');
-    const dom = JSON.parse(readFileSync(join(pageDir, 'page_013_dom.json'), 'utf8'));
-    const elements = JSON.parse(readFileSync(join(pageDir, 'inline_elements.json'), 'utf8')).elements as SourceInlineElement[];
-    const target = elements.find(element => element.symbolId === 'combat.skull'
-      && element.anchor.blockId === 'block_48' && element.anchor.lineId === 'line_48_0')!;
-    expect(target).toBeDefined();
-    const blocks = attachSourceInlineElements(dom.blocks, [target]);
-    const block = blocks.find((candidate: { id: string }) => candidate.id === 'block_48')!;
-    const sourceTemplateSegments = sourceSpanRuns(block.lines.flatMap((line: { spans: unknown[] }) => line.spans), mapFont);
-    const line = block.lines.find((candidate: { id: string }) => candidate.id === 'line_48_0')!;
-    const sourceRuns = sourceSpanRuns(line.spans, mapFont);
-    const sourceIcon = sourceRuns.find(run => run.symbolId === 'combat.skull')!;
-    const previous = sourceRuns.filter(run => run !== sourceIcon);
-    const sourceText = editableTextForSegments(previous, 'en');
-    const token = getSymbolEditorToken('combat.skull', 'en')!;
-    const toolStyle = { font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const };
-
-    expect(sourceIcon.symbolMetrics?.renderVariant).toBe('bounty-red-raster');
-    const restored = segmentsFromEditableText(token + sourceText, toolStyle, 'en', previous, 'paragraph', undefined, sourceTemplateSegments);
-    const restoredIcon = restored.find(run => run.symbolId === 'combat.skull')!;
-
-    expect(restoredIcon).toBeDefined();
-    expect(restoredIcon.size).toBe(sourceIcon.size);
-    expect(restoredIcon.color).toBe(sourceIcon.color);
-    expect(restoredIcon.symbolMetrics).toEqual(sourceIcon.symbolMetrics);
-  });
 
   it('restores and renders the p. 78 compact black die vector after [[black-die]] reinsertion', () => {
     const pageDir = join(process.cwd(), 'public/pages', 'page_078');

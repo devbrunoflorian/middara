@@ -111,6 +111,31 @@ export const SEMANTIC_SYMBOLS: SemanticSymbolDefinition[] = [
     },
     render: { widthEm: 2, verticalAlignEm: 0.58, mask: 'circle' },
   },
+  {
+    id: 'combat.skull2',
+    category: 'Regras e combate',
+    labels: { en: 'Bounty Skull', 'pt-BR': 'Caveira de Recompensa' },
+    searchTerms: {
+      en: ['skull2', 'bounty skull', 'skull 2', 'red skull'],
+      'pt-BR': ['skull2', 'caveira2', 'caveira de recompensa', 'caveira vermelha'],
+    },
+    editorTokens: {
+      en: '⟦Skull2⟧',
+      'pt-BR': '⟦Caveira2⟧',
+    },
+    assetUrl: '/pages/page_013/source-symbol-bounty-skull.png',
+    source: {
+      pdf: 'Rulebook 1p2 Final Version 05-19-23 Optimized.pdf',
+      page: 13,
+      bboxPt: [544.6724, 560.7195, 558.5242, 581.1824],
+      assetSizePx: [58, 86],
+    },
+    render: {
+      widthEm: 1.38518,
+      heightEm: 2.04629,
+      verticalAlignEm: 0.70001,
+    },
+  },
 ];
 
 /**
@@ -132,6 +157,7 @@ const PREFERRED_EDITOR_ALIASES: Record<string, string[]> = {
   'dice.red': ['red-die', 'dado-vermelho', 'red'],
   'dice.grey': ['grey-die', 'dado-cinza', 'grey'],
   'combat.skull': ['skull', 'caveira'],
+  'combat.skull2': ['skull2', 'caveira2', 'bounty-skull', 'bountyskull'],
   'combat.damage-star': ['damage-star', 'estrela-de-dano'],
   'combat.shield': ['defense-shield', 'escudo-de-defesa'],
   'weapon.hand': ['hand-requirement', 'requisito-de-mao'],

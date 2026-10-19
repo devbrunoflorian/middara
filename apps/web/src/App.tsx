@@ -1094,7 +1094,36 @@ function App() {
     [reviewCatalog],
   );
   const selectedReviewCandidate = reviewCandidates.find(candidate => candidate.reviewKey === selectedReviewKey) ?? null;
-  const reviewEditorCandidate = reviewCandidates.find(candidate => candidate.reviewKey === reviewEditorItemKey) ?? null;
+  const reviewEditorCandidate = useMemo(() => {
+    const fromProposals = reviewCandidates.find(candidate => candidate.reviewKey === reviewEditorItemKey);
+    if (fromProposals) return fromProposals;
+    if (!reviewEditorItemKey) return null;
+    const fromRecord = reviewRecords.find(record => record.reviewKey === reviewEditorItemKey);
+    if (!fromRecord) return null;
+    const blockIndex = Number(fromRecord.spanKey.match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u)?.[1]);
+    const fallback: TranslationReviewCandidate = {
+      reviewKey: fromRecord.reviewKey,
+      pageNumber: fromRecord.pageNumber,
+      proposalId: fromRecord.proposalId,
+      proposalVersion: fromRecord.proposalVersion,
+      proposalTitle: 'Unidade aprovada',
+      proposalFile: '',
+      index: 0,
+      spanKey: fromRecord.spanKey,
+      blockIndex: Number.isInteger(blockIndex) ? blockIndex : null,
+      sourceBlockId: null,
+      sourceUnitId: null,
+      sourceText: fromRecord.sourceText ?? '',
+      proposalText: textForReviewData(fromRecord.publication?.data ?? fromRecord.data),
+      data: fromRecord.publication?.data ?? fromRecord.data,
+      technicalStatus: fromRecord.technicalStatus,
+      editorialStatus: fromRecord.approvalStatus,
+      diagnosticRendering: '',
+      pendingTerms: [],
+      diagnosticBlank: null,
+    };
+    return fallback;
+  }, [reviewCandidates, reviewEditorItemKey, reviewRecords]);
   const reviewEditorRecord = reviewEditorCandidate
     ? reviewRecordForCandidate(reviewRecords, reviewEditorCandidate)
     : undefined;
@@ -1112,14 +1141,16 @@ function App() {
   const isProposalReviewEditorMode = Boolean(reviewEditorItemKey && reviewEditorSelectionKey);
   const highlightedReviewCandidate = isProposalReviewEditorMode ? reviewEditorCandidate : selectedReviewCandidate;
   const reviewHighlightRendererKey = (isTranslationReviewOpen || isProposalReviewEditorMode)
-    && rendererLanguage === 'pt-BR'
     && highlightedReviewCandidate?.pageNumber === currentPage
     && pageData?.page_number === currentPage
     ? rendererKeyForReviewCandidate(highlightedReviewCandidate, pageData)
     : null;
 
+  const lastScrolledReviewKeyRef = useRef<string | null>(null);
   useEffect(() => {
     if (!isTranslationReviewOpen || !reviewHighlightRendererKey) return;
+    if (highlightedReviewCandidate?.reviewKey === lastScrolledReviewKeyRef.current) return;
+    lastScrolledReviewKeyRef.current = highlightedReviewCandidate?.reviewKey ?? null;
     // A zoom gesture can still be applying its focal pan after the scale
     // changes. Let PageRenderer finish that correction before centering the
     // selected review target, or its final scroll can move the highlight back
@@ -1204,6 +1235,8 @@ function App() {
           : reviewDraftOverrides.get(rendererKey) ?? record?.data ?? candidate.data, pageData);
       if (override) {
         overrides.set(rendererKey, override);
+        const clientKey = clientSpanKey(rendererKey, 'pt-BR');
+        if (clientKey !== rendererKey) overrides.set(clientKey, { ...override, spanKey: clientKey });
         const frame = layoutFrameForReviewOverride(candidate.reviewLayoutFrame, override);
         if (frame && !hasSavedHumanTranslation) layoutFrames.set(rendererKey.replace(/__pt-BR$/u, ''), frame);
       }
@@ -1324,13 +1357,12 @@ function App() {
   const handleSelectReviewCandidate = useCallback((candidate: TranslationReviewCandidate) => {
     const needsReviewNavigation = candidate.pageNumber !== currentPage
       || viewMode !== 'single'
-      || rendererLanguage !== 'pt-BR'
       || readOnlyExperiment;
     if (needsReviewNavigation && !moveToReviewPage(candidate.pageNumber)) return;
     setSelectedReviewKey(candidate.reviewKey);
     setSelectedPublishedReviewKey(null);
     setReviewStatus(null);
-  }, [currentPage, viewMode, rendererLanguage, readOnlyExperiment, moveToReviewPage]);
+  }, [currentPage, viewMode, readOnlyExperiment, moveToReviewPage]);
 
   const handleOpenReviewViewer = useCallback((candidate: TranslationReviewCandidate, diagnosticBlank: boolean) => {
     if (!moveToReviewPage(candidate.pageNumber)) return;
@@ -1694,6 +1726,23 @@ function App() {
     setIsExperimentRailCollapsed(false);
     syncV3ExperimentUrl(variant);
   }, [acceptLeavingLayout, acceptLeavingTranslationDraft, syncV3ExperimentUrl]);
+
+  const handleToggleLanguage = useCallback((nextLanguage: 'en' | 'pt-BR') => {
+    if (nextLanguage === rendererLanguage) return;
+    if (isPage14V3ExperimentVisible && activeV3Variant !== null) {
+      choosePage14V3Variant(nextLanguage === 'en' ? 'EN' : 'PT');
+      return;
+    }
+    if (isPage14V2ExperimentVisible && activeV2Variant !== null) {
+      choosePage14V2Variant(nextLanguage === 'en' ? 'EN' : 'PT');
+      return;
+    }
+    if (isPage14ExperimentVisible && activeExperimentVariant !== null) {
+      chooseEditorialExperimentVariant(nextLanguage === 'en' ? 'EN' : 'PT');
+      return;
+    }
+    setLanguage(nextLanguage);
+  }, [rendererLanguage, isPage14V3ExperimentVisible, activeV3Variant, choosePage14V3Variant, isPage14V2ExperimentVisible, activeV2Variant, choosePage14V2Variant, isPage14ExperimentVisible, activeExperimentVariant, chooseEditorialExperimentVariant]);
 
   const handlePage14V3UnitSelect = useCallback((spanKey: string | null) => {
     const unitKey = normalizePage14V3UnitKey(spanKey);
@@ -2399,7 +2448,8 @@ function App() {
               </div>
             ) : pageData ? (
               <PageRenderer 
-                key={`single-${currentPage}-${rendererLanguage}-${readOnlyExperiment ? 'preview-only' : 'editable'}-${reviewEditorItemKey ?? 'view'}`}
+                key={`single-${currentPage}-${readOnlyExperiment ? 'preview-only' : 'editable'}-${reviewEditorItemKey ?? 'view'}`}
+                onToggleLanguage={handleToggleLanguage}
                 overlayHost={overlayHost}
                 pageData={pageData} 
                 isAdmin={isAdmin}
@@ -2664,6 +2714,8 @@ function App() {
       <TranslationReviewPanel
         open={isTranslationReviewOpen}
         onClose={closeTranslationReview}
+        language={rendererLanguage}
+        onToggleLanguage={handleToggleLanguage}
         catalog={reviewCatalog}
         catalogError={reviewCatalogError}
         records={reviewRecords}

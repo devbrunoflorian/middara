@@ -105,6 +105,7 @@ interface RichSpanEditorProps {
   symbolAliasPreferences?: SymbolAliasPreferences;
   onPaletteEditorChange?: (editorKey: string, state: AdminSymbolPaletteEditorState | null) => void;
   headerAccessory?: React.ReactNode;
+  onToggleLanguage?: (language: 'en' | 'pt-BR') => void;
   /** Save into isolated in-memory experiment state instead of persistence. */
   sessionOnly?: boolean;
 }
@@ -162,6 +163,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   symbolAliasPreferences = getDefaultSymbolAliasPreferences(),
   onPaletteEditorChange,
   headerAccessory,
+  onToggleLanguage,
   sessionOnly = false,
 }) => {
   const normalizeText = useCallback((text: string) => (
@@ -235,6 +237,14 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const editTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const editSelectionRef = useRef({ start: 0, end: 0 });
   const charSelectionAnchorRef = useRef({ start: 0, end: 0 });
+  const spanBaseKey = spanKey.replace(/__(?:pt-BR|en)$/u, '');
+  const lastBaseKeyRef = useRef<string>(spanBaseKey);
+  const lastLanguageRef = useRef<'en' | 'pt-BR'>(language);
+  const ptDraftRef = useRef<{
+    snapshot: EditorSnapshot;
+    undoHistory: EditorSnapshot[];
+    redoHistory: EditorSnapshot[];
+  } | null>(null);
 
   const createSnapshot = useCallback((): EditorSnapshot => {
     const textarea = editTextAreaRef.current;
@@ -337,15 +347,22 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   }, [lineHeight, pushHistory]);
 
   useEffect(() => {
+    if (language === 'en' && ptDraftRef.current) return;
     setTextAlign(baseTextAlign);
-  }, [spanKey, baseTextAlign]);
+  }, [spanBaseKey, baseTextAlign, language]);
 
   useEffect(() => {
+    if (language === 'en' && ptDraftRef.current) return;
     setLineHeight(baseLineHeight);
     setLineHeightMode(baseLineHeightMode);
-  }, [spanKey, baseLineHeight, baseLineHeightMode]);
+  }, [spanBaseKey, baseLineHeight, baseLineHeightMode, language]);
 
   useEffect(() => {
+    if (spanBaseKey === lastBaseKeyRef.current) return;
+    lastBaseKeyRef.current = spanBaseKey;
+    ptDraftRef.current = null;
+    lastLanguageRef.current = language;
+
     setToolFont(editorFontForSource(originalFont));
     setToolWeight(originalWeight);
     setToolStyle(originalStyle);
@@ -363,13 +380,57 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setSymbolPaletteStatus(null);
     setUndoHistory([]);
     setRedoHistory([]);
-  }, [spanKey, language, originalFont, originalWeight, originalStyle, originalColor, originalSize]);
-
-  // Initialize segments from existing override or original span
-  useEffect(() => {
     setSegments(baseSegments);
     setManagedSourceSymbols(baseManagedSourceSymbols);
-  }, [spanKey, baseSegments, baseManagedSourceSymbols]);
+  }, [spanBaseKey, originalFont, originalWeight, originalStyle, originalColor, originalSize, baseSegments, baseManagedSourceSymbols, language]);
+
+  useEffect(() => {
+    if (language === lastLanguageRef.current) return;
+    const prevLang = lastLanguageRef.current;
+    lastLanguageRef.current = language;
+
+    if (prevLang === 'pt-BR' && language === 'en') {
+      ptDraftRef.current = {
+        snapshot: createSnapshot(),
+        undoHistory: [...undoHistory],
+        redoHistory: [...redoHistory],
+      };
+      setIsEditingText(false);
+      setEditText('');
+      setEditTextBaseline('');
+      setEditTextSegments([]);
+      setSegments(sourceContextSegments.map(s => ({ ...s })));
+      setManagedSourceSymbols(initialManagedSourceSymbols(sourceContextSegments));
+      setSelStart(null);
+      setSelEnd(null);
+      setUndoHistory([]);
+      setRedoHistory([]);
+      onDraftChange?.(null);
+    } else if (prevLang === 'en' && language === 'pt-BR') {
+      if (ptDraftRef.current) {
+        const cached = ptDraftRef.current;
+        restoreSnapshot(cached.snapshot);
+        setUndoHistory(cached.undoHistory);
+        setRedoHistory(cached.redoHistory);
+
+        const restored = cached.snapshot;
+        const finalSegments = restored.isEditingText ? restored.editTextSegments : restored.segments;
+        const draft = createEditorOverride(
+          spanKey,
+          bbox,
+          restored.textAlign,
+          finalSegments,
+          restored.managedSourceSymbols,
+          restored.lineHeight,
+          restored.lineHeightMode
+        );
+        onDraftChange?.(draft);
+      } else {
+        setSegments(baseSegments);
+        setManagedSourceSymbols(baseManagedSourceSymbols);
+      }
+    }
+  }, [language, createSnapshot, undoHistory, redoHistory, sourceContextSegments, onDraftChange, restoreSnapshot, spanKey, bbox, baseSegments, baseManagedSourceSymbols]);
 
   // Flatten segments to characters with their style info
   const chars = useMemo(() => {
@@ -994,15 +1055,42 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             </div>
           </div>
           <div className="rse-toolbar-row rse-toolbar-actions">
-            <button className="rse-tool-btn" disabled={!undoHistory.length} onClick={undo} aria-label={language === 'pt-BR' ? 'Desfazer' : 'Undo'}>↶</button>
-            <button className="rse-tool-btn" disabled={!redoHistory.length} onClick={redo} aria-label={language === 'pt-BR' ? 'Refazer' : 'Redo'}>↷</button>
-            <button className="rse-tool-btn" onClick={() => applyToSelection()} disabled={!hasSelection}>
+            <button className="rse-tool-btn" disabled={!undoHistory.length || language === 'en'} onClick={undo} aria-label={language === 'pt-BR' ? 'Desfazer' : 'Undo'}>↶</button>
+            <button className="rse-tool-btn" disabled={!redoHistory.length || language === 'en'} onClick={redo} aria-label={language === 'pt-BR' ? 'Refazer' : 'Redo'}>↷</button>
+            <button className="rse-tool-btn" onClick={() => applyToSelection()} disabled={!hasSelection || language === 'en'}>
               🎨 Apply to Selection
             </button>
-            <button className="rse-tool-btn" onClick={selectAll}>Select All</button>
-            <button className="rse-tool-btn" disabled={isEditingText} onClick={handleStartEditText}>📝 Edit Text</button>
+            <button className="rse-tool-btn" onClick={selectAll} disabled={language === 'en'}>Select All</button>
+            <button className="rse-tool-btn" disabled={isEditingText || language === 'en'} onClick={handleStartEditText}>📝 Edit Text</button>
+            {onToggleLanguage && (
+              <div className="rse-lang-toggle" role="group" aria-label="Alternar idioma">
+                <button
+                  type="button"
+                  className={`rse-lang-btn ${language === 'en' ? 'is-active' : ''}`}
+                  onClick={() => onToggleLanguage('en')}
+                  title="Visualizar original EN/US (somente leitura)"
+                >
+                  EN/US
+                </button>
+                <span className="rse-lang-divider">↔</span>
+                <button
+                  type="button"
+                  className={`rse-lang-btn ${language === 'pt-BR' ? 'is-active' : ''}`}
+                  onClick={() => onToggleLanguage('pt-BR')}
+                  title="Visualizar tradução PT/BR"
+                >
+                  PT/BR
+                </button>
+              </div>
+            )}
           </div>
         </div>
+
+        {language === 'en' && (
+          <div className="rse-lang-banner" role="status">
+            <span>Referência EN/US original (somente leitura). Alterne para PT/BR para editar a tradução.</span>
+          </div>
+        )}
 
         {/* Text Rewrite Input */}
         {isEditingText && (
@@ -1114,8 +1202,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         {/* Footer: Save */}
         <div className="rse-footer">
           <div className="rse-footer-actions">
-            <button className="rse-btn-reset" onClick={handleReset}>{sessionOnly ? 'Restaurar proposta' : 'Reset'}</button>
-            <button className="rse-btn-save" onClick={handleSave}>{sessionOnly ? 'Aplicar à prova' : '💾 Save'}</button>
+            <button className="rse-btn-reset" disabled={language === 'en'} onClick={handleReset} title={language === 'en' ? 'Alterne para PT/BR para resetar' : undefined}>{sessionOnly ? 'Restaurar proposta' : 'Reset'}</button>
+            <button className="rse-btn-save" disabled={language === 'en'} onClick={handleSave} title={language === 'en' ? 'Alterne para PT/BR para salvar' : undefined}>{sessionOnly ? 'Aplicar à prova' : '💾 Save'}</button>
           </div>
         </div>
       </div>

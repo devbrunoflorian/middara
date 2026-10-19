@@ -10,7 +10,13 @@ interface GlossaryEntry extends GlossaryMatch {
 }
 
 function stripMarkdownEmphasis(value: string): string {
-  return value.trim().replace(/^\*\*(.*)\*\*$/, '$1').replace(/^`(.*)`$/, '$1');
+  return value
+    .trim()
+    .replace(/\s*\*[^*]+\*\s*$/g, '')
+    .replace(/\s*\([^)]+\)\s*$/g, '')
+    .replace(/^\*\*(.*)\*\*$/, '$1')
+    .replace(/^`(.*)`$/, '$1')
+    .trim();
 }
 
 function parseGlossary(markdown: string): GlossaryEntry[] {

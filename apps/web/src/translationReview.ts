@@ -89,10 +89,14 @@ function canonicalCopyfitValue(value: unknown): string {
   return JSON.stringify(value) ?? 'undefined';
 }
 
+function normalizeSpanKeyForComparison(key: unknown): string {
+  return String(key ?? '').replace(/__pt-BR$/u, '');
+}
+
 function copyfitMeasurementSnapshot(data: unknown): Record<string, unknown> | null {
   if (!isRecord(data) || !Array.isArray(data.segments)) return null;
   return {
-    spanKey: data.spanKey,
+    spanKey: normalizeSpanKeyForComparison(data.spanKey),
     bbox: data.bbox,
     textAlign: data.textAlign,
     lineHeight: data.lineHeight,
@@ -120,7 +124,7 @@ export function copyfitCanonicalEvidenceBlockReason(
     && bbox[2] > bbox[0] && bbox[3] > bbox[1];
   if (!candidate.copyfitMeasurementFingerprint?.trim()
     || !candidate.copyfitCanonicalSpanKey
-    || candidate.copyfitCanonicalSpanKey !== candidate.spanKey
+    || normalizeSpanKeyForComparison(candidate.copyfitCanonicalSpanKey) !== normalizeSpanKeyForComparison(candidate.spanKey)
     || !hasCanonicalBbox
     || !isRecord(candidate.data)
     || !Array.isArray(candidate.data.segments)) return 'UNMEASURED';
@@ -570,7 +574,11 @@ export async function loadSavedPortugueseTranslations(): Promise<SavedPortuguese
   for (const record of remote) {
     if (record.language !== 'pt-BR' || typeof record.spanKey !== 'string' || record.id === undefined) continue;
     const key = clientSpanKey(record.spanKey, 'pt-BR');
-    payload.set(key, { id: record.id, spanKey: record.spanKey, data: record.data });
+    const entry = { id: record.id, spanKey: record.spanKey, data: record.data };
+    payload.set(key, entry);
+    if (!payload.has(record.spanKey)) payload.set(record.spanKey, entry);
+    const unSuffixed = record.spanKey.replace(/__pt-BR$/u, '');
+    if (!payload.has(unSuffixed)) payload.set(unSuffixed, entry);
     if (data.has(key)) continue; // An unsynced local human edit is newer than the remote copy.
     const text = textFromStoredData(record.data);
     texts.set(key, text);
@@ -581,6 +589,13 @@ export async function loadSavedPortugueseTranslations(): Promise<SavedPortuguese
 
 export function rendererKeyForReviewCandidate(candidate: TranslationReviewCandidate, pageData?: PageData | null): string {
   if (typeof candidate.copyfitCanonicalSpanKey === 'string' && candidate.copyfitCanonicalSpanKey) {
+    const plainMatch = candidate.copyfitCanonicalSpanKey.match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u);
+    if (plainMatch) {
+      const index = Number(plainMatch[1]);
+      const sourceBlock = pageData?.page_number === candidate.pageNumber ? pageData.blocks[index] : undefined;
+      if (sourceBlock?.editorKey) return `${sourceBlock.editorKey}__pt-BR`;
+      return `page_${candidate.pageNumber}_block_${index}`;
+    }
     return candidate.copyfitCanonicalSpanKey;
   }
   if (/^page_\d+_unit_/u.test(candidate.spanKey)) {
@@ -593,6 +608,8 @@ export function rendererKeyForReviewCandidate(candidate: TranslationReviewCandid
     if (sourceBlock?.editorKey) return `${sourceBlock.editorKey}__pt-BR`;
     return `page_${candidate.pageNumber}_block_${index}`;
   }
+  const plainMatch = candidate.spanKey.match(/^(page_\d+_block_\d+)__pt-BR$/u);
+  if (plainMatch) return plainMatch[1];
   return candidate.spanKey;
 }
 
@@ -875,7 +892,14 @@ export async function persistTranslationReviewApproval(
   existing: TranslationReviewRecord | undefined,
   technicalStatus = existing?.technicalStatus ?? candidate.technicalStatus,
 ): Promise<PersistedTranslationApproval> {
-  const reviewData = encodeReviewData(data, existing?.data ?? candidate.data);
+  const canonicalSpanKey = candidate.copyfitCanonicalSpanKey ?? candidate.spanKey;
+  const canonicalBbox = candidate.copyfitCanonicalBbox ?? data.bbox;
+  const canonicalOverride: SpanOverride = {
+    ...data,
+    spanKey: canonicalSpanKey,
+    bbox: canonicalBbox,
+  };
+  const reviewData = encodeReviewData(canonicalOverride, existing?.data ?? candidate.data);
   const response = await fetch(payloadApiUrl('translation-review/approve'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
