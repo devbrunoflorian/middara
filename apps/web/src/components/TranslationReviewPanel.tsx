@@ -12,7 +12,9 @@ import type {
   TranslationGlossaryDecisionStatus,
 } from '../translationReview';
 import type { PageData } from './PageRenderer';
-import { candidateForReviewException, copyfitApprovalBlockReason, copyfitCanonicalEvidenceBlockReason, glossaryDecisionKey, normalizeGlossaryTerm, parseGlossaryTermCandidates, rendererKeyForReviewCandidate, reviewRecordForCandidate, reviewRequestMatchesUnit, spanOverrideForReviewCandidate, textForReviewData, translationDataMatches } from '../translationReview';
+import { mapPdfFont, renderSegmentContent, segFontToCSS } from './PageRenderer';
+import type { Segment } from './RichSpanEditor';
+import { candidateForReviewException, clientSpanKey, copyfitApprovalBlockReason, copyfitCanonicalEvidenceBlockReason, glossaryDecisionKey, normalizeGlossaryTerm, parseGlossaryTermCandidates, rendererKeyForReviewCandidate, reviewRecordForCandidate, reviewRequestMatchesUnit, segmentsForReviewData, spanOverrideForReviewCandidate, textForReviewData, translationDataMatches } from '../translationReview';
 import './TranslationReviewPanel.css';
 
 interface TranslationReviewPanelProps {
@@ -164,11 +166,61 @@ function pendingGlossaryRows(
   return rows;
 }
 
+interface TypographicPreviewProps {
+  segments?: Segment[] | null;
+  fallbackText: string;
+  language: 'en' | 'pt-BR';
+  emptyMessage?: string;
+}
+
+function TypographicPreview({ segments, fallbackText, language, emptyMessage }: TypographicPreviewProps) {
+  if (!segments || segments.length === 0) {
+    return (
+      <div className="translation-review-typographic-preview is-fallback">
+        <p>{fallbackText || emptyMessage || 'Texto não registrado nesta unidade.'}</p>
+      </div>
+    );
+  }
+
+  const sizes = segments
+    .map(s => s.size)
+    .filter((s): s is number => typeof s === 'number' && Number.isFinite(s) && s > 0);
+  const minSize = sizes.length > 0 ? Math.min(...sizes) : 10;
+  const maxSize = sizes.length > 0 ? Math.max(...sizes) : 10;
+  const hasVaryingSizes = maxSize - minSize > 1.5;
+
+  return (
+    <div className="translation-review-typographic-preview">
+      {segments.map((seg, idx) => {
+        const mapped = mapPdfFont(seg.font);
+        const relSize = hasVaryingSizes
+          ? Math.max(12, Math.min(20, Math.round((seg.size / minSize) * 13)))
+          : 13;
+
+        const style: React.CSSProperties = {
+          fontFamily: segFontToCSS(seg.font),
+          fontWeight: seg.weight,
+          fontStyle: seg.style,
+          fontVariantCaps: mapped.variantCaps,
+          fontSize: `${relSize}px`,
+          lineHeight: 1.5,
+        };
+
+        return (
+          <span key={idx} style={style}>
+            {renderSegmentContent({ ...seg, size: relSize, color: 'currentColor' }, 1, language, 'inline')}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
 export function TranslationReviewPanel({
   open, onClose, catalog, catalogError, records, requests, glossaryDecisions, persistenceError, persistenceAvailable,
   pageData,
   savedHumanTranslations, savedPayloadTranslations, selectedPage, selectedReviewKey, busyReviewKey, hasUnsavedDraft,
-  reviewStatus, language = 'pt-BR', onToggleLanguage, onSelectCandidate, onOpenViewer, onOpenApprovedViewer, onOpenEditor, onOpenExceptionPage, onApprove, onSetArchived, onClearSelection, onReopen,
+  reviewStatus, language = 'pt-BR', onToggleLanguage, onSelectCandidate, onOpenEditor, onOpenExceptionPage, onApprove, onSetArchived, onClearSelection, onReopen,
   onCreateAIRequest, onUpdateAIRequest, onCompleteAIRequestAsUser, onDecideGlossaryTerm,
 }: TranslationReviewPanelProps) {
   const [tab, setTab] = useState<PanelTab>('proposals');
@@ -245,6 +297,7 @@ export function TranslationReviewPanel({
         sourceUnitId: source?.sourceUnitId ?? null,
         sourceText: record.sourceText ?? source?.sourceText ?? '',
         proposalText,
+        sourceSegments: source?.sourceSegments,
         data: activeData,
         technicalStatus: record.technicalStatus,
         editorialStatus: 'approved',
@@ -777,11 +830,21 @@ export function TranslationReviewPanel({
               <div className="translation-review-comparison">
                 <section>
                   <h4>EN · texto-fonte</h4>
-                  <p>{selectedCandidate.sourceText || 'Texto-fonte não registrado nesta unidade.'}</p>
+                  <TypographicPreview
+                    segments={selectedCandidate.sourceSegments}
+                    fallbackText={selectedCandidate.sourceText}
+                    language="en"
+                    emptyMessage="Texto-fonte não registrado nesta unidade."
+                  />
                 </section>
                 <section>
                   <h4>PT-BR · {tab === 'approved' ? 'integrado ao livro' : 'proposta'}</h4>
-                  <p>{selectedCandidate.proposalText || 'A unidade não tem texto simples; os segmentos ricos permanecem disponíveis no Editor.'}</p>
+                  <TypographicPreview
+                    segments={segmentsForReviewData(selectedCandidate.data)}
+                    fallbackText={selectedCandidate.proposalText}
+                    language="pt-BR"
+                    emptyMessage="A unidade não tem texto simples; os segmentos ricos permanecem disponíveis no Editor."
+                  />
                 </section>
                 {selectedRecord && (selectedText !== selectedCandidate.proposalText || selectedRecordFromEarlierProposal
                   || (tab === 'approved' && !!selectedRecord.publication && !translationDataMatches(selectedRecord.data, selectedRecord.publication.data))) && (
@@ -792,7 +855,11 @@ export function TranslationReviewPanel({
                         Revisão da proposta {selectedRecord.proposalVersion} preservada e prioritária. A proposta atual é {selectedCandidate.proposalVersion}; a validação técnica exibida pertence à revisão salva.
                       </p>
                     )}
-                    <p>{selectedText}</p>
+                    <TypographicPreview
+                      segments={segmentsForReviewData(selectedRecord.data)}
+                      fallbackText={selectedText}
+                      language="pt-BR"
+                    />
                   </section>
                 )}
                 {humanText && tab !== 'approved' && (

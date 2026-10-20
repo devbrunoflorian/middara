@@ -122,6 +122,7 @@ export interface LayoutFrame {
   textAlign?: TextAlignment;
   lineHeight?: number;
   hidden?: boolean;
+  paragraphSpacingPt?: number;
 }
 
 export interface Block {
@@ -180,6 +181,7 @@ export interface CreditFieldDefinition {
   bbox: [number, number, number, number];
   frame: LayoutFrame;
   links?: CreditLinkDefinition[];
+  paragraphSpacingPt?: number;
 }
 
 export interface CreditLinkDefinition {
@@ -203,6 +205,7 @@ export interface TypographicUnitDefinition {
   field: CreditFieldDefinition;
   /** Keep a source marker anchored when a neighboring heading grows. */
   fixedPosition?: boolean;
+  paragraphSpacingPt?: number;
 }
 
 export interface TypographicSpanUnitDefinition {
@@ -370,7 +373,7 @@ export function mapPdfFont(pdfFontName: string): FontMapping {
   return { family: "'OptimaLTStd', 'Optima', serif", weight: 400, style: 'normal' };
 }
 
-function segFontToCSS(f: string): string {
+export function segFontToCSS(f: string): string {
   if (f.includes('Optima') || f === 'OptimaLTStd') return "'OptimaLTStd', serif";
   if (f.includes('Garamond') || f === 'AGaramondPro') return "'AGaramondPro', serif";
   if (f === 'CinzelLocal' || (f.includes('Cinzel') && !f.includes('Decorative'))) return "'CinzelLocal', 'Cinzel', serif";
@@ -384,6 +387,31 @@ function segFontToCSS(f: string): string {
   if (f.includes('ZapfDingbats')) return "'Zapf Dingbats', sans-serif";
   if (f === 'Inter') return "'Inter', sans-serif";
   return `'${f}', serif`;
+}
+
+export function splitSegmentsIntoParagraphs(segments: SpanOverride['segments']): SpanOverride['segments'][] {
+  const paragraphs: SpanOverride['segments'][] = [];
+  let current: SpanOverride['segments'] = [];
+  for (const seg of segments) {
+    let text = seg.text;
+    while (text.includes('\n')) {
+      const idx = text.indexOf('\n');
+      const head = text.slice(0, idx);
+      if (head.length > 0) {
+        current.push({ ...seg, text: head });
+      }
+      paragraphs.push(current);
+      current = [];
+      text = text.slice(idx + 1);
+    }
+    if (text.length > 0) {
+      current.push({ ...seg, text });
+    }
+  }
+  if (current.length > 0 || paragraphs.length === 0) {
+    paragraphs.push(current);
+  }
+  return paragraphs;
 }
 
 function renderCreditSegments(
@@ -956,14 +984,17 @@ async function deleteOverrideFromPayload(spanKey: string, lang: string): Promise
   }
 }
 
-function extractCreditFieldInfo(
+export function extractCreditFieldInfo(
   spanKey: string,
   block: Block,
-  field: CreditFieldDefinition,
+  fieldOrUnit: CreditFieldDefinition | TypographicUnitDefinition,
   unitKind?: TypographicUnitDefinition['kind'],
   unitLabel?: string,
 ): SelectedSpanInfo {
-  const selectedIds = new Set(field.lineIds);
+  const field: CreditFieldDefinition = 'field' in fieldOrUnit && fieldOrUnit.field ? fieldOrUnit.field : (fieldOrUnit as CreditFieldDefinition);
+  const effectiveKind = unitKind ?? ('kind' in fieldOrUnit ? fieldOrUnit.kind : undefined);
+  const effectiveLabel = unitLabel ?? ('label' in fieldOrUnit ? fieldOrUnit.label : undefined);
+  const selectedIds = new Set(field.lineIds ?? []);
   const lines = (block.lines || []).filter(line => selectedIds.has(line.id));
   const sourceSegments = sourceSegmentsFromSpans(lines.flatMap(line => line.spans));
   let font = '';
@@ -997,7 +1028,7 @@ function extractCreditFieldInfo(
 
   return {
     spanKey,
-    editorLabel: unitLabel,
+    editorLabel: effectiveLabel,
     text,
     font,
     family: mapPdfFont(font).family,
@@ -1005,11 +1036,11 @@ function extractCreditFieldInfo(
     style,
     color,
     size,
-    bbox: field.bbox,
-    textAlign: field.frame.textAlign || 'left',
-    lineHeight: field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
-    sourceSegments: unitKind === 'paragraph' ? normalizeParagraphSourceSegments(sourceSegments) : sourceSegments,
-    editorContext: unitKind === 'paragraph'
+    bbox: field.bbox ?? block.bbox,
+    textAlign: field.frame?.textAlign || 'left',
+    lineHeight: field.frame?.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+    sourceSegments: effectiveKind === 'paragraph' ? normalizeParagraphSourceSegments(sourceSegments) : sourceSegments,
+    editorContext: effectiveKind === 'paragraph'
       ? 'paragraph'
       : block.creditUnit || block.creditUnits?.length ? 'credit-field' : 'typographic-field',
   };
@@ -1116,6 +1147,7 @@ function sourceLayoutFrameForField(field: CreditFieldDefinition): LayoutFrame {
     rotation: 0,
     textAlign: field.frame.textAlign,
     lineHeight: field.frame.lineHeight,
+    paragraphSpacingPt: field.frame.paragraphSpacingPt ?? field.paragraphSpacingPt,
   };
 }
 
@@ -1168,7 +1200,7 @@ function frameUnitKey(pageNumber: number, block: Block, blockIndex: number): str
   return block.editorKey ?? `page_${pageNumber}_block_${blockIndex}`;
 }
 
-function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 'pt-BR', geometryMode: 'translatedFlow' | 'inline' = 'inline'): React.ReactNode {
+export function renderSegmentContent(segment: Segment, scale: number, language: 'en' | 'pt-BR', geometryMode: 'translatedFlow' | 'inline' = 'inline'): React.ReactNode {
   const legacy = !segment.symbolId ? resolveLegacySymbol(segment.font,segment.text) : undefined;
   const id=segment.symbolId ?? legacy?.id;
   if (!id) return segment.text;
@@ -1695,7 +1727,44 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       if (typographicUnit) {
         const newUnitKey = `page_${pageData.page_number}_unit_${typographicUnit.id}__${language}`;
         if (newUnitKey !== selectedSpan.spanKey) {
-          const updated = extractCreditFieldInfo(newUnitKey, block, typographicUnit);
+          const updated = extractCreditFieldInfo(
+            newUnitKey,
+            block,
+            typographicUnit.field,
+            typographicUnit.kind,
+            typographicUnit.label,
+          );
+          setSelectedSpan(prev => prev ? { ...prev, spanKey: newUnitKey, bbox: updated.bbox } : null);
+        }
+        return;
+      }
+      const creditUnits = block.creditUnits ?? (block.creditUnit ? [block.creditUnit] : []);
+      for (const cu of creditUnits) {
+        if (`page_${pageData.page_number}_credit_${cu.id}_${cu.label.id}` === baseKey) {
+          const newKey = `page_${pageData.page_number}_credit_${cu.id}_${cu.label.id}__${language}`;
+          if (newKey !== selectedSpan.spanKey) {
+            const updated = extractCreditFieldInfo(newKey, block, cu.label);
+            setSelectedSpan(prev => prev ? { ...prev, spanKey: newKey, bbox: updated.bbox } : null);
+          }
+          return;
+        }
+        if (`page_${pageData.page_number}_credit_${cu.id}_${cu.body.id}` === baseKey) {
+          const newKey = `page_${pageData.page_number}_credit_${cu.id}_${cu.body.id}__${language}`;
+          if (newKey !== selectedSpan.spanKey) {
+            const updated = extractCreditFieldInfo(newKey, block, cu.body);
+            setSelectedSpan(prev => prev ? { ...prev, spanKey: newKey, bbox: updated.bbox } : null);
+          }
+          return;
+        }
+      }
+      const spanUnit = block.typographicSpanUnits?.find(candidate => {
+        const uBase = `page_${pageData.page_number}_unit_${candidate.id}`;
+        return uBase === baseKey;
+      });
+      if (spanUnit) {
+        const newUnitKey = `page_${pageData.page_number}_unit_${spanUnit.id}__${language}`;
+        if (newUnitKey !== selectedSpan.spanKey) {
+          const updated = extractInlineSpanUnitInfo(newUnitKey, block, spanUnit);
           setSelectedSpan(prev => prev ? { ...prev, spanKey: newUnitKey, bbox: updated.bbox } : null);
         }
         return;
@@ -2095,7 +2164,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       handleSpanClick(extractInlineSpanUnitInfo(unitKey, block, unit));
       return;
     }
-    const target = Array.from(pageElement?.querySelectorAll<HTMLElement>('[data-editable-unit-key]') ?? [])
+    const target = (Array.from(pageElement?.querySelectorAll('[data-editable-unit-key]') ?? []) as HTMLElement[])
       .find(element => {
         const k = element.dataset.editableUnitKey;
         return k ? matchesTarget(k) : false;
@@ -3585,6 +3654,7 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
             onSelectLayoutFrame={onSelectLayoutFrame}
             unitKind={unit.kind}
             unitLabel={unit.label}
+            paragraphSpacingPt={unit.paragraphSpacingPt ?? frameOverride?.paragraphSpacingPt ?? frameForSelection?.paragraphSpacingPt ?? unit.field.paragraphSpacingPt}
           />
         );
       })}
@@ -3605,6 +3675,7 @@ interface CreditFieldProps {
   language: 'en' | 'pt-BR';
   unitKind?: TypographicUnitDefinition['kind'];
   unitLabel?: string;
+  paragraphSpacingPt?: number;
   nextFieldY?: number;
   topOffsetPt?: number;
   layoutMode?: boolean;
@@ -3638,7 +3709,7 @@ function sourceLeadingContentOffsetPt(line: LineData | undefined): number {
 
 const CreditField: React.FC<CreditFieldProps> = ({
   block, field, spanKey, scale, isAdmin, selected, proposalReviewHighlightKey, override, flowOverflow = false, language, nextFieldY,
-  unitKind, unitLabel, topOffsetPt = 0, layoutMode = false, layoutUnitKey, layoutFrameForSelection,
+  unitKind, unitLabel, paragraphSpacingPt, topOffsetPt = 0, layoutMode = false, layoutUnitKey, layoutFrameForSelection,
   layoutFrameOverride, onSelectLayoutFrame, onPreviewMeasure, inlineSpanStates, onInlineSpanClick, onBlockClick,
 }) => {
   const previewRef = useRef<HTMLDivElement>(null);
@@ -3646,6 +3717,11 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
   const activeFrame = layoutFrameOverride ?? (layoutMode ? layoutFrameForSelection : undefined);
+  const effectiveParagraphSpacingPt = paragraphSpacingPt
+    ?? activeFrame?.paragraphSpacingPt
+    ?? field.paragraphSpacingPt
+    ?? field.frame.paragraphSpacingPt
+    ?? (spanKey.split('__')[0] === 'page_9_unit_p9-block-34-remaining-size-10pt' ? 2.81 : undefined);
   const translatedSourceRotation = language === 'pt-BR' && override !== null
     && (field.frame.rotation ?? 0) !== 0;
   // A vertical PDF line has a tall source ink box but its translated text is
@@ -3696,7 +3772,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
       for (const rect of Array.from(contentRange.getClientRects())) {
         if (rect.width > 0 && rect.height > 0) contentRects.push(rect);
       }
-      for (const element of preview.querySelectorAll('[data-source-inline-semantic], [data-source-inline-placeholder], svg[data-symbol-id], img')) {
+      for (const element of Array.from(preview.querySelectorAll('[data-source-inline-semantic], [data-source-inline-placeholder], svg[data-symbol-id], img'))) {
         const rect = element.getBoundingClientRect();
         if (rect.width > 0 && rect.height > 0) contentRects.push(rect);
       }
@@ -3796,7 +3872,21 @@ const CreditField: React.FC<CreditFieldProps> = ({
             paddingTop: `${leadingContentOffsetPt * scale}px`,
           }}
         >
-          {renderCreditSegments(override.segments, field.links, language, scale, isAdmin, 'pre-wrap', spanKey)}
+          {effectiveParagraphSpacingPt && effectiveParagraphSpacingPt > 0 ? (
+            splitSegmentsIntoParagraphs(override.segments).map((parSegments, parIdx, arr) => (
+              <div
+                key={parIdx}
+                className="credit-paragraph"
+                style={{
+                  marginBottom: parIdx < arr.length - 1 ? `${effectiveParagraphSpacingPt * scale}px` : 0,
+                }}
+              >
+                {renderCreditSegments(parSegments, field.links, language, scale, isAdmin, 'pre-wrap', spanKey)}
+              </div>
+            ))
+          ) : (
+            renderCreditSegments(override.segments, field.links, language, scale, isAdmin, 'pre-wrap', spanKey)
+          )}
         </div>
       ) : (
         lines.map(line => (
@@ -3942,7 +4032,8 @@ const LineRenderer: React.FC<LineRendererProps> = ({
 
     const lineRect = lineElement.getBoundingClientRect();
     const nextOverflowingKeys = new Set<string>();
-    for (const unitElement of lineElement.querySelectorAll<HTMLElement>('[data-inline-unit-flow-key]')) {
+    const unitElements = Array.from(lineElement.querySelectorAll('[data-inline-unit-flow-key]')) as HTMLElement[];
+    for (const unitElement of unitElements) {
       const key = unitElement.dataset.inlineUnitFlowKey;
       const sourceFlowBottomPt = Number(unitElement.dataset.inlineUnitFlowBottomPt);
       if (!key || !Number.isFinite(sourceFlowBottomPt)) continue;
@@ -3953,7 +4044,8 @@ const LineRenderer: React.FC<LineRendererProps> = ({
       if (typeof contentRange.getClientRects === 'function') {
         contentRects.push(...Array.from(contentRange.getClientRects()).filter(rect => rect.width > 0 && rect.height > 0));
       }
-      for (const content of unitElement.querySelectorAll<HTMLElement | SVGElement>('svg, img, [data-source-inline-semantic], [data-source-inline-placeholder]')) {
+      const contents = Array.from(unitElement.querySelectorAll('svg, img, [data-source-inline-semantic], [data-source-inline-placeholder]')) as (HTMLElement | SVGElement)[];
+      for (const content of contents) {
         const rect = content.getBoundingClientRect();
         if (rect.width > 0 && rect.height > 0) contentRects.push(rect);
       }

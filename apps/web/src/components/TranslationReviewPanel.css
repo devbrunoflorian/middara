@@ -70,6 +70,8 @@
 .translation-review-comparison section, .translation-review-exception-text { padding: 10px; border: 1px solid rgba(255,255,255,0.07); border-radius: 9px; background: rgba(255,255,255,0.025); }
 .translation-review-comparison h4, .translation-review-exception-text h4 { margin: 0 0 6px; color: #b6a2d1; font: 600 9px 'Inter', sans-serif; letter-spacing: 0.04em; text-transform: uppercase; }
 .translation-review-comparison p, .translation-review-exception-text p { margin: 0; color: #e0dbe7; font: 12px/1.55 'Inter', sans-serif; white-space: pre-wrap; overflow-wrap: anywhere; }
+.translation-review-typographic-preview { margin: 0; color: #e0dbe7; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; line-height: 1.5; }
+.translation-review-typographic-preview.is-fallback p { margin: 0; color: #c6bdd0; font: 12px/1.55 'Inter', sans-serif; white-space: pre-wrap; overflow-wrap: anywhere; font-style: italic; }
 .translation-review-edited-text { border-color: rgba(151, 188, 232, 0.2) !important; }
 .translation-review-human-text { border-color: rgba(105, 189, 145, 0.25) !important; }
 .translation-review-human-text h4 { color: #9dd7b4; }

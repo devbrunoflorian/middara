@@ -1,5 +1,5 @@
 import type { LayoutFrame, PageData } from './components/PageRenderer';
-import type { SpanOverride } from './components/RichSpanEditor';
+import type { Segment, SpanOverride } from './components/RichSpanEditor';
 import { decodeOverrideData, encodeOverrideData } from './symbols/overrideData';
 import { lineHeightModeForOverride } from './symbols/editorOverride';
 import { payloadApiUrl } from './config/payloadApi';
@@ -24,6 +24,7 @@ export interface TranslationReviewCandidate {
   sourceUnitId: string | null;
   sourceText: string;
   proposalText: string;
+  sourceSegments?: Segment[];
   data: unknown;
   /** Explicit proposal-only frame, absent unless its geometry was measured and approved for preview. */
   reviewLayoutFrame?: ProposalReviewLayoutFrame | null;
@@ -768,6 +769,10 @@ function encodeReviewData(override: SpanOverride, sourceData: unknown): Record<s
 
 export function textForReviewData(data: unknown): string {
   return textFromStoredData(data);
+}
+
+export function segmentsForReviewData(data: unknown): Segment[] | null {
+  return decodeOverrideData(data)?.segments ?? null;
 }
 
 export async function persistTranslationReview(

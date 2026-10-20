@@ -688,7 +688,7 @@ function App() {
 
   const isPage14ImportantCompositionVisible = currentPage === 14 && viewMode === 'single' && page14ImportantCompositionVariant !== null;
   const activeImportantCompositionVariant = isPage14ImportantCompositionVisible ? page14ImportantCompositionVariant : null;
-  const isPage14ExperimentVisible = currentPage === PAGE14_EDITORIAL_EXPERIMENT.pageNumber && viewMode === 'single';
+  const isPage14ExperimentVisible = false;
   const isPage14V2ExperimentVisible = currentPage === PAGE14_V2_SNAPSHOT.pageNumber && viewMode === 'single' && page14V2Variant !== null;
   const isPage14V3ExperimentVisible = currentPage === PAGE14_V3_INITIAL.pageNumber && viewMode === 'single' && page14V3Variant !== null;
   const activeV3Variant = isPage14V3ExperimentVisible ? page14V3Variant : null;
