@@ -21,6 +21,20 @@ const officialGlossaryTerms = glossaryText.split(/\r?\n/u).flatMap(line => {
 const exceptionItems = Array.isArray(queue.items) ? queue.items : [];
 const candidatesByFamily = new Map();
 const pageDomCache = new Map();
+const sourceSymbols = JSON.parse(fs.readFileSync(path.join(root, 'apps/web/src/symbols/sourceSymbols.json'), 'utf8'));
+
+function mapPdfFont(pdfFontName) {
+  const name = pdfFontName || '';
+  let weight = 400;
+  let style = 'normal';
+  if (name.includes('ExtraBlack')) weight = 950;
+  else if (name.includes('Black')) weight = 900;
+  else if (name.includes('DemiBold') || name.includes('Demi')) weight = 600;
+  else if (name.includes('Medium')) weight = 500;
+  else if (name.includes('Bold')) weight = 700;
+  if (name.includes('Italic')) style = 'italic';
+  return { weight, style };
+}
 
 function versionFromPath(value) {
   return Number(value.match(/-v(\d+)(?:-corrected)?\.json$/iu)?.[1] ?? 0);
@@ -161,6 +175,59 @@ function canonicalCopyfitGeometry(candidate, pageNumber, spanKey) {
   return validBbox(bbox) ? { spanKey: canonicalSpanKey, bbox } : null;
 }
 
+function resolveSourceSegments(candidate, pageNumber, spanKey) {
+  const page = pageDom(pageNumber);
+  const blocks = Array.isArray(page?.blocks) ? page.blocks : [];
+  const keyBlockIndex = Number(spanKey.match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u)?.[1]);
+  const blockIndex = Number.isInteger(candidate.blockIndex)
+    ? candidate.blockIndex
+    : Number.isInteger(keyBlockIndex)
+      ? keyBlockIndex
+      : candidate.sourceBlockId ? blocks.findIndex(b => b?.id === candidate.sourceBlockId) : -1;
+  const sourceBlock = blockIndex >= 0 && blockIndex < blocks.length ? blocks[blockIndex] : null;
+  if (!sourceBlock || !Array.isArray(sourceBlock.lines)) return [];
+
+  const sourceUnitKey = spanKey.match(/^page_\d+_unit_(.+?)(?:__pt-BR)?$/u)?.[1];
+  const sourceUnitId = candidate.sourceUnitId ?? sourceUnitKey;
+  const sourceUnit = sourceUnitId && Array.isArray(sourceBlock.typographicUnits)
+    ? sourceBlock.typographicUnits.find(u => u?.id === sourceUnitId)
+    : null;
+
+  let spans = [];
+  if (sourceUnit && Array.isArray(sourceUnit.spanRefs)) {
+    for (const line of sourceBlock.lines) {
+      if (!Array.isArray(line.spans)) continue;
+      line.spans.forEach((span, idx) => {
+        const ref = `${line.id}:${span.sourceSpanIndex ?? idx}`;
+        if (sourceUnit.spanRefs.includes(ref) && !span.renderOnlyStrokePass) {
+          spans.push(span);
+        }
+      });
+    }
+  }
+  if (spans.length === 0) {
+    spans = sourceBlock.lines.flatMap(l => (l.spans || []).filter(s => !s.renderOnlyStrokePass));
+  }
+
+  return spans.map(s => {
+    const mapped = mapPdfFont(s.font);
+    const weight = s.renderWeightOverride ?? mapped.weight;
+    const style = mapped.style;
+    const legacySymbol = sourceSymbols.find(sym => sym.legacy && s.font.includes(sym.legacy.font) && sym.legacy.characters.includes(s.text.trim()));
+    const symbolId = s.semanticSymbolId ?? legacySymbol?.id;
+    return {
+      text: s.displayOverride || s.text,
+      font: s.font,
+      size: s.renderSizeOverridePt ?? s.size,
+      weight,
+      style,
+      color: s.color || '#231f20',
+      ...(symbolId ? { symbolId } : {}),
+      ...(s.sourceSymbolMetrics ? { symbolMetrics: s.sourceSymbolMetrics } : {})
+    };
+  });
+}
+
 for (const relativePath of queue.sourceProposals ?? []) {
   if (!relativePath.toLowerCase().endsWith('.json')) continue;
   const absolutePath = path.resolve(root, relativePath);
@@ -229,6 +296,7 @@ const proposals = [...candidatesByFamily.values()]
         sourceUnitId: candidate.sourceUnitId ?? null,
         sourceText,
         proposalText,
+        sourceSegments: resolveSourceSegments(candidate, pageNumber, spanKey),
         data,
         reviewLayoutFrame: candidate.reviewLayoutFrame && typeof candidate.reviewLayoutFrame === 'object'
           ? candidate.reviewLayoutFrame : null,

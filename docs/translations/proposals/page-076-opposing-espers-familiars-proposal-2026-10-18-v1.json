@@ -26,7 +26,7 @@
             "font": "Cinzel-Regular",
             "size": 18,
             "color": "#231f20",
-            "weight": 400,
+            "weight": 700,
             "style": "normal",
             "disableLigatures": true
           }
@@ -113,7 +113,9 @@
       "proposalText": "Espers Oponentes\n\nOPPOSING ESPERS representam os ESPERS controlados por invocadores adversários.\nEspers Oponentes seguem todas as regras normais de uma Carta de Combatente Inteligente, com as seguintes diferenças:\n• Espers Oponentes começam no tabuleiro durante a preparação, ou também podem ser invocados usando a IA impressa na Carta de Combatente Inteligente do respectivo invocador. Encontros com um invocador capaz de invocar um Esper Oponente terão o Esper Oponente que ele invocará listado nas Regras Especiais do Encontro como um Encounter Esper.\n• Espers Oponentes utilizam Ícones de Escala exatamente da mesma forma que os Loyal Espers. Esses Ícones de Escala são calculados utilizando os atributos máximos presentes na Carta de Combatente Inteligente do seu invocador correspondente. Ao desferir um Ataque, o Esper Oponente utilizará as Habilidades de Símbolo impressas em seu invocador correspondente, desde que as Habilidades de Símbolo do invocador se mostrem melhores para o Ataque em questão.\n• Espers Oponentes não estão sujeitos a regras especiais associadas aos Loyal Espers. Em vez disso, funcionam plenamente como qualquer outro Combatente Inteligente.\n• Uma vez que Espers Oponentes e seus invocadores não possuem Disciplinas para consulta, eles calculam seu Valor de Força de Escala de maneira distinta das Cartas de Combatente normais. Para determinar a Força *, estes Espers sempre utilizarão o valor impresso na Tag SUMMONER X da carta do seu invocador correspondente. Veja as regras de Ícones de Escala na Pág. 72.",
       "sourceText": "Opposing Espers\n\n \nOPPOSING ESPERS represent the ESPERS controlled by adversarial \nsummoners. \nOpposing Espers follow all the normal rules of an Intelligent Combatant \nCard with the following differences: \n•\t\nOpposing Espers will start on the board during setup, or might also \nbe summoned using the AI printed on the corresponding summoner's \nIntelligent Combatant Card. Encounters with a summoner who might \nsummon an Opposing Esper will have the Opposing Esper they will \nsummon (if instructed to) listed in the Encounter's Special Rules as an \nEncounter Esper.\n•\t\nOpposing Espers use Scaling Icons just like Loyal Espers. These \nScaling Icons are calculated by using the maximum stats on their \ncorresponding summoner's Intelligent Combatant Card. When \nmaking an Attack, an Opposing Esper will use Symbol Abilities \nprinted on their corresponding summoner if the summoner's Symbol \nAbilities are better for the Attack in question. \n•\t\nOpposing Espers are not subject to any special rules associated \nwith Loyal Espers. Instead, Opposing Espers function like any other \nIntelligent Combatant. \n•\t\nSince Opposing Espers and their summoner do not have Disciplines \nto reference, Opposing Espers calculate their Scaling Force Value \ndifferently than Combatant Cards. To determine Force *, these Espers \nwill always use the value printed on the SUMMONER X Tag on their \ncorresponding summoner's card. See Scaling Icons Pg. 72.",
       "status": "proposal_pending_human_editorial_review",
-      "pendingTerms": [],
+      "pendingTerms": [
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
       "semanticSymbols": [],
       "sourceBlockId": "block_8",
       "sourcePdfVisualLineCount": 26,
@@ -218,7 +220,7 @@
             "font": "Cinzel-Regular",
             "size": 12,
             "color": "#231f20",
-            "weight": 400,
+            "weight": 700,
             "style": "normal",
             "disableLigatures": true
           }
@@ -305,7 +307,9 @@
       "proposalText": "Felled Afterlife é uma Disciplina de Assemblage que permite a um Aventureiro trazer até dois Enslaved Spirits para o tabuleiro sob seu controle. Enslaved Spirits não são Loyal Espers. Em vez disso, essas Cartas de Comando funcionam como qualquer outra Carta de Comando.",
       "sourceText": "Felled Afterlife is an Assemblage Discipline that allows an Adventurer to \nbring up to two Enslaved Spirits to the board under their control. Enslaved \nSpirits are not Loyal Espers. Instead, these Command Cards function like \nany other Command Card.",
       "status": "proposal_pending_human_editorial_review",
-      "pendingTerms": [],
+      "pendingTerms": [
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
       "semanticSymbols": [],
       "sourceBlockId": "block_29",
       "sourcePdfVisualLineCount": 4,
@@ -368,7 +372,16 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "DICA: Lembre-se, a menos que uma Habilidade diga o contrário, um Aventureiro nunca pode ter mais de 1 Combatente de Comando trazido ao tabuleiro por Habilidade ao mesmo tempo. Isso significa que um Aventureiro não poderia invocar um Loyal Esper e usar Felled Afterlife simultaneamente.",
+            "text": "DICA:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9.5,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Lembre-se, a menos que uma Habilidade diga o contrário, um Aventureiro nunca pode ter mais de 1 Combatente de Comando trazido ao tabuleiro por Habilidade ao mesmo tempo. Isso significa que um Aventureiro não poderia invocar um Loyal Esper e usar Felled Afterlife simultaneamente.",
             "font": "OptimaLTStd",
             "size": 9.5,
             "color": "#231f20",
@@ -471,7 +484,9 @@
       "proposalText": "Familiares\n\nA Disciplina Familiar em ASSEMBLAGE permite que um Aventureiro invoque e mantenha uma pequena criatura chamada Familiar. Familiares concedem um benefício constante. Tematicamente, eles colaboram ativamente com seu mestre. Por isso, as Cartas de Familiar não são afetadas por Disciplinas ou Efeitos que impediriam seu uso pelo mestre. Isso significa que Cartas de Familiar continuam utilizáveis mesmo enquanto Paralisado ou em Forma de Canalização.",
       "sourceText": "Familiars\n \nThe Familiar Discipline in ASSEMBLAGE allows an Adventurer to summon \nand maintain a small creature called a Familiar. Familiars give Adventurers \na constant benefit. Thematically, Familiars are doing their own part to \nhelp out their master. Because of this, Familiar Cards are not affected \nby Disciplines or Effects that might prevent them from being used by \ntheir master. This means that Familiar Cards may still be used even while \nParalyzed or in Conduit Form.",
       "status": "proposal_pending_human_editorial_review",
-      "pendingTerms": [],
+      "pendingTerms": [
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
       "semanticSymbols": [],
       "sourceBlockId": "block_34",
       "sourcePdfVisualLineCount": 8,
@@ -624,7 +639,7 @@
             "font": "Cinzel-Regular",
             "size": 14,
             "color": "#231f20",
-            "weight": 400,
+            "weight": 700,
             "style": "normal",
             "disableLigatures": true
           }
@@ -711,7 +726,9 @@
       "proposalText": "Assemblage contém um segundo tipo de Esper chamado EXALTED ESPER. Essas entidades divinas e poderosas se manifestam para ajudar o invocador de forma espetacular antes de desaparecerem.",
       "sourceText": "Assemblage contains a second type of Esper called an EXALTED ESPER. \nThese powerful god-like entities will manifest to help the summoner in a \nspectacular fashion before vanishing. ",
       "status": "proposal_pending_human_editorial_review",
-      "pendingTerms": [],
+      "pendingTerms": [
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
       "semanticSymbols": [],
       "sourceBlockId": "block_62",
       "sourcePdfVisualLineCount": 3,
@@ -789,7 +806,9 @@
       "proposalText": "A Disciplina Exalted Summoning permite que um Aventureiro invoque um EXALTED ESPER para ajudá-lo. Ao usar, o jogador escolhe um EXALTED ESPER (em cartas de tamanho tarô) e utiliza sua Habilidade impressa.",
       "sourceText": "The Exalted Summoning Discipline allows an Adventurer to summon an \nEXALTED ESPER to aid them. When used, a player must choose an EXALTED \nESPER (printed on tarot sized cards) and use its printed Ability. ",
       "status": "proposal_pending_human_editorial_review",
-      "pendingTerms": [],
+      "pendingTerms": [
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
       "semanticSymbols": [],
       "sourceBlockId": "block_63",
       "sourcePdfVisualLineCount": 3,
@@ -867,7 +886,9 @@
       "proposalText": "A miniatura usando a Habilidade é a fonte da EdI listada na carta. Qualquer Dano, Efeito ou Habilidade conta como originário do Aventureiro que utilizou Exalted Summoning.",
       "sourceText": "The figure using the Ability is the source of the SOI listed on the card. Any \nDamage, Effects, or Abilities count as coming from the Adventurer who \nused Exalted Summoning.",
       "status": "proposal_pending_human_editorial_review",
-      "pendingTerms": [],
+      "pendingTerms": [
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
       "semanticSymbols": [],
       "sourceBlockId": "block_64",
       "sourcePdfVisualLineCount": 3,
