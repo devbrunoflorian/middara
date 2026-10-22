@@ -1,6 +1,14 @@
 # Estado atual do projeto
 
-**Atualizado:** 2026-10-17.
+**Atualizado:** 2026-10-22.
+
+## Checkpoint operacional — Resolução de Famílias Copyfit V3 e Piloto p.102 (2026-10-22)
+
+O Goal de localização continua **pausado e preservado**.
+A causa raiz do bloqueio generalizado de aprovação foi diagnosticada e corrigida: propostas com carimbos de data diferentes no nome de arquivo não estavam sendo agrupadas na mesma família em `scripts/build_translation_review_catalog.mjs`, deixando versões antigas v1 (não medidas) como duplicatas zumbis no catálogo ativo.
+Após a correção da regex de `familyPath`, o catálogo foi consolidado para 1075 candidatos ativos (removendo as duplicatas v1).
+Na página 102, as pendências de medição foram zeradas (0 gaps). O teste piloto real no Viewer (`http://127.0.0.1:8080/`) confirmou PASS na unidade `page_102_block_1__pt-BR` (botão "Aprovar unidade" habilitado e sem alerta de bloqueio), enquanto controles negativos (`OVER` e ausência de medição) mantêm o botão devidamente desabilitado.
+Nenhuma unidade foi aprovada no Payload CMS e o banco de dados permanece com 438 traduções intactas.
 
 ## Checkpoint operacional — pausa solicitada pelo usuário (2026-10-17)
 

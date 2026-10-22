@@ -15,7 +15,7 @@ const canon = v => Array.isArray(v) ? `[${v.map(canon).join(',')}]`
   : v && typeof v === 'object' ? `{${Object.keys(v).sort().map(k => `${JSON.stringify(k)}:${canon(v[k])}`).join(',')}}`
     : JSON.stringify(v);
 const hash = v => createHash('sha256').update(canon(v)).digest('hex');
-const familyPath = p => p.replace(/-v\d+(?:-corrected)?\.json$/iu, '.json');
+const familyPath = p => p.replace(/(?:-\d{4}-\d{2}-\d{2})?(?:-v\d+(?:-corrected)?)?\.json$/iu, '.json');
 const counts = c => {
   const s = Number(c.sourcePdfVisualLineCount ?? c.copyfitMeasurement?.sourcePdfVisualLineCount);
   const t = Number(c.pageRendererVisualLineCount ?? c.copyfitMeasurement?.pageRendererVisualLineCount);

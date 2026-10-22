@@ -41,7 +41,7 @@ function versionFromPath(value) {
 }
 
 function familyPath(value) {
-  return value.replace(/-v\d+(?:-corrected)?\.json$/iu, '.json');
+  return value.replace(/(?:-\d{4}-\d{2}-\d{2})?(?:-v\d+(?:-corrected)?)?\.json$/iu, '.json');
 }
 
 function isBlankDiagnostic(value) {
