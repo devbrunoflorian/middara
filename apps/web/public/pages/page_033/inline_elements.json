@@ -2,90 +2,6 @@
   "schemaVersion": 1,
   "elements": [
     {
-      "symbolId": "dice.white",
-      "bbox": [
-        510.0110168457031,
-        324.51849365234375,
-        521.4990234375,
-        337.7774963378906
-      ],
-      "drawingIndices": [
-        160,
-        161,
-        162,
-        163
-      ],
-      "anchor": {
-        "blockId": "block_41",
-        "blockIndex": 25,
-        "lineId": "line_41_3",
-        "spanIndex": 2,
-        "side": "after",
-        "sizePt": 10,
-        "gapPt": 0.309204,
-        "ownerSpanRef": {
-          "lineId": "line_41_3",
-          "spanIndex": 1
-        }
-      },
-      "metrics": {
-        "widthEm": 1.1488006591796875,
-        "heightEm": 1.3259002685546875,
-        "verticalAlignEm": 0.259649658203125
-      },
-      "mask": {
-        "url": "/pages/page_033/inline-element-mask-000.png",
-        "bbox": [
-          509,
-          323.5,
-          522.5,
-          338.75
-        ]
-      }
-    },
-    {
-      "symbolId": "dice.white",
-      "bbox": [
-        544.4155883789062,
-        354.00830078125,
-        555.9036254882812,
-        367.2673034667969
-      ],
-      "drawingIndices": [
-        168,
-        169,
-        170,
-        171
-      ],
-      "anchor": {
-        "blockId": "block_43",
-        "blockIndex": 26,
-        "lineId": "line_43_2",
-        "spanIndex": 2,
-        "side": "after",
-        "sizePt": 10,
-        "gapPt": 0.631531,
-        "ownerSpanRef": {
-          "lineId": "line_43_2",
-          "spanIndex": 1
-        }
-      },
-      "metrics": {
-        "widthEm": 1.1488037109375,
-        "heightEm": 1.3259002685546875,
-        "verticalAlignEm": 0.34169921875
-      },
-      "mask": {
-        "url": "/pages/page_033/inline-element-mask-001.png",
-        "bbox": [
-          543.25,
-          353,
-          557,
-          368.25
-        ]
-      }
-    },
-    {
       "id": "p33-purple-001",
       "symbolId": "dice.purple",
       "bbox": [
@@ -134,7 +50,8 @@
           154.5,
           161.75
         ]
-      }
+      },
+      "sourceRendering": "semantic-inline"
     },
     {
       "id": "p33-purple-002",
@@ -185,7 +102,233 @@
           294.75,
           161.75
         ]
+      },
+      "sourceRendering": "semantic-inline"
+    },
+    {
+      "id": "p33-purple-007",
+      "symbolId": "dice.purple",
+      "bbox": [
+        161.7178955078125,
+        200.55653381347656,
+        172.10789489746094,
+        212.2935333251953
+      ],
+      "drawingIndices": [
+        144,
+        145,
+        146,
+        147
+      ],
+      "blockIndex": 21,
+      "blockId": "block_37",
+      "lineId": "line_37_0",
+      "spanIndex": 0,
+      "side": "after",
+      "expectedSpan": "Conviction: ",
+      "sourceRendering": "semantic-inline",
+      "metrics": {
+        "widthEm": 1.0389999389648437,
+        "heightEm": 1.173699951171875,
+        "verticalAlignEm": 0.24381256103515625,
+        "advanceEm": 1.0389999389648437,
+        "gapEm": 0.05,
+        "sourceAssetUrl": "/pages/page_033/source-dice-purple-p33-conviction.svg",
+        "sourceAppearanceKey": "p33-conviction-purple-die-vector-source-pdf"
+      },
+      "anchor": {
+        "blockId": "block_37",
+        "blockIndex": 21,
+        "lineId": "line_37_0",
+        "spanIndex": 0,
+        "side": "after",
+        "sizePt": 10.0,
+        "gapPt": 0.5,
+        "ownerSpanRef": {
+          "lineId": "line_37_0",
+          "spanIndex": 0
+        }
+      },
+      "mask": {
+        "url": "/pages/page_033/inline-element-mask-008.png",
+        "bbox": [
+          160.67,
+          199.51,
+          173.16,
+          213.34
+        ]
+      },
+      "provenance": {
+        "candidateId": "p033-v144-147-n4",
+        "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+        "audit": "output/proofs/full-symbol-integrity-2026-10-13/pages/p033/audit.json",
+        "method": "The official PDF's four native vector drawings were traced at their source bbox. Only the two icon-sized areas were masked with clean neighboring pixels from the same beige band."
       }
+    },
+    {
+      "id": "p33-purple-008",
+      "symbolId": "dice.purple",
+      "bbox": [
+        175.60789489746094,
+        200.55653381347656,
+        185.99789428710938,
+        212.29353381347656
+      ],
+      "drawingIndices": [
+        148,
+        149,
+        150,
+        151
+      ],
+      "blockIndex": 21,
+      "blockId": "block_37",
+      "lineId": "line_37_1",
+      "spanIndex": 0,
+      "side": "after",
+      "expectedSpan": " ",
+      "sourceRendering": "semantic-inline",
+      "metrics": {
+        "widthEm": 1.0389999389648437,
+        "heightEm": 1.1736999999999995,
+        "verticalAlignEm": 0.24381260986328074,
+        "advanceEm": 1.0389999389648437,
+        "gapEm": 0.05,
+        "sourceAssetUrl": "/pages/page_033/source-dice-purple-p33-conviction.svg",
+        "sourceAppearanceKey": "p33-conviction-purple-die-vector-source-pdf"
+      },
+      "anchor": {
+        "blockId": "block_37",
+        "blockIndex": 21,
+        "lineId": "line_37_1",
+        "spanIndex": 0,
+        "side": "after",
+        "sizePt": 10.0,
+        "gapPt": 0.5,
+        "ownerSpanRef": {
+          "lineId": "line_37_1",
+          "spanIndex": 0
+        }
+      },
+      "mask": {
+        "url": "/pages/page_033/inline-element-mask-009.png",
+        "bbox": [
+          174.56,
+          199.51,
+          187.05,
+          213.34
+        ]
+      },
+      "provenance": {
+        "candidateId": "p033-v148-151-n4",
+        "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+        "audit": "output/proofs/full-symbol-integrity-2026-10-13/pages/p033/audit.json",
+        "method": "The official PDF's four native vector drawings were traced at their source bbox. Only the two icon-sized areas were masked with clean neighboring pixels from the same beige band."
+      }
+    },
+    {
+      "id": "p33-purple-006",
+      "symbolId": "dice.purple",
+      "bbox": [
+        140.79800415039062,
+        218.2257843017578,
+        151.18800354003906,
+        229.96278381347656
+      ],
+      "drawingIndices": [
+        152,
+        153,
+        154,
+        155
+      ],
+      "blockIndex": 22,
+      "blockId": "block_38",
+      "lineId": "line_38_0",
+      "spanIndex": 0,
+      "side": "after",
+      "expectedSpan": "Casting: ",
+      "sourceRendering": "semantic-inline",
+      "metrics": {
+        "widthEm": 1.0389999389648437,
+        "heightEm": 1.173699951171875,
+        "verticalAlignEm": 0.24387969970703124,
+        "advanceEm": 1.0389999389648437,
+        "gapEm": 0.049909999999999996,
+        "sourceAssetUrl": "/pages/page_033/source-dice-purple-p33-casting.svg",
+        "sourceAppearanceKey": "p33-casting-label-purple-die-vector-source-pdf"
+      },
+      "anchor": {
+        "blockId": "block_38",
+        "blockIndex": 22,
+        "lineId": "line_38_0",
+        "spanIndex": 0,
+        "side": "after",
+        "sizePt": 10,
+        "gapPt": 0.4991,
+        "ownerSpanRef": {
+          "lineId": "line_38_0",
+          "spanIndex": 0
+        }
+      },
+      "mask": {
+        "url": "/pages/page_033/inline-element-mask-007.png",
+        "bbox": [
+          139.75,
+          217.18,
+          152.25,
+          231.01
+        ]
+      },
+      "provenance": {
+        "candidateId": "p033-v152-155-n4",
+        "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+        "audit": "output/proofs/full-symbol-integrity-2026-10-13/pages/p033/audit.json",
+        "method": "PDF drawing paths 152–155 traced to the per-occurrence source SVG; background mask cloned from the adjacent clean area of the same page band."
+      }
+    },
+    {
+      "symbolId": "dice.white",
+      "bbox": [
+        510.0110168457031,
+        324.51849365234375,
+        521.4990234375,
+        337.7774963378906
+      ],
+      "drawingIndices": [
+        160,
+        161,
+        162,
+        163
+      ],
+      "anchor": {
+        "blockId": "block_41",
+        "blockIndex": 25,
+        "lineId": "line_41_3",
+        "spanIndex": 2,
+        "side": "after",
+        "sizePt": 10,
+        "gapPt": 0.309204,
+        "ownerSpanRef": {
+          "lineId": "line_41_3",
+          "spanIndex": 1
+        }
+      },
+      "metrics": {
+        "widthEm": 1.1488006591796875,
+        "heightEm": 1.3259002685546875,
+        "verticalAlignEm": 0.259649658203125,
+        "sourceAssetUrl": "/pages/page_033/source-dice-white-p33-160.svg",
+        "sourceAppearanceKey": "source-dice-white-p33-160-source-pdf"
+      },
+      "mask": {
+        "url": "/pages/page_033/inline-element-mask-000.png",
+        "bbox": [
+          509,
+          323.5,
+          522.5,
+          338.75
+        ]
+      },
+      "sourceRendering": "semantic-inline"
     },
     {
       "id": "p33-purple-003",
@@ -236,7 +379,8 @@
           446.5,
           339.75
         ]
-      }
+      },
+      "sourceRendering": "semantic-inline"
     },
     {
       "id": "p33-purple-004",
@@ -287,7 +431,53 @@
           480.75,
           368.4
         ]
-      }
+      },
+      "sourceRendering": "semantic-inline"
+    },
+    {
+      "symbolId": "dice.white",
+      "bbox": [
+        544.4155883789062,
+        354.00830078125,
+        555.9036254882812,
+        367.2673034667969
+      ],
+      "drawingIndices": [
+        168,
+        169,
+        170,
+        171
+      ],
+      "anchor": {
+        "blockId": "block_43",
+        "blockIndex": 26,
+        "lineId": "line_43_2",
+        "spanIndex": 2,
+        "side": "after",
+        "sizePt": 10,
+        "gapPt": 0.631531,
+        "ownerSpanRef": {
+          "lineId": "line_43_2",
+          "spanIndex": 1
+        }
+      },
+      "metrics": {
+        "widthEm": 1.1488037109375,
+        "heightEm": 1.3259002685546875,
+        "verticalAlignEm": 0.34169921875,
+        "sourceAssetUrl": "/pages/page_033/source-dice-white-p33-168.svg",
+        "sourceAppearanceKey": "source-dice-white-p33-168-source-pdf"
+      },
+      "mask": {
+        "url": "/pages/page_033/inline-element-mask-001.png",
+        "bbox": [
+          543.25,
+          353,
+          557,
+          368.25
+        ]
+      },
+      "sourceRendering": "semantic-inline"
     },
     {
       "id": "p33-purple-005",
@@ -338,7 +528,8 @@
           621.95,
           392.4
         ]
-      }
+      },
+      "sourceRendering": "semantic-inline"
     }
   ]
 }

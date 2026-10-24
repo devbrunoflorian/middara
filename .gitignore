@@ -45,6 +45,15 @@ apps/web/public/pages/page_*/*
 !apps/web/public/pages/page_*/fidelity_overlays.json
 !apps/web/public/pages/page_*/fidelity-overlay-component-*.png
 !apps/web/public/pages/page_*/fidelity-overlay-source-vector-*.svg
+# Exact PDF vectors reused as semantic inline symbols in p. 33 prose.
+!apps/web/public/pages/page_033/source-dice-purple-p33-casting.svg
+!apps/web/public/pages/page_033/source-dice-purple-p33-conviction.svg
+!apps/web/public/pages/page_033/source-dice-white-p33-160.svg
+!apps/web/public/pages/page_033/source-dice-white-p33-168.svg
+# Exact PDF vectors and CFF glyph outline remapped as semantic inline symbols on p.30.
+!apps/web/public/pages/page_030/source-shield-p30.svg
+!apps/web/public/pages/page_030/source-page-p30.svg
+!apps/web/public/pages/page_030/source-page-3-p30.svg
 # Exact PDF vector restoration for the editable p. 67 card label background.
 !apps/web/public/pages/page_067/per-encounter-pill.svg
 !apps/web/public/pages/page_100/fidelity-overlay-component-status-tag-pill.svg
