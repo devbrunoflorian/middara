@@ -1,0 +1,294 @@
+{
+  "proposalId": "p014-setting-up-intro",
+  "version": "1",
+  "title": "Preparação de Encontros — introdução da p. 14",
+  "page": 14,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+    "background": "314de6ab6c2195737f944d97749365898d035b06e49e9234342645692c0f5355",
+    "pageDom": "ad99d42ed0273a65f3b28b38224a36659688ec266b0fe911a0c97ddb389af8c1"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 1,
+    "priorReviewRecordsPreserved": 1,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationSpanKeys": [
+      "page_14_block_22__pt-BR"
+    ],
+    "finalTranslationWrites": 0
+  },
+  "scopeLimits": [
+    "This batch proposes only the introductory paragraph in source block_14. It does not alter the already approved page_14_block_22 heading or any neighboring page content.",
+    "Crawl Mode remains in English because the project glossary has no approved equivalent and saved usage conflicts; this term is explicitly pending editorial review.",
+    "The proposal remains separate from final translations until an explicit editorial approval is completed."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_14",
+      "sourceUnitId": null,
+      "spanKey": "page_14_block_0__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Whether playing the Crawl Mode or Adventure Mode, players will be instructed to set up Encounters. When setting up an Encounter, read the Special Rules of the Encounter and then go through the 4 Phases of setup as follows:",
+      "proposalText": "Seja no Crawl Mode ou no Modo Aventura, os jogadores receberão instruções para preparar Encontros. Ao preparar um Encontro, leiam as Regras Especiais de Encontro e sigam as 4 Fases de preparação a seguir:",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_14_block_0__pt-BR",
+        "bbox": [
+          86.17320251464844,
+          144.97418212890625,
+          402.4431457519531,
+          189.8741912841797
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Seja no Crawl Mode ou no Modo Aventura, os jogadores receberão instruções para preparar Encontros. Ao preparar um Encontro, leiam as Regras Especiais de Encontro e sigam as ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "4",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " Fases de preparação a seguir:",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_copyfit_v3_under_source_pdf_and_page_renderer",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "underCompositionJustification": "UNDER 3/4. A redação mantém as duas instruções e os termos da fonte, inclusive o numeral 4 em negrito. O original não contém quebras de parágrafo editoriais dentro deste bloco; as três linhas PT-BR cabem no frame original de quatro linhas e deixam apenas espaço interno livre, sem mover a Fase 1 nem alterar fonte, tamanho ou geometria. O leading usa multiplicador 1.1 (11 pt para fonte de 10 pt), conferindo com o intervalo de 11 pt entre as baselines do PDF-fonte. A forma Crawl Mode permanece explicitamente pendente de decisão terminológica humana.",
+      "pendingTerms": [
+        "Crawl Mode: retained in English because the project glossary has no approved PT-BR equivalent and saved usage conflicts."
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "UNDER",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 3,
+          "classification": "UNDER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 14,
+            "pdfDocumentPageIndex": 13,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17320251464844,
+              144.97418212890625,
+              402.4431457519531,
+              189.8741912841797
+            ],
+            "visualBaselinesPt": [
+              154.164,
+              165.164,
+              176.164,
+              187.164
+            ],
+            "spans": 6,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_14_block_0",
+            "readingMethod": "text rects of the review-highlighted unit",
+            "rangeRectFragments": 7,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              144.08,
+              152.98,
+              161.89
+            ],
+            "frameHeightCssPx": 36.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 3,
+          "classification": "UNDER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 14,
+            "pdfDocumentPageIndex": 13,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17320251464844,
+              144.97418212890625,
+              402.4431457519531,
+              189.8741912841797
+            ],
+            "visualBaselinesPt": [
+              154.164,
+              165.164,
+              176.164,
+              187.164
+            ],
+            "spans": 6,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_14_block_0",
+            "readingMethod": "text rects of the review-highlighted unit",
+            "rangeRectFragments": 7,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              352.63,
+              357.06,
+              361.5
+            ],
+            "frameHeightCssPx": 18.2
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 3,
+        "classification": "UNDER",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 14,
+          "pdfDocumentPageIndex": 13,
+          "language": "pt-BR",
+          "viewerZoom": "100%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            144.97418212890625,
+            402.4431457519531,
+            189.8741912841797
+          ],
+          "visualBaselinesPt": [
+            154.164,
+            165.164,
+            176.164,
+            187.164
+          ],
+          "spans": 6,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_14_block_0",
+          "readingMethod": "text rects of the review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            352.63,
+            357.06,
+            361.5
+          ],
+          "frameHeightCssPx": 18.2
+        },
+        "editorialStatus": "The updated glossary form was remeasured at 100% and 200%; both runs report 4 source rows / 3 PageRenderer rows (UNDER). Crawl Mode remains an editorial exception. Copyfit V3 is technical evidence only; editorial decision remains separate."
+      }
+    }
+  ],
+  "note": "A first text-only slice for page 14. It preserves the source font family, size, bold numeral, color, frame and page hierarchy; Copyfit V3 must be measured against the official PDF and live PageRenderer before technical validation.\n\n2026-10-22 update: page_14_block_0__pt-BR: The updated glossary form was remeasured at 100% and 200%; both runs report 4 source rows / 3 PageRenderer rows (UNDER). Crawl Mode remains an editorial exception. No Payload write or approval was made in this update.",
+  "revisions": [
+    {
+      "recordedAt": "2026-10-22",
+      "spanKey": "page_14_block_0__pt-BR",
+      "reason": "Align the locally proposed name for Special Rules of the Encounter with the approved glossary form; retain Crawl Mode as pending.",
+      "previousProposalText": "Seja no Crawl Mode ou no Modo Aventura, os jogadores receberão instruções para preparar Encontros. Ao preparar um Encontro, leiam as Regras Especiais do Encontro e sigam as 4 Fases de preparação a seguir:",
+      "previousPendingTerms": [
+        "Crawl Mode: retained in English because the project glossary has no approved PT-BR equivalent and saved usage conflicts."
+      ],
+      "previousCopyfitEvidence": {
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 3,
+        "copyfitClassification": "UNDER",
+        "copyfitMeasurement": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 3,
+          "classification": "UNDER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 14,
+            "pdfDocumentPageIndex": 13,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17320251464844,
+              144.97418212890625,
+              402.4431457519531,
+              189.8741912841797
+            ],
+            "visualBaselinesPt": [
+              154.164,
+              165.164,
+              176.164,
+              187.164
+            ],
+            "spans": 6,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_14_block_0",
+            "readingMethod": "text rects of the review-highlighted unit",
+            "rangeRectFragments": 7,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              144.08,
+              152.98,
+              161.89
+            ],
+            "frameHeightCssPx": 36.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
-  "status": "18_of_19_candidates_viewer_pdf_copyfit_v3_verified_one_whole_unit_diagnostic_blank_fixed_source_die_exception_human_review_pending_artwork_pending",
+  "status": "p033_conviction_label_dice_mapped_pending_live_validation",
   "page": 33,
-  "scope": "19 editable prose proposals. The full proposal for block_38 is preserved, but its whole label is blank only in the v5 diagnostic because “Conjuração:” collides with a purple source die that has no semantic placement. Three English card overlays remain unchanged; this is not a fully localized physical page.",
+  "scope": "19 editable prose proposals; block_38 Casting die and block_37 Conviction dice are now mapped to semantic source vectors. The block_37 Copyfit V3 receipt is pending live remeasurement after inserting both symbols. All editorial approvals remain pending; three English card overlays remain unchanged, so the physical page is not fully localized.",
   "candidates": [
     {
       "page": 33,
@@ -407,18 +407,45 @@
             "weight": 700,
             "style": "normal",
             "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "dice.purple",
+            "font": "Cinzel-Regular",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "dice.purple",
+            "font": "Cinzel-Regular",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolMetrics": {
+              "gapEm": 0.35
+            }
           }
         ],
         "textAlign": "left",
         "lineHeight": 1.1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "dice.purple"
+        ]
       },
       "sourceText": "Conviction:  ",
-      "proposalText": "Convicção:",
+      "proposalText": "Convicção:￼￼",
       "status": "proposal_pending_human_editorial_review",
       "pendingTerms": [],
-      "semanticSymbols": [],
+      "semanticSymbols": [
+        "dice.purple"
+      ],
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
@@ -427,14 +454,15 @@
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows, clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 33,
           "pdfDocumentPageIndex": 32,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -451,15 +479,132 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_33_block_21",
-          "readingMethod": "text rects of review-highlighted unit",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
           "rangeRectFragments": 1,
+          "renderedSymbolIds": [
+            "dice.purple",
+            "dice.purple"
+          ],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            188.75
+            188.73
           ],
           "frameHeightCssPx": 10.9
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "technicalSymbolMapping": {
+        "status": "source_vectors_mapped_to_semantic_inline_occurrences",
+        "sourceCandidateIds": [
+          "p033-v144-147-n4",
+          "p033-v148-151-n4"
+        ],
+        "sourceSymbolId": "dice.purple",
+        "editorialApproval": "pending"
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Convicção:",
+            "font": "Cinzel-Regular",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "dice.purple",
+            "font": "Cinzel-Regular",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "dice.purple",
+            "font": "Cinzel-Regular",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolMetrics": {
+              "gapEm": 0.35
+            }
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": [
+          "dice.purple"
+        ]
+      },
+      "diagnosticRendering": "The PT-BR proposal includes two source-mapped semantic purple dice after Convicção:. Both source vector occurrences are masked locally and retained as editable symbols; human editorial approval remains pending.",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows, clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 33,
+            "pdfDocumentPageIndex": 32,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              91.57789611816406,
+              200.09474182128906,
+              175.1083984375,
+              213.57540893554688
+            ],
+            "visualBaselinesPt": [
+              209.855
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_33_block_21",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [
+              "dice.purple",
+              "dice.purple"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              188.73
+            ],
+            "frameHeightCssPx": 10.9
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "technicalStatus": "verified_copyfit_v3_symbols_frame_viewer_pdf",
+      "technicalValidationEvidence": {
+        "status": "verified",
+        "copyfit": "EXACT 1 source visual row → 1 PageRenderer visual row",
+        "symbolId": "dice.purple",
+        "expectedSemanticOccurrences": 2,
+        "viewerAndEditor": "verified in the real Viewer; the Rich Block Editor shows the symbol diamond instead of the hamburger rail launcher",
+        "pdf": "isolated EN and PT-BR page exports passed PDF verification; proposal remains in a non-publishing snapshot",
+        "editorialApproval": "pending_human_editorial_review",
+        "payloadWrites": 0,
+        "verifiedOn": "2026-10-23"
       }
     },
     {
@@ -480,29 +625,65 @@
             "weight": 700,
             "style": "normal",
             "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "dice.purple",
+            "font": "Cinzel-Regular",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
           }
         ],
         "textAlign": "left",
         "lineHeight": 1.1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "dice.purple"
+        ]
       },
       "sourceText": "Casting: ",
-      "proposalText": "Conjuração:",
-      "status": "full_proposal_preserved_whole_unit_blank_in_v5_diagnostic_due_to_fixed_source_die_overlap",
+      "proposalText": "Conjuração: ￼",
+      "status": "proposal_pending_human_editorial_review",
       "pendingTerms": [
         "Casting → Conjuração: proposta local, pendente de revisão humana."
       ],
-      "semanticSymbols": [],
+      "semanticSymbols": [
+        "dice.purple"
+      ],
       "diagnosticData": {
         "schemaVersion": 2,
-        "segments": [],
+        "segments": [
+          {
+            "text": "Conjuração:",
+            "font": "Cinzel-Regular",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "dice.purple",
+            "font": "Cinzel-Regular",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
         "textAlign": "left",
         "lineHeight": 1.1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "dice.purple"
+        ]
       },
-      "diagnosticRendering": "The entire translated Casting label is blank only in this isolated diagnostic; the source purple die remains at its original background position.",
+      "diagnosticRendering": "The complete block_38 proposal “Conjuração: [[purple-die]]” is visible in one line. Its source vector is masked only at the occurrence and represented by one semantic editable token. Human editorial review remains pending.",
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
@@ -511,14 +692,15 @@
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows, clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 33,
           "pdfDocumentPageIndex": 32,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -534,9 +716,13 @@
           "visualRows": 1
         },
         "pageRendererEvidence": {
-          "spanKey": "page_33_block_22__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
+          "spanKey": "page_33_block_22",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
           "rangeRectFragments": 1,
+          "renderedSymbolIds": [
+            "dice.purple"
+          ],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
             203.06
@@ -544,6 +730,76 @@
           "frameHeightCssPx": 10.9
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "technicalSymbolMapping": {
+        "status": "verified_in_viewer_editor_and_diagnostic_pdf",
+        "sourceCandidateId": "p033-v152-155-n4",
+        "sourceSymbolId": "dice.purple",
+        "sourceDrawingIndices": [
+          152,
+          153,
+          154,
+          155
+        ],
+        "editorialApproval": "pending"
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows, clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 33,
+            "pdfDocumentPageIndex": 32,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              91.57890319824219,
+              217.7639923095703,
+              140.2989044189453,
+              231.24398803710938
+            ],
+            "visualBaselinesPt": [
+              227.524
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_33_block_22",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [
+              "dice.purple"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              203.06
+            ],
+            "frameHeightCssPx": 10.9
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "technicalStatus": "verified_copyfit_v3_symbols_frame_viewer_pdf",
+      "technicalValidationEvidence": {
+        "status": "verified",
+        "copyfit": "EXACT 1 source visual row → 1 PageRenderer visual row",
+        "symbolId": "dice.purple",
+        "expectedSemanticOccurrences": 1,
+        "viewerAndEditor": "verified in the real Viewer; the Rich Block Editor shows the symbol diamond instead of the hamburger rail launcher",
+        "pdf": "isolated EN and PT-BR page exports passed PDF verification; proposal remains in a non-publishing snapshot",
+        "editorialApproval": "pending_human_editorial_review",
+        "payloadWrites": 0,
+        "verifiedOn": "2026-10-23"
       }
     },
     {
@@ -1954,16 +2210,18 @@
     "candidateUnits": 19,
     "editorChecked": 1,
     "copyfitV3Checked": 18,
-    "wholeUnitDiagnosticBlanks": 1,
+    "wholeUnitDiagnosticBlanks": 0,
     "humanReviewCandidates": 19,
-    "technicalCompositionExceptions": 1,
+    "technicalCompositionExceptions": 0,
     "savedHumanRecords": 0,
-    "copyfitV3Status": "18_visible_candidates_pass_with_no_right_or_bottom_excess_over_0.05pt_one_whole_unit_blank",
+    "copyfitV3Status": "18_EXACT_0_UNDER_0_OVER_1_pending_symbol_inclusive_measurement; editorial_review_pending",
     "visibleCandidateUnitsInV5": 18,
     "editorVerifiedCandidates": 1,
     "copyfitV3PassedCandidates": 18,
     "copyfitV3FailedVisibleCandidates": 0,
-    "visibleInViewerAndPdfV5": 18
+    "visibleInViewerAndPdfV5": 18,
+    "visibleCandidateUnitsInV6": 19,
+    "visibleInViewerAndPdfV6": 19
   },
   "diagnosticExceptions": [
     {
@@ -1980,7 +2238,16 @@
       "sourceSymbol": "purple die printed immediately after the Casting label",
       "finding": "“Conjuração:” is wider than the English “Casting:” source label and visibly collides with the fixed purple die in the v3 Viewer/PDF raster.",
       "diagnosticTreatment": "Keep the entire block_38 translation blank in the v5 Viewer/PDF snapshot. Preserve the complete proposal in this candidate record. Leave the source die in the original background position.",
-      "requiredAction": "Trace the source die as a semantic placement or approve a shorter label that fits before it; then rerun Viewer, Copyfit V3, and PDF review. Do not persist the proposal while the exception is open."
+      "requiredAction": "Trace the source die as a semantic placement or approve a shorter label that fits before it; then rerun Viewer, Copyfit V3, and PDF review. Do not persist the proposal while the exception is open.",
+      "status": "resolved_technical_pending_human_review",
+      "resolution": "Mapped official PDF drawing indices 152–155 to one dice.purple inline token; widened only line_38_0.availableWidth to the measured safe corridor within the same beige strip. Viewer, editor token round-trip, combined text+symbol row measurement, and one-page PDF v6 verified. Proposal remains editorially pending.",
+      "evidence": [
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/asset-extraction-receipt.json",
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/integration-receipt.json",
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/corridor-receipt.json",
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/runtime-proof.json",
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/pdf-export-verification-v6.json"
+      ]
     }
   ],
   "version": 5,
@@ -2000,7 +2267,27 @@
     ],
     "payloadWrites": 0,
     "canonicalChangesDuringV5": 0,
-    "englishArtworkOverlays": 3
+    "englishArtworkOverlays": 3,
+    "latestDiagnosticExport": {
+      "version": "v6 isolated one-page diagnostic",
+      "viewer": "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/pdf-viewer-v6.png",
+      "printScreenshot": "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/pdf-print-v6.png",
+      "pdf": "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/page-033-pt-BR-casting-die-v6.pdf",
+      "pdfRaster": "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/pdf-render-v6.png",
+      "exportMetrics": "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/pdf-metrics-v6.json",
+      "runtimeProof": "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/runtime-proof.json",
+      "pdfVerificationReceipt": "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/pdf-export-verification-v6.json",
+      "visibleCandidateCount": 19,
+      "copyfitV3ClassificationSummary": {
+        "EXACT": 18,
+        "UNDER": 0,
+        "OVER": 0,
+        "PENDING_MEASUREMENT": 1
+      },
+      "diagnosticBlankSpanKeys": [],
+      "payloadWrites": 0,
+      "status": "Technical diagnostic only; one symbol-inclusive Copyfit measurement remains pending. No proposal was approved or published."
+    }
   },
   "revisionHistory": [
     {
@@ -2021,6 +2308,35 @@
         "Shortened the SP-cost explanation while retaining the red-dot key and zero-cost/other-condition cases.",
         "Rephrased the upgrade limits while retaining both caps and the choice rule."
       ]
+    },
+    {
+      "date": "2026-10-23",
+      "change": "Completed the technical mapping of the fixed purple die after block_38 “Casting:” as one semantic dice.purple token. Widened only the line corridor inside the same beige strip; retained “Conjuração:” and kept editorial approval pending.",
+      "evidence": [
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/asset-extraction-receipt.json",
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/integration-receipt.json",
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/corridor-receipt.json",
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/runtime-proof.json",
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/pdf-export-verification-v6.json",
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/source-visual-diff.json"
+      ],
+      "status": "Technical mapping, editor token round-trip, Copyfit V3 EXACT and isolated PDF verified; human editorial approval remains pending.",
+      "from": "v5"
+    },
+    {
+      "date": "2026-10-23",
+      "change": "Mapped both purple dice printed after the block_37 Conviction label to semantic dice.purple occurrences and added them to the existing PT-BR proposal. Preserved the label wording and invalidated the previous text-only Copyfit receipt until live symbol-inclusive measurement.",
+      "evidence": [
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-conviction-pair/source-occurrences.json",
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p033-conviction-pair/asset-extraction-receipt.json"
+      ],
+      "status": "technical mapping in progress; Copyfit V3 and human editorial approval remain separate"
     }
-  ]
+  ],
+  "copyfitV3ClassificationSummary": {
+    "EXACT": 18,
+    "UNDER": 0,
+    "OVER": 0,
+    "PENDING_MEASUREMENT": 1
+  }
 }

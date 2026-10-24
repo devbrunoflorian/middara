@@ -19,6 +19,18 @@ DOM_PATH = FOLDER / "page_101_dom.json"
 ROWS_PATH = FOLDER / "contents_rows.json"
 BACKGROUND_PATH = FOLDER / "background.webp"
 REF_RE = re.compile(r"^\d+(?:\s*[-,;]\s*\d+)*$")
+INLINE_LABELS = {
+    ("block_9", "line_9_278"): ("Double-Tag Items", "27,92"),
+    ("block_9", "line_9_335"): ("Ending all Actions and Abilities", "48,60"),
+    ("block_10", "line_10_214"): ("Materials", "93,57"),
+}
+UNNUMBERED_LABELS = {
+    ("block_9", "line_9_214"): "Values",
+    ("block_10", "line_10_51"): "Gaining",
+    ("block_10", "line_10_276"): "Phases",
+    ("block_10", "line_10_329"): "Removing",
+    ("block_11", "line_11_190"): "Upgrades",
+}
 
 
 def rgb_crop_without_leader(background: Image.Image, bbox: list[float], sx: float, sy: float,
@@ -88,6 +100,37 @@ def drawing_leaders(page: fitz.Page) -> list[dict]:
     return result
 
 
+def line_visible_chars(raw_lines: list[dict], line: dict) -> list[dict]:
+    box = line["bbox"]
+    chars = raw_chars_for_line(raw_lines, (box[1] + box[3]) / 2, box[0] - 1, box[2] + 1)
+    return sorted(chars, key=lambda char: (char["bbox"][0], char["bbox"][1]))
+
+
+def find_row_leader(leaders: list[dict], center: float, ref_x: float | None = None,
+                    after_x: float | None = None) -> dict | None:
+    candidates = leaders
+    if after_x is not None:
+        candidates = [leader for leader in candidates if leader["x0"] >= after_x - 2 and leader["x1"] - leader["x0"] >= 30]
+    matches = sorted(candidates, key=lambda leader: abs(leader["y"] - center)
+                     + (abs(leader["x1"] - ref_x) if ref_x is not None else 0))
+    if not matches or abs(matches[0]["y"] - center) > 5:
+        return None
+    if ref_x is not None and abs(matches[0]["x1"] - ref_x) > 1.25:
+        return None
+    return matches[0]
+
+
+def leader_record(leader: dict) -> dict:
+    return {
+        "bbox": [leader["x0"], leader["y"] - leader["widthPt"] / 2,
+                 leader["x1"], leader["y"] + leader["widthPt"] / 2],
+        "style": "solid",
+        "periodPt": 0,
+        "widthPt": leader["widthPt"],
+        "yPt": leader["y"],
+    }
+
+
 def build(apply: bool, verify: bool = False) -> dict:
     dom = json.loads(DOM_PATH.read_text(encoding="utf-8"))
     source_pdf = fitz.open(PDF)
@@ -131,8 +174,7 @@ def build(apply: bool, verify: bool = False) -> dict:
             ref_x0 = min(char["bbox"][0] for char in ref_chars)
             ref_x1 = max(char["bbox"][2] for char in ref_chars)
             center = (label_box[1] + label_box[3]) / 2
-            matches = sorted(leaders, key=lambda line: abs(line["y"] - center) + abs(line["x1"] - ref_x0))
-            leader = matches[0] if matches and abs(matches[0]["y"] - center) <= 5 and abs(matches[0]["x1"] - ref_x0) <= 1.25 else None
+            leader = find_row_leader(leaders, center, ref_x=ref_x0)
             if not leader:
                 failures.append(f"p.101 block {block_index} y={y_center}: matching solid leader missing")
                 continue
@@ -158,14 +200,7 @@ def build(apply: bool, verify: bool = False) -> dict:
                 "numberLineId": number_line["id"],
                 "numberBBox": [ref_x0, number_box[1], ref_x1, number_box[3]],
                 "targetPage": int(re.search(r"\d+", number_text).group()),
-                "leader": {
-                    "bbox": [leader["x0"], leader["y"] - leader["widthPt"] / 2,
-                             leader["x1"], leader["y"] + leader["widthPt"] / 2],
-                    "style": "solid",
-                    "periodPt": 0,
-                    "widthPt": leader["widthPt"],
-                    "yPt": leader["y"],
-                },
+                "leader": leader_record(leader),
                 "mask": {
                     "url": f"/pages/page_101/{mask_name}",
                     "bbox": mask_bbox,
@@ -177,10 +212,125 @@ def build(apply: bool, verify: bool = False) -> dict:
             masks.append((row, mask_name, leader))
             row_in_block += 1
 
+    # Some entries are printed on one source line instead of a label line plus
+    # a page-number line. Append them after the original 189 IDs so none of the
+    # stable row keys above move when this extraction rule is improved.
+    blocks_by_id = {block["id"]: (index, block) for index, block in enumerate(dom["blocks"][:3])}
+    lines_by_key = {
+        (block["id"], line["id"]): line
+        for block in dom["blocks"][:3] for line in block.get("lines", [])
+    }
+    for (block_id, line_id), (expected_label, expected_reference) in INLINE_LABELS.items():
+        line = lines_by_key.get((block_id, line_id))
+        block_index, block = blocks_by_id[block_id]
+        if line is None:
+            failures.append(f"p.101 inline index row missing {block_id}/{line_id}")
+            continue
+        text = text_of_line(line)
+        match = re.fullmatch(r"(.+?)\s+(\d+(?:\s*[-,;]\s*\d+)*)", text)
+        if not match or (match.group(1), re.sub(r"\s+", "", match.group(2))) != (
+            expected_label, re.sub(r"\s+", "", expected_reference)
+        ):
+            failures.append(f"p.101 inline index source changed at {line_id}: {text!r}")
+            continue
+        label_text, reference_text = match.group(1), match.group(2)
+        visible_chars = line_visible_chars(raw_lines, line)
+        ref_chars = visible_chars[-len(re.sub(r"\s+", "", reference_text)):]
+        label_chars = visible_chars[:-len(ref_chars)]
+        if ("".join(char["c"] for char in label_chars) != re.sub(r"\s+", "", label_text)
+                or "".join(char["c"] for char in ref_chars) != re.sub(r"\s+", "", reference_text)):
+            failures.append(f"p.101 inline label/reference glyph split failed at {line_id}")
+            continue
+        label_box = line["bbox"]
+        label_x0 = min(char["bbox"][0] for char in label_chars)
+        label_x1 = max(char["bbox"][2] for char in label_chars)
+        ref_x0 = min(char["bbox"][0] for char in ref_chars)
+        ref_x1 = max(char["bbox"][2] for char in ref_chars)
+        center = (label_box[1] + label_box[3]) / 2
+        leader = find_row_leader(leaders, center, ref_x=ref_x0)
+        if not leader:
+            failures.append(f"p.101 inline index leader missing at {line_id}")
+            continue
+
+        ordinal = len(rows)
+        mask_bbox = [max(0, label_x0 - 0.4), label_box[1] - 0.2, max(label_x0 + 1, ref_x0 - 0.2), label_box[3] + 0.2]
+        mask_name = f"contents-paper-index-{ordinal:03d}.png"
+        row = {
+            "id": f"index-{ordinal:03d}", "blockId": block_id, "blockIndex": block_index,
+            "lineId": line_id, "keyStem": f"page_101_unit_p101-index-{ordinal:03d}",
+            "legacyCombinedKeyStems": [], "overlaySource": True,
+            "labelBBox": [label_x0, label_box[1], label_x1, label_box[3]],
+            "numberLineId": line_id,
+            "numberBBox": [ref_x0, label_box[1], ref_x1, label_box[3]],
+            "labelWidthPt": max(0, ref_x0 - label_x0 - 3),
+            "targetPage": int(re.match(r"\d+", reference_text).group()),
+            "leader": leader_record(leader),
+            "mask": {"url": f"/pages/page_101/{mask_name}", "bbox": mask_bbox},
+            "sourceText": label_text, "sourceReference": reference_text,
+        }
+        rows.append(row)
+        masks.append((row, mask_name, leader))
+
+    # These index headings have no numeric reference. Preserve their source
+    # line baselines and give translation text the remaining column corridor.
+    for (block_id, line_id), expected_text in UNNUMBERED_LABELS.items():
+        line = lines_by_key.get((block_id, line_id))
+        block_index, block = blocks_by_id[block_id]
+        if line is None or text_of_line(line).strip() != expected_text:
+            failures.append(f"p.101 unnumbered index heading changed or missing: {block_id}/{line_id}")
+            continue
+        visible_chars = line_visible_chars(raw_lines, line)
+        if "".join(char["c"] for char in visible_chars) != expected_text.replace(" ", ""):
+            failures.append(f"p.101 unnumbered index glyph metrics missing at {line_id}")
+            continue
+        label_box = line["bbox"]
+        label_x0 = min(char["bbox"][0] for char in visible_chars)
+        label_x1 = max(char["bbox"][2] for char in visible_chars)
+        center = (label_box[1] + label_box[3]) / 2
+        # “Values” has a source leader leading to a nonnumeric outlined “Back”
+        # artifact. Rebuild only the line and retain “Back” as source evidence.
+        leader = find_row_leader(leaders, center, after_x=label_x1) if line_id == "line_9_214" else None
+        if line_id == "line_9_214" and not leader:
+            failures.append("p.101 Values source leader missing before the nonnumeric Back artifact")
+            continue
+        reference_line = lines_by_key.get((block_id, "line_9_217")) if line_id == "line_9_214" else None
+        reference_chars = line_visible_chars(raw_lines, reference_line) if reference_line else []
+        if line_id == "line_9_214" and (not reference_line or text_of_line(reference_line).strip() != "Back" or not reference_chars):
+            failures.append("p.101 Values nonnumeric source reference 'Back' changed or is missing")
+            continue
+        column_right = max(candidate["bbox"][2] for candidate in block.get("lines", []) if candidate.get("bbox"))
+        corridor_right = leader["x1"] if leader else column_right
+        ordinal = len(rows)
+        mask_bbox = [max(0, label_x0 - 0.4), label_box[1] - 0.2,
+                     max(label_x0 + 1, corridor_right - 0.2 if leader else label_x1 + 0.4), label_box[3] + 0.2]
+        mask_name = f"contents-paper-index-{ordinal:03d}.png"
+        row = {
+            "id": f"index-{ordinal:03d}", "blockId": block_id, "blockIndex": block_index,
+            "lineId": line_id, "keyStem": f"page_101_unit_p101-index-{ordinal:03d}",
+            "legacyCombinedKeyStems": [], "overlaySource": True,
+            "labelBBox": [label_x0, label_box[1], label_x1, label_box[3]],
+            "labelWidthPt": max(0, corridor_right - label_x0 - 3),
+            "leader": leader_record(leader) if leader else {
+                "bbox": [label_x1, label_box[1], label_x1, label_box[3]],
+                "style": "none", "periodPt": 0, "widthPt": 0, "yPt": center,
+            },
+            "mask": {"url": f"/pages/page_101/{mask_name}", "bbox": mask_bbox},
+            "sourceText": expected_text,
+        }
+        if line_id == "line_9_214":
+            row["numberLineId"] = reference_line["id"]
+            row["numberBBox"] = [min(char["bbox"][0] for char in reference_chars),
+                                 reference_line["bbox"][1],
+                                 max(char["bbox"][2] for char in reference_chars),
+                                 reference_line["bbox"][3]]
+            row["sourceReference"] = "Back"
+        rows.append(row)
+        masks.append((row, mask_name, leader))
+
     if failures:
         raise RuntimeError("\n".join(failures))
-    if len(rows) < 180:
-        raise RuntimeError(f"Expected the index entries across three columns; found only {len(rows)}.")
+    if len(rows) != 197:
+        raise RuntimeError(f"Expected 189 existing plus eight newly identified index rows; found {len(rows)}.")
     payload = {"schemaVersion": 1, "overlaySource": True, "rows": rows}
     generated_masks = {}
     for row, mask_name, leader in masks:
@@ -189,13 +339,30 @@ def build(apply: bool, verify: bool = False) -> dict:
 
     if apply or verify:
         for destination, patch in generated_masks.items():
-            if apply:
-                patch.save(destination)
-            else:
+            if destination.exists():
                 with Image.open(destination) as saved:
                     if saved.size != patch.size or ImageChops.difference(saved.convert("RGB"), patch).getbbox() is not None:
-                        raise AssertionError(f"Mask differs from source background: {destination}")
+                        raise AssertionError(f"Existing mask differs from regenerated source background; refusing overwrite: {destination}")
+            elif apply:
+                patch.save(destination)
+            else:
+                raise AssertionError(f"Missing source-derived mask: {destination}")
         if apply:
+            if ROWS_PATH.exists():
+                saved = json.loads(ROWS_PATH.read_text(encoding="utf-8"))
+                old_rows = saved.get("rows", [])
+                if old_rows[:189] != rows[:189]:
+                    mismatch = next((index for index, (old, new) in enumerate(zip(old_rows[:189], rows[:189])) if old != new), None)
+                    raise AssertionError(f"An original stable row changed at row {mismatch}; refusing to rewrite it.")
+                for index, (old, new) in enumerate(zip(old_rows[189:], rows[189:]), start=189):
+                    if old == new:
+                        continue
+                    # Repair only the Values row produced by this run's first
+                    # extraction pass, before its separate “Back” line was mapped.
+                    if (index == 192 and old.get("id") == "index-192" and old.get("lineId") == "line_9_214"
+                            and old.get("sourceReference") == "Back" and "numberLineId" not in old):
+                        continue
+                    raise AssertionError(f"Generated appended row {index} differs; refusing to overwrite it.")
             ROWS_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         else:
             saved = json.loads(ROWS_PATH.read_text(encoding="utf-8"))
@@ -205,6 +372,7 @@ def build(apply: bool, verify: bool = False) -> dict:
     result = {
         "rows": len(rows),
         "solidLeadersMatched": len(masks),
+        "newRows": len(INLINE_LABELS) + len(UNNUMBERED_LABELS),
         "uniqueKeys": len({row["keyStem"] for row in rows}),
         "masks": len(generated_masks),
         "mode": "verify" if verify else "apply" if apply else "dry-run",

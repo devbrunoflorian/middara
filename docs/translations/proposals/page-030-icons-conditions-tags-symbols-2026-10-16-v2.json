@@ -9,26 +9,26 @@
   "sourceDomSha256": "ac463f4dbc6e51976d24c92fac3eb4c439b352666cff05628a701d7675283e6d",
   "backgroundSha256": "39ad39da6d0cad66d5e6b9eea0174e517880beff110d0a7f186326f9f7368237",
   "inlineElementsSha256": "f5c9a093a53cb67a8da8cb88022bf4d4531e66e760c8b292465eab82a5079b58",
-  "status": "18_of_19_candidates_verified_in_viewer_copyfit_pdf_all_19_editor_fields_checked_one_whole_unit_diagnostic_blank_source_symbol_composition_exception_human_review_pending",
+  "status": "p030_inline_symbol_mapping_and_review_preview_resolved; copyfit_v3_exact; human_editorial_review_pending",
   "counts": {
     "candidates": 19,
-    "verifiedInViewer": 18,
+    "verifiedInViewer": 19,
     "verifiedInEditor": 19,
-    "verifiedInCopyfit": 18,
+    "verifiedInCopyfit": 19,
     "verifiedInPdf": 18,
-    "diagnosticBlankUnits": 1,
+    "diagnosticBlankUnits": 0,
     "preservedHumanRecords": 0,
     "artworkExceptions": 0,
-    "technicalExceptions": 1,
+    "technicalExceptions": 0,
     "humanReviewCandidates": 19
   },
   "sourceReview": {
-    "status": "official_pdf_and_english_viewer_compared_2026-10-16",
+    "status": "official_pdf_paint_order_and_english_viewer_symbol_mapping_verified_2026-10-23",
     "sourcePdfPageCount": 102,
     "officialSourceRaster": "output/proofs/translation-readiness-2026-10-16/p030-icons-conditions-tags-symbols-proposal-v1/source-official-p030.png",
     "englishViewerScreenshot": "output/proofs/translation-readiness-2026-10-16/p030-icons-conditions-tags-symbols-proposal-v1/viewer-en-source-v1.png",
     "viewerFinding": "PDF and English Viewer agree on title, two columns, headings, the four-symbol artwork panel, inline example glyphs, IMPORTANT callout and background art. The title is editable despite suspectedGhost metadata and previously passed a one-line PT preview.",
-    "sourceSymbolFinding": "The prose example block_41 contains source Book/3 and Shield artwork that has no semantic placements. The existing symbol audit blocks p030-v116-117-n2 because combat.page contains the printed number 3. This candidate is blank as a whole in the PT diagnostic until composition/anchoring is resolved.",
+    "sourceSymbolFinding": "The p.30 block_41 example contains three source occurrences: p030-v111-113-n3 (combat.shield), p030-v114-115-n2 (combat.page), and p030-v116-117-n2 (combat.page.3). The third combines vector drawings 116–117 with the separate embedded CFF glyph three; only that source glyph is covered. Semantic EN Viewer and PT-BR review preview expose all three symbols. Copyfit V3 measured 5/5 EXACT in the live PageRenderer at 200%; review-panel contrast was corrected so source-black symbols remain visible on the dark card. Human editorial review remains pending.",
     "payloadTranslations": 0,
     "payloadLayoutFrames": 0
   },
@@ -2503,16 +2503,18 @@
     {
       "sourceBlockId": "block_41",
       "sourceUnitIds": [
+        "p030-v111-113-n3",
+        "p030-v114-115-n2",
         "p030-v116-117-n2"
       ],
       "blockIndex": 17,
       "sourceText": "Some Abilities that use Symbols as a Condition might have multiple Symbols printed. ( ) In these cases, the Ability would cost 1 Book and 1 Shield to use once. In other cases, there may be too many to fit on the card, so instead they will be printed with numbers in them. For example, ( 3 ) means that an Adventurer must spend 3 Books to use that Ability.",
-      "proposalText": "Algumas Habilidades que usam Símbolos como Condição podem ter vários Símbolos impressos. ⟦preservar aqui os glifos originais de Escudo e Livro com o número 3⟧ Nesses casos, usar a Habilidade uma vez custa 1 Livro e 1 Escudo. Em outros casos, pode haver Símbolos demais para caber na carta; por isso, eles são impressos com números. Por exemplo, (3) significa que um Aventureiro deve gastar 3 Livros para usar essa Habilidade.",
-      "proposalMarkup": "Algumas Habilidades que usam Símbolos como Condição podem ter vários Símbolos impressos. ⟦preservar aqui os glifos originais de Escudo e Livro com o número 3⟧ Nesses casos, usar a Habilidade uma vez custa 1 Livro e 1 Escudo. Em outros casos, pode haver Símbolos demais para caber na carta; por isso, eles são impressos com números. Por exemplo, (3) significa que um Aventureiro deve gastar 3 Livros para usar essa Habilidade.",
+      "proposalText": "Algumas Habilidades que usam Símbolos como Condição podem exibir vários. ⟦Escudo de defesa⟧ ⟦Símbolo de combate em forma de folha⟧ Nesses casos, usar a Habilidade uma vez custa 1 Livro e 1 Escudo. Quando houver Símbolos demais para caber na carta, eles serão impressos com números. Por exemplo, ( ⟦Símbolo de página de combate marcado com 3⟧ ) significa que um Aventureiro deve gastar 3 Livros para usar essa Habilidade.",
+      "proposalMarkup": "Algumas Habilidades que usam Símbolos como Condição podem exibir vários. ( [[symbol:combat.shield]] [[symbol:combat.page]] ) Nesses casos, usar a Habilidade uma vez custa 1 Livro e 1 Escudo. Quando houver Símbolos demais para caber na carta, eles serão impressos com números. Por exemplo, ( [[symbol:combat.page.3]] ) significa que um Aventureiro deve gastar 3 Livros para usar essa Habilidade.",
       "sourceSymbolsPreserved": [
-        "source artwork: shield icon",
-        "source artwork: book icon with printed 3",
-        "bold numeral 3"
+        "combat.shield",
+        "combat.page",
+        "combat.page.3"
       ],
       "spanKey": "page_30_block_17",
       "legacyBlockSpanKey": "page_30_block_17__pt-BR",
@@ -2528,26 +2530,314 @@
             "weight": 400,
             "style": "normal",
             "disableLigatures": true,
-            "text": "Algumas Habilidades que usam Símbolos como Condição podem ter vários Símbolos impressos. ⟦preservar aqui os glifos originais de Escudo e Livro com o número 3⟧ Nesses casos, usar a Habilidade uma vez custa 1 Livro e 1 Escudo. Em outros casos, pode haver Símbolos demais para caber na carta; por isso, eles são impressos com números. Por exemplo, (3) significa que um Aventureiro deve gastar 3 Livros para usar essa Habilidade."
+            "text": "Algumas Habilidades que usam Símbolos como Condição podem exibir vários. ( "
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "combat.shield",
+            "text": "￼",
+            "symbolMetrics": {
+              "widthEm": 1.2694000244140624,
+              "heightEm": 1.325201416015625,
+              "verticalAlignEm": 0.3,
+              "advanceEm": 1.2694000244140624,
+              "sourceAssetUrl": "/pages/page_030/source-shield-p30.svg",
+              "sourceAppearanceKey": "p30-inline-shield-vector-v1"
+            }
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " "
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "combat.page",
+            "text": "￼",
+            "symbolMetrics": {
+              "widthEm": 1.2240997314453126,
+              "heightEm": 1.322100830078125,
+              "verticalAlignEm": 0.3,
+              "advanceEm": 1.2240997314453126,
+              "sourceAssetUrl": "/pages/page_030/source-page-p30.svg",
+              "sourceAppearanceKey": "p30-inline-book-vector-v1"
+            }
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " ) Nesses casos, usar a Habilidade uma vez custa "
+          },
+          {
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "1"
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " Livro e "
+          },
+          {
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "1"
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " Escudo. Quando houver Símbolos demais para caber na carta, eles serão impressos com números. Por exemplo, ( "
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "combat.page.3",
+            "text": "￼",
+            "symbolMetrics": {
+              "widthEm": 1.2239990234375,
+              "heightEm": 1.322100830078125,
+              "verticalAlignEm": 0.3,
+              "advanceEm": 1.2239990234375,
+              "sourceAssetUrl": "/pages/page_030/source-page-3-p30.svg",
+              "sourceAppearanceKey": "p30-inline-book-3-vector-glyph-v1"
+            }
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " ) significa que um Aventureiro deve gastar "
+          },
+          {
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "3"
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " Livros para usar essa Habilidade."
           }
         ],
         "textAlign": "left",
         "lineHeight": 1.1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "combat.shield",
+          "combat.page",
+          "combat.page.3"
+        ]
       },
       "diagnosticData": {
         "schemaVersion": 2,
-        "segments": [],
+        "segments": [
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "Algumas Habilidades que usam Símbolos como Condição podem ter vários Símbolos impressos. ( "
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "combat.shield",
+            "text": "￼",
+            "symbolMetrics": {
+              "widthEm": 1.2694000244140624,
+              "heightEm": 1.325201416015625,
+              "verticalAlignEm": 0.3,
+              "advanceEm": 1.2694000244140624,
+              "sourceAssetUrl": "/pages/page_030/source-shield-p30.svg",
+              "sourceAppearanceKey": "p30-inline-shield-vector-v1"
+            }
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " "
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "combat.page",
+            "text": "￼",
+            "symbolMetrics": {
+              "widthEm": 1.2240997314453126,
+              "heightEm": 1.322100830078125,
+              "verticalAlignEm": 0.3,
+              "advanceEm": 1.2240997314453126,
+              "sourceAssetUrl": "/pages/page_030/source-page-p30.svg",
+              "sourceAppearanceKey": "p30-inline-book-vector-v1"
+            }
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " ) Nesses casos, usar a Habilidade uma vez custa "
+          },
+          {
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "1"
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " Livro e "
+          },
+          {
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "1"
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " Escudo. Em outros casos, pode haver Símbolos demais para caber na carta; por isso, eles são impressos com números. Por exemplo, ( "
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "combat.page.3",
+            "text": "￼",
+            "symbolMetrics": {
+              "widthEm": 1.2239990234375,
+              "heightEm": 1.322100830078125,
+              "verticalAlignEm": 0.3,
+              "advanceEm": 1.2239990234375,
+              "sourceAssetUrl": "/pages/page_030/source-page-3-p30.svg",
+              "sourceAppearanceKey": "p30-inline-book-3-vector-glyph-v1"
+            }
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " ) significa que um Aventureiro deve gastar "
+          },
+          {
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "3"
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": " Livros para usar essa Habilidade."
+          }
+        ],
         "textAlign": "left",
         "lineHeight": 1.1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "combat.shield",
+          "combat.page",
+          "combat.page.3"
+        ]
       },
-      "status": "full_proposal_editor_verified_whole_unit_blank_in_viewer_pdf_due_to_source_symbol_composition_exception",
-      "technicalStatus": "editor_checked_diagnostic_only_source_symbols_unmapped",
+      "status": "verified_in_viewer_editor_copyfit_v3_exact_human_review_pending",
+      "technicalStatus": "verified_source_vector_cleanup_semantic_mapping_and_copyfit_v3_exact",
       "editorialStatus": "pending_human_review",
-      "diagnosticRendering": "whole_unit_blank_due_to_unresolved_source_symbol_composition_exception",
+      "diagnosticRendering": "Source vector mapping is resolved. Keep the candidate available in the review panel; apply the diagnostic blank only if the new live Copyfit V3 result is OVER.",
       "sourceLineCount": 7,
       "sourceBboxes": [
         [
@@ -2603,13 +2893,66 @@
         "lineHeight": 1.1
       },
       "pendingTerms": [
-        "O exemplo tem glifos-fonte de Escudo e Livro/3 sem placements semânticos. A identidade da composição combat.page com o número 3 está bloqueada no ledger; o reflow PT exige preservar e ancorar esses glifos.",
-        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+        "The source has mixed bold formatting that still needs visual human review in the Editor."
       ],
       "sourcePdfVisualLineCount": 5,
       "pageRendererVisualLineCount": 5,
       "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows, clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 30,
+          "pdfDocumentPageIndex": 29,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8388671875,
+            391.5548095703125,
+            732.31884765625,
+            451.4541015625
+          ],
+          "visualBaselinesPt": [
+            400.745,
+            412.744,
+            424.744,
+            435.805,
+            448.744
+          ],
+          "spans": 14,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_30_block_17",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 16,
+          "renderedSymbolIds": [
+            "combat.shield",
+            "combat.page",
+            "combat.page.3"
+          ],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            343.91,
+            352.81,
+            361.72,
+            370.63,
+            379.53
+          ],
+          "frameHeightCssPx": 48.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementBeforeSymbolRecovery": {
         "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 5,
         "pageRendererVisualLineCount": 5,
@@ -2655,6 +2998,62 @@
           "frameHeightCssPx": 48.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows, clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 30,
+            "pdfDocumentPageIndex": 29,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              415.8388671875,
+              391.5548095703125,
+              732.31884765625,
+              451.4541015625
+            ],
+            "visualBaselinesPt": [
+              400.745,
+              412.744,
+              424.744,
+              435.805,
+              448.744
+            ],
+            "spans": 14,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_30_block_17",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 16,
+            "renderedSymbolIds": [
+              "combat.shield",
+              "combat.page",
+              "combat.page.3"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              343.91,
+              352.81,
+              361.72,
+              370.63,
+              379.53
+            ],
+            "frameHeightCssPx": 48.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     },
     {
@@ -2922,13 +3321,25 @@
       ],
       "classification": "unmapped_inline_source_symbol_composition",
       "sourceSymbols": [
-        "shield",
-        "book icon with printed 3",
-        "bold numeric 3"
+        "p030-v111-113-n3 → combat.shield (drawings 111–113)",
+        "p030-v114-115-n2 → combat.page (drawings 114–115)",
+        "p030-v116-117-n2 → combat.page.3 (drawings 116–117 + CFF glyph three)"
       ],
       "diagnosticTextTreatment": "The entire block_41 is blank only in the PT-BR Viewer/PDF diagnostic. Full PT prose and source-symbol placement notes remain in the candidate JSON/Markdown and were inspected in the read-only Editor. Source glyphs remain visible in their original background positions.",
-      "canonicalRepairStatus": "pending occurrence identity and placement review; canonical sidecar unchanged",
-      "userVisibleImpact": "The translated example cannot be certified until the Shield/Book glyphs and their source spacing reflow with the text without duplication or loss."
+      "canonicalRepairStatus": "resolved in page sidecar/registry/proposal on 2026-10-23; Copyfit V3 remeasurement and human editorial review remain pending",
+      "userVisibleImpact": "The old whole-unit diagnostic blank was caused by unmapped source symbols and is no longer required. The candidate remains unapproved until its live PageRenderer copyfit and human editorial review are complete.",
+      "sourceUnitIds": [
+        "p030-v111-113-n3",
+        "p030-v114-115-n2",
+        "p030-v116-117-n2"
+      ],
+      "status": "resolved",
+      "resolution": "The source vector family is represented by three semantic inline occurrences with occurrence-specific provenance. The original numeral 3 is covered only for the composite icon; the numeric 3 in the surrounding cost sentence remains text.",
+      "evidence": [
+        "output/proofs/source-symbol-inline-focus-2026-10-23/p030-family/manifest.json",
+        "apps/web/public/pages/page_030/inline_elements.json",
+        "apps/web/src/symbols/sourceSymbols.json"
+      ]
     }
   ],
   "unchangedSourceContent": [

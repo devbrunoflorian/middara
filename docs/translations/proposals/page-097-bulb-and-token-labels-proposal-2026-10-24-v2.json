@@ -1,0 +1,958 @@
+{
+  "proposalId": "p097-bulb-and-token-labels",
+  "version": "2",
+  "title": "Fichas da Tabela 9 e regras da Bulb, p. 97 (v2)",
+  "page": 97,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "bbd5e440e798d1817d937f6da3504d7230bed1a810ccbbf0a0e5aa2244a77c1d"
+  },
+  "counts": {
+    "candidates": 6,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "Candidatos provisórios; nenhuma escrita no Payload ou aprovação.",
+    "Os nomes de componentes/token sem decisão no glossário ficam marcados para revisão humana.",
+    "A redação ambígua da referência à carta Fragor/Conduit fica explicitamente pendente.",
+    "O lote cobre a regra Bulb, o texto introdutório de Plank e rótulos curtos; os demais blocos da p.97 continuam sem tradução."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 3,
+      "sourceBlockId": "block_6",
+      "sourceUnitId": null,
+      "spanKey": "page_97_block_3__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Bulb",
+      "proposalText": "Bulbo",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_97_block_3__pt-BR",
+        "bbox": [
+          62.923797607421875,
+          339.28424072265625,
+          82.93379211425781,
+          351.2042236328125
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Bulbo",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Bulb → Bulbo (candidate glossary term; no approved decision yet)"
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 97,
+            "pdfDocumentPageIndex": 96,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              62.923797607421875,
+              339.28424072265625,
+              82.93379211425781,
+              351.2042236328125
+            ],
+            "visualRowBaselinesPt": [
+              348.494
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_97_block_3",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              301.55
+            ],
+            "frameHeightCssPx": 9.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 97,
+          "pdfDocumentPageIndex": 96,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            62.923797607421875,
+            339.28424072265625,
+            82.93379211425781,
+            351.2042236328125
+          ],
+          "visualRowBaselinesPt": [
+            348.494
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_97_block_3",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            301.55
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 5,
+      "sourceBlockId": "block_9",
+      "sourceUnitId": null,
+      "spanKey": "page_97_block_5__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Dynamite",
+      "proposalText": "Dinamite",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_97_block_5__pt-BR",
+        "bbox": [
+          62.923492431640625,
+          454.4441223144531,
+          105.7034912109375,
+          466.3641052246094
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Dinamite",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Dynamite → Dinamite (component-name candidate; no approved decision yet)"
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 97,
+            "pdfDocumentPageIndex": 96,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              62.923492431640625,
+              454.4441223144531,
+              105.7034912109375,
+              466.3641052246094
+            ],
+            "visualRowBaselinesPt": [
+              463.654
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_97_block_5",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              394.88
+            ],
+            "frameHeightCssPx": 9.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 97,
+          "pdfDocumentPageIndex": 96,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            62.923492431640625,
+            454.4441223144531,
+            105.7034912109375,
+            466.3641052246094
+          ],
+          "visualRowBaselinesPt": [
+            463.654
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_97_block_5",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            394.88
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 7,
+      "sourceBlockId": "block_12",
+      "sourceUnitId": null,
+      "spanKey": "page_97_block_7__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Font of Renewal",
+      "proposalText": "Fonte da Renovação",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_97_block_7__pt-BR",
+        "bbox": [
+          62.92359924316406,
+          571.12109375,
+          99.79359436035156,
+          591.0411376953125
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Fonte da Renovação",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Font of Renewal → Fonte da Renovação (component-name candidate; no approved decision yet)"
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 97,
+            "pdfDocumentPageIndex": 96,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              62.92359924316406,
+              571.12109375,
+              99.79359436035156,
+              591.0411376953125
+            ],
+            "visualRowBaselinesPt": [
+              580.331,
+              588.331
+            ],
+            "spans": 2,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_97_block_7",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 3,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              489.42,
+              497.53
+            ],
+            "frameHeightCssPx": 16.1
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 97,
+          "pdfDocumentPageIndex": 96,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            62.92359924316406,
+            571.12109375,
+            99.79359436035156,
+            591.0411376953125
+          ],
+          "visualRowBaselinesPt": [
+            580.331,
+            588.331
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_97_block_7",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 3,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            489.42,
+            497.53
+          ],
+          "frameHeightCssPx": 16.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 9,
+      "sourceBlockId": "block_16",
+      "sourceUnitId": null,
+      "spanKey": "page_97_block_9__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Plank",
+      "proposalText": "Tábua",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_97_block_9__pt-BR",
+        "bbox": [
+          62.9232177734375,
+          656.781005859375,
+          86.82321166992188,
+          668.7010498046875
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Tábua",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Plank → Tábua (component-name candidate; no approved decision yet)"
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 97,
+            "pdfDocumentPageIndex": 96,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              62.9232177734375,
+              656.781005859375,
+              86.82321166992188,
+              668.7010498046875
+            ],
+            "visualRowBaselinesPt": [
+              665.991
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_97_block_9",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              558.84
+            ],
+            "frameHeightCssPx": 9.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 97,
+          "pdfDocumentPageIndex": 96,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            62.9232177734375,
+            656.781005859375,
+            86.82321166992188,
+            668.7010498046875
+          ],
+          "visualRowBaselinesPt": [
+            665.991
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_97_block_9",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            558.84
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 4,
+      "sourceBlockId": "block_8",
+      "sourceUnitId": null,
+      "spanKey": "page_97_block_4__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Bulbs tokens are put into play by the Fragor Combatant and Conduit card. When any figure would provoke a Break Attack from a Bulb, flip the Bulb token and resolve the listed Ability against all figures on or adjacent to the Bulb. Bulb tokens that are moved at the same time as another figure or cause a situation where a Break Attacks timing is ambiguous will not flip.",
+      "proposalText": "As fichas de Bulbo são colocadas em jogo pela carta de Combatente Fragor e Conduit. Quando qualquer miniatura provocaria um Ataque de Ruptura de uma ficha de Bulbo, vire a ficha e resolva a Habilidade indicada contra todas as miniaturas na mesma casa ou adjacentes à ficha de Bulbo. Fichas de Bulbo movidas junto com outra miniatura, ou que tornem ambíguo o momento de um Ataque de Ruptura, não serão viradas.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_97_block_4__pt-BR",
+        "bbox": [
+          173.29348754882812,
+          319.9341125488281,
+          766.793212890625,
+          370.5340881347656
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "As fichas de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Bulbo",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " são colocadas em jogo pela carta de Combatente ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fragor",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " e Conduit. ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Quando qualquer miniatura provocaria um Ataque de Ruptura de uma ficha de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Bulbo",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": ", vire a ficha e resolva a Habilidade indicada contra todas as miniaturas na mesma casa ou adjacentes à ficha de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Bulbo",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": ". ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fichas de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Bulbo",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " movidas junto com outra miniatura, ou que tornem ambíguo o momento de um Ataque de Ruptura, não serão viradas.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Bulb → Bulbo (provisional component name)",
+        "Break Attack → Ataque de Ruptura (term not yet approved)",
+        "Fragor Combatant and Conduit card: source wording may name one card or two; keep the localized relation provisional for human review"
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 97,
+            "pdfDocumentPageIndex": 96,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              173.29348754882812,
+              319.9341125488281,
+              766.793212890625,
+              370.5340881347656
+            ],
+            "visualRowBaselinesPt": [
+              329.164,
+              342.994,
+              353.994,
+              367.824
+            ],
+            "spans": 14,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_97_block_4",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 19,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
+            "visualRowTopsCssPx": [
+              285.86,
+              293.97,
+              302.08,
+              310.19
+            ],
+            "frameHeightCssPx": 41
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 97,
+          "pdfDocumentPageIndex": 96,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            173.29348754882812,
+            319.9341125488281,
+            766.793212890625,
+            370.5340881347656
+          ],
+          "visualRowBaselinesPt": [
+            329.164,
+            342.994,
+            353.994,
+            367.824
+          ],
+          "spans": 14,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_97_block_4",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 19,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            285.86,
+            293.97,
+            302.08,
+            310.19
+          ],
+          "frameHeightCssPx": 41
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 10,
+      "sourceBlockId": "block_18",
+      "sourceUnitId": null,
+      "spanKey": "page_97_block_10__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Adventurers have access to Items that can place a Plank token onto the board.",
+      "proposalText": "Aventureiros podem usar Itens para colocar uma ficha de Tábua no tabuleiro.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_97_block_10__pt-BR",
+        "bbox": [
+          173.29359436035156,
+          615.2701416015625,
+          510.61346435546875,
+          627.2101440429688
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Aventureiros podem usar Itens para colocar uma ficha de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Tábua",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " no tabuleiro.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Plank → Tábua (provisional component name)"
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 97,
+            "pdfDocumentPageIndex": 96,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              173.29359436035156,
+              615.2701416015625,
+              510.61346435546875,
+              627.2101440429688
+            ],
+            "visualRowBaselinesPt": [
+              624.5
+            ],
+            "spans": 3,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_97_block_10",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 3,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              525.22
+            ],
+            "frameHeightCssPx": 9.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 97,
+          "pdfDocumentPageIndex": 96,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            173.29359436035156,
+            615.2701416015625,
+            510.61346435546875,
+            627.2101440429688
+          ],
+          "visualRowBaselinesPt": [
+            624.5
+          ],
+          "spans": 3,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_97_block_10",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 3,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            525.22
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "note": "Localização provisória de partes selecionadas da Tabela 9. Os nomes incertos não são canonizados.",
+  "revisions": [
+    {
+      "version": "1",
+      "status": "superseded_after_critical_semantic_review",
+      "reason": "The first wording broadened the ambiguity trigger. v2 says the Bulb tokens themselves cause the ambiguous timing, preserving the source condition.",
+      "previousBlock8": {
+        "proposalText": "As fichas de Bulbo são colocadas em jogo pela carta de Combatente Fragor e Conduit. Quando qualquer miniatura provocaria um Ataque de Ruptura de uma ficha de Bulbo, vire a ficha e resolva a Habilidade indicada contra todas as miniaturas na mesma casa ou adjacentes à ficha de Bulbo. Fichas de Bulbo movidas ao mesmo tempo que outra miniatura, ou em situações nas quais o momento de um Ataque de Ruptura seja ambíguo, não serão viradas.",
+        "copyfitClassification": "EXACT",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4
+      }
+    }
+  ]
+}

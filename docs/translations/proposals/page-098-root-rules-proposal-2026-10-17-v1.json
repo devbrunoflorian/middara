@@ -3,7 +3,7 @@
   "version": "1",
   "title": "Regras de Raiz — p. 98 (v1)",
   "page": 98,
-  "status": "pending_live_copyfit_and_human_review",
+  "status": "beta_candidate_copyfit_exact_human_review_pending",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -15,7 +15,7 @@
     "exactSourcePdfVisualBaselines": 5,
     "existingHumanTranslationsPreserved": 0,
     "finalTranslationWrites": 0,
-    "copyfitExact": 0,
+    "copyfitExact": 1,
     "copyfitUnder": 0,
     "copyfitOver": 0,
     "openExceptions": 0
@@ -44,75 +44,512 @@
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_98_block_4__pt-BR",
-        "bbox": [173.29299926757812, 194.04942321777344, 761.8434448242188, 255.6587371826172],
+        "bbox": [
+          173.29299926757812,
+          194.04942321777344,
+          761.8434448242188,
+          255.6587371826172
+        ],
         "textAlign": "left",
         "lineHeightMode": "source",
         "segments": [
-          {"text": "Fichas de ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "Raiz", "font": "OptimaLTStd-Italic", "size": 10, "weight": 400, "style": "italic", "color": "#231f20"},
-          {"text": " fazem parte das Preparações de Encontro que incluem o Combatente ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "Efígie Grotesca", "font": "OptimaLTStd-Italic", "size": 10, "weight": 400, "style": "italic", "color": "#231f20"},
-          {"text": ". Raízes", "font": "OptimaLTStd-Italic", "size": 10, "weight": 400, "style": "italic", "color": "#231f20"},
-          {"text": " contam como Miniaturas com ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "6", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": " ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "HP", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": ", ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "10", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": " de Defesa e ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "6", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": " de Armadura. ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "Raízes", "font": "OptimaLTStd-Italic", "size": 10, "weight": 400, "style": "italic", "color": "#231f20"},
-          {"text": " têm ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "RESISTÊNCIA", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": " a ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "DANO FÍSICO", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": " e ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "DANO MÁGICO", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": ", exceto quando a fonte do Dano vem de um ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "MACHADO", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": ". Raízes", "font": "OptimaLTStd-Italic", "size": 10, "weight": 400, "style": "italic", "color": "#231f20"},
-          {"text": " têm ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "IMUNIDADE", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": " a ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "FEITIÇOS", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": " e ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "EFEITOS", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": ". Todos os oponentes que provoquem um Ataque de Interrupção de uma ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "Raiz", "font": "OptimaLTStd-Italic", "size": 10, "weight": 400, "style": "italic", "color": "#231f20"},
-          {"text": " ou estejam adjacentes a ela no início do turno da ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "Efígie Grotesca", "font": "OptimaLTStd-Italic", "size": 10, "weight": 400, "style": "italic", "color": "#231f20"},
-          {"text": " recebem ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "DANO FÍSICO", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20"},
-          {"text": " de um ", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"},
-          {"text": "￼", "font": "OptimaLTStd-Bold", "size": 10, "weight": 700, "style": "normal", "color": "#231f20", "symbolId": "dice.green", "symbolMetrics": {"widthEm": 1.0389999389648437, "heightEm": 1.173699951171875, "verticalAlignEm": 0.26134796142578126, "gapEm": 0.0499573, "trailingGapEm": 0.05005}},
-          {"text": ". Raízes", "font": "OptimaLTStd-Italic", "size": 10, "weight": 400, "style": "italic", "color": "#231f20"},
-          {"text": " não deixam Saque de Combatentes.", "font": "OptimaLTStd", "size": 10, "weight": 400, "style": "normal", "color": "#231f20"}
+          {
+            "text": "Fichas de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "Raiz",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20"
+          },
+          {
+            "text": " fazem parte das Preparações de Encontro que incluem o Combatente ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "Efígie Grotesca",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20"
+          },
+          {
+            "text": ". Raízes",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20"
+          },
+          {
+            "text": " contam como Miniaturas com ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "6",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "HP",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": ", ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "10",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": " de Defesa e ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "6",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": " de Armadura. ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "Raízes",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20"
+          },
+          {
+            "text": " têm ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "RESISTÊNCIA",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": " a ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "DANO FÍSICO",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": " e ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "DANO MÁGICO",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": ", exceto quando a fonte do Dano vem de um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "MACHADO",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": ". Raízes",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20"
+          },
+          {
+            "text": " têm ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "IMUNIDADE",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": " a ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "FEITIÇOS",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": " e ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "EFEITOS",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": ". Todos os oponentes que provoquem um Ataque de Interrupção de uma ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "Raiz",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20"
+          },
+          {
+            "text": " ou estejam adjacentes a ela no início do turno da ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "Efígie Grotesca",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20"
+          },
+          {
+            "text": " recebem ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "DANO FÍSICO",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": " de um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "symbolId": "dice.green",
+            "symbolMetrics": {
+              "widthEm": 1.0389999389648437,
+              "heightEm": 1.173699951171875,
+              "verticalAlignEm": 0.26134796142578126,
+              "gapEm": 0.0499573,
+              "trailingGapEm": 0.05005
+            }
+          },
+          {
+            "text": ". Raízes",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "weight": 400,
+            "style": "italic",
+            "color": "#231f20"
+          },
+          {
+            "text": " não deixam Saque de Combatentes.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20"
+          }
         ],
-        "managedSourceSymbols": ["dice.green"]
+        "managedSourceSymbols": [
+          "dice.green"
+        ]
       },
-      "technicalStatus": "pending_live_copyfit_and_human_review",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer_beta_preview",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
-        {"source": "Root / Roots", "proposal": "Raiz / Raízes"},
-        {"source": "Grotesque Effigy", "proposal": "Efígie Grotesca"},
-        {"source": "HP", "proposal": "preserved as HP"},
-        {"source": "Defense", "proposal": "Defesa"},
-        {"source": "Armor", "proposal": "Armadura"},
-        {"source": "Break Attack", "proposal": "Ataque de Interrupção"},
-        {"source": "Encounter setup", "proposal": "Preparação de Encontro"},
-        {"source": "Combatant Loot", "proposal": "Saque de Combatentes"}
+        {
+          "source": "Root / Roots",
+          "proposal": "Raiz / Raízes"
+        },
+        {
+          "source": "Grotesque Effigy",
+          "proposal": "Efígie Grotesca"
+        },
+        {
+          "source": "HP",
+          "proposal": "preserved as HP"
+        },
+        {
+          "source": "Defense",
+          "proposal": "Defesa"
+        },
+        {
+          "source": "Armor",
+          "proposal": "Armadura"
+        },
+        {
+          "source": "Break Attack",
+          "proposal": "Ataque de Interrupção"
+        },
+        {
+          "source": "Encounter setup",
+          "proposal": "Preparação de Encontro"
+        },
+        {
+          "source": "Combatant Loot",
+          "proposal": "Saque de Combatentes"
+        }
       ],
-      "sourceLineIds": ["line_17_0", "line_17_1", "line_17_2", "line_17_3", "line_17_4", "line_17_5"],
+      "sourceLineIds": [
+        "line_17_0",
+        "line_17_1",
+        "line_17_2",
+        "line_17_3",
+        "line_17_4",
+        "line_17_5"
+      ],
       "sourcePdfVisualLineCount": 5,
       "sourceBboxes": [
-        [173.29302978515625, 194.04942321777344, 699.5830078125, 205.9894256591797],
-        [173.29302978515625, 207.39942932128906, 760.9230346679688, 219.81944274902344],
-        [173.29302978515625, 218.39942932128906, 544.0531005859375, 230.81944274902344],
-        [173.29302978515625, 232.70945739746094, 744.3436889648438, 244.6494598388672],
-        [173.29302978515625, 243.71873474121094, 463.5330505371094, 255.6587371826172]
-      ]
+        [
+          173.29302978515625,
+          194.04942321777344,
+          699.5830078125,
+          205.9894256591797
+        ],
+        [
+          173.29302978515625,
+          207.39942932128906,
+          760.9230346679688,
+          219.81944274902344
+        ],
+        [
+          173.29302978515625,
+          218.39942932128906,
+          544.0531005859375,
+          230.81944274902344
+        ],
+        [
+          173.29302978515625,
+          232.70945739746094,
+          744.3436889648438,
+          244.6494598388672
+        ],
+        [
+          173.29302978515625,
+          243.71873474121094,
+          463.5330505371094,
+          255.6587371826172
+        ]
+      ],
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_visual_rows_beta_preview",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "PyMuPDF source spans were grouped by their parent visual text-line box centre inside the canonical bbox (1 pt); PT-BR PageRenderer text Range fragments from the immutable beta snapshot were grouped with the shared groupPageRendererVisualLines function in scripts/export_page_pdf.mjs. The same five visual rows were measured in Viewer and print layouts. This is a beta-only technical measurement, not editorial approval.",
+        "environment": {
+          "pageNumber": 98,
+          "pdfDocumentPageIndex": 97,
+          "language": "pt-BR",
+          "viewer": "http://127.0.0.1:8080",
+          "viewerScaleX": 1.5700691988102569,
+          "viewerScaleY": 1.5700691988102569,
+          "printScaleX": 1.3333169649543333,
+          "printScaleY": 1.3333169649543333,
+          "immutableBetaSnapshot": true,
+          "payloadWrites": 0
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            173.29299926757812,
+            194.04942321777344,
+            761.8434448242188,
+            255.6587371826172
+          ],
+          "visualRowCentersPt": [
+            200.019,
+            213.609,
+            224.609,
+            238.679,
+            249.689
+          ],
+          "visualRows": 5,
+          "matchingPdfSpans": 39,
+          "sourceLineIds": [
+            "line_17_0",
+            "line_17_1",
+            "line_17_2",
+            "line_17_3",
+            "line_17_4",
+            "line_17_5"
+          ]
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_98_block_4__pt-BR",
+          "readingMethod": "PageRenderer [data-rendered-translation-key] Range fragments grouped by shared Copyfit V3 visual-row grouper",
+          "viewerVisualRows": 5,
+          "printVisualRows": 5,
+          "renderedSymbolIds": [
+            "dice.green"
+          ],
+          "frameRectPt": {
+            "x": 173.29053089263277,
+            "y": 194.04001443430505,
+            "width": 588.5489000741,
+            "height": 61.60158423163136
+          },
+          "viewerContentBoundsPt": {
+            "x": 173.29053089263277,
+            "y": 192.76618522886906,
+            "width": 584.7473160391269,
+            "height": 51.470661332148204
+          },
+          "viewerEdgeExcessPt": {
+            "left": 0,
+            "top": 1.2738292054359874,
+            "right": 0,
+            "bottom": 0
+          },
+          "printEdgeExcessPt": {
+            "left": 0,
+            "top": 1.5000184146524305,
+            "right": 0,
+            "bottom": 0
+          },
+          "evidenceArtifacts": [
+            "tmp/full-book-beta-2026-10-23-v16/p98-root-candidate/viewer.png",
+            "tmp/full-book-beta-2026-10-23-v16/p98-root-candidate/print.png",
+            "tmp/full-book-beta-2026-10-23-v16/p98-root-candidate/page-098.pdf",
+            "tmp/full-book-beta-2026-10-23-v16/p98-root-candidate/metrics.json"
+          ]
+        },
+        "editorialStatus": "Pending human editorial approval. Terminology candidates remain unresolved; this measurement does not approve or publish the translation."
+      }
     }
   ],
   "note": "Draft only. The existing semantic dice.green object replaces the source color label and vector in this PT-BR sentence. Await live Copyfit V3 measurement, critical review, and human terminology approval."

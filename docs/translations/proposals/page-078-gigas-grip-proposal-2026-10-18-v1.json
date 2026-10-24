@@ -428,7 +428,54 @@
         "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
       ],
       "semanticSymbols": [],
-      "sourceBlockId": "block_16"
+      "sourceBlockId": "block_16",
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "UNDER",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 2,
+        "classification": "UNDER",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 78,
+          "pdfDocumentPageIndex": 77,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            85.76909637451172,
+            226.84442138671875,
+            397.1490478515625,
+            285.7444152832031
+          ],
+          "visualBaselinesPt": [
+            236.034,
+            247.034,
+            261.034,
+            272.034,
+            283.034
+          ],
+          "spans": 9,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_78_block_4",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            210.42,
+            219.33
+          ],
+          "frameHeightCssPx": 47.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "page": 78,

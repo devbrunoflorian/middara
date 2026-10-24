@@ -1,6 +1,6 @@
 # p.30 — proposta PT-BR “Ícones, Condições, Tags e Símbolos” v2
 
-**Estado:** 19 unidades propostas; 18 passaram no Viewer, Copyfit V3 de impressão e PDF. Os 19 campos completos foram conferidos no Editor read-only. O exemplo inline fica inteiro em branco somente no snapshot por uma exceção de composição de símbolos. Revisão humana pendente. Nenhuma tradução ou frame foi gravado no Payload. A v1 permanece preservada.
+**Estado:** 19 unidades propostas; 19 verificadas no Viewer e no Copyfit V3; 18 possuem evidência PDF anterior. Os 19 campos foram conferidos no Editor read-only. Os três símbolos inline do block_41 foram resolvidos com placements semânticos e proveniência individual; a nova medição live confirmou EXACT 5/5 e os símbolos aparecem com contraste na prévia. A revisão editorial humana permanece pendente. Nenhuma tradução ou frame foi gravado no Payload. A v1 permanece preservada.
 
 ## Proposta de texto
 
@@ -72,17 +72,17 @@
 
 - Revisão: Custom dice → dados personalizados e a redação de “no limit” aguardam revisão.
 
-### block_41 — Algumas Habilidades que usam Símbolos como Condição podem ter vários Símbolos impressos. ⟦preservar aqui os glifos originais de Escudo e Livro com o número 3⟧ Nesses casos, usar a Habilidade uma vez custa 1 Livro e 1 Escudo. Em outros casos, pode haver Símbolos demais para caber na carta; por isso, eles são impressos com números. Por exemplo, (3) significa que um Aventureiro deve gastar 3 Livros para usar essa Habilidade.
+### block_41 — Algumas Habilidades que usam Símbolos como Condição podem exibir vários. ⟦Escudo de defesa⟧ ⟦Símbolo de combate em forma de folha⟧ Nesses casos, usar a Habilidade uma vez custa 1 Livro e 1 Escudo. Quando houver Símbolos demais para caber na carta, eles serão impressos com números. Por exemplo, (⟦Símbolo de página de combate marcado com 3⟧) significa que um Aventureiro deve gastar 3 Livros para usar essa Habilidade.
 
-- Revisão: O exemplo tem glifos-fonte de Escudo e Livro/3 sem placements semânticos. A identidade da composição combat.page com o número 3 está bloqueada no ledger; o reflow PT exige preservar e ancorar esses glifos.
+- Revisão: as três ocorrências fonte foram mapeadas para `combat.shield`, `combat.page` e o composto `combat.page.3`. Copyfit V3 mediu **EXACT 5/5** no PDF-fonte e PageRenderer live a 200%. Os símbolos aparecem na prévia PT-BR após corrigir o contraste do tema escuro. A aprovação editorial humana permanece pendente.
 
 ### block_42 — [[symbol:tag.important.icon]] IMPORTANTE: Normalmente, os Símbolos só podem ser gastos durante uma Ação de Ataque, embora algumas Habilidades permitam gastar Símbolos em rolagens que não sejam de Ataque.
 
 - Revisão: Ação de Ataque e “rolagens que não sejam de Ataque” são candidatos contextuais.
 
-## Exceção de símbolos inline
+## Resolução técnica de símbolos inline
 
-O bloco block_41 contém glifos-fonte de Escudo e Livro com número 3 entre trechos do exemplo. Eles não têm placements semânticos ativos. A auditoria de símbolos preserva a ocorrência p030-v116-117-n2 porque combat.page tem o número impresso 3. Para não deixar um fluxo PT ocupar as posições fixas, o bloco inteiro fica vazio somente no Viewer/PDF diagnóstico. O texto completo continua acima e no JSON; nenhuma arte ou fundo é removido.
+O mapeamento confirmou três ocorrências ligadas ao exemplo no PDF: `p030-v111-113-n3` → `combat.shield` (desenhos 111–113), `p030-v114-115-n2` → `combat.page` (114–115) e `p030-v116-117-n2` → `combat.page.3` (116–117 + glifo CFF `three`). O glifo textual `3` original é coberto apenas na ocorrência composta; o `3` da frase “gastar 3 Livros” permanece texto. Copyfit V3 confirmou **5 linhas-fonte / 5 linhas PageRenderer (EXACT)**. Os três símbolos ficam visíveis no cartão de prévia da revisão. A aprovação editorial humana continua pendente. Evidência, comparação de pixels e rollback: [manifesto da família p.30](../../../output/proofs/source-symbol-inline-focus-2026-10-23/p030-family/manifest.json).
 
 ## Fonte e evidências
 
@@ -90,6 +90,6 @@ O PDF oficial e o Viewer EN foram comparados. Ver [PDF raster](../../../output/p
 
 ## Viewer, Editor, Copyfit V3 e PDF v2
 
-Dezoito unidades passaram Viewer, Editor read-only, Copyfit V3 de impressão e PDF de uma página; os 19 campos candidatos foram comparados no Editor e todos os diálogos foram cancelados. A exportação tem 820,346 × 820,346 pt, 18 unidades PT-BR selecionáveis, zero caractere de substituição/uso privado e nenhum excesso à direita ou abaixo. A unidade block_41 fica integralmente em branco somente no Viewer/PDF diagnóstico. Os glifos-fonte de Escudo e Livro/3 continuam no fundo em suas posições originais. O raster não mostra colisão ou corte das 18 unidades. Payload: zero traduções e frames antes/depois, somente GET; os assets canônicos permaneceram iguais.
+A prova anterior validou 18 unidades no Viewer, Editor read-only, Copyfit V3 de impressão e PDF; os 19 campos candidatos foram comparados no Editor e os diálogos foram cancelados. A recuperação dos símbolos do block_41 mudou o conteúdo medido; a nova medição live é **EXACT 5/5** e a prévia foi conferida com os três glifos visíveis. O total sobe para 19 verificações de Viewer e Copyfit; a evidência PDF permanece em 18, pois a proposta atualizada ainda não foi reexportada. O Payload foi acessado apenas para leitura, sem gravação. A decisão editorial continua pendente.
 
 Evidências: [recibo Viewer/Editor](../../../output/proofs/translation-readiness-2026-10-16/p030-icons-conditions-tags-symbols-proposal-v2/viewer-editor-receipt-v2.json), [recibo PDF e Copyfit V3](../../../output/proofs/translation-readiness-2026-10-16/p030-icons-conditions-tags-symbols-proposal-v2/pdf-copyfit-receipt-v2.json), [PDF](../../../output/proofs/translation-readiness-2026-10-16/p030-icons-conditions-tags-symbols-proposal-v2/page-030-pt-BR-diagnostic-v2.pdf), [raster](../../../output/proofs/translation-readiness-2026-10-16/p030-icons-conditions-tags-symbols-proposal-v2/print-pt-BR-diagnostic-v2.png) e [métricas](../../../output/proofs/translation-readiness-2026-10-16/p030-icons-conditions-tags-symbols-proposal-v2/metrics-pt-BR-diagnostic-v2.json).

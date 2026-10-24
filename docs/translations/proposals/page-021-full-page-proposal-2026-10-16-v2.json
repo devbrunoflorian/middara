@@ -595,7 +595,7 @@
           {
             "text": "Fichas de Terreno",
             "font": "Cinzel-Regular",
-            "size": 9.5,
+            "size": 12,
             "color": "#231f20",
             "weight": 700,
             "style": "normal",
@@ -613,7 +613,7 @@
           {
             "text": "Fichas de Terreno",
             "font": "Cinzel-Regular",
-            "size": 9.5,
+            "size": 12,
             "color": "#231f20",
             "weight": 700,
             "style": "normal",
@@ -626,7 +626,7 @@
         "managedSourceSymbols": []
       },
       "status": "draft_v2_pending_visual_copyfit_and_human_review",
-      "technicalStatus": "pending_visual_copyfit_viewer_and_pdf",
+      "technicalStatus": "pending_typographic_metrics_audit_and_live_copyfit",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "blocker": null,
@@ -642,49 +642,11 @@
       "pendingTerms": [
         "Terrain Token → Ficha de Terreno é candidato pendente de confirmação."
       ],
-      "copyfitRevisionNote": "Fonte de 12 pt quebrava o título em duas linhas e a segunda cruzava o filete; redução local proposta para caber em uma linha, confirmar visualmente.",
+      "copyfitRevisionNote": "Restored the source Cinzel 12 pt. Keep the source frame unchanged while auditing PageRenderer font advances and visual rows; the prior 317 pt expansion was based on the adjacent body column corridor, not a title-specific frame measurement, and has been reverted. Remeasure before closing the request or approving.",
       "sourcePdfVisualLineCount": 1,
-      "pageRendererVisualLineCount": 1,
-      "copyfitClassification": "EXACT",
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 1,
-        "pageRendererVisualLineCount": 1,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 21,
-          "pdfDocumentPageIndex": 20,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
-        },
-        "sourceEvidence": {
-          "bboxPt": [
-            86.8927001953125,
-            246.82632446289062,
-            191.94073486328125,
-            263.0023193359375
-          ],
-          "visualBaselinesPt": [
-            258.538
-          ],
-          "spans": 1,
-          "visualRows": 1
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_21_block_14__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 1,
-          "distinctVisualRows": 1,
-          "visualRowTopsCssPx": [
-            225.61
-          ],
-          "frameHeightCssPx": 13.1
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      "pageRendererVisualLineCount": null,
+      "copyfitClassification": null,
+      "copyfitMeasurement": null
     },
     {
       "blockIndex": 18,
@@ -1322,6 +1284,22 @@
             "disableLigatures": true
           },
           {
+            "text": "￼",
+            "symbolId": "resource.movement",
+            "symbolMetrics": {
+              "widthEm": 1.1803334554036458,
+              "heightEm": 1.1802164713541667,
+              "verticalAlignEm": 0.2221950954861111,
+              "advanceEm": 1.1803334554036458
+            },
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
             "text": " pontos de Movimento. Habilidades que colocam Terreno Difícil só podem substituir espaços de Terreno Normal.",
             "font": "OptimaLTStd",
             "size": 10,
@@ -1334,13 +1312,94 @@
         "textAlign": "left",
         "lineHeight": 1.1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "resource.movement"
+        ]
       },
       "diagnosticData": {
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "",
+            "text": "DIFÍCIL:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Ataques feitos através de Terreno Difícil ou contra alvos dentro dele sofrem ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "−1",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " na rolagem de Ataque. Essa penalidade não pode ser aplicada mais de uma vez, mas se acumula com a penalidade de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "−1",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " na rolagem de Ataque causada por espaços que contenham Aliados. Sair de um espaço de Terreno Difícil custa ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "resource.movement",
+            "symbolMetrics": {
+              "widthEm": 1.1803334554036458,
+              "heightEm": 1.1802164713541667,
+              "verticalAlignEm": 0.2221950954861111,
+              "advanceEm": 1.1803334554036458
+            },
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " pontos de Movimento. Habilidades que colocam Terreno Difícil só podem substituir espaços de Terreno Normal.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -1352,13 +1411,15 @@
         "textAlign": "left",
         "lineHeight": 1.1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "resource.movement"
+        ]
       },
-      "status": "blocked_blank_in_diagnostic",
-      "technicalStatus": "blocked_missing_occurrence_specific_symbol",
+      "status": "pending_human_review",
+      "technicalStatus": "blocked_copyfit_v3_over",
       "editorialStatus": "pending_human_review",
-      "diagnosticRendering": "blank",
-      "blocker": "Ícone vermelho de Movimento sem mapeamento semântico/avanço por ocorrência; origem no fundo, sem caixa no sidecar.",
+      "diagnosticRendering": "Blank PT-BR diagnostic rendering because this rich proposal measures Copyfit V3 OVER; the complete proposal remains in review.",
+      "blocker": "Copyfit V3 OVER: 5 source rows → 6 PageRenderer rows at 200% (OVER). Keep source font, size and frame unchanged; revise and remeasure. Human editorial approval remains pending.",
       "sourceLineCount": 5,
       "sourceBboxes": [
         [
@@ -1397,21 +1458,366 @@
         "A proposta completa permanece no inventário; no diagnóstico, o texto fica em branco até resolver a ocorrência do ícone."
       ],
       "sourcePdfVisualLineCount": 5,
-      "pageRendererVisualLineCount": 5,
-      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 6,
+      "copyfitClassification": "OVER",
+      "priorCopyfitMeasurements": [
+        {
+          "reason": "Superseded for approval gating after the source vector was mapped as a semantic inline element; original numeric evidence is retained for comparison.",
+          "measurement": {
+            "status": "measured_copyfit_v3_script_visual_rows",
+            "sourcePdfVisualLineCount": 5,
+            "pageRendererVisualLineCount": 5,
+            "classification": "EXACT",
+            "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+            "environment": {
+              "pageNumber": 21,
+              "pdfDocumentPageIndex": 20,
+              "language": "pt-BR",
+              "viewerZoom": "200%",
+              "viewportCssPixels": "1280x720",
+              "devicePixelRatio": 1.25
+            },
+            "sourceEvidence": {
+              "bboxPt": [
+                86.83790588378906,
+                620.0988159179688,
+                407.6211853027344,
+                676.0187377929688
+              ],
+              "visualBaselinesPt": [
+                629.309,
+                640.307,
+                651.309,
+                662.309,
+                673.309
+              ],
+              "spans": 14,
+              "visualRows": 5
+            },
+            "pageRendererEvidence": {
+              "spanKey": "page_21_block_2__pt-BR",
+              "readingMethod": "text rects of review-highlighted unit",
+              "rangeRectFragments": 14,
+              "distinctVisualRows": 5,
+              "visualRowTopsCssPx": [
+                529.11,
+                538.03,
+                546.94,
+                555.86,
+                564.78
+              ],
+              "frameHeightCssPx": 45.3
+            },
+            "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+          }
+        }
+      ],
+      "proposalRevisionHistory": [
+        {
+          "revision": "before-semantic-movement-inline",
+          "reason": "Preserve the previous pending PT-BR proposal and its measurements before adding the audited source movement pictogram as an editable semantic symbol.",
+          "proposalText": "DIFÍCIL: Ataques feitos através de Terreno Difícil ou contra alvos dentro dele sofrem −1 na rolagem de Ataque. Essa penalidade não pode ser aplicada mais de uma vez, mas se acumula com a penalidade de −1 na rolagem de Ataque causada por espaços que contenham Aliados. Sair de um espaço de Terreno Difícil custa 2 pontos de Movimento. Habilidades que colocam Terreno Difícil só podem substituir espaços de Terreno Normal.",
+          "data": {
+            "schemaVersion": 2,
+            "segments": [
+              {
+                "text": "DIFÍCIL:",
+                "font": "OptimaLTStd-Bold",
+                "size": 9,
+                "color": "#ffffff",
+                "weight": 700,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": " Ataques feitos através de Terreno Difícil ou contra alvos dentro dele sofrem ",
+                "font": "OptimaLTStd",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 400,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": "−1",
+                "font": "OptimaLTStd-Bold",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 700,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": " na rolagem de Ataque. Essa penalidade não pode ser aplicada mais de uma vez, mas se acumula com a penalidade de ",
+                "font": "OptimaLTStd",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 400,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": "−1",
+                "font": "OptimaLTStd-Bold",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 700,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": " na rolagem de Ataque causada por espaços que contenham Aliados. Sair de um espaço de Terreno Difícil custa ",
+                "font": "OptimaLTStd",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 400,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": "2",
+                "font": "OptimaLTStd-Bold",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 700,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": " pontos de Movimento. Habilidades que colocam Terreno Difícil só podem substituir espaços de Terreno Normal.",
+                "font": "OptimaLTStd",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 400,
+                "style": "normal",
+                "disableLigatures": true
+              }
+            ],
+            "textAlign": "left",
+            "lineHeight": 1.1,
+            "lineHeightMode": "source",
+            "managedSourceSymbols": []
+          },
+          "copyfitMeasurement": {
+            "status": "measured_copyfit_v3_script_visual_rows",
+            "sourcePdfVisualLineCount": 5,
+            "pageRendererVisualLineCount": 6,
+            "classification": "OVER",
+            "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+            "environment": {
+              "pageNumber": 21,
+              "pdfDocumentPageIndex": 20,
+              "language": "pt-BR",
+              "viewerZoom": "200%",
+              "viewportCssPixels": "1280x720",
+              "devicePixelRatio": 1.25,
+              "fontLoaded": true
+            },
+            "sourceEvidence": {
+              "bboxPt": [
+                86.83790588378906,
+                620.0988159179688,
+                407.6211853027344,
+                676.0187377929688
+              ],
+              "visualBaselinesPt": [
+                629.309,
+                640.307,
+                651.309,
+                662.309,
+                673.309
+              ],
+              "spans": 14,
+              "visualRows": 5
+            },
+            "pageRendererEvidence": {
+              "spanKey": "page_21_block_2",
+              "readingMethod": "text rects of the review-highlighted unit",
+              "rangeRectFragments": 18,
+              "distinctVisualRows": 6,
+              "visualRowTopsCssPx": [
+                529.11,
+                538.02,
+                546.92,
+                555.83,
+                564.73,
+                573.64
+              ],
+              "frameHeightCssPx": 45.3
+            },
+            "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+          },
+          "copyfitMeasurementsByZoom": {
+            "100%": {
+              "status": "measured_copyfit_v3_script_visual_rows",
+              "sourcePdfVisualLineCount": 5,
+              "pageRendererVisualLineCount": 6,
+              "classification": "OVER",
+              "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+              "environment": {
+                "pageNumber": 21,
+                "pdfDocumentPageIndex": 20,
+                "language": "pt-BR",
+                "viewerZoom": "100%",
+                "viewportCssPixels": "1280x720",
+                "devicePixelRatio": 1.25,
+                "fontLoaded": true
+              },
+              "sourceEvidence": {
+                "bboxPt": [
+                  86.83790588378906,
+                  620.0988159179688,
+                  407.6211853027344,
+                  676.0187377929688
+                ],
+                "visualBaselinesPt": [
+                  629.309,
+                  640.307,
+                  651.309,
+                  662.309,
+                  673.309
+                ],
+                "spans": 14,
+                "visualRows": 5
+              },
+              "pageRendererEvidence": {
+                "spanKey": "page_21_block_2",
+                "readingMethod": "text rects of the review-highlighted unit",
+                "rangeRectFragments": 18,
+                "distinctVisualRows": 6,
+                "visualRowTopsCssPx": [
+                  545.14,
+                  549.58,
+                  554.02,
+                  558.45,
+                  562.89,
+                  567.33
+                ],
+                "frameHeightCssPx": 22.7
+              },
+              "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+            },
+            "200%": {
+              "status": "measured_copyfit_v3_script_visual_rows",
+              "sourcePdfVisualLineCount": 5,
+              "pageRendererVisualLineCount": 6,
+              "classification": "OVER",
+              "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+              "environment": {
+                "pageNumber": 21,
+                "pdfDocumentPageIndex": 20,
+                "language": "pt-BR",
+                "viewerZoom": "200%",
+                "viewportCssPixels": "1280x720",
+                "devicePixelRatio": 1.25,
+                "fontLoaded": true
+              },
+              "sourceEvidence": {
+                "bboxPt": [
+                  86.83790588378906,
+                  620.0988159179688,
+                  407.6211853027344,
+                  676.0187377929688
+                ],
+                "visualBaselinesPt": [
+                  629.309,
+                  640.307,
+                  651.309,
+                  662.309,
+                  673.309
+                ],
+                "spans": 14,
+                "visualRows": 5
+              },
+              "pageRendererEvidence": {
+                "spanKey": "page_21_block_2",
+                "readingMethod": "text rects of the review-highlighted unit",
+                "rangeRectFragments": 18,
+                "distinctVisualRows": 6,
+                "visualRowTopsCssPx": [
+                  529.11,
+                  538.02,
+                  546.92,
+                  555.83,
+                  564.73,
+                  573.64
+                ],
+                "frameHeightCssPx": 45.3
+              },
+              "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+            }
+          }
+        }
+      ],
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 6,
+          "classification": "OVER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows, clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 21,
+            "pdfDocumentPageIndex": 20,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.83790588378906,
+              620.0988159179688,
+              407.6211853027344,
+              676.0187377929688
+            ],
+            "visualBaselinesPt": [
+              629.309,
+              640.307,
+              651.309,
+              662.309,
+              673.309
+            ],
+            "spans": 14,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_21_block_2",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 18,
+            "renderedSymbolIds": [
+              "resource.movement"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 6,
+            "visualRowTopsCssPx": [
+              529.11,
+              538.02,
+              546.92,
+              555.83,
+              564.73,
+              573.64
+            ],
+            "frameHeightCssPx": 45.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
       "copyfitMeasurement": {
         "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 5,
-        "pageRendererVisualLineCount": 5,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "pageRendererVisualLineCount": 6,
+        "classification": "OVER",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows, clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 21,
           "pdfDocumentPageIndex": 20,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -1431,16 +1837,21 @@
           "visualRows": 5
         },
         "pageRendererEvidence": {
-          "spanKey": "page_21_block_2__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 14,
-          "distinctVisualRows": 5,
+          "spanKey": "page_21_block_2",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 18,
+          "renderedSymbolIds": [
+            "resource.movement"
+          ],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 6,
           "visualRowTopsCssPx": [
             529.11,
-            538.03,
-            546.94,
-            555.86,
-            564.78
+            538.02,
+            546.92,
+            555.83,
+            564.73,
+            573.64
           ],
           "frameHeightCssPx": 45.3
         },
@@ -1506,6 +1917,22 @@
             "disableLigatures": true
           },
           {
+            "text": "￼",
+            "symbolId": "resource.movement",
+            "symbolMetrics": {
+              "widthEm": 1.1803334554036458,
+              "heightEm": 1.1802164713541667,
+              "verticalAlignEm": 0.2221950954861111,
+              "advanceEm": 1.1803334554036458
+            },
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
             "text": " pontos de Movimento. Habilidades que colocam Terreno de Água podem substituir Terreno Normal, Terreno Difícil e Terreno de Lodo. Fichas de Água colocadas por uma Habilidade não têm Corrente.",
             "font": "OptimaLTStd",
             "size": 10,
@@ -1518,13 +1945,76 @@
         "textAlign": "left",
         "lineHeight": 1.1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "resource.movement"
+        ]
       },
       "diagnosticData": {
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "",
+            "text": "ÁGUA:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Miniaturas na Água não podem usar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "ESQUIVA",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Sair de um espaço de Água custa ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "resource.movement",
+            "symbolMetrics": {
+              "widthEm": 1.1803334554036458,
+              "heightEm": 1.1802164713541667,
+              "verticalAlignEm": 0.2221950954861111,
+              "advanceEm": 1.1803334554036458
+            },
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " pontos de Movimento. Habilidades que colocam Terreno de Água podem substituir Terreno Normal, Terreno Difícil e Terreno de Lodo. Fichas de Água colocadas por uma Habilidade não têm Corrente.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -1536,13 +2026,15 @@
         "textAlign": "left",
         "lineHeight": 1.1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "resource.movement"
+        ]
       },
-      "status": "blocked_blank_in_diagnostic",
-      "technicalStatus": "blocked_missing_occurrence_specific_symbol",
+      "status": "pending_human_review",
+      "technicalStatus": "blocked_copyfit_v3_over",
       "editorialStatus": "pending_human_review",
-      "diagnosticRendering": "blank",
-      "blocker": "Ícone vermelho de Movimento sem mapeamento semântico/avanço por ocorrência; origem no fundo, sem caixa no sidecar.",
+      "diagnosticRendering": "Blank PT-BR diagnostic rendering because this rich proposal measures Copyfit V3 OVER; the complete proposal remains in review.",
+      "blocker": "Copyfit V3 OVER: 4 source rows → 5 PageRenderer rows at 200% (OVER). Keep source font, size and frame unchanged; revise and remeasure. Human editorial approval remains pending.",
       "sourceLineCount": 5,
       "sourceBboxes": [
         [
@@ -1581,21 +2073,338 @@
         "A proposta completa permanece no inventário; no diagnóstico, o texto fica em branco até resolver a ocorrência do ícone."
       ],
       "sourcePdfVisualLineCount": 4,
-      "pageRendererVisualLineCount": 4,
-      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "OVER",
+      "priorCopyfitMeasurements": [
+        {
+          "reason": "Superseded for approval gating after the source vector was mapped as a semantic inline element; original numeric evidence is retained for comparison.",
+          "measurement": {
+            "status": "measured_copyfit_v3_script_visual_rows",
+            "sourcePdfVisualLineCount": 4,
+            "pageRendererVisualLineCount": 4,
+            "classification": "EXACT",
+            "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+            "environment": {
+              "pageNumber": 21,
+              "pdfDocumentPageIndex": 20,
+              "language": "pt-BR",
+              "viewerZoom": "200%",
+              "viewportCssPixels": "1280x720",
+              "devicePixelRatio": 1.25
+            },
+            "sourceEvidence": {
+              "bboxPt": [
+                86.8406982421875,
+                680.7680053710938,
+                385.2806701660156,
+                725.6880493164062
+              ],
+              "visualBaselinesPt": [
+                689.978,
+                700.978,
+                711.978,
+                722.978
+              ],
+              "spans": 9,
+              "visualRows": 4
+            },
+            "pageRendererEvidence": {
+              "spanKey": "page_21_block_3__pt-BR",
+              "readingMethod": "text rects of review-highlighted unit",
+              "rangeRectFragments": 9,
+              "distinctVisualRows": 4,
+              "visualRowTopsCssPx": [
+                578.28,
+                587.2,
+                596.13,
+                605.03
+              ],
+              "frameHeightCssPx": 36.4
+            },
+            "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+          }
+        }
+      ],
+      "proposalRevisionHistory": [
+        {
+          "revision": "before-semantic-movement-inline",
+          "reason": "Preserve the previous pending PT-BR proposal and its measurements before adding the audited source movement pictogram as an editable semantic symbol.",
+          "proposalText": "ÁGUA: Miniaturas na Água não podem usar ESQUIVA. Sair de um espaço de Água custa 2 pontos de Movimento. Habilidades que colocam Terreno de Água podem substituir Terreno Normal, Terreno Difícil e Terreno de Lodo. Fichas de Água colocadas por uma Habilidade não têm Corrente.",
+          "data": {
+            "schemaVersion": 2,
+            "segments": [
+              {
+                "text": "ÁGUA:",
+                "font": "OptimaLTStd-Bold",
+                "size": 9,
+                "color": "#ffffff",
+                "weight": 700,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": " Miniaturas na Água não podem usar ",
+                "font": "OptimaLTStd",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 400,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": "ESQUIVA",
+                "font": "OptimaLTStd-Bold",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 700,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": ". Sair de um espaço de Água custa ",
+                "font": "OptimaLTStd",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 400,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": "2",
+                "font": "OptimaLTStd-Bold",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 700,
+                "style": "normal",
+                "disableLigatures": true
+              },
+              {
+                "text": " pontos de Movimento. Habilidades que colocam Terreno de Água podem substituir Terreno Normal, Terreno Difícil e Terreno de Lodo. Fichas de Água colocadas por uma Habilidade não têm Corrente.",
+                "font": "OptimaLTStd",
+                "size": 10,
+                "color": "#ffffff",
+                "weight": 400,
+                "style": "normal",
+                "disableLigatures": true
+              }
+            ],
+            "textAlign": "left",
+            "lineHeight": 1.1,
+            "lineHeightMode": "source",
+            "managedSourceSymbols": []
+          },
+          "copyfitMeasurement": {
+            "status": "measured_copyfit_v3_script_visual_rows",
+            "sourcePdfVisualLineCount": 4,
+            "pageRendererVisualLineCount": 5,
+            "classification": "OVER",
+            "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+            "environment": {
+              "pageNumber": 21,
+              "pdfDocumentPageIndex": 20,
+              "language": "pt-BR",
+              "viewerZoom": "200%",
+              "viewportCssPixels": "1280x720",
+              "devicePixelRatio": 1.25,
+              "fontLoaded": true
+            },
+            "sourceEvidence": {
+              "bboxPt": [
+                86.8406982421875,
+                680.7680053710938,
+                385.2806701660156,
+                725.6880493164062
+              ],
+              "visualBaselinesPt": [
+                689.978,
+                700.978,
+                711.978,
+                722.978
+              ],
+              "spans": 9,
+              "visualRows": 4
+            },
+            "pageRendererEvidence": {
+              "spanKey": "page_21_block_3",
+              "readingMethod": "text rects of the review-highlighted unit",
+              "rangeRectFragments": 14,
+              "distinctVisualRows": 5,
+              "visualRowTopsCssPx": [
+                578.28,
+                587.19,
+                596.09,
+                605,
+                613.91
+              ],
+              "frameHeightCssPx": 36.4
+            },
+            "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+          },
+          "copyfitMeasurementsByZoom": {
+            "100%": {
+              "status": "measured_copyfit_v3_script_visual_rows",
+              "sourcePdfVisualLineCount": 4,
+              "pageRendererVisualLineCount": 5,
+              "classification": "OVER",
+              "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+              "environment": {
+                "pageNumber": 21,
+                "pdfDocumentPageIndex": 20,
+                "language": "pt-BR",
+                "viewerZoom": "100%",
+                "viewportCssPixels": "1280x720",
+                "devicePixelRatio": 1.25,
+                "fontLoaded": true
+              },
+              "sourceEvidence": {
+                "bboxPt": [
+                  86.8406982421875,
+                  680.7680053710938,
+                  385.2806701660156,
+                  725.6880493164062
+                ],
+                "visualBaselinesPt": [
+                  689.978,
+                  700.978,
+                  711.978,
+                  722.978
+                ],
+                "spans": 9,
+                "visualRows": 4
+              },
+              "pageRendererEvidence": {
+                "spanKey": "page_21_block_3",
+                "readingMethod": "text rects of the review-highlighted unit",
+                "rangeRectFragments": 14,
+                "distinctVisualRows": 5,
+                "visualRowTopsCssPx": [
+                  569.73,
+                  574.17,
+                  578.61,
+                  583.05,
+                  587.48
+                ],
+                "frameHeightCssPx": 18.2
+              },
+              "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+            },
+            "200%": {
+              "status": "measured_copyfit_v3_script_visual_rows",
+              "sourcePdfVisualLineCount": 4,
+              "pageRendererVisualLineCount": 5,
+              "classification": "OVER",
+              "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+              "environment": {
+                "pageNumber": 21,
+                "pdfDocumentPageIndex": 20,
+                "language": "pt-BR",
+                "viewerZoom": "200%",
+                "viewportCssPixels": "1280x720",
+                "devicePixelRatio": 1.25,
+                "fontLoaded": true
+              },
+              "sourceEvidence": {
+                "bboxPt": [
+                  86.8406982421875,
+                  680.7680053710938,
+                  385.2806701660156,
+                  725.6880493164062
+                ],
+                "visualBaselinesPt": [
+                  689.978,
+                  700.978,
+                  711.978,
+                  722.978
+                ],
+                "spans": 9,
+                "visualRows": 4
+              },
+              "pageRendererEvidence": {
+                "spanKey": "page_21_block_3",
+                "readingMethod": "text rects of the review-highlighted unit",
+                "rangeRectFragments": 14,
+                "distinctVisualRows": 5,
+                "visualRowTopsCssPx": [
+                  578.28,
+                  587.19,
+                  596.09,
+                  605,
+                  613.91
+                ],
+                "frameHeightCssPx": 36.4
+              },
+              "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+            }
+          }
+        }
+      ],
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 5,
+          "classification": "OVER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows, clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 21,
+            "pdfDocumentPageIndex": 20,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.8406982421875,
+              680.7680053710938,
+              385.2806701660156,
+              725.6880493164062
+            ],
+            "visualBaselinesPt": [
+              689.978,
+              700.978,
+              711.978,
+              722.978
+            ],
+            "spans": 9,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_21_block_3",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 14,
+            "renderedSymbolIds": [
+              "resource.movement"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              578.28,
+              587.19,
+              596.09,
+              605,
+              613.91
+            ],
+            "frameHeightCssPx": 36.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
       "copyfitMeasurement": {
         "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 4,
-        "pageRendererVisualLineCount": 4,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "pageRendererVisualLineCount": 5,
+        "classification": "OVER",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows, clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 21,
           "pdfDocumentPageIndex": 20,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -1614,15 +2423,20 @@
           "visualRows": 4
         },
         "pageRendererEvidence": {
-          "spanKey": "page_21_block_3__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 9,
-          "distinctVisualRows": 4,
+          "spanKey": "page_21_block_3",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 14,
+          "renderedSymbolIds": [
+            "resource.movement"
+          ],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 5,
           "visualRowTopsCssPx": [
             578.28,
-            587.2,
-            596.13,
-            605.03
+            587.19,
+            596.09,
+            605,
+            613.91
           ],
           "frameHeightCssPx": 36.4
         },
