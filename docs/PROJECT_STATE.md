@@ -1,10 +1,60 @@
+## Checkpoint mais recente — PDF reproduz Viewer PT-BR e drafts p.81–84/100–102 (2026-10-24)
+
+- Contrato confirmado: exportar PDF usa o mesmo PageRenderer e o estado PT-BR persistido no Payload, incluindo drafts ativos; a saída segue a visualização normal do localhost. Não foi exportado o livro completo.
+- Corrigi no exportador de páginas o escopo da verificação do snapshot imutável. O job captura traduções globais, mas a checagem agora compara somente unidades da página exportada, evitando falso erro por registros de outras páginas. p.84 passou na rota direta e em snapshot imutável construído com o Payload global: 23/23 alvos idênticos entre Viewer, print e snapshot, mais símbolos, imagens, linhas geométricas e box físico iguais; PDF verificado.
+- Persistência recente: p.81–83 recebeu 14 drafts ativos pendentes (1 EXACT, 1 EXACT e 11 EXACT + 1 UNDER); p.84 recebeu 23 (21 EXACT, 2 UNDER), incluindo o antigo candidato do bloco 10. p.101 tem 198 EXACT pendentes. Nenhuma gravação mudou a coleção `translations`.
+- Estado geral do Payload: 555 traduções (545 PT-BR, 10 EN), 530 reviews (299 pendentes ativos, 5 pendentes arquivados, 226 aprovados). p.100 permanece com 30 EXACT e 1 OVER; p.102 mantém 13 drafts EXACT e seis aprovações existentes.
+- p.102: o crítico verificou diretamente paridade Viewer/PDF 16/16, dois símbolos e dimensões. Permanecem defeitos compartilhados de composição na página, especialmente o título humano aprovado que cruza o divisor; exceção aberta, conteúdo humano intocado.
+- Nenhuma página nova foi certificada. Páginas completas continuam 4/102 (15, 16, 19, 31). Não contar proposta pendente ou presença em PDF como fechamento.
+
+## Checkpoint operacional — Goal ativo; exportação estrita v17 (2026-10-23)
+
+O Goal integral das 102 páginas permanece ativo. Payload GET confirma **533 traduções totais (523 PT-BR, 10 EN)** e **211 reviews (203 aprovados, 8 pendentes)**. O critério atual registra **4/102 páginas efetivamente concluídas** (15, 16, 19 e 31); presença no PDF, propostas e aprovações parciais não contam como página fechada. Não foi comprovada nenhuma página nova concluída desde o checkpoint anterior.
+
+A p.19 tem 24 unidades editoriais aprovadas/publicadas (19 aprovações anteriores preservadas, cinco novas aprovações oficiais em reviews 161–165) e quatro rótulos EXIT arquivados como arte-fonte. A conclusão diz respeito à cobertura e validação da p.19; o livro completo permanece diagnóstico, com bloqueios noutras páginas.
+
+A triagem da p.39 explicou a diferença inicial: das 17 unidades ainda não aprovadas quando havia 5/22, quatro eram GREEN e foram posteriormente aprovadas no fluxo oficial. O estado atual é 9/22; as 13 restantes são EXACT, mas 12 dependem de decisões de termos mecânicos e uma da escolha de título Adjacent Spaces. Não há falha Copyfit entre elas e nenhuma foi aprovada por inferência. A p.47 está em 15/16 candidatas atuais aprovadas; `Counter` continua sem termo PT-BR aprovado, e o bloco-fonte `block_20` ainda tem prosa inglesa sem proposta, portanto a página segue incompleta.
+
+A exportação diagnóstica estrita [v17](../output/proofs/translation-readiness-2026-10-23/full-book-persisted-snapshot-v17-current-payload-strict-diagnostic.pdf) contém **102/102 páginas**, sequência 1–102 sem lacunas/duplicatas, 102 page boxes verificados contra a fonte e zero falhas de rede. “80/102” é progresso transitório, não ausência de páginas. O manifesto identifica 56 páginas sem tradução PT-BR salva, 101 páginas com unidades diagnósticas vazias (7.084 unidades), oito indicadores de overflow em sete páginas e duas unidades reportadas invisíveis nas p.3 e p.87. A exportação usa modo estrito sem fallback inglês; é evidência de diagnóstico, não livro publicado/completo. Ver [relatório v17](../tmp/full-book-persisted-snapshot-v17-current-payload-strict-diagnostic/viewer-export-report.json).
+
+Estado para priorização: **CONCLUÍDA** — p.15, 16, 19 e 31; **PRONTA PARA FECHAMENTO** — nenhuma página comprovada neste ciclo; **AGUARDANDO DECISÃO EDITORIAL** — p.9 (termos do Crawl Mode) e p.39 (termos de movimento/título); **INCOMPLETA** — p.47 e as demais páginas não certificadas. A p.9 está tecnicamente preenchida no snapshot (18 registros, zero vazios, sem overflow/invisíveis), mas seus termos não estão decididos e isso impede aprovação editorial.
+
+## Retomada autorizada e prova da revisão p.27 — 22/10/2026
+
+O usuário retomou explicitamente o Goal integral das 102 páginas e autorizou continuar sem novas perguntas. A unidade p.27 `page_27_block_3` (pedido FIFO #16) foi corrigida no rascunho persistente, salva e reaberta no Rich Block Editor; Copyfit V3 deu 5/5 EXACT, Viewer EN/PT-BR e PDF isolado passaram. O PDF completo ainda não foi exportado. A revisão continua pendente da aprovação editorial humana, sem publicação e sem escrita em `translations` (428 registros e hash preservado). Evidências e distribuição 3+2 da fonte / 4+1 PT-BR: [recibo #16](../output/proofs/translation-readiness-2026-10-22/p027-request16-v11/p027-request16-v11-validation.json) e [progresso do Goal](project-progress/2026-10-22-copyfit-v3-catalog-family-pilot.md).
+
+A próxima execução deve retomar a primeira lacuna de conteúdo indicada no tracker, começando pelas páginas iniciais cuja cobertura está somente parcial. O checkpoint anterior de pausa é histórico e não restringe esta retomada.
 # Estado atual do projeto
 
-**Atualizado:** 2026-10-22.
+**Atualizado:** 2026-10-24.
 
-## Checkpoint operacional — Resolução de Famílias Copyfit V3 e Piloto p.102 (2026-10-22)
+## Checkpoint corrente — p.87 em lote; 9 aprovações oficiais no ciclo (2026-10-24)
 
-O Goal de localização continua **pausado e preservado**.
+- A orquestração crítica deve trabalhar unidades relacionadas em lote, preservar evidência PASS até mudança material, corrigir e revalidar só o que foi afetado e transformar PASS completo em gravação oficial no Payload. PASS semântico sozinho não é aprovação; dúvidas ficam editáveis/rastreáveis.
+- Na p.87, nove propostas da v2 passaram pelo Reviewer oficial e foram persistidas desde o início do lote; as seis últimas foram `unit-02`/`unit-03` do bloco de variantes, `block_5`, `block_11`, `block_17` e `block_21`. Todas tinham Copyfit EXACT, `pendingTerms=[]`, validação crítica reutilizada do lote e gravação confirmada. Propostas caiu 1282→1273; Aprovados subiu 227→236; traduções no Payload 555→564. A unidade humana prévia foi preservada. UNDER, OVER e itens com termos/ambiguidade pendentes permanecem em revisão.
+- A exportação de página após esse lote passou com 21 linhas agrupadas em Viewer e impressão, box da fonte 820,346 pt, registros PT-BR confirmados no Payload e `pdfVerification=true`. O material não fecha a p.87: propostas não aprovadas continuam como lacunas no modo diagnóstico. Algumas unidades aprovadas ainda mostram “Validação técnica: Pendente” no detalhe da interface apesar das evidências técnicas; esta discrepância permanece aberta.
+- Outros resultados deste ciclo: hit target de NATUREZA na p.14 corrigido e validado abrindo no Rich Block Editor; recuo da p.18 já coincidia com EN, sem alteração. Seis sincronizações locais foram resolvidas usando “Usar Payload localmente”; zero pendências locais após recarregar, com backup recuperável. Sem gravação no Payload por essa operação.
+- Páginas efetivamente concluídas continuam **4/102**; aprovação parcial não equivale a página concluída. Próximo trabalho: avançar o lote existente e reutilizar validações sem reabrir análise inalterada.
+
+## Checkpoint corrente — p.2 concluída em cobertura; lote p.14 priorizado (22/10/2026)
+
+Payload GET confirma 471 traduções PT-BR e 150 revisões (142 aprovadas, 8 pendentes). A p.2 agora tem 26/26 registros PT-BR: preservei os 24 preexistentes e aprovei oficialmente os dois rótulos que faltavam (`Design de Jogo:` e `Testadores de Jogo:`; reviews 149–150, translations 477–478). Viewer e exportações integrais EN/PT-BR da página foram comparados; o PDF PT-BR confirmou os registros persistidos. Esta conclusão de cobertura não cria recibos retroativos para os 24 registros antigos.
+
+O diagnóstico auxiliar do exportador foi alinhado ao agrupador compartilhado de linhas visuais do Copyfit V3. Para p.17 block49, Viewer e impressão agora medem cinco linhas; o crítico confirmou que a tinta raster fica dentro do frame, embora a união dos Range rectangles ultrapasse o frame nominal em ~2,30 pt. Esse valor está explicitamente identificado como limite de Range, não como clipping; unidade permanece EXACT 5/5, sem alteração de texto ou geometria aprovada.
+
+Prioridade de rendimento: fechar o conjunto de propostas remanescentes da p.14 como página, reaproveitando medições/validações vigentes e deixando termos ambíguos pendentes; depois seguir às lacunas seguintes. p.17 segue parcial; blocks60/review117 e 58/review141, além de termos de Encounter Action, Loot LVL e Range, permanecem preservados.
+
+## Checkpoint histórico — p.14 e avanço para p.16 (22/10/2026)
+
+Payload read-only confirma 455 traduções e 134 revisões. A p.14 tem 18 unidades aprovadas e publicadas, entre elas block2 (review 133 / translation 461, Copyfit 3/3 EXACT) e block9 (review 134 / translation 462, 1/1 EXACT); a tradução humana block22 permanece intacta. O PDF isolado da p.14 foi exportado depois dessas aprovações e verificado, mas a página continua parcial.
+
+A próxima lacuna sequencial está na p.16. A legenda B `page_16_block_1__pt-BR` não tem tradução nem revisão no Payload. A proposta antiga existe, porém usa `lineHeight: 1` diante de baselines-fonte de 11 pt; sua classificação 6/6 anterior não é evidência Copyfit V3 válida para a versão corrigida. Reusar o conteúdo, corrigir a métrica no candidato preservado, medir no Viewer real e revisar criticamente antes de qualquer aprovação. O histórico de pausa e os estados antigos da p.14 abaixo estão supersedidos. Quatro conflitos de sync local em p.3/p.9/p.13 continuam preservados.
+
+## Checkpoint histórico anterior à retomada — Resolução de Famílias Copyfit V3 e Piloto p.102 (2026-10-22)
+
+Este checkpoint foi escrito antes da retomada explícita do Goal pelo usuário em 22/10/2026. O Goal está **ativo**; o registro histórico da pausa de 17/10 permanece abaixo apenas como contexto.
+Em 22/10, as propostas p.2 (`Game Design:` e `Playtesters:`) permanecem pendentes após Copyfit V3 EXACT 1/1 e revisão crítica de chave/bbox/span. A capa p.1 e as sete traduções existentes + overlay da p.12 foram verificadas no Viewer; p.12 passou revisão crítica independente, mas exportação/certificação continuam pendentes. Na p.13, 36 traduções já persistidas aparecem no Viewer; 23 revisões têm aprovação ativa e uma revisão antiga está arquivada apesar do valor continuar salvo, portanto a unidade não foi recriada.
+O lote atual da p.14 tem 26 propostas: 25 medem EXACT e o intro mede 4/3 UNDER, justificado pelo espaço vertical livre e leading-fonte de 11 pt. Copyfit V3 foi conferido em 100%/200% com baselines do PDF e linhas reais do PageRenderer. A crítica independente revisou cinco candidatas recentes e encontrou uma nuance em “cleaning up the Encounter”; a proposta agora usa “desmontar o Encontro” e mantém a distinção entre desmontar e encerrar marcada para revisão. A Fase de Preparação (`page_14_block_1__pt-BR`) mede 7/7 EXACT nos dois zooms, aguardando crítica semântica. Todas as propostas seguem editorialmente pendentes. `Crawl Mode` e termos locais permanecem sem decisão global. A tradução aprovada `page_14_block_22__pt-BR` continua intacta; nenhuma tradução final foi gravada.
 A causa raiz do bloqueio generalizado de aprovação foi diagnosticada e corrigida: propostas com carimbos de data diferentes no nome de arquivo não estavam sendo agrupadas na mesma família em `scripts/build_translation_review_catalog.mjs`, deixando versões antigas v1 (não medidas) como duplicatas zumbis no catálogo ativo.
 Após a correção da regex de `familyPath`, o catálogo foi consolidado para 1075 candidatos ativos (removendo as duplicatas v1).
 Na página 102, as pendências de medição foram zeradas (0 gaps). O teste piloto real no Viewer (`http://127.0.0.1:8080/`) confirmou PASS na unidade `page_102_block_1__pt-BR` (botão "Aprovar unidade" habilitado e sem alerta de bloqueio), enquanto controles negativos (`OVER` e ausência de medição) mantêm o botão devidamente desabilitado.
@@ -112,3 +162,4 @@ Aguardar tua avaliação do piloto p.83 antes de ativar outros placements. Em pa
 - IDs persistentes representam unidades editoriais, não linhas físicas.
 - Candidatos geométricos são evidência, não bugs nem correções automáticas.
 - Viewer, persistência e export são verificações distintas; não declarar o livro inteiro aprovado a partir de uma amostra.
+

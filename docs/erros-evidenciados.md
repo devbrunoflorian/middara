@@ -419,3 +419,11 @@ O problema afetava **605 das 1077 unidades do catálogo**, impedindo a aprovaç�
 - Testes automatizados em múltiplas páginas (p. 16, 20, 21, 26) confirmaram aprovações imediatas com status 200.
 
 
+
+## UI-REVIEW-RULER-OVERLAY — régua cobre o painel de revisão (adiado)
+
+- **Evidência:** captura do Viewer enviada em 2026-10-22; com “Propostas e exceções” aberto e a régua ativa, as guias horizontal e vertical aparecem por cima do cabeçalho e da lista de propostas.
+- **Impacto:** ruído visual e possível obstrução da navegação/revisão; não altera os dados de tradução. Prioridade baixa enquanto o lote PT-BR avança.
+- **Ajuste futuro:** restringir a régua à superfície do PDF ou suspendê-la enquanto o painel de revisão está aberto, preservando seu uso no Viewer/Editor.
+- **Validação ao corrigir:** abrir/fechar Reviewer com régua ativa em zooms diferentes; confirmar que nenhuma guia cobre cabeçalho, lista ou botões e que medir/arrastar no canvas continua funcionando.
+- **Estado:** pendente; registrado para execução após um ponto seguro do lote, conforme pedido do usuário. Sem mudança de código neste ciclo.

@@ -13,6 +13,7 @@
 | **Objectives** | Objetivos |
 | **Standup** | Miniatura de Papel |
 | **Loot** | Saque/Saques |
+| **Line of Sight** | Linha de Visão |
 | **End Conditions** | Condições Finais |
 | **WIN CONDITION** | CONDIÇÃO DE VITÓRIA |
 | **LOSE CONDITION** | CONDIÇÃO DE DERROTA |
@@ -23,6 +24,7 @@
 | **Venture Forth** | Aventurar-se |
 | **Story Round** | Rodada de História |
 | **White Valts** | Criptas Brancas |
+| **Adventure Mechanic** | Mecânica de Aventura |
 | **Adventurers** | Aventureiros |
 | **Hindering Terrain** | Terreno Difícil |
 | **Muck Terrain** | Terreno de Lodo |
@@ -36,7 +38,9 @@
 | **White Spires** | Agulhas Brancas |
 | **Grim Deacons** | Diáconos Sombrios |
 | **Demiurge** | Demiurgo |
+| **Gain** *(verbo mecânico; infletir conforme o contexto)* | obter |
 | **Restore** | Restaurar |
+| **Restore Adventurers** | Restaurar Aventureiros |
 | **Draw** | Compre |
 | **UNDERGROUND** | SUBTERRÂNEO |
 | **WILDERNESS** | NATUREZA |
@@ -69,11 +73,20 @@
 
 Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir automaticamente o verbo isolado *refresh* como “manutenção”; avaliar cada ocorrência pelo contexto.
 
+**Decisão confirmada pela equipe de tradução (22/10/2026):** `Restore Adventurers` → **Restaurar Aventureiros**, consistente com `Restore` → **Restaurar**. Esta decisão fixa a terminologia do Rulebook; não autoriza modificar arquivos intermediários do Livro de Aventura nem sobrescrever traduções humanas aprovadas.
+
+
+**Decisões Payload preservadas no glossário oficial (22/10/2026):** `Gain` → **obter** (decision id 4; manter inflexão gramatical natural, como “obtém/obtido”) e `Adventure Mechanic` → **Mecânica de Aventura** (decision id 8). As decisões já estavam aprovadas no Payload e foram apenas sincronizadas com esta tabela; não publicam unidades nem autorizam alterar texto humano salvo.
+
 **Decisão do usuário (15/10/2026):** para a mecânica *Exhaust*, usar o verbo **exaustar**; em rótulos de Tag, manter a forma verbal/capitalização natural, por exemplo **EXAUSTAR**. Esta decisão não renomeia IDs semânticos como `action.exhaust` e não autoriza sobrescrever traduções humanas já salvas.
 
 **Decisão do usuário (18/10/2026):** para a classificação de itens (*Mundane, Common, Uncommon, Rare*) e faixas de recompensa, o termo **Tier** é fixado canonicamente como **Tier** (mantendo-se no plural **Tiers**). Esta decisão preserva a distinção mecânica essencial em relação a **Nível / LVL** (*Loot Level* → Nível de Saque, *Discipline Level* → Nível de Disciplina, *Elevation Level* → Nível de Elevação).
 
 **Decisão do usuário (19/10/2026):** em referências editoriais cruzadas a páginas, seções, tabelas, diagramas e outras partes do manual, traduzir sempre "See" como **Veja**. Não utilizar "Consulte" nem "Veja em". Esta regra se aplica estritamente a referências editoriais e não altera ocorrências conversacionais de outros sentidos do verbo consultar. Preservar o formato, pontuação e o alvo da referência.
+
+**Decisão do usuário (22/10/2026):** `Line of Sight` → **Linha de Visão** (Payload `translation-glossary-decisions`, id 59). Esta equivalência terminológica não aprova unidades de tradução nem autoriza sobrescrever conteúdo humano já salvo.
+
+**Decisão aprovada na central (Payload `translation-glossary-decisions`, id 31):** `Spawning` → **Surgimento**. A decisão cobre a equivalência do termo e não aprova unidades que a contenham nem autoriza sobrescrever traduções humanas.
 
 ## Decisões complementares registradas na central
 
