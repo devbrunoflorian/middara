@@ -160,6 +160,8 @@ const PREFERRED_EDITOR_ALIASES: Record<string, string[]> = {
   'combat.skull2': ['skull2', 'caveira2', 'bounty-skull', 'bountyskull'],
   'combat.damage-star': ['damage-star', 'estrela-de-dano'],
   'combat.shield': ['defense-shield', 'escudo-de-defesa'],
+  'stat.armor': ['armor-value-icon', 'armor-value', 'armor-icon', 'ícone-valor-armadura'],
+  'stat.defense': ['defense-value-icon', 'defense-value', 'defense-icon', 'ícone-valor-defesa'],
   'weapon.hand': ['hand-requirement', 'requisito-de-mao'],
   'weapon.hand.one': ['1hand', 'one-hand', 'one-handed', 'uma-mao', '1-mao'],
   'weapon.hand.two': ['2hand', 'two-hand', 'two-handed', 'duas-maos', '2-maos'],

@@ -1,7 +1,7 @@
 import type { SpanOverride } from '../components/RichSpanEditor';
 
 /** Existing Payload JSON envelope; legacy arrays remain readable. */
-export function decodeOverrideData(stored:unknown):Pick<SpanOverride,'segments'|'textAlign'|'lineHeight'|'lineHeightMode'|'managedSourceSymbols'>|null {
+export function decodeOverrideData(stored:unknown):Pick<SpanOverride,'segments'|'textAlign'|'lineHeight'|'lineHeightMode'|'managedSourceSymbols'|'paragraphSpacingPt'>|null {
   const data=stored as Partial<SpanOverride>|null;
   const segments=Array.isArray(stored) ? stored : data?.segments;
   if(!Array.isArray(segments))return null;
@@ -13,10 +13,12 @@ export function decodeOverrideData(stored:unknown):Pick<SpanOverride,'segments'|
     lineHeightMode:!Array.isArray(stored) && (data?.lineHeightMode === 'source' || data?.lineHeightMode === 'custom')
       ? data.lineHeightMode : undefined,
     managedSourceSymbols:Array.isArray(data?.managedSourceSymbols) ? data.managedSourceSymbols.filter((id):id is string=>typeof id==='string') : undefined,
+    paragraphSpacingPt:!Array.isArray(stored) && typeof data?.paragraphSpacingPt === 'number' && Number.isFinite(data.paragraphSpacingPt)
+      ? Math.max(0, data.paragraphSpacingPt) : undefined,
   };
 }
 
 export function encodeOverrideData(override:SpanOverride) {
   return {schemaVersion:2,segments:override.segments,textAlign:override.textAlign,lineHeight:override.lineHeight,
-    lineHeightMode:override.lineHeightMode,managedSourceSymbols:override.managedSourceSymbols};
+    lineHeightMode:override.lineHeightMode,managedSourceSymbols:override.managedSourceSymbols,paragraphSpacingPt:override.paragraphSpacingPt};
 }

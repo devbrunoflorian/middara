@@ -45,11 +45,12 @@ function canonical(value: unknown): string {
 
 function fingerprint(data: Record<string, unknown>): string {
   const snapshot = {
-    spanKey: data.spanKey,
+    spanKey: String(data.spanKey ?? '').replace(/__pt-BR$/u, ''),
     bbox: data.bbox,
     textAlign: data.textAlign,
     lineHeight: data.lineHeight,
     lineHeightMode: data.lineHeightMode,
+    paragraphSpacingPt: data.paragraphSpacingPt ?? null,
     managedSourceSymbols: data.managedSourceSymbols ?? [],
     segments: data.segments,
   }
@@ -127,9 +128,10 @@ function fakePayload() {
         return { docs: payloadState.reviews.filter(doc => doc.reviewKey === key) }
       }
       const conditions = where.and ?? []
-      const spanKey = conditions.find((condition: any) => condition.spanKey)?.spanKey?.equals
+      const spanKeyCondition = conditions.find((condition: any) => condition.spanKey)?.spanKey
+      const spanKeys = spanKeyCondition?.in ?? (spanKeyCondition?.equals ? [spanKeyCondition.equals] : [])
       const language = conditions.find((condition: any) => condition.language)?.language?.equals
-      return { docs: payloadState.translations.filter(doc => doc.spanKey === spanKey && doc.language === language) }
+      return { docs: payloadState.translations.filter(doc => spanKeys.includes(doc.spanKey) && doc.language === language) }
     }),
     create: vi.fn(async ({ collection, data }: { collection: string; data: Record<string, any> }) => {
       const doc = { id: `${collection}-${payloadState.reviews.length + payloadState.translations.length + 1}`, ...data }

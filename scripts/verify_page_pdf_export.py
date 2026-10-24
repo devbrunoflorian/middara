@@ -61,7 +61,14 @@ def contains_text_fragment(expected: str, extracted: str) -> bool:
     def compact_list_marker_space(value: str) -> str:
         return re.sub(r"(?<!\w)([a-z]\.)(\s+)(?=[A-Z\u00c0-\u00de])", r"\1", value)
 
-    return compact_list_marker_space(normalized_expected) in compact_list_marker_space(normalized_extracted)
+    def compact_numbered_phase_marker_space(value: str) -> str:
+        # The phase numeral and its heading occupy separate PageRenderer grid
+        # columns. Text extraction may omit the visual advance between them.
+        return re.sub(r"(?<!\w)([1-4]\.)(\s+)(?=[A-Z\u00c0-\u00de])", r"\1", value)
+
+    expected_compact = compact_numbered_phase_marker_space(compact_list_marker_space(normalized_expected))
+    extracted_compact = compact_numbered_phase_marker_space(compact_list_marker_space(normalized_extracted))
+    return expected_compact in extracted_compact
 
 
 def font_evidence(document: pymupdf.Document, page: pymupdf.Page) -> list[dict[str, object]]:

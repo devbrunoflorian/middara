@@ -6,6 +6,7 @@ import { access, readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative as relativePath, sep } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { verifySnapshotRenderTargets } from './lib/snapshot-render-verification.mjs';
+import { groupPageRendererVisualLines } from '../apps/web/src/editorialStructurePrevalidator.mjs';
 
 function argsFrom(argv) {
   const result = {
@@ -22,6 +23,7 @@ function argsFrom(argv) {
     printScreenshot: undefined,
     metricsOutput: undefined,
     captureOnly: false,
+    betaDiagnostic: false,
     snapshot: undefined,
   };
   for (let i = 0; i < argv.length; i += 1) {
@@ -32,6 +34,10 @@ function argsFrom(argv) {
       result.captureOnly = true;
       continue;
     }
+    if (key === '--beta-diagnostic') {
+      result.betaDiagnostic = true;
+      continue;
+    }
     if (value === undefined || value.startsWith('--')) throw new Error(`Missing value for ${key}`);
     const name = ({ '--page': 'page', '--language': 'language', '--profile': 'profile', '--output': 'output', '--base-url': 'baseUrl', '--api-url': 'apiUrl', '--source-pdf': 'sourcePdf', '--browser': 'executablePath', '--debug-screenshot': 'debugScreenshot', '--viewer-screenshot': 'viewerScreenshot', '--print-screenshot': 'printScreenshot', '--metrics-output': 'metricsOutput', '--snapshot': 'snapshot' })[key];
     if (!name) throw new Error(`Unknown option: ${key}`);
@@ -40,6 +46,7 @@ function argsFrom(argv) {
   }
   if (!Number.isInteger(result.page) || result.page < 1 || result.page > 102) throw new Error('Use --page with an integer from 1 to 102.');
   if (!['en', 'pt-BR'].includes(result.language)) throw new Error('Use --language en or pt-BR.');
+  if (result.betaDiagnostic && result.language !== 'pt-BR') throw new Error('--beta-diagnostic is only valid with --language pt-BR.');
   if (result.profile !== 'visual') throw new Error('Only the visual PDF profile is currently available.');
   if (!result.output) result.output = `output/pdf/page-${String(result.page).padStart(3, '0')}-${result.language}-visual.pdf`;
   result.output = resolve(result.output);
@@ -54,8 +61,83 @@ function translationPlainText(data) {
   return segments.map(segment => segment.symbolId ? '' : String(segment.text ?? '')).join('');
 }
 
+function rendererKeyForReviewCandidate(candidate, pageData) {
+  const canonicalKey = String(candidate.copyfitCanonicalSpanKey ?? '');
+  const blockFromCanonical = canonicalKey.match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u);
+  const blockFromProposal = String(candidate.spanKey ?? '').match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u);
+  if (/^page_\d+_unit_/u.test(canonicalKey)) return canonicalKey.endsWith('__pt-BR') ? canonicalKey : `${canonicalKey}__pt-BR`;
+  if (/^page_\d+_unit_/u.test(String(candidate.spanKey ?? ''))) {
+    return candidate.spanKey.endsWith('__pt-BR') ? candidate.spanKey : `${candidate.spanKey}__pt-BR`;
+  }
+  const blockMatch = blockFromCanonical ?? blockFromProposal;
+  const blockIndex = Number.isInteger(candidate.blockIndex) ? candidate.blockIndex
+    : blockMatch ? Number(blockMatch[1]) : null;
+  if (blockIndex !== null && blockIndex >= 0) {
+    const block = pageData.blocks[blockIndex];
+    return block?.editorKey ? `${block.editorKey}__pt-BR` : `page_${candidate.pageNumber}_block_${blockIndex}`;
+  }
+  return canonicalKey || String(candidate.spanKey ?? '');
+}
+
+function activePendingDraftsForPage(snapshot, pageData, pageNumber, translations) {
+  const catalog = snapshot?.translationReviewCatalog;
+  if (!catalog || !Array.isArray(catalog.proposals)) return [];
+  const humanKeys = new Set(translations
+    .filter(record => record.language === 'pt-BR')
+    .flatMap(record => {
+      const key = String(record.spanKey ?? '');
+      return [key, key.replace(/__pt-BR$/u, '')];
+    }));
+  const records = (snapshot.translationReviews ?? []).filter(record => Number(record.pageNumber) === pageNumber);
+  const candidates = catalog.proposals.flatMap(proposal => proposal.candidates ?? [])
+    .filter(candidate => Number(candidate.pageNumber) === pageNumber);
+  const eligible = [];
+  for (const candidate of candidates) {
+    const record = records.find(item => item.reviewKey === candidate.reviewKey
+      && item.proposalId === candidate.proposalId
+      && String(item.proposalVersion) === String(candidate.proposalVersion)
+      && String(item.spanKey ?? '').replace(/__pt-BR$/u, '') === String(candidate.spanKey ?? '').replace(/__pt-BR$/u, ''));
+    if (!record || record.approvalStatus !== 'pending' || record.reviewDisposition === 'archived'
+      || record.publication || candidate.diagnosticBlank
+      || String(candidate.copyfitClassification ?? '').toUpperCase() === 'OVER'
+      || /^(?:blocked|failed)(?:[_-]|$)|(?:^|[_-])dtp[_-]exception[_-]open/iu.test(String(candidate.technicalStatus ?? ''))) continue;
+    const rendererKey = rendererKeyForReviewCandidate(candidate, pageData);
+    const ownershipKeys = [
+      rendererKey,
+      rendererKey.replace(/__pt-BR$/u, ''),
+      candidate.spanKey,
+      String(candidate.spanKey ?? '').replace(/__pt-BR$/u, ''),
+      candidate.copyfitCanonicalSpanKey,
+      String(candidate.copyfitCanonicalSpanKey ?? '').replace(/__pt-BR$/u, ''),
+    ].filter(Boolean).map(String);
+    if (ownershipKeys.some(key => humanKeys.has(key))) continue;
+    const override = record.data ?? candidate.data;
+    if (!Array.isArray(override?.segments)) continue;
+    const renderedSpanKey = rendererKey.endsWith('__pt-BR') ? rendererKey : `${rendererKey}__pt-BR`;
+    eligible.push({ ...record, spanKey: rendererKey, renderedSpanKey, data: override });
+  }
+  return eligible;
+}
+
+async function fetchCollectionSnapshot(apiUrl, slug) {
+  const url = new URL(`/api/${slug}`, apiUrl);
+  url.searchParams.set('limit', '5000');
+  const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
+  if (!response.ok) throw new Error(`Payload returned ${response.status} while loading ${slug}.`);
+  const body = await response.json();
+  if (!Array.isArray(body.docs) || (Number.isInteger(body.totalDocs) && body.totalDocs > body.docs.length)) {
+    throw new Error(`Payload ${slug} snapshot is incomplete.`);
+  }
+  return body.docs;
+}
+
 function normalizeText(value) {
-  return value.replace(/\s+/gu, ' ').trim();
+  return value
+    .replace(/\s+/gu, ' ')
+    // Numbered phases use a source-positioned marker cell; the DOM text nodes
+    // remain adjacent even though the fixed column supplies the visual gap.
+    .replace(/(?<!\w)([1-4]\.)(?=[A-Z\u00c0-\u00de])/gu, '$1 ')
+    .trim();
 }
 
 function normalizedOrigin(value) {
@@ -97,7 +179,6 @@ if (config.language === 'pt-BR') {
     const payload = await response.json();
     docs = (payload.docs ?? []).filter(doc => String(doc.spanKey ?? '').startsWith(prefix));
   }
-  if (!docs.length && !immutableSnapshot) throw new Error(`No saved PT-BR translation records found for page ${config.page}.`);
   expectedTranslation = docs
     .map(doc => translationPlainText(doc.data))
     .filter(text => text.length >= 20 && !Array.from(text).some(char => {
@@ -105,7 +186,32 @@ if (config.language === 'pt-BR') {
       return code >= 0xE000 && code <= 0xF8FF;
     }))
     .sort((a, b) => b.length - a.length)[0] ?? '';
-  if (!expectedTranslation && !immutableSnapshot) throw new Error(`Page ${config.page} has no ordinary PT-BR prose to verify in the viewer.`);
+  let reviewSnapshot = immutableSnapshot;
+  if (!reviewSnapshot) {
+    const catalogUrl = new URL('/translation-review/catalog.json', config.baseUrl);
+    const [translationReviews, catalogResponse] = await Promise.all([
+      fetchCollectionSnapshot(config.apiUrl, 'translation-reviews'),
+      fetch(catalogUrl, { signal: AbortSignal.timeout(20000) }),
+    ]);
+    if (!catalogResponse.ok) throw new Error(`Viewer review catalog returned ${catalogResponse.status}.`);
+    reviewSnapshot = {
+      translations: docs,
+      translationReviews,
+      translationReviewCatalog: await catalogResponse.json(),
+    };
+  }
+  const reviewDrafts = activePendingDraftsForPage(reviewSnapshot, pageData, config.page,
+    immutableSnapshot?.translations ?? docs);
+  if (!expectedTranslation && reviewDrafts.length) {
+    expectedTranslation = reviewDrafts
+      .map(doc => translationPlainText(doc.data))
+      .filter(text => text.length >= 20 && !Array.from(text).some(char => {
+        const code = char.codePointAt(0) ?? 0;
+        return code >= 0xE000 && code <= 0xF8FF;
+      }))
+      .sort((a, b) => b.length - a.length)[0] ?? '';
+  }
+  if (!expectedTranslation && !immutableSnapshot) throw new Error(`Page ${config.page} has no visible PT-BR translation or current pending review draft to verify.`);
 }
 
 const launchOptions = { headless: true };
@@ -137,6 +243,12 @@ try {
           && (!language || doc.language === language));
       } else if (requestUrl.pathname === '/api/symbol-alias-settings') {
         docs = immutableSnapshot.symbolAliasSettings ?? [];
+      } else if (requestUrl.pathname === '/api/translation-reviews') {
+        docs = immutableSnapshot.translationReviews ?? [];
+      } else if (requestUrl.pathname === '/api/translation-review-requests') {
+        docs = immutableSnapshot.translationReviewRequests ?? [];
+      } else if (requestUrl.pathname === '/api/translation-glossary-decisions') {
+        docs = immutableSnapshot.translationGlossaryDecisions ?? [];
       } else {
         await route.fulfill({ status: 404, contentType: 'application/json', body: JSON.stringify({ errors: [{ message: 'Not included in export snapshot.' }] }) });
         return;
@@ -147,6 +259,19 @@ try {
         headers: { 'Access-Control-Allow-Origin': pageOrigin, 'Access-Control-Allow-Credentials': 'true', 'Vary': 'Origin' },
         body: JSON.stringify({ docs, totalDocs: docs.length, limit: docs.length, page: 1, totalPages: 1, hasNextPage: false, hasPrevPage: false }),
       });
+    });
+    await context.route('**/translation-review/catalog.json', async route => {
+      const requestUrl = new URL(route.request().url());
+      if (requestUrl.origin !== pageOrigin) {
+        await route.continue();
+        return;
+      }
+      const catalog = immutableSnapshot.translationReviewCatalog;
+      if (!catalog) {
+        await route.fulfill({ status: 404, contentType: 'application/json', body: '{}' });
+        return;
+      }
+      await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(catalog) });
     });
     await context.route('**/pages/page_*/*', async route => {
       const requestUrl = new URL(route.request().url());
@@ -192,7 +317,9 @@ try {
       if (requestUrl.pathname.startsWith('/api/')) apiRequestOrigins.add(requestUrl.origin);
     } catch {}
   });
-  const appResponse = await page.goto(config.baseUrl, { waitUntil: 'domcontentloaded' });
+  const viewerUrl = new URL(config.baseUrl);
+  if (config.betaDiagnostic) viewerUrl.searchParams.set('diagnosticBlankUntranslated', '1');
+  const appResponse = await page.goto(viewerUrl.toString(), { waitUntil: 'domcontentloaded' });
   if (!appResponse?.ok()) throw new Error(`Viewer returned ${appResponse?.status() ?? 'no response'} at ${config.baseUrl}`);
   await page.waitForFunction(() => !!document.querySelector('input.page-input') && !!document.querySelector('.page-container img'));
 
@@ -222,7 +349,12 @@ try {
     await page.waitForFunction(fragment => {
       const content = normalizeText(document.querySelector('.page-container')?.textContent ?? '');
       return content.includes(fragment);
-      function normalizeText(value) { return value.replace(/\s+/gu, ' ').trim(); }
+      function normalizeText(value) {
+        return value
+          .replace(/\s+/gu, ' ')
+          .replace(/(?<!\w)([1-4]\.)(?=[A-Z\u00c0-\u00de])/gu, '$1 ')
+          .trim();
+      }
     }, expectedFragment, { timeout: 60000 });
   }
 
@@ -230,6 +362,48 @@ try {
   if (viewerLocale !== config.language) {
     throw new Error(`Viewer locale ${viewerLocale} does not match requested export language ${config.language}.`);
   }
+  if (config.betaDiagnostic) {
+    await page.waitForFunction(() => document.querySelector('.app-container')?.getAttribute('data-ptbr-diagnostic-mode') === 'blank-untranslated');
+    await page.waitForFunction(() => document.querySelector('.page-container')?.getAttribute('data-diagnostic-blank-keys') !== null);
+  }
+
+  const betaArtworkPendingLabels = config.betaDiagnostic && config.page === 100
+    ? await page.locator('.page-container').evaluate(container => {
+      const labels = [
+        { id: 'table-11', text: 'ARTE EM INGLÊS — PT-BR PENDENTE', x: 286, y: 262, width: 104 },
+        { id: 'table-13', text: 'ARTE EM INGLÊS — PT-BR PENDENTE', x: 675, y: 362, width: 140 },
+      ];
+      for (const label of labels) {
+        const badge = document.createElement('div');
+        badge.className = 'beta-artwork-pending-label';
+        badge.dataset.betaArtworkPending = label.id;
+        badge.textContent = label.text;
+        Object.assign(badge.style, {
+          position: 'absolute',
+          left: `${label.x}pt`,
+          top: `${label.y}pt`,
+          width: `${label.width}pt`,
+          boxSizing: 'border-box',
+          zIndex: '1000002',
+          display: 'block',
+          padding: '1px 2px',
+          border: '0.5pt solid #b78a2e',
+          borderRadius: '2pt',
+          background: 'rgba(255, 245, 211, 0.96)',
+          color: '#5b430b',
+          font: '600 5pt/1.05 Arial, sans-serif',
+          letterSpacing: '0.1px',
+          whiteSpace: 'nowrap',
+          pointerEvents: 'none',
+          userSelect: 'none',
+          WebkitPrintColorAdjust: 'exact',
+          printColorAdjust: 'exact',
+        });
+        container.appendChild(badge);
+      }
+      return labels.length;
+    })
+    : 0;
 
   await page.evaluate(() => document.fonts.ready);
   await page.getByTitle('Fit to Screen').click();
@@ -237,8 +411,9 @@ try {
 
   if (immutableSnapshot?.verifyRenderedSnapshot) {
     const snapshotRecords=immutableSnapshot.translations??[];
+    const pageSpanPrefix=`page_${config.page}_`;
     const snapshotKeys=new Set(snapshotRecords
-      .filter(doc=>doc.language===config.language)
+      .filter(doc=>doc.language===config.language&&String(doc.spanKey??'').startsWith(pageSpanPrefix))
       .map(doc=>doc.spanKey));
     const supersededLegacyKeys=new Set();
     for(const [blockIndex,block] of (pageData.blocks??[]).entries()){
@@ -254,20 +429,37 @@ try {
     // Preserve legacy parent records in the snapshot, but don't require them
     // to render once every child editorial unit has its own active override.
     const expectedRecords=snapshotRecords.filter(doc=>
-      doc.language===config.language&&!supersededLegacyKeys.has(doc.spanKey),
+      doc.language===config.language
+      &&String(doc.spanKey??'').startsWith(pageSpanPrefix)
+      &&!supersededLegacyKeys.has(doc.spanKey),
     );
     const snapshotChecks=expectedRecords.map(doc=>({
       spanKey:doc.spanKey,
       expected:normalizeText((doc.data.segments??[]).map(s=>s.symbolId?`[symbol:${s.symbolId}]`:s.text||'').join('')),
     }));
+    if (config.language === 'pt-BR') {
+      const humanKeys = new Set(snapshotRecords.filter(doc => doc.language === 'pt-BR'&&String(doc.spanKey??'').startsWith(pageSpanPrefix)).flatMap(doc => [
+        String(doc.spanKey ?? ''), String(doc.spanKey ?? '').replace(/__pt-BR$/u, ''),
+      ]));
+      for (const draft of activePendingDraftsForPage(immutableSnapshot, pageData, config.page, snapshotRecords)) {
+        const key = String(draft.renderedSpanKey ?? draft.spanKey ?? '');
+        if (humanKeys.has(key) || humanKeys.has(key.replace(/__pt-BR$/u, ''))) continue;
+        snapshotChecks.push({
+          spanKey: key,
+          expected: normalizeText((draft.data.segments ?? []).map(segment => segment.symbolId ? `[symbol:${segment.symbolId}]` : segment.text || '').join('')),
+        });
+      }
+    }
     const renderedTargets=await page.locator('.page-container').evaluate(container=>{
       const normalize=value=>value.replace(/\s+/gu,' ').trim();
       const walk=node=>{
         if(node.nodeType===Node.TEXT_NODE)return node.textContent||'';
         if(!(node instanceof Element))return '';
         if(node.getAttribute('aria-hidden')==='true'||getComputedStyle(node).visibility==='hidden')return '';
+        if(node.tagName==='BR')return ' ';
         const id=node.getAttribute('data-symbol-id');if(id)return `[symbol:${id}]`;
-        return [...node.childNodes].map(walk).join('');
+        const children=[...node.childNodes].map(walk).join('');
+        return node.classList.contains('credit-paragraph')?` ${children} `:children;
       };
       return [...container.querySelectorAll('[data-rendered-translation-key]')].map(element=>({
         spanKey:element.getAttribute('data-rendered-translation-key'),
@@ -280,10 +472,11 @@ try {
         throw new Error(`Requested snapshot ${check.spanKey} is not rendered exactly once with the expected text/symbol order; refusing source fallback. ${JSON.stringify(check)}`);
       }
     }
-    console.log('[page-export] edited snapshot text/symbol order verified',expectedRecords.length);
+    console.log('[page-export] edited snapshot text/symbol order verified',verification.length);
   }
 
-  const capturePageMetrics = () => page.locator('.page-container').evaluate(container => {
+  const capturePageMetrics = async () => {
+    const metrics = await page.locator('.page-container').evaluate(container => {
     const pageRect = container.getBoundingClientRect();
     const relativeRect = element => {
       const rect = element.getBoundingClientRect();
@@ -307,46 +500,33 @@ try {
     const translationTargets = [...container.querySelectorAll('[data-rendered-translation-key]')].map(element => {
       const frame = element.closest('.block-container,.credit-field') ?? element;
       const frameRect = toPtRect(frame.getBoundingClientRect());
-      const range = document.createRange();
-      range.selectNodeContents(element);
-      const fragments = [...range.getClientRects()].filter(rect => rect.width > 0 && rect.height > 0);
-      const lines = [];
-      for (const fragment of fragments) {
-        const top = fragment.top - pageRect.top;
-        let line = lines.find(candidate => Math.abs(candidate.topPx - top) < 1);
-        if (!line) {
-          line = { topPx: top, leftPx: fragment.left - pageRect.left, rightPx: fragment.right - pageRect.left,
-            bottomPx: fragment.bottom - pageRect.top };
-          lines.push(line);
-        } else {
-          line.leftPx = Math.min(line.leftPx, fragment.left - pageRect.left);
-          line.rightPx = Math.max(line.rightPx, fragment.right - pageRect.left);
-          line.bottomPx = Math.max(line.bottomPx, fragment.bottom - pageRect.top);
+      // Measure text nodes individually. A Range over the whole rendered unit
+      // can return the bounding boxes of block/grid paragraphs rather than
+      // their wrapped text rows, which undercounts flowed lists in Copyfit.
+      const fragments = [];
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        if (!node.textContent?.trim()) continue;
+        const parent = node.parentElement;
+        const style = parent ? getComputedStyle(parent) : null;
+        if (!style || style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) continue;
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        for (const rect of range.getClientRects()) {
+          if (rect.width > 0 && rect.height > 0) fragments.push(rect);
         }
       }
-      const contentBounds = lines.length ? toPtRect({
-        left: pageRect.left + Math.min(...lines.map(line => line.leftPx)),
-        top: pageRect.top + Math.min(...lines.map(line => line.topPx)),
-        right: pageRect.left + Math.max(...lines.map(line => line.rightPx)),
-        bottom: pageRect.top + Math.max(...lines.map(line => line.bottomPx)),
-        width: Math.max(...lines.map(line => line.rightPx)) - Math.min(...lines.map(line => line.leftPx)),
-        height: Math.max(...lines.map(line => line.bottomPx)) - Math.min(...lines.map(line => line.topPx)),
-      }) : null;
       return {
         spanKey: element.getAttribute('data-rendered-translation-key'),
         text: (element.textContent ?? '').replace(/\s+/gu, ' ').trim(),
         elementRectPt: toPtRect(element.getBoundingClientRect()),
         frameRectPt: frameRect,
-        lineCount: lines.length,
-        widestLinePt: lines.length ? Math.max(...lines.map(line => line.rightPx - line.leftPx))
-          / (pageRect.width / Number(container.dataset.pdfPageWidth)) : 0,
-        contentBoundsPt: contentBounds,
-        edgeExcessPt: contentBounds ? {
-          left: Math.max(0, frameRect.x - contentBounds.x),
-          top: Math.max(0, frameRect.y - contentBounds.y),
-          right: Math.max(0, contentBounds.x + contentBounds.width - frameRect.x - frameRect.width),
-          bottom: Math.max(0, contentBounds.y + contentBounds.height - frameRect.y - frameRect.height),
-        } : { left: 0, top: 0, right: 0, bottom: 0 },
+        rangeFragments: fragments.map(fragment => ({
+          top: fragment.top - pageRect.top,
+          bottom: fragment.bottom - pageRect.top,
+          left: fragment.left - pageRect.left,
+          right: fragment.right - pageRect.left,
+        })),
       };
     });
     return {
@@ -375,7 +555,42 @@ try {
         naturalWidth: element.naturalWidth, naturalHeight: element.naturalHeight,
       })),
     };
-  });
+    });
+    metrics.translationTargets = metrics.translationTargets.map(target => {
+      // Count rows with Copyfit V3's shared grouper. Range bounds are retained
+      // as geometric diagnostics, but they are not glyph-ink bounds and must
+      // not be presented as proof of clipping.
+      const lines = groupPageRendererVisualLines(target.rangeFragments);
+      const left = lines.length ? Math.min(...lines.map(line => line.left)) : null;
+      const top = lines.length ? Math.min(...lines.map(line => line.top)) : null;
+      const right = lines.length ? Math.max(...lines.map(line => line.right)) : null;
+      const bottom = lines.length ? Math.max(...lines.map(line => line.bottom)) : null;
+      const contentBoundsPt = lines.length ? {
+        x: left / metrics.scaleX,
+        y: top / metrics.scaleY,
+        width: (right - left) / metrics.scaleX,
+        height: (bottom - top) / metrics.scaleY,
+      } : null;
+      const frame = target.frameRectPt;
+      return {
+        ...target,
+        lineCount: lines.length,
+        widestLinePt: lines.length
+          ? Math.max(...lines.map(line => line.right - line.left)) / metrics.scaleX
+          : 0,
+        contentBoundsPt,
+        contentBoundsBasis: 'union-of-Range.getClientRects; glyph-ink clipping is verified from the print raster',
+        edgeExcessPt: contentBoundsPt ? {
+          left: Math.max(0, frame.x - contentBoundsPt.x),
+          top: Math.max(0, frame.y - contentBoundsPt.y),
+          right: Math.max(0, contentBoundsPt.x + contentBoundsPt.width - frame.x - frame.width),
+          bottom: Math.max(0, contentBoundsPt.y + contentBoundsPt.height - frame.y - frame.height),
+        } : { left: 0, top: 0, right: 0, bottom: 0 },
+        rangeFragments: undefined,
+      };
+    });
+    return metrics;
+  };
   const viewerMetrics = await capturePageMetrics();
   if (config.viewerScreenshot) {
     await mkdir(dirname(resolve(config.viewerScreenshot)), { recursive: true });
@@ -409,17 +624,39 @@ try {
     }
     .app-container { display: flex !important; flex-direction: row !important; }
     .viewer-main.single, .page-wrapper, .page-renderer, .page-stage { display: flex !important; }
-    .global-nav-slot, .editing-symbol-rail, .pdf-sidebar, .app-shell-header-actions, .app-shell-faq-actions,
+    #global-navigation, .global-nav-slot, .editing-symbol-rail, .pdf-sidebar, .app-shell-header-actions, .app-shell-faq-actions,
     .floating-arrow, .toast-notification, .translation-editor, .rich-block-editor, .block-editor, .faq-dialog,
     .editorial-experiment-rail, .editorial-experiment-switcher {
       display: none !important;
     }
+    .scroll-page-wrapper { box-shadow: none !important; border-radius: 0 !important; }
     .page-container {
       width: ${pageData.width}pt !important; height: ${pageData.height}pt !important;
       max-width: none !important; max-height: none !important; margin: 0 !important;
       box-shadow: none !important; transition: none !important; overflow: hidden !important;
     }
     .page-container img { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    ${config.betaDiagnostic ? `
+    /* Match the full-book beta's export-only missing-unit and page-status labels. */
+    .translation-review-diagnostic-blank::after {
+      content: "PT-BR PENDENTE";
+      position: absolute; top: 0; left: 0; z-index: 1000000; display: block;
+      padding: 1px 2px; border: 0.5px solid #b78a2e; border-radius: 2px;
+      background: rgba(255, 245, 211, 0.96); color: #5b430b;
+      font: 600 5px/1.05 Arial, sans-serif; letter-spacing: 0.1px;
+      white-space: nowrap; pointer-events: none;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .page-container::after {
+      content: "BETA PT-BR — unidades pendentes: " attr(data-diagnostic-blank-count);
+      position: absolute; top: 2pt; left: 2pt; z-index: 1000001; display: block;
+      padding: 2px 4px; border: 0.5px solid #b78a2e; border-radius: 2px;
+      background: rgba(255, 245, 211, 0.96); color: #5b430b;
+      font: 600 6px/1.05 Arial, sans-serif; letter-spacing: 0.1px;
+      white-space: nowrap; pointer-events: none;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    ` : ''}
   ` });
   await page.evaluate(() => window.dispatchEvent(new Event('resize')));
   await page.waitForTimeout(500);
@@ -434,7 +671,8 @@ try {
   if (config.metricsOutput) {
     await mkdir(dirname(resolve(config.metricsOutput)), { recursive: true });
     await writeFile(resolve(config.metricsOutput), JSON.stringify({
-      page: config.page, language: config.language, viewer: viewerMetrics, print: printMetrics,
+      page: config.page, language: config.language, betaArtworkPendingLabels,
+      viewer: viewerMetrics, print: printMetrics,
     }, null, 2));
   }
   const printLayout = await page.evaluate(() => Object.fromEntries(

@@ -15,7 +15,7 @@ import { calculateTypographicFlowPlan } from '../typographicReflow';
 import { getEditableNavigationIndex, getEditableNavigationTargets } from '../editableUnitNavigation';
 import { focalScrollOffsets, type DocumentFocalPoint } from '../focalZoom';
 import { ContentsRowFlow } from './ContentsRowFlow';
-import { exposesNestedSpanTargets, hasPreservedLegacySpanOverride } from '../editorUnitCompatibility';
+import { exposesNestedSpanTargets, hasLegacyTypographicUnitOverride, hasPreservedLegacySpanOverride } from '../editorUnitCompatibility';
 import { sourceElementIsReplaced, sourceMaskClipPath, sourceOverlayMask, previousSourceSpan, type SourceInlineElement } from '../symbols/sourceInlineElements';
 import './PageRenderer.css';
 import './Toast.css';
@@ -179,7 +179,8 @@ export interface CreditFieldDefinition {
   id: string;
   lineIds: string[];
   bbox: [number, number, number, number];
-  frame: LayoutFrame;
+  /** Some extracted typographic units omit a saved frame; derive it from their source lines. */
+  frame?: LayoutFrame;
   links?: CreditLinkDefinition[];
   paragraphSpacingPt?: number;
 }
@@ -212,6 +213,8 @@ export interface TypographicSpanUnitDefinition {
   id: string;
   /** `lineId:spanIndex` references identify a contiguous same-size run. */
   spanRefs: string[];
+  /** Optional page-authored flow frame for a translated inline run whose source word is wider than its ink box. */
+  flowFrame?: LayoutFrame;
 }
 
 interface InlineSpanUnitRenderState {
@@ -223,6 +226,8 @@ interface InlineSpanUnitRenderState {
   selected: boolean;
   /** Editorial paragraph lines route clicks to the paragraph editor while still rendering legacy span overrides. */
   interactive?: boolean;
+  flowFrame?: LayoutFrame | null;
+  diagnosticBlank?: boolean;
   info: SelectedSpanInfo;
 }
 
@@ -231,10 +236,14 @@ function inlineSpanUnitFlowBottomPt(block: Block, unit: TypographicSpanUnitDefin
   const unitLineIds = new Set(unit.spanRefs.map(reference => reference.slice(0, reference.lastIndexOf(':'))));
   const lastUnitLineIndex = lines.reduce((lastIndex, line, index) =>
     unitLineIds.has(line.id) ? index : lastIndex, -1);
-  const nextPaintedLine = lines.slice(lastUnitLineIndex + 1).find(line => line.spans.some(span =>
-    !span.sourceEditorOnly && !span.renderOnlyStrokePass && !span.sourceCompoundHidden
-      && (span.text.trim() || span.semanticSymbolId || span.pictogramSvgPath),
-  ));
+  const lastUnitLineTop = lines[lastUnitLineIndex]?.bbox[1] ?? block.bbox[1];
+  const nextPaintedLine = lines.slice(lastUnitLineIndex + 1).find(line =>
+    line.bbox[1] > lastUnitLineTop + 0.5
+      && line.spans.some(span =>
+        !span.sourceEditorOnly && !span.renderOnlyStrokePass && !span.sourceCompoundHidden
+          && (span.text.trim() || span.semanticSymbolId || span.pictogramSvgPath),
+      ),
+  );
   return nextPaintedLine?.bbox[1] ?? block.bbox[3];
 }
 
@@ -246,6 +255,8 @@ function buildInlineSpanStates(
   draftOverride: SpanOverride | null,
   language: 'en' | 'pt-BR',
   nonInteractiveLineIds?: Set<string>,
+  layoutFrames?: Map<string, LayoutFrame>,
+  diagnosticBlankKeys?: ReadonlySet<string>,
 ): Map<string, InlineSpanUnitRenderState> {
   const states = new Map<string, InlineSpanUnitRenderState>();
   for (const unit of block.typographicSpanUnits ?? []) {
@@ -253,6 +264,7 @@ function buildInlineSpanStates(
     const override = selectedBlockKey === spanKey && draftOverride
       ? draftOverride
       : overrides.get(spanKey) || null;
+    const unitKey = `page_${pageNumber}_unit_${unit.id}`;
     const state: InlineSpanUnitRenderState = {
       spanKey,
       renderAtRef: (block.lines ?? []).flatMap(line=>line.spans.flatMap((span,index)=>
@@ -261,6 +273,8 @@ function buildInlineSpanStates(
       sourceFlowBottomPt: inlineSpanUnitFlowBottomPt(block, unit),
       override,
       selected: selectedBlockKey === spanKey,
+      flowFrame: layoutFrames?.get(unitKey) ?? unit.flowFrame ?? null,
+      diagnosticBlank: diagnosticBlankKeys?.has(spanKey) ?? false,
       info: extractInlineSpanUnitInfo(spanKey, block, unit),
     };
     for (const spanRef of unit.spanRefs) {
@@ -626,18 +640,45 @@ function normalizeStaticEditorPrefix(block: Block, override: SpanOverride | null
 
   let remaining = fixedPrefix;
   const segments: Segment[] = [];
+  const sourceListMarkerIndexes = [...listMarkerLineIndexes(block)].filter(index => fixedIndexes.has(index));
+  const sourceListMarker = fixedIndexes.size === 1 && sourceListMarkerIndexes.length === 1
+    ? listMarkerGlyph(block.lines[sourceListMarkerIndexes[0]])
+    : null;
+  let sourceListMarkerRemoved = false;
+  let awaitingListBody = false;
   for (const segment of override.segments) {
     if (!remaining) {
       segments.push(segment);
       continue;
     }
     if (!segment.text) continue;
+    if (awaitingListBody) {
+      const body = segment.text.replace(/^[\s\u00a0]+/u, '');
+      if (!body) continue;
+      segments.push({ ...segment, text: body });
+      awaitingListBody = false;
+      remaining = '';
+      continue;
+    }
     if (remaining.startsWith(segment.text)) {
       remaining = remaining.slice(segment.text.length);
       continue;
     }
     if (segment.text.startsWith(remaining)) {
       segments.push({ ...segment, text: segment.text.slice(remaining.length) });
+      remaining = '';
+      continue;
+    }
+    // List marker lines are painted from the source PDF at their own hanging
+    // indent. Older proposal data often repeats the same glyph with spaces
+    // instead of the source tab; strip that duplicate marker while retaining
+    // the translated body and its rich-span styling.
+    if (!sourceListMarkerRemoved && sourceListMarker && segment.text.startsWith(sourceListMarker)) {
+      const rest = segment.text.slice(sourceListMarker.length);
+      const body = rest.replace(/^[\s\u00a0]+/u, '');
+      sourceListMarkerRemoved = true;
+      if (body) segments.push({ ...segment, text: body });
+      else awaitingListBody = true;
       remaining = '';
       continue;
     }
@@ -1101,15 +1142,24 @@ interface PageRendererProps {
   experimentalEditorOverrides?: ReadonlyMap<string, SpanOverride>;
   experimentalEditorSelectionKey?: string | null;
   experimentalDraftKey?: string | null;
-  onExperimentalEditorSave?: (spanKey: string, override: SpanOverride | null) => void;
+  onExperimentalEditorSave?: (spanKey: string, override: SpanOverride | null) => void | boolean | Promise<boolean>;
+  experimentalSaveStatus?: 'saved' | 'saving' | 'error';
   onExperimentalEditorDraftChange?: (spanKey: string, draft: SpanOverride | null) => void;
   onProposalReviewEditorClose?: () => void;
   proposalReviewSelectionKey?: string | null;
   proposalReviewHighlightKey?: string | null;
   proposalReviewOverrides?: ReadonlyMap<string, SpanOverride>;
+  /** Persisted pending drafts are displayed only when no saved translation owns the unit. */
+  persistedReviewDraftOverrides?: ReadonlyMap<string, SpanOverride>;
+  /** Candidate-only geometry for pending drafts; never replaces a persisted human frame. */
+  persistedReviewDraftLayoutFrames?: ReadonlyMap<string, LayoutFrame>;
+  persistedReviewDraftKeys?: ReadonlyMap<string, string>;
+  onOpenPersistedReviewDraft?: (reviewKey: string) => void;
   /** Viewer-only geometry from review proposals; persisted frames always take precedence. */
   proposalReviewLayoutFrames?: ReadonlyMap<string, LayoutFrame>;
   proposalReviewDiagnosticBlankKeys?: ReadonlySet<string>;
+  /** Blank untranslated PT-BR editorial units for explicitly requested diagnostic exports. */
+  strictPtBrDiagnostic?: boolean;
   experimentalFrames?: ReadonlyMap<string, LayoutFrame>;
   experimentalHangingIndentBlockKeys?: ReadonlySet<string>;
   readOnlyExperiment?: boolean;
@@ -1138,16 +1188,59 @@ function typographicUnitFrameKey(pageNumber: number, unit: TypographicUnitDefini
   return `page_${pageNumber}_unit_${unit.id}`;
 }
 
-function sourceLayoutFrameForField(field: CreditFieldDefinition): LayoutFrame {
+function sourceLayoutFrameForField(
+  field: CreditFieldDefinition,
+  block: Block,
+  includeLeadingBulletsInFlow = false,
+  preserveStoredRotation = false,
+): LayoutFrame {
+  const fieldLineIds = new Set(field.lineIds);
+  const sourceLines = (block.lines ?? []).filter(line => fieldLineIds.has(line.id));
+  const availableLines = sourceLines.filter(line => Number.isFinite(line.availableX)
+    && Number.isFinite(line.availableWidth)
+    && (line.availableWidth ?? 0) > 0);
+  // Use the corridor shared by every source line in the unit. A union would
+  // make a translated paragraph appear wider than its narrowest source line.
+  const availableX = availableLines.length
+    ? Math.max(...availableLines.map(line => line.availableX!))
+    : undefined;
+  const availableRight = availableLines.length
+    ? Math.min(...availableLines.map(line => line.availableX! + line.availableWidth!))
+    : undefined;
+  const standaloneBulletLines = sourceLines.filter(isStandaloneSourceBulletLine);
+  const bodyStartXs = sourceLines
+    .filter(line => !standaloneBulletLines.includes(line))
+    .flatMap(line => line.spans
+      .filter(span => span.text.trim())
+      .map(span => span.origin?.[0] ?? span.bbox[0]))
+    .filter(Number.isFinite);
+  const hangingIndentX = standaloneBulletLines.length > 0 && availableX !== undefined && bodyStartXs.length > 0
+    ? Math.min(...bodyStartXs)
+    : undefined;
+  const frameX = includeLeadingBulletsInFlow
+    ? availableX
+    : hangingIndentX !== undefined && availableX !== undefined && hangingIndentX > availableX + 2
+    ? hangingIndentX
+    : availableX;
+  const hasStoredFrame = field.frame !== undefined;
+  const rotatedTranslationFrame = preserveStoredRotation && (field.frame?.rotation ?? 0) !== 0;
   return {
-    x: field.frame.x,
-    y: field.bbox[1],
-    width: field.frame.width,
-    height: Math.max(1, field.bbox[3] - field.bbox[1]),
-    rotation: 0,
-    textAlign: field.frame.textAlign,
-    lineHeight: field.frame.lineHeight,
-    paragraphSpacingPt: field.frame.paragraphSpacingPt ?? field.paragraphSpacingPt,
+    x: (includeLeadingBulletsInFlow && availableX !== undefined ? availableX : field.frame?.x)
+      ?? frameX ?? (!hasStoredFrame ? block.layoutFrame?.x : undefined) ?? field.bbox[0],
+    y: (rotatedTranslationFrame ? field.frame?.y : undefined) ?? field.bbox[1],
+    width: (includeLeadingBulletsInFlow && availableX !== undefined && availableRight !== undefined && availableRight > availableX
+      ? availableRight - availableX
+      : field.frame?.width)
+      ?? (frameX !== undefined && availableRight !== undefined && availableRight > frameX ? availableRight - frameX : undefined)
+      ?? (!hasStoredFrame ? block.layoutFrame?.width : undefined)
+      ?? Math.max(1, field.bbox[2] - field.bbox[0]),
+    height: Math.max(1, (rotatedTranslationFrame ? field.frame?.height : undefined) ?? (field.bbox[3] - field.bbox[1])),
+    rotation: rotatedTranslationFrame ? field.frame?.rotation ?? 0 : 0,
+    textAlign: field.frame?.textAlign ?? (!hasStoredFrame ? block.layoutFrame?.textAlign : undefined),
+    lineHeight: field.frame?.lineHeight ?? (!hasStoredFrame
+      ? block.defaultLineHeight ?? block.layoutFrame?.lineHeight
+      : undefined),
+    paragraphSpacingPt: field.frame?.paragraphSpacingPt ?? field.paragraphSpacingPt,
   };
 }
 
@@ -1164,7 +1257,7 @@ function findLayoutFrameSource(pageData: PageData, unitKey: string): LayoutFrame
     const unit = block.typographicUnits?.find(candidate =>
       typographicUnitFrameKey(pageData.page_number, candidate) === unitKey,
     );
-    if (unit) return { frame: sourceLayoutFrameForField(unit.field), bbox: unit.field.bbox };
+    if (unit) return { frame: sourceLayoutFrameForField(unit.field, block), bbox: unit.field.bbox };
   }
   return null;
 }
@@ -1500,9 +1593,10 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   onResolveEditableNavigation, totalPages = 102, editableNavigationEnabled = true,
   editorPanelWidth = 420, faqOpen = false, onEditorPanelWidthChange, onEditorOpenChange,
   experimentalOverrides, experimentalEditorMode = false, experimentalEditorOverrides,
-  experimentalEditorSelectionKey, experimentalDraftKey, onExperimentalEditorSave,
+  experimentalEditorSelectionKey, experimentalDraftKey, onExperimentalEditorSave, experimentalSaveStatus,
   onExperimentalEditorDraftChange, onProposalReviewEditorClose, proposalReviewSelectionKey, proposalReviewHighlightKey,
-  proposalReviewOverrides, proposalReviewLayoutFrames, proposalReviewDiagnosticBlankKeys, experimentalFrames, experimentalHangingIndentBlockKeys,
+  proposalReviewOverrides, persistedReviewDraftOverrides, persistedReviewDraftLayoutFrames, persistedReviewDraftKeys, onOpenPersistedReviewDraft,
+  proposalReviewLayoutFrames, proposalReviewDiagnosticBlankKeys, strictPtBrDiagnostic, experimentalFrames, experimentalHangingIndentBlockKeys,
   readOnlyExperiment = false, isolatedSnapshot = false, onExperimentalUnitSelect, editorHeaderAccessory,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -1540,15 +1634,169 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   const [alignmentGuides, setAlignmentGuides] = useState<LayoutAlignmentGuide[]>([]);
   const overridesReady = overridesLoadedLanguage === language;
 
+  const strictPtBrDiagnosticBlankKeys = useMemo(() => {
+    if (!strictPtBrDiagnostic || language !== 'pt-BR' || !overridesReady) return new Set<string>();
+    const missing = new Set<string>();
+    const pageNumber = pageData.page_number;
+    const sourceLines = new Map(pageData.blocks.flatMap(block => block.lines ?? []).map(line => [line.id, line] as const));
+    const neutralContentsNumberLineIds = new Set((pageData.contentsRows ?? [])
+      .map(row => row.numberLineId).filter((lineId): lineId is string => !!lineId));
+    const sourceFolioLineIds = new Set(pageData.blocks.flatMap(block => (block.lines ?? [])
+      .filter(line => {
+        const text = line.spans.filter(span => !span.renderOnlyStrokePass).map(span => span.text).join('').trim();
+        const [x, y, right] = line.bbox;
+        return text === String(pageNumber) && y > pageData.height * 0.9
+          && (x < pageData.width * 0.15 || right > pageData.width * 0.85);
+      }).map(line => line.id)));
+    const hasTextOnLines = (lineIds: string[]) => lineIds.some(lineId =>
+      !neutralContentsNumberLineIds.has(lineId) && !sourceFolioLineIds.has(lineId)
+      &&
+      sourceLines.get(lineId)?.spans.some(span => span.text.trim().length > 0),
+    );
+    const hasTextOnSpanRefs = (spanRefs: string[]) => spanRefs.some(reference => {
+      const separator = reference.lastIndexOf(':');
+      const lineId = separator >= 0 ? reference.slice(0, separator) : reference;
+      if (neutralContentsNumberLineIds.has(lineId) || sourceFolioLineIds.has(lineId)) return false;
+      const line = sourceLines.get(lineId);
+      if (!line) return false;
+      const spanIndex = separator >= 0 ? Number(reference.slice(separator + 1)) : NaN;
+      return Number.isInteger(spanIndex)
+        ? Boolean(line.spans[spanIndex]?.text.trim())
+        : line.spans.some(span => span.text.trim().length > 0);
+    });
+
+    pageData.blocks.forEach((block, blockIndex) => {
+      if (block.hiddenFromPage || block.artworkOnly) return;
+      // These four source labels are printed as part of the EXIT component art.
+      // They remain source-identical in PT-BR and are not missing prose.
+      if (pageNumber === 19 && ['block_39', 'block_43', 'block_47', 'block_51'].includes(block.id)) return;
+      const blockKey = block.editorKey
+        ? `${block.editorKey}__pt-BR`
+        : `page_${pageNumber}_block_${blockIndex}`;
+      // Page folios are language-neutral source labels, not untranslated prose.
+      // Keep the original numeral visible in strict PT-BR diagnostics. Older
+      // pages do not carry the folio audit tag, so use the exact displayed page
+      // number plus its footer and outer-margin geometry as a narrow fallback.
+      const sourceFolioAudit = (block.lines ?? []).some(line => line.spans.some(span =>
+        span.sourcePaintAuditId?.includes('folio-outline'),
+      ));
+      const folioLines = (block.lines ?? []).map(line => line.spans
+        .filter(span => !span.renderOnlyStrokePass)
+        .map(span => span.text)
+        .join('')
+        .trim())
+        .filter(Boolean);
+      const blockBox = block.bbox;
+      const neutralPageFolio = folioLines.length > 0
+        && folioLines.every(text => text === String(pageNumber))
+        && blockBox[1] > pageData.height * 0.9
+        && (blockBox[0] < pageData.width * 0.15 || blockBox[2] > pageData.width * 0.85);
+      if (!overrides.has(blockKey) && (sourceFolioAudit || neutralPageFolio)) return;
+      // Credit bodies are people and contributor names, so preserve them in
+      // their original spelling. The special-thanks body is prose and remains
+      // a required translation unit; role labels are translatable as usual.
+      if (pageNumber === 2 && block.creditUnits?.length) {
+        for (const unit of block.creditUnits) {
+          if (!hasTextOnLines(unit.label.lineIds)) continue;
+          const key = `page_${pageNumber}_credit_${unit.id}_${unit.label.id}__pt-BR`;
+          if (!overrides.has(key)) missing.add(key);
+          if (unit.id === 'special-thanks' && hasTextOnLines(unit.body.lineIds)) {
+            const bodyKey = `page_${pageNumber}_credit_${unit.id}_${unit.body.id}__pt-BR`;
+            if (!overrides.has(bodyKey)) missing.add(bodyKey);
+          }
+        }
+        return;
+      }
+      // This heading is the game's unchanged identifier for Tags.
+      if (pageNumber === 3 && block.id === 'block_21') return;
+      const rows = pageData.contentsRows?.filter(row => row.blockId === block.id) ?? [];
+      if (rows.length && !contentsRowUsesLegacy(rows, 'pt-BR', key => overrides.has(key))) {
+        for (const row of rows) {
+          const key = contentsRowKey(row, 'pt-BR');
+          if (!overrides.has(key)) missing.add(key);
+        }
+        return;
+      }
+      if (block.adminReadOnly) return;
+      const hasBlockTranslation = overrides.has(blockKey);
+      const credits = block.creditUnits ?? (block.creditUnit ? [block.creditUnit] : []);
+      if (credits.length > 0 && !hasBlockTranslation) {
+        for (const unit of credits) {
+          for (const field of [unit.label]) {
+            if (!hasTextOnLines(field.lineIds)) continue;
+            const key = `page_${pageNumber}_credit_${unit.id}_${field.id}__pt-BR`;
+            if (!overrides.has(key)) missing.add(key);
+          }
+        }
+        return;
+      }
+
+      if (block.typographicUnits?.length && !hasBlockTranslation) {
+        for (const unit of block.typographicUnits) {
+          if (!hasTextOnLines(unit.field.lineIds)) continue;
+          const key = `page_${pageNumber}_unit_${unit.id}__pt-BR`;
+          if (!overrides.has(key) && !hasLegacyTypographicUnitOverride(
+            block, unit, pageNumber, 'pt-BR', candidate => overrides.has(candidate),
+          )) missing.add(key);
+        }
+      } else if (!block.typographicUnits?.length && block.typographicSpanUnits?.length && !hasBlockTranslation) {
+        for (const unit of block.typographicSpanUnits) {
+          if (!hasTextOnSpanRefs(unit.spanRefs)) continue;
+          const key = `page_${pageNumber}_unit_${unit.id}__pt-BR`;
+          if (!overrides.has(key)) missing.add(key);
+        }
+      } else if (!block.typographicUnits?.length && !block.typographicSpanUnits?.length
+        && !hasBlockTranslation && (block.lines ?? []).some(line =>
+          !neutralContentsNumberLineIds.has(line.id) && !sourceFolioLineIds.has(line.id)
+          && line.spans.some(span => span.text.trim()))) {
+        missing.add(blockKey);
+      }
+
+      // Inline editorial runs may coexist with a larger typographic unit.
+      if (!hasBlockTranslation) {
+        for (const unit of block.typographicSpanUnits ?? []) {
+          if (!hasTextOnSpanRefs(unit.spanRefs)) continue;
+          const coveredByTranslatedSemanticUnits = unit.spanRefs.every(reference => {
+            const separator = reference.lastIndexOf(':');
+            const lineId = separator >= 0 ? reference.slice(0, separator) : reference;
+            const semanticUnit = block.typographicUnits?.find(candidate => candidate.field.lineIds.includes(lineId));
+            if (!semanticUnit) return false;
+            const semanticKey = `page_${pageNumber}_unit_${semanticUnit.id}__pt-BR`;
+            return overrides.has(semanticKey) || hasLegacyTypographicUnitOverride(
+              block, semanticUnit, pageNumber, 'pt-BR', key => overrides.has(key),
+            );
+          });
+          if (coveredByTranslatedSemanticUnits) continue;
+          const key = `page_${pageNumber}_unit_${unit.id}__pt-BR`;
+          if (!overrides.has(key)) missing.add(key);
+        }
+      }
+    });
+    return missing;
+  }, [strictPtBrDiagnostic, language, overridesReady, overrides, pageData]);
+  const effectiveDiagnosticBlankKeys = useMemo(() => new Set([
+    ...(proposalReviewDiagnosticBlankKeys ?? []),
+    ...strictPtBrDiagnosticBlankKeys,
+  ]), [proposalReviewDiagnosticBlankKeys, strictPtBrDiagnosticBlankKeys]);
+
   const renderOverrides = useMemo(() => {
     let next: Map<string, SpanOverride> | null = null;
-    if (overridesReady && proposalReviewOverrides?.size) {
+    if (overridesReady && (persistedReviewDraftOverrides?.size || proposalReviewOverrides?.size)) {
       next = new Map(overrides);
-      proposalReviewOverrides.forEach((override, key) => {
-        // A local or Payload translation is human-owned; it stays visible over a proposal preview.
-        if (!overrides.has(key)) next!.set(key, override);
+      persistedReviewDraftOverrides?.forEach((override, key) => {
         const clientKey = clientSpanKey(key, language);
-        if (clientKey !== key && !overrides.has(clientKey)) next!.set(clientKey, { ...override, spanKey: clientKey });
+        const baseKey = key.replace(/__pt-BR$/u, '');
+        // A real translation always wins over an unapproved review draft.
+        if (next!.has(key) || next!.has(clientKey) || next!.has(baseKey)) return;
+        next!.set(key, override);
+        if (clientKey !== key) next!.set(clientKey, { ...override, spanKey: clientKey });
+      });
+      proposalReviewOverrides?.forEach((override, key) => {
+        // Review previews are temporary and limited to the selected unit; let
+        // that explicit preview show over the published text without saving it.
+        next!.set(key, override);
+        const clientKey = clientSpanKey(key, language);
+        if (clientKey !== key) next!.set(clientKey, { ...override, spanKey: clientKey });
       });
     }
     if (readOnlyExperiment && experimentalOverrides?.size) {
@@ -1556,16 +1804,32 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       experimentalOverrides.forEach((override, key) => next!.set(key, override));
     }
     return next ?? overrides;
-  }, [overrides, overridesReady, experimentalOverrides, readOnlyExperiment, proposalReviewOverrides]);
+  }, [overrides, overridesReady, experimentalOverrides, readOnlyExperiment, proposalReviewOverrides, persistedReviewDraftOverrides, language]);
   const renderLayoutFrames = useMemo(() => {
-    if (!proposalReviewLayoutFrames?.size && !(readOnlyExperiment && experimentalFrames?.size)) return layoutFrames;
-    const next = new Map(proposalReviewLayoutFrames ?? []);
-    // Local and Payload frames are human-owned and must beat proposal geometry.
-    layoutFrames.forEach((frame, key) => next.set(key, frame));
+    if (!persistedReviewDraftLayoutFrames?.size && !proposalReviewLayoutFrames?.size
+      && !(readOnlyExperiment && experimentalFrames?.size)) return layoutFrames;
+    const next = new Map(layoutFrames);
+    // Candidate geometry fills only an otherwise unframed unit. Saved human
+    // geometry remains authoritative for visible and selected review drafts.
+    persistedReviewDraftLayoutFrames?.forEach((frame, key) => {
+      if (!next.has(key)) next.set(key, frame);
+    });
+    proposalReviewLayoutFrames?.forEach((frame, key) => {
+      if (!next.has(key)) next.set(key, frame);
+    });
     if (!readOnlyExperiment || !experimentalFrames?.size) return next;
     experimentalFrames.forEach((frame, key) => next.set(key, frame));
     return next;
-  }, [layoutFrames, proposalReviewLayoutFrames, experimentalFrames, readOnlyExperiment]);
+  }, [layoutFrames, persistedReviewDraftLayoutFrames, proposalReviewLayoutFrames, experimentalFrames, readOnlyExperiment]);
+  const persistedReviewDraftFrameKeys = useMemo(() => {
+    const keys = new Set<string>();
+    persistedReviewDraftLayoutFrames?.forEach((_frame, key) => {
+      // Only mark candidate geometry that actually filled an unowned frame.
+      // Saved human geometry remains authoritative and keeps its normal marker behavior.
+      if (!layoutFrames.has(key) && !experimentalFrames?.has(key)) keys.add(key);
+    });
+    return keys;
+  }, [layoutFrames, persistedReviewDraftLayoutFrames, experimentalFrames]);
 
   const editorIsOpen = isAdmin && !!selectedSpan && (!readOnlyExperiment || experimentalEditorMode);
   editorIsOpenRef.current = editorIsOpen;
@@ -1845,7 +2109,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     if (block.typographicUnits?.length) {
       return block.typographicUnits.map(unit => {
         const key = typographicUnitFrameKey(pageData.page_number, unit);
-        const sourceFrame = sourceLayoutFrameForField(unit.field);
+        const sourceFrame = sourceLayoutFrameForField(unit.field, block);
         const frame = effectiveFrameFor(key, sourceFrame);
         return {
           key,
@@ -2109,6 +2373,14 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
 
   const handleSpanClick = useCallback((info: SelectedSpanInfo) => {
     if (!isAdmin) return;
+    if (!experimentalEditorMode && language === 'pt-BR' && persistedReviewDraftKeys?.size) {
+      const draftReviewKey = persistedReviewDraftKeys.get(info.spanKey)
+        ?? persistedReviewDraftKeys.get(clientSpanKey(info.spanKey, language));
+      if (draftReviewKey) {
+        onOpenPersistedReviewDraft?.(draftReviewKey);
+        return;
+      }
+    }
     if (proposalReviewSelectionKey) {
       const targetNormalized = clientSpanKey(proposalReviewSelectionKey, language);
       const clickedNormalized = clientSpanKey(info.spanKey, language);
@@ -2126,7 +2398,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     setSelectedSpan(info);
     setDraftOverride(null);
     onTranslationDraftDirtyChange?.(false);
-  }, [isAdmin, proposalReviewSelectionKey, selectedSpan, confirmDiscardTranslationDraft, onTranslationDraftDirtyChange, language, onProposalReviewEditorClose]);
+  }, [isAdmin, experimentalEditorMode, persistedReviewDraftKeys, onOpenPersistedReviewDraft, proposalReviewSelectionKey, selectedSpan, confirmDiscardTranslationDraft, onTranslationDraftDirtyChange, language, onProposalReviewEditorClose]);
 
   useEffect(() => {
     if (!experimentalEditorMode || !isAdmin || !experimentalEditorSelectionKey) return;
@@ -2346,10 +2618,19 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
 
   const handleSaveExperimentalOverride = useCallback((override: SpanOverride | null) => {
     if (!selectedSpan || !experimentalEditorMode) return;
-    onExperimentalEditorSave?.(selectedSpan.spanKey, override);
-    if (proposalReviewSelectionKey) onProposalReviewEditorClose?.();
-    setSelectedSpan(null);
-    setDraftOverride(null);
+    const closeAfterSave = () => {
+      if (proposalReviewSelectionKey) onProposalReviewEditorClose?.();
+      setSelectedSpan(null);
+      setDraftOverride(null);
+    };
+    const result = onExperimentalEditorSave?.(selectedSpan.spanKey, override);
+    if (result && typeof (result as Promise<boolean>).then === 'function') {
+      void Promise.resolve(result).then(confirmed => {
+        if (confirmed !== false) closeAfterSave();
+      }).catch(() => undefined);
+      return;
+    }
+    if (result !== false) closeAfterSave();
   }, [selectedSpan, experimentalEditorMode, onExperimentalEditorSave, proposalReviewSelectionKey, onProposalReviewEditorClose]);
 
   const containerStyle: React.CSSProperties = {
@@ -2422,6 +2703,10 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
         data-pdf-page-number={pageData.page_number}
         data-pdf-page-width={pageData.width}
         data-pdf-page-height={pageData.height}
+        data-diagnostic-blank-count={strictPtBrDiagnostic && language === 'pt-BR' && overridesReady
+          ? strictPtBrDiagnosticBlankKeys.size : undefined}
+        data-diagnostic-blank-keys={strictPtBrDiagnostic && language === 'pt-BR' && overridesReady
+          ? JSON.stringify([...strictPtBrDiagnosticBlankKeys]) : undefined}
       >
         {toast && (
           <div className={`toast-notification toast-${toast.type}`}>
@@ -2471,7 +2756,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           if (canRenderRows && !overlaySourceRows) return (
             <ContentsLabelBlock key={block.id} block={block} rows={rows} scale={scale} isAdmin={isAdmin}
               language={language} overrides={renderOverrides} selectedKey={selectedSpan?.spanKey ?? null} draft={draftOverride}
-              onBlockClick={handleSpanClick} onNavigate={onNavigate} proposalReviewHighlightKey={proposalReviewHighlightKey} />
+              onBlockClick={handleSpanClick} onNavigate={onNavigate} proposalReviewHighlightKey={proposalReviewHighlightKey}
+              diagnosticBlankKeys={effectiveDiagnosticBlankKeys} />
           );
           return (
             <React.Fragment key={block.id}>
@@ -2494,6 +2780,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
                 layoutSelectionKey={layoutUnitKey}
                 layoutDraft={layoutDraft}
                 layoutFrames={renderLayoutFrames}
+                persistedReviewDraftFrameKeys={persistedReviewDraftFrameKeys}
                 inheritedLayoutFrames={inheritedLayoutFrames}
                 layoutFrameForSelection={effectiveFrameFor(frameUnitKey(pageData.page_number, block, bIdx), sourceLayoutFrame(block))}
                 layoutFrameOverride={(layoutUnitKey === frameUnitKey(pageData.page_number, block, bIdx) ? layoutDraft : undefined)
@@ -2505,12 +2792,13 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
                 overridesReady={overridesReady}
                 draftOverride={draftOverride}
                 language={language}
-                proposalReviewDiagnosticBlankKeys={overridesReady ? proposalReviewDiagnosticBlankKeys : undefined}
+                proposalReviewDiagnosticBlankKeys={overridesReady ? effectiveDiagnosticBlankKeys : undefined}
                 proposalReviewHighlightKey={proposalReviewHighlightKey}
               />
               {overlaySourceRows && <ContentsLabelBlock block={block} rows={rows} scale={scale} isAdmin={isAdmin}
                 language={language} overrides={renderOverrides} selectedKey={selectedSpan?.spanKey ?? null} draft={draftOverride}
-                onBlockClick={handleSpanClick} onNavigate={onNavigate} proposalReviewHighlightKey={proposalReviewHighlightKey} />}
+                onBlockClick={handleSpanClick} onNavigate={onNavigate} proposalReviewHighlightKey={proposalReviewHighlightKey}
+                diagnosticBlankKeys={effectiveDiagnosticBlankKeys} />}
             </React.Fragment>
           );
         })}
@@ -2608,6 +2896,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           headerAccessory={editorHeaderAccessory}
           onToggleLanguage={onToggleLanguage}
           sessionOnly={experimentalEditorMode}
+          persistentDraftMode={Boolean(experimentalEditorMode && proposalReviewSelectionKey)}
+          persistentDraftStatus={experimentalSaveStatus}
         />
       )}
       {isAdmin && layoutMode && (
@@ -2653,15 +2943,17 @@ interface ContentsLabelBlockProps {
   onBlockClick: (info: SelectedSpanInfo) => void;
   onNavigate?: (page: number) => void;
   proposalReviewHighlightKey?: string | null;
+  diagnosticBlankKeys?: ReadonlySet<string>;
 }
 function ContentsLabelBlock({
-  block, rows, scale, isAdmin, language, overrides, selectedKey, draft, onBlockClick, onNavigate, proposalReviewHighlightKey,
+  block, rows, scale, isAdmin, language, overrides, selectedKey, draft, onBlockClick, onNavigate, proposalReviewHighlightKey, diagnosticBlankKeys,
 }: ContentsLabelBlockProps) {
   return <>{rows.map(row => {
     const line = contentsRowLine(block, row);
     if (!line) return null;
     const key = contentsRowKey(row, language);
     const override = selectedKey === key && draft ? draft : overrides.get(key);
+    const diagnosticBlank = language === 'pt-BR' && !override && (diagnosticBlankKeys?.has(key) ?? false);
     const [x, y, , bottom] = row.labelBBox;
     const width = contentsLabelWidth(row);
     const height = bottom - y;
@@ -2674,14 +2966,14 @@ function ContentsLabelBlock({
     const attributes = adminGeometryAttributes(isAdmin, key, { x, y, width, height, rotation: 0 });
     const select = () => {
       if (isAdmin) onBlockClick({ ...extractCreditFieldInfo(key, block, field), singleLine: true, editorContext: 'typographic-field' });
-      else onNavigate?.(row.targetPage);
+      else if (row.targetPage !== undefined) onNavigate?.(row.targetPage);
     };
     const click = (event: React.MouseEvent) => {
       event.stopPropagation();
       select();
     };
     return <React.Fragment key={row.id}>
-      {override && <img src={row.mask.url} alt="" aria-hidden="true" draggable={false} style={{
+      {(override || diagnosticBlank) && <img src={row.mask.url} alt="" aria-hidden="true" draggable={false} style={{
         position: 'absolute', left: row.mask.bbox[0] * scale, top: row.mask.bbox[1] * scale,
         width: (row.mask.bbox[2] - row.mask.bbox[0]) * scale,
         height: (row.mask.bbox[3] - row.mask.bbox[1]) * scale, zIndex: overlaySource ? 1001 : 2, pointerEvents: 'none',
@@ -2691,7 +2983,10 @@ function ContentsLabelBlock({
         style={{ position: 'absolute', left: x * scale, top: y * scale, width: width * scale, height: height * scale,
           zIndex: overlaySource ? 1002 : block.zIndex ?? 10 }}
         {...attributes} data-editable-unit-key={isAdmin && spansContainEditableText(line.spans) ? key : undefined}
+        data-rendered-translation-key={override ? key : undefined}
         data-translation-review-highlight={reviewHighlighted ? key : undefined}
+        data-translation-review-diagnostic-blank={diagnosticBlank ? key : undefined}
+        aria-label={diagnosticBlank ? 'Unidade vazia na exportação diagnóstica; a tradução não está persistida.' : undefined}
         onClick={click} onKeyDown={event => {
           if (event.key === 'Enter' || (isAdmin && event.key === ' ')) {
             event.preventDefault();
@@ -2701,7 +2996,7 @@ function ContentsLabelBlock({
         {override ? <ContentsRowFlow row={row} scale={scale} sourceFontSize={line.spans.find(span => span.text.trim())?.size ?? override.segments[0]?.size ?? 12}
           isAdmin={isAdmin} text={override.segments.map(run => run.text).join('')}>
           {renderCreditSegments(override.segments.map(run => ({ ...run, text: run.text.replace(/[\r\n]+/g, ' ') })), undefined, language, scale, isAdmin, 'nowrap')}
-        </ContentsRowFlow> : overlaySource ? null : <div style={{ pointerEvents: 'none' }}><LineRenderer line={line} scale={scale} blockOriginX={x} blockOriginY={y}
+        </ContentsRowFlow> : diagnosticBlank ? null : overlaySource ? null : <div style={{ pointerEvents: 'none' }}><LineRenderer line={line} scale={scale} blockOriginX={x} blockOriginY={y}
           isAdmin={false} isSelected={false} language={language} onClick={() => {}} /></div>}
       </div>
     </React.Fragment>;
@@ -2727,6 +3022,7 @@ interface SpanBlockProps {
   layoutSelectionKey: string | null;
   layoutDraft: LayoutFrame | null;
   layoutFrames: Map<string, LayoutFrame>;
+  persistedReviewDraftFrameKeys: ReadonlySet<string>;
   inheritedLayoutFrames: Map<string, LayoutFrame>;
   layoutFrameForSelection: LayoutFrame;
   layoutFrameOverride?: LayoutFrame;
@@ -2743,7 +3039,7 @@ interface SpanBlockProps {
 const SpanBlock: React.FC<SpanBlockProps> = ({
   block, hasSourceInlineSymbols, coveredSourceSymbols, allBlocks, layoutObstacles, blockIdx, pageNumber, pageHeightPt, scale, isAdmin, contentsMap,
   onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutSelectionKey, layoutDraft, layoutFrames, inheritedLayoutFrames,
-  layoutFrameForSelection, layoutFrameOverride, onSelectLayoutFrame,
+  persistedReviewDraftFrameKeys, layoutFrameForSelection, layoutFrameOverride, onSelectLayoutFrame,
   selectedBlockKey, overrides, overridesReady, draftOverride, language, proposalReviewDiagnosticBlankKeys,
   proposalReviewHighlightKey,
 }) => {
@@ -2773,7 +3069,13 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   const blockKey = block.editorKey
     ? `${block.editorKey}__${language}`
     : `page_${pageNumber}_block_${blockIdx}`;
-  const reviewBlockHighlighted = proposalReviewHighlightKey === blockKey || (proposalReviewHighlightKey ? clientSpanKey(proposalReviewHighlightKey, language) === blockKey : false);
+  const clientReviewKey = proposalReviewHighlightKey ? clientSpanKey(proposalReviewHighlightKey, language) : null;
+  const reviewBlockHighlighted = Boolean(proposalReviewHighlightKey && (
+    proposalReviewHighlightKey === blockKey
+    || clientReviewKey === blockKey
+    || blockKey.startsWith(`${proposalReviewHighlightKey}__`)
+    || Boolean(clientReviewKey && blockKey.startsWith(`${clientReviewKey}__`))
+  ));
   const reviewBlockHighlightClass = reviewBlockHighlighted ? 'proposal-review-highlight' : '';
   const isDiagnosticBlank = proposalReviewDiagnosticBlankKeys?.has(blockKey) ?? false;
 
@@ -2915,6 +3217,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
         draftOverride={draftOverride}
         language={language}
         proposalReviewHighlightKey={proposalReviewHighlightKey}
+        diagnosticBlankKeys={proposalReviewDiagnosticBlankKeys}
       />
     );
   }
@@ -2983,7 +3286,8 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
       {parts.map(part => {
         if (part.kind === 'marker' && part.line) {
           return (
-            <div key={part.key} className="block-container list-marker-source" aria-hidden="true"
+            <div key={part.key} className={`block-container list-marker-source ${reviewBlockHighlightClass}`} aria-hidden="true"
+              data-translation-review-highlight={reviewBlockHighlighted ? (proposalReviewHighlightKey ?? blockKey) : undefined}
               data-list-marker-line={part.line.id}
               style={{ position: 'absolute', left: `${blockX * scale}px`, top: `${blockY * scale}px`,
                 width: `${blockW * scale}px`, height: `${blockH * scale}px`, zIndex: block.zIndex || 10,
@@ -3005,7 +3309,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             inheritedLayoutFrames={inheritedLayoutFrames}
             layoutFrameForSelection={sourceLayoutFrame(rowBlock)} onSelectLayoutFrame={onSelectLayoutFrame}
             selectedBlockKey={selectedBlockKey} overrides={rowOverrides} overridesReady={overridesReady}
-            draftOverride={draftOverride} language={language} />
+            draftOverride={draftOverride} language={language} proposalReviewHighlightKey={proposalReviewHighlightKey} />
         );
       })}
     </>;
@@ -3013,6 +3317,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
 
   const inlineSpanStates = buildInlineSpanStates(
     block, pageNumber, selectedBlockKey, overrides, draftOverride, language,
+    undefined, layoutFrames, proposalReviewDiagnosticBlankKeys,
   );
   const inlineSpanHitTargets = isAdmin && !layoutMode
     ? (block.typographicSpanUnits ?? []).flatMap(unit => {
@@ -3073,7 +3378,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
       lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
     },
   ));
-  if (language === 'en' && (!isAdmin || !layoutMode) && hasExactSourceGeometry(block)
+  const page19ExitArtworkLabel = pageNumber === 19
+    && ['block_39', 'block_43', 'block_47', 'block_51'].includes(block.id);
+  if ((language === 'en' || page19ExitArtworkLabel) && (!isAdmin || !layoutMode) && hasExactSourceGeometry(block)
     && (!currentOverride || sourceOverrideIsUnchanged) && nestedOverridesAreSourceEquivalent) {
     return (
       <div className={`block-container ${blockHoverClass} ${overflowClass} ${reviewBlockHighlightClass}`} data-render-mode="sourceGeometry"
@@ -3123,10 +3430,37 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     const fallbackLineHeight = currentOverride.lineHeight ?? block.defaultLineHeight ?? layoutFrameOverride?.lineHeight
       ?? block.layoutFrame?.lineHeight ?? 1;
     const effectiveLineHeight = fallbackLineHeight;
+    const sourceBulletLines = language === 'pt-BR'
+      ? (block.lines ?? []).filter((line, index) => markerIndexes.has(index) && listMarkerGlyph(line) === '•')
+      : [];
+    const bulletParagraphCount = countLeadingBulletParagraphs(sourceAwareSegments);
+    const inlineSourceBulletFlow = sourceBulletLines.length > 0
+      && bulletParagraphCount === sourceBulletLines.length;
+    let flowedBulletIndex = 0;
+    const flowedListParagraphs = inlineSourceBulletFlow
+      ? splitSegmentsIntoParagraphs(sourceAwareSegments).map((paragraph, paragraphIndex) => {
+          const paragraphText = paragraph.map(segment => segment.text).join('').trimStart();
+          if (!/^•(?:[\s\t]|$)/u.test(paragraphText)) {
+            return { paragraph, marker: null as SpanOverride['segments'] | null, indentPt: 0, markerLineId: null as string | null, paragraphIndex };
+          }
+          const sourceMarker = sourceBulletLines[flowedBulletIndex++];
+          if (!sourceMarker) {
+            return { paragraph, marker: null as SpanOverride['segments'] | null, indentPt: 0, markerLineId: null as string | null, paragraphIndex };
+          }
+          return {
+            paragraph: removeLeadingBulletParagraphPrefix(paragraph),
+            marker: sourceBulletRenderSegments(sourceMarker),
+            indentPt: sourceListMarkerIndentPt(sourceMarker, block.lines ?? []),
+            markerLineId: sourceMarker.id,
+            paragraphIndex,
+          };
+        })
+      : null;
+    const flowedBulletLineIds = new Set(flowedListParagraphs?.flatMap(paragraph => paragraph.markerLineId ? [paragraph.markerLineId] : []) ?? []);
     // Edited text uses translatedFlow; untouched EN stays in SourceGeometryBlock above.
     const fixedLineIndexes = fixedEditorLineIndexes(block);
   const fixedLineEntries = (block.lines ?? []).flatMap((line, index) =>
-    fixedLineIndexes.has(index) ? [{ line, index }] : [],
+    fixedLineIndexes.has(index) && !flowedBulletLineIds.has(line.id) ? [{ line, index }] : [],
   );
   const fixedLines = fixedLineEntries.map(entry => entry.line);
     const firstLine = editableBlockLines(block)[0] ?? block.lines[0];
@@ -3150,16 +3484,77 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     const renderOriginY = translatedFrame ? translatedY : blockY;
     const blockLineX = (rawX - renderOriginX) * scale;
     const blockLineW = rawWidth * scale;
-    const page14PhaseKeys = new Set([
-      'page_14_block_1',
-      'page_14_block_5',
-      'page_14_block_6',
-      'page_14_block_7',
-    ]);
-    const phaseMarkerIndex = page14PhaseKeys.has(editableNavigationKey?.split('__')[0] ?? '')
-      ? sourceAwareSegments.findIndex((segment, index) => /^[1-4]\.$/.test(segment.text)
-        && sourceAwareSegments[index + 1]?.text === '\t')
+    const sourceHangingIndentMarkerByKey: Readonly<Record<string, string>> = {
+      page_14_block_1: '1.',
+      page_14_block_5: '2.',
+      page_14_block_6: '3.',
+      page_14_block_7: '4.',
+      // Source p.18 item 4 starts its continuation 18 pt after the numeral.
+      page_18_block_103: '4.',
+    };
+    // Layout fidelity applies to persisted/viewer translations as well as
+    // admin editing previews; editableNavigationKey is absent outside Admin.
+    const expectedHangingIndentMarker = sourceHangingIndentMarkerByKey[blockKey.split('__')[0]];
+    const phaseMarkerIndex = expectedHangingIndentMarker
+      ? sourceAwareSegments.findIndex(segment => {
+        const match = /^([1-4]\.)(?:\t)?$/.exec(segment.text);
+        return match?.[1] === expectedHangingIndentMarker;
+      })
       : -1;
+    const phaseMarkerTabIndex = phaseMarkerIndex >= 0
+      && /^\t\s*$/u.test(sourceAwareSegments[phaseMarkerIndex + 1]?.text ?? '')
+      ? phaseMarkerIndex + 1
+      : -1;
+    const phaseBodyStartIndex = phaseMarkerIndex >= 0
+      ? phaseMarkerIndex + 1 + (phaseMarkerTabIndex >= 0 ? 1 : 0)
+      : 0;
+    const renderSegments = (segments: SpanOverride['segments'], startIndex = 0) => segments.map((seg, segIdx) => {
+      const absoluteSegmentIndex = startIndex + segIdx;
+      const segmentStyle: React.CSSProperties = {
+        fontFamily: segFontToCSS(seg.font),
+        fontSize: `${seg.size * scale}px`,
+        fontWeight: seg.weight,
+        fontStyle: seg.style,
+        fontVariantCaps: mapPdfFont(seg.font).variantCaps,
+        color: seg.color,
+        ...(seg.textStrokeWidthPt ? {
+          WebkitTextStroke: `${seg.textStrokeWidthPt * scale}px ${seg.textStrokeColor || '#231f20'}`,
+          paintOrder: 'stroke fill',
+        } : {}),
+        whiteSpace: block.noWrap ? 'pre' : 'pre-wrap',
+        fontVariantLigatures: 'none',
+        fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
+        // EN uses source-native advances so symbols match the PDF. Keep
+        // the established PT-BR copyfit tracking to prevent extra wraps.
+        letterSpacing: hasInlineSymbols && language === 'en' ? 'normal' : '-0.015em',
+        ...(esmeraldaHeadingSource && needsEsmeraldaHeadingDrop(
+          seg.font,
+          seg.size,
+          esmeraldaHeadingSource.bbox[3] - esmeraldaHeadingSource.bbox[1],
+        ) ? { display: 'inline-block', transform: 'translateY(12%)' } : {}),
+      };
+      if (absoluteSegmentIndex === phaseMarkerIndex) {
+        // These audited source markers each occupy an 18 pt first column;
+        // keep that measured gap even when extraction stores the tab with spaces.
+        const markerSegment = { ...seg, text: expectedHangingIndentMarker ?? seg.text.replace(/\t$/, '') };
+        return <span key={absoluteSegmentIndex} aria-label={markerSegment.text} data-source-marker-advance="18pt" style={{
+          display: 'inline-block',
+          width: `${18 * scale}px`,
+          whiteSpace: 'pre',
+          verticalAlign: 'baseline',
+        }}>
+          <span style={segmentStyle}>{renderSegmentContent(markerSegment, scale, language, 'translatedFlow')}</span>
+        </span>;
+      }
+      if (absoluteSegmentIndex === phaseMarkerTabIndex) return null;
+      return <span key={absoluteSegmentIndex} style={segmentStyle}>
+        {seg.symbolId || resolveLegacySymbol(seg.font, seg.text)
+          ? renderSegmentContent(seg, scale, language, 'translatedFlow')
+          : block.noWrap
+            ? seg.text.replace(/[\r\n]+/g, ' ').replace(/[\t ]+/g, ' ')
+            : seg.text}
+      </span>;
+    });
 
     return (
       <div className={`block-container ${blockHoverClass} ${overflowClass}`} style={translatedStyle} onClick={handleBlockClick} {...geometryAttributes} data-editable-unit-key={editableNavigationKey}
@@ -3180,8 +3575,11 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             <LineRenderer
               line={line}
               scale={scale}
-              blockOriginX={frameX}
-              blockOriginY={blockY}
+              // A candidate-only review frame can widen/move the translated
+              // body while this marker stays on its source PDF anchor. Saved
+              // human frames retain the existing marker-following behavior.
+              blockOriginX={persistedReviewDraftFrameKeys.has(layoutUnitKey) ? renderOriginX : frameX}
+              blockOriginY={persistedReviewDraftFrameKeys.has(layoutUnitKey) ? renderOriginY : blockY}
               isAdmin={false}
               isSelected={false}
               language={language}
@@ -3206,53 +3604,86 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             cursor: layoutMode ? 'move' : isAdmin ? 'text' : 'default',
           }}
         >
-          {sourceAwareSegments.map((seg, segIdx) => {
-            const segmentStyle: React.CSSProperties = {
-                fontFamily: segFontToCSS(seg.font),
-                fontSize: `${seg.size * scale}px`,
-                fontWeight: seg.weight,
-                fontStyle: seg.style,
-                fontVariantCaps: mapPdfFont(seg.font).variantCaps,
-                color: seg.color,
-                ...(seg.textStrokeWidthPt ? {
-                  WebkitTextStroke: `${seg.textStrokeWidthPt * scale}px ${seg.textStrokeColor || '#231f20'}`,
-                  paintOrder: 'stroke fill',
-                } : {}),
-                whiteSpace: block.noWrap ? 'pre' : 'pre-wrap',
-                fontVariantLigatures: 'none',
-                fontFeatureSettings: '"liga" 0, "clig" 0, "dlig" 0, "hlig" 0',
-                // EN uses source-native advances so symbols match the PDF. Keep
-                // the established PT-BR copyfit tracking to prevent extra wraps.
-                letterSpacing: hasInlineSymbols && language === 'en' ? 'normal' : '-0.015em',
-                ...(esmeraldaHeadingSource && needsEsmeraldaHeadingDrop(
-                  seg.font,
-                  seg.size,
-                  esmeraldaHeadingSource.bbox[3] - esmeraldaHeadingSource.bbox[1],
-                ) ? { display: 'inline-block', transform: 'translateY(12%)' } : {}),
-            };
-            if (segIdx === phaseMarkerIndex) {
-              // The original p.14 marker begins at x=86.173 pt and its phase
-              // heading begins at x=104.173 pt. Keep that 18 pt source advance
-              // from marker origin; Chrome collapses the intervening tab when
-              // marker and heading have separate rich-text styles.
-              return <span key={segIdx} aria-label={seg.text} data-source-marker-advance="18pt" style={{
-                display: 'inline-block',
-                width: `${18 * scale}px`,
-                whiteSpace: 'pre',
-                verticalAlign: 'baseline',
-              }}>
-                <span style={segmentStyle}>{renderSegmentContent(seg, scale, language, 'translatedFlow')}</span>
-              </span>;
-            }
-            if (segIdx === phaseMarkerIndex + 1 && phaseMarkerIndex >= 0) return null;
-            return <span key={segIdx} style={segmentStyle}>
-              {seg.symbolId || resolveLegacySymbol(seg.font,seg.text)
-                ? renderSegmentContent(seg, scale, language, 'translatedFlow')
-                : block.noWrap
-                ? seg.text.replace(/[\r\n]+/g, ' ').replace(/[\t ]+/g, ' ')
-              : seg.text}
-            </span>;
-          })}
+          {phaseMarkerIndex >= 0 ? (
+            <div
+              data-source-hanging-indent-pt="18"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: `${18 * scale}px minmax(0, 1fr)`,
+                alignItems: 'start',
+                width: '100%',
+              }}
+            >
+              <span style={{ minWidth: 0, whiteSpace: 'pre' }}>
+                {renderSegments([sourceAwareSegments[phaseMarkerIndex]], phaseMarkerIndex)}
+              </span>
+              <span style={{ display: 'block', minWidth: 0 }}>
+                {renderSegments(sourceAwareSegments.slice(phaseBodyStartIndex), phaseBodyStartIndex)}
+              </span>
+            </div>
+          ) : flowedListParagraphs ? (
+            <div data-source-bullet-flow="true">
+              {flowedListParagraphs.map(({ paragraph, marker, indentPt, markerLineId, paragraphIndex }, flowIndex) => {
+                const paragraphFontSize = paragraph.find(segment => segment.text.trim())?.size
+                  ?? sourceBulletLines[0]?.spans.find(span => !span.renderOnlyStrokePass)?.size
+                  ?? 10;
+                const paragraphStyle: React.CSSProperties = {
+                  display: 'block',
+                  fontSize: `${paragraphFontSize * scale}px`,
+                  lineHeight: effectiveLineHeight,
+                };
+                return (
+                  <React.Fragment key={markerLineId ? `source-bullet-${markerLineId}` : `flow-paragraph-${paragraphIndex}`}>
+                    {flowIndex > 0 && <span aria-hidden="true" style={{ display: 'none' }}>{'\n'}</span>}
+                    {marker && markerLineId ? (
+                      <div
+                        data-source-bullet-flow-row={markerLineId}
+                        style={{
+                          ...paragraphStyle,
+                          display: 'grid',
+                          gridTemplateColumns: `${indentPt * scale}px minmax(0, 1fr)`,
+                          alignItems: 'start',
+                          width: '100%',
+                        }}
+                      >
+                        <span data-source-bullet-flow-marker={markerLineId} style={{ minWidth: 0, whiteSpace: 'pre' }}>
+                          {renderSegments(marker)}
+                        </span>
+                        <span data-source-bullet-flow-body={markerLineId} style={{ display: 'block', minWidth: 0 }}>
+                          {renderSegments(paragraph)}
+                        </span>
+                      </div>
+                    ) : (
+                      <div
+                        data-source-bullet-flow-prose={inlineSourceBulletFlow ? 'true' : undefined}
+                        style={paragraphStyle}
+                      >
+                        {paragraph.length ? renderSegments(paragraph) : <br />}
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          ) : currentOverride.paragraphSpacingPt && currentOverride.paragraphSpacingPt > 0
+            ? splitSegmentsIntoParagraphs(sourceAwareSegments).map((paragraphSegments, paragraphIndex, paragraphs) => {
+              const segmentOffset = paragraphs.slice(0, paragraphIndex).reduce((count, paragraph) => count + paragraph.length, 0);
+              return (
+                <div
+                  key={`paragraph-${paragraphIndex}`}
+                  className="credit-paragraph"
+                  style={{
+                    display: 'block',
+                    marginBottom: paragraphIndex < paragraphs.length - 1
+                      ? `${currentOverride!.paragraphSpacingPt! * scale}px`
+                      : 0,
+                  }}
+                >
+                  {renderSegments(paragraphSegments, segmentOffset)}
+                </div>
+              );
+            })
+            : renderSegments(sourceAwareSegments)}
         </div>
       </div>
     );
@@ -3317,11 +3748,12 @@ interface CreditUnitBlockProps {
   draftOverride: SpanOverride | null;
   language: 'en' | 'pt-BR';
   proposalReviewHighlightKey?: string | null;
+  diagnosticBlankKeys?: ReadonlySet<string>;
 }
 
 const CreditUnitBlock: React.FC<CreditUnitBlockProps> = ({
   block, blockRendererKey, units, pageNumber, scale, isAdmin, onBlockClick, selectedBlockKey,
-  overrides, draftOverride, language, proposalReviewHighlightKey,
+  overrides, draftOverride, language, proposalReviewHighlightKey, diagnosticBlankKeys,
 }) => {
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
@@ -3360,6 +3792,7 @@ const CreditUnitBlock: React.FC<CreditUnitBlockProps> = ({
             proposalReviewHighlightKey={proposalReviewHighlightKey}
             override={override}
             language={language}
+            diagnosticBlank={language === 'pt-BR' && !override && (diagnosticBlankKeys?.has(spanKey) ?? false)}
             onBlockClick={onBlockClick}
           />
         );
@@ -3399,7 +3832,7 @@ function findNextSameColumnComponentY(
 ): number | undefined {
   const frames = block.typographicUnits
     ?.filter(unit => !unit.fixedPosition)
-    .map(unit => unit.field.frame) ?? [];
+    .map(unit => sourceLayoutFrameForField(unit.field, block)) ?? [];
   if (frames.length === 0) return undefined;
   const x0 = Math.min(...frames.map(frame => frame.x));
   const x1 = Math.max(...frames.map(frame => frame.x + frame.width));
@@ -3499,6 +3932,7 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
   const editorialLineIds = new Set(units.flatMap(unit => unit.field.lineIds));
   const inlineSpanStates = exposesNestedSpanTargets(block) ? buildInlineSpanStates(
     block, pageNumber, selectedBlockKey, overrides, draftOverride, language, editorialLineIds,
+    layoutFrames, proposalReviewDiagnosticBlankKeys,
   ) : undefined;
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
@@ -3518,9 +3952,30 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
   // Every editorial unit paints its source lines when it has no override and
   // paints translated segments when it does. Keep those lines out of the
   // fixed-source layer in both cases; otherwise untranslated EN is painted
-  // twice whenever fixed indexes overlap unit-owned lines.
+  // twice whenever fixed indexes overlap unit-owned lines. A standalone
+  // Source markers remain at their PDF positions when the proposal omits them.
+  // When a proposal includes list markers, its markers flow with the translated
+  // paragraphs and the extracted source marker rows are suppressed.
+  const preservedSourceMarkerLineIds = new Set<string>();
+  if (language === 'pt-BR') {
+    for (const unit of units) {
+      const spanKey = `page_${pageNumber}_unit_${unit.id}__pt-BR`;
+      if (proposalReviewDiagnosticBlankKeys?.has(spanKey)) continue;
+      const override = selectedBlockKey === spanKey && draftOverride
+        ? draftOverride
+        : overrides.get(spanKey);
+      if (!override) continue;
+      const markerLines = unit.field.lineIds
+        .map(lineId => block.lines?.find(line => line.id === lineId))
+        .filter((line): line is LineData => line !== undefined && isStandaloneSourceBulletLine(line));
+      const candidateHasBulletLines = countLeadingBulletParagraphs(override.segments) > 0;
+      if (candidateHasBulletLines || !override.segments.some(segment => segment.symbolId || segment.text.trim())) continue;
+      for (const line of markerLines) preservedSourceMarkerLineIds.add(line.id);
+    }
+  }
   const fixedSourceLines = (block.lines ?? []).filter((line, index) =>
-    fixedLineIndexes.has(index) && !editorialLineIds.has(line.id),
+    (fixedLineIndexes.has(index) && !editorialLineIds.has(line.id))
+      || preservedSourceMarkerLineIds.has(line.id),
   );
   const untouchedSourceUnits = language === 'en' && !isAdmin && units.every(unit => {
     const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
@@ -3537,12 +3992,23 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
   const flowUnits = units.filter(unit => !unit.fixedPosition);
   const frameForUnit = (unit: TypographicUnitDefinition): LayoutFrame | undefined => {
     const key = typographicUnitFrameKey(pageNumber, unit);
+    const spanKey = `${key}__${language}`;
+    const override = selectedBlockKey === spanKey && draftOverride ? draftOverride : overrides.get(spanKey) ?? null;
+    const sourceMarkerCount = unit.field.lineIds
+      .map(lineId => block.lines?.find(line => line.id === lineId))
+      .filter((line): line is LineData => line !== undefined && isStandaloneSourceBulletLine(line)).length;
+    const includeLeadingBulletsInFlow = language === 'pt-BR'
+      && sourceMarkerCount > 0
+      && !!override
+      && countLeadingBulletParagraphs(override.segments) > 0;
+    const preserveStoredRotation = language === 'pt-BR' && !!override && (unit.field.frame?.rotation ?? 0) !== 0;
+    const sourceFrame = sourceLayoutFrameForField(unit.field, block, includeLeadingBulletsInFlow, preserveStoredRotation);
     const base = block.layoutFrame
       ? {
-          ...sourceLayoutFrameForField(unit.field),
-          x: block.layoutFrame.x ?? unit.field.frame.x,
-          width: block.layoutFrame.width ?? unit.field.frame.width,
-          textAlign: block.layoutFrame.textAlign ?? unit.field.frame.textAlign,
+          ...sourceFrame,
+          x: block.layoutFrame.x ?? sourceFrame.x,
+          width: block.layoutFrame.width ?? sourceFrame.width,
+          textAlign: block.layoutFrame.textAlign ?? sourceFrame.textAlign,
         }
       : undefined;
     return layoutMode && layoutUnitKey === key && layoutDraft
@@ -3603,7 +4069,18 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
         const spanKey = `page_${pageNumber}_unit_${unit.id}__${language}`;
         if (language === 'pt-BR' && proposalReviewDiagnosticBlankKeys?.has(spanKey)) return null;
         const frameKey = typographicUnitFrameKey(pageNumber, unit);
-        const sourceFrame = sourceLayoutFrameForField(unit.field);
+        const override = selectedBlockKey === spanKey && draftOverride
+          ? draftOverride
+          : overrides.get(spanKey) || null;
+        const sourceMarkerLines = unit.field.lineIds
+          .map(lineId => block.lines?.find(line => line.id === lineId))
+          .filter((line): line is LineData => line !== undefined && isStandaloneSourceBulletLine(line));
+        const includeLeadingBulletsInFlow = language === 'pt-BR'
+          && sourceMarkerLines.length > 0
+          && !!override
+          && countLeadingBulletParagraphs(override.segments) > 0;
+        const preserveStoredRotation = language === 'pt-BR' && !!override && (unit.field.frame?.rotation ?? 0) !== 0;
+        const sourceFrame = sourceLayoutFrameForField(unit.field, block, includeLeadingBulletsInFlow, preserveStoredRotation);
         const baseFrame = block.layoutFrame
           ? {
               ...sourceFrame,
@@ -3616,9 +4093,6 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
         const frameOverride = layoutMode && layoutUnitKey === frameKey && layoutDraft
           ? layoutDraft
           : layoutFrames.get(frameKey) ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(frameKey) : undefined) ?? baseFrame;
-        const override = selectedBlockKey === spanKey && draftOverride
-          ? draftOverride
-          : overrides.get(spanKey) || null;
         const nextFlowUnit = unit.fixedPosition ? undefined : units
           .slice(unitIndex + 1)
           .find(nextUnit => !nextUnit.fixedPosition);
@@ -3671,6 +4145,7 @@ interface CreditFieldProps {
   selected: boolean;
   proposalReviewHighlightKey?: string | null;
   override: SpanOverride | null;
+  diagnosticBlank?: boolean;
   flowOverflow?: boolean;
   language: 'en' | 'pt-BR';
   unitKind?: TypographicUnitDefinition['kind'];
@@ -3707,8 +4182,56 @@ function sourceLeadingContentOffsetPt(line: LineData | undefined): number {
   return 0;
 }
 
+function isStandaloneSourceBulletLine(line: LineData): boolean {
+  if (line.rasterizedDuplicate) return false;
+  return line.spans
+    .filter(span => !span.renderOnlyStrokePass)
+    .map(span => span.text)
+    .join('')
+    .trim() === '•';
+}
+
+function countLeadingBulletParagraphs(segments: SpanOverride['segments']): number {
+  return splitSegmentsIntoParagraphs(segments).filter(paragraph =>
+    /^•(?:[\s\t]|$)/u.test(paragraph.map(segment => segment.text).join('').trimStart()),
+  ).length;
+}
+
+function removeLeadingBulletParagraphPrefix(segments: SpanOverride['segments']): SpanOverride['segments'] {
+  const prefix = segments.map(segment => segment.text).join('').match(/^\s*•[ \t]*/u)?.[0];
+  if (!prefix) return segments;
+  let remaining = prefix.length;
+  return segments.map(segment => {
+    if (remaining <= 0) return segment;
+    const removed = Math.min(remaining, segment.text.length);
+    remaining -= removed;
+    return { ...segment, text: segment.text.slice(removed) };
+  });
+}
+
+function sourceBulletRenderSegments(line: LineData): SpanOverride['segments'] {
+  const sourceSegments = sourceSegmentsFromSpans(line.spans.filter(span => !span.renderOnlyStrokePass));
+  const marker = sourceSegments.find(segment => segment.text.includes('•'));
+  return marker ? [{ ...marker, text: '•' }] : [];
+}
+
+function sourceListMarkerIndentPt(markerLine: LineData, sourceLines: LineData[]): number {
+  const markerBaseline = markerLine.spans.find(span => span.origin)?.origin?.[1];
+  const markerX = markerLine.availableX ?? markerLine.bbox[0];
+  const baselineTextStarts = sourceLines
+    .filter(line => line !== markerLine)
+    .flatMap(line => line.spans
+      .filter(span => span.text.trim() && (markerBaseline === undefined
+        || span.origin === undefined
+        || Math.abs(span.origin[1] - markerBaseline) <= 0.75))
+      .map(span => span.origin?.[0] ?? span.bbox[0]))
+    .filter(x => Number.isFinite(x) && x > markerX + 2);
+  const indent = baselineTextStarts.length ? Math.min(...baselineTextStarts) - markerX : 18;
+  return Math.max(1, indent);
+}
+
 const CreditField: React.FC<CreditFieldProps> = ({
-  block, field, spanKey, scale, isAdmin, selected, proposalReviewHighlightKey, override, flowOverflow = false, language, nextFieldY,
+  block, field, spanKey, scale, isAdmin, selected, proposalReviewHighlightKey, override, diagnosticBlank = false, flowOverflow = false, language, nextFieldY,
   unitKind, unitLabel, paragraphSpacingPt, topOffsetPt = 0, layoutMode = false, layoutUnitKey, layoutFrameForSelection,
   layoutFrameOverride, onSelectLayoutFrame, onPreviewMeasure, inlineSpanStates, onInlineSpanClick, onBlockClick,
 }) => {
@@ -3716,29 +4239,30 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const [isOverflowing, setIsOverflowing] = useState(false);
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
+  const sourceFieldFrame = field.frame ?? sourceLayoutFrameForField(field, block);
   const activeFrame = layoutFrameOverride ?? (layoutMode ? layoutFrameForSelection : undefined);
   const effectiveParagraphSpacingPt = paragraphSpacingPt
     ?? activeFrame?.paragraphSpacingPt
     ?? field.paragraphSpacingPt
-    ?? field.frame.paragraphSpacingPt
+    ?? sourceFieldFrame.paragraphSpacingPt
     ?? (spanKey.split('__')[0] === 'page_9_unit_p9-block-34-remaining-size-10pt' ? 2.81 : undefined);
   const translatedSourceRotation = language === 'pt-BR' && override !== null
-    && (field.frame.rotation ?? 0) !== 0;
+    && (sourceFieldFrame.rotation ?? 0) !== 0;
   // A vertical PDF line has a tall source ink box but its translated text is
   // laid out horizontally, then rotated into that same visual box. Keep the
   // English source on its existing line-direction renderer and only use this
   // derived frame for a translated override.
-  const rotatedSourceFrame = (field.frame.rotation ?? 0) !== 0;
-  const fieldX = activeFrame?.x ?? (rotatedSourceFrame && !translatedSourceRotation ? field.bbox[0] : field.frame.x);
-  const fieldY = activeFrame?.y ?? (translatedSourceRotation ? field.frame.y ?? field.bbox[1] : field.bbox[1]);
+  const rotatedSourceFrame = (sourceFieldFrame.rotation ?? 0) !== 0;
+  const fieldX = activeFrame?.x ?? (rotatedSourceFrame && !translatedSourceRotation ? field.bbox[0] : sourceFieldFrame.x);
+  const fieldY = activeFrame?.y ?? (translatedSourceRotation ? sourceFieldFrame.y ?? field.bbox[1] : field.bbox[1]);
   const effectiveFieldY = fieldY + topOffsetPt;
   const fieldHeight = activeFrame?.height ?? (translatedSourceRotation
-    ? field.frame.height ?? (field.bbox[3] - field.bbox[1])
-    : rotatedSourceFrame ? field.bbox[3] - field.bbox[1] : field.frame.height ?? (field.bbox[3] - field.bbox[1]));
+    ? sourceFieldFrame.height ?? (field.bbox[3] - field.bbox[1])
+    : rotatedSourceFrame ? field.bbox[3] - field.bbox[1] : sourceFieldFrame.height ?? (field.bbox[3] - field.bbox[1]));
   const fieldWidth = activeFrame?.width ?? (rotatedSourceFrame && !translatedSourceRotation
     ? field.bbox[2] - field.bbox[0]
-    : field.frame.width);
-  const fieldRotation = activeFrame?.rotation ?? (translatedSourceRotation ? field.frame.rotation : undefined);
+    : sourceFieldFrame.width);
+  const fieldRotation = activeFrame?.rotation ?? (translatedSourceRotation ? sourceFieldFrame.rotation : undefined);
   const neighborHeight = nextFieldY !== undefined && nextFieldY > effectiveFieldY
     ? nextFieldY - effectiveFieldY
     : fieldHeight;
@@ -3794,11 +4318,39 @@ const CreditField: React.FC<CreditFieldProps> = ({
   }, [onPreviewMeasure, override, neighborHeight, scale]);
 
   const lines = (block.lines || []).filter(line => field.lineIds.includes(line.id));
+  const sourceBulletLines = language === 'pt-BR' ? lines.filter(isStandaloneSourceBulletLine) : [];
+  const inlineSourceBulletFlow = override !== null
+    && sourceBulletLines.length > 0
+    && countLeadingBulletParagraphs(override.segments) > 0;
+  let flowedBulletIndex = 0;
+  const flowedListParagraphs = inlineSourceBulletFlow
+    ? splitSegmentsIntoParagraphs(override.segments).map(paragraph => {
+        const text = paragraph.map(segment => segment.text).join('').trimStart();
+        if (!/^•(?:[\s\t]|$)/u.test(text)) return { segments: paragraph, marker: null, indentPt: 0 };
+        const sourceMarker = sourceBulletLines[flowedBulletIndex++];
+        if (!sourceMarker) return { segments: paragraph, marker: null, indentPt: 0 };
+        return {
+          segments: removeLeadingBulletParagraphPrefix(paragraph),
+          marker: sourceBulletRenderSegments(sourceMarker),
+          indentPt: sourceListMarkerIndentPt(sourceMarker, lines),
+        };
+      })
+    : null;
   const leadingContentOffsetPt = sourceLeadingContentOffsetPt(lines[0]);
   const sourceClass = isAdmin ? (layoutMode ? 'layout-frame-selectable' : 'credit-edit-field') : '';
   const selectedClass = selected ? 'credit-field-selected' : '';
   const reviewHighlightClass = proposalReviewHighlightKey === spanKey ? 'proposal-review-highlight' : '';
   const overflowClass = isAdmin && (isOverflowing || flowOverflow) ? 'block-overflow' : '';
+
+  if (diagnosticBlank && language === 'pt-BR' && !override) {
+    return <div
+      className={`credit-field translation-review-diagnostic-blank ${reviewHighlightClass}`}
+      style={fieldStyle}
+      data-translation-review-diagnostic-blank={spanKey}
+      aria-label="Unidade vazia na exportação diagnóstica; a tradução não está persistida."
+      {...geometryAttributes}
+    />;
+  }
 
   // Untouched English source has exact PDF run origins available for some
   // editorial fields even when adjacent marker/furniture lines do not. Paint
@@ -3811,8 +4363,8 @@ const CreditField: React.FC<CreditFieldProps> = ({
   };
   const sourceFieldSegments = sourceSegmentsFromSpans(lines.flatMap(line => line.spans));
   const sourceEquivalentOverride = override !== null && overrideIsSourceEquivalent(override, sourceFieldSegments, {
-    textAlign: field.frame.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
-    lineHeight: field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+    textAlign: sourceFieldFrame.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
+    lineHeight: sourceFieldFrame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
   });
   const overridePreservesSourceLines = override !== null
     && sourceEquivalentOverride
@@ -3862,8 +4414,8 @@ const CreditField: React.FC<CreditFieldProps> = ({
             position: 'relative',
             width: '100%',
             whiteSpace: 'pre-wrap',
-            textAlign: override.textAlign ?? activeFrame?.textAlign ?? field.frame.textAlign ?? 'left',
-            lineHeight: override.lineHeight ?? activeFrame?.lineHeight ?? field.frame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+            textAlign: override.textAlign ?? activeFrame?.textAlign ?? sourceFieldFrame.textAlign ?? 'left',
+            lineHeight: override.lineHeight ?? activeFrame?.lineHeight ?? sourceFieldFrame.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
             display: 'block',
             fontSize: 0,
             // Only translated segments omit the source newline-only run. Keep
@@ -3872,7 +4424,31 @@ const CreditField: React.FC<CreditFieldProps> = ({
             paddingTop: `${leadingContentOffsetPt * scale}px`,
           }}
         >
-          {effectiveParagraphSpacingPt && effectiveParagraphSpacingPt > 0 ? (
+          {flowedListParagraphs ? (
+            flowedListParagraphs.map((paragraph, parIdx, arr) => (
+              <div
+                key={parIdx}
+                className="credit-paragraph"
+                style={{
+                  display: paragraph.marker ? 'grid' : 'block',
+                  gridTemplateColumns: paragraph.marker ? `${paragraph.indentPt * scale}px minmax(0, 1fr)` : undefined,
+                  alignItems: 'start',
+                  marginBottom: effectiveParagraphSpacingPt && effectiveParagraphSpacingPt > 0 && parIdx < arr.length - 1
+                    ? `${effectiveParagraphSpacingPt * scale}px`
+                    : 0,
+                }}
+              >
+                {paragraph.marker && (
+                  <span style={{ gridColumn: 1, minWidth: 0 }}>
+                    {renderCreditSegments(paragraph.marker, undefined, language, scale, isAdmin, 'pre-wrap', spanKey)}
+                  </span>
+                )}
+                <span style={{ gridColumn: paragraph.marker ? 2 : 1, minWidth: 0 }}>
+                  {renderCreditSegments(paragraph.segments, field.links, language, scale, isAdmin, 'pre-wrap', spanKey)}
+                </span>
+              </div>
+            ))
+          ) : effectiveParagraphSpacingPt && effectiveParagraphSpacingPt > 0 ? (
             splitSegmentsIntoParagraphs(override.segments).map((parSegments, parIdx, arr) => (
               <div
                 key={parIdx}
@@ -4348,10 +4924,15 @@ const LineRenderer: React.FC<LineRendererProps> = ({
         const inlineOverrideSegments = inlineUnit?.override?.segments ?? [];
         const inlineUnitOwnsThisPaint = !!inlineUnit?.override
           && `${line.id}:${span.sourceSpanIndex ?? si}` === inlineUnit.renderAtRef;
-        const inlineUnitFlowMaxWidthPx = inlineUnitOwnsThisPaint
+        const sourceInlineUnitFlowMaxWidthPx = inlineUnitOwnsThisPaint
           ? Math.max(0, ((line.availableX ?? line.bbox[0])
             + (line.availableWidth ?? (line.bbox[2] - line.bbox[0]))
             - (span.origin?.[0] ?? span.bbox[0])) * scale)
+          : undefined;
+        const inlineUnitFlowMaxWidthPx = inlineUnitOwnsThisPaint
+          ? inlineUnit?.flowFrame
+            ? Math.max(0, inlineUnit.flowFrame.width * scale)
+            : sourceInlineUnitFlowMaxWidthPx
           : undefined;
         const inlineUnitOverflowed = inlineUnitOwnsThisPaint
           && overflowingInlineUnitKeys.has(inlineUnit!.spanKey);
@@ -4432,13 +5013,23 @@ const LineRenderer: React.FC<LineRendererProps> = ({
                 // The first source span can be a narrow semantic glyph. Its
                 // source advance must not constrain the translated unit to
                 // the icon's width; use the remaining baseline flow width.
-                flex: `0 1 ${inlineUnitFlowMaxWidthPx}px`,
+                flex: inlineUnit?.flowFrame
+                  ? `0 0 ${inlineUnitFlowMaxWidthPx}px`
+                  : `0 1 ${inlineUnitFlowMaxWidthPx}px`,
                 boxSizing: 'border-box',
                 whiteSpace: 'pre-wrap',
                 minWidth: 0,
                 width: `${inlineUnitFlowMaxWidthPx}px`,
                 maxWidth: `${inlineUnitFlowMaxWidthPx}px`,
+                ...(inlineUnit?.flowFrame ? {
+                  position: 'relative',
+                  left: `${(inlineUnit.flowFrame.x - (span.origin?.[0] ?? span.bbox[0])) * scale}px`,
+                  textAlign: inlineUnit.flowFrame.textAlign ?? 'left',
+                } : {}),
               } : {}),
+              ...(inlineUnit?.diagnosticBlank && language === 'pt-BR'
+                ? { visibility: 'hidden', pointerEvents: 'none' }
+                : {}),
               ...(inlineUnitInteractive && isAdmin ? { cursor: 'text' } : {}),
             }}
             onClick={inlineUnitInteractive && isAdmin ? event => {

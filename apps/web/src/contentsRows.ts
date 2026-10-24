@@ -7,9 +7,11 @@ export interface ContentsRowDefinition {
   keyStem: string;
   legacyCombinedKeyStems: string[];
   labelBBox: [number, number, number, number];
-  numberLineId: string;
-  numberBBox: [number, number, number, number];
-  targetPage: number;
+  numberLineId?: string;
+  numberBBox?: [number, number, number, number];
+  /** Explicit text corridor for labels with no separate printed page number. */
+  labelWidthPt?: number;
+  targetPage?: number;
   overlaySource?: boolean;
   sourceText?: string;
   sourceReference?: string;
@@ -33,6 +35,8 @@ export const CONTENTS_LEADER_GAP_PT = 3;
 
 /** The label's frame ends before the fixed page number. */
 export function contentsLabelWidth(row: ContentsRowDefinition) {
+  if (row.labelWidthPt !== undefined) return Math.max(0, row.labelWidthPt);
+  if (!row.numberBBox) return Math.max(0, row.labelBBox[2] - row.labelBBox[0]);
   return Math.max(0, row.numberBBox[0] - row.labelBBox[0] - CONTENTS_LEADER_GAP_PT);
 }
 

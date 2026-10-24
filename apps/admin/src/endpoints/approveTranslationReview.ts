@@ -45,6 +45,7 @@ function copyfitMeasurementFingerprint(data: unknown): string | null {
     textAlign: data.textAlign,
     lineHeight: data.lineHeight,
     lineHeightMode: data.lineHeightMode,
+    paragraphSpacingPt: data.paragraphSpacingPt ?? null,
     managedSourceSymbols: data.managedSourceSymbols ?? [],
     segments: data.segments,
   }
@@ -125,7 +126,6 @@ export function resolveCanonicalCopyfitEvidence(
         spanKey: normalizeSpanKeyForComparison(identity.data.spanKey) === normalizeSpanKeyForComparison(canonicalSpanKey)
           ? canonicalSpanKey
           : identity.data.spanKey,
-        bbox: canonicalBbox,
       }
     : identity.data
   const submittedFingerprint = copyfitMeasurementFingerprint(submittedData)

@@ -437,6 +437,44 @@ async function listAssetHashes(directory: string, baseDirectory: string): Promis
   return result
 }
 
+async function readPageScopedTranslationReviewCatalog(root: string, pages: number[]) {
+  const catalogPaths = [
+    path.join(root, 'apps/web/node_modules/.cache/translation-review/catalog.json'),
+    path.join(root, 'apps/web/public/translation-review/catalog.json'),
+  ]
+  let catalog: Record<string, unknown> | null = null
+  for (const catalogPath of catalogPaths) {
+    try {
+      catalog = JSON.parse(await readFile(catalogPath, 'utf8')) as Record<string, any>
+      break
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error
+    }
+  }
+  if (!catalog || catalog.schemaVersion !== 1 || !Array.isArray(catalog.proposals) || !Array.isArray(catalog.exceptions)) {
+    throw new Error('Não foi possível capturar o catálogo vigente de propostas para espelhar o Viewer PT-BR na exportação.')
+  }
+  const requestedPages = new Set(pages)
+  const proposalRows = catalog.proposals as Array<Record<string, unknown> & { candidates?: unknown }>
+  const proposals = proposalRows.flatMap(proposal => {
+    const candidates = Array.isArray(proposal.candidates)
+      ? (proposal.candidates as Array<Record<string, unknown>>)
+        .filter(candidate => requestedPages.has(Number(candidate.pageNumber)))
+      : []
+    return candidates.length ? [{ ...proposal, candidates }] : []
+  })
+  const exceptions = (catalog.exceptions as Array<Record<string, unknown>>)
+    .filter(exception => requestedPages.has(Number(exception.pageNumber)))
+  return {
+    ...catalog,
+    proposalCount: proposals.length,
+    candidateCount: proposals.reduce((count, proposal) => count + proposal.candidates.length, 0),
+    exceptionCount: exceptions.length,
+    proposals,
+    exceptions,
+  }
+}
+
 async function createImmutableSnapshot(
   payload: Payload,
   jobId: string,
@@ -454,10 +492,14 @@ async function createImmutableSnapshot(
 
   await access(source)
   const sourcePdfSha256 = await hashFile(source)
-  const [translationDocs, frameDocs, aliasDocs, sourcePageBoxes] = await Promise.all([
+  const [translationDocs, frameDocs, aliasDocs, reviewDocs, reviewRequestDocs, glossaryDecisionDocs, reviewCatalog, sourcePageBoxes] = await Promise.all([
     readAll(payload, 'translations'),
     readAll(payload, 'layout-frames'),
     readAll(payload, 'symbol-alias-settings'),
+    readAll(payload, 'translation-reviews'),
+    readAll(payload, 'translation-review-requests'),
+    readAll(payload, 'translation-glossary-decisions'),
+    readPageScopedTranslationReviewCatalog(root, request.pages),
     snapshotSourcePageBoxes(payload, jobId, source, request.pages, logPath),
   ])
   if (await hashFile(source) !== sourcePdfSha256) {
@@ -481,6 +523,18 @@ async function createImmutableSnapshot(
     pages: request.pages,
     assetPages,
     translations: translationDocs.map(record => selectFields(record, ['id', 'spanKey', 'language', 'data', 'updatedAt'])),
+    translationReviews: reviewDocs
+      .filter(record => request.pages.includes(Number(record.pageNumber)))
+      .map(record => selectFields(record, [
+        'id', 'reviewKey', 'pageNumber', 'spanKey', 'proposalId', 'proposalVersion', 'sourceText', 'proposalText',
+        'data', 'technicalStatus', 'copyfitClassification', 'copyfitSourcePdfLineCount', 'copyfitPageRendererLineCount',
+        'copyfitMeasurementFingerprint', 'underCompositionJustification', 'approvalStatus', 'reviewDisposition',
+        'approvedAt', 'publication', 'updatedAt',
+      ])),
+    translationReviewRequests: reviewRequestDocs.filter(record =>
+      record.pageNumber === undefined || request.pages.includes(Number(record.pageNumber))),
+    translationGlossaryDecisions: glossaryDecisionDocs,
+    translationReviewCatalog: reviewCatalog,
     layoutFrames: frameDocs
       .filter(record => assetPages.includes(Number(record.pageNumber)))
       .map(record => selectFields(record, ['id', 'frameKey', 'unitKey', 'pageNumber', 'language', 'data', 'updatedAt'])),
@@ -959,6 +1013,10 @@ export async function readPdfExportSnapshot(snapshotPath: string) {
     pages: number[]
     assetPages: number[]
     translations: SnapshotDoc[]
+    translationReviews: SnapshotDoc[]
+    translationReviewRequests: SnapshotDoc[]
+    translationGlossaryDecisions: SnapshotDoc[]
+    translationReviewCatalog: Record<string, unknown>
     layoutFrames: SnapshotDoc[]
     symbolAliasSettings: SnapshotDoc[]
     sourcePdfSha256: string

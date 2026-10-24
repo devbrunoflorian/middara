@@ -21,6 +21,8 @@ const officialGlossaryTerms = glossaryText.split(/\r?\n/u).flatMap(line => {
 const exceptionItems = Array.isArray(queue.items) ? queue.items : [];
 const candidatesByFamily = new Map();
 const pageDomCache = new Map();
+const pageCreditUnitCache = new Map();
+const pageContentsRowCache = new Map();
 const sourceSymbols = JSON.parse(fs.readFileSync(path.join(root, 'apps/web/src/symbols/sourceSymbols.json'), 'utf8'));
 
 function mapPdfFont(pdfFontName) {
@@ -90,6 +92,7 @@ function copyfitMeasurementFingerprint(data) {
     textAlign: data.textAlign,
     lineHeight: data.lineHeight,
     lineHeightMode: data.lineHeightMode,
+    paragraphSpacingPt: data.paragraphSpacingPt ?? null,
     managedSourceSymbols: data.managedSourceSymbols ?? [],
     segments: data.segments,
   };
@@ -129,8 +132,66 @@ function pageDom(pageNumber) {
   }
 }
 
+function pageCreditUnits(pageNumber) {
+  if (pageCreditUnitCache.has(pageNumber)) return pageCreditUnitCache.get(pageNumber);
+  const pageDirectory = `page_${String(pageNumber).padStart(3, '0')}`;
+  const creditPath = path.join(root, 'apps/web/public/pages', pageDirectory, 'credit_units.json');
+  try {
+    const data = JSON.parse(fs.readFileSync(creditPath, 'utf8'));
+    pageCreditUnitCache.set(pageNumber, data);
+    return data;
+  } catch {
+    pageCreditUnitCache.set(pageNumber, null);
+    return null;
+  }
+}
+
+function pageContentsRows(pageNumber) {
+  if (pageContentsRowCache.has(pageNumber)) return pageContentsRowCache.get(pageNumber);
+  const pageDirectory = `page_${String(pageNumber).padStart(3, '0')}`;
+  const rowsPath = path.join(root, 'apps/web/public/pages', pageDirectory, 'contents_rows.json');
+  try {
+    const data = JSON.parse(fs.readFileSync(rowsPath, 'utf8'));
+    const rows = Array.isArray(data?.rows) ? data.rows : [];
+    pageContentsRowCache.set(pageNumber, rows);
+    return rows;
+  } catch {
+    pageContentsRowCache.set(pageNumber, null);
+    return null;
+  }
+}
+
+function contentsRow(pageNumber, spanKey) {
+  const key = normalizeSpanKeyForComparison(spanKey);
+  return pageContentsRows(pageNumber)?.find(row => row?.keyStem === key) ?? null;
+}
+
+function creditField(pageNumber, sourceBlock, spanKey) {
+  const match = spanKey.match(/^page_\d+_credit_(.+)_(label|body)(?:__pt-BR)?$/u);
+  if (!match || !sourceBlock?.id) return null;
+  const [, unitId, fieldId] = match;
+  const units = pageCreditUnits(pageNumber)?.[sourceBlock.id];
+  const unit = Array.isArray(units) ? units.find(item => item?.id === unitId) : null;
+  const field = unit?.[fieldId];
+  if (!field || !validBbox(field.bbox) || !Array.isArray(field.lineIds)) return null;
+  return field;
+}
+
 /** Resolve the same persisted span identity and page-space box used by the Viewer before issuing Copyfit evidence. */
 function canonicalCopyfitGeometry(candidate, pageNumber, spanKey) {
+  const contents = contentsRow(pageNumber, spanKey);
+  if (contents && validBbox(contents.labelBBox)) {
+    const [x, y, , bottom] = contents.labelBBox;
+    const width = Number(contents.labelWidthPt ?? (validBbox(contents.numberBBox)
+      ? contents.numberBBox[0] - x - 3
+      : contents.labelBBox[2] - x));
+    if (Number.isFinite(width) && width > 0) {
+      return {
+        spanKey: `${contents.keyStem}__pt-BR`,
+        bbox: [x, y, x + width, bottom],
+      };
+    }
+  }
   const page = pageDom(pageNumber);
   const blocks = Array.isArray(page?.blocks) ? page.blocks : [];
   const keyBlockIndex = Number(spanKey.match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u)?.[1]);
@@ -140,10 +201,28 @@ function canonicalCopyfitGeometry(candidate, pageNumber, spanKey) {
       ? keyBlockIndex
       : candidate.sourceBlockId ? blocks.findIndex(block => block?.id === candidate.sourceBlockId) : -1;
   const sourceBlock = blockIndex >= 0 && blockIndex < blocks.length ? blocks[blockIndex] : null;
+  const sourceCreditField = creditField(pageNumber, sourceBlock, spanKey);
   const sourceUnitKey = spanKey.match(/^page_\d+_unit_(.+?)(?:__pt-BR)?$/u)?.[1];
   const sourceUnitId = candidate.sourceUnitId ?? sourceUnitKey;
   const sourceUnit = sourceUnitId && Array.isArray(sourceBlock?.typographicUnits)
     ? sourceBlock.typographicUnits.find(unit => unit?.id === sourceUnitId)
+    : null;
+  const sourceSpanUnit = sourceUnitId && Array.isArray(sourceBlock?.typographicSpanUnits)
+    ? sourceBlock.typographicSpanUnits.find(unit => unit?.id === sourceUnitId)
+    : null;
+  const spanUnitBboxes = sourceSpanUnit
+    ? sourceBlock.lines.flatMap(line => (line.spans ?? []).flatMap((span, index) => {
+        const ref = `${line.id}:${span.sourceSpanIndex ?? index}`;
+        return sourceSpanUnit.spanRefs?.includes(ref) && validBbox(span.bbox) ? [span.bbox] : [];
+      }))
+    : [];
+  const spanUnitBbox = spanUnitBboxes.length > 0
+    ? [
+        Math.min(...spanUnitBboxes.map(bbox => bbox[0])),
+        Math.min(...spanUnitBboxes.map(bbox => bbox[1])),
+        Math.max(...spanUnitBboxes.map(bbox => bbox[2])),
+        Math.max(...spanUnitBboxes.map(bbox => bbox[3])),
+      ]
     : null;
   const validBboxes = Array.isArray(candidate.sourceBboxes)
     ? candidate.sourceBboxes.filter(validBbox)
@@ -159,12 +238,18 @@ function canonicalCopyfitGeometry(candidate, pageNumber, spanKey) {
   const rawData = candidate.data && typeof candidate.data === 'object' && !Array.isArray(candidate.data)
     ? candidate.data
     : null;
-  const bbox = sourceUnit
+  const bbox = sourceCreditField
+    ? sourceCreditField.bbox
+    : sourceUnit
     ? [sourceUnit.field?.bbox, sourceBboxUnion, rawData?.bbox, sourceBlock?.bbox].find(validBbox)
+    : sourceSpanUnit
+      ? [spanUnitBbox, sourceBboxUnion, rawData?.bbox, sourceBlock?.bbox].find(validBbox)
     : [sourceBlock?.bbox, sourceBboxUnion, rawData?.bbox].find(validBbox);
 
   let canonicalSpanKey = spanKey;
-  if (/^page_\d+_unit_/u.test(spanKey)) {
+  if (/^page_\d+_credit_/u.test(spanKey)) {
+    canonicalSpanKey = spanKey.endsWith('__pt-BR') ? spanKey : `${spanKey}__pt-BR`;
+  } else if (/^page_\d+_unit_/u.test(spanKey)) {
     canonicalSpanKey = spanKey.endsWith('__pt-BR') ? spanKey : `${spanKey}__pt-BR`;
   } else if (blockIndex >= 0) {
     canonicalSpanKey = sourceBlock?.editorKey
@@ -187,25 +272,54 @@ function resolveSourceSegments(candidate, pageNumber, spanKey) {
   const sourceBlock = blockIndex >= 0 && blockIndex < blocks.length ? blocks[blockIndex] : null;
   if (!sourceBlock || !Array.isArray(sourceBlock.lines)) return [];
 
+  const credit = creditField(pageNumber, sourceBlock, spanKey);
+  if (credit) {
+    const lineIds = new Set(credit.lineIds);
+    const creditSpans = sourceBlock.lines
+      .filter(line => lineIds.has(line.id))
+      .flatMap(line => (line.spans || []).filter(s => !s.renderOnlyStrokePass
+        && (String(s.displayOverride || s.text || '').trim() || s.semanticSymbolId)));
+    return creditSpans.map(s => {
+      const mapped = mapPdfFont(s.font);
+      const weight = s.renderWeightOverride ?? mapped.weight;
+      const legacySymbol = sourceSymbols.find(sym => sym.legacy && s.font.includes(sym.legacy.font) && sym.legacy.characters.includes(s.text.trim()));
+      const symbolId = s.semanticSymbolId ?? legacySymbol?.id;
+      return {
+        text: s.displayOverride || s.text,
+        font: s.font,
+        size: s.renderSizeOverridePt ?? s.size,
+        weight,
+        style: mapped.style,
+        color: s.color || '#231f20',
+        ...(symbolId ? { symbolId } : {}),
+        ...(s.sourceSymbolMetrics ? { symbolMetrics: s.sourceSymbolMetrics } : {}),
+      };
+    });
+  }
+
   const sourceUnitKey = spanKey.match(/^page_\d+_unit_(.+?)(?:__pt-BR)?$/u)?.[1];
   const sourceUnitId = candidate.sourceUnitId ?? sourceUnitKey;
   const sourceUnit = sourceUnitId && Array.isArray(sourceBlock.typographicUnits)
     ? sourceBlock.typographicUnits.find(u => u?.id === sourceUnitId)
     : null;
+  const sourceSpanUnit = sourceUnitId && Array.isArray(sourceBlock.typographicSpanUnits)
+    ? sourceBlock.typographicSpanUnits.find(u => u?.id === sourceUnitId)
+    : null;
 
   let spans = [];
-  if (sourceUnit && Array.isArray(sourceUnit.spanRefs)) {
+  const spanRefs = sourceSpanUnit?.spanRefs ?? sourceUnit?.spanRefs;
+  if (Array.isArray(spanRefs)) {
     for (const line of sourceBlock.lines) {
       if (!Array.isArray(line.spans)) continue;
       line.spans.forEach((span, idx) => {
         const ref = `${line.id}:${span.sourceSpanIndex ?? idx}`;
-        if (sourceUnit.spanRefs.includes(ref) && !span.renderOnlyStrokePass) {
+        if (spanRefs.includes(ref) && !span.renderOnlyStrokePass) {
           spans.push(span);
         }
       });
     }
   }
-  if (spans.length === 0) {
+  if (spans.length === 0 && !sourceSpanUnit && !sourceUnit) {
     spans = sourceBlock.lines.flatMap(l => (l.spans || []).filter(s => !s.renderOnlyStrokePass));
   }
 

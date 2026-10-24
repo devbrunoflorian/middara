@@ -20,6 +20,20 @@ function readP50UnitFixture(): PageData {
   };
 }
 
+function readP19RemovalParagraphFixture(): PageData {
+  const pageDir = join(process.cwd(), 'public/pages/page_019');
+  const pageData = JSON.parse(readFileSync(join(pageDir, 'page_019_dom.json'), 'utf8')) as PageData;
+  const block = pageData.blocks.find(candidate => candidate.id === 'block_35');
+  if (!block) throw new Error('Expected p. 19 removal-tokens block_35');
+  return {
+    ...pageData,
+    images: [],
+    fidelityOverlays: [],
+    backgroundUrl: '/pages/page_019/background.webp',
+    blocks: [block],
+  };
+}
+
 function readP102DiceLegendFixture(): PageData {
   const pageDir = join(process.cwd(), 'public/pages/page_102');
   const pageData = JSON.parse(readFileSync(join(pageDir, 'page_102_dom.json'), 'utf8')) as PageData;
@@ -99,6 +113,58 @@ describe('typographic unit source fallback', () => {
     });
     expect(container.querySelectorAll('.credit-field')).toHaveLength(10);
     expect(container.querySelectorAll('.static-editor-line')).toHaveLength(0);
+  });
+
+  it('flows two translated source bullets with their list entries without mutating proposal text', async () => {
+    const pageData = readP19RemovalParagraphFixture();
+    const block = pageData.blocks[0];
+    const unit = block.typographicUnits!.find(candidate => candidate.id === 'p19-block-35-paragraph-2')!;
+    const spanKey = `page_19_unit_${unit.id}__pt-BR`;
+    const sourceMarkers = block.lines!.filter(line => unit.field.lineIds.includes(line.id)
+      && line.spans.map(span => span.text).join('').trim() === '•');
+    const sourceText = 'Por exemplo: uma ficha não poderá surgir depois de removida.\n'
+      + '• Cartas de Item: continuam disponíveis na pilha correspondente.\n'
+      + '• Remoção Permanente: o componente fica fora da Aventura.';
+    const override: SpanOverride = {
+      spanKey,
+      bbox: unit.field.bbox,
+      segments: [{
+        text: sourceText, font: 'OptimaLTStd', size: 10, weight: 400, style: 'normal', color: '#231f20',
+      }],
+    };
+    const originalRangeRects = Object.getOwnPropertyDescriptor(Range.prototype, 'getClientRects');
+    Object.defineProperty(Range.prototype, 'getClientRects', { configurable: true, value: () => [] });
+    restoreRangeRects = () => {
+      if (originalRangeRects) Object.defineProperty(Range.prototype, 'getClientRects', originalRangeRects);
+      else delete (Range.prototype as unknown as { getClientRects?: () => DOMRectList }).getClientRects;
+    };
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    root = createRoot(container);
+
+    await act(async () => {
+      root!.render(<PageRenderer
+        pageData={pageData}
+        isAdmin={false}
+        language="pt-BR"
+        isolatedSnapshot
+        readOnlyExperiment
+        experimentalOverrides={new Map([[spanKey, override]])}
+      />);
+      await Promise.resolve();
+    });
+
+    const renderedText = container.querySelector<HTMLElement>(`[data-rendered-translation-key="${spanKey}"]`);
+    expect(sourceMarkers).toHaveLength(2);
+    expect(renderedText).not.toBeNull();
+    expect(renderedText!.textContent?.match(/•/gu)).toHaveLength(2);
+    const flowedListRows = Array.from(renderedText!.querySelectorAll<HTMLElement>('.credit-paragraph'))
+      .filter(paragraph => paragraph.style.display === 'grid');
+    expect(flowedListRows).toHaveLength(2);
+    expect(flowedListRows.every(paragraph => Number.parseFloat(paragraph.style.gridTemplateColumns) > 0)).toBe(true);
+    expect(container.querySelector('[data-source-line-id="line_35_13"]')).toBeNull();
+    expect(container.querySelector('[data-source-line-id="line_35_18"]')).toBeNull();
+    expect(override.segments[0].text).toBe(sourceText);
   });
 
   it('keeps a rejected PT-BR diagnostic unit blank without English fallback or source-data deletion', async () => {

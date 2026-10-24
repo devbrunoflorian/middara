@@ -73,6 +73,8 @@ export interface SpanOverride {
   lineHeightMode?: LineHeightMode;
   /** Source IDs adopted by this edit, including objects deliberately deleted. */
   managedSourceSymbols?: string[];
+  /** Source-measured separation between adjacent paragraphs, in PDF points. */
+  paragraphSpacingPt?: number;
 }
 
 interface RichSpanEditorProps {
@@ -108,6 +110,9 @@ interface RichSpanEditorProps {
   onToggleLanguage?: (language: 'en' | 'pt-BR') => void;
   /** Save into isolated in-memory experiment state instead of persistence. */
   sessionOnly?: boolean;
+  /** Save a proposal edit back to its persisted pending Payload review record. */
+  persistentDraftMode?: boolean;
+  persistentDraftStatus?: 'saved' | 'saving' | 'error';
 }
 
 interface EditorSnapshot {
@@ -165,6 +170,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   headerAccessory,
   onToggleLanguage,
   sessionOnly = false,
+  persistentDraftMode = false,
+  persistentDraftStatus = 'saved',
 }) => {
   const normalizeText = useCallback((text: string) => (
     singleLine ? text.replace(/[\r\n]+/g, ' ').replace(/[\t ]+/g, ' ') : text
@@ -422,7 +429,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
           finalSegments,
           restored.managedSourceSymbols,
           restored.lineHeight,
-          restored.lineHeightMode
+          restored.lineHeightMode,
+          existingOverride?.paragraphSpacingPt
         );
         onDraftChange?.(draft);
       } else {
@@ -469,7 +477,15 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       : editableTextForSegments(segments, language, symbolAliasPreferences);
     return needsManualRichStyleReview(sourceContextSegments, candidateText, symbolAliasPreferences);
   }, [language, hasDraftChanges, isEditingText, editText, segments, sourceContextSegments, symbolAliasPreferences]);
-  const translationState = sessionOnly
+  const translationState = persistentDraftMode
+    ? persistentDraftStatus === 'saving'
+      ? { label: 'SALVANDO RASCUNHO NO PAYLOAD…', className: 'is-loading' }
+      : persistentDraftStatus === 'error'
+        ? { label: 'ERRO AO SALVAR · RASCUNHO NÃO CONFIRMADO', className: 'is-error' }
+        : hasDraftChanges
+          ? { label: 'RASCUNHO ALTERADO · NÃO SALVO', className: 'is-dirty' }
+          : { label: 'RASCUNHO PERSISTIDO NO PAYLOAD · APROVAÇÃO PENDENTE', className: 'is-pending' }
+    : sessionOnly
     ? hasDraftChanges
       ? { label: 'RASCUNHO EXPERIMENTAL · NÃO APLICADO À PROVA', className: 'is-dirty' }
       : { label: 'PROPOSTA EXPERIMENTAL · SOMENTE NESTA SESSÃO', className: 'is-pending' }
@@ -512,8 +528,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     }
 
     const previewSegments = isEditingText ? editTextSegments : segments;
-    onDraftChange(createEditorOverride(spanKey, bbox, textAlign, previewSegments, managedSourceSymbols, lineHeight, lineHeightMode));
-  }, [segments, editTextSegments, textAlign, lineHeight, lineHeightMode, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, managedSourceSymbols]);
+    onDraftChange(createEditorOverride(spanKey, bbox, textAlign, previewSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt));
+  }, [segments, editTextSegments, textAlign, lineHeight, lineHeightMode, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, managedSourceSymbols, existingOverride?.paragraphSpacingPt]);
 
   // Selection helpers
   const hasSelection = selStart !== null && selEnd !== null && selStart !== selEnd;
@@ -886,8 +902,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       return;
     }
     const finalSegments = isEditingText ? editTextSegments : segments;
-    onSave(createEditorOverride(spanKey, bbox, textAlign, finalSegments, managedSourceSymbols, lineHeight, lineHeightMode));
-  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign, lineHeight, lineHeightMode, isEditingText, editTextSegments, managedSourceSymbols]);
+    onSave(createEditorOverride(spanKey, bbox, textAlign, finalSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt));
+  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign, lineHeight, lineHeightMode, isEditingText, editTextSegments, managedSourceSymbols, existingOverride?.paragraphSpacingPt]);
 
   // Reset to original
   const handleReset = useCallback(() => {
@@ -1202,8 +1218,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         {/* Footer: Save */}
         <div className="rse-footer">
           <div className="rse-footer-actions">
-            <button className="rse-btn-reset" disabled={language === 'en'} onClick={handleReset} title={language === 'en' ? 'Alterne para PT/BR para resetar' : undefined}>{sessionOnly ? 'Restaurar proposta' : 'Reset'}</button>
-            <button className="rse-btn-save" disabled={language === 'en'} onClick={handleSave} title={language === 'en' ? 'Alterne para PT/BR para salvar' : undefined}>{sessionOnly ? 'Aplicar à prova' : '💾 Save'}</button>
+            <button className="rse-btn-reset" disabled={language === 'en'} onClick={handleReset} title={language === 'en' ? 'Alterne para PT/BR para resetar' : undefined}>{persistentDraftMode ? 'Descartar edição' : sessionOnly ? 'Restaurar proposta' : 'Reset'}</button>
+            <button className="rse-btn-save" disabled={language === 'en' || persistentDraftStatus === 'saving'} onClick={handleSave} title={language === 'en' ? 'Alterne para PT/BR para salvar' : undefined}>{persistentDraftMode ? persistentDraftStatus === 'saving' ? 'Salvando…' : 'Salvar rascunho' : sessionOnly ? 'Aplicar à prova' : '💾 Save'}</button>
           </div>
         </div>
       </div>

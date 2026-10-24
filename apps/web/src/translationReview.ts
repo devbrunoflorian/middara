@@ -10,6 +10,24 @@ export interface ProposalReviewLayoutFrame extends LayoutFrame {
   height: number;
 }
 
+export interface StructuredTranslationPendingTerm {
+  source: string;
+  proposal: string;
+}
+
+export type TranslationPendingTerm = string | StructuredTranslationPendingTerm;
+
+export function pendingTranslationTermNote(value: TranslationPendingTerm): string {
+  if (typeof value === 'string') return value;
+  const source = String(value?.source ?? '').trim();
+  const proposal = String(value?.proposal ?? '').trim();
+  if (!source) return proposal || 'Pendência terminológica sem descrição.';
+  if (!proposal) return source;
+  // Preserved names are informational, not glossary mappings to approve.
+  if (/^(?:kept|preserved|retained)\b/iu.test(proposal)) return `${source}: ${proposal}`;
+  return `${source} → ${proposal}`;
+}
+
 export interface TranslationReviewCandidate {
   reviewKey: string;
   pageNumber: number;
@@ -39,7 +57,7 @@ export interface TranslationReviewCandidate {
   underCompositionJustification?: string | null;
   editorialStatus: string;
   diagnosticRendering: string;
-  pendingTerms: string[];
+  pendingTerms: TranslationPendingTerm[];
   diagnosticBlank: { exceptionId: string; reason: string } | null;
 }
 
@@ -102,6 +120,7 @@ function copyfitMeasurementSnapshot(data: unknown): Record<string, unknown> | nu
     textAlign: data.textAlign,
     lineHeight: data.lineHeight,
     lineHeightMode: data.lineHeightMode,
+    paragraphSpacingPt: data.paragraphSpacingPt ?? null,
     managedSourceSymbols: data.managedSourceSymbols ?? [],
     segments: data.segments,
   };
@@ -166,6 +185,14 @@ export interface TranslationReviewException {
 
 export function exceptionRequiresDiagnosticBlank(exception: Pick<TranslationReviewException, 'status' | 'diagnosticBlank'>): boolean {
   return exception.status !== 'resolved' && exception.diagnosticBlank;
+}
+
+export function unresolvedReviewExceptions(
+  exceptions: TranslationReviewException[],
+  pageValue: string,
+): TranslationReviewException[] {
+  return exceptions.filter(exception => exception.status !== 'resolved'
+    && (pageValue === 'all' || exception.pageNumber === Number(pageValue)));
 }
 
 export interface TranslationReviewCatalog {
@@ -406,6 +433,19 @@ function sortJsonKeys(value: unknown): unknown {
 
 export function translationDataMatches(left: unknown, right: unknown): boolean {
   return JSON.stringify(sortJsonKeys(left)) === JSON.stringify(sortJsonKeys(right));
+}
+
+/**
+ * A published translation remains approved while its replacement draft is
+ * pending. Keep the two states distinguishable so the old Payload value stays
+ * discoverable in Aprovados without hiding the draft from Propostas.
+ */
+export function hasUnapprovedPublishedRevisionDraft(
+  record: Pick<TranslationReviewRecord, 'approvalStatus' | 'publication' | 'data'> | null | undefined,
+): boolean {
+  return !!record?.publication
+    && record.approvalStatus !== 'approved'
+    && !translationDataMatches(record.data, record.publication.data);
 }
 
 async function fetchCollection<T>(slug: string, sort = 'id'): Promise<T[]> {
@@ -676,6 +716,28 @@ export function reviewRecordForCandidate(
       return rightUpdated - leftUpdated
         || Number(right.reviewKey === candidate.reviewKey) - Number(left.reviewKey === candidate.reviewKey);
     })[0];
+}
+
+/**
+ * A pending review may be shown in the normal PT-BR viewer as editable draft
+ * content only while it still names the exact proposal version. Published
+ * revisions, archived items, explicit diagnostic blanks and known OVER units
+ * remain out of the normal page composition.
+ */
+export function isCurrentActivePendingReviewDraft(
+  record: TranslationReviewRecord | undefined,
+  candidate: TranslationReviewCandidate,
+): record is TranslationReviewRecord {
+  if (!record
+    || record.approvalStatus !== 'pending'
+    || record.reviewDisposition === 'archived'
+    || record.publication
+    || record.reviewKey !== candidate.reviewKey
+    || record.proposalId !== candidate.proposalId
+    || record.proposalVersion !== candidate.proposalVersion
+    || candidate.diagnosticBlank
+    || candidate.copyfitClassification === 'OVER') return false;
+  return !/^(?:blocked|failed)(?:[_-]|$)|(?:^|[_-])dtp[_-]exception[_-]open/iu.test(candidate.technicalStatus);
 }
 
 export function withUpdatedTranslationReviewRecord(

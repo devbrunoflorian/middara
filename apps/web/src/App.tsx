@@ -10,7 +10,7 @@ import { ShellNavigation, type ShellDestination } from './components/ShellNaviga
 import { ArcaneGlassDefinitions } from './components/ArcaneGlassDefinitions';
 import { AtmosphericParticles } from './components/AtmosphericParticles';
 import {
-  ChevronLeft, ChevronRight, Diamond, Edit3, Menu,
+  ChevronLeft, ChevronRight, Diamond, Edit3,
   ZoomIn, ZoomOut, Maximize, Layout, LayoutList,
   Ruler, Move
 } from 'lucide-react';
@@ -48,11 +48,14 @@ import {
   spanOverrideForReviewCandidate,
   textForReviewData,
   updateTranslationReviewRequest,
+  pendingTranslationTermNote,
   parseGlossaryTermCandidates,
   withUpdatedTranslationReviewRecord,
   normalizeGlossaryTerm,
   copyfitCanonicalEvidenceBlockReason,
   copyfitApprovalBlockReason,
+  hasUnapprovedPublishedRevisionDraft,
+  isCurrentActivePendingReviewDraft,
   type TranslationReviewCandidate,
   type TranslationReviewCatalog,
   type TranslationReviewException,
@@ -519,6 +522,8 @@ async function loadPageData(pageNum: number): Promise<PageData> {
 
 function App() {
   const [overlayHost, setOverlayHost] = useState<HTMLDivElement | null>(null);
+  const [strictPtBrDiagnostic] = useState(() => new URLSearchParams(window.location.search)
+    .get('diagnosticBlankUntranslated') === '1');
   const [initialImportantCompositionVariant] = useState(() => readPage14ImportantCompositionVariant(window.location.search));
   const [initialV3ExperimentLocation] = useState(() => readPage14V3ExperimentLocation(window.location.search));
   const [initialV2ExperimentLocation] = useState(() => readPage14V2ExperimentLocation(window.location.search));
@@ -594,8 +599,6 @@ function App() {
   const [reviewWritingKey, setReviewWritingKey] = useState<string | null>(null);
   const [reviewStatus, setReviewStatus] = useState<string | null>(null);
   const [faqActiveType, setFaqActiveType] = useState<'faq' | 'errata'>('faq');
-  const [navigationOpenRequest, setNavigationOpenRequest] = useState(0);
-  const [isNavigationExpanded, setIsNavigationExpanded] = useState(false);
   const [symbolAliasPreferences, setSymbolAliasPreferences] = useState<SymbolAliasPreferences>(getDefaultSymbolAliasPreferences);
   const [symbolAliasSettingsLoading, setSymbolAliasSettingsLoading] = useState(true);
   const [paletteEditorState, setPaletteEditorState] = useState<Pick<AdminSymbolPaletteEditorState, 'context' | 'canInsert' | 'canUndo' | 'status'> & { editorKey: string } | null>(null);
@@ -634,7 +637,7 @@ function App() {
   }, [isTranslationReviewOpen]);
 
   useEffect(() => {
-    if (!isTranslationReviewOpen || reviewPersistenceLoaded || reviewPersistenceLoading) return;
+    if ((!isTranslationReviewOpen && language !== 'pt-BR') || reviewPersistenceLoaded || reviewPersistenceLoading) return;
     setReviewPersistenceLoading(true);
     setReviewPersistenceError(null);
     void Promise.all([loadTranslationReviewRecords(), loadTranslationReviewRequests(), loadTranslationGlossaryDecisions(), loadSavedPortugueseTranslations()]).then(([records, requests, decisions, humanTranslations]) => {
@@ -651,7 +654,7 @@ function App() {
       setReviewPersistenceLoaded(true);
       setReviewPersistenceLoading(false);
     });
-  }, [isTranslationReviewOpen, reviewPersistenceLoaded, reviewPersistenceLoading]);
+  }, [isTranslationReviewOpen, language, reviewPersistenceLoaded, reviewPersistenceLoading]);
 
   useEffect(() => {
     if (!isTranslationReviewOpen || !reviewPersistenceLoaded || reviewPersistenceError) return;
@@ -1195,13 +1198,67 @@ function App() {
     const overrides = new Map<string, SpanOverride>();
     const layoutFrames = new Map<string, LayoutFrame>();
     const diagnosticBlankKeys = new Set<string>();
-    if (!isTranslationReviewOpen || viewMode !== 'single' || rendererLanguage !== 'pt-BR'
+    const persistedDraftOverrides = new Map<string, SpanOverride>();
+    const persistedDraftLayoutFrames = new Map<string, LayoutFrame>();
+    const persistedDraftReviewKeys = new Map<string, string>();
+    if (viewMode === 'single' && rendererLanguage === 'pt-BR'
+      && !readOnlyExperiment && pageData && pageData.page_number === currentPage
+      && reviewPersistenceLoaded) {
+      for (const candidate of reviewCandidates.filter(item => item.pageNumber === currentPage)) {
+        const record = reviewRecordForCandidate(reviewRecords, candidate);
+        if (!isCurrentActivePendingReviewDraft(record, candidate)) continue;
+        const rendererKey = rendererKeyForReviewCandidate(candidate, pageData);
+        const rendererBaseKey = rendererKey.replace(/__pt-BR$/u, '');
+        const ownershipKeys = new Set([
+          rendererKey,
+          rendererBaseKey,
+          candidate.spanKey,
+          candidate.spanKey.replace(/__pt-BR$/u, ''),
+          clientSpanKey(rendererKey, 'pt-BR'),
+          clientSpanKey(candidate.spanKey, 'pt-BR'),
+        ]);
+        if ([...ownershipKeys].some(key => savedHumanTranslations.has(key))) continue;
+        const override = spanOverrideForReviewCandidate(candidate, rendererKey, record.data, pageData);
+        if (!override) continue;
+        persistedDraftOverrides.set(rendererKey, override);
+        const frame = layoutFrameForReviewOverride(candidate.reviewLayoutFrame, override);
+        if (frame) persistedDraftLayoutFrames.set(rendererBaseKey, frame);
+        for (const key of ownershipKeys) persistedDraftReviewKeys.set(key, candidate.reviewKey);
+      }
+      // Do not leave unsafe source-English text visible in the normal PT-BR
+      // Viewer when an explicit DTP exception says the candidate must be
+      // diagnostically blank. Keep the full draft in the review panel; a real
+      // human translation remains authoritative and PageRenderer prefers it.
+      for (const candidate of reviewCandidates.filter(item => item.pageNumber === currentPage)) {
+        if (!candidateRequiresDiagnosticBlank(candidate)) continue;
+        const rendererKey = rendererKeyForReviewCandidate(candidate, pageData);
+        const ownershipKeys = [
+          rendererKey,
+          rendererKey.replace(/__pt-BR$/u, ''),
+          candidate.spanKey,
+          candidate.spanKey.replace(/__pt-BR$/u, ''),
+          clientSpanKey(rendererKey, 'pt-BR'),
+          clientSpanKey(candidate.spanKey, 'pt-BR'),
+        ];
+        if (ownershipKeys.some(key => savedHumanTranslations.has(key))) continue;
+        diagnosticBlankKeys.add(rendererKey);
+      }
+    }
+    if (viewMode !== 'single' || rendererLanguage !== 'pt-BR'
       || readOnlyExperiment || !pageData || pageData.page_number !== currentPage) {
-      return { overrides, layoutFrames, diagnosticBlankKeys };
+      return { overrides, layoutFrames, diagnosticBlankKeys, persistedDraftOverrides, persistedDraftLayoutFrames, persistedDraftReviewKeys };
+    }
+    if (!isTranslationReviewOpen) {
+      return { overrides, layoutFrames, diagnosticBlankKeys, persistedDraftOverrides, persistedDraftLayoutFrames, persistedDraftReviewKeys };
     }
     for (const candidate of reviewCandidates.filter(item => item.pageNumber === currentPage)) {
       const rendererKey = rendererKeyForReviewCandidate(candidate, pageData);
-      if (candidateRequiresDiagnosticBlank(candidate)) {
+      const record = reviewRecordForCandidate(reviewRecords, candidate);
+      const currentPendingDraft = isCurrentActivePendingReviewDraft(record, candidate);
+      const selectedRevisionDraft = selectedReviewKey === candidate.reviewKey
+        && !strictPtBrDiagnostic
+        && hasUnapprovedPublishedRevisionDraft(record);
+      if (candidateRequiresDiagnosticBlank(candidate) && !selectedRevisionDraft && !currentPendingDraft) {
         const baseKey = rendererKey.replace(/__pt-BR$/u, '');
         if (!savedHumanTranslations.has(rendererKey)
           && !savedHumanTranslations.has(baseKey)
@@ -1210,7 +1267,6 @@ function App() {
         }
         continue;
       }
-      const record = reviewRecordForCandidate(reviewRecords, candidate);
       const humanTranslationKeys = [
         rendererKey,
         rendererKey.replace(/__pt-BR$/u, ''),
@@ -1229,6 +1285,10 @@ function App() {
         if (humanOverride) overrides.set(rendererKey, humanOverride);
         continue;
       }
+      // Only the selected review unit is a temporary Viewer preview. This lets
+      // an explicit revision draft be inspected over its older published value
+      // without repainting every other human-owned translation on the page.
+      if (selectedReviewKey !== candidate.reviewKey) continue;
       const override = spanOverrideForReviewCandidate(candidate, rendererKey,
         selectedPublishedReviewKey === candidate.reviewKey && record?.publication
           ? record.publication.data
@@ -1268,8 +1328,8 @@ function App() {
         diagnosticBlankKeys.add(rendererKey);
       }
     }
-    return { overrides, layoutFrames, diagnosticBlankKeys };
-  }, [isTranslationReviewOpen, viewMode, rendererLanguage, readOnlyExperiment, pageData, currentPage, reviewCandidates, reviewCatalog, savedHumanTranslations, savedHumanTranslationData, reviewRecords, reviewDraftOverrides, selectedPublishedReviewKey]);
+    return { overrides, layoutFrames, diagnosticBlankKeys, persistedDraftOverrides, persistedDraftLayoutFrames, persistedDraftReviewKeys };
+  }, [isTranslationReviewOpen, viewMode, rendererLanguage, readOnlyExperiment, pageData, currentPage, reviewPersistenceLoaded, reviewCandidates, reviewCatalog, savedHumanTranslations, savedHumanTranslationData, reviewRecords, reviewDraftOverrides, selectedReviewKey, selectedPublishedReviewKey, strictPtBrDiagnostic]);
   const effectiveDiagnosticBlankKeys = useMemo(() => new Set([
     ...reviewPreview.diagnosticBlankKeys,
     ...activeV3DiagnosticBlankKeys,
@@ -1303,39 +1363,45 @@ function App() {
     setIsTranslationReviewOpen(true);
   }, []);
 
-  const handleProposalReviewSave = useCallback((spanKey: string, override: SpanOverride | null) => {
-    if (!reviewEditorCandidate) return;
+  const handleProposalReviewSave = useCallback(async (spanKey: string, override: SpanOverride | null): Promise<boolean> => {
+    if (!reviewEditorCandidate) return false;
+    if (reviewWritingKey === reviewEditorCandidate.reviewKey) return false;
     const expectedKey = rendererKeyForReviewCandidate(reviewEditorCandidate,
       pageData?.page_number === reviewEditorCandidate.pageNumber ? pageData : null);
     if (!override) {
-      setReviewStatus('A proposta original foi restaurada somente nesta sessão; nenhuma tradução foi publicada.');
-      return;
+      setReviewStatus('Edição descartada; o rascunho salvo no Payload permanece intacto. Nenhuma tradução foi publicada.');
+      return true;
     }
     if (spanKey !== expectedKey || override.spanKey !== expectedKey) {
       setReviewStatus('A unidade selecionada mudou. Abra novamente a unidade pelo painel para salvar a proposta correta.');
-      return;
+      return false;
     }
     setReviewWritingKey(reviewEditorCandidate.reviewKey);
     setReviewStatus(null);
-    void persistTranslationReview(
-      reviewEditorCandidate,
-      override,
-      reviewRecordForCandidate(reviewRecords, reviewEditorCandidate),
-      'pending',
-      'changed_since_technical_validation',
-    ).then(saved => {
+    try {
+      const saved = await persistTranslationReview(
+        reviewEditorCandidate,
+        override,
+        reviewRecordForCandidate(reviewRecords, reviewEditorCandidate),
+        'pending',
+        'changed_since_technical_validation',
+      );
       setReviewRecords(current => withUpdatedTranslationReviewRecord(current, saved));
       setReviewDraftOverrides(current => { const next = new Map(current); next.delete(override.spanKey); return next; });
       setHasTranslationDraft(false);
       setReviewPersistenceError(null);
       setReviewStatus('Rascunho salvo. A aprovação editorial continua pendente.');
-    }).catch(error => {
+      return true;
+    } catch (error) {
       setReviewDraftOverrides(new Map([[override.spanKey, override]]));
       setHasTranslationDraft(true);
-      setReviewStatus('Não foi possível persistir o rascunho. O texto foi mantido nesta sessão; reabra o Editor para tentar novamente.');
+      setReviewStatus('Não foi possível persistir o rascunho. O texto continua no Editor; tente salvar novamente.');
       setReviewPersistenceError(error instanceof Error ? error.message : 'Não foi possível salvar a proposta.');
-    }).finally(() => setReviewWritingKey(null));
-  }, [reviewEditorCandidate, pageData, reviewRecords]);
+      return false;
+    } finally {
+      setReviewWritingKey(null);
+    }
+  }, [reviewEditorCandidate, pageData, reviewRecords, reviewWritingKey]);
 
   const moveToReviewPage = useCallback((pageNumber: number) => {
     if (!acceptLeavingLayout() || !acceptLeavingTranslationDraft()) return false;
@@ -1391,6 +1457,11 @@ function App() {
     setIsAdmin(true);
     setIsSymbolPaletteOpen(false);
   }, [moveToReviewPage, pageData]);
+
+  const handleOpenPersistedReviewDraft = useCallback((reviewKey: string) => {
+    const candidate = reviewCandidates.find(item => item.reviewKey === reviewKey);
+    if (candidate) handleOpenReviewEditor(candidate);
+  }, [reviewCandidates, handleOpenReviewEditor]);
 
   const persistReviewState = useCallback(async (
     candidate: TranslationReviewCandidate,
@@ -1592,7 +1663,7 @@ function App() {
       throw new Error(`“${sourceTerm}” já consta no glossário oficial como “${officialTerm.targetTerms.join(' / ')}”. A proposta conflitante permanece pendente para revisão.`);
     }
     const occurrences = reviewCandidates.flatMap(candidate => candidate.pendingTerms
-      .flatMap(note => parseGlossaryTermCandidates(note))
+      .flatMap(note => parseGlossaryTermCandidates(pendingTranslationTermNote(note)))
       .filter(term => term.decisionKey === decisionKey)
       .map(() => ({
         pageNumber: candidate.pageNumber,
@@ -2392,20 +2463,22 @@ function App() {
     </section>
   ) : null;
   const experimentUsesReservedRail = isPage14V2ExperimentVisible || isPage14V3ExperimentVisible || isPage14ImportantCompositionVisible;
+  // Keep navigation and symbol access paired with the actual editing surface,
+  // even during transitions where Admin mode and the rich editor state differ.
+  const workspaceEditing = isAdmin || isRichEditorOpen || isProposalReviewEditorMode;
 
   return (
     <div
       ref={setOverlayHost}
       className={`app-container ${isAdmin ? 'admin-mode' : ''} ${isFaqOpen ? 'faq-open' : ''} ${isRichEditorOpen ? 'rich-editor-open' : ''} ${isTranslationReviewOpen ? 'translation-review-open' : ''} ${isProposalReviewEditorMode ? 'translation-review-editor-open' : ''} theme-dark`}
+      data-ptbr-diagnostic-mode={strictPtBrDiagnostic ? 'blank-untranslated' : undefined}
       style={{ '--rich-editor-panel-width': `${richEditorPanelWidth}px` } as CSSProperties}
     >
       <ArcaneGlassDefinitions />
       <AtmosphericParticles />
       <ShellNavigation
         active={isFaqOpen ? faqActiveType : currentPage === 3 ? 'contents' : 'rulebook'}
-        workspaceEditing={isRichEditorOpen}
-        openRequest={navigationOpenRequest}
-        onExpandedChange={setIsNavigationExpanded}
+        workspaceEditing={workspaceEditing}
         language={language}
         translationReviewOpen={isTranslationReviewOpen}
         onExportPdf={() => setIsPdfExportOpen(true)}
@@ -2420,7 +2493,7 @@ function App() {
           if (didNavigate) setIsFaqOpen(false);
         }}
       />
-      {isAdmin && isRichEditorOpen && paletteEditorState && (
+      {workspaceEditing && (
         <aside className="editing-symbol-rail" aria-label={language === 'pt-BR' ? 'Ferramentas de símbolos' : 'Symbol tools'}>
           <button
             type="button"
@@ -2483,13 +2556,25 @@ function App() {
                   ? reviewDraftOverrides.keys().next().value ?? null
                   : page14ImportantDraftOverrides.keys().next().value ?? null}
                 onExperimentalEditorSave={isProposalReviewEditorMode ? handleProposalReviewSave : activeImportantCompositionVariant === 'candidate' ? handlePage14ImportantExperimentalSave : undefined}
+                experimentalSaveStatus={isProposalReviewEditorMode
+                  ? reviewWritingKey === reviewEditorCandidate?.reviewKey
+                    ? 'saving'
+                    : reviewPersistenceError && reviewStatus?.startsWith('Não foi possível persistir')
+                      ? 'error'
+                      : 'saved'
+                  : undefined}
                 onExperimentalEditorDraftChange={isProposalReviewEditorMode ? handleReviewEditorDraftChange : activeImportantCompositionVariant === 'candidate' ? handlePage14ImportantExperimentalDraftChange : undefined}
                 onProposalReviewEditorClose={isProposalReviewEditorMode ? handleReviewEditorClose : undefined}
                 proposalReviewSelectionKey={isProposalReviewEditorMode ? reviewEditorRendererKey : null}
                 proposalReviewHighlightKey={reviewHighlightRendererKey}
                 proposalReviewOverrides={reviewPreview.overrides}
+                persistedReviewDraftOverrides={reviewPreview.persistedDraftOverrides}
+                persistedReviewDraftLayoutFrames={reviewPreview.persistedDraftLayoutFrames}
+                persistedReviewDraftKeys={reviewPreview.persistedDraftReviewKeys}
+                onOpenPersistedReviewDraft={handleOpenPersistedReviewDraft}
                 proposalReviewLayoutFrames={reviewPreview.layoutFrames}
                 proposalReviewDiagnosticBlankKeys={effectiveDiagnosticBlankKeys}
+                strictPtBrDiagnostic={strictPtBrDiagnostic}
                 experimentalFrames={experimentalFrames}
                 experimentalHangingIndentBlockKeys={isPage14V3ExperimentVisible ? PAGE14_V3_HANGING_INDENT_BLOCK_KEYS : undefined}
                 readOnlyExperiment={readOnlyExperiment}
@@ -2521,6 +2606,7 @@ function App() {
                     zoomLevel={zoomLevel}
                     onNavigate={navigateToPage}
                     language={language}
+                    strictPtBrDiagnostic={strictPtBrDiagnostic}
                     symbolAliasPreferences={symbolAliasPreferences}
                     onPaletteEditorChange={handlePaletteEditorChange}
                     onTranslationDraftDirtyChange={setHasTranslationDraft}
@@ -2557,19 +2643,6 @@ function App() {
       {/* Vertical Sidebar (Moved to Right) */}
       <aside className="pdf-sidebar">
         <div className="toolbar-section top">
-          {isRichEditorOpen && (
-            <button
-              type="button"
-              className={`tool-btn workspace-navigation-toggle ${isNavigationExpanded ? 'active' : ''}`}
-              aria-label={language === 'pt-BR' ? 'Abrir navegação' : 'Open navigation'}
-              aria-controls="global-navigation"
-              aria-expanded={isNavigationExpanded}
-              title={language === 'pt-BR' ? 'Navegação' : 'Navigation'}
-              onClick={() => setNavigationOpenRequest(request => request + 1)}
-            >
-              <Menu size={16} aria-hidden="true" />
-            </button>
-          )}
           {/* View Toggles */}
           <div className="tool-group">
             <button

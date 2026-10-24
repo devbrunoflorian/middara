@@ -1,20 +1,22 @@
 import { useMemo, useState } from 'react';
 import { Archive, Check, ChevronRight, FileDown, RotateCcw, X } from 'lucide-react';
-import type {
-  TranslationReviewCandidate,
-  TranslationReviewCatalog,
-  TranslationReviewException,
-  TranslationReviewRecord,
-  TranslationReviewRequest,
-  TranslationReviewRequestStatus,
-  NewTranslationReviewRequest,
-  TranslationGlossaryDecision,
-  TranslationGlossaryDecisionStatus,
+import {
+  pendingTranslationTermNote,
+  type TranslationReviewCandidate,
+  type TranslationReviewCatalog,
+  type TranslationReviewException,
+  type TranslationReviewRecord,
+  type TranslationReviewRequest,
+  type TranslationReviewRequestStatus,
+  type NewTranslationReviewRequest,
+  type TranslationGlossaryDecision,
+  type TranslationGlossaryDecisionStatus,
+  type TranslationPendingTerm,
 } from '../translationReview';
 import type { PageData } from './PageRenderer';
 import { mapPdfFont, renderSegmentContent, segFontToCSS } from './PageRenderer';
 import type { Segment } from './RichSpanEditor';
-import { candidateForReviewException, clientSpanKey, copyfitApprovalBlockReason, copyfitCanonicalEvidenceBlockReason, glossaryDecisionKey, normalizeGlossaryTerm, parseGlossaryTermCandidates, rendererKeyForReviewCandidate, reviewRecordForCandidate, reviewRequestMatchesUnit, segmentsForReviewData, spanOverrideForReviewCandidate, textForReviewData, translationDataMatches } from '../translationReview';
+import { candidateForReviewException, clientSpanKey, copyfitApprovalBlockReason, copyfitCanonicalEvidenceBlockReason, glossaryDecisionKey, hasUnapprovedPublishedRevisionDraft, normalizeGlossaryTerm, parseGlossaryTermCandidates, rendererKeyForReviewCandidate, reviewRecordForCandidate, reviewRequestMatchesUnit, segmentsForReviewData, spanOverrideForReviewCandidate, textForReviewData, translationDataMatches, unresolvedReviewExceptions } from '../translationReview';
 import './TranslationReviewPanel.css';
 
 interface TranslationReviewPanelProps {
@@ -126,13 +128,14 @@ type PendingGlossaryRow =
   | { kind: 'term'; key: string; sourceTerm: string; targetTerm: string; note: string; contextNote?: string; conflictingTarget?: string };
 
 function pendingGlossaryRows(
-  notes: string[],
+  notes: readonly TranslationPendingTerm[],
   decisions: TranslationGlossaryDecision[],
   officialGlossaryTerms: NonNullable<TranslationReviewCatalog['officialGlossaryTerms']>,
 ): PendingGlossaryRow[] {
   const rows: PendingGlossaryRow[] = [];
   const seen = new Set<string>();
-  for (const [index, note] of notes.entries()) {
+  for (const [index, value] of notes.entries()) {
+    const note = pendingTranslationTermNote(value);
     const terms = parseGlossaryTermCandidates(note);
     if (!terms.length) {
       rows.push({ kind: 'note', key: `note-${index}-${note}`, note });
@@ -220,7 +223,7 @@ export function TranslationReviewPanel({
   open, onClose, catalog, catalogError, records, requests, glossaryDecisions, persistenceError, persistenceAvailable,
   pageData,
   savedHumanTranslations, savedPayloadTranslations, selectedPage, selectedReviewKey, busyReviewKey, hasUnsavedDraft,
-  reviewStatus, language = 'pt-BR', onToggleLanguage, onSelectCandidate, onOpenEditor, onOpenExceptionPage, onApprove, onSetArchived, onClearSelection, onReopen,
+  reviewStatus, language = 'pt-BR', onToggleLanguage, onSelectCandidate, onOpenApprovedViewer, onOpenEditor, onOpenExceptionPage, onApprove, onSetArchived, onClearSelection, onReopen,
   onCreateAIRequest, onUpdateAIRequest, onCompleteAIRequestAsUser, onDecideGlossaryTerm,
 }: TranslationReviewPanelProps) {
   const [tab, setTab] = useState<PanelTab>('proposals');
@@ -244,7 +247,7 @@ export function TranslationReviewPanel({
     const seenUnits = new Set<string>();
 
     for (const record of records) {
-      if (!record.publication || record.approvalStatus !== 'approved') continue;
+      if (!record.publication) continue;
       const publicationKey = (record.publication.data as { spanKey?: string } | null)?.spanKey ?? record.spanKey;
       if (typeof publicationKey !== 'string') continue;
 
@@ -321,6 +324,7 @@ export function TranslationReviewPanel({
 
   const isCandidateApproved = (candidate: TranslationReviewCandidate) => {
     const record = reviewRecordForCandidate(records, candidate);
+    if (hasUnapprovedPublishedRevisionDraft(record)) return false;
     return approvedKeys.has(candidate.reviewKey)
       || publishedUnits.has(reviewUnitIdentity(candidate))
       || (record?.approvalStatus === 'approved' && (approvedKeys.has(record.reviewKey) || publishedUnits.has(`${record.pageNumber}:${record.spanKey.replace(/__pt-BR$/u, '')}`)));
@@ -352,8 +356,7 @@ export function TranslationReviewPanel({
   const visibleArchivedCandidates = archivedCandidates.filter(candidate =>
     pageValue === 'all' || candidate.pageNumber === Number(pageValue));
   const visibleApproved = approvedCandidates.filter(candidate => pageValue === 'all' || candidate.pageNumber === Number(pageValue));
-  const visibleExceptions = (catalog?.exceptions ?? []).filter(exception =>
-    pageValue === 'all' || exception.pageNumber === Number(pageValue));
+  const visibleExceptions = unresolvedReviewExceptions(catalog?.exceptions ?? [], pageValue);
   const visibleRequests = [...requests]
     .filter(request => pageValue === 'all' || request.pageNumber === Number(pageValue))
     .sort((left, right) => {
@@ -626,13 +629,13 @@ export function TranslationReviewPanel({
       </p>
 
       <div className="translation-review-tabs" role="tablist" aria-label="Conteúdo de revisão">
-        <button type="button" role="tab" aria-selected={tab === 'proposals'} className={tab === 'proposals' ? 'active' : ''} onClick={() => { setTab('proposals'); setShowArchived(false); setSelectedExceptionId(null); }}>
+        <button type="button" role="tab" aria-selected={tab === 'proposals'} className={tab === 'proposals' ? 'active' : ''} onClick={() => { if (tab === 'approved') onClearSelection(); setTab('proposals'); setShowArchived(false); setSelectedExceptionId(null); }}>
           Propostas <span>{catalog ? proposalRemainingCount : '…'}</span>
         </button>
-        <button type="button" role="tab" aria-selected={tab === 'exceptions'} className={tab === 'exceptions' ? 'active' : ''} onClick={() => setTab('exceptions')}>
+        <button type="button" role="tab" aria-selected={tab === 'exceptions'} className={tab === 'exceptions' ? 'active' : ''} onClick={() => { if (tab === 'approved') onClearSelection(); setTab('exceptions'); }}>
           Exceções <span>{catalog?.exceptionCount ?? '…'}</span>
         </button>
-        <button type="button" role="tab" aria-selected={tab === 'requests'} className={tab === 'requests' ? 'active' : ''} onClick={() => { setTab('requests'); setPageFilter('all'); setSelectedExceptionId(null); }}>
+        <button type="button" role="tab" aria-selected={tab === 'requests'} className={tab === 'requests' ? 'active' : ''} onClick={() => { if (tab === 'approved') onClearSelection(); setTab('requests'); setPageFilter('all'); setSelectedExceptionId(null); }}>
           Pedidos de Revisão <span>{activeRequestCount}</span>
         </button>
         <button type="button" role="tab" aria-selected={tab === 'approved'} className={tab === 'approved' ? 'active' : ''} onClick={() => { setTab('approved'); setSelectedExceptionId(null); }}>
@@ -676,7 +679,11 @@ export function TranslationReviewPanel({
                 data-review-key={candidate.reviewKey}
                 className={`translation-review-row ${active ? 'is-selected' : ''}`}
                 aria-pressed={active}
-                onClick={() => { setSelectedExceptionId(null); onSelectCandidate(candidate); }}
+                onClick={() => {
+                  setSelectedExceptionId(null);
+                  if (onOpenApprovedViewer) onOpenApprovedViewer(candidate);
+                  else onSelectCandidate(candidate);
+                }}
               >
                 <span className="translation-review-row-heading">p. {candidate.pageNumber} · {candidateHeading(candidate)}</span>
                 <span className="translation-review-row-meta">

@@ -106,6 +106,98 @@ describe('p.14 experimental numbered-list hanging indent', () => {
     expect(bodyLine.bbox[0]).toBeGreaterThan(markerLine.bbox[2]);
   });
 
+  it('keeps the persisted phase marker column in the non-admin Viewer', async () => {
+    const pagePath = join(process.cwd(), 'public/pages/page_014/page_014_dom.json');
+    const page = JSON.parse(readFileSync(pagePath, 'utf8')) as PageData;
+    const override = {
+      spanKey: 'page_14_block_5__pt-BR',
+      bbox: page.blocks[5].bbox,
+      textAlign: 'left' as const,
+      lineHeight: 1.1,
+      segments: [
+        { text: '2.\t', font: 'OptimaLTStd-Bold', size: 9, weight: 700, style: 'normal' as const, color: '#231f20' },
+        { text: 'FASE DE POSICIONAMENTO:', font: 'OptimaLTStd-Bold', size: 9, weight: 700, style: 'normal' as const, color: '#231f20' },
+        { text: '\u00a0Organizem as Peças conforme o Diagrama de Preparação do Encontro.', font: 'OptimaLTStd', size: 10, weight: 400, style: 'normal' as const, color: '#231f20' },
+      ],
+    } as any;
+
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    root = createRoot(container);
+    await act(async () => {
+      root!.render(<PageRenderer
+        pageData={{ ...page, images: [] }}
+        isAdmin={false}
+        language="pt-BR"
+        experimentalOverrides={new Map([['page_14_block_5', override]])}
+        isolatedSnapshot
+        readOnlyExperiment
+      />);
+    });
+
+    const translatedBody = container.querySelector<HTMLElement>('[data-rendered-translation-key="page_14_block_5__pt-BR"]');
+    const hangingIndent = translatedBody?.querySelector<HTMLElement>('[data-source-hanging-indent-pt="18"]');
+    const marker = hangingIndent?.querySelector<HTMLElement>('[data-source-marker-advance="18pt"]');
+    expect(translatedBody).toBeTruthy();
+    expect(hangingIndent).toBeTruthy();
+    const markerColumnPx = Number.parseFloat(hangingIndent!.style.gridTemplateColumns);
+    const markerWidthPx = Number.parseFloat(marker!.style.width);
+    expect(markerColumnPx).toBeGreaterThan(0);
+    expect(markerColumnPx).toBeCloseTo(markerWidthPx, 4);
+    expect(marker?.textContent).toBe('2.');
+    expect(hangingIndent!.textContent).toContain('FASE DE POSICIONAMENTO:');
+    expect(hangingIndent!.textContent).not.toContain('\t');
+  });
+
+  it('keeps p.18 item 4 continuation aligned with its source body column', async () => {
+    const pagePath = join(process.cwd(), 'public/pages/page_018/page_018_dom.json');
+    const page = JSON.parse(readFileSync(pagePath, 'utf8')) as PageData;
+    const blockIndex = page.blocks.findIndex(candidate => candidate.id === 'block_153');
+    const block = page.blocks[blockIndex];
+    expect(blockIndex).toBe(103);
+    const firstLine = block.lines![0];
+    const continuationLine = block.lines![1];
+    expect(continuationLine.bbox[0] - firstLine.bbox[0]).toBeCloseTo(18, 2);
+    const override = {
+      spanKey: 'page_18_block_103__pt-BR',
+      bbox: block.bbox,
+      textAlign: 'left' as const,
+      lineHeight: 1.1,
+      segments: [
+        { text: '4.', font: 'OptimaLTStd-Bold', size: 10, color: '#231f20', weight: 700, style: 'normal' as const },
+        { text: '\t ', font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const },
+        { text: 'Todos os Aventureiros podem trocar Itens como se estivessem adjacentes e tivessem feito uma Ação de Reequipar. Veja ', font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const },
+        { text: 'Ações', font: 'OptimaLTStd-Bold', size: 10, color: '#231f20', weight: 700, style: 'normal' as const },
+        { text: ', pág. 38.', font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' as const },
+      ],
+    } as any;
+
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    root = createRoot(container);
+    await act(async () => {
+      root!.render(<PageRenderer
+        pageData={{ ...page, images: [] }}
+        isAdmin={false}
+        language="pt-BR"
+        experimentalOverrides={new Map([['page_18_block_103', override]])}
+        isolatedSnapshot
+        readOnlyExperiment
+      />);
+    });
+
+    const translatedBody = container.querySelector<HTMLElement>('[data-rendered-translation-key="page_18_block_103__pt-BR"]');
+    const hangingIndent = translatedBody?.querySelector<HTMLElement>('[data-source-hanging-indent-pt="18"]');
+    const marker = hangingIndent?.querySelector<HTMLElement>('[data-source-marker-advance="18pt"]');
+    expect(translatedBody).toBeTruthy();
+    expect(hangingIndent).toBeTruthy();
+    expect(marker?.textContent).toBe('4.');
+    expect(hangingIndent!.textContent).toContain('Todos os Aventureiros podem trocar Itens');
+    expect(hangingIndent!.textContent).not.toContain('\t');
+    const scale = Number.parseFloat(container.querySelector<HTMLElement>('.page-container')!.style.width) / page.width;
+    expect(Number.parseFloat(hangingIndent!.style.gridTemplateColumns)).toBeCloseTo(18 * scale, 4);
+  });
+
   it('keeps a source bullet fixed and starts every translated line in its text column', async () => {
     const pagePath = join(process.cwd(), 'public/pages/page_013/page_013_dom.json');
     const page = JSON.parse(readFileSync(pagePath, 'utf8')) as PageData;

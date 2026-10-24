@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { exposesNestedSpanTargets, hasPreservedLegacySpanOverride } from '../src/editorUnitCompatibility';
+import { exposesNestedSpanTargets, hasLegacyTypographicUnitOverride, hasPreservedLegacySpanOverride } from '../src/editorUnitCompatibility';
 import { readFileSync } from 'node:fs';
 import { sourceElementIsReplaced, type SourceInlineElement } from '../src/symbols/sourceInlineElements';
 import type { Block } from '../src/components/PageRenderer';
@@ -19,6 +19,22 @@ test('source font fragments cannot intercept opted-in paragraph fields', () => {
   assert.equal(exposesNestedSpanTargets({ preserveLegacySpanOverrides: true }), false);
   assert.equal(exposesNestedSpanTargets({ preserveLegacySpanOverrides: false }), true);
   assert.equal(exposesNestedSpanTargets({}), true);
+});
+
+test('strict diagnostics honor a legacy rich span covering a newer editorial unit', () => {
+  const block = {
+    typographicUnits: [{ id: 'p4-combatant-cards-heading', field: { lineIds: ['line_18_0'] } }],
+    typographicSpanUnits: [
+      { id: 'p4-block-18-font-size-12pt-unit-00', spanRefs: ['line_18_0:0'] },
+      { id: 'p4-block-18-font-size-10pt-unit-01', spanRefs: ['line_18_1:0', 'line_18_2:0'] },
+    ],
+  };
+  assert.equal(hasLegacyTypographicUnitOverride(block, block.typographicUnits[0], 4, 'pt-BR',
+    key => key === 'page_4_unit_p4-block-18-font-size-12pt-unit-00__pt-BR'), true);
+  assert.equal(hasLegacyTypographicUnitOverride(block, block.typographicUnits[0], 4, 'pt-BR',
+    key => key === 'page_4_unit_p4-block-18-font-size-10pt-unit-01__pt-BR'), false);
+  assert.equal(hasLegacyTypographicUnitOverride(block, { id: 'p4-body', field: { lineIds: ['line_18_1', 'line_18_2'] } }, 4, 'pt-BR',
+    key => key === 'page_4_unit_p4-block-18-font-size-12pt-unit-00__pt-BR'), false);
 });
 
 test('p37 source glyph restoration is erased only when its own paragraph adopts the symbol', () => {

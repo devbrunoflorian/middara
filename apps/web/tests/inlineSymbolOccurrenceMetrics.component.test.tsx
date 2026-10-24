@@ -8,6 +8,45 @@ const inlinePageFiles = Array.from({ length: 102 }, (_, index) => index + 1)
   .filter(existsSync);
 
 describe('source inline symbol occurrence metrics', () => {
+  it('records the four p.66 prose dice as editable semantic inline objects with source masks', () => {
+    const page66Dir = join(pageRoot, 'page_066');
+    const { elements } = JSON.parse(readFileSync(join(page66Dir, 'inline_elements.json'), 'utf8')) as {
+      elements: {
+        id?: string;
+        symbolId: string;
+        sourceRendering?: string;
+        drawingIndices: number[];
+        metrics?: { widthEm: number; heightEm: number; verticalAlignEm: number; renderVariant?: string };
+        mask?: { url: string };
+        provenance?: { auditId?: string };
+      }[];
+    };
+    const dice = elements.filter(element => element.provenance?.auditId === 'manual-source-mapping-2026-10-23-p66');
+
+    expect(dice).toHaveLength(4);
+    expect(dice.map(element => element.drawingIndices)).toEqual([
+      [188, 189, 190, 191],
+      [196, 197, 198, 199],
+      [201, 202, 203, 204],
+      [205, 206, 207, 208],
+    ]);
+    expect(new Set(dice.map(element => element.id)).size).toBe(4);
+    for (const element of dice) {
+      expect(element.symbolId).toBe('dice.purple');
+      expect(element.sourceRendering).toBe('semantic-inline');
+      expect(element.metrics?.renderVariant).toBe('purple-p66-prose-die-source');
+      expect(element.mask?.url).toBeTruthy();
+      expect(existsSync(join(page66Dir, element.mask!.url.split('/').at(-1)!))).toBe(true);
+    }
+
+    const registry = JSON.parse(readFileSync(join(process.cwd(), 'src/symbols/sourceSymbols.json'), 'utf8')) as {
+      id: string;
+      render?: { variants?: Record<string, { paths?: unknown[] }> };
+    }[];
+    const purpleDie = registry.find(symbol => symbol.id === 'dice.purple');
+    expect(purpleDie?.render?.variants?.['purple-p66-prose-die-source']?.paths).toHaveLength(4);
+  });
+
   it('keeps measured geometry for every source glyph replacement', () => {
     let glyphReplacements = 0;
     for (const url of inlinePageFiles) {

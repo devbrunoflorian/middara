@@ -7,8 +7,8 @@
 
 :root { --editing-symbol-rail-width: 48px; }
 
-/* Editing gives the whole left rail back to the document. Navigation remains
-   available through its small fixed launcher and only opens on deliberate use. */
+/* Editing gives the whole left rail back to the document. The menu launcher
+   hides while the symbol diamond stays in that same rail for the full editor session. */
 .app-container.rich-editor-open { --left-nav-width: 0px; }
 
 /* An explicitly requested FAQ during editing is a temporary overlay. It must
@@ -55,8 +55,6 @@
   }
 }
 
-.workspace-navigation-toggle { margin-bottom: 4px; }
-
 .editing-symbol-rail {
   position: relative;
   z-index: 1500;
@@ -64,9 +62,12 @@
   flex: 0 0 var(--editing-symbol-rail-width);
   width: var(--editing-symbol-rail-width);
   min-width: var(--editing-symbol-rail-width);
-  align-items: center;
+  /* Replace the hamburger at the top of the rail while editing. The old
+     centered alignment left the diamond halfway down the screen. */
+  align-items: flex-start;
   justify-content: center;
   box-sizing: border-box;
+  padding-top: 40px;
   border-right: 1px solid rgba(105, 217, 235, 0.12);
   background: linear-gradient(180deg, rgba(15, 16, 29, 0.54), rgba(10, 13, 23, 0.38));
 }
