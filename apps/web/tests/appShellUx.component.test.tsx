@@ -1,6 +1,6 @@
 import React, { act } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { fireEvent, getQueriesForElement } from '@testing-library/dom';
+import { fireEvent, getQueriesForElement, waitFor } from '@testing-library/dom';
 import { createRoot, type Root } from 'react-dom/client';
 import { DevelopmentEnvironmentStatus } from '../src/components/DevelopmentEnvironmentStatus';
 import { FaqDrawer } from '../src/components/FaqDrawer';
@@ -102,13 +102,12 @@ describe('application shell UX', () => {
     expect(panel.classList.contains('is-expanded')).toBe(true);
     expect(slot.classList.contains('is-expanded')).toBe(true);
 
-    act(() => fireEvent.click(toggle));
-    expect(panel.classList.contains('is-expanded')).toBe(true);
-    expect(slot.classList.contains('is-expanded')).toBe(true);
     act(() => fireEvent.mouseOut(panel, { relatedTarget: document.body }));
     act(() => vi.advanceTimersByTime(221));
     expect(panel.classList.contains('is-expanded')).toBe(false);
 
+    act(() => fireEvent.click(toggle));
+    expect(panel.classList.contains('is-expanded')).toBe(true);
     act(() => fireEvent.click(toggle));
     expect(panel.classList.contains('is-expanded')).toBe(false);
 
@@ -120,8 +119,21 @@ describe('application shell UX', () => {
     act(() => fireEvent.pointerDown(document.body));
     expect(panel.classList.contains('is-expanded')).toBe(false);
 
-    act(() => fireEvent.click(queries.getByRole('button', { name: 'Errata' })));
+    act(() => fireEvent.click(queries.getByRole('button', { name: 'Official Errata' })));
     expect(onSelect).toHaveBeenCalledWith('errata');
+  });
+
+  it('labels editorial FAQ and official references in the Viewer language', async () => {
+    const queries = mount(<ShellNavigation active="editorial-faq" language="en" onSelect={vi.fn()} />);
+    act(() => fireEvent.click(queries.getByRole('button', { name: 'Toggle navigation' })));
+    expect(queries.getByRole('button', { name: 'FAQ / Questions' })).toBeTruthy();
+    expect(queries.getByRole('button', { name: 'Official FAQ' })).toBeTruthy();
+    expect(queries.getByRole('button', { name: 'Official Errata' })).toBeTruthy();
+
+    await act(async () => root.render(<ShellNavigation active="editorial-faq" language="pt-BR" onSelect={vi.fn()} />));
+    expect(queries.getByRole('button', { name: 'FAQ / Dúvidas' })).toBeTruthy();
+    expect(queries.getByRole('button', { name: 'FAQ oficial' })).toBeTruthy();
+    expect(queries.getByRole('button', { name: 'Errata oficial' })).toBeTruthy();
   });
 
   it('closes hover-only navigation after its short leave delay', () => {
@@ -155,6 +167,27 @@ describe('application shell UX', () => {
     expect(container.querySelector('.global-nav-slot')?.classList.contains('is-expanded')).toBe(false);
   });
 
+  it('keeps closed mobile navigation actions out of keyboard navigation', () => {
+    const matchMedia = window.matchMedia as ReturnType<typeof vi.fn>;
+    matchMedia.mockReturnValue({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() });
+    const queries = mount(<ShellNavigation active="rulebook" onSelect={vi.fn()} />);
+    const links = container.querySelector<HTMLElement>('.global-nav-links')!;
+    const actions = container.querySelector<HTMLElement>('.global-nav-actions')!;
+    const menuButton = container.querySelector<HTMLButtonElement>('.global-nav-menu-button')!;
+
+    expect(links.hasAttribute('inert')).toBe(true);
+    expect(actions.hasAttribute('inert')).toBe(true);
+
+    act(() => fireEvent.click(queries.getByRole('button', { name: 'Open navigation' })));
+    expect(links.hasAttribute('inert')).toBe(false);
+    expect(actions.hasAttribute('inert')).toBe(false);
+
+    act(() => fireEvent.keyDown(window, { key: 'Escape' }));
+    expect(links.hasAttribute('inert')).toBe(true);
+    expect(actions.hasAttribute('inert')).toBe(true);
+    expect(document.activeElement).toBe(menuButton);
+  });
+
   it('keeps editing navigation out of the workspace until the dock requests it', async () => {
     const onSelect = vi.fn();
     const onExpandedChange = vi.fn();
@@ -175,7 +208,7 @@ describe('application shell UX', () => {
     expect(panel.classList.contains('is-expanded')).toBe(false);
 
     await act(async () => root.render(<ShellNavigation active="rulebook" onSelect={onSelect} workspaceEditing openRequest={2} onExpandedChange={onExpandedChange} />));
-    act(() => fireEvent.click(queries.getByRole('button', { name: 'Errata' })));
+    act(() => fireEvent.click(queries.getByRole('button', { name: 'Official Errata' })));
     expect(onSelect).toHaveBeenCalledWith('errata');
   });
 
@@ -183,53 +216,55 @@ describe('application shell UX', () => {
     const [reachEntry, courageEntry] = getCatalogEntries('faq');
     const reachEn = resolveCatalogContent(reachEntry, 'en');
     const reachPt = resolveCatalogContent(reachEntry, 'pt-BR');
-    const courageEn = resolveCatalogContent(courageEntry, 'en');
+    const couragePt = resolveCatalogContent(courageEntry, 'pt-BR');
     const triggerForTitle = (title: string) => Array.from(container.querySelectorAll<HTMLButtonElement>('.faq-entry-trigger'))
       .find(button => button.querySelector('.faq-entry-title')?.textContent === title);
     expect(reachEn.isFallback).toBe(false);
-    expect(reachPt.isFallback).toBe(true);
-    expect(reachPt.title).toMatch(/Reach/);
+    expect(reachPt.isFallback).toBe(false);
+    expect(reachPt.title).toMatch(/Alcance/);
 
     const onOpenChange = vi.fn();
     const onNavigateToPage = vi.fn(() => true);
     const queries = mount(<FaqDrawer language="pt-BR" open={false} onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />);
     await act(async () => root.render(<FaqDrawer language="pt-BR" open onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />));
+    act(() => fireEvent.click(queries.getByRole('tab', { name: /FAQ oficial/i })));
 
     expect(queries.getByRole('dialog').hasAttribute('open')).toBe(true);
     expect(queries.getByRole('dialog').getAttribute('aria-modal')).toBe('false');
-    expect(queries.getByText(/Entradas sem tradução PT-BR revisada aparecem em EN/)).toBeTruthy();
+    expect(queries.queryByText(/Entradas sem tradução PT-BR revisada aparecem em EN/)).toBeNull();
 
-    const reachTrigger = queries.getByRole('button', { name: /How does Reach and Flanking Work/ });
-    const courageTrigger = queries.getByRole('button', { name: /Casting Dice upgrade/ });
+    const reachTrigger = queries.getByRole('button', { name: /Como funcionam o Alcance e o Flanqueamento/ });
+    const courageTrigger = queries.getByRole('button', { name: /O aprimoramento de Dado de Conjuração/ });
     expect(reachTrigger.getAttribute('aria-expanded')).toBe('false');
     expect(queries.queryByText(/So long as you're attacking an opponent/)).toBeNull();
 
     act(() => fireEvent.click(reachTrigger));
     expect(reachTrigger.getAttribute('aria-expanded')).toBe('true');
-    expect(queries.getByText('Fallback EN')).toBeTruthy();
-    expect(container.querySelector('.faq-entry-body')?.textContent).toMatch(/So long as you're attacking an opponent/);
+    expect(queries.queryByText('Fallback EN')).toBeNull();
+    expect(container.querySelector('.faq-entry-body')?.textContent).toMatch(/Desde que você esteja atacando um oponente/);
 
     act(() => fireEvent.click(courageTrigger));
     expect(reachTrigger.getAttribute('aria-expanded')).toBe('true');
     expect(courageTrigger.getAttribute('aria-expanded')).toBe('true');
 
-    const search = queries.getByRole('searchbox', { name: 'Buscar no catálogo' });
-    act(() => fireEvent.change(search, { target: { value: 'rEaCh' } }));
-    expect(queries.getByText(reachEn.title)).toBeTruthy();
+    const search = queries.getByRole('searchbox', { name: 'Buscar no FAQ ou errata' });
+    act(() => fireEvent.change(search, { target: { value: 'aLcAnCe' } }));
+    await waitFor(() => expect(queries.queryAllByRole('button', { name: /Courage Stifle/ })).toHaveLength(0));
+    expect(queries.getByText(reachPt.title)).toBeTruthy();
     expect(reachTrigger.getAttribute('aria-expanded')).toBe('false');
-    expect(queries.queryByRole('button', { name: /Courage Stifle/ })).toBeNull();
     expect(container.querySelector('.faq-entry-content .faq-entry-body')).toBeNull();
 
     act(() => fireEvent.change(search, { target: { value: '' } }));
+    await waitFor(() => expect(queries.getByText('77 entradas')).toBeTruthy());
     expect(queries.getByText('77 entradas')).toBeTruthy();
-    expect(queries.getByRole('button', { name: /How does Reach and Flanking Work/ }).getAttribute('aria-expanded')).toBe('false');
-    expect(triggerForTitle(courageEn.title)?.getAttribute('aria-expanded')).toBe('false');
+    expect(queries.getByRole('button', { name: /Como funcionam o Alcance e o Flanqueamento/ }).getAttribute('aria-expanded')).toBe('false');
+    expect(triggerForTitle(couragePt.title)?.getAttribute('aria-expanded')).toBe('false');
   });
 
   it('uses the same collapsed interaction for Errata and keeps severity visible', () => {
     const onOpenChange = vi.fn();
     const queries = mount(<FaqDrawer language="en" open onOpenChange={onOpenChange} onNavigateToPage={vi.fn(() => true)} />);
-    const errataTab = queries.getByRole('tab', { name: /ERRATA/ });
+    const errataTab = queries.getByRole('tab', { name: /errata/i });
     act(() => fireEvent.click(errataTab));
     expect(errataTab.getAttribute('aria-selected')).toBe('true');
 
@@ -252,8 +287,9 @@ describe('application shell UX', () => {
     const queries = mount(<FaqDrawer language="en" open={false} onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />);
 
     await act(async () => root.render(<FaqDrawer language="en" open onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />));
+    act(() => fireEvent.click(queries.getByRole('tab', { name: /Official Errata/i })));
     expect(queries.getByRole('dialog').hasAttribute('open')).toBe(true);
-    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Search the catalog' }), { target: { value: 'Gigas Grip' } }));
+    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Search FAQ or errata' }), { target: { value: 'Gigas Grip' } }));
     act(() => fireEvent.click(queries.getByRole('button', { name: 'Close panel' })));
 
     expect(container.querySelector('dialog')?.hasAttribute('open')).toBe(false);
@@ -263,19 +299,26 @@ describe('application shell UX', () => {
     // Closing the FAQ to enter the editor does not unmount its catalog state.
     await act(async () => root.render(<FaqDrawer language="en" open={false} onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />));
     await act(async () => root.render(<FaqDrawer language="en" open onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />));
-    expect((queries.getByRole('searchbox', { name: 'Search the catalog' }) as HTMLInputElement).value).toBe('Gigas Grip');
+    expect((queries.getByRole('searchbox', { name: 'Search FAQ or errata' }) as HTMLInputElement).value).toBe('Gigas Grip');
   });
 
-  it('navigates only to confirmed Rulebook references and leaves the desktop FAQ drawer open', () => {
+  it('navigates only to confirmed Rulebook references and leaves the desktop FAQ drawer open', async () => {
     localStorage.setItem('reference-click-fixture', 'untouched');
     const before = localStorage.getItem('reference-click-fixture');
     const onOpenChange = vi.fn();
     const onNavigateToPage = vi.fn(() => true);
     const queries = mount(<FaqDrawer language="pt-BR" open onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />);
+    const gigasEntry = getCatalogEntries('errata').find(entry => entry.titleEn.includes('Gigas Grip'))!;
+    const gigasPt = resolveCatalogContent(gigasEntry, 'pt-BR');
+    const flankingEntry = getCatalogEntries('errata').find(entry => entry.titleEn.includes('Flanking and Backstab'))!;
+    const flankingPt = resolveCatalogContent(flankingEntry, 'pt-BR');
+    const triggerForTitle = (title: string) => Array.from(container.querySelectorAll<HTMLButtonElement>('.faq-entry-trigger'))
+      .find(button => button.querySelector('.faq-entry-title')?.textContent === title);
 
-    act(() => fireEvent.click(queries.getByRole('tab', { name: /ERRATA/ })));
-    act(() => fireEvent.click(queries.getByRole('button', { name: /Gigas Grip/ })));
-    expect(queries.getByText('Fallback EN')).toBeTruthy();
+    act(() => fireEvent.click(queries.getByRole('tab', { name: /errata/i })));
+    act(() => fireEvent.click(triggerForTitle(gigasPt.title)!));
+    if (gigasPt.isFallback) expect(queries.getByText('Fallback EN')).toBeTruthy();
+    else expect(queries.queryByText('Fallback EN')).toBeNull();
 
     const page78Link = queries.getByRole('button', { name: 'Abrir página 78 do Rulebook 1.2' });
     expect(page78Link.textContent).toBe('Rulebook · p. 78');
@@ -285,10 +328,12 @@ describe('application shell UX', () => {
     act(() => fireEvent.click(page78Link));
     expect(onNavigateToPage).toHaveBeenCalledWith(78);
     expect(queries.getByRole('dialog').hasAttribute('open')).toBe(true);
-    expect(queries.getByText('Fallback EN')).toBeTruthy();
+    if (gigasPt.isFallback) expect(queries.getByText('Fallback EN')).toBeTruthy();
+    else expect(queries.queryByText('Fallback EN')).toBeNull();
 
-    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Buscar no catálogo' }), { target: { value: 'Flanking and Backstab' } }));
-    act(() => fireEvent.click(queries.getByRole('button', { name: /Flanking and Backstab/ })));
+    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Buscar no FAQ ou errata' }), { target: { value: flankingPt.title } }));
+    await waitFor(() => expect(triggerForTitle(flankingPt.title)).toBeTruthy());
+    act(() => fireEvent.click(triggerForTitle(flankingPt.title)!));
     const page50Link = queries.getByRole('button', { name: 'Abrir página 50 do Rulebook 1.2' });
     act(() => fireEvent.click(page50Link));
     expect(onNavigateToPage).toHaveBeenLastCalledWith(50);
@@ -300,7 +345,8 @@ describe('application shell UX', () => {
     const onOpenChange = vi.fn();
     const onNavigateToPage = vi.fn(() => true);
     const queries = mount(<FaqDrawer language="en" open onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />);
-    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Search the catalog' }), { target: { value: 'no more components left to draw' } }));
+    act(() => fireEvent.click(queries.getByRole('tab', { name: /Official FAQ/i })));
+    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Search FAQ or errata' }), { target: { value: 'no more components left to draw' } }));
     act(() => fireEvent.click(queries.getByRole('button', { name: /What happens if I need to draw a Reward or Card/ })));
 
     expect(queries.getByText(/Unconfirmed page reference · p\. 6/)).toBeTruthy();
@@ -312,8 +358,8 @@ describe('application shell UX', () => {
     const onOpenChange = vi.fn();
     const onNavigateToPage = vi.fn(() => true);
     const queries = mount(<FaqDrawer language="en" open onOpenChange={onOpenChange} onNavigateToPage={onNavigateToPage} />);
-    act(() => fireEvent.click(queries.getByRole('tab', { name: /ERRATA/ })));
-    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Search the catalog' }), { target: { value: 'Aisling (COMMAND)' } }));
+    act(() => fireEvent.click(queries.getByRole('tab', { name: /errata/i })));
+    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Search FAQ or errata' }), { target: { value: 'Aisling (COMMAND)' } }));
     act(() => fireEvent.click(queries.getByRole('button', { name: /Aisling \(COMMAND\)/ })));
     expect(queries.getByText(/Other book\/component · p\. 423/)).toBeTruthy();
     expect(queries.queryByRole('button', { name: /page 423/i })).toBeNull();
@@ -321,7 +367,7 @@ describe('application shell UX', () => {
 
     const matchMedia = window.matchMedia as ReturnType<typeof vi.fn>;
     matchMedia.mockReturnValue({ matches: true });
-    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Search the catalog' }), { target: { value: 'Gigas Grip (Discipline)' } }));
+    act(() => fireEvent.change(queries.getByRole('searchbox', { name: 'Search FAQ or errata' }), { target: { value: 'Gigas Grip (Discipline)' } }));
     act(() => fireEvent.click(queries.getByRole('button', { name: /Gigas Grip \(Discipline\)/ })));
     onNavigateToPage.mockReturnValueOnce(false);
     act(() => fireEvent.click(queries.getByRole('button', { name: 'Open Rulebook 1.2 page 78' })));

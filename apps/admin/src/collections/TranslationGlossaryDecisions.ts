@@ -27,8 +27,18 @@ export const TranslationGlossaryDecisions: CollectionConfig = {
       required: true,
       options: [
         { label: 'Aprovado no glossário', value: 'approved' },
+        { label: 'Padrão observado', value: 'observed_standard' },
+        { label: 'Experimental', value: 'experimental' },
+        { label: 'Hipótese', value: 'hypothesis' },
         { label: 'Rejeitado', value: 'rejected' },
       ],
+    },
+    {
+      name: 'semanticMetadata',
+      type: 'json',
+      admin: {
+        description: 'Categoria, contexto, relações, evidências e proteção editorial. O status continua em decisionStatus.',
+      },
     },
     { name: 'occurrences', type: 'json', required: true },
     { name: 'decisionNote', type: 'textarea' },

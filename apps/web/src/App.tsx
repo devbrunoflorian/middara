@@ -25,6 +25,7 @@ import { attachSourceCompoundElements, type SourceCompoundElement } from './symb
 import type { ContentsRowDefinition } from './contentsRows';
 import { getDefaultSymbolAliasPreferences, getEditorAliasConflicts, getSemanticSymbol, normalizeEditorAlias, type SymbolAliasPreferences } from './symbols/semanticSymbols';
 import { loadSymbolAliasSettings, saveSymbolAliasSettings } from './symbols/symbolAliasSettings';
+import { migrateLocalLayoutFrames } from './layoutFrames';
 import {
   candidateForReviewException,
   candidateRequiresDiagnosticBlank,
@@ -598,7 +599,7 @@ function App() {
   const [reviewDraftOverrides, setReviewDraftOverrides] = useState<Map<string, SpanOverride>>(() => new Map());
   const [reviewWritingKey, setReviewWritingKey] = useState<string | null>(null);
   const [reviewStatus, setReviewStatus] = useState<string | null>(null);
-  const [faqActiveType, setFaqActiveType] = useState<'faq' | 'errata'>('faq');
+  const [faqActiveType, setFaqActiveType] = useState<'editorial' | 'faq' | 'errata'>('editorial');
   const [symbolAliasPreferences, setSymbolAliasPreferences] = useState<SymbolAliasPreferences>(getDefaultSymbolAliasPreferences);
   const [symbolAliasSettingsLoading, setSymbolAliasSettingsLoading] = useState(true);
   const [paletteEditorState, setPaletteEditorState] = useState<Pick<AdminSymbolPaletteEditorState, 'context' | 'canInsert' | 'canUndo' | 'status'> & { editorKey: string } | null>(null);
@@ -611,6 +612,10 @@ function App() {
   const [scrollPages, setScrollPages] = useState<Map<number, PageData>>(new Map());
 
   const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    migrateLocalLayoutFrames();
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -1680,6 +1685,18 @@ function App() {
       normalizedSourceTerm: normalizeGlossaryTerm(sourceTerm),
       normalizedTargetTerm: normalizeGlossaryTerm(targetTerm),
       decisionStatus,
+      semanticMetadata: {
+        ...(existing?.semanticMetadata ?? {}),
+        decisionType: existing?.semanticMetadata?.decisionType ?? 'terminology',
+        category: existing?.semanticMetadata?.category ?? 'unclassified',
+        context: existing?.semanticMetadata?.context ?? 'Termo identificado em uma pendência da Central de Revisão; a classe e o escopo mecânico ainda precisam ser registrados.',
+        evidence: existing?.semanticMetadata?.evidence ?? occurrences.map(occurrence => `p. ${occurrence.pageNumber}: ${occurrence.sourceText}`).slice(0, 5),
+        humanLocked: true,
+        version: (existing?.semanticMetadata?.version ?? 0) + 1,
+        updatedBy: 'Central de Revisão',
+        reconciliationStatus: existing?.semanticMetadata?.reconciliationStatus ?? 'needs_review',
+        reconciliationNote: existing?.semanticMetadata?.reconciliationNote ?? 'Completar a classificação semântica e verificar relações antes de harmonizar outras unidades.',
+      },
       occurrences,
       decisionNote: '',
     } satisfies NewTranslationGlossaryDecision, existing);
@@ -1814,6 +1831,19 @@ function App() {
     }
     setLanguage(nextLanguage);
   }, [rendererLanguage, isPage14V3ExperimentVisible, activeV3Variant, choosePage14V3Variant, isPage14V2ExperimentVisible, activeV2Variant, choosePage14V2Variant, isPage14ExperimentVisible, activeExperimentVariant, chooseEditorialExperimentVariant]);
+
+  const handleToolbarLanguageToggle = useCallback((nextLanguage: 'en' | 'pt-BR') => {
+    if (nextLanguage === rendererLanguage) return;
+    const experimentActive = isPage14V3ExperimentVisible && activeV3Variant !== null
+      || isPage14V2ExperimentVisible && activeV2Variant !== null
+      || isPage14ExperimentVisible && activeExperimentVariant !== null;
+    if (experimentActive) {
+      handleToggleLanguage(nextLanguage);
+      return;
+    }
+    if (acceptLeavingLayout() && acceptLeavingTranslationDraft()) handleToggleLanguage(nextLanguage);
+  }, [rendererLanguage, isPage14V3ExperimentVisible, activeV3Variant, isPage14V2ExperimentVisible, activeV2Variant,
+    isPage14ExperimentVisible, activeExperimentVariant, acceptLeavingLayout, acceptLeavingTranslationDraft, handleToggleLanguage]);
 
   const handlePage14V3UnitSelect = useCallback((spanKey: string | null) => {
     const unitKey = normalizePage14V3UnitKey(spanKey);
@@ -2477,15 +2507,15 @@ function App() {
       <ArcaneGlassDefinitions />
       <AtmosphericParticles />
       <ShellNavigation
-        active={isFaqOpen ? faqActiveType : currentPage === 3 ? 'contents' : 'rulebook'}
+        active={isFaqOpen ? faqActiveType === 'editorial' ? 'editorial-faq' : faqActiveType : currentPage === 3 ? 'contents' : 'rulebook'}
         workspaceEditing={workspaceEditing}
         language={language}
         translationReviewOpen={isTranslationReviewOpen}
         onExportPdf={() => setIsPdfExportOpen(true)}
         onToggleTranslationReview={() => isTranslationReviewOpen ? closeTranslationReview() : setIsTranslationReviewOpen(true)}
         onSelect={(destination: ShellDestination) => {
-          if (destination === 'faq' || destination === 'errata') {
-            setFaqActiveType(destination);
+          if (destination === 'editorial-faq' || destination === 'faq' || destination === 'errata') {
+            setFaqActiveType(destination === 'editorial-faq' ? 'editorial' : destination);
             setIsFaqOpen(true);
             return;
           }
@@ -2536,6 +2566,7 @@ function App() {
                 onNavigate={navigateToPage}
                 language={rendererLanguage}
                 symbolAliasPreferences={symbolAliasPreferences}
+                glossaryDecisions={glossaryDecisions}
                 onPaletteEditorChange={handlePaletteEditorChange}
                 onTranslationDraftDirtyChange={setHasTranslationDraft}
                 pendingEditableNavigation={pendingEditableNavigation}
@@ -2608,6 +2639,7 @@ function App() {
                     language={language}
                     strictPtBrDiagnostic={strictPtBrDiagnostic}
                     symbolAliasPreferences={symbolAliasPreferences}
+                    glossaryDecisions={glossaryDecisions}
                     onPaletteEditorChange={handlePaletteEditorChange}
                     onTranslationDraftDirtyChange={setHasTranslationDraft}
                     editableNavigationEnabled={false}
@@ -2646,24 +2678,30 @@ function App() {
           {/* View Toggles */}
           <div className="tool-group">
             <button
+              type="button"
               className={`tool-btn ${viewMode === 'single' ? 'active' : ''}`}
+              aria-label={rendererLanguage === 'pt-BR' ? 'Página única' : 'Single Page View'}
+              aria-pressed={viewMode === 'single'}
               onClick={() => {
                 if (viewMode !== 'single' && (!acceptLeavingLayout() || !acceptLeavingTranslationDraft())) return;
                 setViewMode('single');
               }}
-              title="Single Page View"
+              title={rendererLanguage === 'pt-BR' ? 'Página única' : 'Single Page View'}
             >
-              <Layout size={16} />
+              <Layout size={16} aria-hidden="true" />
             </button>
             <button
+              type="button"
               className={`tool-btn ${viewMode === 'scroll' ? 'active' : ''}`}
+              aria-label={rendererLanguage === 'pt-BR' ? 'Rolagem contínua' : 'Continuous Scroll'}
+              aria-pressed={viewMode === 'scroll'}
               onClick={() => {
                 if (viewMode !== 'scroll' && (!acceptLeavingLayout() || !acceptLeavingTranslationDraft())) return;
                 setViewMode('scroll');
               }}
-              title="Continuous Scroll"
+              title={rendererLanguage === 'pt-BR' ? 'Rolagem contínua' : 'Continuous Scroll'}
             >
-              <LayoutList size={16} />
+              <LayoutList size={16} aria-hidden="true" />
             </button>
           </div>
 
@@ -2671,8 +2709,14 @@ function App() {
 
           {/* Pagination Controls */}
           <div className="pagination-group">
-            <button className="nav-btn" onClick={() => navigateToPage(Math.max(1, currentPage - 1))}>
-              <ChevronLeft size={16} />
+            <button
+              type="button"
+              className="nav-btn"
+              aria-label={rendererLanguage === 'pt-BR' ? 'Página anterior' : 'Previous page'}
+              title={rendererLanguage === 'pt-BR' ? 'Página anterior' : 'Previous page'}
+              onClick={() => navigateToPage(Math.max(1, currentPage - 1))}
+            >
+              <ChevronLeft size={16} aria-hidden="true" />
             </button>
             <form onSubmit={handlePageSubmit} className="page-input-form">
               <input 
@@ -2681,11 +2725,18 @@ function App() {
                 onChange={(e) => setPageInput(e.target.value)}
                 onBlur={handlePageSubmit}
                 className="page-input"
+                aria-label={rendererLanguage === 'pt-BR' ? 'Número da página' : 'Page number'}
               />
               <span className="page-total">{TOTAL_PAGES}</span>
             </form>
-            <button className="nav-btn" onClick={() => navigateToPage(Math.min(TOTAL_PAGES, currentPage + 1))}>
-              <ChevronRight size={16} />
+            <button
+              type="button"
+              className="nav-btn"
+              aria-label={rendererLanguage === 'pt-BR' ? 'Próxima página' : 'Next page'}
+              title={rendererLanguage === 'pt-BR' ? 'Próxima página' : 'Next page'}
+              onClick={() => navigateToPage(Math.min(TOTAL_PAGES, currentPage + 1))}
+            >
+              <ChevronRight size={16} aria-hidden="true" />
             </button>
           </div>
 
@@ -2693,45 +2744,29 @@ function App() {
 
           {/* Zoom Controls */}
           <div className="zoom-group">
-            <button className="tool-btn" onClick={() => changeZoomAroundCenter(zoomLevelRef.current + 0.25)} title="Zoom In">
-              <ZoomIn size={16} />
+            <button type="button" className="tool-btn" aria-label={rendererLanguage === 'pt-BR' ? 'Aumentar zoom' : 'Zoom In'} onClick={() => changeZoomAroundCenter(zoomLevelRef.current + 0.25)} title={rendererLanguage === 'pt-BR' ? 'Aumentar zoom' : 'Zoom In'}>
+              <ZoomIn size={16} aria-hidden="true" />
             </button>
             <span className="zoom-level">{Math.round(zoomLevel * 100)}%</span>
-            <button className="tool-btn" onClick={() => changeZoomAroundCenter(zoomLevelRef.current - 0.25)} title="Zoom Out">
-              <ZoomOut size={16} />
+            <button type="button" className="tool-btn" aria-label={rendererLanguage === 'pt-BR' ? 'Diminuir zoom' : 'Zoom Out'} onClick={() => changeZoomAroundCenter(zoomLevelRef.current - 0.25)} title={rendererLanguage === 'pt-BR' ? 'Diminuir zoom' : 'Zoom Out'}>
+              <ZoomOut size={16} aria-hidden="true" />
             </button>
-            <button className="tool-btn" onClick={() => changeZoomAroundCenter(1, true)} title="Fit to Screen">
-              <Maximize size={16} />
+            <button type="button" className="tool-btn" aria-label={rendererLanguage === 'pt-BR' ? 'Ajustar à tela' : 'Fit to Screen'} onClick={() => changeZoomAroundCenter(1, true)} title={rendererLanguage === 'pt-BR' ? 'Ajustar à tela' : 'Fit to Screen'}>
+              <Maximize size={16} aria-hidden="true" />
             </button>
           </div>
 
         </div>
 
         <div className="toolbar-section bottom">
-          <select 
-            value={rendererLanguage}
-            onChange={(e) => {
-              const nextLanguage = e.target.value as 'en' | 'pt-BR';
-              if (nextLanguage === rendererLanguage) return;
-              if (isPage14V2ExperimentVisible && activeV2Variant !== null) {
-                if (nextLanguage === 'en' || nextLanguage === 'pt-BR') {
-                  choosePage14V2Variant(nextLanguage === 'en' ? 'EN' : 'PT');
-                }
-                return;
-              }
-              if (isPage14ExperimentVisible && activeExperimentVariant !== null) {
-                chooseEditorialExperimentVariant(nextLanguage === 'en' ? 'EN' : 'PT');
-                return;
-              }
-              if (acceptLeavingLayout() && acceptLeavingTranslationDraft()) setLanguage(nextLanguage);
-            }}
-            className="language-select"
-            style={{ padding: '4px', borderRadius: '4px', border: '1px solid #444', background: '#333', color: '#fff', fontSize: '10px', width: '38px', appearance: 'none', textAlign: 'center' }}
-            title="Language"
-          >
-            <option value="en">EN</option>
-            <option value="pt-BR">PT</option>
-          </select>
+          <div className="language-toggle" role="group" aria-label={rendererLanguage === 'pt-BR' ? 'Idioma' : 'Language'}>
+            <button type="button" className={`language-toggle-option ${rendererLanguage === 'en' ? 'active' : ''}`}
+              aria-label="English" aria-pressed={rendererLanguage === 'en'} title="English"
+              onClick={() => handleToolbarLanguageToggle('en')}>EN</button>
+            <button type="button" className={`language-toggle-option ${rendererLanguage === 'pt-BR' ? 'active' : ''}`}
+              aria-label="Português (Brasil)" aria-pressed={rendererLanguage === 'pt-BR'} title="Português (Brasil)"
+              onClick={() => handleToolbarLanguageToggle('pt-BR')}>PT</button>
+          </div>
 
           <div className="divider"></div>
 
@@ -2776,8 +2811,8 @@ function App() {
               setIsRulerVisible(nextAdmin);
               if (!nextAdmin) setIsSymbolPaletteOpen(false);
             }}
-            title={isAdmin ? 'Exit Admin' : 'Enter Admin'}
-            aria-label={isAdmin ? 'Sair do modo Admin' : 'Entrar no modo Admin'}
+            title={rendererLanguage === 'pt-BR' ? isAdmin ? 'Sair do modo Admin' : 'Entrar no modo Admin' : isAdmin ? 'Exit Admin' : 'Enter Admin'}
+            aria-label={rendererLanguage === 'pt-BR' ? isAdmin ? 'Sair do modo Admin' : 'Entrar no modo Admin' : isAdmin ? 'Exit Admin' : 'Enter Admin'}
           >
             <Edit3 size={16} />
             <span>Admin</span>
@@ -2820,6 +2855,7 @@ function App() {
       />
       <FaqDrawer
         language={language}
+        currentPage={currentPage}
         open={isFaqOpen}
         activeType={faqActiveType}
         onActiveTypeChange={setFaqActiveType}

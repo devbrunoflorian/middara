@@ -77,6 +77,7 @@ export interface Config {
     'translation-reviews': TranslationReview;
     'translation-review-requests': TranslationReviewRequest;
     'translation-glossary-decisions': TranslationGlossaryDecision;
+    'editorial-faqs': EditorialFaq;
     'layout-frames': LayoutFrame;
     'symbol-alias-settings': SymbolAliasSetting;
     'pdf-export-jobs': PdfExportJob;
@@ -97,6 +98,7 @@ export interface Config {
     'translation-reviews': TranslationReviewsSelect<false> | TranslationReviewsSelect<true>;
     'translation-review-requests': TranslationReviewRequestsSelect<false> | TranslationReviewRequestsSelect<true>;
     'translation-glossary-decisions': TranslationGlossaryDecisionsSelect<false> | TranslationGlossaryDecisionsSelect<true>;
+    'editorial-faqs': EditorialFaqsSelect<false> | EditorialFaqsSelect<true>;
     'layout-frames': LayoutFramesSelect<false> | LayoutFramesSelect<true>;
     'symbol-alias-settings': SymbolAliasSettingsSelect<false> | SymbolAliasSettingsSelect<true>;
     'pdf-export-jobs': PdfExportJobsSelect<false> | PdfExportJobsSelect<true>;
@@ -365,7 +367,19 @@ export interface TranslationGlossaryDecision {
   targetTerm: string;
   normalizedSourceTerm: string;
   normalizedTargetTerm: string;
-  decisionStatus: 'approved' | 'rejected';
+  decisionStatus: 'approved' | 'observed_standard' | 'experimental' | 'hypothesis' | 'rejected';
+  /**
+   * Categoria, contexto, relações, evidências e proteção editorial. O status continua em decisionStatus.
+   */
+  semanticMetadata?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   occurrences:
     | {
         [k: string]: unknown;
@@ -379,6 +393,92 @@ export interface TranslationGlossaryDecision {
   decidedAt: string;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * FAQ editorial PT-BR do Rulebook 1.2. Não é FAQ nem errata oficial. Revise o conteúdo antes de publicar.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "editorial-faqs".
+ */
+export interface EditorialFaq {
+  id: number;
+  /**
+   * ID estável da fonte editorial.
+   */
+  faqId: string;
+  language: 'pt-BR';
+  question: string;
+  /**
+   * Markdown simples; HTML arbitrário não é renderizado no Viewer.
+   */
+  answer: string;
+  /**
+   * Versão em inglês. O Viewer em EN não faz fallback para o conteúdo PT-BR.
+   */
+  englishQuestion?: string | null;
+  /**
+   * Versão em inglês. Só aparece quando este campo e a pergunta em inglês estiverem preenchidos.
+   */
+  englishAnswer?: string | null;
+  category:
+    | 'Modos de jogo e campanha'
+    | 'Preparação, Encontros e Urgência'
+    | 'Turnos, SP e Habilidades'
+    | 'Movimento, Terrenos e Elevação'
+    | 'Ataques, Esquiva, Contra-ataque e flanqueamento'
+    | 'Alcance, Linha de Visão, Feitiços e Follow Up'
+    | 'Equipamentos, Itens, Disciplinas e Aprimoramentos'
+    | 'Saques, Ouro e recompensas'
+    | 'Combatentes Inteligentes, grupos e IA'
+    | 'Espers, Familiares e Conduítes'
+    | 'Efeitos, limites e regras gerais'
+    | 'Regras especiais e variantes opcionais';
+  sourceVersion: string;
+  /**
+   * Páginas impressas 1–102; intervalos da fonte são expandidos em páginas individuais.
+   */
+  sourcePages: {
+    page: number;
+    id?: string | null;
+  }[];
+  /**
+   * Primeira página de origem; útil para busca e filtro no Admin.
+   */
+  primarySourcePage?: number | null;
+  sourcePageSearch?: string | null;
+  /**
+   * Só preencher após confirmar o vínculo no DOM de origem.
+   */
+  sourceUnitIds?:
+    | {
+        id: string;
+      }[]
+    | null;
+  keywords?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  synonyms?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  ruleScope: 'base' | 'optional_variant';
+  spoilerLevel: 'none' | 'spoiler';
+  /**
+   * A revisão editorial é independente do estado de publicação nativo do Payload.
+   */
+  reviewStatus: 'pending' | 'reviewed';
+  reviewedAt?: string | null;
+  reviewedBy?: string | null;
+  sourceEntryHash?: string | null;
+  importedContentHash?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -536,6 +636,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'translation-glossary-decisions';
         value: number | TranslationGlossaryDecision;
+      } | null)
+    | ({
+        relationTo: 'editorial-faqs';
+        value: number | EditorialFaq;
       } | null)
     | ({
         relationTo: 'layout-frames';
@@ -759,11 +863,61 @@ export interface TranslationGlossaryDecisionsSelect<T extends boolean = true> {
   normalizedSourceTerm?: T;
   normalizedTargetTerm?: T;
   decisionStatus?: T;
+  semanticMetadata?: T;
   occurrences?: T;
   decisionNote?: T;
   decidedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "editorial-faqs_select".
+ */
+export interface EditorialFaqsSelect<T extends boolean = true> {
+  faqId?: T;
+  language?: T;
+  question?: T;
+  answer?: T;
+  englishQuestion?: T;
+  englishAnswer?: T;
+  category?: T;
+  sourceVersion?: T;
+  sourcePages?:
+    | T
+    | {
+        page?: T;
+        id?: T;
+      };
+  primarySourcePage?: T;
+  sourcePageSearch?: T;
+  sourceUnitIds?:
+    | T
+    | {
+        id?: T;
+      };
+  keywords?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  synonyms?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  ruleScope?: T;
+  spoilerLevel?: T;
+  reviewStatus?: T;
+  reviewedAt?: T;
+  reviewedBy?: T;
+  sourceEntryHash?: T;
+  importedContentHash?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

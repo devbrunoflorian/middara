@@ -1,8 +1,12 @@
 # FAQ and Errata local catalog
 
-The viewer reads the static, provenance-aware catalog at `apps/web/src/faq/faqCatalog.json` through `apps/web/src/faq/faqContent.ts`. Opening the panel does not fetch the official site and does not read or write Rulebook translation persistence.
+The viewer reads the static, provenance-aware official catalog at `apps/web/src/faq/faqCatalog.json` through `apps/web/src/faq/faqContent.ts`. The separate PT-BR editorial FAQ is served by the authenticated Payload-backed collection `editorial-faqs`; only published, spoiler-free records are readable without authentication. Opening the panel does not fetch the official site and does not read or write Rulebook translation persistence.
 
-The left-side panel has separate **FAQ** and **ERRATA** tabs. Both support search and category filtering. Errata also filters by Critical, Major, and Minor severity. The panel preserves page references as metadata, labels spoilers, and links back to the current official page. On desktop, it docks left and shifts the PDF viewport right; while open, the FAQ and development controls are hidden behind the panel so their icons cannot overlap it. On narrow screens, the panel fills the viewport.
+The right-side panel has separate **FAQ editorial**, **FAQ oficial**, and **Errata oficial** tabs. Search and category filtering are shared; Errata also filters by Critical, Major, and Minor severity. The editorial tab follows the Viewer language exactly: it displays the PT-BR source while the book is in Portuguese, and displays only explicitly supplied English fields while the book is in English. Missing English editorial text is reported as unavailable rather than replaced with Portuguese. Editorial results prioritize the current printed page and retain global search, categories, and standard/optional filters. Opening an answer shows its stable ID, rule scope, page references, and **Ver no livro** navigation. The panel preserves search and scroll when closed and reopened. On desktop, it docks right while the book remains navigable; on narrow screens, it uses a near-full-screen sheet.
+
+The existing official FAQ and Errata remain distinct, provenance-aware snapshots. Their untranslated source entries keep the catalog's explicit English fallback notice when the Viewer is set to PT-BR; these official entries are not mixed into, or rewritten as, the editorial FAQ.
+
+The editorial records use Payload's native draft/publish state and version history. The Admin collection is searchable by FAQ ID, question, category, and source page. Marking a record as reviewed is separate from publishing it. Initial Markdown import records are drafts and require an authenticated administrator to review and publish them individually. User creation is disabled through the Users API; the first admin must be provisioned with the protected local bootstrap script documented in the project's progress note.
 
 ## Canonical current source
 

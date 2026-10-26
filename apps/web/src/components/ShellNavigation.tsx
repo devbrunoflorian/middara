@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { BookOpen, CircleHelp, ClipboardCheck, FileDown, ListTree, Menu, ShieldAlert } from 'lucide-react';
+import { BadgeCheck, BookOpen, CircleHelp, ClipboardCheck, FileDown, ListTree, Menu, ShieldAlert } from 'lucide-react';
 import { MiddaraMark } from './MiddaraMark';
 import './ShellNavigation.css';
 
-export type ShellDestination = 'rulebook' | 'faq' | 'errata' | 'contents';
+export type ShellDestination = 'rulebook' | 'editorial-faq' | 'faq' | 'errata' | 'contents';
 const touchDrawerQuery = '(max-width: 700px), (hover: none) and (pointer: coarse)';
 
 interface ShellNavigationProps {
@@ -20,10 +20,18 @@ interface ShellNavigationProps {
 
 const destinations: Array<{ id: ShellDestination; label: string; icon: typeof BookOpen }> = [
   { id: 'rulebook', label: 'Rulebook', icon: BookOpen },
-  { id: 'faq', label: 'FAQ', icon: CircleHelp },
-  { id: 'errata', label: 'Errata', icon: ShieldAlert },
+  { id: 'editorial-faq', label: 'FAQ / Dúvidas', icon: CircleHelp },
+  { id: 'faq', label: 'FAQ oficial', icon: BadgeCheck },
+  { id: 'errata', label: 'Errata oficial', icon: ShieldAlert },
   { id: 'contents', label: 'Índice', icon: ListTree },
 ];
+
+function destinationLabel(id: ShellDestination, fallback: string, language: 'en' | 'pt-BR'): string {
+  if (id === 'editorial-faq') return language === 'pt-BR' ? 'FAQ / Dúvidas' : 'FAQ / Questions';
+  if (id === 'faq') return language === 'pt-BR' ? 'FAQ oficial' : 'Official FAQ';
+  if (id === 'errata') return language === 'pt-BR' ? 'Errata oficial' : 'Official Errata';
+  return fallback;
+}
 
 export function ShellNavigation({
   active,
@@ -226,24 +234,27 @@ export function ShellNavigation({
             <Menu size={18} aria-hidden="true" />
           </button>
         </div>
-        <nav className="global-nav-links" aria-label="Rulebook sections">
-          {destinations.map(({ id, label, icon: Icon }, index) => (
-            <button
-              key={id}
-              ref={index === 0 ? firstItemRef : undefined}
-              type="button"
-              className={`global-nav-link ${active === id ? 'is-active' : ''}`}
-              aria-current={active === id ? 'page' : undefined}
-              aria-label={label}
-              title={label}
-              onClick={() => handleSelect(id)}
-            >
-              <Icon size={17} aria-hidden="true" />
-              <span>{label}</span>
-            </button>
-          ))}
+        <nav className="global-nav-links" aria-label="Rulebook sections" inert={isNarrow && !mobileOpen}>
+          {destinations.map(({ id, label, icon: Icon }, index) => {
+            const localizedLabel = destinationLabel(id, label, language);
+            return (
+              <button
+                key={id}
+                ref={index === 0 ? firstItemRef : undefined}
+                type="button"
+                className={`global-nav-link ${active === id ? 'is-active' : ''}`}
+                aria-current={active === id ? 'page' : undefined}
+                aria-label={localizedLabel}
+                title={localizedLabel}
+                onClick={() => handleSelect(id)}
+              >
+                <Icon size={17} aria-hidden="true" />
+                <span>{localizedLabel}</span>
+              </button>
+            );
+          })}
         </nav>
-        <div className="global-nav-actions" aria-label={language === 'pt-BR' ? 'Ações do documento' : 'Document actions'}>
+        <div className="global-nav-actions" aria-label={language === 'pt-BR' ? 'Ações do documento' : 'Document actions'} inert={isNarrow && !mobileOpen}>
           <button
             type="button"
             className="global-nav-action"

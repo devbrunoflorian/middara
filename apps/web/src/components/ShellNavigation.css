@@ -268,10 +268,18 @@
   .global-nav-panel.is-mobile.is-expanded .global-nav-brand { justify-content: flex-start; width: auto; }
   .global-nav-panel.is-mobile.is-expanded .global-nav-brand > span { display: inline; }
   .global-nav-panel.is-mobile.is-expanded .global-nav-menu-button { margin-left: auto; }
+  .global-nav-panel.is-mobile .global-nav-menu-button {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+  }
   .global-nav-panel.is-mobile.is-expanded .global-nav-link {
     justify-content: flex-start;
     gap: 12px;
     width: 100%;
+    min-height: 44px;
+    height: auto;
+    padding-block: 8px;
     padding-inline: 8px;
     margin: 0;
   }

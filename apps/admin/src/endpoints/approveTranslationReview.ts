@@ -210,11 +210,17 @@ async function findTranslation(req: PayloadRequest, spanKey: string) {
   return result.docs[0] ?? null
 }
 
-function validateTranslationData(data: unknown, pageNumber: number): asserts data is JsonRecord {
+function validateTranslationData(data: unknown, pageNumber: number, canonicalSpanKey?: string): asserts data is JsonRecord {
   if (!isRecord(data) || data.schemaVersion !== 2 || !Array.isArray(data.segments) || !data.segments.length) {
     throw new Error('A unidade não contém segmentos ricos editáveis para publicar.')
   }
-  if (typeof data.spanKey !== 'string' || !data.spanKey.startsWith(`page_${pageNumber}_`)) {
+  // Some source blocks use stable, page-local editorKey values (for example
+  // p63_discipline_*). Accept those only when they exactly match the key from
+  // the server-built canonical review candidate; legacy approvals still need
+  // the ordinary page_XX_ prefix.
+  const pageScopedKey = typeof data.spanKey === 'string' && data.spanKey.startsWith(`page_${pageNumber}_`)
+  const canonicalEditorKey = typeof canonicalSpanKey === 'string' && data.spanKey === canonicalSpanKey
+  if (!pageScopedKey && !canonicalEditorKey) {
     throw new Error('A chave de renderização não corresponde à página da unidade.')
   }
   const bbox = data.bbox
@@ -356,7 +362,7 @@ async function approve(req: PayloadRequest): Promise<Response> {
       throw Object.assign(new Error('A proposta mudou de página desde que foi aberta.'), { status: 409 })
     }
     const data = legacyApproval ? review!.data : body.data
-    validateTranslationData(data, pageNumber)
+    validateTranslationData(data, pageNumber, legacyApproval ? undefined : canonicalEvidence?.canonicalSpanKey)
     if (!legacyApproval && canonicalEvidence?.canonicalSpanKey && isRecord(data)) {
       data.spanKey = canonicalEvidence.canonicalSpanKey
       if (canonicalEvidence.canonicalBbox) data.bbox = canonicalEvidence.canonicalBbox
