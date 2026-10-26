@@ -1,6 +1,6 @@
-# p.25 — proposta PT-BR “Componentes da Carta de Aventureiro” v8
+# p.25 — proposta PT-BR “Componentes da Ficha de Aventureiro” v8
 
-**Estado:** 12 unidades editáveis têm proposta; 9/9 unidades ativas passaram Viewer, Editor read-only, Copyfit V3 e PDF de uma página. As três unidades com falha ficam integralmente em branco apenas no diagnóstico v8; suas fontes e propostas completas permanecem preservadas. Quatorze grupos impressos no card aguardam localização de arte. Quatro traduções humanas (IDs 320–323) foram mantidas; zero writes no Payload e nenhuma alteração canônica.
+**Estado do diagnóstico v8 (histórico):** 12 unidades editáveis têm proposta; 9/9 unidades ativas passaram Viewer, Editor read-only, Copyfit V3 e PDF de uma página. Três unidades estruturais ficam integralmente em branco apenas no diagnóstico; suas fontes e propostas completas permanecem preservadas. Quatorze grupos impressos no card aguardam localização de arte. As quatro traduções humanas (IDs 320–323) continuam preservadas. **Estado atual (2026-10-26):** 9/9 reviews ativas aprovadas; as três unidades estruturais, 14 grupos de arte e os reparos de estrutura continuam pendentes. A página não está certificada.
 
 
 ## Verificações técnicas
@@ -10,7 +10,7 @@
 - Copyfit V3/PDF: 9 candidatos visíveis; excesso direito/inferior máximo de 0.000 pt (tolerância 0,05 pt). O PDF tem uma página de 820,346 × 820,346 pt; zero caracteres de substituição/uso privado.
 - Blanking diagnóstico: block_84, block_86 e block_87 ficam vazios como unidades inteiras somente no snapshot PT-BR. As propostas completas permanecem no JSON/Markdown; os spans originais não foram alterados no canônico.
 - Raster: Viewer, impressão e raster independente do PDF foram inspecionados. Não há colisão/corte visível nos nove alvos PT-BR ativos; a arte original permanece visível.
-- Payload: quatro registros humanos antes/depois, IDs 320–323 intactos; somente GET; zero writes. DOM, arte e molduras canônicas mantiveram os hashes de origem.
+- Payload: quatro registros humanos, IDs 320–323, intactos. Review1404 foi publicada como translation1184 pelo Reviewer oficial após readback; as outras oito aprovações ativas permanecem intactas. DOM, arte e molduras canônicas mantiveram os hashes de origem.
 
 ## Unidades de página editáveis
 
@@ -18,11 +18,11 @@
 
 **EN:** Adventurer Card Breakdown
 
-**PT-BR:** Componentes da Carta de Aventureiro
+**PT-BR:** Componentes da Ficha de Aventureiro
 
 **Diagnóstico:** Viewer, Editor read-only e PDF verificados; revisão humana pendente
 
-**Revisão pendente:** Adventurer Card → Carta de Aventureiro é o composto proposto para o título; confirmar com o glossário.
+**Estado atual:** review 1403 → translation 806, aprovada pelo Reviewer oficial após EXACT 1/1 em 100% e 200%. A forma Ficha de Aventureiro foi aplicada somente a esta ocorrência; Glossário id67 continua HIPÓTESE, Cartão de Aventureiro permanece alternativa e Adventure Sheet → Ficha de Aventura (id 7) segue distinto.
 
 ### block_83 / p25-block-83-remaining-size-10pt
 
@@ -30,9 +30,11 @@
 
 **PT-BR:** Acesso à Habilidade Especial do Aventureiro.
 
-**Diagnóstico:** Viewer, Editor read-only e PDF verificados; revisão humana pendente
+**Diagnóstico:** fonte PDF conferida; o corpo é um único span OptimaLTStd 10 pt regular. O título separado `CHARACTER ABILITY:` é OptimaLTStd-Bold 9 pt. A proposta preserva o estilo do corpo. PageRenderer atual: EXACT 1/1 em 100% e 200%; tradução persistida e publicada.
 
-**Revisão pendente:** Special Ability → Habilidade Especial é forma local para revisão de caixa e capitalização.
+**Decisão contextual:** `Ability → Habilidade` segue a decisão aprovada do glossário (id 5); `Special` é modificador descritivo nesta explicação. `Habilidade Especial` fica como tradução local, com a capitalização da fonte. Nenhum termo global novo foi criado.
+
+**Estado atual:** review 1404 → translation 1184, aprovada pelo Reviewer oficial em 2026-10-26 após readback; fingerprint Copyfit `aae667c181c7e6dd76ac22acc9307430f674d7d0a8327078ac9d58d2a9e3882a`.
 
 ### block_84 / p25-block-84-localized-body-v1
 
@@ -337,3 +339,8 @@ A v7 foi preservada como registro histórico e usava fallback inglês nas três 
 Evidências v8: [Viewer](../../../output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v8/viewer-pt-BR-v8.png), [Editor read-only](../../../output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v8/editor-readonly-v8.png), [PDF](../../../output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v8/page-025-pt-BR-v8.pdf), [raster independente](../../../output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v8/pdf-render-v8.png), [Copyfit V3](../../../output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v8/copyfit-v3-receipt-v8.json).
 
 Histórico v7: [proposta JSON](page-025-adventurer-card-proposal-2026-10-16-v7.json), [Markdown](page-025-adventurer-card-proposal-2026-10-16-v7.md) e [relatório](../../project-progress/2026-10-16-p025-adventurer-card-proposal-v7.md).
+
+
+## Persistência atual — 2026-10-25
+
+O read-back do Payload confirma 1 unidade aprovada e 8 reviews pendentes na página. A preferência lexical foi aplicada localmente, sem promover o estado do glossário.

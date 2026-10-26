@@ -118,8 +118,8 @@
       "sourceText": "During Zeke's Action Phase, he wants to move to the Loot token to the west of Remi. He spends 1 SP to make a Move Action and Gains Movement Points equal to his Movement Value printed on his Adventurer Card, in this case, 6. Since figures cannot move diagonally, he must choose between the shorter route heading west through Hindering Terrain (finishing at B ), or the longer route heading south and moving to D.",
       "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Durante a Fase de Ação de Zeke, ele quer alcançar a ficha de Saque localizada a oeste de Remi. Ele gasta 1 SP para realizar uma Ação de Movimento e Ganha Pontos de Movimento iguais ao Valor de Movimento impresso em sua Carta de Aventureiro — neste caso, 6. Como as miniaturas não podem se mover na diagonal, ele deve escolher entre a rota mais curta em direção ao oeste, pelo Terreno Difícil (terminando em ￼), ou a rota mais longa em direção ao sul, movendo-se até ￼.",
-      "proposalMarkup": "Durante a Fase de Ação de Zeke, ele quer alcançar a ficha de Saque localizada a oeste de Remi. Ele gasta 1 SP para realizar uma Ação de Movimento e Ganha Pontos de Movimento iguais ao Valor de Movimento impresso em sua Carta de Aventureiro — neste caso, 6. Como as miniaturas não podem se mover na diagonal, ele deve escolher entre a rota mais curta em direção ao oeste, pelo Terreno Difícil (terminando em ￼), ou a rota mais longa em direção ao sul, movendo-se até ￼.",
+      "proposalText": "Durante a Fase de Ação de Zeke, ele quer alcançar a ficha de Saque localizada a oeste de Remi. Ele gasta 1 SP para realizar uma Ação de Movimento e obtém Pontos de Movimento iguais ao Valor de Movimento impresso em sua Ficha de Aventureiro — neste caso, 6. Como as miniaturas não podem se mover na diagonal, ele deve escolher entre a rota mais curta em direção ao oeste, pelo Terreno Difícil (terminando em ￼), ou a rota mais longa em direção ao sul, movendo-se até ￼.",
+      "proposalMarkup": "Durante a Fase de Ação de Zeke, ele quer alcançar a ficha de Saque localizada a oeste de Remi. Ele gasta 1 SP para realizar uma Ação de Movimento e obtém Pontos de Movimento iguais ao Valor de Movimento impresso em sua Ficha de Aventureiro — neste caso, 6. Como as miniaturas não podem se mover na diagonal, ele deve escolher entre a rota mais curta em direção ao oeste, pelo Terreno Difícil (terminando em ￼), ou a rota mais longa em direção ao sul, movendo-se até ￼.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
@@ -150,7 +150,7 @@
             "style": "normal"
           },
           {
-            "text": " para realizar uma Ação de Movimento e Ganha Pontos de Movimento iguais ao Valor de Movimento impresso em sua Carta de Aventureiro — neste caso, ",
+            "text": " para realizar uma Ação de Movimento e obtém Pontos de Movimento iguais ao Valor de Movimento impresso em sua Ficha de Aventureiro — neste caso, ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -223,7 +223,7 @@
           "marker.reference.d"
         ]
       },
-      "technicalStatus": "verified_in_viewer_editor_and_pdf_proof",
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_at_100_and_200",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
@@ -233,22 +233,23 @@
         "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
         "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
       ],
-      "sourcePdfVisualLineCount": 3,
-      "pageRendererVisualLineCount": 3,
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
       "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
         "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 3,
-        "pageRendererVisualLineCount": 3,
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 40,
           "pdfDocumentPageIndex": 39,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -257,7 +258,7 @@
             724.6871948242188,
             339.7861022949219
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             315.076,
             326.076,
             336.01,
@@ -268,18 +269,500 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 11,
-          "distinctVisualRows": 3,
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 13,
+          "renderedSymbolIds": [
+            "marker.reference.b",
+            "marker.reference.d"
+          ],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 4,
           "visualRowTopsCssPx": [
             274.44,
             282.55,
-            290.66
+            290.66,
+            298.77
           ],
-          "frameHeightCssPx": 27.5
+          "visualRowIntervalsPt": [
+            10.01,
+            10.01,
+            10.01
+          ],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "7.29364px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 32.4
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "copyfitMeasurementFingerprint": null,
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 40,
+            "pdfDocumentPageIndex": 39,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              91.40840148925781,
+              305.8460998535156,
+              724.6871948242188,
+              339.7861022949219
+            ],
+            "visualRowBaselinesPt": [
+              315.076,
+              326.076,
+              336.01,
+              337.076
+            ],
+            "spans": 14,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 13,
+            "renderedSymbolIds": [
+              "marker.reference.b",
+              "marker.reference.d"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
+            "visualRowTopsCssPx": [
+              417.8,
+              422.44,
+              427.08,
+              431.31
+            ],
+            "visualRowIntervalsPt": [
+              11.45,
+              11.14,
+              10.45
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "3.64682px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 17.8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 40,
+            "pdfDocumentPageIndex": 39,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              91.40840148925781,
+              305.8460998535156,
+              724.6871948242188,
+              339.7861022949219
+            ],
+            "visualRowBaselinesPt": [
+              315.076,
+              326.076,
+              336.01,
+              337.076
+            ],
+            "spans": 14,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 13,
+            "renderedSymbolIds": [
+              "marker.reference.b",
+              "marker.reference.d"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
+            "visualRowTopsCssPx": [
+              274.44,
+              282.55,
+              290.66,
+              298.77
+            ],
+            "visualRowIntervalsPt": [
+              10.01,
+              10.01,
+              10.01
+            ],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "7.29364px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 32.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "supersededCopyfitMeasurements": [
+        {
+          "proposalText": "Durante a Fase de Ação de Zeke, ele quer alcançar a ficha de Saque localizada a oeste de Remi. Ele gasta 1 SP para realizar uma Ação de Movimento e Ganha Pontos de Movimento iguais ao Valor de Movimento impresso em sua Ficha de Aventureiro — neste caso, 6. Como as miniaturas não podem se mover na diagonal, ele deve escolher entre a rota mais curta em direção ao oeste, pelo Terreno Difícil (terminando em ￼), ou a rota mais longa em direção ao sul, movendo-se até ￼.",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "measurement": {
+            "status": "measured_copyfit_v3_script_visual_rows",
+            "sourcePdfVisualLineCount": 4,
+            "pageRendererVisualLineCount": 4,
+            "classification": "EXACT",
+            "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+            "environment": {
+              "pageNumber": 40,
+              "pdfDocumentPageIndex": 39,
+              "language": "pt-BR",
+              "viewerZoom": "200%",
+              "viewportCssPixels": "1280x720",
+              "devicePixelRatio": 1.25,
+              "fontLoaded": true
+            },
+            "sourceEvidence": {
+              "bboxPt": [
+                91.40840148925781,
+                305.8460998535156,
+                724.6871948242188,
+                339.7861022949219
+              ],
+              "visualRowBaselinesPt": [
+                315.076,
+                326.076,
+                336.01,
+                337.076
+              ],
+              "spans": 14,
+              "visualRows": 4
+            },
+            "pageRendererEvidence": {
+              "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
+              "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+              "rangeRectFragments": 13,
+              "renderedSymbolIds": [
+                "marker.reference.b",
+                "marker.reference.d"
+              ],
+              "semanticSymbolOnlyRows": 0,
+              "distinctVisualRows": 4,
+              "visualRowTopsCssPx": [
+                274.44,
+                282.55,
+                290.66,
+                298.77
+              ],
+              "visualRowIntervalsPt": [
+                10.01,
+                10.01,
+                10.01
+              ],
+              "pageScaleCssPxPerPt": 0.8104049916413385,
+              "renderedFontSamples": [
+                {
+                  "fontFamily": "OptimaLTStd, serif",
+                  "fontSize": "8.10405px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(35, 31, 32)",
+                  "lineHeight": "8.10405px",
+                  "letterSpacing": "-0.121561px",
+                  "fontKerning": "auto",
+                  "fontVariantLigatures": "none",
+                  "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                  "fontLoaded": true
+                },
+                {
+                  "fontFamily": "OptimaLTStd, serif",
+                  "fontSize": "7.29364px",
+                  "fontWeight": "700",
+                  "fontStyle": "normal",
+                  "color": "rgb(35, 31, 32)",
+                  "lineHeight": "7.29364px",
+                  "letterSpacing": "-0.109405px",
+                  "fontKerning": "auto",
+                  "fontVariantLigatures": "none",
+                  "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                  "fontLoaded": true
+                }
+              ],
+              "frameHeightCssPx": 32.4
+            },
+            "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+          },
+          "measurementsByZoom": {
+            "100%": {
+              "status": "measured_copyfit_v3_script_visual_rows",
+              "sourcePdfVisualLineCount": 4,
+              "pageRendererVisualLineCount": 4,
+              "classification": "EXACT",
+              "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+              "environment": {
+                "pageNumber": 40,
+                "pdfDocumentPageIndex": 39,
+                "language": "pt-BR",
+                "viewerZoom": "100%",
+                "viewportCssPixels": "1280x720",
+                "devicePixelRatio": 1.25,
+                "fontLoaded": true
+              },
+              "sourceEvidence": {
+                "bboxPt": [
+                  91.40840148925781,
+                  305.8460998535156,
+                  724.6871948242188,
+                  339.7861022949219
+                ],
+                "visualRowBaselinesPt": [
+                  315.076,
+                  326.076,
+                  336.01,
+                  337.076
+                ],
+                "spans": 14,
+                "visualRows": 4
+              },
+              "pageRendererEvidence": {
+                "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
+                "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+                "rangeRectFragments": 13,
+                "renderedSymbolIds": [
+                  "marker.reference.b",
+                  "marker.reference.d"
+                ],
+                "semanticSymbolOnlyRows": 0,
+                "distinctVisualRows": 4,
+                "visualRowTopsCssPx": [
+                  417.8,
+                  422.44,
+                  427.08,
+                  431.31
+                ],
+                "visualRowIntervalsPt": [
+                  11.45,
+                  11.14,
+                  10.45
+                ],
+                "pageScaleCssPxPerPt": 0.40520249582066925,
+                "renderedFontSamples": [
+                  {
+                    "fontFamily": "OptimaLTStd, serif",
+                    "fontSize": "4.05202px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(35, 31, 32)",
+                    "lineHeight": "4.05202px",
+                    "letterSpacing": "-0.0607804px",
+                    "fontKerning": "auto",
+                    "fontVariantLigatures": "none",
+                    "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                    "fontLoaded": true
+                  },
+                  {
+                    "fontFamily": "OptimaLTStd, serif",
+                    "fontSize": "3.64682px",
+                    "fontWeight": "700",
+                    "fontStyle": "normal",
+                    "color": "rgb(35, 31, 32)",
+                    "lineHeight": "3.64682px",
+                    "letterSpacing": "-0.0547023px",
+                    "fontKerning": "auto",
+                    "fontVariantLigatures": "none",
+                    "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                    "fontLoaded": true
+                  }
+                ],
+                "frameHeightCssPx": 17.8
+              },
+              "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+            },
+            "200%": {
+              "status": "measured_copyfit_v3_script_visual_rows",
+              "sourcePdfVisualLineCount": 4,
+              "pageRendererVisualLineCount": 4,
+              "classification": "EXACT",
+              "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+              "environment": {
+                "pageNumber": 40,
+                "pdfDocumentPageIndex": 39,
+                "language": "pt-BR",
+                "viewerZoom": "200%",
+                "viewportCssPixels": "1280x720",
+                "devicePixelRatio": 1.25,
+                "fontLoaded": true
+              },
+              "sourceEvidence": {
+                "bboxPt": [
+                  91.40840148925781,
+                  305.8460998535156,
+                  724.6871948242188,
+                  339.7861022949219
+                ],
+                "visualRowBaselinesPt": [
+                  315.076,
+                  326.076,
+                  336.01,
+                  337.076
+                ],
+                "spans": 14,
+                "visualRows": 4
+              },
+              "pageRendererEvidence": {
+                "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
+                "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+                "rangeRectFragments": 13,
+                "renderedSymbolIds": [
+                  "marker.reference.b",
+                  "marker.reference.d"
+                ],
+                "semanticSymbolOnlyRows": 0,
+                "distinctVisualRows": 4,
+                "visualRowTopsCssPx": [
+                  274.44,
+                  282.55,
+                  290.66,
+                  298.77
+                ],
+                "visualRowIntervalsPt": [
+                  10.01,
+                  10.01,
+                  10.01
+                ],
+                "pageScaleCssPxPerPt": 0.8104049916413385,
+                "renderedFontSamples": [
+                  {
+                    "fontFamily": "OptimaLTStd, serif",
+                    "fontSize": "8.10405px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(35, 31, 32)",
+                    "lineHeight": "8.10405px",
+                    "letterSpacing": "-0.121561px",
+                    "fontKerning": "auto",
+                    "fontVariantLigatures": "none",
+                    "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                    "fontLoaded": true
+                  },
+                  {
+                    "fontFamily": "OptimaLTStd, serif",
+                    "fontSize": "7.29364px",
+                    "fontWeight": "700",
+                    "fontStyle": "normal",
+                    "color": "rgb(35, 31, 32)",
+                    "lineHeight": "7.29364px",
+                    "letterSpacing": "-0.109405px",
+                    "fontKerning": "auto",
+                    "fontVariantLigatures": "none",
+                    "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                    "fontLoaded": true
+                  }
+                ],
+                "frameHeightCssPx": 32.4
+              },
+              "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+            }
+          }
+        }
+      ],
+      "status": "copyfit_v3_exact_at_100_and_200_terminology_pending",
+      "notes": [
+        "Tentativa textual local: aplicado Gain → obter em flexão natural (obtém), mantendo os rich spans e os dois marcadores semânticos de referência. O restante das escolhas mecânicas desta unidade continua pendente."
+      ]
     },
     {
       "blockIndex": 1,
@@ -761,13 +1244,7 @@
       "technicalStatus": "verified_in_viewer_editor_and_pdf_proof",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Break Attack → Ataque de Oportunidade (fonte: Break Attack; glossário registra Breaking Attack)",
-        "Animate → Animado",
-        "Push/Pull/Command → Empurrar/Puxar/Comandar",
-        "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
-        "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 3,
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "EXACT",
@@ -813,7 +1290,17 @@
           "frameHeightCssPx": 27.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "reviewedPendingTerms": [
+        "Break Attack → Ataque de Oportunidade (fonte: Break Attack; glossário registra Breaking Attack)",
+        "Animate → Animado",
+        "Push/Pull/Command → Empurrar/Puxar/Comandar",
+        "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
+        "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
+      ],
+      "notes": [
+        "Revisão editorial local: nomes de habilidade Push/Pull/Command traduzidos como Empurrar/Puxar/Comandar e Ability como Habilidade conforme as definições explícitas desta página e uso já publicado. Nenhum termo foi promovido ao glossário global; rich spans, layout/PDF e Copyfit EXACT existentes foram reutilizados."
+      ]
     },
     {
       "blockIndex": 9,
@@ -859,13 +1346,7 @@
       "technicalStatus": "verified_in_viewer_editor_and_pdf_proof",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Break Attack → Ataque de Oportunidade (fonte: Break Attack; glossário registra Breaking Attack)",
-        "Animate → Animado",
-        "Push/Pull/Command → Empurrar/Puxar/Comandar",
-        "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
-        "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 4,
       "pageRendererVisualLineCount": 4,
       "copyfitClassification": "EXACT",
@@ -913,7 +1394,17 @@
           "frameHeightCssPx": 36.4
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "reviewedPendingTerms": [
+        "Break Attack → Ataque de Oportunidade (fonte: Break Attack; glossário registra Breaking Attack)",
+        "Animate → Animado",
+        "Push/Pull/Command → Empurrar/Puxar/Comandar",
+        "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
+        "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
+      ],
+      "notes": [
+        "Revisão editorial local: nomes de habilidade Push/Pull/Command traduzidos como Empurrar/Puxar/Comandar e Ability como Habilidade conforme as definições explícitas desta página e uso já publicado. Nenhum termo foi promovido ao glossário global; rich spans, layout/PDF e Copyfit EXACT existentes foram reutilizados."
+      ]
     },
     {
       "blockIndex": 10,
@@ -959,13 +1450,7 @@
       "technicalStatus": "verified_in_viewer_editor_and_pdf_proof",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Break Attack → Ataque de Oportunidade (fonte: Break Attack; glossário registra Breaking Attack)",
-        "Animate → Animado",
-        "Push/Pull/Command → Empurrar/Puxar/Comandar",
-        "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
-        "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 2,
       "pageRendererVisualLineCount": 2,
       "copyfitClassification": "EXACT",
@@ -1009,7 +1494,17 @@
           "frameHeightCssPx": 18.6
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "reviewedPendingTerms": [
+        "Break Attack → Ataque de Oportunidade (fonte: Break Attack; glossário registra Breaking Attack)",
+        "Animate → Animado",
+        "Push/Pull/Command → Empurrar/Puxar/Comandar",
+        "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
+        "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
+      ],
+      "notes": [
+        "Revisão editorial local: nomes de habilidade Push/Pull/Command traduzidos como Empurrar/Puxar/Comandar e Ability como Habilidade conforme as definições explícitas desta página e uso já publicado. Nenhum termo foi promovido ao glossário global; rich spans, layout/PDF e Copyfit EXACT existentes foram reutilizados."
+      ]
     },
     {
       "blockIndex": 11,
@@ -1079,13 +1574,7 @@
       "technicalStatus": "verified_in_viewer_editor_and_pdf_proof",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Break Attack → Ataque de Oportunidade (fonte: Break Attack; glossário registra Breaking Attack)",
-        "Animate → Animado",
-        "Push/Pull/Command → Empurrar/Puxar/Comandar",
-        "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
-        "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 4,
       "pageRendererVisualLineCount": 4,
       "copyfitClassification": "EXACT",
@@ -1132,7 +1621,17 @@
           "frameHeightCssPx": 36.4
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "reviewedPendingTerms": [
+        "Break Attack → Ataque de Oportunidade (fonte: Break Attack; glossário registra Breaking Attack)",
+        "Animate → Animado",
+        "Push/Pull/Command → Empurrar/Puxar/Comandar",
+        "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
+        "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
+      ],
+      "notes": [
+        "Revisão editorial local: nomes de habilidade Push/Pull/Command traduzidos como Empurrar/Puxar/Comandar e Ability como Habilidade conforme as definições explícitas desta página e uso já publicado. Nenhum termo foi promovido ao glossário global; rich spans, layout/PDF e Copyfit EXACT existentes foram reutilizados."
+      ]
     },
     {
       "blockIndex": null,
@@ -1568,5 +2067,6 @@
   ],
   "terminologyStatus": "pending_human_review",
   "technicalStatus": "viewer_editor_pdf_verified; full English page fidelity remains not_certified",
-  "payloadWrites": 0
+  "payloadWrites": 0,
+  "updated": "2026-10-25T11:38:33.616Z"
 }

@@ -616,8 +616,8 @@
       "spanKey": "page_39_unit_p39-block-37-paragraph__pt-BR",
       "language": "pt-BR",
       "sourceText": "Adventurers are limited to 1 Move Action on their turn. The Move Action costs 1 SP, and allows the figure to move up to the Movement Value printed on their Adventurer Card. Movement is always counted orthogonally. This means that you may not move diagonally. After moving up to their Movement Value, the Adventurer may then spend SP. For each additional SP spent, an Adventurer adds +2 to their Movement Value for that Action.",
-      "proposalText": "Aventureiros estão limitados a apenas 1 Ação de Movimento em seu turno. A Ação de Movimento custa 1 SP e permite mover a miniatura até o Valor de Movimento impresso em sua Carta de Aventureiro. O movimento é sempre contado de forma ortogonal. Isso significa que você não pode mover-se na diagonal. Depois de mover-se até o seu Valor de Movimento, o Aventureiro pode então gastar SP adicionais. Para cada SP adicional gasto, o Aventureiro adiciona +2 ao seu Valor de Movimento para aquela Ação.",
-      "proposalMarkup": "Aventureiros estão limitados a apenas 1 Ação de Movimento em seu turno. A Ação de Movimento custa 1 SP e permite mover a miniatura até o Valor de Movimento impresso em sua Carta de Aventureiro. O movimento é sempre contado de forma ortogonal. Isso significa que você não pode mover-se na diagonal. Depois de mover-se até o seu Valor de Movimento, o Aventureiro pode então gastar SP adicionais. Para cada SP adicional gasto, o Aventureiro adiciona +2 ao seu Valor de Movimento para aquela Ação.",
+      "proposalText": "Aventureiros estão limitados a apenas 1 Ação de Movimento em seu turno. A Ação de Movimento custa 1 SP e permite mover a miniatura até o Valor de Movimento impresso em sua Ficha de Aventureiro. O movimento é sempre contado de forma ortogonal. Isso significa que você não pode mover-se na diagonal. Depois de mover-se até o seu Valor de Movimento, o Aventureiro pode então gastar SP adicionais. Para cada SP adicional gasto, o Aventureiro adiciona +2 ao seu Valor de Movimento para aquela Ação.",
+      "proposalMarkup": "Aventureiros estão limitados a apenas 1 Ação de Movimento em seu turno. A Ação de Movimento custa 1 SP e permite mover a miniatura até o Valor de Movimento impresso em sua Ficha de Aventureiro. O movimento é sempre contado de forma ortogonal. Isso significa que você não pode mover-se na diagonal. Depois de mover-se até o seu Valor de Movimento, o Aventureiro pode então gastar SP adicionais. Para cada SP adicional gasto, o Aventureiro adiciona +2 ao seu Valor de Movimento para aquela Ação.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_39_unit_p39-block-37-paragraph__pt-BR",
@@ -664,7 +664,7 @@
             "style": "normal"
           },
           {
-            "text": " e permite mover a miniatura até o Valor de Movimento impresso em sua Carta de Aventureiro. O movimento é sempre contado de forma ortogonal. Isso significa que você não pode mover-se na diagonal. Depois de mover-se até o seu Valor de Movimento, o Aventureiro pode então gastar SP adicionais. Para cada ",
+            "text": " e permite mover a miniatura até o Valor de Movimento impresso em sua Ficha de Aventureiro. O movimento é sempre contado de forma ortogonal. Isso significa que você não pode mover-se na diagonal. Depois de mover-se até o seu Valor de Movimento, o Aventureiro pode então gastar SP adicionais. Para cada ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -714,7 +714,7 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "copyfit_v3_live_page_renderer_remeasured_after_renderer_changes; current_isolated_pdf_and_full_page_review_pending",
+      "technicalStatus": "copyfit_v3_exact_at_100_and_200_after_user_preferred_component_term; terminology_pending_for_Move_Action_and_Movement_Value",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
@@ -729,7 +729,7 @@
         "sourcePdfVisualLineCount": 7,
         "pageRendererVisualLineCount": 7,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 39,
           "pdfDocumentPageIndex": 38,
@@ -746,7 +746,7 @@
             404.54150390625,
             173.85643005371094
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             105.146,
             116.146,
             127.146,
@@ -760,8 +760,10 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_39_unit_p39-block-37-paragraph__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 22,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 7,
           "visualRowTopsCssPx": [
             104.34,
@@ -772,9 +774,59 @@
             148.88,
             157.78
           ],
-          "frameHeightCssPx": 63.1
+          "visualRowIntervalsPt": [
+            10.99,
+            10.99,
+            10.99,
+            10.99,
+            10.99,
+            10.99
+          ],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.02301px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 62.3
         },
-        "editorialStatus": "Pending human editorial approval. Current evidence measures the live PageRenderer; it does not approve or publish the translation. Current full-page PDF review is pending."
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
       "copyfitMeasurementsByZoom": {
         "200%": {
@@ -782,7 +834,7 @@
           "sourcePdfVisualLineCount": 7,
           "pageRendererVisualLineCount": 7,
           "classification": "EXACT",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
           "environment": {
             "pageNumber": 39,
             "pdfDocumentPageIndex": 38,
@@ -799,7 +851,7 @@
               404.54150390625,
               173.85643005371094
             ],
-            "visualBaselinesPt": [
+            "visualRowBaselinesPt": [
               105.146,
               116.146,
               127.146,
@@ -813,8 +865,10 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_39_unit_p39-block-37-paragraph__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 22,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 7,
             "visualRowTopsCssPx": [
               104.34,
@@ -825,11 +879,166 @@
               148.88,
               157.78
             ],
-            "frameHeightCssPx": 63.1
+            "visualRowIntervalsPt": [
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99
+            ],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.02301px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 62.3
           },
-          "editorialStatus": "Pending human editorial approval. Current evidence measures the live PageRenderer; it does not approve or publish the translation. Current full-page PDF review is pending."
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 7,
+          "pageRendererVisualLineCount": 7,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 39,
+            "pdfDocumentPageIndex": 38,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.87960815429688,
+              95.9564208984375,
+              404.54150390625,
+              173.85643005371094
+            ],
+            "visualRowBaselinesPt": [
+              105.146,
+              116.146,
+              127.146,
+              138.146,
+              149.146,
+              160.146,
+              171.146
+            ],
+            "spans": 20,
+            "visualRows": 7
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_39_unit_p39-block-37-paragraph__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 22,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 7,
+            "visualRowTopsCssPx": [
+              332.77,
+              337.2,
+              341.64,
+              346.08,
+              350.52,
+              354.95,
+              359.39
+            ],
+            "visualRowIntervalsPt": [
+              10.95,
+              10.64,
+              10.95,
+              10.95,
+              11.26,
+              10.95
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 31.1
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         }
-      }
+      },
+      "copyfitMeasurementFingerprint": null
     },
     {
       "sourceBlockId": "block_38",
@@ -3529,5 +3738,6 @@
   "terminologyStatus": "local_proposals_pending_human_review",
   "technicalStatus": "copyfit_v3_22_of_22_exact_current_page_renderer; 9_approved_payload_persisted; 13_pending_unresolved_terminology_and_one_title_choice; strict_full_page_diagnostic_export_verified; certification_pending",
   "payloadWrites": true,
-  "payloadWriteDetails": "Five earlier candidates (review ids 166-170; translation ids 494-498) were preserved. Four additional GREEN candidates were approved through the official in-app review flow and confirmed by Payload GET on 2026-10-23 (review ids 171-174; translation ids 499-502). No existing human translation was overwritten."
+  "payloadWriteDetails": "Five earlier candidates (review ids 166-170; translation ids 494-498) were preserved. Four additional GREEN candidates were approved through the official in-app review flow and confirmed by Payload GET on 2026-10-23 (review ids 171-174; translation ids 499-502). No existing human translation was overwritten.",
+  "updatedAt": "2026-10-25T06:51:16.337Z"
 }

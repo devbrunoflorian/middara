@@ -16,7 +16,7 @@
   "counts": {
     "candidates": 12,
     "existingHumanTranslationsPreserved": 0,
-    "finalTranslationWrites": 0
+    "finalTranslationWrites": 1
   },
   "sourceArtifacts": [
     "docs/translations/proposals/page-046-full-page-proposal-2026-10-16-v3.json",
@@ -283,9 +283,7 @@
       "technicalStatus": "verified_viewer_editor_copyfit_pdf",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Ação de Encontro"
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 2,
       "pageRendererVisualLineCount": 2,
       "copyfitClassification": "EXACT",
@@ -329,7 +327,13 @@
           "frameHeightCssPx": 18.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "reviewedPendingTerms": [
+        "Ação de Encontro"
+      ],
+      "notes": [
+        "Ação de Encontro segue a forma canônica Encounter Action → Ação de Encontro. Texto, rich spans e medição existente foram mantidos; nenhuma decisão nova foi adicionada ao glossário."
+      ]
     },
     {
       "blockIndex": 1,
@@ -385,9 +389,7 @@
       "technicalStatus": "verified_viewer_editor_copyfit_pdf",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Ação de Encontro"
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 3,
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "EXACT",
@@ -433,7 +435,13 @@
           "frameHeightCssPx": 27.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "reviewedPendingTerms": [
+        "Ação de Encontro"
+      ],
+      "notes": [
+        "Ação de Encontro segue a forma canônica Encounter Action → Ação de Encontro. Texto, rich spans e medição existente foram mantidos; nenhuma decisão nova foi adicionada ao glossário."
+      ]
     },
     {
       "blockIndex": 3,
@@ -817,9 +825,7 @@
       "technicalStatus": "verified_viewer_editor_copyfit_pdf",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Re-Equip Action → Ação de Reequipar"
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
@@ -861,7 +867,13 @@
           "frameHeightCssPx": 19.7
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "reviewedPendingTerms": [
+        "Re-Equip Action → Ação de Reequipar"
+      ],
+      "notes": [
+        "Ação de Reequipar aplica a forma canônica Re-Equip → Reequipar ao nome da ação. Texto, rich spans e medição existente foram mantidos; nenhuma decisão nova foi adicionada ao glossário."
+      ]
     },
     {
       "blockIndex": 6,
@@ -899,9 +911,7 @@
       "technicalStatus": "verified_viewer_editor_copyfit_pdf",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Encounter Action(s) → Ação(ões) de Encontro"
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
@@ -943,7 +953,13 @@
           "frameHeightCssPx": 19.7
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "reviewedPendingTerms": [
+        "Encounter Action(s) → Ação(ões) de Encontro"
+      ],
+      "notes": [
+        "Ações de Encontro flexiona no plural a forma canônica Encounter Action → Ação de Encontro. Texto, rich spans e medição existente foram mantidos; nenhuma decisão nova foi adicionada ao glossário."
+      ]
     },
     {
       "blockIndex": 7,
@@ -952,7 +968,7 @@
       "sourceText": "For 1 SP , the Re-Equip Action lets an Adventurer equip Items from, and Store Items into, their Pack. Adventurers may also take Items and Companions from adjacent Adventurers. However, Adventurers may never give Items or Companions to another Adventurer. The Adventurer being taken from may also Re-Equip their Items during this Action, but may not take Items or Companions from another Adventurer.",
       "spanKey": "page_46_block_7__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Por 1 SP, a Ação de Reequipar permite ao Aventureiro equipar Itens de sua Mochila e guardar Itens nela. Aventureiros podem pegar Itens e Companheiros de Aventureiros adjacentes, mas não entregá-los a outro Aventureiro. O Aventureiro de quem algo for retirado também pode Reequipar seus Itens nessa Ação, mas não pode pegar Itens ou Companheiros de outro Aventureiro.",
+      "proposalText": "Por 1 SP, a Ação de Reequipar permite ao Aventureiro equipar Itens de sua Mochila e guardar Itens nela. Aventureiros podem pegar Itens e Companheiros de Aventureiros adjacentes, mas nunca podem dá-los a outro Aventureiro. O Aventureiro de quem algo for retirado também pode Reequipar seus Itens nessa Ação, mas não pode pegar Itens ou Companheiros de outro Aventureiro.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_46_block_7__pt-BR",
@@ -967,7 +983,39 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Por 1 SP, a Ação de Reequipar permite ao Aventureiro equipar Itens de sua Mochila e guardar Itens nela. Aventureiros podem pegar Itens e Companheiros de Aventureiros adjacentes, mas não entregá-los a outro Aventureiro. O Aventureiro de quem algo for retirado também pode Reequipar seus Itens nessa Ação, mas não pode pegar Itens ou Companheiros de outro Aventureiro.",
+            "text": "Por ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "1 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ", a Ação de Reequipar permite ao Aventureiro equipar Itens de sua Mochila e guardar Itens nela. Aventureiros podem pegar Itens e Companheiros de Aventureiros adjacentes, mas ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "nunca",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " podem dá-los a outro Aventureiro. O Aventureiro de quem algo for retirado também pode Reequipar seus Itens nessa Ação, mas não pode pegar Itens ou Companheiros de outro Aventureiro.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -977,15 +1025,10 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "awaiting_current_viewer_copyfit_remeasurement",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "verified_viewer_editor_copyfit_pdf",
+      "editorialStatus": "approved_and_published_via_official_reviewer",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Re-Equip Action → Ação de Reequipar",
-        "Pack → Mochila",
-        "Companion(s) → Companheiro(s)",
-        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 6,
       "pageRendererVisualLineCount": 6,
       "copyfitClassification": "EXACT",
@@ -994,7 +1037,7 @@
         "sourcePdfVisualLineCount": 6,
         "pageRendererVisualLineCount": 6,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans grouped by their parent visual text-line box centre (1 pt), so one row split around an inline symbol remains one row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 46,
           "pdfDocumentPageIndex": 45,
@@ -1011,21 +1054,21 @@
             393.963134765625,
             681.9213256835938
           ],
-          "visualRowCentersPt": [
-            620.971,
-            631.971,
-            642.971,
-            653.961,
-            664.971,
-            675.971
+          "visualRowBaselinesPt": [
+            624.211,
+            635.211,
+            646.211,
+            657.211,
+            668.211,
+            679.211
           ],
           "spans": 9,
           "visualRows": 6
         },
         "pageRendererEvidence": {
-          "spanKey": "page_46_block_7",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-          "rangeRectFragments": 11,
+          "spanKey": "page_46_block_7__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 15,
           "renderedSymbolIds": [],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 6,
@@ -1037,11 +1080,60 @@
             560.63,
             569.53
           ],
-          "frameHeightCssPx": 54.2
+          "visualRowIntervalsPt": [
+            10.99,
+            10.99,
+            10.99,
+            10.99,
+            10.99
+          ],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.02301px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 53.4
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
-      "proposalMarkup": "Por 1 SP, a Ação de Reequipar permite ao Aventureiro equipar Itens de sua Mochila e guardar Itens nela. Aventureiros podem pegar Itens e Companheiros de Aventureiros adjacentes, mas não entregá-los a outro Aventureiro. O Aventureiro de quem algo for retirado também pode Reequipar seus Itens nessa Ação, mas não pode pegar Itens ou Companheiros de outro Aventureiro.",
+      "proposalMarkup": "Por 1 SP, a Ação de Reequipar permite ao Aventureiro equipar Itens de sua Mochila e guardar Itens nela. Aventureiros podem pegar Itens e Companheiros de Aventureiros adjacentes, mas nunca podem dá-los a outro Aventureiro. O Aventureiro de quem algo for retirado também pode Reequipar seus Itens nessa Ação, mas não pode pegar Itens ou Companheiros de outro Aventureiro.",
       "proposalRevisionHistory": [
         {
           "date": "2026-10-24",
@@ -1052,6 +1144,17 @@
             "prior PageRenderer visual-line count",
             "prior Copyfit V3 classification"
           ]
+        },
+        {
+          "date": "2026-10-26",
+          "reason": "A conferência do PDF-fonte mostrou negrito apenas em 1 SP (9 pt) e never (10 pt), sem itálico. Os spans PT-BR foram reconstruídos com 1 SP e nunca em negrito; o texto explicita a proibição modal. Mantive os usos aprovados em review797 (Ação de Reequipar), review1383 (Mochila) e review700 (Companheiros/nunca dá-los), sem criar decisão global. A medição anterior foi invalidada.",
+          "previousText": "Por 1 SP, a Ação de Reequipar permite ao Aventureiro equipar Itens de sua Mochila e guardar Itens nela. Aventureiros podem pegar Itens e Companheiros de Aventureiros adjacentes, mas não entregá-los a outro Aventureiro. O Aventureiro de quem algo for retirado também pode Reequipar seus Itens nessa Ação, mas não pode pegar Itens ou Companheiros de outro Aventureiro.",
+          "currentText": "Por 1 SP, a Ação de Reequipar permite ao Aventureiro equipar Itens de sua Mochila e guardar Itens nela. Aventureiros podem pegar Itens e Companheiros de Aventureiros adjacentes, mas nunca podem dá-los a outro Aventureiro. O Aventureiro de quem algo for retirado também pode Reequipar seus Itens nessa Ação, mas não pode pegar Itens ou Companheiros de outro Aventureiro.",
+          "invalidatedEvidence": [
+            "prior PageRenderer visual-line count",
+            "prior Copyfit V3 classification",
+            "prior rich-span evidence"
+          ]
         }
       ],
       "copyfitMeasurementsByZoom": {
@@ -1060,7 +1163,7 @@
           "sourcePdfVisualLineCount": 6,
           "pageRendererVisualLineCount": 6,
           "classification": "EXACT",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans grouped by their parent visual text-line box centre (1 pt), so one row split around an inline symbol remains one row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
           "environment": {
             "pageNumber": 46,
             "pdfDocumentPageIndex": 45,
@@ -1077,21 +1180,21 @@
               393.963134765625,
               681.9213256835938
             ],
-            "visualRowCentersPt": [
-              620.971,
-              631.971,
-              642.971,
-              653.961,
-              664.971,
-              675.971
+            "visualRowBaselinesPt": [
+              624.211,
+              635.211,
+              646.211,
+              657.211,
+              668.211,
+              679.211
             ],
             "spans": 9,
             "visualRows": 6
           },
           "pageRendererEvidence": {
-            "spanKey": "page_46_block_7",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-            "rangeRectFragments": 11,
+            "spanKey": "page_46_block_7__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 15,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 6,
@@ -1103,11 +1206,162 @@
               560.63,
               569.53
             ],
-            "frameHeightCssPx": 54.2
+            "visualRowIntervalsPt": [
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99
+            ],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.02301px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 53.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 6,
+          "pageRendererVisualLineCount": 6,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 46,
+            "pdfDocumentPageIndex": 45,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17320251464844,
+              615.0213012695312,
+              393.963134765625,
+              681.9213256835938
+            ],
+            "visualRowBaselinesPt": [
+              624.211,
+              635.211,
+              646.211,
+              657.211,
+              668.211,
+              679.211
+            ],
+            "spans": 9,
+            "visualRows": 6
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_46_block_7__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 15,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 6,
+            "visualRowTopsCssPx": [
+              543.09,
+              547.53,
+              551.97,
+              556.41,
+              560.84,
+              565.28
+            ],
+            "visualRowIntervalsPt": [
+              10.64,
+              10.95,
+              10.95,
+              10.95,
+              10.95
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 26.6
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         }
-      }
+      },
+      "copyfitRevisionNote": "Published by the official Reviewer as Payload translation 1230. Source PDF p.46 shows 1 SP at 9 pt bold and never at 10 pt bold, with no italic run; the PT-BR data preserves both emphasis spans. Reused approved Ação de Reequipar (review797), Mochila (review1383), and Companheiros/nunca dá-los (review700) without adding glossary decisions. PageRenderer Copyfit V3 EXACT 6/6 at 100% and 200%; Payload readback confirmed the published data."
     },
     {
       "blockIndex": 8,

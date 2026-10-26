@@ -22,7 +22,7 @@
 
 **EN:** These are Items and Discipline Cards that are only available in the Adventure Mode. These cards cannot be acquired normally. Instead, they must be earned during the Adventure and are hidden inside **Hidden Card** decks. When playing the Crawl Mode, these cards are not used and can be kept in the game box. See ***Story Disciplines and Items*** Pg. 13.
 
-**PT-BR (rascunho):** Estas são Cartas de Item e de Disciplina disponíveis apenas no Modo Aventura. Não é possível obtê-las normalmente: elas devem ser conquistadas durante a Aventura e ficam ocultas nos baralhos de **Cartas Ocultas**. No Modo Crawl, essas cartas não são usadas e podem ficar na caixa do jogo. Consulte ***Disciplinas e Itens de História***, pág. 13.
+**PT-BR (rascunho):** Estas são Cartas de Item e de Disciplina disponíveis apenas no Modo Aventura. Não é possível obtê-las normalmente: elas devem ser conquistadas durante a Aventura e ficam ocultas nos baralhos de **Cartas Ocultas**. No Modo Exploração, essas cartas não são usadas e podem ficar na caixa do jogo. Consulte ***Disciplinas e Itens de História***, pág. 13.
 
 ### 03 — Exalted Esper Cards
 
@@ -38,7 +38,7 @@
 
 **EN:** Abraxis is a mini-game played using the custom dice that come with the game. These cards are only used when playing the Adventure Mode. When playing the Crawl Mode, these cards are not used and can be kept in the game box. See ***Abraxis Battle Dice*** Pg. 85.
 
-**PT-BR (rascunho):** Abraxis é um minijogo disputado com os dados personalizados que acompanham o jogo. Estas cartas são usadas apenas no Modo Aventura. No Modo Crawl, não são usadas e podem ficar na caixa do jogo. Consulte ***Dados de Batalha de Abraxis***, pág. 85.
+**PT-BR (rascunho):** Abraxis é um minijogo disputado com os dados personalizados que acompanham o jogo. Estas cartas são usadas apenas no Modo Aventura. No Modo Exploração, não são usadas e podem ficar na caixa do jogo. Consulte ***Dados de Batalha de Abraxis***, pág. 85.
 
 ### 05 — Quick Reference cards
 

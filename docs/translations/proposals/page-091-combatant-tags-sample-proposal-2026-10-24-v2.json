@@ -3,7 +3,7 @@
   "version": "2",
   "title": "Tags de Combatente — p. 91",
   "page": 91,
-  "status": "pending_human_review",
+  "status": "pending_human_review; user terminology updated and block_3 remeasured EXACT 10/10 on 2026-10-24",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -475,7 +475,7 @@
       "spanKey": "page_91_block_3__pt-BR",
       "language": "pt-BR",
       "sourceText": "BOSS:Combatants with this tag represent particularly strong opponents, players will fight these Combatants during special Encounters throughout both the Adventure Mode and Crawl Mode. BOSS Combatant Cards are located in Hidden Card decks and will be revealed whenever a Special Encounter Rule instructs players to reveal and use it. Some BOSS Combatants have special Monster Loot that players will Gain when the BOSS is Defeated. If this does occur, a Special Encounter Rule will instruct players on how to Gain this Monster Loot. Unless otherwise stated, Bosses drop Combatant Loot as normal. If you draw the Monster Loot Card, you must redraw.",
-      "proposalText": "BOSS: Combatentes com esta Tag são oponentes especialmente fortes, enfrentados pelos jogadores em Encontros especiais nos modos Adventure e Crawl. As Cartas de Combatente BOSS ficam nos Baralhos de Cartas Ocultas e são reveladas quando uma Regra Especial de Encontro instrui os jogadores a revelar e usar uma delas. Alguns BOSS têm Saque de Monstro especial, que os jogadores obtêm quando o BOSS é Derrotado. Se for o caso, uma Regra Especial de Encontro explica como obter esse Saque. Salvo indicação em contrário, BOSS concede Saque de Combatente normalmente. Se comprar uma Carta de Saque de Monstro, compre outra.",
+      "proposalText": "BOSS: Combatentes com esta Tag são oponentes especialmente fortes, enfrentados pelos jogadores em Encontros especiais tanto no Modo Aventura quanto no Modo Exploração. As Cartas de Combatente BOSS ficam nos Baralhos de Cartas Ocultas e são reveladas quando uma Regra Especial de Encontro instrui os jogadores a revelar e usar uma delas. Alguns BOSS têm Saque de Monstro especial, que os jogadores obtêm quando o BOSS é Derrotado. Se for o caso, uma Regra Especial de Encontro explica como obter esse Saque. Salvo indicação em contrário, BOSS concede Saque de Combatente normalmente. Se comprar uma Carta de Saque de Monstro, compre outra.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_91_block_3__pt-BR",
@@ -499,7 +499,7 @@
             "disableLigatures": true
           },
           {
-            "text": " Combatentes com esta Tag são oponentes especialmente fortes, enfrentados pelos jogadores em Encontros especiais nos modos Adventure e Crawl. As Cartas de Combatente ",
+            "text": " Combatentes com esta Tag são oponentes especialmente fortes, enfrentados pelos jogadores em Encontros especiais tanto no Modo Aventura quanto no Modo Exploração. As Cartas de Combatente ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -582,28 +582,29 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
       "editorialStatus": "pending_human_review; provisional beta only",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
-        "BOSS permanece como Tag/API; Adventure Mode/Crawl Mode, Hidden Card deck, Saque de Monstro e Saque de Combatente são formas locais. A regra de compra de outra carta foi mantida."
+        "BOSS permanece como Tag/API; Hidden Card deck, Saque de Monstro e Saque de Combatente são formas locais. A regra de compra de outra carta foi mantida."
       ],
-      "copyfitClassification": "UNDER",
+      "copyfitClassification": "EXACT",
       "sourcePdfVisualLineCount": 10,
-      "pageRendererVisualLineCount": 9,
+      "pageRendererVisualLineCount": 10,
       "copyfitMeasurement": {
         "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 10,
-        "pageRendererVisualLineCount": 9,
-        "classification": "UNDER",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "pageRendererVisualLineCount": 10,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 91,
           "pdfDocumentPageIndex": 90,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -612,7 +613,7 @@
             405.985595703125,
             689.0231323242188
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             587.313,
             598.313,
             609.313,
@@ -629,9 +630,11 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_91_block_3",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 26,
-          "distinctVisualRows": 9,
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 28,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 10,
           "visualRowTopsCssPx": [
             495.08,
             503.98,
@@ -641,11 +644,80 @@
             539.61,
             548.52,
             557.42,
-            566.33
+            566.33,
+            575.23
           ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [],
           "frameHeightCssPx": 89.9
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 10,
+          "pageRendererVisualLineCount": 10,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 91,
+            "pdfDocumentPageIndex": 90,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              74.97567749023438,
+              578.1030883789062,
+              405.985595703125,
+              689.0231323242188
+            ],
+            "visualRowBaselinesPt": [
+              587.313,
+              598.313,
+              609.313,
+              620.313,
+              631.313,
+              642.313,
+              653.313,
+              664.313,
+              675.313,
+              686.313
+            ],
+            "spans": 17,
+            "visualRows": 10
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_91_block_3",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 28,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 10,
+            "visualRowTopsCssPx": [
+              495.08,
+              503.98,
+              512.89,
+              521.8,
+              530.7,
+              539.61,
+              548.52,
+              557.42,
+              566.33,
+              575.23
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [],
+            "frameHeightCssPx": 89.9
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     },
     {

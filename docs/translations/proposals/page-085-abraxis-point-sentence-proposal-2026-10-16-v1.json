@@ -41,7 +41,7 @@
       "spanKey": "page_85_block_18__pt-BR",
       "language": "pt-BR",
       "sourceText": "If an Adventurer matches the Abraxis card's Symbols exactly, they Gain 1 Abraxis Point.",
-      "proposalText": "Se um Aventureiro corresponder exatamente aos Símbolos da carta de Abraxis, ganha 1 Ponto de Abraxis.",
+      "proposalText": "Se um Aventureiro corresponder exatamente aos Símbolos da carta de Abraxis, obtém 1 Ponto de Abraxis.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_85_block_18__pt-BR",
@@ -56,7 +56,7 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Se um Aventureiro corresponder exatamente aos Símbolos da carta de Abraxis, ganha ",
+            "text": "Se um Aventureiro corresponder exatamente aos Símbolos da carta de Abraxis, obtém ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -82,59 +82,72 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "verified_live_viewer_comparison_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "changed_since_technical_validation",
+      "editorialStatus": "Applied approved Gain→obter contextually; local Abraxis Point term remains pending; Copyfit must be remeasured.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
-        "Gain → ganhar e Abraxis Point → Ponto de Abraxis são formas locais candidatas nesta frase, sem canonização global.",
-        "Símbolos mantém a capitalização desta unidade; confirme consistência editorial com as demais regras da p.85."
+        "Abraxis Point → Ponto de Abraxis remains a local choice in this sentence; no global glossary decision is being introduced."
       ],
-      "sourcePdfVisualLineCount": 2,
-      "pageRendererVisualLineCount": 2,
-      "copyfitClassification": "EXACT",
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
+      "sourcePdfVisualLineCount": null,
+      "pageRendererVisualLineCount": null,
+      "copyfitClassification": null,
+      "copyfitMeasurement": null,
+      "preEditCopyfit": {
+        "technicalStatus": "verified_live_viewer_comparison_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
+        "copyfitClassification": "EXACT",
         "sourcePdfVisualLineCount": 2,
         "pageRendererVisualLineCount": 2,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 85,
-          "pdfDocumentPageIndex": 84,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+        "copyfitMeasurement": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 85,
+            "pdfDocumentPageIndex": 84,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              416.1493225097656,
+              170.8976593017578,
+              732.2699584960938,
+              193.8176727294922
+            ],
+            "visualBaselinesPt": [
+              180.108,
+              191.108
+            ],
+            "spans": 3,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_85_block_18__pt-BR",
+            "readingMethod": "text rects of review-highlighted unit",
+            "rangeRectFragments": 5,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              165.08,
+              173.98
+            ],
+            "frameHeightCssPx": 18.6
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         },
-        "sourceEvidence": {
-          "bboxPt": [
-            416.1493225097656,
-            170.8976593017578,
-            732.2699584960938,
-            193.8176727294922
-          ],
-          "visualBaselinesPt": [
-            180.108,
-            191.108
-          ],
-          "spans": 3,
-          "visualRows": 2
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_85_block_18__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 5,
-          "distinctVisualRows": 2,
-          "visualRowTopsCssPx": [
-            165.08,
-            173.98
-          ],
-          "frameHeightCssPx": 18.6
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+        "note": "Preserved before applying approved terminology; invalid for the revised text."
+      },
+      "copyfitMeasurementFingerprint": null
     }
   ],
   "note": "Recorte isolado da condição de ganho de ponto. Preserva a ênfase da fonte no numeral 1. A proposta não publica no Viewer final nem substitui a tradução humana de outro bloco; os termos continuam pendentes de decisão editorial.",
-  "revisions": []
+  "revisions": [
+    {
+      "recordedAt": "2026-10-25",
+      "summary": "Applied approved Gain→obter in block 18; Abraxis Point remains a local, non-canonical term choice pending review."
+    }
+  ]
 }

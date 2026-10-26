@@ -42,7 +42,7 @@
 
 ### 04 — Crawl Book
 
-**PT-BR (título):** Livro Crawl
+**PT-BR (título):** Livro de Masmorras
 
 **EN:** This book contains **5** different Scenarios that can be played in any order.
 
@@ -78,7 +78,7 @@
 
 **EN:** When playing ***Middara***, players will take on the role of Adventurers. When playing the Adventure Mode, players will be instructed to use specific Adventurers. When playing the Crawl Mode, players may choose from any Adventurers they own to create a party. See ***Adventurers*** Pg. 25.
 
-**PT-BR (rascunho):** Ao jogar ***Middara***, os jogadores assumem o papel de Aventureiros. No Modo Aventura, eles recebem instruções para usar Aventureiros específicos. No Modo Crawl, podem escolher quaisquer Aventureiros que possuam para formar um grupo. Consulte ***Aventureiros***, pág. 25.
+**PT-BR (rascunho):** Ao jogar ***Middara***, os jogadores assumem o papel de Aventureiros. No Modo Aventura, eles recebem instruções para usar Aventureiros específicos. No Modo Exploração, podem escolher quaisquer Aventureiros que possuam para formar um grupo. Consulte ***Aventureiros***, pág. 25.
 
 ## Coluna direita
 

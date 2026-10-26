@@ -13,7 +13,7 @@
     "fidelityOverlays": "727EE9A9574F5A53A6F4C426BD2DA695D9DACB7B197A73E8F4EAF222541D4B94"
   },
   "counts": {
-    "candidates": 20,
+    "candidates": 21,
     "existingHumanTranslationsPreserved": 0,
     "priorReviewRecordsPreserved": 0,
     "finalTranslationWrites": 0,
@@ -25,10 +25,10 @@
     "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
   },
   "scopeLimits": [
-    "A proposta cobre os 19 blocos textuais de definições/regras e o título “Icons” na p.89. A unidade de Presença mantém intacta a medição EXACT já existente; as outras 19 candidatas permanecem UNMEASURED.",
+    "A proposta contém 21 candidatas: os 19 blocos textuais originais e o título “Icons”, com a definição 1-Hand e seu callout IMPORTANT agora em unidades separadas. O split usa apenas o callout próprio do PDF (linhas22_7–9); a revisão existente do texto 1-Hand mantém sua identidade.",
     "Os rótulos curvos em inglês dentro dos pictogramas (Health, Defense, Movement, Armor, Presence, Lore, Agility, Perception, Strength) continuam parte da arte-fonte e não foram reconstruídos neste lote; a página permanece beta/parcial.",
-    "A ocorrência inline do ícone de Armadura na definição do Valor Total de Armadura é descrita em texto, mas não convertida aqui; a auditoria localizada de símbolo continua pendente. Os dois marcadores IMPORTANTE usam o símbolo semântico tag.important.icon.",
-    "Nenhuma tradução foi escrita no Payload, nenhuma aprovação humana foi criada e a geometria canônica da página não foi alterada."
+    "A ocorrência inline do ícone de Armadura na definição do Valor Total de Armadura continua pendente de auditoria localizada. O callout da definição 1-Hand e o callout subsequente usam o asset semântico existente tag.important.icon; o ID-fonte é mascarado pela unidade proprietária e desenhado uma vez na unidade PT-BR separada. O painel de fundo permanece arte-fonte intacta.",
+    "Nenhuma tradução foi publicada nem aprovada no Payload nesta proposta; os frames PT-BR do texto 1-Hand e do callout foram salvos no mecanismo existente de layout. A geometria inglesa e a arte de fundo não foram alteradas."
   ],
   "candidates": [
     {
@@ -1916,8 +1916,8 @@
       "sourceUnitId": null,
       "spanKey": "page_89_block_16__pt-BR",
       "language": "pt-BR",
-      "sourceText": "1-Hand: Players may only ever Equip a maximum of 2 hands worth of Weapons. Weapons with this Icon take up only 1 hand and may be paired with another Weapon with this Icon printed on it. Weapons with this Icon may Equip 1 Item Upgrade. IMPORTANT:Weapons with the Melee Icon may not be paired with Weapons with the Ranged Icon.",
-      "proposalText": "1 Mão: O jogador só pode equipar Armas que ocupem, no máximo, 2 mãos. Armas com este Ícone ocupam apenas 1 mão, podem ser combinadas com outra Arma com o mesmo Ícone e podem receber 1 Aprimoramento de Item.\nIMPORTANTE: Armas com o Ícone Corpo a Corpo não podem ser combinadas com Armas com o Ícone à Distância.",
+      "sourceText": "1-Hand: Players may only ever Equip a maximum of 2 hands worth of Weapons. Weapons with this Icon take up only 1 hand and may be paired with another Weapon with this Icon printed on it. Weapons with this Icon may Equip 1 Item Upgrade.",
+      "proposalText": "1 Mão: O jogador só pode equipar Armas que ocupem, no máximo, 2 mãos. Armas com este Ícone ocupam apenas 1 mão, podem ser combinadas com outra Arma com o mesmo Ícone e podem receber 1 Aprimoramento de Item.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_89_block_16__pt-BR",
@@ -1925,7 +1925,7 @@
           150.03639221191406,
           459.2268371582031,
           394.12030029296875,
-          559.1425170898438
+          526.1467895507812
         ],
         "textAlign": "left",
         "lineHeight": 1.1,
@@ -1995,14 +1995,124 @@
             "disableLigatures": true
           },
           {
-            "text": " Aprimoramento de Item.\n",
+            "text": " Aprimoramento de Item.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
             "weight": 400,
             "style": "normal",
             "disableLigatures": true
-          },
+          }
+        ],
+        "managedSourceSymbols": [
+          "tag.important.icon"
+        ]
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review; 1-Hand remains on its existing review identity; structural split derived from source lines22_7–9",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "1-Hand, Equip, Item Upgrade e as regras de combinação são escolhas locais."
+      ],
+      "copyfitClassification": "UNMEASURED",
+      "sourcePdfVisualLineCount": 6,
+      "pageRendererVisualLineCount": null,
+      "sourceBboxes": [
+        [
+          150.03639221191406,
+          459.2268371582031,
+          191.17,
+          471.15
+        ],
+        [
+          150.03639221191406,
+          470.25,
+          375.32,
+          482.15
+        ],
+        [
+          150.03639221191406,
+          481.25,
+          394.12030029296875,
+          493.15
+        ],
+        [
+          150.03639221191406,
+          492.25,
+          383.55,
+          504.15
+        ],
+        [
+          150.03639221191406,
+          503.25,
+          372.45,
+          515.15
+        ],
+        [
+          150.03639221191406,
+          514.23,
+          249.96,
+          526.1467895507812
+        ]
+      ],
+      "reviewLayoutFrame": {
+        "x": 150.03639221191406,
+        "y": 459.2268371582031,
+        "width": 244.0839080810547,
+        "height": 66.91995239257812,
+        "textAlign": "left",
+        "lineHeight": 1.1
+      }
+    },
+    {
+      "blockIndex": 16,
+      "sourceBlockId": "block_22",
+      "sourceUnitId": null,
+      "spanKey": "page_89_unit_admin-block-34658a77-d752-44ee-811c-126039975f33__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "IMPORTANT: Weapons with the Melee Icon may not be paired with Weapons with the Ranged Icon.",
+      "proposalText": "IMPORTANTE: Armas com o Ícone Corpo a Corpo não podem ser combinadas com Armas com o Ícone à Distância.",
+      "sourceBboxes": [
+        [
+          150.0366973876953,
+          536.1824951171875,
+          222.6366973876953,
+          548.16
+        ],
+        [
+          160.0366973876953,
+          536.1824951171875,
+          378.1364,
+          548.14
+        ],
+        [
+          150.0366973876953,
+          547.22,
+          369.396,
+          559.1425
+        ]
+      ],
+      "reviewLayoutFrame": {
+        "x": 150.0367,
+        "y": 536.1825,
+        "width": 228.09969999999998,
+        "height": 22.960000000000036,
+        "textAlign": "left",
+        "lineHeight": 1.1
+      },
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_89_unit_admin-block-34658a77-d752-44ee-811c-126039975f33__pt-BR",
+        "bbox": [
+          150.0367,
+          536.1825,
+          378.1364,
+          559.1425
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "segments": [
           {
             "text": "￼",
             "font": "OptimaLTStd",
@@ -2032,7 +2142,25 @@
             "disableLigatures": true
           },
           {
-            "text": " Armas com o Ícone Corpo a Corpo não podem ser combinadas com Armas com o Ícone à Distância.",
+            "text": " Armas com o Ícone Corpo a Corpo ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "não",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " podem ser combinadas com Armas com o Ícone à Distância.",
             "font": "OptimaLTStd",
             "size": 10,
             "weight": 400,
@@ -2046,67 +2174,14 @@
         ]
       },
       "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "editorialStatus": "pending_human_review; separate source callout from lines22_7–9; terminology and Copyfit pending",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
-        "1-Hand, Equip, Item Upgrade e as regras de combinação são escolhas locais. O símbolo tag.important.icon foi mantido semanticamente; validar no Viewer antes de usar como versão certificada."
+        "Melee Icon/Ranged Icon → Ícone Corpo a Corpo/Ícone à Distância permanecem escolhas locais desta unidade; confirmar terminologia mecânica canônica."
       ],
-      "copyfitClassification": "EXACT",
-      "sourcePdfVisualLineCount": 8,
-      "pageRendererVisualLineCount": 8,
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 8,
-        "pageRendererVisualLineCount": 8,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 89,
-          "pdfDocumentPageIndex": 88,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
-        },
-        "sourceEvidence": {
-          "bboxPt": [
-            150.03639221191406,
-            459.2268371582031,
-            394.12030029296875,
-            559.1425170898438
-          ],
-          "visualBaselinesPt": [
-            468.437,
-            479.437,
-            490.437,
-            501.437,
-            512.437,
-            523.437,
-            545.432,
-            556.432
-          ],
-          "spans": 14,
-          "visualRows": 8
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_89_block_16",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 22,
-          "distinctVisualRows": 8,
-          "visualRowTopsCssPx": [
-            398.75,
-            407.66,
-            416.56,
-            425.47,
-            434.38,
-            443.28,
-            453.19,
-            462.09
-          ],
-          "frameHeightCssPx": 81
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      "copyfitClassification": "UNMEASURED",
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": null
     },
     {
       "blockIndex": 17,
@@ -2383,19 +2458,17 @@
             "font": "Cinzel-Regular",
             "size": 18,
             "color": "#ffffff",
-            "weight": 700,
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
           }
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved through the official Reviewer; PageRenderer Copyfit V3 EXACT 1/1 at 100% and 200%, semantic and rich-span checks passed; Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Icons → Ícones é forma local de título. Os rótulos curvos impressos dentro dos pictogramas permanecem parte da arte-fonte e não foram reconstruídos neste lote."
-      ],
+      "pendingTerms": [],
       "copyfitClassification": "EXACT",
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
@@ -2404,14 +2477,15 @@
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 89,
           "pdfDocumentPageIndex": 88,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -2420,32 +2494,360 @@
             437.9408874511719,
             74.43678283691406
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             67.741
           ],
           "spans": 1,
           "visualRows": 1
         },
         "pageRendererEvidence": {
-          "spanKey": "page_89_block_19",
-          "readingMethod": "text rects of review-highlighted unit",
+          "spanKey": "page_89_block_19__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            67.25
+            67.22
           ],
-          "frameHeightCssPx": 19.7
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.8104811790054112,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "CinzelLocal, Cinzel, serif",
+              "fontSize": "14.5887px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "16.0475px",
+              "letterSpacing": "-0.21883px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 16
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 89,
+            "pdfDocumentPageIndex": 88,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              381.60089111328125,
+              50.17278289794922,
+              437.9408874511719,
+              74.43678283691406
+            ],
+            "visualRowBaselinesPt": [
+              67.741
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_89_block_19__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              315.22
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.02301px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 89,
+            "pdfDocumentPageIndex": 88,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              381.60089111328125,
+              50.17278289794922,
+              437.9408874511719,
+              74.43678283691406
+            ],
+            "visualRowBaselinesPt": [
+              67.741
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_89_block_19__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              67.22
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104811790054112,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "14.5887px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "16.0475px",
+                "letterSpacing": "-0.21883px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 16
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "preStyleCopyfit": {
+        "classification": "EXACT",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "copyfitMeasurement": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 89,
+            "pdfDocumentPageIndex": 88,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              381.60089111328125,
+              50.17278289794922,
+              437.9408874511719,
+              74.43678283691406
+            ],
+            "visualRowBaselinesPt": [
+              67.741
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_89_block_19__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              315.22
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.02301px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "copyfitMeasurementsByZoom": {
+          "200%": {
+            "status": "measured_copyfit_v3_script_visual_rows",
+            "sourcePdfVisualLineCount": 1,
+            "pageRendererVisualLineCount": 1,
+            "classification": "EXACT",
+            "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+            "environment": {
+              "pageNumber": 89,
+              "pdfDocumentPageIndex": 88,
+              "language": "pt-BR",
+              "viewerZoom": "200%",
+              "viewportCssPixels": "1280x720",
+              "devicePixelRatio": 1.25
+            },
+            "sourceEvidence": {
+              "bboxPt": [
+                381.60089111328125,
+                50.17278289794922,
+                437.9408874511719,
+                74.43678283691406
+              ],
+              "visualBaselinesPt": [
+                67.741
+              ],
+              "spans": 1,
+              "visualRows": 1
+            },
+            "pageRendererEvidence": {
+              "spanKey": "page_89_block_19",
+              "readingMethod": "text rects of review-highlighted unit",
+              "rangeRectFragments": 1,
+              "distinctVisualRows": 1,
+              "visualRowTopsCssPx": [
+                67.25
+              ],
+              "frameHeightCssPx": 19.7
+            },
+            "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+          },
+          "100%": {
+            "status": "measured_copyfit_v3_script_visual_rows",
+            "sourcePdfVisualLineCount": 1,
+            "pageRendererVisualLineCount": 1,
+            "classification": "EXACT",
+            "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+            "environment": {
+              "pageNumber": 89,
+              "pdfDocumentPageIndex": 88,
+              "language": "pt-BR",
+              "viewerZoom": "100%",
+              "viewportCssPixels": "1280x720",
+              "devicePixelRatio": 1.25,
+              "fontLoaded": true
+            },
+            "sourceEvidence": {
+              "bboxPt": [
+                381.60089111328125,
+                50.17278289794922,
+                437.9408874511719,
+                74.43678283691406
+              ],
+              "visualRowBaselinesPt": [
+                67.741
+              ],
+              "spans": 1,
+              "visualRows": 1
+            },
+            "pageRendererEvidence": {
+              "spanKey": "page_89_block_19__pt-BR",
+              "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+              "rangeRectFragments": 1,
+              "renderedSymbolIds": [],
+              "semanticSymbolOnlyRows": 0,
+              "distinctVisualRows": 1,
+              "visualRowTopsCssPx": [
+                315.22
+              ],
+              "visualRowIntervalsPt": [],
+              "pageScaleCssPxPerPt": 0.40520249582066925,
+              "renderedFontSamples": [
+                {
+                  "fontFamily": "CinzelLocal, Cinzel, serif",
+                  "fontSize": "7.29364px",
+                  "fontWeight": "700",
+                  "fontStyle": "normal",
+                  "color": "rgb(255, 255, 255)",
+                  "lineHeight": "8.02301px",
+                  "letterSpacing": "-0.109405px",
+                  "fontKerning": "auto",
+                  "fontVariantLigatures": "none",
+                  "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                  "fontLoaded": true
+                }
+              ],
+              "frameHeightCssPx": 8
+            },
+            "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+          }
+        }
+      },
+      "blockingReason": "The source is an editable text heading “Icons”, not part of the fixed pictogram artwork. Match source regular weight 400 and remeasure Copyfit V3.",
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 1000,
+        "translationId": 940,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:47:27.990Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual"
       }
     }
   ],
-  "note": "Proposta provisória para compor a página 89 na beta. A tradução editorial continua pendente; a página contém rótulos curvos dentro da arte e símbolos que requerem revisão localizada.",
+  "note": "Proposta provisória para compor a página 89 na beta. A tradução editorial continua pendente; os rótulos curvos dentro da arte permanecem intactos. O texto 1-Hand e o callout IMPORTANTE são unidades distintas, ancoradas no bloco-fonte e nos frames PT-BR persistidos.",
   "revisions": [
     {
       "version": "2",
       "date": "2026-10-24",
       "summary": "Expande a proposta histórica de Presença para os demais blocos textuais da legenda de ícones, mantendo a medição 2/2 da unidade original e deixando as novas unidades UNMEASURED. Sem escrita no Payload."
+    },
+    {
+      "recordedAt": "2026-10-25",
+      "summary": "p89 block19 source PDF confirms Cinzel-Regular 18 pt, regular weight 400. Corrected target from synthetic weight700 to weight400, invalidated pre-correction Copyfit, and kept Payload pending; source pictogram art and its curved labels remain untouched."
+    },
+    {
+      "recordedAt": "2026-10-25",
+      "summary": "Block 19 rich-span corrected to source Cinzel-Regular weight 400; Copyfit V3 EXACT 1/1 at 100%/200%. Curved labels within pictograms remain source artwork and were not masked or reconstructed; title is editable text."
+    },
+    {
+      "recordedAt": "2026-10-25",
+      "summary": "Block 19 approved through the official Reviewer after restoring source Cinzel-Regular weight 400 and 100%/200% EXACT PageRenderer verification. Translation 940 read back; pictogram artwork and its curved labels remain untouched."
+    },
+    {
+      "recordedAt": "2026-10-26",
+      "summary": "Separou o callout IMPORTANTE de 1-Hand usando o frame administrativo persistido page_89_unit_admin-block-34658a77-d752-44ee-811c-126039975f33; preservou a identidade existente do texto 1-Hand, o asset tag.important.icon, os estilos da fonte (incluindo “não” em negrito) e o fundo do callout. Copyfit e termos permanecem pendentes."
     }
   ]
 }

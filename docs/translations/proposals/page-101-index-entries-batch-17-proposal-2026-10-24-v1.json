@@ -3,7 +3,7 @@
   "version": "1",
   "title": "Rótulos de índice omitidos pela extração — p. 101",
   "page": 101,
-  "status": "pending_human_review",
+  "status": "partial_payload_publication_4_of_8_candidates",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -15,7 +15,7 @@
     "candidates": 8,
     "existingHumanTranslationsPreserved": 0,
     "priorReviewRecordsPreserved": 0,
-    "finalTranslationWrites": 0,
+    "finalTranslationWrites": 4,
     "openExceptions": 1
   },
   "scopeLimits": [
@@ -237,8 +237,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_source_pdf_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved and persisted through the official Reviewer. Source meaning and rich-span styling passed; Copyfit V3 was EXACT at 100% and 200%; Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "pageRendererVisualLineCount": 1,
@@ -274,13 +274,30 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_101_unit_p101-index-190__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               593.75
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.24162px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "3.24162px",
+                "letterSpacing": "-0.0486243px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 3.8
           },
@@ -316,13 +333,30 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_101_unit_p101-index-190__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               626.33
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "6.48324px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "6.48324px",
+                "letterSpacing": "-0.0972486px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 7.7
           },
@@ -339,7 +373,7 @@
           "pageNumber": 101,
           "pdfDocumentPageIndex": 100,
           "language": "pt-BR",
-          "viewerZoom": "200%",
+          "viewerZoom": "100%",
           "viewportCssPixels": "1280x720",
           "devicePixelRatio": 1.25,
           "fontLoaded": true
@@ -359,17 +393,42 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_101_unit_p101-index-190__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
           "renderedSymbolIds": [],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            626.33
+            593.75
           ],
-          "frameHeightCssPx": 7.7
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "3.24162px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "3.24162px",
+              "letterSpacing": "-0.0486243px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 3.8
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 377,
+        "translationId": 915,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:12:06.866Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_source_pdf_100_200_semantic_rich_span_visual"
       }
     },
     {
@@ -409,8 +468,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_source_pdf_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved and persisted through the official Reviewer. Source meaning and rich-span styling passed; Copyfit V3 was EXACT at 100% and 200%; Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "pageRendererVisualLineCount": 1,
@@ -446,13 +505,30 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_101_unit_p101-index-191__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               498.94
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.24162px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "3.24162px",
+                "letterSpacing": "-0.0486243px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 3.8
           },
@@ -488,13 +564,30 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_101_unit_p101-index-191__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               436.69
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "6.48324px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "6.48324px",
+                "letterSpacing": "-0.0972486px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 7.7
           },
@@ -511,7 +604,7 @@
           "pageNumber": 101,
           "pdfDocumentPageIndex": 100,
           "language": "pt-BR",
-          "viewerZoom": "200%",
+          "viewerZoom": "100%",
           "viewportCssPixels": "1280x720",
           "devicePixelRatio": 1.25,
           "fontLoaded": true
@@ -531,17 +624,42 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_101_unit_p101-index-191__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
           "renderedSymbolIds": [],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            436.69
+            498.94
           ],
-          "frameHeightCssPx": 7.7
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "3.24162px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "3.24162px",
+              "letterSpacing": "-0.0486243px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 3.8
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 378,
+        "translationId": 916,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:12:07.676Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_source_pdf_100_200_semantic_rich_span_visual"
       }
     },
     {
@@ -755,8 +873,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_source_pdf_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved and persisted through the official Reviewer. Source meaning and rich-span styling passed; Copyfit V3 was EXACT at 100% and 200%; Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "pageRendererVisualLineCount": 1,
@@ -792,13 +910,30 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_101_unit_p101-index-193__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               378.59
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.24162px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "3.24162px",
+                "letterSpacing": "-0.0486243px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 3.8
           },
@@ -834,13 +969,30 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_101_unit_p101-index-193__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               196
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "6.48324px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "6.48324px",
+                "letterSpacing": "-0.0972486px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 7.7
           },
@@ -857,7 +1009,7 @@
           "pageNumber": 101,
           "pdfDocumentPageIndex": 100,
           "language": "pt-BR",
-          "viewerZoom": "200%",
+          "viewerZoom": "100%",
           "viewportCssPixels": "1280x720",
           "devicePixelRatio": 1.25,
           "fontLoaded": true
@@ -877,17 +1029,42 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_101_unit_p101-index-193__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
           "renderedSymbolIds": [],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            196
+            378.59
           ],
-          "frameHeightCssPx": 7.7
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "3.24162px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "3.24162px",
+              "letterSpacing": "-0.0486243px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 3.8
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 380,
+        "translationId": 917,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:12:08.830Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_source_pdf_100_200_semantic_rich_span_visual"
       }
     },
     {
@@ -927,8 +1104,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_source_pdf_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved and persisted through the official Reviewer. Source meaning and rich-span styling passed; Copyfit V3 was EXACT at 100% and 200%; Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "pageRendererVisualLineCount": 1,
@@ -964,13 +1141,30 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_101_unit_p101-index-194__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               549.98
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.24162px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "3.24162px",
+                "letterSpacing": "-0.0486243px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 3.8
           },
@@ -1006,13 +1200,30 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_101_unit_p101-index-194__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               538.8
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "6.48324px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "6.48324px",
+                "letterSpacing": "-0.0972486px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 7.7
           },
@@ -1029,7 +1240,7 @@
           "pageNumber": 101,
           "pdfDocumentPageIndex": 100,
           "language": "pt-BR",
-          "viewerZoom": "200%",
+          "viewerZoom": "100%",
           "viewportCssPixels": "1280x720",
           "devicePixelRatio": 1.25,
           "fontLoaded": true
@@ -1049,17 +1260,42 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_101_unit_p101-index-194__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
           "renderedSymbolIds": [],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            538.8
+            549.98
           ],
-          "frameHeightCssPx": 7.7
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "3.24162px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "3.24162px",
+              "letterSpacing": "-0.0486243px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 3.8
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 381,
+        "translationId": 918,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:12:10.093Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_source_pdf_100_200_semantic_rich_span_visual"
       }
     },
     {
@@ -1073,7 +1309,7 @@
       "sourcePdfLineIds": [
         "line_10_329"
       ],
-      "proposalText": "Remover",
+      "proposalText": "Remoção",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_101_unit_p101-index-195__pt-BR",
@@ -1088,7 +1324,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Remover",
+            "text": "Remoção",
             "font": "OptimaLTStd",
             "size": 8,
             "weight": 400,
@@ -1099,7 +1335,7 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "technicalStatus": "passed_page_renderer_copyfit_v3_exact_100_200",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
@@ -1136,13 +1372,30 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_101_unit_p101-index-195__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               593.75
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.24162px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "3.24162px",
+                "letterSpacing": "-0.0486243px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 3.8
           },
@@ -1178,13 +1431,30 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_101_unit_p101-index-195__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               626.33
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "6.48324px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "6.48324px",
+                "letterSpacing": "-0.0972486px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 7.7
           },
@@ -1221,13 +1491,30 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_101_unit_p101-index-195__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
           "renderedSymbolIds": [],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
             626.33
+          ],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "6.48324px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "6.48324px",
+              "letterSpacing": "-0.0972486px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
           ],
           "frameHeightCssPx": 7.7
         },
@@ -1410,5 +1697,28 @@
     }
   ],
   "note": "Décimo sétimo lote incremental do índice. O arquivo contém propostas locais e não escreve traduções finais no Payload.",
-  "revisions": []
+  "revisions": [],
+  "payload": {
+    "httpMethod": "POST /api/translation-review/approve",
+    "approvedCandidateKeys": [
+      "page_101_unit_p101-index-190__pt-BR",
+      "page_101_unit_p101-index-191__pt-BR",
+      "page_101_unit_p101-index-193__pt-BR",
+      "page_101_unit_p101-index-194__pt-BR"
+    ],
+    "reviewIds": [
+      377,
+      378,
+      380,
+      381
+    ],
+    "translationIds": [
+      915,
+      916,
+      917,
+      918
+    ],
+    "writesPerformed": 4,
+    "publicationVerified": true
+  }
 }

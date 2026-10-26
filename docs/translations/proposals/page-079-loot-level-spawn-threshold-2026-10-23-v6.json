@@ -3,7 +3,7 @@
   "version": "6",
   "title": "Nível de Saque, Variações e Surgimento de Combatentes — p. 79 (v6)",
   "page": 79,
-  "status": "page-079-beta-proposal-v6-unmeasured-human-review-pending",
+  "status": "page-079-beta-proposal-v6-user-terminology-updated-copyfit-exact-2026-10-24",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -987,7 +987,7 @@
       "spanKey": "page_79_block_6__pt-BR",
       "language": "pt-BR",
       "sourceText": "As an Adventure progresses, or for Adventures that start at higher Loot Levels (In the Crawl Mode for example), Combatants get stronger. When instructed to Spawn Combatants during an Encounter, players always Spawn Combatants whose Loot Level listed on their cards corresponds with the Loot Level of the current Encounter.",
-      "proposalText": "À medida que a Aventura avança — ou começa em Nível de Saque alto, como no Crawl Mode —, os Combatentes ficam mais fortes. Ao receber instruções para fazer surgir Combatentes durante um Encontro, os jogadores usam sempre cartas com Nível de Saque igual ao do Encontro atual.",
+      "proposalText": "À medida que a Aventura avança — ou começa em Nível de Saque alto, como no Modo Exploração —, os Combatentes ficam mais fortes. Ao receber instruções para fazer surgir Combatentes durante um Encontro, os jogadores usam sempre cartas com Nível de Saque igual ao do Encontro atual.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_79_block_6__pt-BR",
@@ -1011,7 +1011,7 @@
             "disableLigatures": true
           },
           {
-            "text": "Crawl Mode",
+            "text": "Modo Exploração",
             "font": "OptimaLTStd-Italic",
             "size": 10,
             "color": "#231f20",
@@ -1031,14 +1031,14 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "not_measured_beta_provisional_only",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
         "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
         "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
-        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
         "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
       ],
       "semanticSymbols": [],
@@ -1050,14 +1050,15 @@
         "sourcePdfVisualLineCount": 5,
         "pageRendererVisualLineCount": 5,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 79,
           "pdfDocumentPageIndex": 78,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -1066,7 +1067,7 @@
             397.6780700683594,
             720.6198120117188
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             673.91,
             684.91,
             695.91,
@@ -1078,8 +1079,10 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_79_block_6",
-          "readingMethod": "text rects of review-highlighted unit",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
           "rangeRectFragments": 11,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 5,
           "visualRowTopsCssPx": [
             565.28,
@@ -1088,9 +1091,67 @@
             592,
             600.91
           ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [],
           "frameHeightCssPx": 45.3
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 79,
+            "pdfDocumentPageIndex": 78,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.76909637451172,
+              664.7197875976562,
+              397.6780700683594,
+              720.6198120117188
+            ],
+            "visualRowBaselinesPt": [
+              673.91,
+              684.91,
+              695.91,
+              706.91,
+              717.91
+            ],
+            "spans": 5,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_79_block_6",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 11,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              565.28,
+              574.19,
+              583.09,
+              592,
+              600.91
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [],
+            "frameHeightCssPx": 45.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     },
     {

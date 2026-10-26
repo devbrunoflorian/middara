@@ -9,18 +9,20 @@
   "sourceDomSha256": "ac463f4dbc6e51976d24c92fac3eb4c439b352666cff05628a701d7675283e6d",
   "backgroundSha256": "39ad39da6d0cad66d5e6b9eea0174e517880beff110d0a7f186326f9f7368237",
   "inlineElementsSha256": "f5c9a093a53cb67a8da8cb88022bf4d4531e66e760c8b292465eab82a5079b58",
-  "status": "p030_inline_symbol_mapping_and_review_preview_resolved; copyfit_v3_exact; human_editorial_review_pending",
+  "status": "p030_partial_17_of_19_approved_2_pending; current candidate EXACT but preferred terminology hypothesis pending",
   "counts": {
     "candidates": 19,
     "verifiedInViewer": 19,
-    "verifiedInEditor": 19,
+    "verifiedInEditor": 18,
     "verifiedInCopyfit": 19,
     "verifiedInPdf": 18,
     "diagnosticBlankUnits": 0,
     "preservedHumanRecords": 0,
     "artworkExceptions": 0,
     "technicalExceptions": 0,
-    "humanReviewCandidates": 19
+    "humanReviewCandidates": 19,
+    "currentApprovedTranslations": 18,
+    "currentPendingReviews": 1
   },
   "sourceReview": {
     "status": "official_pdf_paint_order_and_english_viewer_symbol_mapping_verified_2026-10-23",
@@ -418,8 +420,8 @@
       "sourceUnitIds": [],
       "blockIndex": 2,
       "sourceText": "On Items, they are used to know what kind of benefits you Gain from equipping those Items.",
-      "proposalText": "Nos Itens, eles são utilizados para identificar exatamente quais tipos de benefícios e bônus você Obtém ao equipá-los.",
-      "proposalMarkup": "Nos Itens, indicam quais benefícios você obtém ao equipá-los.",
+      "proposalText": "Nos Itens, eles indicam que tipos de benefícios você obtém ao equipá-los.",
+      "proposalMarkup": "Nos Itens, eles indicam que tipos de benefícios você obtém ao equipá-los.",
       "sourceSymbolsPreserved": [],
       "spanKey": "page_30_block_2",
       "legacyBlockSpanKey": "page_30_block_2__pt-BR",
@@ -429,7 +431,7 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "Nos Itens, eles são utilizados para identificar exatamente quais tipos de benefícios e bônus você Obtém ao equipá-los.",
+            "text": "Nos Itens, eles indicam que tipos de benefícios você obtém ao equipá-los.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -453,7 +455,7 @@
             "weight": 400,
             "style": "normal",
             "disableLigatures": true,
-            "text": "Nos Itens, indicam quais benefícios você obtém ao equipá-los."
+            "text": "Nos Itens, eles indicam que tipos de benefícios você obtém ao equipá-los."
           }
         ],
         "textAlign": "left",
@@ -461,8 +463,8 @@
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "status": "verified_in_viewer_editor_copyfit_pdf_human_review_pending",
-      "technicalStatus": "verified_in_viewer_editor_copyfit_v3_and_pdf",
+      "status": "verified_page_renderer_copyfit_v3_exact_pending_official_review",
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_at_100_and_200",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "sourceLineCount": 2,
@@ -489,9 +491,7 @@
         "textAlign": "left",
         "lineHeight": 1.1
       },
-      "pendingTerms": [
-        "Gain → obter é candidato contextual."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 2,
       "pageRendererVisualLineCount": 2,
       "copyfitClassification": "EXACT",
@@ -500,14 +500,15 @@
         "sourcePdfVisualLineCount": 2,
         "pageRendererVisualLineCount": 2,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 30,
           "pdfDocumentPageIndex": 29,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -516,7 +517,7 @@
             386.9327392578125,
             161.35411071777344
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             147.644,
             158.644
           ],
@@ -524,18 +525,214 @@
           "visualRows": 2
         },
         "pageRendererEvidence": {
-          "spanKey": "page_30_block_2__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
+          "spanKey": "page_30_block_2",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
           "rangeRectFragments": 2,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 2,
           "visualRowTopsCssPx": [
             138.8,
             147.7
           ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
           "frameHeightCssPx": 18.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "supersededCopyfitMeasurements": [
+        {
+          "proposalText": "Nos Itens, eles são utilizados para identificar exatamente quais tipos de benefícios e bônus você Obtém ao equipá-los.",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "measurement": {
+            "status": "measured_copyfit_v3_script_visual_rows",
+            "sourcePdfVisualLineCount": 2,
+            "pageRendererVisualLineCount": 2,
+            "classification": "EXACT",
+            "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+            "environment": {
+              "pageNumber": 30,
+              "pdfDocumentPageIndex": 29,
+              "language": "pt-BR",
+              "viewerZoom": "200%",
+              "viewportCssPixels": "1280x720",
+              "devicePixelRatio": 1.25
+            },
+            "sourceEvidence": {
+              "bboxPt": [
+                86.17279052734375,
+                138.4541015625,
+                386.9327392578125,
+                161.35411071777344
+              ],
+              "visualBaselinesPt": [
+                147.644,
+                158.644
+              ],
+              "spans": 2,
+              "visualRows": 2
+            },
+            "pageRendererEvidence": {
+              "spanKey": "page_30_block_2__pt-BR",
+              "readingMethod": "text rects of review-highlighted unit",
+              "rangeRectFragments": 2,
+              "distinctVisualRows": 2,
+              "visualRowTopsCssPx": [
+                138.8,
+                147.7
+              ],
+              "frameHeightCssPx": 18.5
+            },
+            "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+          }
+        }
+      ],
+      "notes": [
+        "Revisão semântica: eliminada paráfrase com adição indevida de exatamente e bônus; aplicada a decisão proprietária Gain → obter em flexão verbal natural, sem alteração dos rich spans."
+      ],
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 30,
+            "pdfDocumentPageIndex": 29,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17279052734375,
+              138.4541015625,
+              386.9327392578125,
+              161.35411071777344
+            ],
+            "visualRowBaselinesPt": [
+              147.644,
+              158.644
+            ],
+            "spans": 2,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_30_block_2",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 2,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              138.8,
+              147.7
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 18.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 30,
+            "pdfDocumentPageIndex": 29,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17279052734375,
+              138.4541015625,
+              386.9327392578125,
+              161.35411071777344
+            ],
+            "visualRowBaselinesPt": [
+              147.644,
+              158.644
+            ],
+            "spans": 2,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_30_block_2",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 2,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              349.98,
+              354.42
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 9.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "supersededTechnicalStatus": "verified_in_viewer_editor_copyfit_v3_and_pdf"
     },
     {
       "sourceBlockId": "block_23",
@@ -585,9 +782,9 @@
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "status": "verified_in_viewer_editor_copyfit_pdf_human_review_pending",
+      "status": "approved_and_published_via_official_reviewer",
       "technicalStatus": "verified_in_viewer_editor_copyfit_v3_and_pdf",
-      "editorialStatus": "pending_human_review",
+      "editorialStatus": "approved_and_persisted_in_payload",
       "diagnosticRendering": "proposal",
       "sourceLineCount": 3,
       "sourceBboxes": [
@@ -619,9 +816,7 @@
         "textAlign": "left",
         "lineHeight": 1.1
       },
-      "pendingTerms": [
-        "Range, Combat Dice, Armor Value e Defense Value aguardam harmonização terminológica humana."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 3,
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "EXACT",
@@ -667,7 +862,13 @@
           "frameHeightCssPx": 27.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "payloadReviewId": 1454,
+      "payloadTranslationId": 1246,
+      "approvedAt": "2026-10-26T06:55:07.244Z",
+      "notes": [
+        "Review 1454 foi aprovada pelo Reviewer oficial e publicada como translation 1246; EXACT 3/3 e fingerprint b1a7382871f54fe994374b17cb2dc766f5ada1bd61edd4b32674e6812bbcef88 confirmados. Range/Alcance, Combat Dice/Dados de Combate, Armor Value/Valor de Armadura e Defense Value/Valor de Defesa têm precedentes em unidades publicadas; decisão aplicada apenas a esta ocorrência, sem alteração global do glossário."
+      ]
     },
     {
       "sourceBlockId": "block_24",
@@ -678,8 +879,8 @@
       ],
       "blockIndex": 4,
       "sourceText": "On Adventurer and Combatant Cards, Icons are used to convey the different stats figures have such as HP, Movement, and Defense.",
-      "proposalText": "Nas Cartas de Aventureiro e de Combatente, os Ícones indicam atributos das Miniaturas, como PV, Movimento e Defesa.",
-      "proposalMarkup": "Nas Cartas de Aventureiro e de Combatente, os Ícones indicam atributos das Miniaturas, como PV, Movimento e Defesa.",
+      "proposalText": "Nas Fichas de Aventureiro e Cartas de Combatente, os Ícones indicam atributos das Miniaturas, como HP, Movimento e Defesa.",
+      "proposalMarkup": "Nas Fichas de Aventureiro e Cartas de Combatente, os Ícones indicam atributos das Miniaturas, como HP, Movimento e Defesa.",
       "sourceSymbolsPreserved": [],
       "spanKey": "page_30_block_4",
       "legacyBlockSpanKey": "page_30_block_4__pt-BR",
@@ -695,7 +896,25 @@
             "weight": 400,
             "style": "normal",
             "disableLigatures": true,
-            "text": "Nas Cartas de Aventureiro e de Combatente, os Ícones indicam atributos das Miniaturas, como PV, Movimento e Defesa."
+            "text": "Nas Fichas de Aventureiro e Cartas de Combatente, os Ícones indicam atributos das Miniaturas, como "
+          },
+          {
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "HP"
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": ", Movimento e Defesa."
           }
         ],
         "textAlign": "left",
@@ -713,7 +932,25 @@
             "weight": 400,
             "style": "normal",
             "disableLigatures": true,
-            "text": "Nas Cartas de Aventureiro e de Combatente, os Ícones indicam atributos das Miniaturas, como PV, Movimento e Defesa."
+            "text": "Nas Fichas de Aventureiro e Cartas de Combatente, os Ícones indicam atributos das Miniaturas, como "
+          },
+          {
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "HP"
+          },
+          {
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": ", Movimento e Defesa."
           }
         ],
         "textAlign": "left",
@@ -721,9 +958,9 @@
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "status": "verified_in_viewer_editor_copyfit_pdf_human_review_pending",
-      "technicalStatus": "verified_in_viewer_editor_copyfit_v3_and_pdf",
-      "editorialStatus": "pending_human_review",
+      "status": "approved_and_published_via_official_reviewer",
+      "technicalStatus": "passed_page_renderer_copyfit_v3_exact_100_200",
+      "editorialStatus": "approved_and_persisted_in_payload",
       "diagnosticRendering": "proposal",
       "sourceLineCount": 2,
       "sourceBboxes": [
@@ -749,10 +986,7 @@
         "textAlign": "left",
         "lineHeight": 1.1
       },
-      "pendingTerms": [
-        "Combatant → Combatente; HP → PV; harmonizar com termos de atributos.",
-        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 2,
       "pageRendererVisualLineCount": 2,
       "copyfitClassification": "EXACT",
@@ -761,14 +995,15 @@
         "sourcePdfVisualLineCount": 2,
         "pageRendererVisualLineCount": 2,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 30,
           "pdfDocumentPageIndex": 29,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -777,7 +1012,7 @@
             376.9827575683594,
             227.69407653808594
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             213.984,
             224.982
           ],
@@ -785,17 +1020,207 @@
           "visualRows": 2
         },
         "pageRendererEvidence": {
-          "spanKey": "page_30_block_4__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 3,
+          "spanKey": "page_30_block_4",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 5,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 2,
           "visualRowTopsCssPx": [
             192.55,
             201.45
           ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10443px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91487px",
+              "letterSpacing": "-0.121566px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29399px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.02339px",
+              "letterSpacing": "-0.10941px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
           "frameHeightCssPx": 18.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "notes": [
+        "Atualização motivada pela preferência explícita do proprietário: “Cartas de Aventureiro” foi substituído por “Fichas de Aventureiro”. “Cartas de Combatente” segue forma local apoiada nas traduções aprovadas 158, 141 e 53. A alteração invalida a medição anterior; reaplicar Copyfit V3.",
+        "A redação revisada mediu EXACT 2/2 no PageRenderer a 100% e 200%, com OptimaLTStd carregada. A medição anterior da redação “Cartas de Aventureiro” foi invalidada. O termo escolhido segue como hipótese e bloqueia aprovação.",
+        "2026-10-26: corrigido PV para HP conforme o glossário do proprietário, e restaurado o rich span do PDF original (OptimaLTStd-Bold, 9 pt). A redação/estilo alterados invalidam o Copyfit anterior; nova medição PageRenderer pendente.",
+        "Copyfit V3 reaplicado após a correção: PageRenderer EXACT 2/2 a 100% e 200%, fonte carregada e estilos 10 pt regular + HP bold 9 pt confirmados nos samples. A unidade permanece pending por hipótese terminológica.",
+        "A forma local Ficha de Aventureiro foi aplicada conforme preferência explícita do proprietário (registrada em 2026-10-25); a hipótese global 67 não foi promovida, Cartão de Aventureiro permanece alternativa e Adventure Sheet → Ficha de Aventura segue conceito distinto. “Stats” foi vertido como atributos no contexto enumerado por HP, Movimento e Defesa, sem criar decisão global.",
+        "Review 1455 foi aprovada e publicada pelo endpoint oficial do Reviewer após Copyfit V3 EXACT 2/2 em 100%/200%, verificação semântica e rich spans fonte. Translation 1259 confirma o mesmo texto/dados. A preferência Ficha de Aventureiro foi aplicada somente localmente; o registro global 67 permanece hipótese."
+      ],
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 30,
+            "pdfDocumentPageIndex": 29,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17279052734375,
+              204.7940673828125,
+              376.9827575683594,
+              227.69407653808594
+            ],
+            "visualRowBaselinesPt": [
+              213.984,
+              224.982
+            ],
+            "spans": 4,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_30_block_4",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 5,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              376.86,
+              381.3
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 9.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 30,
+            "pdfDocumentPageIndex": 29,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17279052734375,
+              204.7940673828125,
+              376.9827575683594,
+              227.69407653808594
+            ],
+            "visualRowBaselinesPt": [
+              213.984,
+              224.982
+            ],
+            "spans": 4,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_30_block_4",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 5,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              192.55,
+              201.45
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10443px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91487px",
+                "letterSpacing": "-0.121566px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29399px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.02339px",
+                "letterSpacing": "-0.10941px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 18.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     },
     {
@@ -3418,5 +3843,25 @@
     ],
     "payloadWrites": 0,
     "canonicalAssetsUnchangedDuringReadOnlyVerification": true
+  },
+  "updated": "2026-10-26",
+  "currentPayloadState": {
+    "databaseCounts": {
+      "translations": 1250,
+      "translationReviewRequests": 30,
+      "glossaryDecisions": 73,
+      "layoutFrames": 38,
+      "translationReviews": 1556
+    },
+    "latestApprovedTranslation": {
+      "translationId": 1259,
+      "reviewId": 1455,
+      "spanKey": "page_30_block_4__pt-BR",
+      "text": "Nas Fichas de Aventureiro e Cartas de Combatente, os Ícones indicam atributos das Miniaturas, como HP, Movimento e Defesa."
+    },
+    "pendingReviewIds": [
+      1460
+    ],
+    "pageStatus": "18/19 active reviews approved; 1460 pending on FLIGHT → VOO; no page-wide certification"
   }
 }

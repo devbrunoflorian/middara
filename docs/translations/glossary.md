@@ -2,11 +2,15 @@
 
 > Este glossário garante a consistência e sincronia entre a tradução do Livro de Regras e a equipe responsável pela tradução do Livro de Aventuras. **Use sempre estes termos ao traduzir os textos extraídos.**
 
+> **Registro estruturado:** a coleção Payload `translation-glossary-decisions` é a fonte canônica de IDs, status, relações semânticas, evidências e histórico das decisões persistidas. Esta tabela Markdown continua servindo como referência editorial legível para termos ainda não reconciliados. Conflitos entre as duas fontes ficam pendentes para revisão humana; status observado, experimental ou hipótese não equivale a aprovação.
+
 | Termo Original (EN) | Tradução Oficial (PT-BR) |
 | :--- | :--- |
 | **Setup** | Preparação |
 | **Tiles** | Peças |
 | **Terrain** | Terrenos |
+| **Hidden Cards** | Cartas Ocultas |
+| **Hidden Card Decks** | Baralhos Secretos |
 | **Totems** | Totens |
 | **Exit** | Saída |
 | **Figures** | Miniaturas |
@@ -25,7 +29,12 @@
 | **Story Round** | Rodada de História |
 | **White Valts** | Criptas Brancas |
 | **Adventure Mechanic** | Mecânica de Aventura |
+| **Adventurer Sheet** | Ficha de Aventureiro |
+| **Adventure Sheet** | Ficha de Aventura |
 | **Adventurers** | Aventureiros |
+| **Crawl Book** | Livro de Masmorras |
+| **Crawl Mode** | Modo Exploração |
+| **Epic Crawl Mode** | Modo Exploração Épica |
 | **Hindering Terrain** | Terreno Difícil |
 | **Muck Terrain** | Terreno de Lodo |
 | **Water Terrain** | Terreno de Água |
@@ -55,6 +64,12 @@
 | **Haste** | Celeridade |
 | **The Anointed** | Os Ungidos |
 | **Breaking Attack** | Ataque de Oportunidade |
+| **Break Attack** | Ataque de Oportunidade |
+| **Follow Up** *(mecânica)* | Follow Up |
+| **Follow Up Ability** | Habilidade Follow Up |
+| **Follow Up Step** | Etapa de Follow Up |
+| **FU** *(abreviação de Follow Up)* | FU |
+| **FLIGHT** *(nome da Tag)* | VOO |
 | **WARP** | TRANSPORTE |
 | **Harbingers** | Arautos |
 | **Blight** | Praga |
@@ -69,6 +84,7 @@
 | **Refresh Phase** *(nome da fase)* | Fase de Manutenção |
 | **Exhaust** *(mecânica de Tag/Habilidade)* | Exaustar |
 | **Tier** | Tier |
+| **LVL** *(abreviação de Level)* | LVL |
 | **See** *(referência editorial: página, seção, tabela, diagrama)* | Veja |
 
 Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir automaticamente o verbo isolado *refresh* como “manutenção”; avaliar cada ocorrência pelo contexto.
@@ -80,13 +96,23 @@ Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir auto
 
 **Decisão do usuário (15/10/2026):** para a mecânica *Exhaust*, usar o verbo **exaustar**; em rótulos de Tag, manter a forma verbal/capitalização natural, por exemplo **EXAUSTAR**. Esta decisão não renomeia IDs semânticos como `action.exhaust` e não autoriza sobrescrever traduções humanas já salvas.
 
-**Decisão do usuário (18/10/2026):** para a classificação de itens (*Mundane, Common, Uncommon, Rare*) e faixas de recompensa, o termo **Tier** é fixado canonicamente como **Tier** (mantendo-se no plural **Tiers**). Esta decisão preserva a distinção mecânica essencial em relação a **Nível / LVL** (*Loot Level* → Nível de Saque, *Discipline Level* → Nível de Disciplina, *Elevation Level* → Nível de Elevação).
+**Decisão do usuário (18/10/2026, Payload id 58):** para a classificação de itens (*Mundane, Common, Uncommon, Rare*) e faixas de recompensa, o termo **Tier** é fixado canonicamente como **Tier** (mantendo-se no plural **Tiers**). `Tier` é distinto de `Level/LVL`.
+
+**Decisão do usuário (25/10/2026, Payload id 73):** `LVL` é a abreviação de `Level` e pode ser preservada em PT-BR, especialmente em referências numéricas a níveis de Disciplinas e em rótulos/componentes impressos. Não expandir automaticamente `LVL` para “Nível”. Quando a fonte escreve `Level` por extenso, traduza conforme o contexto. No exemplo de CRUOR da p. 32, o PDF usa `Level 3` por extenso e `LVL 1` / `LVL 2` abreviados; portanto, o texto por extenso pode ficar “Nível 3”, enquanto as siglas permanecem `LVL 1` e `LVL 2`. Preserve traduções aprovadas que já usam “Nível”; esta decisão não autoriza substituição global. `Tier` permanece um conceito separado.
 
 **Decisão do usuário (19/10/2026):** em referências editoriais cruzadas a páginas, seções, tabelas, diagramas e outras partes do manual, traduzir sempre "See" como **Veja**. Não utilizar "Consulte" nem "Veja em". Esta regra se aplica estritamente a referências editoriais e não altera ocorrências conversacionais de outros sentidos do verbo consultar. Preservar o formato, pontuação e o alvo da referência.
 
 **Decisão do usuário (22/10/2026):** `Line of Sight` → **Linha de Visão** (Payload `translation-glossary-decisions`, id 59). Esta equivalência terminológica não aprova unidades de tradução nem autoriza sobrescrever conteúdo humano já salvo.
 
 **Decisão aprovada na central (Payload `translation-glossary-decisions`, id 31):** `Spawning` → **Surgimento**. A decisão cobre a equivalência do termo e não aprova unidades que a contenham nem autoriza sobrescrever traduções humanas.
+
+**Decisão do usuário (24/10/2026):** `Crawl Mode` → **Modo Exploração** e `Epic Crawl Mode` → **Modo Exploração Épica**. Usar essas formas também nos textos corridos; substituir a variação anterior “Modo de Exploração” quando se referir ao nome do modo. `Crawl Book` é um componente separado, não outro nome do modo.
+
+**Decisão do usuário (24/10/2026):** `Crawl Book` → **Livro de Masmorras** (Payload `translation-glossary-decisions`, id **66**). A equivalência fixa o nome do componente e não aprova nem publica as unidades de tradução que o contêm.
+
+**Decisões do usuário (26/10/2026):** `Break Attack` → **Ataque de Oportunidade**, conforme a mecânica descrita na p. 42 e a entrada do índice na p. 101; `Ataque de Ruptura` não foi escolhido. A forma `Breaking Attack` já registrada mantém o mesmo equivalente. `Adventurer Sheet` → **Ficha de Aventureiro**, componente individual distinto de `Adventure Sheet` → **Ficha de Aventura**; esta decisão não altera a hipótese `Adventurer Card` → `Ficha de Aventureiro` (Payload id 67) nem promove suas alternativas. `FLIGHT` → **VOO** somente como nome de Tag, preservando caixa alta; não generalizar para usos comuns de *flight*.
+
+**Decisão do usuário (26/10/2026, Payload ids 77–80):** `Follow Up` → **Follow Up**; `Follow Up Ability` → **Habilidade Follow Up** (plural: **Habilidades Follow Up**); `Follow Up Step` → **Etapa de Follow Up**; `FU` → **FU**. Preservar Follow Up como termo mecânico; não traduzir essa mecânica como “Seguimento”, “Continuação” ou “Ataque Extra”. Aplicar a capitalização da fonte. Referências indicadas: Rulebook 1.2, pp. 41 e 47–48. Esta decisão não se estende a usos comuns de *follow up* sem sentido mecânico.
 
 ## Decisões complementares registradas na central
 

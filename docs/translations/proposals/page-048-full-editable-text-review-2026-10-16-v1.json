@@ -33,7 +33,7 @@
       "sourceText": "Abilities that End Actions and Abilities",
       "spanKey": "page_48_block_0__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Encerramento de Ações e Habilidades",
+      "proposalText": "Habilidades que Encerram Ações e Habilidades",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_48_block_0__pt-BR",
@@ -48,37 +48,38 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Encerramento de Ações e Habilidades",
+            "text": "Habilidades que Encerram Ações e Habilidades",
             "font": "Cinzel-Regular",
             "size": 12,
             "color": "#231f20",
-            "weight": 700,
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
           }
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "verified_isolated_viewer_editor_copyfit_pdf",
+      "technicalStatus": "blocked_copyfit_v3_over",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
-      "pageRendererVisualLineCount": 1,
-      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "OVER",
       "copyfitMeasurement": {
         "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 1,
-        "pageRendererVisualLineCount": 1,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "pageRendererVisualLineCount": 2,
+        "classification": "OVER",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 48,
           "pdfDocumentPageIndex": 47,
           "language": "pt-BR",
-          "viewerZoom": "200%",
+          "viewerZoom": "100%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -87,23 +88,111 @@
             679.2520141601562,
             308.5692138671875
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             304.105
           ],
           "spans": 1,
           "visualRows": 1
         },
         "pageRendererEvidence": {
-          "spanKey": "page_48_block_0__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 1,
-          "distinctVisualRows": 1,
+          "spanKey": "page_48_block_0",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 3,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 2,
           "visualRowTopsCssPx": [
-            263.55
+            412.36,
+            417.7
           ],
-          "frameHeightCssPx": 13.1
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "CinzelLocal, Cinzel, serif",
+              "fontSize": "4.86243px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "5.34867px",
+              "letterSpacing": "-0.0729365px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 6.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "proposalMarkup": "Habilidades que Encerram Ações e Habilidades",
+      "status": "draft_pending_human_review",
+      "notes": [
+        "Correção semântica: Abilities that End... descreve Habilidades que encerram Ações e Habilidades; Cinzel-Regular 12 pt com peso regular conforme o PDF.",
+        "A correção semântica e o Cinzel-Regular 12 pt do PDF foram preservados; Copyfit V3 deu OVER 1→2 a 100%. Registrei a pendência e avancei sem perseguir o encaixe."
+      ],
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 2,
+          "classification": "OVER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 48,
+            "pdfDocumentPageIndex": 47,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              415.8424987792969,
+              292.3932189941406,
+              679.2520141601562,
+              308.5692138671875
+            ],
+            "visualRowBaselinesPt": [
+              304.105
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_48_block_0",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 3,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              412.36,
+              417.7
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "4.86243px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "5.34867px",
+                "letterSpacing": "-0.0729365px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 6.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     },
     {
@@ -919,7 +1008,7 @@
       "sourceText": "Some Abilities will use Tags to let players perform Actions, such as the Move, Attack, or Spell Actions. Tags that start Actions and also require specific Icons on equipped Weapons (such as the ATK or ATK Tag), can only be used if the Adventurer has an equipped Weapon with the matching Icon. See Tags Pg. 92-93 to determine if your Ability starts an Action. Abilities that start Actions cannot be used during another Action without ending the current Action first.",
       "spanKey": "page_48_block_12__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Algumas Habilidades usam Tags para permitir Ações, como Movimento, Ataque ou Feitiço. Tags que iniciam Ações e exigem Ícones em Armas equipadas (como o ícone ￼ ATK ou o Marcador  ATK) só podem ser usadas se houver Arma equipada com o Ícone correspondente. Veja  ATK) só podem ser usados se o Aventureiro tiver uma Arma equipada com o Ícone correspondente. Veja , págs. 92–93. Habilidades que iniciam Ações não podem ser usadas durante outra Ação sem antes encerrá-la., págs. 92–93, para determinar se a Habilidade inicia uma Ação. Habilidades que iniciam Ações não podem ser usadas durante outra Ação sem antes encerrá-la.",
+      "proposalText": "Algumas Habilidades usam Tags para permitir Ações de Movimento, Ataque ou Feitiço. Tags que iniciam Ações e exigem Ícones específicos em Armas equipadas (como o Ícone ￼ ATK ou a Tag ￼ ATK) só podem ser usadas se o Aventureiro tiver uma Arma equipada com o Ícone correspondente. Veja Tags, págs. 92–93, para identificar se a Habilidade inicia uma Ação. Habilidades que iniciam Ações não podem ser usadas durante outra Ação sem encerrar a Ação atual.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_48_block_12__pt-BR",
@@ -934,7 +1023,7 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Algumas Habilidades usam Tags para permitir Ações, como Movimento, Ataque ou Feitiço. Tags que iniciam Ações e exigem Ícones em Armas equipadas (como o ícone ",
+            "text": "Algumas Habilidades usam Tags para permitir Ações de Movimento, Ataque ou Feitiço. Tags que iniciam Ações e exigem Ícones específicos em Armas equipadas (como o Ícone ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -956,7 +1045,7 @@
             }
           },
           {
-            "text": " ATK ou o Marcador ",
+            "text": " ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -964,7 +1053,23 @@
             "style": "normal"
           },
           {
-            "text": " ATK) só podem ser usadas se houver Arma equipada com o Ícone correspondente. Veja ",
+            "text": "ATK",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ou a Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -978,7 +1083,7 @@
             }
           },
           {
-            "text": " ATK) só podem ser usados se o Aventureiro tiver uma Arma equipada com o Ícone correspondente. Veja ",
+            "text": " ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -986,7 +1091,23 @@
             "style": "normal"
           },
           {
-            "text": ", págs. 92–93. Habilidades que iniciam Ações não podem ser usadas durante outra Ação sem antes encerrá-la.",
+            "text": "ATK",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ") só podem ser usadas se o Aventureiro tiver uma Arma equipada com o Ícone correspondente. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Tags",
             "font": "OptimaLTStd-BoldItalic",
             "size": 10,
             "color": "#231f20",
@@ -994,7 +1115,7 @@
             "style": "italic"
           },
           {
-            "text": ", págs. 92–93, para determinar se a Habilidade inicia uma Ação. Habilidades que iniciam Ações não podem ser usadas durante outra Ação sem antes encerrá-la.",
+            "text": ", págs. 92–93, para identificar se a Habilidade inicia uma Ação. Habilidades que iniciam Ações não podem ser usadas durante outra Ação sem encerrar a Ação atual.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1007,7 +1128,7 @@
           "attack.ranged"
         ]
       },
-      "technicalStatus": "verified_isolated_viewer_editor_copyfit_pdf",
+      "technicalStatus": "source_pdf_symbols_and_rich_spans_verified; copyfit_v3_exact_7_of_7_at_100_and_200",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
@@ -1019,14 +1140,15 @@
         "sourcePdfVisualLineCount": 7,
         "pageRendererVisualLineCount": 7,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 48,
           "pdfDocumentPageIndex": 47,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -1035,7 +1157,7 @@
             396.61834716796875,
             189.69712829589844
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             120.987,
             131.987,
             142.987,
@@ -1049,19 +1171,74 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_48_block_12__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 13,
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 19,
+          "renderedSymbolIds": [
+            "attack.melee",
+            "attack.ranged"
+          ],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 7,
           "visualRowTopsCssPx": [
-            117.19,
-            126.09,
-            135.02,
-            143.92,
-            152.73,
-            161.75,
-            170.67
+            117.17,
+            125.28,
+            133.39,
+            141.5,
+            149.61,
+            158.72,
+            166.83
           ],
-          "frameHeightCssPx": 63.1
+          "visualRowIntervalsPt": [
+            10.01,
+            10.01,
+            10.01,
+            11.09,
+            10.16,
+            10.01
+          ],
+          "pageScaleCssPxPerPt": 0.8104430853233748,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10443px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10443px",
+              "letterSpacing": "-0.121566px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29399px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "7.29399px",
+              "letterSpacing": "-0.10941px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10443px",
+              "fontWeight": "700",
+              "fontStyle": "italic",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10443px",
+              "letterSpacing": "-0.121566px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 57.8
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
@@ -1079,7 +1256,7 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Algumas Habilidades usam Tags para permitir Ações, como Movimento, Ataque ou Feitiço. Tags que iniciam Ações e exigem Ícones em Armas equipadas (como o ícone ",
+            "text": "Algumas Habilidades usam Tags para permitir Ações de Movimento, Ataque ou Feitiço. Tags que iniciam Ações e exigem Ícones específicos em Armas equipadas (como o Ícone ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1101,7 +1278,7 @@
             }
           },
           {
-            "text": " ATK ou o Marcador ",
+            "text": " ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1109,7 +1286,23 @@
             "style": "normal"
           },
           {
-            "text": " ATK) só podem ser usadas se houver Arma equipada com o Ícone correspondente. Veja ",
+            "text": "ATK",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ou a Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1123,7 +1316,7 @@
             }
           },
           {
-            "text": " ATK) só podem ser usados se o Aventureiro tiver uma Arma equipada com o Ícone correspondente. Veja ",
+            "text": " ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1131,7 +1324,23 @@
             "style": "normal"
           },
           {
-            "text": ", págs. 92–93. Habilidades que iniciam Ações não podem ser usadas durante outra Ação sem antes encerrá-la.",
+            "text": "ATK",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ") só podem ser usadas se o Aventureiro tiver uma Arma equipada com o Ícone correspondente. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Tags",
             "font": "OptimaLTStd-BoldItalic",
             "size": 10,
             "color": "#231f20",
@@ -1139,7 +1348,7 @@
             "style": "italic"
           },
           {
-            "text": ", págs. 92–93, para determinar se a Habilidade inicia uma Ação. Habilidades que iniciam Ações não podem ser usadas durante outra Ação sem antes encerrá-la.",
+            "text": ", págs. 92–93, para identificar se a Habilidade inicia uma Ação. Habilidades que iniciam Ações não podem ser usadas durante outra Ação sem encerrar a Ação atual.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1151,6 +1360,223 @@
           "attack.melee",
           "attack.ranged"
         ]
+      },
+      "copyfitMeasurementFingerprint": null,
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 7,
+          "pageRendererVisualLineCount": 7,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 48,
+            "pdfDocumentPageIndex": 47,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.89440155029297,
+              111.797119140625,
+              396.61834716796875,
+              189.69712829589844
+            ],
+            "visualRowBaselinesPt": [
+              120.987,
+              131.987,
+              142.987,
+              153.987,
+              164.987,
+              175.987,
+              186.987
+            ],
+            "spans": 13,
+            "visualRows": 7
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_48_block_12__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 19,
+            "renderedSymbolIds": [
+              "attack.melee",
+              "attack.ranged"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 7,
+            "visualRowTopsCssPx": [
+              339.19,
+              343.23,
+              347.28,
+              351.92,
+              355.97,
+              360.02,
+              364.06
+            ],
+            "visualRowIntervalsPt": [
+              9.99,
+              10.4,
+              11.04,
+              9.99,
+              9.99,
+              9.99
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "3.64682px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 28.9
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 7,
+          "pageRendererVisualLineCount": 7,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 48,
+            "pdfDocumentPageIndex": 47,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.89440155029297,
+              111.797119140625,
+              396.61834716796875,
+              189.69712829589844
+            ],
+            "visualRowBaselinesPt": [
+              120.987,
+              131.987,
+              142.987,
+              153.987,
+              164.987,
+              175.987,
+              186.987
+            ],
+            "spans": 13,
+            "visualRows": 7
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_48_block_12__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 19,
+            "renderedSymbolIds": [
+              "attack.melee",
+              "attack.ranged"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 7,
+            "visualRowTopsCssPx": [
+              117.17,
+              125.28,
+              133.39,
+              141.5,
+              149.61,
+              158.72,
+              166.83
+            ],
+            "visualRowIntervalsPt": [
+              10.01,
+              10.01,
+              10.01,
+              11.09,
+              10.16,
+              10.01
+            ],
+            "pageScaleCssPxPerPt": 0.8104430853233748,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10443px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10443px",
+                "letterSpacing": "-0.121566px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29399px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "7.29399px",
+                "letterSpacing": "-0.10941px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10443px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10443px",
+                "letterSpacing": "-0.121566px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 57.8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     },
     {
@@ -1690,7 +2116,7 @@
       "sourceText": "Example: Hammer Helm grants the Adventurer +1 PHYSICAL DMG to their Attacks. In addition, an Adventurer can Exhaust the Discipline to re-roll any dice in their Combat Dice Pool so long as they are making a Attack and have a 2-Handed Weapon equipped. While this card is Exhausted, the Adventurer still Gains the bonus to PHYSICAL DMG from the Passive Ability.",
       "spanKey": "page_48_block_34__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Exemplo: A Habilidade de Hammer Helm concede ao Aventureiro +1 de DANO FÍSICO nos Ataques. Além disso, ele pode exaurir a Disciplina para rerrolar quaisquer dados da Reserva de Combate ao realizar um  Ataque com uma Arma de 2 mãos. Mesmo com a carta Exaurida, o Aventureiro ainda recebe o bônus de DANO FÍSICO da Habilidade Passiva.",
+      "proposalText": "Exemplo: A Habilidade de Hammer Helm concede ao Aventureiro +1 de DANO FÍSICO nos Ataques. Além disso, ele pode exaurir a Disciplina para rerrolar quaisquer dados da Reserva de Combate ao realizar um ￼ Ataque com uma Arma de 2 mãos. Mesmo com a carta Exaurida, o Aventureiro ainda recebe o bônus de DANO FÍSICO da Habilidade Passiva.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_48_block_34__pt-BR",
@@ -1868,5 +2294,6 @@
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     }
-  ]
+  ],
+  "updatedAt": "2026-10-25T06:57:08.688Z"
 }

@@ -3,7 +3,7 @@
   "version": "1",
   "title": "Preparação de Encontros — introdução da p. 14",
   "page": 14,
-  "status": "pending_human_review",
+  "status": "revision_approved_exact_by_official_reviewer_2026-10-26",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
@@ -36,10 +36,10 @@
       "spanKey": "page_14_block_0__pt-BR",
       "language": "pt-BR",
       "sourceText": "Whether playing the Crawl Mode or Adventure Mode, players will be instructed to set up Encounters. When setting up an Encounter, read the Special Rules of the Encounter and then go through the 4 Phases of setup as follows:",
-      "proposalText": "Seja no Crawl Mode ou no Modo Aventura, os jogadores receberão instruções para preparar Encontros. Ao preparar um Encontro, leiam as Regras Especiais de Encontro e sigam as 4 Fases de preparação a seguir:",
+      "proposalText": "Quer estejam jogando no Modo Exploração ou no Modo Aventura, os jogadores receberão instruções para preparar Encontros. Ao preparar um Encontro, leiam as Regras Especiais do Encontro e, em seguida, sigam as 4 Fases de preparação indicadas a seguir:",
       "data": {
         "schemaVersion": 2,
-        "spanKey": "page_14_block_0__pt-BR",
+        "spanKey": "page_14_block_0",
         "bbox": [
           86.17320251464844,
           144.97418212890625,
@@ -51,7 +51,52 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Seja no Crawl Mode ou no Modo Aventura, os jogadores receberão instruções para preparar Encontros. Ao preparar um Encontro, leiam as Regras Especiais de Encontro e sigam as ",
+            "text": "Quer estejam jogando ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "no Modo Exploração ou no Modo Aventura, os jogadores receberão instruções para preparar Encontros. Ao preparar um Encontro, leiam as Regras Especiais",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " do ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Encontro e",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": ", em seguida, ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "sigam as ",
             "font": "OptimaLTStd",
             "size": 10,
             "weight": 400,
@@ -69,7 +114,25 @@
             "disableLigatures": true
           },
           {
-            "text": " Fases de preparação a seguir:",
+            "text": " Fases de preparação",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " indicadas ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "a seguir:",
             "font": "OptimaLTStd",
             "size": 10,
             "weight": 400,
@@ -80,68 +143,20 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "verified_copyfit_v3_under_source_pdf_and_page_renderer",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
+      "editorialStatus": "approved_in_payload_2026-10-26",
       "diagnosticRendering": "proposal",
-      "underCompositionJustification": "UNDER 3/4. A redação mantém as duas instruções e os termos da fonte, inclusive o numeral 4 em negrito. O original não contém quebras de parágrafo editoriais dentro deste bloco; as três linhas PT-BR cabem no frame original de quatro linhas e deixam apenas espaço interno livre, sem mover a Fase 1 nem alterar fonte, tamanho ou geometria. O leading usa multiplicador 1.1 (11 pt para fonte de 10 pt), conferindo com o intervalo de 11 pt entre as baselines do PDF-fonte. A forma Crawl Mode permanece explicitamente pendente de decisão terminológica humana.",
-      "pendingTerms": [
-        "Crawl Mode: retained in English because the project glossary has no approved PT-BR equivalent and saved usage conflicts."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 4,
-      "pageRendererVisualLineCount": 3,
-      "copyfitClassification": "UNDER",
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
       "copyfitMeasurementsByZoom": {
-        "200%": {
-          "status": "measured_copyfit_v3_script_visual_rows",
-          "sourcePdfVisualLineCount": 4,
-          "pageRendererVisualLineCount": 3,
-          "classification": "UNDER",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
-          "environment": {
-            "pageNumber": 14,
-            "pdfDocumentPageIndex": 13,
-            "language": "pt-BR",
-            "viewerZoom": "200%",
-            "viewportCssPixels": "1280x720",
-            "devicePixelRatio": 1.25,
-            "fontLoaded": true
-          },
-          "sourceEvidence": {
-            "bboxPt": [
-              86.17320251464844,
-              144.97418212890625,
-              402.4431457519531,
-              189.8741912841797
-            ],
-            "visualBaselinesPt": [
-              154.164,
-              165.164,
-              176.164,
-              187.164
-            ],
-            "spans": 6,
-            "visualRows": 4
-          },
-          "pageRendererEvidence": {
-            "spanKey": "page_14_block_0",
-            "readingMethod": "text rects of the review-highlighted unit",
-            "rangeRectFragments": 7,
-            "distinctVisualRows": 3,
-            "visualRowTopsCssPx": [
-              144.08,
-              152.98,
-              161.89
-            ],
-            "frameHeightCssPx": 36.4
-          },
-          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-        },
         "100%": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 4,
-          "pageRendererVisualLineCount": 3,
-          "classification": "UNDER",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
           "environment": {
             "pageNumber": 14,
             "pdfDocumentPageIndex": 13,
@@ -158,7 +173,7 @@
               402.4431457519531,
               189.8741912841797
             ],
-            "visualBaselinesPt": [
+            "visualRowBaselinesPt": [
               154.164,
               165.164,
               176.164,
@@ -169,15 +184,126 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_14_block_0",
-            "readingMethod": "text rects of the review-highlighted unit",
-            "rangeRectFragments": 7,
-            "distinctVisualRows": 3,
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 15,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
             "visualRowTopsCssPx": [
               352.63,
               357.06,
-              361.5
+              361.5,
+              365.94
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 18.2
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 14,
+            "pdfDocumentPageIndex": 13,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17320251464844,
+              144.97418212890625,
+              402.4431457519531,
+              189.8741912841797
+            ],
+            "visualRowBaselinesPt": [
+              154.164,
+              165.164,
+              176.164,
+              187.164
+            ],
+            "spans": 6,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_14_block_0",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 15,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
+            "visualRowTopsCssPx": [
+              144.08,
+              152.98,
+              161.89,
+              170.8
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 36.4
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         }
@@ -185,14 +311,14 @@
       "copyfitMeasurement": {
         "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 4,
-        "pageRendererVisualLineCount": 3,
-        "classification": "UNDER",
-        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 14,
           "pdfDocumentPageIndex": 13,
           "language": "pt-BR",
-          "viewerZoom": "100%",
+          "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
           "devicePixelRatio": 1.25,
           "fontLoaded": true
@@ -204,7 +330,7 @@
             402.4431457519531,
             189.8741912841797
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             154.164,
             165.164,
             176.164,
@@ -215,21 +341,54 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_14_block_0",
-          "readingMethod": "text rects of the review-highlighted unit",
-          "rangeRectFragments": 7,
-          "distinctVisualRows": 3,
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 15,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 4,
           "visualRowTopsCssPx": [
-            352.63,
-            357.06,
-            361.5
+            144.08,
+            152.98,
+            161.89,
+            170.8
           ],
-          "frameHeightCssPx": 18.2
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 36.4
         },
-        "editorialStatus": "The updated glossary form was remeasured at 100% and 200%; both runs report 4 source rows / 3 PageRenderer rows (UNDER). Crawl Mode remains an editorial exception. Copyfit V3 is technical evidence only; editorial decision remains separate."
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     }
   ],
-  "note": "A first text-only slice for page 14. It preserves the source font family, size, bold numeral, color, frame and page hierarchy; Copyfit V3 must be measured against the official PDF and live PageRenderer before technical validation.\n\n2026-10-22 update: page_14_block_0__pt-BR: The updated glossary form was remeasured at 100% and 200%; both runs report 4 source rows / 3 PageRenderer rows (UNDER). Crawl Mode remains an editorial exception. No Payload write or approval was made in this update.",
+  "note": "A first text-only slice for page 14. It preserves the source font family, size, bold numeral, color, frame and page hierarchy; Copyfit V3 must be measured against the official PDF and live PageRenderer before technical validation.\n\n2026-10-22 update: page_14_block_0__pt-BR: The updated glossary form was remeasured at 100% and 200%; both runs report 4 source rows / 3 PageRenderer rows (UNDER). Crawl Mode remains an editorial exception. No Payload write or approval was made in this update.\n\n2026-10-26: A redação revisada foi persistida como rascunho pending no Payload pelo Rich Block Editor; o recibo e o texto publicado anterior foram preservados. Copyfit anterior invalidado. Nova medição V3 a 100% e 200% pendente antes de qualquer publicação.\n\n2026-10-26 finalization: The revised PT-BR draft was measured EXACT 4/4 in the PDF and live PageRenderer at 100% and 200%, then approved through the official transactional Reviewer endpoint. Payload readback confirms translation 545, review 216, current EXACT evidence, and the previous published wording retained in publication history. Rich spans retain bold Optima 10 pt for “4”; Modo Exploração follows the owner’s decision. Full-page export certification remains pending.",
   "revisions": [
     {
       "recordedAt": "2026-10-22",
@@ -288,6 +447,64 @@
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         }
+      }
+    },
+    {
+      "recordedAt": "2026-10-26",
+      "spanKey": "page_14_block_0__pt-BR",
+      "payloadReviewId": 216,
+      "reason": "Revisão corretiva para atender ao gate EXACT vigente; a versão publicada anterior permanece no recibo de publicação do Payload até nova aprovação oficial.",
+      "previousProposalText": "Seja no Modo Exploração ou no Modo Aventura, os jogadores receberão instruções para preparar Encontros. Ao preparar um Encontro, leiam as Regras Especiais de Encontro e sigam as 4 Fases de preparação a seguir:",
+      "previousData": {
+        "schemaVersion": 2,
+        "spanKey": "page_14_block_0__pt-BR",
+        "bbox": [
+          86.17320251464844,
+          144.97418212890625,
+          402.4431457519531,
+          189.8741912841797
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Seja no Modo Exploração ou no Modo Aventura, os jogadores receberão instruções para preparar Encontros. Ao preparar um Encontro, leiam as Regras Especiais de Encontro e sigam as ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "4",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " Fases de preparação a seguir:",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "previousCopyfitEvidence": {
+        "technicalStatus": "changed_since_technical_validation",
+        "copyfitClassification": null,
+        "sourcePdfVisualLineCount": null,
+        "pageRendererVisualLineCount": null,
+        "copyfitMeasurementFingerprint": null,
+        "underCompositionJustification": null
       }
     }
   ]

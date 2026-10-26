@@ -8,7 +8,7 @@
   "sourceHashes": {
     "pageDom": "80889C18595D75C60A86F6518F67EA7D13D411B1DE212F539B775A18F16D643C",
     "background": "8701C861A2FCC04F2D732DD0F34D640BF5A9F421837FA6345AF8A4D09E58361E",
-    "inlineElements": "6FC9AB8D1D2FFB262F8C775359764245CBF0F103E480B2BEE29CEE2A2B557E49",
+    "inlineElements": "F955AF355A50011C1AB0C0C88E0DDEFC62DDA422CD30922DDBAB1902522BAAAE",
     "layoutFrames": "F12FC7615DB20B16628BE352EF08A2A65917CEB48A1BAAB2F45E778492BBE324"
   },
   "counts": {
@@ -795,11 +795,32 @@
             "weight": 400,
             "style": "normal",
             "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "resource.sp-orb",
+            "symbolMetrics": {
+              "widthEm": 1.5497,
+              "heightEm": 1.5126037,
+              "verticalAlignEm": 0.4,
+              "advanceEm": 1.5497,
+              "sourceAssetUrl": "/pages/page_047/resource-sp-orb.png",
+              "sourceAppearanceKey": "736bb0ccc8e7f3246f08efffb08e8cb8e5b4c7746ce92e6d4455939e5f5300b2"
+            },
+            "sourceRendering": "semantic-inline"
           }
         ],
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "resource.sp-orb"
+        ]
       },
-      "technicalStatus": "not_recorded",
+      "technicalStatus": "verified_copyfit_v3_exact_p047_semantic_symbols_100_200",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
@@ -811,14 +832,15 @@
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "Official PDF source visual rows compared with the live PT-BR PageRenderer at 100% and 200%. Existing resource.sp-orb is included in the same text row; no prose or rich style changed beyond inserting the source-backed semantic object.",
         "environment": {
           "pageNumber": 47,
           "pdfDocumentPageIndex": 46,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -831,19 +853,107 @@
             209.496
           ],
           "spans": 1,
-          "visualRows": 1
+          "visualRows": 1,
+          "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351"
         },
         "pageRendererEvidence": {
           "spanKey": "page_47_unit_p47-block-15-paragraph-2__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 1,
+          "readingMethod": "PageRenderer text rects plus visible semantic-symbol rects",
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            188.91
+            190.27
           ],
-          "frameHeightCssPx": 9.6
+          "renderedSymbolIds": [
+            "resource.sp-orb"
+          ]
         },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 evidence does not approve or publish the translation."
+      },
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "Official PDF source visual rows compared with the live PT-BR PageRenderer at 100% and 200%. Existing resource.sp-orb is included in the same text row; no prose or rich style changed beyond inserting the source-backed semantic object.",
+          "environment": {
+            "pageNumber": 47,
+            "pdfDocumentPageIndex": 46,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              104.17059326171875,
+              200.3060302734375,
+              204.22056579589844,
+              212.20603942871094
+            ],
+            "visualBaselinesPt": [
+              209.496
+            ],
+            "spans": 1,
+            "visualRows": 1,
+            "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351"
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_47_unit_p47-block-15-paragraph-2__pt-BR",
+            "readingMethod": "PageRenderer text rects plus visible semantic-symbol rects",
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              375.7
+            ],
+            "renderedSymbolIds": [
+              "resource.sp-orb"
+            ]
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 evidence does not approve or publish the translation."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "Official PDF source visual rows compared with the live PT-BR PageRenderer at 100% and 200%. Existing resource.sp-orb is included in the same text row; no prose or rich style changed beyond inserting the source-backed semantic object.",
+          "environment": {
+            "pageNumber": 47,
+            "pdfDocumentPageIndex": 46,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              104.17059326171875,
+              200.3060302734375,
+              204.22056579589844,
+              212.20603942871094
+            ],
+            "visualBaselinesPt": [
+              209.496
+            ],
+            "spans": 1,
+            "visualRows": 1,
+            "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351"
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_47_unit_p47-block-15-paragraph-2__pt-BR",
+            "readingMethod": "PageRenderer text rects plus visible semantic-symbol rects",
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              190.27
+            ],
+            "renderedSymbolIds": [
+              "resource.sp-orb"
+            ]
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 evidence does not approve or publish the translation."
+        }
       }
     },
     {
@@ -1461,13 +1571,14 @@
             "disableLigatures": true
           },
           {
-            "text": "A",
+            "text": "￼",
             "font": "OptimaLTStd-Bold",
             "size": 8,
             "color": "#231f20",
             "weight": 700,
             "style": "normal",
-            "disableLigatures": true
+            "disableLigatures": true,
+            "symbolId": "marker.reference.a"
           },
           {
             "text": " representa um custo de ",
@@ -1515,13 +1626,14 @@
             "disableLigatures": true
           },
           {
-            "text": "B",
+            "text": "￼",
             "font": "OptimaLTStd-Bold",
             "size": 8,
             "color": "#231f20",
             "weight": 700,
             "style": "normal",
-            "disableLigatures": true
+            "disableLigatures": true,
+            "symbolId": "marker.reference.b"
           },
           {
             "text": " mostra a Tag de Condição EXAUSTAR, que exige que o Aventureiro exauste esta Disciplina quando sua Habilidade é usada. ",
@@ -1533,13 +1645,14 @@
             "disableLigatures": true
           },
           {
-            "text": "C",
+            "text": "￼",
             "font": "OptimaLTStd-Bold",
             "size": 8,
             "color": "#231f20",
             "weight": 700,
             "style": "normal",
-            "disableLigatures": true
+            "disableLigatures": true,
+            "symbolId": "marker.reference.c"
           },
           {
             "text": " mostra uma Condição de Texto que determina que o alvo deve estar dentro da ",
@@ -1569,28 +1682,34 @@
             "disableLigatures": true
           }
         ],
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "marker.reference.a",
+          "marker.reference.b",
+          "marker.reference.c"
+        ]
       },
-      "technicalStatus": "verified_viewer_pdf_0_05pt_tolerance",
+      "technicalStatus": "verified_copyfit_v3_exact_p047_semantic_symbols_100_200",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "sourcePdfVisualLineCount": 6,
       "pageRendererVisualLineCount": 6,
       "copyfitClassification": "EXACT",
+      "underCompositionJustification": "As 6 linhas físicas do PDF original e as 6 linhas do PageRenderer coincidem. A extração em baselines de 1 pt separa A/B/C por 1,06 pt acima da linha de texto correspondente; por isso, seus 9 clusters brutos não são 9 linhas visuais.",
       "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
+        "status": "measured_copyfit_v3_script_visual_rows_with_source_visual_reconciliation",
         "sourcePdfVisualLineCount": 6,
         "pageRendererVisualLineCount": 6,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "Source count uses the six visible prose rows in the unchanged official PDF. The raw 1 pt PyMuPDF baseline grouping returns nine clusters because the detached A/B/C source marker glyphs sit 1.06 pt above their host prose rows; this is the same source-span artifact documented in the prior accepted p.47 measurement. Current live PT-BR PageRenderer shows six visual rows at both 100% and 200%, with each semantic marker grouped on its host row.",
         "environment": {
           "pageNumber": 47,
           "pdfDocumentPageIndex": 46,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -1599,7 +1718,7 @@
             711.3160400390625,
             382.8706970214844
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             323.161,
             334.095,
             335.161,
@@ -1610,27 +1729,149 @@
             369.161,
             380.161
           ],
-          "spans": 23,
-          "visualRows": 9
+          "rawPyMuPdfBaselineClustersAt1Pt": 9,
+          "visualRows": 6,
+          "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+          "note": "Three detached reference-letter baselines are 1.06 pt above their host rows; physical PDF crop has six prose rows."
         },
         "pageRendererEvidence": {
-          "spanKey": "page_47_block_19__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 23,
+          "spanKey": "page_47_block_19",
+          "readingMethod": "PageRenderer text Range rects plus visible semantic-symbol rects",
           "distinctVisualRows": 6,
           "visualRowTopsCssPx": [
             279.73,
-            290.75,
-            300.47,
-            309.39,
-            318.3,
-            327.22
+            290.42,
+            299.33,
+            308.23,
+            317.14,
+            326.05
           ],
-          "frameHeightCssPx": 57.1
+          "renderedSymbolIds": [
+            "marker.reference.a",
+            "marker.reference.b",
+            "marker.reference.c"
+          ]
         },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 evidence does not approve or publish the translation."
       },
-      "underCompositionJustification": "6 linhas visuais exatas, casando 1:1 com as 6 linhas de texto do PDF original (PyMuPDF contava 9 artificialmente devido à baseline das letras de rótulo A, B, C a 1.06pt acima)."
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows_with_source_visual_reconciliation",
+          "sourcePdfVisualLineCount": 6,
+          "pageRendererVisualLineCount": 6,
+          "classification": "EXACT",
+          "method": "Source count uses the six visible prose rows in the unchanged official PDF. The raw 1 pt PyMuPDF baseline grouping returns nine clusters because the detached A/B/C source marker glyphs sit 1.06 pt above their host prose rows; this is the same source-span artifact documented in the prior accepted p.47 measurement. Current live PT-BR PageRenderer shows six visual rows at both 100% and 200%, with each semantic marker grouped on its host row.",
+          "environment": {
+            "pageNumber": 47,
+            "pdfDocumentPageIndex": 46,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              427.4786071777344,
+              312.3727111816406,
+              711.3160400390625,
+              382.8706970214844
+            ],
+            "visualRowBaselinesPt": [
+              323.161,
+              334.095,
+              335.161,
+              346.095,
+              347.161,
+              358.161,
+              368.095,
+              369.161,
+              380.161
+            ],
+            "rawPyMuPdfBaselineClustersAt1Pt": 9,
+            "visualRows": 6,
+            "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+            "note": "Three detached reference-letter baselines are 1.06 pt above their host rows; physical PDF crop has six prose rows."
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_47_block_19",
+            "readingMethod": "PageRenderer text Range rects plus visible semantic-symbol rects",
+            "distinctVisualRows": 6,
+            "visualRowTopsCssPx": [
+              421.45,
+              425.89,
+              430.44,
+              434.98,
+              439.42,
+              443.97
+            ],
+            "renderedSymbolIds": [
+              "marker.reference.a",
+              "marker.reference.b",
+              "marker.reference.c"
+            ]
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 evidence does not approve or publish the translation."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows_with_source_visual_reconciliation",
+          "sourcePdfVisualLineCount": 6,
+          "pageRendererVisualLineCount": 6,
+          "classification": "EXACT",
+          "method": "Source count uses the six visible prose rows in the unchanged official PDF. The raw 1 pt PyMuPDF baseline grouping returns nine clusters because the detached A/B/C source marker glyphs sit 1.06 pt above their host prose rows; this is the same source-span artifact documented in the prior accepted p.47 measurement. Current live PT-BR PageRenderer shows six visual rows at both 100% and 200%, with each semantic marker grouped on its host row.",
+          "environment": {
+            "pageNumber": 47,
+            "pdfDocumentPageIndex": 46,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              427.4786071777344,
+              312.3727111816406,
+              711.3160400390625,
+              382.8706970214844
+            ],
+            "visualRowBaselinesPt": [
+              323.161,
+              334.095,
+              335.161,
+              346.095,
+              347.161,
+              358.161,
+              368.095,
+              369.161,
+              380.161
+            ],
+            "rawPyMuPdfBaselineClustersAt1Pt": 9,
+            "visualRows": 6,
+            "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+            "note": "Three detached reference-letter baselines are 1.06 pt above their host rows; physical PDF crop has six prose rows."
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_47_block_19",
+            "readingMethod": "PageRenderer text Range rects plus visible semantic-symbol rects",
+            "distinctVisualRows": 6,
+            "visualRowTopsCssPx": [
+              279.73,
+              290.42,
+              299.33,
+              308.23,
+              317.14,
+              326.05
+            ],
+            "renderedSymbolIds": [
+              "marker.reference.a",
+              "marker.reference.b",
+              "marker.reference.c"
+            ]
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 evidence does not approve or publish the translation."
+        }
+      }
     },
     {
       "blockIndex": 25,

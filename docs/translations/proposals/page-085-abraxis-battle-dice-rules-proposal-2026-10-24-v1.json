@@ -1040,12 +1040,9 @@
         "managedSourceSymbols": []
       },
       "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "editorialStatus": "Approved through the official Reviewer; existing canonical PageRenderer Copyfit V3 EXACT 4/4, no unresolved unit terms, rich spans verified, Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Lock In → Travar e Fate Token → Ficha de Destino são escolhas locais provisórias; não foram canonizadas no glossário.",
-        "Abraxis Point → Ponto de Abraxis, Damage Token → Ficha de Dano e Battle Dice → Dados de Batalha de Abraxis permanecem escolhas locais desta página, sem aprovação global nova."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 4,
       "pageRendererVisualLineCount": 4,
       "copyfitClassification": "EXACT",
@@ -1146,6 +1143,14 @@
           "frameHeightCssPx": 36.4
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 533,
+        "translationId": 958,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T11:04:47.257Z",
+        "technicalStatus": "measured_copyfit_v3_exact_pending_human_review"
       }
     },
     {
@@ -1311,7 +1316,7 @@
       "spanKey": "page_85_block_4__pt-BR",
       "language": "pt-BR",
       "sourceText": "If Adventurers can match their Symbols well enough to survive these 5 Rounds, they'll be rewarded. Rewards earned via Abraxis Battle Dice are cumulative. Meaning, that if all 4 Adventurers survive, they would gain the rewards listed for all four tiers. (1 Adventurer, 2 Adventurer, etc.)",
-      "proposalText": "Se os Aventureiros corresponderem aos Símbolos o bastante para sobreviver às 5 Rodadas, receberão recompensas. As recompensas de Dados de Batalha de Abraxis são cumulativas: se todos os 4 sobreviverem, recebem as dos quatro níveis (1 Aventureiro, 2 Aventureiros etc.).",
+      "proposalText": "Se os Aventureiros corresponderem aos Símbolos o bastante para sobreviver às 5 Rodadas, receberão recompensas. As recompensas de Dados de Batalha de Abraxis são cumulativas: se todos os 4 sobreviverem, obtêm as recompensas dos quatro Tiers (1 Aventureiro, 2 Aventureiros etc.).",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_85_block_4__pt-BR",
@@ -1380,7 +1385,7 @@
             "disableLigatures": true
           },
           {
-            "text": " sobreviverem, recebem as dos quatro níveis (",
+            "text": " sobreviverem, obtêm as recompensas dos quatro Tiers (",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1427,18 +1432,72 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "technicalStatus": "changed_since_technical_validation",
+      "editorialStatus": "Applied approved Gain→obter and Tier→Tier contextually; local Battle Dice term remains pending; Copyfit must be remeasured.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
-        "Lock In → Travar e Fate Token → Ficha de Destino são escolhas locais provisórias; não foram canonizadas no glossário.",
-        "Abraxis Point → Ponto de Abraxis, Damage Token → Ficha de Dano e Battle Dice → Dados de Batalha de Abraxis permanecem escolhas locais desta página, sem aprovação global nova."
+        "Battle Dice → Dados de Batalha de Abraxis remains a local choice for this page; no global glossary decision is being introduced."
       ],
-      "sourcePdfVisualLineCount": 4,
-      "pageRendererVisualLineCount": 4,
-      "copyfitClassification": "EXACT",
-      "copyfitMeasurementsByZoom": {
-        "200%": {
+      "sourcePdfVisualLineCount": null,
+      "pageRendererVisualLineCount": null,
+      "copyfitClassification": null,
+      "copyfitMeasurement": null,
+      "preEditCopyfit": {
+        "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
+        "copyfitClassification": "EXACT",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "copyfitMeasurementsByZoom": {
+          "200%": {
+            "status": "measured_copyfit_v3_script_visual_rows",
+            "sourcePdfVisualLineCount": 4,
+            "pageRendererVisualLineCount": 4,
+            "classification": "EXACT",
+            "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans grouped by their parent visual text-line box centre (1 pt), so one row split around an inline symbol remains one row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+            "environment": {
+              "pageNumber": 85,
+              "pdfDocumentPageIndex": 84,
+              "language": "pt-BR",
+              "viewerZoom": "200%",
+              "viewportCssPixels": "1280x720",
+              "devicePixelRatio": 1.25,
+              "fontLoaded": true
+            },
+            "sourceEvidence": {
+              "bboxPt": [
+                86.78590393066406,
+                314.23760986328125,
+                401.5858459472656,
+                359.1575927734375
+              ],
+              "visualRowCentersPt": [
+                320.198,
+                331.208,
+                342.198,
+                353.198
+              ],
+              "spans": 11,
+              "visualRows": 4
+            },
+            "pageRendererEvidence": {
+              "spanKey": "page_85_block_4",
+              "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+              "rangeRectFragments": 16,
+              "renderedSymbolIds": [],
+              "semanticSymbolOnlyRows": 0,
+              "distinctVisualRows": 4,
+              "visualRowTopsCssPx": [
+                281.23,
+                290.14,
+                299.05,
+                307.95
+              ],
+              "frameHeightCssPx": 36.4
+            },
+            "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+          }
+        },
+        "copyfitMeasurement": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 4,
           "pageRendererVisualLineCount": 4,
@@ -1485,56 +1544,10 @@
             "frameHeightCssPx": 36.4
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-        }
+        },
+        "note": "Preserved before applying approved terminology; invalid for the revised text."
       },
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 4,
-        "pageRendererVisualLineCount": 4,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans grouped by their parent visual text-line box centre (1 pt), so one row split around an inline symbol remains one row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 85,
-          "pdfDocumentPageIndex": 84,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25,
-          "fontLoaded": true
-        },
-        "sourceEvidence": {
-          "bboxPt": [
-            86.78590393066406,
-            314.23760986328125,
-            401.5858459472656,
-            359.1575927734375
-          ],
-          "visualRowCentersPt": [
-            320.198,
-            331.208,
-            342.198,
-            353.198
-          ],
-          "spans": 11,
-          "visualRows": 4
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_85_block_4",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-          "rangeRectFragments": 16,
-          "renderedSymbolIds": [],
-          "semanticSymbolOnlyRows": 0,
-          "distinctVisualRows": 4,
-          "visualRowTopsCssPx": [
-            281.23,
-            290.14,
-            299.05,
-            307.95
-          ],
-          "frameHeightCssPx": 36.4
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      "copyfitMeasurementFingerprint": null
     },
     {
       "blockIndex": 5,
@@ -1579,12 +1592,9 @@
         "managedSourceSymbols": []
       },
       "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "editorialStatus": "Approved through the official Reviewer; existing canonical PageRenderer Copyfit V3 EXACT 1/1, no unresolved unit terms, rich spans verified, Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Lock In → Travar e Fate Token → Ficha de Destino são escolhas locais provisórias; não foram canonizadas no glossário.",
-        "Abraxis Point → Ponto de Abraxis, Damage Token → Ficha de Dano e Battle Dice → Dados de Batalha de Abraxis permanecem escolhas locais desta página, sem aprovação global nova."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
@@ -1673,6 +1683,14 @@
           "frameHeightCssPx": 9.7
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 536,
+        "translationId": 959,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T11:04:55.803Z",
+        "technicalStatus": "measured_copyfit_v3_exact_pending_human_review"
       }
     },
     {
@@ -4101,12 +4119,9 @@
         "managedSourceSymbols": []
       },
       "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "editorialStatus": "Approved through the official Reviewer; existing canonical PageRenderer Copyfit V3 EXACT 1/1, no unresolved unit terms, rich spans verified, Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Lock In → Travar e Fate Token → Ficha de Destino são escolhas locais provisórias; não foram canonizadas no glossário.",
-        "Abraxis Point → Ponto de Abraxis, Damage Token → Ficha de Dano e Battle Dice → Dados de Batalha de Abraxis permanecem escolhas locais desta página, sem aprovação global nova."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
@@ -4195,6 +4210,14 @@
           "frameHeightCssPx": 9.6
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 547,
+        "translationId": 960,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T11:05:04.285Z",
+        "technicalStatus": "measured_copyfit_v3_exact_pending_human_review"
       }
     },
     {
@@ -4504,12 +4527,9 @@
         "managedSourceSymbols": []
       },
       "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "editorialStatus": "Approved through the official Reviewer; existing canonical PageRenderer Copyfit V3 EXACT 1/1, no unresolved unit terms, rich spans verified, Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Lock In → Travar e Fate Token → Ficha de Destino são escolhas locais provisórias; não foram canonizadas no glossário.",
-        "Abraxis Point → Ponto de Abraxis, Damage Token → Ficha de Dano e Battle Dice → Dados de Batalha de Abraxis permanecem escolhas locais desta página, sem aprovação global nova."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
@@ -4598,6 +4618,14 @@
           "frameHeightCssPx": 9.7
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 549,
+        "translationId": 961,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T11:05:12.765Z",
+        "technicalStatus": "measured_copyfit_v3_exact_pending_human_review"
       }
     },
     {
@@ -4607,7 +4635,7 @@
       "spanKey": "page_85_block_20__pt-BR",
       "language": "pt-BR",
       "sourceText": "After losing or gaining Abraxis Points, the Round ends. The game continues for a total of 5 Rounds. After the end of the fifth Round, rewards will be Gained based on how many Adventurers are still in the game after all 5 Rounds. These rewards are detailed in the Adventure Book on the page with the corresponding Abraxis Card Encounter.",
-      "proposalText": "Depois de ganhar ou perder Pontos de Abraxis, a Rodada termina. A partida dura 5 Rodadas. Ao fim da quinta Rodada, as recompensas dependem de quantos Aventureiros restarem na partida após todas as 5 Rodadas. Os detalhes estão no Livro de Aventura, na página do Encontro correspondente à carta de Abraxis.",
+      "proposalText": "Depois de obter ou perder Pontos de Abraxis, a Rodada termina. A partida dura 5 Rodadas. Ao fim da quinta Rodada, obtêm-se recompensas conforme o número de Aventureiros ainda na partida após as 5 Rodadas. Os detalhes estão no Livro de Aventura, na página do Encontro correspondente à carta de Abraxis.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_85_block_20__pt-BR",
@@ -4622,7 +4650,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Depois de ganhar ou perder Pontos de Abraxis, a ",
+            "text": "Depois de obter ou perder Pontos de Abraxis, a ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -4694,7 +4722,7 @@
             "disableLigatures": true
           },
           {
-            "text": ", as recompensas dependem de quantos Aventureiros restarem na partida após todas as ",
+            "text": ", obtêm-se recompensas conforme o número de Aventureiros ainda na partida após as ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -4741,18 +4769,74 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "technicalStatus": "changed_since_technical_validation",
+      "editorialStatus": "Applied approved Gain→obter contextually in both source occurrences; local Abraxis Points term remains pending; Copyfit must be remeasured.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
-        "Lock In → Travar e Fate Token → Ficha de Destino são escolhas locais provisórias; não foram canonizadas no glossário.",
-        "Abraxis Point → Ponto de Abraxis, Damage Token → Ficha de Dano e Battle Dice → Dados de Batalha de Abraxis permanecem escolhas locais desta página, sem aprovação global nova."
+        "Abraxis Points → Pontos de Abraxis remains a local choice for this page; no global glossary decision is being introduced."
       ],
-      "sourcePdfVisualLineCount": 5,
-      "pageRendererVisualLineCount": 5,
-      "copyfitClassification": "EXACT",
-      "copyfitMeasurementsByZoom": {
-        "200%": {
+      "sourcePdfVisualLineCount": null,
+      "pageRendererVisualLineCount": null,
+      "copyfitClassification": null,
+      "copyfitMeasurement": null,
+      "preEditCopyfit": {
+        "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
+        "copyfitClassification": "EXACT",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "copyfitMeasurementsByZoom": {
+          "200%": {
+            "status": "measured_copyfit_v3_script_visual_rows",
+            "sourcePdfVisualLineCount": 5,
+            "pageRendererVisualLineCount": 5,
+            "classification": "EXACT",
+            "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans grouped by their parent visual text-line box centre (1 pt), so one row split around an inline symbol remains one row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+            "environment": {
+              "pageNumber": 85,
+              "pdfDocumentPageIndex": 84,
+              "language": "pt-BR",
+              "viewerZoom": "200%",
+              "viewportCssPixels": "1280x720",
+              "devicePixelRatio": 1.25,
+              "fontLoaded": true
+            },
+            "sourceEvidence": {
+              "bboxPt": [
+                416.1493225097656,
+                220.92767333984375,
+                736.8799438476562,
+                276.8276672363281
+              ],
+              "visualRowCentersPt": [
+                226.878,
+                237.868,
+                248.878,
+                259.868,
+                270.878
+              ],
+              "spans": 10,
+              "visualRows": 5
+            },
+            "pageRendererEvidence": {
+              "spanKey": "page_85_block_20",
+              "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+              "rangeRectFragments": 19,
+              "renderedSymbolIds": [],
+              "semanticSymbolOnlyRows": 0,
+              "distinctVisualRows": 5,
+              "visualRowTopsCssPx": [
+                205.61,
+                214.52,
+                223.42,
+                232.33,
+                241.23
+              ],
+              "frameHeightCssPx": 45.3
+            },
+            "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+          }
+        },
+        "copyfitMeasurement": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 5,
           "pageRendererVisualLineCount": 5,
@@ -4801,58 +4885,10 @@
             "frameHeightCssPx": 45.3
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-        }
+        },
+        "note": "Preserved before applying approved terminology; invalid for the revised text."
       },
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 5,
-        "pageRendererVisualLineCount": 5,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans grouped by their parent visual text-line box centre (1 pt), so one row split around an inline symbol remains one row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 85,
-          "pdfDocumentPageIndex": 84,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25,
-          "fontLoaded": true
-        },
-        "sourceEvidence": {
-          "bboxPt": [
-            416.1493225097656,
-            220.92767333984375,
-            736.8799438476562,
-            276.8276672363281
-          ],
-          "visualRowCentersPt": [
-            226.878,
-            237.868,
-            248.878,
-            259.868,
-            270.878
-          ],
-          "spans": 10,
-          "visualRows": 5
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_85_block_20",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-          "rangeRectFragments": 19,
-          "renderedSymbolIds": [],
-          "semanticSymbolOnlyRows": 0,
-          "distinctVisualRows": 5,
-          "visualRowTopsCssPx": [
-            205.61,
-            214.52,
-            223.42,
-            232.33,
-            241.23
-          ],
-          "frameHeightCssPx": 45.3
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      "copyfitMeasurementFingerprint": null
     },
     {
       "blockIndex": 29,
@@ -4897,12 +4933,9 @@
         "managedSourceSymbols": []
       },
       "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "editorialStatus": "Approved through the official Reviewer; existing canonical PageRenderer Copyfit V3 EXACT 2/2, no unresolved unit terms, rich spans verified, Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Lock In → Travar e Fate Token → Ficha de Destino são escolhas locais provisórias; não foram canonizadas no glossário.",
-        "Abraxis Point → Ponto de Abraxis, Damage Token → Ficha de Dano e Battle Dice → Dados de Batalha de Abraxis permanecem escolhas locais desta página, sem aprovação global nova."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 2,
       "pageRendererVisualLineCount": 2,
       "copyfitClassification": "EXACT",
@@ -4995,6 +5028,14 @@
           "frameHeightCssPx": 18.6
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 551,
+        "translationId": 962,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T11:05:21.273Z",
+        "technicalStatus": "measured_copyfit_v3_exact_pending_human_review"
       }
     },
     {
@@ -5040,12 +5081,9 @@
         "managedSourceSymbols": []
       },
       "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "editorialStatus": "Approved through the official Reviewer; existing canonical PageRenderer Copyfit V3 EXACT 3/3, no unresolved unit terms, rich spans verified, Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Lock In → Travar e Fate Token → Ficha de Destino são escolhas locais provisórias; não foram canonizadas no glossário.",
-        "Abraxis Point → Ponto de Abraxis, Damage Token → Ficha de Dano e Battle Dice → Dados de Batalha de Abraxis permanecem escolhas locais desta página, sem aprovação global nova."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 3,
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "EXACT",
@@ -5142,6 +5180,14 @@
           "frameHeightCssPx": 27.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 552,
+        "translationId": 963,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T11:05:29.772Z",
+        "technicalStatus": "measured_copyfit_v3_exact_pending_human_review"
       }
     },
     {
@@ -5187,12 +5233,9 @@
         "managedSourceSymbols": []
       },
       "technicalStatus": "measured_copyfit_v3_exact_pending_human_review",
-      "editorialStatus": "pending_human_review; provisional beta only",
+      "editorialStatus": "Approved through the official Reviewer; existing canonical PageRenderer Copyfit V3 EXACT 3/3, no unresolved unit terms, rich spans verified, Payload read-back confirmed.",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "Lock In → Travar e Fate Token → Ficha de Destino são escolhas locais provisórias; não foram canonizadas no glossário.",
-        "Abraxis Point → Ponto de Abraxis, Damage Token → Ficha de Dano e Battle Dice → Dados de Batalha de Abraxis permanecem escolhas locais desta página, sem aprovação global nova."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 3,
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "EXACT",
@@ -5289,6 +5332,14 @@
           "frameHeightCssPx": 27.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 553,
+        "translationId": 964,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T11:05:38.291Z",
+        "technicalStatus": "measured_copyfit_v3_exact_pending_human_review"
       }
     },
     {
@@ -5432,5 +5483,15 @@
       }
     }
   ],
-  "note": "Proposta beta da página 85. Copyfit V3 e revisão semântica ainda pendentes; termos específicos de Abraxis são locais e não canonizados. A arte da carta de exemplo permanece em inglês como componente-fonte preservado."
+  "note": "Proposta beta da página 85. Copyfit V3 e revisão semântica ainda pendentes; termos específicos de Abraxis são locais e não canonizados. A arte da carta de exemplo permanece em inglês como componente-fonte preservado.",
+  "revisions": [
+    {
+      "recordedAt": "2026-10-25",
+      "summary": "Cleared page-wide term notices only from blocks 2, 5, 16, 19, 29, 30 and 31, where the flagged Lock In/Fate Token/Abraxis Point/Damage Token/Battle Dice terms do not occur. Applied approved Tier→Tier and Gain→obter only in blocks 4, 18 and 20; local Abraxis/Battle Dice terms remain pending."
+    },
+    {
+      "recordedAt": "2026-10-25",
+      "summary": "Blocks 2, 5, 16, 19, 29–31 approved through the official Reviewer using existing EXACT/fingerprint evidence and individual Payload read-back; no unrelated page-wide terminology warnings were attached to these units (translations 958–964)."
+    }
+  ]
 }

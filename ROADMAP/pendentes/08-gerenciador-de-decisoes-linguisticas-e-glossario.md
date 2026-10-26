@@ -219,6 +219,8 @@ Ao aplicar alterações sugeridas por decisões linguísticas:
 
 ## 10. Fases Independentes de Implementação
 
+**Checkpoint 2026-10-25 — Fase 1 em andamento:** a coleção Payload existente permanece canônica e recebeu metadados semânticos opcionais; a Central de Revisão agora consulta os registros com busca, filtros e exportação JSON/CSV. O piloto é pequeno e preserva IDs/histórico. Scanner de ocorrências e geração de propostas das Fases 2–4 continuam fora do escopo deste incremento. Ver `docs/project-progress/2026-10-24-semantic-glossary-pilot.md`.
+
 Cada fase entrega valor autônomo imediato, sem dependência de passos futuros:
 
 ### Fase 1: Consulta e Exportação no Visualizador (MVP)

@@ -1,6 +1,6 @@
 # p.33 — proposta completa de prosa PT-BR v6
 
-**Estado:** 19 unidades propostas; 19/19 aparecem no Viewer PT-BR e no PDF diagnóstico isolado. Todas mediram **EXACT (1 linha visual)** no Copyfit V3; o block_38 inclui a medição separada do texto e do símbolo inline agrupados na mesma linha. Todas as traduções continuam pendentes de revisão editorial humana. A página não está integralmente localizada: três overlays de carta continuam em inglês. Nenhum texto foi aprovado ou gravado no Payload.
+**Estado do diagnóstico v6 (histórico):** 19 unidades apareciam no Viewer PT-BR e no PDF isolado; a captura antecede as edições de terminologia descritas ao final. **Estado atual (2026-10-25):** 2/19 revisões estão aprovadas e 17 continuam pendentes; uma delas está OVER após duas tentativas de copyfit. A página segue parcial, com três overlays de carta em inglês e exceções editoriais abertas.
 
 ## Correção técnica do dado roxo em block_38
 
@@ -30,3 +30,11 @@ Na reabertura da proposta, o destaque do `block_37` terminava 3,92 pt antes do l
 - [Medições PageRenderer/PDF](../../../output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/pdf-metrics-v6.json), [prova de edição e copyfit](../../../output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/runtime-proof.json), [recibo do corredor](../../../output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/corridor-receipt.json), [integração do símbolo](../../../output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/integration-receipt.json) e [comparação visual localizada](../../../output/proofs/source-symbol-inline-focus-2026-10-23/p033-casting-label-die/source-visual-diff.json).
 - Rechecagem atual da família: [PDF EN-fonte](../../../output/proofs/source-symbol-inline-focus-2026-10-23/p033-conviction-label-dice/page-033-en-source.pdf), [PDF PT-BR diagnóstico](../../../output/proofs/source-symbol-inline-focus-2026-10-23/p033-conviction-label-dice/page-033-pt-BR-conviction-label.pdf), [capturas EN/PT-BR na mesma escala](../../../output/proofs/source-symbol-inline-focus-2026-10-23/p033-conviction-label-dice/) e [recibo com hashes e validação](../../../output/proofs/source-symbol-inline-focus-2026-10-23/p033-conviction-label-dice/snapshot-preparation-receipt.json). Ambos os PDFs passaram a verificação de página; o PT-BR usa snapshot isolado e não publica a proposta.
 - A proposta v5 e seus recibos anteriores permanecem registrados no JSON como histórico; nenhuma tradução humana foi sobrescrita.
+
+
+## Atualização editorial e Copyfit — 2026-10-25
+
+- A forma preferencial local `Adventurer Card → Ficha de Aventureiro` foi aplicada às ocorrências editáveis desta página sem alterar o estado HIPÓTESE do glossário 67; `Cartão de Aventureiro` continua alternativa e `Adventure Sheet → Ficha de Aventura` (id 7) segue distinto.
+- `page_33_unit_p33-block-35-default-dice-paragraph__pt-BR` preserva os dois símbolos `dice.purple` e os respectivos spans em negrito. Com `Ficha de Aventureiro`, o PageRenderer/PyMuPDF mediu EXACT 4/4 em 100% e 200%; o Reviewer oficial aprovou review1480 → translation807, com CAS/read-back. Os termos `Conviction` e `cast` seguem o glossário; a pendência residual “Upgrade” não aparece na fonte.
+- `page_33_block_20__pt-BR` usa `Exemplo na Ficha de Aventureiro:`. Após duas formulações, permanece EXACT 1/1 a 100%, mas OVER 1/2 a 200%; review1481 e a exceção permanecem abertos, sem aprovação ou nova tentativa.
+- Estado Payload reconciliado: 2 revisões aprovadas e 17 pendentes. O PDF v6 continua prova histórica; nenhuma exportação nova foi gerada.

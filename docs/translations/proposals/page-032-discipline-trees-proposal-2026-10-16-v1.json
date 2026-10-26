@@ -388,7 +388,7 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "As Disciplinas se dividem em ",
+            "text": "Há ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -406,7 +406,7 @@
             "disableLigatures": true
           },
           {
-            "text": " Árvores, e cada Árvore se divide em Níveis (",
+            "text": " Árvores de Disciplinas, cada uma dividida em Níveis (",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -424,7 +424,7 @@
             "disableLigatures": true
           },
           {
-            "text": "). Elas podem ser combinadas para personalizar seu Aventureiro. Aventureiros podem aprender Disciplinas de ",
+            "text": "). As Disciplinas podem ser combinadas para personalizar o Aventureiro. É possível aprender Disciplinas de ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -474,7 +474,7 @@
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "proposalText": "As Disciplinas se dividem em 5 Árvores com Níveis (LVL). Elas podem ser combinadas para personalizar o Aventureiro. É possível aprender Disciplinas de LVL 1 de qualquer Árvore, mas níveis superiores exigem ao menos 1 Disciplina de cada LVL inferior da mesma Árvore.",
+      "proposalText": "Há 5 Árvores de Disciplinas, cada uma dividida em Níveis (LVL). As Disciplinas podem ser combinadas para personalizar o Aventureiro. É possível aprender Disciplinas de LVL 1 de qualquer Árvore, mas as de LVL superior exigem ao menos 1 Disciplina de cada LVL inferior da mesma Árvore.",
       "sourceText": "Disciplines are separated into 5 different Discipline Trees, and each Tree is divided into Levels (LVL). Disciplines can be mixed and matched to customize your Adventurer. Adventurers may learn LVL 1 Disciplines from any Tree but higher LVL Disciplines require at least 1 Discipline from each lower LVL of the same Tree to learn them. ",
       "status": "proposal_pending_human_editorial_review",
       "pendingTerms": [
@@ -489,7 +489,7 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "As Disciplinas se dividem em ",
+            "text": "Há ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -507,7 +507,7 @@
             "disableLigatures": true
           },
           {
-            "text": " Árvores, e cada Árvore se divide em Níveis (",
+            "text": " Árvores de Disciplinas, cada uma dividida em Níveis (",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -525,7 +525,7 @@
             "disableLigatures": true
           },
           {
-            "text": "). Elas podem ser combinadas para personalizar seu Aventureiro. Aventureiros podem aprender Disciplinas de ",
+            "text": "). As Disciplinas podem ser combinadas para personalizar o Aventureiro. É possível aprender Disciplinas de ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -580,14 +580,15 @@
         "sourcePdfVisualLineCount": 5,
         "pageRendererVisualLineCount": 5,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 32,
           "pdfDocumentPageIndex": 31,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -596,7 +597,7 @@
             735.4939575195312,
             147.69029235839844
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             100.98,
             111.98,
             122.98,
@@ -608,19 +609,252 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_32_unit_p32-discipline-levels-body__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
           "rangeRectFragments": 17,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 5,
           "visualRowTopsCssPx": [
-            100.95,
-            109.86,
-            118.77,
-            127.67,
-            136.58
+            100.94,
+            109.84,
+            118.75,
+            127.66,
+            136.56
+          ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10481px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91529px",
+              "letterSpacing": "-0.121572px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10481px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91529px",
+              "letterSpacing": "-0.121572px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29433px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.02376px",
+              "letterSpacing": "-0.109415px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
           ],
           "frameHeightCssPx": 45.3
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 32,
+            "pdfDocumentPageIndex": 31,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              416.20977783203125,
+              91.76961517333984,
+              735.4939575195312,
+              147.69029235839844
+            ],
+            "visualRowBaselinesPt": [
+              100.98,
+              111.98,
+              122.98,
+              133.98,
+              144.98
+            ],
+            "spans": 18,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_32_unit_p32-discipline-levels-body__pt-BR",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 17,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              331.06,
+              335.5,
+              339.94,
+              344.38,
+              348.81
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 22.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 32,
+            "pdfDocumentPageIndex": 31,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              416.20977783203125,
+              91.76961517333984,
+              735.4939575195312,
+              147.69029235839844
+            ],
+            "visualRowBaselinesPt": [
+              100.98,
+              111.98,
+              122.98,
+              133.98,
+              144.98
+            ],
+            "spans": 18,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_32_unit_p32-discipline-levels-body__pt-BR",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 17,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              100.94,
+              109.84,
+              118.75,
+              127.66,
+              136.56
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10481px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91529px",
+                "letterSpacing": "-0.121572px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10481px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91529px",
+                "letterSpacing": "-0.121572px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29433px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.02376px",
+                "letterSpacing": "-0.109415px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 45.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     },
     {
@@ -814,7 +1048,7 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "Assemblage é a arte de sussurrar às coisas que caminham nos reinos além do nosso e de lidar com criaturas antigas que um dia estiveram além da nossa imaginação. As Habilidades de Assemblage costumam refletir um perfil versátil. Isso porque são tão diversas quanto as criaturas invocadas para realizá-las. Nos primeiros níveis de Assemblage, o jogador pode realizar uma ampla variedade de Ações, desde ganhar Ações extras até conceder ",
+            "text": "Assemblage é a arte de sussurrar às coisas que caminham nos reinos além do nosso e de lidar com criaturas antigas que um dia estiveram além da nossa imaginação. As Habilidades de Assemblage costumam refletir um perfil versátil. Isso porque são tão diversas quanto as criaturas invocadas para realizá-las. Nos primeiros níveis de Assemblage, o jogador pode realizar uma ampla variedade de Ações, desde obter Ações extras até conceder ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -846,30 +1080,33 @@
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "proposalText": "Assemblage é a arte de sussurrar às coisas que caminham nos reinos além do nosso e de lidar com criaturas antigas que um dia estiveram além da nossa imaginação. As Habilidades de Assemblage costumam refletir um perfil versátil. Isso porque são tão diversas quanto as criaturas invocadas para realizá-las. Nos primeiros níveis de Assemblage, o jogador pode realizar uma ampla variedade de Ações, desde ganhar Ações extras até conceder Efeitos Positivos.",
+      "proposalText": "Assemblage é a arte de sussurrar às coisas que caminham nos reinos além do nosso e de lidar com criaturas antigas que um dia estiveram além da nossa imaginação. As Habilidades de Assemblage costumam refletir um perfil versátil. Isso porque são tão diversas quanto as criaturas invocadas para realizá-las. Nos primeiros níveis de Assemblage, o jogador pode realizar uma ampla variedade de Ações, desde obter Ações extras até conceder Efeitos Positivos.",
       "sourceText": "Assemblage is the art of whispering to the things that walk in the realms outside of our own, and dealing with the ancient creatures that were once beyond our imagination. The Abilities in Assemblage often reflect a jack-of-all-trades mentality. This is because these Abilities are as diverse as the creatures you call upon to perform them. In the early levels of Assemblage, a player can perform a wide array of Actions, from Gaining extra Actions to granting Positive Effects.",
-      "status": "proposal_pending_human_editorial_review",
-      "pendingTerms": [
-        "Assemblage/Ability/Action/Positive Effects: formas locais propostas; nome de árvore pendente."
+      "status": "approved_and_published_via_official_reviewer",
+      "pendingTerms": [],
+      "notes": [
+        "Decisões locais desta unidade, sem criar verbetes globais: Assemblage permanece como nome próprio da Árvore, em paralelo a Cruor, Martial, Sanctus e Subterfuge; Action(s)→Ações segue a decisão aprovada 29; Gain→obter segue a decisão aprovada 4; Ability→Habilidade segue a decisão aprovada 5; Positive Effects→Efeitos Positivos é tradução literal contextual, mantendo o rich span em itálico."
       ],
       "semanticSymbols": [],
       "sourceBlockId": "block_44",
       "sourcePdfVisualLineCount": 5,
       "pageRendererVisualLineCount": 5,
       "copyfitClassification": "EXACT",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
       "copyfitMeasurement": {
         "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 5,
         "pageRendererVisualLineCount": 5,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 32,
           "pdfDocumentPageIndex": 31,
           "language": "pt-BR",
-          "viewerZoom": "200%",
+          "viewerZoom": "100%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -878,7 +1115,7 @@
             721.9812622070312,
             329.4996032714844
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             282.79,
             293.79,
             304.79,
@@ -890,20 +1127,232 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_32_block_13__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 11,
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 10,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 5,
           "visualRowTopsCssPx": [
-            248.31,
-            257.22,
-            266.13,
-            275.03,
-            283.94
+            404.75,
+            409.19,
+            413.63,
+            418.06,
+            422.5
           ],
-          "frameHeightCssPx": 45.3
+          "visualRowIntervalsPt": [
+            10.95,
+            10.95,
+            10.95,
+            10.95
+          ],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "4.05202px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "4.05202px",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 22.2
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 32,
+            "pdfDocumentPageIndex": 31,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              258.9007263183594,
+              273.599609375,
+              721.9812622070312,
+              329.4996032714844
+            ],
+            "visualRowBaselinesPt": [
+              282.79,
+              293.79,
+              304.79,
+              315.79,
+              326.79
+            ],
+            "spans": 7,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_32_block_13__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 10,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              248.31,
+              257.22,
+              266.13,
+              275.03,
+              283.94
+            ],
+            "visualRowIntervalsPt": [
+              10.99,
+              10.99,
+              10.99,
+              10.99
+            ],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 44.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 32,
+            "pdfDocumentPageIndex": 31,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              258.9007263183594,
+              273.599609375,
+              721.9812622070312,
+              329.4996032714844
+            ],
+            "visualRowBaselinesPt": [
+              282.79,
+              293.79,
+              304.79,
+              315.79,
+              326.79
+            ],
+            "spans": 7,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_32_block_13__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 10,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              404.75,
+              409.19,
+              413.63,
+              418.06,
+              422.5
+            ],
+            "visualRowIntervalsPt": [
+              10.95,
+              10.95,
+              10.95,
+              10.95
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 22.2
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "payloadReviewId": 1469,
+      "payloadTranslationId": 1185,
+      "approvedAt": "2026-10-26T00:20:44.126Z"
     },
     {
       "page": 32,

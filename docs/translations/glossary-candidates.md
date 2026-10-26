@@ -1,17 +1,20 @@
 # Glossary candidates from audited drafts
 
-This is a review queue, **not an addition to the official glossary**. The official glossary remains authoritative and unchanged. These proposals come from the current semantic drafts (pages 3–11 and 13); confirm them with the other translation team before treating any as project-wide terminology.
+This is a review queue, **not an approval list**. Payload collection `translation-glossary-decisions` is canonical for the structured IDs, statuses, relations, evidence and history already registered. The official Markdown glossary remains the base reference for terms not yet reconciled there. These proposals come from audited drafts; unresolved conflicts remain visible and do not authorize project-wide replacements.
 
 | English term/concept | Current draft rendering | Pages | Review note |
 |---|---|---:|---|
 | Adventure Mode | `Modo Aventura`; `Modo Aventureiro` | 4–6, 10, 13, 85 | Inconsistent between drafts. **Recommendation:** standardize on `Modo Aventura`; the other wording changes the sense from a game mode to a person. |
-| Tier | `Tier` | 3, 4, 13, 17, 26, 27, 28, 57, 85, 94, 101 | **Decidido canonicamente (18/10/2026):** `Tier → Tier` para classificação de itens e premiações em faixa, mantendo distinção estrita com `Level/LVL → Nível`. Incorporado ao glossário oficial. |
-| Bounty | `Recompensa`; `Livro de Recompensas` | 4, 7, 13 | Same proposed root appears in the mode, heading, and book name; confirm the game's intended PT term. |
-| Crawl Mode / Epic Crawl Mode | `Modo Crawl`; `Modo Exploração`; `Modo de Exploração`; `Modo de Exploração Épica` | 4–9 | The official glossary has no entry. P. 8 Payload uses `Modo Exploração` as a heading and `Modo de Exploração` in body text; p. 8–9 drafts use the latter. Decide whether this is a translated descriptive mode or a proper game-mode name before standardizing. |
+| Tier | `Tier` | 3, 4, 13, 17, 26, 27, 28, 57, 85, 94, 101 | **Decidido canonicamente (18/10/2026; Payload id 58):** `Tier → Tier` para classificação de itens e premiações em faixa. É distinto de `Level` por extenso e da sigla preservada `LVL` (Payload id 73). |
+| Bounty / Reward | `Recompensa(s)`; `prêmio`; `Caçada` contextualmente | 4, 7, 13 | **Decisão humana retomada (26/10/2026; conversas de 12/10 e 18/10):** ambos podem ser “Recompensa(s)”/“prêmio” em contextos distintos; no contexto de Aventura, usar “Recompensas” com inicial maiúscula. “Caçada” depende do sentido local de `Bounty`, não é substituição global. `Great Bounty` permanece nome próprio. Preservar as identidades EN separadas na busca e decidir a redação por contexto. Payload id 12 mantém o termo aprovado `Bounty → Recompensa`. |
+| Adventurer Card | `Ficha de Aventureiro` (proposta preferencial); `Cartão de Aventureiro`; `Carta de Aventureiro` | 10, 24 | The Component Summary and base `glossary.md` propose **Ficha de Aventureiro**. Payload id 67 records it as **HIPÓTESE**, reaffirmed by the user on 25/10/2026 but not approved as canonical terminology. `Cartão de Aventureiro` remains an alternative/hypothesis. Keep distinct from `Adventure Sheet → Ficha de Aventura` (id 7); the p. 24 draft is updated in the normal FIFO and remains pending. |
 | Rank | `Nível` | 9 | Not in the official glossary. Keep distinct from `Tier`/`Loot Level`; confirm whether `Rank` is best rendered as `Nível`, `Patamar`, or another rules term. |
 | Familiar | `Familiar`; `Carta de Familiar` | 4, 7 | Preserved as a game term; absent from the provided official glossary. |
 | Discipline Tree | `Árvore de Disciplinas` | 4 | Proposed label for the system structure; confirm capitalization and plural form. |
-| Terrain token | `Ficha de Terreno` | 5 | `Terrain` alone is officially `Terrenos`; confirm this compound before expanding it to other token families. |
+| Terrain Tokens | `Fichas de Terreno` | 5, 21, 23 | Payload id 69 marks this as **PADRÃO OBSERVADO**, not globally approved; distinguish from `Tiles → Peças` and keep linked page reviews pending. |
+| Range | `Alcance` | 17 | Payload id 70 records a **HIPÓTESE** for the general concept only; it is not the `REACH` Tag or `SOI`. |
+| Combatant Loot Card | `Cartão de Saque de Combatente` | — | Payload id 71 is a **HIPÓTESE**; the component name must remain distinct from abstract `Loot → Saque`. Confirm the printed component and PT form in the source PDF. |
+| DOUBLE (Tag) | `DOUBLE` | — | Payload id 72 is a scoped **HIPÓTESE** to preserve the printed identifier; it is not `Double Encounter → Encontro Duplo`. |
 | Initiative Track | `Trilha de Iniciativa` | 5, 6 | Repeated proposal; absent from the official glossary. |
 | Hidden Card | `Carta Oculta` | 4, 6, 13 | Repeated capitalization-sensitive game term; confirm whether the adjective stays capitalized in prose. |
 | Red Reveal Decoder | `Decodificador de Revelação Vermelha` | 6, 7 | The source also contains the apparent typo `Red Reveal Recoder`; preserve and document that source anomaly rather than silently normalizing the English. |
@@ -24,15 +27,27 @@ This is a review queue, **not an addition to the official glossary**. The offici
 | Lock In / Locked In | `Fixar` / `Fixado` | 85 | Action-state pair must remain unambiguous and consistent through the procedure. |
 | Damage token / SP token | `Ficha(s) de Dano` / `Ficha(s) de SP` | 85 | Component names used to track values; confirm capitalization and whether SP is expanded. |
 | Adventure Book | `Livro de Aventura` | 85 | Cross-book reference; confirm title/capitalization against the Adventure Book localization. |
-| Adventure Sheet / Adventurer Sheet | `Ficha de Aventura`; `Ficha da Aventura`; `Ficha de Aventureiro` | 10, 11, 13 | P. 11's source uses both English forms: its PT text maps `Adventure Sheet` to `Ficha de Aventura` and `Adventurer Sheet` to `Ficha de Aventureiro`. P. 10/13 also differ on the first form; confirm whether the source distinction is intentional. |
+| Adventure Sheet / Adventurer Sheet | `Adventure Sheet → Ficha de Aventura` (approved, Payload id 7); `Adventurer Sheet → Ficha de Aventureiro` (approved, Payload id 75); `Ficha da Aventura` remains an alternative | 10, 11, 13, 28 | Keep the two source forms distinct. The p. 28 user decision also leaves `Adventurer Card → Ficha de Aventureiro` (Payload id 67) as a hypothesis; it does not promote that separate term or its alternatives. |
 | Unselectable / Selectable / Injured | `Não Selecionável`; `Selecionável`; `Ferido` | 11 | Proposed status labels; absent from the official glossary. Confirm these before using them as global terms. |
 | Party Tuck Bag | `Bolsa do Grupo` | 10 | Proposed name for the shared storage bag. Keep distinct from official `Party Stash → Estoque do Grupo` until the compound term is confirmed. |
 
 ## Already governed by the official glossary
 
-Do not re-decide these through this candidate list: `Tiles → Peças`, `Standup(s) → Miniatura(s) de Papel`, `Loot → Saque`, `Adventurers → Aventureiros`, `Terrain → Terrenos`, `Token → Ficha`, `Draw → Compre`, `Story Round → Rodada de História`, `Shop and Train → Comprar e Treinar`, `Explore → Explorar`, `Venture Forth → Aventurar-se`, `Special Encounter Rules → Regras Especiais de Encontro`, `Item Upgrade → Aprimoramento de Item`, and `Tier → Tier`.
+Do not re-decide these through this candidate list: `Tiles → Peças`, `Standup(s) → Miniatura(s) de Papel`, `Loot → Saque`, `Adventurers → Aventureiros`, `Terrain → Terrenos`, `Token → Ficha`, `Draw → Compre`, `Story Round → Rodada de História`, `Shop and Train → Comprar e Treinar`, `Explore → Explorar`, `Venture Forth → Aventurar-se`, `Special Encounter Rules → Regras Especiais de Encontro`, `Item Upgrade → Aprimoramento de Item`, `Tier → Tier`, `Crawl Mode → Modo Exploração`, `Epic Crawl Mode → Modo Exploração Épica`, and `Crawl Book → Livro de Masmorras`.
 
 When a team decision arrives, update this register with the decision and date, then update affected page drafts and the maintained official glossary only if the glossary owner approves the change.
+
+## Decisão do usuário — Modo Exploração (24/10/2026)
+
+O usuário escolheu **Crawl Mode → Modo Exploração**, preferindo essa forma sem a preposição “de”. Para o composto **Epic Crawl Mode**, usar **Modo Exploração Épica**. A decisão está no glossário oficial e no Payload; a decisão anterior rejeitada `Modo Crawl` (id 61) permanece preservada como histórico.
+
+## Decisão do usuário — Livro de Masmorras (24/10/2026)
+
+O usuário confirmou **Crawl Book → Livro de Masmorras** (Payload `translation-glossary-decisions`, id **66**). É um componente separado do Modo Exploração. A decisão fixa a terminologia, mas não aprova nem publica as unidades que a usam. Para `Adventurer Card`, veja a preferência registrada abaixo; a proposta continua sem aprovação canônica.
+
+## Preferência do usuário — Adventurer Card (25/10/2026)
+
+O Sumário de Componentes e o documento-base `glossary.md` propõem **Ficha de Aventureiro** para `Adventurer Card`; o usuário reafirmou essa preferência em 25/10/2026. Payload id **67** continua **HIPÓTESE**; **Cartão de Aventureiro** permanece alternativa/hipótese, e **Carta de Aventureiro** permanece alternativa. Em 26/10/2026, o usuário confirmou separadamente **Adventurer Sheet → Ficha de Aventureiro** (Payload id 75), distinto de **Adventure Sheet → Ficha de Aventura** (id 7). Essa decisão não promove nem altera o id 67.
 
 ## Cross-project terminology evidence — chapters 1–3 audit (2026-10-22)
 
@@ -40,7 +55,7 @@ Source: `C:\Users\bruno\Downloads\Auditoria_terminologica_Middara_capitulos_1_a_
 
 | Rulebook term / issue | Evidence and current handling |
 |---|---|
-| `Adventure Sheet` / `Adventurer Sheet` | The audit reports `Ficha de Aventura` in 8 files, `Ficha de Aventureiro` in 16, plus `Folha de Aventura` in 8; C3/73 reportedly uses both `Ficha de Aventura` and `Folha de Aventura` for related labels. Retain the existing candidate row above. Prefer `Ficha de Aventura` for the Rulebook component provisionally, but keep the source distinction and affected units open for contextual review; no mass replacement. |
+| `Adventure Sheet` / `Adventurer Sheet` | The audit reports `Ficha de Aventura` in 8 files, `Ficha de Aventureiro` in 16, plus `Folha de Aventura` in 8; C3/73 reportedly uses both `Ficha de Aventura` and `Folha de Aventura` for related labels. Resolution on 2026-10-26: preserve the source distinction, with `Adventure Sheet → Ficha de Aventura` (Payload id 7) and `Adventurer Sheet → Ficha de Aventureiro` (id 75). The `Adventurer Card` hypothesis (id 67) remains unchanged; no mass replacement. |
 | `Special Encounter Rules` | The audit finds `Regras Especiais do Encontro` in 30 files, while the official glossary says `Regras Especiais de Encontro`. The glossary remains authoritative until an explicit terminology decision; do not silently replace either the glossary or existing human text. |
 | `End Conditions` | The audit finds `Condições Finais` in 37 files and considers `Condições de Encerramento` semantically more explicit. This is a tradeoff, not a confirmed error. Keep the official `Condições Finais`; any change needs a coordinated human decision because of broad existing usage. |
 | `Range` / `REACH` / `SOI` | Preserve the mechanical distinction: general `Range` is not the `REACH` tag, and SOI is a special spell range that also requires Line of Sight. `Range → Alcance` remains an unresolved p.17 unit term; do not infer a project-wide translation for the printed `REACH` tag or rename `SOI`. |

@@ -1,6 +1,12 @@
 # p.24 — proposta PT-BR “Aventureiros e Itens” v5
 
-**Estado:** 43 unidades propostas e conferidas no Viewer PT-BR, no Editor read-only e no PDF visual de uma página. A rasterização completa não mostra colisões; quatro limites de linha e o crescimento de um callout são documentados nas métricas. As 36 decisões de terminologia/editorial e um exemplo humano parcialmente em inglês permanecem para revisão. Os três registros salvos foram preservados; nada foi gravado no Payload.
+**Estado do snapshot original (16/10):** 43 unidades propostas e conferidas no Viewer PT-BR, no Editor read-only e no PDF visual de uma página. A rasterização completa não mostra colisões; quatro limites de linha e o crescimento de um callout são documentados nas métricas. As 36 decisões de terminologia/editorial e um exemplo humano parcialmente em inglês permanecem para revisão. Os três registros salvos foram preservados naquele snapshot; nada foi gravado no Payload naquela etapa.
+
+## Atualização de produção — review 633 (25/10/2026)
+
+- `block_16` foi atualizado para: “Ao iniciar uma nova Aventura ou jogar um novo Cenário do Modo Exploração, os jogadores serão instruídos a escolher e preparar Aventureiros.” A forma recupera o elemento “will be instructed to” do original.
+- O rascunho persistido corresponde à proposta rica medida; Copyfit V3 **EXACT 2/2**. A review **633** foi aprovada no Payload e gerou Translation id **576**.
+- Viewer PT-BR, impressão e PDF exportado após a aprovação coincidem visualmente, sem colisão no parágrafo seguinte; `pdfVerification=true`. Evidências em `tmp/pdfs/p024-approved-block0-2026-10-25.pdf`, capturas Viewer/print e métricas com o mesmo prefixo.
 
 ## Validação técnica
 
@@ -17,9 +23,9 @@
 
 **EN:** When starting a new Adventure or playing a new Crawl Mode Scenario, players will be instructed to select and setup Adventurers.
 
-**PT-BR:** Ao iniciar uma nova Aventura ou jogar um novo Cenário do Modo Crawl, os jogadores receberão instruções para selecionar e preparar os Aventureiros.
+**PT-BR:** Ao iniciar uma nova Aventura ou jogar um novo Cenário do Modo Exploração, os jogadores serão instruídos a escolher e preparar Aventureiros.
 
-**Revisão pendente:** Crawl Mode → Modo Crawl: termo de modo sem decisão oficial; manter a proposta local pendente.
+**Revisão 633:** aprovada no Payload; o termo Crawl Mode segue a decisão do usuário.
 
 ### block_17
 
@@ -33,17 +39,17 @@
 
 **EN:** In Crawl Mode, players get to pick from any available Adventurer.
 
-**PT-BR:** No Modo Crawl, escolha qualquer Aventureiro disponível.
+**PT-BR:** No Modo Exploração, escolha qualquer Aventureiro disponível.
 
-**Revisão pendente:** Crawl Mode → Modo Crawl: termo de modo sem decisão oficial; manter a proposta local pendente.
+**Revisão pendente:** a unidade continua pendente de revisão editorial; o termo Crawl Mode segue a decisão do usuário.
 
 ### block_19
 
 **EN:** Regardless of the Game Mode, the respective Adventure Book or Crawl Book will detail how to set up Adventurers for the first time.
 
-**PT-BR:** Independentemente do Modo de Jogo, o Livro de Aventura ou o Livro Crawl correspondente explicará como preparar os Aventureiros pela primeira vez.
+**PT-BR:** Independentemente do Modo de Jogo, o Livro de Aventura ou o Livro de Masmorras explica a preparação inicial dos Aventureiros.
 
-**Revisão pendente:** Adventure Book / Crawl Book → Livro de Aventura / Livro Crawl são formas locais propostas; confirmar a nomenclatura dos livros.
+**Revisão pendente:** a unidade continua pendente de revisão editorial; Crawl Book → Livro de Masmorras segue a decisão do usuário.
 
 ### block_20
 
@@ -81,9 +87,9 @@
 
 **EN:** The Crawl Mode allows players to play with any figure with an Adventurer Card. This includes Adventurers from any Middara product.
 
-**PT-BR:** No Modo Crawl, pode-se jogar com qualquer miniatura que tenha uma Carta de Aventureiro, inclusive as de qualquer produto Middara.
+**PT-BR:** No Modo Exploração, pode-se jogar com qualquer miniatura que tenha uma Carta de Aventureiro, inclusive as de qualquer produto Middara.
 
-**Revisão pendente:** Crawl Mode → Modo Crawl e Adventurer Card → Carta de Aventureiro são formas locais pendentes de harmonização.
+**Revisão pendente:** Adventurer Card → Carta de Aventureiro continua uma forma local pendente de harmonização; Crawl Mode segue a decisão do usuário.
 
 ### block_26
 
@@ -217,9 +223,9 @@
 
 **EN:** In this case, the party would Gain 10 Gold and the specific Adventurer that activated the Loot token would Gain the 2 Consumables.
 
-**PT-BR:** Assim, o grupo ganha 10 Ouro, e o Aventureiro que ativou a ficha de Saque ganha 2 Consumíveis.
+**PT-BR:** Neste caso, o grupo obteria 10 Ouro, e o Aventureiro específico que ativou a Ficha de Saque obteria os 2 Consumíveis.
 
-**Revisão pendente:** Loot / Token → Saque / Ficha seguem o glossário oficial; revisar composto e capitalização de Consumíveis.
+**Validação:** translation 1214 aprovada pelo Reviewer oficial; Copyfit V3 EXACT 2/2 em 100% e 200%; estilos da fonte preservados (10 e 2 em negrito; Saque em itálico).
 
 ### block_47
 
@@ -249,17 +255,17 @@
 
 **EN:** In Crawl Mode, Shop and Train is often listed as a reward when completing an Encounter or Scenario. See Encounter Rewards Pg. 9.
 
-**PT-BR:** No Modo Crawl, Comprar e Treinar pode ser recompensa por concluir Encontro ou Cenário (Recompensas de Encontro, pág. 9).
+**PT-BR:** No Modo Exploração, Encontros ou Cenários costumam render **Comprar e Treinar** (***Recompensas de Encontro***, pág. 9).
 
-**Revisão pendente:** Crawl Mode → Modo Crawl e Encounter Rewards → Recompensas de Encontro são formas locais propostas; Shop and Train segue o glossário oficial.
+**Revisão pendente:** Encounter Rewards → Recompensas de Encontro continua candidato local; Crawl Mode → Modo Exploração e Shop and Train → Comprar e Treinar seguem o glossário oficial. A ênfase mista da fonte foi aplicada ao nome da opção (negrito) e ao título da referência (negrito/itálico).
 
 ### block_52 / p24-discipline-learning-body
 
 **EN:** Regardless of which Game Mode you are playing, when learning Disciplines, you may spend XP to learn from any of the available Discipline Trees. In order to learn a Discipline of a higher Level (LVL) in a Tree, you must already have learned a Discipline of the previous LVL in the same Tree.
 
-**PT-BR:** Em qualquer Modo de Jogo, você pode gastar XP para aprender Disciplinas de qualquer Árvore de Disciplinas disponível. Para aprender uma Disciplina de nível superior em uma Árvore, você já precisa ter aprendido uma Disciplina do nível anterior na mesma Árvore.
+**PT-BR:** Independentemente do Modo de Jogo escolhido, ao aprender Disciplinas você pode gastar **XP** para aprender a partir de qualquer Árvore de Disciplinas disponível. Para aprender uma Disciplina de Nível (**LVL)** mais alto em uma Árvore, você já deve ter aprendido anteriormente uma Disciplina do **LVL** anterior nessa mesma Árvore.
 
-**Revisão pendente:** Discipline Tree → Árvore de Disciplinas e Level/LVL → nível são formas locais propostas; confirmar equivalência e tratamento da sigla LVL.
+**Revisão pendente:** Discipline Tree → Árvore de Disciplinas e Level/LVL → nível são formas locais propostas; confirmar equivalência e tratamento da sigla LVL. A fonte usa negrito em XP e LVL, sem itálico; estilo atualizado no Rich Block Editor e salvo como rascunho Payload 638. Copyfit V3: EXACT 5/5; a aprovação permanece pendente e a validação técnica integrada precisa ser renovada.
 
 ### block_53
 

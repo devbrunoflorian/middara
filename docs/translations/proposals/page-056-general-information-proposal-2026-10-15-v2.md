@@ -1,6 +1,6 @@
 # p.56 — General Information (proposta PT-BR v2)
 
-**Status:** família completa em proposta isolada, com copyfit e export técnico verificados; aguarda revisão editorial e terminológica humana. A p.56 inteira continua parcial e não certificada.
+**Status:** família completa na proposta isolada; 4/5 unidades da família já foram publicadas pelo Reviewer oficial. A unidade 1 (review 1294, bloco 1) segue pending por UNDER 6→2. A p.56 inteira continua parcial e não certificada; a fidelidade inglesa da página ainda não foi certificada.
 
 ## Texto proposto
 
@@ -20,7 +20,7 @@ A família cobre o heading, o parágrafo de abertura, as duas definições numer
 
 ## Revisão editorial pendente
 
-As formas **Combatente**, **Combatente de Comando**, **Combatente Inteligente**, **miniatura**, **Ação** e **Aventura** são escolhas desta proposta, não novas aprovações globais do glossário. Confirmar também se “As cartas trazem informações sobre os Combatentes...” preserva o uso de *Combatant information* neste contexto.
+As formas **Combatente**, **Combatente de Comando**, **Combatente Inteligente**, **miniatura**, **Ação** e **Aventura** são escolhas contextuais da proposta. O bloco 3 (“2. Combatentes Inteligentes”) foi revisto e publicado como review 1296 → translation 1247, após conferência semântica e medição PageRenderer EXACT 3/3 em 100%/200%. A unidade 1 continua pending por UNDER 6→2; não foi publicada.
 
 ## Verificação técnica
 

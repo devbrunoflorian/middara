@@ -515,7 +515,6 @@
 
 ## Termos sem entrada oficial
 
-- **Crawl Mode → Modo Crawl:** manter como candidato local; o antigo rascunho p. 3 já usava “Modo Crawl”, mas não foi tratado como glossário oficial.
 - **Tags:** mantido como empréstimo para o conceito formal do livro; revisar consistência quando páginas 91–92 forem auditadas.
 - **Scaling Icons → Ícones Escaláveis:** candidato contextual; p. 72 descreve ícones cujo valor depende de outra carta/personagem.
 - **Assemblage:** preservado sem tradução como nome próprio da árvore de disciplinas.
@@ -526,5 +525,5 @@
 - Resolver o conflito entre o título de origem `Contents`, o rascunho `Sumário` e o override já salvo `Índice` sem apagar conteúdo existente.
 - Renderizar a coluna PT e conferir todos os títulos longos junto aos líderes/page refs, com foco em `ITEM UPGRADES`, `DISCIPLINE TREES`, `SPELL ACTION`, `SKILL CHECKS`, `SCALING ICONS` e `ABRAXIS BATTLE DICE`.
 - Confirmar alternates Esmeralda para “Sumário” e se o render PT consegue preservar o mesmo tratamento do título.
-- Conferir candidatos de terminologia com o restante do livro; esta lista não altera o glossário oficial.
+- Conferir os candidatos de terminologia ainda pendentes com o restante do livro; esta lista não altera o glossário oficial.
 - Validar no preview os caracteres acentuados e o peso bold sem usar o limite de 20% como teste de encaixe.

@@ -1,6 +1,6 @@
 # p.23 — proposta PT-BR “Detalhamento da Peça” v3
 
-**Estado:** 17 unidades propostas e verificadas no Viewer, Editor read-only e PDF visual de uma página, sem overflow horizontal ou inferior. A comparação da página EN com o PDF-fonte foi conferida. Terminologia e revisão editorial humana seguem pendentes; as labels de elevação em arte permanecem em inglês como exceção aberta. Nenhuma tradução foi gravada no Payload; alterações de composição existem apenas no snapshot diagnóstico.
+**Estado atual:** 17 unidades rastreadas; 16 aprovadas e publicadas pelo Reviewer oficial, e uma pendente (review 1376). O alvo `NÚMERO DA PEÇA` permanece pending porque a identidade selecionada pelo PageRenderer expôs 0 dos 239 caracteres esperados, sem prova EXACT registrável. `ELEVATION 2/1` está incorporado ao diagrama e permanece preservado como exceção de arte. O diagnóstico estático v3 é histórico; as medições posteriores estão nos recibos por unidade e no Payload.
 
 ## Validação técnica
 
@@ -8,8 +8,15 @@
 - **Editor Admin read-only:** 17/17 alvos selecionados; o texto conferiu com a proposta, e todos os diálogos foram cancelados sem salvar.
 - **PDF PT-BR:** uma página, MediaBox 820,346 × 820,346 pt, 965 caracteres selecionáveis, zero caracteres de substituição e zero caracteres de uso privado. Os 17 alvos aparecem uma vez cada; nenhuma linha excede a largura do campo.
 - **Fonte EN:** Viewer e PDF foram comparados com o raster do PDF oficial; os 39 segmentos de geometria-fonte, o fundo e a arte aparecem.
-- **Persistência:** zero registros PT-BR encontrados antes/depois; chamadas observadas somente GET; zero gravações; hashes dos assets canônicos iguais.
+- **Persistência:** cinco unidades receberam novas aprovações oficiais no lote inicial (reviews 1371–1375 → translations 801–805); a review 629 foi publicada depois como translation 1245. A página tem 16 unidades aprovadas e uma pendente (review 1376).
 - Raster do PDF exportado: [p.23 PT-BR, 2x](../../../output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-proposal-v3/page-023-pt-BR-v3-raster.png).\n- Recibos: [Viewer/Editor](../../../output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-proposal-v3/viewer-editor-receipt-v3.json), [PDF](../../../output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-proposal-v3/pdf-export-receipt-v3.json), [métricas](../../../output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-proposal-v3/pdf-metrics-v3.json).
+
+
+## Integração das legendas e situação atual do Payload (2026-10-25)
+
+- A raster da fonte e o PDF confirmam que NORMAL, HINDERING, DANGEROUS, SPECIAL, WATER, MUCK e OBSTRUCTING são texto selecionável colocado sobre arte fixa. A imagem de fundo do app contém faixas, ícones e bordas, sem os rótulos impressos; portanto, as novas unidades tipográficas não apagam nem duplicam esses elementos. O catálogo semântico foi consultado; não foram adicionados IDs ou símbolos inline. ELEVATION 2/1 continua parte da ilustração.
+- O PageDOM agora inclui sete unidades tipográficas locais nos blocos 18–21 usando as chaves já presentes nesta proposta. Copyfit atual: seis traduções de rótulo EXACT 1/1 e três unidades de prosa EXACT 2/2, ambas a 100% e 200%.
+- Read-back atualizado: 16/17 unidades da página estão aprovadas; review 629 → translation 1245 foi publicada após EXACT 2/2 em 100% e 200%. A hipótese global Range → Alcance segue sem decisão; esta ocorrência foi confirmada localmente por precedentes aprovados. Review 1376 permanece pending por falha de identidade do medidor, sem EXACT registrável (0/239 caracteres no destaque em 100% e 200%). O parágrafo sobre Terrain foi alinhado ao glossário (`Terrenos` no nome geral e `Terreno` no contexto dos espaços), medido EXACT 4/4 a 100% e 200% e aprovado no review 1375. A exportação estática v3 permanece evidência histórica; nenhuma nova exportação foi gerada neste lote. A página não está certificada.
 
 ## Unidades propostas
 
@@ -51,7 +58,7 @@
 
 **PT-BR:** Cada quadrado da Peça é um espaço. Os espaços são usados para movimento, Alcance e para determinar efeitos de área.
 
-**Termos pendentes:** Range → Alcance é uma proposta contextual ainda pendente de decisão humana; conferir com os usos já registrados.
+**Estado:** review 629 → translation 1245, aprovada pelo Reviewer oficial; EXACT 2/2 em 100% e 200%. A ocorrência local `Alcance` é sustentada pelas reviews aprovadas 980, 981, 1241 e 740. A hipótese global `Range → Alcance` não foi alterada.
 
 ### block_11 / p23-block-11-first-size-9pt
 
@@ -73,9 +80,9 @@
 
 **EN:** TERRAIN
 
-**PT-BR:** TERRENOS
+**PT-BR:** TERRENO
 
-**Termos pendentes:** Nenhum termo de glossário pendente identificado.
+**Estado:** review 1374 → translation 804, aprovado pelo Reviewer oficial; EXACT 1/1 em 100% e 200%.
 
 ### block_12 / p23-block-12-remaining-size-10pt
 
@@ -83,7 +90,7 @@
 
 **PT-BR:** Alguns espaços têm efeitos de área especiais chamados Terrenos (veja “Tipos de Terreno”, p. 21). Os espaços com Terreno exibem uma borda colorida e hachurada ao redor do quadrado e um pequeno símbolo que indica o tipo de Terreno.
 
-**Termos pendentes:** Terrain → Terrenos segue o glossário; revisar o singular “Terreno” no contexto da frase e o título citado “Tipos de Terreno”.
+**Estado:** review 1375 → translation 805, aprovado pelo Reviewer oficial. `Terrenos` segue o glossário para o nome geral; `Terreno` permanece no composto e no contexto de cada espaço. EXACT 4/4 em 100% e 200%.
 
 ### block_13 / p23-block-13-combined-tile-number
 
@@ -92,7 +99,7 @@
 **PT-BR:** NÚMERO DA PEÇA
 Cada Peça é identificada por um código de duas letras seguido de um número, que indica o jogo ou a expansão de origem e ajuda na preparação dos Encontros. Por exemplo, o código UM1 identifica a Peça 1 de Unintentional Malum.
 
-**Termos pendentes:** Unintentional Malum é preservado como nome próprio conforme uso humano já documentado; confirmar a composição completa na revisão editorial.
+**Estado:** review 1376 permanece pending. `Unintentional Malum` é preservado como nome próprio conforme precedentes aprovados; a pendência atual é técnica: o PageRenderer selecionado expôs 0 dos 239 caracteres da proposta, sem medição EXACT atual. Nenhuma edição de texto foi feita.
 
 ### block_18 / p23-block_18-legend-1
 
@@ -162,3 +169,11 @@ Cada Peça é identificada por um código de duas letras seguido de um número, 
 - Raster da fonte: output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-v1/source-en-page-023.png.
 - Snapshot e hashes: output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-proposal-v3/snapshot/snapshot.json e output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-proposal-v3/source-hashes-v3.json.
 - Registros PT-BR encontrados: 0; Payload writes: 0.
+
+
+## Atualização do Payload — review 629 (2026-10-26 06:49 UTC)
+
+- Review 629 foi aprovada pela rota oficial e confirmada no readback como translation 1245. PageRenderer EXACT 2/2 em 100% e 200%; texto e rich spans preservados.
+- A decisão terminológica é local à unidade. Usos aprovados nas reviews 980, 981, 1241 e 740 sustentam `Alcance`; o glossário global não foi alterado.
+- Estado da página: 16/17 aprovadas; review 1376 é a única pendente. Copyfit não registrável: a identidade selecionada mostrou 0/239 caracteres em 100% e 200%.
+- Estado lido do Payload: 1.236 traduções; 1.556 reviews; 907 aprovadas, 638 pending ativas e 11 arquivadas. A página permanece parcial por review 1376 e pelo texto de arte incorporado `ELEVATION 2/1`.

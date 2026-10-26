@@ -20,11 +20,11 @@
 
 ### Crawl Mode
 
-**PT-BR (título):** Modo de Exploração
+**PT-BR (título):** Modo Exploração
 
 **EN:** In the Crawl Mode, players play through a chosen Scenario. The end goal is determined by the Scenario the players choose. This Game Mode is more akin to other dungeon crawl board games. There is no emphasis on a narrative or serious choices to be made. The Crawl Mode is shorter, and can be completed in sessions as short as a couple of hours. If your gaming group is looking to test the waters of ***Middara*** before investing the time into the Adventure Mode, we recommend starting with the Crawl Mode. For more detailed information on how to set up and play the Crawl Mode, continue ***Crawl Mode*** Pg 9.
 
-**PT-BR (rascunho):** No Modo de Exploração, os jogadores jogam um Cenário escolhido. O objetivo final depende do Cenário que escolherem. Este Modo de Jogo se parece mais com outros jogos de tabuleiro de exploração de masmorras. Não há foco em narrativa nem em decisões importantes. O Modo de Exploração é mais curto e pode ser concluído em sessões de apenas algumas horas. Se o grupo quiser experimentar ***Middara*** antes de dedicar mais tempo ao Modo Aventura, recomendamos começar pelo Modo de Exploração. Para saber como preparar e jogar esse modo, continue em ***Modo de Exploração***, pág. 9.
+**PT-BR (rascunho):** No Modo Exploração, os jogadores jogam um Cenário escolhido. O objetivo final depende do Cenário que escolherem. Este Modo de Jogo se parece mais com outros jogos de tabuleiro de exploração de masmorras. Não há foco em narrativa nem em decisões importantes. O Modo Exploração é mais curto e pode ser concluído em sessões de apenas algumas horas. Se o grupo quiser experimentar ***Middara*** antes de dedicar mais tempo ao Modo Aventura, recomendamos começar pelo Modo Exploração. Para saber como preparar e jogar esse modo, continue em ***Modo Exploração***, pág. 9.
 
 ### Adventure Mode
 
@@ -41,5 +41,5 @@
 - A captura Chrome anterior continua mostrando o conteúdo salvo/local existente, não o draft editorial. A prévia integrada em contexto descartável é a evidência de copyfit do texto deste arquivo. A coluna esquerda tem aprox. 321 pt de largura e corpo entre y≈193–293 pt; a direita tem aprox. 313 pt e corpo entre y≈193–326 pt.
 - Reconciliação read-only: `page_8_block_0` existe só na cache PT-BR (introdução local); `_block_1` é o heading salvo `Modo Exploração`; `_block_2` é o corpo salvo do Crawl Mode; `_block_3` e `_block_4` são heading/corpo do Adventure Mode; `_block_5` é o título EsmeraldaPro salvo. O texto local da introdução difere do draft. O corpo Crawl salvo prefere “enfrentam” e “veja”; o draft propõe “jogam” e “continue em”. O corpo Adventure salvo diz “Livro de Aventura correspondente” e “veja”; o draft explicita “correspondente àquela Aventura” e “continue em”. São alternativas editoriais; nada foi mesclado no Payload nem na cache do perfil.
 - As palavras `Middara` no texto corrido e os nomes de modo nas referências de página aparecem em negrito itálico na fonte. Manter as marcações inline; headings de coluna são unidades próprias em Cinzel 12 pt.
-- O glossário oficial não define `Crawl Mode`. Rascunhos das p. 4–7 usam `Modo Crawl`; o Payload da p. 8 usa `Modo Exploração` no heading e `Modo de Exploração` no corpo. `Modo de Exploração` fica neste draft, mas a escolha continua provisória e foi registrada no arquivo de candidatos.
+- **Decisões do usuário (24/10/2026):** `Crawl Mode → Modo Exploração`, também no corpo corrido, e `Crawl Book → Livro de Masmorras`. O livro é um componente separado do modo.
 - O texto EN da p. 8 já está corretamente exibido na sessão local após a quarentena das duas unidades PT-BR em inglês. Os cinco registros salvos no Payload não foram copiados por cima nem alterados. A cache PT-BR também contém uma tradução local ainda não salva para a introdução (`page_8_block_0`); os seis estados foram inventariados e comparados, mas qualquer importação ou substituição continua fora deste tracer.
