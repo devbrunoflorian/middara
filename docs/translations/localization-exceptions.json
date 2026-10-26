@@ -36,6 +36,7 @@
     "docs/translations/proposals/page-027-item-tiers-and-types-proposal-2026-10-16-v10.md",
     "docs/translations/proposals/page-027-item-tiers-and-types-proposal-2026-10-22-v11.json",
     "docs/translations/proposals/page-028-item-upgrades-proposal-2026-10-16-v4.json",
+    "docs/translations/proposals/page-028-item-upgrades-proposal-2026-10-16-v5.json",
     "docs/translations/proposals/page-028-item-upgrades-proposal-2026-10-16-v4.md",
     "docs/translations/proposals/page-029-item-upgrades-proposal-2026-10-16-v2.json",
     "docs/translations/proposals/page-029-item-upgrades-proposal-2026-10-16-v2.md",
@@ -7384,7 +7385,7 @@
       ],
       "category": "human_terminology_editorial_review",
       "status": "pending_human_review",
-      "reason": "A redação nova foi salva no Payload como rascunho pendente, e o estado técnico foi invalidado. O UNDER 4→3 anterior corresponde à redação antiga e não vale para este rascunho. A medição atual pelo script oficial parou antes de contar linhas: o catálogo espera a proposta antiga (203 caracteres), mas o PageRenderer/Rich Block Editor mostra o rascunho salvo (269 caracteres), causando falha de identidade. Não alterei catálogo nem validador e não aprovei a unidade. Unique Items, Story and Monster Loot Items e a terminologia do exemplo continuam pendentes de revisão; Tier permanece Tier (Payload id 58).",
+      "reason": "A proposta v5 foi reconstruída a partir dos segmentos ricos de 269 caracteres lidos da review 1438; o arquivo v4 e o registro Payload 1438 continuam preservados. O catálogo canônico agrupa sourceProposals por família e seleciona a maior vN, mas o editor atual encontra o rascunho por página+spanKey e usa PATCH quando encontra o registro anterior. Não há procedimento documentado para criar no Payload uma revisão v5 paralela sem atualizar a v4. O medidor exige identidade de revisão correspondente e ainda não produziu contagens para a v5; não rodei a medição de 200%. Não apliquei o texto nem aprovei. Permanecem para revisão humana Unique Items e Story and Monster Loot Items. Tier permanece Tier (Payload id 58) e LVL é preservado como abreviação aprovada.",
       "sourceText": "The cost of applying an Item Upgrade to an Item varies depending on the Tier of the Item being Upgraded. Unique Items do not cost more to Upgrade than their non-Unique counterparts. Story and Monster Loot Items are considered to be Items in your current Loot LVL.",
       "proposedText": "O custo de aplicar um Aprimoramento de Item a um Item varia conforme o Tier do Item aprimorado. Itens Únicos não custam mais para aprimorar que seus equivalentes não Únicos. Itens de História e Itens de Saque de Monstro são considerados Itens do seu LVL de Saque atual.",
       "verifiedIn": [
@@ -7406,7 +7407,11 @@
         "output/proofs/translation-readiness-2026-10-16/p028-item-upgrades-proposal-v1/print-pt-BR-diagnostic-v4.png",
         "Após preservar Loot LVL como LVL de Saque, o PageRenderer/PyMuPDF mediu UNDER 4→3 para a redação anterior; resultado invalidado pela edição posterior.",
         "Payload review 1438 read-back 2026-10-26 21:11 UTC: proposalText anterior (203 caracteres); data do rascunho novo (269 caracteres); technicalStatus changed_since_technical_validation; copyfitClassification null.",
-        "Copyfit V3 100% interrompido por mismatch de identidade: esperado 203 caracteres do catálogo, renderizado 269 caracteres do rascunho; nenhuma contagem da nova redação foi produzida."
+        "Copyfit V3 100% interrompido por mismatch de identidade: esperado 203 caracteres do catálogo, renderizado 269 caracteres do rascunho; nenhuma contagem da nova redação foi produzida.",
+        "Versionamento canônico: v5 criada como novo arquivo, v4 preservada; sourceProposals mantém v4 e aponta v5 como versão atual da família.",
+        "Payload GET read-back 2026-10-26: review 1438 continua pending/v4; texto atual 269 caracteres; somente LVL está em negrito; nenhuma escrita no Payload foi feita durante a reconstrução.",
+        "Código canônico consultado: TranslationReviews torna reviewKey único; reviewRecordForCandidate casa página+spanKey e prioriza updatedAt; handleProposalReviewSave passa esse registro a persistTranslationReview, que faz PATCH se existing existir. persistReviewState pode atualizar a identidade da mesma linha para stale_review_version. Nenhum fluxo documentado cria uma linha paralela v5 preservando a 1438.",
+        "Depois da reconstrução do catálogo, o Reviewer mostra a v5 candidata, mas o Payload continua com somente a review 1438/v4 para page_28_block_15; a medição falha por ausência de identidade de registro v5. Dependência para retomar: procedimento oficial version-aware que crie e leia uma nova TranslationReview sem sobrescrever 1438, ou decisão do proprietário sobre como versionar esse rascunho."
       ]
     },
     {
