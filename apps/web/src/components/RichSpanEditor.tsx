@@ -7,7 +7,8 @@ import { SemanticSymbol } from '../symbols/SemanticSymbol';
 import { SYMBOL_OBJECT_MARKER, editableTextForSegments, segmentsFromEditableText, replaceSegmentRange, insertEditorToken, deleteEditorToken, expandEditorTokenSelection, normalizeEditableInput, needsManualRichStyleReview } from '../symbols/inlineCodec';
 import { collectManagedSourceSymbols, initialManagedSourceSymbols, createEditorOverride, lineHeightModeForOverride } from '../symbols/editorOverride';
 import { INLINE_CLIPBOARD_MIME, editableRangeToSegmentRange, sliceSegmentRange, encodeInlineClipboard, decodeInlineClipboard } from '../symbols/inlineClipboard';
-import { findGlossaryMatches } from '../translations/glossaryContext';
+import { findGlossaryMatches, findPersistedGlossaryMatches } from '../translations/glossaryContext';
+import type { TranslationGlossaryDecision } from '../translationReview';
 import type { LocalSyncState } from '../localPersistence';
 
 const PUA_MAPPING: Record<string, {name: string, pua_char: string, hex: string}[]> = puaMappingRaw;
@@ -75,6 +76,10 @@ export interface SpanOverride {
   managedSourceSymbols?: string[];
   /** Source-measured separation between adjacent paragraphs, in PDF points. */
   paragraphSpacingPt?: number;
+  /** Inset of a list marker from the paragraph frame, in PDF points. */
+  listMarkerIndentPt?: number;
+  /** Start of wrapped list text from the paragraph frame, in PDF points. */
+  hangingIndentPt?: number;
 }
 
 interface RichSpanEditorProps {
@@ -89,11 +94,13 @@ interface RichSpanEditorProps {
   originalSegments?: Segment[];
   originalTextAlign?: TextAlignment;
   originalLineHeight?: number;
+  originalListMarkerIndentPt?: number;
+  originalHangingIndentPt?: number;
   bbox: [number, number, number, number];
   pageNumber: number;
   language: 'en' | 'pt-BR';
   onClose: () => void;
-  onSave: (override: SpanOverride | null) => void;
+  onSave: (override: SpanOverride | null) => void | Promise<unknown>;
   existingOverride?: SpanOverride | null;
   overrideStatusLoading?: boolean;
   persistenceStatus?: LocalSyncState | 'sync_error' | 'inherited' | 'loading';
@@ -113,6 +120,7 @@ interface RichSpanEditorProps {
   /** Save a proposal edit back to its persisted pending Payload review record. */
   persistentDraftMode?: boolean;
   persistentDraftStatus?: 'saved' | 'saving' | 'error';
+  glossaryDecisions?: TranslationGlossaryDecision[];
 }
 
 interface EditorSnapshot {
@@ -120,6 +128,8 @@ interface EditorSnapshot {
   textAlign: TextAlignment;
   lineHeight: number;
   lineHeightMode: LineHeightMode;
+  listMarkerIndentPt?: number;
+  hangingIndentPt?: number;
   isEditingText: boolean;
   editText: string;
   editTextBaseline: string;
@@ -150,6 +160,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   originalSegments,
   originalTextAlign = 'left',
   originalLineHeight = 1,
+  originalListMarkerIndentPt,
+  originalHangingIndentPt,
   bbox,
   pageNumber,
   language,
@@ -172,6 +184,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   sessionOnly = false,
   persistentDraftMode = false,
   persistentDraftStatus = 'saved',
+  glossaryDecisions = [],
 }) => {
   const normalizeText = useCallback((text: string) => (
     singleLine ? text.replace(/[\r\n]+/g, ' ').replace(/[\t ]+/g, ' ') : text
@@ -205,6 +218,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     .map(segment => segment.text)
     .join(''), [sourceContextSegments]);
   const sourceGlossaryMatches = useMemo(() => findGlossaryMatches(sourceGlossaryText), [sourceGlossaryText]);
+  const persistedGlossaryMatches = useMemo(() => findPersistedGlossaryMatches(sourceGlossaryText, glossaryDecisions, sourceGlossaryMatches), [sourceGlossaryText, glossaryDecisions, sourceGlossaryMatches]);
   const baseTextAlign = existingOverride?.textAlign ?? originalTextAlign;
   const baseLineHeightMode = lineHeightModeForOverride(existingOverride);
   const baseLineHeight = baseLineHeightMode === 'custom' ? existingOverride?.lineHeight ?? originalLineHeight : originalLineHeight;
@@ -224,10 +238,16 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const [toolStyle, setToolStyle] = useState<'normal' | 'italic'>(originalStyle);
   const [toolColor, setToolColor] = useState(originalColor);
   const [toolSize, setToolSize] = useState(originalSize);
+  const [toolSizeInput, setToolSizeInput] = useState(String(originalSize));
+  const [toolSizeInputError, setToolSizeInputError] = useState<string | null>(null);
+  const toolSizeMin = Math.min(0.1, toolSize);
+  const toolSizeMax = Math.max(72, toolSize);
   const [toolLigatures, setToolLigatures] = useState(true);
   const [textAlign, setTextAlign] = useState<TextAlignment>(baseTextAlign);
   const [lineHeight, setLineHeight] = useState(baseLineHeight);
   const [lineHeightMode, setLineHeightMode] = useState<LineHeightMode>(baseLineHeightMode);
+  const [listMarkerIndentPt, setListMarkerIndentPt] = useState<number | undefined>(existingOverride?.listMarkerIndentPt);
+  const [hangingIndentPt, setHangingIndentPt] = useState<number | undefined>(existingOverride?.hangingIndentPt);
   // Text editing
   const [isEditingText, setIsEditingText] = useState(false);
   const [editText, setEditText] = useState('');
@@ -237,6 +257,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const [editTextSegments, setEditTextSegments] = useState<Segment[]>([]);
   const [editInitialManagedSourceSymbols, setEditInitialManagedSourceSymbols] = useState<string[]>([]);
   const [symbolPaletteStatus, setSymbolPaletteStatus] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [undoHistory, setUndoHistory] = useState<EditorSnapshot[]>([]);
   const [redoHistory, setRedoHistory] = useState<EditorSnapshot[]>([]);
 
@@ -260,6 +282,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       textAlign,
       lineHeight,
       lineHeightMode,
+      listMarkerIndentPt,
+      hangingIndentPt,
       isEditingText,
       editText,
       editTextBaseline,
@@ -277,7 +301,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       toolSize,
       toolLigatures,
     };
-  }, [segments, textAlign, lineHeight, lineHeightMode, isEditingText, editText, editTextBaseline, editTextSegments, managedSourceSymbols, editInitialManagedSourceSymbols, selStart, selEnd, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures]);
+  }, [segments, textAlign, lineHeight, lineHeightMode, listMarkerIndentPt, hangingIndentPt, isEditingText, editText, editTextBaseline, editTextSegments, managedSourceSymbols, editInitialManagedSourceSymbols, selStart, selEnd, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures]);
 
   const pushHistory = useCallback(() => {
     const snapshot = createSnapshot();
@@ -290,6 +314,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setTextAlign(snapshot.textAlign);
     setLineHeight(snapshot.lineHeight);
     setLineHeightMode(snapshot.lineHeightMode);
+    setListMarkerIndentPt(snapshot.listMarkerIndentPt);
+    setHangingIndentPt(snapshot.hangingIndentPt);
     setIsEditingText(snapshot.isEditingText);
     setEditText(snapshot.editText);
     setEditTextBaseline(snapshot.editTextBaseline);
@@ -352,6 +378,16 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setLineHeight(value);
     setLineHeightMode('custom');
   }, [lineHeight, pushHistory]);
+
+  const changeListIndent = useCallback((field: 'marker' | 'hanging', raw?: number) => {
+    if (raw !== undefined && !Number.isFinite(raw)) return;
+    const value = raw === undefined ? undefined : Math.max(0, Math.min(100, raw));
+    const current = field === 'marker' ? listMarkerIndentPt : hangingIndentPt;
+    if (current === value || (current !== undefined && value !== undefined && Math.abs(current - value) < 0.001)) return;
+    pushHistory();
+    if (field === 'marker') setListMarkerIndentPt(value);
+    else setHangingIndentPt(value);
+  }, [listMarkerIndentPt, hangingIndentPt, pushHistory]);
 
   useEffect(() => {
     if (language === 'en' && ptDraftRef.current) return;
@@ -430,7 +466,9 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
           restored.managedSourceSymbols,
           restored.lineHeight,
           restored.lineHeightMode,
-          existingOverride?.paragraphSpacingPt
+          existingOverride?.paragraphSpacingPt,
+          restored.listMarkerIndentPt,
+          restored.hangingIndentPt,
         );
         onDraftChange?.(draft);
       } else {
@@ -439,6 +477,12 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       }
     }
   }, [language, createSnapshot, undoHistory, redoHistory, sourceContextSegments, onDraftChange, restoreSnapshot, spanKey, bbox, baseSegments, baseManagedSourceSymbols]);
+
+  useEffect(() => {
+    if (language === 'en' && ptDraftRef.current) return;
+    setListMarkerIndentPt(existingOverride?.listMarkerIndentPt);
+    setHangingIndentPt(existingOverride?.hangingIndentPt);
+  }, [spanBaseKey, existingOverride?.listMarkerIndentPt, existingOverride?.hangingIndentPt, language]);
 
   // Flatten segments to characters with their style info
   const chars = useMemo(() => {
@@ -469,6 +513,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const hasDraftChanges = segmentsChanged || textChanged || textAlign !== baseTextAlign
     || Math.abs(lineHeight - baseLineHeight) > 0.001
     || lineHeightMode !== baseLineHeightMode
+    || listMarkerIndentPt !== existingOverride?.listMarkerIndentPt
+    || hangingIndentPt !== existingOverride?.hangingIndentPt
     || JSON.stringify(managedSourceSymbols) !== JSON.stringify(baseManagedSourceSymbols);
   const richStyleReviewRequired = useMemo(() => {
     if (language !== 'pt-BR' || !hasDraftChanges) return false;
@@ -485,20 +531,26 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         : hasDraftChanges
           ? { label: 'RASCUNHO ALTERADO · NÃO SALVO', className: 'is-dirty' }
           : { label: 'RASCUNHO PERSISTIDO NO PAYLOAD · APROVAÇÃO PENDENTE', className: 'is-pending' }
+    : saveError
+    ? { label: saveError, className: 'is-error' }
+    : isSaving && persistenceStatus === 'missing_remote'
+    ? { label: 'SALVO NO NAVEGADOR · AGUARDANDO CONFIRMAÇÃO DO PAYLOAD', className: 'is-pending' }
+    : isSaving
+    ? { label: 'SALVANDO ALTERAÇÕES…', className: 'is-loading' }
     : sessionOnly
     ? hasDraftChanges
       ? { label: 'RASCUNHO EXPERIMENTAL · NÃO APLICADO À PROVA', className: 'is-dirty' }
       : { label: 'PROPOSTA EXPERIMENTAL · SOMENTE NESTA SESSÃO', className: 'is-pending' }
     : hasDraftChanges
     ? { label: language === 'pt-BR' ? 'PT-BR ALTERADO NA SESSÃO / NÃO SALVO' : 'EN ALTERADO NA SESSÃO / NÃO SALVO', className: 'is-dirty' }
-    : persistenceStatus === 'sync_error'
-      ? { label: 'ERRO DE SINCRONIZAÇÃO — cópia local preservada quando disponível', className: 'is-error' }
+      : persistenceStatus === 'sync_error'
+      ? { label: 'FALHA DE SINCRONIZAÇÃO — Payload não confirmou; consulte a recuperação local', className: 'is-error' }
       : persistenceStatus === 'missing_remote'
-        ? { label: 'SALVO LOCALMENTE / SINCRONIZAÇÃO PENDENTE', className: 'is-pending' }
+        ? { label: 'SALVO SOMENTE NO NAVEGADOR / SINCRONIZAÇÃO PENDENTE', className: 'is-pending' }
         : persistenceStatus === 'diverged'
-          ? { label: 'DIVERGÊNCIA LOCAL / PAYLOAD', className: 'is-error' }
+          ? { label: 'CONFLITO — cópia local difere do Payload', className: 'is-error' }
           : persistenceStatus === 'unverified'
-            ? { label: 'PAYLOAD INDISPONÍVEL — ESTADO NÃO VERIFICADO', className: 'is-pending' }
+            ? { label: 'PAYLOAD INDISPONÍVEL — confirmação não verificada', className: 'is-pending' }
             : persistenceStatus === 'loading' || overrideStatusLoading
               ? { label: 'CARREGANDO ESTADO…', className: 'is-loading' }
               : persistenceStatus === 'confirmed'
@@ -506,19 +558,20 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
                 : persistenceStatus === 'inherited'
                   ? { label: language === 'pt-BR' ? 'HERDANDO EN' : 'EN ORIGINAL', className: 'is-inherited' }
                   : existingOverride
-                    ? { label: 'PT-BR OVERRIDE SALVO', className: 'is-saved' }
+                    ? { label: 'OVERRIDE EXISTENTE — estado do Payload não verificado', className: 'is-pending' }
                     : overrideStatusLoading
                       ? { label: 'CARREGANDO ESTADO…', className: 'is-loading' }
                       : { label: language === 'pt-BR' ? 'HERDANDO EN' : 'EN ORIGINAL', className: 'is-inherited' };
 
   const requestClose = useCallback(() => {
+    if (isSaving || persistentDraftStatus === 'saving') return;
     if (hasDraftChanges && !window.confirm(language === 'pt-BR'
       ? 'Há alterações de tradução não salvas. Quer sair e descartá-las?'
       : 'There are unsaved text changes. Discard them and close the editor?')) {
       return;
     }
     onClose();
-  }, [language, hasDraftChanges, onClose]);
+  }, [language, hasDraftChanges, onClose, isSaving, persistentDraftStatus]);
 
   useEffect(() => {
     if (!onDraftChange) return;
@@ -528,8 +581,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     }
 
     const previewSegments = isEditingText ? editTextSegments : segments;
-    onDraftChange(createEditorOverride(spanKey, bbox, textAlign, previewSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt));
-  }, [segments, editTextSegments, textAlign, lineHeight, lineHeightMode, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, managedSourceSymbols, existingOverride?.paragraphSpacingPt]);
+    onDraftChange(createEditorOverride(spanKey, bbox, textAlign, previewSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt, listMarkerIndentPt, hangingIndentPt));
+  }, [segments, editTextSegments, textAlign, lineHeight, lineHeightMode, listMarkerIndentPt, hangingIndentPt, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, managedSourceSymbols, existingOverride?.paragraphSpacingPt]);
 
   // Selection helpers
   const hasSelection = selStart !== null && selEnd !== null && selStart !== selEnd;
@@ -557,6 +610,11 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       }
     }
   }, [selMin, chars, segments]);
+
+  useEffect(() => {
+    setToolSizeInput(String(toolSize));
+    setToolSizeInputError(null);
+  }, [toolSize, selMin, selMax]);
 
   // Determine if the single selected character has PUA alternates
   const availableAlternates = useMemo(() => {
@@ -664,6 +722,22 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
     commitSegments(merged);
   }, [selMin, selMax, segments, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures, commitSegments]);
+
+  const commitToolSizeInput = useCallback((input: HTMLInputElement) => {
+    const nextSize = input.valueAsNumber;
+    if (input.value === '' || !Number.isFinite(nextSize) || !input.validity.valid) {
+      setToolSizeInput(String(toolSize));
+      setToolSizeInputError(language === 'pt-BR'
+        ? 'Informe um tamanho de fonte válido; o valor anterior foi mantido.'
+        : 'Enter a valid font size; the previous value was kept.');
+      return;
+    }
+
+    setToolSizeInput(String(nextSize));
+    setToolSizeInputError(null);
+    setToolSize(nextSize);
+    applyToSelection({ size: nextSize });
+  }, [toolSize, language, applyToSelection]);
 
   // Apply a specific PUA character (alternate) to the selected character
   const applyAlternate = useCallback((puaChar: string) => {
@@ -896,14 +970,25 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setSelEnd(null);
   }, [editText, editTextBaseline, normalizeText, editTextSegments, commitSegments]);
 
-  const handleSave = useCallback(() => {
+  const handleSave = useCallback(async () => {
     if (!hasDraftChanges) {
       onClose();
       return;
     }
+    if (isSaving) return;
     const finalSegments = isEditingText ? editTextSegments : segments;
-    onSave(createEditorOverride(spanKey, bbox, textAlign, finalSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt));
-  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign, lineHeight, lineHeightMode, isEditingText, editTextSegments, managedSourceSymbols, existingOverride?.paragraphSpacingPt]);
+    setSaveError(null);
+    setIsSaving(true);
+    try {
+      await onSave(createEditorOverride(spanKey, bbox, textAlign, finalSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt, listMarkerIndentPt, hangingIndentPt));
+    } catch {
+      setSaveError(language === 'pt-BR'
+        ? 'Falha ao concluir o salvamento; as alterações continuam abertas no editor.'
+        : 'The save did not complete; your changes remain open in the editor.');
+    } finally {
+      setIsSaving(false);
+    }
+  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign, lineHeight, lineHeightMode, listMarkerIndentPt, hangingIndentPt, isEditingText, editTextSegments, managedSourceSymbols, existingOverride?.paragraphSpacingPt, isSaving, language]);
 
   // Reset to original
   const handleReset = useCallback(() => {
@@ -949,7 +1034,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             <span className="rse-subtitle">
               Page {pageNumber} · {editorLabel ? editorLabel : <code>{spanKey}</code>}
             </span>
-            <span role="status" aria-live="polite" className={`rse-context-status ${translationState.className}`}>
+            <span role={saveError ? 'alert' : 'status'} aria-live={saveError ? 'assertive' : 'polite'} className={`rse-context-status ${translationState.className}`}>
               {translationState.label}
             </span>
           </div>
@@ -1002,6 +1087,21 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
                   <p>Sem correspondências literais exatas.</p>
                 )}
               </div>
+              {persistedGlossaryMatches.length > 0 && (
+                <div className="rse-context-glossary rse-context-payload-glossary">
+                  <span className="rse-context-label">PAYLOAD · DECISÕES PERSISTIDAS</span>
+                  <ul>
+                    {persistedGlossaryMatches.map(match => (
+                      <li key={`${match.source}:${match.target}`}>
+                        <span lang="en">{match.source}</span><span aria-hidden="true"> → </span><span lang="pt-BR">{match.target}</span>
+                        <small>{match.status === 'approved' ? 'Aprovado' : match.status === 'observed_standard' ? 'Padrão observado' : match.status === 'experimental' ? 'Experimental' : 'Hipótese'}{match.category ? ` · ${match.category.replaceAll('_', ' ')}` : ''}</small>
+                        {match.conflictWithOfficial && <small role="note">Conflito com o glossário oficial: “{match.conflictWithOfficial}”. Não aplicar sem reconciliação.</small>}
+                        {match.context && <small>{match.context}</small>}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <p className="rse-context-footnote">
                 As correspondências são literais; flexões podem não aparecer. Após salvar, confira a confirmação de sincronização com o Payload.
               </p>
@@ -1054,7 +1154,28 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
             </div>
             <div className="rse-toolbar-group rse-toolbar-metrics" role="group" aria-label="Text metrics">
               <input type="color" value={toolColor} onChange={e => { setToolColor(e.target.value); applyToSelection({color: e.target.value}); }} title="Color" className="rse-color-input" />
-              <input type="number" value={toolSize} onChange={e => { setToolSize(Number(e.target.value)); applyToSelection({size: Number(e.target.value)}); }} min={4} max={72} step={0.5} className="rse-size-input" title="Size (pt)" />
+              <span className="rse-size-field">
+                <input
+                  type="number"
+                  value={toolSizeInput}
+                  onChange={event => { setToolSizeInput(event.currentTarget.value); setToolSizeInputError(null); }}
+                  onBlur={event => commitToolSizeInput(event.currentTarget)}
+                  onKeyDown={event => {
+                    if (event.key === 'Enter') {
+                      event.preventDefault();
+                      commitToolSizeInput(event.currentTarget);
+                    }
+                  }}
+                  min={toolSizeMin}
+                  max={toolSizeMax}
+                  step="any"
+                  className="rse-size-input"
+                  title={language === 'pt-BR' ? 'Tamanho da fonte (pt)' : 'Font size (pt)'}
+                  aria-label={language === 'pt-BR' ? 'Tamanho da fonte (pt)' : 'Font size (pt)'}
+                  aria-invalid={toolSizeInputError ? true : undefined}
+                />
+                {toolSizeInputError && <span className="rse-number-field-error" role="alert">{toolSizeInputError}</span>}
+              </span>
               <label className="rse-line-height-control" title={language === 'pt-BR' ? 'Entrelinha (multiplicador)' : 'Line spacing (multiplier)'}>
                 <span aria-hidden="true">↕</span>
                 <input
@@ -1068,6 +1189,25 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
                   className="rse-size-input rse-line-height-input"
                 />
               </label>
+            </div>
+            <div className="rse-toolbar-group rse-toolbar-paragraph" role="group" aria-label={language === 'pt-BR' ? 'Recuos de lista' : 'List indents'}>
+              <label title={language === 'pt-BR' ? 'Recuo do marcador em pontos PDF' : 'List marker inset in PDF points'}>
+                <span>{language === 'pt-BR' ? 'Marcador' : 'Marker'} (pt)</span>
+                <input type="number" min={0} max={100} step={0.5}
+                  aria-label={language === 'pt-BR' ? 'Recuo do marcador (pt)' : 'Marker indent (pt)'}
+                  value={listMarkerIndentPt ?? originalListMarkerIndentPt ?? ''}
+                  placeholder={originalListMarkerIndentPt === undefined ? '—' : undefined}
+                  onChange={event => changeListIndent('marker', event.currentTarget.value === '' ? undefined : event.currentTarget.valueAsNumber)} />
+              </label>
+              <label title={language === 'pt-BR' ? 'Recuo francês: início do texto e das linhas seguintes, em pontos PDF' : 'Hanging indent: body and wrapped lines start, in PDF points'}>
+                <span>{language === 'pt-BR' ? 'Texto / francesa' : 'Body / hanging'} (pt)</span>
+                <input type="number" min={0} max={100} step={0.5}
+                  aria-label={language === 'pt-BR' ? 'Recuo francês do texto (pt)' : 'Hanging text indent (pt)'}
+                  value={hangingIndentPt ?? originalHangingIndentPt ?? ''}
+                  placeholder={originalHangingIndentPt === undefined ? '—' : undefined}
+                  onChange={event => changeListIndent('hanging', event.currentTarget.value === '' ? undefined : event.currentTarget.valueAsNumber)} />
+              </label>
+              <span className="rse-paragraph-indent-hint">{language === 'pt-BR' ? 'Valores do PDF quando disponíveis' : 'PDF source values when available'}</span>
             </div>
           </div>
           <div className="rse-toolbar-row rse-toolbar-actions">
@@ -1219,7 +1359,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         <div className="rse-footer">
           <div className="rse-footer-actions">
             <button className="rse-btn-reset" disabled={language === 'en'} onClick={handleReset} title={language === 'en' ? 'Alterne para PT/BR para resetar' : undefined}>{persistentDraftMode ? 'Descartar edição' : sessionOnly ? 'Restaurar proposta' : 'Reset'}</button>
-            <button className="rse-btn-save" disabled={language === 'en' || persistentDraftStatus === 'saving'} onClick={handleSave} title={language === 'en' ? 'Alterne para PT/BR para salvar' : undefined}>{persistentDraftMode ? persistentDraftStatus === 'saving' ? 'Salvando…' : 'Salvar rascunho' : sessionOnly ? 'Aplicar à prova' : '💾 Save'}</button>
+            <button className="rse-btn-save" disabled={language === 'en' || isSaving || persistentDraftStatus === 'saving'} onClick={() => void handleSave()} title={language === 'en' ? 'Alterne para PT/BR para salvar' : undefined}>{isSaving || persistentDraftStatus === 'saving' ? language === 'pt-BR' ? 'Salvando…' : 'Saving…' : persistentDraftMode ? 'Salvar rascunho' : sessionOnly ? 'Aplicar à prova' : '💾 Save'}</button>
           </div>
         </div>
       </div>

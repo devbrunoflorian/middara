@@ -17,22 +17,29 @@ export interface LayoutAlignmentGuide {
 interface FrameGeometry {
   x: number;
   y: number;
+  /** X₂ in canonical layout frames; physical width in legacy frames and snap targets. */
   width: number;
+  /** Physical frame width; absent only for legacy frames and snap targets. */
+  total?: number;
+  /** Physical frame height; absent only for legacy frames and snap targets. */
+  totalHeight?: number;
   height: number;
   rotation?: number;
 }
 
 function axisAlignedBounds(frame: FrameGeometry) {
+  const frameWidth = frame.total ?? frame.width;
+  const frameHeight = frame.totalHeight ?? frame.height;
   const angle = (frame.rotation ?? 0) * Math.PI / 180;
   const cosine = Math.abs(Math.cos(angle));
   const sine = Math.abs(Math.sin(angle));
-  const width = frame.width * cosine + frame.height * sine;
-  const height = frame.width * sine + frame.height * cosine;
+  const width = frameWidth * cosine + frameHeight * sine;
+  const height = frameWidth * sine + frameHeight * cosine;
   return {
-    left: frame.x + (frame.width - width) / 2,
-    right: frame.x + (frame.width + width) / 2,
-    top: frame.y + (frame.height - height) / 2,
-    bottom: frame.y + (frame.height + height) / 2,
+    left: frame.x + (frameWidth - width) / 2,
+    right: frame.x + (frameWidth + width) / 2,
+    top: frame.y + (frameHeight - height) / 2,
+    bottom: frame.y + (frameHeight + height) / 2,
   };
 }
 
@@ -106,10 +113,14 @@ export function snapLayoutFrame<T extends FrameGeometry>(
 
   const xMatch = nearestSnap(xFeatures, xGuides, scale, thresholdPx);
   const yMatch = nearestSnap(yFeatures, yGuides, scale, thresholdPx);
+  const x = Math.max(0, frame.x + (xMatch?.delta ?? 0));
+  const y = Math.max(0, frame.y + (yMatch?.delta ?? 0));
   const nextFrame = {
     ...frame,
-    x: Math.max(0, frame.x + (xMatch?.delta ?? 0)),
-    y: Math.max(0, frame.y + (yMatch?.delta ?? 0)),
+    x,
+    width: frame.total === undefined ? frame.width : x + frame.total,
+    y,
+    height: frame.totalHeight === undefined ? frame.height : y + frame.totalHeight,
   };
   const guides: LayoutAlignmentGuide[] = [];
   if (xMatch) guides.push({ axis: 'x', value: xMatch.guide.value, label: xMatch.guide.label });

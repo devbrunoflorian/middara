@@ -80,6 +80,7 @@ function mount(
   originalLineHeight = 1,
   overrideStatusLoading = false,
   persistenceStatus?: 'confirmed' | 'missing_remote' | 'diverged' | 'unverified' | 'sync_error' | 'inherited' | 'loading',
+  startTextEditing = true,
 ) {
   const onDraftChange = vi.fn(); const onSave = vi.fn();
   const view = render(<AdminEditorHarness spanKey={`p0-${language}`} pageNumber={37} language={language}
@@ -88,8 +89,8 @@ function mount(
     originalStyle="normal" originalLineHeight={originalLineHeight} bbox={[10, 10, 300, 60]} onClose={vi.fn()} onSave={onSave}
     onDraftChange={onDraftChange} existingOverride={existingOverride} overrideStatusLoading={overrideStatusLoading}
     persistenceStatus={persistenceStatus} />);
-  fireEvent.click(view.getByText('📝 Edit Text'));
-  const textarea = view.getByRole('textbox') as HTMLTextAreaElement;
+  if (startTextEditing) fireEvent.click(view.getByText('📝 Edit Text'));
+  const textarea = (startTextEditing ? view.getByRole('textbox') : null) as HTMLTextAreaElement;
   const edit = (text: string, start = 0, end = start) => {
     textarea.setSelectionRange(start, end); fireEvent.select(textarea); fireEvent.keyUp(textarea);
     fireEvent.change(textarea, { target: { value: text, selectionStart: start, selectionEnd: start } });
@@ -97,6 +98,57 @@ function mount(
   const draft = () => onDraftChange.mock.calls.at(-1)?.[0] as SpanOverride | null;
   return { ...view, textarea, edit, draft, onDraftChange, onSave };
 }
+
+describe('RichSpanEditor font size control', () => {
+  it('does not apply an empty size and restores the last valid value with feedback', () => {
+    const v = mount('pt-BR', [plain('abc')], undefined, 1, false, undefined, false);
+    fireEvent.mouseDown(v.container.querySelector('.rse-char')!);
+    expect(v.container.querySelector('.rse-char-selected')).not.toBeNull();
+    const size = v.getByRole('spinbutton', { name: 'Tamanho da fonte (pt)' }) as HTMLInputElement;
+
+    fireEvent.focus(size);
+    fireEvent.change(size, { target: { value: '' } });
+    fireEvent.focusOut(size);
+
+    expect(size.value).toBe('10');
+    expect(v.getByRole('alert').textContent).toContain('valor anterior foi mantido');
+    expect(size.getAttribute('aria-invalid')).toBe('true');
+  });
+
+  it('commits a valid fractional font size to the selected text', () => {
+    const v = mount('pt-BR', [plain('abc')], undefined, 1, false, undefined, false);
+    fireEvent.mouseDown(v.container.querySelector('.rse-char')!);
+    expect(v.container.querySelector('.rse-char-selected')).not.toBeNull();
+    const size = v.getByRole('spinbutton', { name: 'Tamanho da fonte (pt)' }) as HTMLInputElement;
+
+    fireEvent.focus(size);
+    fireEvent.change(size, { target: { value: '14.5' } });
+    fireEvent.keyDown(size, { key: 'Enter' });
+
+    expect(size.value).toBe('14.5');
+    expect(v.queryByRole('alert')).toBeNull();
+    expect(v.draft()?.segments.map(segment => [segment.text, segment.size])).toEqual([['a', 14.5], ['bc', 10]]);
+  });
+
+  it('keeps and edits a legitimate PDF font size below 4 pt', () => {
+    const sourceSize = 0.8659682869911194;
+    const source = { ...plain('abc'), size: sourceSize };
+    const v = mount('pt-BR', [source], undefined, 1, false, undefined, false);
+    fireEvent.mouseDown(v.container.querySelector('.rse-char')!);
+    const size = v.getByRole('spinbutton', { name: 'Tamanho da fonte (pt)' }) as HTMLInputElement;
+
+    expect(size.value).toBe(String(sourceSize));
+    expect(size.validity.valid).toBe(true);
+    fireEvent.focus(size);
+    fireEvent.focusOut(size);
+    expect(v.queryByRole('alert')).toBeNull();
+
+    fireEvent.change(size, { target: { value: '1.25' } });
+    fireEvent.keyDown(size, { key: 'Enter' });
+
+    expect(v.draft()?.segments.map(segment => [segment.text, segment.size])).toEqual([['a', 1.25], ['bc', sourceSize]]);
+  });
+});
 
 describe.each(['en', 'pt-BR'] as const)('RichSpanEditor mounted regression %s', language => {
   it('keeps fill and outline styling when replacing text within one uniformly styled source run', () => {
@@ -448,10 +500,10 @@ it('keeps p.13 and p.100 translated emphasis neutral until a person maps it sema
 describe('RichSpanEditor translation context and state', () => {
   it.each([
     ['confirmed', 'PAYLOAD CONFIRMADO'],
-    ['missing_remote', 'SALVO LOCALMENTE / SINCRONIZAÇÃO PENDENTE'],
-    ['sync_error', 'ERRO DE SINCRONIZAÇÃO — cópia local preservada quando disponível'],
-    ['diverged', 'DIVERGÊNCIA LOCAL / PAYLOAD'],
-    ['unverified', 'PAYLOAD INDISPONÍVEL — ESTADO NÃO VERIFICADO'],
+    ['missing_remote', 'SALVO SOMENTE NO NAVEGADOR / SINCRONIZAÇÃO PENDENTE'],
+    ['sync_error', 'FALHA DE SINCRONIZAÇÃO — Payload não confirmou; consulte a recuperação local'],
+    ['diverged', 'CONFLITO — cópia local difere do Payload'],
+    ['unverified', 'PAYLOAD INDISPONÍVEL — confirmação não verificada'],
   ] as const)('shows the distinct persistence status %s', (status, expected) => {
     const v = mount('pt-BR', [plain('Original text')], undefined, 1, false, status);
     expect(v.getByRole('status').textContent).toBe(expected);
@@ -463,7 +515,31 @@ describe('RichSpanEditor translation context and state', () => {
     expect(v.getByRole('status').textContent).toBe('PT-BR ALTERADO NA SESSÃO / NÃO SALVO');
   });
 
-  it('shows read-only EN source and accurately identifies an existing PT-BR override', () => {
+  it('shows the save in progress and blocks repeated submissions until the callback settles', async () => {
+    const v = mount('pt-BR', [plain('Original text')]);
+    v.edit('Texto alterado');
+    let resolveSave!: () => void;
+    const pendingSave = new Promise<void>(resolve => { resolveSave = resolve; });
+    v.onSave.mockImplementation(() => pendingSave);
+    const saveButton = v.getByText('💾 Save') as HTMLButtonElement;
+
+    fireEvent.click(saveButton);
+
+    expect(saveButton.disabled).toBe(true);
+    expect(saveButton.textContent).toBe('Salvando…');
+    expect(v.getByRole('status').textContent).toBe('SALVANDO ALTERAÇÕES…');
+    fireEvent.click(saveButton);
+    expect(v.onSave).toHaveBeenCalledTimes(1);
+
+    await act(async () => {
+      resolveSave();
+      await pendingSave;
+    });
+    expect(saveButton.disabled).toBe(false);
+    expect(saveButton.textContent).toBe('💾 Save');
+  });
+
+  it('shows read-only EN source and avoids claiming Payload confirmation for an override with no sync status', () => {
     const source = [plain('Original Setup text')];
     const existing: SpanOverride = {
       spanKey: 'p0-pt-BR', segments: [plain('Texto já traduzido')], bbox: [10, 10, 300, 60],
@@ -473,7 +549,7 @@ describe('RichSpanEditor translation context and state', () => {
 
     const panel = v.container.querySelector('.rse-translation-context')!;
     expect(panel.querySelector('.rse-context-source')?.textContent).toBe('Original Setup text');
-    expect(panel.querySelector('.rse-context-status')?.textContent).toBe('PT-BR OVERRIDE SALVO');
+    expect(panel.querySelector('.rse-context-status')?.textContent).toBe('OVERRIDE EXISTENTE — estado do Payload não verificado');
     expect(panel.querySelector('input, textarea, button, [contenteditable="true"]')).toBeNull();
     expect(v.onSave).not.toHaveBeenCalled();
     v.unmount();
@@ -537,7 +613,7 @@ describe('RichSpanEditor translation context and state', () => {
     inherited.unmount();
 
     const reloaded = mount('pt-BR', source, saved);
-    expect(readState(reloaded)).toBe('PT-BR OVERRIDE SALVO');
+    expect(readState(reloaded)).toBe('OVERRIDE EXISTENTE — estado do Payload não verificado');
     reloaded.edit('Texto salvo editado');
     expect(readState(reloaded)).toBe('PT-BR ALTERADO NA SESSÃO / NÃO SALVO');
     vi.stubGlobal('confirm', () => true);

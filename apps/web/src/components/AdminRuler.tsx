@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { LayoutAlignmentGuide } from '../layoutFrameSnapping';
 import './AdminRuler.css';
@@ -9,6 +9,7 @@ interface AdminRulerProps {
   pageWidth: number;
   pageHeight: number;
   alignmentGuides?: LayoutAlignmentGuide[];
+  selectedGeometry?: HoveredBlockGeometry | null;
 }
 
 interface PageRect {
@@ -39,7 +40,7 @@ const LABEL_INTERVAL_PT = 100;
 const TICK_INTERVAL_PT = 10;
 const RULER_SIZE_PX = 22;
 
-export function AdminRuler({ pageElement, pageWidth, pageHeight, alignmentGuides = [], portalHost = null }: AdminRulerProps) {
+export function AdminRuler({ pageElement, pageWidth, pageHeight, alignmentGuides = [], selectedGeometry = null, portalHost = null }: AdminRulerProps) {
   const [pageRect, setPageRect] = useState<PageRect | null>(null);
   const [hoveredGeometry, setHoveredGeometry] = useState<HoveredBlockGeometry | null>(null);
 
@@ -193,6 +194,31 @@ export function AdminRuler({ pageElement, pageWidth, pageHeight, alignmentGuides
     width: hoveredGeometry.width * scale,
     height: hoveredGeometry.height * scale,
   } : null;
+  const selectedGuideNodes = selectedGeometry ? (() => {
+    const vertical = [selectedGeometry.x, selectedGeometry.x + selectedGeometry.width]
+      .map((value, index) => {
+        const x = pageRect.left + value * scale;
+        if (x < horizontalLeft || x > horizontalRight) return null;
+        return <Fragment key={`selected-x-${index}`}>
+          <span className="admin-ruler-selected-guide admin-ruler-selected-guide-vertical"
+            style={{ left: x, top: verticalTop, height: Math.max(0, verticalBottom - verticalTop) }} />
+          <span className="admin-ruler-selected-mark admin-ruler-selected-mark-x"
+            style={{ left: x, top: horizontalTop + RULER_SIZE_PX - 4 }} />
+        </Fragment>;
+      });
+    const horizontal = [selectedGeometry.y, selectedGeometry.y + selectedGeometry.height]
+      .map((value, index) => {
+        const y = pageRect.top + value * scale;
+        if (y < verticalTop || y > verticalBottom) return null;
+        return <Fragment key={`selected-y-${index}`}>
+          <span className="admin-ruler-selected-guide admin-ruler-selected-guide-horizontal"
+            style={{ left: horizontalLeft, top: y, width: Math.max(0, horizontalRight - horizontalLeft) }} />
+          <span className="admin-ruler-selected-mark admin-ruler-selected-mark-y"
+            style={{ left: verticalLeft + RULER_SIZE_PX - 4, top: y }} />
+        </Fragment>;
+      });
+    return [...vertical, ...horizontal];
+  })() : null;
   const snapGuideNodes = alignmentGuides.flatMap((guide, index) => {
     if (guide.axis === 'x') {
       const x = pageRect.left + guide.value * scale;
@@ -217,6 +243,7 @@ export function AdminRuler({ pageElement, pageWidth, pageHeight, alignmentGuides
   return createPortal(
     <>
       <div className="admin-ruler-layer" aria-hidden="true">
+        {selectedGuideNodes}
         {snapGuideNodes}
         <div className="admin-ruler-corner" style={{ left: verticalStyle.left, top: horizontalStyle.top }} />
         <div className="admin-ruler admin-ruler-horizontal" style={horizontalStyle}>
@@ -254,9 +281,17 @@ export function AdminRuler({ pageElement, pageWidth, pageHeight, alignmentGuides
             style={{ left: geometryPosition.left + geometryPosition.width / 2, top: geometryPosition.top - 6 }}
           >Y {hoveredGeometry.y.toFixed(2)} pt</span>
           <span
-            className="admin-geometry-chip admin-geometry-chip-width"
+            className="admin-geometry-chip admin-geometry-chip-x2"
             style={{ left: geometryPosition.left + geometryPosition.width + 6, top: geometryPosition.top + geometryPosition.height / 2 }}
-          >L {hoveredGeometry.width.toFixed(2)} pt</span>
+            title="Coordenada final X₂ na régua: X + largura"
+            aria-label={`X₂, coordenada final ${(hoveredGeometry.x + hoveredGeometry.width).toFixed(2)} pontos PDF`}
+          >X₂ {(hoveredGeometry.x + hoveredGeometry.width).toFixed(2)} pt</span>
+          <span
+            className="admin-geometry-chip admin-geometry-chip-width"
+            style={{ left: geometryPosition.left + Math.max(0, geometryPosition.width - 92), top: geometryPosition.top - 17 }}
+            title="Largura da moldura: X₂ − X"
+            aria-label={`Largura ${(hoveredGeometry.x + hoveredGeometry.width - hoveredGeometry.x).toFixed(2)} pontos PDF`}
+          >L {(hoveredGeometry.x + hoveredGeometry.width - hoveredGeometry.x).toFixed(2)} pt</span>
           <span
             className="admin-geometry-chip admin-geometry-chip-height"
             style={{ left: geometryPosition.left + geometryPosition.width / 2, top: geometryPosition.top + geometryPosition.height + 6 }}

@@ -10,6 +10,11 @@
   color: #fbbf24;
 }
 
+.local-sync-trigger.is-conflict,
+.local-sync-trigger.is-error {
+  color: #f87171;
+}
+
 .local-sync-count {
   position: absolute;
   right: -4px;
@@ -97,6 +102,11 @@
 .local-sync-warning,
 .local-sync-conflict {
   color: #fcd34d;
+}
+
+.local-sync-summary.is-conflict,
+.local-sync-summary.is-error {
+  color: #fca5a5;
 }
 
 .local-sync-confirmed {

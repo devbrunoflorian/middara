@@ -1,9 +1,11 @@
 import React, { useEffect, useLayoutEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { RichSpanEditor, type Segment, type SpanOverride, type TextAlignment } from './RichSpanEditor';
 import type { AdminSymbolPaletteEditorState } from './AdminSymbolPalette';
+import type { TranslationGlossaryDecision } from '../translationReview';
 import { AdminRuler } from './AdminRuler';
 import { AdminLayoutFrameEditor } from './AdminLayoutFrameEditor';
 import type { LayoutAlignmentGuide, SnapFrameRect } from '../layoutFrameSnapping';
+import { canonicalizeLayoutFrame, layoutFrameRight, layoutFrameTotal, layoutFrameTotalHeight } from '../layoutFrameGeometry';
 import { deleteLayoutFrame, fetchLayoutFrames, loadLocalLayoutFrames, removeLocalLayoutFrame, saveLayoutFrame, saveLocalLayoutFrame, type LayoutLanguage } from '../layoutFrames';
 import { getSemanticSymbol, resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences } from '../symbols/semanticSymbols';
 import { SemanticSymbol } from '../symbols/SemanticSymbol';
@@ -115,7 +117,12 @@ export interface LineData {
 
 export interface LayoutFrame {
   x: number;
+  /** Final horizontal coordinate X₂; legacy records held the physical width here. */
   width: number;
+  /** Physical frame width in PDF points. Missing only in legacy records. */
+  total?: number;
+  /** Physical frame height in PDF points. Missing only in legacy records. */
+  totalHeight?: number;
   y?: number;
   height?: number;
   rotation?: number;
@@ -123,6 +130,8 @@ export interface LayoutFrame {
   lineHeight?: number;
   hidden?: boolean;
   paragraphSpacingPt?: number;
+  /** Administrator-created editable text frame with no English source block. */
+  adminCreatedBlock?: true;
 }
 
 export interface Block {
@@ -799,7 +808,7 @@ function listFlowTextBlock(
     const availableX = line.availableX ?? line.bbox[0];
     const availableWidth = line.availableWidth ?? (line.bbox[2] - line.bbox[0]);
     return availableX + availableWidth;
-  }), parent.layoutFrame ? parent.layoutFrame.x + parent.layoutFrame.width : parent.bbox[2]);
+  }), parent.layoutFrame ? layoutFrameRight(parent.layoutFrame) : parent.bbox[2]);
   const sourceBottom = Math.max(...lines.map(line => line.bbox[3]));
   const boundaryBottom = part.nextMarker?.bbox[1] ?? parent.bbox[3];
   const listFlowHeight = Math.max(1, Math.max(sourceBottom, boundaryBottom) - y);
@@ -817,13 +826,15 @@ function listFlowTextBlock(
     id: parent.id,
     editorKey,
     bbox: blockBBox,
-    layoutFrame: {
+    layoutFrame: canonicalizeLayoutFrame({
       ...(parent.layoutFrame ?? {}),
       x,
       width: Math.max(1, right - x),
+      total: Math.max(1, right - x),
       y,
-      height: listFlowHeight,
-    },
+      height: y + listFlowHeight,
+      totalHeight: listFlowHeight,
+    }),
     lines,
     staticEditorLineIndexes: undefined,
     listMarkerLineIndexes: undefined,
@@ -882,6 +893,7 @@ function extractBlockInfo(
     bbox: block.bbox,
     textAlign: block.layoutFrame?.textAlign || 'left',
     lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+    ...sourceListIndentValues(block.lines ?? [], block.listFlowItem),
     sourceSegments,
     singleLine: block.noWrap ?? false,
   };
@@ -1080,6 +1092,7 @@ export function extractCreditFieldInfo(
     bbox: field.bbox ?? block.bbox,
     textAlign: field.frame?.textAlign || 'left',
     lineHeight: field.frame?.lineHeight ?? block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
+    ...sourceListIndentValues(lines, block.listFlowItem),
     sourceSegments: effectiveKind === 'paragraph' ? normalizeParagraphSourceSegments(sourceSegments) : sourceSegments,
     editorContext: effectiveKind === 'paragraph'
       ? 'paragraph'
@@ -1104,6 +1117,8 @@ interface SelectedSpanInfo {
   bbox: [number, number, number, number];
   textAlign: TextAlignment;
   lineHeight: number;
+  listMarkerIndentPt?: number;
+  hangingIndentPt?: number;
   sourceSegments?: Segment[];
   singleLine?: boolean;
   editorContext?: InlineEditorContext;
@@ -1167,21 +1182,26 @@ interface PageRendererProps {
   isolatedSnapshot?: boolean;
   onExperimentalUnitSelect?: (spanKey: string | null) => void;
   editorHeaderAccessory?: React.ReactNode;
+  glossaryDecisions?: TranslationGlossaryDecision[];
 }
 
 type EditableNavigationDirection = 'previous' | 'next';
 
 function sourceLayoutFrame(block: Block): LayoutFrame {
   const firstLine = editableBlockLines(block)[0] ?? block.lines?.[0];
-  return {
-    x: block.layoutFrame?.x ?? (firstLine as any)?.availableX ?? block.bbox[0],
+  const x = block.layoutFrame?.x ?? (firstLine as any)?.availableX ?? block.bbox[0];
+  const total = block.layoutFrame
+    ? layoutFrameTotal(block.layoutFrame)
+    : (firstLine as any)?.availableWidth ?? Math.max(1, block.bbox[2] - block.bbox[0]);
+  return canonicalizeLayoutFrame({
+    x,
     y: block.bbox[1],
-    width: block.layoutFrame?.width ?? (firstLine as any)?.availableWidth ?? Math.max(1, block.bbox[2] - block.bbox[0]),
+    width: total,
     height: block.bbox[3] - block.bbox[1],
     rotation: 0,
     textAlign: block.layoutFrame?.textAlign,
     lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight,
-  };
+  });
 }
 
 function typographicUnitFrameKey(pageNumber: number, unit: TypographicUnitDefinition): string {
@@ -1224,24 +1244,26 @@ function sourceLayoutFrameForField(
     : availableX;
   const hasStoredFrame = field.frame !== undefined;
   const rotatedTranslationFrame = preserveStoredRotation && (field.frame?.rotation ?? 0) !== 0;
-  return {
-    x: (includeLeadingBulletsInFlow && availableX !== undefined ? availableX : field.frame?.x)
-      ?? frameX ?? (!hasStoredFrame ? block.layoutFrame?.x : undefined) ?? field.bbox[0],
-    y: (rotatedTranslationFrame ? field.frame?.y : undefined) ?? field.bbox[1],
-    width: (includeLeadingBulletsInFlow && availableX !== undefined && availableRight !== undefined && availableRight > availableX
+  const x = (includeLeadingBulletsInFlow && availableX !== undefined ? availableX : field.frame?.x)
+      ?? frameX ?? (!hasStoredFrame ? block.layoutFrame?.x : undefined) ?? field.bbox[0];
+  const total = (includeLeadingBulletsInFlow && availableX !== undefined && availableRight !== undefined && availableRight > availableX
       ? availableRight - availableX
-      : field.frame?.width)
+      : field.frame ? layoutFrameTotal(field.frame) : undefined)
       ?? (frameX !== undefined && availableRight !== undefined && availableRight > frameX ? availableRight - frameX : undefined)
-      ?? (!hasStoredFrame ? block.layoutFrame?.width : undefined)
-      ?? Math.max(1, field.bbox[2] - field.bbox[0]),
-    height: Math.max(1, (rotatedTranslationFrame ? field.frame?.height : undefined) ?? (field.bbox[3] - field.bbox[1])),
+      ?? (!hasStoredFrame && block.layoutFrame ? layoutFrameTotal(block.layoutFrame) : undefined)
+      ?? Math.max(1, field.bbox[2] - field.bbox[0]);
+  return canonicalizeLayoutFrame({
+    x,
+    y: (rotatedTranslationFrame ? field.frame?.y : undefined) ?? field.bbox[1],
+    width: total,
+    height: Math.max(1, (rotatedTranslationFrame && field.frame ? layoutFrameTotalHeight(field.frame) : undefined) ?? (field.bbox[3] - field.bbox[1])),
     rotation: rotatedTranslationFrame ? field.frame?.rotation ?? 0 : 0,
     textAlign: field.frame?.textAlign ?? (!hasStoredFrame ? block.layoutFrame?.textAlign : undefined),
     lineHeight: field.frame?.lineHeight ?? (!hasStoredFrame
       ? block.defaultLineHeight ?? block.layoutFrame?.lineHeight
       : undefined),
     paragraphSpacingPt: field.frame?.paragraphSpacingPt ?? field.paragraphSpacingPt,
-  };
+  });
 }
 
 interface LayoutFrameSource {
@@ -1283,8 +1305,8 @@ function adminGeometryAttributes(
     'data-admin-geometry-key': key,
     'data-admin-geometry-x': frame.x,
     'data-admin-geometry-y': frame.y ?? 0,
-    'data-admin-geometry-width': frame.width,
-    'data-admin-geometry-height': frame.height ?? 1,
+    'data-admin-geometry-width': layoutFrameTotal(frame),
+    'data-admin-geometry-height': Math.max(1, layoutFrameTotalHeight(frame)),
     'data-admin-geometry-rotation': frame.rotation ?? 0,
   };
 }
@@ -1597,7 +1619,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   onExperimentalEditorDraftChange, onProposalReviewEditorClose, proposalReviewSelectionKey, proposalReviewHighlightKey,
   proposalReviewOverrides, persistedReviewDraftOverrides, persistedReviewDraftLayoutFrames, persistedReviewDraftKeys, onOpenPersistedReviewDraft,
   proposalReviewLayoutFrames, proposalReviewDiagnosticBlankKeys, strictPtBrDiagnostic, experimentalFrames, experimentalHangingIndentBlockKeys,
-  readOnlyExperiment = false, isolatedSnapshot = false, onExperimentalUnitSelect, editorHeaderAccessory,
+  readOnlyExperiment = false, isolatedSnapshot = false, onExperimentalUnitSelect, editorHeaderAccessory, glossaryDecisions,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const workspaceRef = useRef<HTMLDivElement>(null);
@@ -1806,21 +1828,28 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     return next ?? overrides;
   }, [overrides, overridesReady, experimentalOverrides, readOnlyExperiment, proposalReviewOverrides, persistedReviewDraftOverrides, language]);
   const renderLayoutFrames = useMemo(() => {
-    if (!persistedReviewDraftLayoutFrames?.size && !proposalReviewLayoutFrames?.size
-      && !(readOnlyExperiment && experimentalFrames?.size)) return layoutFrames;
-    const next = new Map(layoutFrames);
+    const next = new Map<string, LayoutFrame>();
+    layoutFrames.forEach((frame, key) => next.set(key, canonicalizeLayoutFrame(frame)));
     // Candidate geometry fills only an otherwise unframed unit. Saved human
     // geometry remains authoritative for visible and selected review drafts.
     persistedReviewDraftLayoutFrames?.forEach((frame, key) => {
-      if (!next.has(key)) next.set(key, frame);
+      if (!next.has(key)) next.set(key, canonicalizeLayoutFrame(frame));
     });
     proposalReviewLayoutFrames?.forEach((frame, key) => {
-      if (!next.has(key)) next.set(key, frame);
+      if (!next.has(key)) next.set(key, canonicalizeLayoutFrame(frame));
     });
     if (!readOnlyExperiment || !experimentalFrames?.size) return next;
-    experimentalFrames.forEach((frame, key) => next.set(key, frame));
+    experimentalFrames.forEach((frame, key) => next.set(key, canonicalizeLayoutFrame(frame)));
     return next;
   }, [layoutFrames, persistedReviewDraftLayoutFrames, proposalReviewLayoutFrames, experimentalFrames, readOnlyExperiment]);
+  const adminCreatedFrames = useMemo(() => {
+    const frames = new Map<string, LayoutFrame>();
+    renderLayoutFrames.forEach((frame, key) => {
+      if (frame.adminCreatedBlock) frames.set(key, frame);
+    });
+    if (layoutUnitKey && layoutDraft?.adminCreatedBlock) frames.set(layoutUnitKey, layoutDraft);
+    return frames;
+  }, [renderLayoutFrames, layoutUnitKey, layoutDraft]);
   const persistedReviewDraftFrameKeys = useMemo(() => {
     const keys = new Set<string>();
     persistedReviewDraftLayoutFrames?.forEach((_frame, key) => {
@@ -2056,7 +2085,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     const load = async (frameLanguage: LayoutLanguage, local: Map<string, LayoutFrame>) => {
       const remote = await fetchLayoutFrames(pageData.page_number, frameLanguage);
       const merged = new Map(local);
-      remote?.forEach((frame, key) => merged.set(key, frame));
+      remote?.forEach((frame, key) => merged.set(key, canonicalizeLayoutFrame(frame)));
       return merged;
     };
     const languages: LayoutLanguage[] = language === 'pt-BR' ? ['en', 'pt-BR'] : ['en'];
@@ -2099,9 +2128,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   }, [layoutDirty]);
 
   const effectiveFrameFor = useCallback((unitKey: string, sourceFrame: LayoutFrame) => {
-    return renderLayoutFrames.get(unitKey)
+    return canonicalizeLayoutFrame(renderLayoutFrames.get(unitKey)
       ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(unitKey) : undefined)
-      ?? sourceFrame;
+      ?? sourceFrame);
   }, [renderLayoutFrames, inheritedLayoutFrames, language]);
 
   const layoutSnapTargets = useMemo<SnapFrameRect[]>(() => pageData.blocks.flatMap((block, index) => {
@@ -2116,8 +2145,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           label: unit.label || `Bloco ${index + 1} · ${unit.id}`,
           x: frame.x,
           y: frame.y ?? unit.field.bbox[1],
-          width: frame.width,
-          height: frame.height ?? Math.max(1, unit.field.bbox[3] - unit.field.bbox[1]),
+          width: layoutFrameTotal(frame),
+          height: layoutFrameTotalHeight(frame) || Math.max(1, unit.field.bbox[3] - unit.field.bbox[1]),
           rotation: frame.rotation,
         };
       });
@@ -2131,8 +2160,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       label: `Bloco ${index + 1}`,
       x: frame.x,
       y: frame.y ?? block.bbox[1],
-      width: frame.width,
-      height: frame.height ?? Math.max(1, block.bbox[3] - block.bbox[1]),
+      width: layoutFrameTotal(frame),
+      height: layoutFrameTotalHeight(frame) || Math.max(1, block.bbox[3] - block.bbox[1]),
       rotation: frame.rotation,
     }];
   }), [pageData.blocks, pageData.page_number, effectiveFrameFor]);
@@ -2145,18 +2174,44 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       ?? source?.frame
       ?? initialFrame;
     setLayoutUnitKey(unitKey);
-    setLayoutDraft({ ...saved });
+    setLayoutDraft(canonicalizeLayoutFrame(saved));
     setLayoutDirty(false);
     onLayoutDirtyChange?.(false);
     setLayoutStatus(language === 'pt-BR' && !layoutFrames.has(unitKey) ? 'PT-BR herda a moldura EN até ser personalizada.' : null);
   }, [layoutDirty, layoutUnitKey, pageData, layoutFrames, inheritedLayoutFrames, language, onLayoutDirtyChange]);
 
   const changeLayoutDraft = useCallback((frame: LayoutFrame) => {
-    setLayoutDraft(frame);
+    setLayoutDraft(canonicalizeLayoutFrame(frame));
     setLayoutDirty(true);
     onLayoutDirtyChange?.(true);
     setLayoutStatus(null);
   }, [onLayoutDirtyChange]);
+
+  const createAdminBlock = useCallback(() => {
+    if (isolatedSnapshot || language !== 'pt-BR' || layoutDirty || isSavingLayout) return;
+    const id = globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const unitKey = `page_${pageData.page_number}_unit_admin-block-${id}`;
+    const x = 32;
+    const total = Math.min(240, Math.max(80, pageData.width - 64));
+    const y = Math.max(16, Math.min(pageData.height - 96, pageData.height * 0.48));
+    const totalHeight = 72;
+    const frame: LayoutFrame = {
+      x,
+      y,
+      width: x + total,
+      total,
+      height: y + totalHeight,
+      totalHeight,
+      textAlign: 'left',
+      lineHeight: 1,
+      adminCreatedBlock: true,
+    };
+    setLayoutUnitKey(unitKey);
+    setLayoutDraft(frame);
+    setLayoutDirty(true);
+    onLayoutDirtyChange?.(true);
+    setLayoutStatus('Novo bloco PT-BR criado. Ajuste a moldura e salve para persistir no Payload.');
+  }, [isolatedSnapshot, language, layoutDirty, isSavingLayout, pageData.page_number, pageData.width, pageData.height, onLayoutDirtyChange]);
 
   const discardLayoutDraft = useCallback(() => {
     if (!layoutUnitKey) return;
@@ -2165,7 +2220,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(layoutUnitKey) : undefined)
       ?? source?.frame
       ?? null;
-    setLayoutDraft(saved ? { ...saved } : null);
+    setLayoutDraft(saved ? canonicalizeLayoutFrame(saved) : null);
     setLayoutDirty(false);
     onLayoutDirtyChange?.(false);
     setLayoutStatus('Alterações descartadas.');
@@ -2176,8 +2231,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     if (!layoutUnitKey || !layoutDraft || !layoutDirty || isSavingLayout) return;
     setIsSavingLayout(true);
     const next = new Map(layoutFrames);
-    next.set(layoutUnitKey, layoutDraft);
-    const savedLocally = saveLocalLayoutFrame(pageData.page_number, language, layoutUnitKey, layoutDraft);
+    const canonicalDraft = canonicalizeLayoutFrame(layoutDraft);
+    next.set(layoutUnitKey, canonicalDraft);
+    const savedLocally = saveLocalLayoutFrame(pageData.page_number, language, layoutUnitKey, canonicalDraft);
     if (!savedLocally) {
       setLayoutStatus('Falha ao gravar localmente; o Payload não será alterado. O rascunho continua aberto.');
       setIsSavingLayout(false);
@@ -2188,11 +2244,11 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       ? 'SALVO LOCALMENTE / SINCRONIZAÇÃO PENDENTE.'
       : 'Falha ao gravar localmente; o Payload não será alterado.');
     const savedRemotely = savedLocally
-      ? await saveLayoutFrame({ unitKey: layoutUnitKey, pageNumber: pageData.page_number, language, frame: layoutDraft })
+      ? await saveLayoutFrame({ unitKey: layoutUnitKey, pageNumber: pageData.page_number, language, frame: canonicalDraft })
       : false;
     if (savedLocally) dispatchLocalPersistenceChanged({
       kind: 'frame', language, unitKey: layoutUnitKey, pageNumber: pageData.page_number,
-      data: layoutDraft, confirmed: savedRemotely,
+      data: canonicalDraft, confirmed: savedRemotely,
     });
     else dispatchLocalPersistenceChanged();
     setLayoutDirty(false);
@@ -2222,7 +2278,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     const inherited = inheritedLayoutFrames.get(layoutUnitKey)
       ?? findLayoutFrameSource(pageData, layoutUnitKey)?.frame
       ?? null;
-    setLayoutDraft(inherited ? { ...inherited } : null);
+    setLayoutDraft(inherited ? canonicalizeLayoutFrame(inherited) : null);
     setLayoutDirty(false);
     onLayoutDirtyChange?.(false);
     setLayoutStatus(removedRemotely ? 'PAYLOAD CONFIRMADO — moldura PT-BR removida; herdando EN.' : removedLocally
@@ -2676,6 +2732,14 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   const selectedLayoutSource = layoutUnitKey ? findLayoutFrameSource(pageData, layoutUnitKey) : null;
   const selectedLayoutFrame = layoutDraft;
   const selectedLayoutHasOwnFrame = !!layoutUnitKey && layoutFrames.has(layoutUnitKey);
+  const selectedLayoutGeometry = isAdmin && layoutMode && layoutUnitKey && selectedLayoutFrame ? {
+    key: layoutUnitKey,
+    x: selectedLayoutFrame.x,
+    y: selectedLayoutFrame.y ?? 0,
+    width: layoutFrameTotal(selectedLayoutFrame),
+    height: Math.max(1, layoutFrameTotalHeight(selectedLayoutFrame)),
+    rotation: selectedLayoutFrame.rotation ?? 0,
+  } : null;
 
   return (
     <div
@@ -2802,6 +2866,65 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
             </React.Fragment>
           );
         })}
+        {language === 'pt-BR' && Array.from(adminCreatedFrames, ([unitKey, frame]) => {
+          if (frame.hidden) return null;
+          const spanKey = `${unitKey}__pt-BR`;
+          const override = selectedSpan?.spanKey === spanKey && draftOverride
+            ? draftOverride : renderOverrides.get(spanKey) ?? null;
+          const x = frame.x;
+          const y = frame.y ?? 0;
+          const width = layoutFrameTotal(frame);
+          const height = layoutFrameTotalHeight(frame) || 72;
+          const select = (event: React.MouseEvent<HTMLDivElement>) => {
+            event.stopPropagation();
+            if (layoutMode) {
+              selectLayoutFrame(unitKey, frame);
+              return;
+            }
+            handleSpanClick({
+              spanKey,
+              text: '',
+              font: 'AGaramondPro',
+              family: mapPdfFont('AGaramondPro').family,
+              weight: 400,
+              style: 'normal',
+              color: '#231f20',
+              size: 13,
+              bbox: [x, y, x + width, y + height],
+              textAlign: frame.textAlign ?? 'left',
+              lineHeight: frame.lineHeight ?? 1,
+              sourceSegments: [],
+              editorContext: 'paragraph',
+            });
+          };
+          return <div
+            key={unitKey}
+            className={`admin-created-translation-block ${isAdmin ? 'block-editable' : ''}`}
+            data-admin-created-block={unitKey}
+            style={{
+              position: 'absolute',
+              left: `${x * scale}px`,
+              top: `${y * scale}px`,
+              width: `${width * scale}px`,
+              minHeight: `${height * scale}px`,
+              boxSizing: 'border-box',
+              transform: frame.rotation ? `rotate(${frame.rotation}deg)` : undefined,
+              transformOrigin: 'center center',
+              zIndex: 10001,
+              whiteSpace: 'pre-wrap',
+              textAlign: override?.textAlign ?? frame.textAlign ?? 'left',
+              lineHeight: override?.lineHeight ?? frame.lineHeight ?? 1,
+              cursor: isAdmin ? (layoutMode ? 'move' : 'text') : 'default',
+              ...(isAdmin && !override && !layoutMode ? { outline: '1px dashed #00a6ff', background: 'rgb(0 166 255 / 8%)' } : {}),
+            }}
+            onClick={isAdmin ? select : undefined}
+            {...adminGeometryAttributes(isAdmin, unitKey, { x, y, width, height, rotation: frame.rotation ?? 0 })}
+          >
+            {override
+              ? renderCreditSegments(override.segments, undefined, 'pt-BR', scale, isAdmin, 'pre-wrap', spanKey)
+              : isAdmin && !layoutMode ? <span style={{ color: '#64748b', font: `${10 * scale}px Inter, sans-serif` }}>Novo bloco · clique para editar</span> : null}
+          </div>;
+        })}
         <SourceCompoundVectorLayer elements={(pageData.sourceCompounds ?? []).filter(element => {
           const block = pageData.blocks.find(candidate => candidate.id === element.anchor.blockId);
           return !!block && !compoundElementIsReplaced(element, block, pageData.page_number, language, renderOverrides,
@@ -2842,7 +2965,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           );
         })}
       </div>
-      {isAdmin && showRuler && <AdminRuler pageElement={pageElement} pageWidth={pageData.width} pageHeight={pageData.height} alignmentGuides={alignmentGuides} portalHost={overlayHost} />}
+      {isAdmin && (showRuler || layoutMode) && <AdminRuler pageElement={pageElement} pageWidth={pageData.width} pageHeight={pageData.height} alignmentGuides={alignmentGuides} selectedGeometry={selectedLayoutGeometry} portalHost={overlayHost} />}
       </div>
 
       {isAdmin && selectedSpan && onEditorPanelWidthChange && (
@@ -2876,6 +2999,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           originalSegments={selectedSpan.sourceSegments}
           originalTextAlign={selectedSpan.textAlign}
           originalLineHeight={selectedSpan.lineHeight}
+          originalListMarkerIndentPt={selectedSpan.listMarkerIndentPt}
+          originalHangingIndentPt={selectedSpan.hangingIndentPt}
           bbox={selectedSpan.bbox}
           pageNumber={pageData.page_number}
           language={language}
@@ -2898,6 +3023,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           sessionOnly={experimentalEditorMode}
           persistentDraftMode={Boolean(experimentalEditorMode && proposalReviewSelectionKey)}
           persistentDraftStatus={experimentalSaveStatus}
+          glossaryDecisions={glossaryDecisions}
         />
       )}
       {isAdmin && layoutMode && (
@@ -2924,6 +3050,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           onSave={saveLayoutDraft}
           onDiscard={discardLayoutDraft}
           onResetToEnglish={resetLayoutToEnglish}
+          onCreateBlock={createAdminBlock}
           onSnapGuidesChange={setAlignmentGuides}
         />
       )}
@@ -3055,7 +3182,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   // container at the frame origin so Admin and the translated preview expose
   // the same geometry without changing the source line coordinates.
   const frameX = block.layoutFrame?.x ?? (block.lines?.[0] as any)?.availableX ?? blockX;
-  const frameW = block.layoutFrame?.width ?? (block.lines?.[0] as any)?.availableWidth ?? blockW;
+  const frameW = block.layoutFrame ? layoutFrameTotal(block.layoutFrame) : (block.lines?.[0] as any)?.availableWidth ?? blockW;
 
   const blockStyle: React.CSSProperties = {
     position: 'absolute',
@@ -3087,8 +3214,8 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   const translatedFrame = currentOverride ? layoutFrameOverride : undefined;
   const translatedX = translatedFrame?.x ?? frameX;
   const translatedY = translatedFrame?.y ?? blockY;
-  const translatedWidth = translatedFrame?.width ?? frameW;
-  const translatedHeight = translatedFrame?.height ?? block.listFlowHeight ?? blockH;
+  const translatedWidth = translatedFrame ? layoutFrameTotal(translatedFrame) : frameW;
+  const translatedHeight = translatedFrame ? layoutFrameTotalHeight(translatedFrame) : block.listFlowHeight ?? blockH;
   const translatedStyle: React.CSSProperties = translatedFrame ? {
     ...blockStyle,
     left: `${translatedX * scale}px`,
@@ -3257,7 +3384,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
       isAdmin, contentsMap, onNavigate, onBlockClick, layoutMode, layoutUnitKey, layoutSelectionKey, layoutDraft, pageHeightPt,
       layoutFrames, inheritedLayoutFrames, layoutFrameForSelection,
       layoutFrameOverride, onSelectLayoutFrame, selectedBlockKey, overrides, overridesReady, draftOverride, language,
-      proposalReviewHighlightKey,
+      proposalReviewHighlightKey, persistedReviewDraftFrameKeys,
     }} />;
   }
 
@@ -3285,13 +3412,21 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     return <>
       {parts.map(part => {
         if (part.kind === 'marker' && part.line) {
+          const adjacentText = parts.find(candidate => candidate.kind === 'text'
+            && candidate.markerOrdinal === part.markerOrdinal);
+          const adjacentBlock = adjacentText ? listFlowTextBlock(block, adjacentText, pageNumber, blockIdx) : null;
+          const adjacentKey = adjacentBlock?.editorKey ? `${adjacentBlock.editorKey}__${language}` : null;
+          const adjacentOverride = adjacentKey && selectedBlockKey === adjacentKey && draftOverride
+            ? draftOverride : adjacentKey ? overrides.get(adjacentKey) : undefined;
+          const sourceMarkerInset = adjacentBlock ? sourceListIndentValues(adjacentBlock.lines ?? [], true).listMarkerIndentPt ?? 0 : 0;
+          const markerShift = (adjacentOverride?.listMarkerIndentPt ?? sourceMarkerInset) - sourceMarkerInset;
           return (
             <div key={part.key} className={`block-container list-marker-source ${reviewBlockHighlightClass}`} aria-hidden="true"
               data-translation-review-highlight={reviewBlockHighlighted ? (proposalReviewHighlightKey ?? blockKey) : undefined}
               data-list-marker-line={part.line.id}
               style={{ position: 'absolute', left: `${blockX * scale}px`, top: `${blockY * scale}px`,
                 width: `${blockW * scale}px`, height: `${blockH * scale}px`, zIndex: block.zIndex || 10,
-                pointerEvents: 'none' }}>
+                pointerEvents: 'none', transform: markerShift ? `translateX(${markerShift * scale}px)` : undefined }}>
               <LineRenderer line={part.line} scale={scale} blockOriginX={blockX} blockOriginY={blockY}
                 isAdmin={false} isSelected={false} language={language} onClick={() => {}} />
             </div>
@@ -3309,7 +3444,8 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             inheritedLayoutFrames={inheritedLayoutFrames}
             layoutFrameForSelection={sourceLayoutFrame(rowBlock)} onSelectLayoutFrame={onSelectLayoutFrame}
             selectedBlockKey={selectedBlockKey} overrides={rowOverrides} overridesReady={overridesReady}
-            draftOverride={draftOverride} language={language} proposalReviewHighlightKey={proposalReviewHighlightKey} />
+            draftOverride={draftOverride} language={language} proposalReviewHighlightKey={proposalReviewHighlightKey}
+            persistedReviewDraftFrameKeys={persistedReviewDraftFrameKeys} />
         );
       })}
     </>;
@@ -3436,6 +3572,16 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     const bulletParagraphCount = countLeadingBulletParagraphs(sourceAwareSegments);
     const inlineSourceBulletFlow = sourceBulletLines.length > 0
       && bulletParagraphCount === sourceBulletLines.length;
+    const sourceListIndents = sourceListIndentValues(block.lines ?? [], block.listFlowItem);
+    const numberedParagraphs = splitSegmentsIntoParagraphs(sourceAwareSegments).map((paragraph, paragraphIndex) => ({
+      paragraphIndex,
+      ...(splitLeadingNumberedListMarker(paragraph) ?? { marker: null, body: paragraph }),
+    }));
+    const hasNumberedMarkers = numberedParagraphs.some(paragraph => paragraph.marker !== null);
+    const useNumberedListFlow = !inlineSourceBulletFlow && hasNumberedMarkers
+      && (sourceListIndents.hangingIndentPt !== undefined
+        || currentOverride.listMarkerIndentPt !== undefined
+        || currentOverride.hangingIndentPt !== undefined);
     let flowedBulletIndex = 0;
     const flowedListParagraphs = inlineSourceBulletFlow
       ? splitSegmentsIntoParagraphs(sourceAwareSegments).map((paragraph, paragraphIndex) => {
@@ -3465,21 +3611,27 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
   const fixedLines = fixedLineEntries.map(entry => entry.line);
     const firstLine = editableBlockLines(block)[0] ?? block.lines[0];
     const hasStaticEditorLines = fixedLines.length > 0;
-    const rawX = block.experimentalHangingIndent && hasStaticEditorLines
+    const listBodyShiftPt = block.listFlowItem && currentOverride.hangingIndentPt !== undefined
+      && sourceListIndents.hangingIndentPt !== undefined
+      ? currentOverride.hangingIndentPt - sourceListIndents.hangingIndentPt
+      : 0;
+    const baseRawX = block.experimentalHangingIndent && hasStaticEditorLines
       ? firstLine.bbox[0]
       : layoutFrameOverride?.x ?? (hasStaticEditorLines
         ? firstLine.bbox[0]
         : block.layoutFrame?.x ?? ((firstLine as any).availableX !== undefined ? (firstLine as any).availableX : blockX));
+    const rawX = baseRawX + listBodyShiftPt;
     const sourceFrameRight = layoutFrameOverride
-      ? layoutFrameOverride.x + layoutFrameOverride.width
+        ? layoutFrameRight(layoutFrameOverride)
       : block.layoutFrame
-        ? block.layoutFrame.x + block.layoutFrame.width
+        ? layoutFrameRight(block.layoutFrame)
         : ((firstLine as any).availableX ?? rawX) + ((firstLine as any).availableWidth ?? blockW);
-    const rawWidth = block.experimentalHangingIndent && hasStaticEditorLines
+    const baseRawWidth = block.experimentalHangingIndent && hasStaticEditorLines
       ? Math.max(0, sourceFrameRight - rawX)
       : hasStaticEditorLines
         ? Math.max(0, sourceFrameRight - rawX)
-        : layoutFrameOverride?.width ?? block.layoutFrame?.width ?? (firstLine as any).availableWidth ?? blockW;
+        : layoutFrameOverride ? layoutFrameTotal(layoutFrameOverride) : block.layoutFrame ? layoutFrameTotal(block.layoutFrame) : (firstLine as any).availableWidth ?? blockW;
+    const rawWidth = Math.max(0, baseRawWidth - listBodyShiftPt);
     const renderOriginX = translatedFrame ? translatedX : frameX;
     const renderOriginY = translatedFrame ? translatedY : blockY;
     const blockLineX = (rawX - renderOriginX) * scale;
@@ -3508,6 +3660,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
     const phaseBodyStartIndex = phaseMarkerIndex >= 0
       ? phaseMarkerIndex + 1 + (phaseMarkerTabIndex >= 0 ? 1 : 0)
       : 0;
+    const effectiveMarkerIndentPt = currentOverride.listMarkerIndentPt ?? sourceListIndents.listMarkerIndentPt ?? 0;
+    const effectiveHangingIndentPt = currentOverride.hangingIndentPt ?? sourceListIndents.hangingIndentPt ?? 18;
+    const effectiveMarkerAdvancePt = Math.max(0, effectiveHangingIndentPt - effectiveMarkerIndentPt);
     const renderSegments = (segments: SpanOverride['segments'], startIndex = 0) => segments.map((seg, segIdx) => {
       const absoluteSegmentIndex = startIndex + segIdx;
       const segmentStyle: React.CSSProperties = {
@@ -3534,12 +3689,10 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
         ) ? { display: 'inline-block', transform: 'translateY(12%)' } : {}),
       };
       if (absoluteSegmentIndex === phaseMarkerIndex) {
-        // These audited source markers each occupy an 18 pt first column;
-        // keep that measured gap even when extraction stores the tab with spaces.
         const markerSegment = { ...seg, text: expectedHangingIndentMarker ?? seg.text.replace(/\t$/, '') };
-        return <span key={absoluteSegmentIndex} aria-label={markerSegment.text} data-source-marker-advance="18pt" style={{
+        return <span key={absoluteSegmentIndex} aria-label={markerSegment.text} data-source-marker-advance={`${effectiveMarkerAdvancePt}pt`} style={{
           display: 'inline-block',
-          width: `${18 * scale}px`,
+          width: `${effectiveMarkerAdvancePt * scale}px`,
           whiteSpace: 'pre',
           verticalAlign: 'baseline',
         }}>
@@ -3606,10 +3759,11 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
         >
           {phaseMarkerIndex >= 0 ? (
             <div
-              data-source-hanging-indent-pt="18"
+              data-source-hanging-indent-pt={effectiveHangingIndentPt}
               style={{
                 display: 'grid',
-                gridTemplateColumns: `${18 * scale}px minmax(0, 1fr)`,
+                marginLeft: `${effectiveMarkerIndentPt * scale}px`,
+                gridTemplateColumns: `${effectiveMarkerAdvancePt * scale}px minmax(0, 1fr)`,
                 alignItems: 'start',
                 width: '100%',
               }}
@@ -3620,6 +3774,34 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
               <span style={{ display: 'block', minWidth: 0 }}>
                 {renderSegments(sourceAwareSegments.slice(phaseBodyStartIndex), phaseBodyStartIndex)}
               </span>
+            </div>
+          ) : useNumberedListFlow ? (
+            <div data-source-numbered-list-flow="true">
+              {numberedParagraphs.map(({ marker, body, paragraphIndex }, index, paragraphs) => {
+                const markerIndent = currentOverride.listMarkerIndentPt ?? sourceListIndents.listMarkerIndentPt ?? 0;
+                const bodyIndent = currentOverride.hangingIndentPt ?? sourceListIndents.hangingIndentPt ?? 18;
+                const paragraphFontSize = (body.length ? body : marker ?? []).find(segment => segment.text.trim())?.size ?? 13;
+                return <div
+                  key={`numbered-list-${paragraphIndex}`}
+                  data-source-numbered-list-row={paragraphIndex}
+                  style={{
+                    display: marker?.length ? 'grid' : 'block',
+                    gridTemplateColumns: marker?.length
+                      ? `${Math.max(0, bodyIndent - markerIndent) * scale}px minmax(0, 1fr)`
+                      : undefined,
+                    marginLeft: marker?.length ? `${markerIndent * scale}px` : undefined,
+                    marginBottom: currentOverride.paragraphSpacingPt && index < paragraphs.length - 1
+                      ? `${currentOverride.paragraphSpacingPt * scale}px` : 0,
+                    fontSize: `${paragraphFontSize * scale}px`,
+                    lineHeight: effectiveLineHeight,
+                  }}
+                >
+                  {marker?.length ? <>
+                    <span data-source-numbered-list-marker="true" style={{ minWidth: 0, whiteSpace: 'pre' }}>{renderSegments(marker)}</span>
+                    <span data-source-numbered-list-body="true" style={{ display: 'block', minWidth: 0 }}>{renderSegments(body)}</span>
+                  </> : body.length ? renderSegments(body) : <br />}
+                </div>;
+              })}
             </div>
           ) : flowedListParagraphs ? (
             <div data-source-bullet-flow="true">
@@ -3641,7 +3823,8 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
                         style={{
                           ...paragraphStyle,
                           display: 'grid',
-                          gridTemplateColumns: `${indentPt * scale}px minmax(0, 1fr)`,
+                          marginLeft: `${(currentOverride.listMarkerIndentPt ?? 0) * scale}px`,
+                          gridTemplateColumns: `${Math.max(0, (currentOverride.hangingIndentPt ?? indentPt) - (currentOverride.listMarkerIndentPt ?? 0)) * scale}px minmax(0, 1fr)`,
                           alignItems: 'start',
                           width: '100%',
                         }}
@@ -3835,7 +4018,7 @@ function findNextSameColumnComponentY(
     .map(unit => sourceLayoutFrameForField(unit.field, block)) ?? [];
   if (frames.length === 0) return undefined;
   const x0 = Math.min(...frames.map(frame => frame.x));
-  const x1 = Math.max(...frames.map(frame => frame.x + frame.width));
+  const x1 = Math.max(...frames.map(layoutFrameRight));
   const nextTextY = blocks
     .filter(candidate => candidate.id !== block.id
       // Treat every later text block whose ink intersects this component's frame as an obstacle.
@@ -4007,7 +4190,8 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
       ? {
           ...sourceFrame,
           x: block.layoutFrame.x ?? sourceFrame.x,
-          width: block.layoutFrame.width ?? sourceFrame.width,
+          total: layoutFrameTotal(block.layoutFrame),
+          width: block.layoutFrame.x + layoutFrameTotal(block.layoutFrame),
           textAlign: block.layoutFrame.textAlign ?? sourceFrame.textAlign,
         }
       : undefined;
@@ -4085,7 +4269,8 @@ const TypographicUnitBlock: React.FC<TypographicUnitBlockProps> = ({
           ? {
               ...sourceFrame,
               x: block.layoutFrame.x ?? sourceFrame.x,
-              width: block.layoutFrame.width ?? sourceFrame.width,
+              total: layoutFrameTotal(block.layoutFrame),
+              width: block.layoutFrame.x + layoutFrameTotal(block.layoutFrame),
               textAlign: block.layoutFrame.textAlign ?? sourceFrame.textAlign,
             }
           : sourceFrame;
@@ -4209,6 +4394,32 @@ function removeLeadingBulletParagraphPrefix(segments: SpanOverride['segments']):
   });
 }
 
+function sliceSegmentsByTextRange(segments: SpanOverride['segments'], start: number, end: number): SpanOverride['segments'] {
+  const result: SpanOverride['segments'] = [];
+  let offset = 0;
+  for (const segment of segments) {
+    const segmentStart = offset;
+    const segmentEnd = offset + segment.text.length;
+    const from = Math.max(start, segmentStart);
+    const to = Math.min(end, segmentEnd);
+    if (from < to) result.push({ ...segment, text: segment.text.slice(from - segmentStart, to - segmentStart) });
+    offset = segmentEnd;
+  }
+  return result;
+}
+
+function splitLeadingNumberedListMarker(segments: SpanOverride['segments']): { marker: SpanOverride['segments']; body: SpanOverride['segments'] } | null {
+  const text = segments.map(segment => segment.text).join('');
+  const match = text.match(/^(\s*)(\d{1,2}[.)])(?:[\t ]*)/u);
+  if (!match) return null;
+  const markerStart = match[1].length;
+  const markerEnd = markerStart + match[2].length;
+  return {
+    marker: sliceSegmentsByTextRange(segments, markerStart, markerEnd),
+    body: sliceSegmentsByTextRange(segments, match[0].length, text.length),
+  };
+}
+
 function sourceBulletRenderSegments(line: LineData): SpanOverride['segments'] {
   const sourceSegments = sourceSegmentsFromSpans(line.spans.filter(span => !span.renderOnlyStrokePass));
   const marker = sourceSegments.find(segment => segment.text.includes('•'));
@@ -4230,6 +4441,27 @@ function sourceListMarkerIndentPt(markerLine: LineData, sourceLines: LineData[])
   return Math.max(1, indent);
 }
 
+function sourceListIndentValues(lines: LineData[], listFlowItem = false): Pick<SelectedSpanInfo, 'listMarkerIndentPt' | 'hangingIndentPt'> {
+  if (listFlowItem && lines.length) {
+    const frameX = Math.min(...lines.map(line => line.availableX ?? line.bbox[0]));
+    const bodyXs = lines.flatMap(line => line.spans
+      .filter(span => !span.renderOnlyStrokePass && span.text.trim())
+      .map(span => span.origin?.[0] ?? span.bbox[0]).filter(Number.isFinite));
+    if (!bodyXs.length || !Number.isFinite(frameX)) return {};
+    const bodyX = Math.min(...bodyXs);
+    return { listMarkerIndentPt: 0, hangingIndentPt: Math.max(0, bodyX - frameX) };
+  }
+  const markerLine = lines.find(line => {
+    const text = sourceLineText(line).trim();
+    return listMarkerGlyph(line) !== null || /^\d+[.)]$/u.test(text);
+  });
+  if (!markerLine) return {};
+  const frameX = Math.min(...lines.map(line => line.availableX ?? line.bbox[0]));
+  const markerX = markerLine.availableX ?? markerLine.bbox[0];
+  const markerIndentPt = Math.max(0, markerX - frameX);
+  return { listMarkerIndentPt: markerIndentPt, hangingIndentPt: markerIndentPt + sourceListMarkerIndentPt(markerLine, lines) };
+}
+
 const CreditField: React.FC<CreditFieldProps> = ({
   block, field, spanKey, scale, isAdmin, selected, proposalReviewHighlightKey, override, diagnosticBlank = false, flowOverflow = false, language, nextFieldY,
   unitKind, unitLabel, paragraphSpacingPt, topOffsetPt = 0, layoutMode = false, layoutUnitKey, layoutFrameForSelection,
@@ -4239,7 +4471,7 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const [isOverflowing, setIsOverflowing] = useState(false);
   const blockX = block.bbox[0];
   const blockY = block.bbox[1];
-  const sourceFieldFrame = field.frame ?? sourceLayoutFrameForField(field, block);
+  const sourceFieldFrame = field.frame ? canonicalizeLayoutFrame(field.frame) : sourceLayoutFrameForField(field, block);
   const activeFrame = layoutFrameOverride ?? (layoutMode ? layoutFrameForSelection : undefined);
   const effectiveParagraphSpacingPt = paragraphSpacingPt
     ?? activeFrame?.paragraphSpacingPt
@@ -4256,12 +4488,12 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const fieldX = activeFrame?.x ?? (rotatedSourceFrame && !translatedSourceRotation ? field.bbox[0] : sourceFieldFrame.x);
   const fieldY = activeFrame?.y ?? (translatedSourceRotation ? sourceFieldFrame.y ?? field.bbox[1] : field.bbox[1]);
   const effectiveFieldY = fieldY + topOffsetPt;
-  const fieldHeight = activeFrame?.height ?? (translatedSourceRotation
-    ? sourceFieldFrame.height ?? (field.bbox[3] - field.bbox[1])
-    : rotatedSourceFrame ? field.bbox[3] - field.bbox[1] : sourceFieldFrame.height ?? (field.bbox[3] - field.bbox[1]));
-  const fieldWidth = activeFrame?.width ?? (rotatedSourceFrame && !translatedSourceRotation
+  const fieldHeight = activeFrame ? layoutFrameTotalHeight(activeFrame) : (translatedSourceRotation
+    ? layoutFrameTotalHeight(sourceFieldFrame) || (field.bbox[3] - field.bbox[1])
+    : rotatedSourceFrame ? field.bbox[3] - field.bbox[1] : layoutFrameTotalHeight(sourceFieldFrame) || (field.bbox[3] - field.bbox[1]));
+  const fieldWidth = activeFrame ? layoutFrameTotal(activeFrame) : (rotatedSourceFrame && !translatedSourceRotation
     ? field.bbox[2] - field.bbox[0]
-    : sourceFieldFrame.width);
+    : layoutFrameTotal(sourceFieldFrame));
   const fieldRotation = activeFrame?.rotation ?? (translatedSourceRotation ? sourceFieldFrame.rotation : undefined);
   const neighborHeight = nextFieldY !== undefined && nextFieldY > effectiveFieldY
     ? nextFieldY - effectiveFieldY
@@ -4322,6 +4554,16 @@ const CreditField: React.FC<CreditFieldProps> = ({
   const inlineSourceBulletFlow = override !== null
     && sourceBulletLines.length > 0
     && countLeadingBulletParagraphs(override.segments) > 0;
+  const sourceListIndents = sourceListIndentValues(lines, block.listFlowItem);
+  const numberedParagraphs = override ? splitSegmentsIntoParagraphs(override.segments).map((paragraph, paragraphIndex) => ({
+    paragraphIndex,
+    ...(splitLeadingNumberedListMarker(paragraph) ?? { marker: null, body: paragraph }),
+  })) : [];
+  const useNumberedListFlow = !!override && !inlineSourceBulletFlow
+    && numberedParagraphs.some(paragraph => paragraph.marker !== null)
+    && (sourceListIndents.hangingIndentPt !== undefined
+      || override.listMarkerIndentPt !== undefined
+      || override.hangingIndentPt !== undefined);
   let flowedBulletIndex = 0;
   const flowedListParagraphs = inlineSourceBulletFlow
     ? splitSegmentsIntoParagraphs(override.segments).map(paragraph => {
@@ -4431,7 +4673,10 @@ const CreditField: React.FC<CreditFieldProps> = ({
                 className="credit-paragraph"
                 style={{
                   display: paragraph.marker ? 'grid' : 'block',
-                  gridTemplateColumns: paragraph.marker ? `${paragraph.indentPt * scale}px minmax(0, 1fr)` : undefined,
+                  marginLeft: paragraph.marker ? `${(override?.listMarkerIndentPt ?? 0) * scale}px` : undefined,
+                  gridTemplateColumns: paragraph.marker
+                    ? `${Math.max(0, (override?.hangingIndentPt ?? paragraph.indentPt) - (override?.listMarkerIndentPt ?? 0)) * scale}px minmax(0, 1fr)`
+                    : undefined,
                   alignItems: 'start',
                   marginBottom: effectiveParagraphSpacingPt && effectiveParagraphSpacingPt > 0 && parIdx < arr.length - 1
                     ? `${effectiveParagraphSpacingPt * scale}px`
@@ -4448,6 +4693,35 @@ const CreditField: React.FC<CreditFieldProps> = ({
                 </span>
               </div>
             ))
+          ) : useNumberedListFlow ? (
+            numberedParagraphs.map(({ marker, body, paragraphIndex }, index, paragraphs) => {
+              const markerIndent = override!.listMarkerIndentPt ?? sourceListIndents.listMarkerIndentPt ?? 0;
+              const bodyIndent = override!.hangingIndentPt ?? sourceListIndents.hangingIndentPt ?? 18;
+              const paragraphFontSize = (body.length ? body : marker ?? []).find(segment => segment.text.trim())?.size ?? 10;
+              return <div
+                key={`numbered-list-${paragraphIndex}`}
+                data-source-numbered-list-row={paragraphIndex}
+                style={{
+                  display: marker?.length ? 'grid' : 'block',
+                  gridTemplateColumns: marker?.length
+                    ? `${Math.max(0, bodyIndent - markerIndent) * scale}px minmax(0, 1fr)` : undefined,
+                  marginLeft: marker?.length ? `${markerIndent * scale}px` : undefined,
+                  marginBottom: effectiveParagraphSpacingPt && index < paragraphs.length - 1
+                    ? `${effectiveParagraphSpacingPt * scale}px` : 0,
+                  fontSize: `${paragraphFontSize * scale}px`,
+                  lineHeight: override!.lineHeight ?? activeFrame?.lineHeight ?? sourceFieldFrame.lineHeight ?? 1,
+                }}
+              >
+                {marker?.length ? <>
+                  <span data-source-numbered-list-marker="true" style={{ minWidth: 0, whiteSpace: 'pre' }}>
+                    {renderCreditSegments(marker, undefined, language, scale, isAdmin, 'pre-wrap', spanKey)}
+                  </span>
+                  <span data-source-numbered-list-body="true" style={{ display: 'block', minWidth: 0 }}>
+                    {renderCreditSegments(body, field.links, language, scale, isAdmin, 'pre-wrap', spanKey)}
+                  </span>
+                </> : body.length ? renderCreditSegments(body, field.links, language, scale, isAdmin, 'pre-wrap', spanKey) : <br />}
+              </div>;
+            })
           ) : effectiveParagraphSpacingPt && effectiveParagraphSpacingPt > 0 ? (
             splitSegmentsIntoParagraphs(override.segments).map((parSegments, parIdx, arr) => (
               <div

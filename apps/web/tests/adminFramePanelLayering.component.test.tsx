@@ -1,5 +1,6 @@
 import React, { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
+import { fireEvent } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AdminLayoutFrameEditor } from '../src/components/AdminLayoutFrameEditor';
 
@@ -81,5 +82,63 @@ describe('translation frame panel layering', () => {
     expect(panel).not.toBeNull();
     expect(panelLayer?.parentElement).toBe(document.body);
     expect(frameLayer?.contains(panelLayer)).toBe(false);
+  });
+
+  it('keeps an incomplete coordinate from changing the frame and commits a valid value on blur or Enter', async () => {
+    page = document.createElement('div');
+    document.body.appendChild(page);
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    root = createRoot(container);
+    const onChange = vi.fn();
+    const frame = { x: 20, y: 30, width: 180, height: 90, rotation: 0 };
+
+    await act(async () => {
+      root!.render(
+        <AdminLayoutFrameEditor
+          pageElement={page}
+          pageWidth={820}
+          pageHeight={1160}
+          snapTargets={[]}
+          sourceBbox={null}
+          unitKey="p88-test"
+          frame={frame}
+          language="pt-BR"
+          hasOwnFrame
+          isDirty={false}
+          isSaving={false}
+          status={null}
+          onChange={onChange}
+          onSave={vi.fn()}
+          onDiscard={vi.fn()}
+          onResetToEnglish={vi.fn()}
+          onCreateBlock={vi.fn()}
+          onSnapGuidesChange={vi.fn()}
+        />,
+      );
+    });
+
+    const xInput = document.body.querySelector<HTMLInputElement>('.admin-layout-frame-fields input');
+    expect(xInput?.value).toBe('20');
+    expect(xInput).not.toBeNull();
+
+    act(() => fireEvent.change(xInput!, { target: { value: '' } }));
+    expect(onChange).not.toHaveBeenCalled();
+    act(() => fireEvent.blur(xInput!));
+    expect(onChange).not.toHaveBeenCalled();
+    expect(xInput!.value).toBe('20');
+    expect(document.body.querySelector('[role="alert"]')?.textContent)
+      .toBe('Valor inválido; a moldura não foi alterada.');
+
+    act(() => fireEvent.change(xInput!, { target: { value: '-2' } }));
+    act(() => fireEvent.blur(xInput!));
+    expect(onChange).not.toHaveBeenCalled();
+    expect(xInput!.value).toBe('20');
+
+    act(() => xInput!.focus());
+    act(() => fireEvent.change(xInput!, { target: { value: '25.5' } }));
+    act(() => fireEvent.keyDown(xInput!, { key: 'Enter' }));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0]).toEqual(expect.objectContaining({ x: 25.5 }));
   });
 });

@@ -16,7 +16,7 @@ import {
 import type { PageData } from './PageRenderer';
 import { mapPdfFont, renderSegmentContent, segFontToCSS } from './PageRenderer';
 import type { Segment } from './RichSpanEditor';
-import { candidateForReviewException, clientSpanKey, copyfitApprovalBlockReason, copyfitCanonicalEvidenceBlockReason, glossaryDecisionKey, hasUnapprovedPublishedRevisionDraft, normalizeGlossaryTerm, parseGlossaryTermCandidates, rendererKeyForReviewCandidate, reviewRecordForCandidate, reviewRequestMatchesUnit, segmentsForReviewData, spanOverrideForReviewCandidate, textForReviewData, translationDataMatches, unresolvedReviewExceptions } from '../translationReview';
+import { candidateForReviewException, clientSpanKey, copyfitApprovalBlockReason, copyfitCanonicalEvidenceBlockReason, glossaryDecisionKey, hasUnapprovedPublishedRevisionDraft, normalizeGlossarySearchText, normalizeGlossaryTerm, parseGlossaryTermCandidates, rendererKeyForReviewCandidate, reviewRecordForCandidate, reviewRequestMatchesUnit, segmentsForReviewData, spanOverrideForReviewCandidate, textForReviewData, translationDataMatches, unresolvedReviewExceptions } from '../translationReview';
 import './TranslationReviewPanel.css';
 
 interface TranslationReviewPanelProps {
@@ -54,8 +54,41 @@ interface TranslationReviewPanelProps {
   onDecideGlossaryTerm: (sourceTerm: string, targetTerm: string, status: TranslationGlossaryDecisionStatus) => Promise<void>;
 }
 
-type PanelTab = 'proposals' | 'exceptions' | 'requests' | 'approved';
+type PanelTab = 'proposals' | 'exceptions' | 'requests' | 'approved' | 'glossary';
 type RequestTarget = Omit<NewTranslationReviewRequest, 'requestText'>;
+
+const glossaryStatusLabels: Record<TranslationGlossaryDecisionStatus, string> = {
+  approved: 'Aprovado',
+  observed_standard: 'Padrão observado',
+  experimental: 'Experimental',
+  hypothesis: 'Hipótese',
+  rejected: 'Rejeitado',
+};
+
+const glossaryTypeLabels = {
+  terminology: 'Terminologia',
+  editorial_style: 'Estilo editorial',
+  writing_pattern: 'Padrão de redação',
+} as const;
+
+const glossaryCategoryLabels = {
+  unclassified: 'Sem classificação',
+  component: 'Componente',
+  game_mode: 'Modo de jogo',
+  mechanic: 'Mecânica',
+  action_phase: 'Ação ou fase',
+  resource_attribute: 'Recurso ou atributo',
+  status_effect: 'Estado ou efeito',
+  keyword_tag: 'Tag ou palavra-chave',
+  game_entity: 'Entidade do jogo',
+  lore_identifier: 'Nome próprio ou identificador',
+  editorial_convention: 'Convenção editorial',
+} as const;
+
+function csvCell(value: unknown): string {
+  const text = typeof value === 'string' ? value : value == null ? '' : JSON.stringify(value);
+  return `"${text.replaceAll('"', '""')}"`;
+}
 
 function pageRequestTarget(pageNumber: number): RequestTarget {
   return { referenceType: 'page', pageNumber, referenceTitle: `Página ${pageNumber}` };
@@ -238,10 +271,23 @@ export function TranslationReviewPanel({
   const [requestBusy, setRequestBusy] = useState(false);
   const [glossaryError, setGlossaryError] = useState<string | null>(null);
   const [glossaryBusyKey, setGlossaryBusyKey] = useState<string | null>(null);
+  const [glossarySearch, setGlossarySearch] = useState('');
+  const [glossaryStatusFilter, setGlossaryStatusFilter] = useState('all');
+  const [glossaryCategoryFilter, setGlossaryCategoryFilter] = useState('all');
+  const [glossaryTypeFilter, setGlossaryTypeFilter] = useState('all');
   const [showArchived, setShowArchived] = useState(false);
   const [archiveError, setArchiveError] = useState<string | null>(null);
   const [archiveNotice, setArchiveNotice] = useState<string | null>(null);
   const allCandidates = useMemo(() => catalog?.proposals.flatMap(proposal => proposal.candidates) ?? [], [catalog]);
+  const visibleGlossaryDecisions = useMemo(() => {
+    const query = normalizeGlossarySearchText(glossarySearch.trim());
+    return [...glossaryDecisions]
+      .filter(decision => glossaryStatusFilter === 'all' || decision.decisionStatus === glossaryStatusFilter)
+      .filter(decision => glossaryCategoryFilter === 'all' || (decision.semanticMetadata?.category ?? 'unclassified') === glossaryCategoryFilter)
+      .filter(decision => glossaryTypeFilter === 'all' || (decision.semanticMetadata?.decisionType ?? 'terminology') === glossaryTypeFilter)
+      .filter(decision => !query || normalizeGlossarySearchText(JSON.stringify(decision)).includes(query))
+      .sort((left, right) => left.sourceTerm.localeCompare(right.sourceTerm, 'pt-BR'));
+  }, [glossaryDecisions, glossarySearch, glossaryStatusFilter, glossaryCategoryFilter, glossaryTypeFilter]);
   const approvedCandidates = useMemo(() => {
     const list: TranslationReviewCandidate[] = [];
     const seenUnits = new Set<string>();
@@ -435,6 +481,13 @@ export function TranslationReviewPanel({
           : selectedCandidate.copyfitPageRendererLineCount,
       )
     : null;
+  const currentCopyfitRecord = selectedRecord && !selectedRecordFromEarlierProposal ? selectedRecord : null;
+  const copyfitSourceLineCount = currentCopyfitRecord?.copyfitSourcePdfLineCount
+    ?? selectedCandidate?.copyfitSourcePdfLineCount ?? null;
+  const copyfitViewerLineCount = currentCopyfitRecord?.copyfitPageRendererLineCount
+    ?? selectedCandidate?.copyfitPageRendererLineCount ?? null;
+  const copyfitClassification = currentCopyfitRecord?.copyfitClassification
+    ?? selectedCandidate?.copyfitClassification ?? null;
   const humanText = selectedCandidate ? savedHumanTranslations.get(selectedCandidate.spanKey)
     ?? savedHumanTranslations.get(selectedCandidate.spanKey.replace(/__pt-BR$/u, '')) : undefined;
   const isBusy = selectedCandidate !== null && busyReviewKey === selectedCandidate.reviewKey;
@@ -572,17 +625,80 @@ export function TranslationReviewPanel({
     }
   };
 
+  const exportGlossaryJSON = () => {
+    const document = {
+      schemaVersion: 1,
+      exportedAt: new Date().toISOString(),
+      sourceOfTruth: 'Payload collection translation-glossary-decisions',
+      decisions: [...glossaryDecisions].sort((left, right) => left.sourceTerm.localeCompare(right.sourceTerm, 'pt-BR')),
+    };
+    const url = URL.createObjectURL(new Blob([JSON.stringify(document, null, 2)], { type: 'application/json;charset=utf-8' }));
+    const anchor = window.document.createElement('a');
+    anchor.href = url;
+    anchor.download = `middara-glossario-semantico-${new Date().toISOString().slice(0, 10)}.json`;
+    anchor.click();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  const exportGlossaryCSV = () => {
+    const columns = [
+      'id', 'decisionKey', 'sourceTerm', 'preferredForm', 'status', 'decisionType', 'category', 'subtype',
+      'context', 'alternatives', 'rejectedForms', 'distinctFrom', 'printedIdentifierPolicy', 'evidence',
+      'examples', 'humanLocked', 'version', 'reconciliationStatus', 'reconciliationNote', 'decisionNote', 'occurrences',
+    ];
+    const rows = [...glossaryDecisions].sort((left, right) => left.sourceTerm.localeCompare(right.sourceTerm, 'pt-BR')).map(decision => {
+      const metadata = decision.semanticMetadata;
+      const values: Record<string, unknown> = {
+        id: decision.id,
+        decisionKey: decision.decisionKey,
+        sourceTerm: decision.sourceTerm,
+        preferredForm: decision.targetTerm,
+        status: decision.decisionStatus,
+        decisionType: metadata?.decisionType,
+        category: metadata?.category,
+        subtype: metadata?.subtype,
+        context: metadata?.context,
+        alternatives: metadata?.alternatives,
+        rejectedForms: metadata?.rejectedForms,
+        distinctFrom: metadata?.distinctFrom,
+        printedIdentifierPolicy: metadata?.printedIdentifierPolicy,
+        evidence: metadata?.evidence,
+        examples: metadata?.examples,
+        humanLocked: metadata?.humanLocked,
+        version: metadata?.version,
+        reconciliationStatus: metadata?.reconciliationStatus,
+        reconciliationNote: metadata?.reconciliationNote,
+        decisionNote: decision.decisionNote,
+        occurrences: decision.occurrences,
+      };
+      return columns.map(column => csvCell(values[column])).join(',');
+    });
+    const csv = `\uFEFF${columns.join(',')}\r\n${rows.join('\r\n')}`;
+    const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    const anchor = window.document.createElement('a');
+    anchor.href = url;
+    anchor.download = `middara-glossario-semantico-${new Date().toISOString().slice(0, 10)}.csv`;
+    anchor.click();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
   const exportGlossaryDecisionDocument = () => {
-    const approved = glossaryDecisions.filter(decision => decision.decisionStatus === 'approved');
-    const rejected = glossaryDecisions.filter(decision => decision.decisionStatus === 'rejected');
     const renderSection = (title: string, items: TranslationGlossaryDecision[]) => [
       `## ${title}`,
       '',
       items.length ? items.map(decision => {
+        const metadata = decision.semanticMetadata;
         const references = decision.occurrences.map(occurrence => `p. ${occurrence.pageNumber} · ${occurrence.proposalTitle} (${occurrence.reviewKey})`);
         return [
           `### ${decision.sourceTerm} → ${decision.targetTerm}`,
           '',
+          `- Estado: ${glossaryStatusLabels[decision.decisionStatus]}`,
+          `- Tipo/categoria: ${metadata?.decisionType ? glossaryTypeLabels[metadata.decisionType] : 'Terminologia'} / ${metadata?.category ? glossaryCategoryLabels[metadata.category] : 'Sem classificação'}`,
+          ...(metadata?.context ? [`- Contexto: ${metadata.context}`] : []),
+          ...(metadata?.alternatives?.length ? [`- Alternativas: ${metadata.alternatives.join('; ')}`] : []),
+          ...(metadata?.distinctFrom?.length ? [`- Distinto de: ${metadata.distinctFrom.map(relation => `${relation.sourceTerm}${relation.preferredForm ? ` → ${relation.preferredForm}` : ''}${relation.note ? ` (${relation.note})` : ''}`).join('; ')}`] : []),
+          ...(metadata?.evidence?.length ? [`- Evidências: ${metadata.evidence.join('; ')}`] : []),
+          ...(metadata?.reconciliationStatus === 'needs_review' ? [`- Reconciliação pendente: ${metadata.reconciliationNote ?? 'revisar'}`] : []),
           `- Decisão registrada: ${decision.decidedAt ?? decision.updatedAt ?? decision.createdAt ?? 'data indisponível'}`,
           `- Ocorrências vinculadas: ${references.length ? references.join('; ') : 'nenhuma no catálogo atual'}`,
           ...decision.occurrences.slice(0, 3).flatMap(occurrence => [
@@ -599,8 +715,7 @@ export function TranslationReviewPanel({
       '',
       `Exportado em ${new Date().toISOString()}. Este documento prova decisões humanas registradas na central; não publica traduções.`,
       '',
-      ...renderSection('Glossário complementar aprovado', approved),
-      ...renderSection('Formas rejeitadas', rejected),
+      ...Object.entries(glossaryStatusLabels).flatMap(([status, label]) => renderSection(label, glossaryDecisions.filter(decision => decision.decisionStatus === status))),
     ].join('\n');
     const url = URL.createObjectURL(new Blob([document], { type: 'text/markdown;charset=utf-8' }));
     const anchor = window.document.createElement('a');
@@ -641,9 +756,12 @@ export function TranslationReviewPanel({
         <button type="button" role="tab" aria-selected={tab === 'approved'} className={tab === 'approved' ? 'active' : ''} onClick={() => { setTab('approved'); setSelectedExceptionId(null); }}>
           Aprovados <span>{approvedCandidates.length}</span>
         </button>
+        <button type="button" role="tab" aria-selected={tab === 'glossary'} className={tab === 'glossary' ? 'active' : ''} onClick={() => { setTab('glossary'); setSelectedExceptionId(null); }}>
+          Glossário <span>{glossaryDecisions.length}</span>
+        </button>
       </div>
 
-      <div className="translation-review-page-filter">
+      {tab !== 'glossary' && <div className="translation-review-page-filter">
         <label htmlFor="translation-review-page">Página</label>
         <select id="translation-review-page" value={pageFilter} onChange={event => setPageFilter(event.target.value)}>
           <option value="current">Página atual{pageNumbers.includes(selectedPage) ? ` · ${selectedPage}` : ''}</option>
@@ -660,7 +778,7 @@ export function TranslationReviewPanel({
             {showArchived ? 'Voltar à fila' : 'Arquivadas'} <span>{visibleArchivedCandidates.length}</span>
           </button>
         )}
-      </div>
+      </div>}
 
       {catalogError && <p className="translation-review-error" role="alert">{catalogError}</p>}
       {persistenceError && <p className="translation-review-error" role="status">Revisões persistentes indisponíveis: {persistenceError}</p>}
@@ -668,7 +786,79 @@ export function TranslationReviewPanel({
       {archiveError && <p className="translation-review-error" role="alert">{archiveError}</p>}
       {archiveNotice && <p className="translation-review-status" role="status">{archiveNotice}</p>}
 
-      <div className="translation-review-layout">
+      <div className={`translation-review-layout ${tab === 'glossary' ? 'is-glossary' : ''}`}>
+        {tab === 'glossary' ? (
+          <section className="translation-review-glossary-browser" role="tabpanel" aria-label="Glossário semântico">
+            <div className="translation-review-glossary-heading">
+              <div>
+                <p className="translation-review-eyebrow">DECISÕES LINGUÍSTICAS · PAYLOAD</p>
+                <h3>Glossário semântico</h3>
+                <p>Consulta os registros persistidos. As decisões orientam traduções futuras e não alteram páginas automaticamente.</p>
+              </div>
+              <div className="translation-review-glossary-exports">
+                <button type="button" onClick={exportGlossaryJSON}>Exportar JSON</button>
+                <button type="button" onClick={exportGlossaryCSV}>Exportar CSV</button>
+                <button type="button" onClick={exportGlossaryDecisionDocument}>Exportar Markdown</button>
+              </div>
+            </div>
+            <div className="translation-review-glossary-filters">
+              <label>Buscar termos, contexto ou evidência
+                <input type="search" value={glossarySearch} onChange={event => setGlossarySearch(event.target.value)} placeholder="Ex.: Crawl Book, componente, p. 24…" />
+              </label>
+              <label>Tipo
+                <select value={glossaryTypeFilter} onChange={event => setGlossaryTypeFilter(event.target.value)}>
+                  <option value="all">Todos</option>
+                  {Object.entries(glossaryTypeLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+                </select>
+              </label>
+              <label>Categoria
+                <select value={glossaryCategoryFilter} onChange={event => setGlossaryCategoryFilter(event.target.value)}>
+                  <option value="all">Todas</option>
+                  {Object.entries(glossaryCategoryLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+                </select>
+              </label>
+              <label>Status
+                <select value={glossaryStatusFilter} onChange={event => setGlossaryStatusFilter(event.target.value)}>
+                  <option value="all">Todos</option>
+                  {Object.entries(glossaryStatusLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+                </select>
+              </label>
+            </div>
+            <p className="translation-review-glossary-count" aria-live="polite">Exibindo {visibleGlossaryDecisions.length} de {glossaryDecisions.length} decisões.</p>
+            <ul className="translation-review-glossary-list">
+              {visibleGlossaryDecisions.map(decision => {
+                const metadata = decision.semanticMetadata;
+                const category = metadata?.category ?? 'unclassified';
+                return (
+                  <li key={decision.decisionKey} className={`translation-review-glossary-entry is-${decision.decisionStatus}`}>
+                    <div className="translation-review-glossary-entry-title">
+                      <div><h4>{decision.sourceTerm} <span aria-hidden="true">→</span> {decision.targetTerm}</h4><small>id {decision.id} · {decision.decisionKey}</small></div>
+                      <div className="translation-review-glossary-badges">
+                        <span className={`translation-review-badge ${decision.decisionStatus === 'approved' ? 'is-approved' : ''}`}>{glossaryStatusLabels[decision.decisionStatus]}</span>
+                        <span className="translation-review-badge">{metadata?.decisionType ? glossaryTypeLabels[metadata.decisionType] : 'Terminologia'}</span>
+                        <span className="translation-review-badge">{glossaryCategoryLabels[category]}</span>
+                      </div>
+                    </div>
+                    {metadata?.reconciliationStatus === 'needs_review' && <p className="translation-review-glossary-conflict" role="note">Precisa de reconciliação: {metadata.reconciliationNote || 'revisar contra as decisões existentes.'}</p>}
+                    {metadata?.context && <p><strong>Contexto:</strong> {metadata.context}</p>}
+                    {metadata?.subtype && <p><strong>Subtipo:</strong> {metadata.subtype}</p>}
+                    {metadata?.alternatives?.length ? <p><strong>Alternativas:</strong> {metadata.alternatives.join(' · ')}</p> : null}
+                    {metadata?.rejectedForms?.length ? <p><strong>Formas rejeitadas:</strong> {metadata.rejectedForms.join(' · ')}</p> : null}
+                    {metadata?.distinctFrom?.length ? <p><strong>Distinto de:</strong> {metadata.distinctFrom.map(relation => `${relation.sourceTerm}${relation.preferredForm ? ` → ${relation.preferredForm}` : ''}${relation.note ? ` — ${relation.note}` : ''}`).join('; ')}</p> : null}
+                    {metadata?.printedIdentifierPolicy && <p><strong>Identificador impresso:</strong> {metadata.printedIdentifierPolicy}</p>}
+                    {metadata?.evidence?.length ? <p><strong>Evidência:</strong> {metadata.evidence.join(' · ')}</p> : null}
+                    {metadata?.examples?.length ? <ul className="translation-review-glossary-examples">{metadata.examples.map((example, index) => <li key={`${decision.decisionKey}-example-${index}`}><span>EN: {example.sourceText}</span><span>PT-BR: {example.targetText}</span>{example.pageNumber && <small>p. {example.pageNumber}</small>}{example.note && <small>{example.note}</small>}</li>)}</ul> : null}
+                    {metadata?.humanLocked && <small>Protegida por decisão humana · v{metadata.version ?? 1}</small>}
+                    {decision.decisionNote && <p><strong>Nota:</strong> {decision.decisionNote}</p>}
+                    <small>{decision.occurrences.length} ocorrência(s) vinculada(s) · atualizado em {decision.updatedAt ? new Date(decision.updatedAt).toLocaleDateString('pt-BR') : 'data indisponível'}</small>
+                  </li>
+                );
+              })}
+              {!visibleGlossaryDecisions.length && <li className="translation-review-empty">Nenhuma decisão corresponde a esses filtros.</li>}
+            </ul>
+          </section>
+        ) : (
+          <>
         <div className="translation-review-list" role="tabpanel" aria-label={tab === 'proposals' ? showArchived ? 'Unidades arquivadas da revisão' : 'Unidades propostas' : tab === 'exceptions' ? 'Fila de exceções' : tab === 'approved' ? 'Unidades integradas ao livro' : 'Fila de pedidos de revisão'}>
           {tab === 'approved' ? visibleApproved.map(candidate => {
             const active = selectedReviewKey === candidate.reviewKey;
@@ -887,6 +1077,14 @@ export function TranslationReviewPanel({
                   : selectedIsArchived ? 'Arquivada da revisão'
                     : selectedRecord?.approvalStatus === 'approved' ? 'Aprovada e integrada ao livro' : 'Pendente'}</dd></div>
               </dl>
+              <section className="translation-review-copyfit" aria-label="Medição Copyfit V3">
+                <h4>Medição Copyfit V3</h4>
+                <dl>
+                  <div><dt>PDF-fonte</dt><dd>{copyfitSourceLineCount ? `${copyfitSourceLineCount} ${copyfitSourceLineCount === 1 ? 'linha' : 'linhas'}` : 'Não medido'}</dd></div>
+                  <div><dt>Viewer PT-BR</dt><dd>{copyfitViewerLineCount ? `${copyfitViewerLineCount} ${copyfitViewerLineCount === 1 ? 'linha' : 'linhas'}` : 'Não medido'}</dd></div>
+                  <div className="translation-review-copyfit-result"><dt>Resultado</dt><dd>{copyfitClassification ?? 'Não classificado'}</dd></div>
+                </dl>
+              </section>
               {visiblePendingTerms.length > 0 && (
                 <details className="translation-review-pending" open>
                   <summary>Pendências para revisão <span>{visiblePendingTerms.length}</span></summary>
@@ -1010,6 +1208,8 @@ export function TranslationReviewPanel({
             </>
           )}
         </section>
+          </>
+        )}
       </div>
     </aside>
   );

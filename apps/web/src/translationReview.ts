@@ -1,4 +1,5 @@
 import type { LayoutFrame, PageData } from './components/PageRenderer';
+import { canonicalizeLayoutFrame } from './layoutFrameGeometry';
 import type { Segment, SpanOverride } from './components/RichSpanEditor';
 import { decodeOverrideData, encodeOverrideData } from './symbols/overrideData';
 import { lineHeightModeForOverride } from './symbols/editorOverride';
@@ -295,7 +296,55 @@ export function reviewRequestMatchesUnit(
 
 export type NewTranslationReviewRequest = Omit<TranslationReviewRequest, 'id' | 'createdAt' | 'updatedAt' | 'status' | 'handledAt' | 'resultNote'>;
 
-export type TranslationGlossaryDecisionStatus = 'approved' | 'rejected';
+export type TranslationGlossaryDecisionStatus = 'approved' | 'observed_standard' | 'experimental' | 'hypothesis' | 'rejected';
+
+export type LinguisticDecisionType = 'terminology' | 'editorial_style' | 'writing_pattern';
+
+export type SemanticGlossaryCategory =
+  | 'unclassified'
+  | 'component'
+  | 'game_mode'
+  | 'mechanic'
+  | 'action_phase'
+  | 'resource_attribute'
+  | 'status_effect'
+  | 'keyword_tag'
+  | 'game_entity'
+  | 'lore_identifier'
+  | 'editorial_convention';
+
+export interface SemanticGlossaryRelation {
+  sourceTerm: string;
+  preferredForm?: string;
+  decisionId?: number | string;
+  relationship?: 'distinct_from' | 'alias_of' | 'broader_than' | 'narrower_than' | 'related_to';
+  note?: string;
+}
+
+export interface SemanticGlossaryExample {
+  pageNumber?: number;
+  sourceText: string;
+  targetText: string;
+  note?: string;
+}
+
+export interface SemanticGlossaryMetadata {
+  decisionType?: LinguisticDecisionType;
+  category?: SemanticGlossaryCategory;
+  subtype?: string;
+  alternatives?: string[];
+  rejectedForms?: string[];
+  context?: string;
+  distinctFrom?: SemanticGlossaryRelation[];
+  printedIdentifierPolicy?: string;
+  evidence?: string[];
+  examples?: SemanticGlossaryExample[];
+  humanLocked?: boolean;
+  version?: number;
+  updatedBy?: string;
+  reconciliationStatus?: 'clear' | 'needs_review';
+  reconciliationNote?: string;
+}
 
 export interface TranslationGlossaryOccurrence {
   pageNumber: number;
@@ -313,6 +362,7 @@ export interface TranslationGlossaryDecision {
   normalizedSourceTerm: string;
   normalizedTargetTerm: string;
   decisionStatus: TranslationGlossaryDecisionStatus;
+  semanticMetadata?: SemanticGlossaryMetadata | null;
   occurrences: TranslationGlossaryOccurrence[];
   decisionNote?: string | null;
   decidedAt?: string | null;
@@ -339,6 +389,11 @@ export interface ParsedGlossaryTermCandidate {
 
 export function normalizeGlossaryTerm(value: string): string {
   return value.normalize('NFKC').trim().replace(/\s+/gu, ' ').toLocaleLowerCase('pt-BR');
+}
+
+/** Normalizes only the glossary browser query; canonical term identity stays accent-sensitive. */
+export function normalizeGlossarySearchText(value: string): string {
+  return value.normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase('pt-BR');
 }
 
 export function glossaryDecisionKey(sourceTerm: string, targetTerm: string): string {
@@ -695,11 +750,11 @@ export function layoutFrameForReviewOverride(
   if (!reviewLayoutFrame) return null;
   const { x, y, width, height } = reviewLayoutFrame;
   if (![x, y, width, height].every(Number.isFinite) || width <= 0 || height <= 0) return null;
-  return {
+  return canonicalizeLayoutFrame({
     ...reviewLayoutFrame,
     textAlign: override.textAlign ?? reviewLayoutFrame.textAlign,
     lineHeight: override.lineHeight ?? reviewLayoutFrame.lineHeight,
-  };
+  });
 }
 
 export function reviewRecordForCandidate(

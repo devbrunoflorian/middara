@@ -2,7 +2,7 @@ import React, { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import { fireEvent, getQueriesForElement } from '@testing-library/dom';
 import { describe, expect, it, vi } from 'vitest';
-import { candidateRequiresDiagnosticBlank, copyfitApprovalBlockReason, copyfitCanonicalEvidenceBlockReason, copyfitMeasurementDataMatches, exceptionRequiresDiagnosticBlank, hasUnapprovedPublishedRevisionDraft, isCurrentActivePendingReviewDraft, layoutFrameForReviewOverride, persistTranslationReview, persistTranslationReviewApproval, rendererKeyForReviewCandidate, reviewRequestMatchesUnit, spanOverrideForReviewCandidate, type TranslationReviewCandidate, unresolvedReviewExceptions } from '../src/translationReview';
+import { candidateRequiresDiagnosticBlank, copyfitApprovalBlockReason, copyfitCanonicalEvidenceBlockReason, copyfitMeasurementDataMatches, exceptionRequiresDiagnosticBlank, hasUnapprovedPublishedRevisionDraft, isCurrentActivePendingReviewDraft, layoutFrameForReviewOverride, normalizeGlossarySearchText, normalizeGlossaryTerm, persistTranslationReview, persistTranslationReviewApproval, rendererKeyForReviewCandidate, reviewRequestMatchesUnit, spanOverrideForReviewCandidate, type TranslationReviewCandidate, unresolvedReviewExceptions } from '../src/translationReview';
 import { TranslationReviewPanel } from '../src/components/TranslationReviewPanel';
 import type { PageData } from '../src/components/PageRenderer';
 import { decodeOverrideData, encodeOverrideData } from '../src/symbols/overrideData';
@@ -53,7 +53,7 @@ describe('translation review proposal geometry', () => {
   });
 
   it('maps proposal bbox to a viewer frame without changing alignment or line height', () => {
-    expect(layoutFrameForReviewOverride({
+    const frame = layoutFrameForReviewOverride({
       x: 243.724,
       y: 572.84,
       width: 332.498,
@@ -64,15 +64,18 @@ describe('translation review proposal geometry', () => {
     }, {
       textAlign: 'center',
       lineHeight: 1.1,
-    })).toEqual({
+    });
+    expect(frame).toMatchObject({
       x: 243.724,
       y: 572.84,
-      width: 332.498,
-      height: 24.264,
+      total: 332.498,
+      totalHeight: 24.264,
       rotation: 0,
       textAlign: 'center',
       lineHeight: 1.1,
     });
+    expect(frame?.width).toBeCloseTo(576.222, 3);
+    expect(frame?.height).toBeCloseTo(597.104, 3);
   });
 
   it('rejects invalid proposal geometry rather than resizing the Viewer', () => {
@@ -340,7 +343,128 @@ describe('translation review structured terminology notes', () => {
   });
 });
 
+describe('translation review glossary search', () => {
+  it('finds accented decisions without changing canonical term identity', () => {
+    globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    const root = createRoot(container);
+    const decision = {
+      id: 72,
+      decisionKey: 'mechanic=>mecânica',
+      sourceTerm: 'Mechanic',
+      targetTerm: 'Mecânica',
+      normalizedSourceTerm: 'mechanic',
+      normalizedTargetTerm: 'mecânica',
+      decisionStatus: 'approved' as const,
+      semanticMetadata: { category: 'mechanic' as const, context: 'Regra de Mecânica' },
+      occurrences: [],
+    };
+
+    act(() => root.render(<TranslationReviewPanel
+      open
+      onClose={vi.fn()}
+      catalog={{ schemaVersion: 1, generatedAt: '', proposalCount: 0, candidateCount: 0, exceptionCount: 0, proposals: [], exceptions: [] }}
+      catalogError={null}
+      records={[]}
+      requests={[]}
+      glossaryDecisions={[decision]}
+      persistenceError={null}
+      persistenceAvailable
+      pageData={null}
+      savedHumanTranslations={new Map()}
+      savedPayloadTranslations={new Map()}
+      selectedPage={1}
+      selectedReviewKey={null}
+      busyReviewKey={null}
+      hasUnsavedDraft={false}
+      reviewStatus={null}
+      onSelectCandidate={vi.fn()}
+      onOpenApprovedViewer={vi.fn()}
+      onOpenEditor={vi.fn()}
+      onOpenExceptionPage={vi.fn()}
+      onApprove={vi.fn(async () => false)}
+      onSetArchived={vi.fn(async () => {})}
+      onClearSelection={vi.fn()}
+      onReopen={vi.fn()}
+      onCreateAIRequest={vi.fn(async request => ({ ...request, id: 1, status: 'pending' as const }))}
+      onUpdateAIRequest={vi.fn(async () => {})}
+      onCompleteAIRequestAsUser={vi.fn(async () => {})}
+      onDecideGlossaryTerm={vi.fn(async () => {})}
+    />));
+
+    try {
+      const queries = getQueriesForElement(container);
+      act(() => fireEvent.click(queries.getByRole('tab', { name: /Glossário/ })));
+      const search = queries.getByRole('searchbox', { name: /Buscar termos/ });
+      act(() => fireEvent.change(search, { target: { value: 'MECANICA' } }));
+      expect(queries.getByRole('heading', { name: /Mechanic.*Mecânica/ })).toBeTruthy();
+      expect(queries.getByText('Exibindo 1 de 1 decisões.')).toBeTruthy();
+      expect(normalizeGlossarySearchText('MECÂNICA')).toBe('mecanica');
+      expect(normalizeGlossaryTerm('Mecânica')).not.toBe(normalizeGlossaryTerm('Mecanica'));
+    } finally {
+      act(() => root.unmount());
+      container.remove();
+    }
+  });
+});
+
 describe('translation review copyfit approval guard', () => {
+  it('shows the recorded source and Viewer line counts used for Copyfit approval', () => {
+    globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    const root = createRoot(container);
+    const candidate: TranslationReviewCandidate = {
+      reviewKey: 'copyfit-metrics::page_42_block_0__pt-BR',
+      pageNumber: 42,
+      proposalId: 'copyfit-metrics',
+      proposalVersion: '1',
+      proposalTitle: 'Copyfit metrics fixture',
+      proposalFile: 'copyfit-metrics.json',
+      index: 0,
+      spanKey: 'page_42_block_0__pt-BR',
+      blockIndex: 0,
+      sourceBlockId: 'block_0',
+      sourceUnitId: null,
+      sourceText: 'Source text',
+      proposalText: 'Texto da proposta',
+      data: { schemaVersion: 2, spanKey: 'page_42_block_0__pt-BR', bbox: [10, 20, 210, 40], segments: [{ text: 'Texto da proposta', font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' }] },
+      technicalStatus: 'fit-awaiting-human-review',
+      copyfitClassification: 'EXACT',
+      copyfitSourcePdfLineCount: 2,
+      copyfitPageRendererLineCount: 2,
+      copyfitMeasurementFingerprint: 'canonical-measurement',
+      copyfitCanonicalSpanKey: 'page_42_block_0__pt-BR',
+      copyfitCanonicalBbox: [10, 20, 210, 40],
+      editorialStatus: 'pending_human_review',
+      diagnosticRendering: 'proposal',
+      pendingTerms: [],
+      diagnosticBlank: null,
+    };
+    act(() => root.render(<TranslationReviewPanel
+      open onClose={vi.fn()}
+      catalog={{ schemaVersion: 1, generatedAt: '', proposalCount: 1, candidateCount: 1, exceptionCount: 0, proposals: [{ proposalId: candidate.proposalId, proposalVersion: candidate.proposalVersion, proposalTitle: candidate.proposalTitle, proposalFile: candidate.proposalFile, pageNumber: candidate.pageNumber, candidates: [candidate] }], exceptions: [] }}
+      catalogError={null} records={[]} requests={[]} glossaryDecisions={[]} persistenceError={null} persistenceAvailable
+      pageData={null} savedHumanTranslations={new Map()} savedPayloadTranslations={new Map()} selectedPage={42}
+      selectedReviewKey={candidate.reviewKey} busyReviewKey={null} hasUnsavedDraft={false} reviewStatus={null}
+      onSelectCandidate={vi.fn()} onOpenApprovedViewer={vi.fn()} onOpenEditor={vi.fn()} onOpenExceptionPage={vi.fn()}
+      onApprove={vi.fn(async () => false)} onSetArchived={vi.fn(async () => {})} onClearSelection={vi.fn()}
+      onReopen={vi.fn()} onCreateAIRequest={vi.fn(async request => ({ ...request, id: 1, status: 'pending' as const }))}
+      onUpdateAIRequest={vi.fn(async () => {})} onCompleteAIRequestAsUser={vi.fn(async () => {})} onDecideGlossaryTerm={vi.fn(async () => {})}
+    />));
+
+    try {
+      const metrics = getQueriesForElement(container).getByRole('region', { name: 'Medição Copyfit V3' });
+      expect(metrics.textContent).toContain('PDF-fonte2 linhas');
+      expect(metrics.textContent).toContain('Viewer PT-BR2 linhas');
+      expect(metrics.textContent).toContain('EXACT');
+    } finally {
+      act(() => root.unmount());
+      container.remove();
+    }
+  });
+
   it('preserves paragraph spacing in rich overrides and includes it in Copyfit V3 identity', () => {
     const measured = {
       schemaVersion: 2,

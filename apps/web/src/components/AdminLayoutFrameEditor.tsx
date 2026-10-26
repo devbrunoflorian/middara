@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { LayoutFrame } from './PageRenderer';
 import { snapLayoutFrame, type LayoutAlignmentGuide, type SnapFrameRect } from '../layoutFrameSnapping';
+import { canonicalizeLayoutFrame, layoutFrameBottom, layoutFrameRight, layoutFrameTotal, layoutFrameTotalHeight, moveLayoutFrameX, moveLayoutFrameY, resizeLayoutFrameTotal, setLayoutFrameBottom, setLayoutFrameRight } from '../layoutFrameGeometry';
 import './AdminLayoutFrameEditor.css';
 import './AdminOverlayLayers.css';
 
@@ -23,6 +24,7 @@ interface AdminLayoutFrameEditorProps {
   onSave: () => void;
   onDiscard: () => void;
   onResetToEnglish: () => void;
+  onCreateBlock: () => void;
   onSnapGuidesChange: (guides: LayoutAlignmentGuide[]) => void;
 }
 
@@ -32,9 +34,75 @@ interface PageRect {
   scale: number;
 }
 
+interface NumericFrameFieldProps {
+  label: string;
+  value: number;
+  min: number;
+  step: number;
+  title?: string;
+  language: 'en' | 'pt-BR';
+  onCommit: (value: number) => void;
+}
+
+function NumericFrameField({ label, value, min, step, title, language, onCommit }: NumericFrameFieldProps) {
+  const [draft, setDraft] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setDraft(null);
+    setError(null);
+  }, [value]);
+
+  const commit = (input: HTMLInputElement) => {
+    if (draft === null) return;
+    const nextValue = input.valueAsNumber;
+    const validity = input.validity;
+    // PDF-derived coordinates can be fractional values that do not align to
+    // the spinner step. Keep the step as a convenient increment, while still
+    // enforcing the numeric range and allowing the source precision.
+    if (input.value.trim() === '' || !Number.isFinite(nextValue) || validity.badInput
+      || validity.rangeUnderflow || validity.rangeOverflow) {
+      setError(language === 'pt-BR'
+        ? 'Valor inválido; a moldura não foi alterada.'
+        : 'Invalid value; the frame was not changed.');
+      setDraft(null);
+      return;
+    }
+    setError(null);
+    setDraft(null);
+    onCommit(nextValue);
+  };
+
+  return (
+    <label title={title}>
+      <span>{label}</span>
+      <input
+        type="number"
+        required
+        step={step}
+        min={min}
+        value={draft ?? Number(value.toFixed(2))}
+        onChange={event => {
+          setError(null);
+          setDraft(event.currentTarget.value);
+        }}
+        onBlur={event => commit(event.currentTarget)}
+        onKeyDown={event => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            event.currentTarget.blur();
+          }
+        }}
+      />
+      {error && <span className="admin-layout-frame-field-error" role="alert">{error}</span>}
+    </label>
+  );
+}
+
 export function AdminLayoutFrameEditor({
   portalHost = null, pageElement, pageWidth, pageHeight, snapTargets, sourceBbox, unitKey, frame, language, hasOwnFrame, isDirty, isSaving, status,
   onChange, onSave, onDiscard, onResetToEnglish, onSnapGuidesChange,
+  onCreateBlock,
 }: AdminLayoutFrameEditorProps) {
   const [pageRect, setPageRect] = useState<PageRect | null>(null);
 
@@ -65,18 +133,28 @@ export function AdminLayoutFrameEditor({
   }, [pageElement, pageWidth]);
 
   if (!pageRect || !Number.isFinite(pageRect.scale) || pageRect.scale <= 0) return null;
-  const frameY = frame?.y ?? 0;
-  const frameHeight = frame?.height ?? 12;
+  const canonicalFrame = frame ? canonicalizeLayoutFrame(frame) : null;
+  const frameY = canonicalFrame?.y ?? 0;
+  const frameHeight = canonicalFrame ? layoutFrameTotalHeight(canonicalFrame) : 12;
+  const frameWidth = canonicalFrame ? layoutFrameTotal(canonicalFrame) : 0;
+  const frameX2 = canonicalFrame ? layoutFrameRight(canonicalFrame) : 0;
+  const frameY2 = canonicalFrame ? layoutFrameBottom(canonicalFrame) : 0;
 
   const beginDrag = (event: React.PointerEvent<HTMLElement>, resize: boolean) => {
-    if (!frame || event.button !== 0) return;
+    if (!canonicalFrame || event.button !== 0) return;
     event.preventDefault();
     event.stopPropagation();
     const startX = event.clientX;
     const startY = event.clientY;
-    const initial = frame;
-    const initialY = initial.y ?? 0;
-    const initialHeight = initial.height ?? 12;
+    const initialY = canonicalFrame.y ?? 0;
+    const initialHeight = frameHeight || 12;
+    const initial = canonicalizeLayoutFrame({
+      ...canonicalFrame,
+      y: initialY,
+      height: initialY + initialHeight,
+      totalHeight: initialHeight,
+    });
+    const initialWidth = layoutFrameTotal(initial);
     event.currentTarget.setPointerCapture(event.pointerId);
     const move = (moveEvent: PointerEvent) => {
       const dx = (moveEvent.clientX - startX) / pageRect.scale;
@@ -86,10 +164,13 @@ export function AdminLayoutFrameEditor({
       const frameDy = -dx * Math.sin(angle) + dy * Math.cos(angle);
       if (resize) {
         onSnapGuidesChange([]);
-        onChange({ ...initial, width: Math.max(12, initial.width + frameDx), height: Math.max(8, initialHeight + frameDy) });
+        onChange(resizeLayoutFrameTotal(initial, Math.max(12, initialWidth + frameDx)));
         return;
       }
-      const moved = { ...initial, height: initialHeight, x: Math.max(0, initial.x + dx), y: Math.max(0, initialY + dy) };
+      const moved = moveLayoutFrameY(
+        moveLayoutFrameX(initial, Math.max(0, initial.x + frameDx)),
+        Math.max(0, initialY + frameDy),
+      );
       const snapped = snapLayoutFrame(moved, pageWidth, pageHeight, snapTargets, unitKey, pageRect.scale);
       onSnapGuidesChange(snapped.guides);
       onChange(snapped.frame);
@@ -106,19 +187,22 @@ export function AdminLayoutFrameEditor({
   };
 
   const nudge = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!frame) return;
-    const y = frame.y ?? 0;
+    if (!canonicalFrame) return;
+    const y = canonicalFrame.y ?? 0;
     const step = event.shiftKey ? 10 : 1;
     const values: Record<string, Partial<LayoutFrame>> = {
-      ArrowLeft: { x: Math.max(0, frame.x - step) },
-      ArrowRight: { x: frame.x + step },
+      ArrowLeft: { x: Math.max(0, canonicalFrame.x - step) },
+      ArrowRight: { x: canonicalFrame.x + step },
       ArrowUp: { y: Math.max(0, y - step) },
       ArrowDown: { y: y + step },
     };
     const change = values[event.key];
     if (!change) return;
     event.preventDefault();
-    onChange({ ...frame, ...change });
+    const moved = change.x !== undefined
+      ? moveLayoutFrameX(canonicalFrame, change.x)
+      : canonicalFrame;
+    onChange(change.y !== undefined ? moveLayoutFrameY(moved, change.y) : moved);
   };
 
   return (
@@ -137,7 +221,7 @@ export function AdminLayoutFrameEditor({
               }}
             />
           )}
-          {frame && (
+          {canonicalFrame && (
             <div
               className="admin-layout-frame-outline"
               role="group"
@@ -146,11 +230,11 @@ export function AdminLayoutFrameEditor({
               onKeyDown={nudge}
               onPointerDown={event => beginDrag(event, false)}
               style={{
-                left: pageRect.left + frame.x * pageRect.scale,
+                left: pageRect.left + canonicalFrame.x * pageRect.scale,
                 top: pageRect.top + frameY * pageRect.scale,
-                width: frame.width * pageRect.scale,
+                width: frameWidth * pageRect.scale,
                 height: frameHeight * pageRect.scale,
-                transform: `rotate(${frame.rotation ?? 0}deg)`,
+                transform: `rotate(${canonicalFrame.rotation ?? 0}deg)`,
               }}
             >
               <span className="admin-layout-frame-caption">Frame da tradução</span>
@@ -171,50 +255,86 @@ export function AdminLayoutFrameEditor({
           <section className="admin-layout-frame-panel arcane-glass-surface" aria-label="Translation frame controls">
             <strong>Moldura de tradução</strong>
             {unitKey && <code className="admin-layout-frame-unit-key">{unitKey}</code>}
-            {frame?.hidden && (
+            {canonicalFrame?.hidden && (
               <div className="admin-layout-frame-hidden-badge" role="alert">
                 ⚠️ Bloco Oculto da Página
               </div>
             )}
-            {frame ? (
+            {canonicalFrame ? (
               <div className="admin-layout-frame-fields">
-                {([
-                  ['X', 'x'], ['Y', 'y'], ['Largura', 'width'], ['Altura', 'height'], ['Rotação', 'rotation'],
-                ] as const).map(([label, field]) => (
-                  <label key={field}>
-                    <span>{label}{field === 'rotation' ? ' (°)' : ' (pt)'}</span>
-                    <input
-                      type="number"
-                      step={field === 'rotation' ? 1 : 0.5}
-                      min={field === 'width' || field === 'height' ? 1 : field === 'rotation' ? 0 : 0}
-                      value={Number(((frame[field] ?? 0) as number).toFixed(2))}
-                      onChange={event => {
-                        const value = Number(event.currentTarget.value);
-                        if (!Number.isFinite(value)) return;
-                        onChange({ ...frame, [field]: field === 'rotation' ? ((value % 360) + 360) % 360 : Math.max(field === 'width' || field === 'height' ? 1 : 0, value) });
-                      }}
-                    />
-                  </label>
-                ))}
+                <NumericFrameField
+                  label="X (pt)"
+                  value={canonicalFrame.x}
+                  min={0}
+                  step={0.5}
+                  language={language}
+                  onCommit={value => onChange(moveLayoutFrameX(canonicalFrame, Math.max(0, value)))}
+                />
+                <NumericFrameField
+                  label="Y (pt)"
+                  value={frameY}
+                  min={0}
+                  step={0.5}
+                  language={language}
+                  onCommit={value => onChange(canonicalizeLayoutFrame({ ...canonicalFrame, y: Math.max(0, value) }))}
+                />
+                <NumericFrameField
+                  label="Largura (X₂, pt)"
+                  title="Coordenada final X₂; o tamanho é calculado como X₂ − X."
+                  value={frameX2}
+                  min={canonicalFrame.x + 1}
+                  step={0.5}
+                  language={language}
+                  onCommit={value => onChange(setLayoutFrameRight(canonicalFrame, value))}
+                />
+                <NumericFrameField
+                  label="Altura (Y₂, pt)"
+                  title="Coordenada final Y₂; o tamanho é calculado como Y₂ − Y."
+                  value={frameY2}
+                  min={frameY + 1}
+                  step={0.5}
+                  language={language}
+                  onCommit={value => onChange(setLayoutFrameBottom(canonicalFrame, value))}
+                />
+                <label className="admin-layout-frame-calculated-size" title="Tamanho calculado como X₂ − X.">
+                  <span>Total largura (pt)</span>
+                  <output aria-label={`Total largura: ${frameWidth.toFixed(2)} pontos PDF`}>{frameWidth.toFixed(2)} pt</output>
+                </label>
+                <label className="admin-layout-frame-calculated-size" title="Tamanho calculado como Y₂ − Y.">
+                  <span>Total altura (pt)</span>
+                  <output aria-label={`Total altura: ${frameHeight.toFixed(2)} pontos PDF`}>{frameHeight.toFixed(2)} pt</output>
+                </label>
+                <NumericFrameField
+                  label="Rotação (°)"
+                  value={canonicalFrame.rotation ?? 0}
+                  min={0}
+                  step={1}
+                  language={language}
+                  onCommit={value => onChange(canonicalizeLayoutFrame({
+                    ...canonicalFrame,
+                    rotation: ((value % 360) + 360) % 360,
+                  }))}
+                />
               </div>
             ) : (
               <p>Clique em um bloco editável para selecionar sua moldura.</p>
             )}
             <div className="admin-layout-frame-actions">
+              <button type="button" onClick={onCreateBlock} disabled={isSaving || isDirty || language !== 'pt-BR'} title={language !== 'pt-BR' ? 'Crie blocos adicionais na camada PT-BR.' : 'Criar um novo bloco de texto PT-BR nesta página.'}>Novo</button>
               <button type="button" onClick={onSave} disabled={!frame || !isDirty || isSaving}>{isSaving ? 'Salvando…' : 'Salvar'}</button>
               <button type="button" onClick={onDiscard} disabled={!frame || !isDirty || isSaving}>Descartar</button>
-              {frame && (
+              {canonicalFrame && (
                 <button
                   type="button"
-                  className={`admin-layout-frame-toggle-hidden ${frame.hidden ? 'is-hidden' : ''}`}
-                  onClick={() => onChange({ ...frame, hidden: !frame.hidden })}
+                  className={`admin-layout-frame-toggle-hidden ${canonicalFrame.hidden ? 'is-hidden' : ''}`}
+                  onClick={() => onChange({ ...canonicalFrame, hidden: !canonicalFrame.hidden })}
                   disabled={isSaving}
-                  title={frame.hidden ? 'Tornar este bloco visível novamente' : 'Ocultar este bloco da leitura e prévia'}
+                  title={canonicalFrame.hidden ? 'Tornar este bloco visível novamente' : 'Ocultar este bloco da leitura e prévia'}
                 >
-                  {frame.hidden ? '👁️ Reexibir' : '🗑️ Ocultar'}
+                  {canonicalFrame.hidden ? '👁️ Reexibir' : '🗑️ Ocultar'}
                 </button>
               )}
-              {language === 'pt-BR' && hasOwnFrame && (
+              {language === 'pt-BR' && hasOwnFrame && !canonicalFrame?.adminCreatedBlock && (
                 <button type="button" onClick={onResetToEnglish} disabled={isSaving}>Herdar EN</button>
               )}
             </div>

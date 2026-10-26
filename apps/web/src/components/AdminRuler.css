@@ -90,6 +90,42 @@
   filter: drop-shadow(0 0 2px rgb(56 189 248 / 70%));
 }
 
+.admin-ruler-selected-guide {
+  position: fixed;
+  display: block;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.admin-ruler-selected-guide-vertical {
+  width: 1px;
+  background: repeating-linear-gradient(to bottom, rgb(125 211 252 / 82%) 0 2px, transparent 2px 7px);
+}
+
+.admin-ruler-selected-guide-horizontal {
+  height: 1px;
+  background: repeating-linear-gradient(to right, rgb(125 211 252 / 82%) 0 2px, transparent 2px 7px);
+}
+
+.admin-ruler-selected-mark {
+  position: fixed;
+  display: block;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.admin-ruler-selected-mark-x {
+  width: 1px;
+  height: 4px;
+  background: #7dd3fc;
+}
+
+.admin-ruler-selected-mark-y {
+  width: 4px;
+  height: 1px;
+  background: #7dd3fc;
+}
+
 .admin-ruler-snap-mark-x {
   width: 0;
   height: 0;
@@ -141,6 +177,10 @@
 
 .admin-geometry-chip-y {
   transform: translate(-50%, -100%);
+}
+
+.admin-geometry-chip-x2 {
+  transform: translateY(-50%);
 }
 
 .admin-geometry-chip-width {

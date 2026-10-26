@@ -17,6 +17,7 @@ import {
   saveLocalOverrides,
 } from '../src/localPersistence';
 import { saveLayoutFrame, saveLocalLayoutFrame, saveLocalLayoutFrames } from '../src/layoutFrames';
+import { canonicalizeLayoutFrame } from '../src/layoutFrameGeometry';
 import type { SpanOverride } from '../src/components/RichSpanEditor';
 import { encodeOverrideData } from '../src/symbols/overrideData';
 
@@ -204,8 +205,8 @@ describe('local save visibility and recovery', () => {
     const next = { x: 10, y: 20, width: 40, height: 12 };
     expect(saveLocalLayoutFrame(88, 'pt-BR', 'page_88_unit_target', next)).toBe(true);
     expect(JSON.parse(localStorage.getItem(key) ?? '{}')).toEqual({
-      'page_88_unit_sibling': sibling,
-      'page_88_unit_target': next,
+      'page_88_unit_sibling': canonicalizeLayoutFrame(sibling),
+      'page_88_unit_target': canonicalizeLayoutFrame(next),
     });
   });
 
@@ -376,7 +377,7 @@ describe('local save visibility and recovery', () => {
     expect(await saveLayoutFrame({ unitKey, pageNumber: 88, language: 'pt-BR', frame })).toBe(true);
     const report = await inspectLocalPersistence(localStorage, payload.fetcher);
     expect(report.unsyncedCount).toBe(0);
-    expect(payload.frames[0].data).toEqual(frame);
+    expect(payload.frames[0].data).toEqual(canonicalizeLayoutFrame(frame));
   });
 
   it('shows the persistent count, local record identity, retry and emergency export actions', async () => {
@@ -399,9 +400,9 @@ describe('local save visibility and recovery', () => {
     const cleanup = () => { act(() => view.root.unmount()); view.container.remove(); click.mockRestore(); HTMLDialogElement.prototype.showModal = originalShowModal; HTMLDialogElement.prototype.close = originalClose; };
     cleanups.add(cleanup);
     await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
-    fireEvent.click(view.getByRole('button', { name: 'UNSYNCED LOCAL RECORDS = 1' }));
+    fireEvent.click(view.getByRole('button', { name: '1 registro somente no navegador · sincronização pendente' }));
     expect(view.getByRole('dialog').textContent).toContain('p. 88 · unidade ui-recovery');
-    expect(view.getByRole('dialog').textContent).toContain('Ainda não existe no Payload');
+    expect(view.getByRole('dialog').textContent).toContain('1 registro somente no navegador · sincronização pendente');
     expect(view.getByRole('button', { name: 'Tentar sincronizar' })).toBeTruthy();
     expect(view.getByRole('button', { name: 'Exportar recuperação JSON' })).toBeTruthy();
     fireEvent.click(view.getByRole('button', { name: 'Exportar recuperação JSON' }));
@@ -429,7 +430,7 @@ describe('local save visibility and recovery', () => {
     };
     cleanups.add(cleanup);
     await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
-    fireEvent.click(view.getByRole('button', { name: 'UNSYNCED LOCAL RECORDS = 2' }));
+    fireEvent.click(view.getByRole('button', { name: '2 registros somente no navegador · sincronização pendente' }));
     expect(view.getByText(`translation · ${target.spanKey}`)).toBeTruthy();
     const targetRow = view.getByText(`translation · ${target.spanKey}`).closest('li')!;
     const targetQueries = getQueriesForElement(targetRow);
@@ -452,7 +453,7 @@ describe('local save visibility and recovery', () => {
       await new Promise(resolve => setTimeout(resolve, 0));
     });
 
-    expect(view.getByRole('button', { name: 'UNSYNCED LOCAL RECORDS = 1' })).toBeTruthy();
+    expect(view.getByRole('button', { name: '1 registro somente no navegador · sincronização pendente' })).toBeTruthy();
     expect(view.container.textContent).toContain('Override local removido e verificado');
     expect(JSON.parse(localStorage.getItem('middara-lines-v2-pt-BR') ?? '[]')).toEqual([sibling]);
     expect(payload.translations).toHaveLength(0);
@@ -481,7 +482,7 @@ describe('local save visibility and recovery', () => {
     };
     cleanups.add(cleanup);
     await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
-    fireEvent.click(view.getByRole('button', { name: 'UNSYNCED LOCAL RECORDS = 1' }));
+    fireEvent.click(view.getByRole('button', { name: '1 registro somente no navegador · sincronização pendente' }));
     const localRow = view.getByText(`translation · ${local.spanKey}`).closest('li')!;
     const localQueries = getQueriesForElement(localRow);
     fireEvent.click(localQueries.getByText('Revisar snapshot local completo antes de descartar'));
@@ -501,7 +502,7 @@ describe('local save visibility and recovery', () => {
 
     expect(JSON.parse(localStorage.getItem('middara-lines-v2-pt-BR') ?? '[]')).toEqual([local]);
     expect(view.container.textContent).toContain('Falha ao gravar ou verificar o armazenamento local');
-    expect(view.getByRole('button', { name: 'UNSYNCED LOCAL RECORDS = 1' })).toBeTruthy();
+    expect(view.getByRole('button', { name: '1 registro somente no navegador · sincronização pendente' })).toBeTruthy();
     expect(payload.fetcher.mock.calls.every(([, init]) => !['POST', 'PATCH', 'DELETE'].includes((init as RequestInit | undefined)?.method ?? 'GET'))).toBe(true);
   });
 
@@ -524,8 +525,11 @@ describe('local save visibility and recovery', () => {
     const cleanup = () => { act(() => view.root.unmount()); view.container.remove(); click.mockRestore(); HTMLDialogElement.prototype.showModal = originalShowModal; HTMLDialogElement.prototype.close = originalClose; };
     cleanups.add(cleanup);
     await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
-    fireEvent.click(view.getByRole('button', { name: 'UNSYNCED LOCAL RECORDS = 1' }));
+    fireEvent.click(view.getByRole('button', { name: '1 conflito local/Payload' }));
     fireEvent.click(view.getByText('Revisar versões e diferenças'));
+    expect(view.getByRole('dialog').textContent).toContain('1 conflito local/Payload');
+    expect(view.getByRole('dialog').textContent).toContain('Conflito · cópia local difere do Payload');
+    expect(view.getByRole('button', { name: '1 conflito local/Payload' }).className).toContain('is-conflict');
     expect(view.getByText('Local (navegador)')).toBeTruthy();
     expect(view.getByText('Payload · ID 81')).toBeTruthy();
     const versions = view.container.querySelectorAll('pre');

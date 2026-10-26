@@ -19,6 +19,8 @@ export function initialManagedSourceSymbols(original: readonly Segment[], existi
 /** Preview and save serialize exactly the same contract. */
 export function createEditorOverride(spanKey: string, bbox: SpanOverride['bbox'], textAlign: SpanOverride['textAlign'],
   segments: Segment[], managedSourceSymbols: readonly string[], lineHeight?: number,
-  lineHeightMode: SpanOverride['lineHeightMode'] = 'source', paragraphSpacingPt?: number): SpanOverride {
-  return { spanKey, bbox, textAlign, lineHeight, lineHeightMode, paragraphSpacingPt, segments, managedSourceSymbols: collectManagedSourceSymbols(managedSourceSymbols, segments) };
+  lineHeightMode: SpanOverride['lineHeightMode'] = 'source', paragraphSpacingPt?: number,
+  listMarkerIndentPt?: number, hangingIndentPt?: number): SpanOverride {
+  return { spanKey, bbox, textAlign, lineHeight, lineHeightMode, paragraphSpacingPt, listMarkerIndentPt, hangingIndentPt,
+    segments, managedSourceSymbols: collectManagedSourceSymbols(managedSourceSymbols, segments) };
 }

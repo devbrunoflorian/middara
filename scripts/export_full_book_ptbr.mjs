@@ -245,9 +245,18 @@ if (betaMode) {
     ptRecords.push(record);
     rendererKeysSeen.add(rendererBaseKey);
     if (candidate.reviewLayoutFrame && !frameKeys.has(rendererBaseKey)) {
-      const frame = candidate.reviewLayoutFrame;
-      if ([frame.x, frame.y, frame.width, frame.height].every(Number.isFinite)
-        && frame.width > 0 && frame.height > 0) {
+      const rawFrame = candidate.reviewLayoutFrame;
+      const total = Number.isFinite(rawFrame.total) ? rawFrame.total : rawFrame.width;
+      const totalHeight = Number.isFinite(rawFrame.totalHeight) ? rawFrame.totalHeight : rawFrame.height;
+      const frame = {
+        ...rawFrame,
+        total,
+        width: rawFrame.x + total,
+        totalHeight,
+        height: rawFrame.y + totalHeight,
+      };
+      if ([frame.x, frame.y, frame.width, frame.height, frame.total, frame.totalHeight].every(Number.isFinite)
+        && frame.total > 0 && frame.totalHeight > 0) {
         const frameRecord = {
           id: `beta-proposal-frame-${proposalFrameRecords.length + 1}`,
           unitKey: rendererBaseKey,

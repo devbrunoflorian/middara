@@ -119,9 +119,14 @@ export function validateCollectionRecords(slug, records) {
       if (!Number.isInteger(Number(record.pageNumber)) || Number(record.pageNumber) < 1) throw new Error(`${slug}[${index}] has an invalid pageNumber.`);
       if (!['en', 'pt-BR'].includes(record.language)) throw new Error(`${slug}[${index}] has unsupported language ${String(record.language)}.`);
       assertObject(record.data, `${slug}[${index}].data`);
+      const total = Number.isFinite(record.data.total) ? record.data.total : record.data.width;
+      const totalHeight = Number.isFinite(record.data.totalHeight) ? record.data.totalHeight : record.data.height;
       if (!Number.isFinite(record.data.x) || !Number.isFinite(record.data.y)
         || !Number.isFinite(record.data.width) || !Number.isFinite(record.data.height)
-        || record.data.width <= 0 || record.data.height <= 0) {
+        || !Number.isFinite(total) || !Number.isFinite(totalHeight)
+        || total <= 0 || totalHeight <= 0
+        || (Number.isFinite(record.data.total) && Math.abs(record.data.width - record.data.x - total) > 1e-6)
+        || (Number.isFinite(record.data.totalHeight) && Math.abs(record.data.height - record.data.y - totalHeight) > 1e-6)) {
         throw new Error(`${slug}[${index}].data has invalid frame geometry.`);
       }
       keys.push(record.frameKey);

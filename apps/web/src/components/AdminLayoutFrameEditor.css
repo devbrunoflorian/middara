@@ -106,6 +106,12 @@
   font-size: 11px;
 }
 
+.admin-layout-frame-field-error {
+  color: #fecaca;
+  font-size: 10px;
+  line-height: 1.25;
+}
+
 .admin-layout-frame-fields input {
   width: 100%;
   min-width: 0;
@@ -117,6 +123,22 @@
   background: #0f1720;
   color: #fff;
   font: inherit;
+}
+
+.admin-layout-frame-fields output {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  box-sizing: border-box;
+  padding: 3px 6px;
+  border: 1px solid #475569;
+  border-radius: 4px;
+  background: #0f1720;
+  color: #a7f3d0;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
 }
 
 .admin-layout-frame-actions {

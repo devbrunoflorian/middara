@@ -337,11 +337,12 @@ try {
       && image.naturalWidth > 0;
   }, config.page, { timeout: 60000 });
 
-  const localeSelect = page.locator('select.language-select');
-  await localeSelect.selectOption(config.language);
+  const localeLabel = config.language === 'pt-BR' ? 'Português (Brasil)' : 'English';
+  const localeButton = page.locator(`.language-toggle button[aria-label="${localeLabel}"]`);
+  await localeButton.click();
   await page.waitForFunction(
-    expected => document.querySelector('select.language-select')?.value === expected,
-    config.language,
+    expected => document.querySelector('.language-toggle button[aria-pressed="true"]')?.getAttribute('aria-label') === expected,
+    localeLabel,
     { timeout: 10000 },
   );
   if (config.language === 'pt-BR') {
@@ -358,9 +359,9 @@ try {
     }, expectedFragment, { timeout: 60000 });
   }
 
-  const viewerLocale = await localeSelect.inputValue();
-  if (viewerLocale !== config.language) {
-    throw new Error(`Viewer locale ${viewerLocale} does not match requested export language ${config.language}.`);
+  const viewerLocale = await page.locator('.language-toggle button[aria-pressed="true"]').getAttribute('aria-label');
+  if (viewerLocale !== localeLabel) {
+    throw new Error(`Viewer locale ${viewerLocale} does not match requested export language ${localeLabel}.`);
   }
   if (config.betaDiagnostic) {
     await page.waitForFunction(() => document.querySelector('.app-container')?.getAttribute('data-ptbr-diagnostic-mode') === 'blank-untranslated');

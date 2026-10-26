@@ -83,6 +83,13 @@
 .translation-review-states div { min-width: 0; padding: 8px; border-radius: 8px; background: rgba(255,255,255,0.04); }
 .translation-review-states dt { margin-bottom: 4px; color: #948b9e; font: 9px 'Inter', sans-serif; }
 .translation-review-states dd { margin: 0; color: #e1d9eb; font: 600 10px/1.35 'Inter', sans-serif; overflow-wrap: anywhere; }
+.translation-review-copyfit { margin: 9px 0; padding: 9px; border: 1px solid rgba(198, 174, 227, 0.14); border-radius: 8px; background: rgba(177, 149, 211, 0.035); }
+.translation-review-copyfit h4 { margin: 0 0 7px; color: #b6a2d1; font: 600 9px 'Inter', sans-serif; letter-spacing: 0.04em; text-transform: uppercase; }
+.translation-review-copyfit dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0; }
+.translation-review-copyfit dl div { min-width: 0; padding: 6px 7px; border-radius: 6px; background: rgba(255,255,255,0.035); }
+.translation-review-copyfit dt { margin-bottom: 3px; color: #948b9e; font: 9px 'Inter', sans-serif; }
+.translation-review-copyfit dd { margin: 0; color: #e1d9eb; font: 600 10px/1.35 'Inter', sans-serif; overflow-wrap: anywhere; }
+.translation-review-copyfit-result { grid-column: 1 / -1; }
 .translation-review-blank-note { display: grid; gap: 4px; margin: 9px 0; padding: 9px 10px; border: 1px solid rgba(224, 168, 84, 0.22); border-radius: 8px; background: rgba(224, 168, 84, 0.06); color: #e7c98e; font: 10px/1.45 'Inter', sans-serif; }
 .translation-review-blank-note strong { color: #f3d49b; }
 .translation-review-pending { margin: 9px 0; padding: 9px 10px; border: 1px solid rgba(224, 168, 84, 0.22); border-radius: 8px; background: rgba(224, 168, 84, 0.06); color: #e7c98e; font: 10px/1.45 'Inter', sans-serif; }
@@ -190,5 +197,41 @@
   font-size: 11px;
   user-select: none;
   padding-inline: 1px;
+}
+
+.translation-review-layout.is-glossary { grid-template-columns: minmax(0, 1fr); }
+.translation-review-glossary-browser { grid-column: 1 / -1; min-width: 0; min-height: 0; padding: 16px 18px 24px; overflow: auto; scrollbar-gutter: stable; overscroll-behavior: contain; }
+.translation-review-glossary-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 16px; }
+.translation-review-glossary-heading h3 { margin: 0 0 5px; color: #f2edf7; font: 600 17px/1.3 'Inter', sans-serif; }
+.translation-review-glossary-heading p:not(.translation-review-eyebrow) { margin: 0; color: #b9afc6; font: 10px/1.5 'Inter', sans-serif; }
+.translation-review-glossary-exports { display: flex; flex: 0 0 auto; flex-wrap: wrap; gap: 6px; }
+.translation-review-glossary-exports button { min-height: 34px; padding: 6px 9px; border: 1px solid rgba(198, 174, 227, 0.25); border-radius: 8px; background: rgba(177, 149, 211, 0.1); color: #eadff4; font: 600 9px 'Inter', sans-serif; cursor: pointer; }
+.translation-review-glossary-exports button:hover { background: rgba(177, 149, 211, 0.2); }
+.translation-review-glossary-filters { display: grid; grid-template-columns: minmax(190px, 2fr) repeat(3, minmax(115px, 1fr)); align-items: end; gap: 9px; }
+.translation-review-glossary-filters label { display: grid; gap: 5px; color: #c9bfd7; font: 600 9px/1.35 'Inter', sans-serif; }
+.translation-review-glossary-filters input, .translation-review-glossary-filters select { width: 100%; min-width: 0; min-height: 36px; padding: 6px 9px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; background: #24212f; color: #eee9f4; font: 10px 'Inter', sans-serif; }
+.translation-review-glossary-filters input:focus-visible, .translation-review-glossary-filters select:focus-visible, .translation-review-glossary-exports button:focus-visible { outline: 2px solid #c5a9ea; outline-offset: 2px; }
+.translation-review-glossary-count { margin: 10px 0; color: #a9a1b3; font: 9px 'Inter', sans-serif; }
+.translation-review-glossary-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.translation-review-glossary-entry { display: grid; gap: 7px; padding: 11px 12px; border: 1px solid rgba(255,255,255,0.09); border-radius: 9px; background: rgba(255,255,255,0.025); color: #d9d2e1; font: 10px/1.45 'Inter', sans-serif; overflow-wrap: anywhere; }
+.translation-review-glossary-entry.is-approved { border-color: rgba(109,195,148,0.2); }
+.translation-review-glossary-entry.is-rejected { opacity: 0.82; }
+.translation-review-glossary-entry p { margin: 0; }
+.translation-review-glossary-entry strong { color: #eee8f4; }
+.translation-review-glossary-entry > small, .translation-review-glossary-entry-title small { color: #9d95a8; font: 9px/1.4 'Inter', sans-serif; }
+.translation-review-glossary-entry-title { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.translation-review-glossary-entry-title h4 { margin: 0 0 2px; color: #f0eaf6; font: 600 12px/1.4 'Inter', sans-serif; }
+.translation-review-glossary-badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; }
+.translation-review-glossary-conflict { padding: 7px 8px; border: 1px solid rgba(224,168,84,0.23); border-radius: 7px; background: rgba(224,168,84,0.07); color: #e7c98e; }
+.translation-review-glossary-examples { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.translation-review-glossary-examples li { display: grid; gap: 2px; padding: 7px 8px; border-radius: 6px; background: rgba(0,0,0,0.14); }
+.translation-review-glossary-examples small { color: #9d95a8; font: 9px/1.4 'Inter', sans-serif; }
+
+@media (max-width: 700px) {
+  .translation-review-glossary-heading { display: grid; }
+  .translation-review-glossary-filters { grid-template-columns: 1fr 1fr; }
+  .translation-review-glossary-filters label:first-child { grid-column: 1 / -1; }
+  .translation-review-glossary-entry-title { display: grid; }
+  .translation-review-glossary-badges { justify-content: flex-start; }
 }
 

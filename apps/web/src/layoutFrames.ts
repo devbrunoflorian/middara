@@ -1,4 +1,5 @@
 import type { LayoutFrame } from './components/PageRenderer';
+import { canonicalizeLayoutFrame } from './layoutFrameGeometry';
 import { payloadApiUrl } from './config/payloadApi';
 
 export type LayoutLanguage = 'en' | 'pt-BR';
@@ -14,9 +15,9 @@ const STORAGE_PREFIX = 'middara-layout-frames-v1';
 const PAYLOAD_URL = payloadApiUrl('layout-frames');
 
 function stableFrameJson(value: unknown): string {
-  if (Array.isArray(value)) return `[${value.map(stableFrameJson).join(',')}]`;
+  if (Array.isArray(value)) return `[${value.map(child => child === undefined ? 'null' : stableFrameJson(child)).join(',')}]`;
   if (value && typeof value === 'object') {
-    return `{${Object.entries(value).sort(([a], [b]) => a.localeCompare(b))
+    return `{${Object.entries(value).filter(([, child]) => child !== undefined).sort(([a], [b]) => a.localeCompare(b))
       .map(([key, child]) => `${JSON.stringify(key)}:${stableFrameJson(child)}`).join(',')}}`;
   }
   return JSON.stringify(value);
@@ -32,9 +33,12 @@ export function layoutFrameRecordKey(unitKey: string, language: LayoutLanguage) 
 
 export function loadLocalLayoutFrames(pageNumber: number, language: LayoutLanguage): Map<string, LayoutFrame> {
   try {
-    const raw = localStorage.getItem(layoutFrameStorageKey(pageNumber, language));
+    const key = layoutFrameStorageKey(pageNumber, language);
+    const raw = localStorage.getItem(key);
     const records = raw ? JSON.parse(raw) as Record<string, LayoutFrame> : {};
-    return new Map(Object.entries(records));
+    const normalized = Object.fromEntries(Object.entries(records).map(([unitKey, frame]) => [unitKey, normalizeFrame(frame)]));
+    if (raw && stableFrameJson(records) !== stableFrameJson(normalized)) localStorage.setItem(key, JSON.stringify(normalized));
+    return new Map(Object.entries(normalized));
   } catch {
     return new Map();
   }
@@ -50,7 +54,8 @@ export function saveLocalLayoutFrames(
     const raw = localStorage.getItem(key);
     const records: Record<string, LayoutFrame> = raw ? JSON.parse(raw) : {};
     if (!records || typeof records !== 'object' || Array.isArray(records)) return false;
-    for (const [unitKey, frame] of frames) records[unitKey] = frame;
+    for (const [unitKey, frame] of Object.entries(records)) records[unitKey] = normalizeFrame(frame);
+    for (const [unitKey, frame] of frames) records[unitKey] = normalizeFrame(frame);
     localStorage.setItem(key, JSON.stringify(records));
     return true;
   } catch {
@@ -71,7 +76,8 @@ export function saveLocalLayoutFrame(
     const raw = storage.getItem(key);
     const records: Record<string, LayoutFrame> = raw ? JSON.parse(raw) : {};
     if (!records || typeof records !== 'object' || Array.isArray(records)) return false;
-    records[unitKey] = frame;
+    for (const [existingKey, existingFrame] of Object.entries(records)) records[existingKey] = normalizeFrame(existingFrame);
+    records[unitKey] = normalizeFrame(frame);
     storage.setItem(key, JSON.stringify(records));
     return true;
   } catch {
@@ -110,7 +116,7 @@ export async function fetchLayoutFrames(pageNumber: number, language: LayoutLang
     const frames = new Map<string, LayoutFrame>();
     for (const record of result.docs ?? []) {
       if (record.unitKey && record.data && Number.isFinite(record.data.x) && Number.isFinite(record.data.width)) {
-        frames.set(record.unitKey, record.data as LayoutFrame);
+        frames.set(record.unitKey, normalizeFrame(record.data as LayoutFrame));
       }
     }
     return frames;
@@ -126,12 +132,13 @@ export async function saveLayoutFrame(record: LayoutFrameRecord): Promise<boolea
     const lookup = await fetch(`${PAYLOAD_URL}?${query}`);
     if (!lookup.ok) return false;
     const existing = (await lookup.json()).docs?.[0];
+    const canonicalFrame = normalizeFrame(record.frame);
     const payload = {
       frameKey,
       unitKey: record.unitKey,
       pageNumber: record.pageNumber,
       language: record.language,
-      data: record.frame,
+      data: canonicalFrame,
     };
     const response = existing
       ? await fetch(`${PAYLOAD_URL}/${existing.id}`, {
@@ -154,10 +161,51 @@ export async function saveLayoutFrame(record: LayoutFrameRecord): Promise<boolea
       && saved.unitKey === record.unitKey
       && saved.pageNumber === record.pageNumber
       && saved.language === record.language
-      && stableFrameJson(saved.data) === stableFrameJson(record.frame);
+      && stableFrameJson(saved.data) === stableFrameJson(canonicalFrame);
   } catch {
     return false;
   }
+}
+
+function normalizeFrame(frame: LayoutFrame): LayoutFrame {
+  if (!frame || !Number.isFinite(frame.x) || !Number.isFinite(frame.width)) return frame;
+  return canonicalizeLayoutFrame(frame);
+}
+
+/** Migrate every stored page key while preserving all unsynced frame records. */
+export function migrateLocalLayoutFrames(
+  storage: Pick<Storage, 'length' | 'key' | 'getItem' | 'setItem'> = localStorage,
+): { keysUpdated: number; framesUpdated: number; failedKeys: string[] } {
+  let keysUpdated = 0;
+  let framesUpdated = 0;
+  const failedKeys: string[] = [];
+  const keys = Array.from({ length: storage.length }, (_, index) => storage.key(index))
+    .filter((key): key is string => key?.startsWith(`${STORAGE_PREFIX}-`) ?? false);
+  for (const key of keys) {
+    try {
+      const raw = storage.getItem(key);
+      if (!raw) continue;
+      const records = JSON.parse(raw) as Record<string, LayoutFrame>;
+      if (!records || typeof records !== 'object' || Array.isArray(records)) continue;
+      let changed = false;
+      const normalized: Record<string, LayoutFrame> = {};
+      for (const [unitKey, frame] of Object.entries(records)) {
+        const canonical = normalizeFrame(frame);
+        normalized[unitKey] = canonical;
+        if (stableFrameJson(frame) !== stableFrameJson(canonical)) {
+          changed = true;
+          framesUpdated += 1;
+        }
+      }
+      if (changed) {
+        storage.setItem(key, JSON.stringify(normalized));
+        keysUpdated += 1;
+      }
+    } catch {
+      failedKeys.push(key);
+    }
+  }
+  return { keysUpdated, framesUpdated, failedKeys };
 }
 
 export async function deleteLayoutFrame(unitKey: string, language: LayoutLanguage): Promise<boolean> {

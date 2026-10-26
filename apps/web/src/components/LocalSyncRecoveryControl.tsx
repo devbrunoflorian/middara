@@ -29,11 +29,15 @@ function describeEntry(entry: LocalPersistenceEntry): string {
 }
 
 function syncStateText(entry: LocalPersistenceEntry): string {
-  if (entry.syncState === 'missing_remote') return 'Ainda não existe no Payload';
-  if (entry.syncState === 'diverged') return 'Conteúdo local difere do Payload';
-  if (entry.syncState === 'unverified') return 'Payload indisponível; estado não verificado';
-  if (entry.syncState === 'sync_error') return 'Falha de sincronização; versão remota não confirmada';
-  return 'Payload confirmado';
+  if (entry.syncState === 'missing_remote') return 'Somente no navegador · aguardando sincronização';
+  if (entry.syncState === 'diverged') return 'Conflito · cópia local difere do Payload';
+  if (entry.syncState === 'unverified') return 'No navegador · estado do Payload não verificado';
+  if (entry.syncState === 'sync_error') return 'No navegador · Payload não confirmou o envio';
+  return 'Confirmado pelo Payload';
+}
+
+function counted(count: number, singular: string, plural: string): string {
+  return `${count} ${count === 1 ? singular : plural}`;
 }
 
 function downloadRecovery(report: LocalPersistenceReport) {
@@ -255,17 +259,48 @@ export function LocalSyncRecoveryControl({ visible, hasUnsavedDraft = false }: L
 
   if (!visible) return null;
   const unsyncedEntries = report?.entries.filter(entry => entry.syncState !== 'confirmed') ?? [];
-  const countLabel = report?.payloadAvailable
-    ? `UNSYNCED LOCAL RECORDS = ${report.unsyncedCount}`
-    : report ? 'UNSYNCED LOCAL RECORDS = ?' : 'Verificando sincronização local';
+  const stateCounts = {
+    browserOnly: unsyncedEntries.filter(entry => entry.syncState === 'missing_remote').length,
+    syncError: unsyncedEntries.filter(entry => entry.syncState === 'sync_error').length,
+    conflict: unsyncedEntries.filter(entry => entry.syncState === 'diverged').length,
+    unverified: unsyncedEntries.filter(entry => entry.syncState === 'unverified').length,
+  };
+  const triggerDetails = [
+    stateCounts.browserOnly ? `${counted(stateCounts.browserOnly, 'registro', 'registros')} somente no navegador · sincronização pendente` : '',
+    stateCounts.syncError ? `${counted(stateCounts.syncError, 'envio', 'envios')} sem confirmação` : '',
+    stateCounts.conflict ? `${counted(stateCounts.conflict, 'conflito local/Payload', 'conflitos locais/Payload')}` : '',
+    stateCounts.unverified ? `${counted(stateCounts.unverified, 'estado remoto não verificado', 'estados remotos não verificados')}` : '',
+  ].filter(Boolean);
+  const triggerLabel = !report
+    ? 'Verificando sincronização local'
+    : !report.payloadAvailable
+      ? 'Estado do Payload não verificado · abrir sincronização local'
+      : report.unsyncedCount === 0
+        ? 'Sincronizado com o Payload'
+        : triggerDetails.join(' · ') || `${report.unsyncedCount} ${report.unsyncedCount === 1 ? 'registro' : 'registros'} sem confirmação do Payload`;
+  const summaryText = !report
+    ? checking ? 'Verificando armazenamento local e Payload…' : 'Estado da sincronização ainda não verificado.'
+    : !report.payloadAvailable
+      ? 'Estado do Payload não verificado. As cópias locais continuam no navegador.'
+      : report.unsyncedCount === 0
+        ? 'Payload confirmado · nenhuma pendência local.'
+        : [
+          stateCounts.browserOnly ? `${counted(stateCounts.browserOnly, 'registro', 'registros')} somente no navegador · sincronização pendente` : '',
+          stateCounts.syncError ? `${counted(stateCounts.syncError, 'envio', 'envios')} sem confirmação` : '',
+          stateCounts.conflict ? `${counted(stateCounts.conflict, 'conflito local/Payload', 'conflitos locais/Payload')}` : '',
+          stateCounts.unverified ? `${counted(stateCounts.unverified, 'estado remoto não verificado', 'estados remotos não verificados')}` : '',
+        ].filter(Boolean).join(' · ') || `${report.unsyncedCount} registro(s) sem confirmação do Payload`;
+  const summaryTone = report?.payloadAvailable && report.unsyncedCount === 0
+    ? 'is-confirmed'
+    : stateCounts.conflict > 0 ? 'is-conflict' : stateCounts.syncError > 0 ? 'is-error' : 'is-pending';
 
   return (
     <>
       <button
         type="button"
-        className={`tool-btn local-sync-trigger ${report?.payloadAvailable && report.unsyncedCount === 0 ? 'is-confirmed' : 'is-pending'}`}
-        aria-label={countLabel}
-        title={countLabel}
+        className={`tool-btn local-sync-trigger ${summaryTone}`}
+        aria-label={triggerLabel}
+        title={triggerLabel}
         aria-expanded={open}
         onClick={() => setOpen(true)}
       >
@@ -289,8 +324,8 @@ export function LocalSyncRecoveryControl({ visible, hasUnsavedDraft = false }: L
           <button type="button" className="local-sync-close" onClick={() => setOpen(false)} aria-label="Fechar recuperação local">×</button>
         </header>
         <div className="local-sync-dialog-body">
-          <div role="status" aria-live="polite" className={`local-sync-summary ${report?.unsyncedCount === 0 ? 'is-confirmed' : 'is-pending'}`}>
-            {checking && !report ? 'Verificando registros locais e Payload…' : countLabel}
+          <div role="status" aria-live="polite" className={`local-sync-summary ${summaryTone}`}>
+            {summaryText}
           </div>
           {report && !report.payloadAvailable && (
             <p className="local-sync-warning">Payload não respondeu. Não é possível calcular a contagem; os registros locais continuam no navegador e podem ser exportados.</p>

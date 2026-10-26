@@ -3,6 +3,7 @@ import { createRoot, type Root } from 'react-dom/client';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { fireEvent } from '@testing-library/react';
 import { PageRenderer, type PageData } from '../src/components/PageRenderer';
 
 function readP13FlagFixture(): PageData {
@@ -54,7 +55,7 @@ describe('typographic unit translation frame editing', () => {
     vi.unstubAllGlobals();
   });
 
-  it('selects and edits an individual typographic field frame without opening the text editor', async () => {
+  it('selects an individual frame and commits its X₂ coordinate without opening the text editor', async () => {
     const pageData = readP13FlagFixture();
     container = document.createElement('div');
     document.body.appendChild(container);
@@ -85,14 +86,17 @@ describe('typographic unit translation frame editing', () => {
     const widthInput = Array.from(document.body.querySelectorAll<HTMLInputElement>('.admin-layout-frame-fields input'))
       .find(input => input.closest('label')?.textContent?.startsWith('Largura'));
     expect(widthInput).toBeDefined();
-    const valueSetter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set;
+    const targetX2 = Number(widthInput!.value) + 10;
+    const frameX = Number(field!.getAttribute('data-admin-geometry-x'));
+    const expectedTotal = targetX2 - frameX;
     await act(async () => {
-      valueSetter?.call(widthInput, '310');
-      widthInput!.dispatchEvent(new Event('input', { bubbles: true }));
+      widthInput!.focus();
+      fireEvent.change(widthInput!, { target: { value: String(targetX2) } });
+      fireEvent.blur(widthInput!);
     });
 
     const updatedField = container.querySelector<HTMLElement>(`[data-admin-geometry-key="${frameKey}"]`);
-    expect(updatedField?.getAttribute('data-admin-geometry-width')).toBe('310');
+    expect(Number(updatedField?.getAttribute('data-admin-geometry-width'))).toBeCloseTo(expectedTotal);
     expect(saveButton?.disabled).toBe(false);
 
     await act(async () => {
@@ -102,7 +106,9 @@ describe('typographic unit translation frame editing', () => {
     expect(localStorage.getItem('middara-layout-frames-v1-pt-BR-page-13'))
       .toContain('"page_13_unit_p13-new-story-flag-body"');
     expect(localStorage.getItem('middara-layout-frames-v1-pt-BR-page-13'))
-      .toContain('"width":310');
+      .toContain(`"width":${targetX2}`);
+    expect(localStorage.getItem('middara-layout-frames-v1-pt-BR-page-13'))
+      .toContain(`"total":${expectedTotal}`);
 
     await act(async () => root!.unmount());
     root = createRoot(container);
@@ -111,6 +117,6 @@ describe('typographic unit translation frame editing', () => {
     });
     await act(async () => { await Promise.resolve(); });
     const reloadedField = container.querySelector<HTMLElement>(`[data-admin-geometry-key="${frameKey}"]`);
-    expect(reloadedField?.getAttribute('data-admin-geometry-width')).toBe('310');
+    expect(Number(reloadedField?.getAttribute('data-admin-geometry-width'))).toBeCloseTo(expectedTotal);
   });
 });
