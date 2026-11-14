@@ -175,7 +175,7 @@
       "spanKey": "page_98_block_2__pt-BR",
       "language": "pt-BR",
       "sourceText": "Poppet tokens are part of Encounter setups that feature the Gatekeeper Combatant. A Poppet token will be instructed to move during the Gatekeeper's turn. While an opponent shares a space with a Poppet, they may not Dodge. Any figure on the same space as, or on an adjacent space to a Poppet that moves out of that space will provoke a Break Attack from a Poppet . Since Poppet's do not have Combat Dice, if a figure provokes a Break Attack from a Poppet they are dealt 1 MAGIC DMG . Any figure on the same space as, or adjacent to a Poppet may not cast SPELLS . At any time , an opponent who shares the same space with, or is adjacent to a Poppet token, may spend 1 SP to make a Lore 10 check to remove a Poppet token in that space from the board. Combatant Token rule exceptions: • Poppets ignore the effects of movement from non-Obstructing and non-Dangerous Terrain.",
-      "proposalText": "Fichas Poppet integram Preparações de Encontro com o Combatente Gatekeeper. A ficha Poppet é instruída a se mover durante o turno de Gatekeeper. Enquanto um oponente compartilhar um espaço com um Poppet, não poderá ESQUIVAR. Quando um Poppet deixar um espaço, qualquer miniatura que esteja nele ou em um espaço adjacente a esse espaço provocará um Ataque de Interrupção do Poppet. Como Poppets não têm Dados de Combate, uma miniatura que provoque esse Ataque de Interrupção receberá 1 DANO MÁGICO. Miniaturas no mesmo espaço que um Poppet ou adjacentes a ele não podem conjurar FEITIÇOS. A qualquer momento, um oponente no espaço de uma ficha Poppet ou adjacente a ela pode gastar 1 SP para fazer um teste de Lore 10 e remover do tabuleiro uma ficha Poppet naquele espaço. Exceções às regras de Fichas de Combatente: • Poppets ignoram os efeitos de movimento de Terrenos que não sejam Obstruídos nem Perigosos.",
+      "proposalText": "Fichas Poppet integram Preparações de Encontro com o Combatente Gatekeeper. A ficha Poppet é instruída a se mover durante o turno de Gatekeeper. Enquanto um oponente compartilhar um espaço com um Poppet, não poderá ESQUIVAR. Quando um Poppet deixar um espaço, qualquer miniatura que esteja nele ou em um espaço adjacente a esse espaço provocará um Ataque de Oportunidade do Poppet. Como Poppets não têm Dados de Combate, uma miniatura que provoque esse Ataque de Oportunidade receberá 1 DANO MÁGICO. Miniaturas no mesmo espaço que um Poppet ou adjacentes a ele não podem conjurar FEITIÇOS. A qualquer momento, um oponente no espaço de uma ficha Poppet ou adjacente a ela pode gastar 1 SP para fazer um teste de Lore 10 e remover do tabuleiro uma ficha Poppet naquele espaço. Exceções às regras de Fichas de Combatente: • Poppets ignoram os efeitos de movimento de Terrenos que não sejam Obstruídos nem Perigosos.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_98_block_2__pt-BR",
@@ -301,7 +301,7 @@
             "color": "#231f20"
           },
           {
-            "text": " deixar um espaço, qualquer miniatura que esteja nele ou em um espaço adjacente a esse espaço provocará um Ataque de Interrupção do ",
+            "text": " deixar um espaço, qualquer miniatura que esteja nele ou em um espaço adjacente a esse espaço provocará um Ataque de Oportunidade do ",
             "font": "OptimaLTStd",
             "weight": 400,
             "style": "normal",
@@ -333,7 +333,7 @@
             "color": "#231f20"
           },
           {
-            "text": " não têm Dados de Combate, uma miniatura que provoque esse Ataque de Interrupção receberá ",
+            "text": " não têm Dados de Combate, uma miniatura que provoque esse Ataque de Oportunidade receberá ",
             "font": "OptimaLTStd",
             "weight": 400,
             "style": "normal",
@@ -511,7 +511,7 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_live_copyfit_v3",
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
       "copyfitClassification": "UNDER",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
@@ -527,10 +527,6 @@
         {
           "source": "Dodge",
           "proposal": "ESQUIVAR; mechanic mapping pending"
-        },
-        {
-          "source": "Break Attack",
-          "proposal": "Ataque de Interrupção; mechanic mapping pending"
         },
         {
           "source": "Combat Dice",
@@ -618,6 +614,119 @@
       "sourcePdfVisualLineCount": 9,
       "pageRendererVisualLineCount": 8,
       "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 9,
+          "pageRendererVisualLineCount": 8,
+          "classification": "UNDER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 98,
+            "pdfDocumentPageIndex": 97,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              173.29290771484375,
+              74.33848571777344,
+              769.8435668945312,
+              185.6172332763672
+            ],
+            "visualRowBaselinesPt": [
+              83.568,
+              97.398,
+              108.398,
+              119.398,
+              130.398,
+              144.229,
+              155.229,
+              169.059,
+              182.907
+            ],
+            "spans": 44,
+            "visualRows": 9
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_98_block_2",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 45,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 8,
+            "visualRowTopsCssPx": [
+              324,
+              328.05,
+              332.09,
+              336.14,
+              340.19,
+              344.23,
+              348.28,
+              364.25
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, Optima, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "normal",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 45.1
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
         "200%": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 9,
@@ -657,19 +766,75 @@
           "pageRendererEvidence": {
             "spanKey": "page_98_block_2",
             "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-            "rangeRectFragments": 44,
+            "rangeRectFragments": 45,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 8,
             "visualRowTopsCssPx": [
-              86.8,
-              94.91,
-              103.02,
-              111.13,
-              119.23,
-              127.34,
-              135.45,
-              167.3
+              86.83,
+              94.94,
+              103.05,
+              111.16,
+              119.27,
+              127.38,
+              135.48,
+              167.33
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, Optima, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "normal",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 90.2
           },
@@ -715,19 +880,75 @@
         "pageRendererEvidence": {
           "spanKey": "page_98_block_2",
           "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-          "rangeRectFragments": 44,
+          "rangeRectFragments": 45,
           "renderedSymbolIds": [],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 8,
           "visualRowTopsCssPx": [
-            86.8,
-            94.91,
-            103.02,
-            111.13,
-            119.23,
-            127.34,
-            135.45,
-            167.3
+            86.83,
+            94.94,
+            103.05,
+            111.16,
+            119.27,
+            127.38,
+            135.48,
+            167.33
+          ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, Optima, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "normal",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
           ],
           "frameHeightCssPx": 90.2
         },

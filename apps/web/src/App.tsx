@@ -555,6 +555,7 @@ function App() {
   const [viewMode, setViewMode] = useState<'single' | 'scroll'>('single');
   const [pageInput, setPageInput] = useState<string>(() => String(initialImportantCompositionVariant ? 14 : initialV3ExperimentLocation?.pageNumber ?? initialV2ExperimentLocation?.pageNumber ?? initialExperimentLocation?.pageNumber ?? 1));
   const [language, setLanguage] = useState<'en' | 'pt-BR'>(() => initialImportantCompositionVariant === 'EN' ? 'en' : initialImportantCompositionVariant ? 'pt-BR' : initialV3ExperimentLocation?.variant === 'EN' ? 'en' : initialV3ExperimentLocation ? 'pt-BR' : initialV2ExperimentLocation?.variant === 'EN' ? 'en' : initialV2ExperimentLocation ? 'pt-BR' : 'en');
+  const [showOriginalSource, setShowOriginalSource] = useState(false);
   const [editorialExperimentVariant, setEditorialExperimentVariant] = useState<Page14ExperimentVariant | null>(initialExperimentLocation?.variant ?? null);
   const [page14V2Variant, setPage14V2Variant] = useState<Page14V2Variant | null>(initialV2ExperimentLocation?.variant ?? null);
   const [page14V3Variant, setPage14V3Variant] = useState<Page14V3Variant | null>(initialV3ExperimentLocation?.variant ?? null);
@@ -1303,7 +1304,9 @@ function App() {
         const clientKey = clientSpanKey(rendererKey, 'pt-BR');
         if (clientKey !== rendererKey) overrides.set(clientKey, { ...override, spanKey: clientKey });
         const frame = layoutFrameForReviewOverride(candidate.reviewLayoutFrame, override);
-        if (frame && !hasSavedHumanTranslation) layoutFrames.set(rendererKey.replace(/__pt-BR$/u, ''), frame);
+        if (frame && (!hasSavedHumanTranslation || selectedRevisionDraft)) {
+          layoutFrames.set(rendererKey.replace(/__pt-BR$/u, ''), frame);
+        }
       }
     }
     for (const exception of reviewCatalog?.exceptions ?? []) {
@@ -1833,17 +1836,32 @@ function App() {
   }, [rendererLanguage, isPage14V3ExperimentVisible, activeV3Variant, choosePage14V3Variant, isPage14V2ExperimentVisible, activeV2Variant, choosePage14V2Variant, isPage14ExperimentVisible, activeExperimentVariant, chooseEditorialExperimentVariant]);
 
   const handleToolbarLanguageToggle = useCallback((nextLanguage: 'en' | 'pt-BR') => {
-    if (nextLanguage === rendererLanguage) return;
+    if (nextLanguage === rendererLanguage) {
+      if (showOriginalSource && acceptLeavingLayout() && acceptLeavingTranslationDraft()) setShowOriginalSource(false);
+      return;
+    }
     const experimentActive = isPage14V3ExperimentVisible && activeV3Variant !== null
       || isPage14V2ExperimentVisible && activeV2Variant !== null
       || isPage14ExperimentVisible && activeExperimentVariant !== null;
     if (experimentActive) {
+      setShowOriginalSource(false);
       handleToggleLanguage(nextLanguage);
       return;
     }
-    if (acceptLeavingLayout() && acceptLeavingTranslationDraft()) handleToggleLanguage(nextLanguage);
+    if (acceptLeavingLayout() && acceptLeavingTranslationDraft()) {
+      setShowOriginalSource(false);
+      handleToggleLanguage(nextLanguage);
+    }
   }, [rendererLanguage, isPage14V3ExperimentVisible, activeV3Variant, isPage14V2ExperimentVisible, activeV2Variant,
-    isPage14ExperimentVisible, activeExperimentVariant, acceptLeavingLayout, acceptLeavingTranslationDraft, handleToggleLanguage]);
+    isPage14ExperimentVisible, activeExperimentVariant, acceptLeavingLayout, acceptLeavingTranslationDraft, handleToggleLanguage, showOriginalSource]);
+
+  const handleOriginalSourceToggle = useCallback(() => {
+    if (showOriginalSource) {
+      setShowOriginalSource(false);
+      return;
+    }
+    if (acceptLeavingLayout() && acceptLeavingTranslationDraft()) setShowOriginalSource(true);
+  }, [showOriginalSource, acceptLeavingLayout, acceptLeavingTranslationDraft]);
 
   const handlePage14V3UnitSelect = useCallback((spanKey: string | null) => {
     const unitKey = normalizePage14V3UnitKey(spanKey);
@@ -2555,6 +2573,7 @@ function App() {
                 onToggleLanguage={handleToggleLanguage}
                 overlayHost={overlayHost}
                 pageData={pageData} 
+                showOriginalSource={showOriginalSource}
                 isAdmin={isAdmin}
                 showRuler={isAdmin && isRulerVisible}
                 layoutMode={isAdmin && isLayoutMode && !readOnlyExperiment}
@@ -2759,12 +2778,15 @@ function App() {
         </div>
 
         <div className="toolbar-section bottom">
-          <div className="language-toggle" role="group" aria-label={rendererLanguage === 'pt-BR' ? 'Idioma' : 'Language'}>
-            <button type="button" className={`language-toggle-option ${rendererLanguage === 'en' ? 'active' : ''}`}
-              aria-label="English" aria-pressed={rendererLanguage === 'en'} title="English"
+          <div className="language-toggle" role="group" aria-label={rendererLanguage === 'pt-BR' ? 'Versão da página' : 'Page version'}>
+            <button type="button" className={`language-toggle-option ${showOriginalSource ? 'active' : ''}`}
+              aria-label="Original PDF" aria-pressed={showOriginalSource} title="Original PDF"
+              onClick={handleOriginalSourceToggle}>OG</button>
+            <button type="button" className={`language-toggle-option ${!showOriginalSource && rendererLanguage === 'en' ? 'active' : ''}`}
+              aria-label="English" aria-pressed={!showOriginalSource && rendererLanguage === 'en'} title="English"
               onClick={() => handleToolbarLanguageToggle('en')}>EN</button>
-            <button type="button" className={`language-toggle-option ${rendererLanguage === 'pt-BR' ? 'active' : ''}`}
-              aria-label="Português (Brasil)" aria-pressed={rendererLanguage === 'pt-BR'} title="Português (Brasil)"
+            <button type="button" className={`language-toggle-option ${!showOriginalSource && rendererLanguage === 'pt-BR' ? 'active' : ''}`}
+              aria-label="Português (Brasil)" aria-pressed={!showOriginalSource && rendererLanguage === 'pt-BR'} title="Português (Brasil)"
               onClick={() => handleToolbarLanguageToggle('pt-BR')}>PT</button>
           </div>
 

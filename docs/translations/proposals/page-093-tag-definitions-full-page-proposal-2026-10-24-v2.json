@@ -1590,7 +1590,7 @@
       "spanKey": "page_93_block_5__pt-BR",
       "language": "pt-BR",
       "sourceText": "LEAP (X):\nA figure using this Ability moves up to X spaces orthogonally in a straight\nline. A figure using LEAP only provokes Break Attacks from opponents that\nwere adjacent to them at the start of the movement granted by this Ability.\nFigures using the movement from LEAP will ignore other figures and all\nTerrain except Obstructing Terrain.\nA figure using LEAP may move into spaces that contain other figures of\ntheir base size or smaller as determined by the amount of spaces their base\noccupies. If they do, DISPLACE any figures occupying that space. Figures\nDisplaced this way are dealt a PURPLE\nof IRREDUCIBLE DMG.",
-      "proposalText": "LEAP (X): Uma miniatura que use esta Habilidade move-se até X espaços ortogonalmente em linha reta. Uma miniatura que use LEAP só provoca Break Attacks de oponentes que estavam adjacentes a ela no início do movimento concedido por esta Habilidade. Durante o movimento de LEAP, a miniatura ignora outras miniaturas e todos os Terrenos, exceto Terreno Obstruído. Uma miniatura que use LEAP pode mover-se para espaços ocupados por outras miniaturas com bases de tamanho igual ou menor, conforme a quantidade de espaços ocupados por sua própria base. Se o fizer, DESLOQUE todas as miniaturas que ocupem esse espaço. Miniaturas Deslocadas dessa forma sofrem um dado ROXO ￼ de DANO IRREDUTÍVEL.",
+      "proposalText": "LEAP (X): Uma miniatura que use esta Habilidade move-se até X espaços ortogonalmente em linha reta. Uma miniatura que use LEAP só provoca Ataques de Oportunidade de oponentes adjacentes a ela no início do movimento concedido por esta Habilidade. Durante o movimento de LEAP, a miniatura ignora outras miniaturas e todos os Terrenos, exceto Terreno Obstruído. Uma miniatura que use LEAP pode mover-se para espaços ocupados por outras miniaturas com bases de tamanho igual ou menor, conforme a quantidade de espaços ocupados por sua própria base. Se o fizer, DESLOQUE todas as miniaturas que ocupem esse espaço. Miniaturas Deslocadas dessa forma sofrem um dado ROXO ￼ de DANO IRREDUTÍVEL.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_93_block_5__pt-BR",
@@ -1650,7 +1650,7 @@
             "disableLigatures": true
           },
           {
-            "text": " só provoca Break Attacks de oponentes que estavam adjacentes a ela no início do movimento concedido por esta Habilidade. Durante o movimento de ",
+            "text": " só provoca Ataques de Oportunidade de oponentes adjacentes a ela no início do movimento concedido por esta Habilidade. Durante o movimento de ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -1677,11 +1677,20 @@
             "disableLigatures": true
           },
           {
-            "text": "Terreno Obstruído",
-            "font": "OptimaLTStd-BoldItalic",
+            "text": "Terreno ",
+            "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
-            "weight": 700,
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Obstruído",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
             "style": "italic",
             "disableLigatures": true
           },
@@ -1774,7 +1783,7 @@
           {
             "text": "DANO IRREDUTÍVEL",
             "font": "OptimaLTStd-Bold",
-            "size": 9,
+            "size": 10,
             "color": "#ffffff",
             "weight": 700,
             "style": "normal",
@@ -1797,13 +1806,139 @@
       "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "LEAP é mantida como identificador da Tag. Break Attack é mantido em inglês e não foi equiparado a Breaking Attack / Ataque de Oportunidade."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 10,
       "pageRendererVisualLineCount": 10,
       "copyfitClassification": "EXACT",
       "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 10,
+          "pageRendererVisualLineCount": 10,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 93,
+            "pdfDocumentPageIndex": 92,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              81.16900634765625,
+              420.6956481933594,
+              405.5438537597656,
+              534.0315551757812
+            ],
+            "visualRowBaselinesPt": [
+              429.906,
+              440.906,
+              451.906,
+              462.906,
+              473.906,
+              484.906,
+              497.326,
+              508.326,
+              519.322,
+              531.322
+            ],
+            "spans": 28,
+            "visualRows": 10
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_93_block_5__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 33,
+            "renderedSymbolIds": [
+              "dice.purple"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 10,
+            "visualRowTopsCssPx": [
+              464.34,
+              468.78,
+              473.22,
+              477.66,
+              482.09,
+              486.53,
+              490.97,
+              495.41,
+              499.84,
+              504.28
+            ],
+            "visualRowIntervalsPt": [
+              10.95,
+              10.95,
+              10.95,
+              10.95,
+              10.95,
+              10.95,
+              10.95,
+              11.36,
+              10.79
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 44.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
         "200%": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 10,
@@ -1842,9 +1977,9 @@
             "visualRows": 10
           },
           "pageRendererEvidence": {
-            "spanKey": "page_93_block_5",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-            "rangeRectFragments": 34,
+            "spanKey": "page_93_block_5__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 33,
             "renderedSymbolIds": [
               "dice.purple"
             ],
@@ -1856,13 +1991,79 @@
               385.33,
               394.23,
               403.14,
-              413.05,
-              422.95,
-              431.86,
-              440.77,
-              449.67
+              412.05,
+              420.95,
+              429.86,
+              438.77,
+              447.67
             ],
-            "frameHeightCssPx": 91.8
+            "visualRowIntervalsPt": [
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99
+            ],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.02301px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 89.1
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         }
@@ -1905,9 +2106,9 @@
           "visualRows": 10
         },
         "pageRendererEvidence": {
-          "spanKey": "page_93_block_5",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-          "rangeRectFragments": 34,
+          "spanKey": "page_93_block_5__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 33,
           "renderedSymbolIds": [
             "dice.purple"
           ],
@@ -1919,13 +2120,79 @@
             385.33,
             394.23,
             403.14,
-            413.05,
-            422.95,
-            431.86,
-            440.77,
-            449.67
+            412.05,
+            420.95,
+            429.86,
+            438.77,
+            447.67
           ],
-          "frameHeightCssPx": 91.8
+          "visualRowIntervalsPt": [
+            10.99,
+            10.99,
+            10.99,
+            10.99,
+            10.99,
+            10.99,
+            10.99,
+            10.99,
+            10.99
+          ],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.02301px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 89.1
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
@@ -3677,7 +3944,7 @@
       "spanKey": "page_93_block_15__pt-BR",
       "language": "pt-BR",
       "sourceText": "PROVOKE (X):\nAny figure that leaves a space within Range (X) of a figure with PROVOKE,\nwill provoke a Break Attack from that space.",
-      "proposalText": "PROVOKE (X): Qualquer miniatura que deixe um espaço dentro do Alcance (X) de uma miniatura com PROVOKE provocará um Break Attack a partir daquele espaço.",
+      "proposalText": "PROVOKE (X): Qualquer miniatura que saia de um espaço que esteja dentro do Alcance (X) de uma miniatura com PROVOKE provocará um Ataque de Oportunidade a partir daquele espaço.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_93_block_15__pt-BR",
@@ -3701,7 +3968,25 @@
             "disableLigatures": true
           },
           {
-            "text": ": Qualquer miniatura que deixe um espaço dentro do Alcance (X) de uma miniatura com ",
+            "text": ": Qualquer miniatura que saia de um espaço que esteja dentro do Alcance (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "X",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ") de uma miniatura com ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -3719,7 +4004,7 @@
             "disableLigatures": true
           },
           {
-            "text": " provocará um Break Attack a partir daquele espaço.",
+            "text": " provocará um Ataque de Oportunidade a partir daquele espaço.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -3733,13 +4018,103 @@
       "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
-      "pendingTerms": [
-        "PROVOKE permanece como identificador da Tag; Break Attack não foi equiparado a Breaking Attack / Ataque de Oportunidade."
-      ],
+      "pendingTerms": [],
       "sourcePdfVisualLineCount": 3,
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "EXACT",
       "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 3,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 93,
+            "pdfDocumentPageIndex": 92,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              415.56390380859375,
+              193.8523712158203,
+              733.5904541015625,
+              227.77171325683594
+            ],
+            "visualRowBaselinesPt": [
+              203.062,
+              214.062,
+              225.062
+            ],
+            "spans": 8,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_93_block_15__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 10,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              372.44,
+              376.88,
+              381.31
+            ],
+            "visualRowIntervalsPt": [
+              11.16,
+              10.75
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 13.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
         "200%": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 3,
@@ -3771,9 +4146,9 @@
             "visualRows": 3
           },
           "pageRendererEvidence": {
-            "spanKey": "page_93_block_15",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-            "rangeRectFragments": 8,
+            "spanKey": "page_93_block_15__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 10,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 3,
@@ -3782,7 +4157,53 @@
               192.59,
               201.5
             ],
-            "frameHeightCssPx": 27.5
+            "visualRowIntervalsPt": [
+              10.99,
+              10.99
+            ],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.02301px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 26.7
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         }
@@ -3818,9 +4239,9 @@
           "visualRows": 3
         },
         "pageRendererEvidence": {
-          "spanKey": "page_93_block_15",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-          "rangeRectFragments": 8,
+          "spanKey": "page_93_block_15__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 10,
           "renderedSymbolIds": [],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 3,
@@ -3829,7 +4250,53 @@
             192.59,
             201.5
           ],
-          "frameHeightCssPx": 27.5
+          "visualRowIntervalsPt": [
+            10.99,
+            10.99
+          ],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.02301px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 26.7
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
@@ -3841,7 +4308,7 @@
       "spanKey": "page_93_block_16__pt-BR",
       "language": "pt-BR",
       "sourceText": "PULL (X):\nMove the target up to (X) spaces towards the figure that used this Ability.\nThe target does not provoke a Break Attack from the figure that used this\nAbility. See Push, Pull, and Command Pg. 40.",
-      "proposalText": "PULL (X): Mova o alvo até (X) espaços em direção à miniatura que usou esta Habilidade. O alvo não provoca um Break Attack da miniatura que usou esta Habilidade. Veja Push, Pull e Command, pág. 40.",
+      "proposalText": "PULL (X): Mova o alvo até (X) espaços em direção à miniatura que usou esta Habilidade. O alvo não provoca um Ataque de Oportunidade da miniatura que usou esta Habilidade. Veja Push, Pull e Command, pág. 40.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_93_block_16__pt-BR",
@@ -3883,7 +4350,7 @@
             "disableLigatures": true
           },
           {
-            "text": " miniatura que usou esta Habilidade. O alvo não provoca um Break Attack da miniatura que usou esta Habilidade. Veja ",
+            "text": " miniatura que usou esta Habilidade. O alvo não provoca um Ataque de Oportunidade da miniatura que usou esta Habilidade. Veja ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -3916,12 +4383,102 @@
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
-        "PULL/PUSH permanecem como identificadores; Break Attack não foi equiparado a Breaking Attack; confirmar o título “Push, Pull, and Command”."
+        "PULL/PUSH permanecem como identificadores; confirmar o título “Push, Pull, and Command”."
       ],
       "sourcePdfVisualLineCount": 4,
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "UNDER",
       "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 3,
+          "classification": "UNDER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 93,
+            "pdfDocumentPageIndex": 92,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              415.5704040527344,
+              232.5216827392578,
+              730.9111328125,
+              278.4416809082031
+            ],
+            "visualRowBaselinesPt": [
+              241.732,
+              252.732,
+              264.732,
+              275.732
+            ],
+            "spans": 11,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_93_block_16",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 10,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              388.09,
+              392.53,
+              396.97
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05241px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45765px",
+                "letterSpacing": "-0.0607861px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05241px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45765px",
+                "letterSpacing": "-0.0607861px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05241px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45765px",
+                "letterSpacing": "-0.0607861px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 18.6
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
         "200%": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 4,
@@ -3964,6 +4521,49 @@
               215.02,
               224.92,
               233.83
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 37.2
           },
@@ -4013,6 +4613,49 @@
             224.92,
             233.83
           ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "italic",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
           "frameHeightCssPx": 37.2
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
@@ -4025,7 +4668,7 @@
       "spanKey": "page_93_block_17__pt-BR",
       "language": "pt-BR",
       "sourceText": "PUSH (X):\nMove the target up to (X) spaces away from the figure that used this Ability.\nThe target does not provoke a Break Attack from the figure that used this\nAbility. See Push, Pull, and Command Pg. 40.",
-      "proposalText": "PUSH (X): Mova o alvo até (X) espaços para longe da miniatura que usou esta Habilidade. O alvo não provoca um Break Attack da miniatura que usou esta Habilidade. Veja Push, Pull e Command, pág. 40.",
+      "proposalText": "PUSH (X): Mova o alvo até (X) espaços para longe da miniatura que usou esta Habilidade. O alvo não provoca um Ataque de Oportunidade da miniatura que usou esta Habilidade. Veja Push, Pull e Command, pág. 40.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_93_block_17__pt-BR",
@@ -4067,7 +4710,7 @@
             "disableLigatures": true
           },
           {
-            "text": " miniatura que usou esta Habilidade. O alvo não provoca um Break Attack da miniatura que usou esta Habilidade. Veja ",
+            "text": " miniatura que usou esta Habilidade. O alvo não provoca um Ataque de Oportunidade da miniatura que usou esta Habilidade. Veja ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#ffffff",
@@ -4100,12 +4743,102 @@
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
-        "PULL/PUSH permanecem como identificadores; Break Attack não foi equiparado a Breaking Attack; confirmar o título “Push, Pull, and Command”."
+        "PULL/PUSH permanecem como identificadores; confirmar o título “Push, Pull, and Command”."
       ],
       "sourcePdfVisualLineCount": 4,
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "UNDER",
       "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 3,
+          "classification": "UNDER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 93,
+            "pdfDocumentPageIndex": 92,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              415.5704040527344,
+              282.1916809082031,
+              739.1310424804688,
+              328.1116638183594
+            ],
+            "visualRowBaselinesPt": [
+              291.402,
+              302.402,
+              314.402,
+              325.402
+            ],
+            "spans": 11,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_93_block_17",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 10,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              408.22,
+              412.66,
+              417.09
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05241px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45765px",
+                "letterSpacing": "-0.0607861px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05241px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45765px",
+                "letterSpacing": "-0.0607861px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05241px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45765px",
+                "letterSpacing": "-0.0607861px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 18.6
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
         "200%": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 4,
@@ -4148,6 +4881,49 @@
               255.28,
               265.19,
               274.09
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
             ],
             "frameHeightCssPx": 37.2
           },
@@ -4196,6 +4972,49 @@
             255.28,
             265.19,
             274.09
+          ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "italic",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
           ],
           "frameHeightCssPx": 37.2
         },
@@ -6395,6 +7214,14 @@
     {
       "recordedAt": "2026-10-25",
       "summary": "p93 block24 approved via official Reviewer (review 919, translation 935); source line break after bold SOI preserved; PageRenderer EXACT 2/2 at 100% and 200%; Payload read-back confirmed."
+    },
+    {
+      "recordedAt": "2026-10-26",
+      "summary": "p93 PROVOKE updated with canonical Break Attack → Ataque de Oportunidade; restored source bold emphasis on Range (X); first compact phrasing measured UNDER and was naturally expanded for another exact-copyfit attempt."
+    },
+    {
+      "recordedAt": "2026-10-26",
+      "summary": "p93 LEAP rich spans corrected to match source PDF: only “Obstructing” remains italic and “IRREDUCIBLE DMG” maps to bold 10 pt. Copyfit invalidated for remeasurement."
     }
   ]
 }

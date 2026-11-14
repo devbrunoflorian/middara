@@ -3,7 +3,7 @@
   "version": "1",
   "title": "Esquiva e Fortalecer — página 52",
   "page": 52,
-  "status": "pending_human_review",
+  "status": "approved_full_page_copyfit_v3_exact_viewer_print_pdf_verified_english_type_audit_open",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -12,10 +12,12 @@
     "background": "0127649B2449C790BCD828FD192DB6198F060713ABA8FEF05ED1C5A91EBF88EB"
   },
   "counts": {
-    "candidates": 15,
-    "existingHumanTranslationsPreserved": 0,
-    "finalTranslationWrites": 0,
-    "openSourceSymbolExceptions": 1
+    "candidates": 16,
+    "approved": 16,
+    "copyfitExact": 16,
+    "existingHumanTranslationsPreserved": 11,
+    "finalTranslationWrites": 5,
+    "openSourceSymbolExceptions": 0
   },
   "sourceArtifacts": [
     "docs/translations/source-pages/page-052.md",
@@ -64,8 +66,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
@@ -250,8 +252,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Dodge → Esquiva (uso humano localizado na p. 41; canon amplo ainda pendente)"
@@ -421,8 +423,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Dodge → Esquiva (uso humano localizado na p. 41; canon amplo ainda pendente)",
@@ -600,7 +602,7 @@
       "sourceText": "When a figure makes a DODGE, they roll the BLACK . For each  rolled, the figure adds +1 to their Defense. If the  is rolled, no additional Defense is added.",
       "spanKey": "page_52_block_2__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Quando uma Miniatura faz uma ESQUIVA, rola o dado PRETO [dado preto]. Cada [escudo] obtido acrescenta +1 à sua Defesa. Se sair a [caveira], a Defesa não aumenta.",
+      "proposalText": "Quando uma Miniatura faz uma ESQUIVA, rola o dado PRETO [dado preto]. Para cada [escudo] obtido, recebe +1 à Defesa. Se sair [caveira], não recebe Defesa adicional.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_52_block_2__pt-BR",
@@ -651,6 +653,15 @@
             "disableLigatures": true
           },
           {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
             "text": "￼",
             "symbolId": "dice.black",
             "font": "OptimaLTStd",
@@ -666,7 +677,7 @@
             "disableLigatures": true
           },
           {
-            "text": ". Cada ",
+            "text": ". Para cada ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -690,7 +701,7 @@
             "disableLigatures": true
           },
           {
-            "text": " obtido acrescenta ",
+            "text": " obtido, recebe ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -708,7 +719,7 @@
             "disableLigatures": true
           },
           {
-            "text": " à sua Defesa. Se sair a ",
+            "text": " à Defesa. Se sair ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -732,7 +743,7 @@
             "disableLigatures": true
           },
           {
-            "text": ", a Defesa não aumenta.",
+            "text": ", não recebe Defesa adicional.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -747,8 +758,8 @@
           "combat.skull"
         ]
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Dodge → Esquiva (uso humano localizado na p. 41; canon amplo ainda pendente)",
@@ -759,18 +770,18 @@
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
+        "status": "measured_copyfit_v3_export_snapshot_visual_rows",
         "sourcePdfVisualLineCount": 3,
         "pageRendererVisualLineCount": 3,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "Source rows are from the official English PDF and source-backed Copyfit V3 evidence. PT rows were measured from the exact candidate data in an immutable snapshot by scripts/export_page_pdf.mjs using the shared groupPageRendererVisualLines function over actual PageRenderer Range fragments; print/PDF rows were measured independently. Viewer and print counts match, and the export passed pdfVerification.",
         "environment": {
           "pageNumber": 52,
           "pdfDocumentPageIndex": 51,
           "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "viewerZoom": "fit-to-screen",
+          "viewportCssPixels": "1600x1400",
+          "devicePixelRatio": 1
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -789,17 +800,145 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_52_block_2__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 13,
+          "readingMethod": "immutable candidate snapshot; live PageRenderer Range fragments grouped with groupPageRendererVisualLines",
           "distinctVisualRows": 3,
-          "visualRowTopsCssPx": [
-            160.22,
-            169.11,
-            178.05
-          ],
-          "frameHeightCssPx": 27.5
+          "widestLinePt": 293.98584810769336,
+          "frameRectPt": {
+            "x": 86.17255538961162,
+            "y": 164.89121956928918,
+            "width": 309.5703522929494,
+            "height": 33.89579901339845
+          },
+          "contentBoundsPt": {
+            "x": 86.17255538961162,
+            "y": 163.6173903638532,
+            "width": 293.98584810769336,
+            "height": 31.467562090536084
+          },
+          "edgeExcessPt": {
+            "left": 0,
+            "top": 1.2738292054359874,
+            "right": 0,
+            "bottom": 0
+          },
+          "renderedSymbolIds": [
+            "dice.black",
+            "combat.shield",
+            "combat.skull"
+          ]
         },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        "printEvidence": {
+          "distinctVisualRows": 3,
+          "widestLinePt": 293.92157701482665,
+          "frameRectPt": {
+            "x": 86.16902658546391,
+            "y": 164.89655556698798,
+            "width": 309.566300323897,
+            "height": 33.89104105605353
+          },
+          "contentBoundsPt": {
+            "x": 86.16902658546391,
+            "y": 163.39653715233555,
+            "width": 293.92157701482665,
+            "height": 31.99258025000904
+          },
+          "edgeExcessPt": {
+            "left": 0,
+            "top": 1.5000184146524305,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      },
+      "copyfitMeasurementsByZoom": {
+        "fit-to-screen": {
+          "status": "measured_copyfit_v3_export_snapshot_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 3,
+          "classification": "EXACT",
+          "method": "Source rows are from the official English PDF and source-backed Copyfit V3 evidence. PT rows were measured from the exact candidate data in an immutable snapshot by scripts/export_page_pdf.mjs using the shared groupPageRendererVisualLines function over actual PageRenderer Range fragments; print/PDF rows were measured independently. Viewer and print counts match, and the export passed pdfVerification.",
+          "environment": {
+            "pageNumber": 52,
+            "pdfDocumentPageIndex": 51,
+            "language": "pt-BR",
+            "viewerZoom": "fit-to-screen",
+            "viewportCssPixels": "1600x1400",
+            "devicePixelRatio": 1
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17320251464844,
+              164.8995361328125,
+              395.7437744140625,
+              198.79954528808594
+            ],
+            "visualBaselinesPt": [
+              174.09,
+              185.09,
+              196.09
+            ],
+            "spans": 13,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_52_block_2__pt-BR",
+            "readingMethod": "immutable candidate snapshot; live PageRenderer Range fragments grouped with groupPageRendererVisualLines",
+            "distinctVisualRows": 3,
+            "widestLinePt": 293.98584810769336,
+            "frameRectPt": {
+              "x": 86.17255538961162,
+              "y": 164.89121956928918,
+              "width": 309.5703522929494,
+              "height": 33.89579901339845
+            },
+            "contentBoundsPt": {
+              "x": 86.17255538961162,
+              "y": 163.6173903638532,
+              "width": 293.98584810769336,
+              "height": 31.467562090536084
+            },
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.2738292054359874,
+              "right": 0,
+              "bottom": 0
+            },
+            "renderedSymbolIds": [
+              "dice.black",
+              "combat.shield",
+              "combat.skull"
+            ]
+          },
+          "printEvidence": {
+            "distinctVisualRows": 3,
+            "widestLinePt": 293.92157701482665,
+            "frameRectPt": {
+              "x": 86.16902658546391,
+              "y": 164.89655556698798,
+              "width": 309.566300323897,
+              "height": 33.89104105605353
+            },
+            "contentBoundsPt": {
+              "x": 86.16902658546391,
+              "y": 163.39653715233555,
+              "width": 293.92157701482665,
+              "height": 31.99258025000904
+            },
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.5000184146524305,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "proof": {
+            "viewerScreenshot": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-viewer.png",
+            "printScreenshot": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-print.png",
+            "pdf": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes.pdf",
+            "metrics": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-metrics.json",
+            "pdfVerification": true
+          }
+        }
       }
     },
     {
@@ -870,8 +1009,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Dodge Action → Ação de Esquiva",
@@ -1086,8 +1225,8 @@
           "combat.skull"
         ]
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Dodge → Esquiva (uso humano localizado na p. 41; canon amplo ainda pendente)",
@@ -1266,8 +1405,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Empower → Fortalecer (forma usada em proposta local da p. 50; canon ainda pendente)"
@@ -1365,8 +1504,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Empower → Fortalecer (Habilidade) / Fortalecimento (etapa; canon ainda pendente)"
@@ -1422,7 +1561,7 @@
       "sourceText": "To EMPOWER an Attack, an Adventurer spends 1 SP when building their Combat Dice Pool to add the BLACK . This die will provide additional Symbols that can be used on Symbol Abilities during the Attack.",
       "spanKey": "page_52_unit_p52-block-20-paragraph-2__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Para Fortalecer um Ataque, o Aventureiro gasta 1 SP ao montar sua Reserva e adiciona o dado PRETO￼. Ele concede Símbolos adicionais para usar em Habilidades durante o Ataque.",
+      "proposalText": "Para Fortalecer um Ataque, o Aventureiro gasta 1 SP ao montar a Reserva de Dados de Combate e inclui o dado PRETO ￼. Ele concede Símbolos adicionais para Habilidades com Símbolos usadas no Ataque.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_52_unit_p52-block-20-paragraph-2__pt-BR",
@@ -1473,7 +1612,7 @@
             "disableLigatures": true
           },
           {
-            "text": " ao montar sua Reserva e adiciona o dado ",
+            "text": " ao montar a Reserva de Dados de Combate e inclui o dado ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1487,6 +1626,15 @@
             "size": 9,
             "color": "#231f20",
             "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
           },
@@ -1506,7 +1654,7 @@
             "disableLigatures": true
           },
           {
-            "text": ". Ele concede Símbolos adicionais para usar em Habilidades durante o Ataque.",
+            "text": ". Ele concede Símbolos adicionais para Habilidades com Símbolos usadas no Ataque.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1519,8 +1667,8 @@
           "dice.black"
         ]
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Empower → Fortalecer (canon ainda pendente)",
@@ -1531,50 +1679,6 @@
       "sourcePdfVisualLineCount": 3,
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "EXACT",
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 3,
-        "pageRendererVisualLineCount": 4,
-        "classification": "OVER",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 52,
-          "pdfDocumentPageIndex": 51,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
-        },
-        "sourceEvidence": {
-          "bboxPt": [
-            86.16970825195312,
-            323.7073059082031,
-            397.71966552734375,
-            357.6072998046875
-          ],
-          "visualBaselinesPt": [
-            332.897,
-            343.897,
-            354.897
-          ],
-          "spans": 10,
-          "visualRows": 3
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_52_unit_p52-block-20-paragraph-2__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 12,
-          "distinctVisualRows": 4,
-          "visualRowTopsCssPx": [
-            288.92,
-            297.03,
-            305.14,
-            313.25
-          ],
-          "frameHeightCssPx": 32.4
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      },
       "diagnosticData": {
         "schemaVersion": 2,
         "spanKey": "page_52_unit_p52-block-20-paragraph-2__pt-BR",
@@ -1670,6 +1774,173 @@
         "managedSourceSymbols": [
           "dice.black"
         ]
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_export_snapshot_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "Source rows are from the official English PDF and source-backed Copyfit V3 evidence. PT rows were measured from the exact candidate data in an immutable snapshot by scripts/export_page_pdf.mjs using the shared groupPageRendererVisualLines function over actual PageRenderer Range fragments; print/PDF rows were measured independently. Viewer and print counts match, and the export passed pdfVerification.",
+        "environment": {
+          "pageNumber": 52,
+          "pdfDocumentPageIndex": 51,
+          "language": "pt-BR",
+          "viewerZoom": "fit-to-screen",
+          "viewportCssPixels": "1600x1400",
+          "devicePixelRatio": 1
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.16970825195312,
+            323.7073059082031,
+            397.71966552734375,
+            357.6072998046875
+          ],
+          "visualBaselinesPt": [
+            332.897,
+            343.897,
+            354.897
+          ],
+          "spans": 10,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_52_unit_p52-block-20-paragraph-2__pt-BR",
+          "readingMethod": "immutable candidate snapshot; live PageRenderer Range fragments grouped with groupPageRendererVisualLines",
+          "distinctVisualRows": 3,
+          "widestLinePt": 315.8300286227872,
+          "frameRectPt": {
+            "x": 86.16260359894416,
+            "y": 323.70189504075495,
+            "width": 316.0887751801414,
+            "height": 33.89579901339845
+          },
+          "contentBoundsPt": {
+            "x": 86.16260359894416,
+            "y": 322.428065835319,
+            "width": 315.8300286227872,
+            "height": 31.467562090536084
+          },
+          "edgeExcessPt": {
+            "left": 0,
+            "top": 1.273829205435959,
+            "right": 0,
+            "bottom": 0
+          },
+          "renderedSymbolIds": [
+            "dice.black"
+          ]
+        },
+        "printEvidence": {
+          "distinctVisualRows": 3,
+          "widestLinePt": 315.75387628433833,
+          "frameRectPt": {
+            "x": 86.16902658546391,
+            "y": 323.69928632445044,
+            "width": 316.0820053125435,
+            "height": 33.89104105605353
+          },
+          "contentBoundsPt": {
+            "x": 86.16902658546391,
+            "y": 322.19926790979804,
+            "width": 315.75387628433833,
+            "height": 31.99258025000904
+          },
+          "edgeExcessPt": {
+            "left": 0,
+            "top": 1.500018414652402,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      },
+      "copyfitMeasurementsByZoom": {
+        "fit-to-screen": {
+          "status": "measured_copyfit_v3_export_snapshot_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 3,
+          "classification": "EXACT",
+          "method": "Source rows are from the official English PDF and source-backed Copyfit V3 evidence. PT rows were measured from the exact candidate data in an immutable snapshot by scripts/export_page_pdf.mjs using the shared groupPageRendererVisualLines function over actual PageRenderer Range fragments; print/PDF rows were measured independently. Viewer and print counts match, and the export passed pdfVerification.",
+          "environment": {
+            "pageNumber": 52,
+            "pdfDocumentPageIndex": 51,
+            "language": "pt-BR",
+            "viewerZoom": "fit-to-screen",
+            "viewportCssPixels": "1600x1400",
+            "devicePixelRatio": 1
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.16970825195312,
+              323.7073059082031,
+              397.71966552734375,
+              357.6072998046875
+            ],
+            "visualBaselinesPt": [
+              332.897,
+              343.897,
+              354.897
+            ],
+            "spans": 10,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_52_unit_p52-block-20-paragraph-2__pt-BR",
+            "readingMethod": "immutable candidate snapshot; live PageRenderer Range fragments grouped with groupPageRendererVisualLines",
+            "distinctVisualRows": 3,
+            "widestLinePt": 315.8300286227872,
+            "frameRectPt": {
+              "x": 86.16260359894416,
+              "y": 323.70189504075495,
+              "width": 316.0887751801414,
+              "height": 33.89579901339845
+            },
+            "contentBoundsPt": {
+              "x": 86.16260359894416,
+              "y": 322.428065835319,
+              "width": 315.8300286227872,
+              "height": 31.467562090536084
+            },
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.273829205435959,
+              "right": 0,
+              "bottom": 0
+            },
+            "renderedSymbolIds": [
+              "dice.black"
+            ]
+          },
+          "printEvidence": {
+            "distinctVisualRows": 3,
+            "widestLinePt": 315.75387628433833,
+            "frameRectPt": {
+              "x": 86.16902658546391,
+              "y": 323.69928632445044,
+              "width": 316.0820053125435,
+              "height": 33.89104105605353
+            },
+            "contentBoundsPt": {
+              "x": 86.16902658546391,
+              "y": 322.19926790979804,
+              "width": 315.75387628433833,
+              "height": 31.99258025000904
+            },
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.500018414652402,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "proof": {
+            "viewerScreenshot": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-viewer.png",
+            "printScreenshot": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-print.png",
+            "pdf": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes.pdf",
+            "metrics": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-metrics.json",
+            "pdfVerification": true
+          }
+        }
       }
     },
     {
@@ -1748,8 +2019,8 @@
           "combat.skull"
         ]
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Empower → Fortalecer (canon ainda pendente)"
@@ -1866,8 +2137,8 @@
           "combat.skull"
         ]
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Combat Dice → Dados de Combate"
@@ -2002,8 +2273,8 @@
           "combat.skull"
         ]
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "IRREDUCIBLE DMG → DANO IRREDUTÍVEL"
@@ -2059,7 +2330,7 @@
       "sourceText": "Some Weapons also list the BLACK  as part of their Combat Dice or Casting Upgrade. Attacks made with a Weapon that has a BLACK  as part of their Combat Dice are always Empowered. Likewise, Spells Cast with a Weapon that has a BLACK  as part of their Casting Upgrade are always Empowered. Empowering in this way does not cost additional SP.",
       "spanKey": "page_52_block_9__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Certas Armas incluem o dado PRETO￼ nos Dados de Combate ou no Aprimoramento de Conjuração: seus Ataques são sempre Fortalecidos. Feitiços conjurados com Armas que têm dado PRETO￼ no Aprimoramento de Conjuração também são sempre Fortalecidos, sem custo de PRETO￼ no Aprimoramento de Conjuração também estão sempre Fortalecidos. Fortalecer dessa forma não custa SP adicional.",
+      "proposalText": "Algumas Armas listam o dado PRETO ￼ nos Dados de Combate ou no Casting Upgrade. Se o dado PRETO ￼ estiver nos Dados de Combate, os Ataques com essa Arma são sempre Fortalecidos; se o dado PRETO ￼ estiver no Casting Upgrade, os Feitiços conjurados com ela também são sempre Fortalecidos. Esse Fortalecimento não custa SP adicional.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_52_block_9__pt-BR",
@@ -2074,7 +2345,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Certas Armas incluem o dado ",
+            "text": "Algumas Armas listam o dado ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -2088,6 +2359,15 @@
             "size": 9,
             "color": "#231f20",
             "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
           },
@@ -2107,7 +2387,7 @@
             "disableLigatures": true
           },
           {
-            "text": " nos Dados de Combate ou no Aprimoramento de Conjuração: seus Ataques são sempre Fortalecidos. Feitiços conjurados com Armas que têm dado ",
+            "text": " nos Dados de Combate ou no Casting Upgrade. Se o dado ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -2121,6 +2401,15 @@
             "size": 9,
             "color": "#231f20",
             "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
           },
@@ -2140,7 +2429,7 @@
             "disableLigatures": true
           },
           {
-            "text": " no Aprimoramento de Conjuração também são sempre Fortalecidos, sem custo de ",
+            "text": " estiver nos Dados de Combate, os Ataques com essa Arma são sempre Fortalecidos; se o dado ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -2154,6 +2443,15 @@
             "size": 9,
             "color": "#231f20",
             "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
           },
@@ -2173,7 +2471,7 @@
             "disableLigatures": true
           },
           {
-            "text": " no Aprimoramento de Conjuração também estão sempre Fortalecidos. Fortalecer dessa forma não custa ",
+            "text": " estiver no Casting Upgrade, os Feitiços conjurados com ela também são sempre Fortalecidos. Esse Fortalecimento não custa ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -2204,64 +2502,14 @@
           "dice.black"
         ]
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Empower → Fortalecer (canon ainda pendente)",
         "Combat Dice → Dados de Combate",
         "Casting Upgrade → Aprimoramento de Conjuração"
       ],
-      "sourcePdfVisualLineCount": 5,
-      "pageRendererVisualLineCount": 5,
-      "copyfitClassification": "EXACT",
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 5,
-        "pageRendererVisualLineCount": 5,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 52,
-          "pdfDocumentPageIndex": 51,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
-        },
-        "sourceEvidence": {
-          "bboxPt": [
-            86.17500305175781,
-            499.37823486328125,
-            398.2172546386719,
-            555.9616088867188
-          ],
-          "visualBaselinesPt": [
-            509.252,
-            520.252,
-            531.252,
-            542.252,
-            553.252
-          ],
-          "spans": 13,
-          "visualRows": 5
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_52_block_9__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 13,
-          "distinctVisualRows": 5,
-          "visualRowTopsCssPx": [
-            431.83,
-            440.73,
-            449.66,
-            458.58,
-            467.48
-          ],
-          "frameHeightCssPx": 45.8
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      },
       "diagnosticData": {
         "schemaVersion": 2,
         "spanKey": "page_52_block_9__pt-BR",
@@ -2405,6 +2653,184 @@
         "managedSourceSymbols": [
           "dice.black"
         ]
+      },
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "sourcePdfVisualLineCount": 5,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_export_snapshot_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "Source rows are from the official English PDF and source-backed Copyfit V3 evidence. PT rows were measured from the exact candidate data in an immutable snapshot by scripts/export_page_pdf.mjs using the shared groupPageRendererVisualLines function over actual PageRenderer Range fragments; print/PDF rows were measured independently. Viewer and print counts match, and the export passed pdfVerification.",
+        "environment": {
+          "pageNumber": 52,
+          "pdfDocumentPageIndex": 51,
+          "language": "pt-BR",
+          "viewerZoom": "fit-to-screen",
+          "viewportCssPixels": "1600x1400",
+          "devicePixelRatio": 1
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17500305175781,
+            499.37823486328125,
+            398.2172546386719,
+            555.9616088867188
+          ],
+          "visualBaselinesPt": [
+            509.252,
+            520.252,
+            531.252,
+            542.252,
+            553.252
+          ],
+          "spans": 13,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_52_block_9__pt-BR",
+          "readingMethod": "immutable candidate snapshot; live PageRenderer Range fragments grouped with groupPageRendererVisualLines",
+          "distinctVisualRows": 5,
+          "widestLinePt": 305.03233574858365,
+          "frameRectPt": {
+            "x": 86.17255538961162,
+            "y": 499.37090390291274,
+            "width": 312.03839637848165,
+            "height": 56.575929944559654
+          },
+          "contentBoundsPt": {
+            "x": 86.17255538961162,
+            "y": 498.0970746974768,
+            "width": 305.03233574858365,
+            "height": 51.470661332148204
+          },
+          "edgeExcessPt": {
+            "left": 0,
+            "top": 1.273829205435959,
+            "right": 0,
+            "bottom": 0
+          },
+          "renderedSymbolIds": [
+            "dice.black",
+            "dice.black",
+            "dice.black"
+          ]
+        },
+        "printEvidence": {
+          "distinctVisualRows": 5,
+          "widestLinePt": 304.9724939290239,
+          "frameRectPt": {
+            "x": 86.16902658546391,
+            "y": 499.37722424675286,
+            "width": 312.0389869293006,
+            "height": 56.578819577671666
+          },
+          "contentBoundsPt": {
+            "x": 86.16902658546391,
+            "y": 497.8772058321004,
+            "width": 304.9724939290239,
+            "height": 51.985013182798575
+          },
+          "edgeExcessPt": {
+            "left": 0,
+            "top": 1.5000184146524589,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      },
+      "copyfitMeasurementsByZoom": {
+        "fit-to-screen": {
+          "status": "measured_copyfit_v3_export_snapshot_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "Source rows are from the official English PDF and source-backed Copyfit V3 evidence. PT rows were measured from the exact candidate data in an immutable snapshot by scripts/export_page_pdf.mjs using the shared groupPageRendererVisualLines function over actual PageRenderer Range fragments; print/PDF rows were measured independently. Viewer and print counts match, and the export passed pdfVerification.",
+          "environment": {
+            "pageNumber": 52,
+            "pdfDocumentPageIndex": 51,
+            "language": "pt-BR",
+            "viewerZoom": "fit-to-screen",
+            "viewportCssPixels": "1600x1400",
+            "devicePixelRatio": 1
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17500305175781,
+              499.37823486328125,
+              398.2172546386719,
+              555.9616088867188
+            ],
+            "visualBaselinesPt": [
+              509.252,
+              520.252,
+              531.252,
+              542.252,
+              553.252
+            ],
+            "spans": 13,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_52_block_9__pt-BR",
+            "readingMethod": "immutable candidate snapshot; live PageRenderer Range fragments grouped with groupPageRendererVisualLines",
+            "distinctVisualRows": 5,
+            "widestLinePt": 305.03233574858365,
+            "frameRectPt": {
+              "x": 86.17255538961162,
+              "y": 499.37090390291274,
+              "width": 312.03839637848165,
+              "height": 56.575929944559654
+            },
+            "contentBoundsPt": {
+              "x": 86.17255538961162,
+              "y": 498.0970746974768,
+              "width": 305.03233574858365,
+              "height": 51.470661332148204
+            },
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.273829205435959,
+              "right": 0,
+              "bottom": 0
+            },
+            "renderedSymbolIds": [
+              "dice.black",
+              "dice.black",
+              "dice.black"
+            ]
+          },
+          "printEvidence": {
+            "distinctVisualRows": 5,
+            "widestLinePt": 304.9724939290239,
+            "frameRectPt": {
+              "x": 86.16902658546391,
+              "y": 499.37722424675286,
+              "width": 312.0389869293006,
+              "height": 56.578819577671666
+            },
+            "contentBoundsPt": {
+              "x": 86.16902658546391,
+              "y": 497.8772058321004,
+              "width": 304.9724939290239,
+              "height": 51.985013182798575
+            },
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.5000184146524589,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "proof": {
+            "viewerScreenshot": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-viewer.png",
+            "printScreenshot": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-print.png",
+            "pdf": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes.pdf",
+            "metrics": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-metrics.json",
+            "pdfVerification": true
+          }
+        }
       }
     },
     {
@@ -2438,8 +2864,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Empowered → Fortalecido (forma derivada de Empower; canon ainda pendente)"
@@ -2517,7 +2943,7 @@
       "sourceText": "IMPORTANT:IMPORTANT: Some Abilities might use the BLACK  as part of their text. In these instances, the listed Ability does not count as Empowering and will specify what the BLACK  does.",
       "spanKey": "page_52_block_11__pt-BR",
       "language": "pt-BR",
-      "proposalText": "IMPORTANTE: Algumas Habilidades podem incluir o dado PRETO [dado preto] como parte do próprio texto. Nesses casos, a Habilidade listada não conta como um uso de Fortalecer e especificará o que o dado PRETO [dado preto] faz.",
+      "proposalText": "IMPORTANTE: Algumas Habilidades podem incluir o dado PRETO [dado preto] como parte do próprio texto. Nesses casos, a Habilidade não conta como uso de Fortalecer e explica o que o dado PRETO [dado preto] faz.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_52_block_11__pt-BR",
@@ -2576,6 +3002,15 @@
             "disableLigatures": true
           },
           {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
             "text": "￼",
             "symbolId": "dice.black",
             "font": "OptimaLTStd",
@@ -2591,7 +3026,7 @@
             "disableLigatures": true
           },
           {
-            "text": " como parte do próprio texto. Nesses casos, a Habilidade listada não conta como um uso de Fortalecer e especificará o que o dado ",
+            "text": " como parte do próprio texto. Nesses casos, a Habilidade não conta como uso de Fortalecer e explica o que o dado ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -2605,6 +3040,15 @@
             "size": 9,
             "color": "#231f20",
             "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
           },
@@ -2638,8 +3082,8 @@
           "dice.black"
         ]
       },
-      "technicalStatus": "not_recorded",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Empowering → uso de Fortalecer (canon ainda pendente)",
@@ -2649,18 +3093,18 @@
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
+        "status": "measured_copyfit_v3_export_snapshot_visual_rows",
         "sourcePdfVisualLineCount": 3,
         "pageRendererVisualLineCount": 3,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "Source rows are from the official English PDF and source-backed Copyfit V3 evidence. PT rows were measured from the exact candidate data in an immutable snapshot by scripts/export_page_pdf.mjs using the shared groupPageRendererVisualLines function over actual PageRenderer Range fragments; print/PDF rows were measured independently. Viewer and print counts match, and the export passed pdfVerification.",
         "environment": {
           "pageNumber": 52,
           "pdfDocumentPageIndex": 51,
           "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "viewerZoom": "fit-to-screen",
+          "viewportCssPixels": "1600x1400",
+          "devicePixelRatio": 1
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -2679,17 +3123,594 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_52_block_11__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 9,
+          "readingMethod": "immutable candidate snapshot; live PageRenderer Range fragments grouped with groupPageRendererVisualLines",
           "distinctVisualRows": 3,
-          "visualRowTopsCssPx": [
-            498.55,
-            506.66,
-            514.77
-          ],
-          "frameHeightCssPx": 29.8
+          "widestLinePt": 308.36618562218564,
+          "frameRectPt": {
+            "x": 91.83512427940133,
+            "y": 582.3787898602693,
+            "width": 309.6599184089566,
+            "height": 36.781818306964375
+          },
+          "contentBoundsPt": {
+            "x": 91.83512427940133,
+            "y": 581.1049606548333,
+            "width": 308.36618562218564,
+            "height": 32.10447669325408
+          },
+          "edgeExcessPt": {
+            "left": 0,
+            "top": 1.273829205435959,
+            "right": 0,
+            "bottom": 0
+          },
+          "renderedSymbolIds": [
+            "tag.important.icon",
+            "dice.black",
+            "dice.black"
+          ]
         },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        "printEvidence": {
+          "distinctVisualRows": 3,
+          "widestLinePt": 308.31237868039847,
+          "frameRectPt": {
+            "x": 91.84097121586845,
+            "y": 582.3821494888093,
+            "width": 309.6600514748128,
+            "height": 36.77388894671369
+          },
+          "contentBoundsPt": {
+            "x": 91.84097121586845,
+            "y": 580.8821310741569,
+            "width": 308.31237868039847,
+            "height": 31.99258025000904
+          },
+          "edgeExcessPt": {
+            "left": 0,
+            "top": 1.5000184146524589,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      },
+      "copyfitMeasurementsByZoom": {
+        "fit-to-screen": {
+          "status": "measured_copyfit_v3_export_snapshot_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 3,
+          "classification": "EXACT",
+          "method": "Source rows are from the official English PDF and source-backed Copyfit V3 evidence. PT rows were measured from the exact candidate data in an immutable snapshot by scripts/export_page_pdf.mjs using the shared groupPageRendererVisualLines function over actual PageRenderer Range fragments; print/PDF rows were measured independently. Viewer and print counts match, and the export passed pdfVerification.",
+          "environment": {
+            "pageNumber": 52,
+            "pdfDocumentPageIndex": 51,
+            "language": "pt-BR",
+            "viewerZoom": "fit-to-screen",
+            "viewportCssPixels": "1600x1400",
+            "devicePixelRatio": 1
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              91.84249877929688,
+              582.3861694335938,
+              401.5050354003906,
+              619.1710205078125
+            ],
+            "visualBaselinesPt": [
+              592.26,
+              604.26,
+              616.26
+            ],
+            "spans": 10,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_52_block_11__pt-BR",
+            "readingMethod": "immutable candidate snapshot; live PageRenderer Range fragments grouped with groupPageRendererVisualLines",
+            "distinctVisualRows": 3,
+            "widestLinePt": 308.36618562218564,
+            "frameRectPt": {
+              "x": 91.83512427940133,
+              "y": 582.3787898602693,
+              "width": 309.6599184089566,
+              "height": 36.781818306964375
+            },
+            "contentBoundsPt": {
+              "x": 91.83512427940133,
+              "y": 581.1049606548333,
+              "width": 308.36618562218564,
+              "height": 32.10447669325408
+            },
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.273829205435959,
+              "right": 0,
+              "bottom": 0
+            },
+            "renderedSymbolIds": [
+              "tag.important.icon",
+              "dice.black",
+              "dice.black"
+            ]
+          },
+          "printEvidence": {
+            "distinctVisualRows": 3,
+            "widestLinePt": 308.31237868039847,
+            "frameRectPt": {
+              "x": 91.84097121586845,
+              "y": 582.3821494888093,
+              "width": 309.6600514748128,
+              "height": 36.77388894671369
+            },
+            "contentBoundsPt": {
+              "x": 91.84097121586845,
+              "y": 580.8821310741569,
+              "width": 308.31237868039847,
+              "height": 31.99258025000904
+            },
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.5000184146524589,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "proof": {
+            "viewerScreenshot": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-viewer.png",
+            "printScreenshot": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-print.png",
+            "pdf": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes.pdf",
+            "metrics": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-metrics.json",
+            "pdfVerification": true
+          }
+        }
+      }
+    },
+    {
+      "sourceBlockId": "block_20",
+      "sourceUnitId": "p52-block-20-paragraph-3",
+      "spanKey": "page_52_unit_p52-block-20-paragraph-3__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "To EMPOWER a SPELL an Adventurer spends 1 SP when Determining the Force of a Spell to add the BLACK . Spells cannot normally use Symbol Abilities. However, when Empowering a Spell, you may spend  rolled on the BLACK  to add +1 to the Force of the Spell per  spent.",
+      "proposalText": "Para FORTALECER um FEITIÇO, o Aventureiro gasta 1 SP e adiciona o dado PRETO [[black-die]] ao determinar a Força. Feitiços normalmente não podem usar Habilidades com Símbolos. Ao Fortalecer o Feitiço, o Aventureiro pode gastar os [[combat-page]] obtidos no dado PRETO [[black-die]] para somar +1 à Força por [[combat-page]] gasto.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_52_unit_p52-block-20-paragraph-3__pt-BR",
+        "bbox": [
+          86.16970825195312,
+          360.3766174316406,
+          402.2597351074219,
+          411.276611328125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Para ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FORTALECER",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FEITIÇO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", o Aventureiro gasta ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " e adiciona o dado ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "PRETO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "dice.black",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolMetrics": {
+              "widthEm": 1.1488006591796875,
+              "heightEm": 1.3259002685546875,
+              "verticalAlignEm": 0.261029052734375
+            },
+            "disableLigatures": true
+          },
+          {
+            "text": " ao determinar a Força. Feitiços normalmente não podem usar Habilidades com Símbolos. Ao Fortalecer o Feitiço, o Aventureiro pode gastar os ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "combat.page",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolMetrics": {
+              "widthEm": 0.9417999267578125,
+              "heightEm": 1.01719970703125,
+              "verticalAlignEm": 0.0999481201171875
+            },
+            "disableLigatures": true
+          },
+          {
+            "text": " obtidos no dado ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "PRETO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "dice.black",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolMetrics": {
+              "widthEm": 1.1188888888888882,
+              "heightEm": 1.2922222222222217,
+              "verticalAlignEm": 0.027153862847222224
+            },
+            "disableLigatures": true
+          },
+          {
+            "text": " para somar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "+",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " à Força por ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "combat.page",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolMetrics": {
+              "widthEm": 0.9417999267578125,
+              "heightEm": 1.01719970703125,
+              "verticalAlignEm": 0.0999481201171875
+            },
+            "disableLigatures": true
+          },
+          {
+            "text": " gasto.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": [
+          "dice.black",
+          "combat.page"
+        ]
+      },
+      "technicalStatus": "copyfit_v3_exact_viewer_print_pdf_verified_page_52",
+      "editorialStatus": "approved_exact",
+      "diagnosticRendering": "Candidato PT-BR revisável com os dois símbolos combat.page nos anchors-fonte auditados.",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_export_snapshot_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "Source rows are from the official English PDF and source-backed Copyfit V3 evidence. PT rows were measured from the exact candidate data in an immutable snapshot by scripts/export_page_pdf.mjs using the shared groupPageRendererVisualLines function over actual PageRenderer Range fragments; print/PDF rows were measured independently. Viewer and print counts match, and the export passed pdfVerification.",
+        "environment": {
+          "pageNumber": 52,
+          "pdfDocumentPageIndex": 51,
+          "language": "pt-BR",
+          "viewerZoom": "fit-to-screen",
+          "viewportCssPixels": "1600x1400",
+          "devicePixelRatio": 1
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.16970825195312,
+            360.3766174316406,
+            402.2597351074219,
+            411.276611328125
+          ],
+          "visualRowBaselinesPt": [
+            369.567,
+            382.567,
+            394.567,
+            407.567
+          ],
+          "spans": 23,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_52_unit_p52-block-20-paragraph-3__pt-BR",
+          "readingMethod": "immutable candidate snapshot; live PageRenderer Range fragments grouped with groupPageRendererVisualLines",
+          "distinctVisualRows": 4,
+          "widestLinePt": 310.28688122100715,
+          "frameRectPt": {
+            "x": 86.16260359894416,
+            "y": 360.3742436503772,
+            "width": 316.0887751801414,
+            "height": 50.89345747343502
+          },
+          "contentBoundsPt": {
+            "x": 86.16260359894416,
+            "y": 359.1004144449412,
+            "width": 310.28688122100715,
+            "height": 41.469111711342144
+          },
+          "edgeExcessPt": {
+            "left": 0,
+            "top": 1.2738292054360159,
+            "right": 0,
+            "bottom": 0
+          },
+          "renderedSymbolIds": [
+            "dice.black",
+            "combat.page",
+            "dice.black",
+            "combat.page"
+          ]
+        },
+        "printEvidence": {
+          "distinctVisualRows": 4,
+          "widestLinePt": 310.2342772741719,
+          "frameRectPt": {
+            "x": 86.16902658546391,
+            "y": 360.3677052263839,
+            "width": 316.0820053125435,
+            "height": 50.895156053402665
+          },
+          "contentBoundsPt": {
+            "x": 86.16902658546391,
+            "y": 358.86768681173146,
+            "width": 310.2342772741719,
+            "height": 41.988796716403805
+          },
+          "edgeExcessPt": {
+            "left": 0,
+            "top": 1.5000184146524589,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      },
+      "copyfitMeasurementsByZoom": {
+        "fit-to-screen": {
+          "status": "measured_copyfit_v3_export_snapshot_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "method": "Source rows are from the official English PDF and source-backed Copyfit V3 evidence. PT rows were measured from the exact candidate data in an immutable snapshot by scripts/export_page_pdf.mjs using the shared groupPageRendererVisualLines function over actual PageRenderer Range fragments; print/PDF rows were measured independently. Viewer and print counts match, and the export passed pdfVerification.",
+          "environment": {
+            "pageNumber": 52,
+            "pdfDocumentPageIndex": 51,
+            "language": "pt-BR",
+            "viewerZoom": "fit-to-screen",
+            "viewportCssPixels": "1600x1400",
+            "devicePixelRatio": 1
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.16970825195312,
+              360.3766174316406,
+              402.2597351074219,
+              411.276611328125
+            ],
+            "visualRowBaselinesPt": [
+              369.567,
+              382.567,
+              394.567,
+              407.567
+            ],
+            "spans": 23,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_52_unit_p52-block-20-paragraph-3__pt-BR",
+            "readingMethod": "immutable candidate snapshot; live PageRenderer Range fragments grouped with groupPageRendererVisualLines",
+            "distinctVisualRows": 4,
+            "widestLinePt": 310.28688122100715,
+            "frameRectPt": {
+              "x": 86.16260359894416,
+              "y": 360.3742436503772,
+              "width": 316.0887751801414,
+              "height": 50.89345747343502
+            },
+            "contentBoundsPt": {
+              "x": 86.16260359894416,
+              "y": 359.1004144449412,
+              "width": 310.28688122100715,
+              "height": 41.469111711342144
+            },
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.2738292054360159,
+              "right": 0,
+              "bottom": 0
+            },
+            "renderedSymbolIds": [
+              "dice.black",
+              "combat.page",
+              "dice.black",
+              "combat.page"
+            ]
+          },
+          "printEvidence": {
+            "distinctVisualRows": 4,
+            "widestLinePt": 310.2342772741719,
+            "frameRectPt": {
+              "x": 86.16902658546391,
+              "y": 360.3677052263839,
+              "width": 316.0820053125435,
+              "height": 50.895156053402665
+            },
+            "contentBoundsPt": {
+              "x": 86.16902658546391,
+              "y": 358.86768681173146,
+              "width": 310.2342772741719,
+              "height": 41.988796716403805
+            },
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.5000184146524589,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "proof": {
+            "viewerScreenshot": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-viewer.png",
+            "printScreenshot": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-print.png",
+            "pdf": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes.pdf",
+            "metrics": "evidence/2026-11-14-p052/snapshot/page-052-pt-BR-canonical-bboxes-metrics.json",
+            "pdfVerification": true
+          }
+        }
       }
     }
   ]

@@ -1,5 +1,7 @@
 # p.30 — proposta PT-BR “Ícones, Condições, Tags e Símbolos” v2
 
+**Conferência atual (2026-11-13; este estado substitui o status histórico abaixo):** review 1460 e glossário Payload id 76 confirmam `FLIGHT → VOO` como nome de Tag. O copyfit do bloco 27 foi refeito contra o PDF-fonte; o bloco ficou em quatro linhas de corpo, como a fonte, e sua moldura PT-BR cresceu 2 pt para conter o texto sem sobrepor a remissão independente. O rótulo `Passive → Passiva` foi confirmado no Payload id 56. As traduções continuam restritas à prosa do livro; símbolos e arte-fonte foram preservados. Viewer/print v6 e PDF validado: `tmp/page-by-page-audit/page-030-review-pt-v6-*`.
+
 
 
 **Estado atualizado (2026-10-26):** 19 unidades propostas; 18/19 revisões ativas aprovadas e publicadas no Payload, 1 pending. Review 1454 → translation 1246 e review 1455 → translation 1259 foram aprovadas pelo Reviewer oficial com EXACT 3/3 e 2/2. Review 1455 usa Ficha de Aventureiro por preferência explícita local, sem promover a hipótese global 67. Review 1460 segue pending por FLIGHT → VOO. A unidade block_41 continua com os símbolos semânticos existentes; nenhuma página integral foi certificada.
@@ -74,7 +76,7 @@
 
 
 
-### block_27 — Toda Habilidade tem uma Condição. Tags de Condição indicam quando ela pode ser usada. Pontos de Vigor e Símbolos exigidos para usá-la também são Condições. Antes de usá-la, cumpra as Condições e pague os custos.
+### block_27 — Toda Habilidade tem uma Condição. As Tags de Condição indicam quando ela pode ser usada. Pontos de Vigor e Símbolos necessários para isso também são Condições. Antes do uso, cumpra as Condições e pague os custos.
 
 
 
@@ -209,3 +211,12 @@ Evidências: [recibo Viewer/Editor](../../../output/proofs/translation-readiness
 - O Reviewer oficial publicou translation 1259 após a correção de HP e medição PageRenderer EXACT 2/2 em 100% e 200%. O readback confirmou texto e três rich spans idênticos à proposta: 10 pt regular, HP bold 9 pt, 10 pt regular.
 - Ficha de Aventureiro segue a preferência local explícita; decisão global 67 permanece hipótese, Cartão continua alternativa e Adventure Sheet → Ficha de Aventura permanece distinto. Nenhuma entrada do glossário foi promovida.
 - A p.30 tem 18/19 reviews ativas aprovadas; review1460 continua pendente por FLIGHT → VOO. A página ainda não está certificada integralmente.
+
+
+## Correção de copyfit e conflito vertical (2026-11-13)
+
+- O PDF oficial tem quatro linhas no corpo de `Conditions`. A redação PT-BR anterior ocupava seis e invadia `Veja Condition Tags Pg. 90.`. Revisei somente o corpo, mantendo o título Cinzel 12 pt, Optima 10 pt e os termos compostos. `Pontos de Vigor` permanece composicional nesta unidade; não há entrada canônica exata para `Stamina Points` nem `Condition Tag` no Payload.
+- A unidade ficou com quatro linhas de corpo. A moldura da página no Payload ganhou 2 pt de altura (registro 61, `page_30_block_7::pt-BR`); a chamada de referência não foi movida. Viewer e print mostram separação, sem clipping ou colisão.
+- Removi `os` redundante na unidade 24 para eliminar excesso lateral, mantendo HP em negrito de 9 pt. A unidade 35 usa `Passivas` em itálico, confirmado no Glossário Payload id 56; ela também foi condensada para caber.
+- `FLIGHT → VOO` está aprovado no Glossário Payload id 76, restrito ao nome da Tag; `RELENTLESS → INCANSÁVEL` segue a entrada do glossário Markdown. Não se aplica a usos comuns de “flight”.
+- Export final PT-BR: `tmp/page-by-page-audit/page-030-review-pt-v6.pdf`, Viewer/print v6 e métricas v6. `verify_page_pdf_export.py` confirmou uma página, dimensões 820,346 × 820,346 pt, zero replacement/PUA e texto selecionável. Comparações: `page-030-source-official.png`, `page-030-review-current-en-print.png` e `page-030-review-pt-v6-print.png`.

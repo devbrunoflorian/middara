@@ -20,13 +20,23 @@ import { spawnSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
+import { exposeCandidateForCopyfitPreview, exposeLayoutFramesForCopyfitPreview, exposeRequestForCopyfitPreview, exposeReviewDraftsForCopyfitPreview, selectCopyfitMeasurementPath, validatePageRendererIdentity } from './copyfit_renderer_identity.mjs';
 
 const root = process.cwd();
 const args = process.argv.slice(2);
 const pageNumber = Number(args.find(arg => /^\d+$/u.test(arg)));
 const write = args.includes('--write');
+const previewDrafts = args.includes('--preview-drafts');
 const refreshSpanKeys = args.flatMap((arg, index) => arg === '--refresh-span-key' ? [args[index + 1]] : []);
 if (refreshSpanKeys.some(key => !key)) throw new Error('--refresh-span-key requires a span key.');
+const requestIdIdx = args.indexOf('--request-id');
+const previewRequestId = requestIdIdx >= 0 ? args[requestIdIdx + 1] : null;
+if (requestIdIdx >= 0 && (!previewRequestId || !/^\d+$/u.test(previewRequestId))) {
+  throw new Error('--request-id requires a numeric open-request ID and one --refresh-span-key.');
+}
+if (previewRequestId && refreshSpanKeys.length !== 1) {
+  throw new Error('--request-id requires exactly one --refresh-span-key so the preview override stays scoped.');
+}
 const zoomIdx = args.indexOf('--zoom');
 const zoomPercent = zoomIdx >= 0 ? Number(args[zoomIdx + 1]) : 200;
 if (!Number.isInteger(pageNumber) || pageNumber < 1) throw new Error('Usage: measure_copyfit_page.mjs <page> [--write] [--zoom 200]');
@@ -92,12 +102,13 @@ if (!pending.length) {
 const pdfRequest = JSON.stringify({ pdf: pdfPath, page: pageNumber - 1, boxes: pending.map(candidate => candidate.copyfitCanonicalBbox) });
 const pdfScript = `
 import sys, json, pymupdf
+import re
 req = json.load(sys.stdin)
 doc = pymupdf.open(req["pdf"])
 page = doc[req["page"]]
 spans = []
-for block in page.get_text("dict")["blocks"]:
-    for line in block.get("lines", []):
+for block_index, block in enumerate(page.get_text("dict")["blocks"]):
+    for line_index, line in enumerate(block.get("lines", [])):
         lx0, ly0, lx1, ly1 = line["bbox"]
         for span in line["spans"]:
             if span["text"].strip():
@@ -109,21 +120,51 @@ for block in page.get_text("dict")["blocks"]:
                 # fallback for spans without an origin.
                 origin = span.get("origin")
                 baseline = origin[1] if origin and len(origin) > 1 else (ly0 + ly1) / 2
-                spans.append((((x0 + x1) / 2), ((y0 + y1) / 2), baseline, span["text"]))
+                # Keep the source line identity: PyMuPDF can assign different
+                # baselines to rich runs in one visual row (for example around
+                # inline emphasis), even though they share one line box.
+                spans.append((((x0 + x1) / 2), ((y0 + y1) / 2), baseline, span["text"], y0, y1, span.get("font", ""), span.get("size", 0), (block_index, line_index)))
 out = []
 for box in req["boxes"]:
     if not box:
         out.append(None); continue
     pad = 1.0
     inside = [s for s in spans if box[0] - pad <= s[0] <= box[2] + pad and box[1] - pad <= s[1] <= box[3] + pad]
+    # Source A-D callout glyphs are separate PDF text spans from the prose.
+    # Their 8 pt bold glyph baselines sit about 1.6 pt above the 10 pt body
+    # baseline even though their glyph boxes occupy that same visual row. Fold
+    # only those marker spans whose vertical ink box overlaps a prose span;
+    # retain a marker as its own row when no neighbouring text proves an inline
+    # relationship. This prevents an inline tile letter from becoming a false
+    # extra Copyfit row without hiding or dropping its source glyph.
+    marker_spans = [s for s in inside if re.fullmatch(r"[A-D]", s[3].strip())
+        and "Bold" in s[6] and 0 < s[7] <= 8.5]
+    prose_spans = [s for s in inside if s not in marker_spans]
+    folded_markers = 0
+    standalone_markers = []
+    for marker in marker_spans:
+        marker_height = marker[5] - marker[4]
+        overlaps_prose_row = any(
+            min(prose[5], marker[5]) - max(prose[4], marker[4]) >= min(2.0, marker_height * 0.25)
+            for prose in prose_spans
+        )
+        if overlaps_prose_row:
+            folded_markers += 1
+        else:
+            standalone_markers.append(marker)
+    row_spans = prose_spans + standalone_markers
+    # First collapse rich spans belonging to the same source line object.
+    # Then group distinct line objects whose representative baselines are
+    # within 1 pt, covering inline objects emitted as separate PDF lines.
+    source_line_baselines = {}
+    for span in row_spans:
+        source_line_baselines.setdefault(span[8], []).append(span[2])
+    line_baselines = sorted(round(sum(values) / len(values), 3) for values in source_line_baselines.values())
     row_baselines = []
-    for baseline in sorted(round(s[2], 3) for s in inside):
-        # A PDF visual row can be split into separate text-line objects around
-        # an inline object. Their span origins still share the same baseline,
-        # even when per-run bbox centres differ due to glyph bounds or clipping.
+    for baseline in line_baselines:
         if not row_baselines or baseline - row_baselines[-1] > 1.0:
             row_baselines.append(baseline)
-    out.append({"rows": len(row_baselines), "row_baselines": row_baselines, "spans": len(inside)})
+    out.append({"rows": len(row_baselines), "row_baselines": row_baselines, "source_line_objects": len(source_line_baselines), "spans": len(inside), "inline_markers_folded": folded_markers})
 print(json.dumps({"page_index": req["page"], "page_width": page.rect.width, "results": out}))
 `;
 const pdfRun = spawnSync('python', ['-c', pdfScript], { input: pdfRequest, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
@@ -144,9 +185,76 @@ try {
   const context = await browser.newContext({ viewport, deviceScaleFactor: dpr });
   const page = await context.newPage();
   const blocked = [];
+  if (previewRequestId || refreshSpanKeys.length) {
+    await context.route('**/translation-review/catalog.json*', async route => {
+      const upstream = await route.fetch();
+      const payload = await upstream.json();
+      let previewPayload = payload;
+      for (const spanKey of refreshSpanKeys) {
+        previewPayload = exposeCandidateForCopyfitPreview(previewPayload, { spanKey });
+      }
+      console.log(`Browser-only copyfit preview: cleared stale diagnostic blanks for ${refreshSpanKeys.join(', ')}; source catalog remains unchanged.`);
+      await route.fulfill({ response: upstream, json: previewPayload });
+    });
+  }
   await context.route('**/api/**', async route => {
     const method = route.request().method().toUpperCase();
     if (method !== 'GET') { blocked.push(`${method} ${route.request().url()}`); await route.abort('blockedbyclient'); return; }
+    const requestUrl = new URL(route.request().url());
+    if (previewDrafts && requestUrl.pathname.endsWith('/api/translation-reviews')) {
+      const upstream = await route.fetch();
+      const payload = await upstream.json();
+      const previewPayload = exposeReviewDraftsForCopyfitPreview(payload, { candidates: pending });
+      console.log(`Browser-only preview: exposed ${pending.length} proposal drafts to the review renderer; Payload remains unchanged.`);
+      await route.fulfill({ response: upstream, json: previewPayload });
+      return;
+    }
+    if (previewDrafts && requestUrl.pathname.endsWith('/api/layout-frames')) {
+      const upstream = await route.fetch();
+      const payload = await upstream.json();
+      const previewPayload = exposeLayoutFramesForCopyfitPreview(payload, { pageNumber, candidates: pending });
+      console.log(`Browser-only preview: exposed candidate PT-BR layout frames; Payload remains unchanged.`);
+      await route.fulfill({ response: upstream, json: previewPayload });
+      return;
+    }
+    if (previewDrafts && /\/api\/translations\/?$/u.test(requestUrl.pathname)) {
+      const upstream = await route.fetch();
+      const payload = await upstream.json();
+      const sourceDocs = Array.isArray(payload?.docs) ? payload.docs : Array.isArray(payload) ? payload : null;
+      if (!sourceDocs) throw new Error('Translations response has no document list for browser-only draft preview.');
+      const docs = [...sourceDocs];
+      for (const candidate of pending) {
+        if (!candidate.data || !candidate.spanKey) continue;
+        const index = docs.findIndex(doc => doc.spanKey === candidate.spanKey);
+        const existing = index >= 0 ? docs[index] : null;
+        const replacement = {
+          ...(existing ?? {}),
+          id: existing?.id ?? `copyfit-preview-${encodeURIComponent(candidate.spanKey)}`,
+          spanKey: candidate.spanKey,
+          language: 'pt-BR',
+          data: candidate.data,
+        };
+        if (index >= 0) docs[index] = replacement;
+        else docs.push(replacement);
+      }
+      const previewPayload = Array.isArray(payload) ? docs : { ...payload, docs };
+      console.log(`Browser-only preview: exposed ${pending.length} proposal drafts to PageRenderer; Payload remains unchanged.`);
+      await route.fulfill({ response: upstream, json: previewPayload });
+      return;
+    }
+    if (previewRequestId && requestUrl.pathname.endsWith('/api/translation-review-requests')) {
+      const candidate = pending[0];
+      const upstream = await route.fetch();
+      const payload = await upstream.json();
+      const previewPayload = exposeRequestForCopyfitPreview(payload, {
+        requestId: previewRequestId,
+        reviewKey: candidate.reviewKey,
+        spanKey: candidate.spanKey,
+      });
+      console.log(`Browser-only copyfit preview: request ${previewRequestId} is treated as returned by AI; Payload remains unchanged.`);
+      await route.fulfill({ response: upstream, json: previewPayload });
+      return;
+    }
     await route.continue();
   });
   await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -155,11 +263,14 @@ try {
   await page.locator('input.page-input').press('Enter');
   await page.waitForFunction(n => document.querySelector('input.page-input')?.value === String(n)
     && (document.querySelector('.page-container img')?.naturalWidth ?? 0) > 0, pageNumber, { timeout: 30000 });
-  await page.locator('select.language-select').selectOption('pt-BR');
+  await page.locator('button.language-toggle-option[aria-label="Português (Brasil)"]').click();
   const zoomLabel = page.locator('.zoom-level');
   for (let i = 0; i < 20 && parseInt(await zoomLabel.innerText(), 10) !== zoomPercent; i += 1) {
     const current = parseInt(await zoomLabel.innerText(), 10);
-    await page.locator(current < zoomPercent ? 'button[title="Zoom In"]' : 'button[title="Zoom Out"]').click();
+    await page.locator(current < zoomPercent
+      ? 'button[title="Zoom In"], button[title="Aumentar zoom"]'
+      : 'button[title="Zoom Out"], button[title="Diminuir zoom"]')
+      .click();
     await page.waitForTimeout(120);
   }
   const zoomActual = await zoomLabel.innerText();
@@ -171,8 +282,16 @@ try {
   // proposal list after the page filter changes. Do not select a row while
   // that replacement is still in flight; otherwise the PageRenderer highlight
   // can identify the source unit before its temporary PT-BR preview settles.
-  await page.waitForFunction(() => document.querySelector('.translation-review-row-action:not(:disabled)') !== null,
-    null, { timeout: 30000 });
+  try {
+    await page.waitForFunction(() => document.querySelector('.translation-review-row-action:not(:disabled)') !== null,
+      null, { timeout: 8000 });
+  } catch {
+    // Persisted PageRenderer overrides can be measured by their exact renderer
+    // key even when a request owns the candidate and no proposal row is shown.
+    // Keep the direct identity path usable if the panel has no selectable rows.
+    console.warn('No selectable review row loaded; checking exact PageRenderer keys before marking candidates unmatched.');
+  }
+  await page.evaluate(async () => { await document.fonts.ready; });
   const rowCount = await page.locator('.translation-review-row-wrap .translation-review-row').count();
   console.log('panel rows:', rowCount, JSON.stringify(await page.locator('.translation-review-row-wrap .translation-review-row-heading').allInnerTexts()));
 
@@ -194,6 +313,95 @@ try {
     }
     return clustered;
   };
+  const pageRendererSnapshot = async spanKey => page.evaluate(({ key, pageWidth }) => {
+    const matches = Array.from(document.querySelectorAll('[data-rendered-translation-key]'))
+      .filter(element => element.getAttribute('data-rendered-translation-key') === key);
+    if (matches.length !== 1) return { count: matches.length };
+    const target = matches[0];
+    const rects = [];
+    const fontSamples = new Map();
+    let text = '';
+    let previousParagraph = null;
+    const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!node.textContent) continue;
+      const parent = node.parentElement;
+      const style = parent && getComputedStyle(parent);
+      if (!style || style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) === 0) continue;
+      if (node.textContent.trim()) {
+        const fontSample = {
+          fontFamily: style.fontFamily,
+          fontSize: style.fontSize,
+          fontWeight: style.fontWeight,
+          fontStyle: style.fontStyle,
+          color: style.color,
+          lineHeight: style.lineHeight,
+          letterSpacing: style.letterSpacing,
+          fontKerning: style.fontKerning,
+          fontVariantLigatures: style.fontVariantLigatures,
+          fontFeatureSettings: style.fontFeatureSettings,
+          fontLoaded: document.fonts.check(`${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`),
+        };
+        fontSamples.set(JSON.stringify(fontSample), fontSample);
+      }
+      const paragraph = parent?.closest(
+        '.credit-paragraph, [data-source-bullet-flow-row], [data-source-bullet-flow-prose], [data-source-numbered-list-row]',
+      ) ?? null;
+      if (paragraph && previousParagraph && paragraph !== previousParagraph) text += ' ';
+      // Keep the block boundary across whitespace-only text nodes without a
+      // paragraph wrapper so adjacent rich paragraphs retain their separator.
+      if (paragraph) previousParagraph = paragraph;
+      if (!node.textContent.trim()) { text += node.textContent; continue; }
+      text += node.textContent;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      for (const rect of range.getClientRects()) {
+        if (rect.width > 0.5 && rect.height > 1) rects.push({ top: rect.top, height: rect.height, left: rect.left });
+      }
+    }
+    const symbolIds = [];
+    let symbolOnlyRows = 0;
+    const symbols = [
+      ...(target.matches('[data-symbol-id]') ? [target] : []),
+      ...target.querySelectorAll('[data-symbol-id]'),
+    ];
+    for (const symbol of symbols) {
+      const style = getComputedStyle(symbol);
+      if (style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) === 0) continue;
+      const rect = symbol.getBoundingClientRect();
+      if (rect.width <= 0.5 || rect.height <= 1) continue;
+      const symbolId = symbol.getAttribute('data-symbol-id');
+      symbolIds.push(symbolId);
+      const overlapsTextRow = rects.some(textRect =>
+        Math.min(rect.bottom, textRect.top + textRect.height) - Math.max(rect.top, textRect.top)
+          >= Math.min(rect.height, textRect.height) * 0.35);
+      if (!overlapsTextRow) {
+        rects.push({ top: rect.top, height: rect.height, left: rect.left, semanticSymbolId: symbolId });
+        symbolOnlyRows += 1;
+      }
+    }
+    const frame = target.getBoundingClientRect();
+    const pageImage = document.querySelector('.page-container img');
+    const pageScaleCssPxPerPt = pageImage && pageWidth ? pageImage.getBoundingClientRect().width / pageWidth : null;
+    const marker = target.querySelector('[data-list-marker-line]')?.textContent ?? '';
+    return {
+      count: 1,
+      key: target.getAttribute('data-rendered-translation-key'),
+      text,
+      staticMarkerText: marker,
+      rects,
+      symbolIds,
+      symbolOnlyRows,
+      frameHeight: frame.height,
+      fontSamples: [...fontSamples.values()],
+      pageScaleCssPxPerPt,
+    };
+  }, { key: spanKey, pageWidth: pdfPageWidth });
+  const expectedSymbolIdsFor = candidate => (candidate.data?.segments ?? []).flatMap(segment => {
+    if (!segment.symbolId) return [];
+    const count = (String(segment.text ?? '').match(/\uFFFC/gu) ?? []).length || 1;
+    return Array.from({ length: count }, () => segment.symbolId);
+  });
   // Geometric reading of the rendered page: every visible text rect whose centre lies in the canonical bbox.
   const geometricRects = async bbox => page.evaluate(({ bbox: box, pageWidth }) => {
     const container = document.querySelector('.page-container');
@@ -214,10 +422,10 @@ try {
       const style = node.parentElement && getComputedStyle(node.parentElement);
       if (!style || style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) === 0) continue;
       const paragraph = node.parentElement?.closest(
-        '.credit-paragraph, [data-source-bullet-flow-row], [data-source-bullet-flow-prose]',
+        '.credit-paragraph, [data-source-bullet-flow-row], [data-source-bullet-flow-prose], [data-source-numbered-list-row]',
       ) ?? null;
       if (paragraph && previousParagraph && paragraph !== previousParagraph) text += ' ';
-      previousParagraph = paragraph;
+      if (paragraph) previousParagraph = paragraph;
       if (!node.textContent.trim()) {
         // A whitespace-only styled span can supply the visible word gap while
         // exposing no text rect; keep it for identity without counting a row.
@@ -264,8 +472,57 @@ try {
     const index = pageCandidates.indexOf(candidate);
     const rowSelector = `.translation-review-row-wrap[data-review-key=${JSON.stringify(candidate.reviewKey)}] .translation-review-row`;
     const candidateRow = page.locator(rowSelector);
-    if (await candidateRow.count() !== 1) {
-      unmatchedRows.push({ index, spanKey: candidate.spanKey, reason: 'review row identity did not resolve uniquely' });
+    const directSnapshot = await pageRendererSnapshot(candidate.spanKey);
+    const rowCountForCandidate = await candidateRow.count();
+    const directExpectedText = directSnapshot.count === 1
+      ? candidateTextForRenderer(candidate, directSnapshot.staticMarkerText)
+      : null;
+    const directIdentity = directExpectedText === null ? null : validatePageRendererIdentity({
+      expectedText: directExpectedText,
+      actualText: normalize(directSnapshot.text),
+      expectedSymbolIds: expectedSymbolIdsFor(candidate),
+      actualSymbolIds: directSnapshot.symbolIds ?? [],
+    });
+    const measurementPath = selectCopyfitMeasurementPath({
+      // A keyed unit may still be showing its older integrated translation
+      // while the proposal row holds the new pending draft. Measure the draft
+      // through its review overlay in that case; only use the direct key when
+      // its rendered text and semantic symbols match this exact candidate.
+      pageRendererMatchCount: directIdentity?.valid ? directSnapshot.count : directSnapshot.count > 1 ? directSnapshot.count : 0,
+      reviewRowCount: rowCountForCandidate,
+      // A direct PageRenderer key may match the candidate's text while still
+      // using the source frame. Select the review row so its proposed PT-BR
+      // layout frame is materialized before collecting live line rectangles.
+      // The browser-only preview API has already materialized proposed frames
+      // through /api/layout-frames. Outside that isolated route, the review row
+      // must still be selected to apply an unsaved candidate frame.
+      requiresReviewFrame: Boolean(candidate.reviewLayoutFrame && !previewDrafts),
+    });
+    if (measurementPath.path === 'invalid' || measurementPath.path === 'unmatched') {
+      unmatchedRows.push({ index, spanKey: candidate.spanKey, reason: directIdentity?.reason ?? measurementPath.reason });
+      continue;
+    }
+    if (measurementPath.path === 'page-renderer-key') {
+      if (!directSnapshot.rects.length) {
+        unmatchedRows.push({ index, spanKey: candidate.spanKey, reason: 'keyed PageRenderer unit has no visible text or symbol rectangles' });
+        continue;
+      }
+      const clustered = clusterRows(directSnapshot.rects);
+      measurements.set(candidate.reviewKey, {
+        method: 'page-renderer-key',
+        rendererKey: directSnapshot.key,
+        rangeRectFragments: directSnapshot.rects.length,
+        rows: clustered.length,
+        symbolIds: directSnapshot.symbolIds ?? [],
+        symbolOnlyRows: directSnapshot.symbolOnlyRows ?? 0,
+        rowTops: clustered.map(row => Number(row.top.toFixed(2))),
+        rowIntervalsPt: Number.isFinite(directSnapshot.pageScaleCssPxPerPt)
+          ? clustered.slice(1).map((row, rowIndex) => Number(((row.centre - clustered[rowIndex].centre) / directSnapshot.pageScaleCssPxPerPt).toFixed(2)))
+          : [],
+        frameHeight: Number(directSnapshot.frameHeight.toFixed(1)),
+        fontSamples: directSnapshot.fontSamples,
+        pageScaleCssPxPerPt: directSnapshot.pageScaleCssPxPerPt,
+      });
       continue;
     }
     const expectedRendererKey = rendererKeyForCandidate(candidate);
@@ -284,11 +541,29 @@ try {
             .filter(element => element.getAttribute('data-translation-review-highlight') === expectedKey);
           const roots = highlights.filter(element => !highlights.some(other => other !== element && other.contains(element)));
           if (!roots.length) return false;
-          const actual = roots.map(root => root.querySelector('.realbox') ?? root)
-            .map(target => target.textContent ?? '').join(' ')
+          const textWithParagraphBoundaries = target => {
+            const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
+            let text = '';
+            let previousParagraph = null;
+            for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+              if (!node.textContent) continue;
+              const paragraph = node.parentElement?.closest(
+                '.credit-paragraph, [data-source-bullet-flow-row], [data-source-bullet-flow-prose], [data-source-numbered-list-row]',
+              ) ?? null;
+              if (paragraph && previousParagraph && paragraph !== previousParagraph) text += ' ';
+              if (paragraph) previousParagraph = paragraph;
+              text += node.textContent;
+            }
+            return text;
+          };
+          const actual = roots.map(root => textWithParagraphBoundaries(root.querySelector('.realbox') ?? root)).join(' ')
             .replace(/\uFFFC/gu, '').replace(/\uFFFD/gu, ' ').replace(/\s+/gu, ' ')
+            // Match normalize(): numbered phase markers occupy a fixed grid column,
+            // so textContent can concatenate the marker and heading without a gap.
+            .replace(/(?<!\w)([1-4]\.)(?=[A-Z\u00c0-\u00de])/gu, '$1 ')
             .replace(/•(?=\S)/gu, '• ').trim();
           const wanted = expected.replace(/\uFFFC/gu, '').replace(/\uFFFD/gu, ' ').replace(/\s+/gu, ' ')
+            .replace(/(?<!\w)([1-4]\.)(?=[A-Z\u00c0-\u00de])/gu, '$1 ')
             .replace(/•(?=\S)/gu, '• ').trim();
           return actual === wanted;
         }, { expectedKey: expectedRendererKey, expectedText }, { timeout: 7000 });
@@ -324,6 +599,7 @@ try {
       if (!roots.length) return { empty: true, hits: hits.length };
       const targets = roots.map(root => root.querySelector('.realbox') ?? root);
       const rects = [];
+      const fontSamples = new Map();
       let text = '';
       for (const [targetIndex, target] of targets.entries()) {
         if (targetIndex > 0) text += ' ';
@@ -334,11 +610,27 @@ try {
           const parent = node.parentElement;
           const style = parent && getComputedStyle(parent);
           if (!style || style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) === 0) continue;
+          if (node.textContent.trim()) {
+            const fontSample = {
+              fontFamily: style.fontFamily,
+              fontSize: style.fontSize,
+              fontWeight: style.fontWeight,
+              fontStyle: style.fontStyle,
+              color: style.color,
+              lineHeight: style.lineHeight,
+              letterSpacing: style.letterSpacing,
+              fontKerning: style.fontKerning,
+              fontVariantLigatures: style.fontVariantLigatures,
+              fontFeatureSettings: style.fontFeatureSettings,
+              fontLoaded: document.fonts.check(`${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`),
+            };
+            fontSamples.set(JSON.stringify(fontSample), fontSample);
+          }
           const paragraph = parent?.closest(
-            '.credit-paragraph, [data-source-bullet-flow-row], [data-source-bullet-flow-prose]',
+            '.credit-paragraph, [data-source-bullet-flow-row], [data-source-bullet-flow-prose], [data-source-numbered-list-row]',
           ) ?? null;
           if (paragraph && previousParagraph && paragraph !== previousParagraph) text += ' ';
-          previousParagraph = paragraph;
+          if (paragraph) previousParagraph = paragraph;
           if (!node.textContent.trim()) { text += node.textContent; continue; }
           text += node.textContent;
           const range = document.createRange();
@@ -370,7 +662,7 @@ try {
       const frameRects = roots.map(root => root.getBoundingClientRect()).filter(rect => rect.width || rect.height);
       const frameTop = frameRects.length ? Math.min(...frameRects.map(rect => rect.top)) : 0;
       const frameBottom = frameRects.length ? Math.max(...frameRects.map(rect => rect.bottom)) : frameTop;
-      return { key: roots[0].getAttribute('data-translation-review-highlight'), text, rects, symbolIds, symbolOnlyRows, frameHeight: frameBottom - frameTop };
+      return { key: roots[0].getAttribute('data-translation-review-highlight'), text, rects, symbolIds, symbolOnlyRows, frameHeight: frameBottom - frameTop, fontSamples: [...fontSamples.values()] };
     });
     let method = 'highlight';
     let matches;
@@ -447,6 +739,7 @@ try {
     measurements.set(matches[0].reviewKey, {
       method, rendererKey: data.key, rangeRectFragments: data.rects.length, rows: clustered.length,
       symbolIds: data.symbolIds ?? [], symbolOnlyRows: data.symbolOnlyRows ?? 0,
+      fontSamples: data.fontSamples ?? [],
       rowTops: clustered.map(row => Number(row.top.toFixed(2))), frameHeight: data.frameHeight === null ? null : Number(data.frameHeight.toFixed(1)),
     });
   }
@@ -470,6 +763,16 @@ const rows = pending.map((candidate, i) => {
 });
 for (const row of rows) {
   console.log(`${row.classification.padEnd(10)} pdf=${String(row.source).padStart(2)} viewer=${String(row.target).padStart(2)} ${row.symbols ? '[symbols] ' : ''}${row.candidate.spanKey}`);
+  if (args.includes('--typography') && row.viewer) {
+    console.log(`  typography ${JSON.stringify({
+      sourceBaselinesPt: row.pdf?.row_baselines ?? [],
+      viewerRowTopsCssPx: row.viewer.rowTops,
+      viewerRowIntervalsPt: row.viewer.rowIntervalsPt,
+      pageScaleCssPxPerPt: row.viewer.pageScaleCssPxPerPt,
+      requestedFontLoaded: environment.fontLoaded,
+      fontSamples: row.viewer.fontSamples,
+    })}`);
+  }
 }
 if (unmatchedRows.length) console.log('Unmatched panel rows:', JSON.stringify(unmatchedRows));
 const summary = rows.reduce((acc, row) => { acc[row.classification] = (acc[row.classification] ?? 0) + 1; return acc; }, {});
@@ -501,10 +804,10 @@ if (write) {
         sourcePdfVisualLineCount: row.source,
         pageRendererVisualLineCount: row.target,
         classification: row.classification,
-        method: 'scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.',
+        method: 'scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.',
         environment: { pageNumber, pdfDocumentPageIndex: pageNumber - 1, language: 'pt-BR', viewerZoom: environment.zoomActual, viewportCssPixels: `${viewport.width}x${viewport.height}`, devicePixelRatio: dpr, fontLoaded: environment.fontLoaded },
-        sourceEvidence: { bboxPt: row.candidate.copyfitCanonicalBbox, visualRowBaselinesPt: row.pdf.row_baselines, spans: row.pdf.spans, visualRows: row.source },
-        pageRendererEvidence: { spanKey: row.viewer.rendererKey, readingMethod: row.viewer.method === 'geometric' ? 'text rects inside the canonical bbox plus visible semantic-symbol rects for symbol-only rows (renderer did not mark the unit)' : 'text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows', rangeRectFragments: row.viewer.rangeRectFragments, renderedSymbolIds: row.viewer.symbolIds ?? [], semanticSymbolOnlyRows: row.viewer.symbolOnlyRows ?? 0, distinctVisualRows: row.target, visualRowTopsCssPx: row.viewer.rowTops, frameHeightCssPx: row.viewer.frameHeight },
+        sourceEvidence: { bboxPt: row.candidate.copyfitCanonicalBbox, visualRowBaselinesPt: row.pdf.row_baselines, spans: row.pdf.spans, inlineMarkersFoldedIntoTextRows: row.pdf.inline_markers_folded ?? 0, visualRows: row.source },
+        pageRendererEvidence: { spanKey: row.viewer.rendererKey, readingMethod: row.viewer.method === 'geometric' ? 'text rects inside the canonical bbox plus visible semantic-symbol rects for symbol-only rows (renderer did not mark the unit)' : row.viewer.method === 'page-renderer-key' ? 'text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects' : 'text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows', rangeRectFragments: row.viewer.rangeRectFragments, renderedSymbolIds: row.viewer.symbolIds ?? [], semanticSymbolOnlyRows: row.viewer.symbolOnlyRows ?? 0, distinctVisualRows: row.target, visualRowTopsCssPx: row.viewer.rowTops, visualRowIntervalsPt: row.viewer.rowIntervalsPt ?? null, pageScaleCssPxPerPt: row.viewer.pageScaleCssPxPerPt ?? null, renderedFontSamples: row.viewer.fontSamples ?? [], frameHeightCssPx: row.viewer.frameHeight },
         editorialStatus: 'Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.',
       };
       const measurementsByZoom = { ...(target.copyfitMeasurementsByZoom ?? {}) };

@@ -221,6 +221,31 @@ Ao aplicar alterações sugeridas por decisões linguísticas:
 
 **Checkpoint 2026-10-25 — Fase 1 em andamento:** a coleção Payload existente permanece canônica e recebeu metadados semânticos opcionais; a Central de Revisão agora consulta os registros com busca, filtros e exportação JSON/CSV. O piloto é pequeno e preserva IDs/histórico. Scanner de ocorrências e geração de propostas das Fases 2–4 continuam fora do escopo deste incremento. Ver `docs/project-progress/2026-10-24-semantic-glossary-pilot.md`.
 
+### Próximo incremento priorizado: taxonomia tipada de componentes e superfície do texto
+
+O glossário já permite registrar `category` e `subtype` dentro de `semanticMetadata`, mas esse objeto é JSON livre: não há enum validado para diferenciar componente, carta, ficha, token, diagrama ou os subtipos de carta. O próximo incremento deve substituir essa ambiguidade por campos tipados, pequenos e validados no Payload, antes de ampliar a descoberta automática de ocorrências.
+
+O modelo deve separar pelo menos estas dimensões, sem presumir que uma mesma enum cubra todas:
+
+- **Tipo de componente:** categoria física distinta (`carta`, `token` — chamado **Ficha** no glossário —, `Folha da Aventura`, `Ficha de Aventureiro`, `diagrama`, `peça de terreno` ou `outro`). O token e os dois tipos de folha continuam distintos.
+- **Tipo de carta:** subtipo controlado quando a entidade for carta (por exemplo, Carta de Aprimoramento de Item, Carta de Arma, Carta de Saque de Monstro).
+- **Superfície textual:** prosa de regra, título/nome impresso em componente, regra impressa em carta, rótulo de diagrama ou texto embutido em arte.
+- **Política de localização:** traduzível nesta etapa, preservado na língua-fonte ou aguardando uma etapa editorial futura.
+
+Não implemente um inventário prévio de todas as 102 páginas. Migre apenas registros existentes com evidência suficiente; mantenha valores desconhecidos explicitamente sem classificação e preserve `id`, `decisionStatus`, justificativas, exemplos e histórico. Campos desconhecidos não devem ser convertidos silenciosamente em valores arbitrários de enum.
+
+**Exemplos de prova:** `Master Work` deve ser identificável como nome de uma Carta de Aprimoramento de Item; `Great Hammer`, como nome de uma Carta de Arma. Na etapa atual de localização, o nome impresso e o texto das duas cartas permanecem em inglês, enquanto a prosa de regra ao redor é traduzida. Esses exemplos validam a modelagem e a política; não autorizam traduzir as cartas.
+
+**Critérios de aceite:**
+
+- O Admin apresenta opções validadas para as dimensões tipadas e rejeita valores fora do catálogo.
+- `Master Work` e `Great Hammer` aparecem com tipo de componente/carta correto e política explícita de preservação da arte-fonte.
+- A leitura, edição e exportação JSON/CSV existentes preservam todos os registros e metadados atuais sem reescrever traduções, IDs ou decisões aprovadas.
+- Registros ambíguos continuam sinalizados como não classificados para revisão humana; a migração não inventa categorias.
+- O procedimento editorial documenta que a etapa atual traduz regras e preserva texto impresso em cartas.
+
+Este incremento de modelagem não interrompe a revisão página a página em andamento; ele fica como próximo trabalho de produto do glossário.
+
 Cada fase entrega valor autônomo imediato, sem dependência de passos futuros:
 
 ### Fase 1: Consulta e Exportação no Visualizador (MVP)

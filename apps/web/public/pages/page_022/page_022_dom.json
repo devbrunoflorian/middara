@@ -2525,7 +2525,11 @@
             "line_10_39:0"
           ]
         }
-      ]
+      ],
+      "flowParagraphIndentsPt": {
+        "3": 18,
+        "8": 18
+      }
     },
     {
       "id": "block_11",
@@ -3947,6 +3951,14 @@
         633.5656127929688
       ],
       "zIndex": 18,
+      "artworkOnly": true,
+      "artworkOnlyEvidence": {
+        "auditId": "2026-11-13-page-by-page-source-art-overlay-v1",
+        "sourcePdfPage": 22,
+        "region": "current-diagram-blocked-marker-between-token-circles",
+        "rule": "The extracted X belongs to the diagram marker; preserve its complete source rendering as an invariant artwork overlay instead of treating it as translatable prose.",
+        "evidenceRef": "Original Rulebook PDF p.22; overlay crop [630, 580, 720, 645] pt in page-local fidelity overlay sidecar."
+      },
       "suspectedGhost": false,
       "lines": [
         {
@@ -4076,6 +4088,7 @@
         113.2442855834961
       ],
       "zIndex": 24,
+      "sourceTextLanguageInvariant": true,
       "suspectedGhost": false,
       "lines": [
         {

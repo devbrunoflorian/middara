@@ -179,6 +179,26 @@ function creditField(pageNumber, sourceBlock, spanKey) {
 
 /** Resolve the same persisted span identity and page-space box used by the Viewer before issuing Copyfit evidence. */
 function canonicalCopyfitGeometry(candidate, pageNumber, spanKey) {
+  const reviewFrame = candidate.reviewLayoutFrame;
+  if (reviewFrame && [reviewFrame.x, reviewFrame.y, reviewFrame.width, reviewFrame.height].every(Number.isFinite)) {
+    const frameWidth = Number.isFinite(reviewFrame.total) ? reviewFrame.total : reviewFrame.width;
+    const frameHeight = Number.isFinite(reviewFrame.totalHeight) ? reviewFrame.totalHeight : reviewFrame.height;
+    if (frameWidth > 0 && frameHeight > 0) {
+      const frameBbox = [reviewFrame.x, reviewFrame.y, reviewFrame.x + frameWidth, reviewFrame.y + frameHeight];
+      if (validBbox(frameBbox)) {
+        const blockMatch = spanKey.match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u);
+        const blockIndex = Number.isInteger(candidate.blockIndex)
+          ? candidate.blockIndex
+          : blockMatch ? Number(blockMatch[1]) : -1;
+        const page = pageDom(pageNumber);
+        const sourceBlock = Array.isArray(page?.blocks) ? page.blocks[blockIndex] : null;
+        const canonicalSpanKey = sourceBlock?.editorKey
+          ? `${sourceBlock.editorKey}__pt-BR`
+          : blockIndex >= 0 ? `page_${pageNumber}_block_${blockIndex}__pt-BR` : spanKey;
+        return { spanKey: canonicalSpanKey, bbox: frameBbox };
+      }
+    }
+  }
   const contents = contentsRow(pageNumber, spanKey);
   if (contents && validBbox(contents.labelBBox)) {
     const [x, y, , bottom] = contents.labelBBox;

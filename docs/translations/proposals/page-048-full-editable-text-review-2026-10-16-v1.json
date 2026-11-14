@@ -202,7 +202,7 @@
       "sourceText": "When an Ability instructs a figure to “end the current Action and all Abilities”, every other Action and Ability that is currently happening immediately ends. Any Ability, Action, AI Instruction, or Special Rule that would require the current Ability or Action to occur (such as counter), can no longer be used.",
       "spanKey": "page_48_block_1__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Quando uma Habilidade instrui uma miniatura a “encerrar a Ação atual e todas as Habilidades”, as demais Ações e Habilidades em andamento terminam imediatamente. Qualquer Habilidade, Ação, Instrução de IA ou Regra Especial que dependa da Habilidade ou Ação atual (como um contra-ataque) não poderá mais ser usada.",
+      "proposalText": "Quando uma Habilidade instrui uma miniatura a “encerrar a Ação atual e todas as Habilidades”, as demais Ações e Habilidades em andamento terminam imediatamente. Qualquer Habilidade, Ação, Instrução de IA ou Regra Especial que dependa da Habilidade ou Ação atual (como um Revide) não poderá mais ser usada.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_48_block_1__pt-BR",
@@ -235,7 +235,7 @@
             "disableLigatures": true
           },
           {
-            "text": "”, as demais Ações e Habilidades em andamento terminam imediatamente. Qualquer Habilidade, Ação, Instrução de IA ou Regra Especial que dependa da Habilidade ou Ação atual (como um contra-ataque) não poderá mais ser usada.",
+            "text": "”, as demais Ações e Habilidades em andamento terminam imediatamente. Qualquer Habilidade, Ação, Instrução de IA ou Regra Especial que dependa da Habilidade ou Ação atual (como um Revide) não poderá mais ser usada.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -246,60 +246,105 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "verified_isolated_viewer_editor_copyfit_pdf",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "verified_live_viewer_and_print_copyfit",
+      "editorialStatus": "approved_human_editorial_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "sourcePdfVisualLineCount": 5,
       "pageRendererVisualLineCount": 5,
       "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
+        "status": "measured_source_and_live_page_renderer_rows",
         "sourcePdfVisualLineCount": 5,
         "pageRendererVisualLineCount": 5,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "Official PDF source row count retained for unchanged English source. A temporary immutable snapshot rendered the exact glossary-corrected PT text through PageRenderer; live Range.getClientRects were grouped by vertical position. Viewer and print metrics both report five rows. No character-count or frame-height estimate used.",
         "environment": {
           "pageNumber": 48,
           "pdfDocumentPageIndex": 47,
           "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "renderer": "PageRenderer through scripts/export_page_pdf.mjs temporary snapshot",
+          "viewerCapturePageWidthCssPx": 1288,
+          "printPageSizePt": [
+            820.3460083007812,
+            820.3460083007812
+          ]
         },
         "sourceEvidence": {
-          "bboxPt": [
-            415.84210205078125,
-            315.7951965332031,
-            736.6127319335938,
-            371.815185546875
-          ],
-          "visualBaselinesPt": [
-            325.105,
-            336.105,
-            347.105,
-            358.105,
-            369.105
-          ],
-          "spans": 7,
-          "visualRows": 5
+          "visualRows": 5,
+          "text": "When an Ability instructs a figure to “end the current Action and all Abilities”, every other Action and Ability that is currently happening immediately ends. Any Ability, Action, AI Instruction, or Special Rule that would require the current Ability or Action to occur (such as counter), can no longer be used."
         },
         "pageRendererEvidence": {
           "spanKey": "page_48_block_1__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 10,
-          "distinctVisualRows": 5,
-          "visualRowTopsCssPx": [
-            282.52,
-            292.42,
-            302.33,
-            311.23,
-            320.14
-          ],
-          "frameHeightCssPx": 45.4
+          "readingMethod": "live PageRenderer translation target; union of Range.getClientRects, grouped by vertical position",
+          "viewer": {
+            "distinctVisualRows": 5,
+            "widestLinePt": 321.0547187232083,
+            "frameWidthPt": 321.1044776765456,
+            "frameHeightPt": 56.01862966718141,
+            "rightEdgeClearancePt": 0.0497589533373
+          },
+          "print": {
+            "distinctVisualRows": 5,
+            "widestLinePt": 320.9922218417574,
+            "frameWidthPt": 321.10941078040213,
+            "frameHeightPt": 56.016312672177,
+            "rightEdgeClearancePt": 0.1171889386447
+          },
+          "renderedText": "Quando uma Habilidade instrui uma miniatura a “encerrar a Ação atual e todas as Habilidades”, as demais Ações e Habilidades em andamento terminam imediatamente. Qualquer Habilidade, Ação, Instrução de IA ou Regra Especial que dependa da Habilidade ou Ação atual (como um Revide) não poderá mais ser usada.",
+          "renderedSymbolIds": []
         },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+        "editorialStatus": "Glossary correction Counter → Revide; Viewer and print remain five lines. Full-page raster reviewed with no clipping or collision."
+      },
+      "copyfitMeasurementsByZoom": {
+        "snapshot-render": {
+          "status": "measured_source_and_live_page_renderer_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "Official PDF source row count retained for unchanged English source. A temporary immutable snapshot rendered the exact glossary-corrected PT text through PageRenderer; live Range.getClientRects were grouped by vertical position. Viewer and print metrics both report five rows. No character-count or frame-height estimate used.",
+          "environment": {
+            "pageNumber": 48,
+            "pdfDocumentPageIndex": 47,
+            "language": "pt-BR",
+            "renderer": "PageRenderer through scripts/export_page_pdf.mjs temporary snapshot",
+            "viewerCapturePageWidthCssPx": 1288,
+            "printPageSizePt": [
+              820.3460083007812,
+              820.3460083007812
+            ]
+          },
+          "sourceEvidence": {
+            "visualRows": 5,
+            "text": "When an Ability instructs a figure to “end the current Action and all Abilities”, every other Action and Ability that is currently happening immediately ends. Any Ability, Action, AI Instruction, or Special Rule that would require the current Ability or Action to occur (such as counter), can no longer be used."
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_48_block_1__pt-BR",
+            "readingMethod": "live PageRenderer translation target; union of Range.getClientRects, grouped by vertical position",
+            "viewer": {
+              "distinctVisualRows": 5,
+              "widestLinePt": 321.0547187232083,
+              "frameWidthPt": 321.1044776765456,
+              "frameHeightPt": 56.01862966718141,
+              "rightEdgeClearancePt": 0.0497589533373
+            },
+            "print": {
+              "distinctVisualRows": 5,
+              "widestLinePt": 320.9922218417574,
+              "frameWidthPt": 321.10941078040213,
+              "frameHeightPt": 56.016312672177,
+              "rightEdgeClearancePt": 0.1171889386447
+            },
+            "renderedText": "Quando uma Habilidade instrui uma miniatura a “encerrar a Ação atual e todas as Habilidades”, as demais Ações e Habilidades em andamento terminam imediatamente. Qualquer Habilidade, Ação, Instrução de IA ou Regra Especial que dependa da Habilidade ou Ação atual (como um Revide) não poderá mais ser usada.",
+            "renderedSymbolIds": []
+          },
+          "editorialStatus": "Glossary correction Counter → Revide; Viewer and print remain five lines. Full-page raster reviewed with no clipping or collision."
+        }
+      },
+      "status": "approved",
+      "notes": [
+        "Glossário oficial (Payload id 82) determina Counter → Revide. A ocorrência é prosa de regra, não nome impresso de carta. A versão atualizada mede 5/5 linhas em Viewer e print; o texto anterior será preservado no histórico da publicação."
+      ]
     },
     {
       "blockIndex": 2,
@@ -408,7 +453,7 @@
       "sourceText": "Using Abilities Continued",
       "spanKey": "page_48_block_35__pt-BR",
       "language": "pt-BR",
-      "proposalText": "Habilidades (continuação)",
+      "proposalText": "Uso de Habilidades (continuação)",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_48_block_35__pt-BR",
@@ -423,7 +468,7 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Habilidades",
+            "text": "Uso de Habilidades",
             "font": "Cinzel-Regular",
             "size": 18,
             "color": "#231f20",
@@ -441,26 +486,43 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "verified_isolated_viewer_editor_copyfit_pdf",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "verified_live_viewer_and_print_copyfit",
+      "editorialStatus": "approved_human_editorial_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
       "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
+        "status": "measured_source_and_live_page_renderer_rows",
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "Official PDF text spans grouped by common baseline (two runs on one baseline, 1 pt tolerance); temporary immutable snapshot rendered through PageRenderer; live Range.getClientRects grouped by vertical position. Viewer and print metrics both report one row. No character-count or frame-height estimate used.",
         "environment": {
           "pageNumber": 48,
           "pdfDocumentPageIndex": 47,
           "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "renderer": "PageRenderer through scripts/export_page_pdf.mjs temporary snapshot",
+          "viewerCapturePageWidthCssPx": 1288,
+          "printPageSizePt": [
+            820.3460083007812,
+            820.3460083007812
+          ],
+          "fontSegments": [
+            {
+              "font": "Cinzel-Regular",
+              "sizePt": 18,
+              "weight": 700,
+              "color": "#231f20"
+            },
+            {
+              "font": "Cinzel-Regular",
+              "sizePt": 11,
+              "weight": 700,
+              "color": "#231f20"
+            }
+          ]
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -469,24 +531,128 @@
             301.4519958496094,
             81.18983459472656
           ],
-          "visualBaselinesPt": [
-            74.494
+          "visualRowBaselinesPt": [
+            74.49383544921875
           ],
           "spans": 2,
-          "visualRows": 1
+          "visualRows": 1,
+          "text": "Using Abilities Continued"
         },
         "pageRendererEvidence": {
           "spanKey": "page_48_block_35__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 2,
-          "distinctVisualRows": 1,
-          "visualRowTopsCssPx": [
-            71.72
-          ],
-          "frameHeightCssPx": 19.7
+          "readingMethod": "live PageRenderer translation target; union of Range.getClientRects, grouped by vertical position",
+          "text": "Uso de Habilidades (continuação)",
+          "viewer": {
+            "distinctVisualRows": 1,
+            "widestLinePt": 273.78371305273185,
+            "frameWidthPt": 614.9908078775643,
+            "frameHeightPt": 24.26246564728873,
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 1.9107438081539883,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "print": {
+            "distinctVisualRows": 1,
+            "widestLinePt": 273.6830473108832,
+            "frameWidthPt": 614.9958311136353,
+            "frameHeightPt": 24.258110299457407,
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 2.25002762197866,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          "renderedSymbolIds": []
         },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+        "editorialStatus": "Human editorial correction measured against the official PDF; Viewer and print are each one line, with original font sizes, weight and color preserved."
+      },
+      "copyfitMeasurementsByZoom": {
+        "snapshot-render": {
+          "status": "measured_source_and_live_page_renderer_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "Official PDF text spans grouped by common baseline (two runs on one baseline, 1 pt tolerance); temporary immutable snapshot rendered through PageRenderer; live Range.getClientRects grouped by vertical position. Viewer and print metrics both report one row. No character-count or frame-height estimate used.",
+          "environment": {
+            "pageNumber": 48,
+            "pdfDocumentPageIndex": 47,
+            "language": "pt-BR",
+            "renderer": "PageRenderer through scripts/export_page_pdf.mjs temporary snapshot",
+            "viewerCapturePageWidthCssPx": 1288,
+            "printPageSizePt": [
+              820.3460083007812,
+              820.3460083007812
+            ],
+            "fontSegments": [
+              {
+                "font": "Cinzel-Regular",
+                "sizePt": 18,
+                "weight": 700,
+                "color": "#231f20"
+              },
+              {
+                "font": "Cinzel-Regular",
+                "sizePt": 11,
+                "weight": 700,
+                "color": "#231f20"
+              }
+            ]
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.93309783935547,
+              56.92583465576172,
+              301.4519958496094,
+              81.18983459472656
+            ],
+            "visualRowBaselinesPt": [
+              74.49383544921875
+            ],
+            "spans": 2,
+            "visualRows": 1,
+            "text": "Using Abilities Continued"
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_48_block_35__pt-BR",
+            "readingMethod": "live PageRenderer translation target; union of Range.getClientRects, grouped by vertical position",
+            "text": "Uso de Habilidades (continuação)",
+            "viewer": {
+              "distinctVisualRows": 1,
+              "widestLinePt": 273.78371305273185,
+              "frameWidthPt": 614.9908078775643,
+              "frameHeightPt": 24.26246564728873,
+              "edgeExcessPt": {
+                "left": 0,
+                "top": 1.9107438081539883,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            "print": {
+              "distinctVisualRows": 1,
+              "widestLinePt": 273.6830473108832,
+              "frameWidthPt": 614.9958311136353,
+              "frameHeightPt": 24.258110299457407,
+              "edgeExcessPt": {
+                "left": 0,
+                "top": 2.25002762197866,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            "renderedSymbolIds": []
+          },
+          "editorialStatus": "Human editorial correction measured against the official PDF; Viewer and print are each one line, with original font sizes, weight and color preserved."
+        }
+      },
+      "status": "approved",
+      "notes": [
+        "Revisão humana: corrigido para “Uso de Habilidades (continuação)”, título equivalente ao p.47 mais o marcador de continuação do OG. Nova captura de snapshot mediu 1/1 linha em PageRenderer e print; texto-fonte permanece em duas passagens tipográficas na mesma linha."
+      ]
     },
     {
       "blockIndex": null,

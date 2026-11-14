@@ -134,6 +134,9 @@ async function fetchCollectionSnapshot(apiUrl, slug) {
 function normalizeText(value) {
   return value
     .replace(/\s+/gu, ' ')
+    // List markers occupy a separate visual grid cell; DOM textContent can
+    // concatenate the marker and the first word even though the page renders a gap.
+    .replace(/•(?=\S)/gu, '• ')
     // Numbered phases use a source-positioned marker cell; the DOM text nodes
     // remain adjacent even though the fixed column supplies the visual gap.
     .replace(/(?<!\w)([1-4]\.)(?=[A-Z\u00c0-\u00de])/gu, '$1 ')
@@ -181,7 +184,10 @@ if (config.language === 'pt-BR') {
   }
   expectedTranslation = docs
     .map(doc => translationPlainText(doc.data))
-    .filter(text => text.length >= 20 && !Array.from(text).some(char => {
+    // Caption-only pages can have several valid short translations but no
+    // paragraph-sized string. A short distinctive fragment is enough for the
+    // live-viewer/PDF smoke check; snapshot verification checks every unit.
+    .filter(text => text.length >= 4 && !Array.from(text).some(char => {
       const code = char.codePointAt(0) ?? 0;
       return code >= 0xE000 && code <= 0xF8FF;
     }))
@@ -205,7 +211,7 @@ if (config.language === 'pt-BR') {
   if (!expectedTranslation && reviewDrafts.length) {
     expectedTranslation = reviewDrafts
       .map(doc => translationPlainText(doc.data))
-      .filter(text => text.length >= 20 && !Array.from(text).some(char => {
+      .filter(text => text.length >= 4 && !Array.from(text).some(char => {
         const code = char.codePointAt(0) ?? 0;
         return code >= 0xE000 && code <= 0xF8FF;
       }))
@@ -326,6 +332,21 @@ try {
   const expectedApiOrigin = normalizedOrigin(config.apiUrl);
 
   const pageInput = page.locator('input.page-input');
+  const waitForLayoutFrameResponse = (language) => page.waitForResponse(response => {
+    const requestUrl = new URL(response.url());
+    if (requestUrl.origin !== expectedApiOrigin || requestUrl.pathname !== '/api/layout-frames') return false;
+    const params = requestUrl.searchParams;
+    const requestedPage = params.get('where[and][0][pageNumber][equals]') ?? params.get('where[pageNumber][equals]');
+    const requestedLanguage = params.get('where[and][1][language][equals]') ?? params.get('where[language][equals]');
+    return requestedPage === String(config.page) && requestedLanguage === language;
+  }, { timeout: 60000 });
+  // Layout frames load independently from translations. Arm these before
+  // changing pages/languages so the Viewer screenshot cannot capture source
+  // geometry before its localized frame arrives (the print pass naturally
+  // waits long enough to hide this race).
+  const layoutFrameResponses = config.language === 'pt-BR'
+    ? [waitForLayoutFrameResponse('en'), waitForLayoutFrameResponse('pt-BR')]
+    : [waitForLayoutFrameResponse('en')];
   await pageInput.fill(String(config.page));
   await pageInput.press('Enter');
   await page.waitForFunction(expected => {
@@ -345,6 +366,12 @@ try {
     localeLabel,
     { timeout: 10000 },
   );
+  const loadedLayoutFrames = await Promise.all(layoutFrameResponses);
+  for (const response of loadedLayoutFrames) {
+    if (!response.ok()) throw new Error(`Payload returned ${response.status()} while loading page ${config.page} layout frames.`);
+    await response.finished();
+  }
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   if (config.language === 'pt-BR') {
     const expectedFragment = normalizeText(expectedTranslation).slice(0, 48);
     await page.waitForFunction(fragment => {
@@ -353,6 +380,7 @@ try {
       function normalizeText(value) {
         return value
           .replace(/\s+/gu, ' ')
+          .replace(/•(?=\S)/gu, '• ')
           .replace(/(?<!\w)([1-4]\.)(?=[A-Z\u00c0-\u00de])/gu, '$1 ')
           .trim();
       }
@@ -407,7 +435,7 @@ try {
     : 0;
 
   await page.evaluate(() => document.fonts.ready);
-  await page.getByTitle('Fit to Screen').click();
+  await page.locator('button[title="Fit to Screen"], button[title*="Ajustar"], button:has(svg.lucide-maximize)').first().click();
   await page.waitForTimeout(300);
 
   if (immutableSnapshot?.verifyRenderedSnapshot) {

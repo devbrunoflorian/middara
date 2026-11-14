@@ -83,14 +83,14 @@
       "sourceBlockId": "block_19",
       "label": "block_19",
       "sourceText": "Encounters often instruct players to Spawn figures or other game components. When players are instructed to Spawn one or more components, they place up to (as many as they can) that many components on the spaces indicated by the text. Figures and Components spawned by instructions must be placed in the order in which they are listed by the instruction in question.",
-      "proposalText": "Os Encontros podem instruir os jogadores a fazer surgir miniaturas ou outros componentes. Nesses casos, coloque nos espaços indicados pelo texto até o número instruído de componentes (ou o máximo possível). Miniaturas e componentes que surjam por instrução devem ser colocados na ordem em que são indicados.",
+      "proposalText": "Os Encontros às vezes instruem os jogadores a fazer surgir miniaturas ou outros componentes do jogo. Quando a instrução pedir que surjam um ou mais componentes, coloque nos espaços indicados pelo texto a quantidade indicada (ou o máximo possível). Miniaturas e componentes que surgirem por instrução devem ser colocados na ordem em que a instrução correspondente os indicar.",
       "spanKey": "page_19_block_1__pt-BR",
       "language": "pt-BR",
       "data": {
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "Os Encontros podem instruir os jogadores a fazer surgir miniaturas ou outros componentes. Nesses casos, coloque nos espaços indicados pelo texto até o número instruído de componentes (ou o máximo possível). Miniaturas e componentes que surjam por instrução devem ser colocados na ordem em que são indicados.",
+            "text": "Os Encontros às vezes instruem os jogadores a fazer surgir miniaturas ou outros componentes do jogo. Quando a instrução pedir que surjam um ou mais componentes, coloque nos espaços indicados pelo texto a quantidade indicada (ou o máximo possível). Miniaturas e componentes que surgirem por instrução devem ser colocados na ordem em que a instrução correspondente os indicar.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -112,21 +112,99 @@
       ],
       "sourceLineCount": 6,
       "sourcePdfVisualLineCount": 6,
-      "pageRendererVisualLineCount": 5,
-      "copyfitClassification": "UNDER",
+      "pageRendererVisualLineCount": 6,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 6,
+          "pageRendererVisualLineCount": 6,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 19,
+            "pdfDocumentPageIndex": 18,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              418.67718505859375,
+              110.4913330078125,
+              737.90771484375,
+              177.39134216308594
+            ],
+            "visualRowBaselinesPt": [
+              119.681,
+              130.681,
+              141.681,
+              152.681,
+              163.681,
+              174.681
+            ],
+            "spans": 6,
+            "visualRows": 6
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_19_block_1__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 11,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 6,
+            "visualRowTopsCssPx": [
+              116.11,
+              125.02,
+              133.92,
+              142.83,
+              151.73,
+              160.64
+            ],
+            "visualRowIntervalsPt": [
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99
+            ],
+            "pageScaleCssPxPerPt": 0.8104811790054112,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10481px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91529px",
+                "letterSpacing": "-0.121572px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 53.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
       "copyfitMeasurement": {
         "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 6,
-        "pageRendererVisualLineCount": 5,
-        "classification": "UNDER",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "pageRendererVisualLineCount": 6,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 19,
           "pdfDocumentPageIndex": 18,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -135,7 +213,7 @@
             737.90771484375,
             177.39134216308594
           ],
-          "visualBaselinesPt": [
+          "visualRowBaselinesPt": [
             119.681,
             130.681,
             141.681,
@@ -147,18 +225,44 @@
           "visualRows": 6
         },
         "pageRendererEvidence": {
-          "spanKey": null,
-          "readingMethod": "text rects inside canonical bbox (renderer did not mark unit)",
-          "rangeRectFragments": 9,
-          "distinctVisualRows": 5,
+          "spanKey": "page_19_block_1__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 11,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 6,
           "visualRowTopsCssPx": [
-            116.13,
-            125.03,
-            133.94,
-            142.84,
-            151.75
+            116.11,
+            125.02,
+            133.92,
+            142.83,
+            151.73,
+            160.64
           ],
-          "frameHeightCssPx": null
+          "visualRowIntervalsPt": [
+            10.99,
+            10.99,
+            10.99,
+            10.99,
+            10.99
+          ],
+          "pageScaleCssPxPerPt": 0.8104811790054112,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10481px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91529px",
+              "letterSpacing": "-0.121572px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 53.4
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
@@ -477,7 +581,7 @@
       "unitId": "p19-block-21-paragraph-3",
       "label": "p19-block-21-paragraph-3",
       "sourceText": "Some Combatants have multiple Initiative Cards. A Combatant with multiple Initiative Cards of the same Group Number and/or name will add all Initiative Cards of that Name and/or number to the Track in the same way as above. A Combatant's corresponding Initiative Cards will always match its name and Group Number(s). See Activation Numbers And Groups PG. 56.",
-      "proposalText": "Alguns Combatentes têm várias Cartas de Iniciativa. Se um Combatente tiver várias Cartas com o mesmo Número do Grupo e/ou nome, coloque todas as cartas com esse nome e/ou número na Trilha, como explicado acima. As Cartas de Iniciativa de cada Combatente sempre correspondem ao nome e ao(s) Número(s) do Grupo dele. Consulte Números de Ativação e Grupos, pág. 56.",
+      "proposalText": "Alguns Combatentes têm várias Cartas de Iniciativa. Se um Combatente tiver várias Cartas com o mesmo Número do Grupo e/ou nome, coloque todas as cartas com esse nome e/ou número na Trilha, como explicado acima. As Cartas de Iniciativa de cada Combatente sempre correspondem ao nome e ao(s) Número(s) do Grupo dele. Veja Números de Ativação e Grupos, pág. 56.",
       "spanKey": "page_19_unit_p19-block-21-paragraph-3__pt-BR",
       "language": "pt-BR",
       "data": {
@@ -502,7 +606,7 @@
             "disableLigatures": true
           },
           {
-            "text": " Número do Grupo e/ou nome, coloque todas as cartas com esse nome e/ou número na Trilha, como explicado acima. As Cartas de Iniciativa de cada Combatente sempre correspondem ao nome e ao(s) Número(s) do Grupo dele. Consulte ",
+            "text": " Número do Grupo e/ou nome, coloque todas as cartas com esse nome e/ou número na Trilha, como explicado acima. As Cartas de Iniciativa de cada Combatente sempre correspondem ao nome e ao(s) Número(s) do Grupo dele. Veja ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",

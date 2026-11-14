@@ -36,22 +36,51 @@
           "id": "p100-table10-terrain-left-cell",
           "semanticOwner": "p100-table10",
           "leftBoundaryEvidence": [
-            { "valuePt": 57.528, "kind": "table-grid", "detail": "Official PDF left border of the Terrain cell" },
-            { "valuePt": 57.528, "kind": "visual-boundary", "detail": "Same left table stroke in the rendered page" }
+            {
+              "valuePt": 57.528,
+              "kind": "table-grid",
+              "detail": "Official PDF left border of the Terrain cell"
+            },
+            {
+              "valuePt": 57.528,
+              "kind": "visual-boundary",
+              "detail": "Same left table stroke in the rendered page"
+            }
           ],
           "rightBoundaryEvidence": [
-            { "valuePt": 224.522, "kind": "table-grid", "detail": "Official PDF divider between Terrain and Figures cells" },
-            { "valuePt": 224.522, "kind": "visual-boundary", "detail": "Same table divider in the rendered page" }
+            {
+              "valuePt": 224.522,
+              "kind": "table-grid",
+              "detail": "Official PDF divider between Terrain and Figures cells"
+            },
+            {
+              "valuePt": 224.522,
+              "kind": "visual-boundary",
+              "detail": "Same table divider in the rendered page"
+            }
           ],
           "paddingLeftPt": 3.998,
           "paddingRightPt": 4,
           "textBandTopPt": 94.0043,
           "textBandBottomPt": 131.6253,
           "evidence": [
-            { "kind": "semantic-parent", "owner": "p100-table10", "detail": "Terrain note is the left cell of Table 10" },
-            { "kind": "source-baselines", "detail": "Source PDF text baselines and original cell placement" },
-            { "kind": "table-grid", "detail": "Official PDF table strokes define the cell and divider" },
-            { "kind": "artwork-occupancy", "detail": "The adjacent Figures cell remains excluded from the left-cell corridor" }
+            {
+              "kind": "semantic-parent",
+              "owner": "p100-table10",
+              "detail": "Terrain note is the left cell of Table 10"
+            },
+            {
+              "kind": "source-baselines",
+              "detail": "Source PDF text baselines and original cell placement"
+            },
+            {
+              "kind": "table-grid",
+              "detail": "Official PDF table strokes define the cell and divider"
+            },
+            {
+              "kind": "artwork-occupancy",
+              "detail": "The adjacent Figures cell remains excluded from the left-cell corridor"
+            }
           ]
         },
         "alignmentAnchor": "left",
@@ -59,7 +88,12 @@
           {
             "id": "p100-table10-figures-cell-text",
             "semanticRelation": "independent-flow-owner",
-            "bboxPt": [228.521, 94.0043, 380, 131.6253],
+            "bboxPt": [
+              228.521,
+              94.0043,
+              380,
+              131.6253
+            ],
             "requiredGapPt": 8,
             "detail": "The right-cell text begins 4 pt after the divider; keep the full measured inset between the left corridor and its ink"
           }
@@ -328,7 +362,7 @@
     },
     {
       "sourceBlockId": "block_13",
-      "text": "MINIATURAS: As Correntes sempre podem deslocar as miniaturas. Consulte Miniaturas de Base Grande, pág. 71, ou a Tag Pesada, pág. 93, para ver as exceções.",
+      "text": "MINIATURAS: As Correntes sempre podem deslocar as miniaturas. Veja Miniaturas de Base Grande, pág. 71, ou a Tag Pesada, pág. 93, para ver as exceções.",
       "result": "OVER: 4 source lines / 5 PageRenderer lines at 100% and 200%; shortened naturally and re-rendered."
     }
   ],

@@ -1,10 +1,10 @@
 # Projeto Pendente: Auditoria de Métricas Tipográficas e Fidelidade de Cores
 
-- **Status:** BACKLOG / INVESTIGAÇÃO TÉCNICA FUTURA (HIPÓTESE)
+- **Status:** INVESTIGAÇÃO EM CURSO POR AMOSTRAS LOCAIS; auditoria global de conversão CMYK/sRGB permanece em backlog.
 - **Prioridade:** MÉDIA (Elevar para ALTA se comprovado impacto no Copyfit V3 ou em páginas em certificação)
 - **Escopo:** Investigação técnica comparativa entre PDF oficial, Viewer (EN/PT-BR) e PDF exportado nas frentes de microtipografia e fidelidade cromática
 - **Área:** Engenharia Tipográfica / Gestão de Cores / QA Visual / Copyfit
-- **Diretriz Mandatória:** *Nenhuma alteração global ou modificação no renderer, fontes, geometria ou traduções deve ser feita nesta etapa. As divergências relatadas são hipóteses técnicas a serem investigadas e medidas em casos de teste controlados.*
+- **Diretriz:** *Uma amostra local não autoriza mudança global de renderer, fontes ou perfis de cor. Quando a comparação direta com o PDF OG comprovar um desvio local, corrija a unidade ou moldura afetada, repita Copyfit e valide Viewer/PDF. Registre separadamente hipóteses de alcance global.*
 
 ---
 
@@ -102,6 +102,26 @@ Na visualização comparativa da Página 17 entre o original em inglês e a prop
   - O parágrafo 2 em PT-BR termina em $Y = 347,45\text{ pt}$. Até o título seguinte ("OBJETIVOS", $Y = 367,50\text{ pt}$), abre-se um espaço vazio de **20,05 pt** (no original EN o espaço é de apenas **14,15 pt**).
 - **Conclusão Técnica do Efeito:** O inglês parece "ocupar mais espaço" não porque o texto em inglês seja intrinsecamente mais longo (ambos possuem exatamente 9 e 5 linhas), mas porque o inglês é posicionado pelas coordenadas reais do InDesign com leading de **11,00 pt (1,10x)**, enquanto o PT-BR da Página 17 está condensado verticalmente pelo CSS com `line-height: 1.00`. Ao aplicar `lineHeight: 1.1`, a altura dos blocos PT-BR e o distanciamento até "OBJETIVOS" convergem com precisão milimétrica para a composição original.
 
+#### D. Amostra local de tamanho e cor: página 38 (2026-11-13)
+
+As 35 unidades editoriais da p.38 foram confrontadas com os estilos dos spans do PDF OG, incluindo família, tamanho, cor, peso/itálico e traços. Foi confirmado um desvio local: os três runs de `SP` no bloco PT-BR `page_38_block_9` estavam em Optima Bold 10 pt, enquanto os spans correspondentes no OG usam 9 pt. A correção para 9 pt manteve o copyfit em 7/7 linhas. Nas demais unidades, as combinações de estilo e cores de texto correspondem à fonte. Os dois callouts `IMPORTANTE` são uma reconstrução intencional: o glifo/lettering decorativo original é representado por símbolo semântico e lettering vermelho com contorno branco.
+
+Viewer PT-BR, print e PDF exportado foram comparados visualmente; o PDF exportado passou verificação de página única, MediaBox de 820,346 × 820,346 pt e ausência de caracteres de substituição. Isso demonstra uma correção local e um método de comparação por unidade; não conclui a auditoria global de conversão CMYK/sRGB, fundos, transparências ou todas as famílias tipográficas.
+
+#### E. Amostra local de tamanho, cor e moldura: página 39 (2026-11-14)
+
+As 22 unidades da p.39 foram comparadas ao PDF OG; 124 spans de texto tiveram correspondência geométrica direta e zero falhas de associação. No rich-text final, família, tamanho em pontos, cor, peso e itálico coincidem com os spans da unidade correspondente. Um draft marcava `Derrotaria` como Optima Bold 10 pt, mas o OG usa Optima regular 10 pt em `#231f20`; o peso foi corrigido. O título `Adjacent Spaces` no OG usa Cinzel-Regular 18 pt, branco; a tradução `Espaços Adjacentes` preserva esses atributos.
+
+O proprietário ajustou no editor a moldura PT-BR do título para X=457,631 pt, largura=235,190 pt, altura=24,264 pt e alinhamento central (Payload `layout-frames` id 65). O título mantém 1/1 linha em 100% e 200%. A exportação final EN e PT-BR preservou MediaBox de 820,346 × 820,346 pt e passou `pdfVerification`; as capturas Viewer/print foram comparadas ao OG, sem clipping ou colisão visíveis. A inspeção de `terrain.red-border` e dos callouts IMPORTANT também confirmou que o espaçamento é por ocorrência e que não existe um vão automático universal para `[[symbol]]`.
+
+Esta amostra confirma estilos e geometria locais da p.39. Ela não mede conversão de cor global, perfis ICC, transparências, fundos ou todas as famílias do livro.
+
+
+#### F. Amostra local de aparência do corpo: página 49 (2026-11-14; diferença ainda sem causa isolada)
+
+Na comparação do raster do PDF OG de 1288×1288 px com Viewer EN e PT-BR, trechos de corpo OptimaLTStd aparentam maior peso no Viewer. Os spans-fonte e os rich-text correspondentes declaram 10 pt/400; a fonte web estava carregada durante a medição, e o mesmo aspecto foi observado na reconstrução EN, portanto a diferença não aponta para uma tradução local. Copyfit da página não apresentou divergência de linha. Não reduzi o peso nos dados PT-BR: a aparência pode envolver o arquivo de fonte local, o programa incorporado no PDF ou rasterização/antialiasing.
+
+**Próxima verificação:** comparar nomes/contornos e métricas do programa Optima incorporado no PDF com `Optima LT Std Roman.otf`, além de capturar os mesmos glifos em PDF OG, Viewer e print a escala 1:1. A causa continua aberta; esta amostra não autoriza mudança global de fonte ou peso. Evidência: `engineering-labs/planning/engineering-decisions/evidence/2026-11-14-p049/post-proof`.
 ---
 
 ## 3. Frente 2: Fidelidade das Cores

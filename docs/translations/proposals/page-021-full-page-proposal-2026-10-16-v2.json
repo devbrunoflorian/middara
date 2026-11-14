@@ -6859,30 +6859,21 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "DIFÍCIL",
-            "font": "OptimaLTStd-Bold",
+            "text": "￼",
+            "symbolId": "terrain.hindering.icon",
+            "symbolMetrics": {
+              "widthEm": 1.0586683485243056,
+              "heightEm": 1.3083970811631944,
+              "verticalAlignEm": 0.3341946072048611,
+              "advanceEm": 1.3694150151909723
+            },
+            "font": "OptimaLTStd",
             "size": 9,
-            "color": "#ffffff",
-            "weight": 700,
+            "color": "#231f20",
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
-          }
-        ],
-        "textAlign": "center",
-        "lineHeight": 1,
-        "lineHeightMode": "source",
-        "managedSourceSymbols": [],
-        "bbox": [
-          335.2278137207031,
-          518.2163696289062,
-          382.6308288574219,
-          528.9443969726562
-        ],
-        "spanKey": "page_21_unit_p21-block23-hindering-label__pt-BR"
-      },
-      "diagnosticData": {
-        "schemaVersion": 2,
-        "segments": [
+          },
           {
             "text": "DIFÍCIL",
             "font": "OptimaLTStd-Bold",
@@ -6896,7 +6887,52 @@
         "textAlign": "center",
         "lineHeight": 1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": [],
+        "managedSourceSymbols": [
+          "terrain.hindering.icon"
+        ],
+        "bbox": [
+          335.2278137207031,
+          518.2163696289062,
+          382.6308288574219,
+          528.9443969726562
+        ],
+        "spanKey": "page_21_unit_p21-block23-hindering-label__pt-BR"
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "￼",
+            "symbolId": "terrain.hindering.icon",
+            "symbolMetrics": {
+              "widthEm": 1.0586683485243056,
+              "heightEm": 1.3083970811631944,
+              "verticalAlignEm": 0.3341946072048611,
+              "advanceEm": 1.3694150151909723
+            },
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "DIFÍCIL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": [
+          "terrain.hindering.icon"
+        ],
         "bbox": [
           335.2278137207031,
           518.2163696289062,
@@ -6999,17 +7035,33 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_21_unit_p21-block23-hindering-label__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
-            "renderedSymbolIds": [],
+            "renderedSymbolIds": [
+              "terrain.hindering.icon"
+            ],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               446.55
             ],
-            "visualRowIntervalsPt": null,
-            "pageScaleCssPxPerPt": null,
-            "renderedFontSamples": [],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "7.29364px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
             "frameHeightCssPx": 7.3
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
@@ -7045,22 +7097,41 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_21_unit_p21-block23-hindering-label__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
-          "renderedSymbolIds": [],
+          "renderedSymbolIds": [
+            "terrain.hindering.icon"
+          ],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
             446.55
           ],
-          "visualRowIntervalsPt": null,
-          "pageScaleCssPxPerPt": null,
-          "renderedFontSamples": [],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "7.29364px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
           "frameHeightCssPx": 7.3
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
-      "copyfitRevisionNote": "Per-label typographicSpanUnit retains the source PDF text anchor and alignment within its existing vector-art label; the background icon and colored border remain source artwork. Copyfit V3 is EXACT 1/1 at 100% and 200%."
+      "copyfitRevisionNote": "Per-label typographicSpanUnit retains the source PDF text anchor and alignment within its existing vector-art label; the background icon and colored border remain source artwork. Copyfit V3 is EXACT 1/1 at 100% and 200%.",
+      "semanticSymbols": [
+        "terrain.hindering.icon"
+      ]
     },
     {
       "blockIndex": 10,
@@ -7078,23 +7149,21 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "ÁGUA",
-            "font": "OptimaLTStd-Bold",
+            "text": "￼",
+            "symbolId": "terrain.water.icon",
+            "symbolMetrics": {
+              "widthEm": 0.8674452039930556,
+              "heightEm": 1.1898871527777777,
+              "verticalAlignEm": 0.2229953342013889,
+              "advanceEm": 1.0301340928819445
+            },
+            "font": "OptimaLTStd",
             "size": 9,
-            "color": "#ffffff",
-            "weight": 700,
+            "color": "#231f20",
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
-          }
-        ],
-        "textAlign": "center",
-        "lineHeight": 1,
-        "lineHeightMode": "source",
-        "managedSourceSymbols": []
-      },
-      "diagnosticData": {
-        "schemaVersion": 2,
-        "segments": [
+          },
           {
             "text": "ÁGUA",
             "font": "OptimaLTStd-Bold",
@@ -7108,7 +7177,45 @@
         "textAlign": "center",
         "lineHeight": 1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "terrain.water.icon"
+        ]
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "￼",
+            "symbolId": "terrain.water.icon",
+            "symbolMetrics": {
+              "widthEm": 0.8674452039930556,
+              "heightEm": 1.1898871527777777,
+              "verticalAlignEm": 0.2229953342013889,
+              "advanceEm": 1.0301340928819445
+            },
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "ÁGUA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": [
+          "terrain.water.icon"
+        ]
       },
       "status": "draft_pending_human_review",
       "technicalStatus": "measured_copyfit_v3_script_visual_rows",
@@ -7206,17 +7313,33 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_21_unit_p21-block25-water-label__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
-            "renderedSymbolIds": [],
+            "renderedSymbolIds": [
+              "terrain.water.icon"
+            ],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               446.55
             ],
-            "visualRowIntervalsPt": null,
-            "pageScaleCssPxPerPt": null,
-            "renderedFontSamples": [],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "7.29364px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
             "frameHeightCssPx": 7.3
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
@@ -7252,22 +7375,41 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_21_unit_p21-block25-water-label__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
-          "renderedSymbolIds": [],
+          "renderedSymbolIds": [
+            "terrain.water.icon"
+          ],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
             446.55
           ],
-          "visualRowIntervalsPt": null,
-          "pageScaleCssPxPerPt": null,
-          "renderedFontSamples": [],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "7.29364px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
           "frameHeightCssPx": 7.3
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
-      "copyfitRevisionNote": "Per-label typographicSpanUnit retains the source PDF text anchor and alignment within its existing vector-art label; the background icon and colored border remain source artwork. Copyfit V3 is EXACT 1/1 at 100% and 200%."
+      "copyfitRevisionNote": "Per-label typographicSpanUnit retains the source PDF text anchor and alignment within its existing vector-art label; the background icon and colored border remain source artwork. Copyfit V3 is EXACT 1/1 at 100% and 200%.",
+      "semanticSymbols": [
+        "terrain.water.icon"
+      ]
     },
     {
       "blockIndex": 32,
@@ -7285,30 +7427,21 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "LODO",
-            "font": "OptimaLTStd-Bold",
+            "text": "￼",
+            "symbolId": "terrain.muck.icon",
+            "symbolMetrics": {
+              "widthEm": 1.0026652018229167,
+              "heightEm": 1.0009969075520833,
+              "verticalAlignEm": 0.18135579427083334,
+              "advanceEm": 1.1560596462673611
+            },
+            "font": "OptimaLTStd",
             "size": 9,
-            "color": "#ffffff",
-            "weight": 700,
+            "color": "#231f20",
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
-          }
-        ],
-        "textAlign": "center",
-        "lineHeight": 1,
-        "lineHeightMode": "source",
-        "managedSourceSymbols": [],
-        "bbox": [
-          568.516845703125,
-          518.2163696289062,
-          593.671875,
-          528.9443969726562
-        ],
-        "spanKey": "page_21_unit_p21-block25-muck-label__pt-BR"
-      },
-      "diagnosticData": {
-        "schemaVersion": 2,
-        "segments": [
+          },
           {
             "text": "LODO",
             "font": "OptimaLTStd-Bold",
@@ -7322,7 +7455,52 @@
         "textAlign": "center",
         "lineHeight": 1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": [],
+        "managedSourceSymbols": [
+          "terrain.muck.icon"
+        ],
+        "bbox": [
+          568.516845703125,
+          518.2163696289062,
+          593.671875,
+          528.9443969726562
+        ],
+        "spanKey": "page_21_unit_p21-block25-muck-label__pt-BR"
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "￼",
+            "symbolId": "terrain.muck.icon",
+            "symbolMetrics": {
+              "widthEm": 1.0026652018229167,
+              "heightEm": 1.0009969075520833,
+              "verticalAlignEm": 0.18135579427083334,
+              "advanceEm": 1.1560596462673611
+            },
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "LODO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": [
+          "terrain.muck.icon"
+        ],
         "bbox": [
           568.516845703125,
           518.2163696289062,
@@ -7425,17 +7603,33 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_21_unit_p21-block25-muck-label__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
-            "renderedSymbolIds": [],
+            "renderedSymbolIds": [
+              "terrain.muck.icon"
+            ],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
               446.55
             ],
-            "visualRowIntervalsPt": null,
-            "pageScaleCssPxPerPt": null,
-            "renderedFontSamples": [],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "7.29364px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
             "frameHeightCssPx": 7.3
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
@@ -7471,22 +7665,41 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_21_unit_p21-block25-muck-label__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
-          "renderedSymbolIds": [],
+          "renderedSymbolIds": [
+            "terrain.muck.icon"
+          ],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
             446.55
           ],
-          "visualRowIntervalsPt": null,
-          "pageScaleCssPxPerPt": null,
-          "renderedFontSamples": [],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "7.29364px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
           "frameHeightCssPx": 7.3
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
-      "copyfitRevisionNote": "Per-label typographicSpanUnit retains the source PDF text anchor and alignment within its existing vector-art label; the background icon and colored border remain source artwork. Copyfit V3 is EXACT 1/1 at 100% and 200%."
+      "copyfitRevisionNote": "Per-label typographicSpanUnit retains the source PDF text anchor and alignment within its existing vector-art label; the background icon and colored border remain source artwork. Copyfit V3 is EXACT 1/1 at 100% and 200%.",
+      "semanticSymbols": [
+        "terrain.muck.icon"
+      ]
     },
     {
       "blockIndex": 9,
@@ -7504,23 +7717,21 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "PERIGOSO",
-            "font": "OptimaLTStd-Bold",
+            "text": "￼",
+            "symbolId": "terrain.dangerous.icon",
+            "symbolMetrics": {
+              "widthEm": 0.5156656901041666,
+              "heightEm": 1.1555582682291667,
+              "verticalAlignEm": 0.2447781032986111,
+              "advanceEm": 0.7865368012152778
+            },
+            "font": "OptimaLTStd",
             "size": 9,
-            "color": "#ffffff",
-            "weight": 700,
+            "color": "#231f20",
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
-          }
-        ],
-        "textAlign": "center",
-        "lineHeight": 1,
-        "lineHeightMode": "source",
-        "managedSourceSymbols": []
-      },
-      "diagnosticData": {
-        "schemaVersion": 2,
-        "segments": [
+          },
           {
             "text": "PERIGOSO",
             "font": "OptimaLTStd-Bold",
@@ -7534,7 +7745,45 @@
         "textAlign": "center",
         "lineHeight": 1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": []
+        "managedSourceSymbols": [
+          "terrain.dangerous.icon"
+        ]
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "￼",
+            "symbolId": "terrain.dangerous.icon",
+            "symbolMetrics": {
+              "widthEm": 0.5156656901041666,
+              "heightEm": 1.1555582682291667,
+              "verticalAlignEm": 0.2447781032986111,
+              "advanceEm": 0.7865368012152778
+            },
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "PERIGOSO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": [
+          "terrain.dangerous.icon"
+        ]
       },
       "status": "draft_pending_human_review",
       "technicalStatus": "measured_copyfit_v3_script_visual_rows",
@@ -7632,17 +7881,33 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_21_unit_p21-block24-dangerous-label__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
-            "renderedSymbolIds": [],
+            "renderedSymbolIds": [
+              "terrain.dangerous.icon"
+            ],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
-              473.11
+              473.09
             ],
-            "visualRowIntervalsPt": null,
-            "pageScaleCssPxPerPt": null,
-            "renderedFontSamples": [],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "7.29364px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
             "frameHeightCssPx": 7.3
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
@@ -7678,22 +7943,41 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_21_unit_p21-block24-dangerous-label__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
-          "renderedSymbolIds": [],
+          "renderedSymbolIds": [
+            "terrain.dangerous.icon"
+          ],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            473.11
+            473.09
           ],
-          "visualRowIntervalsPt": null,
-          "pageScaleCssPxPerPt": null,
-          "renderedFontSamples": [],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "7.29364px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
           "frameHeightCssPx": 7.3
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
-      "copyfitRevisionNote": "Per-label typographicSpanUnit retains the source PDF text anchor and alignment within its existing vector-art label; the background icon and colored border remain source artwork. Copyfit V3 is EXACT 1/1 at 100% and 200%."
+      "copyfitRevisionNote": "Per-label typographicSpanUnit retains the source PDF text anchor and alignment within its existing vector-art label; the background icon and colored border remain source artwork. Copyfit V3 is EXACT 1/1 at 100% and 200%.",
+      "semanticSymbols": [
+        "terrain.dangerous.icon"
+      ]
     },
     {
       "blockIndex": 31,
@@ -7711,30 +7995,21 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "ESPECIAL",
-            "font": "OptimaLTStd-Bold",
+            "text": "￼",
+            "symbolId": "terrain.special.icon",
+            "symbolMetrics": {
+              "widthEm": 0.9811130099826388,
+              "heightEm": 0.9333360460069444,
+              "verticalAlignEm": 0.13763427734375,
+              "advanceEm": 1.2650585655381943
+            },
+            "font": "OptimaLTStd",
             "size": 9,
-            "color": "#ffffff",
-            "weight": 700,
+            "color": "#231f20",
+            "weight": 400,
             "style": "normal",
             "disableLigatures": true
-          }
-        ],
-        "textAlign": "center",
-        "lineHeight": 1,
-        "lineHeightMode": "source",
-        "managedSourceSymbols": [],
-        "bbox": [
-          510.18780517578125,
-          550.9854125976562,
-          540.9947509765625,
-          561.7134399414062
-        ],
-        "spanKey": "page_21_unit_p21-block24-special-label__pt-BR"
-      },
-      "diagnosticData": {
-        "schemaVersion": 2,
-        "segments": [
+          },
           {
             "text": "ESPECIAL",
             "font": "OptimaLTStd-Bold",
@@ -7748,7 +8023,52 @@
         "textAlign": "center",
         "lineHeight": 1,
         "lineHeightMode": "source",
-        "managedSourceSymbols": [],
+        "managedSourceSymbols": [
+          "terrain.special.icon"
+        ],
+        "bbox": [
+          510.18780517578125,
+          550.9854125976562,
+          540.9947509765625,
+          561.7134399414062
+        ],
+        "spanKey": "page_21_unit_p21-block24-special-label__pt-BR"
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "￼",
+            "symbolId": "terrain.special.icon",
+            "symbolMetrics": {
+              "widthEm": 0.9811130099826388,
+              "heightEm": 0.9333360460069444,
+              "verticalAlignEm": 0.13763427734375,
+              "advanceEm": 1.2650585655381943
+            },
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "ESPECIAL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": [
+          "terrain.special.icon"
+        ],
         "bbox": [
           510.18780517578125,
           550.9854125976562,
@@ -7851,17 +8171,33 @@
           },
           "pageRendererEvidence": {
             "spanKey": "page_21_unit_p21-block24-special-label__pt-BR",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
             "rangeRectFragments": 1,
-            "renderedSymbolIds": [],
+            "renderedSymbolIds": [
+              "terrain.special.icon"
+            ],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
-              473.11
+              473.09
             ],
-            "visualRowIntervalsPt": null,
-            "pageScaleCssPxPerPt": null,
-            "renderedFontSamples": [],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "7.29364px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
             "frameHeightCssPx": 7.3
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
@@ -7897,22 +8233,41 @@
         },
         "pageRendererEvidence": {
           "spanKey": "page_21_unit_p21-block24-special-label__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
-          "renderedSymbolIds": [],
+          "renderedSymbolIds": [
+            "terrain.special.icon"
+          ],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            473.11
+            473.09
           ],
-          "visualRowIntervalsPt": null,
-          "pageScaleCssPxPerPt": null,
-          "renderedFontSamples": [],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "7.29364px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
           "frameHeightCssPx": 7.3
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
-      "copyfitRevisionNote": "Per-label typographicSpanUnit retains the source PDF text anchor and alignment within its existing vector-art label; the background icon and colored border remain source artwork. Copyfit V3 is EXACT 1/1 at 100% and 200%."
+      "copyfitRevisionNote": "Per-label typographicSpanUnit retains the source PDF text anchor and alignment within its existing vector-art label; the background icon and colored border remain source artwork. Copyfit V3 is EXACT 1/1 at 100% and 200%.",
+      "semanticSymbols": [
+        "terrain.special.icon"
+      ]
     },
     {
       "blockIndex": 11,

@@ -425,7 +425,7 @@ try {
   await page.locator('select.language-select').selectOption('pt-BR');
   await page.waitForFunction(() => document.querySelector('select.language-select')?.value === 'pt-BR');
   await page.waitForFunction(() => document.querySelector('.app-container') !== null);
-  await page.locator('button[title="Fit to Screen"]').click();
+  await page.locator('button[title="Fit to Screen"], button[title*="Ajustar"], button:has(svg.lucide-maximize)').first().click();
   await page.waitForTimeout(250);
 
   const pageInput = page.locator('input.page-input');

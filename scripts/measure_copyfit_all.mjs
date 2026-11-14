@@ -3,6 +3,7 @@
  * Automated Copyfit V3 visual-line measurement runner across all pages.
  *
  *   node scripts/measure_copyfit_all.mjs [--from <page>] [--to <page>] [--dry-run]
+ *   node scripts/measure_copyfit_all.mjs --page <page> --span-keys <key1,key2,...> [--force]
  *
  * Reuses a single Playwright browser instance, measures both the official source PDF
  * (PyMuPDF baselines) and live PageRenderer (Playwright client rects inside the review highlight).
@@ -18,6 +19,9 @@ const args = process.argv.slice(2);
 const fromIdx = args.indexOf('--from');
 const toIdx = args.indexOf('--to');
 const pageIdx = args.indexOf('--page');
+const spanKeysIdx = args.indexOf('--span-keys');
+const selectedSpanKeys = spanKeysIdx >= 0
+  ? new Set(String(args[spanKeysIdx + 1] ?? '').split(',').filter(Boolean)) : null;
 const specificPage = pageIdx >= 0 ? Number(args[pageIdx + 1]) : null;
 const fromPage = specificPage ?? (fromIdx >= 0 ? Number(args[fromIdx + 1]) : 1);
 const toPage = specificPage ?? (toIdx >= 0 ? Number(args[toIdx + 1]) : 102);
@@ -36,7 +40,8 @@ const catalog = JSON.parse(readFileSync(resolve(root, 'apps/web/public/translati
 // Identify target pages with pending unmeasured candidates (or all candidates if force)
 const targetPages = [];
 for (let p = fromPage; p <= toPage; p += 1) {
-  const pageCandidates = catalog.proposals.flatMap(pr => pr.candidates).filter(c => c.pageNumber === p);
+  const pageCandidates = catalog.proposals.flatMap(pr => pr.candidates).filter(c => c.pageNumber === p
+    && (!selectedSpanKeys || selectedSpanKeys.has(c.spanKey)));
   const pending = force
     ? pageCandidates
     : pageCandidates.filter(c => !(c.copyfitSourcePdfLineCount && c.copyfitPageRendererLineCount));
@@ -70,13 +75,15 @@ try {
 
   await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
   await page.waitForSelector('input.page-input');
-  await page.locator('select.language-select').selectOption('pt-BR');
+  const ptLanguageToggle = page.getByRole('button', { name: 'Português (Brasil)', exact: true });
+  if (await ptLanguageToggle.count()) await ptLanguageToggle.click();
+  else await page.locator('select').filter({ has: page.locator('option[value="pt-BR"]') }).selectOption('pt-BR', { force: true });
 
   // Set zoom to 200%
   const zoomLabel = page.locator('.zoom-level');
   for (let i = 0; i < 20 && parseInt(await zoomLabel.innerText(), 10) !== zoomPercent; i += 1) {
     const current = parseInt(await zoomLabel.innerText(), 10);
-    await page.locator(current < zoomPercent ? 'button[title="Zoom In"]' : 'button[title="Zoom Out"]').click();
+    await page.locator(current < zoomPercent ? 'button[title="Zoom In"], button[title*="Aumentar"], button:has(svg.lucide-zoom-in)' : 'button[title="Zoom Out"], button[title*="Diminuir"], button:has(svg.lucide-zoom-out)').first().click();
     await page.waitForTimeout(100);
   }
   const zoomActual = await zoomLabel.innerText();

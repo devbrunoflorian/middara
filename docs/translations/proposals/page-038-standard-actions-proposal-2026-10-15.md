@@ -1,6 +1,6 @@
 # p.38 — Ações Padrão (proposta isolada)
 
-**Status:** proposta PT-BR não aprovada; não foi salva no Payload, em sidecar canônico ou como tradução humana.
+**Registro histórico:** este rascunho v1/v2 foi substituído pela revisão v3 e pelas correções aprovadas em 2026-11-13. A decisão atual do glossário `Empower → Fortalecer`, o copyfit das unidades de Aliados/Oponentes e a fidelidade local de fonte/símbolos estão documentados em `page-038-standard-actions-and-abilities-review-2026-10-16-v3.json` e no status da página. Preserve este arquivo como histórico da proposta inicial.
 
 ## Fonte e identidade
 

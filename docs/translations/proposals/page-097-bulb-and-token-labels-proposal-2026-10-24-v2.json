@@ -551,7 +551,7 @@
       "spanKey": "page_97_block_4__pt-BR",
       "language": "pt-BR",
       "sourceText": "Bulbs tokens are put into play by the Fragor Combatant and Conduit card. When any figure would provoke a Break Attack from a Bulb, flip the Bulb token and resolve the listed Ability against all figures on or adjacent to the Bulb. Bulb tokens that are moved at the same time as another figure or cause a situation where a Break Attacks timing is ambiguous will not flip.",
-      "proposalText": "As fichas de Bulbo são colocadas em jogo pela carta de Combatente Fragor e Conduit. Quando qualquer miniatura provocaria um Ataque de Ruptura de uma ficha de Bulbo, vire a ficha e resolva a Habilidade indicada contra todas as miniaturas na mesma casa ou adjacentes à ficha de Bulbo. Fichas de Bulbo movidas junto com outra miniatura, ou que tornem ambíguo o momento de um Ataque de Ruptura, não serão viradas.",
+      "proposalText": "As fichas de Bulbo são colocadas em jogo pela carta de Combatente Fragor e Conduit. Quando qualquer miniatura provocaria um Ataque de Oportunidade de uma ficha de Bulbo, vire a ficha e resolva a Habilidade indicada contra todas as miniaturas na mesma casa ou adjacentes à ficha de Bulbo. Fichas de Bulbo movidas junto com outra miniatura, ou que tornem ambíguo o momento de um Ataque de Oportunidade, não serão viradas.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_97_block_4__pt-BR",
@@ -610,7 +610,7 @@
             "disableLigatures": true
           },
           {
-            "text": "Quando qualquer miniatura provocaria um Ataque de Ruptura de uma ficha de ",
+            "text": "Quando qualquer miniatura provocaria um Ataque de Oportunidade de uma ficha de ",
             "font": "OptimaLTStd",
             "size": 10,
             "weight": 400,
@@ -673,7 +673,7 @@
             "disableLigatures": true
           },
           {
-            "text": " movidas junto com outra miniatura, ou que tornem ambíguo o momento de um Ataque de Ruptura, não serão viradas.",
+            "text": " movidas junto com outra miniatura, ou que tornem ambíguo o momento de um Ataque de Oportunidade, não serão viradas.",
             "font": "OptimaLTStd",
             "size": 10,
             "weight": 400,
@@ -684,115 +684,18 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_live_viewer_copyfit_v3",
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
       "editorialStatus": "pending_human_review",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Bulb → Bulbo (provisional component name)",
-        "Break Attack → Ataque de Ruptura (term not yet approved)",
         "Fragor Combatant and Conduit card: source wording may name one card or two; keep the localized relation provisional for human review"
       ],
       "sourcePdfVisualLineCount": 4,
-      "pageRendererVisualLineCount": 4,
-      "copyfitClassification": "EXACT",
-      "copyfitMeasurementsByZoom": {
-        "200%": {
-          "status": "measured_copyfit_v3_script_visual_rows",
-          "sourcePdfVisualLineCount": 4,
-          "pageRendererVisualLineCount": 4,
-          "classification": "EXACT",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
-          "environment": {
-            "pageNumber": 97,
-            "pdfDocumentPageIndex": 96,
-            "language": "pt-BR",
-            "viewerZoom": "200%",
-            "viewportCssPixels": "1280x720",
-            "devicePixelRatio": 1.25,
-            "fontLoaded": true
-          },
-          "sourceEvidence": {
-            "bboxPt": [
-              173.29348754882812,
-              319.9341125488281,
-              766.793212890625,
-              370.5340881347656
-            ],
-            "visualRowBaselinesPt": [
-              329.164,
-              342.994,
-              353.994,
-              367.824
-            ],
-            "spans": 14,
-            "visualRows": 4
-          },
-          "pageRendererEvidence": {
-            "spanKey": "page_97_block_4",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-            "rangeRectFragments": 19,
-            "renderedSymbolIds": [],
-            "semanticSymbolOnlyRows": 0,
-            "distinctVisualRows": 4,
-            "visualRowTopsCssPx": [
-              285.86,
-              293.97,
-              302.08,
-              310.19
-            ],
-            "frameHeightCssPx": 41
-          },
-          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-        }
-      },
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 4,
-        "pageRendererVisualLineCount": 4,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 97,
-          "pdfDocumentPageIndex": 96,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25,
-          "fontLoaded": true
-        },
-        "sourceEvidence": {
-          "bboxPt": [
-            173.29348754882812,
-            319.9341125488281,
-            766.793212890625,
-            370.5340881347656
-          ],
-          "visualRowBaselinesPt": [
-            329.164,
-            342.994,
-            353.994,
-            367.824
-          ],
-          "spans": 14,
-          "visualRows": 4
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_97_block_4",
-          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-          "rangeRectFragments": 19,
-          "renderedSymbolIds": [],
-          "semanticSymbolOnlyRows": 0,
-          "distinctVisualRows": 4,
-          "visualRowTopsCssPx": [
-            285.86,
-            293.97,
-            302.08,
-            310.19
-          ],
-          "frameHeightCssPx": 41
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      "pageRendererVisualLineCount": null,
+      "copyfitClassification": null,
+      "copyfitMeasurementsByZoom": {},
+      "copyfitMeasurement": null
     },
     {
       "blockIndex": 10,

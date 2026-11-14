@@ -1,10 +1,10 @@
 # p.36 — Trilha de Iniciativa — proposta PT-BR v1
 
-- **Status:** proposta revisada visualmente; aguarda revisão humana de terminologia e arte. Não é tradução aprovada.
+- **Status na criação (2026-10-15):** proposta revisada visualmente; naquele momento aguardava revisão humana de terminologia e arte. O status atual está na reconciliação ao final deste registro.
 - **Fonte:** PDF EN oficial, p.36/102; SHA-256 `A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351`.
 - **Prova:** snapshot imutável `output/proofs/translation-readiness-2026-10-15/p036-initiative-track-v1/snapshot/snapshot-v1.json`; PDF isolado de uma página.
 - **Registros:** 26 unidades textuais PT-BR independentes. As três legendas da arte abaixo pertencem a uma variante localizada do componente, não contam como registros de texto.
-- **Persistência:** nenhum Payload, sidecar canônico ou tradução humana foi escrito.
+- **Persistência no snapshot inicial:** nenhum Payload, sidecar canônico ou tradução humana foi escrito.
 
 ## Proposta por unidade
 
@@ -55,3 +55,18 @@ As pequenas áreas atrás das três legendas foram recompostas com pixels do `ba
 ## Próxima decisão
 
 Revisar a terminologia e aprovar ou rejeitar a aproximação estética das três legendas. Até essa decisão, manter esta como prova/proposta isolada; não copiar os registros para Payload, DOM, sidecars canônicos ou tradução humana aprovada.
+
+## Reconciliação vigente (2026-11-13)
+
+O status pendente acima descreve apenas a prova inicial de 2026-10-15 e está supersedido. A comparação atual cobre o PDF-fonte oficial, o EN e o PT-BR no Viewer e no print. A decisão editorial vigente é traduzir as regras e preservar em inglês nomes e textos impressos nas cartas e demais componentes.
+
+- O Payload contém 26/26 unidades da página aprovadas e `EXACT`. Sete traduções existentes foram ajustadas para eliminar excesso horizontal; as sete aprovações foram atualizadas pelos IDs de review já existentes, sem duplicar chaves. Cada publicação anterior ficou preservada em `publication.history`.
+- A proposta foi dividida em dois arquivos para corresponder às identidades existentes: 20 unidades v1 em `page-036-initiative-track-body-proposal-2026-11-13-v1.json` e seis bullets v2 em `page-036-initiative-track-list-proposal-2026-11-13-v2.json`.
+- As sete unidades ajustadas mantêm as linhas da fonte a 100% e 200%: 5, 3, 5, 5, 4, 2 e 3 linhas. O export final não mostra excesso horizontal nas caixas do Viewer ou do print; `pdfVerification=true` e a MediaBox mede 820,346 × 820,346 pt.
+- O glossário confirma `Initiative Track → Trilha de Iniciativa` (id 26), `Group → Grupo` (id 38) e `Defeated → Derrotado` (id 23); `Setup` e `End Conditions` seguem as formas registradas no glossário editorial. `Combatant` (id 32) não foi generalizado: o registro é uma nota de forma local, e `Initiative Card` não tem uma entrada exata independente.
+- O PDF-fonte contém o erro tipográfico `Initaitive` duas vezes no quinto bullet (unidade `item-4`); a tradução usa o termo pretendido, sem alterar a fonte inglesa.
+- O conteúdo impresso nas cartas do diagrama permanece em inglês conforme o escopo atual. As três legendas `ROUND`, `FRONT` e `BACK` já pertencem à variante localizada do componente, não às 26 unidades textuais.
+
+**Evidência final:** `tmp/page-by-page-audit/page-036-review-pt-final-2026-11-13.pdf`, `page-036-review-pt-final-2026-11-13-viewer.png`, `page-036-review-pt-final-2026-11-13-print.png` e `page-036-review-pt-final-2026-11-13-metrics.json`; a comparação EN e a captura da fonte oficial também estão em `tmp/page-by-page-audit/`.
+
+**Próximo alvo da revisão página a página: p.37.**

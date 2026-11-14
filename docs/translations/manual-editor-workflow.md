@@ -7,7 +7,7 @@
 Use estas fontes nesta ordem:
 
 1. **PDF oficial em inglês:** `C:\Users\bruno\Downloads\Rulebook 1p2 Final Version 05-19-23 Optimized.pdf`. É a autoridade para texto, ordem, pontuação, ênfases e conteúdo impresso.
-2. **Glossário oficial:** [`glossary.md`](glossary.md). `glossary-candidates.md` é provisório e não substitui as entradas aprovadas. No editor PT-BR, “Contexto para tradução” mostra o EN e correspondências literais desse glossário. Flexões e variantes não são inferidas.
+2. **Glossário e decisões canônicas:** confira os termos pertinentes de [`glossary.md`](glossary.md) e a decisão correspondente em `translation-glossary-decisions` no Payload antes de finalizar cada página; se houver conflito, preserve a decisão aprovada e reconcilie a nota desatualizada antes de reaproveitá-la. `glossary-candidates.md` é provisório e não substitui entradas aprovadas. “Contexto para tradução” mostra correspondências literais, mas não substitui essa conferência nem infere flexões e variantes. Preserve distinções como `Token` → **Ficha**, `Adventure Sheet` → **Folha da Aventura**, `Adventurer Sheet` → **Ficha de Aventureiro** e `Tier` distinto de `Level/LVL`.
 3. **Voz:** [`references/page-2-voice-reference.md`](references/page-2-voice-reference.md) é uma amostra curta aprovada para tom e escolhas já feitas. Não é modelo de estrutura nem prova de cobertura da página.
 4. **Copyfit/DTP:** [`../../.agents/skills/middara-translation-copyfit/SKILL.md`](../../.agents/skills/middara-translation-copyfit/SKILL.md) e sua referência de [copyfitting e DTP](../../.agents/skills/middara-translation-copyfit/references/copyfitting-and-dtp.md).
 5. **Editor e símbolos:** a unidade e o key atuais vêm da página carregada; os símbolos inline usam identidade semântica estável. A paleta ou atalhos como `[[melee]]`, `[[lightning]]` e `[[black-die]]` inserem objetos reconhecidos pelo editor. O token visível é uma forma de edição, não o ID persistido.
@@ -36,6 +36,12 @@ O `extract_dom.py --all-pages` não faz parte do procedimento de tradução; nã
 
 Traduza a unidade editorial selecionada no viewer — normalmente um parágrafo, heading, item, label ou corpo — e deixe o app manter sua identidade EN ↔ PT-BR. Uma linha física do PDF não é uma unidade de tradução. Não edite IDs, line IDs, FlowBlocks ou JSON para traduzir.
 
+### Escopo editorial atual: regras, não cartas
+
+Nesta etapa, traduza a prosa e os elementos editoriais do livro de regras; **não traduza o texto impresso nas cartas**. Preserve as cartas como arte-fonte em inglês, incluindo títulos, nomes próprios e regras impressas. Quando a prosa mencionar uma carta pelo nome, use o nome exatamente como aparece nela — por exemplo, `Master Work` e `Great Hammer`. Termos gerais e mecânicos na prosa continuam sujeitos ao glossário aprovado.
+
+Antes de classificar algo como texto de carta, compare a região com o PDF oficial: uma caixa de regra ao lado da carta pode ser prosa traduzível, enquanto texto dentro da imagem da carta permanece intacto. O cadastro atual do glossário guarda alguns metadados de componente em JSON livre; até haver taxonomia validada por enums, trate esses valores como descrições, não como categorias controladas nem como autorização para localizar a arte.
+
 Unidades relacionadas continuam simples para o tradutor: por exemplo, na p. 78 o Body e `Example` são dois parágrafos editáveis independentes, com o bullet associado ao item visual pai. Edite cada parágrafo clicando na própria caixa. Se a unidade não estiver separada no editor, não tente compensar digitando linhas físicas nem mudando a chave; registre a página/unidade para uma correção estrutural concreta.
 
 Quebras de linha digitadas no campo pertencem ao mesmo override. Elas não criam automaticamente uma nova identidade editorial. O significado de `Enter`/`Shift+Enter` não é um contrato universal para dividir unidades; prefira as unidades já apresentadas pelo editor.
@@ -45,7 +51,7 @@ Quebras de linha digitadas no campo pertencem ao mesmo override. Elas não criam
 1. **Abra a página impressa definida para a sessão.** A fila de conteúdo novo começa após a p. 12, cujas traduções existentes estão aprovadas e devem permanecer intactas. Use a fila combinada com o usuário; `page-status.csv` não determina sozinho qual é a próxima página.
 2. **Confira EN no viewer e no PDF.** Confirme que selecionou a caixa certa e entenda headings, parágrafos, listas, Notes/Examples, hierarquia, arte e símbolos inline antes de traduzir.
 3. **Mude para PT-BR e abra a unidade no Admin.** O editor mantém o key da unidade. O painel recolhível **Contexto para tradução** mostra o texto EN da fonte e os termos do glossário encontrados literalmente.
-4. **Escreva a tradução manualmente.** Preserve sentido de regra, agente, negação, condições, quantidade, ordem, referência cruzada, bold/italic e lugar de cada símbolo. Use a paleta ou atalhos `[[alias]]` para símbolos; não digite PUA, emoji ou desenhos para imitar ícones. O app não traduz o conteúdo automaticamente.
+4. **Escreva a tradução manualmente.** Preserve sentido de regra, agente, negação, condições, quantidade, ordem, referência cruzada, termos aprovados, bold/italic e lugar de cada símbolo. Use a paleta ou atalhos `[[alias]]` para símbolos; não digite PUA, emoji ou desenhos para imitar ícones. O app não traduz o conteúdo automaticamente.
 5. **Revise o reflow vivo.** Leia o PT dentro da página inteira: quebras naturais, estilos, símbolos, listas/hierarquia, clipping, colisões e interferência com arte ou boxes vizinhos. Não imite o número de linhas do EN com quebras manuais. Não reduza fonte, altere entrelinha ou redimensione molduras apenas para forçar texto a caber; se copyfit fiel exigir DTP, registre a unidade e a ação necessária.
 6. **Salve e espere a confirmação.** O estado pode incluir um rascunho local. Considere sincronizado com o servidor somente quando o app confirmar o save no Payload; avisos de rascunho local ou falha indicam que ainda é preciso resolver a persistência.
 7. **Recarregue e confira.** Confirme que o PT continua presente, que o EN permanece intacto, que estilos e símbolos sobreviveram e que a unidade certa continua associada à tradução. Volte ao EN e ao PT uma vez para conferir o isolamento entre idiomas.
@@ -57,6 +63,7 @@ Quebras de linha digitadas no campo pertencem ao mesmo override. Elas não criam
 - O painel de contexto mostra **correspondências literais exatas** com o glossário. Uma flexão que não aparece na lista não prova que o termo esteja ausente do glossário; confira a entrada manualmente.
 - Após salvar, o texto pode ter estado local e estado sincronizado no Payload. Use a confirmação visível do save e depois reload; não deduza sincronização só porque a prévia mudou.
 - Fonte EN preserva a geometria original. PT-BR reflowa nas estruturas editáveis correspondentes. Espaçamentos e quebras fonte não devem ser copiados como linhas físicas para o PT.
+- Para falhas de composição que reaparecem, consulte [Problemas comuns de layout e correções aprovadas](common-layout-issues.md). Confirme a hierarquia e a geometria no PDF-fonte antes de aplicar o padrão e repita o copyfit após qualquer mudança de recuo ou moldura.
 
 ## Persistência, viewer e export
 

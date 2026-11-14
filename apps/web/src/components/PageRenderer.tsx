@@ -148,6 +148,8 @@ export interface Block {
     rule: string;
     evidenceRef: string;
   };
+  /** Exact source glyphs (for example A–E diagram callouts) that are unchanged across viewer languages. */
+  sourceTextLanguageInvariant?: boolean;
   /** Stable semantic editor key for newly split units; legacy blocks keep their index-based key. */
   editorKey?: string;
   /** Source line indexes that render as fixed page furniture and stay outside rich-text editing. */
@@ -160,6 +162,8 @@ export interface Block {
   listFlowItem?: boolean;
   /** Available translated-flow height before the next source list item. */
   listFlowHeight?: number;
+  /** Source-measured inset for unmarked paragraphs that remain nested under a list item. */
+  flowParagraphIndentsPt?: Record<number, number>;
   /** Preserve a legacy whole-block translation whose list cannot be split losslessly. */
   disableAutoListMarkerDetection?: boolean;
   /** Keep source-furniture visible but unavailable to Admin editing. */
@@ -1138,6 +1142,8 @@ interface PageRendererProps {
   onFocalZoomApplied?: (id: number) => void;
   onNavigate?: (pageNum: number) => void;
   language?: 'en' | 'pt-BR';
+  /** Show the untouched source PDF page for direct visual comparison. */
+  showOriginalSource?: boolean;
   onToggleLanguage?: (language: 'en' | 'pt-BR') => void;
   symbolAliasPreferences?: SymbolAliasPreferences;
   onPaletteEditorChange?: (editorKey: string, state: AdminSymbolPaletteEditorState | null) => void;
@@ -1610,7 +1616,7 @@ function hasInlineSemanticSymbol(segment: Segment): boolean {
 export const PageRenderer: React.FC<PageRendererProps> = ({
   pageData, overlayHost = null, isAdmin, showRuler = false, layoutMode = false, onLayoutDirtyChange, zoomLevel = 1, continuousScroll = false,
   focalZoomEnabled = false, focalZoomAnchor = null, onFocalZoomApplied,
-  onNavigate, language = 'en', onToggleLanguage, symbolAliasPreferences, onPaletteEditorChange,
+  onNavigate, language = 'en', showOriginalSource = false, onToggleLanguage, symbolAliasPreferences, onPaletteEditorChange,
   onTranslationDraftDirtyChange, pendingEditableNavigation, onRequestEditablePageNavigation,
   onResolveEditableNavigation, totalPages = 102, editableNavigationEnabled = true,
   editorPanelWidth = 420, faqOpen = false, onEditorPanelWidthChange, onEditorOpenChange,
@@ -1689,9 +1695,10 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
 
     pageData.blocks.forEach((block, blockIndex) => {
       if (block.hiddenFromPage || block.artworkOnly) return;
-      // These four source labels are printed as part of the EXIT component art.
+      // These source labels are printed inside component/diagram artwork.
       // They remain source-identical in PT-BR and are not missing prose.
-      if (pageNumber === 19 && ['block_39', 'block_43', 'block_47', 'block_51'].includes(block.id)) return;
+      if ((block.sourceTextLanguageInvariant && hasExactSourceGeometry(block))
+        || (pageNumber === 19 && ['block_39', 'block_43', 'block_47', 'block_51'].includes(block.id))) return;
       const blockKey = block.editorKey
         ? `${block.editorKey}__pt-BR`
         : `page_${pageNumber}_block_${blockIndex}`;
@@ -2699,6 +2706,35 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     flexShrink: 0,
   };
 
+  if (showOriginalSource) {
+    return (
+      <div
+        ref={workspaceRef}
+        className={`page-renderer ${continuousScroll ? 'continuous-scroll-page' : ''}`}
+        style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'stretch', overflow: continuousScroll ? 'visible' : 'hidden' }}
+      >
+        <div ref={containerRef} className={`page-stage ${continuousScroll ? 'continuous-scroll-page-stage' : ''}`}>
+          <div
+            ref={setPageElement}
+            className="page-container"
+            style={containerStyle}
+            data-pdf-page-number={pageData.page_number}
+            data-pdf-page-width={pageData.width}
+            data-pdf-page-height={pageData.height}
+            data-original-source-page="true"
+          >
+            <img
+              src={payloadApiUrl(`source-page?page=${pageData.page_number}`)}
+              alt={`Original PDF, page ${pageData.page_number}`}
+              draggable={false}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill', userSelect: 'none' }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const selectedSourceBlock = selectedSpan
     ? pageData.blocks.find((block, index) => {
         const blockKey = block.editorKey
@@ -3514,9 +3550,9 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
       lineHeight: block.defaultLineHeight ?? block.layoutFrame?.lineHeight ?? 1,
     },
   ));
-  const page19ExitArtworkLabel = pageNumber === 19
-    && ['block_39', 'block_43', 'block_47', 'block_51'].includes(block.id);
-  if ((language === 'en' || page19ExitArtworkLabel) && (!isAdmin || !layoutMode) && hasExactSourceGeometry(block)
+  const preservedSourceText = (block.sourceTextLanguageInvariant && hasExactSourceGeometry(block))
+    || (pageNumber === 19 && ['block_39', 'block_43', 'block_47', 'block_51'].includes(block.id));
+  if ((language === 'en' || preservedSourceText) && (!isAdmin || !layoutMode) && hasExactSourceGeometry(block)
     && (!currentOverride || sourceOverrideIsUnchanged) && nestedOverridesAreSourceEquivalent) {
     return (
       <div className={`block-container ${blockHoverClass} ${overflowClass} ${reviewBlockHighlightClass}`} data-render-mode="sourceGeometry"
@@ -3641,25 +3677,25 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
       page_14_block_5: '2.',
       page_14_block_6: '3.',
       page_14_block_7: '4.',
-      // Source p.18 item 4 starts its continuation 18 pt after the numeral.
+      // Source p.18 keeps all four restoration steps in the same 18 pt text column.
+      page_18_block_100: '1.',
+      page_18_block_101: '2.',
+      page_18_block_102: '3.',
       page_18_block_103: '4.',
     };
     // Layout fidelity applies to persisted/viewer translations as well as
     // admin editing previews; editableNavigationKey is absent outside Admin.
     const expectedHangingIndentMarker = sourceHangingIndentMarkerByKey[blockKey.split('__')[0]];
-    const phaseMarkerIndex = expectedHangingIndentMarker
-      ? sourceAwareSegments.findIndex(segment => {
-        const match = /^([1-4]\.)(?:\t)?$/.exec(segment.text);
-        return match?.[1] === expectedHangingIndentMarker;
-      })
-      : -1;
-    const phaseMarkerTabIndex = phaseMarkerIndex >= 0
-      && /^\t\s*$/u.test(sourceAwareSegments[phaseMarkerIndex + 1]?.text ?? '')
-      ? phaseMarkerIndex + 1
-      : -1;
-    const phaseBodyStartIndex = phaseMarkerIndex >= 0
-      ? phaseMarkerIndex + 1 + (phaseMarkerTabIndex >= 0 ? 1 : 0)
-      : 0;
+    const phaseMarkerSplit = expectedHangingIndentMarker
+      ? splitLeadingNumberedListMarker(sourceAwareSegments)
+      : null;
+    const phaseMarkerText = phaseMarkerSplit?.marker.map(segment => segment.text).join('').trim();
+    const phaseMarkerIndex = expectedHangingIndentMarker && phaseMarkerText === expectedHangingIndentMarker ? 0 : -1;
+    const phaseMarkerSegments = phaseMarkerIndex >= 0 && phaseMarkerSplit?.marker[0] && expectedHangingIndentMarker
+      ? [{ ...phaseMarkerSplit.marker[0], text: expectedHangingIndentMarker }]
+      : [];
+    const phaseBodySegments = phaseMarkerIndex >= 0 && phaseMarkerSplit ? phaseMarkerSplit.body : [];
+    const phaseBodyStartIndex = phaseMarkerIndex >= 0 ? 1 : 0;
     const effectiveMarkerIndentPt = currentOverride.listMarkerIndentPt ?? sourceListIndents.listMarkerIndentPt ?? 0;
     const effectiveHangingIndentPt = currentOverride.hangingIndentPt ?? sourceListIndents.hangingIndentPt ?? 18;
     const effectiveMarkerAdvancePt = Math.max(0, effectiveHangingIndentPt - effectiveMarkerIndentPt);
@@ -3699,7 +3735,6 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
           <span style={segmentStyle}>{renderSegmentContent(markerSegment, scale, language, 'translatedFlow')}</span>
         </span>;
       }
-      if (absoluteSegmentIndex === phaseMarkerTabIndex) return null;
       return <span key={absoluteSegmentIndex} style={segmentStyle}>
         {seg.symbolId || resolveLegacySymbol(seg.font, seg.text)
           ? renderSegmentContent(seg, scale, language, 'translatedFlow')
@@ -3769,10 +3804,10 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
               }}
             >
               <span style={{ minWidth: 0, whiteSpace: 'pre' }}>
-                {renderSegments([sourceAwareSegments[phaseMarkerIndex]], phaseMarkerIndex)}
+                {renderSegments(phaseMarkerSegments, phaseMarkerIndex)}
               </span>
               <span style={{ display: 'block', minWidth: 0 }}>
-                {renderSegments(sourceAwareSegments.slice(phaseBodyStartIndex), phaseBodyStartIndex)}
+                {renderSegments(phaseBodySegments, phaseBodyStartIndex)}
               </span>
             </div>
           ) : useNumberedListFlow ? (
@@ -3839,7 +3874,16 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
                     ) : (
                       <div
                         data-source-bullet-flow-prose={inlineSourceBulletFlow ? 'true' : undefined}
-                        style={paragraphStyle}
+                        style={{
+                          ...paragraphStyle,
+                          ...(block.flowParagraphIndentsPt?.[paragraphIndex]
+                            ? {
+                              marginLeft: `${block.flowParagraphIndentsPt[paragraphIndex] * scale}px`,
+                              width: `calc(100% - ${block.flowParagraphIndentsPt[paragraphIndex] * scale}px)`,
+                              boxSizing: 'border-box',
+                            }
+                            : {}),
+                        }}
                       >
                         {paragraph.length ? renderSegments(paragraph) : <br />}
                       </div>
@@ -5205,7 +5249,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           : undefined;
         const inlineUnitFlowMaxWidthPx = inlineUnitOwnsThisPaint
           ? inlineUnit?.flowFrame
-            ? Math.max(0, inlineUnit.flowFrame.width * scale)
+            ? Math.max(0, layoutFrameTotal(inlineUnit.flowFrame) * scale)
             : sourceInlineUnitFlowMaxWidthPx
           : undefined;
         const inlineUnitOverflowed = inlineUnitOwnsThisPaint
