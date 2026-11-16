@@ -2,8 +2,8 @@
 
 Use this as a limited voice and terminology sample. It is not a translation template for page structure, and its values remain in the database as the user-authored reference.
 
-## Read-only finding (2026-10-02)
+## Scope
 
-The active local Payload database `apps/admin/apps-admin.db` has 18 PT-BR units on page 2: 17 credit labels and the “Special Thanks” body. This sample demonstrates concise, straightforward wording and the established choices visible on that page. It is not a broad prose sample. The active database also has two sparse PT-BR entries on page 1 (`Rulebook` and the version line); these do not amount to a fully translated page. The legacy `apps/admin/middara.db` contains two older line-level PT records; it is not the active database and was not used as the style source.
+Use only the saved page 2 wording as a small voice/terminology reference: concise, straightforward phrasing and choices visible in that material. It is not a broad prose sample, a template for page structure, or proof that page 2 has complete unit coverage. Database row counts change with editing and are deliberately not used as translation progress here.
 
-No database rows were changed. Do not overwrite or migrate these records as part of the Markdown workflow.
+The source records remain user-authored reference content. Do not overwrite, migrate, or “refresh” them while translating other pages.

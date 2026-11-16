@@ -6,9 +6,9 @@
 
 - **PDF page:** 9 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** complete — PDF and isolated English app page visually compared; see `docs/project-progress/2026-10-04-page9-visual-review.md`
+- **English fidelity:** app↔PDF visual review documented; no new discrepancy confirmed
+- **PT-BR:** saved Epic Crawl translation units now render after a key-compatibility repair; source-to-translation style and editorial audit remain pending
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)

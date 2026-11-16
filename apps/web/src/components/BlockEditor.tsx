@@ -49,7 +49,7 @@ export const BlockEditor: React.FC<BlockEditorProps> = ({
 
   return (
     <div className="rse-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className="rse-panel" style={{ width: '600px' }}>
+      <div className="rse-panel arcane-glass-surface" style={{ width: '600px' }}>
         <div className="rse-header">
           <div>
             <h3>📝 Block Translator</h3>

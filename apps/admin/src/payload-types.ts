@@ -74,6 +74,13 @@ export interface Config {
     pages: Page;
     'rulebook-blocks': RulebookBlock;
     translations: Translation;
+    'translation-reviews': TranslationReview;
+    'translation-review-requests': TranslationReviewRequest;
+    'translation-glossary-decisions': TranslationGlossaryDecision;
+    'editorial-faqs': EditorialFaq;
+    'layout-frames': LayoutFrame;
+    'symbol-alias-settings': SymbolAliasSetting;
+    'pdf-export-jobs': PdfExportJob;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +95,13 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     'rulebook-blocks': RulebookBlocksSelect<false> | RulebookBlocksSelect<true>;
     translations: TranslationsSelect<false> | TranslationsSelect<true>;
+    'translation-reviews': TranslationReviewsSelect<false> | TranslationReviewsSelect<true>;
+    'translation-review-requests': TranslationReviewRequestsSelect<false> | TranslationReviewRequestsSelect<true>;
+    'translation-glossary-decisions': TranslationGlossaryDecisionsSelect<false> | TranslationGlossaryDecisionsSelect<true>;
+    'editorial-faqs': EditorialFaqsSelect<false> | EditorialFaqsSelect<true>;
+    'layout-frames': LayoutFramesSelect<false> | LayoutFramesSelect<true>;
+    'symbol-alias-settings': SymbolAliasSettingsSelect<false> | SymbolAliasSettingsSelect<true>;
+    'pdf-export-jobs': PdfExportJobsSelect<false> | PdfExportJobsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -261,6 +275,305 @@ export interface Translation {
   createdAt: string;
 }
 /**
+ * Persistent proposal edits, reversible review queue disposition, explicit approval and a Payload receipt for the published translation.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-reviews".
+ */
+export interface TranslationReview {
+  id: number;
+  reviewKey: string;
+  pageNumber: number;
+  spanKey: string;
+  proposalId: string;
+  proposalVersion: string;
+  sourceText?: string | null;
+  proposalText?: string | null;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  technicalStatus: string;
+  copyfitClassification?: ('EXACT' | 'UNDER' | 'OVER') | null;
+  copyfitSourcePdfLineCount?: number | null;
+  copyfitPageRendererLineCount?: number | null;
+  copyfitMeasurementFingerprint?: string | null;
+  underCompositionJustification?: string | null;
+  approvalStatus: 'pending' | 'approved';
+  reviewDisposition?: ('active' | 'archived') | null;
+  approvedAt?: string | null;
+  publication?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Human requests for AI corrections; ordered by creation time and separate from proposals and published translations.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-review-requests".
+ */
+export interface TranslationReviewRequest {
+  id: number;
+  referenceType: 'proposal' | 'exception' | 'page';
+  pageNumber: number;
+  referenceTitle: string;
+  reviewKey?: string | null;
+  spanKey?: string | null;
+  sourceBlockId?: string | null;
+  exceptionId?: string | null;
+  proposalId?: string | null;
+  proposalVersion?: string | null;
+  translationSpanKey?: string | null;
+  requestText: string;
+  requestContext?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  status: 'pending' | 'in_progress' | 'completed';
+  resultNote?: string | null;
+  handledAt?: string | null;
+  completedBy?: ('ai' | 'user') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Persistent human terminology decisions and their translation evidence.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-glossary-decisions".
+ */
+export interface TranslationGlossaryDecision {
+  id: number;
+  decisionKey: string;
+  sourceTerm: string;
+  targetTerm: string;
+  normalizedSourceTerm: string;
+  normalizedTargetTerm: string;
+  decisionStatus: 'approved' | 'observed_standard' | 'experimental' | 'hypothesis' | 'rejected';
+  /**
+   * Categoria, contexto, relações, evidências e proteção editorial. O status continua em decisionStatus.
+   */
+  semanticMetadata?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  occurrences:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  decisionNote?: string | null;
+  decidedAt: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * FAQ editorial PT-BR do Rulebook 1.2. Não é FAQ nem errata oficial. Revise o conteúdo antes de publicar.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "editorial-faqs".
+ */
+export interface EditorialFaq {
+  id: number;
+  /**
+   * ID estável da fonte editorial.
+   */
+  faqId: string;
+  language: 'pt-BR';
+  question: string;
+  /**
+   * Markdown simples; HTML arbitrário não é renderizado no Viewer.
+   */
+  answer: string;
+  /**
+   * Versão em inglês. O Viewer em EN não faz fallback para o conteúdo PT-BR.
+   */
+  englishQuestion?: string | null;
+  /**
+   * Versão em inglês. Só aparece quando este campo e a pergunta em inglês estiverem preenchidos.
+   */
+  englishAnswer?: string | null;
+  category:
+    | 'Modos de jogo e campanha'
+    | 'Preparação, Encontros e Urgência'
+    | 'Turnos, SP e Habilidades'
+    | 'Movimento, Terrenos e Elevação'
+    | 'Ataques, Esquiva, Contra-ataque e flanqueamento'
+    | 'Alcance, Linha de Visão, Feitiços e Follow Up'
+    | 'Equipamentos, Itens, Disciplinas e Aprimoramentos'
+    | 'Saques, Ouro e recompensas'
+    | 'Combatentes Inteligentes, grupos e IA'
+    | 'Espers, Familiares e Conduítes'
+    | 'Efeitos, limites e regras gerais'
+    | 'Regras especiais e variantes opcionais';
+  sourceVersion: string;
+  /**
+   * Páginas impressas 1–102; intervalos da fonte são expandidos em páginas individuais.
+   */
+  sourcePages: {
+    page: number;
+    id?: string | null;
+  }[];
+  /**
+   * Primeira página de origem; útil para busca e filtro no Admin.
+   */
+  primarySourcePage?: number | null;
+  sourcePageSearch?: string | null;
+  /**
+   * Só preencher após confirmar o vínculo no DOM de origem.
+   */
+  sourceUnitIds?:
+    | {
+        id: string;
+      }[]
+    | null;
+  keywords?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  synonyms?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  ruleScope: 'base' | 'optional_variant';
+  spoilerLevel: 'none' | 'spoiler';
+  /**
+   * A revisão editorial é independente do estado de publicação nativo do Payload.
+   */
+  reviewStatus: 'pending' | 'reviewed';
+  reviewedAt?: string | null;
+  reviewedBy?: string | null;
+  sourceEntryHash?: string | null;
+  importedContentHash?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "layout-frames".
+ */
+export interface LayoutFrame {
+  id: number;
+  frameKey: string;
+  unitKey: string;
+  pageNumber: number;
+  language: 'en' | 'pt-BR';
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Shared preferred [[alias]] values for inline semantic symbols.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "symbol-alias-settings".
+ */
+export interface SymbolAliasSetting {
+  id: number;
+  settingsKey: string;
+  aliases:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pdf-export-jobs".
+ */
+export interface PdfExportJob {
+  id: number;
+  jobId: string;
+  ownerId?: string | null;
+  language: 'en' | 'pt-BR';
+  profile: 'visual' | 'editable';
+  pages:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  status: 'queued' | 'running' | 'completed' | 'failed' | 'cancelled';
+  phase: 'queued' | 'preparing' | 'rendering' | 'assembling' | 'verifying' | 'completed' | 'failed' | 'cancelled';
+  completedPages: number;
+  totalPages: number;
+  currentPage?: number | null;
+  failedPage?: number | null;
+  stage: string;
+  cancelRequested: boolean;
+  verificationSummary?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  workerPid?: number | null;
+  workerCommand?: string | null;
+  workerProcessStartedAt?: string | null;
+  snapshotPath?: string | null;
+  snapshotHash?: string | null;
+  outputPath?: string | null;
+  downloadName?: string | null;
+  error?: string | null;
+  startedAt?: string | null;
+  completedAt?: string | null;
+  expiresAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -311,6 +624,34 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'translations';
         value: number | Translation;
+      } | null)
+    | ({
+        relationTo: 'translation-reviews';
+        value: number | TranslationReview;
+      } | null)
+    | ({
+        relationTo: 'translation-review-requests';
+        value: number | TranslationReviewRequest;
+      } | null)
+    | ({
+        relationTo: 'translation-glossary-decisions';
+        value: number | TranslationGlossaryDecision;
+      } | null)
+    | ({
+        relationTo: 'editorial-faqs';
+        value: number | EditorialFaq;
+      } | null)
+    | ({
+        relationTo: 'layout-frames';
+        value: number | LayoutFrame;
+      } | null)
+    | ({
+        relationTo: 'symbol-alias-settings';
+        value: number | SymbolAliasSetting;
+      } | null)
+    | ({
+        relationTo: 'pdf-export-jobs';
+        value: number | PdfExportJob;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -458,6 +799,179 @@ export interface TranslationsSelect<T extends boolean = true> {
   spanKey?: T;
   language?: T;
   data?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-reviews_select".
+ */
+export interface TranslationReviewsSelect<T extends boolean = true> {
+  reviewKey?: T;
+  pageNumber?: T;
+  spanKey?: T;
+  proposalId?: T;
+  proposalVersion?: T;
+  sourceText?: T;
+  proposalText?: T;
+  data?: T;
+  technicalStatus?: T;
+  copyfitClassification?: T;
+  copyfitSourcePdfLineCount?: T;
+  copyfitPageRendererLineCount?: T;
+  copyfitMeasurementFingerprint?: T;
+  underCompositionJustification?: T;
+  approvalStatus?: T;
+  reviewDisposition?: T;
+  approvedAt?: T;
+  publication?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-review-requests_select".
+ */
+export interface TranslationReviewRequestsSelect<T extends boolean = true> {
+  referenceType?: T;
+  pageNumber?: T;
+  referenceTitle?: T;
+  reviewKey?: T;
+  spanKey?: T;
+  sourceBlockId?: T;
+  exceptionId?: T;
+  proposalId?: T;
+  proposalVersion?: T;
+  translationSpanKey?: T;
+  requestText?: T;
+  requestContext?: T;
+  status?: T;
+  resultNote?: T;
+  handledAt?: T;
+  completedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translation-glossary-decisions_select".
+ */
+export interface TranslationGlossaryDecisionsSelect<T extends boolean = true> {
+  decisionKey?: T;
+  sourceTerm?: T;
+  targetTerm?: T;
+  normalizedSourceTerm?: T;
+  normalizedTargetTerm?: T;
+  decisionStatus?: T;
+  semanticMetadata?: T;
+  occurrences?: T;
+  decisionNote?: T;
+  decidedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "editorial-faqs_select".
+ */
+export interface EditorialFaqsSelect<T extends boolean = true> {
+  faqId?: T;
+  language?: T;
+  question?: T;
+  answer?: T;
+  englishQuestion?: T;
+  englishAnswer?: T;
+  category?: T;
+  sourceVersion?: T;
+  sourcePages?:
+    | T
+    | {
+        page?: T;
+        id?: T;
+      };
+  primarySourcePage?: T;
+  sourcePageSearch?: T;
+  sourceUnitIds?:
+    | T
+    | {
+        id?: T;
+      };
+  keywords?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  synonyms?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  ruleScope?: T;
+  spoilerLevel?: T;
+  reviewStatus?: T;
+  reviewedAt?: T;
+  reviewedBy?: T;
+  sourceEntryHash?: T;
+  importedContentHash?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "layout-frames_select".
+ */
+export interface LayoutFramesSelect<T extends boolean = true> {
+  frameKey?: T;
+  unitKey?: T;
+  pageNumber?: T;
+  language?: T;
+  data?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "symbol-alias-settings_select".
+ */
+export interface SymbolAliasSettingsSelect<T extends boolean = true> {
+  settingsKey?: T;
+  aliases?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pdf-export-jobs_select".
+ */
+export interface PdfExportJobsSelect<T extends boolean = true> {
+  jobId?: T;
+  ownerId?: T;
+  language?: T;
+  profile?: T;
+  pages?: T;
+  status?: T;
+  phase?: T;
+  completedPages?: T;
+  totalPages?: T;
+  currentPage?: T;
+  failedPage?: T;
+  stage?: T;
+  cancelRequested?: T;
+  verificationSummary?: T;
+  workerPid?: T;
+  workerCommand?: T;
+  workerProcessStartedAt?: T;
+  snapshotPath?: T;
+  snapshotHash?: T;
+  outputPath?: T;
+  downloadName?: T;
+  error?: T;
+  startedAt?: T;
+  completedAt?: T;
+  expiresAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

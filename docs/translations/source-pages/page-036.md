@@ -1,14 +1,14 @@
 # PDF page 036
 
 > Raw text-line transcript extracted from the official English PDF with PyMuPDF.
-> This is not a semantic paragraph map, an artwork/ghost decision, or an English-fidelity sign-off.
-> Reorder/re-group only after checking the rendered source; keep different font sizes and boxes distinct.
+> This is not a semantic paragraph map or artwork/ghost decision. The rendered source was checked against the normal Viewer on 2026-10-15; see `docs/project-progress/2026-10-15-p36-localization-proposal.md`.
+> Reorder/re-group only after checking the rendered source; keep different font sizes and boxes distinct. This transcript remains raw; see the isolated PT-BR proposal for semantic units.
 
 - **PDF page:** 36 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** rendered page reconciled with the normal Viewer on 2026-10-15
+- **English fidelity:** source PDF and normal Viewer composition visually correspond in the reviewed page scope; raw transcript remains uncurated
+- **PT-BR:** isolated proposal v1 rendered in Viewer, print, and PDF; human terminology and art approval pending
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)

@@ -1,0 +1,103 @@
+{
+  "proposalId": "p098-table9-continuation-title",
+  "version": "3",
+  "title": "Continuação da Tabela 9 — p. 98 (v3)",
+  "page": 98,
+  "status": "pending_live_copyfit_and_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "36B70C8CD32ACAA31A352245EBF0E0495A3D625D9BDF4CAC6DB80FC5BB3D2FC9",
+    "pageDom": "D7850BBADBF40F953174D188315CF5AB149CF9AAF8C7A6923CBAFF6D86D38BAE"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0,
+    "copyfitExact": 0,
+    "copyfitUnder": 0,
+    "copyfitOver": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "GETs somente leitura confirmaram zero traduções e zero reviews na p. 98; a coleção final translations não foi alterada.",
+    "Este recorte cobre somente o título de continuação da Tabela 9. Poppet, Root e Tentacle, suas imagens e regras permanecem em inglês para análise em lotes posteriores.",
+    "Version 3 restores the source concept Combatant Tokens as Fichas de Combatentes and uses the conventional Portuguese continuation abbreviation (cont.) to retain the single source visual row. Live PageRenderer copyfit and human review are pending."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 7,
+      "sourceBlockId": "block_21",
+      "sourceUnitId": null,
+      "spanKey": "page_98_block_7__pt-BR",
+      "language": "pt-BR",
+      "sourceText": " Table 9: Combatant Tokens Continued ",
+      "proposalText": "Tabela 9: Fichas de Combatentes (cont.)",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_98_block_7__pt-BR",
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Tabela 9: ",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fichas de Combatentes (cont.)",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_copyfit_and_human_review",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourceLineIds": [
+        "line_21_0"
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "sourceBboxes": [
+        [
+          58.6693000793457,
+          39.970924377441406,
+          303.2053527832031,
+          56.14692306518555
+        ]
+      ]
+    }
+  ],
+  "note": "Complete, concise title: preserves Table 9, Combatant Tokens, and the continuation marker using the established abbreviation cont.; source typography and geometry remain unchanged.",
+  "revisions": [
+    {
+      "version": "1",
+      "proposalText": "Tabela 9: Fichas de Combatentes (continuação)",
+      "status": "blocked_copyfit_two_lines_in_viewer_100_150",
+      "note": "O agente crítico confirmou quebra em duas linhas a 100% e 150%."
+    },
+    {
+      "version": "2",
+      "proposalText": "Tabela 9: Continuação",
+      "status": "superseded_semantic_omission",
+      "note": "The source concept Combatant Tokens was not explicit in this shortened title."
+    }
+  ]
+}

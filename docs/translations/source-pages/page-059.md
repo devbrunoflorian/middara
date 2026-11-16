@@ -6,10 +6,10 @@
 
 - **PDF page:** 59 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
-- **Artwork text / uncertain overlays:** not classified by this extractor
+- **Source review:** complete — full page compared with the official PDF and English Viewer on 2026-11-15
+- **English fidelity:** reviewed against the official PDF; source component artwork and its printed labels remain in English by user decision
+- **PT-BR:** all 17 active page units approved; Copyfit V3 EXACT 100%/200%; final Viewer and print export verified
+- **Artwork text / uncertain overlays:** Command Combatant card and portrait remain source artwork; the PASSIVE tag in editable prose is a semantic token with source-language rendering for this occurrence
 
 ## Raw line 001 (block 0, line 0)
 

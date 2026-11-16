@@ -130,7 +130,7 @@ export const FontEditor: React.FC<FontEditorProps> = ({ span, onClose, onApply, 
 
   return (
     <div className="font-editor-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className="font-editor-panel">
+      <div className="font-editor-panel arcane-glass-surface">
         <div className="font-editor-header">
           <h3>🎨 Font Editor</h3>
           <button className="font-editor-close" onClick={onClose}>✕</button>

@@ -6,10 +6,10 @@
 
 - **PDF page:** 11 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
-- **Artwork text / uncertain overlays:** not classified by this extractor
+- **Source review:** visually reviewed against the official PDF and app capture; see [`2026-10-04-page11-translation-audit.md`](../../project-progress/2026-10-04-page11-translation-audit.md)
+- **English fidelity:** reviewed after suppressing the duplicate editable cover blocks; the printed title, `ACT I`, and author credit remain in the artwork exactly once
+- **PT-BR:** nine existing Payload units reconciled and previewed; one title punctuation correction is documented in the linked audit
+- **Artwork text / uncertain overlays:** the three user-reported cover duplicates are confirmed as raster text and hidden from page rendering; see [`2026-10-04-page11-cover-ghost-blocks.md`](../../project-progress/2026-10-04-page11-cover-ghost-blocks.md)
 
 ## Raw line 001 (block 0, line 0)
 

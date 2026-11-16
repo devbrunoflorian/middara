@@ -6,9 +6,9 @@
 
 - **PDF page:** 60 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** full-page candidate inventory and visual comparison against the official PDF, Viewer, and print export completed 2026-11-15; editorial certification remains pending.
+- **English fidelity:** the page candidate layout and source typography were compared with the official PDF; the page remains not certified pending editorial sign-off.
+- **PT-BR:** 16 full-page proposal candidates have Copyfit V3 EXACT measurements and Viewer/print export evidence. They remain local browser-only drafts, with no Payload write or human editorial approval; the page remains pending/not certified.
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)
@@ -1248,3 +1248,11 @@
 
 **PDF span runs:**
 - `60` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `49.34, 775.72, 61.20, 787.98`
+
+## Full-page PT-BR candidate review — 2026-11-15
+
+- Proposal: `../proposals/page-060-intelligent-combatants-full-page-review-2026-11-15-v1.json` (16 candidates). Existing Golden Rules intro decision is preserved; candidate text keeps printed card instructions and names in English.
+- All 16 proposal units measured EXACT in Copyfit V3 at 100%; related page units were also checked for fit. The measured list flows preserve four explicit markers in each long bullet group and use the source-derived hanging indent. Copyfit was repeated after indentation and paragraph-spacing adjustments.
+- Export evidence: viewer and print captures plus a verified PDF (`pdfVerification=true`, `verifiedTranslationRecords=true`). The duplicated page-number outline/fill passes remain visible. No clipping or collisions were found in the reviewed page. Print text extends 2.75 pt / 1.71 pt beyond two parent content frames, but the raster review confirms both remain inside the page and clear of adjacent content; these are tight local metrics, not a global frame exception.
+- Editorial state: candidate only; no Payload writes, human approval, or claim that the page is complete. Local terminology choices (`Range` → `Alcance`; `Current` → `Corrente`) are confined to this proposal and do not approve or alter glossary-wide decisions. `Aggro`, SOI, printed card text, and other component labels remain as documented in the proposal.
+- Private evidence: `C:\Users\bruno\engineering-labs\planning\engineering-decisions\evidence\2026-11-15-p060-review\`.

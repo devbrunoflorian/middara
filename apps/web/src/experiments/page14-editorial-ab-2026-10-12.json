@@ -1,0 +1,338 @@
+{
+  "id": "page14-editorial-ab-2026-10-12",
+  "pageNumber": 14,
+  "createdAt": "2026-10-12",
+  "status": "experimental-unapproved",
+  "productionWrites": false,
+  "method": {
+    "requestedConditions": "A baseline project rules, glossary, source and editorial data; B the same resources plus the translation-copyfit, terminology-decisions and editorial-style skills and editorial casebook.",
+    "isolation": "NOT A CONTROLLED CAUSAL TEST. Both drafts were produced in the same assistant context after the B skills and casebook had been read. A cannot be treated as an independent blind control; no quality difference is attributed to the skills.",
+    "modelAndBudget": "Same assistant/model context; no separate-run budget harness was available.",
+    "safeUse": "Preview-only overrides in the PageRenderer. No Payload, canonical translation, localStorage, sidecar, PDF or geometry writes. No promotion path."
+  },
+  "source": {
+    "document": "Official Middara Rulebook 1.2 EN",
+    "page": 14,
+    "domSidecar": "/pages/page_014/page_014_dom.json",
+    "geometryReference": "Live PageRenderer data attributes + read-only Payload GET for page 14"
+  },
+  "baselineFrames": {
+    "page_14_block_17": {
+      "x": 415.8411865234375,
+      "y": 337.7591247558594,
+      "width": 319.83,
+      "height": 44.899261474609375,
+      "rotation": 0
+    },
+    "page_14_block_23": {
+      "x": 415.8424987792969,
+      "y": 545.0088500976562,
+      "width": 315.6805114746094,
+      "height": 33.89996337890625,
+      "rotation": 0
+    },
+    "page_14_block_25": {
+      "x": 415.8424987792969,
+      "y": 616.5819702148438,
+      "width": 320.5207214355469,
+      "height": 33.9000244140625,
+      "rotation": 0
+    }
+  },
+  "observedManualAdjustments": [
+    {
+      "unitKey": "page_14_block_8",
+      "language": "pt-BR",
+      "x": 86.17478942871094,
+      "y": 588.3164672851562,
+      "width": 317.6,
+      "height": 11.9200439453125,
+      "rotation": 0,
+      "payloadUpdatedAt": "2026-10-12T20:30:29.276Z"
+    },
+    {
+      "unitKey": "page_14_block_9",
+      "language": "pt-BR",
+      "x": 86.17478942871094,
+      "y": 604.966552734375,
+      "width": 317.6,
+      "height": 11.94000244140625,
+      "rotation": 0,
+      "payloadUpdatedAt": "2026-10-12T20:32:48.663Z"
+    },
+    {
+      "unitKey": "page_14_block_16",
+      "language": "pt-BR",
+      "x": 415.84259033203125,
+      "y": 299.089111328125,
+      "width": 319.83,
+      "height": 33.899993896484375,
+      "rotation": 0,
+      "payloadUpdatedAt": "2026-10-12T20:33:33.975Z"
+    },
+    {
+      "unitKey": "page_14_block_17",
+      "language": "pt-BR",
+      "x": 415.8411865234375,
+      "y": 337.7591247558594,
+      "width": 319.83,
+      "height": 44.899261474609375,
+      "rotation": 0,
+      "payloadUpdatedAt": "2026-10-12T20:33:41.588Z"
+    },
+    {
+      "unitKey": "page_14_block_19",
+      "language": "pt-BR",
+      "x": 415.8411865234375,
+      "y": 415.0984191894531,
+      "width": 319.83,
+      "height": 11.899993896484375,
+      "rotation": 0,
+      "payloadUpdatedAt": "2026-10-12T20:33:05.742Z"
+    },
+    {
+      "unitKey": "page_14_block_20",
+      "language": "pt-BR",
+      "x": 415.8411865234375,
+      "y": 431.7684326171875,
+      "width": 319.83,
+      "height": 33.899993896484375,
+      "rotation": 0,
+      "payloadUpdatedAt": "2026-10-12T20:33:58.547Z"
+    },
+    {
+      "unitKey": "page_14_block_28",
+      "language": "pt-BR",
+      "x": 125.53,
+      "y": 56.69208526611328,
+      "width": 569,
+      "height": 40.86000061035156,
+      "rotation": 0,
+      "textAlign": "center",
+      "payloadUpdatedAt": "2026-10-04T14:11:01.294Z"
+    }
+  ],
+  "geometryAnalysis": {
+    "groups": [
+      {
+        "label": "Right-column ordinary body text",
+        "evidence": "The live EN source and PT frames share x≈415.84 pt. Ordinary body frames span 315.68–320.52 pt; the manually adjusted middle paragraphs use width 319.83 pt. The range is small but not identical.",
+        "exceptions": "IMPORTANT callout block 21 is inset to x≈427.18 pt and anchored by tag.important.icon. Headings, the centered page title, lists, the bottom location-symbol artwork and their frames are separate roles.",
+        "status": "observed-family-not-normalization-rule"
+      },
+      {
+        "label": "Left-column numbered setup steps",
+        "evidence": "Blocks 1, 5, 6 and 7 have standalone numbered source lines at x≈86.17 pt while phase bodies begin at x≈104.17 pt.",
+        "exceptions": "Do not treat the marker and body as one ordinary paragraph envelope; callout boxes are separately inset near x≈111.68 pt.",
+        "status": "observed-distinct-list-family"
+      }
+    ],
+    "proposals": [
+      {
+        "page": 14,
+        "unitKey": "page_14_block_23",
+        "group": "Right-column ordinary body text, below Special Encounter Rules heading",
+        "current": { "x": 415.8424987792969, "y": 545.0088500976562, "width": 315.6805114746094, "height": 33.89996337890625 },
+        "suggested": { "x": 415.8424987792969, "y": 545.0088500976562, "width": 319.83, "height": 33.89996337890625 },
+        "reason": "The left edge matches the right-column body, and neighboring saved prose frames reach 319.83 pt. However, both tested translations fit the existing 315.68 pt frame; the three-line A and two-line B drafts clear the adjacent section and artwork.",
+        "expectedImpact": "A hypothetical 4.15 pt widening may change wraps, but the live evidence shows no copyfit problem that needs it.",
+        "risk": "The 315.68 pt source frame may be intentional. The broader neighbor value is not proof of the intended boundary.",
+        "confidence": "medium-low",
+        "status": "reviewed-not-applied-no-change-justified"
+      },
+      {
+        "page": 14,
+        "unitKey": "page_14_block_12",
+        "group": "Right-column introductory body paragraph",
+        "current": { "x": 415.8424987792969, "y": 144.8226318359375, "width": 315.9997863769531, "height": 34.02000427246094 },
+        "suggested": { "x": 415.8424987792969, "y": 144.8226318359375, "width": 319.83, "height": 34.02000427246094 },
+        "reason": "Shares the right-column x coordinate, while nearby ordinary body frames reach 319.83 pt; no inline symbol or inset callout belongs to this block.",
+        "expectedImpact": "Up to 3.83 pt extra width; any changed wrap requires a live full-page review.",
+        "risk": "The line-derived 316 pt width may intentionally preserve the printed block. There is no proof this frame is restrictive for an approved translation.",
+        "confidence": "low",
+        "status": "hypothesis-only-not-applied"
+      }
+    ],
+    "preservation": "All widths and saved geometry remain unchanged. A and B use the exact baselineFrames above for every selected unit."
+  },
+  "terminology": [
+    { "term": "End Conditions", "proposed": "Condições Finais", "basis": "Project glossary", "status": "approved-glossary-form" },
+    { "term": "Special Encounter Rules", "proposed": "Regras Especiais de Encontro", "basis": "Project glossary", "status": "approved-glossary-form" },
+    { "term": "Setup", "proposed": "Preparação", "basis": "Project glossary", "status": "approved-glossary-form" },
+    { "term": "Encounter Breakdown Continued", "proposed": "Detalhamento do Encontro — continuação", "basis": "Cross-reference title, not listed in the glossary", "status": "experimental-human-review-needed" },
+    { "term": "Location type Symbol", "proposed": "Símbolo de tipo de Localização / símbolo associado ao tipo de Localização", "basis": "No approved equivalent found in the glossary", "status": "human-decision-needed" }
+  ],
+  "units": [
+    {
+      "page": 14,
+      "blockId": "block_36",
+      "blockIndex": 17,
+      "spanKey": "page_14_block_17",
+      "sourceText": "End Conditions are not optional and happen as soon as their stipulations have been met. This means that in section B, under Encounter Breakdown Continued on Pg. 16, an Adventurer may not end their turn on the Blue Exit without immediately ending the Encounter.",
+      "baseFrameKey": "page_14_block_17",
+      "baseFrame": { "x": 415.8411865234375, "y": 337.7591247558594, "width": 319.83, "height": 44.899261474609375, "rotation": 0 },
+      "semanticConstraints": [
+        "End Conditions are not optional.",
+        "They take effect as soon as their stipulations are met.",
+        "Preserve section B and the cross-reference title/page 16.",
+        "An Adventurer may not end their turn on the Blue Exit without the Encounter ending immediately."
+      ],
+      "richText": "Both variants retain bold section marker B and bold-italic cross-reference title; no inline symbol occurs in this unit.",
+      "variants": {
+        "A": {
+          "label": "Baseline-instruction draft",
+          "proposedText": "As Condições Finais não são opcionais e ocorrem assim que seus requisitos são cumpridos. Isso significa que, na seção B, em Detalhamento do Encontro — continuação, pág. 16, um Aventureiro não pode encerrar seu turno na Saída Azul sem encerrar imediatamente o Encontro.",
+          "copyfitStatus": "live-render-observed-fit-at-200-percent",
+          "editorialStatus": "experimental-not-human-approved",
+          "override": {
+            "spanKey": "page_14_block_17",
+            "bbox": [415.8411865234375, 337.7591247558594, 735.5313720703125, 382.65838623046875],
+            "textAlign": "left",
+            "lineHeight": 1.1,
+            "segments": [
+              { "text": "As Condições Finais não são opcionais e ocorrem assim que seus requisitos são cumpridos. Isso significa que, na seção ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
+              { "text": "B", "font": "OptimaLTStd-Bold", "size": 9, "color": "#231f20", "weight": 700, "style": "normal" },
+              { "text": ", em ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
+              { "text": "Detalhamento do Encontro — continuação", "font": "OptimaLTStd-BoldItalic", "size": 10, "color": "#231f20", "weight": 700, "style": "italic" },
+              { "text": ", pág. 16, um Aventureiro não pode encerrar seu turno na Saída Azul sem encerrar imediatamente o Encontro.", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" }
+            ]
+          }
+        },
+        "B": {
+          "label": "Skills-and-casebook-guided draft",
+          "proposedText": "As Condições Finais não são opcionais e ocorrem assim que os critérios são cumpridos. Assim, na seção B de Detalhamento do Encontro — continuação (pág. 16), um Aventureiro não pode encerrar o turno na Saída Azul sem encerrar o Encontro imediatamente.",
+          "copyfitStatus": "live-render-observed-fit-after-shortening-at-200-percent",
+          "editorialStatus": "experimental-not-human-approved",
+          "override": {
+            "spanKey": "page_14_block_17",
+            "bbox": [415.8411865234375, 337.7591247558594, 735.5313720703125, 382.65838623046875],
+            "textAlign": "left",
+            "lineHeight": 1.1,
+            "segments": [
+              { "text": "As Condições Finais não são opcionais e ocorrem assim que os critérios são cumpridos. Assim, na seção ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
+              { "text": "B", "font": "OptimaLTStd-Bold", "size": 9, "color": "#231f20", "weight": 700, "style": "normal" },
+              { "text": " de ", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" },
+              { "text": "Detalhamento do Encontro — continuação", "font": "OptimaLTStd-BoldItalic", "size": 10, "color": "#231f20", "weight": 700, "style": "italic" },
+              { "text": " (pág. 16), um Aventureiro não pode encerrar o turno na Saída Azul sem encerrar o Encontro imediatamente.", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" }
+            ]
+          }
+        }
+      },
+      "evaluation": {
+        "semantic": "Both preserve non-optionality, trigger upon criteria being met, section B, page 16, and the prohibition tied to the Blue Exit.",
+        "terminology": "Condições Finais follows the glossary. The cross-reference title remains provisional.",
+        "editorial": "B is more explicit that the condition takes effect after its criteria are met; A is shorter. No human preference established.",
+        "copyfit": "Both were rendered in the real Chrome PageRenderer at 200% with the same 319.83 × 44.90 pt frame and no visible collision. The first B draft overlapped the following English paragraph; the shortened revision was rerendered and now clears it. No frame was changed.",
+        "geometry": "No geometry changes proposed for the A/B comparison."
+      }
+    },
+    {
+      "page": 14,
+      "blockId": "block_43",
+      "blockIndex": 23,
+      "spanKey": "page_14_block_23",
+      "sourceText": "Many Encounters have Special Encounter Rules. Special Encounter Rules must be read before setting up the Encounter. These rules change how an Encounter plays.",
+      "baseFrameKey": "page_14_block_23",
+      "baseFrame": { "x": 415.8424987792969, "y": 545.0088500976562, "width": 315.6805114746094, "height": 33.89996337890625, "rotation": 0 },
+      "semanticConstraints": [
+        "Many, not all, Encounters have these rules.",
+        "They must be read before the Encounter is set up.",
+        "The rules change how that Encounter plays."
+      ],
+      "richText": "All source spans are regular Optima 10 pt; no inline symbols occur.",
+      "variants": {
+        "A": {
+          "label": "Baseline-instruction draft",
+          "proposedText": "Muitos Encontros têm Regras Especiais de Encontro. É preciso ler essas regras antes de preparar o Encontro. Elas mudam a forma como um Encontro é jogado.",
+          "copyfitStatus": "live-render-observed-fit-at-200-percent",
+          "editorialStatus": "experimental-not-human-approved",
+          "override": {
+            "spanKey": "page_14_block_23",
+            "bbox": [415.8424987792969, 545.0088500976562, 731.5230102539062, 578.9088134765625],
+            "textAlign": "left",
+            "lineHeight": 1.1,
+            "segments": [
+              { "text": "Muitos Encontros têm Regras Especiais de Encontro. É preciso ler essas regras antes de preparar o Encontro. Elas mudam a forma como um Encontro é jogado.", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" }
+            ]
+          }
+        },
+        "B": {
+          "label": "Skills-and-casebook-guided draft",
+          "proposedText": "Muitos Encontros têm Regras Especiais de Encontro. Essas regras devem ser lidas antes de preparar o Encontro e mudam a maneira como ele é jogado.",
+          "copyfitStatus": "live-render-observed-fit-at-200-percent",
+          "editorialStatus": "experimental-not-human-approved",
+          "override": {
+            "spanKey": "page_14_block_23",
+            "bbox": [415.8424987792969, 545.0088500976562, 731.5230102539062, 578.9088134765625],
+            "textAlign": "left",
+            "lineHeight": 1.1,
+            "segments": [
+              { "text": "Muitos Encontros têm Regras Especiais de Encontro. Essas regras devem ser lidas antes de preparar o Encontro e mudam a maneira como ele é jogado.", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" }
+            ]
+          }
+        }
+      },
+      "evaluation": {
+        "semantic": "Both retain Many and the must-read-before-setup instruction. Neither expands the quantifier to all.",
+        "terminology": "Both use the approved glossary form Regras Especiais de Encontro; Setup is rendered as preparar, a natural inflection of Preparação.",
+        "editorial": "B is more compact; A makes the obligation explicit with É preciso. No demonstrated overall winner.",
+        "copyfit": "Both variants were rendered at 200% in the real Chrome PageRenderer. A wraps to three lines and B to two; both stay within the existing 33.90 pt frame and clear adjacent content. The 315.68 pt frame remains unchanged; no widening was tested or applied.",
+        "geometry": "Candidate frame-envelope widening is documented separately and is not applied to either variant."
+      }
+    },
+    {
+      "page": 14,
+      "blockId": "block_46",
+      "blockIndex": 25,
+      "spanKey": "page_14_block_25",
+      "sourceText": "Each Encounter has a Location type Symbol associated with it listed in the top right corner of an Encounter page. Currently these symbols have no mechanical use.",
+      "baseFrameKey": "page_14_block_25",
+      "baseFrame": { "x": 415.8424987792969, "y": 616.5819702148438, "width": 320.5207214355469, "height": 33.9000244140625, "rotation": 0 },
+      "semanticConstraints": [
+        "Each, not only some, Encounters have an associated location-type symbol.",
+        "The symbol is listed at the top right of an Encounter page.",
+        "Currently the symbols have no mechanical use."
+      ],
+      "richText": "All source spans are regular Optima 10 pt; the three location symbols are separate artwork below this text, not inline spans.",
+      "variants": {
+        "A": {
+          "label": "Baseline-instruction draft",
+          "proposedText": "Cada Encontro tem um Símbolo de tipo de Localização associado a ele, indicado no canto superior direito da página do Encontro. Atualmente, esses símbolos não têm uso mecânico.",
+          "copyfitStatus": "live-render-observed-fit-at-200-percent",
+          "editorialStatus": "experimental-terminology-pending",
+          "override": {
+            "spanKey": "page_14_block_25",
+            "bbox": [415.8424987792969, 616.5819702148438, 736.3632202148438, 650.4819946289062],
+            "textAlign": "left",
+            "lineHeight": 1.1,
+            "segments": [
+              { "text": "Cada Encontro tem um Símbolo de tipo de Localização associado a ele, indicado no canto superior direito da página do Encontro. Atualmente, esses símbolos não têm uso mecânico.", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" }
+            ]
+          }
+        },
+        "B": {
+          "label": "Skills-and-casebook-guided draft",
+          "proposedText": "Cada Encontro tem um símbolo associado ao seu tipo de Localização, indicado no canto superior direito da página do Encontro. No momento, esses símbolos não têm função mecânica.",
+          "copyfitStatus": "live-render-observed-fit-at-200-percent",
+          "editorialStatus": "experimental-terminology-pending",
+          "override": {
+            "spanKey": "page_14_block_25",
+            "bbox": [415.8424987792969, 616.5819702148438, 736.3632202148438, 650.4819946289062],
+            "textAlign": "left",
+            "lineHeight": 1.1,
+            "segments": [
+              { "text": "Cada Encontro tem um símbolo associado ao seu tipo de Localização, indicado no canto superior direito da página do Encontro. No momento, esses símbolos não têm função mecânica.", "font": "OptimaLTStd", "size": 10, "color": "#231f20", "weight": 400, "style": "normal" }
+            ]
+          }
+        }
+      },
+      "evaluation": {
+        "semantic": "Both retain Each and the current no-mechanical-use disclaimer.",
+        "terminology": "Location type Symbol has no approved equivalent in the glossary. Both renderings remain proposals pending a human term decision.",
+        "editorial": "B reads more naturally in Portuguese; A follows English capitalization more closely. Neither is approved.",
+        "copyfit": "Both variants were rendered at 200% in the real Chrome PageRenderer; each occupies two lines, clears the artwork below, and uses the same 320.52 × 33.90 pt frame. No frame change was made.",
+        "geometry": "No geometry changes proposed for the A/B comparison."
+      }
+    }
+  ]
+}

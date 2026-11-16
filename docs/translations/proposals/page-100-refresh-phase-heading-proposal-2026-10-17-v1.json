@@ -1,0 +1,121 @@
+{
+  "proposalId": "p100-refresh-phase-heading",
+  "version": "1",
+  "title": "Fase de Manutenção — p. 100",
+  "page": 100,
+  "status": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 0
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch covers only the numbered Refresh Phase heading on page 100.",
+    "The heading is an independent typographic unit tied to line_25_0:0; the following explanation remains in its own source line.",
+    "Original OptimaLTStd-Bold 9 pt style, source geometry, and page frame are preserved.",
+    "Refresh Phase → Fase de Manutenção follows the approved official glossary entry."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 14,
+      "sourceBlockId": "block_25",
+      "sourceUnitId": "p100-refresh-phase-heading",
+      "spanKey": "page_100_unit_p100-refresh-phase-heading__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "3. REFRESH PHASE:",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfLineIds": [
+        "line_25_0"
+      ],
+      "proposalText": "3. FASE DE MANUTENÇÃO:",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-refresh-phase-heading__pt-BR",
+        "bbox": [
+          435.9778137207031,
+          155.00665283203125,
+          519.0028686523438,
+          165.73464965820312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "3. FASE DE MANUTENÇÃO:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "technicalStatus": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            435.9778137207031,
+            155.00665283203125,
+            718.7662963867188,
+            175.73367309570312
+          ],
+          "visualBaselinesPt": [
+            163.296,
+            173.295
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-refresh-phase-heading__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            152.2
+          ],
+          "frameHeightCssPx": 7.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Calibrated to 1 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
+      },
+      "diagnosticRendering": "proposal",
+      "pendingTerms": []
+    }
+  ],
+  "note": "The translated heading follows the approved glossary. The explanation and all later phase content remain separate proposals for subsequent incremental work.",
+  "criticalReview": {
+    "result": "PASS",
+    "finding": "The real Viewer shows only the heading localized and bold. The English explanation and next subheading remain separate, with no visible clipping or collision. Both 100% and 200% Copyfit V3 measurements are 1→1 EXACT with the font loaded and no frame escape."
+  }
+}

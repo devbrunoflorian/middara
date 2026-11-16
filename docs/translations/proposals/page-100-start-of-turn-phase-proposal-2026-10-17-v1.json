@@ -1,0 +1,140 @@
+{
+  "proposalId": "p100-start-of-turn-phase",
+  "version": "1",
+  "title": "Fase de Início do Turno — p. 100",
+  "page": 100,
+  "status": "superseded_blocked_source_composition_mismatch",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 0
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch covers only the first numbered phase heading and its explanatory sentence on page 100.",
+    "The source heading remains bold and the body remains regular at 9 pt in the original frame.",
+    "Copyfit V3 line count is measured from PDF source baselines and live PageRenderer DOM Range rectangles grouped by the shared visual-line helper.",
+    "The proposal is not approved or published. Editor round-trip and exported-PDF parity remain pending."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 12,
+      "sourceBlockId": "block_23",
+      "sourceUnitId": null,
+      "spanKey": "page_100_block_12__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "1. START OF TURN PHASE: Resolve Abilities and Effects that occur at the start of a turn.",
+      "sourcePdfVisualLineCount": 2,
+      "sourcePdfLineIds": [
+        "line_23_0",
+        "line_23_1"
+      ],
+      "proposalText": "1. FASE DE INÍCIO DO TURNO: Resolva as Habilidades e os Efeitos que ocorrem no início do turno.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_12__pt-BR",
+        "bbox": [
+          435.97540283203125,
+          87.67230224609375,
+          665.1339721679688,
+          108.39933013916016
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "1. FASE DE INÍCIO DO TURNO:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " Resolva as Habilidades e os Efeitos que ocorrem no início do turno.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "technicalStatus": "blocked_composition_mismatch_even_though_total_line_count_exact",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Start of Turn Phase → Fase de Início do Turno is a local candidate, not an approved glossary term.",
+        "Effect(s) → Efeito(s) is used consistently with local proposals but is not an approved glossary entry."
+      ],
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 2,
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "PDF-derived page_100_dom.json source baselines compared with PageRenderer DOM Range rectangles grouped by groupPageRendererVisualLines",
+        "environment": {
+          "viewportCssPixels": "2400x1400",
+          "deviceScaleFactor": 1,
+          "language": "pt-BR",
+          "zooms": [
+            "100%",
+            "200%"
+          ],
+          "fontLoaded": true
+        },
+        "geometry": "The original block bbox and 9 pt source styles were preserved, and the total row count was EXACT. However, the heading and beginning of the body shared the first baseline, leaving only the final words on the second; this does not preserve the source heading/body composition and is blocked.",
+        "evidence": {
+          "measurementFiles": [
+            "apps/web/output/p100-block_23-copyfit-v1/1-fase-de-in-cio-do-turno-resolva-as-habilidades-e-os-efeitos-que-ocorrem-no-in-cio-do-turno-100pct-measurement.json",
+            "apps/web/output/p100-block_23-copyfit-v1/1-fase-de-in-cio-do-turno-resolva-as-habilidades-e-os-efeitos-que-ocorrem-no-in-cio-do-turno-200pct-measurement.json"
+          ],
+          "screenshots": [
+            "apps/web/output/p100-block_23-copyfit-v1/viewer-ptbr-1-fase-de-in-cio-do-turno-resolva-as-habilidades-e-os-efeitos-que-ocorrem-no-in-cio-do-turno-100pct.png",
+            "apps/web/output/p100-block_23-copyfit-v1/viewer-ptbr-1-fase-de-in-cio-do-turno-resolva-as-habilidades-e-os-efeitos-que-ocorrem-no-in-cio-do-turno-200pct.png"
+          ]
+        },
+        "samplesByZoom": [
+          {
+            "zoomPercent": 100,
+            "renderedVisualBaselines": 2,
+            "textEscapesFrame": false
+          },
+          {
+            "zoomPercent": 200,
+            "renderedVisualBaselines": 2,
+            "textEscapesFrame": false
+          }
+        ],
+        "writeSafety": "Read-only Payload preflight found no matching saved human translation; all non-GET requests were blocked; no writes occurred."
+      }
+    }
+  ],
+  "revisions": [
+    {
+      "version": "1",
+      "date": "2026-10-17",
+      "attempt": 1,
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "classification": "EXACT",
+      "result": "FAIL overall: total row count was EXACT at 100% and 200%, but the body flowed onto the heading baseline. The critical review rejected this composition; preserve the attempt as superseded evidence, not a reviewable proposal.",
+      "criticalReview": "The critical agent found no semantic loss but identified that a matching total line count did not preserve the source's heading/body baseline hierarchy."
+    }
+  ]
+}

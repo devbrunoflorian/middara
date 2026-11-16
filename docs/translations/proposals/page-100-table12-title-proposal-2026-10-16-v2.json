@@ -1,0 +1,213 @@
+{
+  "proposalId": "p100-table12-title",
+  "version": "2",
+  "title": "Table 12 — fases do turno de um Aventureiro, p. 100",
+  "page": 100,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "40372696A229A9E0C1E211C5D36DE4971B4AF38369FA9514210D497ED0C1DF7E",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 2,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "GET somente leitura confirmou zero traduções p. 100 e zero revisões p. 100; nenhuma tradução final foi escrita.",
+    "Este lote cobre somente o título externo da Tabela 12 e sua repetição no cabeçalho interno. As regras, símbolos, demais tabelas e a composição integral da página permanecem fora do recorte.",
+    "A expressão 'Turno do Aventureiro' segue a forma editorial usada nas referências do projeto; as propostas continuam pendentes de revisão humana e não são publicadas.",
+    "A comparação com o PDF oficial confirma que as duas caixas repetem 'Phases of an Adventurer's Turn', uma em 12 pt e outra em 8 pt branca sobre o cabeçalho escuro. Viewer e copyfit ainda requerem validação crítica.",
+    "Copyfit V3 was measured in the live PageRenderer for both title units at 100% and 200%. Each source PDF unit and each PT-BR rendering occupies exactly one visual line; original rich spans, font sizes, colors, and frame geometry were preserved. Both measurements are EXACT with no measured frame overflow.",
+    "The Viewer check was read-only and blocked every non-GET request. No final translation or human review record was written. Full-page neighboring-content review and exported-PDF parity remain pending; this title batch is not a claim that the whole page is complete."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 19,
+      "sourceBlockId": "block_30",
+      "sourceUnitId": null,
+      "spanKey": "page_100_block_19__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Table 12: Phases of an Adventurer's Turn",
+      "proposalText": "Tabela 12: Fases do Turno do Aventureiro",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_19__pt-BR",
+        "bbox": [
+          431.72540283203125,
+          50.172828674316406,
+          689.317626953125,
+          66.34882354736328
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Tabela 12: ",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fases do Turno do Aventureiro",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "fit-awaiting-human-review",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "copyfitClassification": "EXACT",
+      "sourcePdfVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            431.72540283203125,
+            50.172828674316406,
+            689.317626953125,
+            66.34882354736328
+          ],
+          "visualBaselinesPt": [
+            61.885
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_block_19__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            66.25
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "pageRendererVisualLineCount": 1
+    },
+    {
+      "blockIndex": 11,
+      "sourceBlockId": "block_22",
+      "sourceUnitId": null,
+      "spanKey": "page_100_block_11__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "PHASES OF AN ADVENTURER'S TURN",
+      "proposalText": "FASES DO TURNO DO AVENTUREIRO",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_11__pt-BR",
+        "bbox": [
+          530.9290771484375,
+          71.12779235839844,
+          667.5762329101562,
+          80.66378784179688
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "FASES DO TURNO DO AVENTUREIRO",
+            "font": "OptimaLTStd-Bold",
+            "size": 8,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "fit-awaiting-human-review",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "copyfitClassification": "EXACT",
+      "sourcePdfVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            530.9290771484375,
+            71.12779235839844,
+            667.5762329101562,
+            80.66378784179688
+          ],
+          "visualBaselinesPt": [
+            78.496
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_block_11__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            84.23
+          ],
+          "frameHeightCssPx": 7.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "pageRendererVisualLineCount": 1
+    }
+  ],
+  "note": "A proposta cobre as duas ocorrências visuais do mesmo título de tabela, mantendo a hierarquia, cor e famílias tipográficas de cada uma. Não altera as regras ou outros títulos da página.",
+  "revisions": [
+    {
+      "version": "2",
+      "date": "2026-10-17",
+      "change": "Added live Copyfit V3 measurements for the two repeated Table 12 title units; both are EXACT (1 source line / 1 PT-BR line) at 100% and 200%.",
+      "publication": "No Payload writes; still pending human approval."
+    }
+  ]
+}

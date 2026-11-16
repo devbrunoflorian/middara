@@ -1,0 +1,145 @@
+{
+  "proposalId": "p071-rounding-numbers-rule",
+  "version": "1",
+  "title": "Arredondamento de Números — p. 71",
+  "page": 71,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "69E5686E398DD3727DA1DB17621743AF7F1AC35EA5E597D99AD9BF25E9D8FF29",
+    "pageDom": "88C14646A1C15F6BF86A27A1831C475D63D6D5112078DE62F52C65B6C06EA85D",
+    "inlineElements": null,
+    "fidelityOverlays": null
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2e0efc6c6f6f0"
+  },
+  "scopeLimits": [
+    "Somente a regra de arredondamento block_17 (DOM index 4) entra neste recorte; regras de Miniaturas Grandes, símbolos, exemplos e demais unidades permanecem fora da proposta.",
+    "GETs confirmaram zero traduções PT-BR e zero reviews da p.71 antes da proposta. Nenhuma tradução final é publicada ou sobrescrita.",
+    "Viewer real verificado por agente crítico; Copyfit V3, Editor, PDF, fidelidade integral e aprovação editorial continuam pendentes."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 4,
+      "sourceBlockId": "block_17",
+      "sourceUnitId": null,
+      "spanKey": "page_71_block_4__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Anytime you must cut a number in half, you always round up to the nearest whole number. This could be Damage, Gold, or any other number in the game.",
+      "proposalText": "Sempre que precisar dividir um número por dois, arredonde-o para cima, até o inteiro mais próximo. Isso vale para Dano, Ouro ou qualquer outro número do jogo.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_71_block_4__pt-BR",
+        "bbox": [
+          86.17320251464844,
+          540.7587280273438,
+          406.7830810546875,
+          574.6587524414062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Sempre que precisar dividir um número por dois, arredonde-o para cima, até o inteiro mais próximo. Isso vale para Dano, Ouro ou qualquer outro número do jogo.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_live_viewer_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 71,
+          "pdfDocumentPageIndex": 70,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            540.7587280273438,
+            406.7830810546875,
+            574.6587524414062
+          ],
+          "visualBaselinesPt": [
+            549.949,
+            560.949,
+            571.949
+          ],
+          "spans": 3,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_71_block_4",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            464.81,
+            473.72,
+            482.63
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "note": "Unidade de prosa simples e independente; redação concisa preserva a divisão por dois e o arredondamento para cima. Regras relacionadas a símbolos ficam retidas para outra verificação.",
+  "revisions": [
+    {
+      "version": 2,
+      "note": "Redução de extensão sem retirar a regra de arredondar sempre para cima."
+    }
+  ],
+  "viewerVerification": {
+    "status": "verified_live_viewer_exact_highlight_readability",
+    "verifiedOn": "2026-10-16",
+    "independentCriticalReview": true,
+    "pageNumber": 71,
+    "candidatesVerified": 1,
+    "correctHighlights": 1,
+    "completeEnglishPortugueseComparison": true,
+    "highlightOnlyTargetParagraph": true,
+    "readableAt100Percent": true,
+    "visibleClippingOrOverlap": false,
+    "payloadTranslationCount": 326,
+    "pageTranslationRows": 0,
+    "pageReviewRows": 0,
+    "writeOrApprovalActions": 0,
+    "copyfitV3Verified": false,
+    "editorRoundTripVerified": false,
+    "pdfExportVerified": false,
+    "editorialApproval": false,
+    "finalTranslationWrites": 0
+  }
+}

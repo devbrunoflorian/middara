@@ -1,0 +1,162 @@
+{
+  "proposalId": "p100-action-phase-description",
+  "version": "1",
+  "title": "Descrição da Fase de Ação — p. 100",
+  "page": 100,
+  "status": "viewer_copyfit_v3_exact_100_200_critical_review_pending_human_review",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 0
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch covers only the Action Phase explanation below its separate heading on page 100.",
+    "The body is tied to its three source-backed visual baselines; no hard breaks, font changes, or frame edits are introduced.",
+    "Original OptimaLTStd 9 pt style and the two bold SP abbreviations are preserved.",
+    "Fase de Ação and Fase de Fim do Turno remain local candidates until editorial approval."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 17,
+      "sourceBlockId": "block_28",
+      "sourceUnitId": "p100-action-phase-description",
+      "spanKey": "page_100_unit_p100-action-phase-description__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "During the Action Phase, an Adventurer may spend SP to take Actions and/or use Abilities. When they decide they no longer want to spend SP or take Actions and/or use Abilities, the Adventure continues to the End of Turn Phase.",
+      "sourcePdfVisualLineCount": 3,
+      "sourcePdfLineIds": [
+        "line_28_1",
+        "line_28_2",
+        "line_28_3"
+      ],
+      "proposalText": "Durante a Fase de Ação, o Aventureiro pode gastar SP para realizar Ações e/ou usar Habilidades. Quando não quiser mais gastar SP, realizar Ações ou usar Habilidades, a Aventura segue para a Fase de Fim do Turno.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-action-phase-description__pt-BR",
+        "bbox": [
+          435.9742126464844,
+          292.17889404296875,
+          755.9225463867188,
+          322.9048767089844
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Durante a Fase de Ação, o Aventureiro pode gastar ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " para realizar Ações e/ou usar Habilidades. Quando não quiser mais gastar ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": ", realizar Ações ou usar Habilidades, a Aventura segue para a Fase de Fim do Turno.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "technicalStatus": "viewer_copyfit_v3_exact_100_200_critical_review_pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Action Phase → Fase de Ação, End of Turn Phase → Fase de Fim do Turno, and Adventure → Aventura are local candidates pending editorial approval.",
+        "Stamina Points remains abbreviated as source SP."
+      ],
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 3,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            435.9742126464844,
+            282.17987060546875,
+            755.9225463867188,
+            322.9048767089844
+          ],
+          "visualBaselinesPt": [
+            290.469,
+            300.468,
+            310.467,
+            320.466
+          ],
+          "spans": 8,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-action-phase-description__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            263.36,
+            270.66,
+            277.95
+          ],
+          "frameHeightCssPx": 21.9
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Calibrated to 3 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
+      }
+    }
+  ],
+  "note": "The one-candidate body translation measured EXACT (3→3) at 100% and 200%; no frame escape, blocked writes, or page errors. Independent critical review and human approval remain pending."
+}

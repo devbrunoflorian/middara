@@ -1,0 +1,2362 @@
+{
+  "proposalId": "p079-loot-level-spawn-threshold",
+  "version": "2",
+  "title": "Nível de Saque, Variações e surgimento de Combatentes — p. 79",
+  "page": 79,
+  "status": "page-079-beta-proposal-v2-unmeasured-human-review-pending",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "4B9ED41491A012626E2AC14A6E42B1F60CB2E73ECBE0D47D61F27259EDC819EF",
+    "pageDom": "45C089FD7394701427B0FE523880CED69E4EDD350AA940D75163E68AB5FEA6FA",
+    "inlineElements": null,
+    "fidelityOverlays": "A86D163C3A8EC2D9C2154C1CDE6FC526EA91E2F1BA772C9BD8C204B5DB6FEB7B"
+  },
+  "counts": {
+    "candidates": 22,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2e0efc6c6f6f0"
+  },
+  "scopeLimits": [
+    "O lote ampliado cobre as unidades de prosa editorial dos blocos DOM 9, 11, 14, 15, 18, 19, 20, 21, 22, 25, 26, 27, 28, 31, 32, 44, 45, 46, 47, 52, 53 e 54. A proposta v1 de block_19 foi reutilizada sem alteração.",
+    "Texto embutido nas cartas/ilustrações e nomes de cartas ou componentes foi preservado; não é tratado como prosa do PageRenderer nem traduzido neste lote.",
+    "Candidatos novos estão UNMEASURED e servem somente à leitura da beta; isso não representa Copyfit V3, validação técnica ou aprovação editorial.",
+    "Loot Level → Nível de Saque permanece candidato local, sem canonização no glossário. Tags Alternate/Variation, Possible Spawns, AI e Crawl Mode também permanecem pendentes de harmonização humana.",
+    "Nenhuma tradução final ou decisão editorial foi publicada ou sobrescrita. Payload não foi gravado."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 5,
+      "sourceBlockId": "block_19",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_5__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "The higher the Loot Level a Combatant Card has, the higher the Loot Level an Encounter must be for it to Spawn.",
+      "proposalText": "Quanto maior o Nível de Saque na Carta do Combatente, maior deve ser o do Encontro para o Combatente surgir.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_5__pt-BR",
+        "bbox": [
+          85.76909637451172,
+          489.36981201171875,
+          382.54901123046875,
+          512.2698364257812
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Quanto maior o Nível de Saque na Carta do Combatente, maior deve ser o do Encontro para o Combatente surgir.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_live_viewer_comparison_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level -> Nível de Saque: equivalência local candidata; glossário oficial ainda não a canoniza."
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 79,
+          "pdfDocumentPageIndex": 78,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            85.76909637451172,
+            489.36981201171875,
+            382.54901123046875,
+            512.2698364257812
+          ],
+          "visualBaselinesPt": [
+            498.56,
+            509.56
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_79_block_5__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            423.17,
+            432.08
+          ],
+          "frameHeightCssPx": 18.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_9",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_0__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Alternate, Variations, and Loot LVL",
+      "proposalText": "Alternativas, Variações e Loot LVL",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_0__pt-BR",
+        "bbox": [
+          85.88189697265625,
+          56.69243621826172,
+          439.4342346191406,
+          80.95643615722656
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Alternativas, Variações e Loot LVL",
+            "font": "Cinzel-Regular",
+            "size": 18,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 1,
+      "sourceBlockId": "block_11",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_1__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "The Basics As players progress through Middara, some Combatants might get stronger, randomly switch up their AI, or even be replaced by entirely different types of Combatants. The following section details the special rules to denote this Spawning behavior.",
+      "proposalText": "Noções Básicas\n\nÀ medida que as aventuras de Middara avançam, alguns Combatentes podem ficar mais fortes, mudar aleatoriamente sua IA ou até ser substituídos por tipos de Combatente completamente diferentes. A seção a seguir detalha as regras especiais que indicam esse comportamento de Surgimento.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_1__pt-BR",
+        "bbox": [
+          85.76909637451172,
+          91.98380279541016,
+          407.09979248046875,
+          161.4058074951172
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Noções Básicas\n\n",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "À medida que as aventuras de Middara avançam, alguns Combatentes podem ficar mais fortes, mudar aleatoriamente sua IA ou até ser substituídos por tipos de Combatente completamente diferentes. A seção a seguir detalha as regras especiais que indicam esse comportamento de Surgimento.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 2,
+      "sourceBlockId": "block_14",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_2__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "These rules replace the Alternate Tag rules from our previous versions of Middara. If you're using a previous version of Middara, or other promotional material, all Alternate Tag Combatants now Spawn according to the rules below. However, mechanically, they still function as described on the back of their cards and can be used with no changes required.",
+      "proposalText": "Estas regras substituem as regras da Tag Alternate das versões anteriores de Middara. Se você estiver usando uma versão anterior de Middara ou outro material promocional, todos os Combatentes com a Tag Alternate agora surgem conforme as regras abaixo. No entanto, mecanicamente, continuam funcionando conforme descrito no verso das cartas e podem ser usados sem alterações.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_2__pt-BR",
+        "bbox": [
+          85.76909637451172,
+          166.17578125,
+          407.30902099609375,
+          222.07579040527344
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Estas regras substituem as regras da Tag Alternate das versões anteriores de Middara. Se você estiver usando uma ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "versão anterior de Middara",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ou outro material promocional, todos os Combatentes com a Tag Alternate agora surgem conforme as regras abaixo. No entanto, mecanicamente, continuam funcionando conforme descrito no verso das cartas e podem ser usados ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "sem alterações",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 3,
+      "sourceBlockId": "block_15",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_3__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Loot Level & How Combatants Scale All Combatants now have a Loot Level printed on the front and back of their Combatant Card. The higher the Loot Level, the stronger that Combatant Card is.",
+      "proposalText": "Nível de Saque e Escalonamento dos Combatentes\n\nTodas as Cartas de Combatente agora têm um Nível de Saque impresso na frente e no verso. Quanto maior o Nível de Saque, mais forte é a Carta de Combatente.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_3__pt-BR",
+        "bbox": [
+          85.76909637451172,
+          232.48782348632812,
+          407.09979248046875,
+          290.9098205566406
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Nível de Saque e Escalonamento dos Combatentes\n\n",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Todas",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " as Cartas d",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Combat",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "nt",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " agora têm um Nív",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "l d",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Saqu",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " impr",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "sso na fr",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "nt",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " no v",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "rso. Quanto maior o Nív",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "l d",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Saqu",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", mais fort",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " é a Carta d",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Combat",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "nt",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "e",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 4,
+      "sourceBlockId": "block_18",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_4__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "On some cards, the Loot Level will be called \"Loot LVL\" for space purposes. These two terms are interchangeable. See Loot Levels, Pg. 17.",
+      "proposalText": "Em algumas cartas, o Nível de Saque aparece como “Loot LVL” por falta de espaço. Esses dois termos são intercambiáveis. Veja Níveis de Saque, pág. 17.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_4__pt-BR",
+        "bbox": [
+          85.76909637451172,
+          295.6798095703125,
+          390.9289245605469,
+          318.5798034667969
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Em algumas cartas, o Nível de Saque aparece como “Loot LVL” por falta de espaço. Esses dois termos são intercambiáveis. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Níveis de Saque",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 17.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 6,
+      "sourceBlockId": "block_20",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_6__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "As an Adventure progresses, or for Adventures that start at higher Loot Levels (In the Crawl Mode for example), Combatants get stronger. When instructed to Spawn Combatants during an Encounter, players always Spawn Combatants whose Loot Level listed on their cards corresponds with the Loot Level of the current Encounter.",
+      "proposalText": "À medida que uma Aventura avança, ou em Aventuras que começam em Níveis de Saque mais altos (como no Crawl Mode, por exemplo), os Combatentes ficam mais fortes. Quando recebem instruções para fazer surgir Combatentes durante um Encontro, os jogadores sempre fazem surgir Combatentes cujo Nível de Saque indicado nas cartas corresponde ao Nível de Saque do Encontro atual.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_6__pt-BR",
+        "bbox": [
+          85.76909637451172,
+          664.7197875976562,
+          397.6780700683594,
+          720.6198120117188
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "À medida que uma Aventura avança, ou em Aventuras que começam em Níveis de Saque mais altos (como no Crawl Mode, por exemplo), os Combatentes ficam mais fortes. Quando recebem instruções para fazer surgir Combatentes durante um Encontro, os jogadores sempre fazem surgir Combatentes cujo Nível de Saque indicado nas cartas corresponde ao Nível de Saque do Encontro atual.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 7,
+      "sourceBlockId": "block_21",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_7__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Some Combatants have Additional Prerequisites that must be met before Spawning them. These will be listed on the back of their card under their Loot Level requirement. If any required Prerequisites has not been met and players are instructed to Spawn a Combatant of their type, players should use the card with the next lowest Loot Level if available. Otherwise, do not Spawn the Combatant.",
+      "proposalText": "Alguns Combatentes têm Pré-requisitos Adicionais que precisam ser atendidos antes de surgirem. Eles são listados no verso da carta, abaixo do requisito de Nível de Saque. Se algum Pré-requisito exigido não tiver sido atendido e os jogadores receberem instruções para fazer surgir um Combatente daquele tipo, devem usar, se disponível, a carta com o próximo Nível de Saque mais baixo. Caso contrário, não façam surgir o Combatente.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_7__pt-BR",
+        "bbox": [
+          85.76908874511719,
+          725.3698120117188,
+          400.7790222167969,
+          792.2898559570312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Alguns Combatentes têm ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Pré-requisitos Adicionais",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " que precisam ser atendidos antes de surgirem. Eles são listados no verso da carta, abaixo do requisito de Nível de Saque. Se ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "algum",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Pré-requisito exigido não tiver sido atendido e os jogadores receberem instruções para fazer surgir um Combatente daquele tipo, devem usar, se disponível, a carta com o próximo Nível de Saque mais baixo. Caso contrário, não façam surgir o Combatente.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 8,
+      "sourceBlockId": "block_22",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_8__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Base Combatants While all Combatant Cards have a Loot Level associated with them, not all Combatant Cards have the Alternate or Variation Tags listed on the top right corner with the other Combatant Tags.",
+      "proposalText": "Combatentes Base\n\nEmbora todas as Cartas de Combatente tenham um Nível de Saque associado, nem todas têm as Tags Alternate ou Variation no canto superior direito, junto das outras Tags de Combatente.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_8__pt-BR",
+        "bbox": [
+          415.9064025878906,
+          91.98380279541016,
+          737.2371826171875,
+          152.0751190185547
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Combatentes Base\n\n",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Embora ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "todas",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " as Cartas de Combatente tenham um Nível de Saque associado, nem ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "todas",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " têm as Tags Alternate ou ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Variation",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " no canto superior direito, junto das outras Tags de Combatente.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 9,
+      "sourceBlockId": "block_25",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_9__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Cards without either of these Tags are considered Base Combatants.",
+      "proposalText": "Cartas sem nenhuma dessas Tags são consideradas Combatentes Base.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_9__pt-BR",
+        "bbox": [
+          415.906494140625,
+          156.72509765625,
+          708.7669067382812,
+          168.74510192871094
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Cartas sem nenhuma dessas Tags são consideradas ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Combatentes Base",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 10,
+      "sourceBlockId": "block_26",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_10__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "A Base Combatant Card is the unmodified version of a Combatant. Meaning, it's the Combatant Card you can expect to use unless the Alternate or Variation rules modify them.",
+      "proposalText": "Uma Carta de Combatente Base é a versão sem modificações de um Combatente. Ou seja, é a Carta de Combatente que se espera usar, a menos que as regras Alternate ou Variation a modifiquem.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_10__pt-BR",
+        "bbox": [
+          415.906494140625,
+          173.39508056640625,
+          705.8569946289062,
+          207.4150848388672
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Uma Carta de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Combatente Base",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " é a versão sem modificações de um Combatente. Ou seja, é a Carta de Combatente que se espera usar, a menos que as regras Alternate ou ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Variation",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " a modifiquem.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 11,
+      "sourceBlockId": "block_27",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_11__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Example: The Cave Sickles included in Unintentional Malum: Act 1 (all Loot Levels of them) are considered Base Combatants.",
+      "proposalText": "Exemplo: as Cave Sickles incluídas em Unintentional Malum: Act 1 (em todos os Níveis de Saque) são consideradas Combatentes Base.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_11__pt-BR",
+        "bbox": [
+          415.906494140625,
+          212.0650634765625,
+          724.7571411132812,
+          235.08506774902344
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Exemplo:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " as Cave Sickles incluídas em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Unintentional Malum: Act 1",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " (em todos os Níveis de Saque) são consideradas ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Combatentes Base",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 12,
+      "sourceBlockId": "block_28",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_12__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Alternate Combatants Combatant Cards with the Alternate Tag will always specify a Base Combatant they might replace. These Combatant Cards are considered Alternate Combatants.",
+      "proposalText": "Combatentes Alternate\n\nCartas de Combatente com a Tag Alternate sempre especificam um Combatente Base que podem substituir. Essas Cartas de Combatente são consideradas Combatentes Alternate.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_12__pt-BR",
+        "bbox": [
+          415.906494140625,
+          248.33023071289062,
+          737.2371826171875,
+          308.4214782714844
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Combatentes Alternate\n\n",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Cartas de Combatente com a Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Alternate",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " sempre especificam um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Combatente Base",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " que podem substituir. Essas Cartas de Combatente são consideradas ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Combatentes Alternate",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 13,
+      "sourceBlockId": "block_31",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_13__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "See The Alternate Tag, Pg. 80.",
+      "proposalText": "Veja a seção “Alternate Tag”, pág. 80.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_13__pt-BR",
+        "bbox": [
+          415.906494140625,
+          313.0715026855469,
+          544.156494140625,
+          325.09149169921875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Veja a seção ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "“Alternate Tag”",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 80.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 14,
+      "sourceBlockId": "block_32",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_14__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "The Variation Tag",
+      "proposalText": "A Tag Variation\n",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_14__pt-BR",
+        "bbox": [
+          415.9064025878906,
+          334.3381042480469,
+          519.4904174804688,
+          350.51409912109375
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "A Tag ",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Variation",
+            "font": "OptimaLTStd-Bold",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 20,
+      "sourceBlockId": "block_44",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_20__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Combatant Cards with the Variation Tag denote Combatants that have new and different AI printed on them but represent the same Combatant.",
+      "proposalText": "Cartas de Combatente com a Tag Variation indicam Combatentes com uma IA nova e diferente impressa nelas, mas que representam o mesmo Combatente.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_20__pt-BR",
+        "bbox": [
+          415.9060974121094,
+          411.3319091796875,
+          731.0366821289062,
+          434.27191162109375
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Cartas de Combatente com a Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Variation",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " indicam Combatentes com uma IA nova e diferente impressa nelas, mas que representam o mesmo Combatente.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 21,
+      "sourceBlockId": "block_45",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_21__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "For example, this could be a Cave Sickle with two different types of AI Steps and instructions.",
+      "proposalText": "Por exemplo, pode ser uma Cave Sickle com dois tipos diferentes de etapas e instruções de IA.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_21__pt-BR",
+        "bbox": [
+          415.9060974121094,
+          439.0019226074219,
+          720.2966918945312,
+          461.9419250488281
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Por exemplo, pode ser uma ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Cave Sickle",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " com dois tipos diferentes de etapas e instruções de IA.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 22,
+      "sourceBlockId": "block_46",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_22__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Combatant Variations are designed to add variety to Middara by shaking up the AI that is printed on Base Combatants and the Alternate Tagged Combatant Cards that might replace them.",
+      "proposalText": "As Variações de Combatente foram criadas para trazer variedade a Middara, alterando a IA impressa nos Combatentes Base e nas Cartas de Combatente com a Tag Alternate que podem substituí-los.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_22__pt-BR",
+        "bbox": [
+          415.9060974121094,
+          466.7119445800781,
+          728.7566528320312,
+          500.6119384765625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "As Variações de Combatente foram criadas para trazer variedade a Middara, alterando a IA impressa nos ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Combatentes Base",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " e nas Cartas de Combatente com a Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Alternate",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " que podem substituí-los.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 23,
+      "sourceBlockId": "block_47",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_23__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Example: This Burrowing Cave Sickle Variation shown above switches up the Cave Sickle AI for Group 1-3!",
+      "proposalText": "Exemplo: a Burrowing Cave Sickle Variation mostrada acima altera a IA da Cave Sickle para os Grupos 1–3!",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_23__pt-BR",
+        "bbox": [
+          436.7952880859375,
+          542.1544189453125,
+          700.505615234375,
+          565.1744384765625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Exemplo:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " a Burrowing ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Cave Sickle Variation",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " mostrada acima altera a IA da ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Cave Sickle",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " para os Grupos ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "–",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "3",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "!",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 25,
+      "sourceBlockId": "block_52",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_25__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "On the back of Combatants with the Variation Tag, there is the name of the Combatant Card they are considered Possible Spawns for listed as VARIATION: X. (e.g. Cave Sickle Group 1-3.) However, a Combatant with the Variation Tag is never considered a Possible Spawn while its Variation Group card counterpart (e.g. Cave Sickle Group 1-3) is already in use.",
+      "proposalText": "No verso dos Combatentes com a Tag Variation, a Carta de Combatente para a qual eles são considerados Surgimentos Possíveis aparece identificada como VARIATION: X (por exemplo, Cave Sickle Group 1–3). No entanto, um Combatente com a Tag Variation nunca é considerado um Surgimento Possível enquanto a carta correspondente do Grupo de Variation (por exemplo, Cave Sickle Group 1–3) já estiver em uso.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_25__pt-BR",
+        "bbox": [
+          415.9062194824219,
+          577.210205078125,
+          736.40673828125,
+          633.1302490234375
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "No verso dos Combatentes com a Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Variation",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", a Carta de Combatente para a qual eles são considerados ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Surgimentos Possíveis",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " aparece identificada como ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "VARIATION: X",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "por exemplo,",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Cave Sickle Group",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1–3",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": "). No entanto, um Combatente com a Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Variation",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " nunca é considerado um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Surgimento Possível",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " enquanto a carta correspondente do Grupo de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Variation",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "por exemplo,",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Cave Sickle Group",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1–3",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ") já estiver em uso.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 26,
+      "sourceBlockId": "block_53",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_26__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "The card that the Variation Tag lists (e.g. Cave Sickle Group 1-3) can be either a Base Combatant or an Alternate Combatant. Meaning, you can have a Variation of a Base Combatant or Alternate Combatant.",
+      "proposalText": "A carta indicada pela Tag Variation (por exemplo, Cave Sickle Group 1–3) pode ser um Combatente Base ou um Combatente Alternate. Ou seja, pode haver uma Variação de um Combatente Base ou de um Combatente Alternate.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_26__pt-BR",
+        "bbox": [
+          415.9062194824219,
+          637.8602294921875,
+          726.4766235351562,
+          671.8002319335938
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "A carta indicada pela Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Variation",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "por exemplo,",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Cave Sickle Group",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1–3",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ") pode ser um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Combatente Base",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " ou um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Combatente Alternate",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Ou seja, pode haver uma Variação de um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Combatente Base",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " ou de um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Combatente Alternate",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    },
+    {
+      "blockIndex": 27,
+      "sourceBlockId": "block_54",
+      "sourceUnitId": null,
+      "spanKey": "page_79_block_27__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Combatants with the Variation Tag have special Spawn rules associated with them. See Possible Spawns, Pg. 80.",
+      "proposalText": "Combatentes com a Tag Variation seguem regras especiais de Surgimento. Veja “Possible Spawns”, pág. 80.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_79_block_27__pt-BR",
+        "bbox": [
+          415.9062194824219,
+          676.5501708984375,
+          725.126708984375,
+          699.47021484375
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Combatentes com a Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Variation",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " seguem regras especiais de Surgimento. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "“Possible Spawns”",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 80.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "not_measured_beta_provisional_only",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loot Level → Nível de Saque permanece uma forma local candidata, sem canonização no glossário.",
+        "Alternate Tag / Variation Tag e Combatentes Alternate/Base: identificadores de Tags e nomes mecânicos preservados ou traduzidos apenas provisoriamente; harmonização editorial pendente.",
+        "Possible Spawn(s) → Surgimento(s) Possível(is): equivalência local provisória; seção de referência da p. 80 ainda precisa ser reconciliada.",
+        "Crawl Mode e AI/AI Steps foram mantidos como termos reconhecíveis ou traduzidos como IA, com decisão terminológica humana pendente.",
+        "Nomes de cartas, variações, campanha e componentes (Cave Sickle, Burrowing Cave Sickle Variation, Unintentional Malum: Act 1, entre outros) foram preservados em inglês; o texto rasterizado das cartas continua fora do escopo desta proposta."
+      ],
+      "semanticSymbols": [],
+      "copyfitClassification": "UNMEASURED"
+    }
+  ],
+  "viewerVerification": {
+    "result": "pending beta export verification",
+    "comparison": "Not yet rechecked for v2 candidate batch.",
+    "highlight": "Not measured.",
+    "readability": "Provisional beta only; inspect resulting page export.",
+    "translationRecordsTotal": 523,
+    "pageTranslationRecords": 22,
+    "pageReviewRecords": 0,
+    "writesOrApproval": 0,
+    "copyfitV3": false,
+    "editor": false,
+    "pdf": false,
+    "humanEditorialApproval": false,
+    "terminology": "All listed pending terms remain provisional and unapproved."
+  },
+  "note": "Ampliação da proposta p.79: reutiliza o candidato EXACT pré-existente para block_19 e acrescenta o texto editorial contíguo em candidatos provisórios ainda não medidos. Arte de cartas e nomes de componentes permanecem fonte em inglês, explicitamente fora deste lote. Nenhum Payload write.",
+  "revisions": [
+    {
+      "version": 2,
+      "note": "Redação encurtada para caber no frame mantendo o limiar de Nível de Saque e o Combatente como referente do surgimento."
+    },
+    {
+      "version": 2,
+      "note": "Expansão para 21 novos blocos de prosa, em modo UNMEASURED beta-only; texto de cartas/artwork preservado."
+    }
+  ]
+}

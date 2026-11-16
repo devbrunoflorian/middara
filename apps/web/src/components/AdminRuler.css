@@ -1,0 +1,215 @@
+.admin-ruler-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 20002;
+  pointer-events: none;
+  color: #fff;
+  font: 9px/1 Inter, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-ruler,
+.admin-ruler-corner {
+  position: fixed;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: rgba(18, 18, 18, 0.88);
+  border: 1px solid rgba(74, 222, 128, 0.7);
+}
+
+.admin-ruler-tick {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 1px;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.admin-ruler-horizontal .admin-ruler-tick.labeled {
+  height: 12px;
+}
+
+.admin-ruler-horizontal .admin-ruler-tick > span {
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  white-space: nowrap;
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+}
+
+.admin-ruler-vertical .admin-ruler-tick {
+  left: 0;
+  width: 7px;
+  height: 1px;
+}
+
+.admin-ruler-vertical .admin-ruler-tick.labeled {
+  width: 12px;
+}
+
+.admin-ruler-vertical .admin-ruler-tick > span {
+  position: absolute;
+  top: 2px;
+  left: 1px;
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+}
+
+.admin-ruler-end-label {
+  position: absolute;
+  top: 1px;
+  padding-inline: 2px;
+  background: rgba(18, 18, 18, 0.88);
+  white-space: nowrap;
+}
+
+.admin-ruler-corner {
+  width: 22px;
+  height: 22px;
+}
+
+.admin-ruler-snap-guide,
+.admin-ruler-snap-mark {
+  position: fixed;
+  display: block;
+}
+
+.admin-ruler-snap-guide-vertical {
+  width: 1px;
+  background: repeating-linear-gradient(to bottom, #7dd3fc 0 4px, transparent 4px 8px);
+  filter: drop-shadow(0 0 2px rgb(56 189 248 / 70%));
+}
+
+.admin-ruler-snap-guide-horizontal {
+  height: 1px;
+  background: repeating-linear-gradient(to right, #7dd3fc 0 4px, transparent 4px 8px);
+  filter: drop-shadow(0 0 2px rgb(56 189 248 / 70%));
+}
+
+.admin-ruler-selected-guide {
+  position: fixed;
+  display: block;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.admin-ruler-selected-guide-vertical {
+  width: 1px;
+  background: repeating-linear-gradient(to bottom, rgb(125 211 252 / 82%) 0 2px, transparent 2px 7px);
+}
+
+.admin-ruler-selected-guide-horizontal {
+  height: 1px;
+  background: repeating-linear-gradient(to right, rgb(125 211 252 / 82%) 0 2px, transparent 2px 7px);
+}
+
+.admin-ruler-selected-mark {
+  position: fixed;
+  display: block;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.admin-ruler-selected-mark-x {
+  width: 1px;
+  height: 4px;
+  background: #7dd3fc;
+}
+
+.admin-ruler-selected-mark-y {
+  width: 4px;
+  height: 1px;
+  background: #7dd3fc;
+}
+
+.admin-ruler-snap-mark-x {
+  width: 0;
+  height: 0;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-top: 6px solid #7dd3fc;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 2px #38bdf8);
+}
+
+.admin-ruler-snap-mark-y {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid #7dd3fc;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 0 2px #38bdf8);
+}
+
+.admin-geometry-measurements {
+  position: fixed;
+  inset: 0;
+  z-index: 20001;
+  pointer-events: none;
+  color: #f8fafc;
+  font: 600 11px/1 Inter, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-geometry-chip {
+  position: fixed;
+  display: inline-flex;
+  min-height: 22px;
+  align-items: center;
+  padding: 0 7px;
+  border: 1px solid #38bdf8;
+  border-radius: 999px;
+  background: rgb(8 15 24 / 96%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 42%);
+  color: #f8fafc;
+  white-space: nowrap;
+  text-shadow: 0 1px 1px rgb(0 0 0 / 55%);
+}
+
+.admin-geometry-chip-x {
+  transform: translate(-100%, -50%);
+}
+
+.admin-geometry-chip-y {
+  transform: translate(-50%, -100%);
+}
+
+.admin-geometry-chip-x2 {
+  transform: translateY(-50%);
+}
+
+.admin-geometry-chip-width {
+  transform: translateY(-50%);
+}
+
+.admin-geometry-chip-height {
+  transform: translateX(-50%);
+}
+
+.admin-geometry-chip-rotation {
+  transform: translateY(-100%);
+  border-color: #fbbf24;
+  color: #fef3c7;
+}
+
+@media (forced-colors: active) {
+  .admin-ruler,
+  .admin-ruler-corner,
+  .admin-geometry-chip {
+    border-color: CanvasText;
+    background-color: Canvas;
+    color: CanvasText;
+    forced-color-adjust: none;
+  }
+
+  .admin-ruler-tick,
+  .admin-ruler-horizontal,
+  .admin-ruler-vertical {
+    background-color: CanvasText;
+  }
+}

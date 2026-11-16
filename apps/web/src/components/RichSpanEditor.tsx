@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import './RichSpanEditor.css';
 import puaMappingRaw from '../assets/pua_mapping.json';
+import type { AdminSymbolPaletteEditorState } from './AdminSymbolPalette';
+import { getDefaultSymbolAliasPreferences, getSemanticSymbol, getSymbolEditorToken, isSymbolAllowed, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences } from '../symbols/semanticSymbols';
+import { SemanticSymbol } from '../symbols/SemanticSymbol';
+import { SYMBOL_OBJECT_MARKER, editableTextForSegments, segmentsFromEditableText, replaceSegmentRange, insertEditorToken, deleteEditorToken, expandEditorTokenSelection, normalizeEditableInput, needsManualRichStyleReview } from '../symbols/inlineCodec';
+import { collectManagedSourceSymbols, initialManagedSourceSymbols, createEditorOverride, lineHeightModeForOverride } from '../symbols/editorOverride';
+import { INLINE_CLIPBOARD_MIME, editableRangeToSegmentRange, sliceSegmentRange, encodeInlineClipboard, decodeInlineClipboard } from '../symbols/inlineClipboard';
+import { findGlossaryMatches, findPersistedGlossaryMatches } from '../translations/glossaryContext';
+import type { TranslationGlossaryDecision } from '../translationReview';
+import type { LocalSyncState } from '../localPersistence';
 
 const PUA_MAPPING: Record<string, {name: string, pua_char: string, hex: string}[]> = puaMappingRaw;
 
@@ -40,66 +49,186 @@ export interface Segment {
   weight: number;
   style: 'normal' | 'italic';
   disableLigatures?: boolean;
+  /** Preserve PDF text outline effects on editable color runs. */
+  textStrokeWidthPt?: number;
+  textStrokeColor?: string;
+  /** Stable semantic symbol ID; `text` carries one object-replacement marker. */
+  symbolId?: string;
+  /** Per-occurrence PDF metrics; optional and compatible with existing JSON. */
+  symbolMetrics?: InlineSymbolMetrics;
+  /** Source occurrence needs its semantic SVG because the page raster omits the vector. */
+  sourceRendering?: 'semantic-inline';
 }
 
 export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
+export type LineHeightMode = 'source' | 'custom';
 
 export interface SpanOverride {
   spanKey: string;
   segments: Segment[];
   bbox: [number, number, number, number];
   textAlign?: TextAlignment;
+  /** Unitless CSS line height used for explicit line breaks and wrapped rows. */
+  lineHeight?: number;
+  /** Optional unitless line height for PDF output when browser print metrics diverge from the viewer. */
+  printLineHeight?: number;
+  /** Optional paragraph spacing for PDF output when browser print metrics diverge from the viewer. */
+  printParagraphSpacingPt?: number;
+  /** Source leading is the default; `custom` means the admin changed the control. */
+  lineHeightMode?: LineHeightMode;
+  /** Source IDs adopted by this edit, including objects deliberately deleted. */
+  managedSourceSymbols?: string[];
+  /** Source-measured separation between adjacent paragraphs, in PDF points. */
+  paragraphSpacingPt?: number;
+  /** Inset of a list marker from the paragraph frame, in PDF points. */
+  listMarkerIndentPt?: number;
+  /** Start of wrapped list text from the paragraph frame, in PDF points. */
+  hangingIndentPt?: number;
 }
 
 interface RichSpanEditorProps {
   spanKey: string;
+  editorLabel?: string;
   originalText: string;
   originalFont: string;
   originalSize: number;
   originalColor: string;
   originalWeight: number;
   originalStyle: 'normal' | 'italic';
+  originalSegments?: Segment[];
   originalTextAlign?: TextAlignment;
+  originalLineHeight?: number;
+  originalListMarkerIndentPt?: number;
+  originalHangingIndentPt?: number;
   bbox: [number, number, number, number];
   pageNumber: number;
   language: 'en' | 'pt-BR';
   onClose: () => void;
-  onSave: (override: SpanOverride | null) => void;
+  onSave: (override: SpanOverride | null) => void | Promise<unknown>;
   existingOverride?: SpanOverride | null;
+  overrideStatusLoading?: boolean;
+  persistenceStatus?: LocalSyncState | 'sync_error' | 'inherited' | 'loading';
   onDraftChange?: (draft: SpanOverride | null) => void;
+  canNavigatePrevious?: boolean;
+  canNavigateNext?: boolean;
+  onNavigatePrevious?: () => void;
+  onNavigateNext?: () => void;
+  singleLine?: boolean;
+  editorContext?: InlineEditorContext;
+  symbolAliasPreferences?: SymbolAliasPreferences;
+  onPaletteEditorChange?: (editorKey: string, state: AdminSymbolPaletteEditorState | null) => void;
+  headerAccessory?: React.ReactNode;
+  onToggleLanguage?: (language: 'en' | 'pt-BR') => void;
+  /** Save into isolated in-memory experiment state instead of persistence. */
+  sessionOnly?: boolean;
+  /** Save a proposal edit back to its persisted pending Payload review record. */
+  persistentDraftMode?: boolean;
+  persistentDraftStatus?: 'saved' | 'saving' | 'error';
+  glossaryDecisions?: TranslationGlossaryDecision[];
+}
+
+interface EditorSnapshot {
+  segments: Segment[];
+  textAlign: TextAlignment;
+  lineHeight: number;
+  lineHeightMode: LineHeightMode;
+  listMarkerIndentPt?: number;
+  hangingIndentPt?: number;
+  isEditingText: boolean;
+  editText: string;
+  editTextBaseline: string;
+  editTextSegments: Segment[];
+  managedSourceSymbols: string[];
+  editInitialManagedSourceSymbols: string[];
+  editSelectionStart: number;
+  editSelectionEnd: number;
+  selStart: number | null;
+  selEnd: number | null;
+  toolFont: string;
+  toolWeight: number;
+  toolStyle: 'normal' | 'italic';
+  toolColor: string;
+  toolSize: number;
+  toolLigatures: boolean;
 }
 
 export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   spanKey,
+  editorLabel,
   originalText,
   originalFont,
   originalSize,
   originalColor,
   originalWeight,
   originalStyle,
+  originalSegments,
   originalTextAlign = 'left',
+  originalLineHeight = 1,
+  originalListMarkerIndentPt,
+  originalHangingIndentPt,
   bbox,
   pageNumber,
   language,
   onClose,
   onSave,
   existingOverride,
+  overrideStatusLoading = false,
+  persistenceStatus,
   onDraftChange,
+  canNavigatePrevious = false,
+  canNavigateNext = false,
+  onNavigatePrevious,
+  onNavigateNext,
+  singleLine = false,
+  editorContext = 'paragraph',
+  symbolAliasPreferences = getDefaultSymbolAliasPreferences(),
+  onPaletteEditorChange,
+  headerAccessory,
+  onToggleLanguage,
+  sessionOnly = false,
+  persistentDraftMode = false,
+  persistentDraftStatus = 'saved',
+  glossaryDecisions = [],
 }) => {
+  const normalizeText = useCallback((text: string) => (
+    singleLine ? text.replace(/[\r\n]+/g, ' ').replace(/[\t ]+/g, ' ') : text
+  ), [singleLine]);
+
   const baseSegments = useMemo<Segment[]>(() => {
-    if (existingOverride && existingOverride.segments.length > 0) {
-      return existingOverride.segments;
+    const normalizeSegments = (items: Segment[]) => singleLine
+      ? items.map(segment => ({ ...segment, text: normalizeText(segment.text) }))
+      : items;
+    if (existingOverride) {
+      return normalizeSegments(existingOverride.segments);
     }
+    if (originalSegments && originalSegments.length > 0) return normalizeSegments(originalSegments);
     return [{
-      text: originalText,
+      text: normalizeText(originalText),
       font: originalFont,
       size: originalSize,
       color: originalColor,
       weight: originalWeight,
       style: originalStyle,
     }];
-  }, [existingOverride, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle]);
+  }, [existingOverride, originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, normalizeText, singleLine]);
+  const sourceContextSegments = useMemo<Segment[]>(() => originalSegments?.length
+    ? originalSegments
+    : [{ text: originalText, font: originalFont, size: originalSize, color: originalColor, weight: originalWeight, style: originalStyle }],
+  [originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle]);
+  const sourceContextText = useMemo(() => editableTextForSegments(sourceContextSegments, 'en', symbolAliasPreferences),
+    [sourceContextSegments, symbolAliasPreferences]);
+  const sourceGlossaryText = useMemo(() => sourceContextSegments
+    .filter(segment => !segment.symbolId)
+    .map(segment => segment.text)
+    .join(''), [sourceContextSegments]);
+  const sourceGlossaryMatches = useMemo(() => findGlossaryMatches(sourceGlossaryText), [sourceGlossaryText]);
+  const persistedGlossaryMatches = useMemo(() => findPersistedGlossaryMatches(sourceGlossaryText, glossaryDecisions, sourceGlossaryMatches), [sourceGlossaryText, glossaryDecisions, sourceGlossaryMatches]);
   const baseTextAlign = existingOverride?.textAlign ?? originalTextAlign;
+  const baseLineHeightMode = lineHeightModeForOverride(existingOverride);
+  const baseLineHeight = baseLineHeightMode === 'custom' ? existingOverride?.lineHeight ?? originalLineHeight : originalLineHeight;
+  const baseManagedSourceSymbols = useMemo(() => initialManagedSourceSymbols(originalSegments ?? baseSegments, existingOverride),
+    [originalSegments, baseSegments, existingOverride]);
+  const [managedSourceSymbols, setManagedSourceSymbols] = useState(baseManagedSourceSymbols);
 
   // Segments = the array of styled character runs
   const [segments, setSegments] = useState<Segment[]>(baseSegments);
@@ -113,19 +242,176 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   const [toolStyle, setToolStyle] = useState<'normal' | 'italic'>(originalStyle);
   const [toolColor, setToolColor] = useState(originalColor);
   const [toolSize, setToolSize] = useState(originalSize);
+  const [toolSizeInput, setToolSizeInput] = useState(String(originalSize));
+  const [toolSizeInputError, setToolSizeInputError] = useState<string | null>(null);
+  const toolSizeMin = Math.min(0.1, toolSize);
+  const toolSizeMax = Math.max(72, toolSize);
   const [toolLigatures, setToolLigatures] = useState(true);
   const [textAlign, setTextAlign] = useState<TextAlignment>(baseTextAlign);
+  const [lineHeight, setLineHeight] = useState(baseLineHeight);
+  const [lineHeightMode, setLineHeightMode] = useState<LineHeightMode>(baseLineHeightMode);
+  const [listMarkerIndentPt, setListMarkerIndentPt] = useState<number | undefined>(existingOverride?.listMarkerIndentPt);
+  const [hangingIndentPt, setHangingIndentPt] = useState<number | undefined>(existingOverride?.hangingIndentPt);
   // Text editing
   const [isEditingText, setIsEditingText] = useState(false);
   const [editText, setEditText] = useState('');
+  const [editTextBaseline, setEditTextBaseline] = useState('');
+  // Keep the latest rich projection: reparsing every keystroke against the
+  // original text loses styles between two independently changed regions.
+  const [editTextSegments, setEditTextSegments] = useState<Segment[]>([]);
+  const [editInitialManagedSourceSymbols, setEditInitialManagedSourceSymbols] = useState<string[]>([]);
+  const [symbolPaletteStatus, setSymbolPaletteStatus] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [undoHistory, setUndoHistory] = useState<EditorSnapshot[]>([]);
+  const [redoHistory, setRedoHistory] = useState<EditorSnapshot[]>([]);
 
   const charGridRef = useRef<HTMLDivElement>(null);
+  const editTextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const editSelectionRef = useRef({ start: 0, end: 0 });
+  const charSelectionAnchorRef = useRef({ start: 0, end: 0 });
+  const spanBaseKey = spanKey.replace(/__(?:pt-BR|en)$/u, '');
+  const lastBaseKeyRef = useRef<string>(spanBaseKey);
+  const lastLanguageRef = useRef<'en' | 'pt-BR'>(language);
+  const ptDraftRef = useRef<{
+    snapshot: EditorSnapshot;
+    undoHistory: EditorSnapshot[];
+    redoHistory: EditorSnapshot[];
+  } | null>(null);
+
+  const createSnapshot = useCallback((): EditorSnapshot => {
+    const textarea = editTextAreaRef.current;
+    return {
+      segments: segments.map(segment => ({ ...segment })),
+      textAlign,
+      lineHeight,
+      lineHeightMode,
+      listMarkerIndentPt,
+      hangingIndentPt,
+      isEditingText,
+      editText,
+      editTextBaseline,
+      editTextSegments: editTextSegments.map(segment => ({ ...segment })),
+      managedSourceSymbols: [...managedSourceSymbols],
+      editInitialManagedSourceSymbols: [...editInitialManagedSourceSymbols],
+      editSelectionStart: textarea?.selectionStart ?? editSelectionRef.current.start,
+      editSelectionEnd: textarea?.selectionEnd ?? editSelectionRef.current.end,
+      selStart,
+      selEnd,
+      toolFont,
+      toolWeight,
+      toolStyle,
+      toolColor,
+      toolSize,
+      toolLigatures,
+    };
+  }, [segments, textAlign, lineHeight, lineHeightMode, listMarkerIndentPt, hangingIndentPt, isEditingText, editText, editTextBaseline, editTextSegments, managedSourceSymbols, editInitialManagedSourceSymbols, selStart, selEnd, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures]);
+
+  const pushHistory = useCallback(() => {
+    const snapshot = createSnapshot();
+    setUndoHistory(history => [...history.slice(-49), snapshot]);
+    setRedoHistory([]);
+  }, [createSnapshot]);
+
+  const restoreSnapshot = useCallback((snapshot: EditorSnapshot) => {
+    setSegments(snapshot.segments.map(segment => ({ ...segment })));
+    setTextAlign(snapshot.textAlign);
+    setLineHeight(snapshot.lineHeight);
+    setLineHeightMode(snapshot.lineHeightMode);
+    setListMarkerIndentPt(snapshot.listMarkerIndentPt);
+    setHangingIndentPt(snapshot.hangingIndentPt);
+    setIsEditingText(snapshot.isEditingText);
+    setEditText(snapshot.editText);
+    setEditTextBaseline(snapshot.editTextBaseline);
+    setEditTextSegments(snapshot.editTextSegments.map(segment => ({ ...segment })));
+    setManagedSourceSymbols([...snapshot.managedSourceSymbols]);
+    setEditInitialManagedSourceSymbols([...snapshot.editInitialManagedSourceSymbols]);
+    setSelStart(snapshot.selStart);
+    setSelEnd(snapshot.selEnd);
+    setToolFont(snapshot.toolFont);
+    setToolWeight(snapshot.toolWeight);
+    setToolStyle(snapshot.toolStyle);
+    setToolColor(snapshot.toolColor);
+    setToolSize(snapshot.toolSize);
+    setToolLigatures(snapshot.toolLigatures);
+    editSelectionRef.current = { start: snapshot.editSelectionStart, end: snapshot.editSelectionEnd };
+    requestAnimationFrame(() => {
+      const textarea = editTextAreaRef.current;
+      if (snapshot.isEditingText && textarea) {
+        textarea.focus();
+        textarea.setSelectionRange(snapshot.editSelectionStart, snapshot.editSelectionEnd);
+      }
+    });
+  }, []);
+
+  const undo = useCallback(() => {
+    if (undoHistory.length === 0) return;
+    const snapshot = undoHistory[undoHistory.length - 1];
+    setRedoHistory(history => [...history, createSnapshot()]);
+    setUndoHistory(history => history.slice(0, -1));
+    restoreSnapshot(snapshot);
+    setSymbolPaletteStatus(language === 'pt-BR' ? 'Ação desfeita.' : 'Action undone.');
+  }, [undoHistory, createSnapshot, restoreSnapshot, language]);
+
+  const redo = useCallback(() => {
+    if (redoHistory.length === 0) return;
+    const snapshot = redoHistory[redoHistory.length - 1];
+    setUndoHistory(history => [...history, createSnapshot()]);
+    setRedoHistory(history => history.slice(0, -1));
+    restoreSnapshot(snapshot);
+    setSymbolPaletteStatus(language === 'pt-BR' ? 'Ação refeita.' : 'Action redone.');
+  }, [redoHistory, createSnapshot, restoreSnapshot, language]);
+
+  const commitSegments = useCallback((next: Segment[]) => {
+    pushHistory();
+    setSegments(next);
+    setManagedSourceSymbols(previous => collectManagedSourceSymbols(previous, next));
+  }, [pushHistory]);
+
+  const changeTextAlign = useCallback((next: TextAlignment) => {
+    if (next === textAlign) return;
+    pushHistory();
+    setTextAlign(next);
+  }, [textAlign, pushHistory]);
+
+  const changeLineHeight = useCallback((next: number) => {
+    if (!Number.isFinite(next)) return;
+    const value = Math.min(2.5, Math.max(0.6, next));
+    if (Math.abs(value - lineHeight) < 0.001) return;
+    pushHistory();
+    setLineHeight(value);
+    setLineHeightMode('custom');
+  }, [lineHeight, pushHistory]);
+
+  const changeListIndent = useCallback((field: 'marker' | 'hanging', raw?: number) => {
+    if (raw !== undefined && !Number.isFinite(raw)) return;
+    const value = raw === undefined ? undefined : field === 'marker'
+      ? Math.max(-24, Math.min(100, raw))
+      : Math.max(0, Math.min(100, raw));
+    const current = field === 'marker' ? listMarkerIndentPt : hangingIndentPt;
+    if (current === value || (current !== undefined && value !== undefined && Math.abs(current - value) < 0.001)) return;
+    pushHistory();
+    if (field === 'marker') setListMarkerIndentPt(value);
+    else setHangingIndentPt(value);
+  }, [listMarkerIndentPt, hangingIndentPt, pushHistory]);
 
   useEffect(() => {
+    if (language === 'en' && ptDraftRef.current) return;
     setTextAlign(baseTextAlign);
-  }, [spanKey, baseTextAlign]);
+  }, [spanBaseKey, baseTextAlign, language]);
 
   useEffect(() => {
+    if (language === 'en' && ptDraftRef.current) return;
+    setLineHeight(baseLineHeight);
+    setLineHeightMode(baseLineHeightMode);
+  }, [spanBaseKey, baseLineHeight, baseLineHeightMode, language]);
+
+  useEffect(() => {
+    if (spanBaseKey === lastBaseKeyRef.current) return;
+    lastBaseKeyRef.current = spanBaseKey;
+    ptDraftRef.current = null;
+    lastLanguageRef.current = language;
+
     setToolFont(editorFontForSource(originalFont));
     setToolWeight(originalWeight);
     setToolStyle(originalStyle);
@@ -136,45 +422,162 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setSelEnd(null);
     setIsEditingText(false);
     setEditText('');
-  }, [spanKey, originalFont, originalWeight, originalStyle, originalColor, originalSize]);
-
-  // Initialize segments from existing override or original span
-  useEffect(() => {
+    setEditTextBaseline('');
+    setEditTextSegments([]);
+    setEditInitialManagedSourceSymbols([]);
+    editSelectionRef.current = { start: 0, end: 0 };
+    setSymbolPaletteStatus(null);
+    setUndoHistory([]);
+    setRedoHistory([]);
     setSegments(baseSegments);
-  }, [spanKey, baseSegments]);
+    setManagedSourceSymbols(baseManagedSourceSymbols);
+  }, [spanBaseKey, originalFont, originalWeight, originalStyle, originalColor, originalSize, baseSegments, baseManagedSourceSymbols, language]);
+
+  useEffect(() => {
+    if (language === lastLanguageRef.current) return;
+    const prevLang = lastLanguageRef.current;
+    lastLanguageRef.current = language;
+
+    if (prevLang === 'pt-BR' && language === 'en') {
+      ptDraftRef.current = {
+        snapshot: createSnapshot(),
+        undoHistory: [...undoHistory],
+        redoHistory: [...redoHistory],
+      };
+      setIsEditingText(false);
+      setEditText('');
+      setEditTextBaseline('');
+      setEditTextSegments([]);
+      setSegments(sourceContextSegments.map(s => ({ ...s })));
+      setManagedSourceSymbols(initialManagedSourceSymbols(sourceContextSegments));
+      setSelStart(null);
+      setSelEnd(null);
+      setUndoHistory([]);
+      setRedoHistory([]);
+      onDraftChange?.(null);
+    } else if (prevLang === 'en' && language === 'pt-BR') {
+      if (ptDraftRef.current) {
+        const cached = ptDraftRef.current;
+        restoreSnapshot(cached.snapshot);
+        setUndoHistory(cached.undoHistory);
+        setRedoHistory(cached.redoHistory);
+
+        const restored = cached.snapshot;
+        const finalSegments = restored.isEditingText ? restored.editTextSegments : restored.segments;
+        const draft = createEditorOverride(
+          spanKey,
+          bbox,
+          restored.textAlign,
+          finalSegments,
+          restored.managedSourceSymbols,
+          restored.lineHeight,
+          restored.lineHeightMode,
+          existingOverride?.paragraphSpacingPt,
+          restored.listMarkerIndentPt,
+          restored.hangingIndentPt,
+        );
+        onDraftChange?.(draft);
+      } else {
+        setSegments(baseSegments);
+        setManagedSourceSymbols(baseManagedSourceSymbols);
+      }
+    }
+  }, [language, createSnapshot, undoHistory, redoHistory, sourceContextSegments, onDraftChange, restoreSnapshot, spanKey, bbox, baseSegments, baseManagedSourceSymbols]);
+
+  useEffect(() => {
+    if (language === 'en' && ptDraftRef.current) return;
+    setListMarkerIndentPt(existingOverride?.listMarkerIndentPt);
+    setHangingIndentPt(existingOverride?.hangingIndentPt);
+  }, [spanBaseKey, existingOverride?.listMarkerIndentPt, existingOverride?.hangingIndentPt, language]);
 
   // Flatten segments to characters with their style info
   const chars = useMemo(() => {
-    const result: { char: string; segIdx: number; font: string; weight: number; style: 'normal' | 'italic'; color: string; size: number }[] = [];
+    const result: { char: string; start: number; end: number; segIdx: number; font: string; weight: number; style: 'normal' | 'italic'; color: string; size: number; symbolId?: string }[] = [];
+    let offset = 0;
     segments.forEach((seg, segIdx) => {
       for (const ch of seg.text) {
         result.push({
           char: ch,
+          start: offset,
+          end: offset + ch.length,
           segIdx,
           font: seg.font,
           weight: seg.weight,
           style: seg.style,
           color: seg.color,
           size: seg.size,
+          symbolId: seg.symbolId,
         });
+        offset += ch.length;
       }
     });
     return result;
   }, [segments]);
 
-  // Full text from segments
-  const fullText = useMemo(() => chars.map(c => c.char).join(''), [chars]);
-
   const segmentsChanged = JSON.stringify(segments) !== JSON.stringify(baseSegments);
-  const textChanged = isEditingText && editText !== fullText;
-  const hasDraftChanges = segmentsChanged || textChanged || textAlign !== baseTextAlign;
+  const textChanged = isEditingText && editText !== editTextBaseline;
+  const hasDraftChanges = segmentsChanged || textChanged || textAlign !== baseTextAlign
+    || Math.abs(lineHeight - baseLineHeight) > 0.001
+    || lineHeightMode !== baseLineHeightMode
+    || listMarkerIndentPt !== existingOverride?.listMarkerIndentPt
+    || hangingIndentPt !== existingOverride?.hangingIndentPt
+    || JSON.stringify(managedSourceSymbols) !== JSON.stringify(baseManagedSourceSymbols);
+  const richStyleReviewRequired = useMemo(() => {
+    if (language !== 'pt-BR' || !hasDraftChanges) return false;
+    const candidateText = isEditingText
+      ? editText
+      : editableTextForSegments(segments, language, symbolAliasPreferences);
+    return needsManualRichStyleReview(sourceContextSegments, candidateText, symbolAliasPreferences);
+  }, [language, hasDraftChanges, isEditingText, editText, segments, sourceContextSegments, symbolAliasPreferences]);
+  const translationState = persistentDraftMode
+    ? persistentDraftStatus === 'saving'
+      ? { label: 'SALVANDO RASCUNHO NO PAYLOAD…', className: 'is-loading' }
+      : persistentDraftStatus === 'error'
+        ? { label: 'ERRO AO SALVAR · RASCUNHO NÃO CONFIRMADO', className: 'is-error' }
+        : hasDraftChanges
+          ? { label: 'RASCUNHO ALTERADO · NÃO SALVO', className: 'is-dirty' }
+          : { label: 'RASCUNHO PERSISTIDO NO PAYLOAD · APROVAÇÃO PENDENTE', className: 'is-pending' }
+    : saveError
+    ? { label: saveError, className: 'is-error' }
+    : isSaving && persistenceStatus === 'missing_remote'
+    ? { label: 'SALVO NO NAVEGADOR · AGUARDANDO CONFIRMAÇÃO DO PAYLOAD', className: 'is-pending' }
+    : isSaving
+    ? { label: 'SALVANDO ALTERAÇÕES…', className: 'is-loading' }
+    : sessionOnly
+    ? hasDraftChanges
+      ? { label: 'RASCUNHO EXPERIMENTAL · NÃO APLICADO À PROVA', className: 'is-dirty' }
+      : { label: 'PROPOSTA EXPERIMENTAL · SOMENTE NESTA SESSÃO', className: 'is-pending' }
+    : hasDraftChanges
+    ? { label: language === 'pt-BR' ? 'PT-BR ALTERADO NA SESSÃO / NÃO SALVO' : 'EN ALTERADO NA SESSÃO / NÃO SALVO', className: 'is-dirty' }
+      : persistenceStatus === 'sync_error'
+      ? { label: 'FALHA DE SINCRONIZAÇÃO — Payload não confirmou; consulte a recuperação local', className: 'is-error' }
+      : persistenceStatus === 'missing_remote'
+        ? { label: 'SALVO SOMENTE NO NAVEGADOR / SINCRONIZAÇÃO PENDENTE', className: 'is-pending' }
+        : persistenceStatus === 'diverged'
+          ? { label: 'CONFLITO — cópia local difere do Payload', className: 'is-error' }
+          : persistenceStatus === 'unverified'
+            ? { label: 'PAYLOAD INDISPONÍVEL — confirmação não verificada', className: 'is-pending' }
+            : persistenceStatus === 'loading' || overrideStatusLoading
+              ? { label: 'CARREGANDO ESTADO…', className: 'is-loading' }
+              : persistenceStatus === 'confirmed'
+                ? { label: 'PAYLOAD CONFIRMADO', className: 'is-saved' }
+                : persistenceStatus === 'inherited'
+                  ? { label: language === 'pt-BR' ? 'HERDANDO EN' : 'EN ORIGINAL', className: 'is-inherited' }
+                  : existingOverride
+                    ? { label: 'OVERRIDE EXISTENTE — estado do Payload não verificado', className: 'is-pending' }
+                    : overrideStatusLoading
+                      ? { label: 'CARREGANDO ESTADO…', className: 'is-loading' }
+                      : { label: language === 'pt-BR' ? 'HERDANDO EN' : 'EN ORIGINAL', className: 'is-inherited' };
 
   const requestClose = useCallback(() => {
-    if (language === 'pt-BR' && hasDraftChanges && !window.confirm('Há alterações de tradução não salvas. Quer sair e descartá-las?')) {
+    if (isSaving || persistentDraftStatus === 'saving') return;
+    if (hasDraftChanges && !window.confirm(language === 'pt-BR'
+      ? 'Há alterações de tradução não salvas. Quer sair e descartá-las?'
+      : 'There are unsaved text changes. Discard them and close the editor?')) {
       return;
     }
     onClose();
-  }, [language, hasDraftChanges, onClose]);
+  }, [language, hasDraftChanges, onClose, isSaving, persistentDraftStatus]);
 
   useEffect(() => {
     if (!onDraftChange) return;
@@ -183,24 +586,9 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       return;
     }
 
-    const previewSegments = isEditingText && editText !== fullText
-      ? [{
-          text: editText,
-          font: toolFont,
-          size: toolSize,
-          color: toolColor,
-          weight: toolWeight,
-          style: toolStyle,
-        }]
-      : segments;
-
-    onDraftChange({
-      spanKey,
-      segments: previewSegments,
-      textAlign,
-      bbox
-    });
-  }, [segments, textAlign, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, editText, fullText, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
+    const previewSegments = isEditingText ? editTextSegments : segments;
+    onDraftChange(createEditorOverride(spanKey, bbox, textAlign, previewSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt, listMarkerIndentPt, hangingIndentPt, existingOverride?.printLineHeight, existingOverride?.printParagraphSpacingPt));
+  }, [segments, editTextSegments, textAlign, lineHeight, lineHeightMode, listMarkerIndentPt, hangingIndentPt, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, managedSourceSymbols, existingOverride?.paragraphSpacingPt, existingOverride?.printLineHeight, existingOverride?.printParagraphSpacingPt]);
 
   // Selection helpers
   const hasSelection = selStart !== null && selEnd !== null && selStart !== selEnd;
@@ -209,8 +597,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
   // When selection changes, update tool to match first selected char
   useEffect(() => {
-    if (selMin !== null && selMin < chars.length) {
-      const c = chars[selMin];
+    const c = chars.find(char=>char.start===selMin);
+    if (c && selMin !== null) {
       setToolFont(c.font);
       setToolWeight(c.weight);
       setToolStyle(c.style);
@@ -229,10 +617,17 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     }
   }, [selMin, chars, segments]);
 
+  useEffect(() => {
+    setToolSizeInput(String(toolSize));
+    setToolSizeInputError(null);
+  }, [toolSize, selMin, selMax]);
+
   // Determine if the single selected character has PUA alternates
   const availableAlternates = useMemo(() => {
     if (selMin !== null && selMax !== null && selMax - selMin === 1) {
-      const char = chars[selMin].char;
+      const selectedChar = chars.find(c=>c.start===selMin);
+      if (!selectedChar || selectedChar.symbolId) return null;
+      const char = selectedChar.char;
       let baseChar = char;
       
       // If char is already an alternate, find base
@@ -299,6 +694,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         const overlapStart = Math.max(0, selMin - segStart);
         const overlapEnd = Math.min(seg.text.length, selMax - segStart);
         newSegments.push({
+          ...seg,
           text: seg.text.slice(overlapStart, overlapEnd),
           font: finalFont,
           weight: finalWeight,
@@ -323,15 +719,31 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     for (const seg of newSegments) {
       if (seg.text.length === 0) continue;
       const last = merged[merged.length - 1];
-      if (last && last.font === seg.font && last.weight === seg.weight && last.style === seg.style && last.color === seg.color && last.size === seg.size && last.disableLigatures === seg.disableLigatures) {
+      if (last && !last.symbolId && !seg.symbolId && last.font === seg.font && last.weight === seg.weight && last.style === seg.style && last.color === seg.color && last.size === seg.size && last.disableLigatures === seg.disableLigatures && last.textStrokeWidthPt === seg.textStrokeWidthPt && last.textStrokeColor === seg.textStrokeColor) {
         last.text += seg.text;
       } else {
         merged.push({ ...seg });
       }
     }
 
-    setSegments(merged);
-  }, [selMin, selMax, segments, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures]);
+    commitSegments(merged);
+  }, [selMin, selMax, segments, toolFont, toolWeight, toolStyle, toolColor, toolSize, toolLigatures, commitSegments]);
+
+  const commitToolSizeInput = useCallback((input: HTMLInputElement) => {
+    const nextSize = input.valueAsNumber;
+    if (input.value === '' || !Number.isFinite(nextSize) || !input.validity.valid) {
+      setToolSizeInput(String(toolSize));
+      setToolSizeInputError(language === 'pt-BR'
+        ? 'Informe um tamanho de fonte válido; o valor anterior foi mantido.'
+        : 'Enter a valid font size; the previous value was kept.');
+      return;
+    }
+
+    setToolSizeInput(String(nextSize));
+    setToolSizeInputError(null);
+    setToolSize(nextSize);
+    applyToSelection({ size: nextSize });
+  }, [toolSize, language, applyToSelection]);
 
   // Apply a specific PUA character (alternate) to the selected character
   const applyAlternate = useCallback((puaChar: string) => {
@@ -367,33 +779,36 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     for (const seg of newSegments) {
       if (seg.text.length === 0) continue;
       const last = merged[merged.length - 1];
-      if (last && last.font === seg.font && last.weight === seg.weight && last.style === seg.style && last.color === seg.color && last.size === seg.size) {
+      if (last && !last.symbolId && !seg.symbolId && last.font === seg.font && last.weight === seg.weight && last.style === seg.style && last.color === seg.color && last.size === seg.size && last.textStrokeWidthPt === seg.textStrokeWidthPt && last.textStrokeColor === seg.textStrokeColor) {
         last.text += seg.text;
       } else {
         merged.push({ ...seg });
       }
     }
 
-    setSegments(merged);
+    commitSegments(merged);
     setToolFont('EsmeraldaPro-PUA');
-  }, [selMin, selMax, segments]);
+  }, [selMin, selMax, segments, commitSegments]);
 
   // Select All shortcut
   const selectAll = useCallback(() => {
     setSelStart(0);
-    setSelEnd(chars.length);
-  }, [chars.length]);
+    setSelEnd(segments.reduce((n,seg)=>n+seg.text.length,0));
+  }, [segments]);
 
   // Character click/drag handlers
-  const handleCharMouseDown = useCallback((idx: number) => {
-    setSelStart(idx);
-    setSelEnd(idx + 1);
+  const handleCharMouseDown = useCallback((start: number, end: number) => {
+    charSelectionAnchorRef.current = { start, end };
+    setSelStart(start);
+    setSelEnd(end);
     setIsDragging(true);
   }, []);
 
-  const handleCharMouseEnter = useCallback((idx: number) => {
+  const handleCharMouseEnter = useCallback((start: number, end: number) => {
     if (isDragging) {
-      setSelEnd(idx + 1);
+      const anchor=charSelectionAnchorRef.current;
+      setSelStart(start < anchor.start ? anchor.end : anchor.start);
+      setSelEnd(start < anchor.start ? start : end);
     }
   }, [isDragging]);
 
@@ -406,48 +821,191 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     return () => window.removeEventListener('mouseup', handleMouseUp);
   }, [handleMouseUp]);
 
+  const updateEditableText = useCallback((next:{text:string;caret?:number;segments?:Segment[]}) => {
+    const text = normalizeText(next.text);
+    const nextSegments = next.segments ?? segmentsFromEditableText(text, {
+      font: toolFont, size: toolSize, color: toolColor, weight: toolWeight, style: toolStyle,
+    }, language, editTextSegments, editorContext, symbolAliasPreferences, originalSegments ?? []);
+    pushHistory();
+    setEditText(text);
+    setEditTextSegments(nextSegments);
+    setManagedSourceSymbols(previous => collectManagedSourceSymbols(previous, nextSegments));
+    if (next.caret !== undefined) {
+      const caret = Math.min(next.caret, text.length);
+      editSelectionRef.current = { start: caret, end: caret };
+      requestAnimationFrame(() => { editTextAreaRef.current?.setSelectionRange(caret, caret); });
+    }
+  }, [normalizeText, toolFont, toolSize, toolColor, toolWeight, toolStyle, language, editTextSegments, editorContext, symbolAliasPreferences, originalSegments, pushHistory]);
+
+  const insertSemanticSymbol = useCallback((symbolId: string) => {
+    const symbol = getSemanticSymbol(symbolId);
+    const editorToken = getSymbolEditorToken(symbolId, language, symbolAliasPreferences);
+    if (!symbol || !editorToken || !isSymbolAllowed(symbol,editorContext)) return;
+
+    if (isEditingText) {
+      const textarea = editTextAreaRef.current;
+      const start = textarea?.selectionStart ?? editSelectionRef.current.start;
+      const end = textarea?.selectionEnd ?? editSelectionRef.current.end;
+      const insertion = insertEditorToken(editText,start,end,editorToken,symbolAliasPreferences);
+      updateEditableText(insertion);
+      const caret = insertion.caret;
+      editSelectionRef.current = { start: caret, end: caret };
+      requestAnimationFrame(() => {
+        const currentTextarea = editTextAreaRef.current;
+        if (!currentTextarea) return;
+        currentTextarea.focus();
+        currentTextarea.setSelectionRange(caret, caret);
+      });
+      setSymbolPaletteStatus(language === 'pt-BR' ? `${symbol.labels['pt-BR']} inserido no texto.` : `${symbol.labels.en} inserted in text.`);
+      return;
+    }
+
+    if (selMin === null || selMax === null) {
+      setSymbolPaletteStatus(language === 'pt-BR' ? 'Selecione caracteres ou abra Editar Texto para escolher o cursor.' : 'Select characters or open Edit Text to choose a caret position.');
+      return;
+    }
+
+    const replacement: Segment = {
+      text: SYMBOL_OBJECT_MARKER,
+      symbolId,
+      font: toolFont,
+      size: toolSize,
+      color: toolColor,
+      weight: toolWeight,
+      style: toolStyle,
+    };
+    const nextSegments = replaceSegmentRange(segments,selMin,selMax,[replacement]);
+    commitSegments(nextSegments);
+    setSelStart(selMin);
+    setSelEnd(selMin + 1);
+    setSymbolPaletteStatus(language === 'pt-BR' ? `${symbol.labels['pt-BR']} substituiu a seleção.` : `${symbol.labels.en} replaced the selection.`);
+  }, [isEditingText, editText, language, symbolAliasPreferences, editorContext, updateEditableText, selMin, selMax, toolFont, toolSize, toolColor, toolWeight, toolStyle, segments, commitSegments]);
+
+  useEffect(() => {
+    if (!onPaletteEditorChange) return;
+    onPaletteEditorChange(spanKey, {
+      context: editorContext,
+      canInsert: isEditingText || hasSelection,
+      canUndo: undoHistory.length > 0,
+      status: symbolPaletteStatus,
+      insert: insertSemanticSymbol,
+      undo,
+    });
+  }, [spanKey, onPaletteEditorChange, editorContext, isEditingText, hasSelection, undoHistory.length, symbolPaletteStatus, insertSemanticSymbol, undo]);
+
+  useEffect(() => () => onPaletteEditorChange?.(spanKey, null), [spanKey, onPaletteEditorChange]);
+
   // Text rewrite mode
   const handleStartEditText = useCallback(() => {
-    setEditText(fullText);
+    const readableText = editableTextForSegments(segments, language, symbolAliasPreferences);
+    setEditText(readableText);
+    setEditTextBaseline(readableText);
+    setEditTextSegments(segments.map(segment => ({ ...segment })));
+    setEditInitialManagedSourceSymbols([...managedSourceSymbols]);
+    editSelectionRef.current = { start: readableText.length, end: readableText.length };
     setIsEditingText(true);
-  }, [fullText]);
+  }, [segments, language, symbolAliasPreferences, managedSourceSymbols]);
+
+  const cancelEditText = useCallback(() => {
+    pushHistory();
+    setIsEditingText(false);
+    setEditText(editTextBaseline);
+    setEditTextSegments(segments.map(segment => ({ ...segment })));
+    setManagedSourceSymbols([...editInitialManagedSourceSymbols]);
+  }, [pushHistory, editTextBaseline, segments, editInitialManagedSourceSymbols]);
+
+  const handleEditableKey = useCallback((event:React.KeyboardEvent<HTMLTextAreaElement>)=>{
+    if(event.nativeEvent.isComposing)return;
+    if((event.ctrlKey || event.metaKey) && !event.altKey) {
+      const key=event.key.toLowerCase();
+      if(key==='z' || key==='y') {event.preventDefault();if(key==='y' || event.shiftKey)redo();else undo();return;}
+    }
+    if(event.key!=='Backspace' && event.key!=='Delete')return;
+    const deleted=deleteEditorToken(editText,event.currentTarget.selectionStart,event.currentTarget.selectionEnd,event.key==='Backspace'?'backward':'forward',symbolAliasPreferences);
+    if(deleted) {
+      event.preventDefault();
+      const selectionStart=event.currentTarget.selectionStart;
+      const selectionEnd=event.currentTarget.selectionEnd;
+      const rangeStart=selectionStart===selectionEnd && event.key==='Backspace'?Math.max(0,selectionStart-1):selectionStart;
+      const rangeEnd=selectionStart===selectionEnd && event.key==='Delete'?Math.min(editText.length,selectionEnd+1):selectionEnd;
+      const range=editableRangeToSegmentRange(editTextSegments,language,rangeStart,rangeEnd,symbolAliasPreferences);
+      const nextSegments=replaceSegmentRange(editTextSegments,range.start,range.end,[]);
+      updateEditableText({...deleted,segments:nextSegments});
+    }
+  },[editText,editTextSegments,language,undo,redo,updateEditableText,symbolAliasPreferences]);
+
+  const handleEditableClipboard = useCallback((event:React.ClipboardEvent<HTMLTextAreaElement>,cut:boolean)=>{
+    const {selectionStart,selectionEnd}=event.currentTarget;
+    if(selectionStart===selectionEnd)return;
+    const expanded=expandEditorTokenSelection(editText,selectionStart,selectionEnd,symbolAliasPreferences);
+    event.preventDefault();event.clipboardData.setData('text/plain',editText.slice(expanded.start,expanded.end));
+    const range = editableRangeToSegmentRange(editTextSegments, language, expanded.start, expanded.end,symbolAliasPreferences);
+    event.clipboardData.setData(INLINE_CLIPBOARD_MIME, encodeInlineClipboard(sliceSegmentRange(editTextSegments, range.start, range.end), language));
+    if(cut) {
+      const nextSegments=replaceSegmentRange(editTextSegments,range.start,range.end,[]);
+      updateEditableText({text:editText.slice(0,expanded.start)+editText.slice(expanded.end),
+        caret:expanded.start,segments:nextSegments});
+    }
+  },[editText, editTextSegments, language, symbolAliasPreferences, updateEditableText]);
+
+  const handleEditablePaste = useCallback((event: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    const imported = decodeInlineClipboard(event.clipboardData.getData(INLINE_CLIPBOARD_MIME), event.clipboardData.getData('text/plain'),symbolAliasPreferences);
+    if (!imported) return;
+    event.preventDefault();
+    const range = editableRangeToSegmentRange(editTextSegments, language, event.currentTarget.selectionStart, event.currentTarget.selectionEnd,symbolAliasPreferences);
+    const permitted = imported.map(run => {
+      const definition = getSemanticSymbol(run.symbolId);
+      if (!definition || isSymbolAllowed(definition, editorContext) || editTextSegments.some(previous => previous.symbolId === run.symbolId)) return run;
+      return { ...run, text: editableTextForSegments([run], language, symbolAliasPreferences), symbolId: undefined, symbolMetrics: undefined };
+    });
+    const normalized = singleLine ? permitted.map(run => ({ ...run, text: normalizeText(run.text) })) : permitted;
+    const nextSegments = replaceSegmentRange(editTextSegments, range.start, range.end, normalized);
+    updateEditableText({ text: editableTextForSegments(nextSegments, language, symbolAliasPreferences), segments: nextSegments,
+      caret: range.editable.start + editableTextForSegments(normalized, language, symbolAliasPreferences).length });
+  }, [editTextSegments, language, symbolAliasPreferences, editorContext, singleLine, normalizeText, updateEditableText]);
 
   const handleConfirmEditText = useCallback(() => {
+    const normalizedEditText = normalizeText(editText);
     // A no-op confirmation must not flatten existing styled runs.
-    if (editText !== fullText) {
-      setSegments([{
-        text: editText,
-        font: toolFont,
-        size: toolSize,
-        color: toolColor,
-        weight: toolWeight,
-        style: toolStyle,
-      }]);
+    if (normalizedEditText !== editTextBaseline) {
+      commitSegments(editTextSegments);
     }
     setIsEditingText(false);
+    setEditTextBaseline(normalizedEditText);
     setSelStart(null);
     setSelEnd(null);
-  }, [editText, fullText, toolFont, toolSize, toolColor, toolWeight, toolStyle]);
+  }, [editText, editTextBaseline, normalizeText, editTextSegments, commitSegments]);
 
-  const handleSave = useCallback(() => {
+  const handleSave = useCallback(async () => {
     if (!hasDraftChanges) {
       onClose();
       return;
     }
-    onSave({
-      spanKey,
-      segments,
-      bbox,
-      textAlign,
-    });
-  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign]);
+    if (isSaving) return;
+    const finalSegments = isEditingText ? editTextSegments : segments;
+    setSaveError(null);
+    setIsSaving(true);
+    try {
+      await onSave(createEditorOverride(spanKey, bbox, textAlign, finalSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt, listMarkerIndentPt, hangingIndentPt, existingOverride?.printLineHeight, existingOverride?.printParagraphSpacingPt));
+    } catch {
+      setSaveError(language === 'pt-BR'
+        ? 'Falha ao concluir o salvamento; as alterações continuam abertas no editor.'
+        : 'The save did not complete; your changes remain open in the editor.');
+    } finally {
+      setIsSaving(false);
+    }
+  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign, lineHeight, lineHeightMode, listMarkerIndentPt, hangingIndentPt, isEditingText, editTextSegments, managedSourceSymbols, existingOverride?.paragraphSpacingPt, existingOverride?.printLineHeight, existingOverride?.printParagraphSpacingPt, isSaving, language]);
 
   // Reset to original
   const handleReset = useCallback(() => {
-    if (language === 'pt-BR' && !window.confirm('Resetar esta tradução em português? O rascunho salvo desta unidade será removido.')) {
+    if (!window.confirm(sessionOnly
+      ? 'Restaurar o conteúdo inicial desta prova? Somente as alterações em memória desta unidade serão descartadas.'
+      : language === 'pt-BR'
+        ? 'Resetar esta tradução em português? O rascunho salvo desta unidade será removido.'
+      : 'Reset this English override? The saved override for this unit will be removed.')) {
       return;
     }
-    setSegments([{
+    commitSegments(originalSegments?.length ? originalSegments.map(segment => ({ ...segment })) : [{
       text: originalText,
       font: originalFont,
       size: originalSize,
@@ -455,10 +1013,11 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
       weight: originalWeight,
       style: originalStyle,
     }]);
+    setLineHeight(originalLineHeight);
     setSelStart(null);
     setSelEnd(null);
     onSave(null);
-  }, [language, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, onSave]);
+  }, [language, sessionOnly, originalSegments, originalText, originalFont, originalSize, originalColor, originalWeight, originalStyle, originalLineHeight, onSave, commitSegments]);
 
   const fontToCSS = (f: string) => {
     if (f.includes('Optima') || f === 'OptimaLTStd') return "'OptimaLTStd', serif";
@@ -473,12 +1032,17 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
   return (
     <div className="rse-overlay" onClick={(e) => { if (e.target === e.currentTarget) requestClose(); }}>
-      <div className="rse-panel">
+      <div className="rse-panel arcane-glass-surface">
         {/* Header */}
         <div className="rse-header">
           <div>
-            <h3>✏️ Rich Block Editor</h3>
-            <span className="rse-subtitle">Page {pageNumber} · <code>{spanKey}</code></span>
+            <h3>Rich Block Editor</h3>
+            <span className="rse-subtitle">
+              Page {pageNumber} · {editorLabel ? editorLabel : <code>{spanKey}</code>}
+            </span>
+            <span role={saveError ? 'alert' : 'status'} aria-live={saveError ? 'assertive' : 'polite'} className={`rse-context-status ${translationState.className}`}>
+              {translationState.label}
+            </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <span style={{ fontSize: '12px', color: '#666', fontStyle: 'italic' }}>
@@ -488,66 +1052,241 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
           </div>
         </div>
 
+        {headerAccessory && <div className="rse-header-accessory">{headerAccessory}</div>}
+
+        {(onNavigatePrevious || onNavigateNext) && (
+          <nav className="rse-unit-navigation" aria-label="Editable unit navigation">
+            <button type="button" onClick={onNavigatePrevious} disabled={!canNavigatePrevious}>
+              ← Anterior
+            </button>
+            <button type="button" onClick={onNavigateNext} disabled={!canNavigateNext}>
+              Próxima →
+            </button>
+            <span>Alt+Shift+↑ / ↓</span>
+          </nav>
+        )}
+
+        {language === 'pt-BR' && (
+          <details className="rse-translation-context">
+            <summary>
+              <span className="rse-context-chevron" aria-hidden="true">›</span>
+              <span>Contexto para tradução</span>
+              <span className={`rse-context-status ${translationState.className}`}>
+                {translationState.label}
+              </span>
+            </summary>
+            <div className="rse-context-content">
+              <span className="rse-context-label">FONTE EN</span>
+              <p className="rse-context-source" lang="en">{sourceContextText || '—'}</p>
+              {sourceContextSegments.some(segment => segment.symbolId) && (
+                <p className="rse-context-hint">Símbolos inline aparecem pelos atalhos entre colchetes duplos.</p>
+              )}
+              <div className="rse-context-glossary">
+                <span className="rse-context-label">GLOSSÁRIO OFICIAL</span>
+                {sourceGlossaryMatches.length > 0 ? (
+                  <ul>
+                    {sourceGlossaryMatches.map(match => (
+                      <li key={`${match.source}:${match.target}`}><span lang="en">{match.source}</span><span aria-hidden="true"> → </span><span lang="pt-BR">{match.target}</span></li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>Sem correspondências literais exatas.</p>
+                )}
+              </div>
+              {persistedGlossaryMatches.length > 0 && (
+                <div className="rse-context-glossary rse-context-payload-glossary">
+                  <span className="rse-context-label">PAYLOAD · DECISÕES PERSISTIDAS</span>
+                  <ul>
+                    {persistedGlossaryMatches.map(match => (
+                      <li key={`${match.source}:${match.target}`}>
+                        <span lang="en">{match.source}</span><span aria-hidden="true"> → </span><span lang="pt-BR">{match.target}</span>
+                        <small>{match.status === 'approved' ? 'Aprovado' : match.status === 'observed_standard' ? 'Padrão observado' : match.status === 'experimental' ? 'Experimental' : 'Hipótese'}{match.category ? ` · ${match.category.replaceAll('_', ' ')}` : ''}</small>
+                        {match.conflictWithOfficial && <small role="note">Conflito com o glossário oficial: “{match.conflictWithOfficial}”. Não aplicar sem reconciliação.</small>}
+                        {match.context && <small>{match.context}</small>}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <p className="rse-context-footnote">
+                As correspondências são literais; flexões podem não aparecer. Após salvar, confira a confirmação de sincronização com o Payload.
+              </p>
+            </div>
+          </details>
+        )}
+
+        {richStyleReviewRequired && (
+          <p className="rse-rich-style-review" role="note">
+            A origem contém ênfase sem correspondência textual exata nesta proposta. Confira o trecho equivalente pelo significado e aplique negrito/itálico manualmente; a tradução não herda estilos por posição.
+          </p>
+        )}
+
         {/* Toolbar */}
         <div className="rse-toolbar">
-          <div className="rse-toolbar-row">
-            <select value={toolFont} onChange={e => { setToolFont(e.target.value); applyToSelection({font: e.target.value}); }} title="Font Family">
-              {AVAILABLE_FONTS.map(f => (
-                <option key={f.value} value={f.value}>{f.label}</option>
-              ))}
-            </select>
-            <select value={toolWeight} onChange={e => { setToolWeight(Number(e.target.value)); applyToSelection({weight: Number(e.target.value)}); }} title="Weight">
-              {FONT_WEIGHTS.map(w => (
-                <option key={w} value={w}>{w}</option>
-              ))}
-            </select>
-            <button
-              className={`rse-tool-btn ${toolWeight >= 600 ? 'active' : ''}`}
-              onClick={() => { const w = toolWeight >= 600 ? 400 : 700; setToolWeight(w); applyToSelection({weight: w}); }}
-              title="Bold"
-            ><strong>B</strong></button>
-            <button
-              className={`rse-tool-btn ${toolStyle === 'italic' ? 'active' : ''}`}
-              onClick={() => { const s = toolStyle === 'italic' ? 'normal' : 'italic'; setToolStyle(s); applyToSelection({style: s}); }}
-              title="Italic"
-            ><em>I</em></button>
-            <button
-              className={`rse-tool-btn ${toolLigatures ? 'active' : ''}`}
-              onClick={() => { setToolLigatures(!toolLigatures); applyToSelection({ligatures: !toolLigatures}); }}
-              title="Ligatures (ct, st, etc)"
-              style={{ fontFamily: 'EsmeraldaPro' }}
-            >fi</button>
-            <div className="rse-toolbar-divider" style={{ width: '1px', background: '#ccc', margin: '0 8px' }} />
-            <button className={`rse-tool-btn ${textAlign === 'left' ? 'active' : ''}`} onClick={() => setTextAlign('left')} title="Align Left">⫷</button>
-            <button className={`rse-tool-btn ${textAlign === 'center' ? 'active' : ''}`} onClick={() => setTextAlign('center')} title="Align Center">≡</button>
-            <button className={`rse-tool-btn ${textAlign === 'right' ? 'active' : ''}`} onClick={() => setTextAlign('right')} title="Align Right">⫸</button>
-            <button className={`rse-tool-btn ${textAlign === 'justify' ? 'active' : ''}`} onClick={() => setTextAlign('justify')} title="Justify">▤</button>
-            <div className="rse-toolbar-divider" style={{ width: '1px', background: '#ccc', margin: '0 8px' }} />
-            <input type="color" value={toolColor} onChange={e => { setToolColor(e.target.value); applyToSelection({color: e.target.value}); }} title="Color" className="rse-color-input" />
-            <input type="number" value={toolSize} onChange={e => { setToolSize(Number(e.target.value)); applyToSelection({size: Number(e.target.value)}); }} min={4} max={72} step={0.5} className="rse-size-input" title="Size (pt)" />
+          <div className="rse-toolbar-row rse-toolbar-groups">
+            <div className="rse-toolbar-group" role="group" aria-label="Font and emphasis">
+              <select value={toolFont} onChange={e => { setToolFont(e.target.value); applyToSelection({font: e.target.value}); }} title="Font Family">
+                {AVAILABLE_FONTS.map(f => (
+                  <option key={f.value} value={f.value}>{f.label}</option>
+                ))}
+              </select>
+              <select value={toolWeight} onChange={e => { setToolWeight(Number(e.target.value)); applyToSelection({weight: Number(e.target.value)}); }} title="Weight">
+                {FONT_WEIGHTS.map(w => (
+                  <option key={w} value={w}>{w}</option>
+                ))}
+              </select>
+              <button
+                className={`rse-tool-btn ${toolWeight >= 600 ? 'active' : ''}`}
+                onClick={() => { const w = toolWeight >= 600 ? 400 : 700; setToolWeight(w); applyToSelection({weight: w}); }}
+                title="Bold"
+              ><strong>B</strong></button>
+              <button
+                className={`rse-tool-btn ${toolStyle === 'italic' ? 'active' : ''}`}
+                onClick={() => { const s = toolStyle === 'italic' ? 'normal' : 'italic'; setToolStyle(s); applyToSelection({style: s}); }}
+                title="Italic"
+              ><em>I</em></button>
+              <button
+                className={`rse-tool-btn ${toolLigatures ? 'active' : ''}`}
+                onClick={() => { setToolLigatures(!toolLigatures); applyToSelection({ligatures: !toolLigatures}); }}
+                title="Ligatures (ct, st, etc)"
+                style={{ fontFamily: 'EsmeraldaPro' }}
+              >fi</button>
+            </div>
+            <div className="rse-toolbar-group rse-toolbar-align" role="group" aria-label="Text alignment">
+              <button className={`rse-tool-btn ${textAlign === 'left' ? 'active' : ''}`} onClick={() => changeTextAlign('left')} title="Align Left">⫷</button>
+              <button className={`rse-tool-btn ${textAlign === 'center' ? 'active' : ''}`} onClick={() => changeTextAlign('center')} title="Align Center">≡</button>
+              <button className={`rse-tool-btn ${textAlign === 'right' ? 'active' : ''}`} onClick={() => changeTextAlign('right')} title="Align Right">⫸</button>
+              <button className={`rse-tool-btn ${textAlign === 'justify' ? 'active' : ''}`} onClick={() => changeTextAlign('justify')} title="Justify">▤</button>
+            </div>
+            <div className="rse-toolbar-group rse-toolbar-metrics" role="group" aria-label="Text metrics">
+              <input type="color" value={toolColor} onChange={e => { setToolColor(e.target.value); applyToSelection({color: e.target.value}); }} title="Color" className="rse-color-input" />
+              <span className="rse-size-field">
+                <input
+                  type="number"
+                  value={toolSizeInput}
+                  onChange={event => { setToolSizeInput(event.currentTarget.value); setToolSizeInputError(null); }}
+                  onBlur={event => commitToolSizeInput(event.currentTarget)}
+                  onKeyDown={event => {
+                    if (event.key === 'Enter') {
+                      event.preventDefault();
+                      commitToolSizeInput(event.currentTarget);
+                    }
+                  }}
+                  min={toolSizeMin}
+                  max={toolSizeMax}
+                  step="any"
+                  className="rse-size-input"
+                  title={language === 'pt-BR' ? 'Tamanho da fonte (pt)' : 'Font size (pt)'}
+                  aria-label={language === 'pt-BR' ? 'Tamanho da fonte (pt)' : 'Font size (pt)'}
+                  aria-invalid={toolSizeInputError ? true : undefined}
+                />
+                {toolSizeInputError && <span className="rse-number-field-error" role="alert">{toolSizeInputError}</span>}
+              </span>
+              <label className="rse-line-height-control" title={language === 'pt-BR' ? 'Entrelinha (multiplicador)' : 'Line spacing (multiplier)'}>
+                <span aria-hidden="true">↕</span>
+                <input
+                  type="number"
+                  aria-label={language === 'pt-BR' ? 'Entrelinha' : 'Line spacing'}
+                  value={lineHeight.toFixed(2)}
+                  onChange={event => changeLineHeight(event.currentTarget.valueAsNumber)}
+                  min={0.6}
+                  max={2.5}
+                  step={0.01}
+                  className="rse-size-input rse-line-height-input"
+                />
+              </label>
+            </div>
+            <div className="rse-toolbar-group rse-toolbar-paragraph" role="group" aria-label={language === 'pt-BR' ? 'Recuos de lista' : 'List indents'}>
+              <label title={language === 'pt-BR' ? 'Recuo do marcador em pontos PDF; valores negativos movem o marcador para a esquerda da moldura' : 'List marker inset in PDF points; negative values move the marker left of the frame'}>
+                <span>{language === 'pt-BR' ? 'Marcador' : 'Marker'} (pt)</span>
+                <input type="number" min={-24} max={100} step={0.5}
+                  aria-label={language === 'pt-BR' ? 'Recuo do marcador (pt)' : 'Marker indent (pt)'}
+                  value={listMarkerIndentPt ?? originalListMarkerIndentPt ?? ''}
+                  placeholder={originalListMarkerIndentPt === undefined ? '—' : undefined}
+                  onChange={event => changeListIndent('marker', event.currentTarget.value === '' ? undefined : event.currentTarget.valueAsNumber)} />
+              </label>
+              <label title={language === 'pt-BR' ? 'Recuo francês: início do texto e das linhas seguintes, em pontos PDF' : 'Hanging indent: body and wrapped lines start, in PDF points'}>
+                <span>{language === 'pt-BR' ? 'Texto / francesa' : 'Body / hanging'} (pt)</span>
+                <input type="number" min={0} max={100} step={0.5}
+                  aria-label={language === 'pt-BR' ? 'Recuo francês do texto (pt)' : 'Hanging text indent (pt)'}
+                  value={hangingIndentPt ?? originalHangingIndentPt ?? ''}
+                  placeholder={originalHangingIndentPt === undefined ? '—' : undefined}
+                  onChange={event => changeListIndent('hanging', event.currentTarget.value === '' ? undefined : event.currentTarget.valueAsNumber)} />
+              </label>
+              <span className="rse-paragraph-indent-hint">{language === 'pt-BR' ? 'Valores do PDF quando disponíveis' : 'PDF source values when available'}</span>
+            </div>
           </div>
-          <div className="rse-toolbar-row">
-            <button className="rse-tool-btn" onClick={() => applyToSelection()} disabled={!hasSelection}>
+          <div className="rse-toolbar-row rse-toolbar-actions">
+            <button className="rse-tool-btn" disabled={!undoHistory.length || language === 'en'} onClick={undo} aria-label={language === 'pt-BR' ? 'Desfazer' : 'Undo'}>↶</button>
+            <button className="rse-tool-btn" disabled={!redoHistory.length || language === 'en'} onClick={redo} aria-label={language === 'pt-BR' ? 'Refazer' : 'Redo'}>↷</button>
+            <button className="rse-tool-btn" onClick={() => applyToSelection()} disabled={!hasSelection || language === 'en'}>
               🎨 Apply to Selection
             </button>
-            <button className="rse-tool-btn" onClick={selectAll}>Select All</button>
-            <button className="rse-tool-btn" onClick={handleStartEditText}>📝 Edit Text</button>
+            <button className="rse-tool-btn" onClick={selectAll} disabled={language === 'en'}>Select All</button>
+            <button className="rse-tool-btn" disabled={isEditingText || language === 'en'} onClick={handleStartEditText}>📝 Edit Text</button>
+            {onToggleLanguage && (
+              <div className="rse-lang-toggle" role="group" aria-label="Alternar idioma">
+                <button
+                  type="button"
+                  className={`rse-lang-btn ${language === 'en' ? 'is-active' : ''}`}
+                  onClick={() => onToggleLanguage('en')}
+                  title="Visualizar original EN/US (somente leitura)"
+                >
+                  EN/US
+                </button>
+                <span className="rse-lang-divider">↔</span>
+                <button
+                  type="button"
+                  className={`rse-lang-btn ${language === 'pt-BR' ? 'is-active' : ''}`}
+                  onClick={() => onToggleLanguage('pt-BR')}
+                  title="Visualizar tradução PT/BR"
+                >
+                  PT/BR
+                </button>
+              </div>
+            )}
           </div>
         </div>
+
+        {language === 'en' && (
+          <div className="rse-lang-banner" role="status">
+            <span>Referência EN/US original (somente leitura). Alterne para PT/BR para editar a tradução.</span>
+          </div>
+        )}
 
         {/* Text Rewrite Input */}
         {isEditingText && (
           <div className="rse-edit-text">
-            <label>Rewrite text:</label>
+            <label>{language === 'pt-BR' ? 'Editar texto:' : 'Rewrite text:'}</label>
+            <p className="rse-symbol-edit-hint">
+              {language === 'pt-BR'
+                ? 'Atalhos como [[lightning]], [[sword]] e [[black-die]] viram símbolos ao confirmar. Tokens antigos entre ⟦colchetes⟧ continuam aceitos; a paleta insere no cursor ou substitui a seleção.'
+                : 'Shortcuts like [[lightning]], [[sword]] and [[black-die]] become symbols when confirmed. Legacy ⟦bracket⟧ tokens still work; the palette inserts at the caret or replaces the selection.'}
+            </p>
             <textarea
+              ref={editTextAreaRef}
               value={editText}
-              onChange={e => setEditText(e.target.value)}
-              rows={3}
+              onChange={e => {
+                const {start,end}=editSelectionRef.current;
+                const next=normalizeEditableInput(editText,e.target.value,start,end,symbolAliasPreferences);
+                updateEditableText(next);
+                if(next.caret===undefined)editSelectionRef.current = { start: e.currentTarget.selectionStart, end: e.currentTarget.selectionEnd };
+              }}
+              onKeyDown={handleEditableKey}
+              onCopy={e=>handleEditableClipboard(e,false)}
+              onCut={e=>handleEditableClipboard(e,true)}
+              onPaste={handleEditablePaste}
+              onSelect={e => { editSelectionRef.current = { start: e.currentTarget.selectionStart, end: e.currentTarget.selectionEnd }; }}
+              onClick={e => { editSelectionRef.current = { start: e.currentTarget.selectionStart, end: e.currentTarget.selectionEnd }; }}
+              onKeyUp={e => { editSelectionRef.current = { start: e.currentTarget.selectionStart, end: e.currentTarget.selectionEnd }; }}
+              onBlur={e => { editSelectionRef.current = { start: e.currentTarget.selectionStart, end: e.currentTarget.selectionEnd }; }}
+              rows={singleLine ? 1 : 3}
+              wrap={singleLine ? 'off' : 'soft'}
               autoFocus
             />
             <div className="rse-edit-text-actions">
-              <button onClick={() => setIsEditingText(false)}>Cancel</button>
-              <button className="rse-apply" onClick={handleConfirmEditText}>Confirm</button>
+              <button onClick={cancelEditText}> {language === 'pt-BR' ? 'Cancelar' : 'Cancel'}</button>
+              <button className="rse-apply" onClick={handleConfirmEditText}>{language === 'pt-BR' ? 'Confirmar' : 'Confirm'}</button>
             </div>
           </div>
         )}
@@ -557,21 +1296,25 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
           <label>Character Selection <span className="rse-hint">(click &amp; drag to select)</span></label>
           <div className="rse-char-grid" ref={charGridRef}>
             {chars.map((c, idx) => {
-              const isSelected = selMin !== null && selMax !== null && idx >= selMin && idx < selMax;
+              const isSelected = selMin !== null && selMax !== null && c.start >= selMin && c.end <= selMax;
               return (
                 <span
                   key={idx}
-                  className={`rse-char ${isSelected ? 'rse-char-selected' : ''}`}
+                  className={`rse-char ${c.symbolId ? 'rse-char-symbol' : ''} ${isSelected ? 'rse-char-selected' : ''}`}
+                  aria-label={c.symbolId ? getSemanticSymbol(c.symbolId)?.labels[language] : c.char}
+                  title={c.symbolId ? getSemanticSymbol(c.symbolId)?.labels[language] : undefined}
                   style={{
                     fontFamily: fontToCSS(c.font),
                     fontWeight: c.weight,
                     fontStyle: c.style,
                     color: c.color,
                   }}
-                  onMouseDown={() => handleCharMouseDown(idx)}
-                  onMouseEnter={() => handleCharMouseEnter(idx)}
+                  onMouseDown={() => handleCharMouseDown(c.start,c.end)}
+                  onMouseEnter={() => handleCharMouseEnter(c.start,c.end)}
                 >
-                  {c.char === ' ' ? '\u00A0' : c.char}
+                  {c.symbolId ? (
+                    <SemanticSymbol id={c.symbolId} language={language} size={16} color={c.color} preview />
+                  ) : c.char === ' ' ? '\u00A0' : c.char}
                 </span>
               );
             })}
@@ -611,7 +1354,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
           <div className="rse-segments-list">
             {segments.map((seg, i) => (
               <div key={i} className="rse-segment-chip">
-                <span className="rse-seg-text">"{seg.text.length > 20 ? seg.text.slice(0, 20) + '…' : seg.text}"</span>
+                <span className="rse-seg-text">"{seg.symbolId ? getSemanticSymbol(seg.symbolId)?.labels[language] ?? seg.symbolId : seg.text.length > 20 ? seg.text.slice(0, 20) + '…' : seg.text}"</span>
                 <span className="rse-seg-meta">{seg.font} · {seg.weight} · {seg.style} · {seg.color}</span>
               </div>
             ))}
@@ -621,8 +1364,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         {/* Footer: Save */}
         <div className="rse-footer">
           <div className="rse-footer-actions">
-            <button className="rse-btn-reset" onClick={handleReset}>Reset</button>
-            <button className="rse-btn-save" onClick={handleSave}>💾 Save</button>
+            <button className="rse-btn-reset" disabled={language === 'en'} onClick={handleReset} title={language === 'en' ? 'Alterne para PT/BR para resetar' : undefined}>{persistentDraftMode ? 'Descartar edição' : sessionOnly ? 'Restaurar proposta' : 'Reset'}</button>
+            <button className="rse-btn-save" disabled={language === 'en' || isSaving || persistentDraftStatus === 'saving'} onClick={() => void handleSave()} title={language === 'en' ? 'Alterne para PT/BR para salvar' : undefined}>{isSaving || persistentDraftStatus === 'saving' ? language === 'pt-BR' ? 'Salvando…' : 'Saving…' : persistentDraftMode ? 'Salvar rascunho' : sessionOnly ? 'Aplicar à prova' : '💾 Save'}</button>
           </div>
         </div>
       </div>

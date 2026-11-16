@@ -1,0 +1,1870 @@
+{
+  "proposalId": "p098-poppet-tentacle-rules",
+  "version": "2",
+  "title": "Tokens Poppet, Raiz e Tentáculo — regras provisórias p. 98 (v2)",
+  "page": 98,
+  "status": "beta_only_copyfit_pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "36B70C8CD32ACAA31A352245EBF0E0495A3D625D9BDF4CAC6DB80FC5BB3D2FC9",
+    "pageDom": "D7850BBADBF40F953174D188315CF5AB149CF9AAF8C7A6923CBAFF6D86D38BAE"
+  },
+  "counts": {
+    "candidates": 5,
+    "copyfitExact": 0,
+    "copyfitUnder": 0,
+    "copyfitOver": 0,
+    "copyfitUnmeasured": 5,
+    "payloadWrites": 0,
+    "humanEditorialApproval": 0
+  },
+  "scope": "Cinco unidades dos nomes e regras Poppet, Root e Tentacle na Tabela 9. Textos e rich spans são provisórios para ampliar a beta; nomes e identificadores mecânicos sinalizados permanecem pendentes de decisão humana.",
+  "preservation": {
+    "canonicalPayloadWritten": false,
+    "humanApprovalsOverwritten": 0,
+    "geometryChanged": false,
+    "sourceArtworkChanged": false
+  },
+  "candidates": [
+    {
+      "page": 98,
+      "blockIndex": 1,
+      "sourceBlockId": "block_12",
+      "spanKey": "page_98_block_1__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Poppet",
+      "proposalText": "Poppet",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_98_block_1__pt-BR",
+        "bbox": [
+          62.91859817504883,
+          124.02779388427734,
+          93.0385971069336,
+          135.9477996826172
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Poppet",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_copyfit_v3",
+      "copyfitClassification": "EXACT",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        {
+          "source": "Poppet",
+          "proposal": "kept in English as a named token; glossary decision pending"
+        }
+      ],
+      "sourceLineIds": [
+        "line_12_0"
+      ],
+      "sourceBboxes": [
+        [
+          62.91859817504883,
+          124.02779388427734,
+          93.0385971069336,
+          135.9477996826172
+        ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 98,
+            "pdfDocumentPageIndex": 97,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              62.91859817504883,
+              124.02779388427734,
+              93.0385971069336,
+              135.9477996826172
+            ],
+            "visualRowBaselinesPt": [
+              133.238
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_98_block_1",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              127.09
+            ],
+            "frameHeightCssPx": 9.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 98,
+          "pdfDocumentPageIndex": 97,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            62.91859817504883,
+            124.02779388427734,
+            93.0385971069336,
+            135.9477996826172
+          ],
+          "visualRowBaselinesPt": [
+            133.238
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_98_block_1",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            127.09
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 98,
+      "blockIndex": 2,
+      "sourceBlockId": "block_14",
+      "spanKey": "page_98_block_2__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Poppet tokens are part of Encounter setups that feature the Gatekeeper Combatant. A Poppet token will be instructed to move during the Gatekeeper's turn. While an opponent shares a space with a Poppet, they may not Dodge. Any figure on the same space as, or on an adjacent space to a Poppet that moves out of that space will provoke a Break Attack from a Poppet . Since Poppet's do not have Combat Dice, if a figure provokes a Break Attack from a Poppet they are dealt 1 MAGIC DMG . Any figure on the same space as, or adjacent to a Poppet may not cast SPELLS . At any time , an opponent who shares the same space with, or is adjacent to a Poppet token, may spend 1 SP to make a Lore 10 check to remove a Poppet token in that space from the board. Combatant Token rule exceptions: • Poppets ignore the effects of movement from non-Obstructing and non-Dangerous Terrain.",
+      "proposalText": "Fichas Poppet integram Preparações de Encontro com o Combatente Gatekeeper. A ficha Poppet é instruída a se mover durante o turno de Gatekeeper. Enquanto um oponente compartilhar um espaço com um Poppet, não poderá ESQUIVAR. Quando um Poppet deixar um espaço, qualquer miniatura que esteja nele ou em um espaço adjacente a esse espaço provocará um Ataque de Oportunidade do Poppet. Como Poppets não têm Dados de Combate, uma miniatura que provoque esse Ataque de Oportunidade receberá 1 DANO MÁGICO. Miniaturas no mesmo espaço que um Poppet ou adjacentes a ele não podem conjurar FEITIÇOS. A qualquer momento, um oponente no espaço de uma ficha Poppet ou adjacente a ela pode gastar 1 SP para fazer um teste de Lore 10 e remover do tabuleiro uma ficha Poppet naquele espaço. Exceções às regras de Fichas de Combatente: • Poppets ignoram os efeitos de movimento de Terrenos que não sejam Obstruídos nem Perigosos.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_98_block_2__pt-BR",
+        "bbox": [
+          173.29290771484375,
+          74.33848571777344,
+          769.8435668945312,
+          185.6172332763672
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Fichas ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Poppet",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " integram Preparações de Encontro com o Combatente ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Gatekeeper",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". A ficha ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Poppet",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " é instruída a se mover durante o turno de ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Gatekeeper",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". Enquanto um oponente compartilhar um espaço com um ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Poppet",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ", não poderá ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "ESQUIVAR",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". Quando um ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Poppet",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " deixar um espaço, qualquer miniatura que esteja nele ou em um espaço adjacente a esse espaço provocará um Ataque de Oportunidade do ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Poppet",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". Como ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Poppets",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " não têm Dados de Combate, uma miniatura que provoque esse Ataque de Oportunidade receberá ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "DANO MÁGICO",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". Miniaturas no mesmo espaço que um ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Poppet",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ou adjacentes a ele não podem conjurar ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "FEITIÇOS",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". A qualquer momento, um oponente no espaço de uma ficha ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Poppet",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ou adjacente a ela pode gastar ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "1 SP",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " para fazer um teste de Lore ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "10",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " e remover do tabuleiro uma ficha ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Poppet",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " naquele espaço.\n",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Exceções às regras de Fichas de Combatente:",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "\n•",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Poppets",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ignoram os efeitos de movimento de Terrenos que não sejam Obstruídos nem Perigosos.",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "copyfitClassification": "UNDER",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        {
+          "source": "Poppet",
+          "proposal": "kept as a named token; glossary decision pending"
+        },
+        {
+          "source": "Gatekeeper",
+          "proposal": "kept as a proper name; glossary decision pending"
+        },
+        {
+          "source": "Dodge",
+          "proposal": "ESQUIVAR; mechanic mapping pending"
+        },
+        {
+          "source": "Combat Dice",
+          "proposal": "Dados de Combate; terminology pending"
+        },
+        {
+          "source": "SP / Lore",
+          "proposal": "preserved as SP / Lore; terminology pending"
+        }
+      ],
+      "sourceLineIds": [
+        "line_14_0",
+        "line_14_1",
+        "line_14_2",
+        "line_14_3",
+        "line_14_4",
+        "line_14_5",
+        "line_14_6",
+        "line_14_7",
+        "line_14_8",
+        "line_14_9"
+      ],
+      "sourceBboxes": [
+        [
+          173.29319763183594,
+          74.33848571777344,
+          531.712890625,
+          86.27848052978516
+        ],
+        [
+          173.29290771484375,
+          88.16850280761719,
+          760.1033935546875,
+          100.1084976196289
+        ],
+        [
+          173.29290771484375,
+          99.16850280761719,
+          752.7325439453125,
+          111.1084976196289
+        ],
+        [
+          173.29290771484375,
+          110.0885009765625,
+          769.8435668945312,
+          122.1084976196289
+        ],
+        [
+          173.29290771484375,
+          121.16850280761719,
+          513.2328491210938,
+          133.10850524902344
+        ],
+        [
+          173.29290771484375,
+          134.91851806640625,
+          762.6834716796875,
+          146.9385223388672
+        ],
+        [
+          173.29290771484375,
+          145.99851989746094,
+          402.3228759765625,
+          157.9385223388672
+        ],
+        [
+          173.29290771484375,
+          159.84852600097656,
+          324.0828857421875,
+          171.76853942871094
+        ],
+        [
+          173.29310607910156,
+          173.67723083496094,
+          181.07310485839844,
+          185.55722045898438
+        ],
+        [
+          191.29310607910156,
+          173.67723083496094,
+          582.4021606445312,
+          185.6172332763672
+        ]
+      ],
+      "sourcePdfVisualLineCount": 9,
+      "pageRendererVisualLineCount": 8,
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 9,
+          "pageRendererVisualLineCount": 8,
+          "classification": "UNDER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 98,
+            "pdfDocumentPageIndex": 97,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              173.29290771484375,
+              74.33848571777344,
+              769.8435668945312,
+              185.6172332763672
+            ],
+            "visualRowBaselinesPt": [
+              83.568,
+              97.398,
+              108.398,
+              119.398,
+              130.398,
+              144.229,
+              155.229,
+              169.059,
+              182.907
+            ],
+            "spans": 44,
+            "visualRows": 9
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_98_block_2",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 45,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 8,
+            "visualRowTopsCssPx": [
+              324,
+              328.05,
+              332.09,
+              336.14,
+              340.19,
+              344.23,
+              348.28,
+              364.25
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, Optima, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "normal",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 45.1
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 9,
+          "pageRendererVisualLineCount": 8,
+          "classification": "UNDER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 98,
+            "pdfDocumentPageIndex": 97,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              173.29290771484375,
+              74.33848571777344,
+              769.8435668945312,
+              185.6172332763672
+            ],
+            "visualRowBaselinesPt": [
+              83.568,
+              97.398,
+              108.398,
+              119.398,
+              130.398,
+              144.229,
+              155.229,
+              169.059,
+              182.907
+            ],
+            "spans": 44,
+            "visualRows": 9
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_98_block_2",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 45,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 8,
+            "visualRowTopsCssPx": [
+              86.83,
+              94.94,
+              103.05,
+              111.16,
+              119.27,
+              127.38,
+              135.48,
+              167.33
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, Optima, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "normal",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 90.2
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 9,
+        "pageRendererVisualLineCount": 8,
+        "classification": "UNDER",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 98,
+          "pdfDocumentPageIndex": 97,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            173.29290771484375,
+            74.33848571777344,
+            769.8435668945312,
+            185.6172332763672
+          ],
+          "visualRowBaselinesPt": [
+            83.568,
+            97.398,
+            108.398,
+            119.398,
+            130.398,
+            144.229,
+            155.229,
+            169.059,
+            182.907
+          ],
+          "spans": 44,
+          "visualRows": 9
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_98_block_2",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 45,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 8,
+          "visualRowTopsCssPx": [
+            86.83,
+            94.94,
+            103.05,
+            111.16,
+            119.27,
+            127.38,
+            135.48,
+            167.33
+          ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, Optima, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "normal",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 90.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 98,
+      "blockIndex": 3,
+      "sourceBlockId": "block_15",
+      "spanKey": "page_98_block_3__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Root",
+      "proposalText": "Raiz",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_98_block_3__pt-BR",
+        "bbox": [
+          62.92311096191406,
+          218.90724182128906,
+          83.48310852050781,
+          230.82725524902344
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Raiz",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_copyfit_v3",
+      "copyfitClassification": "EXACT",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        {
+          "source": "Root",
+          "proposal": "Raiz; glossary decision pending"
+        }
+      ],
+      "sourceLineIds": [
+        "line_15_0"
+      ],
+      "sourceBboxes": [
+        [
+          62.92311096191406,
+          218.90724182128906,
+          83.48310852050781,
+          230.82725524902344
+        ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 98,
+            "pdfDocumentPageIndex": 97,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              62.92311096191406,
+              218.90724182128906,
+              83.48310852050781,
+              230.82725524902344
+            ],
+            "visualRowBaselinesPt": [
+              228.117
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_98_block_3",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              203.97
+            ],
+            "frameHeightCssPx": 9.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 98,
+          "pdfDocumentPageIndex": 97,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            62.92311096191406,
+            218.90724182128906,
+            83.48310852050781,
+            230.82725524902344
+          ],
+          "visualRowBaselinesPt": [
+            228.117
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_98_block_3",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            203.97
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 98,
+      "blockIndex": 5,
+      "sourceBlockId": "block_18",
+      "spanKey": "page_98_block_5__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Tentacle",
+      "proposalText": "Tentáculo",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_98_block_5__pt-BR",
+        "bbox": [
+          62.923095703125,
+          322.1187438964844,
+          99.23309326171875,
+          334.0387268066406
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Tentáculo",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_copyfit_v3",
+      "copyfitClassification": "EXACT",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        {
+          "source": "Tentacle",
+          "proposal": "Tentáculo; glossary decision pending"
+        }
+      ],
+      "sourceLineIds": [
+        "line_18_0"
+      ],
+      "sourceBboxes": [
+        [
+          62.923095703125,
+          322.1187438964844,
+          99.23309326171875,
+          334.0387268066406
+        ]
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 98,
+            "pdfDocumentPageIndex": 97,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              62.923095703125,
+              322.1187438964844,
+              99.23309326171875,
+              334.0387268066406
+            ],
+            "visualRowBaselinesPt": [
+              331.329
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_98_block_5",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              287.63
+            ],
+            "frameHeightCssPx": 9.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 98,
+          "pdfDocumentPageIndex": 97,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            62.923095703125,
+            322.1187438964844,
+            99.23309326171875,
+            334.0387268066406
+          ],
+          "visualRowBaselinesPt": [
+            331.329
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_98_block_5",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            287.63
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 98,
+      "blockIndex": 6,
+      "sourceBlockId": "block_20",
+      "spanKey": "page_98_block_6__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Tentacle tokens are part of Encounter setups that feature the Corpse Collector Combatant . A Tentacle token will be instructed to move during the Corpse Collector's turn. If an opponent starts their turn on the same space as a Tentacle token, they put the token on their card as a Special Effect . Figures may be affected by multiple Tentacle tokens. Figures with Tentacle tokens or adjacent allies may spend 1 SP and make a Strength 10 check to remove a Tentacle token. If the Tentacle token is removed, place it in an nearest unoccupied non-Dangerous space adjacent to the Corpse Collector at the end of the Corpse Collector's next turn. Combatant Token rule exceptions: • Tentacles cannot be moved by Currents and other Special Encounter Rules that would move figures or tokens on the board. • Tentacles Ignore the effects of non-Obstructing Terrain. • Tentacles cannot be targeted, PUSHED , PULLED , or otherwise moved by Abilities that don't explicitly allow moving Tentacles .",
+      "proposalText": "Fichas Tentacle integram Preparações de Encontro com o Combatente Corpse Collector. Uma ficha Tentacle é instruída a se mover durante o turno de Corpse Collector. Se um oponente iniciar o turno no mesmo espaço de uma ficha Tentacle, colocará essa ficha em sua carta como um Efeito Especial. Uma miniatura pode ser afetada por várias fichas Tentacle. Uma miniatura com ficha Tentacle ou um aliado adjacente pode gastar 1 SP e fazer um teste de Força 10 para remover uma ficha Tentacle. Se uma ficha Tentacle for removida, coloque-a no espaço desocupado não Perigoso mais próximo que seja adjacente a Corpse Collector, ao final do próximo turno de Corpse Collector. Exceções às regras de Fichas de Combatente: • Tentacles ignoram movimentos causados por Correntes e por Regras Especiais de Encontro que moveriam miniaturas ou fichas no tabuleiro. • Tentacles ignoram os efeitos de Terrenos que não sejam Obstruídos. • Habilidades sem permissão expressa para mover Tentacles não podem escolhê-los como alvo, EMPURRÁ-los, PUXÁ-los ou movê-los.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_98_block_6__pt-BR",
+        "bbox": [
+          173.29299926757812,
+          264.0909729003906,
+          772.0034790039062,
+          392.0389099121094
+        ],
+        "textAlign": "left",
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Fichas ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Tentacle",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " integram Preparações de Encontro com o Combatente ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Corpse Collector",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". Uma ficha ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Tentacle",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " é instruída a se mover durante o turno de ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Corpse Collector",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". Se um oponente iniciar o turno no mesmo espaço de uma ficha ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Tentacle",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ", colocará essa ficha em sua carta como um ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Efeito Especial",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". Uma miniatura pode ser afetada por várias fichas ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Tentacle",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". Uma miniatura com ficha ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Tentacle",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ou um aliado adjacente pode gastar ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "1 SP",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " e fazer um teste de Força ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "10",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " para remover uma ficha ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Tentacle",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ". Se uma ficha ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Tentacle",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " for removida, coloque-a no espaço desocupado não Perigoso mais próximo que seja adjacente a ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Corpse Collector",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ", ao final do próximo turno de ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Corpse Collector",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ".\n",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Exceções às regras de Fichas de Combatente:",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "\n•",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Tentacles",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ignoram movimentos causados por Correntes e por Regras Especiais de Encontro que moveriam miniaturas ou fichas no tabuleiro.\n•",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Tentacles",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ignoram os efeitos de Terrenos que não sejam Obstruídos.\n•",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " Habilidades sem permissão expressa para mover ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "Tentacles",
+            "font": "OptimaLTStd-Italic",
+            "weight": 400,
+            "style": "italic",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " não podem escolhê-los como alvo, ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "EMPURRÁ-los",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": ", ",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": "PUXÁ-los",
+            "font": "OptimaLTStd-Bold",
+            "weight": 700,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          },
+          {
+            "text": " ou movê-los.",
+            "font": "OptimaLTStd",
+            "weight": 400,
+            "style": "normal",
+            "size": 10,
+            "color": "#231f20"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_copyfit_v3",
+      "copyfitClassification": "UNDER",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        {
+          "source": "Tentacle",
+          "proposal": "Tentáculo; glossary decision pending"
+        },
+        {
+          "source": "Corpse Collector",
+          "proposal": "kept as a proper name; glossary decision pending"
+        },
+        {
+          "source": "Special Effect",
+          "proposal": "Efeito Especial; terminology pending"
+        },
+        {
+          "source": "Strength",
+          "proposal": "Força; stat terminology pending"
+        },
+        {
+          "source": "Current / Currents",
+          "proposal": "Corrente / Correntes; terminology pending"
+        },
+        {
+          "source": "PUSHED / PULLED",
+          "proposal": "EMPURRADAS / PUXADAS; operation terms pending"
+        }
+      ],
+      "sourceLineIds": [
+        "line_20_0",
+        "line_20_1",
+        "line_20_2",
+        "line_20_3",
+        "line_20_4",
+        "line_20_5",
+        "line_20_6",
+        "line_20_7",
+        "line_20_8",
+        "line_20_9",
+        "line_20_10",
+        "line_20_11",
+        "line_20_12"
+      ],
+      "sourceBboxes": [
+        [
+          173.29319763183594,
+          264.0909729003906,
+          558.8030395507812,
+          276.0309753417969
+        ],
+        [
+          173.29299926757812,
+          277.9209899902344,
+          746.99365234375,
+          289.8609924316406
+        ],
+        [
+          173.29299926757812,
+          288.84100341796875,
+          743.653564453125,
+          300.8609924316406
+        ],
+        [
+          173.29299926757812,
+          299.9209899902344,
+          643.3632202148438,
+          311.8609924316406
+        ],
+        [
+          173.29299926757812,
+          313.7509765625,
+          772.0034790039062,
+          325.69097900390625
+        ],
+        [
+          173.29299926757812,
+          324.7509765625,
+          295.24298095703125,
+          336.69097900390625
+        ],
+        [
+          173.29299926757812,
+          338.6009826660156,
+          324.0829772949219,
+          350.5209655761719
+        ],
+        [
+          173.29319763183594,
+          352.4295959472656,
+          181.0731964111328,
+          364.3096008300781
+        ],
+        [
+          191.29319763183594,
+          352.349609375,
+          722.78369140625,
+          364.3695983886719
+        ],
+        [
+          173.29319763183594,
+          366.2641906738281,
+          181.0731964111328,
+          378.1441955566406
+        ],
+        [
+          191.29319763183594,
+          366.2641906738281,
+          425.7531433105469,
+          378.2041931152344
+        ],
+        [
+          173.29319763183594,
+          380.0989074707031,
+          181.0731964111328,
+          391.9789123535156
+        ],
+        [
+          191.29319763183594,
+          380.0189208984375,
+          737.1038208007812,
+          392.0389099121094
+        ]
+      ],
+      "sourcePdfVisualLineCount": 10,
+      "pageRendererVisualLineCount": 9,
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 10,
+          "pageRendererVisualLineCount": 9,
+          "classification": "UNDER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 98,
+            "pdfDocumentPageIndex": 97,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              173.29299926757812,
+              264.0909729003906,
+              772.0034790039062,
+              392.0389099121094
+            ],
+            "visualRowBaselinesPt": [
+              273.321,
+              287.151,
+              298.151,
+              309.151,
+              322.981,
+              333.981,
+              347.811,
+              361.66,
+              375.494,
+              389.329
+            ],
+            "spans": 49,
+            "visualRows": 10
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_98_block_6",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 53,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 9,
+            "visualRowTopsCssPx": [
+              240.59,
+              248.7,
+              256.81,
+              264.92,
+              273.03,
+              281.14,
+              312.13,
+              323.39,
+              334.55
+            ],
+            "frameHeightCssPx": 103.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 10,
+        "pageRendererVisualLineCount": 9,
+        "classification": "UNDER",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 98,
+          "pdfDocumentPageIndex": 97,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            173.29299926757812,
+            264.0909729003906,
+            772.0034790039062,
+            392.0389099121094
+          ],
+          "visualRowBaselinesPt": [
+            273.321,
+            287.151,
+            298.151,
+            309.151,
+            322.981,
+            333.981,
+            347.811,
+            361.66,
+            375.494,
+            389.329
+          ],
+          "spans": 49,
+          "visualRows": 10
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_98_block_6",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 53,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 9,
+          "visualRowTopsCssPx": [
+            240.59,
+            248.7,
+            256.81,
+            264.92,
+            273.03,
+            281.14,
+            312.13,
+            323.39,
+            334.55
+          ],
+          "frameHeightCssPx": 103.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "notes": [
+    "Nomes/ações mecânicas sem decisão confirmada permanecem identificados em pendingTerms.",
+    "Nenhuma proposta é aprovação ou decisão de glossário.",
+    "As molduras e estilos de fonte vêm da geometria/fonte original.",
+    "Version 2 clarifies that the affected figures are in the space vacated by a moving Poppet or in a space adjacent to that vacated space. The Break Attack term mapping remains pending human terminology review."
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "proposalId": "p086-variants-choice",
+  "version": "1",
+  "title": "Escolha das variantes — p. 86",
+  "page": 86,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "46A889F363CAE20864AB0AA503DDB7D874254673084E0C5DBC941E27C9C9F5DE",
+    "pageDom": "77B2C812898A71BCD7B4C2575BEA698045571C129F5F2354ECC6AE8A7D27D3A4",
+    "inlineElements": null,
+    "fidelityOverlays": null
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "Somente a introdução sobre escolher regras de variante, block_12 / DOM index 2, foi incluída. Título, seção No Player Elimination, regras, variantes por tamanho de grupo e demais componentes da página permanecem fora deste recorte.",
+    "A página 86 não tem traduções humanas salvas nem reviews (confirmado por GET); nenhuma tradução final foi escrita.",
+    "“À la carte” foi condensado como escolha livre de regras; a nuance e “gaming group → grupo de jogo” aguardam revisão humana.",
+    "A fidelidade EN integral da página ainda não passou pelo gate; a proposta é parcial e não certifica a página.",
+    "Viewer, Copyfit V3, Editor, PDF, fidelidade integral e aprovação editorial aguardam verificação."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 2,
+      "sourceBlockId": "block_12",
+      "sourceUnitId": null,
+      "spanKey": "page_86_block_2__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Any of the following rules can be taken à la carte to modify Middara to turn it into the game best suited for your gaming group.",
+      "proposalText": "Seu grupo de jogo pode escolher livremente as regras a seguir para adaptar Middara ao estilo de jogo que prefere.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_86_block_2__pt-BR",
+        "bbox": [
+          86.17320251464844,
+          230.30035400390625,
+          393.6631164550781,
+          253.2003631591797
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Seu grupo de jogo pode escolher livremente as regras a seguir para adaptar Middara ao estilo de jogo que prefere.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "à la carte → escolha livre de regras; gaming group → grupo de jogo são formas locais candidatas, sem canonização global."
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 86,
+          "pdfDocumentPageIndex": 85,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            230.30035400390625,
+            393.6631164550781,
+            253.2003631591797
+          ],
+          "visualBaselinesPt": [
+            239.49,
+            250.49
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_86_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            213.22,
+            222.13
+          ],
+          "frameHeightCssPx": 18.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "note": "Uma frase introdutória isolada da seção de variantes. O recorte traduz a seleção livre de regras para adaptar o jogo ao grupo, sem inferir ou substituir a tradução do restante da página.",
+  "revisions": []
+}

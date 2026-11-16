@@ -1,0 +1,423 @@
+{
+  "proposalId": "p057-shared-icons-prose-2026-11-15-v1",
+  "version": "1",
+  "title": "Introdução a Ícones Compartilhados — p.57",
+  "page": 57,
+  "status": "approved_and_export_verified",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "6DB9BA84E6DB8892A92131215BBA4D1BB5E225E4461C77F3C1B37259819552F1",
+    "background": "42F88728516FB23FB1621141D85CD5C6C9BF977D3BA0BD68367974D123A34639",
+    "inlineElements": "E18617DBC0EE0E9028F1CB2B5A3A4F77083C3FCD7895805845DF2AF47FEBE400",
+    "fidelityOverlays": "B5722CFEC2B59F078A45E6F9AF3FA6C1E8EB16FA6EB8791DA54BE5D28D065848"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 1,
+    "finalTranslationWrites": 1,
+    "openExceptions": 0,
+    "viewerVerifiedCandidates": 1,
+    "copyfitV3VerifiedCandidates": 1,
+    "pdfExportVerifiedCandidates": 1,
+    "editoriallyApprovedCandidates": 1
+  },
+  "sourceArtifacts": [
+    "docs/translations/source-pages/page-057.md",
+    "apps/web/public/pages/page_057/page_057_dom.json",
+    "apps/web/public/pages/page_057/inline_elements.json",
+    "apps/web/public/pages/page_057/fidelity_overlays.json",
+    "docs/translations/glossary.md",
+    "docs/translations/glossary-candidates.md"
+  ],
+  "scopeLimits": [
+    "Traduz somente a prosa introdutória dos Ícones Compartilhados. As etiquetas dentro dos cards e a arte do diagrama permanecem em inglês por decisão do usuário.",
+    "INTELLIGENT e COMMAND são rótulos de tipo impressos e ficam em inglês; a cor, o contorno e o peso dos rótulos seguem o PDF OG.",
+    "Combatant ainda aparece como uso de página/proposta no glossário estruturado; esta redação mantém Combatente por consistência local sem canonizar esse termo."
+  ],
+  "copyfitEvidence": {
+    "status": "Copyfit V3 EXACT 4/4 em 100% e 200%; Viewer e PDF final conferidos.",
+    "attemptsUsed": 2,
+    "revisionBudget": 1
+  },
+  "exportEvidence": {
+    "outputPdf": "C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p057\\p057-shared-icons-prose-final.pdf",
+    "viewerScreenshot": "C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p057\\p057-shared-icons-prose-final-viewer.png",
+    "printScreenshot": "C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p057\\p057-shared-icons-prose-final-print.png",
+    "metrics": "C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p057\\p057-shared-icons-prose-final-metrics.json",
+    "pdfVerification": true,
+    "viewerLineCount": 101,
+    "printLineCount": 101,
+    "semanticSymbolCount": 1,
+    "renderedImageCount": 9,
+    "visualReview": "OG, Viewer PT-BR e print comparados; os rótulos INTELLIGENT/COMMAND mantêm cor, contorno e peso da fonte, sem clipping observado."
+  },
+  "approvalEvidence": {
+    "reviewId": 1668,
+    "reviewKey": "p057-shared-icons-prose-2026-11-15-v1@1::page_57_block_12__pt-BR",
+    "translationId": 1978,
+    "approvalStatus": "approved",
+    "reviewDisposition": "active",
+    "readBackVerified": true
+  },
+  "candidates": [
+    {
+      "blockIndex": 12,
+      "sourceBlockId": "block_55",
+      "spanKey": "page_57_block_12__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Both types of Combatants (INTELLIGENT and COMMAND) share many of the same Icons as Adventurers and have the following Icons directly printed on their cards. A figure with no Casting die listed will never be required to roll one.",
+      "proposalText": "Os dois tipos de Combatente — INTELLIGENT e COMMAND — compartilham muitos Ícones com os Aventureiros. Os Ícones a seguir estão impressos nas cartas. Sem Dado de Conjuração listado, a Miniatura nunca precisará rolá-lo.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_57_block_12__pt-BR",
+        "bbox": [
+          86.16830444335938,
+          144.734130859375,
+          391.13824462890625,
+          189.63414001464844
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Os dois tipos de Combatente — ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "INTELLIGENT",
+            "font": "OptimaLTStd-Black",
+            "size": 9,
+            "color": "#b5d333",
+            "weight": 900,
+            "style": "normal",
+            "disableLigatures": true,
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#231f20"
+          },
+          {
+            "text": " e ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "COMMAND",
+            "font": "OptimaLTStd-Black",
+            "size": 9,
+            "color": "#f8951d",
+            "weight": 900,
+            "style": "normal",
+            "disableLigatures": true,
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#231f20"
+          },
+          {
+            "text": " — compartilham muitos Ícones com os Aventureiros. Os Ícones a seguir estão impressos nas cartas. Sem Dado de Conjuração listado, a Miniatura nunca precisará rolá-lo.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "copyfit_v3_exact_4_of_4_at_100_and_200_percent",
+      "editorialStatus": "Glossário consultado: Icon → Ícone, Casting Die → Dado de Conjuração e Figure → Miniatura estão aprovados. INTELLIGENT e COMMAND permanecem como rótulos ingleses de componente, com cores e contorno OG. Combatant permanece forma de uso local nesta página, sem nova canonização. Copyfit V3 EXACT 4/4 em 100% e 200%; export pendente.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 57,
+            "pdfDocumentPageIndex": 56,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.16830444335938,
+              144.734130859375,
+              391.13824462890625,
+              189.63414001464844
+            ],
+            "visualRowBaselinesPt": [
+              153.924,
+              164.924,
+              175.924,
+              186.924
+            ],
+            "spans": 10,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_57_block_12",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 11,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
+            "visualRowTopsCssPx": [
+              352.53,
+              356.97,
+              361.41,
+              365.84
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "900",
+                "fontStyle": "normal",
+                "color": "rgb(181, 211, 51)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "900",
+                "fontStyle": "normal",
+                "color": "rgb(248, 149, 29)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 18.2
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 57,
+            "pdfDocumentPageIndex": 56,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.16830444335938,
+              144.734130859375,
+              391.13824462890625,
+              189.63414001464844
+            ],
+            "visualRowBaselinesPt": [
+              153.924,
+              164.924,
+              175.924,
+              186.924
+            ],
+            "spans": 10,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_57_block_12",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 11,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
+            "visualRowTopsCssPx": [
+              143.88,
+              152.78,
+              161.69,
+              170.59
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "900",
+                "fontStyle": "normal",
+                "color": "rgb(181, 211, 51)",
+                "lineHeight": "8.02301px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "900",
+                "fontStyle": "normal",
+                "color": "rgb(248, 149, 29)",
+                "lineHeight": "8.02301px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 36.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 57,
+          "pdfDocumentPageIndex": 56,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.16830444335938,
+            144.734130859375,
+            391.13824462890625,
+            189.63414001464844
+          ],
+          "visualRowBaselinesPt": [
+            153.924,
+            164.924,
+            175.924,
+            186.924
+          ],
+          "spans": 10,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_57_block_12",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 11,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            143.88,
+            152.78,
+            161.69,
+            170.59
+          ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "900",
+              "fontStyle": "normal",
+              "color": "rgb(181, 211, 51)",
+              "lineHeight": "8.02301px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "900",
+              "fontStyle": "normal",
+              "color": "rgb(248, 149, 29)",
+              "lineHeight": "8.02301px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ]
+}

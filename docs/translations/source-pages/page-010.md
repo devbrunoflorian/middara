@@ -6,9 +6,9 @@
 
 - **PDF page:** 10 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** visually reviewed against the official PDF (see [`2026-10-04-page10-visual-review.md`](../../project-progress/2026-10-04-page10-visual-review.md))
+- **English fidelity:** app↔PDF visual review complete; no discrepancy confirmed
+- **PT-BR:** 22 local Payload records reconciled; five targeted copy/style fixes saved with snapshots and read-back; isolated full-page preview verified; shared term decisions remain pending
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)

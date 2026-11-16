@@ -1,0 +1,308 @@
+{
+  "page": 62,
+  "units": [
+    "p62-ai-target-priority-body",
+    "p62-ai-target-priority-example"
+  ],
+  "family": "Body + Example — AI Target Priority",
+  "status": "isolated-proposal-copyfit-verified-pending-human-review",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "E941F79E8A569A729FDDC9F6024723C61D3368F9A15431F97FE9D5CC7AC42A04",
+    "dom": "9CC260B9C0494EE428545C71E5E9CD86183E752C378409303B2A6DCC3B7CE02F",
+    "inlineElements": "A39ABF5925DD6D04A3FFEBCB68B0FA816EC0E0AE5C69A3921FD377595B506DE1",
+    "layoutFrames": "92C0B4F23C7589EE29413450AFA2EBABE7C054BE9EA39698FACCE4B2BFA78AFD",
+    "fidelityOverlays": "84061610D789FE73528537CCA78791BAB2699774CD4ED190D3ACACCE293724A0"
+  },
+  "existingPayloadRecords": [
+    {
+      "id": 250,
+      "spanKey": "page_62_block_15__pt-BR",
+      "updatedAt": "2026-10-07T17:06:20.317Z",
+      "sha256": "88D33F323FAA9FAEA69106090D807C6A7028DDA5B6B51A9CB200B897B98D71FF"
+    },
+    {
+      "id": 251,
+      "spanKey": "page_62_unit_p62-block-32-intro__pt-BR",
+      "updatedAt": "2026-10-07T17:07:15.349Z",
+      "sha256": "98CC9086E2566FDD78DB74547AC75CE0307D61379D1EB843E2B004B180CFAAB3"
+    },
+    {
+      "id": 261,
+      "spanKey": "page_62_unit_p62-block-32-towards-away-heading__pt-BR",
+      "updatedAt": "2026-10-07T17:33:12.270Z",
+      "sha256": "ACE56BBDC8B8B20B333B4290FF2938CBEDB918A6042AECEC0E1FE9DCAA2DC014"
+    },
+    {
+      "id": 264,
+      "spanKey": "page_62_unit_p62-block-32-towards-away-body__pt-BR",
+      "updatedAt": "2026-10-07T18:34:02.577Z",
+      "sha256": "3D03AC14F2BC16CDA91FD3DF8982A807AE4CC9A70D0A4D9AA21D59CB2A1823D4"
+    },
+    {
+      "id": 265,
+      "spanKey": "page_62_unit_p62-block-35-movement-rules-body__pt-BR",
+      "updatedAt": "2026-10-07T18:38:03.035Z",
+      "sha256": "F6C6D05C6752117B3290EE57E4AD422828B9C932AA59E29E454B19E8AF87F9B8"
+    },
+    {
+      "id": 266,
+      "spanKey": "page_62_unit_p62-block-35-then-heading__pt-BR",
+      "updatedAt": "2026-10-07T18:39:06.984Z",
+      "sha256": "240C98F608EED28B3FC2AADB0EAE52A729B719235F766748CD8015ABD1C514C5"
+    },
+    {
+      "id": 267,
+      "spanKey": "page_62_unit_p62-block-37-then-cannot-complete-body__pt-BR",
+      "updatedAt": "2026-10-07T19:08:40.718Z",
+      "sha256": "CD378D57BB9C9062EFA741C7CACCC68E6F00E69EFB9EE88B1D76FB0E19D075FC"
+    },
+    {
+      "id": 268,
+      "spanKey": "page_62_unit_p62-block-37-then-opening-body__pt-BR",
+      "updatedAt": "2026-10-07T18:54:02.952Z",
+      "sha256": "68D9A86C1A992E97B5880FB95D109FD62235335BC1BFCD7B9CF54D558D8429B1"
+    }
+  ],
+  "preservedExistingRecordCount": 8,
+  "candidateRecordCount": 2,
+  "candidateKeysUnique": true,
+  "sourceText": {
+    "body": "If a specific target is never mentioned, or if there are ever multiple eligible targets even after a more specific target is identified, Combatants will prioritize the target that is closer to the front of the Initiative Track.",
+    "example": "Example: An AI Step instructs a Cave Sickle to make a [[symbol:attack.melee]] ATK against the target with the most Damage. There are 2 eligible targets, both are within Range, which is adjacent, and they both have the same amount of Damage. Out of the two, the target closer to the front of the Initiative Track would be the target of the Attack."
+  },
+  "proposalText": {
+    "body": "Se nenhum alvo específico for mencionado, ou se ainda houver vários alvos elegíveis mesmo depois de um alvo mais específico ser identificado, os Combatentes priorizam o alvo que estiver mais à frente na Trilha de Iniciativa.",
+    "example": "Exemplo: Uma Etapa de IA instrui um Cave Sickle a realizar um  ATQ contra o alvo com mais Dano. Há 2 alvos elegíveis; ambos estão no Alcance adjacente e têm a mesma quantidade de Dano. Entre os dois, o alvo mais à frente na Trilha de Iniciativa será escolhido para o Ataque."
+  },
+  "richText": {
+    "exampleLabelStylePreserved": true,
+    "aiAbbreviationBoldPreservedAsIA": true,
+    "creatureNameBoldItalicPreserved": true,
+    "atqAbbreviationBoldPreserved": true,
+    "numeral2BoldPreserved": true,
+    "semanticSymbolOrder": [
+      "attack.melee"
+    ],
+    "sourceFontsAndFramesUnchanged": true
+  },
+  "terminologyPendingHumanReview": [
+    "Initiative Track → Trilha de Iniciativa appears as a repeated candidate in glossary-candidates.md but is not official glossary terminology.",
+    "ATK → ATQ follows the saved p.50 local form; Range → Alcance follows saved p.50 usage. Neither is approved as a global glossary decision.",
+    "AI Step → Etapa de IA follows existing p.62 saved usage. Damage → Dano and the positional wording “mais à frente” remain proposed local forms.",
+    "Cave Sickle remains the printed creature name, matching saved p.50 examples."
+  ],
+  "copyfit": {
+    "sourceBodyLines": 3,
+    "sourceExampleLines": 6,
+    "lineHeight": 1.1,
+    "revisionBudget": 2,
+    "currentAttempt": 1,
+    "status": "verified-in-isolated-viewer-pdf-and-normal-editor",
+    "evidence": [
+      "docs/project-progress/evidence/2026-10-15-p062-ai-target-priority-v1/normal-viewer-page-062-en.png",
+      "docs/project-progress/evidence/2026-10-15-p062-ai-target-priority-v1/viewer-page-062-pt-BR.png",
+      "docs/project-progress/evidence/2026-10-15-p062-ai-target-priority-v1/source-vs-export-family-crop.png",
+      "docs/project-progress/evidence/2026-10-15-p062-ai-target-priority-v1/proposal-page-062-pt-BR.pdf",
+      "docs/project-progress/evidence/2026-10-15-p062-ai-target-priority-v1/normal-editor-receipt.json",
+      "docs/project-progress/evidence/2026-10-15-p062-ai-target-priority-v1/pdf-text-verification.json"
+    ],
+    "pdfVerification": {
+      "page": 62,
+      "language": "pt-BR",
+      "pageCount": 1,
+      "exportedPdfSha256": "334D0EF1528447C1D85EF91D7C0D5A208781EFDE0E9B5BDA2A50A303C44BEE2B",
+      "replacementCharacterCount": 0,
+      "bodyOverrideTextPresent": true,
+      "exampleOverrideTextPresent": true,
+      "sourceFallbackOnly": false,
+      "semanticSymbol": "attack.melee",
+      "exporterVerifiedSnapshotRecordCount": 10
+    },
+    "normalEditorVerification": {
+      "bothUnitsEditable": true,
+      "cancelReturnedWithoutSave": true,
+      "writeRequestsAttempted": 0,
+      "canonicalPageFilesUnchanged": true
+    }
+  },
+  "note": "Only the two p.62 AI Target Priority units are proposed. The Example’s source attack.melee symbol, rich emphasis, and number styling are retained. Existing p.62 Payload records are included unchanged in the isolated snapshot. No Payload, canonical sidecar, source PDF, or human translation was written.",
+  "candidates": [
+    {
+      "spanKey": "page_62_unit_p62-ai-target-priority-body__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_62_unit_p62-ai-target-priority-body__pt-BR",
+        "bbox": [
+          86.17689514160156,
+          239.83721923828125,
+          406.5967712402344,
+          273.7372131347656
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Se nenhum alvo específico for mencionado, ou se ainda houver vários alvos elegíveis mesmo depois de um alvo mais específico ser identificado, os Combatentes priorizam o alvo que estiver mais à frente na Trilha de Iniciativa.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "spanKey": "page_62_unit_p62-ai-target-priority-example__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_62_unit_p62-ai-target-priority-example__pt-BR",
+        "bbox": [
+          86.17037963867188,
+          276.9078063964844,
+          395.33673095703125,
+          334.4057922363281
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Exemplo:",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "Uma Etapa de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "IA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "instrui um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Cave Sickle",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic"
+          },
+          {
+            "text": " a realizar um ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "attack.melee",
+            "symbolMetrics": {
+              "widthEm": 0.9797770182291666,
+              "heightEm": 0.9797770182291666,
+              "verticalAlignEm": 0.11109754774305555
+            }
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "ATQ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "contra o alvo com mais Dano. Há ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " alvos elegíveis; ambos estão no Alcance adjacente e têm a mesma quantidade de Dano. Entre os dois, o alvo mais à frente na Trilha de Iniciativa será escolhido para o Ataque.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": [
+          "attack.melee"
+        ]
+      }
+    }
+  ]
+}

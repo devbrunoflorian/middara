@@ -1,0 +1,145 @@
+{
+  "experimentId": "page14-editorial-ab-v2-2026-10-12",
+  "status": "frozen-before-evaluation",
+  "createdAt": "2026-10-12",
+  "productionWrites": false,
+  "conditions": {
+    "A": {
+      "generationContext": "Independent subagent context with no inherited parent conversation history.",
+      "resources": "Common packet, source PDF p.14, p.14 sidecar, glossary, limited voice reference, and listed project rules. Did not read the three skill bodies, casebook, V1 outputs, or the other condition output.",
+      "modelTelemetry": "GPT-6 family; exact model identifier/configuration unavailable.",
+      "revisionBudget": "One initial draft and up to two revisions per unit; actual use: one initial draft per unit."
+    },
+    "B": {
+      "generationContext": "Independent subagent context with no inherited parent conversation history.",
+      "resources": "Same common resources as A plus exactly three specified skill files and docs/translations/editorial-casebook.md. Did not read V1 outputs or A output.",
+      "modelTelemetry": "GPT-6 family; exact model identifier/configuration unavailable.",
+      "revisionBudget": "One initial draft and up to two revisions per unit; actual use: one initial draft per unit."
+    }
+  },
+  "units": [
+    {
+      "spanKey": "page_14_block_0",
+      "A": {
+        "proposedText": "Quer estejam jogando no Modo Crawl ou no Modo de Aventura, os jogadores serão instruídos a preparar Encontros. Ao preparar um Encontro, leia as Regras Especiais do Encontro e, em seguida, siga as 4 Fases de Preparação a seguir:",
+        "styles": [{"text":"4","font":"OptimaLTStd-Bold","size":10,"weight":700,"style":"normal"}]
+      },
+      "B": {
+        "proposedText": "Seja no Modo Crawl, seja no Modo Aventura, os jogadores receberão instruções para preparar Encontros. Ao preparar um Encontro, leiam as Regras Especiais de Encontro e, então, sigam as 4 Fases de Preparação a seguir:",
+        "styles": [{"text":"4","font":"OptimaLTStd-Bold","size":10,"weight":700,"style":"normal"}]
+      }
+    },
+    {
+      "spanKey": "page_14_block_1",
+      "A": {
+        "proposedText": "1. FASE DE PREPARAÇÃO: Cada Aventureiro remove suas Fichas Usadas de suas Habilidades por Encontro e remove o estado de Exaustão de todas as cartas. Todos os Aventureiros Derrotados ou os Aventureiros com mais Fichas de Dano do que metade de seu HP máximo removem Fichas de Dano até ficarem com Fichas de Dano em quantidade igual à metade de seu HP máximo. Todas as Fichas de Efeito são removidas, e cada Aventureiro define seus Pontos de Vigor (SP) como seu Valor de Recuperação de Pontos de Vigor (geralmente 3).",
+        "styles": [
+          {"text":"1.","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"FASE DE PREPARAÇÃO:","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"Usadas","font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"mais","font":"OptimaLTStd-BoldItalic","size":10,"weight":700,"style":"italic"},
+          {"text":"Dano","occurrence":0,"font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"HP","occurrence":0,"font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"Dano","occurrence":1,"font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"Dano","occurrence":2,"font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"HP","occurrence":1,"font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"Efeito","font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"SP","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"3","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"}
+        ]
+      },
+      "B": {
+        "proposedText": "1.\tFASE DE PREPARAÇÃO: Cada Aventureiro remove suas fichas Usadas de suas Habilidades por Encontro e desexausta todas as cartas. Todos os Aventureiros Derrotados ou Aventureiros com mais fichas de Dano que metade do seu HP máximo removem fichas de Dano até ficarem com uma quantidade igual à metade do seu HP máximo. Todas as fichas de Efeito são removidas, e cada Aventureiro ajusta seus Pontos de Stamina (SP) para seu Valor de Recuperação de Pontos de Stamina (geralmente 3).",
+        "styles": [
+          {"text":"1.","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"FASE DE PREPARAÇÃO:","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"Usadas","font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"mais","font":"OptimaLTStd-BoldItalic","size":10,"weight":700,"style":"italic"},
+          {"text":"Dano","occurrence":0,"font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"HP","occurrence":0,"font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"Dano","occurrence":1,"font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"HP","occurrence":1,"font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"Efeito","font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"SP","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"3","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"}
+        ]
+      }
+    },
+    {
+      "spanKey": "page_14_block_5",
+      "A": {
+        "proposedText": "2. FASE DE POSICIONAMENTO: Prepare as Peças de acordo com o Diagrama de Preparação do Encontro. Em seguida, coloque todas as fichas de Encontro, fichas de Terreno e miniaturas conforme indicado no Diagrama de Preparação do Encontro. Os Aventureiros podem escolher colocar suas miniaturas em qualquer um dos espaços marcados como Zona Inicial no Diagrama de Preparação do Encontro.",
+        "styles": [
+          {"text":"2.","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"FASE DE POSICIONAMENTO:","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"Encontro","occurrence":1,"font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"Terreno","font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"}
+        ]
+      },
+      "B": {
+        "proposedText": "2.\tFASE DE POSICIONAMENTO: Prepare as Peças de acordo com o Diagrama de Preparação do Encontro. Em seguida, coloque todas as fichas de Encontro, fichas de Terreno e Miniaturas conforme mostrado no Diagrama de Preparação do Encontro. Os Aventureiros podem escolher colocar suas Miniaturas em qualquer um dos espaços marcados como Zona Inicial no Diagrama de Preparação do Encontro.",
+        "styles": [
+          {"text":"2.","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"FASE DE POSICIONAMENTO:","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"Encontro","occurrence":1,"font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"Terreno","font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"}
+        ]
+      }
+    },
+    {
+      "spanKey": "page_14_block_6",
+      "A": {
+        "proposedText": "3. FASE DE DISTRIBUIÇÃO: Distribua as Cartas de Combatente correspondentes aos Combatentes listados na Preparação do Encontro. Isso pode ser feito em qualquer ordem; contudo, recomenda-se distribuir as Cartas de Combatente igualmente para que cada jogador tenha uma responsabilidade quando não for seu turno.",
+        "styles": [{"text":"3.","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},{"text":"FASE DE DISTRIBUIÇÃO:","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"}]
+      },
+      "B": {
+        "proposedText": "3.\tFASE DE DISTRIBUIÇÃO: Distribuam as Cartas de Combatente correspondentes aos Combatentes listados na Preparação do Encontro. Isso pode ser feito em qualquer ordem; porém, recomenda-se uma distribuição equilibrada das Cartas de Combatente, para que cada jogador tenha uma responsabilidade quando não for sua vez.",
+        "styles": [{"text":"3.","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},{"text":"FASE DE DISTRIBUIÇÃO:","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"}]
+      }
+    },
+    {
+      "spanKey": "page_14_block_7",
+      "A": {
+        "proposedText": "4. FASE DE INICIATIVA: Os jogadores pegam a(s) Carta(s) de Iniciativa correspondente(s) a cada Aventureiro e Combatente no Encontro e as embaralham. Em seguida, os jogadores distribuem as Cartas de Iniciativa para formar a Trilha de Iniciativa. Consulte a Trilha de Iniciativa, pág. 36.",
+        "styles": [{"text":"4.","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},{"text":"FASE DE INICIATIVA:","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},{"text":"Trilha de Iniciativa","occurrence":1,"font":"OptimaLTStd-BoldItalic","size":10,"weight":700,"style":"italic"}]
+      },
+      "B": {
+        "proposedText": "4.\tFASE DE INICIATIVA: Os jogadores pegam a(s) Carta(s) de Iniciativa correspondente(s) a cada Aventureiro e Combatente do Encontro e as embaralham. Em seguida, distribuem as Cartas de Iniciativa para formar a Trilha de Iniciativa. Veja A Trilha de Iniciativa, pág. 36.",
+        "styles": [{"text":"4.","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},{"text":"FASE DE INICIATIVA:","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},{"text":"Trilha de Iniciativa","occurrence":1,"font":"OptimaLTStd-BoldItalic","size":10,"weight":700,"style":"italic"}]
+      }
+    },
+    {
+      "spanKey": "page_14_block_14",
+      "A": {
+        "proposedText": "Cada Encontro usa sua própria combinação única de fichas de Terreno, fichas de Encontro e miniaturas. A caixa de Preparação discrimina cada componente necessário para preparar o Encontro. Consulte a seção F no Diagrama de Exemplo de Encontro, pág. 15.",
+        "styles": [
+          {"text":"Terreno","font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":", ","font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"Encontro","occurrence":1,"font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"F","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"Exemplo de Encontro","font":"OptimaLTStd-BoldItalic","size":10,"weight":700,"style":"italic"}
+        ]
+      },
+      "B": {
+        "proposedText": "Cada Encontro usa sua própria combinação exclusiva de fichas de Terreno, fichas de Encontro e Miniaturas. O quadro de Preparação lista todos os componentes necessários para preparar o Encontro. Veja a seção F no Diagrama de Exemplo de Encontro, pág. 15.",
+        "styles": [
+          {"text":"Terreno","font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":", ","font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"Encontro","occurrence":1,"font":"OptimaLTStd-Italic","size":10,"weight":400,"style":"italic"},
+          {"text":"F","font":"OptimaLTStd-Bold","size":9,"weight":700,"style":"normal"},
+          {"text":"Exemplo de Encontro","font":"OptimaLTStd-BoldItalic","size":10,"weight":700,"style":"italic"}
+        ]
+      }
+    },
+    {
+      "spanKey": "page_14_block_16",
+      "A": {"proposedText":"Todo Encontro tem uma ou mais Condições Finais. Assim que uma dessas Condições Finais for alcançada, o Encontro termina imediatamente, e os jogadores leem a Recompensa listada abaixo da Condição Final que foi atingida.","styles":[]},
+      "B": {"proposedText":"Cada Encontro tem uma ou mais Condições Finais. Assim que uma delas é atingida, o Encontro termina imediatamente, e os jogadores leem a Recompensa indicada abaixo da Condição Final que foi atingida.","styles":[]}
+    },
+    {
+      "spanKey": "page_14_block_18",
+      "A": {"proposedText":"Alguns Encontros têm várias Condições de Vitória e de Derrota. Essas Condições Finais Alternativas têm suas próprias Recompensas, listadas separadamente.","styles":[]},
+      "B": {"proposedText":"Alguns Encontros têm múltiplas Condições de Vitória e de Derrota. Essas Condições Finais Alternativas têm Recompensas próprias, separadas e listadas.","styles":[]}
+    }
+  ]
+}

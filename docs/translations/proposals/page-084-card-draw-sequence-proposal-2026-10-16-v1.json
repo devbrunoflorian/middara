@@ -1,0 +1,76 @@
+{
+  "proposalId": "p084-card-draw-sequence",
+  "version": "1",
+  "title": "Compra de carta após embaralhar — p. 84",
+  "page": 84,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "29F0B26E8055E9687FACA662DD41B6F956E2CD82B4ACD541F59160B0314CF669",
+    "pageDom": "CC73ACA621C9B6EAE05FC203DCD2988BF824A328BDBA6E6F8C7A1C636F03DF86",
+    "inlineElements": null,
+    "fidelityOverlays": null
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2e0efc6c6f6f0"
+  },
+  "scopeLimits": [
+    "Somente a frase de transição block_30 / DOM index 10 foi incluída. Os demais passos, cartas e diagramas da p.84 permanecem fora deste recorte.",
+    "Shuffle → embaralhar e draw → comprar são escolhas locais candidatas; a terminologia aguarda revisão humana.",
+    "GETs confirmaram zero traduções PT-BR e zero revisões da p.84 antes da proposta. Nenhuma tradução final é publicada ou sobrescrita.",
+    "Copyfit V3, Viewer, Editor, PDF, fidelidade integral e aprovação editorial aguardam verificação."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 10,
+      "sourceBlockId": "block_30",
+      "sourceUnitId": null,
+      "spanKey": "page_84_block_10__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "After shuffling these cards, the players draw one randomly.",
+      "proposalText": "Após embaralhar as cartas, os jogadores compram uma ao acaso.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_84_block_10__pt-BR",
+        "bbox": [
+          96.37799835205078,
+          493.5976257324219,
+          350.2069091796875,
+          505.4976196289062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Após embaralhar as cartas, os jogadores compram uma ao acaso.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Shuffle → embaralhar e draw a card → comprar uma carta são formas locais nesta unidade, sem canonização global."
+      ]
+    }
+  ],
+  "note": "A sequência após embaralhar e o sorteio aleatório de uma carta são mantidos; tradução e termos ainda aguardam revisão humana.",
+  "revisions": []
+}

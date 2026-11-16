@@ -6,9 +6,9 @@
 
 - **PDF page:** 61 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** visual review complete against the official OG PDF; the printed Animate card, its labels, and the A–M callouts were classified as source artwork.
+- **English fidelity:** OG PDF and source renderer compared; the card and illustration remain intact in English.
+- **PT-BR:** 1 existing approved unit (#1419 / review #1250) and 13 new browser-only proposal candidates. Human review and final page certification remain pending.
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)
@@ -1858,6 +1858,14 @@
 
 **PDF span runs:**
 - `61` — `OptimaLTStd-ExtraBlack` 10.00 pt; PDF flags `4`; bbox `759.92, 775.72, 771.78, 787.98`
+
+## Full-page review — 2026-11-15
+
+- Compared the complete PT-BR proposal with the official OG PDF. The printed Animate card, its names, instructions, symbols and tags, the illustration, and callout letters A–M remain original English artwork. The title and all 13 external explanatory prose units are proposal-only; the existing `DEFESA` unit remains the already approved translation #1419 / review #1250.
+- Copyfit V3 measured all 14 units EXACT at 100% and 200%. The exported PDF and Viewer were compared visually with the OG. Both outputs contain 27 text lines, one semantic inline symbol, and three images; no visible clipping or collisions were found.
+- The inline `tag.passive.icon` retains the source dimensions and baseline. The source gap after the icon is about 1.58 pt at 9 pt text (approximately 0.175 em); this is occurrence-specific evidence, not a global spacing token.
+- The 13 new candidates remain pending human editorial review and were not written to Payload. This technical pass does not certify the page. After any editorial edits or publication, rerun Copyfit and compare the final Viewer/PDF with the OG.
+- Proposal: `docs/translations/proposals/page-061-intelligent-combatant-breakdown-review-2026-11-15-v1.json`. Private visual/export evidence: `C:\Users\bruno\engineering-labs\planning\engineering-decisions\evidence\2026-11-15-p061-review\`.
 
 ## Raw line 165 (block 79, line 164)
 

@@ -1,0 +1,936 @@
+{
+  "proposalId": "p049-counter-rules",
+  "version": "3",
+  "title": "Regras de Contra-ataque — quatro unidades para revisão",
+  "page": 49,
+  "status": "isolated-copyfit-verified-pending-human-editorial-review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourceProposal": "1429BF4068EFE97ED842A7F9FE05FC17FC0A577957FB5E8D3311292DD595B4B3",
+    "pageDom": "BF7755A493CB02D63414A32F28FB225A01FE1673FBE71B9FCA77E042BE0F7041",
+    "background": "7D6AF89C2DFD36098072515D202219C09201AB9309943C40251C3EB4E4F11848",
+    "inlineElements": "6D41483875FE7C3F0A83E8337D60C1E16F7EDE4997B030106385FDF065E498C5"
+  },
+  "counts": {
+    "candidates": 4,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0
+  },
+  "sourceArtifacts": [
+    "docs/translations/proposals/page-049-counter-rules-proposal-2026-10-15-v3.json",
+    "docs/project-progress/2026-10-15-p049-counter-rules-copyfit-v3.md",
+    "docs/project-progress/evidence/2026-10-15-p049-counter-rules-v3/pdf-verification-v3.json"
+  ],
+  "candidates": [
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_20",
+      "sourceUnitId": null,
+      "sourceText": "If a figure Attacks a target and the Attack misses or deals no Final Damage, the target may use the COUNTER Ability during the Check if the Target Counters step of the Attack. See The Attack Action Pg. 41.",
+      "spanKey": "page_49_block_0__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "Se uma miniatura atacar um alvo e o Ataque errar ou não causar Dano Final, o alvo pode usar a Habilidade CONTRA-ATACAR durante a etapa Verifique o Contra-ataque do Ataque. Veja Ação de Ataque, p. 41.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_49_block_0__pt-BR",
+        "bbox": [
+          107.71298217773438,
+          91.66268157958984,
+          388.7662048339844,
+          136.5826873779297
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Se uma miniatura atacar um alvo e o Ataque errar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "ou",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " não causar Dano Final, o alvo pode usar a Habilidade ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "CONTRA-ATACAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " durante a etapa ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Verifique o Contra-ataque",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " do Ataque. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Ação de Ataque",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", p. 41.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "copyfit_v3_exact_4_of_4_at_100_and_200_after_canonical_reference_fix",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 49,
+          "pdfDocumentPageIndex": 48,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            107.71298217773438,
+            91.66268157958984,
+            388.7662048339844,
+            136.5826873779297
+          ],
+          "visualRowBaselinesPt": [
+            100.873,
+            111.873,
+            122.873,
+            133.873
+          ],
+          "spans": 11,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_49_block_0__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 14,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            100.88,
+            109.78,
+            118.69,
+            128.59
+          ],
+          "visualRowIntervalsPt": [
+            10.99,
+            11.98,
+            12.16
+          ],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.02301px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "italic",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.91445px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 37.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementFingerprint": null,
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 49,
+            "pdfDocumentPageIndex": 48,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              107.71298217773438,
+              91.66268157958984,
+              388.7662048339844,
+              136.5826873779297
+            ],
+            "visualRowBaselinesPt": [
+              100.873,
+              111.873,
+              122.873,
+              133.873
+            ],
+            "spans": 11,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_49_block_0__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 14,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
+            "visualRowTopsCssPx": [
+              331.03,
+              335.47,
+              339.91,
+              344.34
+            ],
+            "visualRowIntervalsPt": [
+              11.36,
+              10.54,
+              10.95
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 17.8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 4,
+          "pageRendererVisualLineCount": 4,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 49,
+            "pdfDocumentPageIndex": 48,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              107.71298217773438,
+              91.66268157958984,
+              388.7662048339844,
+              136.5826873779297
+            ],
+            "visualRowBaselinesPt": [
+              100.873,
+              111.873,
+              122.873,
+              133.873
+            ],
+            "spans": 11,
+            "visualRows": 4
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_49_block_0__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 14,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
+            "visualRowTopsCssPx": [
+              100.88,
+              109.78,
+              118.69,
+              128.59
+            ],
+            "visualRowIntervalsPt": [
+              10.99,
+              11.98,
+              12.16
+            ],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.02301px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 37.6
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      }
+    },
+    {
+      "blockIndex": 1,
+      "sourceBlockId": "block_21",
+      "sourceUnitId": null,
+      "sourceText": "Adventurers and Command Combatants may use the COUNTER Ability for 2 SP. However, if they successfully Dodged the Attack being Countered, they may reduce the cost of the Counter by 1 SP. Some Items and Disciplines also have the COUNTER Tag listed as an Ability. In cases where there is an SP cost on a COUNTER Tag this SP cost may also be reduced by 1. Intelligent Combatants will only COUNTER if their Combatant Card instructs them to.",
+      "spanKey": "page_49_block_1__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "Aventureiros e Combatentes de Comando podem usar CONTRA-ATACAR por 2 SP. Se esquivarem com sucesso do Ataque, podem reduzir o custo do Contra-ataque em 1 SP. Alguns Itens e Disciplinas também listam a Tag CONTRA-ATACAR como Habilidade. Se houver custo de SP nessa Tag, ele também pode ser reduzido em 1. Combatentes Inteligentes só usam CONTRA-ATACAR se a Carta de Combatente instruir.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_49_block_1__pt-BR",
+        "bbox": [
+          107.71261596679688,
+          141.35198974609375,
+          390.7189025878906,
+          219.2519989013672
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Aventureiros e Combatentes de Comando podem usar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "CONTRA-ATACAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " por ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "2 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Se esquivarem com sucesso do Ataque, podem reduzir o custo do Contra-ataque em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Alguns Itens e Disciplinas também listam a Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "CONTRA-ATACAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " como Habilidade. Se houver custo de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " nessa Tag, ele também pode ser reduzido em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Combatentes Inteligentes só usam ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "CONTRA-ATACAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " se a Carta de Combatente instruir.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_isolated_copyfit_viewer_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 7,
+      "pageRendererVisualLineCount": 7,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 7,
+        "pageRendererVisualLineCount": 7,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 49,
+          "pdfDocumentPageIndex": 48,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            107.71261596679688,
+            141.35198974609375,
+            390.7189025878906,
+            219.2519989013672
+          ],
+          "visualBaselinesPt": [
+            150.542,
+            161.542,
+            172.542,
+            183.542,
+            194.542,
+            205.542,
+            216.542
+          ],
+          "spans": 25,
+          "visualRows": 7
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_49_block_1__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 25,
+          "distinctVisualRows": 7,
+          "visualRowTopsCssPx": [
+            141.14,
+            150.05,
+            158.95,
+            167.86,
+            176.77,
+            185.67,
+            194.58
+          ],
+          "frameHeightCssPx": 63.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 2,
+      "sourceBlockId": "block_22",
+      "sourceUnitId": null,
+      "sourceText": "To COUNTER, the target being Attacked must have Line of Sight and be within Range of the figure making the Attack Action. If the initial figure that made the Attack Action is blocked by a different opposing figure, that figure may be chosen as the target of the Counter instead. If these requirements are met, the current Attack Action immediately ends and the target being Attacked makes an Attack Action targeting the Attacker.",
+      "spanKey": "page_49_block_2__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "Para CONTRA-ATACAR, a miniatura atacada precisa ter Linha de Visão e estar ao Alcance da miniatura que realiza a Ação de Ataque. Se uma miniatura adversária diferente bloquear a miniatura que iniciou a Ação de Ataque, ela poderá ser escolhida como alvo do Contra-ataque. Se esses requisitos forem atendidos, a Ação de Ataque atual termina imediatamente, e a miniatura atacada realiza uma Ação de Ataque contra o atacante.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_49_block_2__pt-BR",
+        "bbox": [
+          107.71339416503906,
+          224.02142333984375,
+          391.9233703613281,
+          301.9214172363281
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Para ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "CONTRA-ATACAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", a miniatura atacada precisa ter Linha de Visão e estar ao Alcance da miniatura que realiza a Ação de Ataque. Se uma miniatura adversária diferente bloquear a miniatura que iniciou a Ação de Ataque, ela poderá ser escolhida como alvo do Contra-ataque. Se esses requisitos forem atendidos, a Ação de Ataque atual termina imediatamente, e a miniatura atacada realiza uma Ação de Ataque contra o atacante.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_isolated_copyfit_viewer_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 7,
+      "pageRendererVisualLineCount": 7,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 7,
+        "pageRendererVisualLineCount": 7,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 49,
+          "pdfDocumentPageIndex": 48,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            107.71339416503906,
+            224.02142333984375,
+            391.9233703613281,
+            301.9214172363281
+          ],
+          "visualBaselinesPt": [
+            233.211,
+            244.211,
+            255.211,
+            266.211,
+            277.211,
+            288.211,
+            299.211
+          ],
+          "spans": 10,
+          "visualRows": 7
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_49_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 15,
+          "distinctVisualRows": 7,
+          "visualRowTopsCssPx": [
+            208.14,
+            217.05,
+            225.95,
+            234.86,
+            243.77,
+            252.67,
+            261.58
+          ],
+          "frameHeightCssPx": 63.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 3,
+      "sourceBlockId": "block_23",
+      "sourceUnitId": null,
+      "sourceText": "It is possible for some back and forth to occur when a figure makes a COUNTER during the Check if the Target Counters step of another figure's COUNTER. In these cases, after resolving all Attacks granted by the COUNTER Ability, the figure whose turn it was when the initial Action was made, would resume their turn.",
+      "spanKey": "page_49_block_3__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "Uma miniatura pode CONTRA-ATACAR na etapa Verifique o Contra-ataque do Contra-ataque de outra miniatura, gerando uma sequência. Após resolver todos os Ataques concedidos por essa Habilidade, a miniatura cujo turno estava ativo ao início da Ação de Ataque inicial retoma seu turno.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_49_block_3__pt-BR",
+        "bbox": [
+          107.71308898925781,
+          306.6914367675781,
+          385.6032409667969,
+          362.5906066894531
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Uma miniatura pode ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "CONTRA-ATACAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " na etapa ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Verifique o Contra-ataque",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " do ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Contra-ataque",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " de outra miniatura, gerando uma sequência. Após resolver todos os Ataques concedidos por essa Habilidade, a miniatura cujo turno estava ativo ao início da Ação de Ataque inicial retoma seu turno.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_isolated_copyfit_viewer_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 49,
+          "pdfDocumentPageIndex": 48,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            107.71308898925781,
+            306.6914367675781,
+            385.6032409667969,
+            362.5906066894531
+          ],
+          "visualBaselinesPt": [
+            315.881,
+            326.881,
+            337.881,
+            348.881,
+            359.881
+          ],
+          "spans": 14,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_49_block_3__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 15,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            275.13,
+            284.03,
+            292.94,
+            301.84,
+            310.75
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ]
+}

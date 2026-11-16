@@ -42,6 +42,9 @@ def main() -> None:
     tmp_font = args.output.with_suffix(".source.ttf")
     tmp_font.write_bytes(font_bytes)
     font = TTFont(tmp_font)
+    # Keep the embedded source timestamps so identical PDF inputs produce a
+    # byte-identical derived font across runs.
+    font.recalcTimestamp = False
     glyph_name = font.getGlyphOrder()[136]
     cmap = newTable("cmap")
     cmap.tableVersion = 0
@@ -52,6 +55,22 @@ def main() -> None:
     subtable.cmap = {0xF088: glyph_name}
     cmap.tables = [subtable]
     font["cmap"] = cmap
+
+    # PDF subset fonts may omit `post`, but Chrome's OpenType Sanitizer requires
+    # it for TrueType webfonts. Format 3 carries no glyph-name mapping, so this
+    # adds browser compatibility without changing the extracted outline.
+    post = newTable("post")
+    post.formatType = 3.0
+    post.italicAngle = 0.0
+    post.underlinePosition = -100
+    post.underlineThickness = 50
+    post.isFixedPitch = 0
+    post.minMemType42 = 0
+    post.maxMemType42 = 0
+    post.minMemType1 = 0
+    post.maxMemType1 = 0
+    font["post"] = post
+
     for record in font["name"].names:
         if record.nameID in (1, 4, 6, 16, 17):
             value = "Middara Wingdings Page 63" if record.nameID in (1, 4, 16) else "MiddaraWingdingsP63"

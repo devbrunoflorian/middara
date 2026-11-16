@@ -1,8 +1,9 @@
 # Roadmap: editor visual de molduras de texto
 
-- **Status:** ideia entrevistada e documentada; não implementar agora.
+- **Status:** primeira fatia de edição visual de molduras implementada; os próximos incrementos continuam no backlog.
 - **Decisões:** concluídas com o usuário em 2026-10-02 usando `Grill Me`.
-- **Ponto de partida previsto:** branch nova criada da branch publicada `codex/book-visual-batch-audit`, antes de qualquer implementação.
+
+O objetivo de saída posterior para impressão, viewer interativo e empacotamento desktop/mobile está documentado em [`final-output-print-and-app.md`](final-output-print-and-app.md). A entrevista adiou o recurso; a ordem mais recente do usuário retomou o roadmap e autorizou a implementação tracer. A ferramenta continua sem substituir a revisão da tradução e não inicia a fase de exportação para gráfica.
 
 ## Problema e resultado pretendido
 
@@ -48,11 +49,11 @@ O editor futuro permitirá ajustar visualmente o frame de uma unidade textual j�
 - Preservar a hierarquia e os runs mistos do texto dentro do frame. Não achatar um heading + corpo em estilo único.
 - Preview e seleção devem manter a distinção: outline-fonte identifica a tinta original durante edição; handles do modo de layout representam o frame traduzido.
 
-## Tracer bullet futuro
+## Tracer bullet retomado
 
-Não iniciar até o usuário retomar esta iniciativa. Quando iniciar:
+O usuário retomou esta iniciativa em 2026-10-04 e pediu execução autônoma sem novas aprovações rotineiras. Já foi implementada a régua Admin e o preview manipulável de um bloco padrão. Quando continuar:
 
-1. Criar branch dedicada da branch publicada atual e reler handoff/rules.
+1. Criar uma branch da versão atual do app antes de começar a próxima fatia.
 2. Modelar a nova coleção e testar CRUD/local-first de uma única unidade EN/PT, sem mudar drafts de texto existentes.
 3. Escolher um bloco normal na página 2 como tracer: mover X/Y, mudar largura e altura, verificar quebra/overflow, salvar, recarregar e comparar persistência EN/PT. PT deve herdar EN antes do primeiro ajuste e sobreviver a alterações posteriores no frame EN depois de ter override próprio.
 4. Implementar os estados UI/Admin separados e Salvar/Descartar só depois de provar o round-trip do frame.

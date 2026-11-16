@@ -1,4 +1,6 @@
-# Text Layout Frames: separating printed ink from translation space
+# Text Layout Frames: page 2 pilot record
+
+> **Status: HISTORICAL PILOT, limited to p. 2.** Its ink/frame distinction remains useful, but its statements that production schema and translation keys were undecided are old. Current contracts: [overview](overview.md), [editorial model](editorial-model.md), [project state](../PROJECT_STATE.md).
 
 **Status:** the page 2 dialogue-frame pilot and fixed viewer scrollport were visually approved by the user. Generalizing frame extraction remains pending; selection-outline polish is documented for later.
 

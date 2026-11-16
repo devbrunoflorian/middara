@@ -1,0 +1,271 @@
+{
+  "proposalId": "p100-additional-table-headings",
+  "version": "1",
+  "title": "Título da Tabela 10 — p. 100",
+  "page": 100,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 2
+  },
+  "scopeLimits": [
+    "A read-only Payload preflight found no saved human translation for these five span keys.",
+    "The original rich runs, font families, sizes, colors, bounding boxes, and one-row source composition are preserved.",
+    "All candidates remain proposals. No final translation or human-approved content was written.",
+    "The Table 11 and Table 13 headings are restored from English-only source-PDF component crops and are not editable PageRenderer text; they are excluded pending localized artwork overlays.",
+    "A targeted semantic-width revalidation corrected the effective-width measurement: the preserved proposal is EXACT (1/1) in the live PageRenderer at 100% and 200%, with the inherited EN frame and all rich text unchanged. It remains pending explicit human review; no final translation write occurred.",
+    "The live PageRenderer frame ends at x=392.9166 pt, 1.3966 pt beyond the measured Table 10 band edge at x=391.52 pt. This is within the documented 1.5 pt boundary tolerance; the frame is reported as within boundary tolerance, not wholly inside the band. Visible proposal ink ends at x=246.3 pt, so it does not approach the edge. No frame change was made."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 9,
+      "sourceBlockId": "block_20",
+      "sourceUnitId": null,
+      "spanKey": "page_100_block_9__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Table 10: Current Effects",
+      "proposalText": "Tabela 10: Efeitos das Correntes",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_9__pt-BR",
+        "bbox": [
+          57.2775993347168,
+          50.172828674316406,
+          213.92440795898438,
+          66.34882354736328
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Tabela 10: ",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Efeitos das Correntes",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            57.2775993347168,
+            50.172828674316406,
+            213.92440795898438,
+            66.34882354736328
+          ],
+          "visualBaselinesPt": [
+            61.885
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_block_9__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            66.25
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitSemanticFlow": {
+        "version": 1,
+        "flowRegion": {
+          "id": "p100-table10-header-band",
+          "semanticOwner": "p100-table10",
+          "leftBoundaryEvidence": [
+            {
+              "valuePt": 57.2776,
+              "kind": "source-baselines",
+              "detail": "block_20 title origin; preserve X",
+              "sourceId": "pdf:page100-block20-origin"
+            },
+            {
+              "valuePt": 57.2776,
+              "kind": "table-grid",
+              "detail": "left Table 10 header band interior origin",
+              "sourceId": "viewer:page100-table10-header-left"
+            }
+          ],
+          "rightBoundaryEvidence": [
+            {
+              "valuePt": 391.52,
+              "kind": "table-grid",
+              "detail": "right edge of Table 10 header band measured from official PDF vector bounds",
+              "sourceId": "pdf:page100-table10-vector-right-edge"
+            },
+            {
+              "valuePt": 391.52,
+              "kind": "background-image-boundary",
+              "detail": "same dark header band edge in the Viewer page raster",
+              "sourceId": "viewer:page100-table10-header-right-edge"
+            }
+          ],
+          "paddingLeftPt": 0,
+          "paddingRightPt": 0,
+          "textBandTopPt": 50.1728,
+          "textBandBottomPt": 66.3488,
+          "evidence": [
+            {
+              "kind": "semantic-parent",
+              "owner": "p100-table10",
+              "detail": "Table 10 title belongs to the left table header only"
+            },
+            {
+              "kind": "source-baselines",
+              "detail": "PDF-extracted Table 10 title baseline and original one-line count"
+            },
+            {
+              "kind": "table-grid",
+              "detail": "Table 10 table-vector boundary, not page-wide whitespace"
+            },
+            {
+              "kind": "background-image-boundary",
+              "detail": "served page raster confirms the same header band"
+            },
+            {
+              "kind": "artwork-occupancy",
+              "detail": "space after x=391.52 is the inter-table gutter and remains outside this title corridor"
+            }
+          ]
+        },
+        "alignmentAnchor": "left",
+        "obstacles": [
+          {
+            "id": "p100-table12-header",
+            "semanticRelation": "independent-flow-owner",
+            "bboxPt": [
+              431.7254,
+              50.1728,
+              689.3176,
+              66.3488
+            ],
+            "requiredGapPt": 40.205,
+            "detail": "Separate table title; the intervening gutter is not borrowed by Table 10."
+          }
+        ],
+        "excludedWhitespacePt": [
+          391.52,
+          431.7254
+        ],
+        "evidenceSources": [
+          "apps/web/public/pages/page_100/page_100_dom.json",
+          "apps/web/public/pages/page_100/background.webp",
+          "official PDF vector bounds reviewed independently by p020_critic"
+        ]
+      },
+      "technicalStatus": "validated_copyfit_v3_exact_pending_human_review",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "Review-only proposal; no final PT-BR translation is published until explicit approval. The stale diagnostic blank is not required by the current successful copyfit measurement.",
+      "pendingTerms": [
+        "Current(s) → Corrente(s): the context on this page indicates moving water; terminology is proposed here, not added to the official glossary."
+      ],
+      "historicalCopyfitMeasurements": [
+        {
+          "recordedClassification": "OVER",
+          "recordedPageRendererVisualLineCount": 2,
+          "technicalStatus": "blocked_copyfit_v3_over_dtp_exception_open",
+          "measurement": {
+            "measurementSource": "PDF-derived page_100_dom.json source geometry and live PageRenderer DOM Range rectangles grouped with groupPageRendererVisualLines",
+            "sourcePdfVisualLineCount": 1,
+            "pageRendererVisualLineCount": 2,
+            "classification": "OVER",
+            "environment": "PT-BR, viewport 2400x1400 CSS px, DPR 1, 100% and 200% Viewer zoom, source font files loaded",
+            "geometry": "Original frame bbox preserved: [57.2776, 50.1728, 213.9244, 66.3488] pt. Candidate ink crosses a second baseline and exceeds the frame vertically at both zooms.",
+            "evidence": [
+              "apps/web/output/p100-block_20-copyfit-v1/tabela-10-efeitos-das-correntes-100pct-measurement.json",
+              "apps/web/output/p100-block_20-copyfit-v1/tabela-10-efeitos-das-correntes-200pct-measurement.json"
+            ]
+          },
+          "supersededReason": "The earlier run used the candidate ink bbox as available width; the live PageRenderer effective frame is measured separately in the receipts below."
+        }
+      ],
+      "revalidation": {
+        "outcome": "EXACT",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCountAt100Percent": 1,
+        "pageRendererVisualLineCountAt200Percent": 1,
+        "effectiveFramePt": {
+          "x": 57.2726,
+          "y": 50.167,
+          "width": 335.644,
+          "height": 16.1717,
+          "originalGeometryPreserved": true
+        },
+        "geometryChanged": false,
+        "finalTranslationWrite": false,
+        "humanApprovalChanged": false,
+        "revalidatedAt": "2026-10-17T12:00:47.243Z"
+      }
+    }
+  ],
+  "note": "The candidate is technically validated as EXACT on the live PageRenderer, but remains review-only pending explicit editorial approval. No final translation or human-approved content was written.",
+  "revisions": [
+    {
+      "text": "Tabela 10: Efeitos das Correntes",
+      "result": "Historical preflight superseded: it used the ink bbox as available width. The current effective-frame measurement is 1 source line / 1 PageRenderer line (EXACT) at 100% and 200%; historical measurements remain attached to the candidate."
+    },
+    {
+      "text": "Tabela 10: Efeitos de corrente",
+      "result": "OVER: 1 source line / 2 PT-BR lines at 100%; rejected as copyfit."
+    },
+    {
+      "text": "Tabela 10: Correntes: efeitos",
+      "result": "OVER: 1 source line / 2 PT-BR lines at 100%; rejected as copyfit."
+    },
+    {
+      "text": "Tabela 10: Efeito das correntes",
+      "result": "OVER: 1 source line / 2 PT-BR lines at 100%; rejected as copyfit."
+    }
+  ],
+  "sourceHashes": {
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "revalidation": {
+    "targetedRetrospective": true,
+    "page": 100,
+    "eligibleUnit": "page_100_block_9__pt-BR",
+    "previousStatus": "stale OVER caused by using ink bbox as available width",
+    "result": "EXACT at 100% and 200%",
+    "resolvedExceptionId": "P100-DTP-COPYFIT-TABLE10-CURRENT-EFFECTS-1",
+    "finalTranslationWrite": false,
+    "humanApprovalChanged": false,
+    "completedAt": "2026-10-17T12:00:47.243Z"
+  }
+}

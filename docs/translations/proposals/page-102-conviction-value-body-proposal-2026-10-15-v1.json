@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "page": 102,
+  "units": [
+    "p102-conviction-value-body"
+  ],
+  "family": "Conviction and Casting Value — body",
+  "status": "isolated-proposal-copyfit-verified-pending-human-review",
+  "candidateKey": "page_102_unit_p102-conviction-value-body__pt-BR",
+  "sourceText": {
+    "en": "Some Abilities, Conditions, or AI Steps may reference a figure's Conviction Value or Casting Value. The Conviction Value or Casting Value is calculated by adding the figure's best dice of the appropriate type according to the rating list on the left.",
+    "ptBR": "Algumas Habilidades, Condições ou Etapas de IA podem se referir ao Valor de Convicção ou ao Valor de Conjuração de uma miniatura. Esse valor é calculado somando os melhores dados da miniatura do tipo adequado, conforme a lista de classificações à esquerda."
+  },
+  "candidateRecord": {
+    "spanKey": "page_102_unit_p102-conviction-value-body__pt-BR",
+    "language": "pt-BR",
+    "data": {
+      "schemaVersion": 2,
+      "spanKey": "page_102_unit_p102-conviction-value-body__pt-BR",
+      "bbox": [
+        419.74951171875,
+        623.8046875,
+        630.7799072265625,
+        690.7247314453125
+      ],
+      "textAlign": "left",
+      "lineHeight": 1.1,
+      "lineHeightMode": "custom",
+      "segments": [
+        {
+          "text": "Algumas Habilidades, Condições ou Etapas de ",
+          "font": "OptimaLTStd",
+          "size": 10,
+          "color": "#ffffff",
+          "weight": 400,
+          "style": "normal"
+        },
+        {
+          "text": "IA",
+          "font": "OptimaLTStd-Bold",
+          "size": 10,
+          "color": "#ffffff",
+          "weight": 700,
+          "style": "normal"
+        },
+        {
+          "text": " podem se referir ao Valor de Convicção ou ao Valor de Conjuração de uma miniatura. Esse valor é calculado somando os melhores dados da miniatura do tipo adequado, conforme a lista de classificações à esquerda.",
+          "font": "OptimaLTStd",
+          "size": 10,
+          "color": "#ffffff",
+          "weight": 400,
+          "style": "normal"
+        }
+      ],
+      "managedSourceSymbols": []
+    }
+  },
+  "existingPayloadRecords": [],
+  "candidateKeyAbsentFromPayload": true,
+  "terminologyPendingHumanReview": [
+    "Figures → Miniaturas follows the approved glossary. Habilidades and Condições are existing glossary forms.",
+    "AI Steps → Etapas de IA, Conviction Value → Valor de Convicção, Casting Value → Valor de Conjuração, and rating list → lista de classificações are proposed local forms; do not promote them to global glossary terms without review."
+  ],
+  "richText": {
+    "sourceEmphasis": "AI is bold in the source.",
+    "targetEmphasis": "IA is preserved as a bold 10 pt Optima segment (weight 700) in the snapshot.",
+    "otherBodyText": "Regular 10 pt Optima; source frame and line height 1.1 preserved.",
+    "exportedPdfFontMetadata": "The PDF embeds translated spans as Type3 subsets; the extracted font label cannot independently identify the source family/weight. The bold target segment is confirmed in the snapshot and visually in Viewer/PDF evidence."
+  },
+  "copyfit": {
+    "sourceLines": 6,
+    "targetLines": 6,
+    "status": "copyfit-pass-with-recorded-glyph-bbox-offset",
+    "sourceFramePt": [
+      419.74951171875,
+      623.8046875,
+      630.7799072265625,
+      690.7247314453125
+    ],
+    "exportedTextBboxPt": [
+      419.7421875,
+      622.7691650390625,
+      630.423828125,
+      689.9754028320312
+    ],
+    "glyphBboxOverhangAboveFramePt": 1.036,
+    "clearanceToExamplePt": 3.043,
+    "differenceFromSourceClearancePt": -0.128,
+    "conclusion": "Pass: six lines are preserved; right and bottom remain within the frame; the preceding heading and Example do not collide; the source Example gap changes by only 0.128 pt. The 1.036 pt top glyph-bbox overhang is explicitly recorded and visually confirmed not to clip or collide."
+  },
+  "verification": {
+    "officialPdfExported": true,
+    "pageCount": 1,
+    "pageSizePt": [
+      820.3460083007812,
+      820.3460083007812
+    ],
+    "targetTextOccurrences": 1,
+    "englishBodyFallbackOccurrences": 0,
+    "replacementCharacterCount": 0,
+    "exampleTextUnchanged": true,
+    "followingParagraphUnchanged": true,
+    "normalEditorSourceFieldEditable": true,
+    "normalEditorCancelAndReopenPreserveEnglish": true,
+    "normalEditorVerificationScope": "Read-only source-field check; PT-BR proposal was not injected into Payload or saved in the Editor.",
+    "canonicalPageFilesUnchanged": true,
+    "payloadUnchanged": true,
+    "payloadWriteRequests": 0
+  },
+  "excludedFromThisProposal": [
+    "The Example unit remains in English; its orange and red source dice icons have not been mapped to semantic inline elements.",
+    "The following Since Casting paragraph remains in English; it was checked for preservation only.",
+    "The chart labels, ratings list, page art, and page-level structural readiness are outside this unit proof."
+  ],
+  "hashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "page102Assets": {
+      "background.webp": {
+        "sha256": "9F6EE3306F10136DB1CCD7DABDEAC994C322D6DFAA807B14382962A180CCA2DD",
+        "size": 94564
+      },
+      "fidelity-overlay-component-dice-color-label-black.png": {
+        "sha256": "6683AB5AEE0521850102A1C676C4DE50A1F2064F784F22178DAD0FD0DF37779A",
+        "size": 3560
+      },
+      "fidelity-overlay-component-dice-color-label-blue.png": {
+        "sha256": "E7FCABE44A97E145AA49606042546BB85EE519CD852401FFC4D364747FDB16D9",
+        "size": 2680
+      },
+      "fidelity-overlay-component-dice-color-label-green.png": {
+        "sha256": "4B0D16E1888EE9AD57771A04D7938FC8CAD7BCFB50FF09808A1A9691A34152BC",
+        "size": 3946
+      },
+      "fidelity-overlay-component-dice-color-label-grey.png": {
+        "sha256": "A5EC59771E7B310E64681FFCE426B640CC679FFAC03D9A71B753DC04218DFEFB",
+        "size": 3442
+      },
+      "fidelity-overlay-component-dice-color-label-orange.png": {
+        "sha256": "56F8337B7792DFD7E56A7CC747003ED31CE9122FC361473553DEC018662B7050",
+        "size": 5813
+      },
+      "fidelity-overlay-component-dice-color-label-purple.png": {
+        "sha256": "FBA49E66814B7988588028DA0AAC546C58A7DB47BD9B84665B16DB915ABE9A7E",
+        "size": 3832
+      },
+      "fidelity-overlay-component-dice-color-label-red.png": {
+        "sha256": "053C2919C470903AB0ED20AD25BD494389F34D83BD4D86F75B45B3CA4ED6E546",
+        "size": 2448
+      },
+      "fidelity-overlay-component-dice-color-label-teal.png": {
+        "sha256": "5E635FAB8DC3DC8385D503E53E7F3DAEE3F2034AAD0622A78F5BA5CD0DFEB6D9",
+        "size": 2315
+      },
+      "fidelity-overlay-component-dice-color-label-white.png": {
+        "sha256": "C6F0099DAA9FF83BE600895D77AFCA788980BCD0554B547F0F5C3426442158E8",
+        "size": 3464
+      },
+      "fidelity-overlay-component-dice-white-row-cube.png": {
+        "sha256": "65243AB728D1CF4E26BCC16A4F5A6A350671014941BCED9E3B2EC17BB3B32DFE",
+        "size": 5251
+      },
+      "fidelity-overlay-component-white-dice-outcomes-row.png": {
+        "sha256": "90B362C2F30DF450EF68978A7BF1B9A9ACCB89557C9197923C05AD9BCA5B79F2",
+        "size": 19124
+      },
+      "fidelity-overlay-decoration-page102-lower-left.png": {
+        "sha256": "8E347D64DDA0F19FD50633CC0D7EC0FB0F3FAFBE04204D5B4124574392566D63",
+        "size": 4346
+      },
+      "fidelity-overlay-decoration-page102-lower-right.png": {
+        "sha256": "001C47296BEDA319E1B4B10C2A06998D35C2FF9A92249B6827CFAAF50328CF9E",
+        "size": 10517
+      },
+      "fidelity-overlay-decoration-page102-top-left.png": {
+        "sha256": "43D084665A1FEA233E4EC69817EB44A233D0B08E41613AF736EFEF2A89D5EC58",
+        "size": 4268
+      },
+      "fidelity-overlay-decoration-page102-top-right.png": {
+        "sha256": "B93368BB44A3718232316E2A9B625E7059FAFF830B4DDA89A2168C6782C1D2FB",
+        "size": 14477
+      },
+      "fidelity-overlay-source-vector-p102-d0418.svg": {
+        "sha256": "F636C179BEAD7097BA83946DD43C2F3CBFA1754EE8EF9B65829A8B7D8F366E1C",
+        "size": 992
+      },
+      "fidelity-overlay-source-vector-p102-d0446.svg": {
+        "sha256": "10650FC84ECEC457002A4F7DB8CAFEF01A4026C7A8A1A3F3B606B4C36F3E5441",
+        "size": 851
+      },
+      "fidelity-overlay-source-vector-p102-d0448.svg": {
+        "sha256": "961A4DC02EB5971DCE890653A36D48D2537DB4E2ADC3050E09D2A873B8B6CEE3",
+        "size": 638
+      },
+      "fidelity-overlay-source-vector-p102-d0451.svg": {
+        "sha256": "5A9BB434BCA3B50809BD906E3359135567C9C7AC5EF1C8A3DB44C7F95B40505F",
+        "size": 1464
+      },
+      "fidelity_overlays.json": {
+        "sha256": "CCF43B9D51F4EF0475ECC1D732B23D0F2B82C2E6B98E78AD626F37E4BDEFF0F3",
+        "size": 10624
+      },
+      "layout_frames.json": {
+        "sha256": "8226ACCEBF5C6BEF5463CDAA2A42F34DAD7FBF165B30A89FE7C6A67AFF2C2F4E",
+        "size": 103
+      },
+      "page_102_dom.json": {
+        "sha256": "97EA10EB5B36E0A36A4DA1339C2D7D72892DB7F3142D92BC8DA01169F89C5548",
+        "size": 51772
+      }
+    },
+    "proposalPdf": "F8F7E7BF6C87F1FB76751527F85F85C5C08C926EDF6DBA92942D4D5E9FB3A05D",
+    "snapshot": "156C861F05C7B7BD087041089B85E5FCF1C256ECFC34CE93EFAEA1E86EB23092",
+    "comparison": "E7B273092BC8DC5E4ADE0D5A671BCFFCEBF963BA094326999A99B6A6BC40B6F6",
+    "editorReceipt": "79A934C05A8B4ACF393244C57E66F7152153C31052B2CF0F91E66C6AE21FDDC3"
+  },
+  "evidence": [
+    "docs/project-progress/evidence/2026-10-15-p102-conviction-value-body-v1/source-viewer-pdf-comparison-v3.png",
+    "docs/project-progress/evidence/2026-10-15-p102-conviction-value-body-v1/proposal-page-102-pt-BR.pdf",
+    "docs/project-progress/evidence/2026-10-15-p102-conviction-value-body-v1/normal-editor-source-unit.png",
+    "docs/project-progress/evidence/2026-10-15-p102-conviction-value-body-v1/normal-editor-after-cancel-reopen.png",
+    "docs/project-progress/evidence/2026-10-15-p102-conviction-value-body-v1/copyfit-reconciliation-v3.json"
+  ],
+  "note": "This is a one-unit isolated proposal. It is not an approved human translation, does not change canonical page assets, and does not localize the page as a whole."
+}

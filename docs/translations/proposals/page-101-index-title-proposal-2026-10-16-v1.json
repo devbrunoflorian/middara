@@ -1,0 +1,281 @@
+{
+  "proposalId": "p101-index-title",
+  "version": "1",
+  "title": "Índice — título da p. 101",
+  "page": 101,
+  "status": "approved_and_published_via_official_reviewer",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "A0C8BFA4889A6AD0AF86DE5B9C3CB957B90C39AA0DBCD4023B682A0E90D5700E",
+    "pageDom": "EB258616F80FBE0F8544CD6153369BE962BE0B71F8587492CBAD68B84ED56A0E"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 1,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "A p. 101 é o índice remissivo. Este recorte propõe somente o título, preservando a localização por termo e página para um lote próprio; não traduz nem altera as entradas do índice.",
+    "A forma 'Índice' segue o título humano da mesma seção na p. 3.",
+    "A fonte usa EsmeraldaPro a 30 pt. O layout da página fornece o frame centralizado [125.53, 57.33, 694.53, 98.19]; a proposta conserva o frame e a cor originais.",
+    "GET somente leitura confirmou zero traduções e revisões da p. 101; nenhuma tradução final foi escrita. O Viewer mediu 1→1 EXACT a 100% e 200%, com verificação visual independente aprovada; round-trip no Editor e PDF exportado seguem pendentes."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 3,
+      "sourceBlockId": "block_13",
+      "sourceUnitId": null,
+      "spanKey": "page_101_block_3__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Index",
+      "proposalText": "Índice",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_101_block_3__pt-BR",
+        "bbox": [
+          125.53,
+          57.33161163330078,
+          694.53,
+          98.19161224365234
+        ],
+        "textAlign": "center",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Índice",
+            "font": "EsmeraldaPro",
+            "size": 30,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 101,
+          "pdfDocumentPageIndex": 100,
+          "language": "pt-BR",
+          "viewerZoom": "100%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            371.5259094238281,
+            57.33161163330078,
+            448.35589599609375,
+            98.19161224365234
+          ],
+          "visualRowBaselinesPt": [
+            89.342
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_101_block_3__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            316.57
+          ],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "EsmeraldaPro, serif",
+              "fontSize": "12.1561px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "12.1561px",
+              "letterSpacing": "-0.182341px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 12.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_source_pdf_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved and persisted through the official Reviewer. Source meaning and rich-span styling passed; Copyfit V3 was EXACT at 100% and 200%; Payload read-back confirmed.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 101,
+            "pdfDocumentPageIndex": 100,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              371.5259094238281,
+              57.33161163330078,
+              448.35589599609375,
+              98.19161224365234
+            ],
+            "visualRowBaselinesPt": [
+              89.342
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_101_block_3__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              71.96
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "EsmeraldaPro, serif",
+                "fontSize": "24.3121px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "24.3121px",
+                "letterSpacing": "-0.364682px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 24.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 101,
+            "pdfDocumentPageIndex": 100,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              371.5259094238281,
+              57.33161163330078,
+              448.35589599609375,
+              98.19161224365234
+            ],
+            "visualRowBaselinesPt": [
+              89.342
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_101_block_3__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              316.57
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "EsmeraldaPro, serif",
+                "fontSize": "12.1561px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "12.1561px",
+                "letterSpacing": "-0.182341px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 12.2
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 480,
+        "translationId": 919,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:12:11.195Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_source_pdf_100_200_semantic_rich_span_visual"
+      }
+    }
+  ],
+  "note": "Título isolado do índice remissivo. As três colunas permanecem inalteradas neste lote.",
+  "criticalReview": {
+    "result": "PASS",
+    "finding": "The independent critical agent confirmed 1→1 EXACT at 100% and 200%, with the original centered 30 pt EsmeraldaPro frame preserved and no visible clipping or collision. The proposal remains pending Editor and exported-PDF validation; no final translation was written."
+  },
+  "revisions": [],
+  "payload": {
+    "httpMethod": "POST /api/translation-review/approve",
+    "approvedCandidateKeys": [
+      "page_101_block_3__pt-BR"
+    ],
+    "reviewIds": [
+      480
+    ],
+    "translationIds": [
+      919
+    ],
+    "writesPerformed": 1,
+    "publicationVerified": true
+  }
+}

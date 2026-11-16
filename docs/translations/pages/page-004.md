@@ -1,7 +1,7 @@
 # Página 004 — Summary of Components
 
 - **Origem EN:** transcrita diretamente do PDF oficial e cotejada com a página renderizada.
-- **Fidelidade EN:** aprovada em revisão visual anterior PDF↔app; os headings de 12 pt Cinzel têm o peso visual local já corrigido. Ver `docs/project-progress/CONTINUE-HERE.md` e `docs/project-progress/2026-10-01-book-wide-typographic-units.md`.
+- **Fidelidade EN:** o histórico de revisão fica no status da página. Confira o PDF original antes de alterar texto, peso tipográfico ou arte.
 - **PT-BR:** rascunho dos 14 blocos editoriais; preview PT ainda pendente.
 - **Hierarquia:** título `Summary of Components` em EsmeraldaPro 30 pt; headings de seção em Cinzel 12 pt, peso visual forte; corpo em Optima 10 pt. Preservar os headings em negrito e as ênfases inline.
 - **Arte:** nomes e regras legíveis dentro das cartas ilustradas, incluindo o nome Nightingale Arsen, pertencem às imagens. Este draft não os traduz nem altera; encaminhar para localização de arte.
@@ -30,7 +30,7 @@
 
 **EN:** This book contains the Adventure of Nightingale and her friends.
 
-**PT-BR (rascunho):** Este livro conta a Aventura de Nightingale e seus amigos.
+**PT-BR (rascunho):** Este livro contém a Aventura de Nightingale e de seus amigos.
 
 ### 03 — Diagram Book
 
@@ -42,7 +42,7 @@
 
 ### 04 — Crawl Book
 
-**PT-BR (título):** Livro Crawl
+**PT-BR (título):** Livro de Masmorras
 
 **EN:** This book contains **5** different Scenarios that can be played in any order.
 
@@ -54,7 +54,7 @@
 
 **EN:** This book contains a Bounty that can be played with any Adventure you own.
 
-**PT-BR (rascunho):** Este livro contém uma Recompensa que pode ser jogada com qualquer Aventura sua.
+**PT-BR (rascunho):** Este livro contém uma Recompensa que pode ser jogada com qualquer Aventura que você tenha.
 
 ### 06 — Plastic Figures
 
@@ -78,7 +78,7 @@
 
 **EN:** When playing ***Middara***, players will take on the role of Adventurers. When playing the Adventure Mode, players will be instructed to use specific Adventurers. When playing the Crawl Mode, players may choose from any Adventurers they own to create a party. See ***Adventurers*** Pg. 25.
 
-**PT-BR (rascunho):** Ao jogar ***Middara***, os jogadores assumem o papel de Aventureiros. No Modo Aventura, eles recebem instruções para usar Aventureiros específicos. No Modo Crawl, podem escolher quaisquer Aventureiros que possuam para formar um grupo. Consulte ***Aventureiros***, pág. 25.
+**PT-BR (rascunho):** Ao jogar ***Middara***, os jogadores assumem o papel de Aventureiros. No Modo Aventura, eles recebem instruções para usar Aventureiros específicos. No Modo Exploração, podem escolher quaisquer Aventureiros que possuam para formar um grupo. Consulte ***Aventureiros***, pág. 25.
 
 ## Coluna direita
 
@@ -112,15 +112,19 @@
 
 **EN:** Item Cards represent all the gear Adventurers can earn or buy. These cards are separated by Tier: Mundane, Common, Uncommon, and Rare. Item Cards also come in **6** different types: Weapon, Armor, Core, Relic, Accessory, and Consumable. See ***Items Tiers and Types*** Pg. 27.
 
-**PT-BR (rascunho):** As Cartas de Item representam todos os equipamentos que os Aventureiros podem ganhar ou comprar. Elas são divididas por Nível: Mundano, Comum, Incomum e Raro. Também há **6** tipos de Carta de Item: Arma, Armadura, Núcleo, Relíquia, Acessório e Consumível. Consulte ***Níveis e Tipos de Itens***, pág. 27.
+**PT-BR (rascunho):** As Cartas de Item representam todos os equipamentos que os Aventureiros podem ganhar ou comprar. Elas são divididas por Tier: Mundano, Comum, Incomum e Raro. Também há **6** tipos de Carta de Item: Arma, Armadura, Núcleo, Relíquia, Acessório e Consumível. Consulte ***Tiers e Tipos de Item***, pág. 27.
+
+**Referência cruzada:** a linha do PDF na p. 4 imprime “Items Tiers and Types”, mas o título no sumário da p. 3 e a seção correspondente estão no singular, “Item Tiers and Types”. A tradução usa o nome de seção da p. 3.
 
 ### 13 — Combatant Loot Cards
 
 **PT-BR (título):** Cartas de Saque de Combatente
 
-**EN:** Combatant Loot Cards represent the Items and Gold that Combatants drop when they are Defeated. Adventurers will draw these cards when they Defeat Combatants. See ***Combatant Loot*** Pg. 57.
+**EN:** Combatant Loot Cards represent the Items and Gold that Combatants drop when they are Defeated. Adventures will draw these cards when they Defeat Combatants. See ***Combatant Loot*** Pg. 57.
 
 **PT-BR (rascunho):** As Cartas de Saque de Combatente representam os Itens e o Ouro deixados por Combatentes quando são Derrotados. Os Aventureiros compram essas cartas ao Derrotar Combatentes. Consulte ***Saque de Combatente***, pág. 57.
+
+**Anomalia da fonte:** a página impressa diz literalmente “Adventures will draw these cards”. A inspeção ampliada da própria imagem da fonte confirmou o texto; o contexto indica que se refere aos Adventurers, então o PT mantém “Aventureiros” e o inglês-fonte não é corrigido silenciosamente.
 
 ### 14 — Monster Loot Cards
 

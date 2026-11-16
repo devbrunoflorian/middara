@@ -1,0 +1,134 @@
+{
+  "proposalId": "p100-shotgun-label",
+  "version": "1",
+  "title": "Espingarda — rótulo da Tabela 10, p. 100",
+  "page": 100,
+  "status": "pending_human_review",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 0
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "40372696A229A9E0C1E211C5D36DE4971B4AF38369FA9514210D497ED0C1DF7E",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch translates only the right-cell SHOTGUN label in the Table 10 diagram; the left-cell ELEVATION AND ELEVATION TOKENS label and neighboring artwork remain separate and unchanged.",
+    "ESPINGARDA is a natural Brazilian Portuguese candidate for this singular weapon label. The official glossary and approved complementary decisions contain no Shotgun equivalent, so ESPINGARDA remains pending human terminology review; ESCOPETA is an alternative for consideration.",
+    "The source span bbox, OptimaLTStd-Bold 9 pt typography, color, capitalization, and one-baseline composition are preserved.",
+    "Editor round-trip and exported-PDF validation remain pending. This is a proposal only; no final translation is written."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 8,
+      "sourceBlockId": "block_19",
+      "sourceUnitId": "p100-shotgun-label",
+      "sourceLineIds": [
+        "line_19_1"
+      ],
+      "spanKey": "page_100_unit_p100-shotgun-label__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "SHOTGUN",
+      "sourcePdfVisualLineCount": 1,
+      "sourceBboxes": [
+        [
+          228.52249145507812,
+          219.24334716796875,
+          273.2615051269531,
+          229.97134399414062
+        ]
+      ],
+      "proposalText": "ESPINGARDA",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-shotgun-label__pt-BR",
+        "bbox": [
+          228.52249145507812,
+          219.24334716796875,
+          273.2615051269531,
+          229.97134399414062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "ESPINGARDA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "copyfitClassification": "EXACT",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Shotgun → Espingarda is a local candidate with ESCOPETA as an alternative; neither equivalent is approved in the official glossary."
+      ],
+      "pageRendererVisualLineCount": 1,
+      "technicalStatus": "pending_critical_editor_and_pdf_validation_after_viewer_copyfit_v3_exact",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            61.527496337890625,
+            219.24334716796875,
+            273.2615051269531,
+            229.97134399414062
+          ],
+          "visualBaselinesPt": [
+            227.532
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-shotgun-label__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            204.27
+          ],
+          "frameHeightCssPx": 7.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "note": "One right-cell weapon label is proposed in this increment. The adjacent ELEVATION AND ELEVATION TOKENS label is tracked as a separate unit.",
+  "criticalReview": {
+    "result": "PASS",
+    "finding": "The independent critical review confirms that p100-shotgun-label maps only to block_19/line_19_1 in the right Table 10 cell; the left-cell elevation label remains separate. Source PDF and live PageRenderer both measure 1 visual line at 100% and 200% (EXACT). Receipts and screenshots show the effective 155.27 pt right-cell frame, loaded OptimaLTStd-Bold 9 pt, preserved color and uppercase styling, no frame escape or visible collision, and no matching saved translation or Payload writes. Proposal metadata records EXACT and links both receipts. Shotgun → Espingarda remains pending human terminology review with Escopeta as an alternative; editor round-trip and exported-PDF validation remain pending."
+  },
+  "applicationReview": {
+    "result": "PASS",
+    "finding": "In the refreshed user-facing app, the PT-BR review drawer lists this proposal and shows its English source SHOTGUN beside the PT-BR proposal ESPINGARDA. The selected right-cell item is highlighted in the Viewer on page 100, with the adjacent left-cell label visible and separate. The page remains a proposal with editorial and technical statuses pending; no approval or final translation write was performed."
+  }
+}

@@ -1,0 +1,1670 @@
+{
+  "proposalId": "page-023-tile-breakdown-2026-10-16-v2",
+  "status": "full_editable_text_proposal_v2_copyfit_pending_1_artwork_localization_exception_open",
+  "page": 23,
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+  "sourceReview": {
+    "status": "official_pdf_checked_against_sidecar",
+    "visibleTextUnits": 17,
+    "evidence": "The official PDF page 23 raster was compared with the page sidecar: the title, five explanatory sections, seven diagram labels, A–E callouts, page folio, and tile code UM1 match the source. ELEVATION 2/1 remains part of a non-editable diagram image.",
+    "pageRaster": "output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-v1/source-en-page-023.png"
+  },
+  "counts": {
+    "editableTargets": 17,
+    "proposedTargets": 17,
+    "verifiedInViewer": 0,
+    "verifiedInEditor": 0,
+    "verifiedInPdf": 0,
+    "languageInvariantCallouts": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "UM1",
+      "folio 23"
+    ],
+    "snapshotOnlyCompositionChanges": [
+      "block_13 combined into one rich text field",
+      "block_18 diagram labels split into centered fields",
+      "block_19 diagram labels split into centered fields",
+      "block_20 diagram labels split into centered fields",
+      "block_21 diagram labels split into centered fields"
+    ]
+  },
+  "candidates": [
+    {
+      "sourceBlockId": "block_24",
+      "sourceUnitId": null,
+      "blockIndex": 19,
+      "sourceText": "Tile Breakdown",
+      "proposalText": "Detalhamento da Peça",
+      "proposalMarkup": "Detalhamento da Peça",
+      "spanKey": "page_23_block_19__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_19__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Detalhamento da Peça",
+            "font": "Cinzel-Regular",
+            "size": 18,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Detalhamento da Peça",
+            "font": "Cinzel-Regular",
+            "size": 18,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          329.7203063964844,
+          56.69243621826172,
+          491.57501220703125,
+          80.95643615722656
+        ]
+      ],
+      "pendingTerms": [
+        "Tile Breakdown → Detalhamento da Peça: título proposto, sujeito à revisão editorial humana."
+      ],
+      "notes": []
+    },
+    {
+      "sourceBlockId": "block_9",
+      "sourceUnitId": "p23-block-9-font-size-9pt-unit-00",
+      "blockIndex": 6,
+      "sourceText": "TILE",
+      "proposalText": "PEÇA",
+      "proposalMarkup": "PEÇA",
+      "spanKey": "page_23_unit_p23-block-9-font-size-9pt-unit-00__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_6__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "PEÇA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "PEÇA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          113.64759826660156,
+          540.5419311523438,
+          130.64859008789062,
+          551.2699584960938
+        ]
+      ],
+      "pendingTerms": [
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "notes": []
+    },
+    {
+      "sourceBlockId": "block_9",
+      "sourceUnitId": "p23-block-9-font-size-10pt-unit-01",
+      "blockIndex": 6,
+      "sourceText": "A Tile is a single large board piece that is combined with other Tiles to create the game board for an Encounter.",
+      "proposalText": "Uma Peça é um componente grande e individual do tabuleiro, que se combina a outras Peças para formar o tabuleiro de um Encontro.",
+      "proposalMarkup": "Uma Peça é um componente grande e individual do tabuleiro, que se combina a outras Peças para formar o tabuleiro de um Encontro.",
+      "spanKey": "page_23_unit_p23-block-9-font-size-10pt-unit-01__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_6__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Uma ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " é um componente grande e individual do tabuleiro, que se combina a outras Peças para formar o tabuleiro de um Encontro.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Uma ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " é um componente grande e individual do tabuleiro, que se combina a outras Peças para formar o tabuleiro de um Encontro.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 2,
+      "sourceBboxes": [
+        [
+          113.64860534667969,
+          550.6409301757812,
+          123.09860229492188,
+          562.5409545898438
+        ],
+        [
+          123.09860229492188,
+          550.6209106445312,
+          138.66859436035156,
+          562.5409545898438
+        ],
+        [
+          138.66859436035156,
+          550.6409301757812,
+          406.7485656738281,
+          562.5409545898438
+        ],
+        [
+          113.64860534667969,
+          561.6409301757812,
+          296.8585510253906,
+          573.5409545898438
+        ]
+      ],
+      "pendingTerms": [],
+      "notes": []
+    },
+    {
+      "sourceBlockId": "block_10",
+      "sourceUnitId": "p23-block-10-font-size-9pt-unit-00",
+      "blockIndex": 7,
+      "sourceText": "SPACES",
+      "proposalText": "ESPAÇOS",
+      "proposalMarkup": "ESPAÇOS",
+      "spanKey": "page_23_unit_p23-block-10-font-size-9pt-unit-00__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_7__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "ESPAÇOS",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "ESPAÇOS",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          113.64759826660156,
+          579.2112426757812,
+          143.23960876464844,
+          589.9392700195312
+        ]
+      ],
+      "pendingTerms": [
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "notes": []
+    },
+    {
+      "sourceBlockId": "block_10",
+      "sourceUnitId": "p23-block-10-font-size-10pt-unit-01",
+      "blockIndex": 7,
+      "sourceText": "Each square on the Tile makes up a space. Spaces are used for movement, Range and determining area effects.",
+      "proposalText": "Cada quadrado da Peça é um espaço. Os espaços são usados para movimento, Alcance e para determinar efeitos de área.",
+      "proposalMarkup": "Cada quadrado da Peça é um espaço. Os espaços são usados para movimento, Alcance e para determinar efeitos de área.",
+      "spanKey": "page_23_unit_p23-block-10-font-size-10pt-unit-01__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_7__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Cada quadrado da ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " é um espaço. Os espaços são usados para movimento, Alcance e para determinar efeitos de área.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Cada quadrado da ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " é um espaço. Os espaços são usados para movimento, Alcance e para determinar efeitos de área.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 2,
+      "sourceBboxes": [
+        [
+          113.64970397949219,
+          589.3102416992188,
+          197.94969177246094,
+          601.2102661132812
+        ],
+        [
+          197.94969177246094,
+          589.2902221679688,
+          213.51968383789062,
+          601.2102661132812
+        ],
+        [
+          213.51968383789062,
+          589.3102416992188,
+          383.5696716308594,
+          601.2102661132812
+        ],
+        [
+          113.64970397949219,
+          600.3102416992188,
+          321.23968505859375,
+          612.2102661132812
+        ]
+      ],
+      "pendingTerms": [
+        "Range → Alcance é uma proposta contextual ainda pendente de decisão humana; conferir com os usos já registrados."
+      ],
+      "notes": []
+    },
+    {
+      "sourceBlockId": "block_11",
+      "sourceUnitId": "p23-block-11-font-size-9pt-unit-00",
+      "blockIndex": 8,
+      "sourceText": "EDGE",
+      "proposalText": "BORDA",
+      "proposalMarkup": "BORDA",
+      "spanKey": "page_23_unit_p23-block-11-font-size-9pt-unit-00__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_8__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "BORDA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "BORDA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          113.64759826660156,
+          617.8804931640625,
+          136.65159606933594,
+          628.6085205078125
+        ]
+      ],
+      "pendingTerms": [
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "notes": []
+    },
+    {
+      "sourceBlockId": "block_11",
+      "sourceUnitId": "p23-block-11-font-size-10pt-unit-01",
+      "blockIndex": 8,
+      "sourceText": "Unless connected to another Tile, the edge of each Tile blocks Line of Sight and is impassable.",
+      "proposalText": "A borda de cada Peça bloqueia a Linha de Visão e impede a passagem, salvo se estiver conectada a outra Peça.",
+      "proposalMarkup": "A borda de cada Peça bloqueia a Linha de Visão e impede a passagem, salvo se estiver conectada a outra Peça.",
+      "spanKey": "page_23_unit_p23-block-11-font-size-10pt-unit-01__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_8__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "A borda de cada ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " bloqueia a Linha de Visão e impede a passagem, salvo se estiver conectada a outra ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "A borda de cada ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " bloqueia a Linha de Visão e impede a passagem, salvo se estiver conectada a outra ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 2,
+      "sourceBboxes": [
+        [
+          113.65159606933594,
+          627.9794921875,
+          239.82156372070312,
+          639.8795166015625
+        ],
+        [
+          239.82156372070312,
+          627.95947265625,
+          255.3915557861328,
+          639.8795166015625
+        ],
+        [
+          255.3915557861328,
+          627.9794921875,
+          334.6915588378906,
+          639.8795166015625
+        ],
+        [
+          334.6915588378906,
+          627.95947265625,
+          350.2615661621094,
+          639.8795166015625
+        ],
+        [
+          350.2615661621094,
+          627.9794921875,
+          404.55157470703125,
+          639.8795166015625
+        ],
+        [
+          113.65159606933594,
+          638.9794921875,
+          227.59156799316406,
+          650.8795166015625
+        ]
+      ],
+      "pendingTerms": [
+        "Line of Sight → Linha de Visão é uma proposta contextual ainda pendente de decisão humana."
+      ],
+      "notes": []
+    },
+    {
+      "sourceBlockId": "block_12",
+      "sourceUnitId": "p23-block-12-font-size-9pt-unit-00",
+      "blockIndex": 9,
+      "sourceText": "TERRAIN",
+      "proposalText": "TERRENOS",
+      "proposalMarkup": "TERRENOS",
+      "spanKey": "page_23_unit_p23-block-12-font-size-9pt-unit-00__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_9__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "TERRENOS",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "TERRENOS",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          441.19879150390625,
+          540.5419311523438,
+          477.7027893066406,
+          551.2699584960938
+        ]
+      ],
+      "pendingTerms": [
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "notes": []
+    },
+    {
+      "sourceBlockId": "block_12",
+      "sourceUnitId": "p23-block-12-font-size-10pt-unit-01",
+      "blockIndex": 9,
+      "sourceText": "Some spaces have special area effects called Terrain (see Terrain types Pg. 21). Spaces that contain Terrain have a colored hatched border surrounding the square as well as a small symbol on the space representing the type of Terrain.",
+      "proposalText": "Alguns espaços têm efeitos de área especiais chamados Terrenos (veja “Tipos de Terreno”, p. 21). Os espaços com Terreno exibem uma borda colorida e hachurada ao redor do quadrado e um pequeno símbolo que indica o tipo de Terreno.",
+      "proposalMarkup": "Alguns espaços têm efeitos de área especiais chamados Terrenos (veja “Tipos de Terreno”, p. 21). Os espaços com Terreno exibem uma borda colorida e hachurada ao redor do quadrado e um pequeno símbolo que indica o tipo de Terreno.",
+      "spanKey": "page_23_unit_p23-block-12-font-size-10pt-unit-01__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_9__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Alguns espaços têm efeitos de área especiais chamados ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Terrenos",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " (veja “Tipos de Terreno”, p. 21). Os espaços com ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Terreno",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " exibem uma borda colorida e hachurada ao redor do quadrado e um pequeno símbolo que indica o tipo de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Terreno",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Alguns espaços têm efeitos de área especiais chamados ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Terrenos",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " (veja “Tipos de Terreno”, p. 21). Os espaços com ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Terreno",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " exibem uma borda colorida e hachurada ao redor do quadrado e um pequeno símbolo que indica o tipo de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Terreno",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 4,
+      "sourceBboxes": [
+        [
+          441.2025146484375,
+          550.6409301757812,
+          717.1332397460938,
+          562.5409545898438
+        ],
+        [
+          441.2025146484375,
+          561.6409301757812,
+          722.7530517578125,
+          573.5409545898438
+        ],
+        [
+          441.2025146484375,
+          572.6409301757812,
+          715.7531127929688,
+          584.5409545898438
+        ],
+        [
+          441.2025146484375,
+          583.6409301757812,
+          606.6228637695312,
+          595.5409545898438
+        ]
+      ],
+      "pendingTerms": [
+        "Terrain → Terrenos segue o glossário; revisar o singular “Terreno” no contexto da frase e o título citado “Tipos de Terreno”."
+      ],
+      "notes": []
+    },
+    {
+      "sourceBlockId": "block_13",
+      "sourceUnitId": "p23-block-13-combined-tile-number",
+      "blockIndex": 10,
+      "sourceText": "TILE NUMBER Each Tile is identified by two letters followed by a number to indicate which game or expansion it is from, as well as to assist in setting up Encounters. For example, Tile UM1, for Unintentional Malum, Tile 1.",
+      "proposalText": "NÚMERO DA PEÇA\nCada Peça é identificada por um código de duas letras seguido de um número, que indica o jogo ou a expansão de origem e ajuda na preparação dos Encontros. Por exemplo, o código UM1 identifica a Peça 1 de Unintentional Malum.",
+      "proposalMarkup": "NÚMERO DA PEÇA\nCada Peça é identificada por um código de duas letras seguido de um número, que indica o jogo ou a expansão de origem e ajuda na preparação dos Encontros. Por exemplo, o código UM1 identifica a Peça 1 de Unintentional Malum.",
+      "spanKey": "page_23_unit_p23-block-13-combined-tile-number__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_10__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "NÚMERO DA PEÇA\n",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Cada ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " é identificada por um código de duas letras seguido de um número, que indica o jogo ou a expansão de origem e ajuda na preparação dos Encontros. Por exemplo, o código ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "UM1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " identifica a ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " 1 de Unintentional Malum.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "NÚMERO DA PEÇA\n",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Cada ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " é identificada por um código de duas letras seguido de um número, que indica o jogo ou a expansão de origem e ajuda na preparação dos Encontros. Por exemplo, o código ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "UM1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " identifica a ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Peça",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " 1 de Unintentional Malum.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 5,
+      "sourceBboxes": [
+        [
+          441.19879150390625,
+          600.3101196289062,
+          500.9844970703125,
+          612.2101440429688
+        ],
+        [
+          441.1944885253906,
+          611.2901000976562,
+          704.4351806640625,
+          623.2101440429688
+        ],
+        [
+          441.1944885253906,
+          622.3101196289062,
+          727.0653686523438,
+          634.2101440429688
+        ],
+        [
+          441.1944885253906,
+          633.2901000976562,
+          717.5457153320312,
+          645.2101440429688
+        ],
+        [
+          441.19537353515625,
+          644.2901000976562,
+          504.00537109375,
+          656.2101440429688
+        ]
+      ],
+      "pendingTerms": [
+        "Unintentional Malum é preservado como nome próprio conforme uso humano já documentado; confirmar a composição completa na revisão editorial."
+      ],
+      "notes": [
+        "Composition exists only in the diagnostic snapshot. The four canonical source units (p23-block-13-font-size-9pt-unit-00, p23-block-13-font-size-10pt-unit-01, p23-block-13-font-size-9pt-unit-02, p23-block-13-font-size-10pt-unit-03) and the block ID remain unchanged."
+      ]
+    },
+    {
+      "sourceBlockId": "block_18",
+      "sourceUnitId": "p23-block_18-legend-1",
+      "blockIndex": 15,
+      "sourceText": "NORMAL",
+      "proposalText": "NORMAL",
+      "proposalMarkup": "NORMAL",
+      "spanKey": "page_23_unit_p23-block_18-legend-1__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_15__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "NORMAL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "NORMAL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          224.5948028564453,
+          701.1347045898438,
+          260.8468017578125,
+          711.8627319335938
+        ]
+      ],
+      "pendingTerms": [],
+      "notes": [
+        "Independent centered text fields exist only in the isolated PT snapshot so neighboring graphic labels keep their own boxes; the canonical source block and legacy key are unchanged."
+      ]
+    },
+    {
+      "sourceBlockId": "block_18",
+      "sourceUnitId": "p23-block_18-legend-2",
+      "blockIndex": 15,
+      "sourceText": "HINDERING",
+      "proposalText": "DIFÍCIL",
+      "proposalMarkup": "DIFÍCIL",
+      "spanKey": "page_23_unit_p23-block_18-legend-2__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_15__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "DIFÍCIL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "DIFÍCIL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          336.10479736328125,
+          701.1347045898438,
+          383.5078125,
+          711.8627319335938
+        ]
+      ],
+      "pendingTerms": [
+        "Hindering Terrain → Terreno Difícil segue o glossário; “Difícil” é uma forma abreviada proposta para o rótulo da legenda."
+      ],
+      "notes": [
+        "Independent centered text fields exist only in the isolated PT snapshot so neighboring graphic labels keep their own boxes; the canonical source block and legacy key are unchanged."
+      ]
+    },
+    {
+      "sourceBlockId": "block_19",
+      "sourceUnitId": "p23-block_19-legend-1",
+      "blockIndex": 16,
+      "sourceText": "DANGEROUS",
+      "proposalText": "PERIGOSO",
+      "proposalMarkup": "PERIGOSO",
+      "spanKey": "page_23_unit_p23-block_19-legend-1__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_16__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "PERIGOSO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "PERIGOSO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          332.82879638671875,
+          733.9036865234375,
+          384.7857971191406,
+          744.6317138671875
+        ]
+      ],
+      "pendingTerms": [
+        "Dangerous como rótulo abreviado: candidato sujeito à revisão humana."
+      ],
+      "notes": [
+        "Independent centered text fields exist only in the isolated PT snapshot so neighboring graphic labels keep their own boxes; the canonical source block and legacy key are unchanged."
+      ]
+    },
+    {
+      "sourceBlockId": "block_19",
+      "sourceUnitId": "p23-block_19-legend-2",
+      "blockIndex": 16,
+      "sourceText": "SPECIAL",
+      "proposalText": "ESPECIAL",
+      "proposalMarkup": "ESPECIAL",
+      "spanKey": "page_23_unit_p23-block_19-legend-2__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_16__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "ESPECIAL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "ESPECIAL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          455.48980712890625,
+          733.9036865234375,
+          486.2967834472656,
+          744.6317138671875
+        ]
+      ],
+      "pendingTerms": [
+        "Special como rótulo abreviado: candidato sujeito à revisão humana."
+      ],
+      "notes": [
+        "Independent centered text fields exist only in the isolated PT snapshot so neighboring graphic labels keep their own boxes; the canonical source block and legacy key are unchanged."
+      ]
+    },
+    {
+      "sourceBlockId": "block_20",
+      "sourceUnitId": "p23-block_20-legend-1",
+      "blockIndex": 17,
+      "sourceText": "WATER",
+      "proposalText": "ÁGUA",
+      "proposalMarkup": "ÁGUA",
+      "spanKey": "page_23_unit_p23-block_20-legend-1__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_17__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "ÁGUA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "ÁGUA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          456.28179931640625,
+          701.1347045898438,
+          483.4977722167969,
+          711.8627319335938
+        ]
+      ],
+      "pendingTerms": [
+        "Water Terrain → Terreno de Água segue o glossário; “Água” é uma forma abreviada proposta para o rótulo."
+      ],
+      "notes": [
+        "Independent centered text fields exist only in the isolated PT snapshot so neighboring graphic labels keep their own boxes; the canonical source block and legacy key are unchanged."
+      ]
+    },
+    {
+      "sourceBlockId": "block_20",
+      "sourceUnitId": "p23-block_20-legend-2",
+      "blockIndex": 17,
+      "sourceText": "MUCK",
+      "proposalText": "LODO",
+      "proposalMarkup": "LODO",
+      "spanKey": "page_23_unit_p23-block_20-legend-2__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_17__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "LODO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "LODO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          569.393798828125,
+          701.1347045898438,
+          594.548828125,
+          711.8627319335938
+        ]
+      ],
+      "pendingTerms": [
+        "Muck Terrain → Terreno de Lodo segue o glossário; “Lodo” é uma forma abreviada proposta para o rótulo."
+      ],
+      "notes": [
+        "Independent centered text fields exist only in the isolated PT snapshot so neighboring graphic labels keep their own boxes; the canonical source block and legacy key are unchanged."
+      ]
+    },
+    {
+      "sourceBlockId": "block_21",
+      "sourceUnitId": "p23-block_21-legend-1",
+      "blockIndex": 18,
+      "sourceText": "OBSTRUCTING",
+      "proposalText": "OBSTRUÍDO",
+      "proposalMarkup": "OBSTRUÍDO",
+      "spanKey": "page_23_unit_p23-block_21-legend-1__pt-BR",
+      "legacyBlockSpanKey": "page_23_block_18__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "OBSTRUÍDO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "OBSTRUÍDO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "center",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "status": "draft_pending_live_copyfit_and_human_review",
+      "technicalStatus": "pending_viewer_editor_and_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "sourceLineCount": 1,
+      "sourceBboxes": [
+        [
+          213.4617919921875,
+          733.9036865234375,
+          271.9707946777344,
+          744.6317138671875
+        ]
+      ],
+      "pendingTerms": [
+        "Obstructing Terrain → Terreno Obstruído segue o glossário; “Obstruído” é uma forma abreviada proposta para o rótulo."
+      ],
+      "notes": [
+        "Independent centered text fields exist only in the isolated PT snapshot so neighboring graphic labels keep their own boxes; the canonical source block and legacy key are unchanged."
+      ]
+    }
+  ],
+  "artworkExceptionGroups": [
+    {
+      "id": "page_23_elevation_labels_artwork_text_pt-BR",
+      "sourceBlockIds": [],
+      "sourceImageBbox": [
+        529.8400268554688,
+        718.386962890625,
+        628.1150512695312,
+        760.6270141601562
+      ],
+      "sourceText": "ELEVATION 2 / ELEVATION 1",
+      "proposedText": "ELEVAÇÃO 2 / ELEVAÇÃO 1",
+      "category": "artwork_text_localization",
+      "status": "open_human_review",
+      "reason": "The elevation labels are embedded in the diagram image rather than represented by editable text. Keep the source image intact until a localized replacement is validated in context.",
+      "evidence": [
+        "apps/web/public/pages/page_023/background.webp",
+        "output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-v1/source-en-page-023.png"
+      ]
+    }
+  ],
+  "payloadRecordsBefore": 0,
+  "payloadWrites": 0,
+  "humanApproved": false,
+  "sourceScope": {
+    "canonicalInputsModified": false,
+    "translationRecordKeysPreserved": true,
+    "pageBlockIds": [
+      "block_24",
+      "block_9",
+      "block_10",
+      "block_11",
+      "block_12",
+      "block_13",
+      "block_18",
+      "block_19",
+      "block_20",
+      "block_21"
+    ],
+    "compatibilityNote": "No saved PT-BR p.23 records existed. Original block IDs and legacy block keys remain unchanged in canonical data. New typographic units are isolated to the diagnostic snapshot and each proposal records its legacy parent key."
+  },
+  "copyfit": {
+    "engine": "Existing PageRenderer with Copyfit V3 source typography and frames",
+    "status": "pending_viewer_editor_pdf_and_full_page_visual_review",
+    "diagnosticFailurePolicy": "If a proposed unit fails live copyfit or composition, blank only that unit in the diagnostic snapshot; preserve the full translation and source data in this proposal."
+  }
+}

@@ -1,0 +1,284 @@
+{
+  "proposalId": "p057-shared-icons-heading-2026-11-15-v1",
+  "version": "1",
+  "title": "Ícones Compartilhados — p.57",
+  "page": 57,
+  "status": "approved_and_export_verified",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "6DB9BA84E6DB8892A92131215BBA4D1BB5E225E4461C77F3C1B37259819552F1",
+    "background": "42F88728516FB23FB1621141D85CD5C6C9BF977D3BA0BD68367974D123A34639",
+    "inlineElements": "E18617DBC0EE0E9028F1CB2B5A3A4F77083C3FCD7895805845DF2AF47FEBE400",
+    "fidelityOverlays": "B5722CFEC2B59F078A45E6F9AF3FA6C1E8EB16FA6EB8791DA54BE5D28D065848"
+  },
+  "counts": {
+    "candidates": 1,
+    "sourcePdfVisualLines": 1,
+    "pageRendererVisualLines": 1,
+    "finalTranslationWrites": 1,
+    "editoriallyApprovedCandidates": 1,
+    "viewerVerifiedCandidates": 1,
+    "copyfitV3VerifiedCandidates": 1,
+    "editorRoundTripVerifiedCandidates": 0,
+    "pdfExportVerifiedCandidates": 1
+  },
+  "sourceArtifacts": [
+    "apps/web/public/pages/page_057/page_057_dom.json",
+    "apps/web/public/pages/page_057/layout_frames.json",
+    "docs/translations/glossary.md"
+  ],
+  "scopeLimits": [
+    "Traduz somente o título editorial Shared Icons; não modifica rótulos dentro da arte dos cards/diagramas.",
+    "Glossário consultado: Icon → Ícone (aprovado). O título usa a forma descritiva compartilhados, sem introduzir termo mecânico novo.",
+    "Mantém a âncora esquerda X=86,173 pt, Cinzel-Regular 12 pt, renderWeightOverride 700 e cor #231f20, conferidos pela aparência do PDF OG.",
+    "A moldura PT-BR local acompanha a largura confirmada da coluna esquerda usada pelo heading block_69 (318,331 pt); no mesmo nível vertical, o heading da coluna direita começa em X=421,842 pt, deixando corredor livre até o limite do frame X=404,504 pt."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_15",
+      "spanKey": "page_57_block_0__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Shared Icons",
+      "proposalText": "Ícones Compartilhados",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_57_block_0__pt-BR",
+        "bbox": [
+          86.17320251464844,
+          56.692420959472656,
+          404.50420251464845,
+          72.86841583251953
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Ícones Compartilhados",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "reviewLayoutFrame": {
+        "x": 86.17320251464844,
+        "y": 56.692420959472656,
+        "width": 318.331,
+        "height": 16.175994873046875,
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source"
+      },
+      "technicalStatus": "copyfit_v3_exact_1_of_1_at_100_and_200_percent",
+      "editorialStatus": "Ícones Compartilhados publicado como translation 1977; Icon está aprovado como Ícone no glossário. Peso, âncora esquerda X=86,173 pt e caixa conferidos contra raster OG; Copyfit EXACT 1/1 em 100% e 200%, Viewer/print conferidos.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 57,
+          "pdfDocumentPageIndex": 56,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            56.692420959472656,
+            404.50420251464845,
+            72.86841583251953
+          ],
+          "visualRowBaselinesPt": [
+            68.404
+          ],
+          "spans": 1,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_57_block_0",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            71.5
+          ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "CinzelLocal, Cinzel, serif",
+              "fontSize": "9.72577px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "9.72577px",
+              "letterSpacing": "-0.145887px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 57,
+            "pdfDocumentPageIndex": 56,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17320251464844,
+              56.692420959472656,
+              404.50420251464845,
+              72.86841583251953
+            ],
+            "visualRowBaselinesPt": [
+              68.404
+            ],
+            "spans": 1,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_57_block_0",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              316.86
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "4.86243px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.86243px",
+                "letterSpacing": "-0.0729365px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 6.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 57,
+            "pdfDocumentPageIndex": 56,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17320251464844,
+              56.692420959472656,
+              404.50420251464845,
+              72.86841583251953
+            ],
+            "visualRowBaselinesPt": [
+              68.404
+            ],
+            "spans": 1,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_57_block_0",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              71.5
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "9.72577px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "9.72577px",
+                "letterSpacing": "-0.145887px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 13.1
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      }
+    }
+  ],
+  "editorialStatus": "Ícones Compartilhados publicado como translation 1977; Icon está aprovado como Ícone no glossário. Peso, âncora esquerda X=86,173 pt e caixa conferidos contra raster OG; Copyfit EXACT 1/1 em 100% e 200%, Viewer/print conferidos.",
+  "exportEvidence": {
+    "outputPdf": "C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p057\\p057-typography-audit-final.pdf",
+    "viewerScreenshot": "C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p057\\p057-typography-audit-final-viewer.png",
+    "printScreenshot": "C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p057\\p057-typography-audit-final-print.png",
+    "pdfRaster": "C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p057\\p057-typography-audit-final-pdf-raster.png",
+    "metrics": "C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p057\\p057-typography-audit-final-metrics.json",
+    "pdfVerification": true,
+    "viewerLineCount": 107,
+    "printLineCount": 107,
+    "semanticSymbolCount": 1,
+    "renderedImageCount": 9,
+    "visualReview": "OG, Viewer PT-BR e print conferidos; quatro cabeçalhos apresentam o peso visual da fonte."
+  }
+}

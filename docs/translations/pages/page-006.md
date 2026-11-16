@@ -56,7 +56,7 @@
 
 **EN:** These bags are used during both Adventurer Mode and Crawl Mode to help keep track of what Items an Adventurer currently has equipped or Stored in their Pack as well as any Disciplines the Adventurer may have learned.
 
-**PT-BR (rascunho):** Estas bolsas são usadas tanto no Modo Aventureiro quanto no Modo Crawl. Elas ajudam a acompanhar quais Itens o Aventureiro tem equipados ou guardados no Pacote, além das Disciplinas que aprendeu.
+**PT-BR (rascunho):** Estas bolsas são usadas tanto no Modo Aventureiro quanto no Modo Exploração. Elas ajudam a acompanhar quais Itens o Aventureiro tem equipados ou guardados no Pacote, além das Disciplinas que aprendeu.
 
 ### 07 — Hidden Card Decks
 
@@ -64,7 +64,7 @@
 
 **EN:** These **Hidden Card** decks are used to keep information hidden from the players. They may contain new, more powerful enemies to fight or friends that will help you on your journey. They could also contain special Items and Disciplines earned while adventuring. Regardless of what’s inside, the Adventure Book or Crawl Book will instruct players when to Reveal the **Hidden Cards** and what to do with contents inside.
 
-**PT-BR (rascunho):** Estes baralhos de **Cartas Ocultas** mantêm informações escondidas dos jogadores. Podem conter novos inimigos mais poderosos para enfrentar ou aliados que ajudarão na jornada. Também podem trazer Itens e Disciplinas especiais, conquistados durante a Aventura. O Livro de Aventura ou o Livro Crawl informa quando revelar as **Cartas Ocultas** e o que fazer com o conteúdo.
+**PT-BR (rascunho):** Estes baralhos de **Cartas Ocultas** mantêm informações escondidas dos jogadores. Podem conter novos inimigos mais poderosos para enfrentar ou aliados que ajudarão na jornada. Também podem trazer Itens e Disciplinas especiais, conquistados durante a Aventura. Seja qual for o conteúdo, o Livro de Aventura ou o Livro de Masmorras orienta os jogadores sobre quando revelar as **Cartas Ocultas** e o que fazer com elas.
 
 ### 08 — Red Reveal Decoder
 

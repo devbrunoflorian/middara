@@ -1,12 +1,14 @@
-# Book typographic hierarchy and fidelity rules
+# Book typographic hierarchy inventory — historical
 
-This is the current evidence-based style guide for reproducing English text in the Middara Rulebook viewer. It records recurring classes, not a global template for every page. Printed cards, diagrams, labels and text over artwork must be classified in their page context.
+> **Status: historical source/style inventory.** Family observations remain useful for visual review, but this is not the current editorial-unit contract. In particular, the 6 pt threshold and requirement to make every source-size boundary a separate edit target are superseded. See [editorial model](editorial-model.md), [project state](../PROJECT_STATE.md) and [documentation dispositions](../history/documentation-dispositions.md).
+
+This historical inventory recorded recurring source/style classes; it was never a universal page template. Use it as dated evidence only, not as a current editing procedure. Printed cards, diagrams, labels and text over artwork remain context-dependent.
 
 ## Observed hierarchy
 
 | Role | Repeated source pattern | Viewer rule |
 |---|---|---|
-| Large decorative page title | `EsmeraldaPro`, 30 pt; selected characters may use alternates | Resolve each alternate by the source PDF glyph ID. Apply only at this family/size, per character. Keep source text and geometry intact. |
+| Large decorative page title | `EsmeraldaPro`, 30 pt; selected characters may use alternates | Resolve each alternate by the source PDF glyph ID. Give the edit frame the usable negative space across its heading band; the short ink bbox is not the frame. Keep page ornaments, neighboring content and centering clear. Apply alternates only at this family/size, per character. |
 | Large section heading | Often `Cinzel-Regular` around 18 pt; a `Continued` run may be 11 pt on the same visual heading | Keep different sizes as separate editable units. Give each run its PDF position and weight; the size difference is part of the hierarchy. |
 | Section/topic heading | Repeated `Cinzel-Regular`, 12 pt, often extracted in title case with small-caps flags | The renderer's regular face can look too light despite matching PDF metadata. Apply 700 only to exact headings visually confirmed against the PDF. |
 | Contents subheading | `OptimaLTStd-Bold`, commonly 9 pt and all caps | Use its bundled bold face and preserve capitalization, baseline and neighboring vector leaders. |
@@ -17,12 +19,14 @@ These recurring roles are supported by the source-PDF comparison on pages 2–13
 
 ## Structural invariants
 
-1. Different PDF font sizes always start separate editable units, including `Rulebook` and the smaller version line on page 1 and `Adventure Mode`/`Continued` on page 13.
+1. Different PDF font sizes/weights/faces always start separate edit targets. Put runs on independent lines/positions in separate boxes; keep deliberately inline runs (such as `Adventure Mode` / `Continued`) independently editable inside their shared baseline, without flattening them into one style. On p. 1, `Rulebook` (17.85 pt Cinzel) and `VERSION 1.2 - MAY 2023` (7 pt Optima Bold) have distinct source blocks and language-specific renderer keys; the viewer renders them separately. Their ink bboxes overlap vertically by 1.921 pt due to font metrics, but the screenshot shows no visible glyph collision, so bbox intersection is not an automatic merge/split decision.
 2. Equal font sizes do not prove shared semantics. Split by column (`x₀` gutter), independent cards/art, baseline, indentation, paragraph gap and hierarchy; retain inline emphasis inside a unit where the source shows one reading flow.
 3. Treat PDF font name and flags as provenance signals, not visual truth. The Cinzel heading case proved that source labels can say regular while the printed result needs a stronger viewer face.
 4. Resolve decorative alternates per character from the embedded source glyph sequence. Do not search ordinary body text or substitute a matching letter throughout the book.
 5. Separate geometry from style. Preserve source text bbox, baseline and column/frame bounds; correct local overflow or alignment only after measuring the page region and neighbor clearance.
 6. Exclude raster duplicates, ghost candidates, tiny vector text and card artwork from heading inference until the PDF and the app background are compared.
+7. Preserve distinct source-size/style runs as rich formatting inside an editorial unit when they share one semantic paragraph. A typography boundary alone does not require a new translation key or independently editable target. The old 6 pt threshold, 771/440 corpus counts, and script requirement are historical triage data, not an active invariant.
+8. Editorial page titles in `EsmeraldaPro` at exactly 30 pt are the documented wide-frame exception: allow the title to use the available horizontal space across its heading band, bounded by the page/title ornaments and neighboring content. Do not make a tiny frame from the visible glyph bbox. Preserve the original centered anchor in every language and let the localized title wrap/use a second line when the band has room; keep other size/style runs (such as the small version line on p. 1) in separate edit targets. The page sidecar is the shared default frame for EN and any language without a custom frame; language-specific changes (including PT-BR) persist as separate `layout-frames` records. This is a role-specific rule, not permission to widen 30 pt text found inside cards or artwork.
 
 ## Verification record
 
@@ -30,7 +34,15 @@ These recurring roles are supported by the source-PDF comparison on pages 2–13
 - Exact-source review has applied local optical weight to 407 confirmed spans across the current corpus. The current manifest covers the reusable Cinzel candidate class; a smaller set of page-specific overrides predates that manifest.
 - The 30 pt Esmeralda audit found 16 editorial title spans; 13 contain PDF-selected alternates, now represented by `displayOverride` without changing source text or bbox.
 - Reproducible inputs and reports: [`audit_typographic_hierarchy.py`](../../scripts/audit_typographic_hierarchy.py), [`audit_font_asset_coverage.py`](../../scripts/audit_font_asset_coverage.py), and `tmp/typography-audit/` / `tmp/font-asset-audit/` outputs.
+- Style-unit split triage: [`audit_style_unit_separation.py`](../../scripts/audit_style_unit_separation.py); its CSV/summary in ignored `tmp/ghost-audit/style-unit-separation/` are candidate maps, not approvals.
 
 ## Remaining known limits
 
-The typography inventory is not a visual pass of every span. The app currently suppresses pictogram font spans pending page-specific background comparison; a first font-coverage run found 204 Zapf Dingbats spans across 34 pages and one Wingdings 3 span on page 15. Do not unsuppress or globally remap them from this count alone. The separate next stage is to reconcile these glyphs against the PDF and actual page backgrounds, then continue geometry/spacing and artwork-text duplication checks.
+The typography inventory is not a visual pass of every span. Counts and pending work in this historic report must be compared with current sidecars and project state before use. Never unsuppress or globally remap pictogram font spans from a count alone.
+
+
+## Marcador em outra coluna dentro do mesmo bloco fonte — p. 35
+
+`block_26` guarda heading/body do Loot Deck à direita e E à esquerda. Não derivar o frame editável da união dessas duas regiões. As unidades de parágrafo preservam tinta/IDs e usam frames por coluna; o E tem unidade própria com `fixedPosition: true`. O renderer exclui unidades fixas do deslocamento de reflow e dos limites de vizinhos/obstáculos. Campos sem o atributo conservam o comportamento anterior. Nenhuma migração de tradução é implícita: overrides legados têm precedência.
+
+Fonte/estruturas, simulação da lógica e build foram verificados; seleção/caret/reflow vivo continuam pendentes no [registro de p. 35](../project-progress/2026-10-04-page35-source-review.md). Não generalizar o flag para outros marcadores sem conferir sua ligação fonte.

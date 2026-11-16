@@ -1,0 +1,140 @@
+{
+  "proposalId": "p100-loa-crystal-token-label",
+  "version": "1",
+  "title": "Ficha de Cristal de Loa — rótulo da Tabela 10, p. 100",
+  "page": 100,
+  "status": "pending_human_review",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 0
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "40372696A229A9E0C1E211C5D36DE4971B4AF38369FA9514210D497ED0C1DF7E",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch translates only the right-cell LOA CRYSTAL TOKEN label in the Table 10 diagram; DIRECTION TOKENS and neighboring artwork remain separate and unchanged.",
+    "Token → Ficha follows the official glossary. Loa Crystal → Cristal de Loa is a local compound candidate and remains pending human terminology review; Loa is retained as a proper name.",
+    "The source span bbox, OptimaLTStd-Bold 9 pt, color, capitalization, and one-baseline composition are preserved.",
+    "Live PageRenderer Copyfit V3 measured one source PDF visual line and one PT-BR visual line at 100% and 200%, preserving the original typography and right-cell geometry. Editor round-trip, exported-PDF, and human review remain pending. No final translation is written."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 7,
+      "sourceBlockId": "block_18",
+      "sourceUnitId": "p100-loa-crystal-token-label",
+      "sourceLineIds": [
+        "line_18_1"
+      ],
+      "spanKey": "page_100_unit_p100-loa-crystal-token-label__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "LOA CRYSTAL TOKEN",
+      "sourcePdfVisualLineCount": 1,
+      "sourceBboxes": [
+        [
+          228.52249145507812,
+          203.91632080078125,
+          315.87652587890625,
+          214.64431762695312
+        ]
+      ],
+      "proposalText": "FICHA DE CRISTAL DE LOA",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-loa-crystal-token-label__pt-BR",
+        "bbox": [
+          228.52249145507812,
+          203.91632080078125,
+          315.87652587890625,
+          214.64431762695312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "FICHA DE CRISTAL DE LOA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            61.527496337890625,
+            203.91632080078125,
+            315.87652587890625,
+            214.64431762695312
+          ],
+          "visualBaselinesPt": [
+            212.205
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-loa-crystal-token-label__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            191.84
+          ],
+          "frameHeightCssPx": 7.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "technicalStatus": "pending_editor_and_pdf_validation_after_viewer_copyfit_v3_exact",
+      "editorialStatus": "pending_human_review",
+      "copyfitClassification": "EXACT",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Loa Crystal → Cristal de Loa is a local compound candidate, not yet approved in the glossary; Loa is retained as a proper name."
+      ]
+    }
+  ],
+  "note": "One right-cell label is proposed in this increment. The adjacent DIRECTION TOKENS label remains a separate reviewed unit.",
+  "criticalReview": {
+    "result": "PASS",
+    "finding": "The independent critical agent confirmed the candidate maps only to block_18 / line_18_1 in the right cell; DIRECTION TOKENS maps to line_18_0 in the separate left cell. The selected PDF source line provides a 155.27 pt right-cell width, separate from the 161.07 pt left cell. Live PageRenderer receipts at 100% and 200% both measure 1→1 EXACT with Optima loaded, no frame escape, no blocked writes, and no page errors. Individual captures show no visible clipping or collision. Loa Crystal → Cristal de Loa remains a local compound candidate pending human review. Editor round-trip and exported-PDF validation also remain pending. The review's container-rectangle description was corrected to distinguish the shared field rectangle from the line-derived effective right-cell frame."
+  },
+  "applicationReview": {
+    "result": "PASS",
+    "finding": "After rebuilding the local review catalog and reloading the app, I selected the LOA CRYSTAL TOKEN proposal in the real PT-BR Viewer. Both FICHAS DE DIREÇÃO and FICHA DE CRISTAL DE LOA were visible in their separate Table 10 cells; only the selected right-cell unit received the review highlight. The DOM selection key was page_100_unit_p100-loa-crystal-token-label__pt-BR. This interactive check was observed in the user-facing app; a combined screenshot was not persisted in the evidence directory."
+  },
+  "revisions": [
+    {
+      "text": "FICHA DE CRISTAL DE LOA",
+      "result": "Initial natural candidate preserving the singular item label, retained proper name Loa, and official Token → Ficha glossary entry; the compound remains pending human review."
+    }
+  ]
+}

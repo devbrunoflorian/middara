@@ -1,0 +1,333 @@
+{
+  "proposalId": "p102-dice-symbol-legend",
+  "version": "2",
+  "title": "Símbolos dos Dados — legenda da p.102",
+  "page": 102,
+  "status": "pending_dtp_exception_and_human_review",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 0
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "9F6EE3306F10136DB1CCD7DABDEAC994C322D6DFAA807B14382962A180CCA2DD",
+    "pageDom": "240EF5812853C676FE12E44BD1068666C733E5B7A4C51A549AA1E0F6340C900B"
+  },
+  "counts": {
+    "candidates": 4,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 1
+  },
+  "scopeLimits": [
+    "This proposal covers only the DICE SYMBOLS / BOOK / SHIELD / BURST legend row. Other p.102 labels, diagram symbols, and prose remain separate units.",
+    "Four existing source fragments are grouped as separate typographic units on one shared baseline; each PT frame starts at the source word x-coordinate and ends at the next source word slot. No spacing characters or font/frame edits force line count.",
+    "The original 10 pt Optima hierarchy, color, source block ID, line IDs, and source glyph geometry are preserved. Three translated siblings pass one-line frame fit in the live Viewer; the BURST PT diagnostic region is blank under an open DTP exception. PDF export remains pending.",
+    "No human translation, human decision, final PT-BR value, or Payload record was modified."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 13,
+      "sourceBlockId": "block_21",
+      "sourceUnitId": "p102-dice-symbols-title",
+      "spanKey": "page_102_unit_p102-dice-symbols-title__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "DICE SYMBOLS:",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfBaselineGroupId": "p102-dice-symbols-legend-row",
+      "sourcePdfLineIds": [
+        [
+          "line_21_0"
+        ]
+      ],
+      "sourceBboxes": [
+        [
+          292.5823974609375,
+          543.3411865234375,
+          368.36236572265625,
+          555.26123046875
+        ]
+      ],
+      "proposalText": "SÍMBOLOS DOS DADOS:",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_unit_p102-dice-symbols-title__pt-BR",
+        "bbox": [
+          292.5823974609375,
+          543.3411865234375,
+          386.5423583984375,
+          555.26123046875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "SÍMBOLOS DOS DADOS:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "validated_live_viewer_exact_line_count_and_frame_fit_100_200",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "DICE SYMBOLS: → SÍMBOLOS DOS DADOS: is a local proposal, not an approved glossary decision."
+      ],
+      "sourceSlotPt": {
+        "x": 292.5823974609375,
+        "width": 106.7611083984375,
+        "visibleSourceTextBbox": [
+          292.5823974609375,
+          543.3411865234375,
+          368.36236572265625,
+          555.26123046875
+        ]
+      },
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitEvidence": [
+        "Official source PDF and PT-BR PageRenderer each render this label on one visual baseline (EXACT).",
+        "The live Viewer at 100% and 200% keeps the translated label inside its source slot without clipping or collision.",
+        "Source font family, 10 pt size, weight, color, x/y slot, and sibling ordering are preserved."
+      ]
+    },
+    {
+      "blockIndex": 13,
+      "sourceBlockId": "block_21",
+      "sourceUnitId": "p102-dice-symbol-book",
+      "spanKey": "page_102_unit_p102-dice-symbol-book__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "BOOK",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfBaselineGroupId": "p102-dice-symbols-legend-row",
+      "sourcePdfLineIds": [
+        [
+          "line_21_1"
+        ]
+      ],
+      "sourceBboxes": [
+        [
+          399.343505859375,
+          543.3411865234375,
+          428.97344970703125,
+          555.26123046875
+        ]
+      ],
+      "proposalText": "LIVRO",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_unit_p102-dice-symbol-book__pt-BR",
+        "bbox": [
+          396.3135070800781,
+          543.3411865234375,
+          450.1834411621094,
+          555.26123046875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "LIVRO",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "validated_live_viewer_exact_line_count_and_frame_fit_100_200",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "BOOK → LIVRO is a local proposal, not an approved glossary decision."
+      ],
+      "sourceSlotPt": {
+        "x": 399.343505859375,
+        "width": 63.224090576171875,
+        "visibleSourceTextBbox": [
+          399.343505859375,
+          543.3411865234375,
+          428.97344970703125,
+          555.26123046875
+        ]
+      },
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitEvidence": [
+        "Official source PDF and PT-BR PageRenderer each render this label on one visual baseline (EXACT).",
+        "The live Viewer at 100% and 200% keeps the translated label inside its source slot without clipping or collision.",
+        "Source font family, 10 pt size, weight, color, x/y slot, and sibling ordering are preserved."
+      ]
+    },
+    {
+      "blockIndex": 13,
+      "sourceBlockId": "block_21",
+      "sourceUnitId": "p102-dice-symbol-shield",
+      "spanKey": "page_102_unit_p102-dice-symbol-shield__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "SHIELD",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfBaselineGroupId": "p102-dice-symbols-legend-row",
+      "sourcePdfLineIds": [
+        [
+          "line_21_2"
+        ]
+      ],
+      "sourceBboxes": [
+        [
+          462.5675964355469,
+          543.3411865234375,
+          497.70758056640625,
+          555.26123046875
+        ]
+      ],
+      "proposalText": "ESCUDO",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_unit_p102-dice-symbol-shield__pt-BR",
+        "bbox": [
+          459.78759765625,
+          543.3411865234375,
+          515.8876342773438,
+          556.26123046875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "ESCUDO",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "validated_live_viewer_exact_line_count_and_frame_fit_100_200",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "SHIELD → ESCUDO is a local proposal, not an approved glossary decision."
+      ],
+      "sourceSlotPt": {
+        "x": 462.5675964355469,
+        "width": 66.24649047851562,
+        "visibleSourceTextBbox": [
+          462.5675964355469,
+          543.3411865234375,
+          497.70758056640625,
+          555.26123046875
+        ]
+      },
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitEvidence": [
+        "Official source PDF and PT-BR PageRenderer each render this label on one visual baseline (EXACT).",
+        "The live Viewer at 100% and 200% keeps the translated label inside its source slot without clipping or collision.",
+        "Source font family, 10 pt size, weight, color, x/y slot, and sibling ordering are preserved."
+      ]
+    },
+    {
+      "blockIndex": 13,
+      "sourceBlockId": "block_21",
+      "sourceUnitId": "p102-dice-symbol-burst",
+      "spanKey": "page_102_unit_p102-dice-symbol-burst__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "BURST",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfBaselineGroupId": "p102-dice-symbols-legend-row",
+      "sourcePdfLineIds": [
+        [
+          "line_21_3"
+        ]
+      ],
+      "sourceBboxes": [
+        [
+          528.8140869140625,
+          543.3411865234375,
+          560.3740844726562,
+          555.26123046875
+        ]
+      ],
+      "proposalText": "EXPLOSÃO",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_unit_p102-dice-symbol-burst__pt-BR",
+        "bbox": [
+          526.0341186523438,
+          543.3411865234375,
+          560.3740844726562,
+          556.26123046875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "EXPLOSÃO",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "failed_dtp_frame_overflow",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "blank PT-BR field in the diagnostic Viewer; no English fallback; the complete proposal remains available in review.",
+      "pendingTerms": [
+        "O rótulo BURST segue a decisão aprovada do glossário (id 50).",
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "sourceSlotPt": {
+        "x": 528.8140869140625,
+        "width": 31.55999755859375,
+        "visibleSourceTextBbox": [
+          528.8140869140625,
+          543.3411865234375,
+          560.3740844726562,
+          555.26123046875
+        ]
+      },
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT line count; failed horizontal frame fit"
+    }
+  ],
+  "note": "The source PDF and DOM fragments group to one visual baseline at y=552.55 pt. Three PT-BR labels pass exact line-count and source-slot fit; BURST remains a complete proposal with a blank diagnostic PT region because EXPLOSÃO overflows its original slot.",
+  "revisions": [
+    {
+      "revision": 1,
+      "result": "v1 single-frame layout failed Copyfit V3: one source baseline became two PageRenderer rows; EXPLOSÃO escaped the frame at 100% and 200%.",
+      "decision": "Split the already separate source text fragments into four existing typographic-unit structures, preserving their source x slots and shared baseline. This is an additive metadata change; no source text, IDs, art, existing translation, or Payload record is changed.",
+      "rollback": "Remove the added typographicUnits array from block_21 and use the preserved v1 proposal; no other source DOM fields were modified."
+    },
+    {
+      "revision": 2,
+      "result": "The live Viewer confirmed the four source fragments share one baseline. Initial PT measurement exposed cumulative vertical reflow and horizontal overflow for EXPLOSÃO.",
+      "decision": "Mark the four same-baseline typographic units fixed-position so they do not flow sequentially. Keep the full EXPLOSÃO proposal, open a unit-scoped DTP exception, and blank only that PT diagnostic field.",
+      "measurement": "PDF 1 visual line; PageRenderer PT-BR 1 visual line (EXACT). At 200%, the source slot is 19.60 CSS px and EXPLOSÃO measures about 30.075 px; no font or frame change is permitted.",
+      "rollback": "Remove the p.102 burst exception by ID and restore the proposal candidate's previous diagnosticRendering/technicalStatus. Remove fixedPosition from the four p.102 legend units only if the units are no longer co-baseline fixed labels."
+    }
+  ]
+}

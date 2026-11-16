@@ -1,0 +1,354 @@
+{
+  "proposalId": "p102-conviction-casting-ratings-heading",
+  "version": "3",
+  "title": "Classificações de Convicção e Conjuração — cabeçalho da p.102 (v3)",
+  "page": 102,
+  "status": "pending_human_review_with_open_dtp_exception",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "9F6EE3306F10136DB1CCD7DABDEAC994C322D6DFAA807B14382962A180CCA2DD",
+    "pageDom": "97EA10EB5B36E0A36A4DA1339C2D7D72892DB7F3142D92BC8DA01169F89C5548"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 1
+  },
+  "scopeLimits": [
+    "Only the block_22 heading is proposed; color rows, symbols, rules, and other page units remain outside this review.",
+    "The source baseline grouping and PT-BR PageRenderer grouping are both two visual rows (EXACT) at 100% and 200%.",
+    "The rendered DOM Range boxes extend beyond the original source realbox at both scales. The critical reviewer found no visible clipping or neighboring collision, but confirms the strict frame-containment gate fails.",
+    "Source typeface, 10 pt size, weight, color, position, and source frame were preserved. No manual line breaks or geometry changes were introduced.",
+    "Conjuração remains a local candidate term awaiting editorial confirmation.",
+    "No human translation, editorial approval, final translation, or Payload record was changed."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 14,
+      "sourceBlockId": "block_22",
+      "sourceUnitId": null,
+      "spanKey": "page_102_block_14__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "CONVICTION AND\n CASTING RATINGS",
+      "sourcePdfVisualLineCount": 2,
+      "sourcePdfLineIds": [
+        "line_22_0",
+        "line_22_1"
+      ],
+      "proposalText": "Classificações de Convicção/Conjuração",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_block_14__pt-BR",
+        "bbox": [
+          199.25408935546875,
+          607.4011840820312,
+          294.194091796875,
+          630.3212280273438
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Classificações de Convicção/Conjuração",
+            "font": "OptimaLTStd-Bold",
+            "size": 10.0,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "blocked_dtp_geometry_overflow_after_exact_line_count; dtp_exception_open",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "blank_whole_unit_diagnostic_only; no English fallback; full proposal retained",
+      "pendingTerms": [
+        "Conviction → Convicção follows the official glossary. Casting → Conjuração follows current p.102 proposal usage and remains a local term awaiting editorial confirmation."
+      ],
+      "copyfitAttempts": [
+        {
+          "proposalVersion": "1",
+          "proposalText": "Classificações de Convicção e Conjuração",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 3,
+          "classification": "OVER",
+          "measurementEnvironment": {
+            "viewport": "1280x720 CSS px",
+            "devicePixelRatio": 1.25,
+            "zoomPercent": 200,
+            "measurement": "live PageRenderer text rects grouped by distinct rendered Y/baseline; critical-agent read-only check after reload"
+          },
+          "sourceFrameProjectedPx": {
+            "left": 194.18,
+            "top": 477.31,
+            "right": 253.15,
+            "bottom": 491.55
+          },
+          "renderedLineRectsPx": [
+            {
+              "left": 194.18,
+              "top": 476.51,
+              "right": 240.0,
+              "bottom": 483.71
+            },
+            {
+              "left": 194.18,
+              "top": 482.73,
+              "right": 228.26,
+              "bottom": 489.93
+            },
+            {
+              "left": 194.18,
+              "top": 488.94,
+              "right": 224.46,
+              "bottom": 496.14
+            }
+          ],
+          "bottomOverflowPx": 4.59,
+          "nextUnitTopPx": 495.1
+        },
+        {
+          "proposalVersion": "2",
+          "proposalText": "Classificações de Convicção/Conjuração",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "measurementEnvironment": {
+            "viewport": "1280x720 CSS px",
+            "devicePixelRatio": 1.25,
+            "zoomPercent": 200,
+            "measurement": "live PageRenderer text rects grouped by distinct rendered Y/baseline; critical-agent read-only check after reload"
+          },
+          "sourceFrameProjectedPx": {
+            "left": 194.18,
+            "top": 477.31,
+            "right": 253.15,
+            "bottom": 491.55
+          },
+          "renderedTextRectPx": {
+            "left": 194.18,
+            "top": 477.31,
+            "right": 253.15,
+            "bottom": 489.74
+          },
+          "insideFrame": true,
+          "terminologyNote": "Slash compresses the coordinated heading; the plural “Classificações” retains the ratings concept. No glossary entry was changed."
+        },
+        {
+          "proposalVersion": "3-live-viewer",
+          "proposalText": "Classificações de Convicção/Conjuração",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "zoomPercent": 100,
+          "measurementMethod": "Source PDF visual baselines and PageRenderer DOM Range rows using the shared Copyfit V3 grouper; source .realbox frame with subpixel-only tolerance",
+          "measured": {
+            "text": "Classificações de Convicção/Conjuração",
+            "rects": [
+              {
+                "top": 1031.65625,
+                "bottom": 1049.65625,
+                "left": 863.828125,
+                "right": 975.59375
+              },
+              {
+                "top": 1031.65625,
+                "bottom": 1049.65625,
+                "left": 975.59375,
+                "right": 979.734375
+              },
+              {
+                "top": 1047.359375,
+                "bottom": 1065.359375,
+                "left": 863.828125,
+                "right": 1016.59375
+              },
+              {
+                "top": 1031.65625,
+                "bottom": 1049.65625,
+                "left": 863.828125,
+                "right": 975.59375
+              },
+              {
+                "top": 1031.65625,
+                "bottom": 1049.65625,
+                "left": 975.59375,
+                "right": 979.734375
+              },
+              {
+                "top": 1047.359375,
+                "bottom": 1065.359375,
+                "left": 863.828125,
+                "right": 1016.59375
+              }
+            ],
+            "frame": {
+              "top": 1033.65625,
+              "bottom": 1065.0625,
+              "left": 863.828125,
+              "right": 1012.875
+            },
+            "font": "700 15.7007px OptimaLTStd, serif",
+            "fontLoaded": true,
+            "color": "rgb(255, 255, 255)"
+          },
+          "renderedRows": [
+            {
+              "groupTop": 1031.65625,
+              "top": 1031.65625,
+              "bottom": 1049.65625,
+              "left": 863.828125,
+              "right": 979.734375
+            },
+            {
+              "groupTop": 1047.359375,
+              "top": 1047.359375,
+              "bottom": 1065.359375,
+              "left": 863.828125,
+              "right": 1016.59375
+            }
+          ],
+          "frameOverrun": {
+            "left": 0,
+            "right": 3.71875,
+            "top": 2,
+            "bottom": 0.296875
+          },
+          "frameOverflow": true,
+          "screenshot": "apps/web/output/p102-conviction-casting-ratings-heading-copyfit-v1/ratings-heading-100pct.png",
+          "criticalReview": "FAIL under strict no-overflow gate; visible text is legible, but measured rectangles extend beyond the source frame.",
+          "blockedWrites": [],
+          "pageErrors": []
+        },
+        {
+          "proposalVersion": "3-live-viewer",
+          "proposalText": "Classificações de Convicção/Conjuração",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "zoomPercent": 200,
+          "measurementMethod": "Source PDF visual baselines and PageRenderer DOM Range rows using the shared Copyfit V3 grouper; source .realbox frame with subpixel-only tolerance",
+          "measured": {
+            "text": "Classificações de Convicção/Conjuração",
+            "rects": [
+              {
+                "top": 1935.3125,
+                "bottom": 1973.3125,
+                "left": 709.671875,
+                "right": 933.1875
+              },
+              {
+                "top": 1935.3125,
+                "bottom": 1973.3125,
+                "left": 933.1875,
+                "right": 941.453125
+              },
+              {
+                "top": 1966.71875,
+                "bottom": 2004.71875,
+                "left": 709.671875,
+                "right": 1015.203125
+              },
+              {
+                "top": 1935.3125,
+                "bottom": 1973.3125,
+                "left": 709.671875,
+                "right": 933.1875
+              },
+              {
+                "top": 1935.3125,
+                "bottom": 1973.3125,
+                "left": 933.1875,
+                "right": 941.453125
+              },
+              {
+                "top": 1966.71875,
+                "bottom": 2004.71875,
+                "left": 709.671875,
+                "right": 1015.203125
+              }
+            ],
+            "frame": {
+              "top": 1939.3125,
+              "bottom": 2002.125,
+              "left": 709.671875,
+              "right": 1007.78125
+            },
+            "font": "700 31.4014px OptimaLTStd, serif",
+            "fontLoaded": true,
+            "color": "rgb(255, 255, 255)"
+          },
+          "renderedRows": [
+            {
+              "groupTop": 1935.3125,
+              "top": 1935.3125,
+              "bottom": 1973.3125,
+              "left": 709.671875,
+              "right": 941.453125
+            },
+            {
+              "groupTop": 1966.71875,
+              "top": 1966.71875,
+              "bottom": 2004.71875,
+              "left": 709.671875,
+              "right": 1015.203125
+            }
+          ],
+          "frameOverrun": {
+            "left": 0,
+            "right": 7.421875,
+            "top": 4,
+            "bottom": 2.59375
+          },
+          "frameOverflow": true,
+          "screenshot": "apps/web/output/p102-conviction-casting-ratings-heading-copyfit-v1/ratings-heading-200pct.png",
+          "criticalReview": "FAIL under strict no-overflow gate; visible text is legible, but measured rectangles extend beyond the source frame.",
+          "blockedWrites": [],
+          "pageErrors": []
+        }
+      ],
+      "copyfitLineCount": "2/2 (EXACT)",
+      "pageRendererVisualLineCount": 2,
+      "copyfitLineCountClassification": "EXACT",
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "Source PDF baseline geometry and PageRenderer DOM Range rectangles grouped into visual rows with the shared Copyfit V3 grouper; source realbox bounds checked with subpixel-only tolerance.",
+        "environment": {
+          "viewportCssPixels": "2400x1400",
+          "deviceScaleFactor": 1,
+          "language": "pt-BR",
+          "zooms": [
+            "100%",
+            "200%"
+          ],
+          "fontLoaded": true
+        },
+        "geometry": "EXACT line count passes. Frame containment fails: at 100% the measured text exceeds the right edge by 3.71875 CSS px and top by 2 px; at 200% it exceeds the right edge by 7.421875 CSS px and top by 4 px. Critical review sees no visible clipping/collision but agrees the strict no-overflow gate fails.",
+        "evidence": {
+          "summary": "apps/web/output/p102-conviction-casting-ratings-heading-copyfit-v1/summary.json",
+          "viewerScreenshots": [
+            "apps/web/output/p102-conviction-casting-ratings-heading-copyfit-v1/ratings-heading-100pct.png",
+            "apps/web/output/p102-conviction-casting-ratings-heading-copyfit-v1/ratings-heading-200pct.png"
+          ],
+          "criticalReview": "The critical reviewer independently confirmed the two-to-two line count and rejected technical passage because the measured text rectangles overrun the source frame at both scales."
+        }
+      },
+      "copyfitClassification": "EXACT"
+    }
+  ],
+  "note": "Copyfit V3 revision: PT-BR matches the source line count (2/2 EXACT), but strict source-frame containment fails at both zooms. Keep the full candidate available in the review panel, blank the rejected unit only in the diagnostic PT-BR Viewer, and retain the open DTP exception.",
+  "revisions": [
+    {
+      "version": "3",
+      "date": "2026-10-17",
+      "summary": "Fresh live Viewer check confirmed EXACT 2/2 at 100% and 200%, but strict frame-overrun measurement fails at both scales; independent critical review confirmed it remains blocked by DTP."
+    }
+  ]
+}

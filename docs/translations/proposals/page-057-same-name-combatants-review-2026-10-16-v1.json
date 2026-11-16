@@ -1,0 +1,580 @@
+{
+  "proposalId": "p057-same-name-combatants-2026-10-16-v1",
+  "version": "1",
+  "title": "Combatentes com o Mesmo Nome — p. 57",
+  "page": 57,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "6DB9BA84E6DB8892A92131215BBA4D1BB5E225E4461C77F3C1B37259819552F1",
+    "background": "42F88728516FB23FB1621141D85CD5C6C9BF977D3BA0BD68367974D123A34639",
+    "inlineElements": "E18617DBC0EE0E9028F1CB2B5A3A4F77083C3FCD7895805845DF2AF47FEBE400",
+    "fidelityOverlays": "B5722CFEC2B59F078A45E6F9AF3FA6C1E8EB16FA6EB8791DA54BE5D28D065848"
+  },
+  "counts": {
+    "candidates": 4,
+    "existingHumanTranslationsPreserved": 8,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "sourceArtifacts": [
+    "docs/translations/source-pages/page-057.md",
+    "apps/web/public/pages/page_057/page_057_dom.json",
+    "apps/web/public/pages/page_057/inline_elements.json",
+    "apps/web/public/pages/page_057/fidelity_overlays.json"
+  ],
+  "scopeLimits": [
+    "This proposal covers only the heading and three paragraphs in the Multiple Combatants; Same Name family.",
+    "Eight human p.57 translations in the loot sections remain untouched.",
+    "The Shared Icons, Symbol Abilities, Combatant Loot and other page families remain outside this batch."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 19,
+      "sourceBlockId": "block_64",
+      "spanKey": "page_57_unit_p57-block-64-paragraph-2__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Multiple Combatants; Same Name",
+      "proposalText": "Combatentes com o Mesmo Nome",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_57_unit_p57-block-64-paragraph-2__pt-BR",
+        "bbox": [
+          86.17320251464844,
+          406.4089050292969,
+          304.87322998046875,
+          422.58489990234375
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Combatentes com o Mesmo Nome",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "PDF confirmado: um único span Cinzel-Regular 12 pt, cor #231f20, regular; sem símbolo inline. Aguardando Copyfit V3 atual em 100%/200%.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 57,
+          "pdfDocumentPageIndex": 56,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            406.4089050292969,
+            304.87322998046875,
+            422.58489990234375
+          ],
+          "visualRowBaselinesPt": [
+            418.121
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_57_unit_p57-block-64-paragraph-2__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            356.94
+          ],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.8104811790054112,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "CinzelLocal, Cinzel, serif",
+              "fontSize": "9.72577px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "10.6984px",
+              "letterSpacing": "-0.145887px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 10.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 57,
+            "pdfDocumentPageIndex": 56,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17320251464844,
+              406.4089050292969,
+              304.87322998046875,
+              422.58489990234375
+            ],
+            "visualRowBaselinesPt": [
+              418.121
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_57_unit_p57-block-64-paragraph-2__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              356.94
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104811790054112,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "9.72577px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "10.6984px",
+                "letterSpacing": "-0.145887px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 10.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 57,
+            "pdfDocumentPageIndex": 56,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              86.17320251464844,
+              406.4089050292969,
+              304.87322998046875,
+              422.58489990234375
+            ],
+            "visualRowBaselinesPt": [
+              418.121
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_57_unit_p57-block-64-paragraph-2__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              459.56
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "4.86243px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "5.34867px",
+                "letterSpacing": "-0.0729365px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 5.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      }
+    },
+    {
+      "blockIndex": 20,
+      "sourceBlockId": "block_66",
+      "spanKey": "page_57_block_20__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Many Combatants have more than 1 figure with the same name that corresponds to 1 Initiative Card and Combatant Card.",
+      "proposalText": "Muitos Combatentes têm mais de 1 Miniatura com o mesmo nome; elas compartilham 1 Carta de Iniciativa e 1 Carta de Combatente.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_57_block_20__pt-BR",
+        "bbox": [
+          86.17320251464844,
+          429.930908203125,
+          367.9366455078125,
+          452.8309020996094
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Muitos Combatentes têm mais de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Miniatura com o mesmo nome; elas compartilham ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Carta de Iniciativa e ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Carta de Combatente.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_selection_highlight_no_visible_clipping",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 57,
+          "pdfDocumentPageIndex": 56,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17320251464844,
+            429.930908203125,
+            367.9366455078125,
+            452.8309020996094
+          ],
+          "visualBaselinesPt": [
+            439.121,
+            450.121
+          ],
+          "spans": 6,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_57_block_20__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            375,
+            383.91
+          ],
+          "frameHeightCssPx": 18.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 21,
+      "sourceBlockId": "block_67",
+      "spanKey": "page_57_block_21__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "While these Combatants take their turn using the same Initiative Card, each Combatant is separate from other Combatants with the same name. Each activates separately, their Damage and Effects are tracked separately, and rules treat each figure as an individual.",
+      "proposalText": "Embora usem a mesma Carta de Iniciativa, cada Combatente é distinto dos demais de mesmo nome. Cada um é ativado separadamente, e seu Dano e seus Efeitos também são registrados separadamente. As regras tratam cada Miniatura como um indivíduo.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_57_block_21__pt-BR",
+        "bbox": [
+          86.1769027709961,
+          457.6009216308594,
+          397.6877136230469,
+          502.50091552734375
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Embora usem a mesma Carta de Iniciativa, cada Combatente é distinto dos demais de mesmo nome. Cada um é ativado separadamente, e seu Dano e seus Efeitos também são registrados separadamente. As regras tratam cada Miniatura como um indivíduo.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_selection_highlight_no_visible_clipping",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 57,
+          "pdfDocumentPageIndex": 56,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.1769027709961,
+            457.6009216308594,
+            397.6877136230469,
+            502.50091552734375
+          ],
+          "visualBaselinesPt": [
+            466.791,
+            477.791,
+            488.791,
+            499.791
+          ],
+          "spans": 4,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_57_block_21__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            397.42,
+            406.33,
+            415.23,
+            424.14
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 22,
+      "sourceBlockId": "block_68",
+      "spanKey": "page_57_block_22__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "When taking a turn with Combatants with the same name, each is considered to take their own turn. They each go through the Phases of a turn separately with the only difference being that they share a Combatant Card and so will perform similar Actions to each other.",
+      "proposalText": "Quando Combatentes de mesmo nome realizam um turno, considera-se que cada um tem seu próprio turno. Cada um passa pelas Fases do Turno separadamente; a única diferença é que compartilham uma Carta de Combatente e, por isso, realizam Ações semelhantes.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_57_block_22__pt-BR",
+        "bbox": [
+          86.1769027709961,
+          507.27093505859375,
+          401.5066833496094,
+          552.1709594726562
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Quando Combatentes de mesmo nome realizam um turno, considera-se que cada um tem seu próprio turno. Cada um passa pelas Fases do Turno separadamente; a única diferença é que compartilham uma Carta de Combatente e, por isso, realizam Ações semelhantes.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_selection_highlight_no_visible_clipping",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 57,
+          "pdfDocumentPageIndex": 56,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.1769027709961,
+            507.27093505859375,
+            401.5066833496094,
+            552.1709594726562
+          ],
+          "visualBaselinesPt": [
+            516.461,
+            527.461,
+            538.461,
+            549.461
+          ],
+          "spans": 4,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_57_block_22__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            437.69,
+            446.59,
+            455.5,
+            464.41
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "viewerVerification": {
+    "status": "verified_viewer_selection_highlight_no_visible_clipping",
+    "verifiedOn": "2026-10-16",
+    "independentCriticalReview": true,
+    "pageNumber": 57,
+    "candidatesVerified": 4,
+    "correctHighlights": 4,
+    "titleHighlightExcludedPrecedingSymbolParagraph": true,
+    "textReadableAt100Percent": true,
+    "visibleClippingOrCollision": false,
+    "existingHumanTranslationsPreserved": 8,
+    "existingHumanTranslationTimestampsUnchanged": true,
+    "payloadTranslationCount": 326,
+    "existingReviewRecordCount": 6,
+    "pageReviewRecordsCreated": 0,
+    "saveApproveOrRequestActions": 0,
+    "copyfitV3Verified": false,
+    "editorRoundTripVerified": false,
+    "pdfExportVerified": false,
+    "editorialApproval": false
+  }
+}

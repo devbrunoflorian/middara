@@ -1,0 +1,2180 @@
+{
+  "status": "full-editable-text-proposal-v1-copyfit-verified-human-review-pending",
+  "page": 32,
+  "scope": "15 proposed editable text units plus the pre-existing human-authored Example record carried unchanged. Five discipline-card art overlays remain as source art; tree names, the LVL acronym, and production identifiers remain unchanged pending editorial confirmation.",
+  "verification": {
+    "viewer": "All 15 candidates and the preserved Example are visible in the isolated PT-BR Viewer.",
+    "editor": "All 15 candidates and the preserved Example match their snapshot text and are editable; Undo/Redo/Cancel/reopen verified without mutations.",
+    "pdf": "Independent PDF render reviewed; text extraction finds all 15 candidates and the preserved Example in the one-page export.",
+    "payloadMutations": 0,
+    "canonicalPageAssetChanges": 0,
+    "humanEditorialApproval": "pending"
+  },
+  "candidates": [
+    {
+      "page": 32,
+      "blockIndex": 23,
+      "unitId": "block_54",
+      "label": "Título da página",
+      "spanKey": "page_32_block_23__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Árvores de Disciplinas",
+            "font": "Cinzel-Regular",
+            "size": 18,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Árvores de Disciplinas",
+      "sourceText": "Discipline Trees",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Discipline Tree → Árvore de Disciplinas: candidato local, sem aprovação global."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_54",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.39779663085938,
+            56.69243621826172,
+            243.8617706298828,
+            80.95643615722656
+          ],
+          "visualBaselinesPt": [
+            74.26
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_23__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            71.53
+          ],
+          "frameHeightCssPx": 19.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 10,
+      "unitId": "block_41",
+      "label": "Introdução",
+      "spanKey": "page_32_block_10__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Cartas de Disciplina contêm Habilidades que podem ser usadas em momentos diferentes, conforme suas Condições. Os Aventureiros aprendem Disciplinas ao gastar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "XP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " quando têm a oportunidade de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Comprar e Treinar",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Comprar Itens e Aprender Disciplinas",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 24.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Cartas de Disciplina contêm Habilidades que podem ser usadas em momentos diferentes, conforme suas Condições. Os Aventureiros aprendem Disciplinas ao gastar XP quando têm a oportunidade de Comprar e Treinar. Veja Comprar Itens e Aprender Disciplinas, pág. 24.",
+      "sourceText": "Discipline Cards contain Abilities that can be used at different times depending on their Conditions. Disciplines are learned as Adventurers spend XP when given the opportunity to Shop and Train. See Buying Items and Learning Disciplines Pg. 24.  ",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Discipline/Ability/Condition → Disciplina/Habilidade/Condição: equivalentes contextuais propostos."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_41",
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.39779663085938,
+            91.790283203125,
+            407.570556640625,
+            136.69029235839844
+          ],
+          "visualBaselinesPt": [
+            100.98,
+            111.98,
+            122.98,
+            133.98
+          ],
+          "spans": 10,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_10__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 13,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            100.97,
+            109.88,
+            118.78,
+            127.69
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 11,
+      "unitId": "block_42",
+      "label": "Custo de XP",
+      "spanKey": "page_32_block_11__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "O custo em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "XP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " de uma Disciplina aparece no canto superior esquerdo da carta. Esse custo aumenta em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "+1 XP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " para cada outra Disciplina do mesmo nível que o Aventureiro já tiver. O sinal “",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "+",
+            "font": "OptimaLTStd-Bold",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "” aparece junto ao custo em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "XP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " como lembrete para os jogadores.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "O custo em XP de uma Disciplina aparece no canto superior esquerdo da carta. Esse custo aumenta em +1 XP para cada outra Disciplina do mesmo nível que o Aventureiro já tiver. O sinal “+” aparece junto ao custo em XP como lembrete para os jogadores.",
+      "sourceText": "The XP cost of a Discipline is listed in the top left corner of the card. This cost is increased by +1 XP for every other Discipline of the same level an Adventurer already has. The “+” is listed alongside the XP cost as a reminder for players. ",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Discipline/Level → Disciplina/Nível: candidatos locais, sem aprovação global."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_42",
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.40039825439453,
+            141.4595947265625,
+            400.42059326171875,
+            186.35960388183594
+          ],
+          "visualBaselinesPt": [
+            150.65,
+            161.65,
+            172.65,
+            183.65
+          ],
+          "spans": 12,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_11__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 14,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            141.22,
+            150.13,
+            159.03,
+            169.94
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 12,
+      "unitId": "p32-discipline-levels-body",
+      "label": "Regras de níveis — corpo",
+      "spanKey": "page_32_unit_p32-discipline-levels-body__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Há ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "5",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Árvores de Disciplinas, cada uma dividida em Níveis (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "LVL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "). As Disciplinas podem ser combinadas para personalizar o Aventureiro. É possível aprender Disciplinas de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "LVL 1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " de qualquer Árvore, mas as de LVL superior exigem ao menos ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Disciplina de cada LVL inferior da mesma Árvore.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Há 5 Árvores de Disciplinas, cada uma dividida em Níveis (LVL). As Disciplinas podem ser combinadas para personalizar o Aventureiro. É possível aprender Disciplinas de LVL 1 de qualquer Árvore, mas as de LVL superior exigem ao menos 1 Disciplina de cada LVL inferior da mesma Árvore.",
+      "sourceText": "Disciplines are separated into 5 different Discipline Trees, and each Tree is divided into Levels (LVL). Disciplines can be mixed and matched to customize your Adventurer. Adventurers may learn LVL 1 Disciplines from any Tree but higher LVL Disciplines require at least 1 Discipline from each lower LVL of the same Tree to learn them. ",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Discipline Tree/Discipline/Level → Árvore de Disciplinas/Disciplina/Nível: candidatos locais."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "p32-discipline-levels-body",
+      "copyfitClassification": "EXACT",
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Há ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "5",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Árvores de Disciplinas, cada uma dividida em Níveis (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "LVL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "). As Disciplinas podem ser combinadas para personalizar o Aventureiro. É possível aprender Disciplinas de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "LVL 1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " de qualquer Árvore, mas as de LVL superior exigem ao menos ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Disciplina de cada LVL inferior da mesma Árvore.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            416.20977783203125,
+            91.76961517333984,
+            735.4939575195312,
+            147.69029235839844
+          ],
+          "visualRowBaselinesPt": [
+            100.98,
+            111.98,
+            122.98,
+            133.98,
+            144.98
+          ],
+          "spans": 18,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_unit_p32-discipline-levels-body__pt-BR",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 17,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            100.94,
+            109.84,
+            118.75,
+            127.66,
+            136.56
+          ],
+          "visualRowIntervalsPt": null,
+          "pageScaleCssPxPerPt": null,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10481px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91529px",
+              "letterSpacing": "-0.121572px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10481px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.91529px",
+              "letterSpacing": "-0.121572px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29433px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.02376px",
+              "letterSpacing": "-0.109415px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 32,
+            "pdfDocumentPageIndex": 31,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              416.20977783203125,
+              91.76961517333984,
+              735.4939575195312,
+              147.69029235839844
+            ],
+            "visualRowBaselinesPt": [
+              100.98,
+              111.98,
+              122.98,
+              133.98,
+              144.98
+            ],
+            "spans": 18,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_32_unit_p32-discipline-levels-body__pt-BR",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 17,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              331.06,
+              335.5,
+              339.94,
+              344.38,
+              348.81
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 22.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 32,
+            "pdfDocumentPageIndex": 31,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              416.20977783203125,
+              91.76961517333984,
+              735.4939575195312,
+              147.69029235839844
+            ],
+            "visualRowBaselinesPt": [
+              100.98,
+              111.98,
+              122.98,
+              133.98,
+              144.98
+            ],
+            "spans": 18,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_32_unit_p32-discipline-levels-body__pt-BR",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 17,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              100.94,
+              109.84,
+              118.75,
+              127.66,
+              136.56
+            ],
+            "visualRowIntervalsPt": null,
+            "pageScaleCssPxPerPt": null,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10481px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91529px",
+                "letterSpacing": "-0.121572px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10481px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91529px",
+                "letterSpacing": "-0.121572px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29433px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.02376px",
+                "letterSpacing": "-0.109415px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 45.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 24,
+      "unitId": "block_56",
+      "label": "IMPORTANTE",
+      "spanKey": "page_32_block_24__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "tag.important.icon",
+            "symbolMetrics": {
+              "widthEm": 1,
+              "heightEm": 1,
+              "verticalAlignEm": 0.2
+            }
+          },
+          {
+            "text": "IMPORTANTE:",
+            "font": "OptimaLTStd-Black",
+            "size": 10,
+            "color": "#b91d23",
+            "weight": 900,
+            "style": "normal",
+            "disableLigatures": true,
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#ffffff"
+          },
+          {
+            "text": " Um Aventureiro pode aprender quantas Disciplinas puder pagar, mas nunca a mesma Disciplina duas vezes.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "managedSourceSymbols": [
+          "tag.important.icon"
+        ]
+      },
+      "proposalText": "IMPORTANTE: Um Aventureiro pode aprender quantas Disciplinas puder pagar, mas nunca a mesma Disciplina duas vezes.",
+      "sourceText": "IMPORTANT:IMPORTANT: An Adventurer may learn as many Disciplines as they can afford, however, they may not learn the same Discipline twice.",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [],
+      "semanticSymbols": [
+        "tag.important.icon"
+      ],
+      "sourceBlockId": "block_56",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            112.80879974365234,
+            206.9534912109375,
+            707.5390014648438,
+            218.93348693847656
+          ],
+          "visualBaselinesPt": [
+            216.203
+          ],
+          "spans": 4,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_24__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            194.3
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 18,
+      "unitId": "block_49",
+      "label": "Título Assemblage",
+      "spanKey": "page_32_block_18__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Assemblage",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Assemblage",
+      "sourceText": "Assemblage",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Nomes das Árvores permanecem no original, pendentes de revisão editorial."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_49",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            258.5763854980469,
+            256.8730773925781,
+            333.50439453125,
+            273.049072265625
+          ],
+          "visualBaselinesPt": [
+            268.585
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_18__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            233.75
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 13,
+      "unitId": "block_44",
+      "label": "Texto Assemblage",
+      "spanKey": "page_32_block_13__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Assemblage é a arte de sussurrar às coisas que caminham nos reinos além do nosso e de lidar com criaturas antigas que um dia estiveram além da nossa imaginação. As Habilidades de Assemblage costumam refletir um perfil versátil. Isso porque são tão diversas quanto as criaturas invocadas para realizá-las. Nos primeiros níveis de Assemblage, o jogador pode realizar uma ampla variedade de Ações, desde obter Ações extras até conceder ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Efeitos Positivos",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Assemblage é a arte de sussurrar às coisas que caminham nos reinos além do nosso e de lidar com criaturas antigas que um dia estiveram além da nossa imaginação. As Habilidades de Assemblage costumam refletir um perfil versátil. Isso porque são tão diversas quanto as criaturas invocadas para realizá-las. Nos primeiros níveis de Assemblage, o jogador pode realizar uma ampla variedade de Ações, desde obter Ações extras até conceder Efeitos Positivos.",
+      "sourceText": "Assemblage is the art of whispering to the things that walk in the realms outside of our own, and dealing with the ancient creatures that were once beyond our imagination. The Abilities in Assemblage often reflect a jack-of-all-trades mentality. This is because these Abilities are as diverse as the creatures you call upon to perform them. In the early levels of Assemblage, a player can perform a wide array of Actions, from Gaining extra Actions to granting Positive Effects.",
+      "status": "approved_and_published_via_official_reviewer",
+      "pendingTerms": [],
+      "notes": [
+        "Decisões locais desta unidade, sem criar verbetes globais: Assemblage permanece como nome próprio da Árvore, em paralelo a Cruor, Martial, Sanctus e Subterfuge; Action(s)→Ações segue a decisão aprovada 29; Gain→obter segue a decisão aprovada 4; Ability→Habilidade segue a decisão aprovada 5; Positive Effects→Efeitos Positivos é tradução literal contextual, mantendo o rich span em itálico."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_44",
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "100%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            258.9007263183594,
+            273.599609375,
+            721.9812622070312,
+            329.4996032714844
+          ],
+          "visualRowBaselinesPt": [
+            282.79,
+            293.79,
+            304.79,
+            315.79,
+            326.79
+          ],
+          "spans": 7,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_13__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 10,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            404.75,
+            409.19,
+            413.63,
+            418.06,
+            422.5
+          ],
+          "visualRowIntervalsPt": [
+            10.95,
+            10.95,
+            10.95,
+            10.95
+          ],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "4.05202px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "4.05202px",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 22.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 32,
+            "pdfDocumentPageIndex": 31,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              258.9007263183594,
+              273.599609375,
+              721.9812622070312,
+              329.4996032714844
+            ],
+            "visualRowBaselinesPt": [
+              282.79,
+              293.79,
+              304.79,
+              315.79,
+              326.79
+            ],
+            "spans": 7,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_32_block_13__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 10,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              248.31,
+              257.22,
+              266.13,
+              275.03,
+              283.94
+            ],
+            "visualRowIntervalsPt": [
+              10.99,
+              10.99,
+              10.99,
+              10.99
+            ],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 44.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 32,
+            "pdfDocumentPageIndex": 31,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              258.9007263183594,
+              273.599609375,
+              721.9812622070312,
+              329.4996032714844
+            ],
+            "visualRowBaselinesPt": [
+              282.79,
+              293.79,
+              304.79,
+              315.79,
+              326.79
+            ],
+            "spans": 7,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_32_block_13__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 10,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              404.75,
+              409.19,
+              413.63,
+              418.06,
+              422.5
+            ],
+            "visualRowIntervalsPt": [
+              10.95,
+              10.95,
+              10.95,
+              10.95
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 22.2
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "payloadReviewId": 1469,
+      "payloadTranslationId": 1185,
+      "approvedAt": "2026-10-26T00:20:44.126Z"
+    },
+    {
+      "page": 32,
+      "blockIndex": 19,
+      "unitId": "block_50",
+      "label": "Título Cruor",
+      "spanKey": "page_32_block_19__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Cruor",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Cruor",
+      "sourceText": "Cruor",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Nomes das Árvores permanecem no original, pendentes de revisão editorial."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_50",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            85.64437866210938,
+            369.0370788574219,
+            128.17237854003906,
+            385.21307373046875
+          ],
+          "visualBaselinesPt": [
+            380.749
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_19__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            324.66
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 14,
+      "unitId": "block_45",
+      "label": "Texto Cruor",
+      "spanKey": "page_32_block_14__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Cruor é arriscada por natureza. Suas Habilidades podem ser muito poderosas, mas apenas se o conjurador estiver disposto a sacrificar um pouco de si. Ela se baseia no poder bruto do sacrifício para cumprir seu propósito. Cruor permite amaldiçoar os inimigos, reduzi-los a pó, adoecê-los, arruiná-los ou liquefazê-los. Quem segue Cruor pode esperar colher grandes recompensas, mas deve tomar cuidado para não se perder nesse processo.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Cruor é arriscada por natureza. Suas Habilidades podem ser muito poderosas, mas apenas se o conjurador estiver disposto a sacrificar um pouco de si. Ela se baseia no poder bruto do sacrifício para cumprir seu propósito. Cruor permite amaldiçoar os inimigos, reduzi-los a pó, adoecê-los, arruiná-los ou liquefazê-los. Quem segue Cruor pode esperar colher grandes recompensas, mas deve tomar cuidado para não se perder nesse processo.",
+      "sourceText": "Cruor is risky by nature. Its Abilities can be very powerful, but only if the caster is willing to give a little of themselves. It focuses on the raw power of sacrifice to get the job done. Cruor grants the Ability to curse your enemies into dust, disease them, ruin them, or liquefy them. Those who follow Cruor can expect to reap great rewards, but must be careful not to lose themselves in the process.",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Cruor/Ability: formas locais propostas; nome de árvore pendente."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_45",
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            85.8707275390625,
+            383.089599609375,
+            558.459716796875,
+            427.9895935058594
+          ],
+          "visualBaselinesPt": [
+            392.28,
+            403.28,
+            414.28,
+            425.28
+          ],
+          "spans": 4,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_14__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 7,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            337.05,
+            345.95,
+            354.86,
+            363.77
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 20,
+      "unitId": "block_51",
+      "label": "Título Martial",
+      "spanKey": "page_32_block_20__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Martial",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Martial",
+      "sourceText": "Martial",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Nomes das Árvores permanecem no original, pendentes de revisão editorial."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_51",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            258.5763854980469,
+            473.4970703125,
+            311.2323913574219,
+            489.6730651855469
+          ],
+          "visualBaselinesPt": [
+            485.209
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_20__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            409.31
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 15,
+      "unitId": "block_46",
+      "label": "Texto Martial",
+      "spanKey": "page_32_block_15__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Martial é a verdadeira personificação do combate físico em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Middara",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Embora muitas Árvores de Disciplinas tornem os Ataques mais poderosos, Martial transforma o Aventureiro em uma verdadeira potência de combate. Martial pode aprimorar tanto Ataques à Distância quanto Corpo a Corpo, e o jogador deve considerar ambos em certos casos. Armas como a ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Kusarigama",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " podem ser usadas tanto Corpo a Corpo quanto à Distância, permitindo usar Habilidades aplicáveis a qualquer um dos tipos com ela.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Martial é a verdadeira personificação do combate físico em Middara. Embora muitas Árvores de Disciplinas tornem os Ataques mais poderosos, Martial transforma o Aventureiro em uma verdadeira potência de combate. Martial pode aprimorar tanto Ataques à Distância quanto Corpo a Corpo, e o jogador deve considerar ambos em certos casos. Armas como a Kusarigama podem ser usadas tanto Corpo a Corpo quanto à Distância, permitindo usar Habilidades aplicáveis a qualquer um dos tipos com ela.",
+      "sourceText": "Martial is the embodiment of physical combat in Middara. While many Discipline Trees can make \nAttacks more powerful, Martial makes an Adventurer a combat powerhouse. Martial can enhance Ranged or Melee Attacks, and a player should consider both in some cases. Some Weapons like the Kusarigama can be used as both Melee and Ranged, meaning that players can use Abilities that work for either while using this Weapon.",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Discipline Tree/Ability/Action/Ranged/Melee: candidatos locais; revisar capitalização dos nomes de regras."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_46",
+      "copyfitClassification": "EXACT",
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            258.5807189941406,
+            487.4295959472656,
+            714.7901000976562,
+            543.4496459960938
+          ],
+          "visualBaselinesPt": [
+            496.74,
+            507.74,
+            518.74,
+            529.74,
+            540.74
+          ],
+          "spans": 8,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_15__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 8,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            421.59,
+            430.59,
+            439.42,
+            448.42,
+            457.34
+          ],
+          "frameHeightCssPx": 45.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 21,
+      "unitId": "block_52",
+      "label": "Título Sanctus",
+      "spanKey": "page_32_block_21__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Sanctus",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Sanctus",
+      "sourceText": "Sanctus",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Nomes das Árvores permanecem no original, pendentes de revisão editorial."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_52",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            85.86038208007812,
+            585.0971069335938,
+            139.68038940429688,
+            601.2730712890625
+          ],
+          "visualBaselinesPt": [
+            596.809
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_21__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            499.75
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 16,
+      "unitId": "block_47",
+      "label": "Texto Sanctus",
+      "spanKey": "page_32_block_16__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Sanctus oferece muitas Habilidades poderosas e variadas. Pode conceder armaduras mágicas, asas temporárias ou permitir que os usuários evitem obstáculos. Com Sanctus, os jogadores podem redirecionar Dano, ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "CURAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " e até dobrar a realidade para teleportar a si mesmos ou outras pessoas. Sanctus pode complementar qualquer estilo de jogo Corpo a Corpo ou à Distância, mas se destaca especialmente entre personagens defensores e de suporte.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Sanctus oferece muitas Habilidades poderosas e variadas. Pode conceder armaduras mágicas, asas temporárias ou permitir que os usuários evitem obstáculos. Com Sanctus, os jogadores podem redirecionar Dano, CURAR e até dobrar a realidade para teleportar a si mesmos ou outras pessoas. Sanctus pode complementar qualquer estilo de jogo Corpo a Corpo ou à Distância, mas se destaca especialmente entre personagens defensores e de suporte.",
+      "sourceText": "Sanctus boasts a wealth of strong and diverse Abilities. It can grant magical armor, temporary wings, or allow users to avoid obstacles. Using Sanctus, players can redirect Damage, HEAL, and even fold reality to teleport themselves or others. Sanctus can complement any Melee or Ranged play style, but really shines with defenders and support characters.",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Ability/Damage/HEAL/Melee/Ranged: candidatos locais; revisar equivalentes e capitalização."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_47",
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.17742919921875,
+            599.1495971679688,
+            569.0765380859375,
+            644.0463256835938
+          ],
+          "visualBaselinesPt": [
+            608.34,
+            619.336,
+            630.336,
+            641.336
+          ],
+          "spans": 6,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_16__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            512.14,
+            521.05,
+            529.95,
+            538.86
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 22,
+      "unitId": "block_53",
+      "label": "Título Subterfuge",
+      "spanKey": "page_32_block_22__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Subterfuge",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Subterfuge",
+      "sourceText": "Subterfuge",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Nomes das Árvores permanecem no original, pendentes de revisão editorial."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_53",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            259.70440673828125,
+            692.1370849609375,
+            334.3912048339844,
+            708.3130493164062
+          ],
+          "visualBaselinesPt": [
+            703.849
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_22__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            586.5
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "page": 32,
+      "blockIndex": 17,
+      "unitId": "block_48",
+      "label": "Texto Subterfuge",
+      "spanKey": "page_32_block_17__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "segments": [
+          {
+            "text": "Subterfuge é a arte dos ladinos e assassinos. A maioria das Habilidades de Subterfuge se concentra em causar muito Dano, mas algumas também maximizam o potencial defensivo ao permitir que os jogadores ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "ESQUIVEM",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", realizem Ações gratuitas e se movam sem sofrer penalidades. A Árvore incentiva a agilidade e o posicionamento para uma abordagem mais sutil, mas também inclui algumas Habilidades diretas.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": []
+      },
+      "proposalText": "Subterfuge é a arte dos ladinos e assassinos. A maioria das Habilidades de Subterfuge se concentra em causar muito Dano, mas algumas também maximizam o potencial defensivo ao permitir que os jogadores ESQUIVEM, realizem Ações gratuitas e se movam sem sofrer penalidades. A Árvore incentiva a agilidade e o posicionamento para uma abordagem mais sutil, mas também inclui algumas Habilidades diretas.",
+      "sourceText": "Subterfuge is the art of the rogue and the assassin. Most Subterfuge Abilities focus on big damage, but \nsome also maximize defensive potential by allowing players to DODGE, take free Actions, and move without penalty. It encourages agility and positioning for a more subtle approach, but includes some straight-forward Abilities as well.",
+      "status": "proposal_pending_human_editorial_review",
+      "pendingTerms": [
+        "Ability/Action/Damage/Dodge: candidatos locais; revisar equivalentes e capitalização."
+      ],
+      "semanticSymbols": [],
+      "sourceBlockId": "block_48",
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 32,
+          "pdfDocumentPageIndex": 31,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            258.5774230957031,
+            706.476318359375,
+            699.5170288085938,
+            751.3777465820312
+          ],
+          "visualBaselinesPt": [
+            715.666,
+            726.666,
+            737.668,
+            748.668
+          ],
+          "spans": 6,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_32_block_17__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 8,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            599.13,
+            608.03,
+            616.94,
+            625.84
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "preservedExistingRecord": {
+    "id": 300,
+    "spanKey": "page_32_unit_p32-discipline-levels-example__pt-BR",
+    "language": "pt-BR",
+    "updatedAt": "2026-10-07T21:09:08.549Z",
+    "data": {
+      "schemaVersion": 2,
+      "segments": [
+        {
+          "font": "AGaramondPro-Bold",
+          "size": 12,
+          "color": "#231f20",
+          "weight": 700,
+          "style": "normal",
+          "disableLigatures": true,
+          "text": "Exemplo:"
+        },
+        {
+          "font": "OptimaLTStd",
+          "size": 10,
+          "color": "#231f20",
+          "weight": 400,
+          "style": "normal",
+          "disableLigatures": true,
+          "text": " Um Aventureiro só pode aprender uma Disciplina CRUOR de Nível "
+        },
+        {
+          "text": "3",
+          "font": "OptimaLTStd-Bold",
+          "size": 10,
+          "color": "#231f20",
+          "weight": 700,
+          "style": "normal",
+          "disableLigatures": true
+        },
+        {
+          "font": "OptimaLTStd",
+          "size": 10,
+          "color": "#231f20",
+          "weight": 400,
+          "style": "normal",
+          "disableLigatures": true,
+          "text": " se já tiver aprendido uma Disciplina "
+        },
+        {
+          "text": "CRUOR",
+          "font": "OptimaLTStd-Bold",
+          "size": 9,
+          "color": "#231f20",
+          "weight": 700,
+          "style": "normal",
+          "disableLigatures": true
+        },
+        {
+          "font": "OptimaLTStd",
+          "size": 10,
+          "color": "#231f20",
+          "weight": 400,
+          "style": "normal",
+          "disableLigatures": true,
+          "text": " de Nível "
+        },
+        {
+          "text": "1",
+          "font": "OptimaLTStd-Bold",
+          "size": 9,
+          "color": "#231f20",
+          "weight": 700,
+          "style": "normal",
+          "disableLigatures": true
+        },
+        {
+          "font": "OptimaLTStd",
+          "size": 10,
+          "color": "#231f20",
+          "weight": 400,
+          "style": "normal",
+          "disableLigatures": true,
+          "text": " e outra de Nível "
+        },
+        {
+          "text": "2",
+          "font": "OptimaLTStd-Bold",
+          "size": 9,
+          "color": "#231f20",
+          "weight": 700,
+          "style": "normal",
+          "disableLigatures": true
+        },
+        {
+          "text": ".",
+          "font": "OptimaLTStd",
+          "size": 10,
+          "color": "#231f20",
+          "weight": 400,
+          "style": "normal",
+          "disableLigatures": true
+        }
+      ],
+      "textAlign": "left",
+      "lineHeight": 1.1,
+      "lineHeightMode": "source",
+      "managedSourceSymbols": []
+    },
+    "includedInSnapshot": true,
+    "overwritten": false,
+    "editorialApprovalStatus": "unknown"
+  },
+  "counts": {
+    "proposedUnits": 15,
+    "preservedHumanRecords": 1,
+    "snapshotRecords": 16
+  },
+  "proposalId": "p032-discipline-trees",
+  "version": "1",
+  "title": "Árvores de Disciplinas — p. 32"
+}

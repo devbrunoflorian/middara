@@ -1,0 +1,222 @@
+{
+  "proposalId": "p100-start-of-turn-phase",
+  "version": "2",
+  "title": "Fase de Início do Turno — p. 100",
+  "page": 100,
+  "status": "viewer_copyfit_v3_exact_composition_100_200_critical_pass_editor_pdf_pending_human_review",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 3
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 2,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch covers only the first numbered phase heading and its explanatory sentence on page 100.",
+    "The source PDF exposes the heading and description as separate visual baselines; the existing typographic-span-unit renderer now keeps these original editorial units separate without inserting a hard break.",
+    "Original source font family, font size, rich emphasis, span geometry, and page frame are preserved.",
+    "Copyfit V3 compares each equivalent source baseline with its independently rendered PageRenderer unit. Human approval, Editor round-trip, and exported-PDF parity remain pending."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 12,
+      "sourceBlockId": "block_23",
+      "sourceUnitId": "p100-start-turn-phase-heading",
+      "spanKey": "page_100_unit_p100-start-turn-phase-heading__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "1. START OF TURN PHASE:",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfLineIds": [
+        "line_23_0"
+      ],
+      "proposalText": "1. FASE DE INÍCIO DO TURNO:",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-start-turn-phase-heading__pt-BR",
+        "bbox": [
+          435.97540283203125,
+          87.67230224609375,
+          546.5315551757812,
+          98.40030670166016
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "1. FASE DE INÍCIO DO TURNO:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "technicalStatus": "viewer_copyfit_v3_exact_composition_100_200_critical_pass_editor_pdf_pending",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Start of Turn Phase → Fase de Início do Turno is a local candidate, not an approved glossary term.",
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            435.97540283203125,
+            87.67230224609375,
+            665.1339721679688,
+            108.39933013916016
+          ],
+          "visualBaselinesPt": [
+            95.961,
+            105.96
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-start-turn-phase-heading__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            97.64
+          ],
+          "frameHeightCssPx": 7.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Calibrated to 1 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
+      }
+    },
+    {
+      "blockIndex": 12,
+      "sourceBlockId": "block_23",
+      "sourceUnitId": "p100-start-turn-phase-description",
+      "spanKey": "page_100_unit_p100-start-turn-phase-description__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Resolve Abilities and Effects that occur at the start of a turn.",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfLineIds": [
+        "line_23_1"
+      ],
+      "proposalText": "Resolva Habilidades e Efeitos do início do turno.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-start-turn-phase-description__pt-BR",
+        "bbox": [
+          435.97540283203125,
+          97.6893310546875,
+          665.1339721679688,
+          108.39933013916016
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Resolva Habilidades e Efeitos do início do turno.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "technicalStatus": "viewer_copyfit_v3_exact_composition_100_200_critical_pass_editor_pdf_pending",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Effect(s) → Efeito(s) is used consistently with local proposals but is not an approved glossary entry.",
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            435.97540283203125,
+            87.67230224609375,
+            665.1339721679688,
+            108.39933013916016
+          ],
+          "visualBaselinesPt": [
+            95.961,
+            105.96
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-start-turn-phase-description__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            105.75
+          ],
+          "frameHeightCssPx": 7.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Calibrated to 1 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
+      }
+    }
+  ],
+  "note": "The original block-level wording produced two lines in aggregate but joined the heading and body on the first baseline, leaving only the last words on the second. The critical review rejected that composition. The existing typographic-span-unit renderer now preserves the two PDF source baselines as separate units without inserting a hard break. Four complete body wordings were measured within the initial-draft-plus-three-revision budget: the first two were OVER at 2 PT-BR lines against 1 source line; the third measured EXACT but was rejected by critical review for weakening the temporal relation; the final wording 'Resolva Habilidades e Efeitos do início do turno.' measured EXACT and passed the critic's semantic review. Both final units were rendered simultaneously and measured at 100% and 200%.",
+  "revisions": [
+    {
+      "version": "1",
+      "date": "2026-10-17",
+      "result": "Rejected by critical review: the total line count was EXACT, but the heading and body shared a baseline, unlike the source PDF.",
+      "evidence": "apps/web/output/p100-block_23-copyfit-v1/"
+    },
+    {
+      "version": "2",
+      "date": "2026-10-17",
+      "change": "Separated the PDF's existing heading and description baselines with typographic span units; this is source-backed structure, not an artificial break.",
+      "criticalReview": "PASS. At 100%, both units rendered simultaneously on separate lines as in the source PDF, with the next numbered phase below and no visible collision. The critic found no concrete semantic defect in the final body wording. The same two-unit render was measured at 100% and 200%; Editor round-trip and exported-PDF parity remain pending."
+    }
+  ]
+}

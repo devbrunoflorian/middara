@@ -1,0 +1,125 @@
+{
+  "proposalId": "p100-status-phase-heading",
+  "version": "1",
+  "title": "Fase de Status — p. 100",
+  "page": 100,
+  "status": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 0
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch covers only the numbered Status Phase heading on page 100.",
+    "The heading has its own typographic span unit tied to line_24_0:0; body text and the inline STATUS tag remain separate source units.",
+    "Original OptimaLTStd-Bold 9 pt style, source geometry, and page frame are preserved.",
+    "The local term Fase de Status is a proposal, not an approved glossary decision."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 13,
+      "sourceBlockId": "block_24",
+      "sourceUnitId": "p100-status-phase-heading",
+      "spanKey": "page_100_unit_p100-status-phase-heading__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "2. STATUS PHASE:",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfLineIds": [
+        "line_24_0"
+      ],
+      "proposalText": "2. FASE DE STATUS:",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-status-phase-heading__pt-BR",
+        "bbox": [
+          435.97540283203125,
+          116.33734130859375,
+          514.0234985351562,
+          127.06534576416016
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "2. FASE DE STATUS:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "technicalStatus": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            435.97540283203125,
+            116.33734130859375,
+            757.3141479492188,
+            147.06863403320312
+          ],
+          "visualBaselinesPt": [
+            124.626,
+            134.159,
+            144.63
+          ],
+          "spans": 6,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-status-phase-heading__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            120.86
+          ],
+          "frameHeightCssPx": 7.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Calibrated to 1 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
+      },
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Status Phase → Fase de Status is a local candidate, not an approved glossary term.",
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ]
+    }
+  ],
+  "note": "Only the heading is translated in this incremental batch. The body, its inline STATUS tag, and the rest of the table remain source content until their own editorial units are handled.",
+  "criticalReview": {
+    "result": "PASS",
+    "finding": "In the real Viewer at 100% and 200%, only the heading is translated and bold. The English body and inline STATUS icon/tag remain intact; no clipping or collision was observed. Both measurements are 1 source / 1 rendered line with the font loaded and no frame escape."
+  }
+}

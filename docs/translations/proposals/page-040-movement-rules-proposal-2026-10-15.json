@@ -1,0 +1,986 @@
+{
+  "page": 40,
+  "attempt": 2,
+  "status": "isolated-proposal-pending-human-review",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "dom": "F8CCBF99B2AFD08530EAAFB4D0EA2F2D30081DB77A7DF19F8DB577C5B8836C2D",
+    "compounds": "B9838765B194A43A0CB05450EBA6CC0AC067580ECF663E286F7DBD3681A65390",
+    "overlays": "EE473CC17670110F51BD51E249A5DDA283C5A3315751D2A79C0F27B5C2DE77A5",
+    "background": "F9D3D0E4809C99E8D7037168AAF7520B14E55B600D0667F6BD21FE4E358DCC2B"
+  },
+  "recordCount": 11,
+  "translationKeys": [
+    "page_40_unit_p40-block-8-heading-size-12pt__pt-BR",
+    "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
+    "page_40_block_1__pt-BR",
+    "page_40_block_2__pt-BR",
+    "page_40_block_8__pt-BR",
+    "page_40_block_9__pt-BR",
+    "page_40_block_10__pt-BR",
+    "page_40_block_11__pt-BR",
+    "page_40_unit_p40-free-movement-body__pt-BR",
+    "page_40_unit_p40-free-movement-example__pt-BR",
+    "page_40_block_15__pt-BR"
+  ],
+  "symbolCounts": {
+    "marker.reference.b": 4,
+    "marker.reference.d": 2,
+    "marker.reference.c": 1,
+    "marker.reference.a": 3
+  },
+  "terminologyPendingHumanReview": [
+    "Break Attack → Ataque de Oportunidade (fonte: Break Attack; glossário registra Breaking Attack)",
+    "Animate → Animado",
+    "Push/Pull/Command → Empurrar/Puxar/Comandar",
+    "Movement Value, Action Phase, SP e demais termos sem entrada aprovada específica nesta fonte",
+    "Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe"
+  ],
+  "records": [
+    {
+      "spanKey": "page_40_unit_p40-block-8-heading-size-12pt__pt-BR",
+      "sourceText": "Movement Example:",
+      "lineIds": [
+        "line_8_0"
+      ],
+      "kind": "unit",
+      "proposalText": "Exemplo de Movimento:"
+    },
+    {
+      "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
+      "sourceText": "During Zeke's Action Phase, he wants to move to the Loot token to the west of Remi. He spends 1 SP to make a Move Action and Gains Movement Points equal to his Movement Value printed on his Adventurer Card, in this case, 6. Since figures cannot move diagonally, he must choose between the shorter route heading west through Hindering Terrain (finishing at B ), or the longer route heading south and moving to D.",
+      "lineIds": [
+        "line_8_1",
+        "line_8_2",
+        "line_8_3"
+      ],
+      "kind": "unit",
+      "proposalText": "Na Fase de Ação de Zeke, ele quer chegar à ficha de Saque a oeste de Remi. Ele gasta 1 SP para realizar uma Ação de Movimento e recebe Pontos de Movimento iguais ao Valor de Movimento da Carta de Aventureiro: 6. Como miniaturas não se movem na diagonal, deve escolher entre a rota curta a oeste, pelo Terreno Difícil (termina em [[symbol:marker.reference.b]]), e a longa ao sul, até [[symbol:marker.reference.d]]."
+    },
+    {
+      "spanKey": "page_40_block_1__pt-BR",
+      "sourceText": "If Zeke chooses the short route to B, the Animate will get a Break Attack against him when he moves out of C (See Diagonals and Break Attacks Pg. 42). If he chooses to move to D, he avoids this danger, but ends up farther from his goal.",
+      "kind": "block",
+      "blockId": "block_9",
+      "proposalText": "Se Zeke seguir pela rota curta até [[symbol:marker.reference.b]], o Animado fará um Ataque de Oportunidade quando ele sair de [[symbol:marker.reference.c]] (veja Diagonais e Ataques de Oportunidade, pág. 42). Se for até [[symbol:marker.reference.d]], evitará o perigo, mas terminará mais longe do objetivo."
+    },
+    {
+      "spanKey": "page_40_block_2__pt-BR",
+      "sourceText": "After moving to B by traveling past the Animate and through Hindering Terrain, Zeke could spend an additional SP to Gain 2 more Movement Points and move through Remi. But, because Remi is an ally, he can move through – but not stop in – her space, and since the space that allies occupy take 2 Movement Points to move out of, Zeke would not be able to reach A without spending a total of 2 more SP for 4 more Movement Points. After reaching A Zeke would have 1 remaining Movement Point.",
+      "kind": "block",
+      "blockId": "block_10",
+      "proposalText": "Após passar pelo Animado e pelo Terreno Difícil até [[symbol:marker.reference.b]], Zeke pode gastar mais SP para receber 2 Pontos de Movimento e atravessar o espaço de Remi. Por ela ser aliada, Zeke pode atravessar o espaço, mas não parar nele. Sair do espaço de uma aliada custa 2 Pontos de Movimento; então, ele só alcançará [[symbol:marker.reference.a]] se gastar mais 2 SP para receber 4 Pontos de Movimento. Ao chegar a [[symbol:marker.reference.a]], ainda terá 1 Ponto de Movimento."
+    },
+    {
+      "spanKey": "page_40_block_8__pt-BR",
+      "sourceText": "PUSH is an Ability that moves an opposing figure away from the nearest space the figure using PUSH occupies. The target of the Push must only move into spaces that are farther from the figure using PUSH. This movement must move the target of the Push directly away in a straight line.",
+      "kind": "block",
+      "blockId": "block_33",
+      "proposalText": "EMPURRAR é uma Habilidade que move uma miniatura oponente para longe do espaço ocupado mais próximo de quem usa a Habilidade. O alvo só pode entrar em espaços mais distantes dessa miniatura e deve ser movido diretamente para longe dela, em linha reta."
+    },
+    {
+      "spanKey": "page_40_block_9__pt-BR",
+      "sourceText": "PULL is an Ability that moves an opposing figure towards the figure using it, the target of the Pull must only move into spaces that are closer to the destination. These spaces do not need to be in a straight line so long as each space counted is considered closer using Movement Rules. The destination is the nearest space to the figure using PULL, ending adjacent if possible.",
+      "kind": "block",
+      "blockId": "block_34",
+      "proposalText": "PUXAR é uma Habilidade que aproxima uma miniatura oponente de quem a usa. O alvo só pode entrar em espaços mais próximos do destino. Os espaços não precisam estar em linha reta, desde que cada passo o aproxime conforme as Regras de Movimento. O destino é o espaço mais próximo de quem usa PUXAR; se possível, o alvo termina adjacente."
+    },
+    {
+      "spanKey": "page_40_block_10__pt-BR",
+      "sourceText": "COMMAND is an Ability that moves an opposing figure in any single orthogonal direction the figure using it wants, up to the amount listed.",
+      "kind": "block",
+      "blockId": "block_35",
+      "proposalText": "COMANDAR é uma Habilidade que move uma miniatura oponente em uma única direção ortogonal escolhida por quem a usa, até a quantidade indicada."
+    },
+    {
+      "spanKey": "page_40_block_11__pt-BR",
+      "sourceText": "If the target of a Push, Pull, or Command is an Adventurer who is positioned diagonally or has more than one option based on their position in relation to the opponent using Push, Pull, or Command, then the Adventurer must choose the most detrimental direction to move. See Towards & Away Pg. 62.",
+      "kind": "block",
+      "blockId": "block_36",
+      "proposalText": "Se o alvo de Empurrar, Puxar ou Comandar for um Aventureiro posicionado na diagonal ou com mais de uma opção em relação ao oponente que usa a Habilidade, o Aventureiro deve escolher a direção de movimento mais prejudicial. Veja Em Direção e Para Longe, pág. 62."
+    },
+    {
+      "spanKey": "page_40_unit_p40-free-movement-body__pt-BR",
+      "sourceText": "Push, Pull, and Command are a type of Free Movement. The target of a Push, Pull, or Command does not provoke a Break Attack from the figure that used the Ability. If a figure is moved into Obstructing Terrain or into another figure using Push or Command, they stop moving and are dealt the remainder of the movement as IRREDUCIBLE DMG. While a figure is being moved by Push, Pull, or Command, they cannot use Actions, Abilities that give Actions, or Abilities that move a figure.",
+      "lineIds": [
+        "line_37_0",
+        "line_37_1",
+        "line_37_2",
+        "line_37_3",
+        "line_37_4",
+        "line_37_5"
+      ],
+      "kind": "unit",
+      "proposalText": "Empurrar, Puxar e Comandar são formas de Movimento Livre. O alvo não provoca um Ataque de Oportunidade contra a miniatura que usou a Habilidade. Se uma miniatura for movida para Terreno Obstruído ou para o espaço de outra miniatura por Empurrar ou Comandar, ela para e sofre o restante do movimento como DANO IRREDUTÍVEL. Enquanto é movida por Empurrar, Puxar ou Comandar, não pode realizar Ações, usar Habilidades que concedam Ações nem Habilidades que movam uma miniatura."
+    },
+    {
+      "spanKey": "page_40_unit_p40-free-movement-example__pt-BR",
+      "sourceText": "Example: The Earth Loa uses the PUSH Ability, which causes Zeke to be moved 3 spaces away in a straight line from the Earth Loa. Zeke is diagonal to the Earth Loa and has to choose to move south or west 3 spaces. Choosing to move west to space A would move him into a Tile Edge and deal him 1 IRREDUCIBLE DMG for the extra space he cannot move. Moving south would cause him to leave Dangerous Terrain and be Defeated. Because it is the most detrimental option he must choose to move south to Space B and be Defeated. Since the Earth Loa was the one who used the Ability, it will not get a Break Attack against Zeke.",
+      "lineIds": [
+        "line_37_6",
+        "line_37_7",
+        "line_37_8",
+        "line_37_9",
+        "line_37_10",
+        "line_37_11",
+        "line_37_12"
+      ],
+      "kind": "unit",
+      "proposalText": "Exemplo: O Earth Loa usa a Habilidade EMPURRAR e move Zeke 3 espaços em linha reta para longe dele. Como Zeke está na diagonal em relação ao Earth Loa, deve escolher entre mover-se 3 espaços ao sul ou a oeste. Se for a oeste, entrará na Borda da Peça no espaço [[symbol:marker.reference.a]] e sofrerá 1 DANO IRREDUTÍVEL pelo espaço extra que não pode percorrer. Se for ao sul, sairá do Terreno Perigoso e será derrotado. Como essa é a opção mais prejudicial, Zeke deve ir ao sul até o espaço [[symbol:marker.reference.b]] e ser derrotado. Como o Earth Loa usou a Habilidade, não fará um Ataque de Oportunidade contra Zeke."
+    },
+    {
+      "spanKey": "page_40_block_15__pt-BR",
+      "sourceText": "Push, Pull, and Command",
+      "kind": "block",
+      "blockId": "block_45",
+      "proposalText": "Empurrar, Puxar e Comandar"
+    }
+  ],
+  "translations": [
+    {
+      "spanKey": "page_40_unit_p40-block-8-heading-size-12pt__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_unit_p40-block-8-heading-size-12pt__pt-BR",
+        "bbox": [
+          91.41329956054688,
+          293.2881164550781,
+          197.14840698242188,
+          307.7001037597656
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Exemplo de Movimento:",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_unit_p40-block-8-body-size-10pt__pt-BR",
+        "bbox": [
+          91.40840148925781,
+          305.8460998535156,
+          724.6871948242188,
+          339.7861022949219
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Na Fase de Ação de Zeke, ele quer chegar à ficha de Saque a oeste de Remi. Ele gasta ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "1 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " para realizar uma Ação de Movimento e recebe Pontos de Movimento iguais ao Valor de Movimento da Carta de Aventureiro: ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "6",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ". Como miniaturas não se movem na diagonal, deve escolher entre a rota curta a oeste, pelo Terreno Difícil (termina em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "marker.reference.b",
+            "symbolMetrics": {
+              "widthEm": 1.2495002746582031,
+              "heightEm": 1.2495002746582031,
+              "verticalAlignEm": 0.2582511901855469
+            }
+          },
+          {
+            "text": "), e a longa ao sul, até ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "marker.reference.d",
+            "symbolMetrics": {
+              "widthEm": 1.2494964599609375,
+              "heightEm": 1.2495002746582031,
+              "verticalAlignEm": 0.2582511901855469
+            }
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": [
+          "marker.reference.b",
+          "marker.reference.d"
+        ]
+      }
+    },
+    {
+      "spanKey": "page_40_block_1__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_block_1__pt-BR",
+        "bbox": [
+          91.41448974609375,
+          343.48931884765625,
+          717.0252685546875,
+          367.4554138183594
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Se Zeke seguir pela rota curta até ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "marker.reference.b",
+            "symbolMetrics": {
+              "widthEm": 1.2495002746582031,
+              "heightEm": 1.2495002746582031,
+              "verticalAlignEm": 0.2582511901855469
+            }
+          },
+          {
+            "text": ", o Animado fará um Ataque de Oportunidade quando ele sair de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "marker.reference.c",
+            "symbolMetrics": {
+              "widthEm": 1.2494964599609375,
+              "heightEm": 1.2495002746582031,
+              "verticalAlignEm": 0.25824737548828125
+            }
+          },
+          {
+            "text": " (veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Diagonais e Ataques de Oportunidade",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "italic"
+          },
+          {
+            "text": ", pág. ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "42",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "). Se for até ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "marker.reference.d",
+            "symbolMetrics": {
+              "widthEm": 1.2495002746582031,
+              "heightEm": 1.2495002746582031,
+              "verticalAlignEm": 0.2582511901855469
+            }
+          },
+          {
+            "text": ", evitará o perigo, mas terminará mais longe do objetivo.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": [
+          "marker.reference.b",
+          "marker.reference.c",
+          "marker.reference.d"
+        ]
+      }
+    },
+    {
+      "spanKey": "page_40_block_2__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_block_2__pt-BR",
+        "bbox": [
+          91.4093017578125,
+          372.2247009277344,
+          713.9710693359375,
+          417.12469482421875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Após passar pelo Animado e pelo Terreno Difícil até ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "marker.reference.b",
+            "symbolMetrics": {
+              "widthEm": 1.2495002746582031,
+              "heightEm": 1.2495002746582031,
+              "verticalAlignEm": 0.2582511901855469
+            }
+          },
+          {
+            "text": ", Zeke pode gastar mais SP para receber ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " Pontos de Movimento e atravessar o espaço de Remi. Por ela ser aliada, Zeke pode atravessar o espaço, mas não parar nele. Sair do espaço de uma aliada custa ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " Pontos de Movimento; então, ele só alcançará ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "marker.reference.a",
+            "symbolMetrics": {
+              "widthEm": 1.2495002746582031,
+              "heightEm": 1.2495002746582031,
+              "verticalAlignEm": 0.2582511901855469
+            }
+          },
+          {
+            "text": " se gastar mais ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " para receber ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "4",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " Pontos de Movimento. Ao chegar a ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "marker.reference.a",
+            "symbolMetrics": {
+              "widthEm": 1.2495002746582031,
+              "heightEm": 1.2495002746582031,
+              "verticalAlignEm": 0.2582511901855469
+            }
+          },
+          {
+            "text": ", ainda terá ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " Ponto de Movimento.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": [
+          "marker.reference.b",
+          "marker.reference.a"
+        ]
+      }
+    },
+    {
+      "spanKey": "page_40_block_8__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_block_8__pt-BR",
+        "bbox": [
+          342.8955993652344,
+          465.8360290527344,
+          763.8363037109375,
+          499.7560119628906
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "EMPURRAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " é uma Habilidade que move uma miniatura oponente para longe do espaço ocupado mais próximo de quem usa a Habilidade. O alvo só pode entrar em espaços mais distantes dessa miniatura e deve ser movido diretamente para longe dela, em linha reta.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "spanKey": "page_40_block_9__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_block_9__pt-BR",
+        "bbox": [
+          342.8935852050781,
+          504.5052185058594,
+          764.4442749023438,
+          549.4252319335938
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "PUXAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " é uma Habilidade que aproxima uma miniatura oponente de quem a usa. O alvo só pode entrar em espaços mais próximos do destino. Os espaços não precisam estar em linha reta, desde que cada passo o aproxime conforme as Regras de Movimento. O destino é o espaço mais próximo de quem usa PUXAR; se possível, o alvo termina adjacente.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "spanKey": "page_40_block_10__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_block_10__pt-BR",
+        "bbox": [
+          342.89630126953125,
+          554.1744995117188,
+          744.5667114257812,
+          577.0945434570312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "COMANDAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " é uma Habilidade que move uma miniatura oponente em uma única direção ortogonal escolhida por quem a usa, até a quantidade indicada.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "spanKey": "page_40_block_11__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_block_11__pt-BR",
+        "bbox": [
+          342.89630126953125,
+          581.864501953125,
+          767.177001953125,
+          626.7645263671875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Se o alvo de Empurrar, Puxar ou Comandar for um Aventureiro posicionado na diagonal ou com mais de uma opção em relação ao oponente que usa a Habilidade, o Aventureiro deve escolher a direção de movimento mais prejudicial. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Em Direção e Para Longe",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "italic"
+          },
+          {
+            "text": ", pág. ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "62",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "spanKey": "page_40_unit_p40-free-movement-body__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_unit_p40-free-movement-body__pt-BR",
+        "bbox": [
+          342.89630126953125,
+          631.5344848632812,
+          768.3058471679688,
+          698.4331665039062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Empurrar, Puxar e Comandar são formas de Movimento Livre. O alvo não provoca um Ataque de Oportunidade contra a miniatura que usou a Habilidade. Se uma miniatura for movida para Terreno Obstruído ou para o espaço de outra miniatura por Empurrar ou Comandar, ela para e sofre o restante do movimento como ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "DANO IRREDUTÍVEL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ". Enquanto é movida por Empurrar, Puxar ou Comandar, não pode realizar Ações, usar Habilidades que concedam Ações nem Habilidades que movam uma miniatura.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "spanKey": "page_40_unit_p40-free-movement-example__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_unit_p40-free-movement-example__pt-BR",
+        "bbox": [
+          342.8935852050781,
+          701.6043701171875,
+          764.0292358398438,
+          781.1024169921875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Exemplo: ",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "O Earth Loa usa a Habilidade ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "EMPURRAR",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " e move Zeke ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "3",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " espaços em linha reta para longe dele. Como Zeke está na diagonal em relação ao Earth Loa, deve escolher entre mover-se ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "3",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " espaços ao sul ou a oeste. Se for a oeste, entrará na Borda da Peça no espaço ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "marker.reference.a",
+            "symbolMetrics": {
+              "widthEm": 1.2494964599609375,
+              "heightEm": 1.2494964599609375,
+              "verticalAlignEm": 0.2582511901855469
+            }
+          },
+          {
+            "text": " e sofrerá ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "DANO IRREDUTÍVEL",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " pelo espaço extra que não pode percorrer. Se for ao sul, sairá do Terreno Perigoso e será derrotado. Como essa é a opção mais prejudicial, Zeke deve ir ao sul até o espaço ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "marker.reference.b",
+            "symbolMetrics": {
+              "widthEm": 1.2495040893554688,
+              "heightEm": 1.2494964599609375,
+              "verticalAlignEm": 0.2582511901855469
+            }
+          },
+          {
+            "text": " e ser derrotado. Como o Earth Loa usou a Habilidade, não fará um Ataque de Oportunidade contra Zeke.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": [
+          "marker.reference.a",
+          "marker.reference.b"
+        ]
+      }
+    },
+    {
+      "spanKey": "page_40_block_15__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_40_block_15__pt-BR",
+        "bbox": [
+          433.3559875488281,
+          434.8735046386719,
+          683.3219604492188,
+          459.13751220703125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Empurrar, Puxar e Comandar",
+            "font": "Cinzel-Regular",
+            "size": 14,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "proposalId": "p100-table10-note-combatant-currents",
+  "version": "1",
+  "title": "Nota da Tabela 10 — Fichas e Correntes — p. 100",
+  "page": 100,
+  "status": "pending_copyfit_v3",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch covers only the editable Table 10 note at page_100_block_10__pt-BR.",
+    "The original bold label and bold-italic cross-reference remain rich spans; source font sizes, colors, frame, and line-height are unchanged.",
+    "Combatant token(s) → ficha(s) de Combatente and Current(s) → Corrente(s) remain contextual candidates; no glossary record is created.",
+    "This is a review proposal, not a final translation or publication."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 10,
+      "sourceBlockId": "block_21",
+      "sourceUnitId": null,
+      "spanKey": "page_100_block_10__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "NOTE: Combatant tokens may or may not be moved by currents. See Table 9, Pg. 97 for details.",
+      "proposalText": "NOTA: Fichas de Combatente podem ou não ser movidas pelas Correntes. Veja a Tabela 9, pág. 97, para detalhes.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_10__pt-BR",
+        "bbox": [
+          57.27650451660156,
+          232.548828125,
+          312.9485778808594,
+          254.17684936523438
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "NOTA:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fichas de Combatente podem ou não ser movidas pelas Correntes. Veja a ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": "Tabela 9, pág. 97",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "text": ", para detalhes.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            57.27650451660156,
+            232.548828125,
+            312.9485778808594,
+            254.17684936523438
+          ],
+          "visualBaselinesPt": [
+            241.739,
+            251.738
+          ],
+          "spans": 5,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_block_10__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 6,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            215.05,
+            223.16
+          ],
+          "frameHeightCssPx": 17.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "technicalStatus": "fit-awaiting-human-review",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "EXACT copyfit candidate visible in the PT-BR Viewer for human review; no final translation or publication is implied.",
+      "pendingTerms": [
+        "Combatant token(s) → Ficha(s) de Combatente: local compound proposal; confirm against approved use.",
+        "Current(s) → Corrente(s): proposed for the moving-water mechanic on this page; not added to the glossary."
+      ]
+    }
+  ],
+  "note": "The unit cannot be marked fit-ready until actual source PDF and PageRenderer visual-line counts and the independent page-composition checks are recorded.",
+  "sourceHashes": {
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  }
+}

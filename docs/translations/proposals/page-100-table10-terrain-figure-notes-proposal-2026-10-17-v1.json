@@ -1,0 +1,373 @@
+{
+  "proposalId": "p100-table10-terrain-figure-notes",
+  "version": "1",
+  "title": "Notas da Tabela 10 — Terreno e Miniaturas — p. 100",
+  "page": 100,
+  "status": "pending_copyfit_v3",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "revisionBudget": {
+    "naturalAlternatives": 3,
+    "rule": "Render each complete, semantically equivalent alternative in PageRenderer before retaining it; never alter fonts, size, saved geometry, meaning, or insert padding to force a line count."
+  },
+  "counts": {
+    "candidates": 2,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 1
+  },
+  "scopeLimits": [
+    "This batch covers only the editable explanatory units beneath Table 10: TERRAIN TOKENS and FIGURES.",
+    "The official glossary terms Terrain → Terrenos, Figures → Miniaturas, and Token → Ficha are applied in context.",
+    "Current(s), Plank token(s), Large Based Figures, and Heavy Tag remain local wording proposals pending terminology review; this file does not update the glossary.",
+    "Source rich-span boundaries, source fonts, sizes, colors, and frames are preserved. These are review proposals, not final translations."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 1,
+      "sourceBlockId": "block_12",
+      "sourceUnitId": null,
+      "spanKey": "page_100_block_1__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "TERRAIN TOKENS: Terrain tokens and things that count as Terrain (e.g. Plank tokens) are not moved by Currents.",
+      "proposalText": "FICHAS DE TERRENO: Fichas e itens que contam como Terreno (ex.: fichas de Prancha) não são movidos pelas Correntes.",
+      "copyfitSemanticFlow": {
+        "version": 1,
+        "flowRegion": {
+          "id": "p100-table10-terrain-left-cell",
+          "semanticOwner": "p100-table10",
+          "leftBoundaryEvidence": [
+            {
+              "valuePt": 57.528,
+              "kind": "table-grid",
+              "detail": "Official PDF left border of the Terrain cell"
+            },
+            {
+              "valuePt": 57.528,
+              "kind": "visual-boundary",
+              "detail": "Same left table stroke in the rendered page"
+            }
+          ],
+          "rightBoundaryEvidence": [
+            {
+              "valuePt": 224.522,
+              "kind": "table-grid",
+              "detail": "Official PDF divider between Terrain and Figures cells"
+            },
+            {
+              "valuePt": 224.522,
+              "kind": "visual-boundary",
+              "detail": "Same table divider in the rendered page"
+            }
+          ],
+          "paddingLeftPt": 3.998,
+          "paddingRightPt": 4,
+          "textBandTopPt": 94.0043,
+          "textBandBottomPt": 131.6253,
+          "evidence": [
+            {
+              "kind": "semantic-parent",
+              "owner": "p100-table10",
+              "detail": "Terrain note is the left cell of Table 10"
+            },
+            {
+              "kind": "source-baselines",
+              "detail": "Source PDF text baselines and original cell placement"
+            },
+            {
+              "kind": "table-grid",
+              "detail": "Official PDF table strokes define the cell and divider"
+            },
+            {
+              "kind": "artwork-occupancy",
+              "detail": "The adjacent Figures cell remains excluded from the left-cell corridor"
+            }
+          ]
+        },
+        "alignmentAnchor": "left",
+        "obstacles": [
+          {
+            "id": "p100-table10-figures-cell-text",
+            "semanticRelation": "independent-flow-owner",
+            "bboxPt": [
+              228.521,
+              94.0043,
+              380,
+              131.6253
+            ],
+            "requiredGapPt": 8,
+            "detail": "The right-cell text begins 4 pt after the divider; keep the full measured inset between the left corridor and its ink"
+          }
+        ],
+        "evidenceSources": [
+          "apps/web/public/pages/page_100/page_100_dom.json",
+          "Official PDF table vector strokes reviewed by the critical agent"
+        ]
+      },
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_1__pt-BR",
+        "bbox": [
+          61.52619934082031,
+          94.00433349609375,
+          212.24017333984375,
+          131.62527465820312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "FICHAS DE TERRENO:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fichas e ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "itens que contam como Terreno (",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "ex.:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " fichas de Prancha",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": ") não são movidos pelas Correntes.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "OVER",
+      "copyfitMeasurement": {
+        "measurementSource": "Original PDF geometry and live PageRenderer DOM Range rectangles grouped by groupPageRendererVisualLines",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 4,
+        "classification": "OVER",
+        "environment": "PT-BR, viewport 2400x1400 CSS px, DPR 1, 100% and 200% Viewer zoom, OptimaLTStd fonts loaded",
+        "geometry": "Original bbox retained: [61.5262, 94.0043, 212.2402, 131.6253] pt. The final line-count attempt stays within the measured source frame at both scales; it still exceeds the mandatory 3-line source target.",
+        "evidence": [
+          "apps/web/output/p100-block_12-copyfit-v1/viewer-ptbr-fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-100pct.png",
+          "apps/web/output/p100-block_12-copyfit-v1/fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-100pct-measurement.json",
+          "apps/web/output/p100-block_12-copyfit-v1/viewer-ptbr-fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-200pct.png",
+          "apps/web/output/p100-block_12-copyfit-v1/fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-200pct-measurement.json"
+        ]
+      },
+      "technicalStatus": "blocked_copyfit_v3_over_dtp_exception_open",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "blank whole PT-BR unit only in the diagnostic Viewer; no English fallback; preserve this complete proposal in the review panel.",
+      "diagnosticBlank": {
+        "exceptionId": "P100-DTP-COPYFIT-TERRAIN-TOKENS-1",
+        "reason": "Three natural equivalent drafts were measured at 3 source lines / 4 target lines in the final attempt. OVER is a mandatory Copyfit V3 failure even though the last draft remains in the source frame."
+      },
+      "pendingTerms": [
+        "Current(s) → Corrente(s): candidate form based on this page's moving-water context; local proposal only, not a glossary addition.",
+        "Plank token(s) → ficha(s) de Prancha: local item-name proposal; confirm against the named item/reference.",
+        "Terrain tokens → Fichas de Terreno: compound capitalization and number should be checked against approved game usage."
+      ]
+    },
+    {
+      "blockIndex": 2,
+      "sourceBlockId": "block_13",
+      "sourceUnitId": null,
+      "spanKey": "page_100_block_2__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "FIGURES: Figures are always subject to being moved by Currents. See Large Based Figures Pg. 71, or the Heavy Tag Pg. 93, for exceptions.",
+      "proposalText": "MINIATURAS: Elas sempre podem ser movidas pelas Correntes. Veja Miniaturas de Base Grande (pág. 71) ou a Tag Pesada (pág. 93) para exceções.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_2__pt-BR",
+        "bbox": [
+          228.5205078125,
+          87.50433349609375,
+          380.7736511230469,
+          138.12124633789062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "MINIATURAS:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Elas sempre podem ser movidas pelas Correntes. Veja ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Miniaturas de ",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Base Grande",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " (pág. 71) ou a ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Tag ",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Pesada",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " (pág. 93) para exceções.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "measurementSource": "Original PDF geometry and live PageRenderer DOM Range rectangles grouped by groupPageRendererVisualLines",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "environment": "PT-BR, viewport 2400x1400 CSS px, DPR 1, 100% and 200% Viewer zoom, OptimaLTStd fonts loaded",
+        "geometry": "Original bbox retained: [228.5205, 87.5043, 380.7737, 138.1212] pt. Candidate ink remains inside the source frame at both zooms; the four source and target visual rows match.",
+        "evidence": [
+          "apps/web/output/p100-block_13-copyfit-v1/viewer-ptbr-miniaturas-elas-sempre-podem-ser-movidas-pelas-correntes-veja-miniaturas-de-base-grande-p-g-71-ou-a-tag-pesada-p-g-93-para-exce-es-100pct.png",
+          "apps/web/output/p100-block_13-copyfit-v1/miniaturas-elas-sempre-podem-ser-movidas-pelas-correntes-veja-miniaturas-de-base-grande-p-g-71-ou-a-tag-pesada-p-g-93-para-exce-es-100pct-measurement.json",
+          "apps/web/output/p100-block_13-copyfit-v1/viewer-ptbr-miniaturas-elas-sempre-podem-ser-movidas-pelas-correntes-veja-miniaturas-de-base-grande-p-g-71-ou-a-tag-pesada-p-g-93-para-exce-es-200pct.png",
+          "apps/web/output/p100-block_13-copyfit-v1/miniaturas-elas-sempre-podem-ser-movidas-pelas-correntes-veja-miniaturas-de-base-grande-p-g-71-ou-a-tag-pesada-p-g-93-para-exce-es-200pct-measurement.json"
+        ]
+      },
+      "technicalStatus": "fit-awaiting-human-review",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "Do not treat a blank diagnostic unit as saved content; if Copyfit V3 or a technical gate fails, show the whole unit blank with no English fallback and keep this complete proposal available for review.",
+      "pendingTerms": [
+        "Current(s) → Corrente(s): candidate form based on this page's moving-water context; local proposal only, not a glossary addition.",
+        "Large Based Figures → Miniaturas de Base Grande: confirm the cross-reference title on page 71.",
+        "Heavy Tag → Tag Pesada: candidate rendering, pending terminology review."
+      ]
+    }
+  ],
+  "revisions": [
+    {
+      "sourceBlockId": "block_12",
+      "text": "FICHAS DE TERRENO: Fichas de Terreno e elementos que contam como Terreno (por exemplo, fichas de Prancha) não são deslocados pelas Correntes.",
+      "result": "OVER: 3 source lines / 5 PageRenderer lines at 100% and 200%; ink also crosses the original frame. Preserved as a full-meaning attempt, not approved."
+    },
+    {
+      "sourceBlockId": "block_12",
+      "text": "FICHAS DE TERRENO: Essas fichas e itens que contam como Terreno (ex.: fichas de Prancha) não são movidos pelas Correntes.",
+      "result": "OVER: 3 source lines / 4 PageRenderer lines at 100%; no frame overflow. Rejected because OVER fails independently of geometry."
+    },
+    {
+      "sourceBlockId": "block_12",
+      "text": "FICHAS DE TERRENO: Fichas e itens que contam como Terreno (ex.: fichas de Prancha) não são movidos pelas Correntes.",
+      "result": "OVER: 3 source lines / 4 PageRenderer lines at 100% and 200%; no frame overflow in the final measured attempt. Preserved as the complete candidate and recorded in the DTP exception."
+    },
+    {
+      "sourceBlockId": "block_13",
+      "text": "MINIATURAS: As Correntes sempre podem deslocar as miniaturas. Veja Miniaturas de Base Grande, pág. 71, ou a Tag Pesada, pág. 93, para ver as exceções.",
+      "result": "OVER: 4 source lines / 5 PageRenderer lines at 100% and 200%; shortened naturally and re-rendered."
+    }
+  ],
+  "note": "Copyfit V3 status is independent of editorial acceptance: block_13 is EXACT and awaits human review; block_12 remains fully available but blank in diagnostic PT-BR because it is OVER.",
+  "sourceHashes": {
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  }
+}

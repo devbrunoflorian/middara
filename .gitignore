@@ -10,6 +10,9 @@ venv/
 .venv/
 .next/
 out/
+/output/
+# Generated Viewer/export proof cache is retained locally; curated receipts live under docs/project-progress/evidence/.
+/apps/web/output/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -34,20 +37,149 @@ apps/web/public/fonts/*
 !apps/web/public/fonts/Middara-Wingdings-p63.ttf
 !apps/web/public/pages/
 apps/web/public/pages/*
+# Keep per-page layout-frame overrides reviewable while leaving extracted
+# backgrounds and DOM payloads ignored.
+!apps/web/public/pages/page_*/
+apps/web/public/pages/page_*/*
+!apps/web/public/pages/page_*/layout_frames.json
+!apps/web/public/pages/page_*/fidelity_overlays.json
+!apps/web/public/pages/page_*/fidelity-overlay-component-*.png
+!apps/web/public/pages/page_*/fidelity-overlay-source-vector-*.svg
+# Exact PDF vectors reused as semantic inline symbols in p. 33 prose.
+!apps/web/public/pages/page_033/source-dice-purple-p33-casting.svg
+!apps/web/public/pages/page_033/source-dice-purple-p33-conviction.svg
+!apps/web/public/pages/page_033/source-dice-white-p33-160.svg
+!apps/web/public/pages/page_033/source-dice-white-p33-168.svg
+# Exact PDF vectors and CFF glyph outline remapped as semantic inline symbols on p.30.
+!apps/web/public/pages/page_030/source-shield-p30.svg
+!apps/web/public/pages/page_030/source-page-p30.svg
+!apps/web/public/pages/page_030/source-page-3-p30.svg
+# Exact PDF vector restoration for the editable p. 67 card label background.
+!apps/web/public/pages/page_067/per-encounter-pill.svg
+!apps/web/public/pages/page_100/fidelity-overlay-component-status-tag-pill.svg
+!apps/web/public/pages/page_*/fidelity-overlay-decoration-*.png
+!apps/web/public/pages/page_058/fidelity-overlay-status-tag-inline-symbol.png
 !apps/web/public/pages/page_004/
 apps/web/public/pages/page_004/*
-!apps/web/public/pages/page_004/fidelity-overlay-combatant-cards.png
+!apps/web/public/pages/page_004/layout_frames.json
 !apps/web/public/pages/page_004/fidelity_overlays.json
+!apps/web/public/pages/page_004/fidelity-overlay-right-card-groups.png
+!apps/web/public/pages/page_004/fidelity-overlay-adventurer-cards.png
+!apps/web/public/pages/page_004/fidelity-overlay-miniatures-dice.png
+!apps/web/public/pages/page_004/fidelity-overlay-book-covers.png
+!apps/web/public/pages/page_004/fidelity-overlay-source-vector-title-arabesques.svg
+!apps/web/public/pages/page_005/
+!apps/web/public/pages/page_005/*
+!apps/web/public/pages/page_005/fidelity_overlays.json
+!apps/web/public/pages/page_005/fidelity-overlay-left-image-groups.png
+!apps/web/public/pages/page_005/fidelity-overlay-right-image-groups.png
 !apps/web/public/pages/page_006/
 apps/web/public/pages/page_006/*
-!apps/web/public/pages/page_006/fidelity-overlay-hidden-cards.png
+!apps/web/public/pages/page_006/layout_frames.json
+!apps/web/public/pages/page_010/
+apps/web/public/pages/page_010/*
+!apps/web/public/pages/page_010/layout_frames.json
 !apps/web/public/pages/page_006/fidelity_overlays.json
+!apps/web/public/pages/page_006/fidelity-overlay-left-image-groups.png
+!apps/web/public/pages/page_006/fidelity-overlay-right-image-groups.png
+!apps/web/public/pages/page_006/fidelity-overlay-character-art.png
+!apps/web/public/pages/page_006/fidelity-overlay-hidden-cards.png
 !apps/web/public/pages/page_007/
 apps/web/public/pages/page_007/*
 !apps/web/public/pages/page_007/fidelity-overlay-component-checkboxes.svg
 !apps/web/public/pages/page_007/fidelity_overlays.json
+!apps/web/public/pages/page_007/layout_frames.json
+!apps/web/public/pages/page_012/
+!apps/web/public/pages/page_012/fidelity-overlay-adventure-inset.png
+!apps/web/public/pages/page_012/fidelity_overlays.json
+!apps/web/public/pages/page_015/
+!apps/web/public/pages/page_015/fidelity-overlay-adventure-inset.png
+!apps/web/public/pages/page_015/fidelity_overlays.json
+!apps/web/public/pages/page_016/
+apps/web/public/pages/page_016/*
+!apps/web/public/pages/page_016/fidelity-overlay-exit-tokens.png
+!apps/web/public/pages/page_016/fidelity-overlay-exit-tokens-ptbr.png
+!apps/web/public/pages/page_016/fidelity_overlays.json
+!apps/web/public/pages/page_016/layout_frames.json
+!apps/web/public/pages/page_021/
+apps/web/public/pages/page_021/*
+!apps/web/public/pages/page_021/fidelity-overlay-token-icons.png
+!apps/web/public/pages/page_021/fidelity_overlays.json
+!apps/web/public/pages/page_050/
+apps/web/public/pages/page_050/*
+!apps/web/public/pages/page_050/fidelity-overlay-flanking-title.png
+!apps/web/public/pages/page_050/fidelity_overlays.json
+!apps/web/public/pages/page_040/fidelity-overlay-p40-white-flourish-left.png
+!apps/web/public/pages/page_040/fidelity-overlay-p40-white-flourish-right.png
 _archive/
 test_fonts*.html
 script.py
 page_002_background.jpg
 apps/admin/apps-admin.db
+# Source-confirmed inline adapters and conditional erasure patches.
+!apps/web/public/pages/page_*/inline_elements.json
+!apps/web/public/pages/page_*/compound_elements.json
+!apps/web/public/pages/page_*/inline-element-mask-*.png
+!apps/web/public/pages/page_033/source-dice-purple-p33.svg
+!apps/web/public/pages/page_003/contents_rows.json
+!apps/web/public/pages/page_003/contents-paper-*.png
+
+# Middara app branding source, generated icon set, and web manifest.
+!apps/web/public/brand/
+apps/web/public/brand/*
+!apps/web/public/brand/README.md
+!apps/web/public/brand/middara-emblem-source.png
+!apps/web/public/brand/middara-emblem-256.webp
+!apps/web/public/site.webmanifest
+!apps/web/public/favicon.ico
+!apps/web/public/favicon-16x16.png
+!apps/web/public/favicon-32x32.png
+!apps/web/public/apple-touch-icon.png
+!apps/web/public/android-chrome-192x192.png
+!apps/web/public/android-chrome-512x512.png
+!apps/web/public/pages/page_037/fidelity-overlay-component-source-zapf-glyphs.svg
+
+# ==============================================================================
+# Pente Fino: Bancos de Dados, Caches, Logs e Artefatos Gerados
+# ==============================================================================
+
+# Bancos de dados locais e SQLite (Payload, dev databases, journals e locks)
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+
+# Build caches, TypeScript e Monorepo
+*.tsbuildinfo
+.turbo/
+.cache/
+.parcel-cache/
+
+# Testes automatizados, Playwright e relatórios
+test-results/
+playwright-report/
+.playwright/
+coverage/
+
+# Diretórios de saída e relatórios de execução locais
+output/
+**/output/
+tmp/
+**/tmp/
+
+# Logs de ambiente e execução
+*.log
+!docs/**/*.log
+
+# Metadados e lixo de sistema operacional
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Armazenamento temporário de agentes e mídia de depuração
+.tempmediaStorage/
+.user_uploaded/

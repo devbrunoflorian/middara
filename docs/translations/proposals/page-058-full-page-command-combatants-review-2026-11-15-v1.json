@@ -1,0 +1,1925 @@
+{
+  "schemaVersion": 1,
+  "proposalId": "p058-command-combatants-full-page-review-2026-11-15-v1",
+  "version": 1,
+  "page": 58,
+  "title": "Combatentes COMMAND e INTELLIGENT — revisão integral da p.58",
+  "status": "page_review_in_progress_human_confirmation_pending",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "32F147D3705A0564F2551A4B02D3172D51B7CD022F241A984D1E9C42D1F87001",
+    "pageDom": "EE07048D46427E0919E0AB341298D3D0A16274A9B31F9EFE59C33A2CB3FAA375",
+    "inlineElements": "4C81427B0C219C892BF366479A34B3D49C614BFB06CF2806FC1E3320A52C7C5C",
+    "layoutFrames": "E96213AF53CFADD3A4AAAAC3057E36003BD199149DA538F5DC7A658D26D9BFA1",
+    "fidelityOverlays": "E3567A4A6637DDF8211EE236CC8D908A0B6D84DF9A8FAD4B45665DE107925671",
+    "compoundElements": "C46636F7E8C7B915152B98CB3F0814BDAF66378B80A438E9F9B995116C2DEFD4"
+  },
+  "sourceArtifacts": [
+    "docs/translations/source-pages/page-058.md",
+    "apps/web/public/pages/page_058/page_058_dom.json",
+    "apps/web/public/pages/page_058/inline_elements.json",
+    "apps/web/public/pages/page_058/layout_frames.json",
+    "apps/web/public/pages/page_058/fidelity_overlays.json",
+    "apps/web/public/pages/page_058/compound_elements.json",
+    "docs/translations/glossary.md"
+  ],
+  "scopeLimits": [
+    "Toda prosa editável da página foi revisada; rótulos impressos em cartas/arte foram preservados conforme a decisão do usuário.",
+    "As traduções previamente aprovadas dos Números de Ativação foram preservadas sem alteração de conteúdo.",
+    "Nenhuma das 22 traduções sem review ativo é considerada aprovação humana; a proposta não certifica a página inteira."
+  ],
+  "counts": {
+    "currentPayloadTranslations": 24,
+    "previouslyApprovedAndPreserved": 2,
+    "withoutActiveHumanReview": 22,
+    "createdOrUpdatedInThisPass": 16,
+    "copyfitV3CandidatesFullyRevalidated": 0,
+    "humanApprovalsCreated": 0
+  },
+  "terminologyPending": [
+    "Combatant Card → Carta de Combatente, Activation Numbers → Números de Ativação, Initiative Card → Carta de Iniciativa, Intelligent Combatant(s), AI Steps, Stamina Points, and Encounter do not have an exact approved glossary entry in docs/translations/glossary.md; compare with existing approved usage before any future publication.",
+    "The two previously approved Números de Ativação units use “Combatentes Inteligentes”; the rest of this page preserves the printed identifier as “Combatentes INTELLIGENT”. Do not rewrite the approved units; resolve consistency as an editorial decision.",
+    "Figure → miniatura follows glossary “Figures → Miniaturas”; printed card names (including Cave Sickles) are kept in English."
+  ],
+  "visualVerification": {
+    "viewerAndPdfExported": true,
+    "pdfVerification": true,
+    "fullPageVisualReviewAgainstOg": true,
+    "headingsAndTypeCompared": true,
+    "bodyFont": "OptimaLTStd 10 pt, #231f20; emphasis and special COMMAND/INTELLIGENT treatments compared against the OG raster.",
+    "bulletBlock": {
+      "sourceVisualRows": 43,
+      "viewerVisualRows": 43,
+      "printVisualRows": 43,
+      "sourceParagraphStartsPt": [
+        227.93,
+        253.19,
+        289.44,
+        336.69,
+        372.94,
+        420.19,
+        467.45,
+        547.7,
+        594.93,
+        677.2
+      ],
+      "viewerParagraphStartsPt": [
+        227.93,
+        253.79,
+        290.46,
+        337.94,
+        374.62,
+        422.1,
+        469.58,
+        549.48,
+        596.96,
+        676.86
+      ],
+      "printParagraphStartsPt": [
+        227.92,
+        253.25,
+        289.61,
+        337.01,
+        373.38,
+        420.78,
+        468.18,
+        548.7,
+        596.1,
+        676.63
+      ],
+      "viewerLineHeight": 1.081,
+      "viewerParagraphSpacingPt": 4.25,
+      "printLineHeight": 1.03,
+      "printParagraphSpacingPt": 3.25,
+      "nextBlockSourceYpt": 736.45,
+      "nextBlockViewerYpt": 735.82,
+      "nextBlockPrintYpt": 735.7,
+      "clippingOrCollisionObserved": false
+    },
+    "headingAnchors": "Left and right column headings retain the OG start-x anchors; do not infer a universal x=112 pt rule.",
+    "symbolSource": "Semantic source-derived symbols (including attack range/mode, Exhaust and Status) compared; embedded artwork labels remain English.",
+    "evidenceLocation": "C:/Users/bruno/engineering-labs/planning/engineering-decisions/evidence/2026-11-15-p058-review"
+  },
+  "candidates": [
+    {
+      "payloadTranslationId": 2000,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_0__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "In Middara, Adventurers perform many complex functions and are \nintended to maximize customization. \nCOMMAND Combatants on the \nother hand, are designed to provide allies to the players that can be \ncontrolled while having all of their Abilities, Items, and various values \nwrapped up into one single card.",
+      "proposalText": "Em Middara, os Aventureiros desempenham funções complexas e foram concebidos para maximizar as possibilidades de personalização. Os Combatentes COMMAND, por outro lado, foram projetados para oferecer aos jogadores aliados que podem controlar, reunindo em uma única carta todas as suas Habilidades, Itens e diversos valores.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_0__pt-BR",
+        "bbox": [
+          86.17050170898438,
+          83.1788330078125,
+          388.31048583984375,
+          139.07884216308594
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Em Middara, os Aventureiros desempenham funções complexas e foram concebidos para maximizar as possibilidades de personalização. Os Combatentes ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "COMMAND",
+            "font": "OptimaLTStd-Black",
+            "size": 9,
+            "color": "#f8951d",
+            "weight": 900,
+            "style": "normal",
+            "disableLigatures": true,
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#231f20"
+          },
+          {
+            "text": ", por outro lado, foram projetados para oferecer aos jogadores aliados que podem controlar, reunindo em uma única carta todas as suas Habilidades, Itens e diversos valores.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2001,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_1__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Command Combatants have Initiative Cards and take turns the same way \nas Adventurers. In addition, they have the same Standard Actions and \nAbilities available to them. See Standard Actions Pg. 38.",
+      "proposalText": "Os Combatentes COMMAND têm Cartas de Iniciativa e realizam seus turnos da mesma forma que os Aventureiros. Além disso, têm acesso às mesmas Ações Padrão e Habilidades. Veja Ações Padrão, pág. 38.",
+      "data": {
+        "managedSourceSymbols": [],
+        "lineHeightMode": "custom",
+        "spanKey": "page_58_block_1__pt-BR",
+        "schemaVersion": 2,
+        "lineHeight": 1.1,
+        "textAlign": "left",
+        "segments": [
+          {
+            "weight": 400,
+            "color": "#231f20",
+            "text": "Os Combatentes COMMAND têm Cartas de Iniciativa e realizam seus turnos da mesma forma que os Aventureiros. Além disso, têm acesso às mesmas ",
+            "size": 10,
+            "style": "normal",
+            "font": "OptimaLTStd",
+            "disableLigatures": true
+          },
+          {
+            "weight": 400,
+            "color": "#231f20",
+            "text": "Ações Padrão",
+            "size": 10,
+            "style": "normal",
+            "font": "OptimaLTStd",
+            "disableLigatures": true
+          },
+          {
+            "weight": 400,
+            "color": "#231f20",
+            "text": " e Habilidades. Veja ",
+            "size": 10,
+            "style": "normal",
+            "font": "OptimaLTStd",
+            "disableLigatures": true
+          },
+          {
+            "weight": 700,
+            "color": "#231f20",
+            "text": "Ações Padrão",
+            "size": 10,
+            "style": "italic",
+            "font": "OptimaLTStd-BoldItalic",
+            "disableLigatures": true
+          },
+          {
+            "weight": 400,
+            "color": "#231f20",
+            "text": ", pág. 38.",
+            "size": 10,
+            "style": "normal",
+            "font": "OptimaLTStd",
+            "disableLigatures": true
+          }
+        ],
+        "bbox": [
+          86.17050170898438,
+          142.4288330078125,
+          402.2994689941406,
+          176.32884216308594
+        ]
+      }
+    },
+    {
+      "payloadTranslationId": 2002,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_2__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Command Combatants are always allies to the Adventurers and are always \ncontrolled by the Adventurers. These cards are only used when specifically \ninstructed to do so by a Special Encounter Rule, Adventure Mechanic, or an \nAbility.",
+      "proposalText": "Os Combatentes COMMAND são sempre aliados dos Aventureiros e estão sempre sob o controle deles. Essas cartas só são usadas quando uma Regra Especial de Encontro, uma Mecânica de Aventura ou uma Habilidade instruir especificamente seu uso.",
+      "data": {
+        "managedSourceSymbols": [],
+        "lineHeightMode": "custom",
+        "spanKey": "page_58_block_2__pt-BR",
+        "schemaVersion": 2,
+        "lineHeight": 1.1,
+        "textAlign": "left",
+        "segments": [
+          {
+            "color": "#231f20",
+            "size": 10,
+            "font": "OptimaLTStd",
+            "disableLigatures": true,
+            "text": "Os Combatentes COMMAND são ",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "color": "#231f20",
+            "size": 10,
+            "font": "OptimaLTStd-Bold",
+            "disableLigatures": true,
+            "text": "sempre",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "color": "#231f20",
+            "size": 10,
+            "font": "OptimaLTStd",
+            "disableLigatures": true,
+            "text": " aliados dos Aventureiros e estão ",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "color": "#231f20",
+            "size": 10,
+            "font": "OptimaLTStd-Bold",
+            "disableLigatures": true,
+            "text": "sempre",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "color": "#231f20",
+            "size": 10,
+            "font": "OptimaLTStd",
+            "disableLigatures": true,
+            "text": " sob o controle deles. Essas cartas só são usadas quando uma Regra Especial de Encontro, uma Mecânica de Aventura ou uma Habilidade instruir especificamente seu uso.",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "bbox": [
+          86.17050170898438,
+          179.65882873535156,
+          395.8604431152344,
+          224.57884216308594
+        ]
+      }
+    },
+    {
+      "payloadTranslationId": 2003,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_3__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "The differences between a Command Combatant and an Adventurer are \nlisted below. \n•\t\nA Command Combatant has all the rules to use their corresponding \nfigure printed on their card. Because of this, Command Combatants \ncannot equip Items, learn Disciplines, or Gain XP.\n•\t\nCommand Combatants may use all the same Standard Actions and \nStandard Abilities as Adventurers. If a Command Combatant Gains \nan Item, put the Item on the Command Card. At the end of the \nEncounter, the players may choose which Adventurer Gains the Items.\n•\t\nWhen an Initiative Card signals the beginning of a Command \nCombatant’s turn, every Command Combatant represented by that \ncard will take a separate turn in the order the players choose.  \n•\t\nDuring the Prepare Phase of a new Encounter, each Command \nCombatant follows all the same rules as Adventurers when \ndetermining their starting SP and how much they might HEAL. \n(assuming they were part of a previous Encounter.) \n•\t\nIf a Command Combatant is Defeated, they are removed from the \nboard. If a Command Combatant is part of a Setup Diagram at the \nStart of an Encounter, they may HEAL and return to play following all \nthe same rules as Adventurers. \n•\t\nCommand Combatants use the same Condition Tags as Adventurers \npresented in the same black box. These Tags function identically to their \ncounterparts except the \nEXHAUST Condition Tag. When a Command \nCombatant uses an Ability with the \nEXHAUST Condition Tag, instead of \nExhausting the card, place an Exhausted token over the Ability that was \nused to remind you that the Ability has been Exhausted. These tokens are \nremoved during the Refresh Phase of that Combatant's turn. \n•\t\nCommand Combatants also use black boxes to display other Tags when \nlisting Abilities that Command Combatants can perform. In these cases, \nplayers should treat the Tags listed in the black box as they are defined in \nthis Rulebook. \n•\t\nCommand Combatants will always have a printed Standard \n ATK \nor \n ATK that costs 2 SP. This is printed on the card using the Tag \n ATK or \n ATK . This is the Attack Type and Range that should \nbe referenced when making Standard Attacks, Counters, Break \nAttacks, or making Free Attacks granted by an Ability or Discipline. If \na Combatant has more than one Standard Attack available, they may \nuse any Standard Attack printed on their card.\n•\t\nAdventurers might bring a Command Combatant to the board via an \nAbility. An individual Adventurer may not have more than 1 Command \nCombatant on the board at any given time using an Ability. Command \nCombatants placed on the board via Special Encounter Rules or other \nAdventure Mechanics are not limited to or contribute to this limitation.",
+      "proposalText": "As diferenças entre um Combatente COMMAND e um Aventureiro são as seguintes:\n• A Carta de Combatente COMMAND reúne todas as regras de uso da miniatura correspondente. Por isso, Combatentes COMMAND não podem equipar Itens, aprender Disciplinas ou obter XP\n• Combatentes COMMAND podem usar as mesmas Ações Padrão e Habilidades Padrão dos Aventureiros. Se um deles obtiver um Item, coloque-o na Carta de Combatente. No fim do Encontro, os jogadores podem escolher qual Aventureiro recebe os Itens.\n• Quando uma Carta de Iniciativa indicar o início do turno de um Combatente COMMAND, cada Combatente COMMAND representado por ela fará um turno separado, na ordem escolhida pelos jogadores.\n• Durante a Fase de Preparação de um novo Encontro, cada Combatente COMMAND segue as regras dos Aventureiros para determinar seus SP iniciais e quanto pode curar (supondo que tenha participado do Encontro anterior).\n• Se um Combatente COMMAND for Derrotado, retire sua miniatura do tabuleiro. Se ele fizer parte de um Diagrama de Preparação no início de um Encontro, poderá curar-se e voltar ao jogo seguindo todas as mesmas regras que os Aventureiros.\n• Combatentes COMMAND usam as mesmas Tags de Condição dos Aventureiros, apresentadas na mesma caixa preta. Elas seguem as mesmas regras, exceto pela Tag de Condição [[action.exhaust]] EXHAUST. Ao usar uma Habilidade com essa Tag, coloque uma ficha de Exaustão sobre ela para indicar que a Habilidade foi exaustada, em vez de exaustar a carta. Remova as fichas durante a Fase de Manutenção do turno do Combatente.\n• Combatentes COMMAND também usam caixas pretas para exibir outras Tags ao listar as Habilidades que podem executar. Nesses casos, os jogadores devem considerar as Tags da caixa preta conforme elas são definidas neste Livro de Regras.\n• Combatentes COMMAND sempre têm um Ataque Padrão impresso: [[attack.melee]] ATK ou [[attack.ranged]] ATK que custa 2 SP. Na carta, esse Ataque usa as Tags [[tag.atk.melee]] ou [[tag.atk.ranged]]. Elas indicam tipo e alcance do Ataque e devem ser consultadas ao fazer Ataques Padrão, Revides, Ataques de Oportunidade ou Ataques Livres concedidos por Habilidades ou Disciplinas. Se houver mais de um Ataque Padrão na carta, o Combatente pode usar qualquer um impresso nela.\n• A Habilidade de um Aventureiro pode trazer um Combatente COMMAND ao tabuleiro. Cada Aventureiro pode manter no tabuleiro no máximo 1 Combatente COMMAND invocado por Habilidade por vez. Os trazidos por Regras Especiais de Encontro ou outras Mecânicas de Aventura não contam para esse limite.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_3__pt-BR",
+        "bbox": [
+          86.17050170898438,
+          227.9288330078125,
+          406.8963623046875,
+          733.1025390625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.081,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "As diferenças entre um Combatente COMMAND e um Aventureiro são as seguintes:",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• A Carta de Combatente COMMAND reúne todas as regras de uso da miniatura correspondente. Por isso, Combatentes COMMAND ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "não podem",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " equipar Itens, aprender Disciplinas ou obter ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "XP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Combatentes COMMAND podem usar as mesmas Ações Padrão e Habilidades Padrão dos Aventureiros. Se um deles obtiver um Item, coloque-o na Carta de Combatente. No fim do Encontro, os jogadores podem escolher qual Aventureiro recebe os Itens.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Quando uma Carta de Iniciativa indicar o início do turno de um Combatente COMMAND, cada Combatente COMMAND representado por ela fará um turno separado, na ordem escolhida pelos jogadores.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Durante a Fase de Preparação de um novo Encontro, cada Combatente COMMAND segue as regras dos Aventureiros para determinar seus ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " iniciais e quanto pode ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "curar",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " (supondo que tenha participado do Encontro anterior).",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Se um Combatente COMMAND for Derrotado, retire sua miniatura do tabuleiro. Se ele fizer parte de um Diagrama de Preparação no início de um Encontro, poderá ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "curar-se",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " e voltar ao jogo seguindo todas as mesmas regras que os Aventureiros.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Combatentes COMMAND usam as mesmas Tags de Condição dos Aventureiros, apresentadas na mesma caixa preta. Elas seguem as mesmas regras, exceto pela Tag de Condição ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "action.exhaust",
+            "sourceRendering": "semantic-inline",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "EXHAUST",
+            "font": "OptimaLTStd-DemiBold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 600,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Ao usar uma Habilidade com essa Tag, coloque uma ficha de Exaustão sobre ela para indicar que a Habilidade foi exaustada, em vez de exaustar a carta. Remova as fichas durante a Fase de Manutenção do turno do Combatente.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Combatentes COMMAND também usam caixas pretas para exibir outras Tags ao listar as Habilidades que podem executar. Nesses casos, os jogadores devem considerar as Tags da caixa preta conforme elas são definidas neste Livro de Regras.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• Combatentes COMMAND ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "sempre",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " têm um Ataque Padrão impresso: ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "attack.melee",
+            "sourceRendering": "semantic-inline",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "ATK",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ou ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "attack.ranged",
+            "sourceRendering": "semantic-inline",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "ATK",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " que custa ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "2 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Na carta, esse Ataque usa as Tags ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "tag.atk.melee",
+            "symbolMetrics": {
+              "widthEm": 4.482888888888889,
+              "heightEm": 1.287,
+              "verticalAlignEm": 0.31589,
+              "advanceEm": 4.482888888888889,
+              "sourceAssetUrl": "/pages/page_058/source-symbol-atk-melee.svg"
+            },
+            "sourceRendering": "semantic-inline",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ou ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "tag.atk.ranged",
+            "symbolMetrics": {
+              "widthEm": 4.482888888888889,
+              "heightEm": 1.287,
+              "verticalAlignEm": 0.31589,
+              "advanceEm": 4.482888888888889,
+              "sourceAssetUrl": "/pages/page_058/source-symbol-atk-ranged.svg"
+            },
+            "sourceRendering": "semantic-inline",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Elas indicam tipo e alcance do Ataque e devem ser consultadas ao fazer Ataques Padrão, Revides, Ataques de Oportunidade ou Ataques Livres concedidos por Habilidades ou Disciplinas. Se houver mais de um Ataque Padrão na carta, o Combatente pode usar qualquer um impresso nela.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n• A Habilidade de um Aventureiro pode trazer um Combatente COMMAND ao tabuleiro. Cada Aventureiro pode manter no tabuleiro no máximo ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Combatente COMMAND invocado por Habilidade por vez. Os trazidos por Regras Especiais de Encontro ou outras Mecânicas de Aventura não contam para esse limite.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": [
+          "action.exhaust",
+          "attack.melee",
+          "attack.ranged",
+          "tag.atk.melee",
+          "tag.atk.ranged"
+        ],
+        "printLineHeight": 1.03,
+        "paragraphSpacingPt": 4.25,
+        "printParagraphSpacingPt": 3.25
+      }
+    },
+    {
+      "payloadTranslationId": 2004,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_4__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "•\t\nCommand Combatants might have scaling Icons. Unless the \nCommand Combatant Card says otherwise, these Icons will Scale \noff of the Adventurer whose Ability brought them to the board. See \nScaling Icons Pg. 72.",
+      "proposalText": "Combatentes COMMAND também podem ter Ícones de Escala. Salvo indicação em contrário na Carta de Combatente COMMAND, esses Ícones escalam com o Aventureiro cuja Habilidade os trouxe ao tabuleiro. Veja Ícones de Escala, pág. 72.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_4__pt-BR",
+        "bbox": [
+          86.17320251464844,
+          736.4545288085938,
+          392.474609375,
+          781.3545532226562
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Combatentes COMMAND também podem ter Ícones de Escala. Salvo indicação em contrário na Carta de Combatente COMMAND, esses Ícones escalam com o Aventureiro cuja Habilidade os trouxe ao tabuleiro. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Ícones de Escala",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "72",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2005,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_5__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Unless stated otherwise, \nINTELLIGENT Combatant Cards always represent \nopponents to the Adventurers and are used to automate figures on the \nboard. This way, players can play against the game cooperatively.",
+      "proposalText": "Salvo indicação em contrário, as Cartas de Combatente INTELLIGENT sempre representam adversários e automatizam as miniaturas no tabuleiro, permitindo que os jogadores cooperem contra o jogo.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_5__pt-BR",
+        "bbox": [
+          415.8399963378906,
+          83.058837890625,
+          731.3103637695312,
+          117.0788345336914
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Salvo indicação em contrário, as Cartas de Combatente ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "INTELLIGENT",
+            "font": "OptimaLTStd-Black",
+            "size": 9,
+            "color": "#b5d333",
+            "weight": 900,
+            "style": "normal",
+            "disableLigatures": true,
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#231f20"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "sempre",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " representam adversários e automatizam as miniaturas no tabuleiro, permitindo que os jogadores cooperem contra o jogo.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2006,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_6__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Intelligent Combatants have Initiative Cards and take turns during a \nround just like Adventurers. In addition, they perform Actions and \nAbilities following all the same rules as Adventurers. However, during an \nIntelligent Combatants turn, they have their own special phases they go \nthrough.",
+      "proposalText": "Combatentes INTELLIGENT têm Cartas de Iniciativa e realizam seus turnos durante uma rodada, assim como os Aventureiros. Além disso, executam Ações e Habilidades seguindo todas as mesmas regras dos Aventureiros. Porém, durante o turno de cada Combatente INTELLIGENT, há fases especiais pelas quais ele passa.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_6__pt-BR",
+        "bbox": [
+          415.8399963378906,
+          121.84881591796875,
+          730.8005981445312,
+          177.7488250732422
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Combatentes INTELLIGENT têm Cartas de Iniciativa e realizam seus turnos durante uma rodada, assim como os Aventureiros. Além disso, executam Ações e Habilidades seguindo todas as mesmas regras dos Aventureiros. Porém, durante o turno de cada Combatente INTELLIGENT, há fases especiais pelas quais ele passa.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2007,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_7__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Some key differences between an Intelligent Combatant and an \nAdventurer are listed below.",
+      "proposalText": "Estas são algumas diferenças entre um Combatente INTELLIGENT e um Aventureiro:",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_7__pt-BR",
+        "bbox": [
+          415.8399963378906,
+          182.518798828125,
+          690.3904418945312,
+          205.41880798339844
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Estas são algumas diferenças entre um Combatente INTELLIGENT e um Aventureiro:",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2008,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_8__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "•\t\nAn Intelligent Combatant has all the rules to use their corresponding \nfigure(s) printed on the card. Because of this, Intelligent Combatants \ncannot equip Items, learn Disciplines, or Gain XP.",
+      "proposalText": "• As cartas de Combatente INTELLIGENT trazem as regras das miniaturas correspondentes. Por isso, eles não podem equipar Itens, aprender Disciplinas nem obter XP.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_8__pt-BR",
+        "bbox": [
+          415.8424987792969,
+          210.18682861328125,
+          729.5331420898438,
+          244.0868377685547
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "• As cartas de Combatente INTELLIGENT trazem as regras das miniaturas correspondentes. Por isso, eles ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "não podem",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " equipar Itens, aprender Disciplinas nem obter ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "XP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2009,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_9__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "•\t\nWhen an Initiative Card signals the beginning of an Intelligent \nCombatant’s turn, every Intelligent Combatant represented by that \ncard will take a separate turn in order of their Activation Number. See \nActivation Numbers Pg. 56.",
+      "proposalText": "• Quando uma Carta de Iniciativa indicar o turno de Combatentes INTELLIGENT, cada um representado nela realiza um turno separado, na ordem do respectivo Número de Ativação. Veja Números de Ativação, pág. 56.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_9__pt-BR",
+        "bbox": [
+          415.8424987792969,
+          248.85601806640625,
+          735.0732421875,
+          293.7560119628906
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "• Quando uma Carta de Iniciativa indicar o turno de Combatentes INTELLIGENT, cada um representado nela realiza um turno separado, na ordem do respectivo Número de Ativação. Veja ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Números de Ativação",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", pág. 56.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2010,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_10__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "•\t\nIntelligent Combatants do not use Stamina Points. Instead, during \ntheir turns they are instructed by AI Steps to perform a certain amount \nof Actions or Abilities.",
+      "proposalText": "• Combatentes INTELLIGENT não usam Pontos de Vigor (SP). Em seus turnos, seguem as Etapas de IA para realizar uma quantidade específica de Ações ou Habilidades.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_10__pt-BR",
+        "bbox": [
+          415.8424987792969,
+          298.52532958984375,
+          735.6231689453125,
+          332.4253234863281
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "• Combatentes INTELLIGENT não usam Pontos de Vigor (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "). Em seus turnos, seguem as Etapas de IA para realizar uma quantidade específica de Ações ou Habilidades.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2011,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_11__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "•\t\nIntelligent Combatants do not use Condition Tags. Their limitations \nare solely determined by their AI Steps.",
+      "proposalText": "• Combatentes INTELLIGENT não usam Tags de Condição; suas limitações são determinadas apenas pelas Etapas de IA.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_11__pt-BR",
+        "bbox": [
+          415.8424987792969,
+          337.1946105957031,
+          721.6231689453125,
+          360.0946044921875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "• Combatentes INTELLIGENT não usam Tags de Condição; suas limitações são determinadas apenas pelas Etapas de IA.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2014,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_15__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "1.\t\nSTART OF TURN PHASE: \n\nResolve Abilities and Effects that occur at the start of a turn.",
+      "proposalText": "1.\tFASE DE INÍCIO DO TURNO:\nResolva Habilidades e Efeitos no início do turno.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_15__pt-BR",
+        "bbox": [
+          415.84228515625,
+          623.6796264648438,
+          691.2388916015625,
+          647.5796508789062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "1.\t",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FASE DE INÍCIO DO TURNO:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\n",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Resolva Habilidades e Efeitos no início do turno.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2015,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_16__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "2.\t\nSTATUS PHASE: \n\nAny Effects and Abilities that have the ✜ STATUS Tag occur during \nthis Phase. See Pg. 95 for a list of Effects.",
+      "proposalText": "2.\tFASE DE STATUS:\nNesta Fase, ocorrem todas as Habilidades e os Efeitos com a Tag [[tag.status]]. Veja a lista de Efeitos na pág. 95.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_16__pt-BR",
+        "bbox": [
+          415.8421936035156,
+          652.3489379882812,
+          731.1448974609375,
+          686.2489624023438
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "2.\t",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FASE DE STATUS:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\nNesta Fase, ocorrem todas as Habilidades e os Efeitos com a Tag ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "￼",
+            "symbolId": "tag.status",
+            "symbolMetrics": {
+              "widthEm": 6.256998697916667,
+              "heightEm": 1.2870008680555556,
+              "verticalAlignEm": 0.3158908420138889,
+              "renderVariant": "prose-9pt"
+            },
+            "sourceRendering": "semantic-inline",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Veja a lista de Efeitos na pág. 95.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": [
+          "tag.status"
+        ]
+      }
+    },
+    {
+      "payloadTranslationId": 2016,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_17__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "3.\t\nACTIVATION PHASE: \n\nGo through the Combatant's AI Steps one at a time until one of the \nconditions is true. Then, perform the instructions listed under the true \ncondition.",
+      "proposalText": "3.\tFASE DE ATIVAÇÃO:\nSiga as Etapas de IA do Combatente uma a uma até que uma das condições seja verdadeira. Então, execute as instruções listadas para essa condição verdadeira.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_17__pt-BR",
+        "bbox": [
+          415.8421936035156,
+          691.0181884765625,
+          733.3575439453125,
+          735.918212890625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "3.\t",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FASE DE ATIVAÇÃO:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\nSiga as Etapas de IA do Combatente uma a uma até que uma das condições seja verdadeira. Então, execute as instruções listadas para essa condição verdadeira.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2017,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_18__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "4.\t\nEND OF TURN PHASE: \n\nResolve Abilities and Effects that occur at the end of a turn.",
+      "proposalText": "4.\tFASE DE FIM DO TURNO:\nResolva Habilidades e Efeitos do fim do turno.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_block_18__pt-BR",
+        "bbox": [
+          415.8421936035156,
+          740.6875,
+          686.8015747070312,
+          763.5875244140625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "4.\t",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FASE DE FIM DO TURNO:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "\nResolva Habilidades e Efeitos do fim do turno.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 1996,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_19__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Command Combatants",
+      "proposalText": "Combatentes COMMAND",
+      "data": {
+        "managedSourceSymbols": [],
+        "schemaVersion": 2,
+        "textAlign": "left",
+        "lineHeight": 1,
+        "segments": [
+          {
+            "size": 18,
+            "text": "Combatentes COMMAND",
+            "color": "#231f20",
+            "font": "Cinzel-Regular",
+            "weight": 700,
+            "disableLigatures": true,
+            "style": "normal"
+          }
+        ],
+        "bbox": [
+          86.52760314941406,
+          56.69243621826172,
+          309.3135986328125,
+          80.95643615722656
+        ],
+        "spanKey": "page_58_block_19__pt-BR",
+        "lineHeightMode": "source"
+      }
+    },
+    {
+      "payloadTranslationId": 1997,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_block_20__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Intelligent Combatants",
+      "proposalText": "Combatentes INTELLIGENT",
+      "data": {
+        "managedSourceSymbols": [],
+        "schemaVersion": 2,
+        "textAlign": "left",
+        "lineHeight": 1,
+        "segments": [
+          {
+            "size": 18,
+            "text": "Combatentes INTELLIGENT",
+            "color": "#231f20",
+            "font": "Cinzel-Regular",
+            "weight": 700,
+            "disableLigatures": true,
+            "style": "normal"
+          }
+        ],
+        "bbox": [
+          415.8424987792969,
+          56.69243621826172,
+          655.8004760742188,
+          80.95643615722656
+        ],
+        "spanKey": "page_58_block_20__pt-BR",
+        "lineHeightMode": "source"
+      }
+    },
+    {
+      "payloadTranslationId": 1413,
+      "payloadReviewId": 1290,
+      "approvalStatus": "approved",
+      "reviewDisposition": "active",
+      "technicalStatus": "copyfit_v3_exact_and_payload_persisted",
+      "spanKey": "page_58_unit_p58-activation-numbers-body__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Intelligent Combatants with more than 3 copies of the same figure will have \n2 or more copies of their Combatant Card. These cards will have a different \nset of Activation Numbers on each Combatant Card. In addition, these \nCombatant Cards will have 2 or more different Initiative Cards with matching \nActivation Numbers.",
+      "proposalText": "Combatentes Inteligentes com mais de 3 cópias da mesma miniatura terão 2 ou mais cópias de sua Carta de Combatente. Cada Carta de Combatente terá um conjunto diferente de Números de Ativação. Além disso, essas Cartas de Combatente terão 2 ou mais Cartas de Iniciativa distintas, com Números de Ativação correspondentes.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_unit_p58-activation-numbers-body__pt-BR",
+        "bbox": [
+          415.8424987792969,
+          422.6025085449219,
+          734.9764404296875,
+          478.50250244140625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Combatentes Inteligentes com mais de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "3",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " cópias da mesma miniatura terão ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ou mais cópias de sua Carta de Combatente. Cada Carta de Combatente terá um conjunto diferente de Números de Ativação. Além disso, essas Cartas de Combatente terão ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ou mais Cartas de Iniciativa distintas, com Números de Ativação correspondentes.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 1414,
+      "payloadReviewId": 1291,
+      "approvalStatus": "approved",
+      "reviewDisposition": "active",
+      "technicalStatus": "copyfit_v3_exact_and_payload_persisted",
+      "spanKey": "page_58_unit_p58-activation-numbers-example__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Example: 6 Cave Sickles start on the board during an Encounter. One player \nwould manage the Combatant Card for Cave Sickles 1, 2, and 3, and another \nplayer would manage the card for Cave Sickles 4, 5, and 6. Since each Cave \nSickle Group has a different Initiative Card, Cave Sickle 1, 2, and 3 will \nactivate at a different time than Cave Sickle 4, 5, and 6.",
+      "proposalText": "Exemplo: 6 Cave Sickles começam no tabuleiro durante um Encontro. Um jogador cuidaria da Carta de Combatente dos Cave Sickles 1, 2 e 3, e outro cuidaria da carta dos Cave Sickles 4, 5 e 6. Como cada grupo de Cave Sickles tem uma Carta de Iniciativa diferente, os Cave Sickles 1, 2 e 3 serão ativados em um momento diferente dos Cave Sickles 4, 5 e 6.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_unit_p58-activation-numbers-example__pt-BR",
+        "bbox": [
+          415.8424987792969,
+          481.673828125,
+          736.1370239257812,
+          539.1718139648438
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Exemplo:",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "6",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " Cave Sickles começam no tabuleiro durante um Encontro. Um jogador cuidaria da Carta de Combatente dos Cave Sickles ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ", ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " e ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "3",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ", e outro cuidaria da carta dos Cave Sickles ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "4",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ", ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "5",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " e ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "6",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ". Como cada grupo de Cave Sickles tem uma Carta de Iniciativa diferente, os Cave Sickles ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ", ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " e ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "3",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " serão ativados em um momento diferente dos Cave Sickles ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "4",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ", ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "5",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " e ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "6",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 1998,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_unit_p58-block-20-first-size-12pt__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Setting up Intelligent Combatants",
+      "proposalText": "Preparação dos Combatentes INTELLIGENT",
+      "data": {
+        "managedSourceSymbols": [],
+        "schemaVersion": 2,
+        "textAlign": "left",
+        "lineHeight": 1,
+        "segments": [
+          {
+            "size": 12,
+            "text": "Preparação dos Combatentes INTELLIGENT",
+            "color": "#231f20",
+            "font": "Cinzel-Regular",
+            "weight": 700,
+            "disableLigatures": true,
+            "style": "normal"
+          }
+        ],
+        "bbox": [
+          415.8424987792969,
+          371.41119384765625,
+          650.9454345703125,
+          387.5871887207031
+        ],
+        "spanKey": "page_58_unit_p58-block-20-first-size-12pt__pt-BR",
+        "lineHeightMode": "source"
+      }
+    },
+    {
+      "payloadTranslationId": 2012,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_unit_p58-block-20-remaining-size-10pt__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "At the start of each Encounter, players deal out each Intelligent Combatant \nCard that they will be using as evenly as possible among the players.",
+      "proposalText": "No início de cada Encontro, os jogadores dividem entre si, da forma mais equilibrada possível, as Cartas de Combatente INTELLIGENT que usarão.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_unit_p58-block-20-remaining-size-10pt__pt-BR",
+        "bbox": [
+          415.8424987792969,
+          394.9331970214844,
+          721.8233642578125,
+          417.83319091796875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "No início de cada Encontro, os jogadores dividem entre si, da forma mais equilibrada possível, as Cartas de Combatente INTELLIGENT que usarão.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 2013,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_unit_p58-block-24-body-size-10pt__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "When an Intelligent Combatant's Initiative Card signals the start of their \nturn, go through the following steps for each Combatant represented by \nthe Initiative Card, finishing the steps for the 1st figure before moving on \nto the next one.",
+      "proposalText": "Quando a Carta de Iniciativa de um Combatente INTELLIGENT indicar o início do turno, siga as etapas abaixo para cada Combatente representado por ela. Conclua todas as etapas para a 1ª miniatura antes de passar à próxima.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_58_unit_p58-block-24-body-size-10pt__pt-BR",
+        "bbox": [
+          415.84228515625,
+          574.0103149414062,
+          728.1740112304688,
+          618.9104614257812
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Quando a Carta de Iniciativa de um Combatente INTELLIGENT indicar o início do turno, siga as etapas abaixo para cada Combatente representado por ela. Conclua todas as etapas para a ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1ª",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " miniatura antes de passar à próxima.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "payloadTranslationId": 1999,
+      "approvalStatus": "no_review_record",
+      "spanKey": "page_58_unit_p58-block-24-heading-size-12pt__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Intelligent Combatant Turns",
+      "proposalText": "Turnos de Combatentes INTELLIGENT",
+      "data": {
+        "managedSourceSymbols": [],
+        "schemaVersion": 2,
+        "textAlign": "left",
+        "lineHeight": 1,
+        "segments": [
+          {
+            "size": 12,
+            "text": "Turnos de Combatentes INTELLIGENT",
+            "color": "#231f20",
+            "font": "Cinzel-Regular",
+            "weight": 700,
+            "disableLigatures": true,
+            "style": "normal"
+          }
+        ],
+        "bbox": [
+          415.84228515625,
+          550.4883422851562,
+          618.5223999023438,
+          566.664306640625
+        ],
+        "spanKey": "page_58_unit_p58-block-24-heading-size-12pt__pt-BR",
+        "lineHeightMode": "source"
+      }
+    }
+  ],
+  "note": "A whole-page translation/render proposal, still subject to terminology consistency and human page review. PDF and Viewer exports were visually inspected; the 43-row Command list and next block anchors closely follow the measured OG. No Copyfit V3 receipts were created for the 22 new/unchanged unreviewed units, and no new approval records were written."
+}

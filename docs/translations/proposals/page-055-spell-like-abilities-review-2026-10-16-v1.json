@@ -1,0 +1,2101 @@
+{
+  "proposalId": "p055-spell-like-abilities-2026-10-16-v1",
+  "version": "1",
+  "title": "Habilidades Semelhantes a Feitiços — resolução do exemplo, página 55",
+  "page": 55,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "193E57886573F8EEBB48C8E01B6789A075881F6A3810519B9C0CA61B6007EA65",
+    "background": "69B4848E12C47C2C17C9C6AF8721F6F7E99D199B40AED0D199951DD419333F6D",
+    "fidelityOverlays": "D4A5DE9CBB321FBCA7D838479FB5027238F074214C730EE2899EAD1E4FEB70CF"
+  },
+  "counts": {
+    "candidates": 12,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 3,
+    "viewerVerifiedCandidates": 12,
+    "copyfitV3VerifiedCandidates": 0,
+    "editorRoundTripVerifiedCandidates": 0,
+    "pdfExportVerifiedCandidates": 0,
+    "editoriallyApprovedCandidates": 0
+  },
+  "sourceArtifacts": [
+    "docs/translations/source-pages/page-055.md",
+    "apps/web/public/pages/page_055/page_055_dom.json",
+    "apps/web/public/pages/page_055/fidelity_overlays.json"
+  ],
+  "candidates": [
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_2",
+      "sourceText": "Remi makes an Attack against the Animate using a Great Hammer.",
+      "spanKey": "page_55_block_0__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "Remi faz um Ataque contra o Animate usando Great Hammer.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_0__pt-BR",
+        "bbox": [
+          87.16529846191406,
+          382.469482421875,
+          373.38519287109375,
+          394.40948486328125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Remi faz um Ataque contra o Animate usando Great Hammer.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_layout_symbol_no_fallback",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Attack → Ataque (uso mecânico/capitalização local em revisão)",
+        "Remi, Animate e Great Hammer → nomes preservados; conferir convenção editorial"
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            87.16529846191406,
+            382.469482421875,
+            373.38519287109375,
+            394.40948486328125
+          ],
+          "visualBaselinesPt": [
+            391.699
+          ],
+          "spans": 3,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_0__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            336.55
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_0__pt-BR",
+        "bbox": [
+          87.16529846191406,
+          382.469482421875,
+          373.38519287109375,
+          394.40948486328125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Remi faz um Ataque contra o Animate usando Great Hammer.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "blockIndex": 2,
+      "sourceBlockId": "block_4",
+      "sourceText": "The total Attack roll equals 13. This hits the Animate’s Defense Value \nof 9 with a difference rolled of 4.",
+      "spanKey": "page_55_block_2__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "A rolagem de Ataque resulta em 13. Isso acerta o Valor de Defesa 9 do Animate com uma diferença de 4.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_2__pt-BR",
+        "bbox": [
+          87.16329956054688,
+          489.1753234863281,
+          384.58331298828125,
+          513.0945434570312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "A rolagem de Ataque resulta em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "13",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Isso acerta o Valor de Defesa ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "9",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " do Animate com uma diferença de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "4",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_layout_symbol_no_fallback",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Attack → Ataque (uso mecânico/capitalização local em revisão)",
+        "Defense Value → Valor de Defesa (proposta local)",
+        "Difference Hit → Diferença do Acerto (proposta local)",
+        "Remi, Animate e Great Hammer → nomes preservados; conferir convenção editorial"
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            87.16329956054688,
+            489.1753234863281,
+            384.58331298828125,
+            513.0945434570312
+          ],
+          "visualBaselinesPt": [
+            498.385,
+            510.385
+          ],
+          "spans": 8,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 9,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            423.02,
+            431.13
+          ],
+          "frameHeightCssPx": 19.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 4,
+      "sourceBlockId": "block_6",
+      "sourceText": "The Animate has 3 Armor, and Remi does not have ARMOR PIERCING on her Weapon, so the PHYSICAL DMG dealt to the Animate is reduced by 3. The Final Damage dealt to the Animate is 8. The Animate now adds \n8 Damage tokens to its card.",
+      "spanKey": "page_55_block_4__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "O Animate tem 3 de Armadura. Como Remi não tem PERFURAÇÃO DE ARMADURA na Arma, o DANO FÍSICO que ela causa é reduzido em 3. O Dano Final é 8. O Animate adiciona 8 fichas de Dano à própria carta.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_4__pt-BR",
+        "bbox": [
+          87.16339111328125,
+          556.5331420898438,
+          402.8981018066406,
+          601.4331665039062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "O Animate tem ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "3",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " de Armadura. Como Remi não tem ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "PERFURAÇÃO DE ARMADURA",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " na Arma, o ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "DANO FÍSICO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " que ela causa é reduzido em ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "3",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". O Dano Final é ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "8",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". O Animate adiciona ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "8",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " fichas de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Dano",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " à própria carta.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_layout_symbol_no_fallback",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Damage / DMG → Dano (proposta local; categoria/capitalização pendente)",
+        "Armor / Armor Piercing → Armadura / Perfuração de Armadura (propostas locais)",
+        "Remi, Animate e Great Hammer → nomes preservados; conferir convenção editorial"
+      ],
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            87.16339111328125,
+            556.5331420898438,
+            402.8981018066406,
+            601.4331665039062
+          ],
+          "visualBaselinesPt": [
+            565.723,
+            576.723,
+            587.723,
+            598.723
+          ],
+          "spans": 16,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_4__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 16,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            477.61,
+            486.52,
+            495.42,
+            504.31
+          ],
+          "frameHeightCssPx": 36.4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 5,
+      "sourceBlockId": "block_7",
+      "sourceText": "Finally, Remi reaches the Follow Up step of her Attack.",
+      "spanKey": "page_55_block_5__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "Por fim, Remi chega à etapa de Follow Up do Ataque.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_5__pt-BR",
+        "bbox": [
+          87.16929626464844,
+          606.18310546875,
+          324.94927978515625,
+          618.1031494140625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Por fim, Remi chega à etapa de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Follow Up",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " do Ataque.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Attack → Ataque (uso mecânico/capitalização local em revisão)",
+        "Remi, Animate e Great Hammer → nomes preservados; conferir convenção editorial"
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            87.16929626464844,
+            606.18310546875,
+            324.94927978515625,
+            618.1031494140625
+          ],
+          "visualRowBaselinesPt": [
+            615.393
+          ],
+          "spans": 3,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_5__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 3,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            517.84
+          ],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 8.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_5__pt-BR",
+        "bbox": [
+          87.16929626464844,
+          606.18310546875,
+          324.94927978515625,
+          618.1031494140625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Por fim, Remi chega à etapa de Continuação do Ataque.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 55,
+            "pdfDocumentPageIndex": 54,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              87.16929626464844,
+              606.18310546875,
+              324.94927978515625,
+              618.1031494140625
+            ],
+            "visualRowBaselinesPt": [
+              615.393
+            ],
+            "spans": 3,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_55_block_5__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 3,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              539.52
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.4052405895027056,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05241px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05241px",
+                "letterSpacing": "-0.0607861px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05241px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.05241px",
+                "letterSpacing": "-0.0607861px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 55,
+            "pdfDocumentPageIndex": 54,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              87.16929626464844,
+              606.18310546875,
+              324.94927978515625,
+              618.1031494140625
+            ],
+            "visualRowBaselinesPt": [
+              615.393
+            ],
+            "spans": 3,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_55_block_5__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 3,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              517.84
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 8.1
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurementFingerprint": null
+    },
+    {
+      "blockIndex": 6,
+      "sourceBlockId": "block_64",
+      "sourceText": "EXHAUST",
+      "spanKey": "page_55_block_6__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "EXAUSTAR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_6__pt-BR",
+        "bbox": [
+          233.18150329589844,
+          634.228759765625,
+          266.9178161621094,
+          643.5361328125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "EXAUSTAR",
+            "font": "OptimaLTStd-DemiBold",
+            "size": 7.8676,
+            "color": "#ffffff",
+            "weight": 600,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_layout_symbol_no_fallback",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            233.18150329589844,
+            634.228759765625,
+            266.9178161621094,
+            643.5361328125
+          ],
+          "visualBaselinesPt": [
+            641.459
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_6__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            540.56
+          ],
+          "frameHeightCssPx": 7.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 7,
+      "sourceBlockId": "block_65",
+      "sourceText": "FU: Spend 1 SP to PUSH 1 against all adjacent opponents and Inflict Paralyze,FORCE 7 + DIFFERENCE HIT.",
+      "spanKey": "page_55_block_7__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "FU: Gaste 1 SP para EMPURRAR 1 contra todos os oponentes adjacentes e inflija Paralisia; FORÇA 7 + DIFERENÇA DO ACERTO.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_7__pt-BR",
+        "bbox": [
+          163.05758666992188,
+          646.3024291992188,
+          330.57373046875,
+          675.75146484375
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "FU:",
+            "font": "OptimaLTStd-Bold",
+            "size": 7.8676,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Gaste ",
+            "font": "OptimaLTStd",
+            "size": 8.4728,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 7.8676,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " para ",
+            "font": "OptimaLTStd",
+            "size": 8.4728,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "EMPURRAR 1",
+            "font": "OptimaLTStd-Bold",
+            "size": 7.8676,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " contra todos os oponentes adjacentes e inflija ",
+            "font": "OptimaLTStd",
+            "size": 8.4728,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Paralisia",
+            "font": "OptimaLTStd-Italic",
+            "size": 8.4728,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": "; ",
+            "font": "OptimaLTStd",
+            "size": 8.4728,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FORÇA 7 + DIFERENÇA DO ACERTO.",
+            "font": "OptimaLTStd-Bold",
+            "size": 7.8676,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_layout_symbol_no_fallback",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Push / Pull / Pushed → Empurrar / Puxar / Empurrado (mecânica local)",
+        "Paralyze → Paralisia (rótulo de condição proposto)",
+        "Force → Força (proposta local)",
+        "Difference Hit → Diferença do Acerto (proposta local)"
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            163.05758666992188,
+            646.3024291992188,
+            330.57373046875,
+            675.75146484375
+          ],
+          "visualBaselinesPt": [
+            654.087,
+            663.772,
+            673.455
+          ],
+          "spans": 11,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_7__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 11,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            550.36,
+            557.22,
+            564.08
+          ],
+          "frameHeightCssPx": 23.9
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 8,
+      "sourceBlockId": "block_69",
+      "sourceText": "The Follow Up Ability on the Great Hammer reads: FU: Spend 1 SP \nto PUSH 1 against all adjacent opponents and Inflict Paralyze, \nFORCE 7 + DIFFERENCE HIT.",
+      "spanKey": "page_55_block_8__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "A Habilidade Follow Up da Great Hammer diz: FU: Gaste 1 SP para EMPURRAR 1 contra todos os oponentes adjacentes e infligir Paralisia; FORÇA 7 + DIFERENÇA DO ACERTO.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_8__pt-BR",
+        "bbox": [
+          87.16529846191406,
+          689.5089111328125,
+          378.96868896484375,
+          723.1779174804688
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "A Habilidade Follow Up da ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Great Hammer",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": " diz: ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FU",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ": Gaste ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " para ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "EMPURRAR 1",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " contra todos os oponentes adjacentes e infligir ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Paralisia",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": "; ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "FORÇA 7 + DIFERENÇA DO ACERTO.",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Remi, Animate e Great Hammer → nomes preservados; conferir convenção editorial",
+        "Push / Pull / Pushed → Empurrar / Puxar / Empurrado (mecânica local)",
+        "Paralyze → Paralisia (rótulo de condição proposto)",
+        "Force → Força (proposta local)",
+        "Difference Hit → Diferença do Acerto (proposta local)"
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            87.16529846191406,
+            689.5089111328125,
+            378.96868896484375,
+            723.1779174804688
+          ],
+          "visualRowBaselinesPt": [
+            698.739,
+            709.739,
+            720.739
+          ],
+          "spans": 12,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_8__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 12,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            585.38,
+            593.48,
+            601.59
+          ],
+          "visualRowIntervalsPt": [
+            10.01,
+            10.01
+          ],
+          "pageScaleCssPxPerPt": 0.8104049916413385,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.29364px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "7.29364px",
+              "letterSpacing": "-0.109405px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "8.10405px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "8.10405px",
+              "letterSpacing": "-0.121561px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 24.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 3,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 55,
+            "pdfDocumentPageIndex": 54,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              87.16529846191406,
+              689.5089111328125,
+              378.96868896484375,
+              723.1779174804688
+            ],
+            "visualRowBaselinesPt": [
+              698.739,
+              709.739,
+              720.739
+            ],
+            "spans": 12,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_55_block_8__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 12,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              573.28,
+              577.92,
+              581.97
+            ],
+            "visualRowIntervalsPt": [
+              11.1,
+              10.4
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "3.64682px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.05202px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 13.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 3,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 55,
+            "pdfDocumentPageIndex": 54,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              87.16529846191406,
+              689.5089111328125,
+              378.96868896484375,
+              723.1779174804688
+            ],
+            "visualRowBaselinesPt": [
+              698.739,
+              709.739,
+              720.739
+            ],
+            "spans": 12,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_55_block_8__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 12,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              585.38,
+              593.48,
+              601.59
+            ],
+            "visualRowIntervalsPt": [
+              10.01,
+              10.01
+            ],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "7.29364px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.10405px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 24.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurementFingerprint": null
+    },
+    {
+      "blockIndex": 9,
+      "sourceBlockId": "block_70",
+      "sourceText": "Her DIFFERENCE HIT (4) adds to the Force of the Spell-Like Ability (7) totaling 11.",
+      "spanKey": "page_55_block_9__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "A Força da Habilidade Semelhante a Feitiços (7) + a DIFERENÇA DO ACERTO de Remi (4) = 11.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_9__pt-BR",
+        "bbox": [
+          87.16079711914062,
+          728.2180786132812,
+          383.1708068847656,
+          751.1181030273438
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "A Força da Habilidade Semelhante a Feitiços (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "7",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ") + a ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "DIFERENÇA DO ACERTO",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " de Remi (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "4",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ") = ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "11",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ".",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_layout_symbol_no_fallback",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Spell-Like Ability → Habilidade Semelhante a Feitiço(s) (proposta local; canon pendente)",
+        "Force → Força (proposta local)",
+        "Difference Hit → Diferença do Acerto (proposta local)"
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            87.16079711914062,
+            728.2180786132812,
+            383.1708068847656,
+            751.1181030273438
+          ],
+          "visualBaselinesPt": [
+            737.408,
+            748.408
+          ],
+          "spans": 10,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_9__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 11,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            616.73,
+            624.84
+          ],
+          "frameHeightCssPx": 18.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 11,
+      "sourceBlockId": "block_72",
+      "sourceText": "The Animate must now make a Conviction Check against the Spell-Like Ability's Force of 11.",
+      "spanKey": "page_55_block_11__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "O Animate deve fazer agora um Teste de Convicção contra a Força 11 da Habilidade Semelhante a Feitiços.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_11__pt-BR",
+        "bbox": [
+          416.34332275390625,
+          460.068115234375,
+          725.9638061523438,
+          483.0881042480469
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "O Animate deve fazer agora um Teste de Convicção contra a Força ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "11",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " da Habilidade Semelhante a Feitiços.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_layout_symbol_no_fallback",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Spell-Like Ability → Habilidade Semelhante a Feitiço(s) (proposta local; canon pendente)",
+        "Conviction Check → Teste de Convicção (proposta local)",
+        "Force → Força (proposta local)",
+        "Remi, Animate e Great Hammer → nomes preservados; conferir convenção editorial"
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            416.34332275390625,
+            460.068115234375,
+            725.9638061523438,
+            483.0881042480469
+          ],
+          "visualBaselinesPt": [
+            469.378,
+            480.377
+          ],
+          "spans": 6,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_11__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            399.42,
+            407.53
+          ],
+          "frameHeightCssPx": 18.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 13,
+      "sourceBlockId": "block_74",
+      "sourceText": "The Animate rolls a 7 and fails the Conviction Check and is Pushed \n1 space and Inflicted with Paralyze. This resolves the Attack, and Remi continues her turn.",
+      "spanKey": "page_55_block_13__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "O Animate tira 7 e falha no Teste de Convicção: é EMPURRADO 1 espaço e recebe Paralisia. Assim se resolve o Ataque, e Remi continua seu turno.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_13__pt-BR",
+        "bbox": [
+          416.3363037109375,
+          537.5253295898438,
+          719.9931640625,
+          571.4253540039062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "O Animate tira ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "7",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " e falha no Teste de Convicção: é Empurrado ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " espaço e recebe ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Paralisia",
+            "font": "OptimaLTStd-Italic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ". Assim se resolve o Ataque, e Remi continua seu turno.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_layout_symbol_no_fallback",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Push / Pull / Pushed → Empurrar / Puxar / Empurrado (mecânica local)",
+        "Paralyze → Paralisia (rótulo de condição proposto)",
+        "Attack → Ataque (uso mecânico/capitalização local em revisão)",
+        "Remi, Animate e Great Hammer → nomes preservados; conferir convenção editorial"
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            416.3363037109375,
+            537.5253295898438,
+            719.9931640625,
+            571.4253540039062
+          ],
+          "visualBaselinesPt": [
+            546.715,
+            557.715,
+            568.715
+          ],
+          "spans": 8,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_13__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 8,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            462.2,
+            471.08,
+            480.03
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 14,
+      "sourceBlockId": "block_75",
+      "sourceText": "Note: Normally, if the Animate moved away from a space adjacent to an opponent it would provoke a Break Attack from that opponent. However, Abilities such as Push and Pull will only provoke Break Attacks from figures who weren't the ones who used the Ability. This means that Remi would not be eligible to make the Break Attack.",
+      "spanKey": "page_55_block_14__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "Observação: Normalmente, se o Animate se afastasse de um espaço adjacente a um oponente, provocaria um Ataque de Oportunidade dele. Porém, Habilidades como Empurrar e Puxar só provocam esses Ataques de Oportunidade de Miniaturas diferentes da que usou a Habilidade. Assim, Remi não poderia realizar esse Ataque de Oportunidade.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_14__pt-BR",
+        "bbox": [
+          416.34259033203125,
+          576.17529296875,
+          732.8631591796875,
+          632.0953369140625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Observação:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " Normalmente, se o Animate se afastasse de um espaço adjacente a um oponente, provocaria um Ataque de Oportunidade dele. Porém, Habilidades como Empurrar e Puxar só provocam esses Ataques de Oportunidade de Miniaturas diferentes da que usou a Habilidade. Assim, Remi não poderia realizar esse Ataque de Oportunidade.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_layout_symbol_no_fallback",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Push / Pull / Pushed → Empurrar / Puxar / Empurrado (mecânica local)",
+        "Remi, Animate e Great Hammer → nomes preservados; conferir convenção editorial"
+      ],
+      "sourcePdfVisualLineCount": 5,
+      "pageRendererVisualLineCount": 5,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 5,
+        "pageRendererVisualLineCount": 5,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            416.34259033203125,
+            576.17529296875,
+            732.8631591796875,
+            632.0953369140625
+          ],
+          "visualBaselinesPt": [
+            585.385,
+            596.385,
+            607.385,
+            618.385,
+            629.385
+          ],
+          "spans": 6,
+          "visualRows": 5
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_14__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 10,
+          "distinctVisualRows": 5,
+          "visualRowTopsCssPx": [
+            493.52,
+            501.63,
+            509.73,
+            517.84,
+            525.95
+          ],
+          "frameHeightCssPx": 45.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 41,
+      "sourceBlockId": "block_201",
+      "sourceText": "Using Spell-Like Abilities",
+      "spanKey": "page_55_block_41__pt-BR",
+      "language": "pt-BR",
+      "proposalText": "Usando Habilidades Semelhantes a Feitiços",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_55_block_41__pt-BR",
+        "bbox": [
+          287.0205993652344,
+          56.69243621826172,
+          532.522705078125,
+          80.95643615722656
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Usando Habilidades Semelhantes a Feitiços",
+            "font": "Cinzel-Regular",
+            "size": 18,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_viewer_layout_symbol_no_fallback",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Spell-Like Ability → Habilidade Semelhante a Feitiço(s) (proposta local; canon pendente)"
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 55,
+          "pdfDocumentPageIndex": 54,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            287.0205993652344,
+            56.69243621826172,
+            532.522705078125,
+            80.95643615722656
+          ],
+          "visualBaselinesPt": [
+            74.26
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_55_block_41__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            71.53
+          ],
+          "frameHeightCssPx": 19.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "viewerVerification": {
+    "status": "verified_viewer_layout_symbol_no_fallback",
+    "verifiedOn": "2026-10-16",
+    "independentCriticalReview": true,
+    "proposalCandidatesExpected": 12,
+    "proposalCandidatesSelected": 12,
+    "selectedRowsMatchedViewerBlocks": 12,
+    "inspectedZoomPercent": [
+      100,
+      125
+    ],
+    "visibleClippingOrOverflow": 0,
+    "symbolExceptionsBlankOnlyInDiagnostic": 2,
+    "completeSourceAndProposalAccessibleInPanel": true,
+    "englishArtworkPreserved": true,
+    "translationsApiDocuments": 326,
+    "translationOrApprovalWrites": 0,
+    "editorRoundTripVerified": false,
+    "copyfitV3Verified": false,
+    "pdfExportVerified": false,
+    "editorialApproval": false
+  }
+}

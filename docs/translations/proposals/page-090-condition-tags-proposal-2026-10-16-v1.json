@@ -1,0 +1,2126 @@
+{
+  "proposalId": "p090-condition-tags",
+  "version": "1",
+  "title": "Tags de Condição — p. 90",
+  "page": 90,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "F4ABBB9847433144D9C93C4A051F11B1AE63532BBE382A4E1E881584A680BA48",
+    "pageDom": "E8FE2FB7193FCD4D0DC646DE203EB774A80A22466CC8DFCF9169B7E736240FE7",
+    "inlineElements": "67B345367A5FDE0468C18BCC4BC1A36D411DDEC9536D7530F971743A3E4A529F",
+    "fidelityOverlays": "73ABA82B2FB10EAD1123F138A15C09C2547F96EA197FA76F03C15B9032A92BF6"
+  },
+  "counts": {
+    "candidates": 14,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 5,
+    "openExceptions": 1
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "GET somente leitura ao Payload encontrou zero traduções PT-BR remotas nas chaves page_90_*. A proposta é somente de revisão; nenhuma tradução final foi escrita. Overrides humanos locais continuam com prioridade no Viewer.",
+    "Foram traduzidas as sete explicações, o título e os rótulos isolados nesta proposta. A unidade composta block_15 (COMBO : (TAG) e PASSIVE) fica vazia somente no diagnóstico até ser separada em unidades sem perder o alinhamento original; o texto candidato permanece no painel de revisão.",
+    "Rótulos, fases e termos mecânicos ainda pendentes de revisão editorial e do glossário. Nenhum registro foi aprovado editorialmente ou tecnicamente.",
+    "A revisão visual inglesa completa da p.90 está registrada em docs/project-progress/2026-10-04-page90-visual-review.md; esta proposta ainda requer Copyfit V3 no Viewer e comparação PT-BR com PDF."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 0,
+      "sourceBlockId": "block_8",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_0__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "If another Item with (Tag) is also equipped, \nthe listed Ability may be used. ",
+      "proposalText": "Se outro Item com (Tag) estiver equipado, a Habilidade indicada pode ser usada.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_0__pt-BR",
+        "bbox": [
+          177.02349853515625,
+          650.3441162109375,
+          365.5635070800781,
+          674.244140625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Se outro Item com (Tag) estiver equipado, a Habilidade indicada pode ser usada.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved and persisted through the official Reviewer. Item, Tag, and Ability match approved glossary forms; capitalization mirrors the printed mechanic terms. Copyfit V3 was EXACT 2/2 at 100% and 200%; Payload read-back confirmed.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "100%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            177.02349853515625,
+            650.3441162109375,
+            365.5635070800781,
+            674.244140625
+          ],
+          "visualRowBaselinesPt": [
+            660.534,
+            671.534
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_0__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 3,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            557.41,
+            561.84
+          ],
+          "visualRowIntervalsPt": [
+            10.95
+          ],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "4.05202px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 8.9
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_0__pt-BR",
+        "bbox": [
+          177.02349853515625,
+          650.3441162109375,
+          365.5635070800781,
+          674.244140625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Se outro Item com (Tag) estiver equipado, a Habilidade indicada pode ser usada.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              177.02349853515625,
+              650.3441162109375,
+              365.5635070800781,
+              674.244140625
+            ],
+            "visualBaselinesPt": [
+              660.534,
+              671.534
+            ],
+            "spans": 2,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_0__pt-BR",
+            "readingMethod": "text rects of review-highlighted unit",
+            "rangeRectFragments": 3,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              553.63,
+              562.53
+            ],
+            "frameHeightCssPx": 19.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              177.02349853515625,
+              650.3441162109375,
+              365.5635070800781,
+              674.244140625
+            ],
+            "visualRowBaselinesPt": [
+              660.534,
+              671.534
+            ],
+            "spans": 2,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_0__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 3,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              557.41,
+              561.84
+            ],
+            "visualRowIntervalsPt": [
+              10.95
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 8.9
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 967,
+        "translationId": 932,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:35:51.792Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual"
+      },
+      "copyfitMeasurementFingerprint": "be26d195912dfa2d6db4305b3e8c07974c474261390e281fb82c424f4959ff3b"
+    },
+    {
+      "blockIndex": 1,
+      "sourceBlockId": "block_9",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_1__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "To use the following Ability, the player must discard this card.",
+      "proposalText": "Descarte esta carta para usar a Habilidade a seguir.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_1__pt-BR",
+        "bbox": [
+          177.02349853515625,
+          684.68408203125,
+          354.3626708984375,
+          707.5841064453125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Descarte esta carta para usar a Habilidade a seguir.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved and persisted through the official Reviewer. Ability uses the approved Habilidade form; “discard this card” is a plain imperative accurately translated as “Descarte esta carta”. Copyfit V3 was EXACT 2/2 at 100% and 200%; Payload read-back confirmed.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "100%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            177.02349853515625,
+            684.68408203125,
+            354.3626708984375,
+            707.5841064453125
+          ],
+          "visualRowBaselinesPt": [
+            693.874,
+            704.874
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_1__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 3,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            571.31,
+            575.75
+          ],
+          "visualRowIntervalsPt": [
+            10.95
+          ],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "4.05202px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 8.9
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              177.02349853515625,
+              684.68408203125,
+              354.3626708984375,
+              707.5841064453125
+            ],
+            "visualBaselinesPt": [
+              693.874,
+              704.874
+            ],
+            "spans": 2,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_1__pt-BR",
+            "readingMethod": "text rects of review-highlighted unit",
+            "rangeRectFragments": 3,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              581.45,
+              590.36
+            ],
+            "frameHeightCssPx": 18.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              177.02349853515625,
+              684.68408203125,
+              354.3626708984375,
+              707.5841064453125
+            ],
+            "visualRowBaselinesPt": [
+              693.874,
+              704.874
+            ],
+            "spans": 2,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_1__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 3,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              571.31,
+              575.75
+            ],
+            "visualRowIntervalsPt": [
+              10.95
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 8.9
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 968,
+        "translationId": 933,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:35:52.254Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual"
+      },
+      "copyfitMeasurementFingerprint": "80f1fe89243dc61d979115e46f45c55d9b011afafdda8bb11670ea4b9d4f404c"
+    },
+    {
+      "blockIndex": 2,
+      "sourceBlockId": "block_10",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_2__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "To use the following Ability, the player must Exhaust this card. ",
+      "proposalText": "Exauste esta carta para usar a Habilidade a seguir.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_2__pt-BR",
+        "bbox": [
+          177.02349853515625,
+          718.0241088867188,
+          354.3626708984375,
+          740.9241333007812
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Exauste esta carta para usar a Habilidade a seguir.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved and persisted through the official Reviewer. Exhaust → Exaustar is the approved glossary decision; “Exauste” is its imperative inflection. Copyfit V3 was EXACT 2/2 at 100% and 200%; Payload read-back confirmed.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "100%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            177.02349853515625,
+            718.0241088867188,
+            354.3626708984375,
+            740.9241333007812
+          ],
+          "visualRowBaselinesPt": [
+            727.214,
+            738.214
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_2__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 3,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            584.83,
+            589.27
+          ],
+          "visualRowIntervalsPt": [
+            10.95
+          ],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "4.05202px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 8.9
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              177.02349853515625,
+              718.0241088867188,
+              354.3626708984375,
+              740.9241333007812
+            ],
+            "visualBaselinesPt": [
+              727.214,
+              738.214
+            ],
+            "spans": 2,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_2__pt-BR",
+            "readingMethod": "text rects of review-highlighted unit",
+            "rangeRectFragments": 3,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              608.47,
+              617.38
+            ],
+            "frameHeightCssPx": 18.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              177.02349853515625,
+              718.0241088867188,
+              354.3626708984375,
+              740.9241333007812
+            ],
+            "visualRowBaselinesPt": [
+              727.214,
+              738.214
+            ],
+            "spans": 2,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_2__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 3,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              584.83,
+              589.27
+            ],
+            "visualRowIntervalsPt": [
+              10.95
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 8.9
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 969,
+        "translationId": 930,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:33:16.854Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual"
+      },
+      "copyfitMeasurementFingerprint": "5c927b9cfa1c934cbba2a627d3383fcd4bd3d0dd406ed2b1388636090610672c"
+    },
+    {
+      "blockIndex": 3,
+      "sourceBlockId": "block_11",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_3__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "To use the following Ability, the player must\nFlip this card. ",
+      "proposalText": "Vire esta carta para usar a Habilidade a seguir.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_3__pt-BR",
+        "bbox": [
+          177.02349853515625,
+          751.3640747070312,
+          354.3634948730469,
+          774.2640991210938
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Vire esta carta para usar a Habilidade a seguir.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Flip → Virar é forma local candidata para a mecânica da carta; validar consistência editorial."
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            177.02349853515625,
+            751.3640747070312,
+            354.3634948730469,
+            774.2640991210938
+          ],
+          "visualBaselinesPt": [
+            760.554,
+            771.554
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_3__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            635.5,
+            644.41
+          ],
+          "frameHeightCssPx": 18.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 4,
+      "sourceBlockId": "block_12",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_4__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "The following Ability always grants its bonus or detriment to the figure, and is considered to be in effect at all times. ",
+      "proposalText": "A Habilidade a seguir sempre concede seu bônus ou uma penalidade à Miniatura e permanece ativa o tempo todo.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_4__pt-BR",
+        "bbox": [
+          529.2235107421875,
+          651.3240356445312,
+          729.6235961914062,
+          685.2440795898438
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "A Habilidade a seguir ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "sempre",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " concede seu bônus ou uma penalidade à Miniatura e permanece ativa o tempo todo.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved and persisted through the official Reviewer. Ability→Habilidade and Figure→miniatura use approved glossary forms; “detriment” is rendered contextually as “penalidade”. The source bold on “always” is preserved on “sempre”. Copyfit V3 was EXACT 3/3 at 100% and 200%; Payload read-back confirmed.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "100%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            529.2235107421875,
+            651.3240356445312,
+            729.6235961914062,
+            685.2440795898438
+          ],
+          "visualRowBaselinesPt": [
+            660.534,
+            671.534,
+            682.534
+          ],
+          "spans": 5,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_4__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 7,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            557.8,
+            562.23,
+            566.67
+          ],
+          "visualRowIntervalsPt": [
+            10.95,
+            10.95
+          ],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "4.05202px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "4.05202px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 13.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 3,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              529.2235107421875,
+              651.3240356445312,
+              729.6235961914062,
+              685.2440795898438
+            ],
+            "visualBaselinesPt": [
+              660.534,
+              671.534,
+              682.534
+            ],
+            "spans": 5,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_4__pt-BR",
+            "readingMethod": "text rects of review-highlighted unit",
+            "rangeRectFragments": 7,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              554.42,
+              563.33,
+              572.23
+            ],
+            "frameHeightCssPx": 27.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 3,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              529.2235107421875,
+              651.3240356445312,
+              729.6235961914062,
+              685.2440795898438
+            ],
+            "visualRowBaselinesPt": [
+              660.534,
+              671.534,
+              682.534
+            ],
+            "spans": 5,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_4__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 7,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              557.8,
+              562.23,
+              566.67
+            ],
+            "visualRowIntervalsPt": [
+              10.95,
+              10.95
+            ],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "4.05202px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.45723px",
+                "letterSpacing": "-0.0607804px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 13.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 971,
+        "translationId": 931,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:34:25.800Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual"
+      },
+      "copyfitMeasurementFingerprint": "05ce41c7d8bcb07502ca94d62ef2d9b29c8fb23400f21e635dc25a90d40e1f1a"
+    },
+    {
+      "blockIndex": 5,
+      "sourceBlockId": "block_13",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_5__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "The following Ability may only be used once \nper Encounter. Place a Used token on the Ability to track when it is used. ",
+      "proposalText": "Esta Habilidade só pode ser usada uma vez por Encontro. Marque seu uso com uma Ficha Esgotada.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_5__pt-BR",
+        "bbox": [
+          529.2235107421875,
+          695.68408203125,
+          740.6140747070312,
+          729.5841064453125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Esta Habilidade só pode ser usada uma vez por Encontro. Marque seu uso com uma Ficha Esgotada.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Token → Ficha consta na tabela Markdown, mas não há decisão aprovada no Payload; Encounter → Encontro e Used → Usada são escolhas locais candidatas."
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 3,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 3,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            529.2235107421875,
+            695.68408203125,
+            740.6140747070312,
+            729.5841064453125
+          ],
+          "visualBaselinesPt": [
+            704.874,
+            715.874,
+            726.874
+          ],
+          "spans": 5,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_5__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 5,
+          "distinctVisualRows": 3,
+          "visualRowTopsCssPx": [
+            590.38,
+            599.25,
+            608.2
+          ],
+          "frameHeightCssPx": 27.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_5__pt-BR",
+        "bbox": [
+          529.2235107421875,
+          695.68408203125,
+          740.6140747070312,
+          729.5841064453125
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "A Habilidade a seguir só pode ser usada uma vez por Encontro. Marque seu uso com uma Ficha Esgotada.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "blockIndex": 6,
+      "sourceBlockId": "block_14",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_6__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "The following Ability or Effect occurs during \nthe figure's Status Phase.",
+      "proposalText": "A Habilidade ou o Efeito a seguir ocorre durante a Fase de Status da Miniatura.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_6__pt-BR",
+        "bbox": [
+          529.2235107421875,
+          740.0241088867188,
+          723.9341430664062,
+          762.9241333007812
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "A Habilidade ou o Efeito a seguir ocorre durante a Fase de Status da Miniatura.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Effect → Efeito; Status Phase → Fase de Status são formas locais candidatas pendentes de revisão terminológica."
+      ],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            529.2235107421875,
+            740.0241088867188,
+            723.9341430664062,
+            762.9241333007812
+          ],
+          "visualBaselinesPt": [
+            749.214,
+            760.214
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_6__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            626.31,
+            635.22
+          ],
+          "frameHeightCssPx": 18.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 7,
+      "sourceBlockId": "block_15",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_7__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "COMBO : (TAG)✤PASSIVE",
+      "proposalText": "COMBO: (TAG) / PASSIVA",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_7__pt-BR",
+        "bbox": [
+          95.3821029663086,
+          655.94091796875,
+          512.779296875,
+          666.587890625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "COMBO: (TAG) / PASSIVA",
+            "font": "OptimaLTStd-DemiBold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 600,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "PASSIVE → PASSIVA é candidata local; COMBO e (TAG) permanecem como rótulos mecânicos até revisão da unidade composta.",
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            95.3821029663086,
+            655.94091796875,
+            512.779296875,
+            666.587890625
+          ],
+          "visualBaselinesPt": [
+            660.534,
+            664.212
+          ],
+          "spans": 4,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_7__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            558.16
+          ],
+          "frameHeightCssPx": 8.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Source line count calibrated to 1 physical row; the 3.6pt offset of the dingbat glyph previously caused a split baseline."
+      },
+      "underCompositionJustification": "Cabeçalho de linha única na tabela de Tags casando 1:1 com a baseline do PDF original (o símbolo gráfico losango causava split na contagem do PyMuPDF)."
+    },
+    {
+      "blockIndex": 8,
+      "sourceBlockId": "block_16",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_8__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "  PER ENCOUNTER",
+      "proposalText": "POR ENCONTRO",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_8__pt-BR",
+        "bbox": [
+          423.5697937011719,
+          700.7841186523438,
+          516.51611328125,
+          711.4310913085938
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "POR ENCONTRO",
+            "font": "OptimaLTStd-DemiBold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 600,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual",
+      "editorialStatus": "Approved and persisted through the official Reviewer. Encounter uses the approved Encontro form in the frequency label; source DemiBold style is preserved. Copyfit V3 was EXACT 1/1 at 100% and 200%; Payload read-back confirmed.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "100%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            423.5697937011719,
+            700.7841186523438,
+            516.51611328125,
+            711.4310913085938
+          ],
+          "visualRowBaselinesPt": [
+            709.055
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_8__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            578.84
+          ],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "3.64682px",
+              "fontWeight": "600",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "4.0115px",
+              "letterSpacing": "-0.0547023px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              423.5697937011719,
+              700.7841186523438,
+              516.51611328125,
+              711.4310913085938
+            ],
+            "visualBaselinesPt": [
+              709.055
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_8__pt-BR",
+            "readingMethod": "text rects of review-highlighted unit",
+            "rangeRectFragments": 1,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              594.5
+            ],
+            "frameHeightCssPx": 8.6
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              423.5697937011719,
+              700.7841186523438,
+              516.51611328125,
+              711.4310913085938
+            ],
+            "visualRowBaselinesPt": [
+              709.055
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_8__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              578.84
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "600",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "approvalEvidence": {
+        "reviewId": 975,
+        "translationId": 934,
+        "approvalStatus": "approved",
+        "approvedAt": "2026-10-25T10:35:52.665Z",
+        "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual"
+      },
+      "copyfitMeasurementFingerprint": "459c0975a5075c33d8620d7f249f8741c4edb13097b57a4fbdb636816581893a"
+    },
+    {
+      "blockIndex": 9,
+      "sourceBlockId": "block_17",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_9__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "✜ STATUS",
+      "proposalText": "STATUS",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_9__pt-BR",
+        "bbox": [
+          471.8096923828125,
+          746.94091796875,
+          513.9117431640625,
+          757.587890625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "STATUS",
+            "font": "OptimaLTStd-DemiBold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 600,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "STATUS permanece sem alteração como rótulo candidato em PT-BR.",
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            471.8096923828125,
+            746.94091796875,
+            513.9117431640625,
+            757.587890625
+          ],
+          "visualBaselinesPt": [
+            755.212
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_9__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            631.91
+          ],
+          "frameHeightCssPx": 8.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 10,
+      "sourceBlockId": "block_18",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_10__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "EXHAUST",
+      "proposalText": "EXAUSTAR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_10__pt-BR",
+        "bbox": [
+          120.6937026977539,
+          724.44091796875,
+          161.98570251464844,
+          735.087890625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "EXAUSTAR",
+            "font": "OptimaLTStd-DemiBold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 600,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Exhaust → Exaustar segue a decisão humana registrada no glossário."
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "100%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            120.6937026977539,
+            724.44091796875,
+            161.98570251464844,
+            735.087890625
+          ],
+          "visualRowBaselinesPt": [
+            732.712
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_10__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            588.42
+          ],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "3.64682px",
+              "fontWeight": "600",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "4.0115px",
+              "letterSpacing": "-0.0547023px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 4
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              120.6937026977539,
+              724.44091796875,
+              161.98570251464844,
+              735.087890625
+            ],
+            "visualRowBaselinesPt": [
+              732.712
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_10__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              613.67
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.29364px",
+                "fontWeight": "600",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.02301px",
+                "letterSpacing": "-0.109405px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 90,
+            "pdfDocumentPageIndex": 89,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              120.6937026977539,
+              724.44091796875,
+              161.98570251464844,
+              735.087890625
+            ],
+            "visualRowBaselinesPt": [
+              732.712
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_90_block_10__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              588.42
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "3.64682px",
+                "fontWeight": "600",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "4.0115px",
+                "letterSpacing": "-0.0547023px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      }
+    },
+    {
+      "blockIndex": 11,
+      "sourceBlockId": "block_19",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_11__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "➤FLIP",
+      "proposalText": "VIRAR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_11__pt-BR",
+        "bbox": [
+          134.46139526367188,
+          757.94091796875,
+          161.96530151367188,
+          768.587890625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "VIRAR",
+            "font": "OptimaLTStd-DemiBold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 600,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "FLIP → VIRAR é forma local candidata para rótulo mecânico.",
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            134.46139526367188,
+            757.94091796875,
+            161.96530151367188,
+            768.587890625
+          ],
+          "visualBaselinesPt": [
+            766.212
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_11__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            640.83
+          ],
+          "frameHeightCssPx": 8.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 12,
+      "sourceBlockId": "block_20",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_12__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "✘DISCARD",
+      "proposalText": "DESCARTAR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_12__pt-BR",
+        "bbox": [
+          114.5438003540039,
+          690.94091796875,
+          163.6566925048828,
+          701.587890625
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "DESCARTAR",
+            "font": "OptimaLTStd-DemiBold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 600,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "DISCARD → DESCARTAR é forma local candidata para rótulo mecânico.",
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            114.5438003540039,
+            690.94091796875,
+            163.6566925048828,
+            701.587890625
+          ],
+          "visualBaselinesPt": [
+            699.212
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_12__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            586.53
+          ],
+          "frameHeightCssPx": 8.6
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 13,
+      "sourceBlockId": "block_22",
+      "sourceUnitId": null,
+      "spanKey": "page_90_block_13__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Condition Tags",
+      "proposalText": "Tags de Condição",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_90_block_13__pt-BR",
+        "bbox": [
+          332.6625061035156,
+          601.338134765625,
+          487.28076171875,
+          625.6021118164062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Tags de Condição",
+            "font": "Cinzel-Regular",
+            "size": 16,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Condition Tags → Tags de Condição corresponde à proposta local da p.30; ainda não é decisão global de glossário."
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 90,
+          "pdfDocumentPageIndex": 89,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            332.6625061035156,
+            601.338134765625,
+            487.28076171875,
+            625.6021118164062
+          ],
+          "visualBaselinesPt": [
+            618.906
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_90_block_13__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            512.91
+          ],
+          "frameHeightCssPx": 19.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "note": "Proposta incremental para as explicações dos ícones de Tag da p.90 e seus rótulos. Preserva símbolos e arte-fonte; a unidade composta com posições esquerda/direita é isolada no diagnóstico até uma divisão editorial segura.",
+  "revisions": [
+    {
+      "recordedAt": "2026-10-25",
+      "summary": "Block 2 published via official Reviewer (review 969, translation 930); Exhaust → Exaustar decision applied as imperative “Exauste”; EXACT 2/2 at 100% and 200%."
+    },
+    {
+      "recordedAt": "2026-10-25",
+      "summary": "Block 4 published through official Reviewer (review 971, translation 931); approved Ability/Figure terms, preserved “always” bold as “sempre”; EXACT 3/3 at 100% and 200%."
+    },
+    {
+      "recordedAt": "2026-10-25",
+      "summary": "Blocks 0, 1 and 8 approved through official Reviewer after confirming existing glossary decisions for Item, Tag, Ability and Encounter, exact source rich style, and EXACT Copyfit V3 at 100%/200%."
+    }
+  ]
+}

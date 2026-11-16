@@ -1,0 +1,139 @@
+{
+  "proposalId": "p102-dice-breakdown-title",
+  "version": "3",
+  "title": "Dados em Detalhe — título da p. 102 (v3)",
+  "page": 102,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "9F6EE3306F10136DB1CCD7DABDEAC994C322D6DFAA807B14382962A180CCA2DD",
+    "pageDom": "97EA10EB5B36E0A36A4DA1339C2D7D72892DB7F3142D92BC8DA01169F89C5548"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "This proposal covers only the 'Dice Breakdown' heading; the rest of p.102 remains in separate translation batches.",
+    "The candidate preserves the source PDF frame, centered alignment, Cinzel-Regular font, 18 pt size, rendered weight, white color, and source line height.",
+    "The prior v2 proposal widened the frame and is superseded here because the original source frame is now used for measurement.",
+    "Payload GET preflight found no saved human PT-BR translation for this key. No final translation or approval was written.",
+    "Viewer Copyfit V3 passed; Editor and PDF export parity remain pending."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 15,
+      "sourceBlockId": "block_25",
+      "sourceUnitId": null,
+      "spanKey": "page_102_block_15__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Dice Breakdown",
+      "proposalText": "Dados em Detalhe",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_102_block_15__pt-BR",
+        "bbox": [
+          328.53741455078125,
+          56.69243621826172,
+          491.003662109375,
+          80.95643615722656
+        ],
+        "textAlign": "center",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Dados em Detalhe",
+            "font": "Cinzel-Regular",
+            "size": 18,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "Official PDF visual baseline geometry and the existing Copyfit V3 PageRenderer DOM Range visual-row grouper; the source frame was selected from the rendered .realbox.",
+        "environment": {
+          "viewportCssPixels": "2400x1400",
+          "deviceScaleFactor": 1,
+          "language": "pt-BR",
+          "zooms": [
+            "100%",
+            "200%"
+          ],
+          "fontLoaded": true
+        },
+        "geometry": "The original source bbox and centered alignment are unchanged. At both zooms the rendered ink remains within the source frame; no clipping or neighboring-unit collision was observed.",
+        "evidence": {
+          "summary": "apps/web/output/p102-dice-breakdown-title-copyfit-v1/summary.json",
+          "viewerScreenshots": [
+            "apps/web/output/p102-dice-breakdown-title-copyfit-v1/dados-em-detalhe-100pct.png",
+            "apps/web/output/p102-dice-breakdown-title-copyfit-v1/dados-em-detalhe-200pct.png"
+          ],
+          "criticalReview": "The critical reviewer confirmed that 'Dados em Detalhe' is natural and accurate for the dice-outcome chart context, and that the title remains centered above the table."
+        }
+      },
+      "technicalStatus": "fit-awaiting-human-review",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": []
+    }
+  ],
+  "note": "The candidate 'Dados em Detalhe' was selected after testing three natural alternatives in the live Viewer. It preserves the original title hierarchy and centered placement; human editorial approval remains pending.",
+  "revisionHistory": [
+    {
+      "attempt": 1,
+      "text": "Dados em Detalhe",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "classification": "EXACT",
+      "geometryResult": "PASS: no frame overflow or visible collision at 100% and 200%.",
+      "measurementFiles": [
+        "apps/web/output/p102-dice-breakdown-title-copyfit-v1/dados-em-detalhe-100pct.json",
+        "apps/web/output/p102-dice-breakdown-title-copyfit-v1/dados-em-detalhe-200pct.json"
+      ]
+    },
+    {
+      "attempt": 2,
+      "text": "Detalhes dos Dados",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "classification": "EXACT",
+      "geometryResult": "PASS: no frame overflow or visible collision at 100% and 200%.",
+      "measurementFiles": [
+        "apps/web/output/p102-dice-breakdown-title-copyfit-v1/detalhes-dos-dados-100pct.json",
+        "apps/web/output/p102-dice-breakdown-title-copyfit-v1/detalhes-dos-dados-200pct.json"
+      ]
+    },
+    {
+      "attempt": 3,
+      "text": "Detalhamento dos Dados",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "classification": "EXACT",
+      "geometryResult": "PASS: no frame overflow or visible collision at 100% and 200%.",
+      "measurementFiles": [
+        "apps/web/output/p102-dice-breakdown-title-copyfit-v1/detalhamento-dos-dados-100pct.json",
+        "apps/web/output/p102-dice-breakdown-title-copyfit-v1/detalhamento-dos-dados-200pct.json"
+      ]
+    }
+  ]
+}

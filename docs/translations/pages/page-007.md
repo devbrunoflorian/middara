@@ -21,7 +21,7 @@
 - ☐ **EN:** 1 Adventure Book<br>
   **PT-BR:** 1 Livro de Aventura
 - ☐ **EN:** 1 Crawl Book<br>
-  **PT-BR:** 1 Livro Crawl
+  **PT-BR:** 1 Livro de Masmorras
 - ☐ **EN:** 1 Diagram Book<br>
   **PT-BR:** 1 Livro de Diagramas
 - ☐ **EN:** 1 Bounty Book<br>
@@ -89,7 +89,7 @@
 
 ## Notas de copyfit e termos
 
-- **Termos a harmonizar:** `Livro Crawl`, `Livro de Diagramas`, `Livro de Recompensas`, `Clipes Coloridos para Base`, `Bolsa de Armazenamento de Aventureiro`, `Conduit`, `Invocação Esper`, `Combatente Inteligente`, `Familiar`, `Carta de Saque de Monstro`, `Aprimoramento`, `Tarô`, `Esper Exaltado` e os nomes de formato de carta não têm correspondência direta no glossário fornecido.
-- **Termos oficiais aplicados:** `Tiles → Peças`, `Standups → Miniaturas de Papel`, `Tokens → Fichas`, `Adventurers → Aventureiros`, `Loot → Saque`.
+- **Termos a harmonizar:** `Livro de Diagramas`, `Livro de Recompensas`, `Clipes Coloridos para Base`, `Bolsa de Armazenamento de Aventureiro`, `Conduit`, `Invocação Esper`, `Combatente Inteligente`, `Familiar`, `Carta de Saque de Monstro`, `Aprimoramento`, `Tarô`, `Esper Exaltado` e os nomes de formato de carta não têm correspondência direta no glossário fornecido.
+- **Termos oficiais aplicados:** `Tiles → Peças`, `Standups → Miniaturas de Papel`, `Tokens → Fichas`, `Adventurers → Aventureiros`, `Loot → Saque`, `Crawl Book → Livro de Masmorras`.
 - **Alerta de expansão (>20%):** 19 das 40 unidades passam o sinal por caracteres: título `Component List` (+42,9%), itens `1 Rulebook` (+70%), `1 Diagram Book` (+42,9%), `1 Bounty Book` (+69,2%), `27 Colored Base Clips` (+38,1%), `40 Standups` (+100%), `1 Red Reveal Decoder` (+85%), `10 Adventurer Tuck Bags` (+78,3%), `101 Large Cards...` (+29,4%), `370 Mini Cards...` (+30%), `45 Combatant Loot Cards` (+28%), `90 Upgrades` (+30,8%), `12 Tarot Cards` (+21,4%), `390 Item Cards...` (+40%), `25 Monster Loot Cards` (+26,1%), os três tamanhos de Hidden Card Deck (+32% a +45,8%) e a nota de rodapé (+38,6%). Medir cada caixa na coluna correspondente; não encurtar automaticamente nomes oficiais de componentes.
 - **Copyfit:** avaliar cada coluna, sem concatenar os rótulos em um parágrafo. O preview é o critério final.

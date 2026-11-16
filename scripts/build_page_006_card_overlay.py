@@ -1,9 +1,10 @@
-"""Build the page 6 English fidelity patch from the source PDF.
+"""Build the page 6 shared fidelity patch from the source PDF.
 
 This restores PDF-rendered card pixels over the viewer's imperfect image/text
 recomposition. The mask is constrained to embedded image placements, audited
-card-label blocks, and five confirmed vector backings; do not generalize it to
-other pages without a new visual audit.
+card-label blocks, and five confirmed vector backings. The patch contains only
+physical components and card-printed labels, so it is shared by EN and PT-BR.
+Do not generalize it to other pages without a new visual audit.
 """
 
 from __future__ import annotations
@@ -165,17 +166,24 @@ def main() -> None:
 
     bbox_pt = [round(value / scale, 5) for value in bounds]
     sidecar = {
-        "overlays": [
-            {
-                "url": "/pages/page_006/fidelity-overlay-hidden-cards.png",
-                "bbox": bbox_pt,
-                "widthPx": overlay.width,
-                "heightPx": overlay.height,
-                "language": "en",
-                "hideInAdmin": True,
-            }
-        ]
+        "overlays": [],
     }
+    if SIDECAR_PATH.is_file():
+        sidecar = json.loads(SIDECAR_PATH.read_text(encoding="utf-8"))
+    overlays = sidecar.setdefault("overlays", [])
+    entry = {
+        "url": "/pages/page_006/fidelity-overlay-hidden-cards.png",
+        "bbox": bbox_pt,
+        "widthPx": overlay.width,
+        "heightPx": overlay.height,
+        "language": "en",
+        "languageInvariant": True,
+    }
+    existing = next((item for item in overlays if item.get("url") == entry["url"]), None)
+    if existing is None:
+        overlays.append(entry)
+    else:
+        overlays[overlays.index(existing)] = entry
     SIDECAR_PATH.write_text(
         json.dumps(sidecar, indent=2) + "\n", encoding="utf-8"
     )

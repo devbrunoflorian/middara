@@ -29,7 +29,7 @@
             {
               "text": "Terrain is an effect on a ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -37,12 +37,16 @@
                 478.35711669921875,
                 189.65248107910156,
                 490.2571105957031
+              ],
+              "origin": [
+                86.84249877929688,
+                487.547119140625
               ]
             },
             {
               "text": "Tile",
               "font": "OptimaLTStd-Bold",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -50,12 +54,16 @@
                 478.3371276855469,
                 205.22239685058594,
                 490.2571105957031
+              ],
+              "origin": [
+                189.65240478515625,
+                487.547119140625
               ]
             },
             {
               "text": ". Terrain may change things like movement and Line of Sight. However, its effects vary widely.  ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -63,8 +71,16 @@
                 478.35711669921875,
                 612.8628540039062,
                 490.2571105957031
+              ],
+              "origin": [
+                205.22239685058594,
+                487.547119140625
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
@@ -95,7 +111,7 @@
             {
               "text": "NORMAL:",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -103,12 +119,16 @@
                 593.3505249023438,
                 127.84649658203125,
                 604.0785522460938
+              ],
+              "origin": [
+                86.84249877929688,
+                601.6395263671875
               ]
             },
             {
               "text": " No special effects. Normal Terrain can be placed on and be ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -116,8 +136,16 @@
                 592.4495239257812,
                 388.8661193847656,
                 604.3495483398438
+              ],
+              "origin": [
+                127.84619903564453,
+                601.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -135,7 +163,7 @@
             {
               "text": "replaced by all types of Terrain. ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -143,8 +171,36 @@
                 603.4495239257812,
                 223.74618530273438,
                 615.3495483398438
+              ],
+              "origin": [
+                86.84619903564453,
+                612.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block-15-font-size-9pt-unit-00",
+          "spanRefs": [
+            "line_15_0:0"
+          ]
+        },
+        {
+          "id": "p21-block-15-font-size-10pt-unit-01",
+          "spanRefs": [
+            "line_15_0:1"
+          ]
+        },
+        {
+          "id": "p21-block-15-font-size-10pt-unit-02",
+          "spanRefs": [
+            "line_15_1:0"
           ]
         }
       ]
@@ -175,7 +231,7 @@
             {
               "text": "HINDERING:",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -183,12 +239,16 @@
                 621.0198364257812,
                 140.34750366210938,
                 631.7478637695312
+              ],
+              "origin": [
+                86.84249877929688,
+                629.308837890625
               ]
             },
             {
               "text": " Attacks made through or into Hindering Terrain get ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -196,12 +256,16 @@
                 620.1188354492188,
                 363.5772399902344,
                 632.0188598632812
+              ],
+              "origin": [
+                140.34730529785156,
+                629.308837890625
               ]
             },
             {
               "text": "-1 ",
               "font": "OptimaLTStd-Bold",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -209,12 +273,16 @@
                 620.0988159179688,
                 375.2472229003906,
                 632.0188598632812
+              ],
+              "origin": [
+                363.5772399902344,
+                629.308837890625
               ]
             },
             {
               "text": "TO ",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -222,8 +290,16 @@
                 621.0198364257812,
                 389.9800109863281,
                 631.7478637695312
+              ],
+              "origin": [
+                375.24700927734375,
+                629.308837890625
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -241,7 +317,7 @@
             {
               "text": "THE ATK ROLL",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -249,12 +325,16 @@
                 632.017822265625,
                 145.864013671875,
                 642.745849609375
+              ],
+              "origin": [
+                86.842041015625,
+                640.3068237304688
               ]
             },
             {
               "text": ". This effect cannot be applied more than once but does ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -262,8 +342,16 @@
                 631.1188354492188,
                 387.57421875,
                 643.0188598632812
+              ],
+              "origin": [
+                145.8643035888672,
+                640.308837890625
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -281,7 +369,7 @@
             {
               "text": "stack with the ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -289,12 +377,16 @@
                 642.1188354492188,
                 148.87428283691406,
                 654.0188598632812
+              ],
+              "origin": [
+                86.84429931640625,
+                651.308837890625
               ]
             },
             {
               "text": "-1",
               "font": "OptimaLTStd-Bold",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -302,12 +394,16 @@
                 642.0988159179688,
                 157.7342987060547,
                 654.0188598632812
+              ],
+              "origin": [
+                148.84429931640625,
+                651.308837890625
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -320,7 +416,7 @@
             {
               "text": "TO THE ATK ROLL ",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -328,12 +424,16 @@
                 643.0198364257812,
                 235.8563995361328,
                 653.7478637695312
+              ],
+              "origin": [
+                160.48770141601562,
+                651.308837890625
               ]
             },
             {
               "text": "from spaces containing Allies. It costs ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -341,12 +441,16 @@
                 642.1188354492188,
                 399.3183288574219,
                 654.0188598632812
+              ],
+              "origin": [
+                235.83120727539062,
+                651.308837890625
               ]
             },
             {
               "text": "2",
               "font": "OptimaLTStd-Bold",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -354,12 +458,16 @@
                 642.0988159179688,
                 404.8411865234375,
                 654.0188598632812
+              ],
+              "origin": [
+                399.28118896484375,
+                651.308837890625
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -369,6 +477,10 @@
                 654.0188598632812
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -386,7 +498,7 @@
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -399,7 +511,7 @@
             {
               "text": "MOVEMENT",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -407,12 +519,16 @@
                 654.0197143554688,
                 150.2581024169922,
                 664.7477416992188
+              ],
+              "origin": [
+                100.24510192871094,
+                662.3087158203125
               ]
             },
             {
               "text": " to leave a Hindering space. Abilities that place Hindering ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -420,8 +536,16 @@
                 653.1187133789062,
                 401.7978820800781,
                 665.0187377929688
+              ],
+              "origin": [
+                150.25790405273438,
+                662.3087158203125
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -439,7 +563,7 @@
             {
               "text": "Terrain can only replace Normal Terrain spaces. ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -447,8 +571,77 @@
                 664.1187133789062,
                 294.4678955078125,
                 676.0187377929688
+              ],
+              "origin": [
+                86.83790588378906,
+                673.3087158203125
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block-16-font-size-9pt-unit-00",
+          "spanRefs": [
+            "line_16_0:0",
+            "line_16_1:0"
+          ]
+        },
+        {
+          "id": "p21-block-16-font-size-10pt-unit-01",
+          "spanRefs": [
+            "line_16_0:1",
+            "line_16_0:2",
+            "line_16_1:1"
+          ]
+        },
+        {
+          "id": "p21-block-16-font-size-9pt-unit-02",
+          "spanRefs": [
+            "line_16_0:3"
+          ]
+        },
+        {
+          "id": "p21-block-16-font-size-10pt-unit-03",
+          "spanRefs": [
+            "line_16_2:0",
+            "line_16_2:1"
+          ]
+        },
+        {
+          "id": "p21-block-16-font-size-9pt-unit-04",
+          "spanRefs": [
+            "line_16_2:3"
+          ]
+        },
+        {
+          "id": "p21-block-16-font-size-10pt-unit-05",
+          "spanRefs": [
+            "line_16_2:4",
+            "line_16_2:5"
+          ]
+        },
+        {
+          "id": "p21-block-16-font-size-9pt-unit-06",
+          "spanRefs": [
+            "line_16_3:1"
+          ]
+        },
+        {
+          "id": "p21-block-16-font-size-10pt-unit-07",
+          "spanRefs": [
+            "line_16_3:2"
+          ]
+        },
+        {
+          "id": "p21-block-16-font-size-10pt-unit-08",
+          "spanRefs": [
+            "line_16_4:0"
           ]
         }
       ]
@@ -479,7 +672,7 @@
             {
               "text": "WATER:",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -487,12 +680,16 @@
                 681.6890258789062,
                 118.36048889160156,
                 692.4170532226562
+              ],
+              "origin": [
+                86.84249877929688,
+                689.97802734375
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -505,7 +702,7 @@
             {
               "text": "Figures in Water may not ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -513,12 +710,16 @@
                 680.7880249023438,
                 230.78250122070312,
                 692.6880493164062
+              ],
+              "origin": [
+                120.86250305175781,
+                689.97802734375
               ]
             },
             {
               "text": "DODGE",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -526,12 +727,16 @@
                 681.6890258789062,
                 263.7854919433594,
                 692.4170532226562
+              ],
+              "origin": [
+                230.78250122070312,
+                689.97802734375
               ]
             },
             {
               "text": ". It costs ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -539,12 +744,16 @@
                 680.7880249023438,
                 301.58551025390625,
                 692.6880493164062
+              ],
+              "origin": [
+                263.7854919433594,
+                689.97802734375
               ]
             },
             {
               "text": "2",
               "font": "OptimaLTStd-Bold",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -552,12 +761,16 @@
                 680.7680053710938,
                 307.1455078125,
                 692.6880493164062
+              ],
+              "origin": [
+                301.58551025390625,
+                689.97802734375
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -567,6 +780,10 @@
                 692.6880493164062
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -584,7 +801,7 @@
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -597,7 +814,7 @@
             {
               "text": "MOVEMENT",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -605,12 +822,16 @@
                 681.6890258789062,
                 373.3409423828125,
                 692.4170532226562
+              ],
+              "origin": [
+                323.3279113769531,
+                689.97802734375
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -620,6 +841,10 @@
                 692.6880493164062
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -637,7 +862,7 @@
             {
               "text": "to leave a Water space. Abilities that place Water Terrain can replace ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -645,8 +870,16 @@
                 691.7880249023438,
                 383.9106140136719,
                 703.6880493164062
+              ],
+              "origin": [
+                86.8406982421875,
+                700.97802734375
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -664,7 +897,7 @@
             {
               "text": "Normal, Hindering and Muck Terrain. Water tokens placed due to an ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -672,8 +905,16 @@
                 702.7880249023438,
                 385.2806701660156,
                 714.6880493164062
+              ],
+              "origin": [
+                86.8406982421875,
+                711.97802734375
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -691,7 +932,7 @@
             {
               "text": "Ability do not have a Current.",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -699,8 +940,57 @@
                 713.7880249023438,
                 214.2606658935547,
                 725.6880493164062
+              ],
+              "origin": [
+                86.8406982421875,
+                722.97802734375
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block-18-font-size-9pt-unit-00",
+          "spanRefs": [
+            "line_18_0:0"
+          ]
+        },
+        {
+          "id": "p21-block-18-font-size-10pt-unit-01",
+          "spanRefs": [
+            "line_18_0:2"
+          ]
+        },
+        {
+          "id": "p21-block-18-font-size-9pt-unit-02",
+          "spanRefs": [
+            "line_18_0:3"
+          ]
+        },
+        {
+          "id": "p21-block-18-font-size-10pt-unit-03",
+          "spanRefs": [
+            "line_18_0:4",
+            "line_18_0:5"
+          ]
+        },
+        {
+          "id": "p21-block-18-font-size-9pt-unit-04",
+          "spanRefs": [
+            "line_18_1:1"
+          ]
+        },
+        {
+          "id": "p21-block-18-font-size-10pt-unit-05",
+          "spanRefs": [
+            "line_18_2:0",
+            "line_18_3:0",
+            "line_18_4:0"
           ]
         }
       ]
@@ -731,7 +1021,7 @@
             {
               "text": "MUCK:",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -739,12 +1029,16 @@
                 731.3583374023438,
                 115.84949493408203,
                 742.0863647460938
+              ],
+              "origin": [
+                86.84249877929688,
+                739.6473388671875
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -757,7 +1051,7 @@
             {
               "text": "Figures in Muck must spend an additional Stamina Point (",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -765,12 +1059,16 @@
                 730.4573364257812,
                 365.43121337890625,
                 742.3573608398438
+              ],
+              "origin": [
+                118.35130310058594,
+                739.6473388671875
               ]
             },
             {
               "text": "SP)",
               "font": "OptimaLTStd-Bold",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -778,12 +1076,16 @@
                 730.4373168945312,
                 379.3211975097656,
                 742.3573608398438
+              ],
+              "origin": [
+                365.43121337890625,
+                739.6473388671875
               ]
             },
             {
               "text": " on ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -791,8 +1093,16 @@
                 730.4573364257812,
                 396.0011901855469,
                 742.3573608398438
+              ],
+              "origin": [
+                379.3211975097656,
+                739.6473388671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -810,7 +1120,7 @@
             {
               "text": "all Actions and Abilities that cost ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -818,12 +1128,16 @@
                 741.4573364257812,
                 230.07125854492188,
                 753.3573608398438
+              ],
+              "origin": [
+                86.84130096435547,
+                750.6473388671875
               ]
             },
             {
               "text": "1",
               "font": "OptimaLTStd-Bold",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -831,12 +1145,16 @@
                 741.4373168945312,
                 235.63125610351562,
                 753.3573608398438
+              ],
+              "origin": [
+                230.07125854492188,
+                750.6473388671875
               ]
             },
             {
               "text": " or more ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -844,12 +1162,16 @@
                 741.4573364257812,
                 275.08123779296875,
                 753.3573608398438
+              ],
+              "origin": [
+                235.63125610351562,
+                750.6473388671875
               ]
             },
             {
               "text": "SP",
               "font": "OptimaLTStd-Bold",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -857,12 +1179,16 @@
                 741.4373168945312,
                 285.6412353515625,
                 753.3573608398438
+              ],
+              "origin": [
+                275.08123779296875,
+                750.6473388671875
               ]
             },
             {
               "text": " to use. Abilities that place ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -870,8 +1196,16 @@
                 741.4573364257812,
                 402.0012512207031,
                 753.3573608398438
+              ],
+              "origin": [
+                285.6412353515625,
+                750.6473388671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -889,7 +1223,7 @@
             {
               "text": "Muck Terrain can only replace Normal and Hindering Terrain.",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -897,8 +1231,43 @@
                 752.4573364257812,
                 351.9112243652344,
                 764.3573608398438
+              ],
+              "origin": [
+                86.84130096435547,
+                761.6473388671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block-19-font-size-9pt-unit-00",
+          "spanRefs": [
+            "line_19_0:0"
+          ]
+        },
+        {
+          "id": "p21-block-19-font-size-10pt-unit-01",
+          "spanRefs": [
+            "line_19_0:2",
+            "line_19_0:3",
+            "line_19_0:4"
+          ]
+        },
+        {
+          "id": "p21-block-19-font-size-10pt-unit-02",
+          "spanRefs": [
+            "line_19_1:0",
+            "line_19_1:1",
+            "line_19_1:2",
+            "line_19_1:3",
+            "line_19_1:4",
+            "line_19_2:0"
           ]
         }
       ]
@@ -929,7 +1298,7 @@
             {
               "text": "OBSTRUCTING:",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -937,12 +1306,16 @@
                 593.3505249023438,
                 481.688232421875,
                 604.0785522460938
+              ],
+              "origin": [
+                416.17718505859375,
+                601.6395263671875
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -955,7 +1328,7 @@
             {
               "text": "Figures may not move through or into spaces that are ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -963,8 +1336,16 @@
                 592.4495239257812,
                 714.6603393554688,
                 604.3495483398438
+              ],
+              "origin": [
+                484.1897888183594,
+                601.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -982,7 +1363,7 @@
             {
               "text": "made up of Obstructing Terrain. A figure may not draw Line of Sight ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -990,8 +1371,16 @@
                 603.4495239257812,
                 709.5703735351562,
                 615.3495483398438
+              ],
+              "origin": [
+                416.1797790527344,
+                612.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1009,7 +1398,7 @@
             {
               "text": "through any part of Obstructing Terrain (e.g. A red line.) Obstructing ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1017,8 +1406,16 @@
                 614.4495239257812,
                 710.5504760742188,
                 626.3495483398438
+              ],
+              "origin": [
+                416.1797790527344,
+                623.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1036,7 +1433,7 @@
             {
               "text": "Terrain spaces can only be interacted with or circumvented by Abilities ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1044,8 +1441,16 @@
                 625.4495239257812,
                 723.71044921875,
                 637.3495483398438
+              ],
+              "origin": [
+                416.1797790527344,
+                634.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1063,7 +1468,7 @@
             {
               "text": "that specifically say so (e.g. ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1071,12 +1476,16 @@
                 636.4495239257812,
                 535.9299926757812,
                 648.3495483398438
+              ],
+              "origin": [
+                416.1797790527344,
+                645.6395263671875
               ]
             },
             {
               "text": "UNSTOPPABLE. ",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -1084,12 +1493,16 @@
                 637.3505249023438,
                 601.5910034179688,
                 648.0785522460938
+              ],
+              "origin": [
+                535.9268798828125,
+                645.6395263671875
               ]
             },
             {
               "text": "See ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1097,12 +1510,16 @@
                 636.4495239257812,
                 619.370849609375,
                 648.3495483398438
+              ],
+              "origin": [
+                601.5908203125,
+                645.6395263671875
               ]
             },
             {
               "text": "Tags ",
               "font": "OptimaLTStd-BoldItalic",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 22,
               "bbox": [
@@ -1110,12 +1527,16 @@
                 636.3295288085938,
                 640.8408813476562,
                 648.279541015625
+              ],
+              "origin": [
+                619.370849609375,
+                645.6395263671875
               ]
             },
             {
               "text": "Pg. 92",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1123,12 +1544,16 @@
                 636.4495239257812,
                 668.0809326171875,
                 648.3495483398438
+              ],
+              "origin": [
+                640.8408813476562,
+                645.6395263671875
               ]
             },
             {
               "text": ")",
               "font": "OptimaLTStd",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1136,12 +1561,16 @@
                 637.3685302734375,
                 670.5828857421875,
                 648.0785522460938
+              ],
+              "origin": [
+                668.0808715820312,
+                645.6395263671875
               ]
             },
             {
               "text": ". Abilities ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1149,8 +1578,16 @@
                 636.4495239257812,
                 713.5731201171875,
                 648.3495483398438
+              ],
+              "origin": [
+                670.5828857421875,
+                645.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1168,7 +1605,7 @@
             {
               "text": "that place Obstructing Terrain can replace all Terrain except for ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1176,8 +1613,16 @@
                 647.4495239257812,
                 689.203369140625,
                 659.3495483398438
+              ],
+              "origin": [
+                416.1728820800781,
+                656.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1195,7 +1640,7 @@
             {
               "text": "Dangerous Terrain. If a special rule or Ability places Obstructing Terrain ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1203,8 +1648,16 @@
                 658.4495239257812,
                 725.5235595703125,
                 670.3495483398438
+              ],
+              "origin": [
+                416.1728820800781,
+                667.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1222,7 +1675,7 @@
             {
               "text": "on a figure, unless otherwise noted by the special rules or Ability that ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1230,8 +1683,16 @@
                 669.4495239257812,
                 715.7636108398438,
                 681.3495483398438
+              ],
+              "origin": [
+                416.1728820800781,
+                678.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1249,7 +1710,7 @@
             {
               "text": "placed the Terrain, that figure must make a Jump check to the nearest ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1257,8 +1718,16 @@
                 680.4495239257812,
                 714.9833984375,
                 692.3495483398438
+              ],
+              "origin": [
+                416.1728820800781,
+                689.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1276,7 +1745,7 @@
             {
               "text": "non-Dangerous empty space or be Defeated.",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1284,8 +1753,70 @@
                 691.4495239257812,
                 609.0131225585938,
                 703.3495483398438
+              ],
+              "origin": [
+                416.1728820800781,
+                700.6395263671875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block-20-font-size-9pt-unit-00",
+          "spanRefs": [
+            "line_20_0:0"
+          ]
+        },
+        {
+          "id": "p21-block-20-font-size-10pt-unit-01",
+          "spanRefs": [
+            "line_20_0:2"
+          ]
+        },
+        {
+          "id": "p21-block-20-font-size-10pt-unit-02",
+          "spanRefs": [
+            "line_20_1:0",
+            "line_20_2:0",
+            "line_20_3:0",
+            "line_20_4:0",
+            "line_20_5:0",
+            "line_20_6:0",
+            "line_20_7:0",
+            "line_20_8:0",
+            "line_20_9:0"
+          ]
+        },
+        {
+          "id": "p21-block-20-font-size-9pt-unit-03",
+          "spanRefs": [
+            "line_20_4:1"
+          ]
+        },
+        {
+          "id": "p21-block-20-font-size-10pt-unit-04",
+          "spanRefs": [
+            "line_20_4:2",
+            "line_20_4:3",
+            "line_20_4:4"
+          ]
+        },
+        {
+          "id": "p21-block-20-font-size-9pt-unit-05",
+          "spanRefs": [
+            "line_20_4:5"
+          ]
+        },
+        {
+          "id": "p21-block-20-font-size-10pt-unit-06",
+          "spanRefs": [
+            "line_20_4:6"
           ]
         }
       ]
@@ -1316,7 +1847,7 @@
             {
               "text": "DANGEROUS:",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -1324,12 +1855,16 @@
                 709.0197143554688,
                 474.2362365722656,
                 719.7477416992188
+              ],
+              "origin": [
+                416.17718505859375,
+                717.3087158203125
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1342,7 +1877,7 @@
             {
               "text": "Figures that end a turn in, end their movement in, or leave ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1350,8 +1885,16 @@
                 708.1187133789062,
                 729.3287963867188,
                 720.0187377929688
+              ],
+              "origin": [
+                476.73809814453125,
+                717.3087158203125
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1369,7 +1912,7 @@
             {
               "text": "a Dangerous space are Defeated. Tokens moved into a Dangerous Terrain ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1377,8 +1920,16 @@
                 719.1187133789062,
                 732.9986572265625,
                 731.0187377929688
+              ],
+              "origin": [
+                416.1781005859375,
+                728.3087158203125
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1396,7 +1947,7 @@
             {
               "text": "space are discarded. Abilities that place Dangerous Terrain can replace all ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1404,8 +1955,16 @@
                 730.1187133789062,
                 736.27783203125,
                 742.0187377929688
+              ],
+              "origin": [
+                416.1781005859375,
+                739.3087158203125
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1423,7 +1982,7 @@
             {
               "text": "Terrain except for Obstructing Terrain.",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1431,8 +1990,38 @@
                 741.1187133789062,
                 578.7982788085938,
                 753.0187377929688
+              ],
+              "origin": [
+                416.1781005859375,
+                750.3087158203125
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block-21-font-size-9pt-unit-00",
+          "spanRefs": [
+            "line_21_0:0"
+          ]
+        },
+        {
+          "id": "p21-block-21-font-size-10pt-unit-01",
+          "spanRefs": [
+            "line_21_0:2"
+          ]
+        },
+        {
+          "id": "p21-block-21-font-size-10pt-unit-02",
+          "spanRefs": [
+            "line_21_1:0",
+            "line_21_2:0",
+            "line_21_3:0"
           ]
         }
       ]
@@ -1463,7 +2052,7 @@
             {
               "text": "SPECIAL:",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -1471,12 +2060,16 @@
                 758.6890258789062,
                 452.1861877441406,
                 769.4170532226562
+              ],
+              "origin": [
+                416.17718505859375,
+                766.97802734375
               ]
             },
             {
               "text": " The effects of this Terrain change depending on the Encounter. ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1484,8 +2077,16 @@
                 757.7880249023438,
                 723.3464965820312,
                 769.6880493164062
+              ],
+              "origin": [
+                452.1860046386719,
+                766.97802734375
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1503,7 +2104,7 @@
             {
               "text": "The rules governing these spaces are specified in the Special Encounter ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1511,8 +2112,16 @@
                 768.7880249023438,
                 723.9364624023438,
                 780.6880493164062
+              ],
+              "origin": [
+                416.1759948730469,
+                777.97802734375
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1530,7 +2139,7 @@
             {
               "text": "Rules of each Encounter.",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -1538,8 +2147,37 @@
                 779.7880249023438,
                 521.9660034179688,
                 791.6880493164062
+              ],
+              "origin": [
+                416.1759948730469,
+                788.97802734375
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block-22-font-size-9pt-unit-00",
+          "spanRefs": [
+            "line_22_0:0"
+          ]
+        },
+        {
+          "id": "p21-block-22-font-size-10pt-unit-01",
+          "spanRefs": [
+            "line_22_0:1"
+          ]
+        },
+        {
+          "id": "p21-block-22-font-size-10pt-unit-02",
+          "spanRefs": [
+            "line_22_1:0",
+            "line_22_2:0"
           ]
         }
       ]
@@ -1547,10 +2185,10 @@
     {
       "id": "block_23",
       "bbox": [
-        223.71780395507812,
-        518.2163696289062,
-        382.6308288574219,
-        528.9443969726562
+        193.21,
+        513.45,
+        290.48,
+        532.97
       ],
       "zIndex": 23,
       "suspectedGhost": false,
@@ -1563,14 +2201,14 @@
             259.96978759765625,
             528.9443969726562
           ],
-          "availableWidth": 158.91302490234375,
-          "availableX": 223.71780395507812,
+          "availableWidth": 97.27000000000001,
+          "availableX": 193.21,
           "suspectedGhost": false,
           "spans": [
             {
               "text": "NORMAL",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -1578,46 +2216,48 @@
                 518.2163696289062,
                 259.96978759765625,
                 528.9443969726562
+              ],
+              "origin": [
+                223.71780395507812,
+                526.50537109375
               ]
             }
-          ]
-        },
-        {
-          "id": "line_23_1",
-          "bbox": [
-            335.2278137207031,
-            518.2163696289062,
-            382.6308288574219,
-            528.9443969726562
           ],
-          "availableWidth": 158.91302490234375,
-          "availableX": 223.71780395507812,
-          "suspectedGhost": false,
-          "spans": [
-            {
-              "text": "HINDERING",
-              "font": "OptimaLTStd-Bold",
-              "size": 9.0,
-              "color": "#ffffff",
-              "flags": 20,
-              "bbox": [
-                335.2278137207031,
-                518.2163696289062,
-                382.6308288574219,
-                528.9443969726562
-              ]
-            }
+          "dir": [
+            1,
+            0
           ]
         }
-      ]
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block23-normal-label",
+          "spanRefs": [
+            "line_23_0:0"
+          ],
+          "flowFrame": {
+            "x": 193.21,
+            "width": 97.27000000000001,
+            "textAlign": "center"
+          }
+        }
+      ],
+      "layoutFrame": {
+        "x": 193.21,
+        "y": 513.45,
+        "width": 97.27000000000001,
+        "height": 19.519999999999982,
+        "rotation": 0,
+        "textAlign": "center"
+      }
     },
     {
       "id": "block_24",
       "bbox": [
-        387.5268249511719,
-        550.9854125976562,
-        540.9947509765625,
-        561.7134399414062
+        360.37,
+        546.02,
+        458.65,
+        566.54
       ],
       "zIndex": 24,
       "suspectedGhost": false,
@@ -1630,14 +2270,14 @@
             439.48382568359375,
             561.7134399414062
           ],
-          "availableWidth": 153.46792602539062,
-          "availableX": 387.5268249511719,
+          "availableWidth": 98.27999999999997,
+          "availableX": 360.37,
           "suspectedGhost": false,
           "spans": [
             {
               "text": "DANGEROUS",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -1645,46 +2285,48 @@
                 550.9854125976562,
                 439.48382568359375,
                 561.7134399414062
+              ],
+              "origin": [
+                387.5268249511719,
+                559.2744140625
               ]
             }
-          ]
-        },
-        {
-          "id": "line_24_1",
-          "bbox": [
-            510.18780517578125,
-            550.9854125976562,
-            540.9947509765625,
-            561.7134399414062
           ],
-          "availableWidth": 153.46792602539062,
-          "availableX": 387.5268249511719,
-          "suspectedGhost": false,
-          "spans": [
-            {
-              "text": "SPECIAL",
-              "font": "OptimaLTStd-Bold",
-              "size": 9.0,
-              "color": "#ffffff",
-              "flags": 20,
-              "bbox": [
-                510.18780517578125,
-                550.9854125976562,
-                540.9947509765625,
-                561.7134399414062
-              ]
-            }
+          "dir": [
+            1,
+            0
           ]
         }
-      ]
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block24-dangerous-label",
+          "spanRefs": [
+            "line_24_0:0"
+          ],
+          "flowFrame": {
+            "x": 360.37,
+            "width": 98.27999999999997,
+            "textAlign": "center"
+          }
+        }
+      ],
+      "layoutFrame": {
+        "x": 360.37,
+        "y": 546.02,
+        "width": 98.27999999999997,
+        "height": 20.519999999999982,
+        "rotation": 0,
+        "textAlign": "center"
+      }
     },
     {
       "id": "block_25",
       "bbox": [
-        455.4048156738281,
-        518.2163696289062,
-        593.671875,
-        528.9443969726562
+        416.88,
+        512.95,
+        515.15,
+        533.47
       ],
       "zIndex": 25,
       "suspectedGhost": false,
@@ -1697,14 +2339,14 @@
             482.62078857421875,
             528.9443969726562
           ],
-          "availableWidth": 138.26705932617188,
-          "availableX": 455.4048156738281,
+          "availableWidth": 98.26999999999998,
+          "availableX": 416.88,
           "suspectedGhost": false,
           "spans": [
             {
               "text": "WATER",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -1712,46 +2354,48 @@
                 518.2163696289062,
                 482.62078857421875,
                 528.9443969726562
+              ],
+              "origin": [
+                455.4048156738281,
+                526.50537109375
               ]
             }
-          ]
-        },
-        {
-          "id": "line_25_1",
-          "bbox": [
-            568.516845703125,
-            518.2163696289062,
-            593.671875,
-            528.9443969726562
           ],
-          "availableWidth": 138.26705932617188,
-          "availableX": 455.4048156738281,
-          "suspectedGhost": false,
-          "spans": [
-            {
-              "text": "MUCK",
-              "font": "OptimaLTStd-Bold",
-              "size": 9.0,
-              "color": "#ffffff",
-              "flags": 20,
-              "bbox": [
-                568.516845703125,
-                518.2163696289062,
-                593.671875,
-                528.9443969726562
-              ]
-            }
+          "dir": [
+            1,
+            0
           ]
         }
-      ]
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block25-water-label",
+          "spanRefs": [
+            "line_25_0:0"
+          ],
+          "flowFrame": {
+            "x": 416.88,
+            "width": 98.26999999999998,
+            "textAlign": "center"
+          }
+        }
+      ],
+      "layoutFrame": {
+        "x": 416.88,
+        "y": 512.95,
+        "width": 98.26999999999998,
+        "height": 20.519999999999982,
+        "rotation": 0,
+        "textAlign": "center"
+      }
     },
     {
       "id": "block_26",
       "bbox": [
-        268.15985107421875,
-        550.9854125976562,
-        326.6688537597656,
-        561.7134399414062
+        249.29,
+        547.02,
+        345.56,
+        565.54
       ],
       "zIndex": 26,
       "suspectedGhost": false,
@@ -1764,14 +2408,14 @@
             326.6688537597656,
             561.7134399414062
           ],
-          "availableWidth": 58.509002685546875,
-          "availableX": 268.15985107421875,
+          "availableWidth": 96.27000000000001,
+          "availableX": 249.29,
           "suspectedGhost": false,
           "spans": [
             {
               "text": "OBSTRUCTING",
               "font": "OptimaLTStd-Bold",
-              "size": 9.0,
+              "size": 9,
               "color": "#ffffff",
               "flags": 20,
               "bbox": [
@@ -1779,11 +2423,40 @@
                 550.9854125976562,
                 326.6688537597656,
                 561.7134399414062
+              ],
+              "origin": [
+                268.15985107421875,
+                559.2744140625
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
-      ]
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block26-obstructing-label",
+          "spanRefs": [
+            "line_26_0:0"
+          ],
+          "flowFrame": {
+            "x": 249.29,
+            "width": 96.27000000000001,
+            "textAlign": "center"
+          }
+        }
+      ],
+      "layoutFrame": {
+        "x": 249.29,
+        "y": 547.02,
+        "width": 96.27000000000001,
+        "height": 18.519999999999982,
+        "rotation": 0,
+        "textAlign": "center"
+      }
     },
     {
       "id": "block_27",
@@ -1811,7 +2484,7 @@
             {
               "text": "Movement and Tokens\n",
               "font": "Cinzel-Regular",
-              "size": 12.0,
+              "size": 12,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -1820,8 +2493,17 @@
                 237.54074096679688,
                 105.14398956298828
               ],
-              "renderWeightOverride": 700
+              "renderWeightOverride": 700,
+              "origin": [
+                86.8927001953125,
+                100.67999267578125
+              ],
+              "sourceVisualWidthPt": 147.64804077148438
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
@@ -1852,7 +2534,7 @@
             {
               "text": "All tokens other than ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -1860,12 +2542,16 @@
                 182.67901611328125,
                 179.1626739501953,
                 194.5790252685547
+              ],
+              "origin": [
+                86.8927001953125,
+                191.8690185546875
               ]
             },
             {
               "text": "Obstructing",
               "font": "OptimaLTStd-Italic",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 6,
               "bbox": [
@@ -1873,12 +2559,16 @@
                 182.63902282714844,
                 229.9024200439453,
                 194.51901245117188
+              ],
+              "origin": [
+                179.1623992919922,
+                191.8690185546875
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -1891,7 +2581,7 @@
             {
               "text": "Terrain",
               "font": "OptimaLTStd-Italic",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 6,
               "bbox": [
@@ -1899,12 +2589,16 @@
                 182.63902282714844,
                 261.972412109375,
                 194.51901245117188
+              ],
+              "origin": [
+                232.6824188232422,
+                191.8690185546875
               ]
             },
             {
               "text": " tokens can be moved onto. ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -1912,8 +2606,16 @@
                 182.67901611328125,
                 384.01239013671875,
                 194.5790252685547
+              ],
+              "origin": [
+                261.972412109375,
+                191.8690185546875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -1931,7 +2633,7 @@
             {
               "text": "Circular tokens, such as",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -1939,12 +2641,16 @@
                 193.67901611328125,
                 188.85238647460938,
                 205.5790252685547
+              ],
+              "origin": [
+                86.89239501953125,
+                202.8690185546875
               ]
             },
             {
               "text": " Exit",
               "font": "OptimaLTStd-Italic",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 6,
               "bbox": [
@@ -1952,12 +2658,16 @@
                 193.63902282714844,
                 206.44239807128906,
                 205.51901245117188
+              ],
+              "origin": [
+                188.85238647460938,
+                202.8690185546875
               ]
             },
             {
               "text": " tokens, Totems, ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -1965,12 +2675,16 @@
                 193.67901611328125,
                 277.5123596191406,
                 205.5790252685547
+              ],
+              "origin": [
+                206.44239807128906,
+                202.8690185546875
               ]
             },
             {
               "text": "Loot",
               "font": "OptimaLTStd-Italic",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 6,
               "bbox": [
@@ -1978,12 +2692,16 @@
                 193.63902282714844,
                 295.7323913574219,
                 205.51901245117188
+              ],
+              "origin": [
+                277.51239013671875,
+                202.8690185546875
               ]
             },
             {
               "text": " tokens, and ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -1991,12 +2709,16 @@
                 193.67901611328125,
                 350.76239013671875,
                 205.5790252685547
+              ],
+              "origin": [
+                295.7323913574219,
+                202.8690185546875
               ]
             },
             {
               "text": "Objective",
               "font": "OptimaLTStd-Italic",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 6,
               "bbox": [
@@ -2004,12 +2726,16 @@
                 193.63902282714844,
                 392.4623718261719,
                 205.51901245117188
+              ],
+              "origin": [
+                350.76239013671875,
+                202.8690185546875
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2019,6 +2745,10 @@
                 205.5790252685547
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -2036,7 +2766,7 @@
             {
               "text": "Tokens do ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2044,12 +2774,16 @@
                 204.67901611328125,
                 133.1423797607422,
                 216.5790252685547
+              ],
+              "origin": [
+                86.89239501953125,
+                213.8690185546875
               ]
             },
             {
               "text": "not",
               "font": "OptimaLTStd-BoldItalic",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 22,
               "bbox": [
@@ -2057,12 +2791,16 @@
                 204.55902099609375,
                 147.59237670898438,
                 216.50901794433594
+              ],
+              "origin": [
+                133.1423797607422,
+                213.8690185546875
               ]
             },
             {
               "text": " ",
               "font": "OptimaLTStd-Italic",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 6,
               "bbox": [
@@ -2075,7 +2813,7 @@
             {
               "text": "block Line of Sight and can all occupy the same space as ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2083,8 +2821,16 @@
                 204.67901611328125,
                 397.8923645019531,
                 216.5790252685547
+              ],
+              "origin": [
+                150.37237548828125,
+                213.8690185546875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -2102,7 +2848,7 @@
             {
               "text": "figures, other circular tokens, or ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2110,12 +2856,16 @@
                 215.67901611328125,
                 226.2623748779297,
                 227.5790252685547
+              ],
+              "origin": [
+                86.89239501953125,
+                224.8690185546875
               ]
             },
             {
               "text": "Terrain ",
               "font": "OptimaLTStd-Italic",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 6,
               "bbox": [
@@ -2123,12 +2873,16 @@
                 215.63902282714844,
                 258.3323974609375,
                 227.51901245117188
+              ],
+              "origin": [
+                226.2623748779297,
+                224.8690185546875
               ]
             },
             {
               "text": "tokens unless otherwise specified ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2136,8 +2890,16 @@
                 215.67901611328125,
                 403.9524230957031,
                 227.5790252685547
+              ],
+              "origin": [
+                258.3323974609375,
+                224.8690185546875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -2155,7 +2917,7 @@
             {
               "text": "in an Encounter. ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2163,8 +2925,16 @@
                 226.67901611328125,
                 159.52236938476562,
                 238.5790252685547
+              ],
+              "origin": [
+                86.89239501953125,
+                235.8690185546875
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
@@ -2195,7 +2965,7 @@
             {
               "text": "Terrain Tokens\n",
               "font": "Cinzel-Regular",
-              "size": 12.0,
+              "size": 12,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2204,8 +2974,17 @@
                 191.94073486328125,
                 263.0023193359375
               ],
-              "renderWeightOverride": 700
+              "renderWeightOverride": 700,
+              "origin": [
+                86.8927001953125,
+                258.538330078125
+              ],
+              "sourceVisualWidthPt": 102.04803466796875
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
@@ -2229,14 +3008,14 @@
             196.66600036621094,
             331.2732849121094
           ],
-          "availableWidth": 9.0,
+          "availableWidth": 9,
           "availableX": 187.66600036621094,
           "suspectedGhost": false,
           "spans": [
             {
               "text": "   ",
               "font": "Cinzel-Regular",
-              "size": 12.0,
+              "size": 12,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2269,14 +3048,14 @@
             250.19830322265625,
             331.2732849121094
           ],
-          "availableWidth": 9.0,
+          "availableWidth": 9,
           "availableX": 241.19830322265625,
           "suspectedGhost": false,
           "spans": [
             {
               "text": "   ",
               "font": "Cinzel-Regular",
-              "size": 12.0,
+              "size": 12,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2309,14 +3088,14 @@
             303.730712890625,
             331.2732849121094
           ],
-          "availableWidth": 9.0,
+          "availableWidth": 9,
           "availableX": 294.730712890625,
           "suspectedGhost": false,
           "spans": [
             {
               "text": "   ",
               "font": "Cinzel-Regular",
-              "size": 12.0,
+              "size": 12,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2356,7 +3135,7 @@
             {
               "text": "Terrain",
               "font": "OptimaLTStd-Italic",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 6,
               "bbox": [
@@ -2364,12 +3143,16 @@
                 339.91778564453125,
                 116.18270111083984,
                 351.79779052734375
+              ],
+              "origin": [
+                86.8927001953125,
+                349.1477966308594
               ]
             },
             {
               "text": " tokens are used to place different Terrain types on Tiles. These ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2377,8 +3160,16 @@
                 339.9577941894531,
                 385.10260009765625,
                 351.8577880859375
+              ],
+              "origin": [
+                116.18260192871094,
+                349.1477966308594
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -2396,7 +3187,7 @@
             {
               "text": "tokens can be moved on to and interacted with by Adventurers and ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2404,8 +3195,16 @@
                 350.9577941894531,
                 377.97259521484375,
                 362.8577880859375
+              ],
+              "origin": [
+                86.8926010131836,
+                360.1477966308594
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -2423,7 +3222,7 @@
             {
               "text": "Combatants as if they were printed on the ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2431,12 +3230,16 @@
                 361.9577941894531,
                 269.19256591796875,
                 373.8577880859375
+              ],
+              "origin": [
+                86.8926010131836,
+                371.1477966308594
               ]
             },
             {
               "text": "Tile",
               "font": "OptimaLTStd-Bold",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 20,
               "bbox": [
@@ -2444,12 +3247,16 @@
                 361.93780517578125,
                 284.7625732421875,
                 373.8577880859375
+              ],
+              "origin": [
+                269.19256591796875,
+                371.1477966308594
               ]
             },
             {
               "text": ".",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2457,8 +3264,16 @@
                 361.9577941894531,
                 287.5425720214844,
                 373.8577880859375
+              ],
+              "origin": [
+                284.7625732421875,
+                371.1477966308594
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
@@ -2489,7 +3304,7 @@
             {
               "text": "The different Terrain types and the rules associated with them are listed in the ",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2497,8 +3312,16 @@
                 378.6278076171875,
                 401.0825500488281,
                 390.5278015136719
+              ],
+              "origin": [
+                86.8926010131836,
+                387.81781005859375
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -2516,7 +3339,7 @@
             {
               "text": "Diagram below.",
               "font": "OptimaLTStd",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2524,8 +3347,16 @@
                 389.6278076171875,
                 152.12258911132812,
                 401.5278015136719
+              ],
+              "origin": [
+                86.8926010131836,
+                398.81781005859375
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
@@ -2556,7 +3387,7 @@
             {
               "text": "Tiles and Terrain",
               "font": "Cinzel-Regular",
-              "size": 18.0,
+              "size": 18,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -2565,8 +3396,16 @@
                 259.6751708984375,
                 80.95643615722656
               ],
-              "renderWeightOverride": 700
+              "renderWeightOverride": 700,
+              "origin": [
+                86.17320251464844,
+                74.26043701171875
+              ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
@@ -2580,6 +3419,14 @@
         163.6611328125
       ],
       "zIndex": 45,
+      "artworkOnly": true,
+      "artworkOnlyEvidence": {
+        "auditId": "2026-11-13-page-by-page-artwork-policy-p21-v1",
+        "sourcePdfPage": 21,
+        "region": "physical-token-labels",
+        "rule": "The extracted label is printed on a physical token; preserve the complete language-invariant source artwork instead of treating the label as PT-BR prose.",
+        "evidenceRef": "fidelity_overlays.json: fidelity-overlay-token-icons.png; original PDF page 21."
+      },
       "suspectedGhost": false,
       "lines": [
         {
@@ -2605,8 +3452,16 @@
                 158.38185119628906,
                 229.44638061523438,
                 163.6611328125
+              ],
+              "origin": [
+                218.0222930908203,
+                162.52001953125
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
@@ -2620,6 +3475,14 @@
         164.15904235839844
       ],
       "zIndex": 49,
+      "artworkOnly": true,
+      "artworkOnlyEvidence": {
+        "auditId": "2026-11-13-page-by-page-artwork-policy-p21-v1",
+        "sourcePdfPage": 21,
+        "region": "physical-token-labels",
+        "rule": "The extracted label is printed on a physical token; preserve the complete language-invariant source artwork instead of treating the label as PT-BR prose.",
+        "evidenceRef": "fidelity_overlays.json: fidelity-overlay-token-icons.png; original PDF page 21."
+      },
       "suspectedGhost": false,
       "lines": [
         {
@@ -2645,8 +3508,16 @@
                 157.4712371826172,
                 263.81982421875,
                 162.2684783935547
+              ],
+              "origin": [
+                260.1611022949219,
+                160.25640869140625
               ]
             }
+          ],
+          "dir": [
+            0.8603036403656006,
+            0.5097820162773132
           ]
         },
         {
@@ -2672,8 +3543,16 @@
                 158.65208435058594,
                 265.44561767578125,
                 163.19558715820312
+              ],
+              "origin": [
+                262.5934143066406,
+                161.64501953125
               ]
             }
+          ],
+          "dir": [
+            0.9244571924209595,
+            0.38128572702407837
           ]
         },
         {
@@ -2699,8 +3578,16 @@
                 159.33474731445312,
                 268.0849914550781,
                 164.06414794921875
+              ],
+              "origin": [
+                264.65631103515625,
+                162.47503662109375
               ]
             }
+          ],
+          "dir": [
+            0.9699691534042358,
+            0.2432279884815216
           ]
         },
         {
@@ -2741,6 +3628,14 @@
         164.189697265625
       ],
       "zIndex": 53,
+      "artworkOnly": true,
+      "artworkOnlyEvidence": {
+        "auditId": "2026-11-13-page-by-page-artwork-policy-p21-v1",
+        "sourcePdfPage": 21,
+        "region": "physical-token-labels",
+        "rule": "The extracted label is printed on a physical token; preserve the complete language-invariant source artwork instead of treating the label as PT-BR prose.",
+        "evidenceRef": "fidelity_overlays.json: fidelity-overlay-token-icons.png; original PDF page 21."
+      },
       "suspectedGhost": false,
       "lines": [
         {
@@ -2766,8 +3661,16 @@
                 159.99288940429688,
                 270.73516845703125,
                 164.189697265625
+              ],
+              "origin": [
+                268.98309326171875,
+                163.23419189453125
               ]
             }
+          ],
+          "dir": [
+            0.999997615814209,
+            -0.0021714235190302134
           ]
         },
         {
@@ -2793,8 +3696,16 @@
                 159.548583984375,
                 274.2734680175781,
                 164.1683807373047
+              ],
+              "origin": [
+                271.0523986816406,
+                163.22412109375
               ]
             }
+          ],
+          "dir": [
+            0.9882219433784485,
+            -0.15302753448486328
           ]
         },
         {
@@ -2820,8 +3731,16 @@
                 158.48538208007812,
                 277.6628723144531,
                 163.4993438720703
+              ],
+              "origin": [
+                274.41339111328125,
+                162.6036376953125
               ]
             }
+          ],
+          "dir": [
+            0.9374305605888367,
+            -0.3481721878051758
           ]
         },
         {
@@ -2847,8 +3766,16 @@
                 157.4434356689453,
                 279.87176513671875,
                 162.03273010253906
+              ],
+              "origin": [
+                277.71429443359375,
+                161.22039794921875
               ]
             }
+          ],
+          "dir": [
+            0.8501805067062378,
+            -0.5264913439750671
           ]
         }
       ]
@@ -2862,6 +3789,14 @@
         157.9132080078125
       ],
       "zIndex": 58,
+      "artworkOnly": true,
+      "artworkOnlyEvidence": {
+        "auditId": "2026-11-13-page-by-page-artwork-policy-p21-v1",
+        "sourcePdfPage": 21,
+        "region": "physical-token-labels",
+        "rule": "The extracted label is printed on a physical token; preserve the complete language-invariant source artwork instead of treating the label as PT-BR prose.",
+        "evidenceRef": "fidelity_overlays.json: fidelity-overlay-token-icons.png; original PDF page 21."
+      },
       "suspectedGhost": false,
       "lines": [
         {
@@ -2887,6 +3822,10 @@
                 139.7060546875,
                 168.9550323486328,
                 156.21551513671875
+              ],
+              "origin": [
+                160.33859252929688,
+                152.2496337890625
               ]
             },
             {
@@ -2900,6 +3839,10 @@
                 139.62855529785156,
                 178.81146240234375,
                 157.068115234375
+              ],
+              "origin": [
+                168.82569885253906,
+                152.2496337890625
               ]
             },
             {
@@ -2913,8 +3856,16 @@
                 139.7060546875,
                 192.96974182128906,
                 156.21551513671875
+              ],
+              "origin": [
+                178.6822052001953,
+                152.2496337890625
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -2940,8 +3891,16 @@
                 152.63392639160156,
                 190.23374938964844,
                 157.9132080078125
+              ],
+              "origin": [
+                175.09779357910156,
+                156.7720947265625
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
@@ -2955,6 +3914,14 @@
         163.83877563476562
       ],
       "zIndex": 61,
+      "artworkOnly": true,
+      "artworkOnlyEvidence": {
+        "auditId": "2026-11-13-page-by-page-artwork-policy-p21-v1",
+        "sourcePdfPage": 21,
+        "region": "physical-token-labels",
+        "rule": "The extracted label is printed on a physical token; preserve the complete language-invariant source artwork instead of treating the label as PT-BR prose.",
+        "evidenceRef": "fidelity_overlays.json: fidelity-overlay-token-icons.png; original PDF page 21."
+      },
       "suspectedGhost": false,
       "lines": [
         {
@@ -2980,8 +3947,16 @@
                 159.14190673828125,
                 314.30731201171875,
                 163.83877563476562
+              ],
+              "origin": [
+                314.07440185546875,
+                160.61468505859375
               ]
             }
+          ],
+          "dir": [
+            -0.9713289737701416,
+            -0.2377394139766693
           ]
         },
         {
@@ -3007,8 +3982,16 @@
                 158.56918334960938,
                 312.3090515136719,
                 163.220458984375
+              ],
+              "origin": [
+                311.9819030761719,
+                160.09173583984375
               ]
             }
+          ],
+          "dir": [
+            -0.9425950646400452,
+            -0.33393794298171997
           ]
         },
         {
@@ -3034,8 +4017,16 @@
                 157.77426147460938,
                 310.7919006347656,
                 162.4107208251953
+              ],
+              "origin": [
+                310.3290100097656,
+                159.48541259765625
               ]
             }
+          ],
+          "dir": [
+            -0.8813170790672302,
+            -0.47252532839775085
           ]
         },
         {
@@ -3061,8 +4052,16 @@
                 156.8278045654297,
                 309.3328857421875,
                 161.3951873779297
+              ],
+              "origin": [
+                308.7851867675781,
+                158.64312744140625
               ]
             }
+          ],
+          "dir": [
+            -0.8291147947311401,
+            -0.5590784549713135
           ]
         },
         {
@@ -3088,8 +4087,16 @@
                 154.84930419921875,
                 308.1222229003906,
                 160.1384735107422
+              ],
+              "origin": [
+                307.4241943359375,
+                157.8096923828125
               ]
             }
+          ],
+          "dir": [
+            -0.7016094923019409,
+            -0.7125616669654846
           ]
         }
       ]
@@ -3103,6 +4110,14 @@
         157.38018798828125
       ],
       "zIndex": 66,
+      "artworkOnly": true,
+      "artworkOnlyEvidence": {
+        "auditId": "2026-11-13-page-by-page-artwork-policy-p21-v1",
+        "sourcePdfPage": 21,
+        "region": "physical-token-labels",
+        "rule": "The extracted label is printed on a physical token; preserve the complete language-invariant source artwork instead of treating the label as PT-BR prose.",
+        "evidenceRef": "fidelity_overlays.json: fidelity-overlay-token-icons.png; original PDF page 21."
+      },
       "suspectedGhost": false,
       "lines": [
         {
@@ -3128,8 +4143,16 @@
                 152.10365295410156,
                 306.06512451171875,
                 157.38018798828125
+              ],
+              "origin": [
+                305.2218017578125,
+                155.69122314453125
               ]
             }
+          ],
+          "dir": [
+            -0.5088372826576233,
+            -0.860862672328949
           ]
         }
       ]
@@ -3143,6 +4166,14 @@
         141.82115173339844
       ],
       "zIndex": 67,
+      "artworkOnly": true,
+      "artworkOnlyEvidence": {
+        "auditId": "2026-11-13-page-by-page-artwork-policy-p21-v1",
+        "sourcePdfPage": 21,
+        "region": "physical-token-labels",
+        "rule": "The extracted label is printed on a physical token; preserve the complete language-invariant source artwork instead of treating the label as PT-BR prose.",
+        "evidenceRef": "fidelity_overlays.json: fidelity-overlay-token-icons.png; original PDF page 21."
+      },
       "suspectedGhost": false,
       "lines": [
         {
@@ -3168,8 +4199,16 @@
                 130.08602905273438,
                 320.8360595703125,
                 134.78289794921875
+              ],
+              "origin": [
+                317.91729736328125,
+                133.31011962890625
               ]
             }
+          ],
+          "dir": [
+            0.9713289737701416,
+            0.2377394139766693
           ]
         },
         {
@@ -3195,8 +4234,16 @@
                 130.70440673828125,
                 322.80950927734375,
                 135.35568237304688
+              ],
+              "origin": [
+                320.0098876953125,
+                133.8331298828125
               ]
             }
+          ],
+          "dir": [
+            0.9425950646400452,
+            0.33393794298171997
           ]
         },
         {
@@ -3222,8 +4269,16 @@
                 131.5140838623047,
                 324.8123474121094,
                 136.15054321289062
+              ],
+              "origin": [
+                321.6626892089844,
+                134.43939208984375
               ]
             }
+          ],
+          "dir": [
+            0.8813170790672302,
+            0.47252532839775085
           ]
         },
         {
@@ -3249,8 +4304,16 @@
                 132.52955627441406,
                 326.54986572265625,
                 137.09693908691406
+              ],
+              "origin": [
+                323.2065124511719,
+                135.2816162109375
               ]
             }
+          ],
+          "dir": [
+            0.8291147947311401,
+            0.5590784549713135
           ]
         },
         {
@@ -3276,8 +4339,16 @@
                 133.7862091064453,
                 329.1708984375,
                 139.07537841796875
+              ],
+              "origin": [
+                324.5675964355469,
+                136.114990234375
               ]
             }
+          ],
+          "dir": [
+            0.7016094923019409,
+            0.7125616669654846
           ]
         },
         {
@@ -3303,8 +4374,16 @@
                 136.54461669921875,
                 331.4532165527344,
                 141.82115173339844
+              ],
+              "origin": [
+                326.7698974609375,
+                138.23358154296875
               ]
             }
+          ],
+          "dir": [
+            0.5088372826576233,
+            0.860862672328949
           ]
         }
       ]
@@ -3335,7 +4414,7 @@
             {
               "text": "Terrain Types",
               "font": "Cinzel-Regular",
-              "size": 18.0,
+              "size": 18,
               "color": "#ffffff",
               "flags": 4,
               "bbox": [
@@ -3344,8 +4423,16 @@
                 478.16265869140625,
                 464.37872314453125
               ],
-              "renderWeightOverride": 700
+              "renderWeightOverride": 700,
+              "origin": [
+                341.380615234375,
+                457.6827087402344
+              ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
@@ -3376,7 +4463,7 @@
             {
               "text": "21",
               "font": "OptimaLTStd-ExtraBlack",
-              "size": 10.0,
+              "size": 10,
               "color": "#fff574",
               "flags": 4,
               "bbox": [
@@ -3384,8 +4471,16 @@
                 775.718505859375,
                 770.15380859375,
                 787.978515625
+              ],
+              "origin": [
+                758.2938232421875,
+                785.3284912109375
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         },
         {
@@ -3403,7 +4498,7 @@
             {
               "text": "21",
               "font": "OptimaLTStd-ExtraBlack",
-              "size": 10.0,
+              "size": 10,
               "color": "#231f20",
               "flags": 4,
               "bbox": [
@@ -3411,19 +4506,234 @@
                 775.718505859375,
                 770.15380859375,
                 787.978515625
+              ],
+              "origin": [
+                758.2938232421875,
+                785.3284912109375
               ]
             }
+          ],
+          "dir": [
+            1,
+            0
           ]
         }
       ]
+    },
+    {
+      "id": "block_76",
+      "bbox": [
+        304.79,
+        512.95,
+        403.07,
+        533.47
+      ],
+      "zIndex": 23,
+      "suspectedGhost": false,
+      "lines": [
+        {
+          "id": "line_23_1",
+          "bbox": [
+            335.2278137207031,
+            518.2163696289062,
+            382.6308288574219,
+            528.9443969726562
+          ],
+          "availableWidth": 98.27999999999997,
+          "availableX": 304.79,
+          "suspectedGhost": false,
+          "spans": [
+            {
+              "text": "HINDERING",
+              "font": "OptimaLTStd-Bold",
+              "size": 9,
+              "color": "#ffffff",
+              "flags": 20,
+              "bbox": [
+                335.2278137207031,
+                518.2163696289062,
+                382.6308288574219,
+                528.9443969726562
+              ],
+              "origin": [
+                335.2278137207031,
+                526.50537109375
+              ]
+            }
+          ],
+          "dir": [
+            1,
+            0
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block23-hindering-label",
+          "spanRefs": [
+            "line_23_1:0"
+          ],
+          "flowFrame": {
+            "x": 304.79,
+            "width": 98.27999999999997,
+            "textAlign": "center"
+          }
+        }
+      ],
+      "layoutFrame": {
+        "x": 304.79,
+        "y": 512.95,
+        "width": 98.27999999999997,
+        "height": 20.519999999999982,
+        "rotation": 0,
+        "textAlign": "center"
+      }
+    },
+    {
+      "id": "block_77",
+      "bbox": [
+        472.46,
+        546.02,
+        570.73,
+        566.54
+      ],
+      "zIndex": 24,
+      "suspectedGhost": false,
+      "lines": [
+        {
+          "id": "line_24_1",
+          "bbox": [
+            510.18780517578125,
+            550.9854125976562,
+            540.9947509765625,
+            561.7134399414062
+          ],
+          "availableWidth": 98.27000000000004,
+          "availableX": 472.46,
+          "suspectedGhost": false,
+          "spans": [
+            {
+              "text": "SPECIAL",
+              "font": "OptimaLTStd-Bold",
+              "size": 9,
+              "color": "#ffffff",
+              "flags": 20,
+              "bbox": [
+                510.18780517578125,
+                550.9854125976562,
+                540.9947509765625,
+                561.7134399414062
+              ],
+              "origin": [
+                510.18780517578125,
+                559.2744140625
+              ]
+            }
+          ],
+          "dir": [
+            1,
+            0
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block24-special-label",
+          "spanRefs": [
+            "line_24_1:0"
+          ],
+          "flowFrame": {
+            "x": 472.46,
+            "width": 98.27000000000004,
+            "textAlign": "center"
+          }
+        }
+      ],
+      "layoutFrame": {
+        "x": 472.46,
+        "y": 546.02,
+        "width": 98.27000000000004,
+        "height": 20.519999999999982,
+        "rotation": 0,
+        "textAlign": "center"
+      }
+    },
+    {
+      "id": "block_78",
+      "bbox": [
+        528.96,
+        512.95,
+        628.11,
+        533.47
+      ],
+      "zIndex": 25,
+      "suspectedGhost": false,
+      "lines": [
+        {
+          "id": "line_25_1",
+          "bbox": [
+            568.516845703125,
+            518.2163696289062,
+            593.671875,
+            528.9443969726562
+          ],
+          "availableWidth": 99.14999999999998,
+          "availableX": 528.96,
+          "suspectedGhost": false,
+          "spans": [
+            {
+              "text": "MUCK",
+              "font": "OptimaLTStd-Bold",
+              "size": 9,
+              "color": "#ffffff",
+              "flags": 20,
+              "bbox": [
+                568.516845703125,
+                518.2163696289062,
+                593.671875,
+                528.9443969726562
+              ],
+              "origin": [
+                568.516845703125,
+                526.50537109375
+              ]
+            }
+          ],
+          "dir": [
+            1,
+            0
+          ]
+        }
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p21-block25-muck-label",
+          "spanRefs": [
+            "line_25_1:0"
+          ],
+          "flowFrame": {
+            "x": 528.96,
+            "width": 99.14999999999998,
+            "textAlign": "center"
+          }
+        }
+      ],
+      "layoutFrame": {
+        "x": 528.96,
+        "y": 512.95,
+        "width": 99.14999999999998,
+        "height": 20.519999999999982,
+        "rotation": 0,
+        "textAlign": "center"
+      }
     }
   ],
   "images": [
     {
       "url": "",
       "bbox": [
-        0.0,
-        0.0,
+        0,
+        0,
         820.3460083007812,
         820.3460083007812
       ],
@@ -3433,8 +4743,8 @@
     {
       "url": "",
       "bbox": [
-        0.0,
-        0.0,
+        0,
+        0,
         820.3460083007812,
         820.3460083007812
       ],
@@ -3455,7 +4765,7 @@
     {
       "url": "",
       "bbox": [
-        0.0,
+        0,
         0.56597900390625,
         13.322999954223633,
         820.3460083007812
@@ -3466,8 +4776,8 @@
     {
       "url": "",
       "bbox": [
-        0.0,
-        0.0,
+        0,
+        0,
         820.3460083007812,
         820.3460083007812
       ],
@@ -3477,7 +4787,7 @@
     {
       "url": "",
       "bbox": [
-        0.0,
+        0,
         0.4420166015625,
         14.322799682617188,
         820.3460083007812
@@ -3510,7 +4820,7 @@
     {
       "url": "",
       "bbox": [
-        0.0,
+        0,
         776.9985961914062,
         15.102399826049805,
         794.8165283203125
@@ -3741,7 +5051,7 @@
     {
       "url": "",
       "bbox": [
-        0.0,
+        0,
         776.9985961914062,
         787.948974609375,
         794.8165283203125

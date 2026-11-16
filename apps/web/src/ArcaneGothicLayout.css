@@ -1,0 +1,72 @@
+/* Arcane Gothic 2.0 — shared tokens and shell composition. Presentation only. */
+:root {
+  --arcane-dock-width: 52px;
+  --arcane-panel-gap: clamp(8px, 1vw, 16px);
+  --arcane-stage-inset: clamp(14px, 2vw, 32px);
+
+  --arcane-radius-control: 4px;
+  --arcane-radius-surface: 4px;
+  --arcane-radius-feature: 5px;
+
+  --arcane-glass-base: rgba(12, 14, 24, 0.74);
+  --arcane-glass-elevated: rgba(19, 16, 28, 0.88);
+  --arcane-glass-floating: rgba(20, 17, 30, 0.96);
+  --arcane-content-opaque: rgba(15, 12, 22, 0.97);
+  --arcane-edge-soft: rgba(211, 205, 223, 0.16);
+  --arcane-edge-highlight: rgba(148, 209, 232, 0.22);
+  --arcane-edge-active: rgba(105, 217, 235, 0.46);
+  --arcane-depth-base: 0 10px 28px rgba(0, 0, 0, 0.28), inset 0 1px rgba(255, 255, 255, 0.07);
+  --arcane-depth-elevated: 0 18px 42px rgba(0, 0, 0, 0.36), inset 0 1px rgba(255, 255, 255, 0.075);
+  --arcane-depth-floating: 0 16px 36px rgba(0, 0, 0, 0.42), inset 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.app-container {
+  --faq-panel-width: min(490px, calc(100vw - var(--left-nav-width, 52px) - var(--arcane-dock-width) - 16px));
+}
+
+.pdf-sidebar {
+  width: var(--arcane-dock-width);
+  flex: 0 0 var(--arcane-dock-width);
+  padding-block: 14px;
+}
+
+.viewer-main.single {
+  align-items: stretch;
+  justify-content: center;
+  padding: var(--arcane-stage-inset);
+}
+
+.viewer-main.scroll {
+  padding-inline: clamp(12px, 2vw, 32px);
+}
+
+.page-wrapper {
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--arcane-panel-gap);
+}
+
+/* The page's auto margins center it when it fits the remaining stage (including
+   the docked editor width), and collapse to zero when it needs scrolling. */
+.page-renderer .page-stage { justify-content: flex-start; }
+.page-renderer .page-container { margin-inline: auto; }
+
+.scroll-container {
+  padding-inline: clamp(12px, 2vw, 32px);
+}
+
+@media (max-width: 700px) {
+  :root {
+    --arcane-dock-width: 48px;
+    --arcane-stage-inset: 12px;
+    --arcane-panel-gap: 8px;
+  }
+
+  .app-container {
+    --faq-panel-width: calc(100vw - var(--arcane-dock-width, 52px));
+  }
+
+  .page-renderer.editor-open .page-stage {
+    padding-inline-end: 0;
+  }
+}

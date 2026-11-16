@@ -1,0 +1,164 @@
+{
+  "proposalId": "p100-end-turn-phase-description",
+  "version": "1",
+  "title": "Descrição da Fase de Fim do Turno — p. 100",
+  "page": 100,
+  "status": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+  "copyfitRevisionBudget": {
+    "naturalRevisionAttempts": 3,
+    "initialDraftAttempt": 1,
+    "revisionsUsed": 2
+  },
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "scopeLimits": [
+    "This batch covers only the explanatory sentence below the numbered End of Turn Phase heading on page 100.",
+    "The sentence is an independent typographic unit tied to line_29_1:0; the heading remains a separate source baseline.",
+    "Original OptimaLTStd 9 pt style, source geometry, and page frame are preserved.",
+    "The translation preserves the scope of Abilities and Effects that occur at the end of a turn."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 18,
+      "sourceBlockId": "block_29",
+      "sourceUnitId": "p100-end-turn-phase-description",
+      "spanKey": "page_100_unit_p100-end-turn-phase-description__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Resolve Abilities and Effects that occur at the End of a Turn.",
+      "sourcePdfVisualLineCount": 1,
+      "sourcePdfLineIds": [
+        "line_29_1"
+      ],
+      "proposalText": "Resolva Habilidades e Efeitos que ocorram nesta fase.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_unit_p100-end-turn-phase-description__pt-BR",
+        "bbox": [
+          435.9742126464844,
+          340.85986328125,
+          659.0836181640625,
+          351.5698547363281
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Resolva Habilidades e Efeitos que ocorram nesta fase.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "editorialStatus": "pending_human_review",
+      "technicalStatus": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+      "diagnosticRendering": "proposal",
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            435.9742126464844,
+            330.8428649902344,
+            659.0836181640625,
+            351.5698547363281
+          ],
+          "visualBaselinesPt": [
+            339.132,
+            349.131
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_unit_p100-end-turn-phase-description__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            302.81
+          ],
+          "frameHeightCssPx": 7.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "note": "Calibrated to 1 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
+      },
+      "pendingTerms": [
+        "Abilities → Habilidades and Effects → Efeitos remain local candidates, not new glossary approvals.",
+        "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
+      ]
+    }
+  ],
+  "note": "The first complete draft measured OVER at two PageRenderer lines against one source line. A concise EXACT revision was rejected by critical review for ambiguous scope. The final natural revision retains the explicit relative clause and ties 'nesta fase' to the End of Turn Phase heading; Copyfit V3 measured it EXACT at 100% and 200%, and independent critical review confirmed semantic scope and visible composition. Human approval remains pending.",
+  "revisions": [
+    {
+      "attempt": 1,
+      "text": "Resolva Habilidades e Efeitos que ocorram no fim do turno.",
+      "classification": "OVER",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 2,
+      "textEscapesFrame": true,
+      "evidence": "apps/web/output/p100-block_29-copyfit-v1/resolva-habilidades-e-efeitos-que-ocorram-no-fim-do-turno-100pct-measurement.json"
+    },
+    {
+      "attempt": 2,
+      "text": "Resolva Habilidades e Efeitos no fim do turno.",
+      "classification": "EXACT",
+      "criticalReview": "FAIL: under the separate End of Turn Phase heading, 'no fim do turno' could modify the resolution action instead of restricting which Abilities and Effects are resolved.",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "textEscapesFrame": false,
+      "evidence": [
+        "apps/web/output/p100-block_29-copyfit-v1/resolva-habilidades-e-efeitos-no-fim-do-turno-100pct-measurement.json",
+        "apps/web/output/p100-block_29-copyfit-v1/resolva-habilidades-e-efeitos-no-fim-do-turno-200pct-measurement.json"
+      ]
+    },
+    {
+      "attempt": 3,
+      "text": "Resolva Habilidades e Efeitos que ocorram nesta fase.",
+      "classification": "EXACT",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "criticalReview": "PASS: 'que ocorram nesta fase' preserves the explicit restriction and clearly refers to the immediately preceding End of Turn Phase heading.",
+      "evidence": [
+        "apps/web/output/p100-block_29-copyfit-v1/resolva-habilidades-e-efeitos-que-ocorram-nesta-fase-100pct-measurement.json",
+        "apps/web/output/p100-block_29-copyfit-v1/resolva-habilidades-e-efeitos-que-ocorram-nesta-fase-200pct-measurement.json"
+      ]
+    }
+  ],
+  "criticalReview": {
+    "result": "PASS",
+    "finding": "The wording preserves which Abilities and Effects are to be resolved; 'nesta fase' refers to the End of Turn Phase heading immediately above. The description remains one line separate from the heading with no visible clipping or collision at 100% and 200%.",
+    "evidence": [
+      "apps/web/output/p100-block_29-copyfit-v1/viewer-ptbr-resolva-habilidades-e-efeitos-que-ocorram-nesta-fase-100pct.png",
+      "apps/web/output/p100-block_29-copyfit-v1/viewer-ptbr-resolva-habilidades-e-efeitos-que-ocorram-nesta-fase-200pct.png"
+    ]
+  }
+}

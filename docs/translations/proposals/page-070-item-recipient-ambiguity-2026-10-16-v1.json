@@ -1,0 +1,137 @@
+{
+  "proposalId": "p070-item-recipient-ambiguity",
+  "version": "1",
+  "title": "Escolha de Aventureiro para receber um Item — p. 70",
+  "page": 70,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "8B069FF039D780FA392A4850C5F39CA96BB11C110AB84DD7ACA8B4F53A08782A",
+    "pageDom": "8BE588339B4061B916F6BD40743605C028CE7773EEF792163C559945B89A78F7",
+    "inlineElements": "DDBBD947ACC777D0C7765FD69213F845153B64BA6FA7D9F60F0E0F4327BBBAA3",
+    "fidelityOverlays": "E45C74E470B93718A1B7AFF6ADF4E2B209BE9215040EE691ABB2AB67524C0B09"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2e0efc6c6f6f0"
+  },
+  "scopeLimits": [
+    "Somente o parágrafo block_12 (DOM index 3), sobre ambiguidade na escolha de qual Aventureiro recebe um Item, entra neste recorte.",
+    "GETs confirmaram zero traduções PT-BR e zero reviews da p.70 antes da proposta. Nenhuma tradução final é publicada ou sobrescrita.",
+    "Viewer real verificado por agente crítico; Copyfit V3, Editor, PDF, fidelidade integral e aprovação editorial continuam pendentes."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 3,
+      "sourceBlockId": "block_12",
+      "sourceUnitId": null,
+      "spanKey": "page_70_block_3__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "If its ambiguous as to what Adventurer would normally Gain the Item, the players may choose which Adventurer Gains the Item.",
+      "proposalText": "Se não estiver claro qual Aventureiro normalmente receberia o Item, os jogadores podem escolher qual Aventureiro o recebe.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_70_block_3__pt-BR",
+        "bbox": [
+          86.173095703125,
+          199.074951171875,
+          404.7229919433594,
+          221.97496032714844
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "Se não estiver claro qual Aventureiro normalmente receberia o Item, os jogadores podem escolher qual Aventureiro o recebe.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "verified_live_viewer_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 70,
+          "pdfDocumentPageIndex": 69,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            86.173095703125,
+            199.074951171875,
+            404.7229919433594,
+            221.97496032714844
+          ],
+          "visualBaselinesPt": [
+            208.265,
+            219.265
+          ],
+          "spans": 2,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_70_block_3__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 3,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            187.92,
+            196.83
+          ],
+          "frameHeightCssPx": 18.5
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "note": "Parágrafo de prosa isolado como próximo lote. A proposta não publica tradução nem substitui revisão humana.",
+  "viewerVerification": {
+    "status": "verified_live_viewer_exact_highlight_readability",
+    "verifiedOn": "2026-10-16",
+    "independentCriticalReview": true,
+    "pageNumber": 70,
+    "candidatesVerified": 1,
+    "correctHighlights": 1,
+    "completeEnglishPortugueseComparison": true,
+    "highlightOnlyTargetParagraph": true,
+    "readableAt100Percent": true,
+    "visibleClippingOrOverlap": false,
+    "payloadTranslationCount": 326,
+    "pageTranslationRows": 0,
+    "pageReviewRows": 0,
+    "writeOrApprovalActions": 0,
+    "copyfitV3Verified": false,
+    "editorRoundTripVerified": false,
+    "pdfExportVerified": false,
+    "editorialApproval": false,
+    "finalTranslationWrites": 0
+  }
+}

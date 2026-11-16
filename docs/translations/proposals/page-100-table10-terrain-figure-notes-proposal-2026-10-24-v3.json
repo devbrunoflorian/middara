@@ -1,0 +1,611 @@
+{
+  "proposalId": "p100-table10-terrain-figure-notes",
+  "version": "3",
+  "title": "Notas da Tabela 10 — Terreno e Miniaturas — p. 100 (v3)",
+  "page": 100,
+  "status": "pending_copyfit_v3_dtp_intervention",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "revisionBudget": {
+    "naturalAlternatives": 3,
+    "rule": "Render each complete, semantically equivalent alternative in PageRenderer before retaining it; never alter fonts, size, saved geometry, meaning, or insert padding to force a line count."
+  },
+  "counts": {
+    "candidates": 2,
+    "existingHumanTranslationsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 1
+  },
+  "scopeLimits": [
+    "This batch covers only the editable explanatory units beneath Table 10: TERRAIN TOKENS and FIGURES.",
+    "The official glossary terms Terrain → Terrenos, Figures → Miniaturas, and Token → Ficha are applied in context.",
+    "Current(s), Plank token(s), Large Based Figures, and Heavy Tag remain local wording proposals pending terminology review; this file does not update the glossary.",
+    "Source rich-span boundaries, source fonts, sizes, colors, and frames are preserved. These are review proposals, not final translations."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 1,
+      "sourceBlockId": "block_12",
+      "sourceUnitId": null,
+      "spanKey": "page_100_block_1__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "TERRAIN TOKENS: Terrain tokens and things that count as Terrain (e.g. Plank tokens) are not moved by Currents.",
+      "proposalText": "FICHAS DE TERRENO: Elas e elementos considerados Terreno (ex.: fichas de Prancha) não são movidos por Correntes.",
+      "copyfitSemanticFlow": {
+        "version": 1,
+        "flowRegion": {
+          "id": "p100-table10-terrain-left-cell",
+          "semanticOwner": "p100-table10",
+          "leftBoundaryEvidence": [
+            {
+              "valuePt": 57.528,
+              "kind": "table-grid",
+              "detail": "Official PDF left border of the Terrain cell",
+              "sourceId": "pdf:page100-terrain-cell-left-stroke"
+            },
+            {
+              "valuePt": 57.528,
+              "kind": "visual-boundary",
+              "detail": "Same left table stroke in the rendered page",
+              "sourceId": "viewer:page100-terrain-cell-left-stroke"
+            }
+          ],
+          "rightBoundaryEvidence": [
+            {
+              "valuePt": 224.522,
+              "kind": "table-grid",
+              "detail": "Official PDF divider between Terrain and Figures cells",
+              "sourceId": "pdf:page100-terrain-figures-divider"
+            },
+            {
+              "valuePt": 224.522,
+              "kind": "visual-boundary",
+              "detail": "Same table divider in the rendered page",
+              "sourceId": "viewer:page100-terrain-figures-divider"
+            }
+          ],
+          "paddingLeftPt": 3.998,
+          "paddingRightPt": 4,
+          "textBandTopPt": 94.0043,
+          "textBandBottomPt": 131.6253,
+          "evidence": [
+            {
+              "kind": "semantic-parent",
+              "owner": "p100-table10",
+              "detail": "Terrain note is the left cell of Table 10"
+            },
+            {
+              "kind": "source-baselines",
+              "detail": "Source PDF text baselines and original cell placement"
+            },
+            {
+              "kind": "table-grid",
+              "detail": "Official PDF table strokes define the cell and divider"
+            },
+            {
+              "kind": "artwork-occupancy",
+              "detail": "The adjacent Figures cell remains excluded from the left-cell corridor"
+            }
+          ]
+        },
+        "alignmentAnchor": "left",
+        "obstacles": [
+          {
+            "id": "p100-table10-figures-cell-text",
+            "semanticRelation": "independent-flow-owner",
+            "bboxPt": [
+              228.521,
+              94.0043,
+              380,
+              131.6253
+            ],
+            "requiredGapPt": 8,
+            "detail": "The right-cell text begins 4 pt after the divider; keep the full measured inset between the left corridor and its ink"
+          }
+        ],
+        "evidenceSources": [
+          "apps/web/public/pages/page_100/page_100_dom.json",
+          "Official PDF table vector strokes reviewed by the critical agent"
+        ]
+      },
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_1__pt-BR",
+        "bbox": [
+          61.52619934082031,
+          94.00433349609375,
+          212.24017333984375,
+          131.62527465820312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "FICHAS DE TERRENO:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Elas e elementos considerados Terreno (ex.: fichas de Prancha) não são movidos por Correntes.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "copyfitClassification": "OVER",
+      "technicalStatus": "blocked_copyfit_v3_over_after_maximum_safe_semantic_width_dtp_exception_open",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "blank whole PT-BR unit only in the diagnostic Viewer; no English fallback; preserve the complete proposal in the review panel.",
+      "pendingTerms": [
+        "Current(s) → Corrente(s): candidate form based on this page's moving-water context; local proposal only, not a glossary addition.",
+        "Plank token(s) → ficha(s) de Prancha: local item-name proposal; confirm against the named item/reference.",
+        "Terrain tokens → Fichas de Terreno: compound capitalization and number should be checked against approved game usage."
+      ],
+      "copyfitLineCount": "4/3 (OVER after maximum safe semantic width)",
+      "copyfitLineCountClassification": "OVER",
+      "copyfitAttempts": [
+        {
+          "proposalVersion": "2-semantic-width-preflight",
+          "proposalText": "FICHAS DE TERRENO: Fichas e itens que contam como Terreno (ex.: fichas de Prancha) não são movidos pelas Correntes.",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 4,
+          "classification": "OVER_AFTER_SAFE_WIDTH",
+          "maximumSafeWidthPt": 158.99903,
+          "measurements": [
+            {
+              "zoomPercent": 100,
+              "sourceLines": 3,
+              "pageRendererLines": 4,
+              "fontLoaded": true,
+              "geometryPass": true,
+              "overflow": false,
+              "collision": false,
+              "measurement": "apps/web/output/p100-block_12-copyfit-v1/fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-100pct-measurement.json",
+              "screenshot": "apps/web/output/p100-block_12-copyfit-v1/viewer-ptbr-fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-semantic-width-maximum-safe-width-100pct.png"
+            },
+            {
+              "zoomPercent": 200,
+              "sourceLines": 3,
+              "pageRendererLines": 4,
+              "fontLoaded": true,
+              "geometryPass": true,
+              "overflow": false,
+              "collision": false,
+              "measurement": "apps/web/output/p100-block_12-copyfit-v1/fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-200pct-measurement.json",
+              "screenshot": "apps/web/output/p100-block_12-copyfit-v1/viewer-ptbr-fichas-de-terreno-fichas-e-itens-que-contam-como-terreno-ex-fichas-de-prancha-n-o-s-o-movidos-pelas-correntes-semantic-width-maximum-safe-width-200pct.png"
+            }
+          ],
+          "decision": "Retain as open DTP exception; do not modify font, text, or neighboring cell geometry."
+        },
+        {
+          "proposalVersion": "3-semantic-concision",
+          "proposalText": "FICHAS DE TERRENO: Elas e elementos considerados Terreno (ex.: fichas de Prancha) não são movidos por Correntes.",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 4,
+          "classification": "OVER_AFTER_MAXIMUM_SAFE_WIDTH",
+          "maximumSafeWidthPt": 158.99903,
+          "measurements": [
+            {
+              "zoomPercent": 100,
+              "sourceLines": 3,
+              "pageRendererLines": 4,
+              "fontLoaded": true,
+              "geometryPass": true,
+              "overflow": false,
+              "collision": false,
+              "measurement": "docs/translations/proposals/page-100-table10-terrain-figure-notes-proposal-2026-10-24-v3.json#copyfitMeasurementsByZoom.100%"
+            },
+            {
+              "zoomPercent": 200,
+              "sourceLines": 3,
+              "pageRendererLines": 4,
+              "fontLoaded": true,
+              "geometryPass": true,
+              "overflow": false,
+              "collision": false,
+              "measurement": "docs/translations/proposals/page-100-table10-terrain-figure-notes-proposal-2026-10-24-v3.json#copyfitMeasurementsByZoom.200%"
+            }
+          ],
+          "decision": "Keep the complete candidate in review and keep the entire PT-BR unit diagnostically blank. The shorter natural variant still measures OVER; preserve the source geometry and leave the DTP exception open."
+        }
+      ],
+      "sourcePdfVisualLineCount": 3,
+      "pageRendererVisualLineCount": 4,
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 4,
+          "classification": "OVER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 100,
+            "pdfDocumentPageIndex": 99,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              61.52619934082031,
+              94.00433349609375,
+              212.24017333984375,
+              131.62527465820312
+            ],
+            "visualRowBaselinesPt": [
+              103.194,
+              116.19,
+              129.186
+            ],
+            "spans": 6,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_100_block_1",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 8,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
+            "visualRowTopsCssPx": [
+              102.75,
+              110.86,
+              118.97,
+              127.08
+            ],
+            "frameHeightCssPx": 30.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 4,
+          "classification": "OVER",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 100,
+            "pdfDocumentPageIndex": 99,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              61.52619934082031,
+              94.00433349609375,
+              212.24017333984375,
+              131.62527465820312
+            ],
+            "visualRowBaselinesPt": [
+              103.194,
+              116.19,
+              129.186
+            ],
+            "spans": 6,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_100_block_1",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 8,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 4,
+            "visualRowTopsCssPx": [
+              331.97,
+              336.02,
+              340.06,
+              344.11
+            ],
+            "frameHeightCssPx": 15.2
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 3,
+        "pageRendererVisualLineCount": 4,
+        "classification": "OVER",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "100%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            61.52619934082031,
+            94.00433349609375,
+            212.24017333984375,
+            131.62527465820312
+          ],
+          "visualRowBaselinesPt": [
+            103.194,
+            116.19,
+            129.186
+          ],
+          "spans": 6,
+          "visualRows": 3
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_block_1",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 8,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            331.97,
+            336.02,
+            340.06,
+            344.11
+          ],
+          "frameHeightCssPx": 15.2
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "diagnosticBlank": {
+        "exceptionId": "P100-DTP-COPYFIT-TERRAIN-TOKENS-1",
+        "reason": "Copyfit V3 measures 4 PT-BR visual rows against 3 source rows at both 100% and 200% after the maximum safe semantic-width attempt. OVER fails the mandatory line-count gate; no font, frame, or neighboring-cell changes were made."
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_1__pt-BR",
+        "bbox": [
+          61.52619934082031,
+          94.00433349609375,
+          212.24017333984375,
+          131.62527465820312
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "FICHAS DE TERRENO:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "Elas e elementos considerados Terreno (ex.: fichas de Prancha) não são movidos por Correntes.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": []
+      }
+    },
+    {
+      "blockIndex": 2,
+      "sourceBlockId": "block_13",
+      "sourceUnitId": null,
+      "spanKey": "page_100_block_2__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "FIGURES: Figures are always subject to being moved by Currents. See Large Based Figures Pg. 71, or the Heavy Tag Pg. 93, for exceptions.",
+      "proposalText": "MINIATURAS: Elas sempre podem ser movidas pelas Correntes. Veja Miniaturas de Base Grande (pág. 71) ou a Tag Pesada (pág. 93) para exceções.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_100_block_2__pt-BR",
+        "bbox": [
+          228.5205078125,
+          87.50433349609375,
+          380.7736511230469,
+          138.12124633789062
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "MINIATURAS:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Elas sempre podem ser movidas pelas Correntes. Veja ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Miniaturas de ",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Base Grande",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " (pág. 71) ou a ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Tag ",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Pesada",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " (pág. 93) para exceções.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "sourcePdfVisualLineCount": 4,
+      "pageRendererVisualLineCount": 4,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 4,
+        "pageRendererVisualLineCount": 4,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 100,
+          "pdfDocumentPageIndex": 99,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            228.5205078125,
+            87.50433349609375,
+            380.7736511230469,
+            138.12124633789062
+          ],
+          "visualBaselinesPt": [
+            96.687,
+            109.69,
+            122.686,
+            135.682
+          ],
+          "spans": 9,
+          "visualRows": 4
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_100_block_2__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 12,
+          "distinctVisualRows": 4,
+          "visualRowTopsCssPx": [
+            97.5,
+            105.61,
+            112.91,
+            120.2
+          ],
+          "frameHeightCssPx": 41
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "technicalStatus": "fit-awaiting-human-review",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "Do not treat a blank diagnostic unit as saved content; if Copyfit V3 or a technical gate fails, show the whole unit blank with no English fallback and keep this complete proposal available for review.",
+      "pendingTerms": [
+        "Current(s) → Corrente(s): candidate form based on this page's moving-water context; local proposal only, not a glossary addition.",
+        "Confirmar se o título da referência cruzada corresponde ao texto da p. 71.",
+        "Heavy Tag → Tag Pesada: candidate rendering, pending terminology review."
+      ]
+    }
+  ],
+  "revisions": [
+    {
+      "sourceBlockId": "block_12",
+      "text": "FICHAS DE TERRENO: Fichas de Terreno e elementos que contam como Terreno (por exemplo, fichas de Prancha) não são deslocados pelas Correntes.",
+      "result": "OVER: 3 source lines / 5 PageRenderer lines at 100% and 200%; ink also crosses the original frame. Preserved as a full-meaning attempt, not approved."
+    },
+    {
+      "sourceBlockId": "block_12",
+      "text": "FICHAS DE TERRENO: Essas fichas e itens que contam como Terreno (ex.: fichas de Prancha) não são movidos pelas Correntes.",
+      "result": "OVER: 3 source lines / 4 PageRenderer lines at 100%; no frame overflow. Rejected because OVER fails independently of geometry."
+    },
+    {
+      "sourceBlockId": "block_12",
+      "text": "FICHAS DE TERRENO: Fichas e itens que contam como Terreno (ex.: fichas de Prancha) não são movidos pelas Correntes.",
+      "result": "OVER: 3 source lines / 4 PageRenderer lines at 100% and 200%; no frame overflow in the final measured attempt. Preserved as the complete candidate and recorded in the DTP exception."
+    },
+    {
+      "sourceBlockId": "block_13",
+      "text": "MINIATURAS: As Correntes sempre podem deslocar as miniaturas. Veja Miniaturas de Base Grande, pág. 71, ou a Tag Pesada, pág. 93, para ver as exceções.",
+      "result": "OVER: 4 source lines / 5 PageRenderer lines at 100% and 200%; shortened naturally and re-rendered."
+    },
+    {
+      "version": "2",
+      "date": "2026-10-17",
+      "summary": "Retrospective preflight explicitly tested the measured maximum safe semantic width; both zooms remain OVER 4/3, so the DTP exception stays open."
+    }
+  ],
+  "note": "The measured 158.999 pt maximum safe left-cell corridor still yields 4 PT-BR visual rows against 3 source rows at 100% and 200%. The full candidate remains preserved and blank in diagnostic rendering; DTP intervention remains required. No neighboring cell, final translation, or Payload record was changed.",
+  "sourceHashes": {
+    "pageDom": "2CF721F04774A14AF55B549AC5097715A4598D616DC85F6F3D3FEB7A915086B7"
+  }
+}

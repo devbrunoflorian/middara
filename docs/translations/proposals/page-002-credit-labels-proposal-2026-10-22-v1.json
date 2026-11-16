@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "proposalId": "page-002-credit-labels-2026-10-22-v1",
+  "version": "1",
+  "page": 2,
+  "locale": "pt-BR",
+  "title": "Rótulos de créditos ausentes",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+  "sourceDomSha256": "afbe3a6e4291300d806b5e5421c5b8a01a3002fd603efa76ada91fac2176ecee",
+  "status": "approved_and_published_via_official_reviewer",
+  "sourceReview": {
+    "status": "existing_official_pdf_and_page-source-review_reused",
+    "evidence": "Both labels are present in the source PDF and p.2 source transcript, have dedicated semantic credit-field geometry in credit_units.json, and have no PT-BR translation record. Existing neighboring credit translations were preserved."
+  },
+  "counts": {
+    "candidates": 2,
+    "payloadWrites": 2,
+    "humanApproved": false,
+    "verifiedInViewer": 2,
+    "verifiedInEditor": 0,
+    "verifiedInPdf": 2,
+    "editorialApprovedByAuthorizedAgent": 2
+  },
+  "candidates": [
+    {
+      "sourceBlockId": "block_32",
+      "blockIndex": 9,
+      "sourceText": "Game Design:",
+      "proposalText": "Design de Jogo:",
+      "proposalMarkup": "Design de Jogo:",
+      "spanKey": "page_2_credit_game-design_label__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_2_credit_game-design_label__pt-BR",
+        "bbox": [
+          264.1614074707031,
+          556.2168579101562,
+          331.4013977050781,
+          568.1369018554688
+        ],
+        "segments": [
+          {
+            "text": "Design de Jogo:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source"
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_2_credit_game-design_label__pt-BR",
+        "bbox": [
+          264.1614074707031,
+          556.2168579101562,
+          331.4013977050781,
+          568.1369018554688
+        ],
+        "segments": [
+          {
+            "text": "Design de Jogo:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source"
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
+      "editorialStatus": "Approved and persisted through the official Reviewer under the authorized GREEN flow; technical Copyfit V3 remains a separate record.",
+      "diagnosticRendering": "proposal",
+      "sourceBboxes": [
+        [
+          264.1614074707031,
+          556.2168579101562,
+          331.4013977050781,
+          568.1369018554688
+        ]
+      ],
+      "pendingTerms": [],
+      "notes": [
+        "Candidate addresses only the missing credit label. Existing names and all saved human translations remain unchanged."
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 2,
+          "pdfDocumentPageIndex": 1,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            264.1614074707031,
+            556.2168579101562,
+            331.4013977050781,
+            568.1369018554688
+          ],
+          "visualBaselinesPt": [
+            565.427
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_2_credit_game-design_label__pt-BR",
+          "readingMethod": "text rects of the review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            477.34
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "approvalEvidence": {
+        "reviewId": 149,
+        "translationId": 477,
+        "approvalStatus": "approved",
+        "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer"
+      }
+    },
+    {
+      "sourceBlockId": "block_40",
+      "blockIndex": 17,
+      "sourceText": "Playtesters:",
+      "proposalText": "Testadores de Jogo:",
+      "proposalMarkup": "Testadores de Jogo:",
+      "spanKey": "page_2_credit_playtesters_label__pt-BR",
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_2_credit_playtesters_label__pt-BR",
+        "bbox": [
+          583.8214111328125,
+          529.536865234375,
+          638.5316162109375,
+          541.4569091796875
+        ],
+        "segments": [
+          {
+            "text": "Testadores de Jogo:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source"
+      },
+      "diagnosticData": {
+        "schemaVersion": 2,
+        "spanKey": "page_2_credit_playtesters_label__pt-BR",
+        "bbox": [
+          583.8214111328125,
+          529.536865234375,
+          638.5316162109375,
+          541.4569091796875
+        ],
+        "segments": [
+          {
+            "text": "Testadores de Jogo:",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "source"
+      },
+      "status": "approved_and_published_via_official_reviewer",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
+      "editorialStatus": "Approved and persisted through the official Reviewer under the authorized GREEN flow; technical Copyfit V3 remains a separate record.",
+      "diagnosticRendering": "proposal",
+      "sourceBboxes": [
+        [
+          583.8214111328125,
+          529.536865234375,
+          638.5316162109375,
+          541.4569091796875
+        ]
+      ],
+      "pendingTerms": [],
+      "notes": [
+        "Candidate addresses only the missing credit label. Existing names and all saved human translations remain unchanged."
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 2,
+          "pdfDocumentPageIndex": 1,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            583.8214111328125,
+            529.536865234375,
+            638.5316162109375,
+            541.4569091796875
+          ],
+          "visualBaselinesPt": [
+            538.747
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_2_credit_playtesters_label__pt-BR",
+          "readingMethod": "text rects of the review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            455.72
+          ],
+          "frameHeightCssPx": 9.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "approvalEvidence": {
+        "reviewId": 150,
+        "translationId": 478,
+        "approvalStatus": "approved",
+        "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer"
+      }
+    }
+  ],
+  "viewer": {
+    "selectedProposalComparedWithEnglishSource": true,
+    "selectedLanguage": "PT",
+    "editorialApproval": "approved",
+    "reviewerFlow": "official"
+  },
+  "payload": {
+    "httpMethod": "GET plus official Reviewer approval action",
+    "page2PtBrRecordCount": 26,
+    "approvedCandidateKeys": [
+      "page_2_credit_game-design_label__pt-BR",
+      "page_2_credit_playtesters_label__pt-BR"
+    ],
+    "reviewIds": [
+      149,
+      150
+    ],
+    "translationIds": [
+      477,
+      478
+    ],
+    "writesPerformed": 2,
+    "publicationVerified": true
+  },
+  "pdf": {
+    "verified": true,
+    "export": "output/proofs/translation-readiness-2026-10-22/p002-credit-labels-approved/page-002-ptBR.pdf",
+    "fullPage": true,
+    "viewerAndPrintScreenshots": true
+  },
+  "decision": "Both missing credit labels were editorially approved under the authorized GREEN flow and published via the official Reviewer. The 24 pre-existing records were preserved; this makes no new approval claim for those legacy records."
+}

@@ -54,7 +54,22 @@
             }
           ]
         }
-      ]
+      ],
+      "typographicSpanUnits": [
+        {
+          "id": "p88-block-8-font-size-18pt-unit-00",
+          "spanRefs": [
+            "line_8_0:0"
+          ]
+        },
+        {
+          "id": "p88-block-8-font-size-11pt-unit-01",
+          "spanRefs": [
+            "line_8_0:1"
+          ]
+        }
+      ],
+      "hiddenFromPage": true
     },
     {
       "id": "block_11",
@@ -90,7 +105,10 @@
                 775.718505859375,
                 61.20249938964844,
                 787.978515625
-              ]
+              ],
+              "renderOnlyStrokePass": true,
+              "sourcePaintRole": "stroke-only",
+              "sourcePaintAuditId": "2026-10-04-p082-101-folio-outline-v1"
             }
           ]
         },
@@ -117,8 +135,20 @@
                 775.718505859375,
                 61.20249938964844,
                 787.978515625
+              ],
+              "renderTextStrokeWidthPt": 1.5,
+              "renderTextStrokeColor": "#fff574",
+              "sourcePaintRole": "fill-with-source-stroke",
+              "sourcePaintAuditId": "2026-10-04-p082-101-folio-outline-v1",
+              "origin": [
+                49.342498779296875,
+                785.3284912109375
               ]
             }
+          ],
+          "dir": [
+            1.0,
+            0.0
           ]
         }
       ]

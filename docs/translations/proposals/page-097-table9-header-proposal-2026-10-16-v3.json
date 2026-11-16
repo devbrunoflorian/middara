@@ -1,0 +1,395 @@
+{
+  "proposalId": "p097-table9-header",
+  "version": "3",
+  "title": "Tabela 9 — título e nota introdutória, p. 97 (v3)",
+  "page": 97,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "7442EFF2981331387BECD0E6F882542A5220B3AE91B7A9B98117EFBAFC6C870F",
+    "pageDom": "BBD5E440E798D1817D937F6DA3504D7230BED1A810CCBBF0A0E5AA2244A77C1D"
+  },
+  "counts": {
+    "candidates": 2,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "GETs somente leitura confirmaram zero traduções e zero reviews nas duas unidades da p. 97; a coleção final translations não foi alterada.",
+    "Este lote cobre somente o título da Tabela 9 e sua nota introdutória. As regras e os tokens Burrow, Bulb, Dynamite, Font of Renewal e Plank continuam para lotes posteriores.",
+    "Token → Ficha segue o glossário oficial. O título plural segue o título humano salvo na p. 5; o composto singular no texto segue a referência humana salva nessa mesma página. Nenhuma decisão nova de glossário é criada.",
+    "O texto e a organização visual das unidades foram conferidos no PDF oficial, p. 97. O Viewer, copyfit, Editor e PDF exportado ainda requerem validação separados."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 12,
+      "sourceBlockId": "block_20",
+      "sourceUnitId": "p97-block-20-first-size-12pt",
+      "spanKey": "page_97_unit_p97-block-20-first-size-12pt__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Table 9: Combatant Tokens",
+      "proposalText": "Tabela 9: Fichas de Combatentes",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_97_unit_p97-block-20-first-size-12pt__pt-BR",
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Tabela 9: ",
+            "font": "AGaramondPro-Bold",
+            "size": 12,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fichas de Combatentes",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 97,
+          "pdfDocumentPageIndex": 96,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            58.6693000793457,
+            39.970924377441406,
+            224.26934814453125,
+            56.14692306518555
+          ],
+          "visualBaselinesPt": [
+            51.683
+          ],
+          "spans": 2,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_97_unit_p97-block-20-first-size-12pt__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 2,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            57.98
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    },
+    {
+      "blockIndex": 12,
+      "sourceBlockId": "block_20",
+      "sourceUnitId": "p97-block-20-remaining-size-9pt",
+      "spanKey": "page_97_unit_p97-block-20-remaining-size-9pt__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "IMPORTANT: Combatant tokens have additional rules associated with them. See Combatant Tokens on Pg. 69 for details.",
+      "proposalText": "IMPORTANTE: Fichas de Combatentes têm regras adicionais. Veja Fichas de Combatentes na pág. 69 para detalhes.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_97_unit_p97-block-20-remaining-size-9pt__pt-BR",
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "IMPORTANTE:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " Fichas de Combatentes têm regras adicionais. Veja ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fichas de Combatentes",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " na pág. ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "69",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " para detalhes.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_viewer_copyfit_v3",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 97,
+            "pdfDocumentPageIndex": 96,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              58.6693000793457,
+              56.942596435546875,
+              527.029541015625,
+              67.7605972290039
+            ],
+            "visualRowBaselinesPt": [
+              65.322
+            ],
+            "spans": 6,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_97_unit_p97-block-20-remaining-size-9pt__pt-BR",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 6,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              73.73
+            ],
+            "frameHeightCssPx": 8.8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 97,
+          "pdfDocumentPageIndex": 96,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            58.6693000793457,
+            56.942596435546875,
+            527.029541015625,
+            67.7605972290039
+          ],
+          "visualRowBaselinesPt": [
+            65.322
+          ],
+          "spans": 6,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_97_unit_p97-block-20-remaining-size-9pt__pt-BR",
+          "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+          "rangeRectFragments": 6,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            73.73
+          ],
+          "frameHeightCssPx": 8.8
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "note": "Recorte das duas unidades tipográficas que formam o título e a nota introdutória antes da Tabela 9. As ênfases, famílias tipográficas, tamanhos, números e referência à pág. 69 são preservados; o restante da tabela não é alterado.",
+  "revisions": [
+    {
+      "version": "1",
+      "proposalText": "IMPORTANTE: Fichas de Combatentes têm regras adicionais. Veja Fichas de Combatentes na pág. 69 para detalhes.",
+      "status": "preserved_superseded_by_human_usage_alignment",
+      "note": "A versão 2 mantém o título plural conforme o título humano da p. 5 e usa no texto a forma singular exata da referência humana da mesma página."
+    },
+    {
+      "version": "2",
+      "status": "superseded_in_place_by_v3_reference_consistency",
+      "note": "The text said “Veja” while its rich segments said “Veja” and used a singular cross-reference against the translated table title. v3 aligns both with the mandatory project reference form and the title “Fichas de Combatentes”.",
+      "previousCandidate": {
+        "spanKey": "page_97_unit_p97-block-20-remaining-size-9pt__pt-BR",
+        "proposalText": "IMPORTANTE: Fichas de Combatente têm regras adicionais. Veja Fichas de Combatente na pág. 69 para detalhes.",
+        "dataSegments": [
+          {
+            "text": "IMPORTANTE:",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " Fichas de Combatente têm regras adicionais. Veja ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "Fichas de Combatente",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " na pág. ",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": "69",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 9,
+            "weight": 700,
+            "style": "italic",
+            "color": "#231f20",
+            "disableLigatures": true
+          },
+          {
+            "text": " para detalhes.",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "weight": 400,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "copyfitMeasurement": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 97,
+            "pdfDocumentPageIndex": 96,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              58.6693000793457,
+              56.942596435546875,
+              527.029541015625,
+              67.7605972290039
+            ],
+            "visualBaselinesPt": [
+              65.322
+            ],
+            "spans": 6,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_97_unit_p97-block-20-remaining-size-9pt__pt-BR",
+            "readingMethod": "text rects of review-highlighted unit",
+            "rangeRectFragments": 6,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              72.73
+            ],
+            "frameHeightCssPx": 8.8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      }
+    }
+  ]
+}

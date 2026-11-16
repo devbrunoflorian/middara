@@ -1,7 +1,7 @@
 # Página 005 — Component reference (no page-wide title)
 
 - **Origem EN:** transcrita diretamente do PDF oficial e cotejada com a página renderizada.
-- **Fidelidade EN:** aprovada anteriormente em revisão visual PDF↔app; referência em `docs/project-progress/CONTINUE-HERE.md` e no registro de auditoria do livro.
+- **Fidelidade EN:** o histórico de revisão fica no status da página. Confira o PDF original antes de alterar texto, peso tipográfico ou arte.
 - **PT-BR:** primeiro rascunho abaixo; ainda precisa de preview em português.
 - **Escopo desta tradução:** os 12 blocos explicativos impressos nas duas colunas. Nomes e regras dentro das cartas/tokens ilustrados ficam fora desta tradução e exigem fluxo de localização de arte.
 - **Hierarquia:** cabeçalhos de seção preservados em negrito; ênfases em negrito/itálico e referências de página mantidas.
@@ -22,7 +22,7 @@
 
 **EN:** These are Items and Discipline Cards that are only available in the Adventure Mode. These cards cannot be acquired normally. Instead, they must be earned during the Adventure and are hidden inside **Hidden Card** decks. When playing the Crawl Mode, these cards are not used and can be kept in the game box. See ***Story Disciplines and Items*** Pg. 13.
 
-**PT-BR (rascunho):** Estas são Cartas de Item e de Disciplina disponíveis apenas no Modo Aventura. Não é possível obtê-las normalmente: elas devem ser conquistadas durante a Aventura e ficam ocultas nos baralhos de **Cartas Ocultas**. No Modo Crawl, essas cartas não são usadas e podem ficar na caixa do jogo. Consulte ***Disciplinas e Itens de História***, pág. 13.
+**PT-BR (rascunho):** Estas são Cartas de Item e de Disciplina disponíveis apenas no Modo Aventura. Não é possível obtê-las normalmente: elas devem ser conquistadas durante a Aventura e ficam ocultas nos baralhos de **Cartas Ocultas**. No Modo Exploração, essas cartas não são usadas e podem ficar na caixa do jogo. Consulte ***Disciplinas e Itens de História***, pág. 13.
 
 ### 03 — Exalted Esper Cards
 
@@ -38,7 +38,7 @@
 
 **EN:** Abraxis is a mini-game played using the custom dice that come with the game. These cards are only used when playing the Adventure Mode. When playing the Crawl Mode, these cards are not used and can be kept in the game box. See ***Abraxis Battle Dice*** Pg. 85.
 
-**PT-BR (rascunho):** Abraxis é um minijogo disputado com os dados personalizados que acompanham o jogo. Estas cartas são usadas apenas no Modo Aventura. No Modo Crawl, não são usadas e podem ficar na caixa do jogo. Consulte ***Dados de Batalha de Abraxis***, pág. 85.
+**PT-BR (rascunho):** Abraxis é um minijogo disputado com os dados personalizados que acompanham o jogo. Estas cartas são usadas apenas no Modo Aventura. No Modo Exploração, não são usadas e podem ficar na caixa do jogo. Consulte ***Dados de Batalha de Abraxis***, pág. 85.
 
 ### 05 — Quick Reference cards
 
@@ -88,7 +88,7 @@
 
 **EN:** Some Abilities inflict rare Effects called *Special Effects*. These tokens are used to keep track of these rare *Effects*. See ***Special Effects*** Pg. 69.
 
-**PT-BR (rascunho):** Algumas Habilidades causam Efeitos raros chamados Efeitos Especiais. Estas fichas servem para acompanhar esses Efeitos. Consulte ***Efeitos Especiais***, pág. 69.
+**PT-BR (rascunho):** Algumas Habilidades causam Efeitos raros chamados *Efeitos Especiais*. Estas fichas servem para acompanhar esses *Efeitos*. Consulte ***Efeitos Especiais***, pág. 69.
 
 ### 11 — Ability tokens
 
@@ -96,7 +96,7 @@
 
 **EN:** Some Abilities and Items grant *Ability* tokens. *Ability* tokens are discarded when a figure is Defeated, the *Ability* token is used or when instructed to Restore Adventurers. These tokens are always round. See ***Ability Tokens*** Pg. 95.
 
-**PT-BR (rascunho):** Algumas Habilidades e alguns Itens concedem Fichas de Habilidade. Descarte-as quando uma miniatura for Derrotada, quando a ficha for usada ou quando uma regra instruir a Restaurar Aventureiros. Essas fichas são sempre redondas. Consulte ***Fichas de Habilidade***, pág. 95.
+**PT-BR (rascunho):** Algumas Habilidades e Itens concedem fichas de *Habilidade*. Descarte-as se a miniatura for Derrotada, se forem usadas ou quando a regra mandar Restaurar Aventureiros. São sempre redondas. Consulte ***Fichas de Habilidade***, pág. 95.
 
 ### 12 — Damage tokens
 
@@ -104,12 +104,13 @@
 
 **EN:** Figures use these tokens to keep track of how much Damage they have been dealt. A figure who has been dealt Damage equal to their Maximum **HP** is Defeated. See ***Damage and Healing*** Pg. 44.
 
-**PT-BR (rascunho):** As miniaturas usam estas fichas para acompanhar quanto Dano sofreram. Uma miniatura que sofrer Dano igual ao seu HP Máximo é Derrotada. Consulte ***Dano e Cura***, pág. 44.
+**PT-BR (rascunho):** As miniaturas usam estas fichas para acompanhar quanto Dano sofreram. Uma miniatura que sofrer Dano igual ao seu **HP** Máximo é Derrotada. Consulte ***Dano e Cura***, pág. 44.
 
 ## Notas de copyfit e termos
 
 - **Expansão por bloco:** Initiative Cards +13%; Story Cards −2%; Exalted Esper Cards +10%; Abraxis Cards −6%; Quick Reference Cards −2%; Tiles −11%; Terrain tokens −10%; Combatant tokens +13%; Effect tokens +3%; Special Effect tokens +7%; Ability tokens +17%; Damage tokens −10%. Nenhum bloco ultrapassa o alerta de 20%; isso ainda não confirma que caiba nas caixas.
 - **Headings:** 8 dos 12 títulos curtos superam 20% no sinal por caracteres; os 12 blocos descritivos ficam abaixo. Revisar largura no preview sem diminuir a hierarquia tipográfica.
+- **Runs ricos:** no preview PT, manter itálico em *Efeitos Especiais*, *Efeitos* e *Habilidade* (Ability token), e negrito em **HP**, conforme a fonte.
 - **Revisão de termos:** `Fichas de Terreno`, `Carta(s) de Iniciativa`, `Trilha de Iniciativa`, `Carta de Combatente`, `Carta(s) de Habilidade`, `Modo Aventura`, `História`, `Derrotada` e `Dano` são propostas locais, não entradas equivalentes no glossário oficial. Harmonizar com o time antes de incorporá-las ao glossário.
 - **Termos preservados provisoriamente:** `Crawl`, `Exalted Esper`, `Assemblage` e `Abraxis` são nomes de modo/conteúdo até haver decisão terminológica aprovada.
 - **Expansion check:** executar a medição por bloco após o preview. A contagem de caracteres serve como alerta; não certifica encaixe.

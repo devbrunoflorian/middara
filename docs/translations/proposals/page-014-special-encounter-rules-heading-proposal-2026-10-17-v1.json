@@ -1,0 +1,114 @@
+{
+  "proposalId": "p014-special-encounter-rules-heading",
+  "version": "1",
+  "title": "Regras Especiais de Encontro — título da p. 14",
+  "page": 14,
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+    "background": "314de6ab6c2195737f944d97749365898d035b06e49e9234342645692c0f5355",
+    "pageDom": "ad99d42ed0273a65f3b28b38224a36659688ec266b0fe911a0c97ddb389af8c1"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 0,
+    "priorReviewRecordsPreserved": 0,
+    "finalTranslationWrites": 0,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationCount": 0,
+    "existingHumanTranslationSpanKeys": [],
+    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "scopeLimits": [
+    "This batch proposes only the p.14 Special Encounter Rules heading. It leaves all surrounding text, rules, artwork, geometry and saved human content unchanged.",
+    "The approved glossary form “Special Encounter Rules → Regras Especiais de Encontro” is reused. Full-page English-fidelity review and human editorial approval remain open.",
+    "Read-only Payload lookup found no saved translation for page_14_block_22__pt-BR; no final translation was written."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 22,
+      "sourceBlockId": "block_41",
+      "sourceUnitId": null,
+      "spanKey": "page_14_block_22__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Special Encounter Rules",
+      "proposalText": "Regras Especiais de Encontro",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_14_block_22__pt-BR",
+        "bbox": [
+          415.8424987792969,
+          521.4868774414062,
+          580.0745849609375,
+          537.662841796875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Regras Especiais de Encontro",
+            "font": "Cinzel-Regular",
+            "size": 12,
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "pending_live_copyfit_v3",
+      "editorialStatus": "pending_human_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 14,
+          "pdfDocumentPageIndex": 13,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8424987792969,
+            521.4868774414062,
+            580.0745849609375,
+            537.662841796875
+          ],
+          "visualBaselinesPt": [
+            533.199
+          ],
+          "spans": 1,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_14_block_22__pt-BR",
+          "readingMethod": "text rects of review-highlighted unit",
+          "rangeRectFragments": 1,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            450.2
+          ],
+          "frameHeightCssPx": 13.1
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "note": "A heading-only vertical slice reuses an approved terminology decision and preserves the source Cinzel family, 12 pt size, weight, color, frame and page hierarchy.",
+  "revisions": []
+}

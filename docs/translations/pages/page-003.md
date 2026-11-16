@@ -2,7 +2,8 @@
 
 - **Origem EN:** extraída diretamente do PDF oficial, página impressa 3.
 - **Fidelidade EN:** verificada em comparação de página inteira PDF↔app após o tracer tipográfico da p. 3; evidência e método em `docs/project-progress/2026-10-01-book-wide-typographic-units.md` e imagens locais `tmp/page3-{app,pdf}-after.png`.
-- **PT-BR:** rascunho completo dos 40 itens do sumário; ainda não foi salvo no banco nem revisado no preview PT.
+- **PT-BR:** há um rascunho editorial dos 40 itens; ele ainda não foi importado como página completa nem aprovado no preview. O override de título `Índice` já existente no Payload é preservado e está em conflito com o rascunho `Sumário`.
+- **Rechecagem da fonte (2026-10-04):** PDF original p. 3 tem os mesmos 40 títulos na mesma ordem e 40 números de destino; pareamento por linha/baseline confirmou 0 divergências.
 - **Hierarquia:** o título usa EsmeraldaPro 30 pt com alternates no PDF; primeiro nível usa Cinzel-Regular 12 pt com peso visual 700 validado por override local; segundo nível usa OptimaLTStd-Bold 9 pt. Não colapsar níveis.
 - **Texto não traduzível:** referências de páginas e líderes pontilhados são preservados como estrutura. O “3” do rodapé é número da página, não item do sumário.
 
@@ -11,6 +12,8 @@
 **EN:** Contents
 
 **PT-BR (rascunho):** Sumário
+
+**Conflito de estado existente:** o Payload já contém `page_3_block_0`/PT-BR = “Índice”. Esse registro foi preservado e não foi sobrescrito. “Sumário” é o rascunho editorial para `Contents`; o título precisa ser reconciliado antes de salvar a tradução completa ou aprovar o preview PT.
 
 **Layout/DTP:** EsmeraldaPro 30 pt. O PDF usa alternates nos caracteres `n` do original; ao renderizar `Sumário`, selecionar alternates adequados ao texto PT se disponíveis. Preservar o tamanho e a hierarquia do título; não reduzir para caber.
 
@@ -130,7 +133,7 @@
 
 **EN:** **ITEM TIERS AND TYPES**
 
-**PT-BR (rascunho):** **NÍVEIS E TIPOS DE ITEM**
+**PT-BR (rascunho):** **TIERS E TIPOS DE ITEM**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -512,7 +515,6 @@
 
 ## Termos sem entrada oficial
 
-- **Crawl Mode → Modo Crawl:** manter como candidato local; o antigo rascunho p. 3 já usava “Modo Crawl”, mas não foi tratado como glossário oficial.
 - **Tags:** mantido como empréstimo para o conceito formal do livro; revisar consistência quando páginas 91–92 forem auditadas.
 - **Scaling Icons → Ícones Escaláveis:** candidato contextual; p. 72 descreve ícones cujo valor depende de outra carta/personagem.
 - **Assemblage:** preservado sem tradução como nome próprio da árvore de disciplinas.
@@ -520,7 +522,8 @@
 
 ## QA PT pendente
 
+- Resolver o conflito entre o título de origem `Contents`, o rascunho `Sumário` e o override já salvo `Índice` sem apagar conteúdo existente.
 - Renderizar a coluna PT e conferir todos os títulos longos junto aos líderes/page refs, com foco em `ITEM UPGRADES`, `DISCIPLINE TREES`, `SPELL ACTION`, `SKILL CHECKS`, `SCALING ICONS` e `ABRAXIS BATTLE DICE`.
 - Confirmar alternates Esmeralda para “Sumário” e se o render PT consegue preservar o mesmo tratamento do título.
-- Conferir candidatos de terminologia com o restante do livro; esta lista não altera o glossário oficial.
+- Conferir os candidatos de terminologia ainda pendentes com o restante do livro; esta lista não altera o glossário oficial.
 - Validar no preview os caracteres acentuados e o peso bold sem usar o limite de 20% como teste de encaixe.
