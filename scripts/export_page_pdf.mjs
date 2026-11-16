@@ -545,11 +545,41 @@ try {
           if (rect.width > 0 && rect.height > 0) fragments.push(rect);
         }
       }
+      const bulletFlow = element.querySelector('[data-source-bullet-flow="true"]');
       return {
         spanKey: element.getAttribute('data-rendered-translation-key'),
         text: (element.textContent ?? '').replace(/\s+/gu, ' ').trim(),
         elementRectPt: toPtRect(element.getBoundingClientRect()),
         frameRectPt: frameRect,
+        flowParagraphRectsPt: bulletFlow ? [...bulletFlow.children].flatMap(row => {
+          const rect = row.getBoundingClientRect();
+          if (!row.textContent?.trim() || rect.width <= 0 || rect.height <= 0) return [];
+          const style = getComputedStyle(row);
+          const textNode = row.querySelector('[data-source-bullet-flow-body], [data-source-bullet-flow-prose]') ?? row.firstElementChild;
+          const textStyle = textNode instanceof HTMLElement ? getComputedStyle(textNode) : null;
+          const segment = textNode?.querySelector('span');
+          const segmentStyle = segment instanceof HTMLElement ? getComputedStyle(segment) : null;
+          return [{
+            x: (rect.left - pageRect.left) / (pageRect.width / Number(container.dataset.pdfPageWidth)),
+            y: (rect.top - pageRect.top) / (pageRect.height / Number(container.dataset.pdfPageHeight)),
+            width: rect.width / (pageRect.width / Number(container.dataset.pdfPageWidth)),
+            height: rect.height / (pageRect.height / Number(container.dataset.pdfPageHeight)),
+            fontSize: style.fontSize,
+            lineHeight: style.lineHeight,
+            marginBottom: style.marginBottom,
+            textStyle: textStyle ? {
+              display: textStyle.display,
+              fontFamily: textStyle.fontFamily,
+              fontSize: textStyle.fontSize,
+              lineHeight: textStyle.lineHeight,
+            } : null,
+            segmentStyle: segmentStyle ? {
+              fontFamily: segmentStyle.fontFamily,
+              fontSize: segmentStyle.fontSize,
+              lineHeight: segmentStyle.lineHeight,
+            } : null,
+          }];
+        }) : undefined,
         rangeFragments: fragments.map(fragment => ({
           top: fragment.top - pageRect.top,
           bottom: fragment.bottom - pageRect.top,
@@ -604,6 +634,12 @@ try {
       return {
         ...target,
         lineCount: lines.length,
+        visualLineBoundsPt: lines.map(line => ({
+          x: line.left / metrics.scaleX,
+          y: line.top / metrics.scaleY,
+          width: (line.right - line.left) / metrics.scaleX,
+          height: (line.bottom - line.top) / metrics.scaleY,
+        })),
         widestLinePt: lines.length
           ? Math.max(...lines.map(line => line.right - line.left)) / metrics.scaleX
           : 0,
@@ -621,6 +657,12 @@ try {
     return metrics;
   };
   const viewerMetrics = await capturePageMetrics();
+  const viewerStructure = await page.locator('.page-container').evaluate(container => ({
+    sourceGeometryLines: container.querySelectorAll('[data-source-line-id]').length,
+    semanticSymbols: container.querySelectorAll('svg[data-symbol-id], svg[data-source-symbol-id]').length,
+    renderedImages: [...container.querySelectorAll('img')].filter(image => image.naturalWidth > 0).length,
+    loadedFonts: [...document.fonts].filter(font => font.status === 'loaded').map(font => font.family),
+  }));
   if (config.viewerScreenshot) {
     await mkdir(dirname(resolve(config.viewerScreenshot)), { recursive: true });
     await page.locator('.page-container').screenshot({
@@ -737,13 +779,6 @@ try {
   if (actualApiOrigins.length !== 1 || actualApiOrigins[0] !== expectedApiOrigin) {
     throw new Error(`Expected one Payload/API origin ${expectedApiOrigin}; viewer queried ${actualApiOrigins.join(', ') || 'none'}.`);
   }
-
-  const viewerStructure = await page.locator('.page-container').evaluate(container => ({
-    sourceGeometryLines: container.querySelectorAll('[data-source-line-id]').length,
-    semanticSymbols: container.querySelectorAll('svg[data-symbol-id], svg[data-source-symbol-id]').length,
-    renderedImages: [...container.querySelectorAll('img')].filter(image => image.naturalWidth > 0).length,
-    loadedFonts: [...document.fonts].filter(font => font.status === 'loaded').map(font => font.family),
-  }));
 
   let pdfVerification = null;
   if (!config.captureOnly) {

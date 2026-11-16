@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-11-14",
+  "updated": "2026-11-15",
   "sourceProposals": [
     "docs/translations/proposals/page-002-credit-labels-proposal-2026-10-22-v1.json",
     "docs/translations/proposals/page-013-full-page-text-proposal-2026-10-16-v3.json",
@@ -74,9 +74,10 @@
     "docs/translations/proposals/page-052-dodge-empower-review-2026-10-16-v1.json",
     "docs/translations/proposals/page-053-spell-action-review-2026-10-16-v1.json",
     "docs/translations/proposals/page-054-casting-spells-review-2026-10-16-v1.json",
-    "docs/translations/proposals/page-055-spell-like-abilities-review-2026-10-16-v1.json",
-    "docs/translations/proposals/page-056-general-information-review-2026-10-16-v1.json",
     "docs/translations/proposals/page-057-same-name-combatants-review-2026-10-16-v1.json",
+    "docs/translations/proposals/page-057-loot-heading-weight-correction-2026-11-15-v1.json",
+    "docs/translations/proposals/page-057-item-loot-bold-and-lvl-correction-2026-11-15-v1.json",
+    "docs/translations/proposals/page-057-shared-icons-heading-2026-11-15-v1.json",
     "docs/translations/proposals/page-058-activation-numbers-example-proposal-2026-10-15-v1.json",
     "docs/translations/proposals/page-059-command-combatant-breakdown-proposal-2026-10-17-v1.json",
     "docs/translations/proposals/page-060-golden-rules-intro-review-2026-10-16-v1.json",
@@ -208,7 +209,22 @@
     "docs/translations/proposals/page-042-break-attack-example-review-2026-10-16-v3.json",
     "docs/translations/proposals/page-043-full-page-review-2026-11-14-v1.json",
     "docs/translations/proposals/page-044-line-of-sight-review-2026-11-14-v1.json",
-    "docs/translations/proposals/page-049-counter-rules-review-2026-11-14-v4.json"
+    "docs/translations/proposals/page-049-counter-rules-review-2026-11-14-v4.json",
+    "docs/translations/proposals/page-054-casting-spells-review-2026-11-14-v2.json",
+    "docs/translations/proposals/page-046-important-label-color-fix-2026-11-14-v1.json",
+    "docs/translations/proposals/page-054-casting-spells-review-2026-11-14-v3.json",
+    "docs/translations/proposals/page-054-casting-spells-title-alignment-2026-11-15-v1.json",
+    "docs/translations/proposals/page-055-spell-like-abilities-review-2026-10-16-v2.json",
+    "docs/translations/proposals/page-056-general-information-review-2026-10-16-v2.json",
+    "docs/translations/proposals/page-057-loot-heading-weight-correction-2026-11-15-v2.json",
+    "docs/translations/proposals/page-057-same-name-combatants-review-2026-10-16-v2.json",
+    "docs/translations/proposals/page-057-shared-icons-prose-2026-11-15-v1.json",
+    "docs/translations/proposals/page-057-shared-icons-and-abilities-2026-11-15-v1.json",
+    "docs/translations/proposals/page-057-combatant-loot-basics-2026-11-15-v1.json",
+    "docs/translations/proposals/page-057-unique-loot-rules-2026-11-15-v1.json",
+    "docs/translations/proposals/page-057-unique-item-draw-contrast-2026-11-15-v1.json",
+    "docs/translations/proposals/page-060-intelligent-combatants-full-page-review-2026-11-15-v1.json",
+    "docs/translations/proposals/page-061-intelligent-combatant-breakdown-review-2026-11-15-v1.json"
   ],
   "items": [
     {
@@ -1785,7 +1801,7 @@
       ],
       "category": "human_terminology_editorial_review",
       "status": "resolved",
-      "reason": "Re-Equip Action -> Ação de Reequipar and Actions -> Ações remain terminology candidates pending glossary review. New layout exception from source-backed remeasurement (2026-10-23): the source PDF has 2 visual baselines; the corrected PageRenderer PT-BR has 3 (OVER). The final “38.” line overlaps the following “Após Restaurar...” paragraph by 5.75 pt. The 18 pt continuation indent is correct. Preserve the approved translation and geometry; a new explicit copyfit/DTP revision is required.",
+      "reason": "Historical diagnosis (2026-10-23): the then-current PT-BR had 3 lines vs. 2 in the source and overlapped the following paragraph by 5.75 pt; the 18 pt hanging indent itself was correct. Recheck (2026-11-15) of the current Payload translation #331, updated 2026-11-13: Viewer and print both show 2 lines; the continuation starts at X=104.16 pt vs. marker X=86.17 pt (18 pt), “38.” remains on the second line, and the next paragraph begins at Y=411.58 pt with no collision. The live layout issue is resolved in the current translation. Review #27 is still approved but predates this updated translation; review/translation synchronization remains open. Keep Re-Equip Action -> Ação de Reequipar and Actions -> Ações local to the saved wording pending glossary review.",
       "sourceText": "4. All Adventurers may trade Items as if they were adjacent and used a Re-Equip Action. See Action s Pg. 38.",
       "proposedText": "4. Todos os Aventureiros podem trocar Itens como se estivessem adjacentes e tivessem feito uma Ação de Reequipar. Veja Ações, pág. 38.",
       "evidence": [
@@ -11079,8 +11095,8 @@
       "sourceBlockId": "block_13",
       "category": "source_symbol_identity",
       "status": "resolved",
-      "reason": "Resolvido tecnicamente: o dado roxo foi associado como dice.purple no block_13, ancorado antes de line_13_4/span 0. A proposta editorial permanece preservada e requer revisão humana; Copyfit, tradução completa e aprovação não foram alterados por esta correção.",
-      "diagnosticRendering": "A integração e o comportamento do símbolo foram validados em sessão isolada do PageRenderer. Texto/proposta continuam preservados, sem aprovação ou publicação. A revisão editorial e o Copyfit V3 da unidade permanecem pendentes.",
+      "reason": "O símbolo dice.purple foi associado ao block_13 antes de line_13_4/span 0. A versão PT-BR atualmente aprovada foi revalidada em 5/5 linhas e exportada no Viewer/PDF. A nota histórica de aprovação UNDER permanece registrada em resolutionNote.",
+      "diagnosticRendering": "O símbolo semântico e a prosa da versão atual foram conferidos no Viewer e no PDF PT-BR; a review 1654 está aprovada como EXACT 5/5. resolutionNote preserva a decisão anterior da versão UNDER.",
       "sourceText": "At this point, Zeke could optionally EMPOWER this spell, but chooses not to. Next, Zeke must determine the Force of Gore Shot by rolling his Casting Die and adding it to the printed Force of the Spell (6). Normally this would be the PURPLE  printed on Zeke’s Adventurer Card. However, Zeke has the Magic Staff equipped. [dado roxo não mapeado]",
       "proposedText": "Neste ponto, Zeke poderia opcionalmente FORTALECER este Feitiço, mas decide não fazê-lo. Em seguida, deve determinar a Força de Gore Shot, rolando seu Dado de Conjuração e somando o resultado à Força impressa do Feitiço (6). Normalmente, esse seria o dado ROXO [ícone de dado não mapeado] impresso no Cartão de Aventureiro de Zeke. Porém, Zeke está equipado com o Magic Staff.",
       "evidence": [
@@ -11113,8 +11129,8 @@
       "sourceBlockId": "block_16",
       "category": "source_symbol_identity",
       "status": "resolved",
-      "reason": "Resolvido tecnicamente: o dado teal foi associado como dice.teal no block_16, ancorado antes de line_16_5/span 0. A proposta editorial permanece preservada e requer revisão humana; Copyfit, tradução completa e aprovação não foram alterados por esta correção.",
-      "diagnosticRendering": "A integração e o comportamento do símbolo foram validados em sessão isolada do PageRenderer. Texto/proposta continuam preservados, sem aprovação ou publicação. A revisão editorial e o Copyfit V3 da unidade permanecem pendentes.",
+      "reason": "O símbolo dice.teal foi associado ao block_16 antes de line_16_5/span 0. A versão PT-BR atualmente aprovada foi revalidada em 5/5 linhas e exportada no Viewer/PDF. A nota histórica de aprovação UNDER permanece registrada em resolutionNote.",
+      "diagnosticRendering": "O símbolo semântico e a prosa da versão atual foram conferidos no Viewer e no PDF PT-BR; a review 1656 está aprovada como EXACT 5/5. resolutionNote preserva a decisão anterior da versão UNDER.",
       "sourceText": "This makes the final Force of Gore Shot 13. Next, the Animate must make a Conviction Check to determine if it is affected by Gore Shot. Combatants have their Conviction dice printed on their cards. The Animate has WHITE  and TEAL  Conviction dice. The Animate rolls both dice and gets a total of 7. [dado branco mapeado] [dado teal não mapeado]",
       "proposedText": "Isso deixa a Força final de Gore Shot em 13. Em seguida, o Animate faz um Teste de Convicção para determinar se foi afetado por Gore Shot. Os Combatentes têm os Dados de Convicção impressos em suas cartas. O Animate tem dados de Convicção BRANCO [dado mapeado] e TEAL [ícone de dado não mapeado]. Ele rola ambos e obtém um total de 7.",
       "evidence": [
@@ -11147,7 +11163,7 @@
       "sourceBlockId": null,
       "category": "component_artwork",
       "status": "resolved",
-      "reason": "A carta Gore Shot no walkthrough é texto incorporado à arte inglesa do componente. Ela precisa de uma variante PT-BR própria, sem reconstruir os ícones e o desenho como prosa.",
+      "reason": "Decisão explícita do usuário: preservar a carta Gore Shot como arte original em inglês. Esta etapa traduz regras, não cartas; resolvido para o escopo atual, sem variante PT-BR da carta.",
       "diagnosticRendering": "Arte original em inglês preservada como overlay fiel; a prosa editável ao redor está nas propostas desta página. Nenhuma tradução PT-BR é pintada sobre a arte.",
       "sourceText": "XP:3+\nEXHAUST  Cast a SPELL 6.\nDeal 2 MAGIC DMG. You may deal yourself 2 IRREDUCIBLE DMG to deal additional MAGIC DMG equal to 2x your highest LVL CRUOR Discipline.\nGore Shot\nCRUOR • LVL 1",
       "proposedText": "",
@@ -11165,7 +11181,7 @@
       "sourceBlockId": null,
       "category": "component_artwork",
       "status": "resolved",
-      "reason": "O nome, os atributos e os rótulos do painel do Animate permanecem incorporados à arte inglesa preservada como overlay fiel; requerem localização do componente.",
+      "reason": "Decisão explícita do usuário: preservar o painel do Animate como arte original em inglês. Esta etapa traduz regras, não componentes; resolvido para o escopo atual, com o overlay fiel preservado.",
       "diagnosticRendering": "Arte original em inglês preservada como overlay fiel; a prosa editável ao redor está nas propostas desta página. Nenhuma tradução PT-BR é pintada sobre a arte.",
       "sourceText": "HEA\nLTH\nDEF\nE\nNSE\nMOVEMENT\n6912\nAnimate\nCONVICTION",
       "proposedText": "",
@@ -11183,7 +11199,7 @@
       "sourceBlockId": null,
       "category": "component_artwork",
       "status": "resolved",
-      "reason": "O painel de Zeke e a carta Magic Staff continuam como arte inglesa no overlay fiel. Texto, ícones, valores e hierarquia dependem de uma variante localizada do componente.",
+      "reason": "Decisão explícita do usuário: preservar o painel de Zeke e a carta Magic Staff como arte original em inglês. Esta etapa traduz regras, não cartas ou painéis; resolvido para o escopo atual.",
       "diagnosticRendering": "Arte original em inglês preservada como overlay fiel; a prosa editável ao redor está nas propostas desta página. Nenhuma tradução PT-BR é pintada sobre a arte.",
       "sourceText": "Magic Staff\n3030SPELLCRAFT • STAFF\n2\n+2 MAGIC DMG     +1 MAGIC DMG\n✤PASSIVE•  Casting Upgrade: WHITE\n•  When you fail to affect a target with a Spell, add 1 Energy token to this card. (Limit 2)\nEXHAUSTWhen determining the Force of a Spell, you may ✘DISCARD any amount of Energy tokens from this card to add +1 to your roll.\nEXHAUST1 SP: Before the target of one of your Spells makes a Conviction Check. In addition to the effect of the Spell, deal a WHITE  of MAGIC DMG.\nZeke",
       "proposedText": "",
@@ -11201,15 +11217,16 @@
       "sourceBlockId": "block_3",
       "category": "source_symbol_identity",
       "status": "resolved",
-      "reason": "Resolvido tecnicamente: os vetores correspondentes aos resultados foram associados como combat.shield e combat.page no block_3. A proposta editorial permanece preservada e requer revisão humana; Copyfit, tradução completa e aprovação não foram alterados por esta correção.",
-      "diagnosticRendering": "A integração e o comportamento do símbolo foram validados em sessão isolada do PageRenderer. Texto/proposta continuam preservados, sem aprovação ou publicação. A revisão editorial e o Copyfit V3 da unidade permanecem pendentes.",
+      "reason": "Os resultados de dado da fonte foram associados aos símbolos semânticos combat.shield e combat.page e a prosa da regra foi traduzida no block_1. A publicação atual (review 1657) mede 2/2 linhas em 100% e 200%; sem decisão global de terminologia além do glossário já aprovado.",
+      "diagnosticRendering": "Viewer e PDF PT-BR mostram os dois símbolos uma vez e sem fallback; export final com pdfVerification=true. A tradução e aprovação atuais substituem o estado diagnóstico antigo.",
       "sourceText": "Remi rolls her Combat Dice and gets a 6, and a 7. In addition, \nshe rolls 6  , and 4 . [símbolos de face de dado não mapeados]",
-      "proposedText": "Remi rola os Dados de Combate e obtém 6 e 7. Além disso, rola 6 [símbolo de face de dado não mapeado] e 4 [símbolo de face de dado não mapeado].",
+      "proposedText": "Remi rola os Dados de Combate e obtém 6 e 7. Além disso, rola 6 [[defense-shield]], e 4 [[combat-page]].",
       "evidence": [
         "PDF oficial p.55: drawings 89–91 são o escudo após o resultado 6; drawings 92–93 são o símbolo de página após o resultado 4, nas bboxes registradas em bboxPt.",
         "apps/web/public/pages/page_055/inline_elements.json associa esses desenhos aos tokens [[defense-shield]] e [[combat-page]], com anchors de fonte; os overlays vetoriais fixos correspondentes foram removidos.",
         "PageRenderer atual: apagar cada token remove apenas seu símbolo, Undo/Redo restaura/remove e a paleta reinsere sem duplicação; limpar e restaurar o bloco remove os símbolos órfãos e retorna ao estado-fonte. Recibo e capturas: output/proofs/source-symbol-inline-focus-2026-10-23/runtime-capture.json e p055-block-rebuild-receipt.json.",
-        "Crítica independente: as duas máscaras são pixel a pixel idênticas ao underlay original (delta RGB máximo 0); em 21 capturas, nenhum pixel >RGB16 mudou fora das regiões editadas. Zero chamadas API e nenhuma escrita no Payload."
+        "Crítica independente: as duas máscaras são pixel a pixel idênticas ao underlay original (delta RGB máximo 0); em 21 capturas, nenhum pixel >RGB16 mudou fora das regiões editadas. Zero chamadas API e nenhuma escrita no Payload.",
+        "Export final 2026-11-15: C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p055\\final-rich-style-v4\\ (Viewer, print, PDF e métricas; block_1 Copyfit EXACT 2/2 em 100%/200%)."
       ],
       "symbolId": [
         "combat.shield",
@@ -11250,15 +11267,16 @@
       "sourceBlockId": "block_5",
       "category": "source_symbol_identity",
       "status": "resolved",
-      "reason": "Resolvido tecnicamente: os vetores da etapa de dano foram associados como combat.shield e combat.damage-star no block_5. A proposta editorial permanece preservada e requer revisão humana; Copyfit, tradução completa e aprovação não foram alterados por esta correção.",
-      "diagnosticRendering": "A integração e o comportamento do símbolo foram validados em sessão isolada do PageRenderer. Texto/proposta continuam preservados, sem aprovação ou publicação. A revisão editorial e o Copyfit V3 da unidade permanecem pendentes.",
+      "reason": "Os dados da etapa de dano foram associados aos símbolos semânticos combat.shield e combat.damage-star e a prosa foi traduzida no block_3. A publicação atual (review 1658) mede 3/3 linhas em 100% e 200%; Damage/DMG e Difference Hit continuam pendentes de reconciliação terminológica, sem alterar o glossário global.",
+      "diagnosticRendering": "Viewer e PDF PT-BR mostram os símbolos uma vez, sem fallback nem clipping; export final com pdfVerification=true. A tradução e aprovação atuais substituem o estado diagnóstico antigo.",
       "sourceText": "During the Determine Damage step of the Attack, Remi spends 6  and \n1  to add +7 PHYSICAL DMG. The Damage added (7) plus the difference rolled (4) totals 11 Damage so far. [símbolo de combate após 6] [símbolo de combate após 1]",
-      "proposedText": "Durante a etapa Determinar Dano do Ataque, Remi gasta 6 [símbolo de combate não mapeado] e 1 [símbolo de combate não mapeado] para adicionar +7 DANO FÍSICO. O Dano adicionado (7), somado à diferença obtida (4), totaliza 11 de Dano até aqui.",
+      "proposedText": "Durante a etapa Determinar Dano do Ataque, Remi gasta 6 [[defense-shield]] e 1 [[damage-star]] para adicionar +7 DANO FÍSICO. O Dano adicionado (7), somado à diferença obtida (4), totaliza 11 de Dano até aqui.",
       "evidence": [
         "PDF oficial p.55: drawings 94–96 são o escudo após o resultado 6 e drawing 97 é a estrela de dano após o resultado 1, nas bboxes registradas em bboxPt.",
         "apps/web/public/pages/page_055/inline_elements.json associa esses desenhos aos tokens [[defense-shield]] e [[damage-star]], com anchors de fonte; os overlays vetoriais fixos correspondentes foram removidos.",
         "PageRenderer atual: apagar cada token remove apenas seu símbolo, Undo/Redo restaura/remove e a paleta reinsere sem duplicação; limpar e restaurar o bloco remove os símbolos órfãos e retorna ao estado-fonte. Recibo e capturas: output/proofs/source-symbol-inline-focus-2026-10-23/runtime-capture.json e p055-block-rebuild-receipt.json.",
-        "Crítica independente: as duas máscaras são pixel a pixel idênticas ao underlay original (delta RGB máximo 0); em 21 capturas, nenhum pixel >RGB16 mudou fora das regiões editadas. Zero chamadas API e nenhuma escrita no Payload."
+        "Crítica independente: as duas máscaras são pixel a pixel idênticas ao underlay original (delta RGB máximo 0); em 21 capturas, nenhum pixel >RGB16 mudou fora das regiões editadas. Zero chamadas API e nenhuma escrita no Payload.",
+        "Export final 2026-11-15: C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p055\\final-rich-style-v4\\ (Viewer, print, PDF e métricas; block_3 Copyfit EXACT 3/3 em 100%/200%)."
       ],
       "symbolId": [
         "combat.shield",
@@ -11298,14 +11316,15 @@
       "sourceBlockId": null,
       "category": "component_artwork",
       "status": "resolved",
-      "reason": "O painel composto em inglês contém o cartão do Animate, o painel/cartão de Remi e o texto da carta Great Hammer. Esses componentes precisam de variante localizada própria; nenhum texto PT-BR é pintado sobre a arte inglesa.",
-      "diagnosticRendering": "Overlay inglês preservado; as unidades de prosa editável aparecem nas propostas da página. A arte do mapa e as imagens de dado permanecem intactas.",
+      "reason": "Conforme decisão do usuário, a arte e os textos impressos de componentes/cartas permanecem no inglês original. A prosa editável de regras é localizada; o trecho impresso de Great Hammer continua em inglês, e apenas a frase que o apresenta no block_8 está em PT-BR.",
+      "diagnosticRendering": "EN e PT-BR foram exportados e comparados. O cartão/painéis e o texto impresso permanecem em inglês, os quatro símbolos da página são semânticos e únicos, e o PDF PT-BR passou pdfVerification=true.",
       "sourceText": "HEA\nLTH\nDEF\nE\nNSE\nMOVEMENT\n6912\nGreat Hammer\n3030BLUNT • GREAT HAMMER • HEAVY\n2\n+1 PHYSICAL DMG     +1 PHYSICAL DMG\nEXHAUST\nFU: Spend 1 SP to PUSH 1 against all adjacent\nopponents and Inflict Paralyze,\nFORCE 7 + DIFFERENCE HIT.\nRemi\nHEA\nLTH\nDEF\nE\nNSE\nMOVEMENT\nARMOR\n36918\nAnimate\nCONVICTION",
       "proposedText": "",
       "evidence": [
         "Overlay fiel: /pages/page_055/fidelity-overlay-component-spell-like-combatant-panels.png, bbox [444,105,700,440].",
         "Blocos de texto extraídos sob o overlay: block_81, block_84, block_87, block_90, block_91, block_94, block_102, block_105, block_160, block_161, block_162, block_163, block_164, block_165, block_166, block_169, block_170, block_173, block_176, block_179, block_180, block_183, block_191, block_196, block_197, block_199.",
-        "apps/web/public/pages/page_055/fidelity_overlays.json e PDF oficial, p. 55."
+        "apps/web/public/pages/page_055/fidelity_overlays.json e PDF oficial, p. 55.",
+        "Export final 2026-11-15: C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-15-p055\\final-rich-style-v4\\ (página completa Viewer/print/PDF EN e PT-BR)."
       ],
       "resolutionNote": "Aprovado no fechamento final das 102 páginas em 2026-11-05T03:59:33.734Z"
     },
@@ -11316,8 +11335,8 @@
       "sourceBlockId": null,
       "category": "component_artwork",
       "status": "resolved",
-      "reason": "Cartas e diagramas da página contêm rótulos em inglês incorporados à arte-fonte. Os cinco textos da família General Information podem ser propostos separadamente; estes componentes continuam preservados sem pintura PT-BR sobre o inglês.",
-      "diagnosticRendering": "Arte original em inglês preservada; nenhuma tradução é publicada por esta exceção.",
+      "reason": "As cartas de Combatente, as cartas de Cave Sickle, os diagramas e as legendas impressas CAVE SICKLE GROUP 1–3/4–6 permanecem em inglês. A prosa de regras e os títulos editáveis da página podem ser localizados em unidades próprias, sem pintar sobre a arte.",
+      "diagnosticRendering": "Arte de cartas e diagramas preservada. A proposta ativa cobre 21 unidades editáveis de regra/título; os dois rótulos de grupo continuam EN no componente. A página segue parcial até validação do Viewer/PDF e reconciliação terminológica.",
       "sourceText": "Combatant type-tag cards; Cave Sickle Combatant and Initiative Card artwork; Activation Number diagrams; printed Cave Sickle labels.",
       "proposedText": "",
       "evidence": [
@@ -11325,7 +11344,8 @@
         "Overlay fiel: /pages/page_056/fidelity-overlay-component-combatant-type-tags.png, bbox [146,168,333,216].",
         "Overlay fiel: /pages/page_056/fidelity-overlay-component-intelligent-combatant-tag-card.png, bbox [493,644,654,720.8].",
         "apps/web/public/pages/page_056/fidelity_overlays.json and background.webp.",
-        "The scoped General Information candidates and copyfit proof are recorded in page-056-general-information-proposal-2026-10-15-v2.json."
+        "The scoped General Information candidates and copyfit proof are recorded in page-056-general-information-proposal-2026-10-15-v2.json.",
+        "docs/translations/proposals/page-056-general-information-review-2026-10-16-v2.json registra as 21 unidades e preserva explicitamente os rótulos impressos."
       ],
       "resolutionNote": "Aprovado no fechamento final das 102 páginas em 2026-11-05T03:59:33.734Z"
     },
@@ -14229,18 +14249,17 @@
       "page": 54,
       "spanKey": "page_54_block_9__pt-BR",
       "category": "terminology_decision",
-      "status": "resolved",
+      "status": "open",
       "priority": 2,
-      "reason": "A expansão de LVL foi corrigida para preservar a abreviação presente no PDF. A proposta e os spans foram persistidos e medidos EXACT 2/2 em 100% e 200%, mas Damage/DMG → Dano continua sem decisão canônica; não aprovar até resolver o termo.",
+      "reason": "A abreviação LVL foi preservada e a review 1316 está aprovada no Payload. Porém, o glossário oficial ainda não decide Damage/DMG → Dano como termo de regra. Reaberta somente esta pendência terminológica; preserve a tradução aprovada e não canonize o termo até a decisão.",
       "sourceText": "Because Zeke's highest LVL CRUOR Discipline is Gore Shot, Zeke will deal the Animate 2 additional MAGIC DMG.",
       "proposedText": "Como Gore Shot é a Disciplina CRUOR de maior LVL de Zeke, ele causa 2 DANO MÁGICO adicional ao Animate.",
       "evidence": [
-        "Payload review 1316 lido após PATCH: pending, publication null, spans CRUOR/LVL/2/DANO MÁGICO em negrito preservados.",
-        "PageRenderer/PyMuPDF: EXACT 2/2 em 100% e 200%; fingerprint reconciliado no Payload.",
-        "Nenhuma tradução foi publicada porque Damage/DMG não tem alvo terminológico canônico aprovado."
+        "Payload read-back em 2026-11-15: review 1316 aprovada e ativa; publicação PT-BR permanece preservada com CRUOR, LVL, 2 e DANO MÁGICO em negrito.",
+        "A unidade permanece medida EXACT 2/2 em 100% e 200%; o ajuste de centralização do título não alterou esta tradução.",
+        "glossary.md não contém decisão para Damage/DMG como mecânica; glossary-candidates.md lista apenas Damage token / SP token, que é outro conceito."
       ],
-      "resolutionNote": "Aprovado canonicamente no Payload CMS em 05/11/2026",
-      "resolvedAt": "2026-11-05T03:53:58.451000Z"
+      "resolutionNote": "O texto de LVL foi aprovado no Payload em 05/11/2026; em 15/11/2026 a exceção foi reaberta somente para a decisão ainda ausente de Damage/DMG → Dano."
     },
     {
       "id": "p041-step6d-proposal-rich-span-identity-conflict",
@@ -14483,7 +14502,7 @@
       "category": "source_symbol_identity",
       "status": "resolved",
       "priority": 2,
-      "reason": "O draft contém o glyph ✤ em ZapfDingbatsStd, mas o PageRenderer não o renderiza. A checagem de identidade falhou: esperado 83 caracteres, rendered 82, diferença no offset 54. O recibo antigo 3/3 não certifica a presença visual do símbolo; não aprovar nem alterar o glyph sem identidade/render comprovados.",
+      "reason": "Resolvido na ocorrência p.59: substituí o glifo literal ZapfDingbats + rótulo digitado por tag.passive com renderLanguage=en. A primeira variante usou PASSIVO; a correção explícita por ocorrência preserva cápsula, ícone e rótulo PASSIVE do OG. Copyfit V3 EXACT 3/3 em 100%/200%; Viewer e PDF isolados confirmaram a cápsula completa. Não generalizar para outros contextos sem comparar a fonte.",
       "diagnosticRendering": "Draft mantido no Viewer e no Payload; nenhuma tradução foi alterada ou publicada nesta exceção.",
       "sourceText": "PASSIVE ABILITIES: Any Abilities with the ✤ PASSIVE Tag are listed here.",
       "proposedText": "HABILIDADES PASSIVAS: Quaisquer Habilidades com a Tag ✤PASSIVA ficam listadas aqui.",
@@ -14493,7 +14512,8 @@
         "Payload review1273 segue pending e sem publication."
       ],
       "resolutionNote": "Aprovado canonicamente no Payload CMS em 05/11/2026",
-      "resolvedAt": "2026-11-05T03:53:58.451000Z"
+      "resolvedAt": "2026-11-05T03:53:58.451000Z",
+      "proposalFile": "docs/translations/proposals/page-059-command-combatant-breakdown-proposal-2026-10-17-v1.json"
     },
     {
       "id": "p059-page-59-block-79-pt-BR-blocker",

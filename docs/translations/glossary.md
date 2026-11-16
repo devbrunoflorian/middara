@@ -28,6 +28,7 @@
 | **Explore** | Explorar |
 | **Venture Forth** | Aventurar-se |
 | **Story Round** | Rodada de História |
+| **Stamina Points** | Pontos de Stamina |
 | **White Valts** | Criptas Brancas |
 | **Adventure Mechanic** | Mecânica de Aventura |
 | **Adventurer Sheet** | Ficha de Aventureiro |
@@ -107,6 +108,8 @@ Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir auto
 
 
 **Decisões Payload preservadas no glossário oficial (22/10/2026):** `Gain` → **obter** (decision id 4; manter inflexão gramatical natural, como “obtém/obtido”) e `Adventure Mechanic` → **Mecânica de Aventura** (decision id 8). As decisões já estavam aprovadas no Payload e foram apenas sincronizadas com esta tabela; não publicam unidades nem autorizam alterar texto humano salvo.
+
+**Decisão do usuário (15/11/2026; Payload `translation-glossary-decisions`):** `Stamina Points` → **Pontos de Stamina**; manter a abreviação impressa `SP`. A escolha vale para prosa de regras e não traduz rótulos impressos em cartas/arte. Na p.59, o usuário manteve “o Combatente ganha a cada turno” como formulação contextual para acumulação recorrente; isso não substitui a decisão geral `Gain` → **obter** nem autoriza “ganhar” como tradução mecânica global. Traduções humanas anteriores com outra forma ficam preservadas até reconciliação contextual.
 
 **Decisão do usuário (15/10/2026):** para a mecânica *Exhaust*, usar o verbo **exaustar**; em rótulos de Tag, manter a forma verbal/capitalização natural, por exemplo **EXAUSTAR**. Esta decisão não renomeia IDs semânticos como `action.exhaust` e não autoriza sobrescrever traduções humanas já salvas.
 

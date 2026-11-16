@@ -191,6 +191,22 @@
   line-height: 1;
 }
 
+@media print {
+  .realbox[data-print-line-height] {
+    line-height: var(--print-line-height) !important;
+  }
+
+  .realbox[data-print-line-height] > [data-source-bullet-flow] > div,
+  .realbox[data-print-line-height] > [data-source-numbered-list-flow] > div {
+    line-height: var(--print-line-height) !important;
+  }
+
+  .realbox[data-print-paragraph-spacing] > [data-source-bullet-flow] > div,
+  .realbox[data-print-paragraph-spacing] > [data-source-numbered-list-flow] > div {
+    margin-bottom: var(--print-paragraph-spacing) !important;
+  }
+}
+
 .semantic-body {
   font-family: 'AGaramondPro', 'EB Garamond', 'Garamond', serif;
   font-size: 15.5px; /* Magic number matching the typical PDF size */

@@ -1,22 +1,18 @@
-# Estrutura do repositório
+# Estrutura do projeto
 
-**Status:** índice curto; os contratos atuais estão em [`docs/README.md`](README.md) e [`docs/architecture/overview.md`](architecture/overview.md).
-
-| Caminho | Papel atual |
+| Caminho | O que tem ali |
 |---|---|
-| `apps/web/` | Viewer/editor React + Vite e renderer do livro. |
-| `apps/web/public/pages/page_NNN/` | DOM JSON, imagens e sidecars de geometria, símbolos, estruturas e overlays por página. |
-| `apps/admin/` | Payload CMS/Next.js, API e SQLite local para traduções. O `apps/admin/AGENTS.md` contém instruções geradas do Next.js. |
-| `scripts/` | Extração PyMuPDF, preparação de assets, auditoria e export. Confirme cada script antes de executá-lo em lote. |
-| `docs/architecture/` | Contratos atuais, ADRs e modelo de dados. |
-| `docs/project-progress/` | Registros datados e evidências de aceitação; status é limitado ao escopo de cada registro. |
-| `.agents/rules/`, `.agents/skills/` | Regras e workflows ativos; a tabela de status nos respectivos READMEs é normativa. |
-| `icebox/` | Snapshots/histórico preservado; não é a arquitetura de produção. |
+| `apps/web/` | Viewer, editor e renderer do livro. |
+| `apps/web/public/pages/page_NNN/` | Extração de texto e sidecars de geometria, símbolos e overlays por página. |
+| `apps/admin/` | Payload CMS, API e banco SQLite local. |
+| `scripts/` | Ferramentas para extração, revisão de layout e exportação de PDF. |
+| `docs/architecture/` | Como os dados, as páginas e os símbolos se conectam. |
+| `docs/translations/` | Glossário, fluxo manual, materiais por página e status de revisão. |
+| `docs/QA/` | Critérios para comparar o Viewer e o PDF ao original. |
+| `ROADMAP/` | Ideias e melhorias futuras para o app. |
 
-## Fluxo local
+## Rodar localmente
 
-`npm run dev` usa `scripts/dev.mjs` para iniciar viewer e Payload. O Vite normalmente usa `localhost:8080` e Payload `localhost:3000`, mas confira o badge/saída da sessão em vez de presumir porta, API ou locale. Preserve `apps/admin/apps-admin.db` e arquivos locais de dados.
+Use `npm run dev` na raiz. O banco Payload fica no SQLite local e não é publicado pelo Git; preserve esse arquivo ao reinstalar dependências ou trocar de branch.
 
-## História de arquitetura
-
-Documentos antigos referem `packages/ingest`, um schema Zod e `docs/architecture_v3_constraints.md`. Esses caminhos não descrevem a árvore atual; o link v3 não existe. Consulte [`documentation-dispositions.md`](history/documentation-dispositions.md) antes de usar qualquer procedimento antigo.
+O documento [`../README.md`](../README.md) mostra os comandos de início. O mapa da documentação fica em [`README.md`](README.md).

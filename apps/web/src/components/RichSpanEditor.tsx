@@ -70,6 +70,10 @@ export interface SpanOverride {
   textAlign?: TextAlignment;
   /** Unitless CSS line height used for explicit line breaks and wrapped rows. */
   lineHeight?: number;
+  /** Optional unitless line height for PDF output when browser print metrics diverge from the viewer. */
+  printLineHeight?: number;
+  /** Optional paragraph spacing for PDF output when browser print metrics diverge from the viewer. */
+  printParagraphSpacingPt?: number;
   /** Source leading is the default; `custom` means the admin changed the control. */
   lineHeightMode?: LineHeightMode;
   /** Source IDs adopted by this edit, including objects deliberately deleted. */
@@ -381,7 +385,9 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
 
   const changeListIndent = useCallback((field: 'marker' | 'hanging', raw?: number) => {
     if (raw !== undefined && !Number.isFinite(raw)) return;
-    const value = raw === undefined ? undefined : Math.max(0, Math.min(100, raw));
+    const value = raw === undefined ? undefined : field === 'marker'
+      ? Math.max(-24, Math.min(100, raw))
+      : Math.max(0, Math.min(100, raw));
     const current = field === 'marker' ? listMarkerIndentPt : hangingIndentPt;
     if (current === value || (current !== undefined && value !== undefined && Math.abs(current - value) < 0.001)) return;
     pushHistory();
@@ -581,8 +587,8 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     }
 
     const previewSegments = isEditingText ? editTextSegments : segments;
-    onDraftChange(createEditorOverride(spanKey, bbox, textAlign, previewSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt, listMarkerIndentPt, hangingIndentPt));
-  }, [segments, editTextSegments, textAlign, lineHeight, lineHeightMode, listMarkerIndentPt, hangingIndentPt, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, managedSourceSymbols, existingOverride?.paragraphSpacingPt]);
+    onDraftChange(createEditorOverride(spanKey, bbox, textAlign, previewSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt, listMarkerIndentPt, hangingIndentPt, existingOverride?.printLineHeight, existingOverride?.printParagraphSpacingPt));
+  }, [segments, editTextSegments, textAlign, lineHeight, lineHeightMode, listMarkerIndentPt, hangingIndentPt, onDraftChange, spanKey, bbox, hasDraftChanges, isEditingText, managedSourceSymbols, existingOverride?.paragraphSpacingPt, existingOverride?.printLineHeight, existingOverride?.printParagraphSpacingPt]);
 
   // Selection helpers
   const hasSelection = selStart !== null && selEnd !== null && selStart !== selEnd;
@@ -980,7 +986,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     setSaveError(null);
     setIsSaving(true);
     try {
-      await onSave(createEditorOverride(spanKey, bbox, textAlign, finalSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt, listMarkerIndentPt, hangingIndentPt));
+      await onSave(createEditorOverride(spanKey, bbox, textAlign, finalSegments, managedSourceSymbols, lineHeight, lineHeightMode, existingOverride?.paragraphSpacingPt, listMarkerIndentPt, hangingIndentPt, existingOverride?.printLineHeight, existingOverride?.printParagraphSpacingPt));
     } catch {
       setSaveError(language === 'pt-BR'
         ? 'Falha ao concluir o salvamento; as alterações continuam abertas no editor.'
@@ -988,7 +994,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
     } finally {
       setIsSaving(false);
     }
-  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign, lineHeight, lineHeightMode, listMarkerIndentPt, hangingIndentPt, isEditingText, editTextSegments, managedSourceSymbols, existingOverride?.paragraphSpacingPt, isSaving, language]);
+  }, [hasDraftChanges, onClose, onSave, spanKey, segments, bbox, textAlign, lineHeight, lineHeightMode, listMarkerIndentPt, hangingIndentPt, isEditingText, editTextSegments, managedSourceSymbols, existingOverride?.paragraphSpacingPt, existingOverride?.printLineHeight, existingOverride?.printParagraphSpacingPt, isSaving, language]);
 
   // Reset to original
   const handleReset = useCallback(() => {
@@ -1191,9 +1197,9 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
               </label>
             </div>
             <div className="rse-toolbar-group rse-toolbar-paragraph" role="group" aria-label={language === 'pt-BR' ? 'Recuos de lista' : 'List indents'}>
-              <label title={language === 'pt-BR' ? 'Recuo do marcador em pontos PDF' : 'List marker inset in PDF points'}>
+              <label title={language === 'pt-BR' ? 'Recuo do marcador em pontos PDF; valores negativos movem o marcador para a esquerda da moldura' : 'List marker inset in PDF points; negative values move the marker left of the frame'}>
                 <span>{language === 'pt-BR' ? 'Marcador' : 'Marker'} (pt)</span>
-                <input type="number" min={0} max={100} step={0.5}
+                <input type="number" min={-24} max={100} step={0.5}
                   aria-label={language === 'pt-BR' ? 'Recuo do marcador (pt)' : 'Marker indent (pt)'}
                   value={listMarkerIndentPt ?? originalListMarkerIndentPt ?? ''}
                   placeholder={originalListMarkerIndentPt === undefined ? '—' : undefined}

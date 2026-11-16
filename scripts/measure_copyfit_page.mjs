@@ -393,6 +393,7 @@ try {
       symbolIds,
       symbolOnlyRows,
       frameHeight: frame.height,
+      frameWidth: frame.width,
       fontSamples: [...fontSamples.values()],
       pageScaleCssPxPerPt,
     };
@@ -520,6 +521,7 @@ try {
           ? clustered.slice(1).map((row, rowIndex) => Number(((row.centre - clustered[rowIndex].centre) / directSnapshot.pageScaleCssPxPerPt).toFixed(2)))
           : [],
         frameHeight: Number(directSnapshot.frameHeight.toFixed(1)),
+        frameWidth: Number(directSnapshot.frameWidth.toFixed(1)),
         fontSamples: directSnapshot.fontSamples,
         pageScaleCssPxPerPt: directSnapshot.pageScaleCssPxPerPt,
       });
@@ -807,7 +809,7 @@ if (write) {
         method: 'scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.',
         environment: { pageNumber, pdfDocumentPageIndex: pageNumber - 1, language: 'pt-BR', viewerZoom: environment.zoomActual, viewportCssPixels: `${viewport.width}x${viewport.height}`, devicePixelRatio: dpr, fontLoaded: environment.fontLoaded },
         sourceEvidence: { bboxPt: row.candidate.copyfitCanonicalBbox, visualRowBaselinesPt: row.pdf.row_baselines, spans: row.pdf.spans, inlineMarkersFoldedIntoTextRows: row.pdf.inline_markers_folded ?? 0, visualRows: row.source },
-        pageRendererEvidence: { spanKey: row.viewer.rendererKey, readingMethod: row.viewer.method === 'geometric' ? 'text rects inside the canonical bbox plus visible semantic-symbol rects for symbol-only rows (renderer did not mark the unit)' : row.viewer.method === 'page-renderer-key' ? 'text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects' : 'text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows', rangeRectFragments: row.viewer.rangeRectFragments, renderedSymbolIds: row.viewer.symbolIds ?? [], semanticSymbolOnlyRows: row.viewer.symbolOnlyRows ?? 0, distinctVisualRows: row.target, visualRowTopsCssPx: row.viewer.rowTops, visualRowIntervalsPt: row.viewer.rowIntervalsPt ?? null, pageScaleCssPxPerPt: row.viewer.pageScaleCssPxPerPt ?? null, renderedFontSamples: row.viewer.fontSamples ?? [], frameHeightCssPx: row.viewer.frameHeight },
+        pageRendererEvidence: { spanKey: row.viewer.rendererKey, readingMethod: row.viewer.method === 'geometric' ? 'text rects inside the canonical bbox plus visible semantic-symbol rects for symbol-only rows (renderer did not mark the unit)' : row.viewer.method === 'page-renderer-key' ? 'text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects' : 'text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows', rangeRectFragments: row.viewer.rangeRectFragments, renderedSymbolIds: row.viewer.symbolIds ?? [], semanticSymbolOnlyRows: row.viewer.symbolOnlyRows ?? 0, distinctVisualRows: row.target, visualRowTopsCssPx: row.viewer.rowTops, visualRowIntervalsPt: row.viewer.rowIntervalsPt ?? null, pageScaleCssPxPerPt: row.viewer.pageScaleCssPxPerPt ?? null, renderedFontSamples: row.viewer.fontSamples ?? [], frameHeightCssPx: row.viewer.frameHeight, frameWidthCssPx: row.viewer.frameWidth },
         editorialStatus: 'Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.',
       };
       const measurementsByZoom = { ...(target.copyfitMeasurementsByZoom ?? {}) };

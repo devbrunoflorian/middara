@@ -3,39 +3,123 @@
   "elements": [
     {
       "symbolId": "attack.ranged",
-      "bbox": [
-        115.84329986572266,
-        607.29638671875,
-        124.66130065917969,
-        616.140380859375
-      ],
-      "drawingIndices": [
-        99,
-        100
-      ],
+      "sourceRendering": "semantic-inline",
+      "bbox": [115.84329986572266, 607.29638671875, 124.66130065917969, 616.140380859375],
+      "drawingIndices": [99, 100],
       "anchor": {
         "blockId": "block_11",
         "blockIndex": 3,
         "lineId": "line_11_43",
         "spanIndex": 0,
         "side": "after",
-        "sizePt": 10.0
+        "sizePt": 10,
+        "gapPt": 0,
+        "trailingGapPt": 2.78
       },
-      "metrics": {
-        "widthEm": 0.8818000793457031,
-        "heightEm": 0.8843994140625,
-        "verticalAlignEm": 0.09998779296875
-      },
+      "metrics": { "widthEm": 0.8818000793457031, "heightEm": 0.8843994140625, "verticalAlignEm": 0.09998779296875 },
       "mask": {
         "url": "/pages/page_058/inline-element-mask-000.png",
-        "bbox": [
-          115.25,
-          606.75,
-          125.25,
-          616.75
-        ],
+        "bbox": [115.25, 606.75, 125.25, 616.75],
         "clipShape": "circle"
       }
+    },
+    {
+      "symbolId": "action.exhaust",
+      "sourceRendering": "semantic-inline",
+      "bbox": [202.743, 492.903, 208.889, 498.636],
+      "drawingIndices": [95],
+      "anchor": {
+        "blockId": "block_11",
+        "blockIndex": 3,
+        "lineId": "line_11_28",
+        "spanIndex": 0,
+        "side": "after",
+        "sizePt": 9,
+        "gapPt": 0,
+        "trailingGapPt": 1.575
+      },
+      "metrics": { "widthEm": 0.6828888888888889, "heightEm": 0.637, "verticalAlignEm": 0 },
+      "mask": { "url": "/pages/page_058/inline-element-mask-001.png", "bbox": [202.493, 492.653, 209.139, 498.886] }
+    },
+    {
+      "symbolId": "action.exhaust",
+      "sourceRendering": "semantic-inline",
+      "bbox": [250.213, 503.903, 256.359, 509.636],
+      "drawingIndices": [96],
+      "anchor": {
+        "blockId": "block_11",
+        "blockIndex": 3,
+        "lineId": "line_11_30",
+        "spanIndex": 0,
+        "side": "after",
+        "sizePt": 9,
+        "gapPt": 0,
+        "trailingGapPt": 1.575
+      },
+      "metrics": { "widthEm": 0.6828888888888889, "heightEm": 0.637, "verticalAlignEm": 0 },
+      "mask": { "url": "/pages/page_058/inline-element-mask-002.png", "bbox": [249.963, 503.653, 256.609, 509.886] }
+    },
+    {
+      "symbolId": "attack.melee",
+      "sourceRendering": "semantic-inline",
+      "bbox": [358.685, 596.322, 367.503, 605.14],
+      "drawingIndices": [97, 98],
+      "anchor": {
+        "blockId": "block_11",
+        "blockIndex": 3,
+        "lineId": "line_11_41",
+        "spanIndex": 4,
+        "side": "after",
+        "sizePt": 10,
+        "gapPt": 0,
+        "trailingGapPt": 2.78
+      },
+      "metrics": { "widthEm": 0.8818, "heightEm": 0.8818, "verticalAlignEm": 0.1 },
+      "mask": {
+        "url": "/pages/page_058/inline-element-mask-003.png",
+        "bbox": [358.094, 595.731, 368.094, 605.731],
+        "clipShape": "circle"
+      }
+    },
+    {
+      "symbolId": "tag.atk.melee",
+      "sourceRendering": "semantic-inline",
+      "bbox": [104.173, 618.557, 144.519, 630.14],
+      "drawingIndices": [101, 102],
+      "coveredSourceTexts": [
+        { "blockId": "block_11", "lineId": "line_11_45", "spanIndex": 0, "text": " " },
+        { "blockId": "block_11", "lineId": "line_11_45", "spanIndex": 1, "text": "ATK" }
+      ],
+      "anchor": {
+        "blockId": "block_11",
+        "blockIndex": 3,
+        "lineId": "line_11_45",
+        "spanIndex": 0,
+        "side": "before",
+        "sizePt": 9
+      },
+      "metrics": { "widthEm": 4.482888888888889, "heightEm": 1.287, "verticalAlignEm": 0.31589, "advanceEm": 4.482888888888889 },
+      "mask": { "url": "/pages/page_058/inline-element-mask-004.png", "bbox": [103.923, 618.307, 144.769, 630.39] }
+    },
+    {
+      "symbolId": "tag.atk.ranged",
+      "sourceRendering": "semantic-inline",
+      "bbox": [158.669, 618.557, 199.015, 630.14],
+      "drawingIndices": [103, 104],
+      "coveredSourceTexts": [
+        { "blockId": "block_11", "lineId": "line_11_46", "spanIndex": 0, "text": " " },
+        { "blockId": "block_11", "lineId": "line_11_46", "spanIndex": 1, "text": "ATK" }
+      ],
+      "anchor": {
+        "blockId": "block_11",
+        "blockIndex": 3,
+        "lineId": "line_11_46",
+        "spanIndex": 0,
+        "side": "before",
+        "sizePt": 9
+      },
+      "metrics": { "widthEm": 4.482888888888889, "heightEm": 1.287, "verticalAlignEm": 0.31589, "advanceEm": 4.482888888888889 },
+      "mask": { "url": "/pages/page_058/inline-element-mask-005.png", "bbox": [158.419, 618.307, 199.265, 630.39] }
     }
   ]
 }

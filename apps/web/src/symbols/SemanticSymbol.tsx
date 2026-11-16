@@ -10,7 +10,8 @@ export function SemanticSymbol({ id, language, size, color = 'currentColor', pre
   const sourceRender = metrics?.renderVariant
     ? symbol.render.variants?.[metrics.renderVariant] ?? symbol.render
     : symbol.render;
-  const visual = sourceRender.localized?.[language] ?? sourceRender;
+  const visualLanguage = metrics?.renderLanguage ?? language;
+  const visual = sourceRender.localized?.[visualLanguage] ?? sourceRender;
   const inkWidthEm=(metrics?.widthEm ?? sourceRender.widthEm)*(metrics?.sourceAssetUrl ? 1 : visual.widthEm/sourceRender.widthEm);
   const inkWidth=size*inkWidthEm;
   const sourceHeight = sourceRender.heightEm ?? sourceRender.widthEm;
@@ -45,14 +46,14 @@ export function SemanticSymbol({ id, language, size, color = 'currentColor', pre
     if (!metrics?.sourceAssetUrl && visual.paths && visual.viewBox) return (
       <span className="inline-semantic-symbol-slot" data-geometry-mode={geometryMode} style={slotStyle}>
         <svg className="inline-semantic-symbol" viewBox={visual.viewBox.join(' ')} style={inkStyle}
-          role="img" aria-label={symbol.labels[language]} data-symbol-id={id}>
+          role="img" aria-label={symbol.labels[visualLanguage]} data-symbol-id={id}>
           {visual.paths.map((path,i)=><path key={i} {...path} />)}
         </svg>
       </span>
     );
     const visualAssetUrl = 'assetUrl' in visual ? visual.assetUrl : undefined;
     return <span className="inline-semantic-symbol-slot" data-geometry-mode={geometryMode} style={slotStyle}>
-      <img className="inline-semantic-symbol" src={metrics?.sourceAssetUrl ?? visualAssetUrl ?? symbol.assetUrl} alt={symbol.labels[language]} draggable={false} data-symbol-id={id}
+      <img className="inline-semantic-symbol" src={metrics?.sourceAssetUrl ?? visualAssetUrl ?? symbol.assetUrl} alt={symbol.labels[visualLanguage]} draggable={false} data-symbol-id={id}
         style={{...inkStyle,clipPath:symbol.render.mask==='circle'?'circle(50% at 50% 50%)':undefined}} />
     </span>;
   }
@@ -63,11 +64,11 @@ export function SemanticSymbol({ id, language, size, color = 'currentColor', pre
   };
   if (!metrics?.sourceAssetUrl && visual.paths && visual.viewBox) return (
     <svg className="inline-semantic-symbol" viewBox={visual.viewBox.join(' ')} style={{...style,overflow:'visible'}}
-      role="img" aria-label={symbol.labels[language]} data-symbol-id={id}>
+      role="img" aria-label={symbol.labels[visualLanguage]} data-symbol-id={id}>
       {visual.paths.map((path,i)=><path key={i} {...path} />)}
     </svg>
   );
   const visualAssetUrl = 'assetUrl' in visual ? visual.assetUrl : undefined;
-  return <img className="inline-semantic-symbol" src={metrics?.sourceAssetUrl ?? visualAssetUrl ?? symbol.assetUrl} alt={symbol.labels[language]} draggable={false} data-symbol-id={id}
+  return <img className="inline-semantic-symbol" src={metrics?.sourceAssetUrl ?? visualAssetUrl ?? symbol.assetUrl} alt={symbol.labels[visualLanguage]} draggable={false} data-symbol-id={id}
     style={{...style,clipPath:symbol.render.mask==='circle'?'circle(50% at 50% 50%)':undefined}} />;
 }

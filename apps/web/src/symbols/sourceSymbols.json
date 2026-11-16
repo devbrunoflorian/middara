@@ -3281,6 +3281,48 @@
     }
   },
   {
+    "id": "tag.atk.melee",
+    "category": "Tags compostas",
+    "labels": { "en": "ATK melee tag", "pt-BR": "Tag ATK corpo a corpo" },
+    "description": {
+      "en": "Source-accurate printed ATK melee pill; the artwork remains in English in both locales.",
+      "pt-BR": "Cápsula ATK corpo a corpo extraída do PDF original; a arte permanece em inglês nos dois idiomas."
+    },
+    "searchTerms": { "en": ["ATK melee", "melee ATK tag"], "pt-BR": ["ATK corpo a corpo", "tag de ataque corpo a corpo"] },
+    "editorTokens": { "en": "⟦ATK melee tag⟧", "pt-BR": "⟦Tag ATK corpo a corpo⟧" },
+    "allowedBlockTypes": ["paragraph", "typographic-field", "span-unit", "credit-field"],
+    "assetUrl": "/pages/page_058/source-symbol-atk-melee.svg",
+    "sourceRendering": "semantic-inline",
+    "source": {
+      "pdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+      "page": 58,
+      "bboxPt": [104.173, 618.557, 144.519, 630.14],
+      "assetSizePx": [0, 0]
+    },
+    "render": { "widthEm": 4.482888888888889, "heightEm": 1.287, "verticalAlignEm": 0.31589 }
+  },
+  {
+    "id": "tag.atk.ranged",
+    "category": "Tags compostas",
+    "labels": { "en": "ATK ranged tag", "pt-BR": "Tag ATK à distância" },
+    "description": {
+      "en": "Source-accurate printed ATK ranged pill; the artwork remains in English in both locales.",
+      "pt-BR": "Cápsula ATK à distância extraída do PDF original; a arte permanece em inglês nos dois idiomas."
+    },
+    "searchTerms": { "en": ["ATK ranged", "ranged ATK tag"], "pt-BR": ["ATK à distância", "tag de ataque à distância"] },
+    "editorTokens": { "en": "⟦ATK ranged tag⟧", "pt-BR": "⟦Tag ATK à distância⟧" },
+    "allowedBlockTypes": ["paragraph", "typographic-field", "span-unit", "credit-field"],
+    "assetUrl": "/pages/page_058/source-symbol-atk-ranged.svg",
+    "sourceRendering": "semantic-inline",
+    "source": {
+      "pdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+      "page": 58,
+      "bboxPt": [158.669, 618.557, 199.015, 630.14],
+      "assetSizePx": [0, 0]
+    },
+    "render": { "widthEm": 4.482888888888889, "heightEm": 1.287, "verticalAlignEm": 0.31589 }
+  },
+  {
     "id": "tag.status",
     "category": "Tags compostas",
     "labels": {

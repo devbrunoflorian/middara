@@ -1,6 +1,6 @@
 # QA status semantics and evidence
 
-> Rule 05 owns the required policy. This document explains the status vocabulary and evidence used to apply it; the operational certification procedure is the [visual-fidelity-qa skill](../../.agents/skills/visual-fidelity-qa/SKILL.md). If wording conflicts, rule 05 prevails.
+> This document explains the labels used during page review. The PDF is the reference; compare source, Viewer and exported PDF before marking a scope as checked.
 
 ## Candidate states
 
@@ -29,4 +29,4 @@ A page/family passes only for its declared scope when:
 
 The official source PDF is the primary evidence; extracted sidecars explain the source model, and viewer/export show the implementation. Raster comparison supports appearance review but cannot establish semantic classification by itself. The same observed difference can be a false positive, defect or unresolved candidate depending on source geometry and the active renderer path.
 
-Detailed measurements and page-specific acceptance results belong in dated `docs/project-progress/` records. For example, the p. 40 A–D tolerance and viewer/export results are recorded in [the 2026-10-07 audit](../project-progress/2026-10-07-source-structure-audit-and-doc-consolidation.md); that local tolerance does not establish a book-wide tolerance for unrelated measurements.
+Page-level status belongs in [`../translations/page-status.csv`](../translations/page-status.csv). Detailed internal measurements and captures stay in the private project notes; a result for one page or symbol family does not set a tolerance for unrelated cases.

@@ -1,7 +1,7 @@
-# Fidelidade visual e QA
+# Conferência visual
 
-**Status:** índice de entrada. A política obrigatória está em [rule 05](../../.agents/rules/05-processo-de-validacao-qa.md); o procedimento operacional está na [skill visual-fidelity-qa](../../.agents/skills/visual-fidelity-qa/SKILL.md); semântica de status/evidência está em [acceptance](acceptance.md). Princípios de investigação estão em [`docs/debugging-principles.md`](../debugging-principles.md).
+Use o PDF original para comparar a página fonte com o Viewer em OG, EN e PT-BR. Quando houver exportação, confira também o PDF gerado.
 
-Use a skill para o procedimento de certificação e o documento `acceptance.md` para interpretar estados e evidências. Screenshot, ausência de clipping, scanner geométrico ou compilação isolados não certificam uma página; essa limitação também está definida na [rule 05](../../.agents/rules/05-processo-de-validacao-qa.md).
+Observe conteúdo, arte, recuos, hierarquia de listas, quebra de linha, copyfit, fontes, cores, símbolos e alinhamento. Um ajuste local precisa ser comparado no contexto da página; passar no scanner ou não mostrar clipping não certifica o restante.
 
-Os relatórios [`QA_REPORT_1_10.md`](QA_REPORT_1_10.md) e [`QA_TRANSCRIPTION_PAGES_1_10.md`](QA_TRANSCRIPTION_PAGES_1_10.md) continuam como registros históricos daquele lote; não representam certificação atual do livro.
+Use [`acceptance.md`](acceptance.md) para interpretar candidatos, falsos positivos, defeitos confirmados e exceções. O status e o escopo de cada página ficam em [`../translations/page-status.csv`](../translations/page-status.csv).

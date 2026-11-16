@@ -6,10 +6,10 @@
 
 - **PDF page:** 58 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
-- **Artwork text / uncertain overlays:** not classified by this extractor
+- **Source review:** visual comparison completed against the official PDF; this file remains a raw line transcript, not a semantic map
+- **English fidelity:** page geometry, headings, prose and inline source art compared with the official PDF raster
+- **PT-BR:** whole-page proposal rendered in Viewer and exported PDF; terminology and human review remain pending
+- **Artwork text / uncertain overlays:** printed component labels stay in English by user decision; inline symbols have local source-sidecar evidence
 
 ## Raw line 001 (block 0, line 0)
 

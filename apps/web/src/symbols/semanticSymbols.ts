@@ -18,6 +18,8 @@ export interface InlineSymbolMetrics {
   trailingGapEm?: number;
   /** Source composition style used by the same semantic symbol ID. */
   renderVariant?: string;
+  /** Render this occurrence in its source-art language instead of the page language. */
+  renderLanguage?: SymbolLanguage;
   /** Audited occurrence artwork; the stable semantic ID still comes from the registry. */
   sourceAssetUrl?: string;
   /** Verified source topology/paint identity shared by equivalent occurrences. */

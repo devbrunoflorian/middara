@@ -1,0 +1,119 @@
+{
+  "proposalId": "p046-important-label-color-2026-11-14",
+  "version": "1",
+  "title": "P.46 — cor do rótulo IMPORTANTE",
+  "page": 46,
+  "status": "verified_viewer_print_pdf",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "9BC239D68098C5C70D0DA0D4F4AEF46F01B4254822E10238C9B5B6673E4A7447",
+    "dom": "638D0DA3D290B8D6834B1F49615BAC16507A9AD46C0F13BEF0BB932EEEAA1AEF",
+    "inlineElements": "A70C035BD66FE703032B829D065CE7D93C596145BC1779DAACDC2A5C67D8D710",
+    "layoutFrames": "28DEBAAF1A99A8BEE710CC706E3A0FB1174B86E433687CE0B51BFB299DD59C59",
+    "fidelityOverlays": "942C9A27CD1DB849A30EA4FADF6BC645B0411A15E48514EB5722F9C97E663736"
+  },
+  "counts": {
+    "candidates": 1,
+    "sourcePdfVisualLines": 2,
+    "pageRendererVisualLines": 2
+  },
+  "sourceArtifacts": [
+    "apps/web/public/pages/page_046/page_046_dom.json",
+    "docs/translations/proposals/page-046-full-page-proposal-2026-10-16-v3.json"
+  ],
+  "verification": {
+    "verifiedAt": "2026-11-15",
+    "sourceLabelColor": "#b91d23",
+    "sourceLabelStroke": {
+      "widthPt": 2,
+      "color": "#ffffff"
+    },
+    "sourceVisualLines": 2,
+    "viewerVisualLines": 2,
+    "printVisualLines": 2,
+    "viewerSemanticSymbols": 1,
+    "printSemanticSymbols": 1,
+    "pdfVerification": true,
+    "approvedReviewKey": "p046-important-label-color-2026-11-14@1::page_46_block_10__pt-BR",
+    "preservedPublicationHistoryEntries": 1,
+    "privateEvidenceFolder": "engineering-decisions/evidence/2026-11-15-p046-color-fix/",
+    "evidenceFiles": [
+      "p046-pt-BR-persisted-color-fix.pdf",
+      "p046-pt-BR-persisted-color-fix-view.png",
+      "p046-pt-BR-persisted-color-fix-print.png",
+      "p046-pt-BR-persisted-color-fix-metrics.json"
+    ]
+  },
+  "candidates": [
+    {
+      "spanKey": "page_46_block_10__pt-BR",
+      "blockIndex": 10,
+      "blockId": "block_29",
+      "unitId": null,
+      "sourceText": "IMPORTANT: An Adventurer may only use Abilities on Items that are equipped.",
+      "proposalText": "IMPORTANTE: Um Aventureiro só pode usar Habilidades de Itens que estejam equipados.",
+      "pendingTerms": [],
+      "language": "pt-BR",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_46_block_10__pt-BR",
+        "bbox": [
+          91.84208679199219,
+          747.6384887695312,
+          387.21209716796875,
+          770.5985107421875
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "tag.important.icon",
+            "symbolMetrics": {
+              "widthEm": 1,
+              "heightEm": 1,
+              "verticalAlignEm": 0.2
+            }
+          },
+          {
+            "text": "IMPORTANTE:",
+            "font": "OptimaLTStd-Black",
+            "size": 10,
+            "color": "#b91d23",
+            "weight": 900,
+            "style": "normal",
+            "disableLigatures": true,
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#ffffff"
+          },
+          {
+            "text": " Um Aventureiro só pode usar Habilidades de Itens que estejam equipados.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": [
+          "tag.important.icon"
+        ]
+      },
+      "reviewKey": "p046-important-label-color-2026-11-14@1::page_46_block_10__pt-BR",
+      "technicalStatus": "verified_viewer_editor_copyfit_pdf",
+      "copyfitClassification": "EXACT",
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "editorialStatus": "existing_approved_translation_formatting_correction"
+    }
+  ]
+}

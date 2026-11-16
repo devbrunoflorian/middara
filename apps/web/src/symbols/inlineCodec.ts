@@ -18,7 +18,7 @@ function sameSourceSymbolTemplate(a:Segment,b:Segment):boolean {
   const sizePt=Number.isFinite(a.size) && a.size>0 ? a.size : undefined;
   const equivalentSourceAssets = !!a.symbolMetrics?.sourceAppearanceKey
     && a.symbolMetrics.sourceAppearanceKey === b.symbolMetrics?.sourceAppearanceKey;
-  const metricFields: (keyof InlineSymbolMetrics)[] = ['widthEm','heightEm','verticalAlignEm','advanceEm','gapEm','trailingGapEm','sourceAppearanceKey',
+  const metricFields: (keyof InlineSymbolMetrics)[] = ['widthEm','heightEm','verticalAlignEm','advanceEm','gapEm','trailingGapEm','renderLanguage','sourceAppearanceKey',
     ...(equivalentSourceAssets ? [] : ['renderVariant','sourceAssetUrl'] as const)];
   return metricFields.every(key=>{
     const first=a.symbolMetrics?.[key];const second=b.symbolMetrics?.[key];

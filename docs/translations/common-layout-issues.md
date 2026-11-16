@@ -130,6 +130,8 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 
 **Casos verificados:** na p.19, o exemplo ganhou sua própria moldura e o texto “Surgimento” mediu 6 linhas na fonte e 6 em PT-BR. Na p.22, os dois exemplos mantiveram os 18 pt de recuo e o bloco mediu 32 linhas na fonte e 32 em PT-BR; o PDF exportado foi conferido visualmente.
 
+**Rechecado na p.19 (2026-11-15):** o exemplo subordinado ao bullet está em X=104,165 pt no PT-BR e X=104,173 pt no OG (diferença de 0,008 pt). As continuações permanecem no mesmo X do texto do exemplo. O corpo dos bullets começa em X=104,173 pt; o marcador fica 18 pt à esquerda. Viewer e print atuais mantêm essa hierarquia.
+
 **Revalidado na p.18 (2026-11-15):** no item numerado 4, o marcador está em X=86,17 pt e o corpo/continuação em X=104,17 pt (18 pt). A versão PT-BR atual ocupa 2 linhas, igual à fonte; “38.” permanece na segunda linha e o parágrafo seguinte não colide. Viewer e PDF exportado confirmam o recuo. O alerta antigo de 3/2 linhas descreve uma versão anterior; a review #27, embora aprovada, ainda não foi sincronizada com a tradução atual #331.
 
 **Também conferido na p.53:** o marcador de cada bullet é desenhado numa coluna de recuo separada; por isso, o `textContent` do DOM pode expor `•Itens` sem um espaço literal, embora a distância visual do corpo esteja correta. Normalize o separador somente na comparação de texto da validação de exportação; não insira um espaço no conteúdo PT-BR sem que ele exista na fonte. Viewer e print mantiveram os bullets e as continuações alinhados.

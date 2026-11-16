@@ -1,78 +1,18 @@
-# Middara Rulebook 1.2 — translation reference and progress
+# Referências de tradução
 
-## Estado atual da revisão
+Esta pasta reúne materiais de apoio para traduzir o livro do inglês para PT-BR e revisar cada página junto ao PDF original.
 
-O Goal de localização está **pausado e incompleto** por decisão do usuário; a revisão das propostas no Viewer continua disponível. No último estado observado no app, a central mostrou **803 Propostas, 316 Exceções, 0 Pedidos de Revisão e 45 Aprovados**. O catálogo tem 848 candidatos brutos; as 45 unidades confirmadas no Payload são ocultadas de Propostas. A aba **Aprovados** continua baseada em tradução final e recibo do Payload.
+## Para começar
 
-O ciclo persistente de edição, reabertura, aprovação, Viewer PT-BR e PDF foi validado no aplicativo; detalhes em [validação da central](../project-progress/2026-10-16-in-app-translation-review.md). A nova regra Copyfit V3 torna `EXACT` o alvo, permite `UNDER` com justificativa e reprova `OVER`. A revalidação da Tabela 10, p.100, passou a `EXACT` sem publicação e sua prévia não é mais ocultada pelo status resolvido. A investigação da p.98 permanece inconclusiva para texto traduzido; consulte o [experimento e seus limites](../project-progress/2026-10-17-p098-root-green-die-experiment.md).
+- [`glossary.md`](glossary.md): termos e escolhas já registrados.
+- [`manual-editor-workflow.md`](manual-editor-workflow.md): fluxo para editar, salvar e conferir uma unidade.
+- [`common-layout-issues.md`](common-layout-issues.md): padrões verificados para recuos, listas, copyfit, símbolos e texto rico.
+- [`page-status.csv`](page-status.csv): cobertura e situação de cada página.
 
-As 189 entradas de índice da p.101 têm cobertura de proposta em lotes; isso não certifica a página inteira. A p.102 também permanece parcial. Os lotes existentes estão preservados para retomada; a nova regra de copyfit não alterou traduções humanas aprovadas.
+## Materiais por página
 
-This folder contains translation references, curated notes, source extracts, and page-level history. The active production route is manual EN→PT-BR translation in the Admin RichSpanEditor, saved as unit overrides. The official PDF remains the textual source of truth; app JSON, database entries, previous extraction files, and screenshots help with locating context but do not replace it.
+- `pages/` contém rascunhos editoriais e notas de composição.
+- `source-pages/` contém extrações do texto inglês do PDF para ajudar a localizar trechos. A extração não substitui a conferência visual nem representa texto aprovado.
+- `proposals/` contém propostas de tradução em revisão. Uma proposta não equivale a uma aprovação nem a uma gravação no banco local.
 
-**Escopo confirmado pelo usuário:** o conteúdo já existente no database das páginas impressas 1–12 está aprovado e deve ser preservado. A fila/drafts novos começam na p. 13; essa aprovação se refere ao conteúdo persistido, não afirma que cada página esteja integralmente traduzida.
-Os estados das páginas 1–12 em `page-status.csv` são registros de auditorias anteriores, não uma solicitação para reabrir essa faixa. A fila de produção ativa começa na p. 13.
-
-Use [`manual-editor-workflow.md`](manual-editor-workflow.md) for the current repeatable translation procedure. [`production-workflow.md`](production-workflow.md) and the Markdown templates describe the older offline draft/review process; they are reference material, not the active save/preview route. Pilot files preserve historical decisions and evidence.
-
-## Current workflow
-
-Translate the next page/unit manually in the Admin viewer, compare against the PDF, use the canonical glossary and limited page 2 voice sample, inspect PT reflow, then save and reload. Do not auto-translate. See the workflow guide for exact steps and for the current limits of page status, glossary matching, overflow signals, and export.
-
-`python scripts/audit_translation_copyfit.py` remains a read-only character-expansion scanner for curated Markdown drafts; it does not scan live Payload overrides or certify visual fit.
-
-## Files
-
-- [`glossary.md`](glossary.md): project copy of the official glossary from `C:\Users\bruno\Middara\Rulebook 1.2\.agents\rules\glossary.md`.
-- [`manual-editor-workflow.md`](manual-editor-workflow.md): active manual translation workflow in the Admin RichSpanEditor.
-- [`glossary-candidates.md`](glossary-candidates.md): provisional, non-authoritative candidates and cross-page terminology conflicts found in the current drafts; requires team review before standardization.
-- [`references/page-2-voice-reference.md`](references/page-2-voice-reference.md): read-only scope and caveats for using the database translation on page 2.
-- [`pages/page-003.md`](pages/page-003.md): all 40 Contents labels and destinations rechecked against the PDF; PT draft exists, but six width alerts and a conflict with the saved title (`Índice` vs `Sumário`) keep the page from being approved or reimported.
-- [`pages/page-004.md`](pages/page-004.md): title and 14 descriptions source-rechecked; printed `Adventures` typo and `Items Tiers` cross-reference discrepancy recorded, PT preview pending.
-- [`pages/page-005.md`](pages/page-005.md): 12 descriptions rechecked against source text; 8 short heading alerts need actual PT width review, preview still pending.
-- [`pages/page-006.md`](pages/page-006.md): 8 descriptions source-rechecked; `Adventurer Mode` and `Red Reveal Recoder` preserved as printed; a missing clause was restored; PT preview pending.
-- [`pages/page-007.md`](pages/page-007.md): all 40 list units and four quantity subtotals rechecked against the source; 19 copyfit alerts remain pending column preview.
-- [`pages/page-008.md`](pages/page-008.md): six units drafted, reconciled read-only with five Payload records and one local PT intro, and visually previewed in an isolated context; no actual state was overwritten. `Crawl Mode` remains provisional.
-- [`pages/page-009.md`](pages/page-009.md): complete PT-BR content covers all 17 source blocks in 18 unique saved records (two editable units for source block 34); current Viewer, PDF and 18/18 Editor targets were rechecked read-only. Human review remains pending for Crawl Mode, Rank, Loot Level and Tuck Bag; see the reproducible receipt under `output/proofs/translation-readiness-2026-10-16/p009-current-payload-recheck-v1/`.
-- [`pages/page-010.md`](pages/page-010.md): 22 saved PT-BR units audited; five targeted copy/style corrections read back and previewed. `Ficha de Aventura` remains a cross-page glossary decision.
-- [`pages/page-011.md`](pages/page-011.md): nine saved PT-BR units reconciled and previewed; title subtitle copyedited with snapshot/read-back; the cover's three duplicate editable labels stay hidden. Status and sheet-label terminology remain candidates.
-- [`pages/page-013.md`](pages/page-013.md): 25 content units and separate headings/callouts source-rechecked; five semantic placements are mapped, and the decorative flag beside `Flags` remains removed by the approved cleanup overlay; 5 copyfit alerts await preview, DIFFICULTY art stays separate.
-- [`proposals/page-025-adventurer-card-proposal-2026-10-16-v8.md`](proposals/page-025-adventurer-card-proposal-2026-10-16-v8.md): 9/9 active proposals pass Viewer, Editor read-only, Copyfit V3 and PDF; three failed units are blank only as whole units in the diagnostic, with full source and proposals preserved.
-- [`proposals/page-026-item-card-types-proposal-2026-10-16-v1.md`](proposals/page-026-item-card-types-proposal-2026-10-16-v1.md): 15 editable units checked in Viewer, Editor read-only and PDF; three SYMBOL ABILITIES subunits are blank only in the diagnostic; artwork and one structural repair remain open.
-- [`proposals/page-027-item-tiers-and-types-proposal-2026-10-16-v10.md`](proposals/page-027-item-tiers-and-types-proposal-2026-10-16-v10.md): 27/30 units passed Viewer, Editor read-only, Copyfit V3 and PDF; three units remain wholly blank only in the diagnostic, with artwork and human review pending.
-- [`proposals/page-028-item-upgrades-proposal-2026-10-16-v4.md`](proposals/page-028-item-upgrades-proposal-2026-10-16-v4.md): 23 new units passed Viewer, Editor read-only, Copyfit V3 and PDF; eight saved translations were preserved, with one legacy Editor-key exception.
-- [`proposals/page-029-item-upgrades-proposal-2026-10-16-v2.md`](proposals/page-029-item-upgrades-proposal-2026-10-16-v2.md): 20/21 units passed Viewer, Editor read-only, Copyfit V3 and PDF; all 21 fields were checked in Editor; block_22 remains wholly blank only in the diagnostic due to a symbol exception.
-- [`proposals/page-030-icons-conditions-tags-symbols-2026-10-16-v2.md`](proposals/page-030-icons-conditions-tags-symbols-2026-10-16-v2.md): 18/19 units passed Viewer, Copyfit V3 and PDF; all 19 fields were checked in Editor; block_41 remains wholly blank only in the diagnostic due to unplaced source glyphs.
-- [`pages/page-031.md`](pages/page-031.md): p.31 reviewed against the official PDF; full-page illustration with no editorial prose to translate.
-- [`proposals/page-032-discipline-trees-v2.md`](proposals/page-032-discipline-trees-v2.md): historical source-review draft, superseded by the complete proposal below.
-- [`proposals/page-032-full-page-proposal-2026-10-16-v1.md`](proposals/page-032-full-page-proposal-2026-10-16-v1.md): 15 new text candidates and the preserved Example passed Viewer, Editor read-only and PDF review; Copyfit V3 and human review remain pending.
-- [`proposals/page-033-conviction-casting-v1.md`](proposals/page-033-conviction-casting-v1.md): historical v1 draft, superseded by the complete-prose v5 proposal below.
-- [`proposals/page-033-full-prose-proposal-2026-10-16-v5.md`](proposals/page-033-full-prose-proposal-2026-10-16-v5.md): 19 text proposals; 18 pass isolated Viewer, PDF and Copyfit V3; one label remains wholly blank in the diagnostic due to a fixed source die. Human review and three English card overlays remain pending.
-- [`proposals/page-050-flanking-rules-proposal-2026-10-15-v2.md`](proposals/page-050-flanking-rules-proposal-2026-10-15-v2.md): cinco regras de Flanqueio/BACKSTAB em snapshot isolado com os cinco símbolos semânticos; revisão terminológica e do peso visual pendente, e duas unidades excedem a borda superior do frame-fonte em menos de 0,9 pt. Nenhuma escrita no Payload.
-- [`pages/page-085.md`](pages/page-085.md): draft piloto para prosa densa, dados inline e legenda A/B/C; o PDF mostra dados branco/laranja sem placement no sidecar atual, então a prévia integrada está bloqueada até reconciliar esses símbolos.
-- [proposals/page-068-skill-check-instructions-2026-10-16-v1.json](proposals/page-068-skill-check-instructions-2026-10-16-v1.json): uma unidade de Teste de Habilidade com comparação EN/PT e highlight exato revalidados no Viewer; redação permanece proposta, com Copyfit V3, Editor, PDF e aprovação humana pendentes.
-- [proposals/page-069-allies-and-opponents-definitions-2026-10-23-v2.json](proposals/page-069-allies-and-opponents-definitions-2026-10-23-v2.json): proposta isolada de definição na p.69; Viewer, Copyfit V3, Editor, PDF e aprovação humana pendentes.
-- [proposals/page-070-item-recipient-ambiguity-2026-10-23-v2.json](proposals/page-070-item-recipient-ambiguity-2026-10-23-v2.json): proposta isolada de escolha do Aventureiro que recebe um Item; Viewer, Copyfit V3, Editor, PDF e aprovação humana pendentes.
-- [proposals/page-071-rounding-numbers-rule-2026-10-16-v1.json](proposals/page-071-rounding-numbers-rule-2026-10-16-v1.json): proposta isolada da regra de arredondamento; outros blocos ligados a símbolos permanecem fora do lote. Viewer, Copyfit V3, Editor, PDF e aprovação humana pendentes.
-- [proposals/page-079-loot-level-spawn-threshold-2026-10-16-v1.json](proposals/page-079-loot-level-spawn-threshold-2026-10-16-v1.json): uma regra isolada de Loot Level proposta; o crítico verificou comparação EN/PT, highlight exato e legibilidade no Viewer. O termo continua candidato local; Copyfit V3, Editor, PDF e aprovação pendentes. Ver [evidência p.79](../project-progress/2026-10-16-p079-loot-level-spawn-threshold.md).
-- [proposals/page-080-alternate-combatant-example-2026-10-16-v1.json](proposals/page-080-alternate-combatant-example-2026-10-16-v1.json): exemplo isolado com nomes de Combatentes preservados; comparação, highlight, formatação rica e leitura a 100/200% conferidos no Viewer. Copyfit V3, Editor, PDF e aprovação humana seguem pendentes. Ver [evidência p.80](../project-progress/2026-10-16-p080-alternate-combatant-example.md).
-- [proposals/page-081-variation-group-rule-2026-10-16-v1.json](proposals/page-081-variation-group-rule-2026-10-16-v1.json): regra isolada de Grupo entre Combatentes e Variações; o crítico confirmou comparação EN/PT e highlight exato no Viewer. Em 200%, foi preciso rolar horizontalmente para ver o contorno inteiro. Copyfit V3, Editor, PDF e revisão humana pendentes. Ver [evidência p.81](../project-progress/2026-10-16-p081-variation-group-rule.md).
-- [proposals/page-082-type-tag-species-proposal-2026-10-16-v1.json](proposals/page-082-type-tag-species-proposal-2026-10-16-v1.json): uma unidade de corpo sob Type Tag; `TYPE: X` fica preservado em inglês e aguarda decisão de localização. O crítico confirmou comparação EN/PT e highlight exato somente no corpo; o reposicionamento automático permaneceu correto de 100% a 200%, sem arrastar a barra. Copyfit V3, Editor, PDF e revisão humana pendentes.
-- [proposals/page-083-loot-level-sequence-proposal-2026-10-16-v2.json](proposals/page-083-loot-level-sequence-proposal-2026-10-16-v2.json): versão com tinta branca e frase condensada. O agente crítico confirmou no Viewer real EN/PT completo, moldura exata e leitura sem colisão em 100/150/200%. A v1 permanece preservada; Copyfit V3 independente, Editor, PDF e revisão humana seguem pendentes. `Loot Level → Nível de Saque` continua candidata local.
-- [proposals/page-084-card-draw-sequence-proposal-2026-10-16-v2.json](proposals/page-084-card-draw-sequence-proposal-2026-10-16-v2.json): versão curta de “Embaralhem estas cartas e comprem uma ao acaso.” A v1 foi preservada após a checagem real encontrar quebra para fora da moldura; v2 passou no Viewer real em 100/150/200%, com uma linha no contorno e sem colisão. `embaralhar` e `comprar` seguem formas locais candidatas; Copyfit V3, Editor, PDF e revisão humana pendentes.
-- [proposals/page-085-abraxis-point-sentence-proposal-2026-10-16-v1.json](proposals/page-085-abraxis-point-sentence-proposal-2026-10-16-v1.json): frase isolada sobre ganhar 1 Ponto de Abraxis, com ênfase do numeral preservada. O Viewer real mostrou EN/PT e duas linhas legíveis dentro do destaque em 100/125/150/200%. A tradução humana do block_38 (ID 143) permaneceu intacta com hash igual antes/depois. A página continua bloqueada para prévia integral; Copyfit V3, Editor, PDF e revisão humana pendentes.
-- [proposals/page-086-variants-choice-proposal-2026-10-16-v1.json](proposals/page-086-variants-choice-proposal-2026-10-16-v1.json): introdução isolada da seção de variantes, ainda parcial e sujeita ao gate de fidelidade EN da página. `à la carte` e `gaming group` são escolhas locais; Viewer, Copyfit V3, Editor, PDF e aprovação humana pendentes.
-- [proposals/page-101-index-entries-proposal-2026-10-16-v1.json](proposals/page-101-index-entries-proposal-2026-10-16-v1.json), [batches 2–14](../project-progress/2026-10-16-p101-index-row-review.md): 168 entradas individuais do índice estão conectadas à central. Os lotes 12–13 passaram no Viewer real; o lote 14 (156–167) está em checagem ao vivo, com sete notas terminológicas/contextuais e sem escrita final. A p.101 permanece parcial.
-- [`source-pages/`](source-pages/): raw line-level English transcript for every PDF page, with per-span font/size/flags/bbox evidence. This generated transcript deliberately keeps artwork text and questionable reading order visible; it is not approved semantic copy or a translation.
-- [`../../scripts/extract_translation_markdown.py`](../../scripts/extract_translation_markdown.py): reproducibly regenerates those raw per-page transcripts from the official 102-page PDF.
-- [`../../scripts/audit_translation_copyfit.py`](../../scripts/audit_translation_copyfit.py): read-only EN/PT character-expansion report for curated drafts; alerts are not layout-fit judgments.
-- [`page-status.csv`](page-status.csv): page-by-page extraction, English fidelity, and translation gate.
-- [`../../.agents/skills/middara-translation-copyfit/SKILL.md`](../../.agents/skills/middara-translation-copyfit/SKILL.md): reusable translation and copyfitting workflow.
-- [`editorial-casebook.md`](editorial-casebook.md): compact record of scoped human patterns, p.13 experimental evidence, failures, pending terminology, and the skill discovery/use smoke test.
-- [`../../.agents/skills/middara-terminology-decisions/SKILL.md`](../../.agents/skills/middara-terminology-decisions/SKILL.md) and [`../../.agents/skills/middara-editorial-style-ptbr/SKILL.md`](../../.agents/skills/middara-editorial-style-ptbr/SKILL.md): terminology decision process and evidence-based PT-BR editorial patterns.
-
-Curated `pages/page-NNN.md` files contain semantic translation units and their layout/style notes. `source-pages/page-NNN.md` files are a lower-level extraction aid and must not be mistaken for reviewed editorial text. Draft Markdown is not saved to the Payload database.
-
-## Existing material
-
-The sibling `C:\Users\bruno\Middara\Rulebook 1.2\_page_extraction\` contains older extracted/translated Markdown for pages 1–10. These files are preserved as historical drafts and terminology clues. Their grouping, 20% rule, and translation quality must be checked against the PDF and current project decisions before reuse. They are not copied over this maintained set.
+O PDF original é a referência para texto, arte e diagramação. Ao revisar PT-BR, confira também hierarquia, recuos, símbolos, fontes, cores, quebras de linha e paridade entre Viewer e PDF exportado.

@@ -1,6 +1,6 @@
 # Modelo editorial
 
-> Este documento explica o modelo aceito e seus casos. As regras obrigatórias de identidade/persistência, renderer e QA estão nas [rules 02](../../.agents/rules/02-schema-e-modelagem-de-dados.md), [03](../../.agents/rules/03-motor-de-renderizacao.md) e [05](../../.agents/rules/05-processo-de-validacao-qa.md); se houver divergência, use as rules `ACTIVE`.
+> Este documento explica como as unidades de tradução se relacionam com parágrafos, listas, chamadas e exemplos. Para a implementação e os critérios de revisão, veja a [visão geral da arquitetura](overview.md), o [fluxo de edição](../translations/manual-editor-workflow.md) e os [critérios de QA](../QA/acceptance.md).
 
 ## Unidade de tradução
 

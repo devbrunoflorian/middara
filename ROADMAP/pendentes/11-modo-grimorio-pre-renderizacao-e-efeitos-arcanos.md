@@ -4,7 +4,7 @@
 - **Prioridade:** MÉDIA (Evolução de Experiência / Não Bloqueante para a Conclusão Editorial das 102 Páginas)
 - **Escopo:** Especificação técnica e arquitetural de um modo de leitura imersivo inspirado em um grimório físico com virada física de páginas, scrub acelerado, pré-renderização em cache, renderização reativa de efeitos mágicos azuis e integração não-destrutiva com o Viewer tradicional, o Block Editor e o exportador de PDF
 - **Área:** Frontend / Animação / Performance & Cache / UX & Efeitos Visuais / Acessibilidade
-- **Diretriz Mandatória:** *Não implementar agora. Não instalar dependências (ex.: `@gul-labs/flipbook` ou afins). Não alterar componentes de produção ([PageRenderer.tsx](file:///c:/Users/bruno/Middara/Rulebook%20App/apps/web/src/components/PageRenderer.tsx), [App.tsx](file:///c:/Users/bruno/Middara/Rulebook%20App/apps/web/src/App.tsx)). Não interromper o cronograma de localização e aprovação editorial das páginas 13 a 102. Este documento tem por finalidade guiar a engenharia quando a prioridade de tradução e impressão gráfica for concluída.*
+- **Diretriz Mandatória:** *Não implementar agora. Não instalar dependências (ex.: `@gul-labs/flipbook` ou afins). Não alterar componentes de produção ([PageRenderer.tsx](../../apps/web/src/components/PageRenderer.tsx), [App.tsx](../../apps/web/src/App.tsx)). Não interromper o cronograma de localização e aprovação editorial das páginas 13 a 102. Este documento tem por finalidade guiar a engenharia quando a prioridade de tradução e impressão gráfica for concluída.*
 
 ---
 
@@ -63,7 +63,7 @@ sequenceDiagram
 ### Análise Causal dos Tempos de Espera:
 1. **Ativos de Imagem (Background WebP):** Cada página do manual é um scan/render de alta definição (entre 1.000 e 2.500 KB). Na ausência de cache em memória ou requisições paralelas antecipadas, o browser precisa esperar a decodificação da textura de fundo.
 2. **Carga em Cascata de JSONs:** O carregamento da página envolve `page_XXX_dom.json`, `inline_elements.json` e, dependendo do estado, requisições de API ao Payload para buscar registros de tradução.
-3. **Custo de Montagem do React:** O [PageRenderer.tsx](file:///c:/Users/bruno/Middara/Rulebook%20App/apps/web/src/components/PageRenderer.tsx) compõe até 80 blocos de texto por página, dezenas de spans tipográficos, injeção de SVGs via `SemanticSymbol.tsx` e cálculo de limites com `getBoundingClientRect()` nos hooks de medição.
+3. **Custo de Montagem do React:** O [PageRenderer.tsx](../../apps/web/src/components/PageRenderer.tsx) compõe até 80 blocos de texto por página, dezenas de spans tipográficos, injeção de SVGs via `SemanticSymbol.tsx` e cálculo de limites com `getBoundingClientRect()` nos hooks de medição.
 4. **Resolução de Fontes na Abertura Fria:** Se uma variante (como `Cinzel Decorative` ou `OptimaLTStd-Bold`) ainda não foi baixada ou decodificada pelo `document.fonts`, ocorre um relayout visual (*layout shift* ou breve flash).
 
 **Conclusão Técnica:** O Modo Grimório **não pode** montar duas ou mais instâncias completas do `PageRenderer` interativo simultaneamente para cada folha em trânsito. A virada física precisa operar sobre **snapshots visuais pré-compostos e leves**, substituindo pelo `PageRenderer` completo somente no repouso da folha ativa.
@@ -164,7 +164,7 @@ A referência técnica apresentada pelo usuário é o repositório [`gul-labs/fl
 | **Licenciamento** | Motor central: **MPL-2.0** (*Mozilla Public License 2.0*); Wrapper React: **MIT**. | Permissivo para uso no projeto, desde que modificações no próprio motor sejam documentadas. |
 
 ### Regra de Ouro: Desacoplamento Absoluto
-O `PageRenderer.tsx` **não deve ser refatorado** para depender do flipbook. O flipbook é um invólucro opcional da casca do aplicativo ([App.tsx](file:///c:/Users/bruno/Middara/Rulebook%20App/apps/web/src/App.tsx)). O leitor poderá alternar livremente entre:
+O `PageRenderer.tsx` **não deve ser refatorado** para depender do flipbook. O flipbook é um invólucro opcional da casca do aplicativo ([App.tsx](../../apps/web/src/App.tsx)). O leitor poderá alternar livremente entre:
 - **Modo Tradicional:** Visualizador técnico atual com zoom focal livre, pan e modo contínuo.
 - **Modo Grimório:** Visualização em livro encadernado de 2 páginas com física de dobra.
 
@@ -226,7 +226,7 @@ graph TD
 #### D. Acessibilidade e Configuração
 - Total respeito à diretriz de acessibilidade `@media (prefers-reduced-motion: reduce)`: neste modo, as viradas 3D e rastros são substituídos por cross-fades discretos.
 - Interruptor dedicado nas preferências do aplicativo para desativar efeitos arcanos mantendo a virada física, ou vice-versa.
-- **Regra de Exportação:** Nenhum elemento arcano, sombra artificial ou overlay dinâmico é incluído no exportador de PDF ([export_page_pdf.mjs](file:///c:/Users/bruno/Middara/Rulebook%20App/scripts/export_page_pdf.mjs)).
+- **Regra de Exportação:** Nenhum elemento arcano, sombra artificial ou overlay dinâmico é incluído no exportador de PDF ([export_page_pdf.mjs](../../scripts/export_page_pdf.mjs)).
 
 ---
 
@@ -324,7 +324,7 @@ A engenharia futura deverá cumprir o seguinte **Orçamento de Recursos (Perform
 A execução deste projeto deve ser dividida em seis etapas sequenciais independentes, garantindo validação a cada marco:
 
 ### Fase 1 — Diagnóstico de Performance e Instrumentação
-- Medir tempos reais de renderização do [PageRenderer.tsx](file:///c:/Users/bruno/Middara/Rulebook%20App/apps/web/src/components/PageRenderer.tsx) página a página (da 1 à 102).
+- Medir tempos reais de renderização do [PageRenderer.tsx](../../apps/web/src/components/PageRenderer.tsx) página a página (da 1 à 102).
 - Mapear quais páginas possuem maior peso de DOM (ex.: páginas com dezenas de símbolos ou tabelas complexas).
 - Instrumentar métricas de memória e decodificação de WebP.
 - *Nenhuma animação ou dependência é adicionada nesta fase.*

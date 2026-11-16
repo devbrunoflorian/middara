@@ -39,11 +39,11 @@ graph TD
 
 2. **Área de Uso Privado Unicode (PUA - `U+E000` a `U+F8FF`):**
    - Fontes de alta tipografia como `EsmeraldaPro` utilizam a PUA para armazenar numerais estilizados em círculos, ligaduras especiais e runas do jogo.
-   - O projeto possui o arquivo [`apps/web/src/assets/pua_mapping.json`](file:///c:/Users/bruno/Middara/Rulebook%20App/apps/web/src/assets/pua_mapping.json) mapeando códigos PUA para nomes de glifos.
+   - O projeto possui o arquivo [`apps/web/src/assets/pua_mapping.json`](../../apps/web/src/assets/pua_mapping.json) mapeando códigos PUA para nomes de glifos.
    - **Risco:** Pontos de código PUA não possuem significado padronizado fora daquela fonte específica. Se o renderizador ou o software externo aplicar outra fonte, o caractere perde seu significado visual e textual.
 
 3. **Símbolos Vetoriais Inline (Semantic Symbols):**
-   - Ícones de mecânica do jogo (dados, corações de HP, escudos de defesa, crânios de perigo) foram catalogados em [`apps/web/src/symbols/sourceSymbols.json`](file:///c:/Users/bruno/Middara/Rulebook%20App/apps/web/src/symbols/sourceSymbols.json) e renderizados como componentes SVG via [`SemanticSymbol.tsx`](file:///c:/Users/bruno/Middara/Rulebook%20App/apps/web/src/symbols/SemanticSymbol.tsx).
+   - Ícones de mecânica do jogo (dados, corações de HP, escudos de defesa, crânios de perigo) foram catalogados em [`apps/web/src/symbols/sourceSymbols.json`](../../apps/web/src/symbols/sourceSymbols.json) e renderizados como componentes SVG via [`SemanticSymbol.tsx`](../../apps/web/src/symbols/SemanticSymbol.tsx).
    - No fluxo de texto do editor, esses símbolos utilizam um caractere marcador de substituição de objeto (`SYMBOL_OBJECT_MARKER = '\uFFFC'`) ou tokens textuais como `[[lightning]]`.
 
 ---
@@ -164,8 +164,8 @@ Quando a investigação for retomada, a validação técnica deverá ser executa
 ## 7. Dependências e Posição no Backlog
 
 - **Dependências Técnicas:**
-  - [Projeto Pendente 04: Exportador do Livro Completo em PDF](file:///c:/Users/bruno/Middara/Rulebook%20App/ROADMAP/pendentes/04-exportador-do-livro-completo-em-pdf.md).
-  - [Projeto Pendente 05: Saída para Gráfica (CMYK, PDF/X e Preflight)](file:///c:/Users/bruno/Middara/Rulebook%20App/ROADMAP/pendentes/05-saida-para-grafica-cmyk-pdfx-preflight.md).
+  - [Projeto Pendente 04: Exportador do Livro Completo em PDF](04-exportador-do-livro-completo-em-pdf.md).
+  - [Projeto Pendente 05: Saída para Gráfica (CMYK, PDF/X e Preflight)](05-saida-para-grafica-cmyk-pdfx-preflight.md).
 - **Prioridade e Momento de Execução:**
   - Esta investigação deve ser iniciada **após a estabilização do motor de exportação de PDF mestre**, mas **antes da certificação final de impressão e distribuição digital do livro**.
 - **Meta Final do Roadmap:**

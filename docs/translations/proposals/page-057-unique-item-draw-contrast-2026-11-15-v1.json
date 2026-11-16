@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "proposalId": "p057-unique-item-draw-contrast",
+  "version": "1",
+  "page": 57,
+  "title": "Preservar purchase/draw em Item Único — p.57",
+  "status": "pending_human_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "pageDom": "3CF03D8F0848718E9811DE43BA96C4E3285DDA079A97ECD34785FAF80E806014",
+    "background": "42F88728516FB23FB1621141D85CD5C6C9BF977D3BA0BD68367974D123A34639",
+    "inlineElements": "E18617DBC0EE0E9028F1CB2B5A3A4F77083C3FCD7895805845DF2AF47FEBE400",
+    "fidelityOverlays": "B5722CFEC2B59F078A45E6F9AF3FA6C1E8EB16FA6EB8791DA54BE5D28D065848"
+  },
+  "sourceArtifacts": [
+    "docs/translations/source-pages/page-057.md",
+    "apps/web/public/pages/page_057/page_057_dom.json",
+    "docs/translations/glossary.md",
+    "docs/translations/proposals/page-057-unique-loot-rules-2026-11-15-v1.json"
+  ],
+  "scopeLimits": [
+    "Esta revisão altera somente a caixa IMPORTANTE da p.57; o desenho e o ícone semântico permanecem intactos.",
+    "Preserva o contraste da fonte entre purchase (comprar) e draw, sem transformar draw em comprar nesta ocorrência.",
+    "A palavra draw permanece provisoriamente em inglês e entre aspas até decisão terminológica; isso não altera a decisão global vigente no glossário.",
+    "O texto-fonte foi conferido na página PDF: diz ‘one of the possible options’; a proposta v1 anterior dizia ‘one of the three to be drawn’ e não deve ser reutilizada como fonte desta revisão.",
+    "Candidato ainda sem medição de copyfit, aprovação editorial ou publicação. Nenhuma tradução publicada foi sobrescrita."
+  ],
+  "counts": {
+    "candidates": 1,
+    "existingHumanTranslationsPreserved": 1,
+    "priorReviewRecordsPreserved": 1,
+    "finalTranslationWrites": 0,
+    "openExceptions": 1
+  },
+  "preservation": {
+    "existingHumanTranslationSpanKeys": [
+      "page_57_block_32__pt-BR"
+    ],
+    "finalTranslationWrites": 0
+  },
+  "terminologyEvidence": {
+    "Purchase": "Comprar, preservando a distinção explícita da fonte nesta caixa.",
+    "Draw": "Pendente nesta ocorrência por instrução do usuário; não substituir por ‘comprar’ nem atualizar o glossário global."
+  },
+  "candidates": [
+    {
+      "blockIndex": 32,
+      "sourceBlockId": "block_79",
+      "spanKey": "page_57_block_32__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "IMPORTANT: If you don't purchase a Unique Item Card and you end up being instructed to draw a Unique Item Card during a future Encounter, you will not shuffle that Unique Item Card in as one of the possible options as it is still for sale back at the store. Furthermore, if you do not purchase this Unique Item, or you decide to sell it, this Unique Item Card is lost and removed from the game for the rest of the Adventure.",
+      "proposalText": "IMPORTANTE: Se você não comprar uma Carta de Item Único e depois receber uma instrução para “draw” uma Carta de Item Único durante um Encontro futuro, não embaralhe essa Carta entre as opções possíveis, pois ela ainda está à venda na loja. Além disso, se você não comprar esse Item Único ou decidir vendê-lo, a Carta de Item Único será perdida e removida do jogo pelo restante da Aventura.",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_57_block_32__pt-BR",
+        "bbox": [
+          421.84210205078125,
+          284.33551025390625,
+          728.9328002929688,
+          362.2955017089844
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "tag.important.icon",
+            "symbolMetrics": {
+              "widthEm": 1,
+              "heightEm": 1,
+              "verticalAlignEm": 0.2
+            },
+            "sourceRendering": "semantic-inline"
+          },
+          {
+            "text": "IMPORTANTE:",
+            "font": "OptimaLTStd-Black",
+            "size": 10,
+            "color": "#b91d23",
+            "weight": 900,
+            "style": "normal",
+            "disableLigatures": true,
+            "textStrokeWidthPt": 2,
+            "textStrokeColor": "#ffffff"
+          },
+          {
+            "text": " Se você não comprar uma Carta de Item Único e depois receber uma instrução para “draw” uma Carta de Item Único durante um Encontro futuro, não embaralhe essa Carta entre as opções possíveis, pois ela ainda está à venda na loja. Além disso, se você não comprar esse Item Único ou decidir vendê-lo, a Carta de Item Único será perdida e removida do jogo pelo restante da Aventura.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": [
+          "tag.important.icon"
+        ]
+      },
+      "technicalStatus": "unmeasured_pending_terminology_review",
+      "editorialStatus": "Draft created after user decision to preserve the purchase/draw contrast; the specific PT term for draw remains pending.",
+      "pendingTerms": [
+        "Draw in this p.57 context: preserve distinction from purchase; PT-BR term remains pending by user instruction."
+      ]
+    }
+  ]
+}

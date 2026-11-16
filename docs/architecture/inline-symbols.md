@@ -1,6 +1,6 @@
 # Símbolos inline: modelo atual
 
-> Este documento explica o modelo e suas evidências. Os requisitos obrigatórios de renderer e semântica ficam nas [rules 03](../../.agents/rules/03-motor-de-renderizacao.md) e [14](../../.agents/rules/14-inline-semantic-elements.md); se houver divergência, use as rules `ACTIVE`.
+> Este documento explica como os símbolos inline preservam identidade, aparência e espaço no texto. Para o fluxo de edição e os critérios de comparação, consulte o [manual do editor](../translations/manual-editor-workflow.md) e os [problemas comuns de layout](../translations/common-layout-issues.md).
 
 ## Identidade versus ocorrência
 
@@ -15,7 +15,7 @@ Cada ocorrência deve manter conceitualmente:
 - âncora de baseline e offset vertical;
 - métricas da linha de texto, independentes da altura de tinta.
 
-A medida vertical do SVG não deve crescer o `line-height` automaticamente. O avanço fonte medido é a referência horizontal. Na p. 40, os dez marcadores A–D medem 9,991–10,000 pt de avanço; suas caixas de 9,996 pt ocupam esse mesmo espaço. O deslocamento sistemático observado no export está no registro [da auditoria](../project-progress/2026-10-07-source-structure-audit-and-doc-consolidation.md).
+A medida vertical do SVG não deve crescer o `line-height` automaticamente. O avanço fonte medido é a referência horizontal; cada ocorrência precisa ser comparada ao símbolo e ao espaçamento vistos no PDF original.
 
 ## Source e tradução
 
