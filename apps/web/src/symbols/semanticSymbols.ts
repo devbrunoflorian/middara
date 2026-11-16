@@ -188,6 +188,11 @@ const PREFERRED_EDITOR_ALIASES: Record<string, string[]> = {
   'marker.reference.b': ['reference-b', 'referencia-b'],
   'marker.reference.c': ['reference-c', 'referencia-c'],
   'marker.reference.d': ['reference-d', 'referencia-d'],
+  'marker.reference.e': ['reference-e', 'referencia-e'],
+  'marker.reference.g': ['reference-g', 'referencia-g'],
+  'marker.reference.h': ['reference-h', 'referencia-h'],
+  'marker.reference.i': ['reference-i', 'referencia-i'],
+  'marker.reference.j': ['reference-j', 'referencia-j'],
   'token.blue-totem': ['blue-totem', 'totem-azul'],
 };
 

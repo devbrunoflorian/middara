@@ -32,6 +32,16 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 
 **Caso verificado:** na p.61, o `tag.passive.icon` da legenda é uma ocorrência semântica inline em texto de 9 pt. A comparação da tinta com o PDF OG mediu cerca de 1,58 pt de espaço à direita (aprox. 0,175 em); dimensões e baseline também foram preservadas. Esse valor pertence à ocorrência p.61 e não deve ser aplicado aos outros usos de `tag.passive`.
 
+## Símbolo inline some porque o asset local não existe ou não foi publicado
+
+**Sintoma:** a página mostra um espaço vazio, um símbolo fallback ou uma imagem quebrada, embora o rich-text e `inline_elements.json` contenham o `symbolId` correto. Um `sourceAssetUrl` pode apontar para um nome temporário de auditoria, para a página errada ou para um arquivo que o Git ignora.
+
+**Como confirmar:** para cada ocorrência, compare o PDF OG, `inline_elements.json` e os segmentos salvos na tradução. Confira `symbolMetrics.sourceAssetUrl` no rich-text além de `metrics.sourceAssetUrl` no sidecar; valide também `mask.url`. Resolva cada URL para a pasta da página, confirme que o arquivo existe e que o servidor do Viewer o entrega. A soma dos desenhos-fonte, o `symbolId` e a geometria devem pertencer à ocorrência correta.
+
+**Correção aprovada:** aponte sidecar e rich-text para o SVG-fonte correspondente à página e à ocorrência, preservando dimensões, avanço, recuo, `gapEm` e identidade visual medidos. Renomeie SVGs e máscaras temporários para nomes duráveis de asset de página; mantenha os nomes de auditoria e evidências privados. Confirme que os arquivos de produto não estão ignorados pelo Git e que todos os destinos referenciados existem antes de salvar ou publicar. Reabra Viewer e PDF exportado para conferir o símbolo no fluxo e a paridade com o OG.
+
+**Caso verificado em 2026-11-16:** a p.64 tinha cinco referências SVG quebradas: dois símbolos `combat.shield` apontavam para um arquivo de auditoria da p.45, e três `stat.armor` apontavam para outro arquivo da p.45. As URLs foram corrigidas no sidecar e nas três traduções salvas correspondentes; o readback confirmou os caminhos da p.64. Na p.65, onze SVGs/máscaras de auditoria foram renomeados para assets duráveis e todos os 14 placements do sidecar agora apontam para arquivos existentes. A rechecagem visual Viewer/PDF dessas páginas continua pendente.
+
 ## Tamanho ou cor de uma fonte diverge do PDF OG
 
 **Sintoma:** um rich-text parece visualmente próximo, mas usa outro tamanho, peso, itálico ou cor em relação ao span correspondente no PDF oficial.
@@ -372,6 +382,14 @@ Quando o número e o início do texto compartilham a primeira linha-fonte, mas a
 **Correção aprovada:** substitua cada campo tipográfico completo como unidade separada (`typographicUnits` no caso abaixo), preservando rich text, tamanho e ênfase próprios. Evite substituir o bloco-pai ou apenas um fragmento que não cubra o campo inteiro. Depois de alterar os IDs de unidade, refaça o copyfit e inspecione a camada sobre o PDF.
 
 **Caso verificado:** na p.43, “Sphere of Influence (SOI)” e “Line of Sight” compartilhavam blocos com seus parágrafos, em tamanhos diferentes. A primeira prévia deixou fragmentos-fonte visíveis; ao mapear os campos tipográficos completos separadamente, a sobreposição desapareceu. As quatro unidades finais mantêm a contagem de linhas da fonte e aparecem limpas no Viewer e no PDF exportado.
+
+## Runs tipográficos internos bloqueiam a edição do parágrafo completo
+
+**Sintoma:** o clique abre só um run do parágrafo (por exemplo, texto regular separado de um número em negrito), embora o texto precise ser traduzido como uma frase contínua. O editor pode mostrar apenas parte da frase, e os demais runs continuam ocupando suas posições na origem.
+
+**Como confirmar:** compare o parágrafo completo do PDF OG com `typographicSpanUnits` no DOM. Se os alvos de clique dos runs cobrem a área inteira, a edição da unidade isolada não é suficiente para comprovar a substituição completa.
+
+**Correção aprovada:** selecione um run e use **Editar bloco inteiro** no editor. Reescreva o conteúdo integral do parágrafo nessa unidade, incluindo os termos e números que o formulário parcial não exibia; associe novamente negrito, itálico, cor e símbolos aos trechos equivalentes. Confira se não restaram fragmentos da origem, repita copyfit e compare OG, Viewer e PDF exportado antes de aplicar o mesmo caminho a outros blocos.
 
 
 ## Override inline encolhe entre trechos-fonte vizinhos

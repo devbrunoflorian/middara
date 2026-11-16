@@ -197,8 +197,14 @@ def reconcile(out,pdf):
                 if p['symbolId'] not in PAINT_VARIANT_IDS:continue
                 ds=doc[p['page']-1].get_drawings();s=normalized_shape(neutral(ds),p['drawingIndices'],p['bbox'])
                 if s:neutral_prototypes.setdefault(s[0],[]).append({**p,'values':s[1]})
-        for n in range(1,103):
-            path=out/f'pages/p{n:03d}/audit.json';a=load(path);dom=load(ROOT/f'apps/web/public/pages/page_{n:03d}/page_{n:03d}_dom.json')
+        audit_paths=sorted((out/'pages').glob('p*/audit.json'))
+        if not audit_paths:
+            raise ValueError('No source audit pages found; run audit_inline_symbol_integrity.py for the target page(s) first.')
+        for path in audit_paths:
+            match=re.fullmatch(r'p(\d{3})',path.parent.name)
+            if not match:
+                continue
+            n=int(match.group(1));a=load(path);dom=load(ROOT/f'apps/web/public/pages/page_{n:03d}/page_{n:03d}_dom.json')
             ds=doc[n-1].get_drawings()
             for c in a['candidates']:
                 if (fitz.Rect(c['bbox']) & doc[n-1].rect).is_empty:
@@ -264,6 +270,9 @@ def prepare(out,pdf,report,selected_pages=None):
             dest=root/f'pages/page_{n:03d}';dest.mkdir(parents=True,exist_ok=True)
             dom=load(canonical/f'page_{n:03d}_dom.json');original=load(canonical/'inline_elements.json',{'schemaVersion':1,'elements':[]});sidecar=copy.deepcopy(original)
             dump(dest/'inline_elements.before.json',original);page=source[n-1];mask_page=masks[n-1];ds=page.get_drawings();paint_bounds=page.get_bboxlog()
+            with Image.open(canonical/'background.webp') as background:
+                grid=background.size
+            scale_x=grid[0]/page.rect.width;scale_y=grid[1]/page.rect.height
             pending=[]
             for c in targets:
                 box=fitz.Rect(c['bbox']);anchor=copy.deepcopy(c['anchor']);covered=None;paths=[]
@@ -282,14 +291,18 @@ def prepare(out,pdf,report,selected_pages=None):
                 # source PDF rounding. Metrics still compare in point space.
                 metrics=dict(widthEm=box.width/size,heightEm=box.height/size,advanceEm=box.width/size,
                     verticalAlignEm=(box.y1-baseline)/size,sourceAssetUrl=f'/pages/page_{n:03d}/{name}',sourceAppearanceKey=appearance_key(page,ds,c,box,covered,dom),renderVariant='audit-source-'+sha(dest/name)[:12])
-                maskbox=box+(-.75,-.75,.75,.75);maskbox=fitz.Rect(math.floor(maskbox.x0*4)/4,math.floor(maskbox.y0*4)/4,math.ceil(maskbox.x1*4)/4,math.ceil(maskbox.y1*4)/4)
+                maskbox=box+(-.75,-.75,.75,.75)
+                left=max(0,math.floor(maskbox.x0*scale_x));top=max(0,math.floor(maskbox.y0*scale_y))
+                right=min(grid[0],math.ceil(maskbox.x1*scale_x));bottom=min(grid[1],math.ceil(maskbox.y1*scale_y))
+                maskpixels=(left,top,right,bottom)
+                maskbox=fitz.Rect(left/scale_x,top/scale_y,right/scale_x,bottom/scale_y)
                 maskname=f'audit-mask-{c["id"]}.png';element=dict(symbolId=c['symbolId'],sourceRendering='semantic-inline',bbox=list(box),anchor=anchor,metrics=metrics,
                     drawingIndices=c.get('drawingIndices',[]),mask=dict(url=f'/pages/page_{n:03d}/{maskname}',bbox=list(maskbox)),
                     provenance=dict(auditId='full-symbol-integrity-2026-10-13',candidateId=c['id'],sourcePdfSha256=report['sourcePdfSha256'],
                         sourceObjects=c.get('drawingIndices') or {'xref':c.get('xref'),'digest':c.get('imageDigest')},assetSha256=sha(dest/name),baselinePt=baseline))
                 if covered:element['coveredSourceText']=covered
                 if c['kind']=='image':element['coveredSourceTexts'],element['sourceTextCompanions']=image_text_contract(page,c,dom)
-                sidecar['elements'].append(element);pending.append((c,element,maskbox,maskname))
+                sidecar['elements'].append(element);pending.append((c,element,maskpixels,maskname))
             # The working copy loses text only; then exact confirmed shapes are
             # removed if fully covered. Neighboring large backgrounds stay.
             mask_page.add_redact_annot(mask_page.rect,fill=None);mask_page.apply_redactions(images=0,graphics=0,text=0)
@@ -308,14 +321,15 @@ def prepare(out,pdf,report,selected_pages=None):
                         seq=ds[i]['seqno'];removal |= fitz.Rect(paint_bounds[seq][1])
                         if ds[i]['type']=='fs' and seq+1<len(paint_bounds) and paint_bounds[seq+1][0]=='stroke-path':removal|=fitz.Rect(paint_bounds[seq+1][1])
                     mask_page.add_redact_annot(removal+(-.2,-.2,.2,.2),fill=None);mask_page.apply_redactions(images=0,graphics=1,text=1)
-            pix=mask_page.get_pixmap(matrix=fitz.Matrix(4,4),alpha=False);clean=Image.frombytes('RGB',(pix.width,pix.height),pix.samples)
-            for c,e,box,name in pending:
-                clean.crop(tuple(round(v*4) for v in box)).save(dest/name)
+            pix=mask_page.get_pixmap(matrix=fitz.Matrix(scale_x,scale_y),alpha=False);clean=Image.frombytes('RGB',(pix.width,pix.height),pix.samples)
+            if clean.size!=grid:raise ValueError(f'Source cleanup grid {clean.size} differs from background grid {grid}')
+            for c,e,pixels,name in pending:
+                clean.crop(pixels).save(dest/name)
                 e['provenance']['maskSha256']=sha(dest/name)
             dump(dest/'inline_elements.json',sidecar)
             plan.append(dict(page=n,originalSidecarSha256=sha(canonical/'inline_elements.json') if (canonical/'inline_elements.json').exists() else None,
                 domSha256=sha(canonical/f'page_{n:03d}_dom.json'),preparedSidecarSha256=sha(dest/'inline_elements.json'),
-                preparedPath=str(dest.relative_to(ROOT)),newPlacementCount=len(pending),candidateIds=[c['id'] for c,_,_,_ in pending],
+                preparedPath=str(dest.relative_to(out)),newPlacementCount=len(pending),candidateIds=[c['id'] for c,_,_,_ in pending],
                 blockedCanonicalWrite='The user requires review before canonical sidecar overwrite; this generator has no apply mode.'))
             print(json.dumps({'preparedPage':n,'placements':len(pending)},ensure_ascii=False),flush=True)
     plan.sort(key=lambda p:p['page'])

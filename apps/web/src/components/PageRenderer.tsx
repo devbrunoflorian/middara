@@ -2748,6 +2748,20 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
         return blockKey === selectedSpan.spanKey;
       })
     : undefined;
+  const selectedUnitParentInfo = (() => {
+    const unitPrefix = `page_${pageData.page_number}_unit_`;
+    if (!selectedSpan?.spanKey.startsWith(unitPrefix)) return null;
+    const unitId = selectedSpan.spanKey.slice(unitPrefix.length).replace(/__(?:pt-BR|en)$/u, '');
+    const blockIndex = pageData.blocks.findIndex(block =>
+      block.typographicSpanUnits?.some(unit => unit.id === unitId)
+      || block.typographicUnits?.some(unit => unit.id === unitId),
+    );
+    if (blockIndex < 0) return null;
+    const block = pageData.blocks[blockIndex];
+    if (block.adminReadOnly) return null;
+    const blockKey = block.editorKey ?? `page_${pageData.page_number}_block_${blockIndex}`;
+    return extractBlockInfo(blockKey, block);
+  })();
   const selectedExistingOverride = selectedSpan
     ? experimentalEditorMode
       ? experimentalEditorOverrides?.get(selectedSpan.spanKey) ?? null
@@ -3060,6 +3074,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           symbolAliasPreferences={symbolAliasPreferences}
           onPaletteEditorChange={onPaletteEditorChange}
           headerAccessory={editorHeaderAccessory}
+          parentBlockAction={selectedUnitParentInfo && !experimentalEditorMode && !proposalReviewSelectionKey
+            ? { label: 'Editar bloco inteiro', onActivate: () => handleSpanClick(selectedUnitParentInfo) }
+            : undefined}
           onToggleLanguage={onToggleLanguage}
           sessionOnly={experimentalEditorMode}
           persistentDraftMode={Boolean(experimentalEditorMode && proposalReviewSelectionKey)}
