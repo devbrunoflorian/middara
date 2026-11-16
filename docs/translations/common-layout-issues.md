@@ -30,11 +30,23 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 
 **Caso verificado:** na p.39, `terrain.red-border` em Optima 10 pt tem avanço semântico de 2,0575 em; a distância entre a tinta do texto e a tinta da linha vermelha é 5,8427 pt à esquerda e 4,1623 pt à direita. O rich-text conserva espaços reais nos dois lados. Nos três callouts `IMPORTANT`, o símbolo começa sem vão adicional até o rótulo; o texto do corpo conserva o espaço literal que a fonte mostra, com 2,4097 pt ou 2,7796 pt entre a tinta do rótulo e a primeira letra, conforme a ocorrência. Esses valores descrevem somente as unidades medidas na p.39.
 
+**Caso verificado:** na p.61, o `tag.passive.icon` da legenda é uma ocorrência semântica inline em texto de 9 pt. A comparação da tinta com o PDF OG mediu cerca de 1,58 pt de espaço à direita (aprox. 0,175 em); dimensões e baseline também foram preservadas. Esse valor pertence à ocorrência p.61 e não deve ser aplicado aos outros usos de `tag.passive`.
+
 ## Tamanho ou cor de uma fonte diverge do PDF OG
 
 **Sintoma:** um rich-text parece visualmente próximo, mas usa outro tamanho, peso, itálico ou cor em relação ao span correspondente no PDF oficial.
 
 **Como confirmar:** compare os spans reais do PDF (família, tamanho em pontos, cor, peso/itálico e contorno, quando houver) com cada segmento rich-text da unidade. Mantenha separados o preenchimento da letra, os traços e os elementos decorativos; não use uma captura ampliada como medida de tamanho nem classifique uma reconstrução semântica como divergência sem conferir sua aparência final.
+
+**Verificação obrigatória durante a tradução:** ao redigir ou revisar cada unidade, associe cada trecho em negrito ou itálico do OG à frase correspondente em PT-BR. A redação pode mudar, mas a ênfase não deve sumir nem se espalhar para palavras vizinhas. Confira segmentos rich-text, raster OG, Viewer e PDF; não deixe essa checagem para uma auditoria posterior. Para títulos, valide também tamanho, cor, família e a âncora de alinhamento.
+
+**Checklist obrigatório por página:** enquanto avança unidade a unidade e novamente antes de encerrar a página, compare os runs de negrito/itálico com o OG e confira cada título pelo eixo correspondente ao alinhamento-fonte: início X para títulos à esquerda, centro da tinta/eixo para títulos centralizados e borda final para títulos à direita. Não use um X fixo como padrão universal nem confira apenas a largura da moldura; meça a âncora real do OG (em alguns títulos, perto de X=112 pt). Registre família, peso, tamanho e cor. Se texto, frame, recuo ou estilo mudar, repita Copyfit e confira Viewer/PDF. Uma tradução aprovada antes não dispensa comparar a página visivelmente com o OG.
+
+**Autoridade visual:** metadados extraídos do PDF (nome de fonte, flags ou pesos dos spans) não bastam quando divergem da aparência renderizada. Compare o raster do PDF OG diretamente ao Viewer e ao PDF PT-BR final; consulte também `renderWeightOverride`/estilos-fonte do PageRenderer. Quando a extração diz regular, mas o OG renderizado está visivelmente em negrito, preserve o negrito visual e registre a divergência da extração. Não declare fidelidade com base apenas na família nominal ou num screenshot ampliado.
+
+**Auditoria técnica na p.56 (página ainda não certificada):** no exemplo `page_56_block_11`, a formulação PT-BR ocupava 3 linhas contra 2 no OG. O texto foi encurtado sem reduzir a fonte e passou a 2/2 linhas em 100% e 200%; `Exemplo:` e os números 2 e 4 mantêm o negrito do OG. Os 21 candidatos da página estão EXACT no Copyfit V3 em ambos os zooms. O título `Combatentes` mantém Cinzel 30 pt, cor `#231f20` e o centro do eixo OG (diferença medida inferior a 0,15 pt). Esta medição é do PageRenderer de proposta; a conferência da página inteira e do PDF exportado continua pendente.
+
+**Também verificado na p.55:** a auditoria das 14 unidades encontrou `Spell-Like Ability's` em negrito itálico no OG, mas `Habilidade Semelhante a Feitiços` estava em peso regular e sem itálico. O estilo foi restaurado no rich-text; o bloco permaneceu em 2/2 linhas em 100% e 200%. Os runs de ênfase restantes foram conferidos contra a fonte, inclusive valores numéricos e o itálico de `Great Hammer`/`Paralyze`; Viewer e PDF final confirmam a correção. A prosa editável ficou localizada, enquanto o texto impresso da carta continua em inglês por decisão do usuário.
 
 **Correção aprovada:** ajuste somente os segmentos divergentes para as medidas da fonte e repita o copyfit. Confira o resultado no Viewer e no PDF exportado, incluindo caixas, símbolos, clipping e colisões. Uma conferência local não certifica conversão global de perfis CMYK/sRGB nem outras páginas.
 
@@ -42,8 +54,31 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 
 **Caso verificado:** na p.39, 22 unidades e 124 spans de texto do PDF foram comparados por família, tamanho, cor, peso e itálico; não houve falhas de associação geométrica nem divergência de estilo no rich-text final. Um draft deixava `Derrotaria` em Optima Bold 10 pt, embora o OG use Optima regular 10 pt em `#231f20`; o peso foi restaurado. O título `Espaços Adjacentes` mantém Cinzel-Regular 18 pt, branco, peso 700, igual ao cabeçalho OG. A comparação local não certifica a conversão global CMYK/sRGB.
 
+**Também verificado na p.46:** o rótulo `IMPORTANTE:` do box inferior estava em preto. O OG usa `#b91d23` com traço branco de 2 pt; o segmento foi corrigido sem mexer no corpo escuro, no símbolo nem na caixa. A unidade permaneceu em 2/2 linhas. A tradução (#669) e a publicação da revisão (#802) divergiam; a revisão foi sincronizada pelo endpoint canônico e a cor anterior ficou em `publication.history`. Viewer e PDF exportado atuais foram conferidos contra o OG, com `pdfVerification=true`.
+
+**Também verificado na p.57:** a comparação direta dos rasters OG/PT revelou que os títulos `Saque Único:`, `Saque de Monstro:`, `Saque de Item:` e `Combatentes com o Mesmo Nome` estavam visualmente leves demais no PT-BR. A extração registra Cinzel-Regular 12 pt, mas a aparência do OG e o `renderWeightOverride: 700` confirmam o peso visual; restaurei `weight: 700`, sem alterar família, tamanho, cor, texto ou âncoras. As âncoras esquerdas PT coincidem com OG: X=421,842 pt, 416,173 pt, 416,173 pt e 86,173 pt. O X≈112 pt observado em outros títulos continua sendo apenas uma medida local, não uma regra global. Os quatro cabeçalhos ficaram EXACT 1/1 em 100% e 200%. No corpo de `Saque de Item`, `BRANCOS` (8,8477 pt) e `LVL` (9 pt) mantêm o negrito do OG; `LVL` permanece sigla conforme glossário, e `dice.white` foi preservado. Esse bloco ficou EXACT 4/4 nos dois zooms. Também foi traduzido o parágrafo de abertura dos Ícones Compartilhados; os rótulos `INTELLIGENT` e `COMMAND` ficaram em inglês com cores, contorno e peso do OG, e o parágrafo manteve 4/4 linhas. A primeira correção baseada apenas no nome de fonte foi rejeitada após o raster mostrar a diferença; a revisão visual corrigida foi publicada com históricos anteriores preservados. Viewer e PDF final foram conferidos. Na primeira passagem, a página ainda não estava certificada porque a seção Saque Único aguardava tradução; o status abaixo registra o fechamento dessa pendência.
+
+**Fechamento verificado da p.57 (2026-11-15):** a prosa editável restante de Saque Único foi publicada nas traduções #1990–1995 / reviews #1680–1685; Copyfit V3 EXACT por unidade (3/3, 5/5, 3/3, 2/2, 7/7 e 2/2 linhas). A comparação completa OG/Viewer/print confirmou os quatro cabeçalhos com peso 700 e âncoras alinhadas, runs de ênfase correspondentes, símbolo semântico no callout, ausência de clipping/colisões visíveis e fólio 57. A exportação v4 tem 48 line rects no Viewer e no print, 4 símbolos e 12 imagens; verifiedTranslationRecords=true e pdfVerification=true. Payload: 31 traduções, 27 reviews ativas aprovadas EXACT e quatro supersedidas arquivadas EXACT; não há exceção aberta na fila para a p.57. Toda a prosa editável da página está em PT-BR. A arte de cartas e os rótulos impressos nela permanecem em inglês por decisão do usuário. Ver recibos em page-057-unique-loot-rules-2026-11-15-v1.json e o relatório de progresso.
+
+**Também verificado na p.77:** os três parágrafos PT-BR no painel marrom tinham `#231f20`, mas os blocos-fonte correspondentes usam branco (`0xffffff`). Corrigi somente a cor dos segmentos nos registros 1480–1482 para `#FFFFFF`, preservando texto, runs, tamanho Optima 10 pt e frames. As unidades mantiveram 5/5, 8/8 e 7/7 linhas; a exportação final mostra contraste correspondente ao OG e passou `verifiedTranslationRecords=true` e `pdfVerification=true`. Backup anterior: `C:\Users\bruno\engineering-labs\planning\engineering-decisions\evidence\2026-11-15-bullet-audit\p077-colors-before-fix.json`.
+
 
 **Diferença de renderização observada na p.49 (ainda sem causa isolada):** runs regulares do OG e do Viewer usam OptimaLTStd 10 pt; os segmentos medidos no Viewer declaram peso 400, mas o raster do Viewer aparenta corpo mais pesado que o raster do PDF OG, tanto em EN quanto em PT-BR. A tradução mantém tamanho, peso e cor registrados na fonte; não compense localmente com peso menor. Mantenha a fidelidade de peso em aberto até comparar o programa de fonte usado no PDF, os arquivos locais e a rasterização do renderer.
+
+## Título PT-BR fica à esquerda apesar de o título OG ser centralizado
+
+**Sintoma:** o título traduzido começa no X esquerdo da moldura e perde o eixo central do cabeçalho, embora a moldura tenha sido ampliada para caber a tradução.
+
+**Como confirmar:** use o ID do bloco-fonte para localizar o sidecar e o `textAlign` salvo na tradução. O ID de origem pode diferir do índice usado pelo `spanKey` do editor; confira qual campo o loader realmente usa. Compare o centro da tinta do título OG, o centro da moldura PT-BR e a regra de precedência entre `translation.textAlign` e `layoutFrame.textAlign`.
+
+**Correção aprovada:** preserve uma moldura local PT-BR que caiba o título e mantenha seu centro no eixo do OG; grave também `textAlign: center` nos dados ricos quando um `textAlign: left` explícito da tradução sobrepuser a moldura. Não mude o alinhamento global nem a geometria-fonte EN. Meça novamente o copyfit, confira Viewer e PDF PT-BR e confirme que o título EN continua em geometria-fonte.
+
+**Caso verificado:** na p.54, `Conjurar Feitiços` herdava `textAlign: left`, apesar de o OG centralizar `Casting Spells`. O `spanKey` PT-BR usa `block_42`, mas `layout_frames.json` associa o frame ao ID-fonte `block_158`; uma tentativa com a chave errada não chegou ao renderer e foi descartada. O frame PT-BR final vai de X=84,972 a 730,473 pt, centralizado no mesmo eixo do OG (X=407,722 pt); o centro medido do texto exportado ficou a 0,01 pt desse eixo. A tradução agora usa alinhamento central, mantém Cinzel 18 pt, peso 700 e branco, e mede 1/1 linha. EN/PT-BR foram exportados contra o PDF oficial e a página PT-BR passou `pdfVerification=true`.
+
+**Também verificado na p.55:** o título `Usando Habilidades Semelhantes a Feitiços` está centralizado no eixo OG X=409,772 pt, com moldura PT-BR X=120 pt, largura=579,543 pt e `textAlign: center`. Cinzel 18 pt, peso 700 e branco foram preservados; Copyfit ficou em 1/1 linha em 100% e 200%. O export EN/PT-BR confirmou o mesmo eixo no Viewer e no PDF; ambos passaram `pdfVerification=true`.
+
+**Também verificado na p.59:** o subtítulo `Ex. 1: Combatente de Comando` mantinha a fonte, o peso, o tamanho e a cor do OG, mas `textAlign: left` deixava a versão curta deslocada. A linha-fonte está centrada em X=410,173 pt. Aplicar `textAlign: center` dentro da mesma bbox centralizou o texto exportado em X=410,231 pt (diferença de 0,057 pt), sem mexer na geometria EN; Copyfit V3 ficou EXACT 1/1 em 100% e 200%.
+
 ## Cabeçalho traduzido excede a largura do texto original
 
 **Sintoma:** um título localizado corretamente ocupa mais largura que o texto inglês e quebra, encosta nos ornamentos ou parece desalinhado quando reutiliza apenas a caixa estreita dos glifos da fonte.
@@ -95,7 +130,45 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 
 **Casos verificados:** na p.19, o exemplo ganhou sua própria moldura e o texto “Surgimento” mediu 6 linhas na fonte e 6 em PT-BR. Na p.22, os dois exemplos mantiveram os 18 pt de recuo e o bloco mediu 32 linhas na fonte e 32 em PT-BR; o PDF exportado foi conferido visualmente.
 
+**Revalidado na p.18 (2026-11-15):** no item numerado 4, o marcador está em X=86,17 pt e o corpo/continuação em X=104,17 pt (18 pt). A versão PT-BR atual ocupa 2 linhas, igual à fonte; “38.” permanece na segunda linha e o parágrafo seguinte não colide. Viewer e PDF exportado confirmam o recuo. O alerta antigo de 3/2 linhas descreve uma versão anterior; a review #27, embora aprovada, ainda não foi sincronizada com a tradução atual #331.
+
 **Também conferido na p.53:** o marcador de cada bullet é desenhado numa coluna de recuo separada; por isso, o `textContent` do DOM pode expor `•Itens` sem um espaço literal, embora a distância visual do corpo esteja correta. Normalize o separador somente na comparação de texto da validação de exportação; não insira um espaço no conteúdo PT-BR sem que ele exista na fonte. Viewer e print mantiveram os bullets e as continuações alinhados.
+
+## Continuação de item de lista após quebra de bloco-fonte perde recuo
+
+**Sintoma:** um bloco-fonte termina no meio de um item de lista e o seguinte começa com texto sem marcador. No PT-BR, esse primeiro parágrafo pode voltar ao X da margem/marcador, mesmo que o restante dos bullets use o recuo suspenso corretamente.
+
+**Como confirmar:** no PDF OG, verifique se o trecho inicial continua o item anterior e meça seu X em relação ao X do marcador e do corpo. Depois compare o primeiro parágrafo do bloco PT-BR e as linhas seguintes no Viewer/PDF. Não mova a moldura inteira se o mesmo bloco também contém novos bullets.
+
+**Correção aprovada:** registre o recuo medido apenas para o índice do parágrafo de continuação em `flowParagraphIndentsPt` no sidecar da página. Deixe os marcadores e os parágrafos de novos itens no fluxo original. Refaça copyfit porque o recuo reduz a largura disponível; confira o texto e as continuações depois de salvar/recarregar e exportar.
+
+**Caso verificado na p.77 (2026-11-15):** o primeiro parágrafo de `block_199` continua o item que começa em `block_198`. O corpo-fonte está em X=103,71 pt e a margem/marcador em X=85,71 pt. O PT-BR começava essa continuação em X=85,70 pt; `flowParagraphIndentsPt: { "0": 18 }` corrigiu somente o primeiro parágrafo. Ele continua em uma linha; os 11 bullets seguintes mantêm marcadores em X=85,70 pt e corpo/continuações em X=103,69 pt. A unidade preservou 32 linhas; Viewer e PDF exportado coincidem e passaram `verifiedTranslationRecords=true` e `pdfVerification=true`. Evidências privadas: `C:\Users\bruno\engineering-labs\planning\engineering-decisions\evidence\2026-11-15-bullet-audit\p077-indent-fix-*`.
+
+## Corpo de item numerado perde o recuo suspenso
+
+**Sintoma:** depois de traduzir ou aplicar uma moldura local, o primeiro trecho do corpo começa junto ao número/bullet, e as linhas seguintes voltam à margem do marcador. A lista parece desalinhada mesmo quando o texto cabe na página.
+
+**Como confirmar:** no PDF OG, meça separadamente o X do marcador e o X do texto do item. Compare também o bbox do texto impresso com `field.frame`/moldura aplicado pelo renderer: o frame fonte pode começar na coluna do marcador, embora o corpo tenha um inset próprio. Confira no Viewer PT-BR e no PDF exportado se o marcador continua em sua camada e se cada continuação usa o X do corpo.
+
+**Correção aprovada:** salve uma moldura PT-BR com o início do corpo no X real da fonte, mantendo a borda da coluna quando couber. Mova o marcador de modo independente usando `listMarkerIndentPt`; valores negativos são válidos quando o marcador deve ficar à esquerda da moldura, e valores positivos quando precisa avançar. Não mude a geometria EN nem aplique o deslocamento a outras listas sem comprovar a mesma estrutura.
+
+Quando o número e o início do texto compartilham a primeira linha-fonte, mas as continuações começam em outro X, confira se a extração reconheceu o recuo. Se não reconheceu, salve `listMarkerIndentPt` e `hangingIndentPt` só nessa tradução, medidos a partir do X da moldura. Isso ativa o fluxo numerado e mantém o marcador separado do corpo; preserve a moldura e os runs ricos quando eles já correspondem à fonte. Não deduza 18 pt por padrão: meça a distância OG em cada caso.
+
+**Copyfit obrigatório após o recuo:** a redução de largura pode criar quebras e colisões verticais. Refaça a medição, preserve os estilos e símbolos ricos e só então ajuste localmente o texto ou a largura disponível. Compare a quantidade/posição de linhas, excesso das bordas, distância até o item seguinte, Viewer e print em 100%/200%.
+
+**Casos verificados:** na p.24, as molduras dos oito itens foram alinhadas ao corpo; os marcadores das duas colunas foram movidos separadamente. O primeiro item e Armadura ficaram em 2 linhas cada; os demais, em 1 linha. Na p.41, seis unidades tiveram o frame deslocado em 14,17 pt até o X do corpo-fonte; com o copyfit, ficaram em 2/2, 4/4, 3/3, 4/4, 3/3 e 4/4 linhas. Viewer e PDF final foram comparados ao OG sem colisões; a linha mais larga recebeu 1,5 pt de largura adicional para remover o excesso medido de 0,48 pt.
+
+**Também verificado na p.56 (2026-11-15):** os blocos 12 e 13 imprimem `1.`/`2.` e texto na mesma primeira linha, mas têm continuações fonte 18 pt à direita. Como o marcador inline não fornecia indentação automática ao renderer, as traduções 796 e 1247 receberam `listMarkerIndentPt: 0` e `hangingIndentPt: 18`. Viewer e print mantêm 3/3 linhas; X do marcador = 86,17 pt e X das continuações = 104,17/104,16 pt, contra 86,17/104,17 pt no OG. A entrelinha print local foi calibrada para 1,13: o excesso inferior caiu de 2,31 pt para 0,15 pt, sem colisão com o texto seguinte. `verifiedTranslationRecords` e `pdfVerification` passaram. Evidências privadas: `C:\Users\bruno\engineering-labs\planning\engineering-decisions\evidence\2026-11-15-bullet-audit\`.
+
+## Marcador se desloca quando a moldura PT-BR é salva
+
+**Sintoma:** a prévia de revisão mostra o marcador no X do PDF e o texto no início do corpo, mas, depois de salvar a moldura, o marcador pula para junto do corpo ou fica sobre a primeira palavra. O caso aparece quando o PDF extrai o marcador e o corpo como linhas-fonte separadas na mesma linha visual.
+
+**Como confirmar:** confira no PDF oficial o X da tinta do marcador, o X do primeiro glifo do corpo e o baseline. No Viewer, verifique separadamente a moldura PT-BR salva, a linha do marcador (`data-list-marker-line`) e o início real do texto. Uma prévia correta no Reviewer não prova que a moldura persistida use a mesma âncora. Não use o X da caixa total do bloco como X do corpo.
+
+**Correção reutilizável:** salve a moldura traduzida com o corpo no X-fonte do texto e largura até a borda segura da coluna. A linha do marcador deve permanecer ancorada no X original do PDF; mudanças intencionais no X do marcador são feitas separadamente por `listMarkerIndentPt`. Depois do save/reload, confira primeira linha e continuações, recalcule copyfit e exporte Viewer e PDF. Valide também uma lista de outra coluna antes de tratar a regra como comum; não deslocar a moldura inteira para o X do bullet.
+
+**Caso verificado nas pp.86–87 (2026-11-15):** na p.86, o PDF coloca marcadores em X=86,17 pt e o corpo em X=104,17 pt. Seis molduras persistidas haviam sido salvas no X do marcador; isso anulava a separação correta que a prévia de revisão mostrava. O renderer agora mantém o marcador na âncora fonte ao mover a moldura PT. As seis molduras usam X=104,17 pt, largura 302,83 pt e borda direita X=407,00 pt; bullets/continuações voltaram ao recuo de 18 pt. Os itens mantêm as linhas medidas no Copyfit V3 (o primeiro item 2/2; os outros alvos 1/1), sem colisão visível no Viewer nem no print. Reexportei a p.87 como contraexemplo de coluna direita: os marcadores permanecem no X da fonte (415,61 pt), os corpos no X=433,61 pt, e os 27 retângulos de linha continuam sem colisão. Evidências privadas: `C:\Users\bruno\engineering-labs\planning\engineering-decisions\evidence\2026-11-15-bullet-audit\p086-anchor-fix-*` e `p087-anchor-fix-*`.
 
 ## Item de lista traduzido invade o item seguinte
 
@@ -103,9 +176,11 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 
 **Correção aprovada:** meça as linhas reais e aumente apenas a moldura PT-BR até cobrir o conteúdo. Reposicione os itens seguintes e o parágrafo livre usando as caixas medidas; mantenha a arte e os callouts na posição fonte. Preserve a redação e o tamanho tipográfico quando couberem com esse reflow. Repita o copyfit e confira a área disponível antes do próximo box.
 
-**Caso verificado:** na p.24, “1 ARMADURA + 1 Aprimoramento de Armadura” ocupa duas linhas, como pede o português. A moldura PT cresceu para 22,92 pt; os itens seguintes e o parágrafo abaixo foram deslocados para evitar colisão. A redação e a arte dos quadros foram preservadas. Viewer e PDF exportado ficaram sem sobreposição; a unidade mede duas linhas nos dois.
+**Caso verificado:** na p.24, “1 ARMADURA + 1 Aprimoramento de Armadura” ocupa duas linhas, como pede o português. A moldura PT cresceu para 22,92 pt; os itens seguintes e o parágrafo abaixo foram deslocados para evitar colisão. A redação e a arte dos quadros foram preservadas. Viewer e PDF exportado ficaram sem sobreposição; a unidade mede duas linhas nos dois. Na mesma página, cada marcador foi ajustado independentemente do frame do corpo, para evitar sobreposição e manter o alinhamento das continuações.
 
 **Também verificado na p.27:** medir cada linha da lista separadamente. Os seis itens ficaram em 3/3, 3/3, 1/1, 2/2, 1/1 e 1/1 linhas fonte/PT. O primeiro item mantinha 3 linhas, mas excedia o frame em 2,62 pt; uma revisão curta preservou a regra e a paridade. A maior linha final mede 286,86 pt num frame de 292,38 pt, sem escape horizontal ou colisão no Viewer/print.
+
+**Também verificado na p.87:** as molduras fonte de uma coluna em duas colunas começam em X=415,61 pt, mas os rótulos da lista e os corpos começam em X=433,61 pt. As molduras PT-BR dos blocos 10–20 haviam usado o X da coluna do marcador, comprimindo o corredor e somando quebras. Corrigi as 11 molduras locais para X do corpo (433,61 pt), mantendo a borda direita-fonte X=736,45 pt. Comparei cada primeira linha e continuação com o OG e recoloquei o Y de cada frame para alinhar a primeira linha ao texto-fonte (diferença Viewer <0,02 pt; print <0,13 pt). Os itens agora medem 2, 3, 3, 4, 4, 5, 3, 2, 1, 8 e 2 linhas, igual ao OG. Os três antigos OVER (blocos 10/18/19) foram refraseados sem remover regra, condição ou rich text; Copyfit V3 passou EXACT a 100% e 200%. Reviews existentes 590/598/599 e traduções 1873/1874/1875 foram atualizadas pelo fluxo oficial; os textos anteriores estão em `publication.history`. Viewer e PDF exibem 27 retângulos de linha, sem colisão nem invasão do fólio; `verifiedTranslationRecords=true` e `pdfVerification=true`. A p.87 ainda não está certificada integralmente. Evidências privadas: `C:\Users\bruno\engineering-labs\planning\engineering-decisions\evidence\2026-11-15-bullet-audit\`.
 
 ## Parágrafo traduzido invade uma referência ou unidade seguinte
 
@@ -144,6 +219,8 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 **Também verificado na p.36:** sete unidades mantinham a contagem de linhas da fonte, mas ultrapassavam horizontalmente seus frames entre 0,49 e 2,62 pt. Revisamos a redação sem mudar os frames nem remover informação: parágrafos 2–3, itens 2–4 e exemplos 1–2. As contagens finais fonte/PT-BR são 5/5, 3/3, 5/5, 5/5, 4/4, 2/2 e 3/3, confirmadas a 100% e 200%. Viewer e print não mostram excesso à direita; a unidade mais apertada termina em 299,03 pt num frame de 301,50 pt. Export final verificado com `pdfVerification=true`.
 
 **Também verificado na p.46:** o bloco `page_46_block_1__pt-BR` tinha uma linha 2,54 pt maior que a moldura, apesar de manter 3/3 linhas. Como havia espaço real dentro da coluna marrom e a redação aprovada estava semanticamente correta, ampliei apenas o frame PT-BR de 285,109 para 290 pt (Payload id 74). O texto continuou em 3/3 linhas; a linha mais larga mede 288,55 pt no Viewer e 288,50 pt no print, sem excesso. A moldura termina antes da arte e não altera a unidade seguinte.
+
+**Também verificado na p.48:** três caixas PT-BR ultrapassavam a largura salva sem mudar o número de linhas. Ampliei somente as molduras locais: bloco 12 para 312,224 pt, bloco 24 para 294,321 pt e bloco 34 para 287,786 pt (Payload ids 103, 105 e 104). As unidades continuam em 7/7, 4/4 e 6/6 linhas; Viewer e print ficaram sem excesso horizontal. A ampliação do bloco 24 foi limitada ao espaço disponível dentro do box, sem alterar símbolos ou redação.
 
 ## Texto curto deixa uma lacuna antes do próximo bloco fixo
 
@@ -215,6 +292,7 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 
 
 **Também verificado na p.49:** os dois boxes `IMPORTANTE` usam corpo Optima 10 pt `#231f20`, rótulo vermelho `#b91d23` com contorno branco e o símbolo semântico `tag.important.icon`. Uma primeira prévia havia herdado branco da coluna e perdeu contraste; a comparação com o OG detectou a diferença. A cor foi corrigida nos segmentos do corpo, sem alterar o box ou o ícone. Copyfit final: 6/6 e 2/2 linhas; Viewer e PDF exportado foram conferidos.
+
 ## Símbolo inline do PDF não aparece na camada de texto
 
 **Sintoma:** uma regra menciona um ícone, mas o texto extraído não contém símbolo semântico e o Viewer omite o desenho, embora o PDF oficial mostre o ícone entre palavras.
@@ -230,6 +308,28 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 **Também verificado na p.45:** os dois ícones `stat.defense` começam no fim do espaço literal antes do rótulo; a fonte registra `gapPt: 0`, avanço de 1,0651 em e o segmento seguinte conserva um espaço literal. A tradução mantém esse espaço antes e depois dos objetos inline; não acrescentamos margem automática. Os ícones acompanham “Valor de Defesa” no fluxo e a unidade continua EXACT 5/5 linhas.
 
 **Também verificado na p.52:** nove ocorrências de `dice.black` vinham sem o espaço tipográfico literal que a fonte mantém entre `PRETO` e o ícone. O PDF separa esse espaço em um run Optima regular de 9 pt; os `gapPt` residuais de aproximadamente 0,361 pt (Esquiva) e 0,524 pt (Fortalecer) não substituem esse run. A correção inseriu um segmento de espaço local antes de cada ícone, sem margem CSS global. As cinco unidades afetadas ficaram em 3/3, 3/3, 5/5, 3/3 e 4/4 linhas no Viewer e no print; os dois `combat.page` da regra de Feitiço mantiveram seus espaços textuais originais. EN, OG, PT-BR e export final foram conferidos.
+
+## Símbolo duplicado entre a arte-fonte e o token traduzido
+
+**Sintoma:** um ícone aparece duas vezes lado a lado em uma legenda traduzida, embora o PDF OG mostre somente uma ocorrência.
+
+**Como confirmar:** siga as camadas separadamente: confira a arte do PDF OG; veja se o `background.webp` ainda contém o ícone; inspecione `inline_elements.json` para confirmar um elemento semântico, sua máscara de limpeza e a âncora; depois procure `symbolId` correspondente nos segmentos da tradução PT-BR. Conte as instâncias `svg[data-symbol-id]` no Viewer e no print/PDF. Uma máscara pode apagar a tinta do fundo e o sidecar pode repor o símbolo original, enquanto um token adicional na tradução continua pintando uma segunda cópia.
+
+**Correção aprovada:** escolha uma única camada proprietária do desenho. Quando o sidecar já repõe o símbolo semântico na coordenada e com a geometria do OG, mantenha a máscara e o sidecar e remova somente o token repetido dos segmentos PT-BR. Preserve o bbox do texto traduzido no bbox fonte do rótulo; isso mantém a distância real entre ícone e palavra. Deixe `managedSourceSymbols` vazio para que o overlay semântico da fonte continue ativo. Se a tradução precisar ser proprietária do símbolo, suprima explicitamente a instância semântica original e valide a nova âncora antes de aplicar essa alternativa.
+
+**Copyfit e conferência de aceite:** verifique se cada ícone aparece uma vez, compare a lacuna entre símbolo e texto com a fonte, confirme a linha e os limites do rótulo, e inspecione Viewer e PDF exportado. Não ajuste `gap` global nem altere a máscara sem evidência geométrica.
+
+**Caso verificado:** na p.21, cinco rótulos PT-BR continham um token de símbolo embora `inline_elements.json` já renderizasse os mesmos cinco símbolos. Removemos os tokens redundantes nos registros 691, 592, 693, 593 e 692, mantendo as palavras e seus bboxes. Cada `terrain.*.icon` aparece uma vez no Viewer e no print; os cinco rótulos ficaram em 1/1 linha, sem excesso de borda. As lacunas entre tinta do símbolo e começo do texto no OG são 2,797 pt (Difícil), 1,464 pt (Água), 1,381 pt (Lodo), 2,438 pt (Perigoso) e 2,556 pt (Especial); a âncora e o bbox-fonte preservam essas relações. A p.23 já usa o padrão de ícone semântico mais rótulo textual e serviu como comparação estrutural. Export final passou `pdfVerification=true`.
+
+## Token semântico troca o idioma do rótulo impresso
+
+**Sintoma:** o desenho e a tradução da prosa estão corretos, mas um token semântico reproduz o rótulo em PT-BR mesmo quando o PDF OG imprime esse rótulo em inglês. Recriar o glifo e a palavra como texto pode, por outro lado, perder a cápsula, a geometria ou o símbolo.
+
+**Como confirmar:** compare o token visível completo (fundo, ícone, texto e orientação) com o PDF OG; confira `symbolId`, a variante da ocorrência em `compound_elements.json` e o idioma da aparência SVG. Não presuma que a variante tipográfica da fonte preserve automaticamente a língua impressa. Separe rótulo de arte/componente de prosa de regra editável.
+
+**Correção aprovada:** use um único símbolo semântico com as métricas da ocorrência-fonte e selecione `renderLanguage` apenas nessa ocorrência quando a arte pedir inglês. Não substitua a cápsula por glifo literal nem aplique a escolha a toda a família. Valide texto acessível, contagem de instâncias, linhas, clipping e Viewer/PDF nos zooms de revisão; publique pela rota canônica e preserve o histórico existente.
+
+**Caso verificado:** na p.59, a variante `tag.passive` `prose-8pt` renderizava `PASSIVO`, enquanto o PDF imprimia a cápsula `✤ PASSIVE`. A tradução passou a usar `renderLanguage: en` no único token da legenda E. A mesma review 1273 e translation 1416 foram atualizadas; o histórico antigo foi preservado. O Viewer e o PDF exportado exibem a cápsula, o ícone e `PASSIVE` uma vez, e a legenda manteve EXACT 3/3 linhas.
 
 ## Copyfit EXACT não garante semântica nem cobertura da página
 
@@ -283,3 +383,35 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 **Copyfit obrigatório:** reescreva o texto para igualar as linhas visuais do PDF-fonte dentro do corredor aprovado. Compare linhas, continuações, distância até o próximo item, clipping, colisões e borda da coluna no Viewer e no print. Se o recuo ou a moldura criar uma quebra ruim, refraseie antes de reduzir a fonte. Aplique essa correção a outra ocorrência somente depois de confirmar a mesma estrutura.
 
 **Caso verificado:** na p.47, o primeiro bullet de `IMPORTANT ABILITY RULES` tinha o corpo disponível em X=104,173 pt até X=404,453 pt (300,28 pt), mas o span ocupava o mesmo flex row que o `1` em negrito e o trecho seguinte. A moldura PT-BR id 75 usa o corredor de 300,28 pt; o PageRenderer passou a usar a largura física `total` da moldura canônica. O texto ficou em 3/3 linhas, mantendo o bullet e as continuações alinhados ao corpo; as outras seis unidades do bloco também igualaram as linhas fonte. Viewer e PDF EN/PT-BR foram comparados ao OG e não mostram clipping nem invasão da coluna vizinha.
+
+**Também verificado na p.47:** outras duas unidades inline excediam o limite do bloco-pai em 1,52 e 2,15 pt, embora cada uma tivesse um corredor medido até a coluna vizinha. Frames específicos de fluxo PT-BR (Payload ids 106 e 107) ampliaram essas unidades para 302,53 e 303,28 pt; a tinta ocupa 301,81 e 302,43 pt e mantém 3/3 linhas. A folga até a próxima coluna continua em 6,30 e 5,55 pt. O box `IMPORTANTE` recebeu moldura PT-BR de 309,22 pt (id 108), manteve 2/2 linhas e não invade a borda do box. Ao ler o diagnóstico, diferencie o `frameRectPt` do bloco-pai do flow frame aplicado à unidade inline.
+
+## Fluxo de bullets muda o compasso entre Viewer e PDF
+
+**Sintoma:** os bullets mantêm a hierarquia, mas o corpo traduzido termina muito antes/depois do OG ou colide com o próximo bloco, embora o número de linhas pareça correto. O avanço pode se acumular ao longo de uma lista longa; uma medida feita só no último bloco não mostra em qual parágrafo o desvio começou.
+
+**Como confirmar:** compare no OG, Viewer e PDF exportado o topo de cada parágrafo, as quebras visuais, o avanço entre linhas e a coordenada do próximo bloco fixo. Meça `lineHeight` e `paragraphSpacingPt` por unidade e confira os estilos efetivamente aplicados em tela e em `@media print`. Preserve a fonte e o tamanho enquanto isola a geometria.
+
+**Correção aprovada:** aplique espaçamento entre parágrafos à unidade de fluxo de lista e repita o copyfit. Se as métricas do Viewer e do PDF divergirem, use `printLineHeight` e/ou `printParagraphSpacingPt` somente com valores medidos contra a fonte; eles são ajustes da saída impressa, não defaults globais. Depois de mudar recuo, entrelinha ou espaçamento, confira novamente cada quebra, recuo suspenso, clipping, colisão e posição do bloco seguinte nos dois modos.
+
+**Caso verificado:** na p.58, o fluxo de Combatentes COMMAND tem 43 linhas no OG, Viewer e print. No PDF, `lineHeight=1.03` e `paragraphSpacingPt=3.25` alinham os inícios dos bullets ao OG. No Viewer, `lineHeight=1.081` e `paragraphSpacingPt=4.25` compensam o acúmulo de aproximadamente 1,2 pt por transição entre parágrafos; o último topo medido fica em 719,45 pt contra 721,20 pt na fonte, e a próxima unidade fica em Y=735,82 pt contra 736,45 pt. Não há clipping ou colisão. A proposta ainda aguarda revisão terminológica/humana; essas medições não certificam a página inteira.
+
+## Nova linha é deslocada por quebra de linha inicial no span-fonte
+
+**Sintoma:** uma linha do Viewer/export fica alguns pontos abaixo do PDF OG, embora a origem geométrica da linha já esteja correta. O primeiro span tem `\n` antes do texto; isso faz o bloco falhar no caminho de geometria exata e cair na caixa mais alta do span.
+
+**Como confirmar:** confronte a string do span, a bbox/origem da linha e a bbox do primeiro span no sidecar DOM. Confira se `renderTextOverride` é igual ao texto visível sem o LF. Exporte EN e PT-BR e meça a baseline em relação ao OG; confirme também que a remoção da quebra não muda conteúdo, runs, bbox, origem, recuo ou geometria das linhas vizinhas.
+
+**Correção aprovada, com escopo local:** quando o LF inicial for artefato de extração e a linha já tiver geometria independente, remova somente esse LF no span-fonte; mantenha a quebra final, `renderTextOverride`, estilos, bbox e origem. Reexporte Viewer e print em EN/PT-BR. Não aplique `trimStart()` global, deslocamento Y fixo ou correção no recuo sem evidência: um LF pode ser estrutural em outro bloco.
+
+**Casos verificados em 2026-11-15:** na p.60, `AI Steps` tinha `\n` antes do título e a baseline do PT ficava 11,35 pt abaixo da OG. Removido só o LF inicial, EN/PT exportados alinham a baseline em +0,56/−0,65 pt da OG; o título não cruza mais o divisor. Na p.41, `block_44` melhorou de +3,18 para +0,46 pt; na p.89, `block_21` de +3,42 para +0,62 pt. Em todos, Viewer e PDF exportados foram rechecados. A p.53 é contraexemplo: span e linha têm a mesma bbox, o desvio medido era 1,27 pt e não havia evidência de fallback; o LF foi preservado.
+
+## Recuo suspenso de bullets usa a tinta do marcador, não a moldura que inclui o fólio
+
+**Sintoma:** o marcador fica muito longe do corpo, ou uma continuação perde o alinhamento com o texto do item. Isso pode acontecer mesmo com `listMarkerLineIndexes` correto quando a linha-fonte contém um marcador extraído como `U+FFFD` + tabulação ou quando `availableX` da moldura inclui a largura de um fólio sobreposto.
+
+**Como confirmar:** compare PDF OG, DOM da página e Viewer. Para cada item, meça o X da tinta do marcador e o X inicial do corpo; não infira o recuo a partir do início da moldura. Verifique se o renderer reconhece `listMarkerGlyphOverride` e se a coluna do marcador termina antes do texto. Confirme também se o número da página tem duas passagens de pintura (por exemplo, contorno e preenchimento) na mesma bbox.
+
+**Correção aprovada para a estrutura confirmada:** restaure o glifo do marcador na camada de renderização sem alterar o conteúdo editorial, e calcule o recuo pelo bbox da tinta do marcador, não por `availableX` quando este incorpora o fólio. Se substituir um bloco que contém o fólio, preserve as linhas-fonte de ambas as passagens com `staticEditorLineIndexes`; não reconstitua um fólio duplicado sem confirmação no PDF. Como o recuo muda a largura do corpo e pode criar novas quebras, repita Copyfit depois do ajuste e confira continuidades, estilo, clipping, colisões, Viewer e PDF exportado contra o OG. Não aplique a outras listas sem confirmar a mesma origem do marcador e a mesma geometria.
+
+**Verificado na p.60:** em `block_22` e `block_30`, a fonte guardava marcadores como `U+FFFD` + tabulação e precisava de `listMarkerGlyphOverride: "•"`. Em `block_30`, `availableX=49,34 pt` era influenciado pelo fólio; o X da tinta do marcador é 86,17 pt e o início do corpo 104,17 pt, portanto o recuo suspenso medido é 18 pt. O renderer passou a usar o bbox do marcador. As duas passagens do fólio 60 foram mantidas em `staticEditorLineIndexes: [19,20]`. O texto verificador normaliza somente a concatenação DOM `•Como` para `• Como`, pois marcador e corpo são colunas visuais separadas; a distância visual continua vindo do layout. As 16 unidades candidatas ficaram EXACT, e Viewer/print não mostram clipping ou colisões. Evidências privadas: `C:\Users\bruno\engineering-labs\planning\engineering-decisions\evidence\2026-11-15-p060-review\`.

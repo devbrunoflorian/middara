@@ -92,6 +92,8 @@ export interface SpanData {
 export interface LineData {
   id: string;
   bbox: [number, number, number, number];
+  /** Recover a semantically known list glyph when the PDF text layer extracts it as a replacement character. */
+  listMarkerGlyphOverride?: string;
   /** Source text-flow frame; optional for extracted JSON lines. */
   availableX?: number;
   availableWidth?: number;
@@ -566,6 +568,9 @@ function sourceLineText(line: LineData): string {
 }
 
 function listMarkerGlyph(line: LineData): string | null {
+  if (line.listMarkerGlyphOverride && LIST_MARKER_GLYPHS.has(line.listMarkerGlyphOverride)) {
+    return line.listMarkerGlyphOverride;
+  }
   const visible = Array.from(sourceLineText(line).replace(/[\s\u00a0]+/gu, ''));
   return visible.length === 1 && LIST_MARKER_GLYPHS.has(visible[0]) ? visible[0] : null;
 }
@@ -3618,6 +3623,7 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
       && (sourceListIndents.hangingIndentPt !== undefined
         || currentOverride.listMarkerIndentPt !== undefined
         || currentOverride.hangingIndentPt !== undefined);
+    let numberedItemOpen = false;
     let flowedBulletIndex = 0;
     const flowedListParagraphs = inlineSourceBulletFlow
       ? splitSegmentsIntoParagraphs(sourceAwareSegments).map((paragraph, paragraphIndex) => {
@@ -3749,15 +3755,22 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
         data-translation-review-highlight={reviewBlockHighlighted ? (proposalReviewHighlightKey ?? blockKey) : undefined}
         data-source-list-body-start-x={experimentalListBodySourceLine?.bbox[0]}
         data-proof-block-id={pageNumber === 14 && (block.id === 'block_16' || block.id === 'block_17') ? block.id : undefined}>
-        {fixedLineEntries.map(({ line, index }) => (
+        {fixedLineEntries.map(({ line, index }) => {
+          const isListMarker = markerIndexes.has(index);
+          const sourceMarkerInset = sourceListIndents.listMarkerIndentPt ?? 0;
+          const markerShiftPt = isListMarker && currentOverride.listMarkerIndentPt !== undefined
+            ? currentOverride.listMarkerIndentPt - sourceMarkerInset
+            : 0;
+          return (
           <div
             key={`static-${line.id}`}
             className="static-editor-line"
-            data-list-marker-line={markerIndexes.has(index) ? line.id : undefined}
+            data-list-marker-line={isListMarker ? line.id : undefined}
             data-source-line-x={line.bbox[0]}
             data-source-line-right={line.bbox[2]}
             data-source-line-available-x={(line as any).availableX}
             data-source-line-available-width={(line as any).availableWidth}
+            style={markerShiftPt ? { transform: `translateX(${markerShiftPt * scale}px)` } : undefined}
             onClick={event => event.stopPropagation()}
           >
             <LineRenderer
@@ -3766,7 +3779,13 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
               // A candidate-only review frame can widen/move the translated
               // body while this marker stays on its source PDF anchor. Saved
               // human frames retain the existing marker-following behavior.
-              blockOriginX={persistedReviewDraftFrameKeys.has(layoutUnitKey) ? renderOriginX : frameX}
+              // A translated frame controls the list body. Keep an extracted
+              // source marker anchored to the PDF position when that frame
+              // moves; otherwise saving a review frame shifts the marker with
+              // the body and destroys the source hanging indent.
+              blockOriginX={isListMarker && translatedFrame
+                ? renderOriginX
+                : persistedReviewDraftFrameKeys.has(layoutUnitKey) ? renderOriginX : frameX}
               blockOriginY={persistedReviewDraftFrameKeys.has(layoutUnitKey) ? renderOriginY : blockY}
               isAdmin={false}
               isSelected={false}
@@ -3774,11 +3793,14 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
               onClick={() => {}}
             />
           </div>
-        ))}
+          );
+        })}
         <div 
           ref={blockRef}
           className={`realbox ${reviewBlockHighlightClass}`}
           data-rendered-translation-key={currentOverride ? payloadSpanKey(blockKey, language) : undefined}
+          data-print-line-height={currentOverride.printLineHeight}
+          data-print-paragraph-spacing={currentOverride.printParagraphSpacingPt}
           style={{
             position: 'absolute',
             left: `${blockLineX}px`,
@@ -3787,6 +3809,12 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             whiteSpace: block.noWrap ? 'pre' : 'pre-wrap',
             textAlign: currentOverride.textAlign ?? layoutFrameOverride?.textAlign ?? block.layoutFrame?.textAlign ?? 'left',
             lineHeight: effectiveLineHeight,
+            ...(currentOverride.printLineHeight !== undefined
+              ? { '--print-line-height': currentOverride.printLineHeight } as React.CSSProperties
+              : {}),
+            ...(currentOverride.printParagraphSpacingPt !== undefined
+              ? { '--print-paragraph-spacing': `${currentOverride.printParagraphSpacingPt * scale}px` } as React.CSSProperties
+              : {}),
             display: 'block',
             fontSize: 0,
             cursor: layoutMode ? 'move' : isAdmin ? 'text' : 'default',
@@ -3815,6 +3843,10 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
               {numberedParagraphs.map(({ marker, body, paragraphIndex }, index, paragraphs) => {
                 const markerIndent = currentOverride.listMarkerIndentPt ?? sourceListIndents.listMarkerIndentPt ?? 0;
                 const bodyIndent = currentOverride.hangingIndentPt ?? sourceListIndents.hangingIndentPt ?? 18;
+                if (marker?.length) numberedItemOpen = true;
+                const continuationIndent = !marker?.length && numberedItemOpen
+                  ? block.flowParagraphIndentsPt?.[paragraphIndex] ?? bodyIndent
+                  : 0;
                 const paragraphFontSize = (body.length ? body : marker ?? []).find(segment => segment.text.trim())?.size ?? 13;
                 return <div
                   key={`numbered-list-${paragraphIndex}`}
@@ -3825,6 +3857,11 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
                       ? `${Math.max(0, bodyIndent - markerIndent) * scale}px minmax(0, 1fr)`
                       : undefined,
                     marginLeft: marker?.length ? `${markerIndent * scale}px` : undefined,
+                    ...(continuationIndent > 0 ? {
+                      marginLeft: `${continuationIndent * scale}px`,
+                      width: `calc(100% - ${continuationIndent * scale}px)`,
+                      boxSizing: 'border-box',
+                    } : {}),
                     marginBottom: currentOverride.paragraphSpacingPt && index < paragraphs.length - 1
                       ? `${currentOverride.paragraphSpacingPt * scale}px` : 0,
                     fontSize: `${paragraphFontSize * scale}px`,
@@ -3844,10 +3881,14 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
                 const paragraphFontSize = paragraph.find(segment => segment.text.trim())?.size
                   ?? sourceBulletLines[0]?.spans.find(span => !span.renderOnlyStrokePass)?.size
                   ?? 10;
+                const paragraphSpacingPt = flowIndex < flowedListParagraphs.length - 1
+                  ? currentOverride.paragraphSpacingPt ?? 0
+                  : 0;
                 const paragraphStyle: React.CSSProperties = {
                   display: 'block',
                   fontSize: `${paragraphFontSize * scale}px`,
                   lineHeight: effectiveLineHeight,
+                  marginBottom: `${paragraphSpacingPt * scale}px`,
                 };
                 return (
                   <React.Fragment key={markerLineId ? `source-bullet-${markerLineId}` : `flow-paragraph-${paragraphIndex}`}>
@@ -4467,12 +4508,19 @@ function splitLeadingNumberedListMarker(segments: SpanOverride['segments']): { m
 function sourceBulletRenderSegments(line: LineData): SpanOverride['segments'] {
   const sourceSegments = sourceSegmentsFromSpans(line.spans.filter(span => !span.renderOnlyStrokePass));
   const marker = sourceSegments.find(segment => segment.text.includes('•'));
-  return marker ? [{ ...marker, text: '•' }] : [];
+  if (marker) return [{ ...marker, text: '•' }];
+  if (line.listMarkerGlyphOverride === '•') {
+    const sourceStyle = sourceSegments[0] ?? { text: '', font: 'OptimaLTStd', size: 10, color: '#231f20', weight: 400, style: 'normal' };
+    return [{ ...sourceStyle, text: '•' }];
+  }
+  return [];
 }
 
 function sourceListMarkerIndentPt(markerLine: LineData, sourceLines: LineData[]): number {
   const markerBaseline = markerLine.spans.find(span => span.origin)?.origin?.[1];
-  const markerX = markerLine.availableX ?? markerLine.bbox[0];
+  // availableX describes the source frame and can include unrelated ink such
+  // as a page folio. The hanging gap starts at the printed marker itself.
+  const markerX = markerLine.bbox[0];
   const baselineTextStarts = sourceLines
     .filter(line => line !== markerLine)
     .flatMap(line => line.spans
