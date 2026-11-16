@@ -118,6 +118,7 @@ interface RichSpanEditorProps {
   symbolAliasPreferences?: SymbolAliasPreferences;
   onPaletteEditorChange?: (editorKey: string, state: AdminSymbolPaletteEditorState | null) => void;
   headerAccessory?: React.ReactNode;
+  parentBlockAction?: { label: string; onActivate: () => void };
   onToggleLanguage?: (language: 'en' | 'pt-BR') => void;
   /** Save into isolated in-memory experiment state instead of persistence. */
   sessionOnly?: boolean;
@@ -184,6 +185,7 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
   symbolAliasPreferences = getDefaultSymbolAliasPreferences(),
   onPaletteEditorChange,
   headerAccessory,
+  parentBlockAction,
   onToggleLanguage,
   sessionOnly = false,
   persistentDraftMode = false,
@@ -1053,6 +1055,14 @@ export const RichSpanEditor: React.FC<RichSpanEditorProps> = ({
         </div>
 
         {headerAccessory && <div className="rse-header-accessory">{headerAccessory}</div>}
+
+        {parentBlockAction && language === 'pt-BR' && (
+          <div className="rse-parent-block-action">
+            <button type="button" className="rse-tool-btn" onClick={parentBlockAction.onActivate}>
+              {parentBlockAction.label}
+            </button>
+          </div>
+        )}
 
         {(onNavigatePrevious || onNavigateNext) && (
           <nav className="rse-unit-navigation" aria-label="Editable unit navigation">
