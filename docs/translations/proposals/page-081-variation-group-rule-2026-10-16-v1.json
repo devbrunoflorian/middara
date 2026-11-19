@@ -3,7 +3,7 @@
   "version": "1",
   "title": "Regras de Grupo para Variações — p. 81",
   "page": 81,
-  "status": "pending_human_review",
+  "status": "existing_translation_revision_completed_2026-11-19",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -14,22 +14,25 @@
   },
   "counts": {
     "candidates": 1,
-    "existingHumanTranslationsPreserved": 0,
-    "priorReviewRecordsPreserved": 0,
-    "finalTranslationWrites": 0,
-    "openExceptions": 0
+    "existingHumanTranslationsPreserved": 1,
+    "priorReviewRecordsPreserved": 1,
+    "finalTranslationWrites": 1,
+    "openExceptions": 0,
+    "persistedActiveApprovedReviews": 1,
+    "copyfitExactUnits": 1
   },
   "preservation": {
-    "existingHumanTranslationCount": 0,
-    "existingHumanTranslationSpanKeys": [],
-    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2e0efc6c6f6f0"
+    "existingHumanTranslationCount": 1,
+    "existingHumanTranslationSpanKeys": [
+      "page_81_block_2__pt-BR"
+    ],
+    "existingHumanTranslationDataSha256": "ca9f75b178a2e200b2f8e2733d76fcdc83d94769955c4a65ad8f1e730189e8ad"
   },
   "scopeLimits": [
-    "Somente a regra isolada block_14 / DOM index 2 sobre equivalência de Grupos entre Combatentes e Variações foi incluída. Os exemplos extensos, cartas e arte seguem fora deste lote.",
-    "Variation Tag → Tag de Variação, Base Combatant → Combatente de Base, Activation Number → Número de Ativação e Possible Spawn → opção de surgimento são formas locais candidatas e aguardam decisão humana; Group → Grupo já está aprovado no glossário.",
-    "Spawn → surgir segue a forma verbal registrada no glossário oficial.",
-    "GETs confirmaram zero traduções PT-BR e zero revisões da p.81 antes da proposta. Nenhuma tradução final é publicada ou sobrescrita.",
-    "Copyfit V3, Viewer, Editor, PDF, fidelidade integral e aprovação editorial aguardam verificação."
+    "Este recibo cobre apenas a regra block_14 sobre equivalência de Grupos entre Combatentes e Variações.",
+    "A tradução anterior foi revisada no mesmo reviewKey e o histórico da publicação é preservado pelo endpoint oficial.",
+    "A correção “a Tag Variation” mantém o nome de Tag em inglês; termos de regras são escolhas locais e não canonizações globais.",
+    "Copyfit e verificação exportada desta revisão serão registrados após as medições frescas."
   ],
   "candidates": [
     {
@@ -39,7 +42,7 @@
       "spanKey": "page_81_block_2__pt-BR",
       "language": "pt-BR",
       "sourceText": "Combatants being Spawned that have 1 or more Activation Number must still adhere to all the Group rules as if their Variation Counterparts counted as the same corresponding Group(s). Meaning, you may not shuffle a Combatant Card with the Variation Tag as a Possible Spawn if the corresponding Base Combatant they replace is already on the board, or vice versa.",
-      "proposalText": "Combatentes que surgirem e tiverem 1 ou mais Números de Ativação ainda devem seguir todas as regras de Grupo, como se suas Variações correspondentes pertencessem aos mesmos Grupos. Ou seja, você não pode embaralhar uma Carta de Combatente com o Tag de Variação como opção de surgimento se o Combatente de Base correspondente que ela substitui já estiver no tabuleiro, nem o contrário.",
+      "proposalText": "Combatentes que surgirem com 1 ou mais Números de Ativação ainda devem seguir todas as regras de Grupo, como se suas Variações correspondentes pertencessem aos mesmos Grupos. Ou seja, não se pode embaralhar uma Carta de Combatente com a Tag Variation como Surgimento Possível se o Combatente Base correspondente que ela substitui já estiver no tabuleiro, nem o contrário.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_81_block_2__pt-BR",
@@ -54,23 +57,7 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "Combatentes que surgirem e tiverem ",
-            "font": "OptimaLTStd",
-            "size": 10,
-            "color": "#231f20",
-            "weight": 400,
-            "style": "normal"
-          },
-          {
-            "text": "1",
-            "font": "OptimaLTStd-Bold",
-            "size": 10,
-            "color": "#231f20",
-            "weight": 700,
-            "style": "normal"
-          },
-          {
-            "text": " ou mais Números de Ativação ainda devem seguir todas as regras de Grupo, como se suas ",
+            "text": "Combatentes que surgirem com 1 ou mais Números de Ativação ainda devem seguir todas as regras de Grupo, como se suas ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -86,7 +73,7 @@
             "style": "normal"
           },
           {
-            "text": " correspondentes pertencessem aos mesmos Grupos. Ou seja, você não pode embaralhar uma Carta de Combatente com o Tag de ",
+            "text": " correspondentes pertencessem aos mesmos Grupos. Ou seja, não se pode embaralhar uma Carta de Combatente com a Tag ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -94,7 +81,7 @@
             "style": "normal"
           },
           {
-            "text": "Variação",
+            "text": "Variation",
             "font": "OptimaLTStd-Bold",
             "size": 10,
             "color": "#231f20",
@@ -110,7 +97,7 @@
             "style": "normal"
           },
           {
-            "text": "opção de surgimento",
+            "text": "Surgimento Possível",
             "font": "OptimaLTStd-Italic",
             "size": 10,
             "color": "#231f20",
@@ -126,7 +113,7 @@
             "style": "normal"
           },
           {
-            "text": "Combatente de Base",
+            "text": "Combatente Base",
             "font": "OptimaLTStd-BoldItalic",
             "size": 10,
             "color": "#231f20",
@@ -144,30 +131,271 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "verified_live_viewer_comparison_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_at_100_and_200_full_page_export_qa_verified",
+      "editorialStatus": "approved_and_published_2026-11-19",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
-        "Variation Tag → Tag de Variação: candidata local para decisão humana.",
-        "Base Combatant → Combatente de Base; Activation Number → Número de Ativação; Possible Spawn → opção de surgimento: candidatas locais, sem canonização.",
-        "Spawn → surgir segue glossário oficial."
+        "Variation permanece em inglês quando é o nome impresso da Tag; a redação “Tag Variation” corrige o artigo e não altera a carta.",
+        "Combatente Base, Número de Ativação e Surgimento Possível seguem o uso local da p.80; não são canonizados globalmente nesta revisão.",
+        "Draw neste pool aleatório significa retirar uma carta, não comprá-la; a decisão é contextual e não muda Draw → Compre no glossário."
       ],
+      "copyfitClassification": "EXACT",
       "sourcePdfVisualLineCount": 6,
       "pageRendererVisualLineCount": 6,
-      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 6,
+          "pageRendererVisualLineCount": 6,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 81,
+            "pdfDocumentPageIndex": 80,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.76909637451172,
+              154.58888244628906,
+              399.5790100097656,
+              221.50889587402344
+            ],
+            "extractedPdfTextVisualRows": 6,
+            "visualRowBaselinesPt": [
+              163.799,
+              174.799,
+              185.799,
+              196.799,
+              207.799,
+              218.799
+            ],
+            "spans": 16,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 6
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_81_block_2__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 16,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 6,
+            "visualRowTopsCssPx": [
+              258.56,
+              275.2,
+              291.84,
+              308.48,
+              325.13,
+              341.77
+            ],
+            "visualRowIntervalsPt": [
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99
+            ],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 99.8,
+            "frameWidthCssPx": 475
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 6,
+          "pageRendererVisualLineCount": 6,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 81,
+            "pdfDocumentPageIndex": 80,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.76909637451172,
+              154.58888244628906,
+              399.5790100097656,
+              221.50889587402344
+            ],
+            "extractedPdfTextVisualRows": 6,
+            "visualRowBaselinesPt": [
+              163.799,
+              174.799,
+              185.799,
+              196.799,
+              207.799,
+              218.799
+            ],
+            "spans": 16,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 6
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_81_block_2__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 16,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 6,
+            "visualRowTopsCssPx": [
+              165.58,
+              173.89,
+              182.2,
+              190.52,
+              198.83,
+              207.14
+            ],
+            "visualRowIntervalsPt": [
+              10.98,
+              10.98,
+              10.98,
+              10.98,
+              10.98
+            ],
+            "pageScaleCssPxPerPt": 0.7567690873341558,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.56769px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.32446px",
+                "letterSpacing": "-0.113515px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.56769px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.32446px",
+                "letterSpacing": "-0.113515px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.56769px",
+                "fontWeight": "400",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.32446px",
+                "letterSpacing": "-0.113515px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.56769px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.32446px",
+                "letterSpacing": "-0.113515px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 49.9,
+            "frameWidthCssPx": 237.5
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
       "copyfitMeasurement": {
         "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 6,
         "pageRendererVisualLineCount": 6,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 81,
           "pdfDocumentPageIndex": 80,
           "language": "pt-BR",
-          "viewerZoom": "200%",
+          "viewerZoom": "100%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -176,7 +404,8 @@
             399.5790100097656,
             221.50889587402344
           ],
-          "visualBaselinesPt": [
+          "extractedPdfTextVisualRows": 6,
+          "visualRowBaselinesPt": [
             163.799,
             174.799,
             185.799,
@@ -185,27 +414,105 @@
             218.799
           ],
           "spans": 16,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
           "visualRows": 6
         },
         "pageRendererEvidence": {
           "spanKey": "page_81_block_2__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 18,
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 16,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 6,
           "visualRowTopsCssPx": [
-            151.86,
-            160.77,
-            169.67,
-            178.58,
-            187.48,
-            197.39
+            165.58,
+            173.89,
+            182.2,
+            190.52,
+            198.83,
+            207.14
           ],
-          "frameHeightCssPx": 54.2
+          "visualRowIntervalsPt": [
+            10.98,
+            10.98,
+            10.98,
+            10.98,
+            10.98
+          ],
+          "pageScaleCssPxPerPt": 0.7567690873341558,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.56769px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.32446px",
+              "letterSpacing": "-0.113515px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.56769px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.32446px",
+              "letterSpacing": "-0.113515px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.56769px",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.32446px",
+              "letterSpacing": "-0.113515px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "7.56769px",
+              "fontWeight": "700",
+              "fontStyle": "italic",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "8.32446px",
+              "letterSpacing": "-0.113515px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 49.9,
+          "frameWidthCssPx": 237.5
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     }
   ],
-  "note": "A redação preserva a relação de equivalência de Grupo entre Combatentes e Variações e a proibição de misturá-los no conjunto de surgimento quando o correspondente já está no tabuleiro. Os termos locais continuam pendentes.",
-  "revisions": []
+  "note": "A redação atual conserva a equivalência de Grupo entre Combatentes e Variações e a proibição de embaralhar uma carta Variation como Surgimento Possível quando o Combatente Base correspondente já está no tabuleiro. A forma antiga “o Tag de Variação” foi corrigida para “a Tag Variation”, mantendo o rótulo original da carta.",
+  "revisions": [
+    {
+      "date": "2026-11-18",
+      "previousProposalText": "Combatentes que surgirem e tiverem 1 ou mais Números de Ativação ainda devem seguir todas as regras de Grupo, como se suas Variações correspondentes pertencessem aos mesmos Grupos. Ou seja, você não pode embaralhar uma Carta de Combatente com o Tag de Variação como opção de surgimento se o Combatente de Base correspondente que ela substitui já estiver no tabuleiro, nem o contrário.",
+      "reason": "Revisão local de terminologia e gramática: preserve o nome impresso Tag Variation em inglês e alinhe Combatente Base/Surgimento Possível ao uso da p.80; revalidar Copyfit e export."
+    },
+    {
+      "date": "2026-11-19",
+      "reason": "Revisão block_2 publicada pelo endpoint oficial; tradução ativa aprovada e EXACT em 100%/200%. A comparação integral da p.81 confirmou a revisão no Viewer e no PDF exportado."
+    }
+  ]
 }

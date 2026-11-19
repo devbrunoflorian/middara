@@ -122,6 +122,12 @@ Esta amostra confirma estilos e geometria locais da p.39. Ela não mede convers�
 Na comparação do raster do PDF OG de 1288×1288 px com Viewer EN e PT-BR, trechos de corpo OptimaLTStd aparentam maior peso no Viewer. Os spans-fonte e os rich-text correspondentes declaram 10 pt/400; a fonte web estava carregada durante a medição, e o mesmo aspecto foi observado na reconstrução EN, portanto a diferença não aponta para uma tradução local. Copyfit da página não apresentou divergência de linha. Não reduzi o peso nos dados PT-BR: a aparência pode envolver o arquivo de fonte local, o programa incorporado no PDF ou rasterização/antialiasing.
 
 **Próxima verificação:** comparar nomes/contornos e métricas do programa Optima incorporado no PDF com `Optima LT Std Roman.otf`, além de capturar os mesmos glifos em PDF OG, Viewer e print a escala 1:1. A causa continua aberta; esta amostra não autoriza mudança global de fonte ou peso. Evidência: `engineering-labs/planning/engineering-decisions/evidence/2026-11-14-p049/post-proof`.
+#### G. Amostra repetida de Optima regular: páginas 50 e 59 (2026-11-17; causa ainda aberta)
+
+Na p.59, o corpo OptimaLTStd regular em branco sobre fundo escuro parece mais pesado no Viewer e no print que no raster OG. A divergência aparece tanto na reconstrução EN quanto na página PT-BR; os segmentos PT são `OptimaLTStd`, 10 pt, peso 400, cor `#ffffff`, e o arquivo Roman está carregado. A comparação visual confirmou o contraste; a extração da fonte OG também identifica corpo 10 pt regular. O copyfit das três unidades corrigidas permaneceu igual ao OG (6/6, 5/5 e 4/4). Um registro independente da p.50 já aponta aparência mais pesada do Optima regular no EN do Viewer. Isso reforça a hipótese de uma diferença de fonte/rasterização compartilhada, sem provar qual arquivo ou etapa a causa.
+
+**Próxima verificação:** seguir o plano da amostra F: comparar os contornos e métricas do Optima incorporado no PDF com `Optima LT Std Roman.otf` em glifos idênticos, a escala 1:1, nos três estágios OG/Viewer/print. Não compensar com `font-weight` local nem alterar a fonte global até provar a causa. Evidência p.59: `engineering-labs/planning/engineering-decisions/evidence/2026-11-15-p059-review/correction-2026-11-17/`; evidência p.50 preservada no registro privado dessa página.
+
 ---
 
 ## 3. Frente 2: Fidelidade das Cores

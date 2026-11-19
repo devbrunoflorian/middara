@@ -328,7 +328,12 @@ async function approve(req: PayloadRequest): Promise<Response> {
       ? review.copyfitMeasurementFingerprint : null
     const requestedFingerprint = typeof body.copyfitMeasurementFingerprint === 'string'
       ? body.copyfitMeasurementFingerprint : null
-    if (!legacyApproval && ((storedFingerprint && storedFingerprint !== canonicalEvidence!.fingerprint)
+    // An already-published approval may be revised under the same review key
+    // after a fresh canonical measurement. The publication/translation pair is
+    // checked below before any write, so its old fingerprint must not block a
+    // measured correction to that same published unit.
+    const revisingPublishedApproval = review?.approvalStatus === 'approved' && isRecord(review.publication)
+    if (!legacyApproval && ((storedFingerprint && storedFingerprint !== canonicalEvidence!.fingerprint && !revisingPublishedApproval)
       || (requestedFingerprint && requestedFingerprint !== canonicalEvidence!.fingerprint))) {
       throw Object.assign(new Error('O comprovante salvo ou enviado diverge da medição Copyfit V3 canônica.'), { status: 409 })
     }

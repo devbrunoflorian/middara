@@ -11,7 +11,8 @@
     "dev:web": "npm run dev -w apps/web -- --host 127.0.0.1",
     "dev": "node scripts/dev.mjs",
     "backup:translations": "node scripts/backup-translations.mjs",
-    "test:translation-backup": "node --test scripts/tests/backup-translations.test.mjs"
+    "test:translation-backup": "node --test scripts/tests/backup-translations.test.mjs",
+    "capture:textless": "node scripts/capture_textless_page.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.48.0"

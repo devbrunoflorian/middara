@@ -111,6 +111,8 @@ Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir auto
 
 **Decisão do usuário (15/11/2026; Payload `translation-glossary-decisions`):** `Stamina Points` → **Pontos de Stamina**; manter a abreviação impressa `SP`. A escolha vale para prosa de regras e não traduz rótulos impressos em cartas/arte. Na p.59, o usuário manteve “o Combatente ganha a cada turno” como formulação contextual para acumulação recorrente; isso não substitui a decisão geral `Gain` → **obter** nem autoriza “ganhar” como tradução mecânica global. Traduções humanas anteriores com outra forma ficam preservadas até reconciliação contextual.
 
+**Nota contextual da p.57 (17/11/2026):** no callout de Item Único, `draw` descreve retirar uma carta do baralho durante um Encontro, em contraste explícito com comprar o Item na loja. Nesse contexto local, usar **retirar do baralho**; manter **Draw → Compre** na tabela global e não generalizar a exceção para outros contextos.
+
 **Decisão do usuário (15/10/2026):** para a mecânica *Exhaust*, usar o verbo **exaustar**; em rótulos de Tag, manter a forma verbal/capitalização natural, por exemplo **EXAUSTAR**. Esta decisão não renomeia IDs semânticos como `action.exhaust` e não autoriza sobrescrever traduções humanas já salvas.
 
 **Decisão do usuário (18/10/2026, Payload id 58):** para a classificação de itens (*Mundane, Common, Uncommon, Rare*) e faixas de recompensa, o termo **Tier** é fixado canonicamente como **Tier** (mantendo-se no plural **Tiers**). `Tier` é distinto de `Level/LVL`.

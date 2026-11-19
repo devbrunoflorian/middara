@@ -53,7 +53,8 @@ function isBlankDiagnostic(value) {
 function copyfitClassification(candidate) {
   const explicit = candidate.copyfitClassification ?? candidate.copyfitLineCountClassification;
   if (['EXACT', 'UNDER', 'OVER', 'UNMEASURED'].includes(explicit)) return explicit;
-  const source = Number(candidate.sourcePdfVisualLineCount
+  const source = Number(candidate.sourceVisualLineCountOverride
+    ?? candidate.sourcePdfVisualLineCount
     ?? candidate.copyfitMeasurement?.sourcePdfVisualLineCount);
   const target = Number(candidate.pageRendererVisualLineCount
     ?? candidate.copyfitMeasurement?.pageRendererVisualLineCount);
@@ -62,7 +63,8 @@ function copyfitClassification(candidate) {
 }
 
 function candidateCopyfitLineCounts(candidate) {
-  const source = Number(candidate.sourcePdfVisualLineCount
+  const source = Number(candidate.sourceVisualLineCountOverride
+    ?? candidate.sourcePdfVisualLineCount
     ?? candidate.copyfitMeasurement?.sourcePdfVisualLineCount);
   const target = Number(candidate.pageRendererVisualLineCount
     ?? candidate.copyfitMeasurement?.pageRendererVisualLineCount);
@@ -439,6 +441,11 @@ const proposals = [...candidatesByFamily.values()]
         copyfitClassification: measuredClassification,
         copyfitSourcePdfLineCount: lineCounts.source,
         copyfitPageRendererLineCount: lineCounts.target,
+        sourceVisualLineCountOverride: Number.isInteger(candidate.sourceVisualLineCountOverride)
+          ? candidate.sourceVisualLineCountOverride : null,
+        sourceVisualLineCountEvidence: candidate.sourceVisualLineCountEvidence
+          && typeof candidate.sourceVisualLineCountEvidence === 'object'
+          ? candidate.sourceVisualLineCountEvidence : null,
         copyfitCanonicalSpanKey: geometry?.spanKey ?? null,
         copyfitCanonicalBbox: geometry?.bbox ?? null,
         copyfitMeasurementFingerprint: lineCounts.source && lineCounts.target && geometry

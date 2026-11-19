@@ -59,7 +59,8 @@
             0.0
           ]
         }
-      ]
+      ],
+      "hiddenFromPage": true
     },
     {
       "id": "block_13",
@@ -2848,18 +2849,19 @@
             }
           ],
           "rasterizedDuplicate": true,
-          "rasterizedDuplicateReason": "the PDF-cleaned background has no title pixels here; this exact source-PDF pixel overlay reproduces the published heading instead of the two misaligned HTML passes",
+          "rasterizedDuplicateReason": "The English title is restored by the exact source-PDF overlay; PT-BR renders this source identity as an editable localized text unit.",
           "rasterizedDuplicateEvidence": {
             "auditId": "page50-flanking-title-pdf-pixel-overlay-v1",
             "sourcePdfPage": 50,
             "region": "Flanking and Backstab title band above the rules text",
-            "rule": "hide only the two exact HTML passes backed by a title-local source-PDF pixel overlay",
+            "rule": "Hide this duplicate in EN where the original-PDF title overlay is used; show its editable translated text unit in PT-BR.",
             "evidenceRef": "docs/project-progress/2026-10-02-page50-flanking-title-tracer.md"
           },
           "dir": [
             1.0,
             0.0
-          ]
+          ],
+          "rasterizedDuplicateLanguage": "en"
         }
       ]
     },

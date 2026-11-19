@@ -513,6 +513,7 @@ function renderCreditSegments(
       fontSize: `${piece.segment.size * scale}px`,
       fontWeight: piece.segment.weight,
       fontStyle: piece.segment.style,
+      fontVariantCaps: mapPdfFont(piece.segment.font).variantCaps,
       color: piece.segment.color,
       ...(piece.segment.textStrokeWidthPt ? {
         WebkitTextStroke: `${piece.segment.textStrokeWidthPt * scale}px ${piece.segment.textStrokeColor || '#231f20'}`,
@@ -3501,6 +3502,8 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
             layoutSelectionKey={layoutSelectionKey} layoutDraft={layoutDraft} layoutFrames={layoutFrames}
             inheritedLayoutFrames={inheritedLayoutFrames}
             layoutFrameForSelection={sourceLayoutFrame(rowBlock)} onSelectLayoutFrame={onSelectLayoutFrame}
+            layoutFrameOverride={layoutFrames.get(rowUnitKey)
+              ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(rowUnitKey) : undefined)}
             selectedBlockKey={selectedBlockKey} overrides={rowOverrides} overridesReady={overridesReady}
             draftOverride={draftOverride} language={language} proposalReviewHighlightKey={proposalReviewHighlightKey}
             persistedReviewDraftFrameKeys={persistedReviewDraftFrameKeys} />
@@ -5165,8 +5168,12 @@ const LineRenderer: React.FC<LineRendererProps> = ({
           const inlineOverrideManagesSourceSymbol = !!inlineUnit?.override
             && (inlineUnit.override.managedSourceSymbols?.includes(span.semanticSymbolId)
               || inlineOverrideContainsSourceSymbol);
+          // Once a localized inline unit adopts this source symbol, the
+          // translated segment owns its rendered position. Keep the source
+          // glyph hidden so it cannot remain at the old PDF coordinates and
+          // appear a second time beside the moved symbol.
           const renderSemanticSourceSymbol = renderSemanticSource
-            && (!inlineUnit?.override || !inlineOverrideManagesSourceSymbol || inlineOverrideContainsSourceSymbol);
+            && (!inlineUnit?.override || !inlineOverrideManagesSourceSymbol);
           const sourceSymbolMetrics = span.sourceSymbolMetrics
             ? { ...span.sourceSymbolMetrics, gapEm: undefined, trailingGapEm: undefined }
             : undefined;

@@ -17,12 +17,12 @@ export interface SourceInlineElement {
   color?: string;
   bbox: [number,number,number,number];
   anchor: { blockId: string; blockIndex: number; lineId: string; spanIndex: number; side: 'before'|'after'|'replace'|'replace-text'; sizePt: number; textRange?: [number,number]; lineStartX?: number; gapPt?: number; trailingGapPt?: number; ownerSpanRef?: { lineId: string; spanIndex: number } };
-  mask: { url: string; bbox: [number,number,number,number]; clipShape?: 'circle' };
+  mask?: { url: string; bbox: [number,number,number,number]; clipShape?: 'circle' };
 }
 
 /** Clip cleanup to the native circular ink while retaining the raster antialias edge. */
 export function sourceMaskClipPath(element: SourceInlineElement): string | undefined {
-  if (element.mask.clipShape !== 'circle') return undefined;
+  if (element.mask?.clipShape !== 'circle') return undefined;
   const [maskX0, maskY0, maskX1, maskY1] = element.mask.bbox;
   const [x0, y0, x1, y1] = element.bbox;
   const maskWidth = maskX1 - maskX0;

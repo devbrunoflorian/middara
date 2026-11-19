@@ -1,0 +1,46 @@
+{
+  "proposalId": "page-064-title-centering-layout-fix-2026-11-18-v1",
+  "status": "standard_centered_title_frame_and_alignment_verified_page_open",
+  "date": "2026-11-18",
+  "printedPage": 64,
+  "source": {
+    "file": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+    "pageIndex": 63,
+    "title": "Intelligent Combatant Turn Walkthrough"
+  },
+  "target": {
+    "spanKey": "page_64_block_48__pt-BR",
+    "translationId": 2048,
+    "text": "TURNO DO COMBATENTE INTELIGENTE: PASSO A PASSO"
+  },
+  "observedIssue": "The PT-BR title only looked centered because its left-aligned text frame had been manually shifted. The saved frame was not a standard centered box, the translation data still forced left alignment, and the title ink exceeded the previous frame width.",
+  "measurement": {
+    "sourceTitleCenterXPt": 409.9730835,
+    "standardFrameXPt": 125,
+    "standardFrameWidthPt": 570,
+    "standardFrameCenterXPt": 410,
+    "targetInkLeftPt": 153.0485886750014,
+    "targetInkWidthPt": 513.8806146960821,
+    "targetInkCenterXPt": 410.0,
+    "centerDeltaPt": 0.0269165,
+    "sideMarginsPt": 28.059692,
+    "lineCount": "1/1",
+    "font": "Cinzel-Regular 18 pt white, weight 700, unchanged"
+  },
+  "correction": "Persisted the canonical PT-BR frame as Payload layout-frame id 184 (x=125, physical width=570, centered at x=410). Updated only translation 2048 data.textAlign to center; title text and rich segments, font, size, weight and color were unchanged. The static legacy sidecar uses x=125 and width=570.",
+  "verification": {
+    "ogReference": "tmp/qa-page-064/p64-og-reference.png",
+    "ptbrPrint": "tmp/qa-page-064/p064-ptbr-title-box-centered-final-print.png",
+    "ptbrViewer": "tmp/qa-page-064/p064-ptbr-title-box-centered-final-viewer.png",
+    "ptbrMetrics": "tmp/qa-page-064/p064-ptbr-title-box-centered-final-metrics.json",
+    "ptbrPdf": "tmp/qa-page-064/p064-ptbr-title-box-centered-final-2026-11-18.pdf",
+    "ptbrPdfVerification": true,
+    "translationRecordsVerified": true,
+    "copyfitVisualRows": "1/1",
+    "viewerAndPrintInspected": true,
+    "payloadFrameId": 184,
+    "oldTranslationBackup": "engineering-decisions/evidence/2026-11-18-p064-review/title-frame-standardization/translation-2048-before-alignment.json"
+  },
+  "remainingIssue": "Regular prose appears visibly heavier in the Viewer/print than in the official OG in both EN and PT-BR. No page-local font override was applied; the shared renderer/rasterization cause remains unproven. Full-page translation and editorial certification remain open.",
+  "privateEvidence": "C:/Users/bruno/engineering-labs/planning/engineering-decisions/evidence/2026-11-18-p064-review/"
+}

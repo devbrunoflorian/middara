@@ -418,6 +418,14 @@ O problema afetava **605 das 1077 unidades do catálogo**, impedindo a aprovaç�
 - O bloco 24 da página 13 com `[[skull2]]` foi aprovado com `HTTP 200 OK` e gravado com sucesso no Payload CMS.
 - Testes automatizados em múltiplas páginas (p. 16, 20, 21, 26) confirmaram aprovações imediatas com status 200.
 
+### Revisar uma tradução já aprovada com nova medição
+
+Uma correção editorial legítima pode mudar texto ou geometria e, por isso, gerar um fingerprint Copyfit V3 novo para uma unidade que já tem publicação aprovada. O endpoint antes rejeitava o fingerprint antigo salvo na própria revisão, embora a nova candidata viesse do catálogo canônico e a publicação atual ainda correspondesse à tradução persistida.
+
+O endpoint agora permite essa revisão apenas quando o registro anterior está aprovado e contém uma publicação. A aprovação continua exigindo o fingerprint enviado igual ao catálogo canônico; antes de escrever, o endpoint também confirma que a tradução atual ainda tem o mesmo ID e os mesmos dados da publicação anterior. A nova publicação guarda a anterior no histórico. Registros pendentes ou sem publicação não recebem essa exceção.
+
+**Evidência:** a correção revisada do callout IMPORTANTE da p. 57 foi republicada pela rota oficial no review 1684. O endpoint confirmou a tradução 1994, Copyfit V3 EXACT 7/7 e manteve a publicação anterior no histórico. Exportações PT-BR finais passaram `verifiedTranslationRecords=true` e `pdfVerification=true`.
+
 
 
 ## UI-REVIEW-RULER-OVERLAY — régua cobre o painel de revisão (adiado)

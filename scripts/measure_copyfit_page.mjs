@@ -45,12 +45,12 @@ const baseUrl = process.env.MIDDARA_VIEWER_URL ?? 'http://127.0.0.1:8080';
 const pdfPath = process.env.MIDDARA_SOURCE_PDF ?? 'C:/Users/bruno/Middara/Rulebook 1.2/Rulebook 1p2 Final Version 05-19-23 Optimized.pdf';
 const rendererKeyForCandidate = candidate => {
   const key = String(candidate.copyfitCanonicalSpanKey || candidate.spanKey || '');
-  // Block overrides share a locale-neutral PageRenderer key. Typographic and
-  // credit units are locale-scoped in PageRenderer and keep the __pt-BR suffix.
-  if (/^page_\d+_(?:unit|credit)_/u.test(key)) {
-    return key.endsWith('__pt-BR') ? key : `${key}__pt-BR`;
-  }
-  return key.replace(/__(?:pt-BR|en)$/u, '');
+  // PageRenderer emits Payload translation keys. PT-BR block overrides are
+  // locale-scoped too (`page_N_block_N__pt-BR`); canonical source keys without
+  // a locale suffix must be qualified before probing the live DOM.
+  if (key.endsWith('__pt-BR')) return key;
+  if (key.endsWith('__en')) return `${key.slice(0, -4)}__pt-BR`;
+  return `${key}__pt-BR`;
 };
 const normalize = value => String(value ?? '')
   .replace(/\[\[[^\]]+\]\]/gu, ' ')
@@ -71,12 +71,19 @@ const normalize = value => String(value ?? '')
   // visible advance; restore that separator only for proposal identity.
   .replace(/(?<!\w)([1-4]\.)(?=[A-Z\u00c0-\u00de])/gu, '$1 ')
   .trim();
-const candidateTextForRenderer = (candidate, staticMarkerText = '') => {
+const candidateTextForRenderer = (candidate, staticMarkerText = '', actualRenderedText = '') => {
   let text = normalize((candidate.data?.segments ?? []).map(segment => segment.text ?? '').join(''));
   const staticMarker = String(staticMarkerText).replace(/[\s\u00a0]+/gu, '');
   // Source list markers remain independently painted at the hanging indent;
   // PageRenderer removes the duplicate marker from the translated body.
   if (staticMarker && text.startsWith(staticMarker)) text = text.slice(staticMarker.length).replace(/^[\s\u00a0]+/u, '');
+  else if (!staticMarker && actualRenderedText) {
+    const bodyText = normalize(actualRenderedText);
+    const leadingMarker = text.match(/^(?:•|[1-4]\.)\s/u)?.[0];
+    if (leadingMarker && !bodyText.startsWith(leadingMarker.trim())) {
+      text = text.slice(leadingMarker.length).replace(/^[\s\u00a0]+/u, '');
+    }
+  }
   return normalize(text);
 };
 
@@ -99,7 +106,15 @@ if (!pending.length) {
 }
 
 // ---- PDF side -------------------------------------------------------------------------------
-const pdfRequest = JSON.stringify({ pdf: pdfPath, page: pageNumber - 1, boxes: pending.map(candidate => candidate.copyfitCanonicalBbox) });
+const pdfRequest = JSON.stringify({
+  pdf: pdfPath,
+  page: pageNumber - 1,
+  boxes: pending.map(candidate => candidate.copyfitCanonicalBbox),
+  semanticSymbols: pending.map(candidate => candidate.semanticSymbols
+    ?? candidate.data?.managedSourceSymbols
+    ?? candidate.data?.segments?.map(segment => segment.symbolId).filter(Boolean)
+    ?? []),
+});
 const pdfScript = `
 import sys, json, pymupdf
 import re
@@ -125,20 +140,30 @@ for block_index, block in enumerate(page.get_text("dict")["blocks"]):
                 # inline emphasis), even though they share one line box.
                 spans.append((((x0 + x1) / 2), ((y0 + y1) / 2), baseline, span["text"], y0, y1, span.get("font", ""), span.get("size", 0), (block_index, line_index)))
 out = []
-for box in req["boxes"]:
+for box_index, box in enumerate(req["boxes"]):
     if not box:
         out.append(None); continue
     pad = 1.0
     inside = [s for s in spans if box[0] - pad <= s[0] <= box[2] + pad and box[1] - pad <= s[1] <= box[3] + pad]
-    # Source A-D callout glyphs are separate PDF text spans from the prose.
-    # Their 8 pt bold glyph baselines sit about 1.6 pt above the 10 pt body
-    # baseline even though their glyph boxes occupy that same visual row. Fold
-    # only those marker spans whose vertical ink box overlaps a prose span;
-    # retain a marker as its own row when no neighbouring text proves an inline
-    # relationship. This prevents an inline tile letter from becoming a false
-    # extra Copyfit row without hiding or dropping its source glyph.
-    marker_spans = [s for s in inside if re.fullmatch(r"[A-D]", s[3].strip())
-        and "Bold" in s[6] and 0 < s[7] <= 8.5]
+    # Source alphabet callout glyphs and some semantic icons are separate PDF
+    # text spans from the prose. Their baselines can be shifted by their larger
+    # glyph boxes even though the ink belongs to the same visual row. Fold
+    # only marker spans whose vertical ink box overlaps a prose span; retain a
+    # marker as its own row when no neighbouring text proves an inline
+    # relationship. The star exception is scoped to candidates that declare
+    # stat.scaling-star, since the OG encodes this icon as a large bold '*'.
+    semantic_symbols = req.get("semanticSymbols", [[]] * len(req["boxes"]))[box_index]
+    marker_spans = [s for s in inside if (
+        (re.fullmatch(r"[A-Z]", s[3].strip()) and "Bold" in s[6] and 0 < s[7] <= 8.5)
+        # The PDF places the Cinzel count printed beside weapon-hand icon
+        # vectors on its own text baseline, offset from the surrounding
+        # Optima row. When the candidate identifies a hand icon, treat that
+        # standalone quantity as inline only if its ink overlaps prose.
+        or (bool({"weapon.hand.one", "weapon.hand.two"} & set(semantic_symbols))
+            and re.fullmatch(r"\\d{1,2}", s[3].strip())
+            and s[6].startswith("Cinzel") and 0 < s[7] <= 12)
+        or ("stat.scaling-star" in semantic_symbols and s[3].strip() == "*" and "Bold" in s[6] and s[7] >= 18)
+    )]
     prose_spans = [s for s in inside if s not in marker_spans]
     folded_markers = 0
     standalone_markers = []
@@ -187,75 +212,85 @@ try {
   const blocked = [];
   if (previewRequestId || refreshSpanKeys.length) {
     await context.route('**/translation-review/catalog.json*', async route => {
-      const upstream = await route.fetch();
-      const payload = await upstream.json();
-      let previewPayload = payload;
-      for (const spanKey of refreshSpanKeys) {
-        previewPayload = exposeCandidateForCopyfitPreview(previewPayload, { spanKey });
+      try {
+        const upstream = await route.fetch();
+        const payload = await upstream.json();
+        let previewPayload = payload;
+        for (const spanKey of refreshSpanKeys) {
+          previewPayload = exposeCandidateForCopyfitPreview(previewPayload, { spanKey });
+        }
+        console.log(`Browser-only copyfit preview: cleared stale diagnostic blanks for ${refreshSpanKeys.join(', ')}; source catalog remains unchanged.`);
+        await route.fulfill({ response: upstream, json: previewPayload });
+      } catch (error) {
+        if (/Request context disposed|Target page, context or browser has been closed/iu.test(String(error?.message ?? error))) return;
+        throw error;
       }
-      console.log(`Browser-only copyfit preview: cleared stale diagnostic blanks for ${refreshSpanKeys.join(', ')}; source catalog remains unchanged.`);
-      await route.fulfill({ response: upstream, json: previewPayload });
     });
   }
   await context.route('**/api/**', async route => {
-    const method = route.request().method().toUpperCase();
-    if (method !== 'GET') { blocked.push(`${method} ${route.request().url()}`); await route.abort('blockedbyclient'); return; }
-    const requestUrl = new URL(route.request().url());
-    if (previewDrafts && requestUrl.pathname.endsWith('/api/translation-reviews')) {
-      const upstream = await route.fetch();
-      const payload = await upstream.json();
-      const previewPayload = exposeReviewDraftsForCopyfitPreview(payload, { candidates: pending });
-      console.log(`Browser-only preview: exposed ${pending.length} proposal drafts to the review renderer; Payload remains unchanged.`);
-      await route.fulfill({ response: upstream, json: previewPayload });
-      return;
-    }
-    if (previewDrafts && requestUrl.pathname.endsWith('/api/layout-frames')) {
-      const upstream = await route.fetch();
-      const payload = await upstream.json();
-      const previewPayload = exposeLayoutFramesForCopyfitPreview(payload, { pageNumber, candidates: pending });
-      console.log(`Browser-only preview: exposed candidate PT-BR layout frames; Payload remains unchanged.`);
-      await route.fulfill({ response: upstream, json: previewPayload });
-      return;
-    }
-    if (previewDrafts && /\/api\/translations\/?$/u.test(requestUrl.pathname)) {
-      const upstream = await route.fetch();
-      const payload = await upstream.json();
-      const sourceDocs = Array.isArray(payload?.docs) ? payload.docs : Array.isArray(payload) ? payload : null;
-      if (!sourceDocs) throw new Error('Translations response has no document list for browser-only draft preview.');
-      const docs = [...sourceDocs];
-      for (const candidate of pending) {
-        if (!candidate.data || !candidate.spanKey) continue;
-        const index = docs.findIndex(doc => doc.spanKey === candidate.spanKey);
-        const existing = index >= 0 ? docs[index] : null;
-        const replacement = {
-          ...(existing ?? {}),
-          id: existing?.id ?? `copyfit-preview-${encodeURIComponent(candidate.spanKey)}`,
-          spanKey: candidate.spanKey,
-          language: 'pt-BR',
-          data: candidate.data,
-        };
-        if (index >= 0) docs[index] = replacement;
-        else docs.push(replacement);
+    try {
+      const method = route.request().method().toUpperCase();
+      if (method !== 'GET') { blocked.push(`${method} ${route.request().url()}`); await route.abort('blockedbyclient'); return; }
+      const requestUrl = new URL(route.request().url());
+      if (previewDrafts && requestUrl.pathname.endsWith('/api/translation-reviews')) {
+        const upstream = await route.fetch();
+        const payload = await upstream.json();
+        const previewPayload = exposeReviewDraftsForCopyfitPreview(payload, { candidates: pending });
+        console.log(`Browser-only preview: exposed ${pending.length} proposal drafts to the review renderer; Payload remains unchanged.`);
+        await route.fulfill({ response: upstream, json: previewPayload });
+        return;
       }
-      const previewPayload = Array.isArray(payload) ? docs : { ...payload, docs };
-      console.log(`Browser-only preview: exposed ${pending.length} proposal drafts to PageRenderer; Payload remains unchanged.`);
-      await route.fulfill({ response: upstream, json: previewPayload });
-      return;
+      if (previewDrafts && requestUrl.pathname.endsWith('/api/layout-frames')) {
+        const upstream = await route.fetch();
+        const payload = await upstream.json();
+        const previewPayload = exposeLayoutFramesForCopyfitPreview(payload, { pageNumber, candidates: pending });
+        console.log(`Browser-only preview: exposed candidate PT-BR layout frames; Payload remains unchanged.`);
+        await route.fulfill({ response: upstream, json: previewPayload });
+        return;
+      }
+      if (previewDrafts && /\/api\/translations\/?$/u.test(requestUrl.pathname)) {
+        const upstream = await route.fetch();
+        const payload = await upstream.json();
+        const sourceDocs = Array.isArray(payload?.docs) ? payload.docs : Array.isArray(payload) ? payload : null;
+        if (!sourceDocs) throw new Error('Translations response has no document list for browser-only draft preview.');
+        const docs = [...sourceDocs];
+        for (const candidate of pending) {
+          if (!candidate.data || !candidate.spanKey) continue;
+          const index = docs.findIndex(doc => doc.spanKey === candidate.spanKey);
+          const existing = index >= 0 ? docs[index] : null;
+          const replacement = {
+            ...(existing ?? {}),
+            id: existing?.id ?? `copyfit-preview-${encodeURIComponent(candidate.spanKey)}`,
+            spanKey: candidate.spanKey,
+            language: 'pt-BR',
+            data: candidate.data,
+          };
+          if (index >= 0) docs[index] = replacement;
+          else docs.push(replacement);
+        }
+        const previewPayload = Array.isArray(payload) ? docs : { ...payload, docs };
+        console.log(`Browser-only preview: exposed ${pending.length} proposal drafts to PageRenderer; Payload remains unchanged.`);
+        await route.fulfill({ response: upstream, json: previewPayload });
+        return;
+      }
+      if (previewRequestId && requestUrl.pathname.endsWith('/api/translation-review-requests')) {
+        const candidate = pending[0];
+        const upstream = await route.fetch();
+        const payload = await upstream.json();
+        const previewPayload = exposeRequestForCopyfitPreview(payload, {
+          requestId: previewRequestId,
+          reviewKey: candidate.reviewKey,
+          spanKey: candidate.spanKey,
+        });
+        console.log(`Browser-only copyfit preview: request ${previewRequestId} is treated as returned by AI; Payload remains unchanged.`);
+        await route.fulfill({ response: upstream, json: previewPayload });
+        return;
+      }
+      await route.continue();
+    } catch (error) {
+      if (/Request context disposed|Target page, context or browser has been closed/iu.test(String(error?.message ?? error))) return;
+      throw error;
     }
-    if (previewRequestId && requestUrl.pathname.endsWith('/api/translation-review-requests')) {
-      const candidate = pending[0];
-      const upstream = await route.fetch();
-      const payload = await upstream.json();
-      const previewPayload = exposeRequestForCopyfitPreview(payload, {
-        requestId: previewRequestId,
-        reviewKey: candidate.reviewKey,
-        spanKey: candidate.spanKey,
-      });
-      console.log(`Browser-only copyfit preview: request ${previewRequestId} is treated as returned by AI; Payload remains unchanged.`);
-      await route.fulfill({ response: upstream, json: previewPayload });
-      return;
-    }
-    await route.continue();
   });
   await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
   await page.waitForSelector('input.page-input');
@@ -265,35 +300,59 @@ try {
     && (document.querySelector('.page-container img')?.naturalWidth ?? 0) > 0, pageNumber, { timeout: 30000 });
   await page.locator('button.language-toggle-option[aria-label="Português (Brasil)"]').click();
   const zoomLabel = page.locator('.zoom-level');
-  for (let i = 0; i < 20 && parseInt(await zoomLabel.innerText(), 10) !== zoomPercent; i += 1) {
-    const current = parseInt(await zoomLabel.innerText(), 10);
-    await page.locator(current < zoomPercent
-      ? 'button[title="Zoom In"], button[title="Aumentar zoom"]'
-      : 'button[title="Zoom Out"], button[title="Diminuir zoom"]')
-      .click();
-    await page.waitForTimeout(120);
+  if (zoomPercent === 100 && Number.parseInt(await zoomLabel.innerText(), 10) !== zoomPercent) {
+    // The Viewer has an explicit 100% control; use it instead of racing four
+    // asynchronous 25% zoom clicks through the edge toolbar.
+    await page.locator('button[title="Fit to Screen"], button[title="Ajustar à tela"]')
+      .dispatchEvent('click');
+    await page.waitForFunction(target => Number.parseInt(document.querySelector('.zoom-level')?.textContent ?? '', 10) === target,
+      zoomPercent, { timeout: 5000 });
+  } else {
+    for (let i = 0; i < 20; i += 1) {
+      const current = Number.parseInt(await zoomLabel.innerText(), 10);
+      if (current === zoomPercent) break;
+      await page.locator(current < zoomPercent
+        ? 'button[title="Zoom In"], button[title="Aumentar zoom"]'
+        : 'button[title="Zoom Out"], button[title="Diminuir zoom"]')
+        .dispatchEvent('click');
+      await page.waitForFunction(previous => {
+        const next = Number.parseInt(document.querySelector('.zoom-level')?.textContent ?? '', 10);
+        return Number.isFinite(next) && next !== previous;
+      }, current, { timeout: 5000 });
+    }
   }
   const zoomActual = await zoomLabel.innerText();
 
-  await page.locator('button.global-nav-action', { hasText: /Revisar traduções|Review translations/u }).first().dispatchEvent('click');
-  await page.getByRole('tab', { name: /Propostas/u }).click();
-  await page.locator('#translation-review-page').selectOption(String(pageNumber));
-  // The persisted review records load asynchronously and can replace the
-  // proposal list after the page filter changes. Do not select a row while
-  // that replacement is still in flight; otherwise the PageRenderer highlight
-  // can identify the source unit before its temporary PT-BR preview settles.
-  try {
-    await page.waitForFunction(() => document.querySelector('.translation-review-row-action:not(:disabled)') !== null,
-      null, { timeout: 8000 });
-  } catch {
-    // Persisted PageRenderer overrides can be measured by their exact renderer
-    // key even when a request owns the candidate and no proposal row is shown.
-    // Keep the direct identity path usable if the panel has no selectable rows.
-    console.warn('No selectable review row loaded; checking exact PageRenderer keys before marking candidates unmatched.');
+  if (!previewDrafts) {
+    await page.locator('button.global-nav-action', { hasText: /Revisar traduções|Review translations/u }).first().dispatchEvent('click');
+    await page.getByRole('tab', { name: /Propostas/u }).click();
+    await page.locator('#translation-review-page').selectOption(String(pageNumber));
+    // The persisted review records load asynchronously and can replace the
+    // proposal list after the page filter changes. Do not select a row while
+    // that replacement is still in flight; otherwise the PageRenderer highlight
+    // can identify the source unit before its temporary PT-BR preview settles.
+    try {
+      await page.waitForFunction(() => document.querySelector('.translation-review-row-action:not(:disabled)') !== null,
+        null, { timeout: 8000 });
+    } catch {
+      // Persisted PageRenderer overrides can be measured by their exact renderer
+      // key even when a request owns the candidate and no proposal row is shown.
+      console.warn('No selectable review row loaded; checking exact PageRenderer keys before marking candidates unmatched.');
+    }
   }
   await page.evaluate(async () => { await document.fonts.ready; });
-  const rowCount = await page.locator('.translation-review-row-wrap .translation-review-row').count();
-  console.log('panel rows:', rowCount, JSON.stringify(await page.locator('.translation-review-row-wrap .translation-review-row-heading').allInnerTexts()));
+  if (previewDrafts) {
+    const expectedRendererKeys = pending.map(rendererKeyForCandidate);
+    await page.waitForFunction(keys => {
+      const present = new Set(Array.from(document.querySelectorAll('[data-rendered-translation-key]'))
+        .map(element => element.getAttribute('data-rendered-translation-key')));
+      return keys.every(key => present.has(key));
+    }, expectedRendererKeys, { timeout: 20000 });
+  }
+  const rowCount = previewDrafts ? 0 : await page.locator('.translation-review-row-wrap .translation-review-row').count();
+  if (!previewDrafts) {
+    console.log('panel rows:', rowCount, JSON.stringify(await page.locator('.translation-review-row-wrap .translation-review-row-heading').allInnerTexts()));
+  }
 
   const byText = new Map();
   for (const candidate of pending) {
@@ -465,18 +524,25 @@ try {
         symbolOnlyRows += 1;
       }
     }
-    return { rects, text, symbolIds, symbolOnlyRows };
+    const staticMarkerText = target.querySelector(
+      '[data-list-marker-line], [data-source-bullet-flow-marker], [data-source-numbered-list-marker]',
+    )?.textContent ?? target.parentElement?.querySelector('[data-list-marker-line]')?.textContent ?? '';
+    return { count: 1, rects, text, symbolIds, symbolOnlyRows, staticMarkerText };
   }, { bbox, pageWidth: pdfPageWidth });
-  const headings = await page.locator('.translation-review-row-wrap .translation-review-row-heading').allInnerTexts();
+  const headings = previewDrafts ? [] : await page.locator('.translation-review-row-wrap .translation-review-row-heading').allInnerTexts();
+  if (process.env.MIDDARA_COPYFIT_DEBUG === '1') {
+    console.log('review row keys:', JSON.stringify(await page.locator('.translation-review-row-wrap').evaluateAll(rows =>
+      rows.map(row => row.getAttribute('data-review-key')))));
+  }
 
   for (const candidate of pending) {
     const index = pageCandidates.indexOf(candidate);
     const rowSelector = `.translation-review-row-wrap[data-review-key=${JSON.stringify(candidate.reviewKey)}] .translation-review-row`;
     const candidateRow = page.locator(rowSelector);
-    const directSnapshot = await pageRendererSnapshot(candidate.spanKey);
+    const directSnapshot = await pageRendererSnapshot(rendererKeyForCandidate(candidate));
     const rowCountForCandidate = await candidateRow.count();
     const directExpectedText = directSnapshot.count === 1
-      ? candidateTextForRenderer(candidate, directSnapshot.staticMarkerText)
+      ? candidateTextForRenderer(candidate, directSnapshot.staticMarkerText, directSnapshot.text)
       : null;
     const directIdentity = directExpectedText === null ? null : validatePageRendererIdentity({
       expectedText: directExpectedText,
@@ -503,6 +569,12 @@ try {
       unmatchedRows.push({ index, spanKey: candidate.spanKey, reason: directIdentity?.reason ?? measurementPath.reason });
       continue;
     }
+    if (process.env.MIDDARA_COPYFIT_DEBUG === '1') {
+      console.log('copyfit candidate:', candidate.spanKey, candidate.reviewKey,
+        'rendererKey=', rendererKeyForCandidate(candidate), 'snapshotCount=', directSnapshot.count,
+        'rowCount=', rowCountForCandidate, 'directIdentity=', directIdentity?.reason ?? (directIdentity ? 'valid' : 'not checked'),
+        'actual=', normalize(directSnapshot.text).slice(0, 180), 'expected=', directExpectedText?.slice(0, 180));
+    }
     if (measurementPath.path === 'page-renderer-key') {
       if (!directSnapshot.rects.length) {
         unmatchedRows.push({ index, spanKey: candidate.spanKey, reason: 'keyed PageRenderer unit has no visible text or symbol rectangles' });
@@ -527,8 +599,28 @@ try {
       });
       continue;
     }
+    if (rowCountForCandidate !== 1) {
+      unmatchedRows.push({
+        index,
+        spanKey: candidate.spanKey,
+        reason: `expected one selectable review row, found ${rowCountForCandidate}`,
+        directText: normalize(directSnapshot.text).slice(0, 180),
+        candidateText: directExpectedText?.slice(0, 180) ?? null,
+      });
+      continue;
+    }
     const expectedRendererKey = rendererKeyForCandidate(candidate);
-    await candidateRow.click();
+    try {
+      await candidateRow.click({ timeout: 3000 });
+    } catch {
+      unmatchedRows.push({
+        index,
+        spanKey: candidate.spanKey,
+        reason: 'review row disappeared before selection',
+        reviewKey: candidate.reviewKey,
+      });
+      continue;
+    }
     const staticMarkerLocator = page.locator(
       `[data-translation-review-highlight=${JSON.stringify(expectedRendererKey)}] [data-list-marker-line]`,
     ).first();
@@ -758,13 +850,22 @@ const hasUnresolvedSymbolTokens = candidate => /\[\[[^\]]+\]\]/u.test(JSON.strin
 const rows = pending.map((candidate, i) => {
   const pdf = pdfResults[i];
   const viewer = measurements.get(candidate.reviewKey);
-  const source = pdf?.rows ?? 0;
+  // Some source-PDF blocks intentionally restore English through a cropped
+  // raster overlay; their selectable text spans can contain only part of the
+  // visible paragraph. A candidate may carry a visually verified row count
+  // for that source crop, with its evidence recorded next to the override.
+  const source = Number.isInteger(candidate.sourceVisualLineCountOverride)
+    ? candidate.sourceVisualLineCountOverride
+    : (pdf?.rows ?? 0);
   const target = viewer?.rows ?? 0;
   const classification = source && target ? (target === source ? 'EXACT' : target < source ? 'UNDER' : 'OVER') : 'UNMEASURED';
   return { candidate, pdf, viewer, source, target, classification, symbols: hasSymbols(candidate), unresolvedSymbols: hasUnresolvedSymbolTokens(candidate) };
 });
 for (const row of rows) {
-  console.log(`${row.classification.padEnd(10)} pdf=${String(row.source).padStart(2)} viewer=${String(row.target).padStart(2)} ${row.symbols ? '[symbols] ' : ''}${row.candidate.spanKey}`);
+  const sourceLabel = Number.isInteger(row.candidate.sourceVisualLineCountOverride)
+    ? `source=${String(row.source).padStart(2)} (PDF text=${String(row.pdf?.rows ?? 0).padStart(2)}; visual override)`
+    : `pdf=${String(row.source).padStart(2)}`;
+  console.log(`${row.classification.padEnd(10)} ${sourceLabel} viewer=${String(row.target).padStart(2)} ${row.symbols ? '[symbols] ' : ''}${row.candidate.spanKey}`);
   if (args.includes('--typography') && row.viewer) {
     console.log(`  typography ${JSON.stringify({
       sourceBaselinesPt: row.pdf?.row_baselines ?? [],
@@ -806,9 +907,9 @@ if (write) {
         sourcePdfVisualLineCount: row.source,
         pageRendererVisualLineCount: row.target,
         classification: row.classification,
-        method: 'scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.',
+        method: 'scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.',
         environment: { pageNumber, pdfDocumentPageIndex: pageNumber - 1, language: 'pt-BR', viewerZoom: environment.zoomActual, viewportCssPixels: `${viewport.width}x${viewport.height}`, devicePixelRatio: dpr, fontLoaded: environment.fontLoaded },
-        sourceEvidence: { bboxPt: row.candidate.copyfitCanonicalBbox, visualRowBaselinesPt: row.pdf.row_baselines, spans: row.pdf.spans, inlineMarkersFoldedIntoTextRows: row.pdf.inline_markers_folded ?? 0, visualRows: row.source },
+        sourceEvidence: { bboxPt: row.candidate.copyfitCanonicalBbox, extractedPdfTextVisualRows: row.pdf.rows, visualRowBaselinesPt: row.pdf.row_baselines, spans: row.pdf.spans, inlineMarkersFoldedIntoTextRows: row.pdf.inline_markers_folded ?? 0, sourceVisualLineCountOverride: row.candidate.sourceVisualLineCountOverride ?? null, sourceVisualLineCountEvidence: row.candidate.sourceVisualLineCountEvidence ?? null, visualRows: row.source },
         pageRendererEvidence: { spanKey: row.viewer.rendererKey, readingMethod: row.viewer.method === 'geometric' ? 'text rects inside the canonical bbox plus visible semantic-symbol rects for symbol-only rows (renderer did not mark the unit)' : row.viewer.method === 'page-renderer-key' ? 'text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects' : 'text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows', rangeRectFragments: row.viewer.rangeRectFragments, renderedSymbolIds: row.viewer.symbolIds ?? [], semanticSymbolOnlyRows: row.viewer.symbolOnlyRows ?? 0, distinctVisualRows: row.target, visualRowTopsCssPx: row.viewer.rowTops, visualRowIntervalsPt: row.viewer.rowIntervalsPt ?? null, pageScaleCssPxPerPt: row.viewer.pageScaleCssPxPerPt ?? null, renderedFontSamples: row.viewer.fontSamples ?? [], frameHeightCssPx: row.viewer.frameHeight, frameWidthCssPx: row.viewer.frameWidth },
         editorialStatus: 'Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.',
       };

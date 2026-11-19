@@ -789,5 +789,40 @@
     "pdfPreviouslyVerified": true,
     "editorialApproval": false,
     "finalTranslationWrites": 0
+  },
+  "latestCorrection": {
+    "verifiedOn": "2026-11-18",
+    "sourceBlockId": "block_27",
+    "sourceBlockIndex": 12,
+    "spanKey": "page_62_block_12__pt-BR",
+    "payloadTranslationId": 2220,
+    "issue": "The earlier translation lived in a font-size subunit; the bold SOI and closing punctuation stayed at their source anchor, and the translation omitted target from the repeated space/target/figure list.",
+    "correction": "Saved one full-block rich-text override for the continuous paragraph, restored target, preserved italics for Nearest/Farthest and their Portuguese equivalents, and preserved SOI bold at 9 pt.",
+    "copyfit": {
+      "classification": "EXACT",
+      "sourcePdfVisualLines": 5,
+      "pageRendererVisualLines": 5,
+      "framePt": [
+        86.16260359894416,
+        669.1285491085941,
+        312.068251750484,
+        55.93901534184166
+      ],
+      "lineHeight": 1.1
+    },
+    "payloadReadBackVerified": true,
+    "viewerAndPrint": {
+      "verifiedTranslationRecords": true,
+      "pdfVerification": true,
+      "semanticSymbolCount": 4,
+      "imageCount": 6,
+      "normalizedMediaBoxPt": [
+        820.3460083007812,
+        820.3460083007812
+      ]
+    },
+    "pdfSha256": "E5BF4882D93DC5A554063695CADA05F80A28B6A3C7B86C9D7721943B60C48CA7",
+    "evidenceDirectory": "C:\\Users\\bruno\\engineering-labs\\planning\\engineering-decisions\\evidence\\2026-11-18-quality-dip-p062",
+    "editorialApproval": "This correction is saved and export-verified; full-page certification and formal review status remain open."
   }
 }

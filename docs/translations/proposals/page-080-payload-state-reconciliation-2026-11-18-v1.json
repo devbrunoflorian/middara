@@ -1,0 +1,41 @@
+{
+  "recordId": "page-080-payload-state-reconciliation-2026-11-18-v1",
+  "recordType": "payload_and_export_state_reconciliation",
+  "date": "2026-11-18",
+  "page": 80,
+  "historicalProposal": {
+    "file": "page-080-alternate-combatant-example-2026-10-16-v1.json",
+    "scope": "One Alternate Combatant example only.",
+    "historicalState": "No p80 translation or review had been written when that proposal was prepared."
+  },
+  "currentPayload": {
+    "translationCount": 1,
+    "activeReviewCount": 1,
+    "approvedReviewCount": 1,
+    "translationId": 1509,
+    "reviewId": 1104,
+    "spanKey": "page_80_block_4__pt-BR",
+    "translatedUnit": "Example: The Cave Sickle Warrior Combatant Card shown above might alternatively Spawn instead of Cave Sickles.",
+    "translation": "Exemplo: a Carta de Combatente Cave Sickle Warrior mostrada acima poderia surgir no lugar das Cave Sickles."
+  },
+  "visualComparison": {
+    "source": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf, printed page 80",
+    "comparedArtifacts": [
+      "p080-og.png",
+      "p080-en-print.png",
+      "p080-pt-BR-print.png",
+      "p080-en.pdf",
+      "p080-pt-BR.pdf"
+    ],
+    "result": "The approved example is translated and visible. Most remaining rule prose, section headings, and the continued page title are still English in the PT-BR export. Printed card/component artwork remains English by project scope.",
+    "exports": {
+      "enPdfVerification": true,
+      "ptBrVerifiedTranslationRecords": true,
+      "ptBrPdfVerification": true
+    }
+  },
+  "pageStatus": "not_certified_translation_incomplete",
+  "nextAction": "Translate the remaining editorial rule units, preserve component artwork and its printed labels, keep headings/paragraphs in their own source units, and copyfit against the OG before publication.",
+  "payloadWrites": 0,
+  "evidenceDirectory": "C:/Users/bruno/engineering-labs/planning/engineering-decisions/evidence/2026-11-18-p080-state-reconciliation/"
+}
