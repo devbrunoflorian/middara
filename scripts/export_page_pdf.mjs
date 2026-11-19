@@ -61,6 +61,72 @@ function translationPlainText(data) {
   return segments.map(segment => segment.symbolId ? '' : String(segment.text ?? '')).join('');
 }
 
+function sourceLineText(line) {
+  return (line?.spans ?? [])
+    .filter(span => !span.renderOnlyStrokePass)
+    .map(span => span.displayOverride || span.text || '')
+    .join('');
+}
+
+function listFlowTranslationKeys(block, pageNumber, blockIndex) {
+  const lines = block.lines ?? [];
+  const markerGlyphs = new Set(Array.from('•·▪■●○◦▫‣⁃'));
+  const markerIndexes = new Set(block.listMarkerLineIndexes ?? []);
+  if (block.disableAutoListMarkerDetection) return [];
+
+  for (let index = 0; index < lines.length; index += 1) {
+    if (markerIndexes.has(index)) continue;
+    const markerText = Array.from(sourceLineText(lines[index]).replace(/[\s\u00a0]+/gu, ''));
+    if (markerText.length !== 1 || !markerGlyphs.has(markerText[0])) continue;
+    const nextTextLine = lines.slice(index + 1).find(candidate => sourceLineText(candidate).trim().length > 0);
+    if (!nextTextLine) continue;
+    const markerSize = lines[index].spans?.find(span => !span.renderOnlyStrokePass)?.size ?? 10;
+    const horizontalGap = nextTextLine.bbox[0] - lines[index].bbox[0];
+    const verticalDelta = Math.abs(nextTextLine.bbox[1] - lines[index].bbox[1]);
+    if (horizontalGap <= markerSize * 0.6 || horizontalGap > markerSize * 3
+      || verticalDelta > Math.max(2.5, markerSize * 0.25)) continue;
+    markerIndexes.add(index);
+  }
+
+  const sortedMarkerIndexes = [...markerIndexes].sort((a, b) => a - b);
+  const firstMarkerIndex = sortedMarkerIndexes[0] ?? -1;
+  const shouldSplitListFlow = markerIndexes.size > 0
+    && (markerIndexes.size > 1 || firstMarkerIndex > 0);
+  const canSplitListFlow = shouldSplitListFlow
+    && !block.adminReadOnly
+    && !block.preserveLegacySpanOverrides
+    && !block.typographicUnits?.length
+    && !block.typographicSpanUnits?.length
+    && !block.creditUnits?.length
+    && !block.creditUnit;
+  if (!canSplitListFlow) return [];
+
+  const keys = [];
+  let activeLines = [];
+  let activeMarkerOrdinal;
+  let markerOrdinal = -1;
+  const flushText = () => {
+    if (!activeLines.length) return;
+    const firstLine = activeLines[0];
+    const partKey = `${activeMarkerOrdinal === undefined ? 'prose' : `item-${activeMarkerOrdinal}`}-${firstLine.id}`;
+    const sourceEditorKey = block.editorKey ?? `page_${pageNumber}_block_${blockIndex}`;
+    keys.push(`${sourceEditorKey}__${partKey}__pt-BR`);
+    activeLines = [];
+    activeMarkerOrdinal = undefined;
+  };
+  lines.forEach((line, index) => {
+    if (markerIndexes.has(index)) {
+      flushText();
+      markerOrdinal += 1;
+      activeMarkerOrdinal = markerOrdinal;
+      return;
+    }
+    activeLines.push(line);
+  });
+  flushText();
+  return keys;
+}
+
 function rendererKeyForReviewCandidate(candidate, pageData) {
   const canonicalKey = String(candidate.copyfitCanonicalSpanKey ?? '');
   const blockFromCanonical = canonicalKey.match(/^page_\d+_block_(\d+)(?:__pt-BR)?$/u);
@@ -182,7 +248,21 @@ if (config.language === 'pt-BR') {
     const payload = await response.json();
     docs = (payload.docs ?? []).filter(doc => String(doc.spanKey ?? '').startsWith(prefix));
   }
+  const legacyBlockKeysSupersededByUnits = new Set();
+  for (const [blockIndex, block] of (pageData.blocks ?? []).entries()) {
+    const units = block.typographicUnits ?? [];
+    const hasEveryUnit = units.length > 0 && units.every(unit => docs.some(doc =>
+      doc.spanKey === `page_${config.page}_unit_${unit.id}__pt-BR`));
+    const listFlowKeys = listFlowTranslationKeys(block, config.page, blockIndex);
+    const hasEveryListFlowUnit = listFlowKeys.length > 0 && listFlowKeys.every(key =>
+      docs.some(doc => doc.spanKey === key));
+    if (hasEveryUnit || hasEveryListFlowUnit) {
+      const blockKey = block.editorKey ?? `page_${config.page}_block_${blockIndex}`;
+      legacyBlockKeysSupersededByUnits.add(`${blockKey}__pt-BR`);
+    }
+  }
   expectedTranslation = docs
+    .filter(doc => !legacyBlockKeysSupersededByUnits.has(doc.spanKey))
     .map(doc => translationPlainText(doc.data))
     // Caption-only pages can have several valid short translations but no
     // paragraph-sized string. A short distinctive fragment is enough for the

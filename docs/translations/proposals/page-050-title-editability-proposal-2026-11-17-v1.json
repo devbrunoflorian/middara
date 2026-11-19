@@ -1,0 +1,105 @@
+{
+  "proposalId": "p050-editable-flanking-title-2026-11-17-v1",
+  "version": 1,
+  "title": "P.50 — tornar o título de Flanqueio editável",
+  "page": 50,
+  "language": "pt-BR",
+  "status": "technical_render_review_complete_human_editorial_review_pending",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "purpose": "Replace the PT-BR SVG text overlay with the same localized wording in an ordinary editable PageRenderer text unit. Preserve the exact English source-PDF title overlay in EN.",
+  "counts": {
+    "candidates": 1,
+    "existingPayloadTranslationReused": 1,
+    "translationRecordsWritten": 1,
+    "humanApprovalsCreated": 0
+  },
+  "sourceIssue": {
+    "sourceBlockIds": [
+      "block_12",
+      "block_16"
+    ],
+    "sourceLineIds": [
+      "line_12_0",
+      "line_16_0"
+    ],
+    "description": "The PDF extractor emitted two offset text passes for one visibly clean source heading. Both were hidden behind image/vector title overlays; the PT-BR wording was not an ordinary editable text unit."
+  },
+  "resolution": {
+    "editableSourceBlockId": "block_16",
+    "spanKey": "page_50_block_3__pt-BR",
+    "payloadTranslationId": 2173,
+    "englishBehavior": "Keep the exact source-PDF pixel overlay in EN and suppress the duplicate HTML pass in EN.",
+    "ptBRBehavior": "Render the localized text from the normal translation record; remove the PT-BR SVG overlay from the active sidecar. The old SVG file is retained but no longer referenced.",
+    "duplicatePass": "block_12 remains preserved in the DOM but is hidden from the page. block_16 is suppressed only in EN."
+  },
+  "candidate": {
+    "blockIndex": 3,
+    "sourceBlockId": "block_16",
+    "sourceLineId": "line_16_0",
+    "spanKey": "page_50_block_3__pt-BR",
+    "language": "pt-BR",
+    "sourceText": "Flanking and Backstab",
+    "proposalText": "Flanqueio e BACKSTAB",
+    "payloadTranslationId": 2173,
+    "data": {
+      "schemaVersion": 2,
+      "spanKey": "page_50_block_3__pt-BR",
+      "textAlign": "center",
+      "lineHeight": 1,
+      "lineHeightMode": "source",
+      "segments": [
+        {
+          "text": "Flanqueio e BACKSTAB",
+          "font": "Cinzel-Regular",
+          "size": 18,
+          "color": "#ffffff",
+          "weight": 700,
+          "style": "normal",
+          "disableLigatures": true
+        }
+      ],
+      "managedSourceSymbols": []
+    },
+    "sourceVisibleRows": 1,
+    "pageRendererVisibleRows": 1,
+    "classification": "EXACT",
+    "measurementMethod": "The official PDF raster shows one visible heading even though the extracted text layer has two offset passes. The real PageRenderer export metrics measured the editable PT-BR title at 1 line in the 200% Viewer and 1 line in the 100% print pass; the source raster, Viewer, and print were inspected together. This is not claimed as a Copyfit V3 measurement.",
+    "renderEvidence": {
+      "viewer": "qa-page-050-editable-title-pt-viewer.png",
+      "print": "qa-page-050-editable-title-pt-print.png",
+      "pdf": "qa-page-050-editable-title-pt.pdf",
+      "metrics": "qa-page-050-editable-title-pt-metrics.json",
+      "titleFramePt": {
+        "x": 294.648,
+        "y": 257.945,
+        "width": 228.753,
+        "height": 24.258
+      },
+      "visibleTextPt": {
+        "x": 301.914,
+        "y": 255.695,
+        "width": 214.221,
+        "height": 21.75
+      },
+      "visibleLines": {
+        "viewer200": 1,
+        "print100": 1
+      },
+      "verifiedTranslationRecords": true,
+      "pdfVerification": true
+    },
+    "approvalStatus": "no_review_record; human editorial review pending"
+  },
+  "englishExport": {
+    "viewer": "qa-page-050-editable-title-en-viewer.png",
+    "print": "qa-page-050-editable-title-en-print.png",
+    "pdf": "qa-page-050-editable-title-en.pdf",
+    "metrics": "qa-page-050-editable-title-en-metrics.json",
+    "pdfVerification": true,
+    "sourceTitleOverlayPreserved": true
+  },
+  "pageLimit": "This only fixes title editability. Page 50 remains uncertified because regular EN body text still appears heavier in the Viewer/print raster than in the official OG despite its stored 400 weight. The 15 body translation units and their existing review/legacy statuses were not changed.",
+  "titleTermDecision": "BACKSTAB permanece em inglês porque nomeia a Tag impressa nos componentes; ‘Flanqueio e BACKSTAB’ é a forma PT-BR pretendida, não uma tradução incompleta. Nenhuma decisão global de glossário foi criada.",
+  "humanApprovalsCreated": 0,
+  "privateEvidence": "C:/Users/bruno/engineering-labs/planning/engineering-decisions/evidence/2026-11-14-p050/p050-editable-title-2026-11-17/"
+}

@@ -22,12 +22,12 @@
   ],
   "scopeLimits": [
     "Traduz apenas a prosa restante da seção Saque Único e o exemplo final; não altera os nomes impressos em cartas nem a arte de componentes.",
-    "Draw segue o glossário oficial Compre; o contexto distingue cartas compradas do baralho das cartas disponíveis para compra na Rodada de História.",
+    "No callout de Item Único, “draw” descreve retirar uma carta do baralho durante um Encontro, distinto de comprar o Item na loja; a forma local é “retirar do baralho”. A tabela global Draw → Compre permanece inalterada.",
     "Tier permanece Tier e LVL permanece sigla; os runs em negrito do OG são preservados.",
     "O ícone do callout IMPORTANTE é semântico. O número de página 57 permanece impresso na arte e fora da moldura do exemplo."
   ],
   "terminologyEvidence": {
-    "Draw": "Compre — glossário oficial; mesma forma mecânica aprovada na própria p.57 em ‘Aventureiros compram a carta do topo do Baralho de Saque de Combatentes’.",
+    "Draw": "Glossário global: Compre. Exceção local confirmada para o callout da p.57: quando draw descreve retirar uma Carta de Item Único do baralho durante um Encontro, usar “retirar do baralho” para não confundir com comprar o Item na loja.",
     "Tier": "Tier — decisão do usuário e glossário oficial.",
     "LVL": "Preservada como sigla e em negrito, conforme o OG e decisões editoriais anteriores.",
     "Unique Item Card": "Carta de Item Único — referência genérica em prosa de regras; nomes impressos em cartas continuam em inglês."
@@ -1109,7 +1109,7 @@
       "spanKey": "page_57_block_32__pt-BR",
       "language": "pt-BR",
       "sourceText": "IMPORTANT: If you don't purchase a Unique Item Card and you end up being instructed to draw a Unique Item Card during a future Encounter, you will not shuffle that Unique Item Card in as one of the three to be drawn. It is still for sale back at the store. If you do not purchase this Unique Item, or you decide to sell it, this Unique Item Card is lost and removed from the game for the rest of the Adventure.",
-      "proposalText": "IMPORTANTE: Se você não comprar uma Carta de Item Único e acabar recebendo instruções para comprar outra Carta desse tipo durante um Encontro futuro, não a embaralhe com o baralho para que não apareça entre as três cartas a serem compradas; ela ainda está à venda na loja. Isso significa que, se você não comprar esse Item Único ou decidir vendê-lo, a Carta de Item Único será perdida e removida do jogo pelo restante da Aventura.",
+      "proposalText": "IMPORTANTE: Se você não comprar uma Carta de Item Único e, durante um Encontro futuro, receber instruções para retirar uma Carta de Item Único do baralho, não embaralhe essa Carta de Item Único entre as três cartas a serem retiradas, pois ela ainda está à venda na loja. Além disso, se você não comprar esse Item Único ou decidir vendê-lo, essa Carta de Item Único será perdida e removida do jogo pelo restante da Aventura.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_57_block_32__pt-BR",
@@ -1151,7 +1151,7 @@
             "textStrokeColor": "#ffffff"
           },
           {
-            "text": " Se você não comprar uma Carta de Item Único e acabar recebendo instruções para comprar outra Carta desse tipo durante um Encontro futuro, não a embaralhe com o baralho para que não apareça entre as três cartas a serem compradas; ela ainda está à venda na loja. Isso significa que, se você não comprar esse Item Único ou decidir vendê-lo, a Carta de Item Único será perdida e removida do jogo pelo restante da Aventura.",
+            "text": " Se você não comprar uma Carta de Item Único e, durante um Encontro futuro, receber instruções para retirar uma Carta de Item Único do baralho, não embaralhe essa Carta de Item Único entre as três cartas a serem retiradas, pois ela ainda está à venda na loja. Além disso, se você não comprar esse Item Único ou decidir vendê-lo, essa Carta de Item Único será perdida e removida do jogo pelo restante da Aventura.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -1165,12 +1165,113 @@
         ]
       },
       "technicalStatus": "approved_copyfit_v3_exact_and_full_page_export_verified",
-      "editorialStatus": "Official review approved and published; style/meaning compared with OG, and the current full-page Viewer/PDF export was verified.",
+      "editorialStatus": "Official review approved and published after correction; purchasing an item at the store is distinct from removing a card from the deck during an Encounter. Full-page Viewer/PDF compared with OG.",
       "pendingTerms": [],
+      "reviewId": 1684,
+      "translationId": 1994,
+      "approvalStatus": "approved",
+      "reviewDisposition": "active",
+      "viewerVerified": true,
+      "pdfExportVerified": true,
       "sourcePdfVisualLineCount": 7,
       "pageRendererVisualLineCount": 7,
       "copyfitClassification": "EXACT",
       "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 7,
+          "pageRendererVisualLineCount": 7,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 57,
+            "pdfDocumentPageIndex": 56,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              421.84210205078125,
+              284.33551025390625,
+              728.9328002929688,
+              362.2955017089844
+            ],
+            "visualRowBaselinesPt": [
+              293.586,
+              304.586,
+              315.586,
+              326.586,
+              337.586,
+              348.586,
+              359.586
+            ],
+            "spans": 10,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "visualRows": 7
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_57_block_32__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 14,
+            "renderedSymbolIds": [
+              "tag.important.icon"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 7,
+            "visualRowTopsCssPx": [
+              257.02,
+              265.92,
+              274.83,
+              283.73,
+              292.64,
+              301.55,
+              310.45
+            ],
+            "visualRowIntervalsPt": [
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99,
+              10.99
+            ],
+            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "900",
+                "fontStyle": "normal",
+                "color": "rgb(185, 29, 35)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "8.10405px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.91445px",
+                "letterSpacing": "-0.121561px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 62.3,
+            "frameWidthCssPx": 248.9
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
         "100%": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 7,
@@ -1264,102 +1365,7 @@
             "frameHeightCssPx": 31.1,
             "frameWidthCssPx": 124.4
           },
-          "editorialStatus": "Official review approved and published; the full-page Viewer/PDF export was compared with the OG."
-        },
-        "200%": {
-          "status": "measured_copyfit_v3_script_visual_rows",
-          "sourcePdfVisualLineCount": 7,
-          "pageRendererVisualLineCount": 7,
-          "classification": "EXACT",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
-          "environment": {
-            "pageNumber": 57,
-            "pdfDocumentPageIndex": 56,
-            "language": "pt-BR",
-            "viewerZoom": "200%",
-            "viewportCssPixels": "1280x720",
-            "devicePixelRatio": 1.25,
-            "fontLoaded": true
-          },
-          "sourceEvidence": {
-            "bboxPt": [
-              421.84210205078125,
-              284.33551025390625,
-              728.9328002929688,
-              362.2955017089844
-            ],
-            "visualRowBaselinesPt": [
-              293.586,
-              304.586,
-              315.586,
-              326.586,
-              337.586,
-              348.586,
-              359.586
-            ],
-            "spans": 10,
-            "inlineMarkersFoldedIntoTextRows": 0,
-            "visualRows": 7
-          },
-          "pageRendererEvidence": {
-            "spanKey": "page_57_block_32__pt-BR",
-            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
-            "rangeRectFragments": 14,
-            "renderedSymbolIds": [
-              "tag.important.icon"
-            ],
-            "semanticSymbolOnlyRows": 0,
-            "distinctVisualRows": 7,
-            "visualRowTopsCssPx": [
-              257,
-              265.91,
-              274.81,
-              283.72,
-              292.63,
-              301.53,
-              310.44
-            ],
-            "visualRowIntervalsPt": [
-              10.99,
-              10.99,
-              10.99,
-              10.99,
-              10.99,
-              10.99
-            ],
-            "pageScaleCssPxPerPt": 0.8104811790054112,
-            "renderedFontSamples": [
-              {
-                "fontFamily": "OptimaLTStd, serif",
-                "fontSize": "8.10481px",
-                "fontWeight": "900",
-                "fontStyle": "normal",
-                "color": "rgb(185, 29, 35)",
-                "lineHeight": "8.91529px",
-                "letterSpacing": "-0.121572px",
-                "fontKerning": "auto",
-                "fontVariantLigatures": "none",
-                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
-                "fontLoaded": true
-              },
-              {
-                "fontFamily": "OptimaLTStd, serif",
-                "fontSize": "8.10481px",
-                "fontWeight": "400",
-                "fontStyle": "normal",
-                "color": "rgb(35, 31, 32)",
-                "lineHeight": "8.91529px",
-                "letterSpacing": "-0.121572px",
-                "fontKerning": "auto",
-                "fontVariantLigatures": "none",
-                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
-                "fontLoaded": true
-              }
-            ],
-            "frameHeightCssPx": 62.3,
-            "frameWidthCssPx": 248.9
-          },
-          "editorialStatus": "Official review approved and published; the full-page Viewer/PDF export was compared with the OG."
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         }
       },
       "copyfitMeasurement": {
@@ -1372,7 +1378,7 @@
           "pageNumber": 57,
           "pdfDocumentPageIndex": 56,
           "language": "pt-BR",
-          "viewerZoom": "200%",
+          "viewerZoom": "100%",
           "viewportCssPixels": "1280x720",
           "devicePixelRatio": 1.25,
           "fontLoaded": true
@@ -1407,32 +1413,32 @@
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 7,
           "visualRowTopsCssPx": [
-            257,
-            265.91,
-            274.81,
-            283.72,
-            292.63,
-            301.53,
-            310.44
+            409.09,
+            413.53,
+            417.97,
+            422.41,
+            426.84,
+            431.28,
+            435.72
           ],
           "visualRowIntervalsPt": [
-            10.99,
-            10.99,
-            10.99,
-            10.99,
-            10.99,
-            10.99
+            10.95,
+            10.95,
+            10.95,
+            10.95,
+            10.95,
+            10.95
           ],
-          "pageScaleCssPxPerPt": 0.8104811790054112,
+          "pageScaleCssPxPerPt": 0.40520249582066925,
           "renderedFontSamples": [
             {
               "fontFamily": "OptimaLTStd, serif",
-              "fontSize": "8.10481px",
+              "fontSize": "4.05202px",
               "fontWeight": "900",
               "fontStyle": "normal",
               "color": "rgb(185, 29, 35)",
-              "lineHeight": "8.91529px",
-              "letterSpacing": "-0.121572px",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
               "fontKerning": "auto",
               "fontVariantLigatures": "none",
               "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
@@ -1440,29 +1446,23 @@
             },
             {
               "fontFamily": "OptimaLTStd, serif",
-              "fontSize": "8.10481px",
+              "fontSize": "4.05202px",
               "fontWeight": "400",
               "fontStyle": "normal",
               "color": "rgb(35, 31, 32)",
-              "lineHeight": "8.91529px",
-              "letterSpacing": "-0.121572px",
+              "lineHeight": "4.45723px",
+              "letterSpacing": "-0.0607804px",
               "fontKerning": "auto",
               "fontVariantLigatures": "none",
               "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
               "fontLoaded": true
             }
           ],
-          "frameHeightCssPx": 62.3,
-          "frameWidthCssPx": 248.9
+          "frameHeightCssPx": 31.1,
+          "frameWidthCssPx": 124.4
         },
-        "editorialStatus": "Official review approved and published; the full-page Viewer/PDF export was compared with the OG."
-      },
-      "reviewId": 1684,
-      "translationId": 1994,
-      "approvalStatus": "approved",
-      "reviewDisposition": "active",
-      "viewerVerified": true,
-      "pdfExportVerified": true
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
     },
     {
       "blockIndex": 38,
@@ -1796,12 +1796,12 @@
     "viewerVerifiedCandidates": 6,
     "pdfExportVerifiedCandidates": 6,
     "finalTranslationWrites": 6,
-    "openExceptions": 0,
+    "openExceptions": 1,
     "editoriallyApprovedCandidates": 6,
     "editorRoundTripVerifiedCandidates": 0
   },
   "copyfitEvidence": {
-    "status": "All six candidates are EXACT against the source PDF at 100% and 200%; rich text preserves source bold runs, the IMPORTANT callout symbol/label, and the source 8-line content geometry.",
+    "status": "All six candidate units are EXACT against the source PDF at 100% and 200%; the corrected p.57 IMPORTANT callout is 7/7 visual rows at both zooms. Full-page export and Viewer/print parity were visually checked.",
     "verifiedCandidates": 6,
     "sourcePdfPageIndex": 56,
     "zooms": [
@@ -1878,12 +1878,12 @@
   "verificationEvidence": {
     "scope": "full_page_pt_BR",
     "sourceCompared": "official_english_pdf_og",
-    "pdf": "p057-pt-BR-v4.pdf",
-    "viewerScreenshot": "p057-viewer-v4.png",
-    "printScreenshot": "p057-print-v4.png",
-    "metrics": "p057-metrics-v4.json",
+    "pdf": "p057-pt-BR-final.pdf",
+    "viewerScreenshot": "p057-pt-BR-viewer.png",
+    "printScreenshot": "p057-pt-BR-print.png",
+    "metrics": "p057-pt-BR-metrics.json",
     "ogReference": "p057-og-reference.png",
-    "privateEvidenceFolder": "engineering-labs/planning/engineering-decisions/evidence/2026-11-15-p057/p057-unique-loot-rules-v1",
+    "privateEvidenceFolder": "engineering-labs/planning/engineering-decisions/evidence/2026-11-15-p057/final-2026-11-17",
     "verifiedTranslationRecords": true,
     "pdfVerification": true,
     "viewerLineRects": 48,
@@ -1896,9 +1896,26 @@
       "heading_weight_size_color_and_alignment_anchor",
       "symbol_placement",
       "clipping_and_collisions",
+      "p57_important_callout_7_of_7_visual_rows",
       "page_folio_57",
       "viewer_print_parity"
     ],
     "artworkDecision": "Card artwork and its printed labels remain in English by user decision."
-  }
+  },
+  "editorialCorrectionHistory": [
+    {
+      "date": "2026-11-17",
+      "spanKey": "page_57_block_32__pt-BR",
+      "previousProposalText": "IMPORTANTE: Se você não comprar uma Carta de Item Único e acabar recebendo instruções para comprar outra Carta desse tipo durante um Encontro futuro, não a embaralhe com o baralho para que não apareça entre as três cartas a serem compradas; ela ainda está à venda na loja. Isso significa que, se você não comprar esse Item Único ou decidir vendê-lo, a Carta de Item Único será perdida e removida do jogo pelo restante da Aventura.",
+      "revisedProposalText": "IMPORTANTE: Se você não comprar uma Carta de Item Único e, durante um Encontro futuro, receber instruções para retirar outra do baralho, não a inclua entre as opções possíveis ao embaralhar, pois ela ainda está à venda na loja. Além disso, se você não comprar esse Item Único ou decidir vendê-lo, a Carta será perdida e removida do jogo pelo restante da Aventura.",
+      "reason": "The published text used “comprar” for both purchase and draw, collapsing the distinction the user explicitly asked to preserve. Local “retirar do baralho” resolves the sentence without changing the global glossary."
+    },
+    {
+      "date": "2026-11-17",
+      "spanKey": "page_57_block_32__pt-BR",
+      "previousProposalText": "IMPORTANTE: Se você não comprar uma Carta de Item Único e, durante um Encontro futuro, receber instruções para retirar outra do baralho, não a inclua entre as opções possíveis ao embaralhar, pois ela ainda está à venda na loja. Além disso, se você não comprar esse Item Único ou decidir vendê-lo, a Carta será perdida e removida do jogo pelo restante da Aventura.",
+      "revisedProposalText": "IMPORTANTE: Se você não comprar uma Carta de Item Único e, durante um Encontro futuro, receber instruções para retirar uma do baralho, não a inclua entre as três a serem compradas. Ela ainda está à venda na loja. Além disso, se você não comprar esse Item Único ou decidir vendê-lo, essa Carta será perdida e removida do jogo pelo restante da Aventura.",
+      "reason": "Refined the local wording to preserve the explicit distinction between purchasing the card at the store and removing a card from the deck during an Encounter. Kept “Draw → Compre” unchanged in the global glossary."
+    }
+  ]
 }

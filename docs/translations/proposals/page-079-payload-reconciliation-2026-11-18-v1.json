@@ -1,0 +1,68 @@
+{
+  "recordId": "page-079-payload-reconciliation-2026-11-18-v1",
+  "recordType": "payload_and_export_reconciliation",
+  "date": "2026-11-18",
+  "page": 79,
+  "proposalHistory": {
+    "proposalId": "p079-loot-level-spawn-threshold",
+    "version": 6,
+    "file": "page-079-loot-level-spawn-threshold-2026-10-23-v6.json",
+    "historicalClaim": "No translation or review was written.",
+    "currentTruth": "The v6 claim is stale; the live Payload contains 22 published translations and 22 active approved reviews."
+  },
+  "payloadReconciliation": {
+    "translationCount": 22,
+    "activeReviewCount": 22,
+    "approvedReviewCount": 22,
+    "publicationDataMatchesTranslationCount": 22,
+    "publishedDataMatchesV6ProposalCount": 21,
+    "currentCopyfitDistribution": {
+      "EXACT": 21,
+      "UNDER": 1
+    },
+    "approvedReviews": {
+      "range": "1001-1021",
+      "additionalPriorReview": 636
+    },
+    "translationIds": {
+      "range": "1489-1508",
+      "updatedExistingUnits": [
+        1817,
+        1869
+      ]
+    },
+    "proposalMismatch": {
+      "spanKey": "page_79_block_2__pt-BR",
+      "reviewId": 1004,
+      "translationId": 1869,
+      "currentReviewCopyfit": "EXACT",
+      "v6CandidateCopyfit": "OVER",
+      "note": "The current approved publication and translation data match; only the older proposal candidate is stale. No Payload edit was needed."
+    }
+  },
+  "visualComparison": {
+    "source": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf, printed page 79",
+    "comparedArtifacts": [
+      "p079-og.png",
+      "p079-en-print.png",
+      "p079-pt-BR-print.png",
+      "p079-en.pdf",
+      "p079-pt-BR.pdf"
+    ],
+    "result": "Fresh OG, EN, and PT-BR exports were compared. No new clipping or collision was visible at page scale. English card/component artwork remains original per project scope.",
+    "scopeLimit": "This reconciliation is not a full-page language or terminology certification."
+  },
+  "exportVerification": {
+    "enPdfVerification": true,
+    "ptBrVerifiedTranslationRecords": true,
+    "ptBrPdfVerification": true,
+    "betaArtworkPendingLabels": 0
+  },
+  "pageStatus": "not_certified",
+  "remainingReview": [
+    "Full-page English source fidelity review remains open.",
+    "Terminology questions recorded by the page proposal remain open for harmonization."
+  ],
+  "evidenceDirectory": "C:/Users/bruno/engineering-labs/planning/engineering-decisions/evidence/2026-11-18-p079-payload-reconciliation/",
+  "payloadWrites": 0
+}

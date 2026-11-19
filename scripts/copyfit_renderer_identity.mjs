@@ -79,7 +79,27 @@ export function exposeReviewDraftsForCopyfitPreview(payload, { candidates }) {
     .map(candidate => [candidate.reviewKey, candidate]));
   const updated = records.map(record => {
     const candidate = byReviewKey.get(record.reviewKey);
-    return candidate ? { ...record, data: candidate.data } : record;
+    // Published records stay approved in Payload. In the isolated browser
+    // preview, however, the review panel only lists pending rows; expose the
+    // candidate as an active pending draft so the measurement script can
+    // select it without mutating the stored review or translation.
+    return candidate ? {
+      ...record,
+      data: candidate.data,
+      sourceText: candidate.sourceText,
+      proposalText: candidate.proposalText,
+      proposalId: candidate.proposalId,
+      proposalVersion: candidate.proposalVersion,
+      technicalStatus: candidate.technicalStatus,
+      copyfitClassification: candidate.copyfitClassification ?? null,
+      copyfitSourcePdfLineCount: candidate.copyfitSourcePdfLineCount ?? null,
+      copyfitPageRendererLineCount: candidate.copyfitPageRendererLineCount ?? null,
+      copyfitMeasurementFingerprint: candidate.copyfitMeasurementFingerprint ?? null,
+      approvalStatus: 'pending',
+      reviewDisposition: 'active',
+      approvedAt: null,
+      publication: null,
+    } : record;
   });
   return Array.isArray(payload) ? updated : { ...payload, docs: updated };
 }

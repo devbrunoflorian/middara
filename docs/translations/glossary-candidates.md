@@ -13,6 +13,9 @@ This is a review queue, **not an approval list**. Payload collection `translatio
 | Discipline Tree | `Árvore de Disciplinas` | 4 | Proposed label for the system structure; confirm capitalization and plural form. |
 | Terrain Tokens | `Fichas de Terreno` | 5, 21, 23 | Payload id 69 marks this as **PADRÃO OBSERVADO**, not globally approved; distinguish from `Tiles → Peças` and keep linked page reviews pending. |
 | Range | `Alcance` | 17 | Payload id 70 records a **HIPÓTESE** for the general concept only; it is not the `REACH` Tag or `SOI`. |
+| `Range` (numeric distance) / `Reach` (weapon property) | `Distância` / `Alcance`; `Range Icon` → `ícone de tipo de Ataque` | 78 | **Decisão local da p.78, não global:** a própria regra contrasta `Range 4` e `Reach 2`, então as medidas ficam distintas. `Range Icon` identifica as categorias dos ícones de ataque (Melee, Ranged, Melee/Ranged), não uma distância numérica. A hipótese geral `Range → Alcance` (Payload id 70) permanece pendente e sem alteração. |
+| Melee Attack | `Ataque Corpo a Corpo` | 43, 65 | Forma usada em tradução aprovada da p.43 e no rascunho da p.65; não há decisão global no glossário nem no Payload. Manter como forma observada/local até decisão explícita; preservar a distinção de Attack, Ranged Attack e Tags impressas. |
+| Dodge (ação) | `Esquiva`; `ESQUIVAR`; `se esquivar` | 14, 38, 41, 65 | Não há equivalência global aprovada. Traduções aprovadas usam formas nominais e verbais conforme a sintaxe; a p.65 usa “usar Esquiva”. Confirmar forma-base e caixa; não sobrescrever texto aprovado nem rótulos impressos em cartas. |
 | Combatant Loot Card | `Cartão de Saque de Combatente` | — | Payload id 71 is a **HIPÓTESE**; the component name must remain distinct from abstract `Loot → Saque`. Confirm the printed component and PT form in the source PDF. |
 | DOUBLE (Tag) | `DOUBLE` | — | Payload id 72 is a scoped **HIPÓTESE** to preserve the printed identifier; it is not `Double Encounter → Encontro Duplo`. |
 | Initiative Track | `Trilha de Iniciativa` | 5, 6 | Repeated proposal; absent from the official glossary. |
@@ -129,3 +132,76 @@ Estes termos ocorrem nas 22 propostas locais de Regras de Movimento. Sua mediç�
 | Movement Point(s) | Ponto(s) de Movimento | Rulebook EN/PT, p.39; custo, gasto e perda ao terminar uma Move Action | Pendente; conferir escopo do efeito |
 | HEAVY | PESADO | Tag impressa e texto de regra na p.39; afeta somente pontos concedidos pela MOVE Action | Pendente; não renomear a Tag globalmente |
 | Adjacent Spaces | Espaços Adjacentes / Adjacência | Cabeçalho e regra de definição geométrica na p.39 | Pendente; confirmar rótulo sem alterar a regra de adjacência |
+
+### Vocabulário local observado na p.68 (2026-11-16)
+
+O glossário foi consultado antes de revisar os Testes de Habilidade e Saltos. `Skill Check → Teste de Habilidade`, `Adventure Mechanic → Mecânica de Aventura`, `Terrain → Terrenos`, `Obstructing Terrain → Terreno Obstruído`, `Figures → Miniaturas`, `Adventurer Card → Ficha de Aventureiro`, `Move Action → Ação de Movimento`, `Free Movement → Movimento Livre` e `Movement Point(s) → Ponto(s) de Movimento` já têm formas oficiais e foram reutilizadas.
+
+As formas abaixo foram usadas apenas no contexto desta página; não foram aprovadas globalmente. Rever no glossário quando esses termos voltarem a aparecer:
+
+| Termo EN | Forma contextual usada | Evidência/contexto | Estado |
+|---|---|---|---|
+| `Skill Value` | Valor de Habilidade | Estatística que entra na rolagem do Teste de Habilidade do Aventureiro | Candidata local; sem decisão global identificada |
+| `Lore` | Conhecimento | Exemplo de Valor de Habilidade na p.68 | Candidata local; confirmar o termo mecânico antes de canonizar |
+| `Active Party` | Grupo Ativo | Condição para modificar Testes fora de Encontros | Candidata local; sem decisão global identificada |
+| `Jump / Jumping` | Salto / Saltar | Nome da regra e verbo de movimento da seção | Candidata local; conferir distinção entre nome e verbo |
+| `Agility / Strength / Perception` | Agilidade / Força / Percepção | Valores usados nos Testes de Salto e em tentativas de segurar um aliado | Formas contextuais; sem decisão global identificada nesta revisão |
+| `Loyal Espers / Conduits` | preservados em inglês | Classes citadas como Combatentes que fazem Testes de Habilidade; nomes de classes/componentes continuam no idioma-fonte conforme o escopo atual | Preservar; não são traduções pendentes de prosa comum |
+
+`INTELLIGENT` e `COMMAND` também permanecem em inglês com as cores e o estilo do OG por serem rótulos impressos de classes. Os símbolos de dados e a caveira são objetos gráficos semânticos, não palavras do glossário.
+
+### Vocabulário local observado na p.69
+
+O glossário oficial foi consultado antes da revisão. `Defeated → Derrotado`, `Figure → Miniatura`, `Initiative Track → Trilha de Iniciativa`, `Gain → obter`, `Restore → Restaurar` e `Special Encounter Rules → Regras Especiais de Encontro` já têm formas aprovadas e foram reutilizadas. Os itens abaixo permanecem escolhas locais/contextuais; não foram canonizados.
+
+| Termo EN | Forma contextual usada | Evidência/contexto | Estado |
+|---|---|---|---|
+| `Combatant token(s)` | ficha(s) de Combatente | Prosa sobre fichas deixadas em jogo após a Derrota; uso semelhante observado na p.100 | Candidata local; verificar consistência antes de aprovar globalmente |
+| `Tracker token(s)` | ficha(s) de Rastreamento | Regra para manter fichas enquanto os jogadores acompanham uma regra | Candidata local; sem decisão global identificada |
+| `Current(s)` | Correntes | Movimento de fichas de Combatente; uso semelhante observado na p.100 | Candidata local; sem decisão global identificada |
+| `Damage token(s)` | ficha(s) de Dano | Marcadores de dano em regras de Derrota e Preparação | Forma contextual recorrente; `Damage` não foi promovido nesta página |
+| `Combatant Spawning` | Combatente que acabou de surgir | Instrução de posicionamento ao reviver um Combatente aliado | Paráfrase contextual; não fixar como nome de componente |
+| `Range` | Alcance | Texto sobre PUSH/PULL/COMMAND e SOI | Uso local; a hipótese global permanece pendente |
+
+`PUSH`, `PULL`, `COMMAND` e `SOI` permanecem impressos em inglês, em negrito conforme o OG. São identificadores de jogo e não foram traduzidos.
+
+### Vocabulário local observado na p.70
+
+O glossário foi conferido antes da revisão. As formas oficiais existentes (`Loot`, `Loot Token`, `Figure`, `Gain`, `Special Encounter Rules`, `Spawn`, `Token`, `Haste`, `Spell` e `Follow Up`) foram reutilizadas. As formas abaixo permanecem locais; nenhuma foi promovida a equivalência global. Os textos impressos nas cartas de exemplo continuam em inglês como arte-fonte.
+
+| Termo EN | Forma contextual usada | Evidência/contexto | Estado |
+|---|---|---|---|
+| `Draw` *(ação de tirar carta de um baralho)* | tirar/retirar carta(s) | 57, 70, 81 | A decisão do usuário para preservar o contraste entre comprar e tirar cartas continua pendente globalmente. Nas pp.57 e 70, usa-se “tirar cartas” no contexto de retirar cartas do baralho; na p.81, “retire uma Carta de Combatente ao acaso” descreve a seleção aleatória de uma carta já embaralhada. `Draw → Compre` permanece no glossário oficial e não é aplicado mecanicamente a esses contextos. |
+| `Pack` | Mochila | 70 | Nome da área onde se guardam Itens; manter distinto de `Party Stash → Estoque do Grupo`. |
+| `Store Items` | Itens de Loja | 70 | Forma usada em prosa de regras; confirmar antes de canonizar como categoria de componente. |
+| `Wandering Items` | Itens Errantes | 70 | Forma usada em prosa; confirmar o composto como nome de categoria. |
+| `Unique Items` | Itens Únicos | 70 | Forma em prosa de regras; não traduzir rótulos impressos em cartas. |
+| `Variation` | Variação | 70 | Forma em prosa para versão alternativa de uma Miniatura; confirmar se é um termo de componente. |
+| `Ability Token / Effect Token` | Ficha de Habilidade / Ficha de Efeito | 70 | Compostos formados com `Token → Ficha`; uso contextual, sem decisão global específica para os compostos. |
+| `Re-Equip Action` | Ação de Reequipar | 70 | Forma local para a ação; não promover sem conferir as demais ocorrências. |
+
+
+### Vocabulário local observado na p.71 (2026-11-16)
+
+O glossário oficial foi conferido; equivalências já aprovadas foram reutilizadas. Estas formas foram usadas apenas nesta página e não aprovam decisões globais: `Companion(s) → Companheiro(s)`, `Forced Movement → Movimento Forçado`, `Re-Rolling Dice → Refazer Rolagens` (na prosa, “repetir a rolagem”), `Terrain Types → Tipos de Terreno` e `Elevation(s) → Elevação(ões)`. `Range → Alcance` continua sendo hipótese pendente; o uso na p.71 é contextual.
+
+`Miniaturas de Base Grande` segue a forma aprovada no glossário para `Large Based Figures`. O título-fonte usa `Large Base Figures` (sem “d”), enquanto o corpo usa `Large Based Figures`; a tradução acompanha a forma aprovada do corpo. Tags e nomes impressos de jogo — `SOI`, `INTELLIGENT`, `WARP`, `SUMMONING`, `CONDUITS` e `DISPLACE` — permanecem em inglês.
+
+### Vocabulário local observado nas pp.72–73 (2026-11-17)
+
+O glossário foi consultado durante as duas revisões. Formas oficiais como `Stamina Points → Pontos de Stamina`, `Token → Ficha`, `Skill Check → Teste de Habilidade`, `Special Encounter Rules → Regras Especiais de Encontro` e `Combatant → Combatente` foram reutilizadas. As decisões abaixo são contextuais e não criam equivalências globais:
+
+| Termo EN | Forma contextual usada | Evidência/contexto | Estado |
+|---|---|---|---|
+| `Scaling Icon(s)` | Ícone(s) de Escala | Referência em prosa na p.72 | Uso local; sem canonização adicional nesta revisão |
+| `Force Value` | Valor de Força | Estatística/referência contextual da p.72 | Uso local; confirmar em outras ocorrências |
+| `Stat(s)` | Atributo(s) | “Stat or Value” nas regras de Ícones de Escala, p.72 | Uso local/contextual; não há forma global aprovada nesta revisão |
+| `Skills` | Perícias | Cinco estatísticas de Combatente na legenda da p.73 | Uso contextual para as estatísticas; não altera eventual uso de “habilidades” em prosa comum |
+| `Gain(s) each turn` | o Combatente ganha a cada turno | Barra de recuperação de Stamina na p.73; preserva o sentido de acumular pontos adotado pelo usuário na p.59 | Preferência contextual; a entrada global `Gain → obter` não foi modificada |
+
+`COMMAND`, `INTELLIGENT` e `PASSIVE` permanecem em inglês na p.73 quando identificam classe ou Tag impressa na carta/diagrama. Essa preservação de identificadores não muda as traduções de prosa comum nem a entrada aprovada `Passive → Passiva`. O texto dentro da carta ilustrada permaneceu em inglês como arte-fonte.
+
+
+### Vocabulário local observado na p.75 (2026-11-17)
+
+O glossário oficial foi consultado. Os nomes impressos de Disciplina, ficha e classe — Summoning, Summon, LOYAL ESPER e SOI — foram preservados em inglês no texto de regras; cartas e arte de componentes continuam no idioma-fonte. Initiative Track → Trilha de Iniciativa foi usado localmente, sem promoção global nesta revisão. Non-Irreducible Damage permanece pendente de decisão editorial; a redação contextual preserva a condição de excluir dano Irredutível e não altera a entrada global de Irreducible Damage.

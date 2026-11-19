@@ -4,7 +4,7 @@
   "version": "1",
   "page": 57,
   "title": "Preservar purchase/draw em Item Único — p.57",
-  "status": "pending_human_review",
+  "status": "superseded_by_localized_revision",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -27,11 +27,8 @@
     "Candidato ainda sem medição de copyfit, aprovação editorial ou publicação. Nenhuma tradução publicada foi sobrescrita."
   ],
   "counts": {
-    "candidates": 1,
-    "existingHumanTranslationsPreserved": 1,
-    "priorReviewRecordsPreserved": 1,
-    "finalTranslationWrites": 0,
-    "openExceptions": 1
+    "candidates": 0,
+    "supersededCandidates": 1
   },
   "preservation": {
     "existingHumanTranslationSpanKeys": [
@@ -43,7 +40,8 @@
     "Purchase": "Comprar, preservando a distinção explícita da fonte nesta caixa.",
     "Draw": "Pendente nesta ocorrência por instrução do usuário; não substituir por ‘comprar’ nem atualizar o glossário global."
   },
-  "candidates": [
+  "candidates": [],
+  "supersededCandidates": [
     {
       "blockIndex": 32,
       "sourceBlockId": "block_79",
@@ -109,7 +107,9 @@
       "editorialStatus": "Draft created after user decision to preserve the purchase/draw contrast; the specific PT term for draw remains pending.",
       "pendingTerms": [
         "Draw in this p.57 context: preserve distinction from purchase; PT-BR term remains pending by user instruction."
-      ]
+      ],
+      "supersededBy": "p057-unique-loot-rules-2026-11-15-v1",
+      "reason": "Superseded by the localized PT-BR wording that distinguishes purchasing from removing a card from the deck."
     }
   ]
 }

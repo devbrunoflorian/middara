@@ -3,7 +3,7 @@
   "version": "1",
   "title": "Nomes das Habilidades de Disciplina — p. 63 (provisório para beta)",
   "page": 63,
-  "status": "p063_partial_105_approved_9_pending_terms",
+  "status": "p063_114_name_units_persisted_and_approved_9_term_decisions_open",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -12,19 +12,19 @@
   "counts": {
     "candidates": 114,
     "newlyTranslatedUnits": 114,
-    "payloadWrites": 105,
+    "payloadWrites": 114,
     "humanEditorialApproval": 0,
     "copyfitMeasured": 114,
     "copyfitExact": 114,
-    "editorialApprovedByAuthorizedAgent": 105,
-    "verifiedInViewer": 105,
+    "editorialApprovedByAuthorizedAgent": 114,
+    "verifiedInViewer": 114,
     "verifiedInEditor": 0,
-    "verifiedInPdf": 105,
+    "verifiedInPdf": 114,
     "pendingTerms": 9
   },
-  "scope": "114 nomes individuais da árvore de habilidades da p.63; preserva identidades das unidades, disciplina/nível, molduras e símbolos. Traduções provisórias para leitura da beta, não aprovação, não decisão de glossário e sem escrita no Payload. Nomes próprios e títulos semanticamente ambíguos estão sinalizados para revisão humana.",
+  "scope": "114 individual names in the p.63 Discipline Ability Tree. All 114 current Payload translations match the proposal and are covered by active approved reviews. Nine documented terminology questions remain open as editorial decisions; they are translated units, not missing text. The page title and five discipline names are tracked separately in page-063-discipline-ability-tree-proposal-2026-10-17-v1.json. Printed card text/art remains in English.",
   "preservation": {
-    "canonicalPayloadWritten": false,
+    "canonicalPayloadWritten": true,
     "humanApprovalsOverwritten": 0,
     "geometryChanged": false,
     "sourceArtworkChanged": false
@@ -25470,5 +25470,21 @@
         }
       }
     }
-  ]
+  ],
+  "currentStateAudit": {
+    "verifiedAt": "2026-11-18",
+    "currentPageReviews": 120,
+    "currentApprovedReviews": 120,
+    "currentCandidateTranslationsMatchingPayload": 114,
+    "currentViewerTranslationTargets": 120,
+    "currentPrintTranslationTargets": 120,
+    "copyfitReviewsExact": 120,
+    "visualComparison": "Compared official source PDF p.63, current EN print, and PT-BR print/viewer artifacts from 2026-11-18. No visible clipping or displaced labels found; title and all five discipline headings align to source frames.",
+    "currentArtifacts": "C:/Users/bruno/Middara/Rulebook App/tmp/qa-p063-current-2026-11-18/",
+    "officialSourcePdf": "C:/Users/bruno/Middara/Rulebook 1.2/Rulebook 1p2 Final Version 05-19-23 Optimized.pdf, page 63 (index 62)",
+    "additionalEvidence": "C:/Users/bruno/engineering-labs/planning/engineering-decisions/evidence/2026-11-18-p063-recheck/",
+    "freshExportAttempt": "A second fresh export attempt on 2026-11-18 timed out while waiting for .page-container. The existing same-day EN/PT-BR PDFs, screenshots, metrics, live Payload state and official source PDF were used for this recheck.",
+    "pendingTermCount": 9,
+    "certification": "Not certified while nine term decisions remain open."
+  }
 }

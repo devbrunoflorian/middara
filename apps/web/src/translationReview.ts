@@ -768,8 +768,8 @@ export function reviewRecordForCandidate(
     .sort((left, right) => {
       const leftUpdated = Date.parse(left.updatedAt ?? '') || 0;
       const rightUpdated = Date.parse(right.updatedAt ?? '') || 0;
-      return rightUpdated - leftUpdated
-        || Number(right.reviewKey === candidate.reviewKey) - Number(left.reviewKey === candidate.reviewKey);
+      return Number(right.reviewKey === candidate.reviewKey) - Number(left.reviewKey === candidate.reviewKey)
+        || rightUpdated - leftUpdated;
     })[0];
 }
 

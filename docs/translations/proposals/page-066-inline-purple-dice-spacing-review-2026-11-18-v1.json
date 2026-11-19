@@ -1,0 +1,417 @@
+{
+  "proposalId": "p066-inline-purple-dice-spacing-review-2026-11-18",
+  "version": "1",
+  "title": "Espaço do dado roxo inline — p.66",
+  "page": 66,
+  "status": "page_review_completed_and_published_under_user_authorized_review",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+    "background": "1CF8BCCF5C78B161BD7578AE7B259262C062398FC3298ED44A393DE560A73EE5",
+    "pageDom": "893B673B31DEE5F1AE44105E982C451D07A71AEA9650619F4651CA85F11CA7C6",
+    "inlineElements": "3DD6075E5AC06C93BB75422F60FC4C5C0ED1CF4081199993DB84673DCBAA6463",
+    "fidelityOverlays": "34BDAA76EE052968DF2BD6376EF5033351E1D571BB6F5D8E278E818D734697E0"
+  },
+  "counts": {
+    "candidates": 1,
+    "existingTranslationsPreserved": 14,
+    "priorReviewRecordsPreserved": 2,
+    "translationWrites": 1
+  },
+  "scopeLimits": [
+    "Corrige somente o espaço textual-fonte que faltava entre ROXOS e [[dice.purple]] no bloco 8; os nomes e textos impressos na carta permanecem em inglês.",
+    "O símbolo permanece como objeto semântico inline e conserva as métricas de espaçamento residual da ocorrência."
+  ],
+  "candidates": [
+    {
+      "blockIndex": 8,
+      "sourceBlockId": "block_19",
+      "spanKey": "page_66_block_8__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "The Animate rolls its Spell casting Die and gets a 3, making the total force of the Spell 9. Remi now rolls her Conviction of 2 PURPLE [[dice.purple]] ( [[marker.reference.i]] ).",
+      "proposalText": "O Animate rola o Dado de Conjuração do Feitiço e obtém 3, totalizando Força 9. Em seguida, Remi rola 2 Dados de Convicção ROXOS [[dice.purple]] ([[marker.reference.i]]).",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_66_block_8__pt-BR",
+        "bbox": [
+          415.8423156738281,
+          558.8350219726562,
+          734.4765014648438,
+          583.7350463867188
+        ],
+        "textAlign": "left",
+        "lineHeight": 1.1,
+        "lineHeightMode": "custom",
+        "segments": [
+          {
+            "text": "O Animate rola o Dado de Conjuração do Feitiço e obtém ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "3",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": ", totalizando Força 9. Em seguida, Remi rola ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "2",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": " Dados de Convicção ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "ROXOS ",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "symbolId": "dice.purple",
+            "symbolMetrics": {
+              "widthEm": 1.2764485677083333,
+              "heightEm": 1.4732259114583333,
+              "verticalAlignEm": 0.2900322808159722,
+              "advanceEm": 1.2764485677083333,
+              "renderVariant": "purple-p66-prose-die-source",
+              "sourceAppearanceKey": "purple-p66-prose-die-source-v1",
+              "gapEm": 0.07016333333333333
+            },
+            "sourceRendering": "semantic-inline"
+          },
+          {
+            "text": " (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "text": "￼",
+            "font": "OptimaLTStd-Bold",
+            "size": 8,
+            "color": "#231f20",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "symbolId": "marker.reference.i",
+            "symbolMetrics": {
+              "widthEm": 1.2494964599609375,
+              "heightEm": 1.2494964599609375,
+              "advanceEm": 1.2494964599609375,
+              "verticalAlignEm": 0.25824737548828125
+            },
+            "sourceRendering": "semantic-inline"
+          },
+          {
+            "text": ").",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal"
+          }
+        ],
+        "managedSourceSymbols": [
+          "dice.purple",
+          "marker.reference.i"
+        ]
+      },
+      "technicalStatus": "verified_copyfit_v3_exact_100_200_live_viewer_pdf",
+      "editorialStatus": "approved_and_published_through_official_reviewer_under_user_authorized_page_review",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "reviewLayoutFrame": {
+        "x": 415.8423156738281,
+        "y": 558.8350219726562,
+        "width": 734.4765014648438,
+        "height": 583.7350463867188,
+        "total": 318.6341857910156,
+        "totalHeight": 24.9000244140625,
+        "textAlign": "left",
+        "lineHeight": 1.1
+      },
+      "sourcePdfVisualLineCount": 2,
+      "pageRendererVisualLineCount": 2,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 66,
+            "pdfDocumentPageIndex": 65,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              415.8423156738281,
+              558.8350219726562,
+              734.4765014648438,
+              583.7350463867188
+            ],
+            "visualRowBaselinesPt": [
+              568.026,
+              581.003
+            ],
+            "spans": 8,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_66_block_8__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 10,
+            "renderedSymbolIds": [
+              "dice.purple",
+              "marker.reference.i"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              462.42,
+              470.91
+            ],
+            "visualRowIntervalsPt": [
+              11.27
+            ],
+            "pageScaleCssPxPerPt": 0.7567690873341558,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.56769px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "8.32446px",
+                "letterSpacing": "-0.113515px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "6.81092px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "7.49201px",
+                "letterSpacing": "-0.102164px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 17,
+            "frameWidthCssPx": 241.1
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 66,
+            "pdfDocumentPageIndex": 65,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              415.8423156738281,
+              558.8350219726562,
+              734.4765014648438,
+              583.7350463867188
+            ],
+            "visualRowBaselinesPt": [
+              568.026,
+              581.003
+            ],
+            "spans": 8,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_66_block_8__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 10,
+            "renderedSymbolIds": [
+              "dice.purple",
+              "marker.reference.i"
+            ],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              852.25,
+              868.89
+            ],
+            "visualRowIntervalsPt": [
+              11.02
+            ],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "13.6218px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "14.984px",
+                "letterSpacing": "-0.204328px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 33.3,
+            "frameWidthCssPx": 482.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 2,
+        "pageRendererVisualLineCount": 2,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 66,
+          "pdfDocumentPageIndex": 65,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            415.8423156738281,
+            558.8350219726562,
+            734.4765014648438,
+            583.7350463867188
+          ],
+          "visualRowBaselinesPt": [
+            568.026,
+            581.003
+          ],
+          "spans": 8,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_66_block_8__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 10,
+          "renderedSymbolIds": [
+            "dice.purple",
+            "marker.reference.i"
+          ],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            852.25,
+            868.89
+          ],
+          "visualRowIntervalsPt": [
+            11.02
+          ],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "15.1354px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "16.6489px",
+              "letterSpacing": "-0.227031px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "13.6218px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "14.984px",
+              "letterSpacing": "-0.204328px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 33.3,
+          "frameWidthCssPx": 482.3
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "note": "Revisão pontual motivada pela comparação com o OG: o espaço depois da cor PURPLE está impresso como run real de texto, além do gap residual do desenho. O segmento rico agora preserva esse espaço antes do símbolo semântico. Correção de moldura local: a linha vazia que antecedia a prosa no bloco-fonte não pertence ao texto PT-BR; a nova moldura começa no primeiro ink line visível (y=558.835 pt), mantendo x/direita e o limite inferior do texto-fonte. A medição anterior foi invalidada e será refeita. Revisão visual final: EN, PT-BR Viewer e PDF comparados ao OG; o texto agora começa na primeira linha impressa e mantém espaço livre sob o dado roxo ilustrado. O export final tem 52 linhas, 13 símbolos semânticos, 18 imagens, verifiedTranslationRecords=true e pdfVerification=true."
+}

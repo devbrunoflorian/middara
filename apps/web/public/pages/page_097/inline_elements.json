@@ -21,7 +21,7 @@
         "lineId": "line_11_5",
         "spanIndex": 4,
         "side": "after",
-        "sizePt": 10.0,
+        "sizePt": 10,
         "ownerSpanRef": {
           "lineId": "line_11_5",
           "spanIndex": 3
@@ -39,7 +39,7 @@
       "mask": {
         "url": "/pages/page_097/inline-element-mask-000.png",
         "bbox": [
-          449.0,
+          449,
           434.25,
           462.5,
           449.5
@@ -63,6 +63,75 @@
           937
         ],
         "maskSha256": "D37C98E6B29326E7D0CA6EFA2AFABE478CE10F266DABC52141B7A43373DA0963"
+      }
+    },
+    {
+      "symbolId": "terrain.elevation-box",
+      "sourceRendering": "semantic-inline",
+      "bbox": [
+        393.7335,
+        672.078,
+        401.637,
+        680.339
+      ],
+      "drawingIndices": [
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240
+      ],
+      "anchor": {
+        "blockId": "block_19",
+        "blockIndex": 11,
+        "lineId": "line_19_5",
+        "spanIndex": 1,
+        "side": "after",
+        "sizePt": 10,
+        "ownerSpanRef": {
+          "lineId": "line_19_5",
+          "spanIndex": 1
+        },
+        "gapPt": 0.5
+      },
+      "metrics": {
+        "widthEm": 0.7903500000000008,
+        "heightEm": 0.826100000000008,
+        "advanceEm": 0.7903500000000008,
+        "verticalAlignEm": 0.050025488281255547,
+        "sourceAppearanceKey": "terrain-elevation-box-p97-source-v1"
+      },
+      "provenance": {
+        "auditId": "p097-elevation-inline-2026-11-17-v1",
+        "sourcePdfSha256": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
+        "sourceDrawings": [
+          229,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239,
+          240
+        ],
+        "verifiedSourceBBox": [
+          393.7335,
+          672.078,
+          401.637,
+          680.339
+        ],
+        "backgroundCleanup": "flat-row donor patch; no runtime mask"
       }
     }
   ]
