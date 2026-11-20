@@ -816,3 +816,25 @@ Quando o número e o início do texto compartilham a primeira linha-fonte, mas a
 **Correção:** adicione `typographicUnits` separados para captions, faixas e cabeçalhos, usando a geometria medida no OG. Preserve hierarquia, fonte, cor, peso e alinhamento. Meça cada unidade em 100% e 200% e confira Viewer, print e PDF exportado; não reduza a fonte ou replique uma largura de outra coluna sem evidência.
 
 **Caso verificado na p.95 (2026-11-20):** as três tabelas tinham captions, faixas de seção e cabeçalhos de coluna embutidos nos blocos-fonte. Foram criadas unidades pelas células medidas, além dos quatro rótulos Tier. As 61 candidatas ficaram EXACT em 100% e 200%; o Viewer e o raster do PDF mantiveram os cabeçalhos dentro das células e as linhas da nota abaixo da tabela, sem colisões. A exportação imutável passou `verifiedTranslationRecords=true` e `pdfVerification=true`; a proposta segue sem aprovação/publicação.
+
+**Também verificado na p.96 (2026-11-20):** 11 cabeçalhos das Tabelas 6–8 e as 18 células da Tabela 8 foram separados pela grade medida no OG. Os rótulos longos das fichas de Habilidade/Efeito foram reorganizados em uma linha, sem reduzir fonte. As 58 candidatas da página ficaram EXACT em 100% e 200%; o snapshot imutável passou `verifiedTranslationRecords=true` e `pdfVerification=true`, e o Viewer/print foram comparados ao OG. É uma prévia de proposta, ainda sem publicação ou aprovação editorial.
+
+## Caixa de tabela começa no X de um símbolo em outra coluna
+
+**Sintoma:** o texto de uma linha começa sobre o ícone ou custo da coluna vizinha, embora a caixa pareça alinhada com o bloco-fonte.
+
+**Como confirmar:** compare o X do primeiro span de prosa com o X do bloco completo. Um bloco-fonte pode incluir um placeholder, número ou símbolo em outra coluna e, por isso, começar antes do texto. Confira a grade do OG e os símbolos visíveis no Viewer/print; o bbox do bloco inteiro não representa necessariamente a origem da prosa.
+
+**Correção:** use um frame local da tradução ancorado no primeiro span textual, com largura até a borda interna da coluna, medida no OG. Preserve o bloco e o símbolo-fonte; não mova conteúdo compartilhado nem copie a largura de outra coluna. Refaça Copyfit em 100%/200% e exporte um snapshot imutável para revisar a posição dos ícones e a quebra do texto.
+
+**Caso verificado em proposta na p.96 (2026-11-20):** na Tabela 6, os blocos que incluem o custo SP começavam em X=137,74 pt, mas a prosa começa em X=162,19 pt. A mesma diferença afetava os dois parágrafos de Esquiva. Cinco frames locais foram alinhados ao início da prosa, usando a largura interna da coluna de Efeito; a exportação mostra as frases depois do símbolo SP, sem colisão, e as contagens de linha continuam EXACT. A proposta permanece pendente; não generalize estes X para outras tabelas.
+
+## Marcador semântico de símbolo aparece como quadrado vazio ou branco
+
+**Sintoma:** um símbolo aparece como quadrado vazio/branco no Viewer ou no PDF, embora a proposta tenha um segmento com `symbolId`.
+
+**Como confirmar:** compare o marcador textual da proposta com os segmentos ricos. O `proposalText` deve usar `[[symbol:<id>]]`; `data.segments` representa o mesmo ponto com `text: "￼"` e `symbolId`. Para símbolos monocromáticos com `currentColor`, confirme também que o segmento recebeu a cor de tinta medida no PDF-fonte (normalmente `#231f20`). Não presuma que `symbolId` sozinho garanta aparência e cor corretas.
+
+**Correção:** sincronize cada `[[symbol:<id>]]` com o segmento rico correspondente, preserve espaçamento e métricas semânticas do símbolo e copie sua cor do trecho-fonte. Refaça Copyfit em 100%/200%, exporte Viewer e print e compare o glifo ampliado com o OG.
+
+**Caso verificado em proposta na p.96 (2026-11-20):** 12 marcadores em `proposalText` estavam como U+FFFC e nove segmentos de símbolos monocromáticos não tinham cor explícita. Foram trocados pela sintaxe `[[symbol:<id>]]` e receberam `#231f20`; símbolos coloridos mantiveram a própria renderização. Os glifos voltaram a aparecer em preto no Viewer e no PDF exportado, sem mudança de contagem de linhas. A proposta continua pendente de revisão editorial.
