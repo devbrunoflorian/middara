@@ -806,3 +806,13 @@ Quando o número e o início do texto compartilham a primeira linha-fonte, mas a
 **Correção:** ao aprovar, gravar na mesma operação a candidata medida e o formato reconhecido, mantendo a publicação anterior no histórico. Não editar a tradução diretamente nem apagar o conflito. Depois, reler tradução e revisão pelo Payload, refazer Viewer/print e confirmar `verifiedTranslationRecords=true` e `pdfVerification=true`.
 
 **Caso verificado (2026-11-19; p.54, bloco 5):** o texto PT-BR tinha quatro linhas contra cinco no OG; a tradução salva ainda trazia entrelinha personalizada `1,18` e um espaço antes de cada dado, ausentes da publicação de revisão antiga. A nova redação restaurou “Força final”, a obrigação de fazer o Teste de Convicção e “total de 7”; preservou os runs ricos, `[[symbol:dice.white]]`, `[[symbol:dice.teal]]`, espaços e entrelinha. A reconciliação restrita foi publicada pelo endpoint oficial com uma entrada de histórico preservada. Copyfit V3: 5/5 em 100% e 200%; Viewer e PDF impresso têm cinco linhas e os dois dados inline. Export PT-BR passou `verifiedTranslationRecords=true` e `pdfVerification=true`; comparação OG/Viewer/print confirmou a região. Evidência em `tmp/qa-p054-2026-11-19/p054-block5-og-vs-pt-final.png` e `p054-block5-og-vs-pt-print.png`. A p.54 permanece aberta para auditoria visual da página inteira e reconciliação terminológica.
+
+## Tabela em um único bloco-fonte precisa de unidades por célula
+
+**Sintoma:** a extração do PDF agrupa caption, faixas de seção e vários cabeçalhos numa única unidade, fazendo uma tradução ampla herdar posição ou largura inadequada de uma célula específica.
+
+**Como confirmar:** compare a grade e os limites de cada célula no PDF OG com os `lineIds`, bboxes e caixas dos blocos no DOM. Confirme que cada alvo é um campo editorial completo e que a moldura termina dentro da própria célula.
+
+**Correção:** adicione `typographicUnits` separados para captions, faixas e cabeçalhos, usando a geometria medida no OG. Preserve hierarquia, fonte, cor, peso e alinhamento. Meça cada unidade em 100% e 200% e confira Viewer, print e PDF exportado; não reduza a fonte ou replique uma largura de outra coluna sem evidência.
+
+**Caso verificado na p.95 (2026-11-20):** as três tabelas tinham captions, faixas de seção e cabeçalhos de coluna embutidos nos blocos-fonte. Foram criadas unidades pelas células medidas, além dos quatro rótulos Tier. As 61 candidatas ficaram EXACT em 100% e 200%; o Viewer e o raster do PDF mantiveram os cabeçalhos dentro das células e as linhas da nota abaixo da tabela, sem colisões. A exportação imutável passou `verifiedTranslationRecords=true` e `pdfVerification=true`; a proposta segue sem aprovação/publicação.
