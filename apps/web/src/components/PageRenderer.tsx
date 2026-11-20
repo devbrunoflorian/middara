@@ -4515,7 +4515,10 @@ function sliceSegmentsByTextRange(segments: SpanOverride['segments'], start: num
 
 function splitLeadingNumberedListMarker(segments: SpanOverride['segments']): { marker: SpanOverride['segments']; body: SpanOverride['segments'] } | null {
   const text = segments.map(segment => segment.text).join('');
-  const match = text.match(/^(\s*)(\d{1,2}[.)])(?:[\t ]*)/u);
+  // Numbered and lettered substeps can share the same inline marker/body
+  // shape. Keep this flow opt-in through source or override indents so prose
+  // such as "A. ..." is never restructured without measured list geometry.
+  const match = text.match(/^(\s*)((?:\d{1,2}|[a-z])[.)])(?:[\t ]*)/iu);
   if (!match) return null;
   const markerStart = match[1].length;
   const markerEnd = markerStart + match[2].length;

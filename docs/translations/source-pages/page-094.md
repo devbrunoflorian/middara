@@ -6,9 +6,11 @@
 
 - **PDF page:** 94 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** completed 2026-11-20 against the official English PDF.
+- **English fidelity:** Viewer, print, and final PDF composition visually compared with the source page on 2026-11-20.
+- **PT-BR:** 12 active units published and approved in Payload; copyfit measured at 100% and 200%.
+- **Copyfit exception:** `SQUEEZE` is 15 PT-BR lines against 16 source lines after two natural copyfit attempts. The next expansion overflows; the approved complete translation fits without clipping or overlap, with no font/frame change.
+- **Source record:** raw line-by-line transcript below is not authoritative for semantic grouping or publication state; see [`page-094.md`](../pages/page-094.md).
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)

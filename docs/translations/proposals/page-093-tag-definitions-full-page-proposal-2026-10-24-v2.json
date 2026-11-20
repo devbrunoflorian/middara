@@ -6961,7 +6961,7 @@
           467.7135009765625,
           80.95643615722656
         ],
-        "textAlign": "left",
+        "textAlign": "center",
         "lineHeight": 1.1,
         "lineHeightMode": "custom",
         "segments": [
@@ -6970,7 +6970,7 @@
             "font": "Cinzel-Regular",
             "size": 18,
             "color": "#ffffff",
-            "weight": 400,
+            "weight": 700,
             "style": "normal",
             "disableLigatures": true
           },
@@ -6979,69 +6979,27 @@
             "font": "Cinzel-Regular",
             "size": 11,
             "color": "#ffffff",
-            "weight": 400,
+            "weight": 700,
             "style": "normal",
             "disableLigatures": true
           }
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual",
-      "editorialStatus": "Approved and persisted through the official Reviewer. Source and target heading structure and rich typography passed; Copyfit V3 was EXACT 1/1 at 100% and 200%; Payload read-back confirmed.",
+      "technicalStatus": "pending_live_viewer_copyfit_v3_centered_title_frame_and_source_weight",
+      "editorialStatus": "A moldura herdada cobria o floreio esquerdo e escondia TAG. Mantidos os dois corpos da fonte (18 pt para Tags; 11 pt para Continued), restaurado peso 700 da fonte e centralizado PT-BR em x=410 pt.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
       "copyfitMeasurementsByZoom": {
-        "200%": {
-          "status": "measured_copyfit_v3_script_visual_rows",
-          "sourcePdfVisualLineCount": 1,
-          "pageRendererVisualLineCount": 1,
-          "classification": "EXACT",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
-          "environment": {
-            "pageNumber": 93,
-            "pdfDocumentPageIndex": 92,
-            "language": "pt-BR",
-            "viewerZoom": "200%",
-            "viewportCssPixels": "1280x720",
-            "devicePixelRatio": 1.25,
-            "fontLoaded": true
-          },
-          "sourceEvidence": {
-            "bboxPt": [
-              352.6337890625,
-              56.69243621826172,
-              467.7135009765625,
-              80.95643615722656
-            ],
-            "visualRowBaselinesPt": [
-              74.26
-            ],
-            "spans": 2,
-            "visualRows": 1
-          },
-          "pageRendererEvidence": {
-            "spanKey": "page_93_block_27",
-            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
-            "rangeRectFragments": 2,
-            "renderedSymbolIds": [],
-            "semanticSymbolOnlyRows": 0,
-            "distinctVisualRows": 1,
-            "visualRowTopsCssPx": [
-              72.53
-            ],
-            "frameHeightCssPx": 19.7
-          },
-          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-        },
         "100%": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 1,
           "pageRendererVisualLineCount": 1,
           "classification": "EXACT",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
           "environment": {
             "pageNumber": 93,
             "pdfDocumentPageIndex": 92,
@@ -7053,15 +7011,19 @@
           },
           "sourceEvidence": {
             "bboxPt": [
-              352.6337890625,
+              102.5,
               56.69243621826172,
-              467.7135009765625,
-              80.95643615722656
+              717.5,
+              80.95643621826171
             ],
+            "extractedPdfTextVisualRows": 1,
             "visualRowBaselinesPt": [
               74.26
             ],
             "spans": 2,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
             "visualRows": 1
           },
           "pageRendererEvidence": {
@@ -7072,19 +7034,19 @@
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
-              317.86
+              91.48
             ],
             "visualRowIntervalsPt": [],
-            "pageScaleCssPxPerPt": 0.40520249582066925,
+            "pageScaleCssPxPerPt": 0.7567690873341558,
             "renderedFontSamples": [
               {
                 "fontFamily": "CinzelLocal, Cinzel, serif",
-                "fontSize": "7.29364px",
-                "fontWeight": "400",
+                "fontSize": "13.6218px",
+                "fontWeight": "700",
                 "fontStyle": "normal",
                 "color": "rgb(255, 255, 255)",
-                "lineHeight": "8.02301px",
-                "letterSpacing": "-0.109405px",
+                "lineHeight": "14.984px",
+                "letterSpacing": "-0.204328px",
                 "fontKerning": "auto",
                 "fontVariantLigatures": "none",
                 "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
@@ -7092,19 +7054,97 @@
               },
               {
                 "fontFamily": "CinzelLocal, Cinzel, serif",
-                "fontSize": "4.45723px",
-                "fontWeight": "400",
+                "fontSize": "8.32446px",
+                "fontWeight": "700",
                 "fontStyle": "normal",
                 "color": "rgb(255, 255, 255)",
-                "lineHeight": "4.90295px",
-                "letterSpacing": "-0.0668584px",
+                "lineHeight": "9.15691px",
+                "letterSpacing": "-0.124867px",
                 "fontKerning": "auto",
                 "fontVariantLigatures": "none",
                 "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
                 "fontLoaded": true
               }
             ],
-            "frameHeightCssPx": 8.9
+            "frameHeightCssPx": 15.2,
+            "frameWidthCssPx": 465.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 93,
+            "pdfDocumentPageIndex": 92,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              102.5,
+              56.69243621826172,
+              717.5,
+              80.95643621826171
+            ],
+            "extractedPdfTextVisualRows": 1,
+            "visualRowBaselinesPt": [
+              74.26
+            ],
+            "spans": 2,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_93_block_27__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 2,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              109.39
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "27.2437px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "29.9681px",
+                "letterSpacing": "-0.408655px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "16.6489px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "18.3138px",
+                "letterSpacing": "-0.249734px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 30,
+            "frameWidthCssPx": 930.8
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         }
@@ -7114,27 +7154,31 @@
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 93,
           "pdfDocumentPageIndex": 92,
           "language": "pt-BR",
-          "viewerZoom": "100%",
+          "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
           "devicePixelRatio": 1.25,
           "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
-            352.6337890625,
+            102.5,
             56.69243621826172,
-            467.7135009765625,
-            80.95643615722656
+            717.5,
+            80.95643621826171
           ],
+          "extractedPdfTextVisualRows": 1,
           "visualRowBaselinesPt": [
             74.26
           ],
           "spans": 2,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
           "visualRows": 1
         },
         "pageRendererEvidence": {
@@ -7145,19 +7189,19 @@
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            317.86
+            109.39
           ],
           "visualRowIntervalsPt": [],
-          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "pageScaleCssPxPerPt": 1.5135381746683116,
           "renderedFontSamples": [
             {
               "fontFamily": "CinzelLocal, Cinzel, serif",
-              "fontSize": "7.29364px",
-              "fontWeight": "400",
+              "fontSize": "27.2437px",
+              "fontWeight": "700",
               "fontStyle": "normal",
               "color": "rgb(255, 255, 255)",
-              "lineHeight": "8.02301px",
-              "letterSpacing": "-0.109405px",
+              "lineHeight": "29.9681px",
+              "letterSpacing": "-0.408655px",
               "fontKerning": "auto",
               "fontVariantLigatures": "none",
               "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
@@ -7165,19 +7209,20 @@
             },
             {
               "fontFamily": "CinzelLocal, Cinzel, serif",
-              "fontSize": "4.45723px",
-              "fontWeight": "400",
+              "fontSize": "16.6489px",
+              "fontWeight": "700",
               "fontStyle": "normal",
               "color": "rgb(255, 255, 255)",
-              "lineHeight": "4.90295px",
-              "letterSpacing": "-0.0668584px",
+              "lineHeight": "18.3138px",
+              "letterSpacing": "-0.249734px",
               "fontKerning": "auto",
               "fontVariantLigatures": "none",
               "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
               "fontLoaded": true
             }
           ],
-          "frameHeightCssPx": 8.9
+          "frameHeightCssPx": 30,
+          "frameWidthCssPx": 930.8
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
@@ -7189,7 +7234,15 @@
         "approvedAt": "2026-10-25T10:29:07.573Z",
         "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200_semantic_rich_span_visual"
       },
-      "copyfitMeasurementFingerprint": "57c6e8141706884c4d1331b443f60cd1ce7760542de0362f6c8689751a77f874"
+      "copyfitMeasurementFingerprint": "57c6e8141706884c4d1331b443f60cd1ce7760542de0362f6c8689751a77f874",
+      "reviewLayoutFrame": {
+        "x": 102.5,
+        "y": 56.69243621826172,
+        "width": 615,
+        "height": 24.264,
+        "textAlign": "center",
+        "lineHeight": 1.1
+      }
     }
   ],
   "note": "Proposta integral não certificada. As contagens Copyfit V3 serão medidas no PageRenderer real após o catálogo carregar; aprovação editorial permanece separada.",
@@ -7222,6 +7275,12 @@
     {
       "recordedAt": "2026-10-26",
       "summary": "p93 LEAP rich spans corrected to match source PDF: only “Obstructing” remains italic and “IRREDUCIBLE DMG” maps to bold 10 pt. Copyfit invalidated for remeasurement."
+    }
+  ],
+  "revisionHistory": [
+    {
+      "recordedAt": "2026-11-19",
+      "summary": "Correção do cabeçalho de continuação: o frame herdado começava sob o floreio e deixava apenas “S (continuação)” visível. O novo frame PT-BR centraliza “Tags (continuação)” no eixo x=410 pt do OG; peso 700 e tamanhos originais 18/11 pt foram restaurados. A prosa e as demais aprovações da página não mudaram."
     }
   ]
 }

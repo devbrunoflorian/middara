@@ -14,6 +14,8 @@ This is a review queue, **not an approval list**. Payload collection `translatio
 | Terrain Tokens | `Fichas de Terreno` | 5, 21, 23 | Payload id 69 marks this as **PADRÃO OBSERVADO**, not globally approved; distinguish from `Tiles → Peças` and keep linked page reviews pending. |
 | Range | `Alcance` | 17 | Payload id 70 records a **HIPÓTESE** for the general concept only; it is not the `REACH` Tag or `SOI`. |
 | `Range` (numeric distance) / `Reach` (weapon property) | `Distância` / `Alcance`; `Range Icon` → `ícone de tipo de Ataque` | 78 | **Decisão local da p.78, não global:** a própria regra contrasta `Range 4` e `Reach 2`, então as medidas ficam distintas. `Range Icon` identifica as categorias dos ícones de ataque (Melee, Ranged, Melee/Ranged), não uma distância numérica. A hipótese geral `Range → Alcance` (Payload id 70) permanece pendente e sem alteração. |
+| Atributos da legenda de Ícones (`Health`, `Defense`, `Movement`, `Armor`, `Presence`, `Lore`, `Agility`, `Perception`, `Strength`) | Saúde, Defesa, Movimento, Armadura, Presença, Conhecimento, Agilidade, Percepção, Força | 89 | Formas locais da prosa de regras, conferidas contra o OG e o glossário atual; não promovidas globalmente. Os rótulos curvos impressos nos pictogramas e texto de cartas/componentes permanecem em inglês. |
+| `Melee/Ranged Icon` / `Scaling Icons` | Ícone Corpo a Corpo/à Distância / Ícones de Escala | 89 | Formas locais desta legenda. A distância numérica `Range` permanece distinta do identificador `REACH`, conforme decisão contextual da p.78. Não altera equivalências globais nem traduz o nome impresso da Tag. |
 | Melee Attack | `Ataque Corpo a Corpo` | 43, 65 | Forma usada em tradução aprovada da p.43 e no rascunho da p.65; não há decisão global no glossário nem no Payload. Manter como forma observada/local até decisão explícita; preservar a distinção de Attack, Ranged Attack e Tags impressas. |
 | Dodge (ação) | `Esquiva`; `ESQUIVAR`; `se esquivar` | 14, 38, 41, 65 | Não há equivalência global aprovada. Traduções aprovadas usam formas nominais e verbais conforme a sintaxe; a p.65 usa “usar Esquiva”. Confirmar forma-base e caixa; não sobrescrever texto aprovado nem rótulos impressos em cartas. |
 | Combatant Loot Card | `Cartão de Saque de Combatente` | — | Payload id 71 is a **HIPÓTESE**; the component name must remain distinct from abstract `Loot → Saque`. Confirm the printed component and PT form in the source PDF. |
@@ -24,12 +26,12 @@ This is a review queue, **not an approval list**. Payload collection `translatio
 | Story Discipline / Story Item | `Disciplina de História`; `Item de História` | 13 | New compound terms used together; confirm whether `Story` should be retained as a keyword or translated. |
 | Game Over | `Fim de Jogo` | 13 | Proposed translation of a rules outcome; absent from the official glossary. |
 | Side Quest | `Missão Secundária` | 13 | Proposed rules term; absent from the official glossary. |
-| Abraxis Battle Dice | `Dados de Batalha de Abraxis` | 85 | Pilot rendering only; decide whether the game mode/title remains in English or uses this translated name. |
-| Abraxis Point(s) | `Ponto(s) de Abraxis` | 85 | Named score resource; absent from the official glossary. |
-| Fate token | `Ficha de Destino` | 85 | Mechanic resource proposed in the pilot; confirm as a rules term. |
-| Lock In / Locked In | `Fixar` / `Fixado` | 85 | Action-state pair must remain unambiguous and consistent through the procedure. |
-| Damage token / SP token | `Ficha(s) de Dano` / `Ficha(s) de SP` | 85 | Component names used to track values; confirm capitalization and whether SP is expanded. |
-| Adventure Book | `Livro de Aventura` | 85 | Cross-book reference; confirm title/capitalization against the Adventure Book localization. |
+| Abraxis Battle Dice | `Dados de Batalha de Abraxis` | 85 | Usado na tradução aprovada da p.85; decisão local, sem canonização global do nome do minijogo. |
+| Abraxis Point(s) | `Ponto(s) de Abraxis` | 85 | Usado como recurso de pontuação na p.85; ainda sem decisão canônica global. |
+| Fate token | `Ficha de Destino` | 85 | Forma aprovada no contexto da p.85; não promove `Fate` nem `token` a regra global. |
+| Lock In / Locked In | `Travar` / `Travado` | 85 | Par usado na p.85 para distinguir a ação do estado do dado; manter em aberto para revisão global. |
+| Damage token / SP token | `Ficha(s) de Dano` / `Ficha(s) de SP` | 85 | Formas usadas na p.85; SP permanece sigla e as escolhas ficam locais. |
+| Adventure Book | `Livro de Aventura` | 85 | Forma usada na referência cruzada da p.85; não altera por si só o título canônico do outro livro. |
 | Adventure Sheet / Adventurer Sheet | `Adventure Sheet → Ficha de Aventura` (approved, Payload id 7); `Adventurer Sheet → Ficha de Aventureiro` (approved, Payload id 75); `Ficha da Aventura` remains an alternative | 10, 11, 13, 28 | Keep the two source forms distinct. The p. 28 user decision also leaves `Adventurer Card → Ficha de Aventureiro` (Payload id 67) as a hypothesis; it does not promote that separate term or its alternatives. |
 | Unselectable / Selectable / Injured | `Não Selecionável`; `Selecionável`; `Ferido` | 11 | Proposed status labels; absent from the official glossary. Confirm these before using them as global terms. |
 | Party Tuck Bag | `Bolsa do Grupo` | 10 | Proposed name for the shared storage bag. Keep distinct from official `Party Stash → Estoque do Grupo` until the compound term is confirmed. |
@@ -171,7 +173,7 @@ O glossário foi conferido antes da revisão. As formas oficiais existentes (`Lo
 
 | Termo EN | Forma contextual usada | Evidência/contexto | Estado |
 |---|---|---|---|
-| `Draw` *(ação de tirar carta de um baralho)* | tirar/retirar carta(s) | 57, 70, 81 | A decisão do usuário para preservar o contraste entre comprar e tirar cartas continua pendente globalmente. Nas pp.57 e 70, usa-se “tirar cartas” no contexto de retirar cartas do baralho; na p.81, “retire uma Carta de Combatente ao acaso” descreve a seleção aleatória de uma carta já embaralhada. `Draw → Compre` permanece no glossário oficial e não é aplicado mecanicamente a esses contextos. |
+| `Draw` *(ação de tirar carta de um baralho)* | tirar/retirar carta(s) | 57, 70, 81, 84 | A decisão do usuário para preservar o contraste entre comprar e tirar cartas continua pendente globalmente. Nas pp.57 e 70, usa-se “tirar cartas” no contexto de retirar cartas do baralho; na p.81, “retire uma Carta de Combatente ao acaso”, e na p.84, “retirem uma ao acaso”, descrevem a seleção de uma carta já embaralhada. `Draw → Compre` permanece no glossário oficial e não é aplicado mecanicamente a esses contextos. |
 | `Pack` | Mochila | 70 | Nome da área onde se guardam Itens; manter distinto de `Party Stash → Estoque do Grupo`. |
 | `Store Items` | Itens de Loja | 70 | Forma usada em prosa de regras; confirmar antes de canonizar como categoria de componente. |
 | `Wandering Items` | Itens Errantes | 70 | Forma usada em prosa; confirmar o composto como nome de categoria. |
@@ -205,3 +207,18 @@ O glossário foi consultado durante as duas revisões. Formas oficiais como `Sta
 ### Vocabulário local observado na p.75 (2026-11-17)
 
 O glossário oficial foi consultado. Os nomes impressos de Disciplina, ficha e classe — Summoning, Summon, LOYAL ESPER e SOI — foram preservados em inglês no texto de regras; cartas e arte de componentes continuam no idioma-fonte. Initiative Track → Trilha de Iniciativa foi usado localmente, sem promoção global nesta revisão. Non-Irreducible Damage permanece pendente de decisão editorial; a redação contextual preserva a condição de excluir dano Irredutível e não altera a entrada global de Irreducible Damage.
+
+
+### Vocabulário local observado na p.53 (2026-11-19)
+
+As formas aprovadas (Spell → Feitiço, cast → conjurar, Casting Die → Dado de Conjuração, Conviction → Convicção e Empower → Fortalecer) foram reconciliadas com o glossário atual. Os termos abaixo descrevem usos locais já publicados; esta anotação não os promove a decisões globais. O título curto do banner usa “Feitiços vs. Habilidades Similares” para manter uma linha e não altera a forma mais completa da prosa.
+
+| Termo EN | Forma contextual usada | Evidência/contexto | Estado |
+|---|---|---|---|
+| Spell-Like Ability | Habilidade Semelhante a Feitiço | Prosa da p.53; no banner, forma curta “Habilidades Similares” cabe em uma linha sem alcançar os arabescos | Uso local; sem canonização global |
+| Combatant Card | Carta de Combatente | Referência à carta na prosa; texto impresso na carta ilustrada permanece em inglês | Uso local; alinhado ao composto corrente “Carta de Combatente” |
+| Conviction Check | Teste de Convicção | Nome do teste para resistir aos efeitos de Feitiço | Uso local; sem entrada global aprovada |
+| Force / Force Pool / Force Value | Força / Reserva de Força / Valor de Força | Instruções da p.53; Force Value também aparece na p.72 | Uso local; sem canonização global |
+| Spell Action / Standard Action | Ação de Feitiço / Ação Padrão | Nomes de etapas/ações mecânicas na página | Uso contextual; sem canonização global |
+| Difference Hit / Sphere of Influence | Diferença do Acerto / Esfera de Influência; sigla SOI preservada | Instruções e referência cruzada da p.53 | Uso local; sigla e texto impresso em cartas permanecem no idioma-fonte |
+| Intelligent Combatants / Upgrade / Weapon Icon | Combatentes Inteligentes / Aprimoramento / Ícone de Arma | Descrições de regras da p.53 | Formas contextuais; sem canonização global |

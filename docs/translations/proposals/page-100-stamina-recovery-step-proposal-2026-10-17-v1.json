@@ -38,7 +38,7 @@
       "sourcePdfLineIds": [
         "line_26_0"
       ],
-      "proposalText": "A. Recuperar Pontos de Vigor (SP):",
+      "proposalText": "A. Recuperar Pontos de Stamina (SP):",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_100_unit_p100-recover-stamina-points-heading__pt-BR",
@@ -71,7 +71,7 @@
             "disableLigatures": true
           },
           {
-            "text": "Recuperar Pontos de Vigor (SP):",
+            "text": "Recuperar Pontos de Stamina (SP):",
             "font": "OptimaLTStd-Bold",
             "size": 9,
             "weight": 700,
@@ -83,56 +83,13 @@
         "managedSourceSymbols": []
       },
       "editorialStatus": "pending_human_review",
-      "technicalStatus": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+      "technicalStatus": "pending_technical_validation",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Stamina Points → Pontos de Vigor is a local candidate; preserve the source abbreviation SP pending terminology approval."
       ],
-      "copyfitClassification": "EXACT",
       "pageRendererVisualLineCount": 1,
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 1,
-        "pageRendererVisualLineCount": 1,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 100,
-          "pdfDocumentPageIndex": 99,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
-        },
-        "sourceEvidence": {
-          "bboxPt": [
-            447.31781005859375,
-            177.83966064453125,
-            755.9719848632812,
-            218.56472778320312
-          ],
-          "visualBaselinesPt": [
-            186.129,
-            196.128,
-            206.127,
-            216.126
-          ],
-          "spans": 11,
-          "visualRows": 4
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_100_unit_p100-recover-stamina-points-heading__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 2,
-          "distinctVisualRows": 1,
-          "visualRowTopsCssPx": [
-            170.7
-          ],
-          "frameHeightCssPx": 7.3
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
-        "note": "Calibrated to 1 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
-      }
+      "copyfitClassification": "UNMEASURED"
     },
     {
       "blockIndex": 15,
@@ -147,7 +104,7 @@
         "line_26_2",
         "line_26_3"
       ],
-      "proposalText": "A Barra de Recuperação de Vigor de cada Aventureiro determina quantos SP ele recebe nesta etapa e quantos SP pode ter a qualquer momento. Veja A: Barra de Recuperação de Vigor, p. 25.",
+      "proposalText": "A Barra de Recuperação de Stamina de cada Aventureiro define quantos SP o Aventureiro recebe nesta etapa e o máximo de SP que pode ter. Veja A: Barra de Recuperação de Stamina, p. 25.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_100_unit_p100-recover-stamina-points-description__pt-BR",
@@ -162,7 +119,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "A Barra de Recuperação de Vigor de cada Aventureiro determina quantos ",
+            "text": "A Barra de Recuperação de Stamina de cada Aventureiro define quantos ",
             "font": "OptimaLTStd",
             "size": 9,
             "weight": 400,
@@ -180,7 +137,7 @@
             "disableLigatures": true
           },
           {
-            "text": " ele recebe nesta etapa e quantos ",
+            "text": " o Aventureiro recebe nesta etapa e o máximo de ",
             "font": "OptimaLTStd",
             "size": 9,
             "weight": 400,
@@ -198,7 +155,7 @@
             "disableLigatures": true
           },
           {
-            "text": " pode ter a qualquer momento. Veja ",
+            "text": " que pode ter. Veja ",
             "font": "OptimaLTStd",
             "size": 9,
             "weight": 400,
@@ -216,7 +173,7 @@
             "disableLigatures": true
           },
           {
-            "text": " Barra de Recuperação de Vigor",
+            "text": " Barra de Recuperação de Stamina",
             "font": "OptimaLTStd-Bold",
             "size": 9,
             "weight": 700,
@@ -237,59 +194,14 @@
         "managedSourceSymbols": []
       },
       "editorialStatus": "pending_human_review",
-      "technicalStatus": "viewer_copyfit_v3_exact_100_200_critical_pass_human_review_pending",
+      "technicalStatus": "pending_technical_validation",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Stamina Recovery Bar → Barra de Recuperação de Vigor is a local candidate, not an approved glossary entry.",
         "Stamina Points → Pontos de Vigor (SP) is a local candidate, not an approved glossary entry."
       ],
-      "copyfitClassification": "EXACT",
       "pageRendererVisualLineCount": 3,
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 3,
-        "pageRendererVisualLineCount": 3,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 100,
-          "pdfDocumentPageIndex": 99,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
-        },
-        "sourceEvidence": {
-          "bboxPt": [
-            447.31781005859375,
-            177.83966064453125,
-            755.9719848632812,
-            218.56472778320312
-          ],
-          "visualBaselinesPt": [
-            186.129,
-            196.128,
-            206.127,
-            216.126
-          ],
-          "spans": 11,
-          "visualRows": 4
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_100_unit_p100-recover-stamina-points-description__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 12,
-          "distinctVisualRows": 3,
-          "visualRowTopsCssPx": [
-            178.8,
-            186.09,
-            193.39
-          ],
-          "frameHeightCssPx": 21.9
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
-        "note": "Calibrated to 3 line(s) for this specific sub-block unit, isolating it from the full parent block bbox."
-      }
+      "copyfitClassification": "UNMEASURED"
     }
   ],
   "note": "Both source-backed units were rendered together. Copyfit V3 measured the heading 1→1 EXACT and the body 3→3 EXACT at 100% and 200%, preserving rich emphasis and source fonts. Independent critical review confirmed the meaning, hierarchy, and separation from the IMPORTANT notice and step B; terminology decisions and human approval remain pending.",

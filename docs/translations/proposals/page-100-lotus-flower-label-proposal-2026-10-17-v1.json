@@ -47,7 +47,7 @@
           183.75637817382812
         ]
       ],
-      "proposalText": "FLOR DE LÓTUS",
+      "proposalText": "LOTUS FLOWER",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_100_unit_p100-lotus-flower-label__pt-BR",
@@ -62,7 +62,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "FLOR DE LÓTUS",
+            "text": "LOTUS FLOWER",
             "font": "OptimaLTStd-Bold",
             "size": 9,
             "weight": 700,
@@ -74,52 +74,13 @@
         "managedSourceSymbols": []
       },
       "pageRendererVisualLineCount": 1,
-      "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
-        "sourcePdfVisualLineCount": 1,
-        "pageRendererVisualLineCount": 1,
-        "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
-        "environment": {
-          "pageNumber": 100,
-          "pdfDocumentPageIndex": 99,
-          "language": "pt-BR",
-          "viewerZoom": "200%",
-          "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
-        },
-        "sourceEvidence": {
-          "bboxPt": [
-            61.52750015258789,
-            173.02838134765625,
-            294.5915222167969,
-            183.75637817382812
-          ],
-          "visualBaselinesPt": [
-            181.317
-          ],
-          "spans": 2,
-          "visualRows": 1
-        },
-        "pageRendererEvidence": {
-          "spanKey": "page_100_unit_p100-lotus-flower-label__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 1,
-          "distinctVisualRows": 1,
-          "visualRowTopsCssPx": [
-            166.81
-          ],
-          "frameHeightCssPx": 7.3
-        },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      },
-      "technicalStatus": "pending_editor_and_pdf_validation_after_viewer_copyfit_v3_exact",
+      "technicalStatus": "pending_technical_validation",
       "editorialStatus": "pending_human_review",
-      "copyfitClassification": "EXACT",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "LOTUS FLOWER → FLOR DE LÓTUS is a local label candidate and is not glossary-approved."
-      ]
+      ],
+      "copyfitClassification": "UNMEASURED"
     }
   ],
   "note": "One independent label in the paired table row is proposed in this increment. The neighboring TOTEMS unit remains a separate proposal.",

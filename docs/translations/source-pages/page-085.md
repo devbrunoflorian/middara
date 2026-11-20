@@ -6,9 +6,9 @@
 
 - **PDF page:** 85 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** verified against the official PDF render and two-column reading order
+- **English fidelity:** Viewer and print/PDF compared with the official source; card artwork text remains part of the printed illustration
+- **PT-BR:** 28 active translation reviews approved; 100%/200% copyfit and final Viewer/print/PDF export verified
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)

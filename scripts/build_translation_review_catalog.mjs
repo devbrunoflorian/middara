@@ -194,9 +194,11 @@ function canonicalCopyfitGeometry(candidate, pageNumber, spanKey) {
           : blockMatch ? Number(blockMatch[1]) : -1;
         const page = pageDom(pageNumber);
         const sourceBlock = Array.isArray(page?.blocks) ? page.blocks[blockIndex] : null;
-        const canonicalSpanKey = sourceBlock?.editorKey
-          ? `${sourceBlock.editorKey}__pt-BR`
-          : blockIndex >= 0 ? `page_${pageNumber}_block_${blockIndex}__pt-BR` : spanKey;
+        const canonicalSpanKey = /^page_\d+_unit_/u.test(spanKey)
+          ? (spanKey.endsWith('__pt-BR') ? spanKey : `${spanKey}__pt-BR`)
+          : sourceBlock?.editorKey
+            ? `${sourceBlock.editorKey}__pt-BR`
+            : blockIndex >= 0 ? `page_${pageNumber}_block_${blockIndex}__pt-BR` : spanKey;
         return { spanKey: canonicalSpanKey, bbox: frameBbox };
       }
     }
@@ -432,6 +434,13 @@ const proposals = [...candidatesByFamily.values()]
         sourceUnitId: candidate.sourceUnitId ?? null,
         sourceText,
         proposalText,
+        ...(Array.isArray(candidate.absorbsSourceSpanKeys)
+          ? { absorbsSourceSpanKeys: candidate.absorbsSourceSpanKeys.filter(key => typeof key === 'string') }
+          : {}),
+        ...(candidate.intentionalEmptyOverride && typeof candidate.intentionalEmptyOverride === 'object'
+          && !Array.isArray(candidate.intentionalEmptyOverride)
+          ? { intentionalEmptyOverride: candidate.intentionalEmptyOverride }
+          : {}),
         sourceSegments: resolveSourceSegments(candidate, pageNumber, spanKey),
         data,
         reviewLayoutFrame: candidate.reviewLayoutFrame && typeof candidate.reviewLayoutFrame === 'object'

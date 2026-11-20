@@ -113,6 +113,12 @@ Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir auto
 
 **Nota contextual da p.57 (17/11/2026):** no callout de Item Único, `draw` descreve retirar uma carta do baralho durante um Encontro, em contraste explícito com comprar o Item na loja. Nesse contexto local, usar **retirar do baralho**; manter **Draw → Compre** na tabela global e não generalizar a exceção para outros contextos.
 
+**Nota contextual da p.84 (19/11/2026):** `draw one randomly` descreve selecionar uma carta depois de embaralhar um baralho. Usar localmente **retirem uma ao acaso**, mantendo a distinção entre retirar do baralho e comprar. A forma global **Draw → Compre** não foi alterada.
+
+**Nota contextual da p.93 (20/11/2026):** em `drawing a Monster Loot Card in the Combatant Loot deck after Defeating opponents`, `draw` é retirar uma carta do baralho após derrotar oponentes, não comprar na loja. Usar localmente **retirar do baralho** nos blocos ITEM UPGRADES e MATERIAL; manter **Draw → Compre** como equivalência global e não traduzir os nomes de componente `Monster Loot Card` e `Combatant Loot`.
+
+**Nota contextual da p.94 (20/11/2026):** `drawing Combatant Loot and pull the Unique Loot card` descreve retirar uma carta do baralho e encontrar a carta `Unique Loot`; não é compra na loja. Usar localmente **retirar do baralho** e preservar os nomes dos componentes `Combatant Loot` e `Unique Loot`. Nesta ocorrência, manter `Tier` como **Tier** e `LVL` como sigla, conforme decisões aprovadas; nenhuma equivalência global nova foi criada.
+
 **Decisão do usuário (15/10/2026):** para a mecânica *Exhaust*, usar o verbo **exaustar**; em rótulos de Tag, manter a forma verbal/capitalização natural, por exemplo **EXAUSTAR**. Esta decisão não renomeia IDs semânticos como `action.exhaust` e não autoriza sobrescrever traduções humanas já salvas.
 
 **Decisão do usuário (18/10/2026, Payload id 58):** para a classificação de itens (*Mundane, Common, Uncommon, Rare*) e faixas de recompensa, o termo **Tier** é fixado canonicamente como **Tier** (mantendo-se no plural **Tiers**). `Tier` é distinto de `Level/LVL`.

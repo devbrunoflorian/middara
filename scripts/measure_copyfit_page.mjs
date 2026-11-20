@@ -42,7 +42,13 @@ const zoomPercent = zoomIdx >= 0 ? Number(args[zoomIdx + 1]) : 200;
 if (!Number.isInteger(pageNumber) || pageNumber < 1) throw new Error('Usage: measure_copyfit_page.mjs <page> [--write] [--zoom 200]');
 
 const baseUrl = process.env.MIDDARA_VIEWER_URL ?? 'http://127.0.0.1:8080';
+const apiUrl = process.env.VITE_PAYLOAD_API_URL ?? 'http://localhost:3000';
 const pdfPath = process.env.MIDDARA_SOURCE_PDF ?? 'C:/Users/bruno/Middara/Rulebook 1.2/Rulebook 1p2 Final Version 05-19-23 Optimized.pdf';
+const fulfillJsonPreview = (route, upstream, payload) => route.fulfill({
+  status: upstream.status(),
+  contentType: 'application/json',
+  body: JSON.stringify(payload),
+});
 const rendererKeyForCandidate = candidate => {
   const key = String(candidate.copyfitCanonicalSpanKey || candidate.spanKey || '');
   // PageRenderer emits Payload translation keys. PT-BR block overrides are
@@ -69,7 +75,7 @@ const normalize = value => String(value ?? '')
   // A source-backed numbered phase uses a fixed 18 pt grid column. Its two
   // text nodes have no literal separator because the column supplies the
   // visible advance; restore that separator only for proposal identity.
-  .replace(/(?<!\w)([1-4]\.)(?=[A-Z\u00c0-\u00de])/gu, '$1 ')
+  .replace(/(?<!\w)((?:[1-4]|[a-z])\.)(?=[A-Z\u00c0-\u00de])/giu, '$1 ')
   .trim();
 const candidateTextForRenderer = (candidate, staticMarkerText = '', actualRenderedText = '') => {
   let text = normalize((candidate.data?.segments ?? []).map(segment => segment.text ?? '').join(''));
@@ -79,7 +85,7 @@ const candidateTextForRenderer = (candidate, staticMarkerText = '', actualRender
   if (staticMarker && text.startsWith(staticMarker)) text = text.slice(staticMarker.length).replace(/^[\s\u00a0]+/u, '');
   else if (!staticMarker && actualRenderedText) {
     const bodyText = normalize(actualRenderedText);
-    const leadingMarker = text.match(/^(?:•|[1-4]\.)\s/u)?.[0];
+    const leadingMarker = text.match(/^(?:•|(?:\d{1,2}|[a-z])\.)\s/iu)?.[0];
     if (leadingMarker && !bodyText.startsWith(leadingMarker.trim())) {
       text = text.slice(leadingMarker.length).replace(/^[\s\u00a0]+/u, '');
     }
@@ -103,6 +109,55 @@ const pending = refreshSpanKeys.length || args.includes('--all')
 if (!pending.length) {
   console.log(`p.${pageNumber}: reused Copyfit V3 visual-row measurements for all ${candidates.length} candidates; skipped redundant Viewer traversal.`);
   process.exit(0);
+}
+
+// A review candidate may carry a frame that is already saved in Payload. In
+// that case the live PageRenderer already uses the candidate geometry, so a
+// panel-row click is unnecessary and can race with the asynchronous review
+// list refresh. Only bypass selection when the persisted frame matches every
+// geometric field used by canonicalCopyfitGeometry.
+const persistedFrameMatches = new Map();
+const framedCandidates = pending.filter(candidate => candidate.reviewLayoutFrame);
+if (framedCandidates.length) {
+  try {
+    const url = new URL('/api/layout-frames', apiUrl);
+    url.searchParams.set('where[pageNumber][equals]', String(pageNumber));
+    url.searchParams.set('where[language][equals]', 'pt-BR');
+    url.searchParams.set('limit', '5000');
+    const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
+    if (response.ok) {
+      const payload = await response.json();
+      const records = Array.isArray(payload?.docs) ? payload.docs : Array.isArray(payload) ? payload : [];
+      for (const candidate of framedCandidates) {
+        const canonicalKey = String(candidate.copyfitCanonicalSpanKey || candidate.spanKey || '')
+          .replace(/__(?:pt-BR|en)$/u, '');
+        const matching = records.filter(record => record?.frameKey === `${canonicalKey}::pt-BR`);
+        if (matching.length !== 1 || !matching[0]?.data) continue;
+        const saved = matching[0].data;
+        const proposed = candidate.reviewLayoutFrame;
+        const expected = [
+          proposed.x,
+          proposed.y,
+          Number.isFinite(proposed.total) ? proposed.total : proposed.width,
+          Number.isFinite(proposed.totalHeight) ? proposed.totalHeight : proposed.height,
+        ];
+        const actual = [
+          saved.x,
+          saved.y,
+          Number.isFinite(saved.total) ? saved.total : saved.width,
+          Number.isFinite(saved.totalHeight) ? saved.totalHeight : saved.height,
+        ];
+        const geometryMatches = expected.every((value, index) => Number.isFinite(value)
+          && Number.isFinite(actual[index]) && Math.abs(value - actual[index]) <= 0.01);
+        const alignmentMatches = !proposed.textAlign || proposed.textAlign === saved.textAlign;
+        if (geometryMatches && alignmentMatches) persistedFrameMatches.set(candidate.reviewKey, true);
+      }
+    }
+  } catch (error) {
+    if (process.env.MIDDARA_COPYFIT_DEBUG === '1') {
+      console.warn('Could not compare saved PT-BR layout frames; review rows remain required.', String(error));
+    }
+  }
 }
 
 // ---- PDF side -------------------------------------------------------------------------------
@@ -214,13 +269,13 @@ try {
     await context.route('**/translation-review/catalog.json*', async route => {
       try {
         const upstream = await route.fetch();
-        const payload = await upstream.json();
+        const payload = JSON.parse((await upstream.body()).toString('utf8'));
         let previewPayload = payload;
         for (const spanKey of refreshSpanKeys) {
           previewPayload = exposeCandidateForCopyfitPreview(previewPayload, { spanKey });
         }
         console.log(`Browser-only copyfit preview: cleared stale diagnostic blanks for ${refreshSpanKeys.join(', ')}; source catalog remains unchanged.`);
-        await route.fulfill({ response: upstream, json: previewPayload });
+        await fulfillJsonPreview(route, upstream, previewPayload);
       } catch (error) {
         if (/Request context disposed|Target page, context or browser has been closed/iu.test(String(error?.message ?? error))) return;
         throw error;
@@ -234,23 +289,23 @@ try {
       const requestUrl = new URL(route.request().url());
       if (previewDrafts && requestUrl.pathname.endsWith('/api/translation-reviews')) {
         const upstream = await route.fetch();
-        const payload = await upstream.json();
+        const payload = JSON.parse((await upstream.body()).toString('utf8'));
         const previewPayload = exposeReviewDraftsForCopyfitPreview(payload, { candidates: pending });
         console.log(`Browser-only preview: exposed ${pending.length} proposal drafts to the review renderer; Payload remains unchanged.`);
-        await route.fulfill({ response: upstream, json: previewPayload });
+        await fulfillJsonPreview(route, upstream, previewPayload);
         return;
       }
       if (previewDrafts && requestUrl.pathname.endsWith('/api/layout-frames')) {
         const upstream = await route.fetch();
-        const payload = await upstream.json();
+        const payload = JSON.parse((await upstream.body()).toString('utf8'));
         const previewPayload = exposeLayoutFramesForCopyfitPreview(payload, { pageNumber, candidates: pending });
         console.log(`Browser-only preview: exposed candidate PT-BR layout frames; Payload remains unchanged.`);
-        await route.fulfill({ response: upstream, json: previewPayload });
+        await fulfillJsonPreview(route, upstream, previewPayload);
         return;
       }
       if (previewDrafts && /\/api\/translations\/?$/u.test(requestUrl.pathname)) {
         const upstream = await route.fetch();
-        const payload = await upstream.json();
+        const payload = JSON.parse((await upstream.body()).toString('utf8'));
         const sourceDocs = Array.isArray(payload?.docs) ? payload.docs : Array.isArray(payload) ? payload : null;
         if (!sourceDocs) throw new Error('Translations response has no document list for browser-only draft preview.');
         const docs = [...sourceDocs];
@@ -270,20 +325,20 @@ try {
         }
         const previewPayload = Array.isArray(payload) ? docs : { ...payload, docs };
         console.log(`Browser-only preview: exposed ${pending.length} proposal drafts to PageRenderer; Payload remains unchanged.`);
-        await route.fulfill({ response: upstream, json: previewPayload });
+        await fulfillJsonPreview(route, upstream, previewPayload);
         return;
       }
       if (previewRequestId && requestUrl.pathname.endsWith('/api/translation-review-requests')) {
         const candidate = pending[0];
         const upstream = await route.fetch();
-        const payload = await upstream.json();
+          const payload = JSON.parse((await upstream.body()).toString('utf8'));
         const previewPayload = exposeRequestForCopyfitPreview(payload, {
           requestId: previewRequestId,
           reviewKey: candidate.reviewKey,
           spanKey: candidate.spanKey,
         });
         console.log(`Browser-only copyfit preview: request ${previewRequestId} is treated as returned by AI; Payload remains unchanged.`);
-        await route.fulfill({ response: upstream, json: previewPayload });
+          await fulfillJsonPreview(route, upstream, previewPayload);
         return;
       }
       await route.continue();
@@ -550,6 +605,7 @@ try {
       expectedSymbolIds: expectedSymbolIdsFor(candidate),
       actualSymbolIds: directSnapshot.symbolIds ?? [],
     });
+    const savedReviewFrameMatches = persistedFrameMatches.get(candidate.reviewKey) === true;
     const measurementPath = selectCopyfitMeasurementPath({
       // A keyed unit may still be showing its older integrated translation
       // while the proposal row holds the new pending draft. Measure the draft
@@ -563,7 +619,11 @@ try {
       // The browser-only preview API has already materialized proposed frames
       // through /api/layout-frames. Outside that isolated route, the review row
       // must still be selected to apply an unsaved candidate frame.
-      requiresReviewFrame: Boolean(candidate.reviewLayoutFrame && !previewDrafts),
+      // A matching frame is already present in the live PageRenderer (either
+      // persisted or exposed by this read-only preview route). In that case,
+      // selecting a review row would add no geometry and can race with the
+      // asynchronous replacement of the proposal list.
+      requiresReviewFrame: Boolean(candidate.reviewLayoutFrame && !previewDrafts && !savedReviewFrameMatches),
     });
     if (measurementPath.path === 'invalid' || measurementPath.path === 'unmatched') {
       unmatchedRows.push({ index, spanKey: candidate.spanKey, reason: directIdentity?.reason ?? measurementPath.reason });
@@ -573,6 +633,7 @@ try {
       console.log('copyfit candidate:', candidate.spanKey, candidate.reviewKey,
         'rendererKey=', rendererKeyForCandidate(candidate), 'snapshotCount=', directSnapshot.count,
         'rowCount=', rowCountForCandidate, 'directIdentity=', directIdentity?.reason ?? (directIdentity ? 'valid' : 'not checked'),
+        'savedReviewFrameMatches=', savedReviewFrameMatches,
         'actual=', normalize(directSnapshot.text).slice(0, 180), 'expected=', directExpectedText?.slice(0, 180));
     }
     if (measurementPath.path === 'page-renderer-key') {

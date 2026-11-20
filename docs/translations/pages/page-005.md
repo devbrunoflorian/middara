@@ -2,7 +2,7 @@
 
 - **Origem EN:** transcrita diretamente do PDF oficial e cotejada com a página renderizada.
 - **Fidelidade EN:** o histórico de revisão fica no status da página. Confira o PDF original antes de alterar texto, peso tipográfico ou arte.
-- **PT-BR:** primeiro rascunho abaixo; ainda precisa de preview em português.
+- **PT-BR:** correções pontuais da p.5 foram aprovadas e conferidas no Viewer/PDF; a certificação de todos os blocos da página continua pendente.
 - **Escopo desta tradução:** os 12 blocos explicativos impressos nas duas colunas. Nomes e regras dentro das cartas/tokens ilustrados ficam fora desta tradução e exigem fluxo de localização de arte.
 - **Hierarquia:** cabeçalhos de seção preservados em negrito; ênfases em negrito/itálico e referências de página mantidas.
 
@@ -22,7 +22,7 @@
 
 **EN:** These are Items and Discipline Cards that are only available in the Adventure Mode. These cards cannot be acquired normally. Instead, they must be earned during the Adventure and are hidden inside **Hidden Card** decks. When playing the Crawl Mode, these cards are not used and can be kept in the game box. See ***Story Disciplines and Items*** Pg. 13.
 
-**PT-BR (rascunho):** Estas são Cartas de Item e de Disciplina disponíveis apenas no Modo Aventura. Não é possível obtê-las normalmente: elas devem ser conquistadas durante a Aventura e ficam ocultas nos baralhos de **Cartas Ocultas**. No Modo Exploração, essas cartas não são usadas e podem ficar na caixa do jogo. Consulte ***Disciplinas e Itens de História***, pág. 13.
+**PT-BR (aprovado, review 1925):** Estas são Cartas de Item e Cartas de Disciplina disponíveis apenas no Modo Aventura. Normalmente, essas cartas não podem ser obtidas. Em vez disso, devem ser conquistadas durante a Aventura e ficam escondidas nos baralhos de **Cartas Ocultas**. No Modo Exploração, essas cartas não são usadas e podem ficar na caixa do jogo. Veja ***Disciplinas e Itens de História***, pág. 13.
 
 ### 03 — Exalted Esper Cards
 
@@ -38,7 +38,7 @@
 
 **EN:** Abraxis is a mini-game played using the custom dice that come with the game. These cards are only used when playing the Adventure Mode. When playing the Crawl Mode, these cards are not used and can be kept in the game box. See ***Abraxis Battle Dice*** Pg. 85.
 
-**PT-BR (rascunho):** Abraxis é um minijogo disputado com os dados personalizados que acompanham o jogo. Estas cartas são usadas apenas no Modo Aventura. No Modo Exploração, não são usadas e podem ficar na caixa do jogo. Consulte ***Dados de Batalha de Abraxis***, pág. 85.
+**PT-BR (aprovado, review 1909):** Abraxis é um minijogo jogado com os dados personalizados do jogo. Essas cartas só são usadas no Modo Aventura. No Modo Exploração, não são usadas e podem ficar na caixa do jogo. Veja ***Dados de Batalha de Abraxis***, pág. 85.
 
 ### 05 — Quick Reference cards
 

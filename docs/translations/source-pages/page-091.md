@@ -6,9 +6,9 @@
 
 - **PDF page:** 91 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** conferida diretamente contra o PDF oficial e a página renderizada.
+- **English fidelity:** Viewer EN e export/PDF comparados visualmente ao OG; geometria da página preservada.
+- **PT-BR:** tradução publicada; 13 unidades textuais EXACT em 100% e 200%, uma unidade vazia intencional; Viewer e PDF final comparados ao OG.
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)

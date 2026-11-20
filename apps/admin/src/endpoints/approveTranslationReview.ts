@@ -37,6 +37,75 @@ function normalizeSpanKeyForComparison(key: unknown): string {
   return String(key ?? '').replace(/__pt-BR$/u, '')
 }
 
+/**
+ * Allow a measured revision to reconcile only known inline-spacing or line-height
+ * edits made after the previous approval, and only when the candidate preserves
+ * those edits plus every rich-run style and semantic symbol. Text itself is
+ * intentionally allowed to change because this is the review being approved.
+ */
+function preservesPostPublicationFormatting(
+  currentValue: unknown,
+  previousValue: unknown,
+  proposedValue: unknown,
+  spanKey: string,
+): boolean {
+  if (!isRecord(currentValue) || !isRecord(previousValue) || !isRecord(proposedValue)
+    || !Array.isArray(currentValue.segments) || !Array.isArray(previousValue.segments)
+    || !Array.isArray(proposedValue.segments)) return false
+  const current = currentValue as JsonRecord
+  const previous = previousValue as JsonRecord
+  const proposed = proposedValue as JsonRecord
+  const withoutReconciledFields = (data: JsonRecord) => {
+    const copy = { ...data }
+    delete copy.spanKey
+    delete copy.bbox
+    delete copy.lineHeight
+    delete copy.lineHeightMode
+    delete copy.segments
+    return copy
+  }
+  if (canonical(withoutReconciledFields(current)) !== canonical(withoutReconciledFields(previous))
+    || canonical(withoutReconciledFields(current)) !== canonical(withoutReconciledFields(proposed))) return false
+  if (normalizeSpanKeyForComparison(current.spanKey ?? spanKey) !== normalizeSpanKeyForComparison(spanKey)
+    || normalizeSpanKeyForComparison(previous.spanKey ?? spanKey) !== normalizeSpanKeyForComparison(spanKey)
+    || normalizeSpanKeyForComparison(proposed.spanKey ?? spanKey) !== normalizeSpanKeyForComparison(spanKey)) return false
+  if ((current.bbox != null && canonical(current.bbox) !== canonical(previous.bbox))
+    || canonical(proposed.bbox) !== canonical(previous.bbox)) return false
+
+  const currentSegments = current.segments as JsonRecord[]
+  const previousSegments = previous.segments as JsonRecord[]
+  const proposedSegments = proposed.segments as JsonRecord[]
+  const isWhitespaceOnly = (segment: JsonRecord) => typeof segment.text === 'string'
+    && /^\s+$/u.test(segment.text) && segment.symbolId === undefined
+  const withoutWhitespaceSegments = (segments: JsonRecord[]) => segments.filter(segment => !isWhitespaceOnly(segment))
+  if (canonical(withoutWhitespaceSegments(currentSegments)) !== canonical(previousSegments)) return false
+  const segmentStyles = (segments: JsonRecord[]) => segments.map(segment => {
+    const style = { ...segment }
+    delete style.text
+    return style
+  })
+  if (canonical(segmentStyles(currentSegments)) !== canonical(segmentStyles(proposedSegments))) return false
+  const whitespaceSlots = (segments: JsonRecord[]) => segments.map((segment, index) => ({
+    index,
+    text: segment.text,
+    before: segments[index - 1]?.symbolId ?? null,
+    after: segments[index + 1]?.symbolId ?? null,
+  })).filter(slot => typeof slot.text === 'string' && /^\s+$/u.test(slot.text) && slot.after !== null)
+  const currentWhitespace = whitespaceSlots(currentSegments)
+  const previousWhitespace = whitespaceSlots(previousSegments)
+  const proposedWhitespace = whitespaceSlots(proposedSegments)
+  const whitespaceChanged = canonical(currentWhitespace) !== canonical(previousWhitespace)
+  if (whitespaceChanged && canonical(currentWhitespace) !== canonical(proposedWhitespace)) return false
+
+  const lineHeightChanged = current.lineHeight !== previous.lineHeight || current.lineHeightMode !== previous.lineHeightMode
+  if (lineHeightChanged && (proposed.lineHeight !== current.lineHeight || proposed.lineHeightMode !== current.lineHeightMode)) return false
+  if (!lineHeightChanged && !whitespaceChanged) return false
+  const symbols = (segments: JsonRecord[]) => segments.filter(segment => typeof segment.symbolId === 'string').map(segment => segment.symbolId)
+  if (canonical(symbols(currentSegments)) !== canonical(symbols(previousSegments))
+    || canonical(symbols(currentSegments)) !== canonical(symbols(proposedSegments))) return false
+  return true
+}
+
 function copyfitMeasurementFingerprint(data: unknown): string | null {
   if (!isRecord(data) || !Array.isArray(data.segments)) return null
   const snapshot = {
@@ -62,6 +131,16 @@ type CanonicalCopyfitEvidence = {
   technicalStatus: string
   canonicalSpanKey: string
   canonicalBbox: [number, number, number, number]
+}
+
+type CanonicalIntentionalEmptyOverride = {
+  proposalId: string
+  proposalVersion: string
+  technicalStatus: string
+  canonicalSpanKey: string
+  canonicalBbox: [number, number, number, number]
+  reflowedIntoSpanKey: string
+  reflowedIntoReviewKey: string
 }
 
 type CopyfitEvidenceIdentity = {
@@ -144,6 +223,100 @@ export function resolveCanonicalCopyfitEvidence(
   }
 }
 
+/**
+ * Resolve an empty override only when the server-built proposal explicitly
+ * binds it to a measured sibling that absorbs the same source prose.
+ */
+export function resolveCanonicalIntentionalEmptyOverride(
+  catalog: unknown,
+  identity: CopyfitEvidenceIdentity,
+): CanonicalIntentionalEmptyOverride | null {
+  if (!isRecord(catalog) || !Array.isArray(catalog.proposals)) return null
+  const matches: Array<{ proposal: JsonRecord; candidate: JsonRecord }> = []
+  for (const rawProposal of catalog.proposals) {
+    if (!isRecord(rawProposal) || !Array.isArray(rawProposal.candidates)) continue
+    for (const rawCandidate of rawProposal.candidates) {
+      if (isRecord(rawCandidate)
+        && rawCandidate.reviewKey === identity.reviewKey
+        && rawCandidate.pageNumber === identity.pageNumber
+        && rawCandidate.spanKey === identity.spanKey) matches.push({ proposal: rawProposal, candidate: rawCandidate })
+    }
+  }
+  if (matches.length !== 1) return null
+  const { proposal, candidate } = matches[0]
+  const proposalId = typeof candidate.proposalId === 'string' ? candidate.proposalId : null
+  const proposalVersion = typeof candidate.proposalVersion === 'string' ? candidate.proposalVersion : null
+  if (!proposalId || !proposalVersion
+    || (identity.proposalId && identity.proposalId !== proposalId)
+    || (identity.proposalVersion && identity.proposalVersion !== proposalVersion)) return null
+  const directive = isRecord(candidate.intentionalEmptyOverride) ? candidate.intentionalEmptyOverride : null
+  const data = isRecord(candidate.data) ? candidate.data : null
+  const canonicalBbox = data && Array.isArray(data.bbox) && data.bbox.length === 4
+    && data.bbox.every(value => typeof value === 'number' && Number.isFinite(value))
+    && data.bbox[2] > data.bbox[0] && data.bbox[3] > data.bbox[1]
+    ? data.bbox as [number, number, number, number]
+    : null
+  const canonicalSpanKey = typeof candidate.spanKey === 'string' ? candidate.spanKey : null
+  const reflowedIntoSpanKey = typeof directive?.reflowedIntoSpanKey === 'string' ? directive.reflowedIntoSpanKey : null
+  const technicalStatus = typeof candidate.technicalStatus === 'string' ? candidate.technicalStatus : ''
+  if (!directive || !data || !canonicalBbox || !canonicalSpanKey || !reflowedIntoSpanKey
+    || typeof directive.reason !== 'string' || !directive.reason.trim()
+    || !/^intentional_empty_override(?:[_-]|$)/iu.test(technicalStatus)
+    || String(candidate.proposalText ?? '').trim() !== ''
+    || !Array.isArray(data.segments) || data.segments.length !== 0
+    || typeof candidate.sourceText !== 'string' || !candidate.sourceText.trim()) return null
+
+  const siblings = (proposal.candidates as unknown[]).filter(isRecord).filter(sibling =>
+    sibling.pageNumber === identity.pageNumber
+    && sibling.proposalId === proposalId
+    && sibling.proposalVersion === proposalVersion
+    && sibling.spanKey === reflowedIntoSpanKey
+    && Array.isArray(sibling.absorbsSourceSpanKeys)
+    && sibling.absorbsSourceSpanKeys.includes(canonicalSpanKey))
+  if (siblings.length !== 1) return null
+  const sibling = siblings[0]
+  const sourceText = (value: unknown) => String(value ?? '')
+    .replace(/\[\[[^\]]+\]\]/gu, ' ')
+    .replace(/\uFFFC/gu, ' ')
+    .replace(/\s+/gu, ' ')
+    .trim()
+    .toLocaleLowerCase('en-US')
+  const absorbedSource = sourceText(candidate.sourceText)
+  const parentSource = sourceText(sibling.sourceText)
+  if (!absorbedSource || !parentSource.includes(absorbedSource)) return null
+  const siblingIdentity: CopyfitEvidenceIdentity = {
+    reviewKey: String(sibling.reviewKey ?? ''),
+    pageNumber: identity.pageNumber,
+    spanKey: String(sibling.spanKey ?? ''),
+    proposalId,
+    proposalVersion,
+    data: sibling.data,
+  }
+  const siblingEvidence = resolveCanonicalCopyfitEvidence(catalog, siblingIdentity)
+  if (!siblingEvidence || siblingEvidence.classification !== 'EXACT') return null
+
+  const canonicalData = { ...data, spanKey: canonicalSpanKey, bbox: canonicalBbox }
+  const canonicalFingerprint = copyfitMeasurementFingerprint(canonicalData)
+  const submittedData = isRecord(identity.data)
+    ? {
+        ...identity.data,
+        spanKey: normalizeSpanKeyForComparison(identity.data.spanKey) === normalizeSpanKeyForComparison(canonicalSpanKey)
+          ? canonicalSpanKey
+          : identity.data.spanKey,
+      }
+    : identity.data
+  if (!canonicalFingerprint || canonicalFingerprint !== copyfitMeasurementFingerprint(submittedData)) return null
+  return {
+    proposalId,
+    proposalVersion,
+    technicalStatus,
+    canonicalSpanKey,
+    canonicalBbox,
+    reflowedIntoSpanKey,
+    reflowedIntoReviewKey: String(sibling.reviewKey),
+  }
+}
+
 function isTechnicallyBlocked(status: string): boolean {
   return /^(?:blocked|failed)(?:[_-]|$)|(?:^|[_-])dtp[_-]exception[_-]open|stale[_-]review[_-]version/iu.test(status)
 }
@@ -210,8 +383,63 @@ async function findTranslation(req: PayloadRequest, spanKey: string) {
   return result.docs[0] ?? null
 }
 
-function validateTranslationData(data: unknown, pageNumber: number, canonicalSpanKey?: string): asserts data is JsonRecord {
-  if (!isRecord(data) || data.schemaVersion !== 2 || !Array.isArray(data.segments) || !data.segments.length) {
+/** Allow a legacy translation to gain only the already-persisted PT-BR frame metadata. */
+async function preservesLegacyPersistedFrameOnly(
+  req: PayloadRequest,
+  pageNumber: number,
+  spanKey: string,
+  currentValue: unknown,
+  proposedValue: unknown,
+  canonicalBbox: unknown,
+): Promise<boolean> {
+  if (!isRecord(currentValue) || !isRecord(proposedValue)
+    || !Array.isArray(canonicalBbox) || canonicalBbox.length !== 4
+    || canonicalBbox.some(value => typeof value !== 'number' || !Number.isFinite(value))) return false
+  const current = currentValue as JsonRecord
+  const proposed = proposedValue as JsonRecord
+  if (current.bbox != null
+    || (current.spanKey != null && normalizeSpanKeyForComparison(current.spanKey) !== normalizeSpanKeyForComparison(spanKey))
+    || normalizeSpanKeyForComparison(proposed.spanKey) !== normalizeSpanKeyForComparison(spanKey)
+    || canonical(proposed.bbox) !== canonical(canonicalBbox)) return false
+
+  const withoutFrameMetadata = (value: JsonRecord) => {
+    const copy = { ...value }
+    delete copy.bbox
+    delete copy.spanKey
+    return copy
+  }
+  if (canonical(withoutFrameMetadata(current)) !== canonical(withoutFrameMetadata(proposed))) return false
+
+  const unitKey = normalizeSpanKeyForComparison(spanKey)
+  const frameKey = `${unitKey}::pt-BR`
+  const frames = await req.payload.find({
+    collection: 'layout-frames',
+    where: {
+      and: [
+        { pageNumber: { equals: pageNumber } },
+        { language: { equals: 'pt-BR' } },
+        { frameKey: { equals: frameKey } },
+      ],
+    },
+    limit: 2,
+    depth: 0,
+    overrideAccess: true,
+    req,
+  })
+  if (frames.docs.length !== 1 || !isRecord(frames.docs[0].data)) return false
+  const frame = frames.docs[0].data as JsonRecord
+  if ((frame.rotation != null && Number(frame.rotation) !== 0)
+    || (proposed.textAlign && frame.textAlign !== proposed.textAlign)) return false
+  const width = Number.isFinite(frame.total) ? Number(frame.total) : Number(frame.width)
+  const height = Number.isFinite(frame.totalHeight) ? Number(frame.totalHeight) : Number(frame.height)
+  const derivedBbox = [Number(frame.x), Number(frame.y), Number(frame.x) + width, Number(frame.y) + height]
+  return derivedBbox.every((value, index) => Number.isFinite(value)
+    && Math.abs(value - Number(canonicalBbox[index])) <= 0.01)
+}
+
+function validateTranslationData(data: unknown, pageNumber: number, canonicalSpanKey?: string, allowEmptyOverride = false): asserts data is JsonRecord {
+  if (!isRecord(data) || data.schemaVersion !== 2 || !Array.isArray(data.segments)
+    || (!allowEmptyOverride && !data.segments.length)) {
     throw new Error('A unidade não contém segmentos ricos editáveis para publicar.')
   }
   // Some source blocks use stable, page-local editorKey values (for example
@@ -230,8 +458,11 @@ function validateTranslationData(data: unknown, pageNumber: number, canonicalSpa
   if (!data.segments.every(segment => isRecord(segment) && typeof segment.text === 'string')) {
     throw new Error('Os segmentos ricos da unidade estão incompletos.')
   }
-  if (!(data.segments as JsonRecord[]).some(segment => (segment.text as string).trim())) {
+  if (!allowEmptyOverride && !(data.segments as JsonRecord[]).some(segment => (segment.text as string).trim())) {
     throw new Error('Uma unidade sem conteúdo não pode ser publicada.')
+  }
+  if (allowEmptyOverride && data.segments.length !== 0) {
+    throw new Error('Um override vazio intencional não pode conter texto ou símbolos.')
   }
 }
 
@@ -293,21 +524,36 @@ async function approve(req: PayloadRequest): Promise<Response> {
       ...(typeof body.proposalVersion === 'string' ? { proposalVersion: body.proposalVersion } : {}),
       data: body.data,
     })
-    if (!legacyApproval && !canonicalEvidence) {
+    const emptyOverrideEvidence = legacyApproval ? null : resolveCanonicalIntentionalEmptyOverride(canonicalCatalog, {
+      reviewKey,
+      pageNumber: requestPageNumber,
+      spanKey: requestSpanKey,
+      ...(typeof body.proposalId === 'string' ? { proposalId: body.proposalId } : {}),
+      ...(typeof body.proposalVersion === 'string' ? { proposalVersion: body.proposalVersion } : {}),
+      data: body.data,
+    })
+    if (!legacyApproval && !canonicalEvidence && !emptyOverrideEvidence) {
+      const matchingCandidate = isRecord(canonicalCatalog) && Array.isArray(canonicalCatalog.proposals)
+        ? canonicalCatalog.proposals.flatMap(proposal => isRecord(proposal) && Array.isArray(proposal.candidates)
+          ? proposal.candidates.filter(candidate => isRecord(candidate) && candidate.reviewKey === reviewKey && candidate.pageNumber === requestPageNumber && candidate.spanKey === requestSpanKey)
+          : [])[0]
+        : null
       throw Object.assign(new Error('Não existe uma medição Copyfit V3 canônica para estes dados e esta versão; nenhuma aprovação foi gravada.'), { status: 409 })
     }
+    const evidenceProposalId = canonicalEvidence?.proposalId ?? emptyOverrideEvidence?.proposalId
+    const evidenceProposalVersion = canonicalEvidence?.proposalVersion ?? emptyOverrideEvidence?.proposalVersion
     if (!legacyApproval && review
-      && ((review.proposalId && review.proposalId !== canonicalEvidence!.proposalId)
-        || (review.proposalVersion && review.proposalVersion !== canonicalEvidence!.proposalVersion))) {
+      && ((review.proposalId && review.proposalId !== evidenceProposalId)
+        || (review.proposalVersion && review.proposalVersion !== evidenceProposalVersion))) {
       throw Object.assign(new Error('O recibo de revisão aponta para outra proposta ou versão; recarregue a unidade canônica antes de aprovar.'), { status: 409 })
     }
-    const sourceLines = legacyApproval
+    const sourceLines = emptyOverrideEvidence ? null : legacyApproval
       ? positiveLineCount(body.copyfitSourcePdfLineCount ?? review?.copyfitSourcePdfLineCount)
       : canonicalEvidence!.sourcePdfLineCount
-    const renderedLines = legacyApproval
+    const renderedLines = emptyOverrideEvidence ? null : legacyApproval
       ? positiveLineCount(body.copyfitPageRendererLineCount ?? review?.copyfitPageRendererLineCount)
       : canonicalEvidence!.pageRendererLineCount
-    if (!legacyApproval && requestedCopyfit && requestedCopyfit !== canonicalEvidence!.classification) {
+    if (!legacyApproval && !emptyOverrideEvidence && requestedCopyfit && requestedCopyfit !== canonicalEvidence!.classification) {
       throw Object.assign(new Error('A classificação enviada diverge da medição Copyfit V3 canônica.'), { status: 409 })
     }
     if ((sourceLines && !renderedLines) || (!sourceLines && renderedLines)) {
@@ -317,7 +563,7 @@ async function approve(req: PayloadRequest): Promise<Response> {
       ? renderedLines === sourceLines ? 'EXACT' : renderedLines < sourceLines ? 'UNDER' : 'OVER'
       : null
     const storedCopyfit = copyfitClassification(review?.copyfitClassification)
-    const approvedCopyfit: CopyfitClassification | null = legacyApproval
+    const approvedCopyfit: CopyfitClassification | null = emptyOverrideEvidence ? null : legacyApproval
       ? measuredCopyfit ?? storedCopyfit ?? requestedCopyfit
       : canonicalEvidence!.classification
     if (measuredCopyfit && ((requestedCopyfit && requestedCopyfit !== measuredCopyfit)
@@ -333,8 +579,9 @@ async function approve(req: PayloadRequest): Promise<Response> {
     // checked below before any write, so its old fingerprint must not block a
     // measured correction to that same published unit.
     const revisingPublishedApproval = review?.approvalStatus === 'approved' && isRecord(review.publication)
-    if (!legacyApproval && ((storedFingerprint && storedFingerprint !== canonicalEvidence!.fingerprint && !revisingPublishedApproval)
-      || (requestedFingerprint && requestedFingerprint !== canonicalEvidence!.fingerprint))) {
+    if (!legacyApproval && !emptyOverrideEvidence
+      && ((storedFingerprint && storedFingerprint !== canonicalEvidence!.fingerprint && !revisingPublishedApproval)
+        || (requestedFingerprint && requestedFingerprint !== canonicalEvidence!.fingerprint))) {
       throw Object.assign(new Error('O comprovante salvo ou enviado diverge da medição Copyfit V3 canônica.'), { status: 409 })
     }
     const compositionRationale = typeof body.underCompositionJustification === 'string'
@@ -346,7 +593,7 @@ async function approve(req: PayloadRequest): Promise<Response> {
     if (copyfitOver) {
       throw Object.assign(new Error('Copyfit V3 OVER não pode ser aprovado. Reduza a contagem visual de linhas e valide a nova versão.'), { status: 409 })
     }
-    if (!legacyApproval && isTechnicallyBlocked(canonicalEvidence!.technicalStatus)) {
+    if (!legacyApproval && !emptyOverrideEvidence && isTechnicallyBlocked(canonicalEvidence!.technicalStatus)) {
       throw Object.assign(new Error('A validação técnica desta proposta está bloqueada; corrija a falha registrada antes de aprovar.'), { status: 409 })
     }
     if (approvedCopyfit === 'UNDER' && !compositionRationale) {
@@ -367,37 +614,60 @@ async function approve(req: PayloadRequest): Promise<Response> {
       throw Object.assign(new Error('A proposta mudou de página desde que foi aberta.'), { status: 409 })
     }
     const data = legacyApproval ? review!.data : body.data
-    validateTranslationData(data, pageNumber, legacyApproval ? undefined : canonicalEvidence?.canonicalSpanKey)
-    if (!legacyApproval && canonicalEvidence?.canonicalSpanKey && isRecord(data)) {
-      data.spanKey = canonicalEvidence.canonicalSpanKey
-      if (canonicalEvidence.canonicalBbox) data.bbox = canonicalEvidence.canonicalBbox
+    const canonicalSpanKey = canonicalEvidence?.canonicalSpanKey ?? emptyOverrideEvidence?.canonicalSpanKey
+    const canonicalBbox = canonicalEvidence?.canonicalBbox ?? emptyOverrideEvidence?.canonicalBbox
+    validateTranslationData(data, pageNumber, legacyApproval ? undefined : canonicalSpanKey, !!emptyOverrideEvidence)
+    if (!legacyApproval && canonicalSpanKey && isRecord(data)) {
+      data.spanKey = canonicalSpanKey
+      if (canonicalBbox) data.bbox = canonicalBbox
     }
     const expectedMeasurementFingerprint = legacyApproval
       ? requestedFingerprint ?? storedFingerprint
-      : canonicalEvidence!.fingerprint
+      : canonicalEvidence?.fingerprint ?? null
     const actualMeasurementFingerprint = copyfitMeasurementFingerprint(data)
-    if (!legacyApproval && (!expectedMeasurementFingerprint || !actualMeasurementFingerprint)) {
+    if (!legacyApproval && !emptyOverrideEvidence && (!expectedMeasurementFingerprint || !actualMeasurementFingerprint)) {
       throw Object.assign(new Error('A medição Copyfit V3 não está vinculada aos dados ricos desta versão.'), { status: 409 })
     }
     if (expectedMeasurementFingerprint && actualMeasurementFingerprint !== expectedMeasurementFingerprint) {
       throw Object.assign(new Error('Os segmentos, estilos ou geometria mudaram depois da medição Copyfit V3. Valide esta versão antes de aprovar.'), { status: 409 })
     }
-    const targetSpanKey = canonicalEvidence?.canonicalSpanKey ?? String(data.spanKey)
+    const targetSpanKey = canonicalSpanKey ?? String(data.spanKey)
     const existingTranslation = await findTranslation(req, targetSpanKey)
+    if (emptyOverrideEvidence) {
+      const parentReview = await findReview(req, emptyOverrideEvidence.reflowedIntoReviewKey)
+      const parentPublication = isRecord(parentReview?.publication)
+        ? parentReview.publication as unknown as Publication
+        : null
+      const parentTranslation = parentReview ? await findTranslation(req, parentReview.spanKey) : null
+      if (!parentReview || parentReview.approvalStatus !== 'approved' || !parentPublication
+        || !parentTranslation || String(parentTranslation.id) !== String(parentPublication.translationId)
+        || canonical(parentTranslation.data) !== canonical(parentPublication.data)) {
+        throw Object.assign(new Error('A unidade fonte só pode ficar vazia depois que a tradução que absorve seu texto estiver publicada e confirmada.'), { status: 409 })
+      }
+    }
     const reviewPublication = review?.publication
     const existingPublication = isRecord(reviewPublication)
       ? reviewPublication as unknown as Publication
       : null
+    let legacyFrameSync = false
 
     if (existingPublication) {
       if (!existingTranslation || String(existingTranslation.id) !== String(existingPublication.translationId)) {
         throw Object.assign(new Error('A tradução publicada foi removida ou substituída fora da revisão. Nenhum conteúdo foi alterado.'), { status: 409 })
       }
-      if (canonical(existingTranslation.data) !== canonical(existingPublication.data)) {
+      const translationMatchesPublication = canonical(existingTranslation.data) === canonical(existingPublication.data)
+      const formattingDriftPreserved = !translationMatchesPublication
+        && preservesPostPublicationFormatting(existingTranslation.data, existingPublication.data, data, targetSpanKey)
+      if (!translationMatchesPublication && !formattingDriftPreserved) {
         throw Object.assign(new Error('A tradução final mudou desde a última aprovação. Ela foi preservada; confira o conflito antes de publicar.'), { status: 409 })
       }
     } else if (existingTranslation && canonical(existingTranslation.data) !== canonical(data)) {
-      throw Object.assign(new Error('Já existe uma tradução humana diferente nesta unidade. Ela foi preservada e não foi sobrescrita.'), { status: 409 })
+      legacyFrameSync = !!(canonicalBbox && await preservesLegacyPersistedFrameOnly(
+        req, requestPageNumber, targetSpanKey, existingTranslation.data, data, canonicalBbox,
+      ))
+      if (!legacyFrameSync) {
+        throw Object.assign(new Error('Já existe uma tradução humana diferente nesta unidade. Ela foi preservada e não foi sobrescrita.'), { status: 409 })
+      }
     }
 
     const now = new Date().toISOString()
@@ -417,6 +687,15 @@ async function approve(req: PayloadRequest): Promise<Response> {
       translation = await req.payload.update({
         collection: 'translations',
         id: existingTranslation.id,
+        data: { data },
+        depth: 0,
+        overrideAccess: true,
+        req,
+      })
+    } else if (legacyFrameSync) {
+      translation = await req.payload.update({
+        collection: 'translations',
+        id: existingTranslation!.id,
         data: { data },
         depth: 0,
         overrideAccess: true,
@@ -446,10 +725,10 @@ async function approve(req: PayloadRequest): Promise<Response> {
 
     const proposalId = legacyApproval
       ? typeof body.proposalId === 'string' ? body.proposalId : review?.proposalId ?? 'unknown'
-      : canonicalEvidence!.proposalId
+      : canonicalEvidence?.proposalId ?? emptyOverrideEvidence!.proposalId
     const proposalVersion = legacyApproval
       ? typeof body.proposalVersion === 'string' ? body.proposalVersion : review?.proposalVersion ?? 'unknown'
-      : canonicalEvidence!.proposalVersion
+      : canonicalEvidence?.proposalVersion ?? emptyOverrideEvidence!.proposalVersion
     const sourceText = typeof body.sourceText === 'string' ? body.sourceText : review?.sourceText ?? ''
     const proposalText = typeof body.proposalText === 'string' ? body.proposalText : review?.proposalText ?? ''
     const technicalStatus = typeof body.technicalStatus === 'string' ? body.technicalStatus : review?.technicalStatus ?? 'pending_technical_validation'
@@ -466,7 +745,7 @@ async function approve(req: PayloadRequest): Promise<Response> {
       copyfitClassification: approvedCopyfit,
       copyfitSourcePdfLineCount: sourceLines,
       copyfitPageRendererLineCount: renderedLines,
-      copyfitMeasurementFingerprint: actualMeasurementFingerprint,
+      copyfitMeasurementFingerprint: emptyOverrideEvidence ? null : actualMeasurementFingerprint,
       underCompositionJustification: compositionRationale,
       approvalStatus: 'approved' as const,
       approvedAt,

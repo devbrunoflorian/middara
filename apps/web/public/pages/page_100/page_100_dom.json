@@ -69,20 +69,53 @@
           ]
         }
       ],
-      "typographicSpanUnits": [
+      "typographicSpanUnits": [],
+      "typographicUnits": [
         {
           "id": "p100-not-moved-by-currents-heading",
-          "label": "Not moved by Currents table heading",
-          "spanRefs": [
-            "line_11_0:0"
-          ]
+          "label": "Cabeçalho da coluna: itens não movidos",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-not-moved-by-currents-heading-field",
+            "lineIds": [
+              "line_11_0"
+            ],
+            "bbox": [
+              57.53,
+              71.12779235839844,
+              223.7,
+              80.66378784179688
+            ],
+            "frame": {
+              "x": 57.53,
+              "width": 166.17,
+              "textAlign": "center",
+              "lineHeight": 1
+            }
+          }
         },
         {
           "id": "p100-moved-by-currents-heading",
-          "label": "Moved by Currents table heading",
-          "spanRefs": [
-            "line_11_1:0"
-          ]
+          "label": "Cabeçalho da coluna: itens movidos",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-moved-by-currents-heading-field",
+            "lineIds": [
+              "line_11_1"
+            ],
+            "bbox": [
+              223.7,
+              71.12779235839844,
+              392.08,
+              80.66378784179688
+            ],
+            "frame": {
+              "x": 223.7,
+              "width": 168.38,
+              "textAlign": "center",
+              "lineHeight": 1
+            }
+          }
         }
       ]
     },
@@ -230,7 +263,8 @@
             }
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_13",
@@ -442,7 +476,8 @@
             }
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_14",
@@ -525,7 +560,8 @@
             "line_14_1:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_15",
@@ -608,7 +644,8 @@
             "line_15_1:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_16",
@@ -691,7 +728,8 @@
             "line_16_1:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_17",
@@ -767,7 +805,8 @@
             "line_17_0:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_18",
@@ -850,7 +889,8 @@
             "line_18_1:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_19",
@@ -933,7 +973,8 @@
             "line_19_1:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_20",
@@ -987,7 +1028,8 @@
             }
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_21",
@@ -1106,7 +1148,8 @@
             }
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_22",
@@ -1146,7 +1189,8 @@
             }
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_23",
@@ -1229,7 +1273,8 @@
             "line_23_1:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_24",
@@ -1380,33 +1425,55 @@
           ]
         }
       ],
-      "typographicSpanUnits": [
+      "typographicSpanUnits": [],
+      "typographicUnits": [
         {
           "id": "p100-status-phase-heading",
-          "label": "Status Phase heading",
-          "spanRefs": [
-            "line_24_0:0"
-          ]
+          "label": "Cabeçalho da Fase de Status",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-status-phase-heading-field",
+            "lineIds": [
+              "line_24_0"
+            ],
+            "bbox": [
+              435.97540283203125,
+              116.33734130859375,
+              514.0234985351562,
+              127.06534576416016
+            ],
+            "frame": {
+              "x": 435.97540283203125,
+              "width": 321.3387451171875,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
         },
         {
-          "id": "p100-block-24-font-size-9pt-unit-00",
-          "spanRefs": [
-            "line_24_1:0",
-            "line_24_3:0"
-          ]
-        },
-        {
-          "id": "p100-block-24-font-size-6.54pt-unit-01",
-          "spanRefs": [
-            "line_24_2:0",
-            "line_24_2:1"
-          ]
-        },
-        {
-          "id": "p100-block-24-font-size-9pt-unit-02",
-          "spanRefs": [
-            "line_24_2:2"
-          ]
+          "id": "p100-status-phase-description",
+          "label": "Texto da Fase de Status",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-status-phase-description-field",
+            "lineIds": [
+              "line_24_1",
+              "line_24_2",
+              "line_24_3"
+            ],
+            "bbox": [
+              435.97540283203125,
+              126.3543701171875,
+              757.3141479492188,
+              147.06863403320312
+            ],
+            "frame": {
+              "x": 435.97540283203125,
+              "width": 321.3387451171875,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
         }
       ]
     },
@@ -1491,7 +1558,8 @@
             "line_25_1:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_26",
@@ -1756,7 +1824,8 @@
             }
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_27",
@@ -2183,7 +2252,8 @@
             "line_27_6:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_28",
@@ -2378,7 +2448,8 @@
             "line_28_3:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_29",
@@ -2461,7 +2532,8 @@
             "line_29_1:0"
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_30",
@@ -2515,7 +2587,8 @@
             }
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_31",
@@ -2617,7 +2690,8 @@
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
           }
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_32",
@@ -2681,7 +2755,8 @@
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
           }
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_33",
@@ -2731,7 +2806,8 @@
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
           }
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_34",
@@ -2816,6 +2892,54 @@
             "category": "reference-table",
             "rule": "suppress HTML lines whose centres are inside the currently audited source-PDF component crop",
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
+          }
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-attack-target-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-target-heading-field",
+            "lineIds": [
+              "line_34_0"
+            ],
+            "bbox": [
+              61.52750015258789,
+              302.1289978027344,
+              386.5,
+              312.85699462890625
+            ],
+            "frame": {
+              "x": 61.52750015258789,
+              "width": 324.9724998474121,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-target-body",
+          "label": "Texto do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-target-body-field",
+            "lineIds": [
+              "line_34_1"
+            ],
+            "bbox": [
+              61.52750015258789,
+              312.14599609375,
+              386.5,
+              322.8559875488281
+            ],
+            "frame": {
+              "x": 61.52750015258789,
+              "width": 324.9724998474121,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
           }
         }
       ]
@@ -2940,6 +3064,55 @@
             "category": "reference-table",
             "rule": "suppress HTML lines whose centres are inside the currently audited source-PDF component crop",
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
+          }
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-attack-combat-pool-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-combat-pool-heading-field",
+            "lineIds": [
+              "line_35_0"
+            ],
+            "bbox": [
+              61.52750015258789,
+              327.7969970703125,
+              386.5,
+              338.5249938964844
+            ],
+            "frame": {
+              "x": 61.52750015258789,
+              "width": 324.9724998474121,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-combat-pool-body",
+          "label": "Texto do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-combat-pool-body-field",
+            "lineIds": [
+              "line_35_1",
+              "line_35_2"
+            ],
+            "bbox": [
+              61.527503967285156,
+              337.8139953613281,
+              386.5,
+              358.5229797363281
+            ],
+            "frame": {
+              "x": 61.527503967285156,
+              "width": 324.97249603271484,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
           }
         }
       ]
@@ -3194,6 +3367,56 @@
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
           }
         }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-attack-empower-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-empower-heading-field",
+            "lineIds": [
+              "line_36_0"
+            ],
+            "bbox": [
+              61.527503967285156,
+              363.4639892578125,
+              386.5,
+              374.1919860839844
+            ],
+            "frame": {
+              "x": 61.527503967285156,
+              "width": 324.97249603271484,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-empower-body",
+          "label": "Texto do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-empower-body-field",
+            "lineIds": [
+              "line_36_1",
+              "line_36_2",
+              "line_36_3"
+            ],
+            "bbox": [
+              61.527503967285156,
+              373.4629821777344,
+              386.5,
+              395.19561767578125
+            ],
+            "frame": {
+              "x": 61.527503967285156,
+              "width": 324.97249603271484,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        }
       ]
     },
     {
@@ -3392,6 +3615,56 @@
             "category": "reference-table",
             "rule": "suppress HTML lines whose centres are inside the currently audited source-PDF component crop",
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
+          }
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-attack-dodge-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-dodge-heading-field",
+            "lineIds": [
+              "line_37_0"
+            ],
+            "bbox": [
+              61.527099609375,
+              400.1366271972656,
+              386.5,
+              410.8646240234375
+            ],
+            "frame": {
+              "x": 61.527099609375,
+              "width": 324.972900390625,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-dodge-a",
+          "label": "Subpasso recuado",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-dodge-a-field",
+            "lineIds": [
+              "line_37_1",
+              "line_37_2",
+              "line_37_3"
+            ],
+            "bbox": [
+              72.86709594726562,
+              410.1356201171875,
+              386.5,
+              440.8616027832031
+            ],
+            "frame": {
+              "x": 72.86709594726562,
+              "width": 313.6329040527344,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
           }
         }
       ]
@@ -3631,6 +3904,34 @@
             "category": "reference-table",
             "rule": "suppress HTML lines whose centres are inside the currently audited source-PDF component crop",
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
+          }
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-attack-dodge-roll-b",
+          "label": "Subpasso recuado",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-dodge-roll-b-field",
+            "lineIds": [
+              "line_38_0",
+              "line_38_1",
+              "line_38_2",
+              "line_38_3"
+            ],
+            "bbox": [
+              72.86709594726562,
+              443.96661376953125,
+              386.5,
+              464.6994934082031
+            ],
+            "frame": {
+              "x": 72.86709594726562,
+              "width": 313.6329040527344,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
           }
         }
       ]
@@ -3957,6 +4258,102 @@
             "category": "reference-table",
             "rule": "suppress HTML lines whose centres are inside the currently audited source-PDF component crop",
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
+          }
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-attack-roll-to-hit-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-roll-to-hit-heading-field",
+            "lineIds": [
+              "line_39_0"
+            ],
+            "bbox": [
+              61.52609634399414,
+              469.6405029296875,
+              386.5,
+              480.3684997558594
+            ],
+            "frame": {
+              "x": 61.52609634399414,
+              "width": 324.97390365600586,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-roll-to-hit-a",
+          "label": "Subpasso recuado",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-roll-to-hit-a-field",
+            "lineIds": [
+              "line_39_1"
+            ],
+            "bbox": [
+              72.86609649658203,
+              479.6394958496094,
+              386.5,
+              490.36749267578125
+            ],
+            "frame": {
+              "x": 72.86609649658203,
+              "width": 313.63390350341797,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-roll-to-hit-b",
+          "label": "Subpasso recuado",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-roll-to-hit-b-field",
+            "lineIds": [
+              "line_39_2"
+            ],
+            "bbox": [
+              72.86609649658203,
+              489.63848876953125,
+              386.5,
+              500.3664855957031
+            ],
+            "frame": {
+              "x": 72.86609649658203,
+              "width": 313.63390350341797,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-roll-to-hit-c",
+          "label": "Subpasso recuado",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-roll-to-hit-c-field",
+            "lineIds": [
+              "line_39_3",
+              "line_39_4",
+              "line_39_5"
+            ],
+            "bbox": [
+              72.86609649658203,
+              499.6374816894531,
+              386.5,
+              530.3634643554688
+            ],
+            "frame": {
+              "x": 72.86609649658203,
+              "width": 313.63390350341797,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
           }
         }
       ]
@@ -4497,6 +4894,149 @@
             "line_40_5:3"
           ]
         }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-attack-determine-damage-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-determine-damage-heading-field",
+            "lineIds": [
+              "line_40_0"
+            ],
+            "bbox": [
+              61.52609634399414,
+              535.3045043945312,
+              386.5,
+              546.0325317382812
+            ],
+            "frame": {
+              "x": 61.52609634399414,
+              "width": 324.97390365600586,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-determine-damage-a",
+          "label": "Subpasso recuado",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-determine-damage-a-field",
+            "lineIds": [
+              "line_40_1"
+            ],
+            "bbox": [
+              72.86609649658203,
+              545.303466796875,
+              386.5,
+              556.031494140625
+            ],
+            "frame": {
+              "x": 72.86609649658203,
+              "width": 313.63390350341797,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-determine-damage-b",
+          "label": "Subpasso recuado",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-determine-damage-b-field",
+            "lineIds": [
+              "line_40_2"
+            ],
+            "bbox": [
+              72.86609649658203,
+              555.3024291992188,
+              386.5,
+              566.0304565429688
+            ],
+            "frame": {
+              "x": 72.86609649658203,
+              "width": 313.63390350341797,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-determine-damage-c",
+          "label": "Subpasso recuado",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-determine-damage-c-field",
+            "lineIds": [
+              "line_40_3"
+            ],
+            "bbox": [
+              72.86609649658203,
+              565.3014526367188,
+              386.5,
+              576.0294799804688
+            ],
+            "frame": {
+              "x": 72.86609649658203,
+              "width": 313.63390350341797,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-determine-damage-d",
+          "label": "Subpasso recuado",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-determine-damage-d-field",
+            "lineIds": [
+              "line_40_4"
+            ],
+            "bbox": [
+              72.86609649658203,
+              575.3004760742188,
+              386.5,
+              586.0285034179688
+            ],
+            "frame": {
+              "x": 72.86609649658203,
+              "width": 313.63390350341797,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-determine-damage-e",
+          "label": "Subpasso recuado",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-determine-damage-e-field",
+            "lineIds": [
+              "line_40_5",
+              "line_40_6",
+              "line_40_7",
+              "line_40_8"
+            ],
+            "bbox": [
+              72.86609649658203,
+              584.4091186523438,
+              386.5,
+              626.0350952148438
+            ],
+            "frame": {
+              "x": 72.86609649658203,
+              "width": 313.63390350341797,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        }
       ]
     },
     {
@@ -4582,6 +5122,54 @@
             "category": "reference-table",
             "rule": "suppress HTML lines whose centres are inside the currently audited source-PDF component crop",
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
+          }
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-attack-follow-up-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-follow-up-heading-field",
+            "lineIds": [
+              "line_41_0"
+            ],
+            "bbox": [
+              61.52981185913086,
+              630.97607421875,
+              386.5,
+              641.7041015625
+            ],
+            "frame": {
+              "x": 61.52981185913086,
+              "width": 324.97018814086914,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-follow-up-body",
+          "label": "Texto do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-follow-up-body-field",
+            "lineIds": [
+              "line_41_1"
+            ],
+            "bbox": [
+              61.52981185913086,
+              640.9931030273438,
+              386.5,
+              651.703125
+            ],
+            "frame": {
+              "x": 61.52981185913086,
+              "width": 324.97018814086914,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
           }
         }
       ]
@@ -4671,6 +5259,54 @@
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
           }
         }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-attack-resolve-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-resolve-heading-field",
+            "lineIds": [
+              "line_42_0"
+            ],
+            "bbox": [
+              61.52981185913086,
+              656.6441040039062,
+              386.5,
+              667.3721313476562
+            ],
+            "frame": {
+              "x": 61.52981185913086,
+              "width": 324.97018814086914,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-attack-resolve-body",
+          "label": "Texto do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-attack-resolve-body-field",
+            "lineIds": [
+              "line_42_1"
+            ],
+            "bbox": [
+              61.52981185913086,
+              666.6610717773438,
+              386.5,
+              677.37109375
+            ],
+            "frame": {
+              "x": 61.52981185913086,
+              "width": 324.97018814086914,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        }
       ]
     },
     {
@@ -4735,7 +5371,8 @@
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
           }
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_44",
@@ -4785,7 +5422,8 @@
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
           }
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_45",
@@ -4961,6 +5599,55 @@
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
           }
         }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-spell-target-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-spell-target-heading-field",
+            "lineIds": [
+              "line_45_0"
+            ],
+            "bbox": [
+              435.97540283203125,
+              402.4754943847656,
+              757.6,
+              413.2034912109375
+            ],
+            "frame": {
+              "x": 435.97540283203125,
+              "width": 321.6245971679688,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-spell-target-body",
+          "label": "Texto do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-spell-target-body-field",
+            "lineIds": [
+              "line_45_1",
+              "line_45_2"
+            ],
+            "bbox": [
+              435.97540283203125,
+              412.4744873046875,
+              757.6,
+              433.20147705078125
+            ],
+            "frame": {
+              "x": 435.97540283203125,
+              "width": 321.6245971679688,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        }
       ]
     },
     {
@@ -5072,6 +5759,54 @@
             "category": "reference-table",
             "rule": "suppress HTML lines whose centres are inside the currently audited source-PDF component crop",
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
+          }
+        }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-spell-force-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-spell-force-heading-field",
+            "lineIds": [
+              "line_46_0"
+            ],
+            "bbox": [
+              435.97540283203125,
+              438.1424865722656,
+              757.6,
+              448.8704833984375
+            ],
+            "frame": {
+              "x": 435.97540283203125,
+              "width": 321.6245971679688,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-spell-force-body",
+          "label": "Texto do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-spell-force-body-field",
+            "lineIds": [
+              "line_46_1"
+            ],
+            "bbox": [
+              435.97540283203125,
+              448.1414794921875,
+              757.6,
+              458.8694763183594
+            ],
+            "frame": {
+              "x": 435.97540283203125,
+              "width": 321.6245971679688,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
           }
         }
       ]
@@ -6838,6 +7573,81 @@
             "evidenceRef": "docs/QA/drafts/2026-10-03-component-artwork-and-marker-audit.md"
           }
         }
+      ],
+      "typographicUnits": [
+        {
+          "id": "p100-spell-resolve-heading",
+          "label": "Título do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-spell-resolve-heading-field",
+            "lineIds": [
+              "line_49_0"
+            ],
+            "bbox": [
+              435.9762268066406,
+              670.8099365234375,
+              757.6,
+              681.5379638671875
+            ],
+            "frame": {
+              "x": 435.9762268066406,
+              "width": 321.6237731933594,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-spell-resolve-body",
+          "label": "Texto do passo",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-spell-resolve-body-field",
+            "lineIds": [
+              "line_49_1",
+              "line_49_2",
+              "line_49_3",
+              "line_49_4",
+              "line_49_5"
+            ],
+            "bbox": [
+              435.9762268066406,
+              680.826904296875,
+              757.6,
+              731.532958984375
+            ],
+            "frame": {
+              "x": 435.9762268066406,
+              "width": 321.6237731933594,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        },
+        {
+          "id": "p100-spell-resolve-note",
+          "label": "Nota",
+          "kind": "paragraph",
+          "field": {
+            "id": "p100-spell-resolve-note-field",
+            "lineIds": [
+              "line_49_6"
+            ],
+            "bbox": [
+              431.7282409667969,
+              733.2811889648438,
+              757.6,
+              745.1812133789062
+            ],
+            "frame": {
+              "x": 431.7282409667969,
+              "width": 325.87175903320315,
+              "textAlign": "left",
+              "lineHeight": 1.1
+            }
+          }
+        }
       ]
     },
     {
@@ -6912,7 +7722,8 @@
             }
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     },
     {
       "id": "block_52",
@@ -6986,7 +7797,8 @@
             }
           ]
         }
-      ]
+      ],
+      "typographicUnits": []
     }
   ],
   "images": [
