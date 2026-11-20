@@ -3,7 +3,7 @@
   "version": "1",
   "title": "Uso narrativo do Tag de Tipo — p. 82",
   "page": 82,
-  "status": "pending_human_review",
+  "status": "superseded_by_p082_full_page_rules_completed_2026-11-19",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -14,22 +14,20 @@
   },
   "counts": {
     "candidates": 1,
-    "existingHumanTranslationsPreserved": 0,
-    "priorReviewRecordsPreserved": 0,
+    "existingHumanTranslationsPreserved": 1,
+    "priorReviewRecordsPreserved": 1,
     "finalTranslationWrites": 0,
     "openExceptions": 0
   },
   "preservation": {
-    "existingHumanTranslationCount": 0,
-    "existingHumanTranslationSpanKeys": [],
-    "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2e0efc6c6f6f0"
+    "existingHumanTranslationCount": 1,
+    "existingHumanTranslationSpanKeys": [
+      "page_82_unit_p82-block-30-remaining-size-10pt__pt-BR"
+    ],
+    "existingHumanTranslationDataSha256": "c4de4c25b3990baaaa1132b5c2257b13f6ea93c7edbd33df4a0dbb4e5beebe47"
   },
   "scopeLimits": [
-    "Somente o corpo do bloco block_30 (unidade tipográfica de 10 pt, DOM index 9) está neste recorte; o heading Type Tag e os demais parágrafos, cartas e arte permanecem fora da proposta.",
-    "TYPE: X é preservado em inglês como rótulo de tag na proposta local; sua tradução e a forma Type Tag → Tag de Tipo aguardam decisão humana.",
-    "Combatant Card → Carta de Combatente é forma local candidata sem canonização. Habilidade corresponde ao termo aprovado anteriormente; nenhuma tradução humana existente foi alterada.",
-    "GETs confirmaram zero traduções PT-BR e zero revisões da p.82 antes da proposta. Nenhuma tradução final é publicada ou sobrescrita.",
-    "Copyfit V3, Editor, PDF, fidelidade integral e aprovação editorial aguardam verificação."
+    "Proposta incorporada à revisão integral da p.82 em 2026-11-19. A tradução humana existente (translation 1511/review 495) foi preservada sem alterar o texto; o heading “Tag de Tipo” e as demais unidades foram cobertos pela proposta integral."
   ],
   "candidates": [
     {
@@ -80,13 +78,11 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "verified_live_viewer_comparison_exact_highlight_readability_copyfit_v3_editor_pdf_pending",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "copyfit_v3_exact_at_100_and_200_full_page_export_qa_verified",
+      "editorialStatus": "approved_and_preserved_2026-11-05",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
-        "Type Tag → Tag de Tipo e TYPE: X → TIPO: X: candidatos para decisão humana; o rótulo fica em inglês nesta proposta para preservar a forma impressa.",
-        "Combatant Card → Carta de Combatente e Tag seguem uso local sem decisão global nesta unidade.",
-        "Ability → Habilidade corresponde à decisão humana já aprovada."
+        "TYPE: X permanece como identificador impresso; Tag de Tipo é uma tradução contextual da prosa e não foi promovida ao glossário global."
       ],
       "sourcePdfVisualLineCount": 3,
       "pageRendererVisualLineCount": 3,
@@ -96,14 +92,15 @@
         "sourcePdfVisualLineCount": 3,
         "pageRendererVisualLineCount": 3,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 82,
           "pdfDocumentPageIndex": 81,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -112,30 +109,248 @@
             393.08905029296875,
             493.8861083984375
           ],
-          "visualBaselinesPt": [
+          "extractedPdfTextVisualRows": 3,
+          "visualRowBaselinesPt": [
             469.176,
             480.176,
             491.176
           ],
           "spans": 5,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
           "visualRows": 3
         },
         "pageRendererEvidence": {
           "spanKey": "page_82_unit_p82-block-30-remaining-size-10pt__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 7,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 3,
           "visualRowTopsCssPx": [
-            400.25,
-            410.16,
-            419.06
+            720.59,
+            737.23,
+            753.88
           ],
-          "frameHeightCssPx": 27.7
+          "visualRowIntervalsPt": [
+            10.99,
+            10.99
+          ],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "15.1354px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "16.6489px",
+              "letterSpacing": "-0.227031px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "15.1354px",
+              "fontWeight": "700",
+              "fontStyle": "italic",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "16.6489px",
+              "letterSpacing": "-0.227031px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 49.9,
+          "frameWidthCssPx": 486.3
         },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+        "editorialStatus": "Human editorial approval and publication are recorded in Payload; persisted Viewer/print/PDF export was visually reviewed."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 3,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 82,
+            "pdfDocumentPageIndex": 81,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.76909637451172,
+              459.8661193847656,
+              393.08905029296875,
+              493.8861083984375
+            ],
+            "extractedPdfTextVisualRows": 3,
+            "visualRowBaselinesPt": [
+              469.176,
+              480.176,
+              491.176
+            ],
+            "spans": 5,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_82_unit_p82-block-30-remaining-size-10pt__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 7,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              720.59,
+              737.23,
+              753.88
+            ],
+            "visualRowIntervalsPt": [
+              10.99,
+              10.99
+            ],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 49.9,
+            "frameWidthCssPx": 486.3
+          },
+          "editorialStatus": "Human editorial approval and publication are recorded in Payload; persisted Viewer/print/PDF export was visually reviewed."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 3,
+          "pageRendererVisualLineCount": 3,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 82,
+            "pdfDocumentPageIndex": 81,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.76909637451172,
+              459.8661193847656,
+              393.08905029296875,
+              493.8861083984375
+            ],
+            "extractedPdfTextVisualRows": 3,
+            "visualRowBaselinesPt": [
+              469.176,
+              480.176,
+              491.176
+            ],
+            "spans": 5,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 3
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_82_unit_p82-block-30-remaining-size-10pt__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 7,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 3,
+            "visualRowTopsCssPx": [
+              396.58,
+              404.89,
+              413.2
+            ],
+            "visualRowIntervalsPt": [
+              10.98,
+              10.98
+            ],
+            "pageScaleCssPxPerPt": 0.7567690873341558,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.56769px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.32446px",
+                "letterSpacing": "-0.113515px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.56769px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.32446px",
+                "letterSpacing": "-0.113515px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 24.9,
+            "frameWidthCssPx": 243.2
+          },
+          "editorialStatus": "Human editorial approval and publication are recorded in Payload; persisted Viewer/print/PDF export was visually reviewed."
+        }
+      },
+      "persistedTranslationId": 1511,
+      "persistedReviewId": 495
     }
   ],
   "note": "A proposta mantém TYPE: X destacado em negrito itálico e distingue a função narrativa do Tag da ausência de regras próprias; outras Habilidades fazem referência a esse Tag. A redação e os termos locais aguardam revisão humana.",
-  "revisions": []
+  "revisions": [
+    {
+      "date": "2026-11-19",
+      "status": "superseded",
+      "summary": "The approved translation 1511/review 495 was preserved and verified inside the completed full-page p.82 pass; this older one-unit proposal is no longer a pending review."
+    }
+  ]
 }

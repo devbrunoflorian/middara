@@ -1,0 +1,299 @@
+{
+  "proposalId": "p092-tags-section-heading",
+  "version": "2",
+  "title": "Correção da moldura centralizada do cabeçalho Tags — p. 92",
+  "page": 92,
+  "status": "payload_approved_final_exports_verified_og_viewer_print_compared",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "sourceHashes": {
+    "sourcePdf": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
+    "background": "5e3519b3625b07ec5bfe2307c01a53b56a7f5aaac0e774709022a7abe030c98d",
+    "pageDom": "e4317422b88333e0f2f6fed73b60d600568a622079f1ddf348d77f4861316d08",
+    "inlineElements": "12aafd17a0a6b1f3780bc2aecd9baa1783c65f9b77455cad8f7b7b0dcb80a0d0",
+    "fidelityOverlays": "4f6e7d4b8eb4ab546a0459310b93dfc33bf4a0bcbc08dbf6fb33c475729ffe09"
+  },
+  "supersedes": "p092-tags-section-heading@1",
+  "counts": {
+    "candidates": 1,
+    "finalTranslationWrites": 1,
+    "payloadWrites": 1,
+    "openExceptions": 0
+  },
+  "preservation": {
+    "existingHumanTranslationsOverwritten": 0,
+    "existingHumanApprovalsOverwritten": 0,
+    "finalTranslationWrites": 1,
+    "payloadWrites": 1,
+    "priorPublicationHistoryEntriesRetained": 1
+  },
+  "scopeLimits": [
+    "Corrige somente a moldura PT-BR do título Tags, centralizando no mesmo eixo x=410 pt do PDF OG. O texto do título e a decisão de preservar Tag como identificador permanecem iguais."
+  ],
+  "candidates": [
+    {
+      "pageNumber": 92,
+      "blockIndex": 30,
+      "sourceBlockId": "block_42",
+      "sourceUnitId": "line_42_0",
+      "spanKey": "page_92_block_30__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Tags",
+      "proposalText": "Tags",
+      "sourceSegments": [
+        {
+          "text": "Tags",
+          "font": "Cinzel-Regular",
+          "size": 18,
+          "color": "#ffffff",
+          "flags": 4,
+          "bbox": [
+            388.1111145019531,
+            56.69243621826172,
+            431.83306884765625,
+            80.95643615722656
+          ],
+          "renderWeightOverride": 700,
+          "origin": [
+            388.1111145019531,
+            74.26043701171875
+          ]
+        }
+      ],
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_92_block_30__pt-BR",
+        "bbox": [
+          388.1111145019531,
+          56.69243621826172,
+          431.83306884765625,
+          80.95643615722656
+        ],
+        "textAlign": "center",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "segments": [
+          {
+            "text": "Tags",
+            "font": "Cinzel-Regular",
+            "size": 18,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          }
+        ],
+        "managedSourceSymbols": []
+      },
+      "technicalStatus": "copyfit_v3_exact_100_200_viewer_print_pdf_verified",
+      "editorialStatus": "Approved title; persisted centered frame and final Viewer/print/PDF verified.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [
+        "Tag is retained verbatim as a formal game identifier; the glossary has no approved Tag translation, and this proposal does not establish one."
+      ],
+      "sourcePdfVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitCanonicalSpanKey": "page_92_block_30__pt-BR",
+      "copyfitCanonicalBbox": [
+        102.5,
+        56.69243621826172,
+        717.5,
+        80.95643621826171
+      ],
+      "underCompositionJustification": "",
+      "pageRendererVisualLineCount": 1,
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 92,
+            "pdfDocumentPageIndex": 91,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              388.1111145019531,
+              56.69243621826172,
+              431.83306884765625,
+              80.95643615722656
+            ],
+            "visualRowBaselinesPt": [
+              74.26
+            ],
+            "spans": 1,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_92_block_30",
+            "readingMethod": "text rects of the review-highlighted unit plus visible semantic-symbol rects for symbol-only rows",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              316.86
+            ],
+            "frameHeightCssPx": 9.8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 92,
+            "pdfDocumentPageIndex": 91,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              102.5,
+              56.69243621826172,
+              717.5,
+              80.95643621826171
+            ],
+            "extractedPdfTextVisualRows": 1,
+            "visualRowBaselinesPt": [
+              74.26
+            ],
+            "spans": 1,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_92_block_30__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              108.39
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "27.2437px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "27.2437px",
+                "letterSpacing": "-0.408655px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 27.3,
+            "frameWidthCssPx": 930.8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 92,
+          "pdfDocumentPageIndex": 91,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            102.5,
+            56.69243621826172,
+            717.5,
+            80.95643621826171
+          ],
+          "extractedPdfTextVisualRows": 1,
+          "visualRowBaselinesPt": [
+            74.26
+          ],
+          "spans": 1,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_92_block_30__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            108.39
+          ],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "CinzelLocal, Cinzel, serif",
+              "fontSize": "27.2437px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "27.2437px",
+              "letterSpacing": "-0.408655px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 27.3,
+          "frameWidthCssPx": 930.8
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "reviewLayoutFrame": {
+        "x": 102.5,
+        "y": 56.69243621826172,
+        "width": 615,
+        "height": 24.264,
+        "textAlign": "center",
+        "lineHeight": 1
+      },
+      "revisionHistory": [
+        {
+          "recordedAt": "2026-11-19",
+          "summary": "v2 corrige a moldura PT-BR: o frame anterior começava no floreio esquerdo e deixava somente o S visível. A nova moldura centraliza o título no eixo x=410 pt do OG; o texto aprovado “Tags” permanece."
+        }
+      ]
+    }
+  ],
+  "revisionHistory": [
+    {
+      "version": "1",
+      "date": "2026-10-24",
+      "note": "Added the one omitted section heading from the p.92 index as a provisional source-identifier-preserving proposal; no glossary decision or Payload write."
+    }
+  ]
+}

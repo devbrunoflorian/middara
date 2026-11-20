@@ -455,7 +455,12 @@ try {
   if (config.language === 'pt-BR') {
     const expectedFragment = normalizeText(expectedTranslation).slice(0, 48);
     await page.waitForFunction(fragment => {
-      const content = normalizeText(document.querySelector('.page-container')?.textContent ?? '');
+      // `textContent` drops separators between sibling block boxes (for
+      // example a label and the paragraph after it), even though the Viewer
+      // visibly separates them. Use the rendered reading order for the live
+      // export smoke check, then normalize its line breaks as spaces.
+      const container = document.querySelector('.page-container');
+      const content = normalizeText(container?.innerText ?? container?.textContent ?? '');
       return content.includes(fragment);
       function normalizeText(value) {
         return value
@@ -527,11 +532,12 @@ try {
     const supersededLegacyKeys=new Set();
     for(const [blockIndex,block] of (pageData.blocks??[]).entries()){
       const units=block.typographicUnits??[];
-      if(!units.length)continue;
-      const completeChildOverrides=units.every(unit=>
+      const completeTypographicChildOverrides=units.length>0&&units.every(unit=>
         snapshotKeys.has(`page_${config.page}_unit_${unit.id}__${config.language}`),
       );
-      if(completeChildOverrides){
+      const listFlowKeys=listFlowTranslationKeys(block,config.page,blockIndex);
+      const completeListFlowChildOverrides=listFlowKeys.length>0&&listFlowKeys.every(key=>snapshotKeys.has(key));
+      if(completeTypographicChildOverrides||completeListFlowChildOverrides){
         supersededLegacyKeys.add(`${block.editorKey??`page_${config.page}_block_${blockIndex}`}__${config.language}`);
       }
     }
@@ -847,7 +853,8 @@ try {
   console.log('[page-export] print layout diagnostic', JSON.stringify(printLayout));
 
   const textSanity = await page.evaluate(() => ({
-    pageText: document.querySelector('.page-container')?.textContent ?? '',
+    pageText: document.querySelector('.page-container')?.innerText
+      ?? document.querySelector('.page-container')?.textContent ?? '',
     pageImageReady: !!document.querySelector('.page-container img')?.naturalWidth,
   }));
   if (!textSanity.pageImageReady) throw new Error('The page background image is not ready.');

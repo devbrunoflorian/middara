@@ -93,7 +93,10 @@ def main() -> None:
 
         # The PDF's stroked-path paint bounds extend beyond the nominal
         # drawing bbox. Inflate each source path by half its stroke width and
-        # include a small antialias margin; the narrower crop left edge slivers.
+        # include enough antialias margin to cover the source vector and avoid
+        # visible seams at the cleanup-patch edges. A 0.12 pt margin left thin
+        # vertical seams in Viewer and exported PDF; 0.75 pt removes them while
+        # retaining more than 5 pt of clearance before the next table row.
         # Text can share this crop because PageRenderer paints editable source
         # text above the page-background cleanup patch.
         paint_bounds = source_page.get_bboxlog()
@@ -109,7 +112,7 @@ def main() -> None:
             redaction_area |= pymupdf.Rect(paint_bounds[seq][1])
             if drawing["type"] == "fs" and seq + 1 < len(paint_bounds) and paint_bounds[seq + 1][0] == "stroke-path":
                 redaction_area |= pymupdf.Rect(paint_bounds[seq + 1][1])
-        mask_box = paint_area + (-.12, -.12, .12, .12)
+        mask_box = paint_area + (-.75, -.75, .75, .75)
         if not mask_box.contains(target_box):
             raise ValueError("Cleanup crop does not cover the measured semantic symbol")
         if mask_box.y1 > ROOT_ROW_BOTTOM_PT - 1.0:
@@ -170,6 +173,7 @@ def main() -> None:
             previous_mask = previous.pop("mask", None)
             proposed_mask = proposed.pop("mask", None)
             known_old_masks = [
+                {"url": "/pages/page_098/inline-element-mask-000.png", "bbox": [207.62259948730468, 243.19593322753906, 219.25259887695313, 256.17291748046875]},
                 {"url": "/pages/page_098/inline-element-mask-000.png", "bbox": [207.99, 243.56, 218.88, 255.8]},
                 {"url": "/pages/page_098/inline-element-mask-000.png", "bbox": [204.12259948730468, 239.69593322753906, 222.75259887695313, 259.67291748046875]},
             ]

@@ -41,8 +41,14 @@ export interface TranslationReviewCandidate {
   blockIndex: number | null;
   sourceBlockId: string | null;
   sourceUnitId: string | null;
+  sourceLineIds?: string[];
   sourceText: string;
   proposalText: string;
+  absorbsSourceSpanKeys?: string[];
+  intentionalEmptyOverride?: {
+    reflowedIntoSpanKey: string;
+    reason: string;
+  } | null;
   sourceSegments?: Segment[];
   data: unknown;
   /** Explicit proposal-only frame, absent unless its geometry was measured and approved for preview. */
@@ -88,6 +94,8 @@ export function copyfitApprovalBlockReason(
   const statusOver = /blocked[-_]line[-_]count[-_]over|blocked[-_]copyfit[-_]v3[-_]over/iu.test(String(technicalStatus ?? ''));
   const hasValidCounts = Number.isInteger(sourcePdfLineCount) && Number(sourcePdfLineCount) >= 1
     && Number.isInteger(pageRendererLineCount) && Number(pageRendererLineCount) >= 1;
+  if (!hasValidCounts && !classification
+    && /^intentional_empty_override(?:[_-]|$)/iu.test(String(technicalStatus ?? ''))) return null;
   if (!hasValidCounts) return classification === 'OVER' || statusOver ? 'OVER' : 'UNMEASURED';
   if (!['EXACT', 'UNDER', 'OVER'].includes(String(classification ?? ''))) return statusOver ? 'OVER' : 'UNMEASURED';
   const measuredClassification = Number(pageRendererLineCount) === Number(sourcePdfLineCount) ? 'EXACT'
@@ -139,6 +147,18 @@ export function copyfitCanonicalEvidenceBlockReason(
   candidate: TranslationReviewCandidate,
   currentData: unknown,
 ): CopyfitApprovalBlockReason {
+  const emptyOverride = candidate.intentionalEmptyOverride;
+  if (emptyOverride
+    && typeof emptyOverride.reflowedIntoSpanKey === 'string'
+    && emptyOverride.reflowedIntoSpanKey.trim()
+    && typeof emptyOverride.reason === 'string'
+    && emptyOverride.reason.trim()
+    && candidate.proposalText.trim() === ''
+    && /^intentional_empty_override(?:[_-]|$)/iu.test(candidate.technicalStatus)
+    && isRecord(candidate.data)
+    && Array.isArray(candidate.data.segments)
+    && candidate.data.segments.length === 0
+    && copyfitMeasurementDataMatches(candidate.data, currentData)) return null;
   const bbox = candidate.copyfitCanonicalBbox;
   const hasCanonicalBbox = Array.isArray(bbox) && bbox.length === 4
     && bbox.every(value => typeof value === 'number' && Number.isFinite(value))

@@ -6,9 +6,9 @@
 
 - **PDF page:** 92 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** compared with the official OG PDF and EN Viewer on 2026-11-20; see `pages/page-092.md`
+- **English fidelity:** page structure, 30 tag definitions, title, and inline-symbol placements compared with the official PDF
+- **PT-BR:** 31 active approved records; all 30 prose units EXACT at 100%/200%, heading 1/1
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)

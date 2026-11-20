@@ -6,9 +6,9 @@
 
 - **PDF page:** 69 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** reviewed against rendered OG on 2026-11-19
+- **English fidelity:** EN Viewer/print compared with the official PDF on 2026-11-19; no visible divergence found
+- **PT-BR:** full-page text and layout compared with the official PDF on 2026-11-19. Corrected the continuation heading to “Outras Regras Importantes (continuação)”; 24 active Payload translations render across 29 editable targets. Two current approved review receipts (reviews 648 and 2016; translations 608 and 2101); 22 active legacy records have no individual current receipt.
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)

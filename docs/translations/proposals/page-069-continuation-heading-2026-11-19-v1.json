@@ -1,0 +1,313 @@
+{
+  "proposalId": "p069-continuation-heading",
+  "version": 1,
+  "title": "Cabeçalho de continuação da p.69",
+  "page": 69,
+  "status": "published_copyfit_exact_export_verified",
+  "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
+  "scopeLimits": [
+    "Formalizar o texto existente do cabeçalho sem alterar sua aparência; depois corrigir a ligação editorial de Continued em português e preservar esta versão no histórico.",
+    "Nenhuma outra tradução, moldura, estilo ou componente da página entra neste candidato."
+  ],
+  "counts": {
+    "candidates": 1,
+    "baselineApproval": 1,
+    "correctionApproval": 1
+  },
+  "candidates": [
+    {
+      "spanKey": "page_69_block_12__pt-BR",
+      "language": "pt-BR",
+      "sourceText": "Other Important Rules Continued",
+      "proposalText": "Outras Regras Importantes (continuação)",
+      "data": {
+        "schemaVersion": 2,
+        "spanKey": "page_69_block_12__pt-BR",
+        "textAlign": "left",
+        "segments": [
+          {
+            "size": 18,
+            "text": "Outras Regras Importantes ",
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "font": "Cinzel-Regular"
+          },
+          {
+            "size": 11,
+            "text": "(continuação)",
+            "weight": 700,
+            "style": "normal",
+            "color": "#231f20",
+            "font": "Cinzel-Regular"
+          }
+        ]
+      },
+      "sourceBboxes": [
+        [
+          86.17320251464844,
+          56.69243621826172,
+          388.0199890136719,
+          80.95643615722656
+        ]
+      ],
+      "reviewLayoutFrame": {
+        "x": 85.17292060698378,
+        "y": 56.684289622451914,
+        "width": 700.1687517206191,
+        "total": 614.9958311136353,
+        "height": 80.94239992190931,
+        "totalHeight": 24.258110299457407,
+        "rotation": 0,
+        "textAlign": "left"
+      },
+      "technicalStatus": "verified_title_continuation_copyfit_v3_exact_100_200_frame_unchanged",
+      "editorialStatus": "Approved in Payload review 2016 for translation 2101 on 2026-11-19. Copyfit EXACT 1/1 at 100% and 200%; the 18 pt/11 pt Cinzel runs, colors, weight, alignment, and saved frame were preserved. Final export verified; raster difference from the pre-correction print is confined to the title glyph region.",
+      "diagnosticRendering": "proposal",
+      "pendingTerms": [],
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1,
+      "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 69,
+            "pdfDocumentPageIndex": 68,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.17292060698378,
+              56.684289622451914,
+              700.1687517206191,
+              80.94239992190933
+            ],
+            "extractedPdfTextVisualRows": 1,
+            "visualRowBaselinesPt": [
+              74.26
+            ],
+            "spans": 2,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_69_block_12__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 2,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              90.48
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.7567690873341558,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "13.6218px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "13.6218px",
+                "letterSpacing": "-0.204328px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "8.32446px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "8.32446px",
+                "letterSpacing": "-0.124867px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 13.6,
+            "frameWidthCssPx": 465.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 69,
+            "pdfDocumentPageIndex": 68,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.17292060698378,
+              56.684289622451914,
+              700.1687517206191,
+              80.94239992190933
+            ],
+            "extractedPdfTextVisualRows": 1,
+            "visualRowBaselinesPt": [
+              74.26
+            ],
+            "spans": 2,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_69_block_12__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 2,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              108.39
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "27.2437px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "27.2437px",
+                "letterSpacing": "-0.408655px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "16.6489px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.249734px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 27.3,
+            "frameWidthCssPx": 930.8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      },
+      "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
+        "sourcePdfVisualLineCount": 1,
+        "pageRendererVisualLineCount": 1,
+        "classification": "EXACT",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+        "environment": {
+          "pageNumber": 69,
+          "pdfDocumentPageIndex": 68,
+          "language": "pt-BR",
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
+        },
+        "sourceEvidence": {
+          "bboxPt": [
+            85.17292060698378,
+            56.684289622451914,
+            700.1687517206191,
+            80.94239992190933
+          ],
+          "extractedPdfTextVisualRows": 1,
+          "visualRowBaselinesPt": [
+            74.26
+          ],
+          "spans": 2,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
+          "visualRows": 1
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_69_block_12__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 2,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 1,
+          "visualRowTopsCssPx": [
+            108.39
+          ],
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "CinzelLocal, Cinzel, serif",
+              "fontSize": "27.2437px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "27.2437px",
+              "letterSpacing": "-0.408655px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "CinzelLocal, Cinzel, serif",
+              "fontSize": "16.6489px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "16.6489px",
+              "letterSpacing": "-0.249734px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 27.3,
+          "frameWidthCssPx": 930.8
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      }
+    }
+  ],
+  "revisionHistory": [
+    {
+      "date": "2026-11-19",
+      "previousText": "Outras Regras Importantes Continuação",
+      "reason": "A justaposição de Continuação sem sinal de continuação soava sem ligação em português; parênteses explicita o descritor editorial e mantém o sentido do título fonte."
+    }
+  ]
+}

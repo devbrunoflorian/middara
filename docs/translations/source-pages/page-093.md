@@ -1,14 +1,14 @@
 # PDF page 093
 
 > Raw text-line transcript extracted from the official English PDF with PyMuPDF.
-> This is not a semantic paragraph map, an artwork/ghost decision, or an English-fidelity sign-off.
+> This is a raw line-wise transcript, not the authoritative semantic paragraph map or translation record. Its per-line PT-BR placeholders below remain extraction-time placeholders; see `../pages/page-093.md` and the saved proposal for current Payload status.
 > Reorder/re-group only after checking the rendered source; keep different font sizes and boxes distinct.
 
 - **PDF page:** 93 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** completed 2026-11-20 against the official PDF
+- **English fidelity:** PT-BR Viewer and print/export visually compared with the PDF source on 2026-11-20
+- **PT-BR:** 28 approved active translations; all 28 EXACT at 100% and 200%
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)

@@ -781,7 +781,16 @@ function trimSegmentEdgeWhitespace(segments: Segment[], edge: 'start' | 'end'): 
 
 /** Split an older whole-list override only when it explicitly contains every source marker. */
 function splitLegacyListOverride(override: SpanOverride, markerGlyphs: string[]): Segment[][] | null {
-  if (!markerGlyphs.length || override.managedSourceSymbols?.length) return null;
+  if (!markerGlyphs.length) return null;
+  const representedSourceSymbols = new Set(override.segments.flatMap(segment => {
+    const symbolId = segment.symbolId ?? resolveLegacySymbol(segment.font, segment.text)?.id;
+    return symbolId ? [symbolId] : [];
+  }));
+  // A whole-list override can be split safely when every managed source symbol
+  // is present in a rich segment. The symbol then stays with the item that
+  // contains it; an intentionally removed/unrepresented symbol keeps the
+  // legacy block intact because its original occurrence cannot be assigned.
+  if ((override.managedSourceSymbols ?? []).some(symbolId => !representedSourceSymbols.has(symbolId))) return null;
   const markerSet = new Set(markerGlyphs);
   const pieces: Segment[][] = [[]];
   let markerIndex = 0;
@@ -3463,7 +3472,10 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
           spanKey: rowKey,
           bbox: rowBlock.bbox,
           segments,
-          managedSourceSymbols: undefined,
+          managedSourceSymbols: [...new Set(segments.flatMap(segment => {
+            const symbolId = segment.symbolId ?? resolveLegacySymbol(segment.font, segment.text)?.id;
+            return symbolId ? [symbolId] : [];
+          }))],
         });
       }
     }
@@ -4515,7 +4527,10 @@ function sliceSegmentsByTextRange(segments: SpanOverride['segments'], start: num
 
 function splitLeadingNumberedListMarker(segments: SpanOverride['segments']): { marker: SpanOverride['segments']; body: SpanOverride['segments'] } | null {
   const text = segments.map(segment => segment.text).join('');
-  const match = text.match(/^(\s*)(\d{1,2}[.)])(?:[\t ]*)/u);
+  // Numbered and lettered substeps can share the same inline marker/body
+  // shape. Keep this flow opt-in through source or override indents so prose
+  // such as "A. ..." is never restructured without measured list geometry.
+  const match = text.match(/^(\s*)((?:\d{1,2}|[a-z])[.)])(?:[\t ]*)/iu);
   if (!match) return null;
   const markerStart = match[1].length;
   const markerEnd = markerStart + match[2].length;

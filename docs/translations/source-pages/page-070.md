@@ -6,9 +6,9 @@
 
 - **PDF page:** 70 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** compared with rendered OG on 2026-11-18 and rechecked on 2026-11-19
+- **English fidelity:** EN Viewer/print compared with the official PDF on 2026-11-18; no visible structural divergence found. Project-wide typography remains uncertified.
+- **PT-BR:** Revisão integral de OG/EN/PT-BR e export conferidos em 2026-11-19. O bloco-fonte 59 foi separado em título e quatro parágrafos; as cinco unidades estão EXACT a 100% e 200%, com Viewer/print comparados ao OG. As reviews atuais aprovadas são 176, 2017 e 2018–2022 (translations 504, 2120 e 2385–2389). A tradução-pai 2119 permanece intacta como fallback; há 18 registros legados sem recibo individual. A tipografia global continua sem certificação.
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)
