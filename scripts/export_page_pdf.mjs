@@ -532,11 +532,12 @@ try {
     const supersededLegacyKeys=new Set();
     for(const [blockIndex,block] of (pageData.blocks??[]).entries()){
       const units=block.typographicUnits??[];
-      if(!units.length)continue;
-      const completeChildOverrides=units.every(unit=>
+      const completeTypographicChildOverrides=units.length>0&&units.every(unit=>
         snapshotKeys.has(`page_${config.page}_unit_${unit.id}__${config.language}`),
       );
-      if(completeChildOverrides){
+      const listFlowKeys=listFlowTranslationKeys(block,config.page,blockIndex);
+      const completeListFlowChildOverrides=listFlowKeys.length>0&&listFlowKeys.every(key=>snapshotKeys.has(key));
+      if(completeTypographicChildOverrides||completeListFlowChildOverrides){
         supersededLegacyKeys.add(`${block.editorKey??`page_${config.page}_block_${blockIndex}`}__${config.language}`);
       }
     }

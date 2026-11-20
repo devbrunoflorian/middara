@@ -1,0 +1,13 @@
+# Página 97 — Tabela 9: Fichas de Combatentes
+
+- **Estado:** proposta parcial revisada em 20/11/2026; não publicada nem aprovada editorialmente. A fidelidade integral do texto-fonte ainda não está certificada.
+- **Cobertura desta rodada:** 32 candidatas em três propostas: seis rótulos e textos de apoio, três unidades do cabeçalho e 23 unidades de regras das fichas. As unidades são independentes por célula, parágrafo e bullet conforme a estrutura do OG.
+- **Nomes de componentes:** Bulb, Dynamite, Font of Renewal e Plank continuam em inglês nos rótulos e na prosa. Cartas, fichas e nomes impressos permanecem como arte/fonte; só as regras ao redor foram traduzidas.
+- **Recuo:** o bullet de exceção da Dynamite está numa linha-fonte separada do texto. O marcador fica em X=173,294 pt e o corpo em X=191,294 pt. A moldura PT-BR local usa o X do corpo e largura de 578,100 pt, preservando a borda direita do OG em X=769,394 pt. A frase foi condensada depois de recuperar o recuo; Copyfit confirmou uma linha como na fonte.
+- **Símbolos:** `dice.purple` permanece inline na regra da Dynamite e `terrain.elevation-box` foi inserido como `[[symbol:terrain.elevation-box]]` na regra de Plank. Viewer, print e PDF mostram dois símbolos semânticos, sem duplicata presa à posição original.
+- **Terminologia:** `Range 4` está como “Distância 4”, seguindo apenas a distinção contextual registrada na p.78 entre distância numérica e `Reach`. A hipótese global `Range → Alcance` não foi alterada.
+- **Copyfit e exportação:** 32/32 candidatas EXACT em 100% e 200%. Snapshot imutável exportou uma página de 820,346 × 820,346 pt, passou `verifiedTranslationRecords=true` e `pdfVerification=true`; Viewer e print registraram 17 linhas-fonte, 2 símbolos e 2 imagens. A inspeção visual comparou OG, Viewer, print e raster do PDF: sem colisão de linhas, clipping ou invasão entre as linhas da tabela.
+- **Propostas:** `page-097-bulb-and-token-labels-proposal-2026-10-24-v4.json`, `page-097-table9-header-proposal-2026-11-16-v5.json` e `page-097-token-rule-bodies-proposal-2026-10-25-v3.json`.
+- **Pendências:** toda a prosa, os rótulos e os cabeçalhos visíveis da Tabela 9 estão cobertos pelas 32 candidatas; a página está pronta para revisão editorial. As propostas não foram gravadas no Payload nem aprovadas. A fidelidade integral do livro continua aberta até a revisão humana e a certificação de página.
+- **Evidência de QA:** `tmp/qa-p097-2026-11-20/` (captura OG, Viewer, print, snapshot de proposta, PDF rasterizado e métricas). O snapshot é diagnóstico e não atualiza o estado persistido.
+- **Fonte:** [transcrição do PDF OG](../source-pages/page-097.md). A transcrição não substitui a comparação visual.

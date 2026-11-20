@@ -194,7 +194,10 @@ function canonicalCopyfitGeometry(candidate, pageNumber, spanKey) {
           : blockMatch ? Number(blockMatch[1]) : -1;
         const page = pageDom(pageNumber);
         const sourceBlock = Array.isArray(page?.blocks) ? page.blocks[blockIndex] : null;
-        const canonicalSpanKey = /^page_\d+_unit_/u.test(spanKey)
+        const isListFlowChild = /^page_\d+_block_\d+__(?:prose|item-\d+)-line_[\w-]+(?:__pt-BR)?$/u.test(spanKey);
+        const canonicalSpanKey = isListFlowChild
+          ? (spanKey.endsWith('__pt-BR') ? spanKey : `${spanKey}__pt-BR`)
+          : /^page_\d+_unit_/u.test(spanKey)
           ? (spanKey.endsWith('__pt-BR') ? spanKey : `${spanKey}__pt-BR`)
           : sourceBlock?.editorKey
             ? `${sourceBlock.editorKey}__pt-BR`
@@ -295,6 +298,32 @@ function resolveSourceSegments(candidate, pageNumber, spanKey) {
       : candidate.sourceBlockId ? blocks.findIndex(b => b?.id === candidate.sourceBlockId) : -1;
   const sourceBlock = blockIndex >= 0 && blockIndex < blocks.length ? blocks[blockIndex] : null;
   if (!sourceBlock || !Array.isArray(sourceBlock.lines)) return [];
+
+  const sourceLineIds = new Set(Array.isArray(candidate.sourceLineIds)
+    ? candidate.sourceLineIds.filter(id => typeof id === 'string') : []);
+  if (sourceLineIds.size > 0) {
+    return sourceBlock.lines
+      .filter(line => sourceLineIds.has(line.id))
+      .flatMap(line => (line.spans || []).filter(span => !span.renderOnlyStrokePass
+        && (String(span.displayOverride || span.text || '').trim() || span.semanticSymbolId)))
+      .map(span => {
+        const mapped = mapPdfFont(span.font);
+        const weight = span.renderWeightOverride ?? mapped.weight;
+        const legacySymbol = sourceSymbols.find(sym => sym.legacy && span.font.includes(sym.legacy.font)
+          && sym.legacy.characters.includes(span.text.trim()));
+        const symbolId = span.semanticSymbolId ?? legacySymbol?.id;
+        return {
+          text: span.displayOverride || span.text,
+          font: span.font,
+          size: span.renderSizeOverridePt ?? span.size,
+          weight,
+          style: mapped.style,
+          color: span.color || '#231f20',
+          ...(symbolId ? { symbolId } : {}),
+          ...(span.sourceSymbolMetrics ? { symbolMetrics: span.sourceSymbolMetrics } : {}),
+        };
+      });
+  }
 
   const credit = creditField(pageNumber, sourceBlock, spanKey);
   if (credit) {
@@ -432,6 +461,8 @@ const proposals = [...candidatesByFamily.values()]
         blockIndex: Number.isInteger(candidate.blockIndex) ? candidate.blockIndex : null,
         sourceBlockId: candidate.sourceBlockId ?? null,
         sourceUnitId: candidate.sourceUnitId ?? null,
+        sourceLineIds: Array.isArray(candidate.sourceLineIds)
+          ? candidate.sourceLineIds.filter(id => typeof id === 'string') : [],
         sourceText,
         proposalText,
         ...(Array.isArray(candidate.absorbsSourceSpanKeys)

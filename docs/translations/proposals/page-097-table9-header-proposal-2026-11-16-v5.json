@@ -3,7 +3,7 @@
   "version": "5",
   "title": "Cabeçalho da Tabela 9 e nomes de coluna traduzidos, p. 97 (v5)",
   "page": 97,
-  "status": "pending_live_viewer_copyfit_v3",
+  "status": "pending_human_review",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -65,8 +65,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_copyfit_v3_after_component-name-preservation",
-      "editorialStatus": "Corrected to preserve English game-component names; pending renewed 100%/200% copyfit and visual comparison.",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
+      "editorialStatus": "Copyfit V3 EXACT em 100% e 200%, com comparação visual do snapshot Viewer/print/PDF contra OG. Nomes impressos de fichas e componentes preservados em inglês. Pendente de revisão editorial humana.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
@@ -387,8 +387,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_copyfit_v3_after_component-name-preservation",
-      "editorialStatus": "Corrected to preserve English game-component names; pending renewed 100%/200% copyfit and visual comparison.",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
+      "editorialStatus": "Copyfit V3 EXACT em 100% e 200%, com comparação visual do snapshot Viewer/print/PDF contra OG. Nomes impressos de fichas e componentes preservados em inglês. Pendente de revisão editorial humana.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Combatant Tokens → Fichas de Combatentes (title form from human usage p.5) vs Fichas de Combatente (reference form from human usage p.5); compound form remains for human decision."
@@ -746,8 +746,8 @@
         "textAlign": "left",
         "lineHeight": 1
       },
-      "technicalStatus": "pending_copyfit_v3",
-      "editorialStatus": "Traduz os cabeçalhos estruturais da tabela; preserva nomes de fichas e componentes.",
+      "technicalStatus": "verified_copyfit_v3_exact_source_pdf_and_page_renderer",
+      "editorialStatus": "Cabeçalhos estruturais traduzidos; nomes impressos de fichas e componentes preservados em inglês. Copyfit e export visual verificados; pendente de revisão editorial humana.",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "sourcePdfVisualLineCount": 1,
@@ -1127,6 +1127,11 @@
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1
       }
+    },
+    {
+      "date": "2026-11-20",
+      "change": "Copyfit V3 e exportação imutável confirmados contra o PDF OG; nomes de fichas/componentes continuam em inglês.",
+      "evidence": "Copyfit V3: todas as unidades da proposta ficaram EXACT em 100% e 200%. Snapshot imutável da p.97 passou verifiedTranslationRecords=true e pdfVerification=true; Viewer, print e raster do PDF foram comparados visualmente ao OG. Nenhum dado foi publicado no Payload; revisão editorial humana continua pendente."
     }
   ],
   "supersedes": [

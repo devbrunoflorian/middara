@@ -41,6 +41,7 @@ export interface TranslationReviewCandidate {
   blockIndex: number | null;
   sourceBlockId: string | null;
   sourceUnitId: string | null;
+  sourceLineIds?: string[];
   sourceText: string;
   proposalText: string;
   absorbsSourceSpanKeys?: string[];
