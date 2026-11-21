@@ -1,0 +1,8 @@
+# Página 101 — Índice
+
+- **Estado:** 198/198 unidades registradas no Payload estão aprovadas e publicadas. O título aparece como “Índice”. A revisão de 2026-11-20 corrigiu 19 entradas que divergiam de decisões do glossário, nomes impressos de Tags ou nomes de componentes; a publicação anterior de cada uma foi preservada no histórico.
+- **Termos corrigidos:** `Counter` → **Revide**; `Stamina Point(s) (SP)` → **Ponto(s) de Stamina (SP)**; `Flanking` → **Flanqueio**; `Gigas Grip` → **Empunhadura Gigas**; `Scaling Icons` → **Ícones de Escala**. Nomes impressos de componentes e Tags foram mantidos em inglês.
+- **Copyfit:** as 19 alterações mantêm uma linha, EXACT, em 100% e 200%, usando as fontes, pesos, cores e molduras existentes.
+- **Fonte:** a segunda leitura conferiu 193/193 referências impressas de destino numérico contra o OG. A referência literal **“Back”** na entrada “Values” é uma linha estática da fonte, fora das 198 unidades traduzíveis existentes; permanece visível em inglês e precisa de uma unidade/overlay de localização própria.
+- **Validação:** os 198 registros aprovados e publicados foram comparados após as alterações; não há divergências. Há uma captura do Viewer PT-BR em `engineering-decisions/evidence/2026-11-20-p101-index-reconciliation/`. A nova exportação falhou depois do ajuste de escala porque o container da página desapareceu antes da coleta de métricas; o PDF anterior é anterior às 19 correções e não serve como evidência desta revisão.
+- **Limite:** este registro fecha a revisão das entradas do índice cobertas pelas unidades atuais; não certifica a fidelidade integral de toda a extração-fonte da página nem conclui o livro.

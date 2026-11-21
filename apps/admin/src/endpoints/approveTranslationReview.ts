@@ -106,6 +106,29 @@ function preservesPostPublicationFormatting(
   return true
 }
 
+/**
+ * Explicitly adopt a legacy editor payload only when its rich text is already
+ * the exact live translation and the sole difference is the canonical
+ * PageRenderer identity/frame metadata supplied by Copyfit V3. This opt-in is
+ * used to reconcile known post-publication editor drift without discarding
+ * that live text or rewriting the previous publication snapshot.
+ */
+function matchesLivePostPublicationRevision(
+  currentValue: unknown,
+  proposedValue: unknown,
+  canonicalSpanKey: unknown,
+  canonicalBbox: unknown,
+): boolean {
+  if (!isRecord(currentValue) || !isRecord(proposedValue)
+    || typeof canonicalSpanKey !== 'string'
+    || !Array.isArray(canonicalBbox) || canonicalBbox.length !== 4
+    || canonicalBbox.some(value => typeof value !== 'number' || !Number.isFinite(value))) return false
+  const current = currentValue as JsonRecord
+  if (current.spanKey != null || current.bbox != null) return false
+  const normalizedLive = { ...current, spanKey: canonicalSpanKey, bbox: canonicalBbox }
+  return canonical(normalizedLive) === canonical(proposedValue)
+}
+
 function copyfitMeasurementFingerprint(data: unknown): string | null {
   if (!isRecord(data) || !Array.isArray(data.segments)) return null
   const snapshot = {
@@ -658,7 +681,12 @@ async function approve(req: PayloadRequest): Promise<Response> {
       const translationMatchesPublication = canonical(existingTranslation.data) === canonical(existingPublication.data)
       const formattingDriftPreserved = !translationMatchesPublication
         && preservesPostPublicationFormatting(existingTranslation.data, existingPublication.data, data, targetSpanKey)
-      if (!translationMatchesPublication && !formattingDriftPreserved) {
+      const explicitLiveRevision = body.reconcilePublishedDraft === true
+        && review?.approvalStatus === 'approved'
+        && typeof body.expectedUpdatedAt === 'string'
+        && body.expectedUpdatedAt === review.updatedAt
+        && matchesLivePostPublicationRevision(existingTranslation.data, data, canonicalSpanKey, canonicalBbox)
+      if (!translationMatchesPublication && !formattingDriftPreserved && !explicitLiveRevision) {
         throw Object.assign(new Error('A tradução final mudou desde a última aprovação. Ela foi preservada; confira o conflito antes de publicar.'), { status: 409 })
       }
     } else if (existingTranslation && canonical(existingTranslation.data) !== canonical(data)) {

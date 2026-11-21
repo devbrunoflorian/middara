@@ -1940,7 +1940,7 @@
       "spanKey": "page_101_unit_p101-index-131__pt-BR",
       "language": "pt-BR",
       "sourceText": "Plank",
-      "proposalText": "Prancha",
+      "proposalText": "Plank",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_101_unit_p101-index-131__pt-BR",
@@ -1955,7 +1955,7 @@
         "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Prancha",
+            "text": "Plank",
             "font": "OptimaLTStd",
             "size": 8,
             "weight": 400,
@@ -1966,8 +1966,8 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "pending_live_viewer_copyfit_v3_editor_pdf",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "viewer_copyfit_v3_exact_100_200_live_payload_revision_verified",
+      "editorialStatus": "official_payload_revision_approval_confirmed_with_prior_publication_history",
       "diagnosticRendering": "proposal",
       "pendingTerms": [
         "Plank é um termo de componente/regra; confirmar se Prancha é o equivalente usado no contexto da p.97."
@@ -1975,118 +1975,206 @@
       "sourcePdfVisualLineCount": 1,
       "pageRendererVisualLineCount": 1,
       "copyfitClassification": "EXACT",
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 101,
+            "pdfDocumentPageIndex": 100,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              305.9537048339844,
+              686.0462036132812,
+              502.4977111816406,
+              695.5662231445312
+            ],
+            "extractedPdfTextVisualRows": 1,
+            "visualRowBaselinesPt": [
+              693.398
+            ],
+            "spans": 2,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_101_unit_p101-index-131__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              567.77
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.7567690873341558,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "6.05415px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "6.05415px",
+                "letterSpacing": "-0.0908123px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 7.2,
+            "frameWidthCssPx": 148.7
+          },
+          "editorialStatus": "Official Payload approval confirmed; prior publication preserved in history. Copyfit V3 is separate technical evidence."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 101,
+            "pdfDocumentPageIndex": 100,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              305.9537048339844,
+              686.0462036132812,
+              502.4977111816406,
+              695.5662231445312
+            ],
+            "extractedPdfTextVisualRows": 1,
+            "visualRowBaselinesPt": [
+              693.398
+            ],
+            "spans": 2,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_101_unit_p101-index-131__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              1062.94
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "12.1083px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "12.1083px",
+                "letterSpacing": "-0.181625px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 14.4,
+            "frameWidthCssPx": 297.5
+          },
+          "editorialStatus": "Official Payload approval confirmed; prior publication preserved in history. Copyfit V3 is separate technical evidence."
+        }
+      },
       "copyfitMeasurement": {
         "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 101,
           "pdfDocumentPageIndex": 100,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
-            305.95269775390625,
-            119.04619598388672,
-            516.6177978515625,
-            785.5662231445312
+            305.9537048339844,
+            686.0462036132812,
+            502.4977111816406,
+            695.5662231445312
           ],
-          "visualBaselinesPt": [
-            126.398,
-            135.398,
-            144.398,
-            153.398,
-            162.398,
-            171.398,
-            180.398,
-            189.398,
-            198.398,
-            207.398,
-            216.398,
-            225.398,
-            234.398,
-            243.398,
-            252.398,
-            261.398,
-            270.398,
-            279.398,
-            288.398,
-            297.398,
-            306.398,
-            315.398,
-            324.398,
-            333.398,
-            342.398,
-            351.398,
-            360.398,
-            369.398,
-            378.398,
-            387.398,
-            396.398,
-            405.398,
-            414.398,
-            423.398,
-            432.398,
-            441.398,
-            450.398,
-            459.398,
-            468.398,
-            477.398,
-            486.398,
-            495.398,
-            504.398,
-            513.398,
-            522.398,
-            531.398,
-            540.398,
-            549.398,
-            558.398,
-            567.398,
-            576.398,
-            585.398,
-            594.398,
-            603.398,
-            612.398,
-            621.398,
-            630.398,
-            639.398,
-            648.398,
-            657.398,
-            666.398,
-            675.398,
-            684.398,
-            693.398,
-            702.398,
-            711.398,
-            720.398,
-            729.398,
-            738.398,
-            747.398,
-            756.398,
-            765.398,
-            774.398,
-            783.398
+          "extractedPdfTextVisualRows": 1,
+          "visualRowBaselinesPt": [
+            693.398
           ],
-          "spans": 144,
-          "visualRows": 74
+          "spans": 2,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
+          "visualRows": 1
         },
         "pageRendererEvidence": {
           "spanKey": "page_101_unit_p101-index-131__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            582.56
+            1062.94
           ],
-          "frameHeightCssPx": 7.7
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "12.1083px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "12.1083px",
+              "letterSpacing": "-0.181625px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 14.4,
+          "frameWidthCssPx": 297.5
         },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
-        "note": "Each individual index entry is exactly 1 row in both the source physical PDF and the live PageRenderer; previously the parent column bbox (74 rows) was assigned to every entry."
+        "editorialStatus": "Official Payload approval confirmed; prior publication preserved in history. Copyfit V3 is separate technical evidence."
+      },
+      "revisionApproval": {
+        "status": "confirmed",
+        "confirmedAt": "2026-11-20",
+        "priorPublicationPreserved": true,
+        "copyfit100": "EXACT",
+        "copyfit200": "EXACT"
       }
     }
   ],

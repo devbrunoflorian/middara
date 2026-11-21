@@ -3,7 +3,7 @@
   "version": "3",
   "title": "Classificações de Convicção e Conjuração — cabeçalho da p.102 (v3)",
   "page": 102,
-  "status": "pending_human_review_with_open_dtp_exception",
+  "status": "published_revision_reconciled_2026-11-20",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -12,10 +12,10 @@
   },
   "counts": {
     "candidates": 1,
-    "existingHumanTranslationsPreserved": 0,
-    "priorReviewRecordsPreserved": 0,
-    "finalTranslationWrites": 0,
-    "openExceptions": 1
+    "existingHumanTranslationsPreserved": 1,
+    "priorReviewRecordsPreserved": 1,
+    "finalTranslationWrites": 1,
+    "openExceptions": 0
   },
   "scopeLimits": [
     "Only the block_22 heading is proposed; color rows, symbols, rules, and other page units remain outside this review.",
@@ -38,34 +38,61 @@
         "line_22_0",
         "line_22_1"
       ],
-      "proposalText": "Classificações de Convicção/Conjuração",
+      "proposalText": "   Classificações de\nConvicção/Conjuração",
       "data": {
         "schemaVersion": 2,
-        "spanKey": "page_102_block_14__pt-BR",
-        "bbox": [
-          199.25408935546875,
-          607.4011840820312,
-          294.194091796875,
-          630.3212280273438
-        ],
-        "textAlign": "left",
-        "lineHeight": 1,
-        "lineHeightMode": "source",
         "segments": [
           {
-            "text": "Classificações de Convicção/Conjuração",
             "font": "OptimaLTStd-Bold",
-            "size": 10.0,
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "   "
+          },
+          {
+            "text": "Classificações de",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "weight": 700,
+            "style": "normal",
+            "color": "#ffffff",
+            "disableLigatures": true
+          },
+          {
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true,
+            "text": "\n"
+          },
+          {
+            "text": "Convicção/Conjuração",
+            "font": "OptimaLTStd-Bold",
+            "size": 10,
             "weight": 700,
             "style": "normal",
             "color": "#ffffff",
             "disableLigatures": true
           }
         ],
-        "managedSourceSymbols": []
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source",
+        "managedSourceSymbols": [],
+        "spanKey": "page_102_block_14__pt-BR",
+        "bbox": [
+          199.24480095339118,
+          607.3975915982857,
+          299.27493213037525,
+          630.3165655054661
+        ]
       },
-      "technicalStatus": "blocked_dtp_geometry_overflow_after_exact_line_count; dtp_exception_open",
-      "editorialStatus": "pending_human_review",
+      "technicalStatus": "viewer_copyfit_v3_exact_100_200_live_payload_revision_verified",
+      "editorialStatus": "official_payload_approval_confirmed_with_prior_publication_history",
       "diagnosticRendering": "blank_whole_unit_diagnostic_only; no English fallback; full proposal retained",
       "pendingTerms": [
         "Conviction → Convicção follows the official glossary. Casting → Conjuração follows current p.102 proposal usage and remains a local term awaiting editorial confirmation."
@@ -93,7 +120,7 @@
             {
               "left": 194.18,
               "top": 476.51,
-              "right": 240.0,
+              "right": 240,
               "bottom": 483.71
             },
             {
@@ -316,31 +343,224 @@
       "pageRendererVisualLineCount": 2,
       "copyfitLineCountClassification": "EXACT",
       "copyfitMeasurement": {
+        "status": "measured_copyfit_v3_script_visual_rows",
         "sourcePdfVisualLineCount": 2,
         "pageRendererVisualLineCount": 2,
         "classification": "EXACT",
-        "method": "Source PDF baseline geometry and PageRenderer DOM Range rectangles grouped into visual rows with the shared Copyfit V3 grouper; source realbox bounds checked with subpixel-only tolerance.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
-          "viewportCssPixels": "2400x1400",
-          "deviceScaleFactor": 1,
+          "pageNumber": 102,
+          "pdfDocumentPageIndex": 101,
           "language": "pt-BR",
-          "zooms": [
-            "100%",
-            "200%"
-          ],
+          "viewerZoom": "200%",
+          "viewportCssPixels": "1280x720",
+          "devicePixelRatio": 1.25,
           "fontLoaded": true
         },
-        "geometry": "EXACT line count passes. Frame containment fails: at 100% the measured text exceeds the right edge by 3.71875 CSS px and top by 2 px; at 200% it exceeds the right edge by 7.421875 CSS px and top by 4 px. Critical review sees no visible clipping/collision but agrees the strict no-overflow gate fails.",
-        "evidence": {
-          "summary": "apps/web/output/p102-conviction-casting-ratings-heading-copyfit-v1/summary.json",
-          "viewerScreenshots": [
-            "apps/web/output/p102-conviction-casting-ratings-heading-copyfit-v1/ratings-heading-100pct.png",
-            "apps/web/output/p102-conviction-casting-ratings-heading-copyfit-v1/ratings-heading-200pct.png"
+        "sourceEvidence": {
+          "bboxPt": [
+            199.24480095339118,
+            607.3975915982857,
+            299.27493213037525,
+            630.3165655054661
           ],
-          "criticalReview": "The critical reviewer independently confirmed the two-to-two line count and rejected technical passage because the measured text rectangles overrun the source frame at both scales."
-        }
+          "extractedPdfTextVisualRows": 2,
+          "visualRowBaselinesPt": [
+            616.611,
+            627.611
+          ],
+          "spans": 2,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
+          "visualRows": 2
+        },
+        "pageRendererEvidence": {
+          "spanKey": "page_102_block_14__pt-BR",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 2,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
+          "distinctVisualRows": 2,
+          "visualRowTopsCssPx": [
+            942.91,
+            958.05
+          ],
+          "visualRowIntervalsPt": [
+            10
+          ],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "15.1354px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "15.1354px",
+              "letterSpacing": "-0.227031px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 30.3,
+          "frameWidthCssPx": 143.7
+        },
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
-      "copyfitClassification": "EXACT"
+      "copyfitClassification": "EXACT",
+      "reviewLayoutFrame": {
+        "x": 199.24480095339118,
+        "y": 607.3975915982857,
+        "width": 100.03013117698409,
+        "height": 22.918973907180455,
+        "total": 100.03013117698409,
+        "totalHeight": 22.918973907180455,
+        "rotation": 0,
+        "textAlign": "left",
+        "lineHeight": 1,
+        "lineHeightMode": "source"
+      },
+      "copyfitMeasurementsByZoom": {
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 102,
+            "pdfDocumentPageIndex": 101,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              199.24480095339118,
+              607.3975915982857,
+              299.27493213037525,
+              630.3165655054661
+            ],
+            "extractedPdfTextVisualRows": 2,
+            "visualRowBaselinesPt": [
+              616.611,
+              627.611
+            ],
+            "spans": 2,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_102_block_14__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 2,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              508.25,
+              515.81
+            ],
+            "visualRowIntervalsPt": [
+              9.99
+            ],
+            "pageScaleCssPxPerPt": 0.7567690873341558,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "7.56769px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "7.56769px",
+                "letterSpacing": "-0.113515px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 15.1,
+            "frameWidthCssPx": 71.8
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        },
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 2,
+          "pageRendererVisualLineCount": 2,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 102,
+            "pdfDocumentPageIndex": 101,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              199.24480095339118,
+              607.3975915982857,
+              299.27493213037525,
+              630.3165655054661
+            ],
+            "extractedPdfTextVisualRows": 2,
+            "visualRowBaselinesPt": [
+              616.611,
+              627.611
+            ],
+            "spans": 2,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 2
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_102_block_14__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 2,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 2,
+            "visualRowTopsCssPx": [
+              942.91,
+              958.05
+            ],
+            "visualRowIntervalsPt": [
+              10
+            ],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "15.1354px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 30.3,
+            "frameWidthCssPx": 143.7
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
+      }
     }
   ],
   "note": "Copyfit V3 revision: PT-BR matches the source line count (2/2 EXACT), but strict source-frame containment fails at both zooms. Keep the full candidate available in the review panel, blank the rejected unit only in the diagnostic PT-BR Viewer, and retain the open DTP exception.",
@@ -350,5 +570,14 @@
       "date": "2026-10-17",
       "summary": "Fresh live Viewer check confirmed EXACT 2/2 at 100% and 200%, but strict frame-overrun measurement fails at both scales; independent critical review confirmed it remains blocked by DTP."
     }
-  ]
+  ],
+  "revisionReconciliation": {
+    "date": "2026-11-20",
+    "publishedRecords": 1,
+    "copyfit100Percent": "EXACT",
+    "copyfit200Percent": "EXACT",
+    "priorPublicationPreservedInHistory": true,
+    "endpoint": "/api/translation-review/approve",
+    "notes": "A revisão recebeu moldura PT-BR com 5,1 pt adicionais à direita para conter a tinta sem colisão, preservando as duas linhas do OG. Reconciliada via /translation-review/approve e Copyfit V3 EXACT em 100% e 200%."
+  }
 }
