@@ -20,6 +20,14 @@ Este guia reúne padrões recorrentes que já foram comparados ao PDF-fonte e co
 
 **Caso verificado na p.98 (2026-11-20):** as regras de Poppet e Tentacle estavam concentradas em dois blocos grandes. O cabeçalho “Combatant Token rule exceptions” e cada bullet tinham âncoras próprias no OG, mas os bullets separados continuavam nos Y antigos quando o parágrafo em PT-BR refluía; isso criava um vão grande sob o cabeçalho. Foram definidas unidades-filhas para cada parágrafo, título e bullet, com o marcador e o texto de cada bullet na mesma unidade. As 14 candidatas da proposta v4 e as cinco unidades das propostas ativas restantes ficaram EXACT em 100% e 200%; a exportação imutável verificou os 19 alvos, e Viewer/print/PDF raster não mostram o vão, clipping ou colisões. A tradução-pai aprovada continua preservada como fallback no Payload; as unidades novas aguardam revisão editorial.
 
+## Linha vazia fonte desloca prosa ou faz células de tabela invadirem a coluna vizinha
+
+**Sintoma:** texto PT-BR começa embaixo do marcador de custo ou invade outra célula, embora a linha visível do OG comece em outra coluna. Em tabelas, duas unidades podem até compartilhar o mesmo `lineId` de origem.
+
+**Como confirmar:** confira `field.lineIds`, o X da tinta visível no PDF e o corredor real de cada célula. Uma linha fonte vazia pode ter bbox no espaço do símbolo e deslocar a moldura; não use esse X como início da prosa. Abra o Viewer normal e o PDF persistido, pois uma proposta isolada pode esconder o problema.
+
+**Correção verificada na p.96:** as células das Tabelas 6–8 foram separadas por linha/coluna; cada linha da Tabela 8 agora pertence a três unidades sem sobreposição. Molduras PT-BR locais iniciam as descrições após os símbolos de custo e ampliam a linha curta ESPECIAL até o limite da coluna. Os seis alvos ajustados foram reavaliados em 100% e 200% (EXACT), e o Viewer/PDF persistidos foram comparados ao OG. No renderer atual, moldura local salva em `layout-frames` é necessária: editar somente `data.bbox` ou a proposta não garante a geometria do Viewer/export. O fundo da p.96 está limpo; não se deve mascarar nem reconstruir texto da tabela como overlay.
+
 ## Capturar rapidamente uma página sem o texto editável
 
 Para inspecionar o fundo e a arte da página sem as unidades de texto do Payload, use:

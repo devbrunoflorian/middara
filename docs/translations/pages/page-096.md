@@ -1,13 +1,12 @@
 # Página 96 — referência de ações, terrenos e encontros
 
-- **Estado:** proposta parcial revisada em 20/11/2026; não publicada nem aprovada editorialmente.
-- **Cobertura:** as propostas existentes e as novas unidades de tabela somam 58 candidatas. Todas ficaram EXACT no Copyfit V3 em 100% e 200%.
-- **Estrutura:** foram criadas 11 unidades para cabeçalhos das Tabelas 6–8 e 18 unidades para as células da Tabela 8. Cada descrição e rótulo usa a moldura da própria célula, medida na grade do PDF OG.
-- **Recuos e alinhamento:** três caixas da Tabela 6 e os dois parágrafos de Esquiva começavam na coluna do custo SP (X=137,74 pt), embora a prosa-fonte começasse em X=162,19 pt. Cinco frames locais alinham a prosa à coluna de Efeito. O preview exportado não mostra texto sobre os símbolos SP.
-- **Símbolos inline:** 12 marcadores em texto foram normalizados para `[[symbol:<id>]]`; nove segmentos monocromáticos receberam a cor de tinta `#231f20` do OG. Os símbolos agora aparecem pretos no Viewer e no PDF, em vez de quadrados brancos, sem alterar o Copyfit.
-- **Copyfit:** 58/58 candidatas EXACT em 100% e 200%; a contagem de linhas coincide com o PDF-fonte. Os rótulos `Efeito (fichas quadradas: HASTE)` e `Habilidade (fichas redondas: HEAL)` cabem em uma linha, preservando a hierarquia de fonte e sem comprimir a tipografia.
-- **Glossário e prosa:** os nomes impressos `Combatant Loot Deck` e `Combatant Loot Cards` permanecem em inglês. Nesta página, estados das cartas aparecem como “Cartas Exaustas” e “Cartas Viradas”; `Token → Ficha`, `Stamina Points → Pontos de Stamina`, `Counter → Revide`, `Movement Points → Pontos de Movimento` e `Special Encounter Rules → Regras Especiais de Encontro` seguem as decisões documentadas. A flexão “exaustas/exaustos” é local, não uma nova decisão global.
-- **Exportação:** snapshot imutável passou `verifiedTranslationRecords=true` e `pdfVerification=true`; página de 820,346 × 820,346 pt. OG, Viewer PT-BR e print foram comparados, com atenção às cinco molduras deslocadas e às 18 células da Tabela 8.
-- **Evidência local:** `tmp/qa-p096-2026-11-20/p096-og.png`, `p096-export-viewer.png`, `p096-export-print.png`, `p096-pt-BR-preview.pdf` e `p096-export-metrics.json`.
-- **Pendente:** revisão editorial e publicação pelo fluxo de revisão. O snapshot é apenas uma prova de proposta e não alterou o Payload.
+- **Estado:** tradução publicada e aprovada; 58/58 revisões ativas da página estão aprovadas.
+- **Cobertura:** as unidades de prosa, cabeçalhos e tabelas foram traduzidas. Cartas, componentes e nomes impressos na arte permanecem em inglês, conforme a decisão do projeto.
+- **Estrutura:** as linhas das Tabelas 6–8 usam unidades editoriais próprias. Nas 18 células da Tabela 8, cada unidade ocupa uma linha e uma coluna fonte, sem compartilhar linhas com a célula vizinha.
+- **Recuos e alinhamento:** três descrições da Tabela 6, os dois parágrafos de Esquiva e o rótulo ESPECIAL da Tabela 7 usam molduras PT-BR locais salvas no Payload. As descrições começam na coluna do efeito, depois do custo SP; ESPECIAL cabe em uma linha.
+- **Símbolos inline:** 12 marcadores textuais usam `[[symbol:<id>]]`; os nove segmentos monocromáticos mantêm a tinta `#231f20` do OG.
+- **Copyfit:** 58/58 unidades estavam EXACT em 100% e 200%. Após os ajustes de moldura, as seis unidades afetadas foram reavaliadas em 100% e 200%: todas EXACT, com contagens 1/1, 2/2, 1/1, 3/3, 1/1 e 1/1.
+- **Glossário e prosa:** `Token → Ficha`, `Stamina Points → Pontos de Stamina`, `Counter → Revide`, `Movement Points → Pontos de Movimento` e `Special Encounter Rules → Regras Especiais de Encontro` seguem decisões documentadas. `Combatant Loot Deck` e `Combatant Loot Cards` continuam em inglês por serem nomes de componentes.
+- **Exportação:** Viewer PT-BR e PDF persistido foram comparados ao OG. Export: `verifiedTranslationRecords=true`, `pdfVerification=true`; 58 alvos de tradução, 12 símbolos e 24 imagens. A inspeção visual confirmou que os custos SP não colidem com a prosa, a Tabela 7 não quebra sua linha curta e as células da Tabela 8 não se sobrepõem.
+- **Evidência local:** `tmp/qa-p096-2026-11-20/p096-og.png`, `p096-current-viewer.png`, `p096-persisted-viewer.png`, `p096-persisted-print.png`, `p096-persisted-ptbr.pdf` e `p096-persisted-metrics.json`.
 - **Fonte:** [transcrição do PDF OG](../source-pages/page-096.md). A transcrição não substitui a comparação visual.
