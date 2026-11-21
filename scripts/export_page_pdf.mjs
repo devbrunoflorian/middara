@@ -217,6 +217,10 @@ const config = argsFrom(process.argv.slice(2));
 const immutableSnapshot = config.snapshot
   ? JSON.parse(await readFile(config.snapshot, 'utf8'))
   : null;
+const snapshotDir = immutableSnapshot ? dirname(config.snapshot) : null;
+const pageAssetSource = immutableSnapshot
+  ? { kind: 'snapshot', path: config.snapshot }
+  : { kind: 'viewer', origin: normalizedOrigin(config.baseUrl) };
 console.log('[page-export] requested environment', JSON.stringify({
   viewerUrl: config.baseUrl,
   translationApiOrigin: normalizedOrigin(config.apiUrl),
@@ -224,9 +228,9 @@ console.log('[page-export] requested environment', JSON.stringify({
   language: config.language,
   profile: config.profile,
   immutableSnapshot: !!immutableSnapshot,
+  pageAssetSource,
 }, null, 2));
 const pageId = String(config.page).padStart(3, '0');
-const snapshotDir = immutableSnapshot ? dirname(config.snapshot) : null;
 const pageDataPath = immutableSnapshot
   ? resolve(snapshotDir, 'pages', `page_${pageId}`, `page_${pageId}_dom.json`)
   : resolve(`apps/web/public/pages/page_${pageId}/page_${pageId}_dom.json`);
@@ -829,6 +833,7 @@ try {
     await mkdir(dirname(resolve(config.metricsOutput)), { recursive: true });
     await writeFile(resolve(config.metricsOutput), JSON.stringify({
       page: config.page, language: config.language, betaArtworkPendingLabels,
+      pageAssetSource,
       viewer: viewerMetrics, print: printMetrics,
     }, null, 2));
   }
