@@ -420,10 +420,10 @@ try {
     const actual = document.querySelector('.app-container')?.getAttribute('data-ptbr-diagnostic-mode') ?? null;
     return actual === (expected ? 'blank-untranslated' : null);
   }, strictDiagnosticMode);
-  const languageSelect = page.locator('select.language-select');
-  await languageSelect.waitFor({ state: 'visible' });
-  await page.locator('select.language-select').selectOption('pt-BR');
-  await page.waitForFunction(() => document.querySelector('select.language-select')?.value === 'pt-BR');
+  const ptBrLanguageButton = page.locator('button[aria-label="Português (Brasil)"]');
+  await ptBrLanguageButton.waitFor({ state: 'visible' });
+  await ptBrLanguageButton.click();
+  await page.waitForFunction(() => document.querySelector('button[aria-label="Português (Brasil)"]')?.getAttribute('aria-pressed') === 'true');
   await page.waitForFunction(() => document.querySelector('.app-container') !== null);
   await page.locator('button[title="Fit to Screen"], button[title*="Ajustar"], button:has(svg.lucide-maximize)').first().click();
   await page.waitForTimeout(250);
@@ -445,6 +445,8 @@ try {
         && image?.getAttribute('src')?.includes(`/page_${String(expected).padStart(3, '0')}/background.webp`)
         && image.naturalWidth > 0;
     }, pageNo, { timeout: 60000 });
+    await page.waitForFunction(() => document.querySelector('.page-container')
+      ?.getAttribute('data-translation-overrides-language') === 'pt-BR', undefined, { timeout: 60000 });
     if (strictDiagnosticMode) {
       await page.waitForFunction(() => {
         const page = document.querySelector('.page-container');
@@ -454,8 +456,8 @@ try {
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(120);
 
-    const actualLocale = await languageSelect.inputValue();
-    if (actualLocale !== 'pt-BR') throw new Error(`p.${pageNo}: viewer is in ${actualLocale}.`);
+    const isPtBr = await ptBrLanguageButton.getAttribute('aria-pressed');
+    if (isPtBr !== 'true') throw new Error(`p.${pageNo}: viewer is not in PT-BR.`);
     if (await page.locator('.app-container').evaluate(element => element.classList.contains('admin-mode'))) {
       throw new Error(`p.${pageNo}: viewer unexpectedly remained in Admin mode.`);
     }
@@ -486,7 +488,7 @@ try {
       if (coverage < 0.45) invisibleTranslations.push(String(record.spanKey));
     }
 
-    await page.locator('button[title="Enter Admin"]').click();
+    await page.locator('button.admin-toggle').click();
     await page.waitForFunction(() => document.querySelector('.app-container')?.classList.contains('admin-mode'));
     await page.waitForTimeout(180);
     const diagnostics = await page.evaluate(() => {
@@ -520,7 +522,7 @@ try {
         renderedDiagnosticBlankNodes: root?.querySelectorAll('[data-translation-review-diagnostic-blank]').length ?? 0,
       };
     });
-    await page.locator('button[title="Exit Admin"]').click();
+    await page.locator('button.admin-toggle').click();
     await page.waitForFunction(() => !document.querySelector('.app-container')?.classList.contains('admin-mode'));
     if (!diagnostics.pageImageReady) throw new Error(`p.${pageNo}: background image not ready in viewer.`);
 
@@ -720,7 +722,7 @@ try {
 
 await mkdir(dirname(config.output), { recursive: true });
 const mergeCode = String.raw`
-import json, sys
+import json, re, sys
 from pathlib import Path
 import fitz
 source_path, page_dir, output_path, report_path = map(Path, sys.argv[1:5])
@@ -741,11 +743,36 @@ for number in range(1, 103):
     page_reports.append({'page':number,'mediaBox':list(src.mediabox),'cropBox':list(src.cropbox),
       'bleedBox':list(src.bleedbox),'trimBox':list(src.trimbox),'artBox':list(src.artbox)})
     exported.close()
+toc_page=full[2]
+heading_rows=[]
+number_rows=[]
+for block in toc_page.get_text('dict').get('blocks',[]):
+    if block.get('type')!=0: continue
+    for line in block.get('lines',[]):
+        text=''.join(span.get('text','') for span in line.get('spans',[])).strip()
+        if not text: continue
+        x,y=line['bbox'][0],line['bbox'][1]
+        if y<100 or y>780: continue
+        if x<240: heading_rows.append({'x':x,'y':y,'text':text})
+        elif x>600 and re.fullmatch(r'\d{1,3}',text): number_rows.append({'y':y,'page':int(text)})
+toc=[]
+for heading in heading_rows:
+    nearest=min(number_rows,key=lambda row:abs(row['y']-heading['y']),default=None)
+    if not nearest or abs(nearest['y']-heading['y'])>3.5: continue
+    target=nearest['page']
+    if not 1<=target<=102: continue
+    toc.append([1 if heading['x']<160 else 2,heading['text'],target])
+if len(toc)<30: raise SystemExit(f'Expected at least 30 TOC bookmarks from page 3, found {len(toc)}')
+full.set_toc(toc)
 report=json.loads(report_path.read_text(encoding='utf-8'))
 if report.get('beta'):
     full.set_metadata({'title': 'Middara Rulebook PT-BR — BETA' + (' Reader (EN source preserved)' if report.get('beta', {}).get('originalEnglishSourcePreservedForUntranslatedUnits') else ' Diagnostic'),
       'subject': 'Incomplete provisional preview. Proposals are not editorial approvals; untranslated English source is explicitly preserved only in reader mode.',
       'keywords': 'Middara, PT-BR, BETA, provisional translation, incomplete'})
+else:
+    full.set_metadata({'title': 'Middara Rulebook — PT-BR (fan translation)',
+      'subject': 'Community fan translation of the Middara rulebook.',
+      'keywords': 'Middara, rulebook, PT-BR, community translation'})
 full.save(output_path, garbage=4, deflate=True, deflate_images=True, deflate_fonts=True)
 full.close()
 check = fitz.open(output_path)
@@ -761,8 +788,10 @@ report['finalPdf']=str(output_path.resolve())
 report['finalPageCount']=102
 report['pageBoxesVerified']=True
 report['pageBoxes']=page_reports
+report['bookmarksCount']=len(toc)
+report['bookmarksSourcePage']=3
 report_path.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-print(json.dumps({'output':str(output_path.resolve()),'pageCount':102,'pageBoxesVerified':True},ensure_ascii=False))
+print(json.dumps({'output':str(output_path.resolve()),'pageCount':102,'pageBoxesVerified':True,'bookmarks':len(toc)},ensure_ascii=False))
 `;
 const reportPath = resolve(config.workDir, 'viewer-export-report.json');
 await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n', 'utf8');

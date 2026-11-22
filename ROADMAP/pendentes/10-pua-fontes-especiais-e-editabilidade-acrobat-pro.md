@@ -1,10 +1,19 @@
 # Projeto Pendente: Caracteres PUA, Fontes Especiais e Editabilidade no Adobe Acrobat Pro
 
-- **Status:** BACKLOG / INVESTIGAÇÃO ARQUITETURAL E COMPATIBILIDADE
+- **Status:** INVESTIGAÇÃO INICIADA / TESTE NO ACROBAT PRO PENDENTE
 - **Prioridade:** ALTA (Impacto na Integridade Textual e na Qualidade da Publicação Final em PDF)
 - **Escopo:** Investigação técnica ponta a ponta sobre caracteres PUA (*Private Use Area*), fontes simbólicas, causas da ocorrência de quadradinhos (*tofu*) e requisitos para editabilidade profissional do PDF exportado no Adobe Acrobat Pro
 - **Área:** Engenharia de Fontes / Codificação Unicode / Pipeline de PDF / Compatibilidade DTP
 - **Diretriz Mandatória:** *Não implementar correções agora. Não modificar o renderer, fontes existentes, tabelas de símbolos, esquemas do Payload ou exportador. O objetivo é documentar formalmente o problema, mapear hipóteses e desenhar a estratégia de compatibilidade.*
+
+---
+
+## Evidência inicial do PDF comunitário (22/11/2026)
+
+- O PDF final tem 102 páginas e 40 bookmarks. A extração em lote encontrou 324.468 caracteres, zero `U+FFFD` e zero referências de fontes sem `/ToUnicode`.
+- O levantamento encontrou 800 referências `Type3` e 34 `Type0` no conjunto de páginas; são referências por página, não uma contagem de famílias únicas. Nenhuma página tem widget de formulário.
+- Isso confirma texto extraível/pesquisável, não a capacidade de editar texto e refluir parágrafos pelo Acrobat. O Acrobat Pro não está instalado neste ambiente, então o Nível 3 continua sem verificação.
+- Próximo passo: testar uma cópia do PDF no Acrobat Pro em amostras de texto puro, texto misto, símbolo inline e acentuação PT-BR. Não alterar o renderer ou as fontes até registrar o resultado real do Acrobat.
 
 ---
 
@@ -164,7 +173,7 @@ Quando a investigação for retomada, a validação técnica deverá ser executa
 ## 7. Dependências e Posição no Backlog
 
 - **Dependências Técnicas:**
-  - [Projeto Pendente 04: Exportador do Livro Completo em PDF](04-exportador-do-livro-completo-em-pdf.md).
+  - [Projeto Concluído 11: Exportador do Livro Completo em PDF](../concluidos/11-exportador-do-livro-completo-em-pdf.md).
   - [Projeto Pendente 05: Saída para Gráfica (CMYK, PDF/X e Preflight)](05-saida-para-grafica-cmyk-pdfx-preflight.md).
 - **Prioridade e Momento de Execução:**
   - Esta investigação deve ser iniciada **após a estabilização do motor de exportação de PDF mestre**, mas **antes da certificação final de impressão e distribuição digital do livro**.
