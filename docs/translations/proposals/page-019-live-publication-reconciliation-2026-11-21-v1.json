@@ -2,9 +2,9 @@
   "proposalId": "page-019-full-page-proposal-2026-10-16-v2",
   "version": "2",
   "title": "p.19 live publication reconciliation and p.79 title reference correction",
-  "status": "pending_canonical_copyfit_and_reviewer_update",
+  "status": "published_and_verified_2026-11-23",
   "page": 19,
-  "scope": "Reconcile the two existing approved p.19 reviews to their current live PT-BR publications; update the Loot LVL label and page-79 cross-reference to match the source heading and preserve component terminology.",
+  "scope": "Reconciliar as duas unidades IMPORTANTE publicadas na p.19 com o conteúdo vivo. Nesta revisão, somente o título da referência da p.79 muda para corresponder ao título aprovado; Loot LVL permanece como nome do campo impresso nas cartas.",
   "candidateCount": 2,
   "candidates": [
     {
@@ -494,7 +494,7 @@
       "sourceBlockId": "block_24",
       "label": "block_24",
       "sourceText": "IMPORTANT: Combatants have a Loot LVL printed on the front and back of them. When instructed to Spawn Combatants during an Encounter, players always Spawn Combatants with the Loot Level listed on their cards that corresponds with the Loot Level of the current Encounter. See Alternate, Variations, and Loot LVL Pg. 79.",
-      "proposalText": "IMPORTANTE: Os Combatentes têm o Loot LVL impresso na frente e no verso. Quando uma instrução mandar fazer surgir Combatentes durante um Encontro, use sempre cartas cujo Nível de Saque corresponda ao Nível de Saque do Encontro atual. Veja Alternativas, Variações e Loot LVL, pág. 79.",
+      "proposalText": "IMPORTANTE: Os Combatentes têm o Loot LVL impresso na frente e no verso. Quando uma instrução mandar fazer surgir Combatentes durante um Encontro, use sempre cartas cujo Nível de Saque corresponda ao Nível de Saque do Encontro atual. Veja Alternativas, Variações e Nível de Saque, pág. 79.",
       "spanKey": "page_19_block_6__pt-BR",
       "language": "pt-BR",
       "data": {
@@ -582,7 +582,7 @@
             "disableLigatures": true
           },
           {
-            "text": "Alternativas, Variações e Loot LVL",
+            "text": "Alternativas, Variações e Nível de Saque",
             "font": "OptimaLTStd-BoldItalic",
             "size": 10,
             "color": "#231f20",
@@ -618,9 +618,7 @@
       "semanticSymbols": [
         "tag.important.icon"
       ],
-      "pendingTerms": [
-        "Loot LVL retained exactly as the p.79 heading / printed stat label; Loot Level remains local prose as Nível de Saque."
-      ],
+      "pendingTerms": [],
       "sourceLineCount": 6,
       "copyfitMeasurementsByZoom": {
         "100%": {
@@ -996,7 +994,9 @@
           "print",
           "PDF"
         ]
-      }
+      },
+      "technicalStatus": "verified_copyfit_v3_live_viewer_visual_rows",
+      "editorialStatus": "Published through the official Payload approval endpoint and compared with the OG and one-page PDF on 2026-11-23."
     }
   ]
 }
