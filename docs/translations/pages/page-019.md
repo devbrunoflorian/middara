@@ -1,5 +1,7 @@
 # Página 019 — Lendo Encontros (continuação)
 
+- **Rechecagem de copyfit (2026-11-23):** a introdução sob “Surgimento” tem 6 linhas no OG e 6 no PT-BR; o exemplo tem 2/2. A página já iguala a contagem de linhas da fonte nesses dois trechos, então não precisa crescer artificialmente.
+
 - **Cobertura PT-BR:** o Payload contém 25 registros de tradução da página. Há 28 revisões ativas aprovadas, incluindo quatro propostas antigas para rótulos de tokens que continuam como arte original; as oito duplicatas da proposta v3 (reviews #1525–1532) foram arquivadas. Não há revisão pendente ativa nesta página.
 - **Comparação visual:** a página OG foi conferida com Viewer, print e export PT-BR em 21/11/2026. A composição em duas colunas, os quatro tokens EXIT coloridos e a arte de componentes foram preservados. O exemplo subordinado à lista continua alinhado ao corpo do item, com as linhas de continuação no mesmo recuo. As três caixas IMPORTANTE permanecem unidades separadas, com o ícone semântico inline.
 - **Referências e copyfit:** a review #36 está sincronizada com a tradução #366 (4/4 linhas); a review #37 está sincronizada com a tradução #367 (5/5 linhas). Copyfit V3 confirmou ambas como EXACT a 100% e 200%.

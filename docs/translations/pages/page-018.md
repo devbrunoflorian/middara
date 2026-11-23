@@ -1,5 +1,7 @@
 # Página 018 — Lendo Encontros (continuação)
 
+- **Rechecagem dos recuos (2026-11-23):** os quatro itens numerados foram conferidos contra o OG no PDF final. Todos mantêm o marcador em X=86,173 pt e o corpo, inclusive linhas de continuação, em X=104,173 pt (avanço francês de 18 pt); o item 4 continua em 2/2 linhas. Não encontrei o problema de recuo mostrado nas capturas antigas.
+
 - **OG:** página inteira comparada ao PDF oficial, Viewer PT-BR e print em 21/11/2026. Todos os 29 alvos PT-BR estão presentes no Viewer e no export.
 - **Recuo e copyfit:** no item 4 da lista, o marcador fica em X=86,173 pt e o corpo/continuação em X=104,173 pt, mantendo avanço francês de 18 pt. Copyfit V3 confirmou 2/2 linhas em 100% e 200%; `pág. 38` permanece na segunda linha, como no OG. O parágrafo seguinte começa em Y=411,58 pt sem colisão.
 - **Exemplo depois do bullet:** o parágrafo “Exemplo: se uma Ficha de Saque...” volta à margem da coluna no OG e no PT-BR; ele é uma unidade separada, não continuação hierárquica do bullet “Fichas de Encontro”. Não aplicar o recuo francês do bullet a esse exemplo.
