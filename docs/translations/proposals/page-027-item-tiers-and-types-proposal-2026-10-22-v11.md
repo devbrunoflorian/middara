@@ -40,9 +40,11 @@ A verificação técnica anterior de 27/30 candidatos e seus recibos permanece c
 
 **EN:** IMPORTANT: IMPORTANT: Many Items in Middara are double-sided but do not contain the DOUBLE Tag! Only Items with the DOUBLE Tag may be treated as if they are two different Items. Players should be careful not to confuse DOUBLE Tag Items with Items that have the ➤FLIP Tag.
 
-**PT-BR proposto:** IMPORTANTE: Muitos Itens em Middara têm dois lados, mas não a Tag DOUBLE! Só Itens com a Tag DOUBLE podem ser tratados como dois Itens diferentes. Cuidado para não confundir Itens com Tag DOUBLE com Itens com a Tag VIRAR.
+**PT-BR aprovado:** IMPORTANTE: Muitos Itens em Middara têm dois lados, mas não a Tag DOUBLE! Só Itens com a Tag DOUBLE podem ser tratados como dois Itens diferentes. Cuidado para não confundir Itens com Tag DOUBLE com Itens com a Tag FLIP.
 
-**Revisão pendente:** DOUBLE, FLIP/VIRAR e Item aguardam validação no glossário; o rótulo IMPORTANTE e os dois símbolos seguem a proposta técnica reutilizada da validação anterior.
+**Publicação e verificação (2026-11-23):** review 1562 / translation 426 atualizadas pelo Reviewer oficial; a publicação anterior permanece no histórico. Copyfit V3 EXACT 4/4 em 100% e 200%. O export temporário de uma página passou `verifiedTranslationRecords=true` e `pdfVerification=true`; OG, Viewer e PDF foram comparados e os dois símbolos semânticos permanecem renderizados. O PDF temporário foi removido após a conferência.
+
+**Escopo das Tags:** os nomes impressos DOUBLE e FLIP permanecem em inglês; o verbo de regra correspondente continua traduzido como virar/virado. O símbolo de seta permanece inline como `[[symbol:marker.arrow]]`.
 
 ### block_14 / page_27_block_3
 
