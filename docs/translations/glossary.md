@@ -29,6 +29,11 @@
 | **Venture Forth** | Aventurar-se |
 | **Story Round** | Rodada de História |
 | **Stamina Points** | Pontos de Stamina |
+| **Damage / DMG** *(prosa de regras)* | Dano *(expandir `DMG` na tradução)* |
+| **Magic Damage / MAGIC DMG** | Dano Mágico |
+| **Physical Damage / PHYSICAL DMG** | Dano Físico |
+| **Irreducible Damage / IRREDUCIBLE DMG** | Dano Irredutível |
+| **Damage token(s)** *(aplicando `Token → Ficha`)* | Ficha(s) de Dano |
 | **White Valts** | Criptas Brancas |
 | **Adventure Mechanic** | Mecânica de Aventura |
 | **Actions** | Ações |
