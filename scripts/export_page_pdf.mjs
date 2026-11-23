@@ -693,6 +693,17 @@ try {
         rect: relativeRect(element),
       })),
       translationTargets,
+      contentsRowOverflows: [...container.querySelectorAll('.contents-label-field')].flatMap(field => {
+        const flow = field.querySelector('.contents-row-flow[data-overflow="true"]');
+        if (!flow) return [];
+        const text = flow.querySelector('.contents-row-text');
+        return [{
+          unitId: field.getAttribute('data-rendered-translation-key') ?? field.getAttribute('data-editable-unit-key'),
+          text: text?.textContent?.trim() ?? '',
+          availableWidthPx: text?.clientWidth ?? 0,
+          requiredWidthPx: text?.scrollWidth ?? 0,
+        }];
+      }),
       symbols: [...container.querySelectorAll('[data-symbol-id], [data-source-symbol-id]')].map(element => ({
         id: element.getAttribute('data-symbol-id') ?? element.getAttribute('data-source-symbol-id'),
         tag: element.tagName.toLowerCase(), rect: relativeRect(element), style: styleFor(element),
@@ -747,6 +758,9 @@ try {
     return metrics;
   };
   const viewerMetrics = await capturePageMetrics();
+  if (viewerMetrics.contentsRowOverflows.length) {
+    throw new Error(`Viewer contents rows overflow their measured frames: ${JSON.stringify(viewerMetrics.contentsRowOverflows)}`);
+  }
   const viewerStructure = await page.locator('.page-container').evaluate(container => ({
     sourceGeometryLines: container.querySelectorAll('[data-source-line-id]').length,
     semanticSymbols: container.querySelectorAll('svg[data-symbol-id], svg[data-source-symbol-id]').length,
@@ -823,6 +837,9 @@ try {
   await page.waitForTimeout(500);
   await page.evaluate(() => document.fonts.ready);
   const printMetrics = await capturePageMetrics();
+  if (printMetrics.contentsRowOverflows.length) {
+    throw new Error(`Print contents rows overflow their measured frames: ${JSON.stringify(printMetrics.contentsRowOverflows)}`);
+  }
   if (config.printScreenshot) {
     await mkdir(dirname(resolve(config.printScreenshot)), { recursive: true });
     await page.locator('.page-container').screenshot({

@@ -18,6 +18,9 @@ export interface ContentsRowDefinition {
   sourceReferencePtBr?: string;
   /** PT-BR-only horizontal adjustment for the source reference's measured text anchor. */
   sourceReferencePtBrShiftPt?: number;
+  /** Page-local indexes can reflow labels, leaders, and references as one editable row. */
+  dynamicReferenceLayout?: boolean;
+  referenceTextPtBr?: string;
   leader: { bbox: number[]; yPt: number; periodPt: number; widthPt: number; style?: 'dotted' | 'solid' | 'none' };
   mask: { url: string; bbox: number[] };
 }
@@ -36,8 +39,11 @@ export function contentsRowLine(block: Block, row: ContentsRowDefinition) {
 }
 export const CONTENTS_LEADER_GAP_PT = 3;
 
-/** The label's frame ends before the fixed page number. */
+/** The row frame ends at the reference column; legacy rows stop before its fixed number. */
 export function contentsLabelWidth(row: ContentsRowDefinition) {
+  if (row.dynamicReferenceLayout && row.numberBBox) {
+    return Math.max(0, row.numberBBox[2] - row.labelBBox[0]);
+  }
   if (row.labelWidthPt !== undefined) return Math.max(0, row.labelWidthPt);
   if (!row.numberBBox) return Math.max(0, row.labelBBox[2] - row.labelBBox[0]);
   return Math.max(0, row.numberBBox[0] - row.labelBBox[0] - CONTENTS_LEADER_GAP_PT);

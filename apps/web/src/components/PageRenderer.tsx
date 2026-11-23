@@ -3190,7 +3190,23 @@ function ContentsLabelBlock({
     };
     const attributes = adminGeometryAttributes(isAdmin, key, { x, y, width, height, rotation: 0 });
     const select = () => {
-      if (isAdmin) onBlockClick({ ...extractCreditFieldInfo(key, block, field), singleLine: true, editorContext: 'typographic-field' });
+        if (isAdmin) {
+          const selected = extractCreditFieldInfo(key, block, field);
+          const semanticSourceText = row.sourceText;
+          onBlockClick({
+            ...selected,
+            ...(semanticSourceText ? {
+              // A reflowed index row uses another source line for its target geometry;
+              // keep the editor's source label bound to the semantic translation key.
+              text: semanticSourceText,
+              sourceSegments: selected.sourceSegments?.length
+                ? [{ ...selected.sourceSegments[0], text: semanticSourceText }]
+                : selected.sourceSegments,
+            } : {}),
+            singleLine: true,
+            editorContext: 'typographic-field',
+          });
+        }
       else if (row.targetPage !== undefined) onNavigate?.(row.targetPage);
     };
     const click = (event: React.MouseEvent) => {
@@ -3219,7 +3235,8 @@ function ContentsLabelBlock({
           }
         }}>
         {override ? <ContentsRowFlow row={row} scale={scale} sourceFontSize={line.spans.find(span => span.text.trim())?.size ?? override.segments[0]?.size ?? 12}
-          isAdmin={isAdmin} text={override.segments.map(run => run.text).join('')}>
+          isAdmin={isAdmin} text={override.segments.map(run => run.text).join('')}
+          referenceText={row.dynamicReferenceLayout ? row.referenceTextPtBr : undefined}>
           {renderCreditSegments(override.segments.map(run => ({ ...run, text: run.text.replace(/[\r\n]+/g, ' ') })), undefined, language, scale, isAdmin, 'nowrap')}
         </ContentsRowFlow> : diagnosticBlank ? null : overlaySource ? null : <div style={{ pointerEvents: 'none' }}><LineRenderer line={line} scale={scale} blockOriginX={x} blockOriginY={y}
           isAdmin={false} isSelected={false} language={language} onClick={() => {}} /></div>}

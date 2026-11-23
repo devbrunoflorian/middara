@@ -7,11 +7,12 @@ interface ContentsRowFlowProps {
   sourceFontSize: number;
   isAdmin: boolean;
   text: string;
+  referenceText?: string;
   children?: ReactNode;
 }
 
-/** Text and leader share one bounded line; the page reference is rendered separately. */
-export function ContentsRowFlow({ row, scale, sourceFontSize, isAdmin, text, children }: ContentsRowFlowProps) {
+/** Text, leader, and an optional page reference share one bounded line. */
+export function ContentsRowFlow({ row, scale, sourceFontSize, isAdmin, text, referenceText, children }: ContentsRowFlowProps) {
   const textRef = useRef<HTMLSpanElement>(null);
   const [overflow, setOverflow] = useState(false);
   useEffect(() => {
@@ -42,11 +43,15 @@ export function ContentsRowFlow({ row, scale, sourceFontSize, isAdmin, text, chi
     style={{ fontSize: `${sourceFontSize * scale}px` }}>
     <span ref={textRef} className="contents-row-text" title={text}>{children}</span>
     {row.leader.style !== 'none' && <svg className="contents-row-leader" aria-hidden="true"
-      style={{ height, marginInlineStart: CONTENTS_LEADER_GAP_PT * scale }}>
+      style={{ height, marginInlineStart: CONTENTS_LEADER_GAP_PT * scale,
+        marginInlineEnd: referenceText ? CONTENTS_LEADER_GAP_PT * scale : 0 }}>
       <line x1="0" x2="100%" y1={leaderY} y2={leaderY} stroke="#231f20"
         strokeWidth={row.leader.widthPt * scale} strokeLinecap="round"
         strokeDasharray={row.leader.style === 'solid' ? undefined : `0 ${row.leader.periodPt * scale}`} />
     </svg>}
+    {referenceText && <span className="contents-row-reference" aria-label={`página ${referenceText}`}>
+      {referenceText}
+    </span>}
     {isAdmin && overflow && <span className="contents-row-overflow" role="status">
       Texto excede a largura máxima
     </span>}
