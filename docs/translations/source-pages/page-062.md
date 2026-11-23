@@ -1,14 +1,14 @@
 # PDF page 062
 
 > Raw text-line transcript extracted from the official English PDF with PyMuPDF.
-> This is not a semantic paragraph map, an artwork/ghost decision, or an English-fidelity sign-off.
+> This is not a complete semantic paragraph map, an artwork/ghost decision, or an English-fidelity sign-off.
 > Reorder/re-group only after checking the rendered source; keep different font sizes and boxes distinct.
 
 - **PDF page:** 62 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** partial; page-wide semantic and structure review remains pending
+- **English fidelity:** partial OG↔Viewer/print visual comparison on 2026-11-22; not a full sign-off
+- **PT-BR:** partial; one paragraph-structure correction recorded in [page review](../pages/page-062.md); 26 legacy records have no current review receipt
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)

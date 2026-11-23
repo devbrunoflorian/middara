@@ -31,6 +31,7 @@
 | **Stamina Points** | Pontos de Stamina |
 | **White Valts** | Criptas Brancas |
 | **Adventure Mechanic** | Mecânica de Aventura |
+| **Actions** | Ações |
 | **Adventurer Sheet** | Ficha de Aventureiro |
 | **Adventure Sheet** | Folha da Aventura |
 | **Adventurers** | Aventureiros |
@@ -43,15 +44,18 @@
 | **Obstructing Terrain** | Terreno Obstruído |
 | **Dangerous Terrain** | Terreno Perigoso |
 | **Spawn** | Surgir / Faça Surgir |
-| **Skill Check** | Teste de Habilidade |
+| **Skill Check** | Teste de Perícia (plural: Testes de Perícia) |
 | **MAST** | TAHM |
 | **Item Upgrade** | Aprimoramento de Item |
+| **Great Hammer** *(nome impresso de carta; preservar em prosa)* | Great Hammer |
+| **Master Work** *(nome impresso de carta; preservar em prosa)* | Master Work |
 | **White Spires** | Agulhas Brancas |
 | **Grim Deacons** | Diáconos Sombrios |
 | **Demiurge** | Demiurgo |
 | **Gain** *(verbo mecânico; infletir conforme o contexto)* | obter |
 | **Restore** | Restaurar |
 | **Restore Adventurers** | Restaurar Aventureiros |
+| **Re-Equip Action** | Ação de Reequipar |
 | **Draw** | Compre |
 | **UNDERGROUND** | SUBTERRÂNEO |
 | **WILDERNESS** | NATUREZA |
@@ -82,6 +86,9 @@
 | **UNSTOPPABLE** | IMPARÁVEL |
 | **RELENTLESS** | INCANSÁVEL |
 | **CRUSH** | ESMAGAR/ESMAGAMENTO |
+| **Un-Flip** *(verbo)* | desvirar |
+| **Urgency** | Urgência |
+| **Urgency Tokens** | Fichas de Urgência |
 | **Party Stash** | Estoque do Grupo |
 | **Refresh Phase** *(nome da fase)* | Fase de Manutenção |
 | **Exhaust** *(mecânica de Tag/Habilidade)* | Exaustar |
@@ -95,6 +102,7 @@
 | **Movement Value** | Valor de Movimento |
 | **Movement Point(s)** | Ponto(s) de Movimento |
 | **Movement** | Movimento |
+| **Free Attack** | Ataque Livre |
 | **Free Movement** | Movimento Livre |
 | **Diagonal Movement** | Movimento Diagonal |
 | **Adjacent Spaces** | Espaços Adjacentes |
@@ -104,6 +112,10 @@
 
 Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir automaticamente o verbo isolado *refresh* como “manutenção”; avaliar cada ocorrência pelo contexto.
 
+**Decisão do usuário (13/11/2026; Payload ids 92–93):** `Great Hammer` e `Master Work` são nomes impressos em cartas de jogo e devem permanecer em inglês quando citados na prosa traduzida do Rulebook. A proposta histórica `Great Hammer` → “Martelo Grande” (id 51) foi rejeitada e substituída pela decisão 93; não reaplicar “Martelo Grande” nem traduzir `Master Work` como “Obra-Prima”.
+
+**Sincronização com o glossário Payload (21/11/2026):** `Actions` (id 29), `Re-Equip Action` (id 28), `Urgency` (id 22), `Urgency Tokens` (id 20) e `Un-Flip` (id 46) já estavam aprovados no banco e foram adicionados à tabela legível. Os campos `sourceTerm`, `normalizedSourceTerm` e `decisionKey` dos registros 29 e 46 continham, respectivamente, formatação Markdown e uma nota de fluxo coladas ao termo; corrigi apenas esses metadados, mantendo tradução, ocorrências e status aprovados.
+
 **Decisão confirmada pela equipe de tradução (22/10/2026):** `Restore Adventurers` → **Restaurar Aventureiros**, consistente com `Restore` → **Restaurar**. Esta decisão fixa a terminologia do Rulebook; não autoriza modificar arquivos intermediários do Livro de Aventura nem sobrescrever traduções humanas aprovadas.
 
 
@@ -111,7 +123,7 @@ Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir auto
 
 **Decisão do usuário (15/11/2026; Payload `translation-glossary-decisions`):** `Stamina Points` → **Pontos de Stamina**; manter a abreviação impressa `SP`. A escolha vale para prosa de regras e não traduz rótulos impressos em cartas/arte. Na p.59, o usuário manteve “o Combatente ganha a cada turno” como formulação contextual para acumulação recorrente; isso não substitui a decisão geral `Gain` → **obter** nem autoriza “ganhar” como tradução mecânica global. Traduções humanas anteriores com outra forma ficam preservadas até reconciliação contextual.
 
-**Nota contextual da p.57 (17/11/2026):** no callout de Item Único, `draw` descreve retirar uma carta do baralho durante um Encontro, em contraste explícito com comprar o Item na loja. Nesse contexto local, usar **retirar do baralho**; manter **Draw → Compre** na tabela global e não generalizar a exceção para outros contextos.
+**Nota contextual das pp.4 e 57 (22/11/2026):** ao derrotar um Combatente, `draw these cards` na p.4 e `draw`/`pull` no callout de Item Único e nas regras de Saque de Monstro da p.57 descrevem retirar uma carta do baralho, em contraste com comprar um Item na loja. Nesses contextos, usar **retirar do baralho**; manter **Draw → Compre** na tabela global para ocorrências de compra e não generalizar a exceção.
 
 **Nota contextual da p.84 (19/11/2026):** `draw one randomly` descreve selecionar uma carta depois de embaralhar um baralho. Usar localmente **retirem uma ao acaso**, mantendo a distinção entre retirar do baralho e comprar. A forma global **Draw → Compre** não foi alterada.
 
@@ -142,6 +154,10 @@ Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir auto
 **Decisões aprovadas de desbloqueio editorial (05/11/2026, Payload ids 81–91, id 7 e id 67):** `Adventurer Card` → **Ficha de Aventureiro** (id 67 aprovado); `Adventure Sheet` → **Folha da Aventura** (id 7 atualizado por decisão do usuário); `Empower` → **Fortalecer** (id 81 atualizado por decisão do usuário); `Counter` → **Revide**; `Move Action` → **Ação de Movimento**; `Movement Value` → **Valor de Movimento**; `Movement Point(s)` → **Ponto(s) de Movimento**; `Free Movement` → **Movimento Livre**; `Diagonal Movement` → **Movimento Diagonal**; `Adjacent Spaces` → **Espaços Adjacentes**; `Combat Dice` → **Dados de Combate**; `Combat Pool` → **Reserva de Dados de Combate**; `HEAVY` → **PESADO/PESADA**. Estas decisões foram cravadas canonicamente para desbloquear a esteira de aprovação das páginas 13 a 102.
 
 **Decisão de composição (14/11/2026, Payload id 94):** `Loot Token` → **Ficha de Saque** combina as entradas aprovadas `Loot` → **Saque** e `Token` → **Ficha**, seguindo a decisão de reservar “Ficha” para tokens. A distinção vale para a prosa de regras; texto impresso em componentes continua em inglês. Ocorrências aprovadas nas pp.17 e 46.
+
+**Decisão aprovada no Payload (id 18):** `Combatant Loot Deck` → **Baralho de Saque de Combatentes**. Usar essa forma ao mencionar o baralho na prosa e em títulos editáveis do manual; o texto impresso nas cartas e na arte dos componentes permanece em inglês.
+
+**Reconciliação terminológica (22/11/2026, Payload id 97):** `Free Attack` → **Ataque Livre**. O OG distingue o nome `Free Attack` dos `Break Attacks`, que a p.42 descreve explicitamente como gratuitos e sem custo de SP. Manter a distinção; não presumir que todo `Free Attack` não custa SP. O uso já aprovado nas pp.58 e 61 é a referência. As formas antigas das pp.59 e 73 foram atualizadas e verificadas no Viewer/print.
 
 ## Decisões complementares registradas na central
 

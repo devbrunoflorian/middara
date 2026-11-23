@@ -420,11 +420,11 @@ O problema afetava **605 das 1077 unidades do catálogo**, impedindo a aprovaç�
 
 ### Revisar uma tradução já aprovada com nova medição
 
-Uma correção editorial legítima pode mudar texto ou geometria e, por isso, gerar um fingerprint Copyfit V3 novo para uma unidade que já tem publicação aprovada. O endpoint antes rejeitava o fingerprint antigo salvo na própria revisão, embora a nova candidata viesse do catálogo canônico e a publicação atual ainda correspondesse à tradução persistida.
+Uma correção editorial legítima pode mudar texto ou geometria e, por isso, gerar um fingerprint e uma classificação Copyfit V3 novos para uma unidade já aprovada. O endpoint comparava o fingerprint e a classificação salvos da versão anterior com a medição nova e rejeitava a revisão, mesmo quando a candidata vinha do catálogo canônico e a tradução persistida ainda correspondia à publicação atual.
 
-O endpoint agora permite essa revisão apenas quando o registro anterior está aprovado e contém uma publicação. A aprovação continua exigindo o fingerprint enviado igual ao catálogo canônico; antes de escrever, o endpoint também confirma que a tradução atual ainda tem o mesmo ID e os mesmos dados da publicação anterior. A nova publicação guarda a anterior no histórico. Registros pendentes ou sem publicação não recebem essa exceção.
+O endpoint agora permite substituir o fingerprint e a classificação antigos somente quando o registro anterior está aprovado e contém uma publicação. A classificação enviada ainda precisa coincidir com a medição do catálogo canônico; antes de escrever, o endpoint confirma que a tradução atual mantém o mesmo ID e os mesmos dados da publicação anterior. A nova publicação guarda a versão anterior no histórico. Registros pendentes ou sem publicação continuam sujeitos à comparação normal com sua medição salva.
 
-**Evidência:** a correção revisada do callout IMPORTANTE da p. 57 foi republicada pela rota oficial no review 1684. O endpoint confirmou a tradução 1994, Copyfit V3 EXACT 7/7 e manteve a publicação anterior no histórico. Exportações PT-BR finais passaram `verifiedTranslationRecords=true` e `pdfVerification=true`.
+**Evidência:** a correção revisada do callout IMPORTANTE da p.57 foi republicada pelo review 1684, tradução 1994, Copyfit EXACT 7/7 e histórico preservado. Na p.22, review 1512 mudou de EXACT 32/32 para UNDER 32/31; a rota oficial publicou translation 1333 após a medição canônica, preservando a versão anterior. Export PT-BR final passou `verifiedTranslationRecords=true` e `pdfVerification=true`.
 
 
 

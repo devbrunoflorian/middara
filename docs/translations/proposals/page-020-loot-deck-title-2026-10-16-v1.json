@@ -1,6 +1,6 @@
 {
   "proposalId": "page-020-loot-deck-title-2026-10-16-v1",
-  "status": "partial_editable_text_proposal_v1_title_verified_artwork_localization_exception_open",
+  "status": "title_aligned_with_glossary_and_art_preserved_by_user_scope_export_verified",
   "page": 20,
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "counts": {
@@ -17,8 +17,8 @@
       "blockIndex": 74,
       "sourceBlockId": "block_1117",
       "sourceText": "Combatant Loot Deck Setup",
-      "proposalText": "Preparação do Baralho de Saque dos Combatentes",
-      "proposalMarkup": "Preparação do Baralho de Saque dos Combatentes",
+      "proposalText": "Preparação do Baralho de Saque de Combatentes",
+      "proposalMarkup": "Preparação do Baralho de Saque de Combatentes",
       "spanKey": "page_20_block_74__pt-BR",
       "spanKeys": [
         "page_20_block_74__pt-BR"
@@ -28,7 +28,7 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "Preparação do Baralho de Saque dos Combatentes",
+            "text": "Preparação do Baralho de Saque de Combatentes",
             "font": "Cinzel-Regular",
             "size": 18,
             "color": "#ffffff",
@@ -46,7 +46,7 @@
         "schemaVersion": 2,
         "segments": [
           {
-            "text": "Preparação do Baralho de Saque dos Combatentes",
+            "text": "Preparação do Baralho de Saque de Combatentes",
             "font": "Cinzel-Regular",
             "size": 18,
             "color": "#ffffff",
@@ -60,9 +60,9 @@
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "status": "draft_pending_human_terminology_review",
-      "technicalStatus": "verified_live_viewer_readonly_editor_and_isolated_pdf",
-      "editorialStatus": "pending_human_review",
+      "status": "approved_in_payload",
+      "technicalStatus": "copyfit_v3_exact_100_200_persisted_export_verified",
+      "editorialStatus": "approved_using_payload_glossary_decision_18",
       "diagnosticRendering": "proposal",
       "sourceBboxes": [
         [
@@ -73,35 +73,30 @@
         ]
       ],
       "sourceLineCount": 1,
-      "pendingTerms": [
-        "Combatant Loot Deck → Baralho de Saque dos Combatentes; composto não cadastrado integralmente no glossário; revisar contra “Cartas de Saque de Combatente” da p.4."
-      ],
+      "pendingTerms": [],
       "notes": [
-        "Setup → Preparação and Loot → Saque follow the official glossary. The isolated PT-BR frame is centered on the decorative banner and uses its available width; it is a locale-specific reframe, not an expansion preserving the source text center or baseline. Typeface, size, color, and weight match the source.",
-        "Live Viewer/Admin Editor and one-page PDF were inspected. Copyfit V3 metrics report one line, 491.13 pt widest glyph run inside a 600 pt frame; the screenshot shows no collision or clipping. A temporary “ PT” insertion recomposed in one line in the Admin Editor, then the proposal text was restored without saving."
+        "Combatant Loot Deck → Baralho de Saque de Combatentes segue a decisão aprovada no glossário (Payload id 18). “Setup” foi traduzido como “Preparação”; a página traduz regras/títulos editáveis, mantendo os nomes de cartas e componentes impressos dentro da arte em inglês.",
+        "O título usa uma moldura local PT-BR centralizada no banner; família, tamanho, cor e peso seguem o OG. Copyfit V3 atual: EXACT 1/1 em 100% e 200%; os samples do Viewer confirmam CinzelLocal 18 pt/700 carregada.",
+        "OG, Viewer PT-BR, print e PDF persistido foram comparados após a aprovação. A imagem da tabela e das cartas permanece igual à fonte, sem máscara nem overlay."
       ],
       "validation": {
-        "viewer": "visible in live Viewer PT-BR",
-        "editor": "selected and temporarily edited/recomposed/restored in session; no save; API remained GET-only",
-        "pdf": "official export path; one page, source page size, selectable PT-BR title",
+        "viewer": "Título presente e centralizado no banner; uma linha.",
+        "editor": "Review #1 e translation #422 reconciliadas pelo endpoint oficial de aprovação do Payload.",
+        "pdf": "Exportação persistida de uma página após aprovação; verifiedTranslationRecords=true, pdfVerification=true; caixa 820,346 × 820,346 pt.",
         "copyfit": {
           "lineCount": 1,
-          "widestLinePt": 491.131,
+          "sourcePdfLineCount": 1,
+          "pageRendererLineCount": 1,
+          "classification": "EXACT",
+          "zooms": [
+            "100%",
+            "200%"
+          ],
           "frameWidthPt": 600,
+          "renderedFont": "CinzelLocal 18 pt/700; font sample loaded=true",
           "visualCollision": false,
           "clipping": false,
-          "sourceLayoutFrame": {
-            "x": 90.972,
-            "width": 615,
-            "textAlign": "left"
-          },
-          "sourceTextCenterPt": 415.972,
-          "sourceBaselinePt": 61.136,
-          "targetTextCenterPt": 410.288,
-          "targetBaselinePt": 60.266,
-          "centerDeltaPt": -5.684,
-          "baselineDeltaPt": -0.87,
-          "alignmentNote": "PT title is centered on the existing decorative banner; the isolated frame differs from the source layout frame and shifts the text slightly left/up. Visual review found no visible defect."
+          "alignmentNote": "Título centralizado no banner; OG, Viewer e print confirmam a composição."
         }
       },
       "sourcePdfVisualLineCount": 1,
@@ -112,7 +107,7 @@
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans inside the canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects of the review-highlighted unit clustered by vertical centre (0.5 x median rect height). No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 20,
           "pdfDocumentPageIndex": 19,
@@ -129,23 +124,177 @@
             555.1832275390625,
             67.83168029785156
           ],
-          "visualBaselinesPt": [
+          "extractedPdfTextVisualRows": 1,
+          "visualRowBaselinesPt": [
             61.136
           ],
           "spans": 1,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
           "visualRows": 1
         },
         "pageRendererEvidence": {
           "spanKey": "page_20_block_74__pt-BR",
-          "readingMethod": "text rects of the review-highlighted unit",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 1,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            61.86
+            91.94
           ],
-          "frameHeightCssPx": 19.7
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "CinzelLocal, Cinzel, serif",
+              "fontSize": "27.2437px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "29.9681px",
+              "letterSpacing": "-0.408655px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 30,
+          "frameWidthCssPx": 904.4
         },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        "editorialStatus": "Published and verified in Payload review #1; Copyfit V3 EXACT 1/1 at the measured zoom."
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 20,
+            "pdfDocumentPageIndex": 19,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": false
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              276.760986328125,
+              43.56768035888672,
+              555.1832275390625,
+              67.83168029785156
+            ],
+            "extractedPdfTextVisualRows": 1,
+            "visualRowBaselinesPt": [
+              61.136
+            ],
+            "spans": 1,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_20_block_74__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              91.94
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "27.2437px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "29.9681px",
+                "letterSpacing": "-0.408655px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 30,
+            "frameWidthCssPx": 904.4
+          },
+          "editorialStatus": "Published and verified in Payload review #1; Copyfit V3 EXACT 1/1 at the measured zoom."
+        },
+        "100%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 20,
+            "pdfDocumentPageIndex": 19,
+            "language": "pt-BR",
+            "viewerZoom": "100%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": false
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              276.760986328125,
+              43.56768035888672,
+              555.1832275390625,
+              67.83168029785156
+            ],
+            "extractedPdfTextVisualRows": 1,
+            "visualRowBaselinesPt": [
+              61.136
+            ],
+            "spans": 1,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_20_block_74__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 1,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              82.77
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 0.7567690873341558,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "13.6218px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "14.984px",
+                "letterSpacing": "-0.204328px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 15,
+            "frameWidthCssPx": 452.2
+          },
+          "editorialStatus": "Published and verified in Payload review #1; Copyfit V3 EXACT 1/1 at the measured zoom."
+        }
       }
     }
   ],

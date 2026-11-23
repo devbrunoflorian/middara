@@ -1,0 +1,11 @@
+# Página 014 — Playing Encounters
+
+- **Origem EN:** página 14 do PDF oficial; comparação visual da página completa com Viewer PT-BR e PDF impresso.
+- **PT-BR:** 31 alvos ativos foram exportados e conferidos no Viewer e no print. Esta rodada corrigiu a terminologia da Fase de Preparação; as demais traduções não foram alteradas.
+- **Copyfit:** o bloco `page_14_block_1__pt-BR` mantém 7 linhas como no OG, medido em 100% e 200%. Preservados o número da etapa, o recuo francês do corpo, negritos e itálicos.
+- **Glossário:** `Stamina Points` → **Pontos de Stamina**; `Stamina Point Recovery Value` → **Valor de Recuperação de Stamina**. A sigla impressa **SP** permanece.
+- **Moldura:** o Viewer ainda usava a largura-fonte porque a revisão anterior havia aumentado apenas o `bbox` da tradução. A moldura PT-BR real foi persistida em `layout-frames`, `page_14_block_1::pt-BR`: x=86,173 pt, y=199,934 pt, largura=319,677 pt, altura=77,940 pt. O texto ficou dentro da moldura sem invadir a coluna direita.
+- **Exportação (21/11/2026):** `verifiedTranslationRecords=true`, `pdfVerification=true`, MediaBox 820,346 × 820,346 pt. A comparação OG/Viewer/print não mostrou clipping ou colisões visíveis. O bloco corrigido tem excesso medido de 0 pt nas bordas direita e inferior; os demais diagnósticos de intervalo na página ficam abaixo de 0,8 pt e não correspondem a tinta cortada nas imagens verificadas.
+- **Revisão semântica (23/11/2026):** as 31 traduções ativas foram comparadas individualmente com o PDF-fonte e seus recibos ativos; não encontrei omissão nem mudança material de regra. `Used tokens` permanece como **Fichas de Usado**, seguindo o precedente local aprovado no review 215 e reutilizado no review 1513 / translation 1228 da p.24. Esse uso não cria uma entrada global no glossário.
+- **Escopo:** regras e legendas editoriais do Rulebook em PT-BR; conteúdo impresso em componentes e a arte original permanecem preservados. A revisão cobre as 31 unidades PT-BR ativas desta página; não certifica o transcript Markdown bruto como uma transcrição integral independente do PDF.
+- **Evidências privadas:** `engineering-decisions/evidence/2026-11-21-page14/` contém OG, Viewer, print, PDF, métricas, dados de Payload antes/depois e molduras antes/depois.

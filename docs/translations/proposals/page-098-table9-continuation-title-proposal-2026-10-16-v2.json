@@ -3,7 +3,7 @@
   "version": "2",
   "title": "Continuação da Tabela 9 — p. 98 (v2)",
   "page": 98,
-  "status": "pending_editor_pdf_and_human_review",
+  "status": "approved_and_published",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -12,13 +12,14 @@
   },
   "counts": {
     "candidates": 1,
-    "existingHumanTranslationsPreserved": 0,
+    "existingHumanTranslationsPreserved": 1,
     "priorReviewRecordsPreserved": 0,
-    "finalTranslationWrites": 0,
+    "finalTranslationWrites": 1,
     "openExceptions": 0,
     "copyfitExact": 1,
     "copyfitUnder": 0,
-    "copyfitOver": 0
+    "copyfitOver": 0,
+    "humanEditorialApproval": 1
   },
   "preservation": {
     "existingHumanTranslationCount": 0,
@@ -26,10 +27,9 @@
     "existingHumanTranslationDataSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
   },
   "scopeLimits": [
-    "GETs somente leitura confirmaram zero traduções e zero reviews na p. 98; a coleção final translations não foi alterada.",
-    "Este recorte cobre somente o título de continuação da Tabela 9. Poppet, Root e Tentacle, suas imagens e regras permanecem em inglês para análise em lotes posteriores.",
-    "A versão 1, com o título completo, quebrou em duas linhas no Viewer a 100% e 150%. A versão 2 usa 'Tabela 9: Continuação', mantendo o identificador e a indicação de continuação da tabela cujo conteúdo começa na p. 97.",
-    "The live PageRenderer copyfit passed EXACT 1/1 at 100%, 150%, and 200%. PDF export, Editor round-trip, and human approval remain pending."
+    "Título da continuação da Tabela 9 conferido no PDF OG e publicado pelo Reviewer oficial em 21/11/2026. A tradução e a aprovação anteriores foram preservadas no histórico.",
+    "A linha única mantém a hierarquia tipográfica da fonte. Viewer, print e PDF persistidos foram comparados ao OG; verifiedTranslationRecords=true e pdfVerification=true.",
+    "Esta proposta cobre somente o título. Nomes impressos de componentes permanecem no original; as regras da página foram traduzidas em propostas próprias."
   ],
   "candidates": [
     {
@@ -69,7 +69,7 @@
         "managedSourceSymbols": []
       },
       "technicalStatus": "passed_page_renderer_copyfit_v3_exact_100_200",
-      "editorialStatus": "pending_human_review",
+      "editorialStatus": "approved_and_published_2026-11-21",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "sourceLineIds": [

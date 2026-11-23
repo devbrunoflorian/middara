@@ -15,6 +15,12 @@
 - Isso confirma texto extraível/pesquisável, não a capacidade de editar texto e refluir parágrafos pelo Acrobat. O Acrobat Pro não está instalado neste ambiente, então o Nível 3 continua sem verificação.
 - Próximo passo: testar uma cópia do PDF no Acrobat Pro em amostras de texto puro, texto misto, símbolo inline e acentuação PT-BR. Não alterar o renderer ou as fontes até registrar o resultado real do Acrobat.
 
+## Rechecagem do PDF final atualizado (23/11/2026)
+
+- Arquivo verificado: `output/pdf/middara-rulebook-pt-BR-final-2026-11-23.pdf` (102 páginas; 40 bookmarks; 324.305 caracteres extraíveis; nenhum `U+FFFD`).
+- A inspeção encontrou 836 objetos de fonte únicos: 802 `Type3` e 34 `Type0`; todos têm `/ToUnicode`. Nenhuma página tem widget de formulário.
+- O texto continua selecionável e pesquisável. Esses dados não provam que o Acrobat consegue editar as palavras e refluir as caixas; o teste no Acrobat Pro ainda está pendente.
+
 ---
 
 ## 1. Problema Observado

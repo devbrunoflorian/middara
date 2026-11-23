@@ -1,0 +1,8 @@
+# Página 72 — Ícones de Escala
+
+- **Estado:** 17 unidades atuais aprovadas no Reviewer em 22/11/2026; 17/17 EXACT em 100% e 200%.
+- **Revisões:** 13 unidades publicadas nas revisões #2106–2118. Quatro unidades já aprovadas na versão anterior mantêm a publicação, pois o conteúdo rico atual coincide com o candidato medido. As 11 pendências da proposta v1 foram arquivadas depois da aprovação da v2; o bloco 16 vazio segue arquivado porque seu texto foi incorporado ao bloco 15.
+- **Conteúdo e layout:** EN e PT-BR foram comparados. Texto, ênfases e símbolos inline correspondem ao candidato revisado; o dado `stat.scaling-star` permanece semântico. A moldura medida foi sincronizada antes da aprovação, sem alterar texto, símbolos ou estilo.
+- **Copyfit:** 17/17 unidades mantêm a contagem de linhas do OG: 67/67 linhas no total. Viewer, print e export completo foram comparados visualmente; sem clipping ou colisões visíveis.
+- **Escopo:** nomes impressos `COMMAND`, `INTELLIGENT`, `SUMMONING`, `ASSEMBLAGE` e `OPPOSING ESPER` permanecem conforme a decisão editorial para nomes de componentes e elementos de jogo.
+- **Fonte e medição:** [`transcrição do PDF OG`](../source-pages/page-072.md) e [proposta medida v2](../proposals/page-072-scaling-icons-proposal-2026-10-18-v2.json). A proposta guarda o estado da revisão; o Payload é a fonte do estado publicado.

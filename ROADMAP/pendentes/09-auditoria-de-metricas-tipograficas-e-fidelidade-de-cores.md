@@ -130,6 +130,22 @@ Na p.59, o corpo OptimaLTStd regular em branco sobre fundo escuro parece mais pe
 
 ---
 
+### 2.4. Separar defeito local de regra compartilhada (2026-11-22)
+
+Antes de mudar o renderer, classifique a primeira divergência:
+
+| Evidência | Escopo correto | Estado desta auditoria |
+| --- | --- | --- |
+| Um ou mais segmentos de uma unidade têm peso/itálico/tamanho/cor diferentes do OG | Corrigir os segmentos da unidade e preservar a aprovação anterior no histórico | **p.76 corrigida:** quatro cabeçalhos Cinzel tinham `renderWeightOverride: 700` no OG, mas `weight: 400` no PT. Atribuído 700 apenas a esses segmentos; Copyfit V3 1/1 em 100% e 200%, Reviewer confirmou a publicação e o export da página passou `verifiedTranslationRecords=true` e `pdfVerification=true`. |
+| Mesmo desvio de peso aparece em texto regular EN e PT sob o mesmo caminho de renderização | Investigar fonte carregada, programa PDF, rasterização e exportação; não falsificar o peso dos dados | **Aberto:** páginas 49, 50, 54, 59 e 64 já documentam aparência Optima regular mais pesada no Viewer/print também em EN. Ainda não há causa confirmada para uma correção geral. |
+| Tracking, leading ou linha-base divergem em várias unidades pela mesma rota | Auditoria compartilhada do renderer, com amostras representativas e contraexemplo antes da alteração | **Aberto:** `-0.015em` em caminhos PT-BR e fallbacks `line-height: 1` são regras compartilhadas candidatas; não alterá-los a partir de uma captura isolada. |
+| Peso, recuo, moldura ou distância de um cabeçalho/símbolo diverge só numa ocorrência | Corrigir a unidade/frame local e repetir Copyfit/exportação | Continuar registrando cada medida pela fonte e pela unidade, sem espalhar o ajuste a irmãos. |
+| Suposto hard print coincide com arte no PDF OG | Não mascarar nem reconstruir | **p.47 falso positivo:** as formas roxas atrás do box são parte da ilustração original e permanecem iguais no Viewer/PT-BR. |
+
+O procedimento de triagem e os exemplos operacionais estão em [`common-layout-issues.md`](../../docs/translations/common-layout-issues.md). Uma regra de revisão pode ser geral mesmo quando as correções de dados permanecem locais: copiar para cada segmento o peso visual do OG/`renderWeightOverride`; não declarar `Cinzel-Regular` sempre regular ou sempre negrito.
+
+**Rechecagem da p.64 em 23/11/2026:** após corrigir os rótulos de dados em dois blocos e reexportar a página, o texto regular ainda parece mais pesado que o OG no Viewer e no print, tanto na reconstrução EN quanto na PT-BR. A DOM-fonte declara OptimaLTStd regular, 10 pt/400, e o mesmo desvio já aparece na versão-base de 22/11; portanto a mudança de tradução não é a causa. O peso não foi alterado localmente. A causa compartilhada segue aberta para a auditoria de fonte/rasterização.
+
 ## 3. Frente 2: Fidelidade das Cores
 
 ### 3.1. Problema e Hipóteses Técnicas

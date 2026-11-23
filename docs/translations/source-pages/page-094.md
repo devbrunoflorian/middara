@@ -8,8 +8,9 @@
 - **Page size:** 820.35 × 820.35 pt
 - **Source review:** completed 2026-11-20 against the official English PDF.
 - **English fidelity:** Viewer, print, and final PDF composition visually compared with the source page on 2026-11-20.
-- **PT-BR:** 12 active units published and approved in Payload; copyfit measured at 100% and 200%.
+- **PT-BR:** 12 active units published and approved in Payload; translation, review, and publication match after the 2026-11-22 terminology-receipt refresh. Copyfit measured at 100% and 200%.
 - **Copyfit exception:** `SQUEEZE` is 15 PT-BR lines against 16 source lines after two natural copyfit attempts. The next expansion overflows; the approved complete translation fits without clipping or overlap, with no font/frame change.
+- **Glossary correction:** `Skill Check` → `Teste de Perícia` is present in the live translation and synchronized review/publication record; `SYMBIOTIC` Copyfit V3 is EXACT 19/19 at 100% and 200%.
 - **Source record:** raw line-by-line transcript below is not authoritative for semantic grouping or publication state; see [`page-094.md`](../pages/page-094.md).
 - **Artwork text / uncertain overlays:** not classified by this extractor
 

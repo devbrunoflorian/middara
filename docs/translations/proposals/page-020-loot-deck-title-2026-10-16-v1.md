@@ -1,23 +1,23 @@
-# p.20 — proposta PT-BR do título v1
+# p.20 — título PT-BR e preservação da arte original
 
-**Estado:** uma unidade editável traduzida e verificada no Viewer PT-BR ao vivo, Editor Admin somente leitura e PDF isolado; revisão editorial e do composto “Saque de Combatentes” pendente. O texto das tabelas e cartas impresso na imagem de fundo segue como exceção de arte aberta. Payload writes = 0.
+**Estado:** título aprovado no Payload e alinhado ao glossário; arte de cartas e componentes preservada em inglês conforme o escopo confirmado pelo usuário para as pp.19–21.
 
-## Texto proposto
+## Texto publicado
 
 **EN:** Combatant Loot Deck Setup
 
-**PT-BR:** Preparação do Baralho de Saque dos Combatentes
+**PT-BR:** Preparação do Baralho de Saque de Combatentes
 
-**Chave:** `page_20_block_74__pt-BR`. O frame PT isolado (x=110,173 pt, largura=600 pt) centraliza o título no banner, mas difere do frame fonte (x=90,972 pt, largura=615 pt, alinhamento à esquerda). O centro do texto desloca-se 5,684 pt à esquerda e a baseline 0,870 pt para cima; a inspeção visual não encontrou defeito. Copyfit V3 mediu uma linha com 491,13 pt. Viewer e PDF raster não mostram colisão nem corte. No Editor, uma inserção temporária de “ PT” recompôs em uma linha; a proposta foi restaurada sem salvar.
+**Chave:** `page_20_block_74__pt-BR`, review #1, translation #422. O termo segue a decisão aprovada `Combatant Loot Deck → Baralho de Saque de Combatentes` (glossário Payload id 18). A moldura PT-BR tem 600 pt e centraliza o título no banner. O Viewer renderiza o título em uma linha, centralizado, com CinzelLocal 18 pt/700 carregada.
 
-## Exceção de texto na arte
+## Texto impresso na arte
 
-Rótulos de níveis, títulos de cartas e tabela de itens seguem impressos no fundo em inglês. A proposta abrange MUNDANO/COMUM/INCOMUM/RARO; ITEM/MONSTRO/ÚNICO; Saque de Item/Monstro/Único; a instrução de dados e as categorias de item. Valores, quantidades e seriais continuam numéricos. As traduções propostas e as 127 linhas-fonte associadas à arte estão discriminadas no JSON. A imagem-fonte permanece preservada até validar uma solução visual que substitua esse texto sem apagar elementos da arte.
+Os rótulos `LVL: MUNDANE/COMMON/UNCOMMON/RARE`, `ITEM/MONSTER/UNIQUE`, os nomes e as regras impressas nas cartas continuam em inglês dentro da imagem-fonte. Essa é a decisão intencional do usuário para cartas e componentes; não criar overlays nem mascarar pixels da arte. A antiga proposta de tradução desses rótulos permanece apenas como registro histórico no JSON, não como trabalho pendente.
 
-## Rastreabilidade
+## Verificação
 
-- Snapshot: `output/proofs/translation-readiness-2026-10-16/p020-loot-deck-title-v1/snapshot/snapshot.json`.
-- Viewer e raster do PDF: `output/proofs/translation-readiness-2026-10-16/p020-loot-deck-title-v1/viewer-pt-BR-live-v1.png` e `print-pt-BR-v1.png`; comparação de referência EN: `source-en-page-020.png`.
-- Recibo read-only do Editor: `output/proofs/translation-readiness-2026-10-16/p020-loot-deck-title-v1/editor-readonly-receipt-v1.json`.
-- Hashes e contagem de registros Payload antes: `output/proofs/translation-readiness-2026-10-16/p020-loot-deck-title-v1/source-hashes.json`.
-- Nenhum registro PT-BR existente na p.20 foi encontrado; nenhuma gravação ocorreu.
+- Copyfit V3: EXACT 1/1 em 100% e 200%; amostras de fonte confirmam CinzelLocal carregada.
+- Review #1 e translation #422 foram atualizadas pelo endpoint oficial; a redação anterior foi preservada no histórico da publicação.
+- OG, Viewer PT-BR, print e PDF fresco comparados em 21/11/2026. Export verificou `verifiedTranslationRecords=true`, `pdfVerification=true` e MediaBox 820,346 × 820,346 pt.
+- SHA-256 do PDF PT-BR: `784DF97673EFDEFE6D07D581A800B999505143A79832272F3FF3FD16C1D65B04`.
+- Evidências privadas: `engineering-decisions/evidence/2026-11-21-page20/`.

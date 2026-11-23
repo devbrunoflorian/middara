@@ -278,8 +278,9 @@ export function TranslationReviewPanel({
   const [showArchived, setShowArchived] = useState(false);
   const [archiveError, setArchiveError] = useState<string | null>(null);
   const [archiveNotice, setArchiveNotice] = useState<string | null>(null);
-  const allCandidates = useMemo(() => catalog?.proposals.flatMap(proposal => proposal.candidates) ?? [], [catalog]);
+  const allCandidates = useMemo(() => open ? catalog?.proposals.flatMap(proposal => proposal.candidates) ?? [] : [], [open, catalog]);
   const visibleGlossaryDecisions = useMemo(() => {
+    if (!open) return [];
     const query = normalizeGlossarySearchText(glossarySearch.trim());
     return [...glossaryDecisions]
       .filter(decision => glossaryStatusFilter === 'all' || decision.decisionStatus === glossaryStatusFilter)
@@ -287,8 +288,9 @@ export function TranslationReviewPanel({
       .filter(decision => glossaryTypeFilter === 'all' || (decision.semanticMetadata?.decisionType ?? 'terminology') === glossaryTypeFilter)
       .filter(decision => !query || normalizeGlossarySearchText(JSON.stringify(decision)).includes(query))
       .sort((left, right) => left.sourceTerm.localeCompare(right.sourceTerm, 'pt-BR'));
-  }, [glossaryDecisions, glossarySearch, glossaryStatusFilter, glossaryCategoryFilter, glossaryTypeFilter]);
+  }, [open, glossaryDecisions, glossarySearch, glossaryStatusFilter, glossaryCategoryFilter, glossaryTypeFilter]);
   const approvedCandidates = useMemo(() => {
+    if (!open) return [];
     const list: TranslationReviewCandidate[] = [];
     const seenUnits = new Set<string>();
 
@@ -356,12 +358,15 @@ export function TranslationReviewPanel({
       } satisfies TranslationReviewCandidate);
     }
     return list;
-  }, [records, savedPayloadTranslations, allCandidates]);
+  }, [open, records, savedPayloadTranslations, allCandidates]);
   const pageNumbers = useMemo(() => [...new Set([
     ...allCandidates.map(candidate => candidate.pageNumber),
     ...approvedCandidates.map(candidate => candidate.pageNumber),
     ...(catalog?.exceptions.map(exception => exception.pageNumber) ?? []),
   ].filter(page => page > 0))].sort((a, b) => a - b), [allCandidates, approvedCandidates, catalog]);
+  // This component stays mounted while the drawer is closed so its filters
+  // and draft state survive toggling. Skip review-queue derivation until open.
+  if (!open) return null;
   const pageValue = pageFilter === 'current'
     ? pageNumbers.includes(selectedPage) ? String(selectedPage) : 'all'
     : pageFilter;
@@ -724,8 +729,6 @@ export function TranslationReviewPanel({
     anchor.click();
     window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
-
-  if (!open) return null;
 
   return (
     <aside className="translation-review-panel" aria-label="Revisão das traduções PT-BR">

@@ -322,13 +322,13 @@ Component List
 
 ---
 
-<!-- BLOCK 22: [543.92, 748.94] 201.66x22.9pt -->
+<!-- BLOCK 22: [543.92, 759.94] 201.66x11.9pt -->
 <!-- FONTS: OptimaLTStd 10pt, ZapfDingbatsStd 10pt -->
 **[EN]:**
 ❇ Hidden Decks included in the itemized lists.
 
 **[PT-BR]:**
-❇ Hidden Decks included in the itemized lists.
+❇ Baralhos Secretos constam das listas detalhadas.
 
 ---
 

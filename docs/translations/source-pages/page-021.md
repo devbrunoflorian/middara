@@ -3,19 +3,20 @@
 > Raw text-line transcript extracted from the official English PDF with PyMuPDF.
 > This is not a semantic paragraph map, an artwork/ghost decision, or an English-fidelity sign-off.
 > Reorder/re-group only after checking the rendered source; keep different font sizes and boxes distinct.
+> The PT-BR placeholders below are not translation records; the live page review is in `docs/translations/pages/page-021.md`.
 
 - **PDF page:** 21 of 102
 - **Page size:** 820.35 × 820.35 pt
-- **Source review:** pending
-- **English fidelity:** pending app↔PDF visual review
-- **PT-BR:** pending English-fidelity gate
+- **Source review:** complete; compared with OG on 2026-11-22
+- **English fidelity:** OG/EN export checked 2026-11-21; source content and styles rechecked 2026-11-22
+- **PT-BR:** 22/22 live units approved; full-page OG/Viewer/print review complete 2026-11-22
 - **Artwork text / uncertain overlays:** not classified by this extractor
 
 ## Raw line 001 (block 0, line 0)
 
 **EN source:** Terrain is an effect on a Tile. Terrain may change things like movement and Line of Sight. However, its effects vary widely.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 478.34, 612.86, 490.26`
 
@@ -28,7 +29,7 @@
 
 **EN source:** NORMAL: No special effects. Normal Terrain can be placed on and be
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 592.45, 388.87, 604.35`
 
@@ -40,7 +41,7 @@
 
 **EN source:** replaced by all types of Terrain.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.85, 603.45, 223.75, 615.35`
 
@@ -51,7 +52,7 @@
 
 **EN source:** HINDERING: Attacks made through or into Hindering Terrain get -1 TO
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 620.10, 389.98, 632.02`
 
@@ -65,7 +66,7 @@
 
 **EN source:** THE ATK ROLL. This effect cannot be applied more than once but does
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 631.12, 387.57, 643.02`
 
@@ -77,7 +78,7 @@
 
 **EN source:** stack with the -1TO THE ATK ROLL from spaces containing Allies. It costs 2
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 642.10, 407.62, 654.02`
 
@@ -92,7 +93,7 @@
 
 **EN source:** MOVEMENT to leave a Hindering space. Abilities that place Hindering
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `97.47, 653.12, 401.80, 665.02`
 
@@ -104,7 +105,7 @@
 
 **EN source:** Terrain can only replace Normal Terrain spaces.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 664.12, 294.47, 676.02`
 
@@ -115,7 +116,7 @@
 
 **EN source:** WATER:Figures in Water may not DODGE. It costs 2
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 680.77, 309.93, 692.69`
 
@@ -130,7 +131,7 @@
 
 **EN source:** MOVEMENT
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `320.55, 680.79, 376.12, 692.69`
 
@@ -141,7 +142,7 @@
 
 **EN source:** to leave a Water space. Abilities that place Water Terrain can replace
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 691.79, 383.91, 703.69`
 
@@ -152,7 +153,7 @@
 
 **EN source:** Normal, Hindering and Muck Terrain. Water tokens placed due to an
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 702.79, 385.28, 714.69`
 
@@ -163,7 +164,7 @@
 
 **EN source:** Ability do not have a Current.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 713.79, 214.26, 725.69`
 
@@ -174,7 +175,7 @@
 
 **EN source:** MUCK:Figures in Muck must spend an additional Stamina Point (SP) on
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 730.44, 396.00, 742.36`
 
@@ -188,7 +189,7 @@
 
 **EN source:** all Actions and Abilities that cost 1 or more SP to use. Abilities that place
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 741.44, 402.00, 753.36`
 
@@ -203,7 +204,7 @@
 
 **EN source:** Muck Terrain can only replace Normal and Hindering Terrain.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.84, 752.46, 351.91, 764.36`
 
@@ -214,7 +215,7 @@
 
 **EN source:** OBSTRUCTING:Figures may not move through or into spaces that are
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 592.45, 714.66, 604.35`
 
@@ -226,7 +227,7 @@
 
 **EN source:** made up of Obstructing Terrain. A figure may not draw Line of Sight
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 603.45, 709.57, 615.35`
 
@@ -237,7 +238,7 @@
 
 **EN source:** through any part of Obstructing Terrain (e.g. A red line.) Obstructing
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 614.45, 710.55, 626.35`
 
@@ -248,7 +249,7 @@
 
 **EN source:** Terrain spaces can only be interacted with or circumvented by Abilities
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 625.45, 723.71, 637.35`
 
@@ -259,7 +260,7 @@
 
 **EN source:** that specifically say so (e.g. UNSTOPPABLE. See Tags Pg. 92). Abilities
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 636.33, 713.57, 648.35`
 
@@ -276,7 +277,7 @@
 
 **EN source:** that place Obstructing Terrain can replace all Terrain except for
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.17, 647.45, 689.20, 659.35`
 
@@ -287,7 +288,7 @@
 
 **EN source:** Dangerous Terrain. If a special rule or Ability places Obstructing Terrain
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.17, 658.45, 725.52, 670.35`
 
@@ -298,7 +299,7 @@
 
 **EN source:** on a figure, unless otherwise noted by the special rules or Ability that
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.17, 669.45, 715.76, 681.35`
 
@@ -309,7 +310,7 @@
 
 **EN source:** placed the Terrain, that figure must make a Jump check to the nearest
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.17, 680.45, 714.98, 692.35`
 
@@ -320,7 +321,7 @@
 
 **EN source:** non-Dangerous empty space or be Defeated.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.17, 691.45, 609.01, 703.35`
 
@@ -331,7 +332,7 @@
 
 **EN source:** DANGEROUS:Figures that end a turn in, end their movement in, or leave
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 708.12, 729.33, 720.02`
 
@@ -343,7 +344,7 @@
 
 **EN source:** a Dangerous space are Defeated. Tokens moved into a Dangerous Terrain
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 719.12, 733.00, 731.02`
 
@@ -354,7 +355,7 @@
 
 **EN source:** space are discarded. Abilities that place Dangerous Terrain can replace all
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 730.12, 736.28, 742.02`
 
@@ -365,7 +366,7 @@
 
 **EN source:** Terrain except for Obstructing Terrain.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 741.12, 578.80, 753.02`
 
@@ -376,7 +377,7 @@
 
 **EN source:** SPECIAL: The effects of this Terrain change depending on the Encounter.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 757.79, 723.35, 769.69`
 
@@ -388,7 +389,7 @@
 
 **EN source:** The rules governing these spaces are specified in the Special Encounter
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 768.79, 723.94, 780.69`
 
@@ -399,7 +400,7 @@
 
 **EN source:** Rules of each Encounter.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `416.18, 779.79, 521.97, 791.69`
 
@@ -410,7 +411,7 @@
 
 **EN source:** NORMAL
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `223.72, 518.22, 259.97, 528.94`
 
@@ -421,7 +422,7 @@
 
 **EN source:** HINDERING
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `335.23, 518.22, 382.63, 528.94`
 
@@ -432,7 +433,7 @@
 
 **EN source:** DANGEROUS
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `387.53, 550.99, 439.48, 561.71`
 
@@ -443,7 +444,7 @@
 
 **EN source:** SPECIAL
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `510.19, 550.99, 540.99, 561.71`
 
@@ -454,7 +455,7 @@
 
 **EN source:** WATER
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `455.40, 518.22, 482.62, 528.94`
 
@@ -465,7 +466,7 @@
 
 **EN source:** MUCK
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `568.52, 518.22, 593.67, 528.94`
 
@@ -476,7 +477,7 @@
 
 **EN source:** OBSTRUCTING
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `268.16, 550.99, 326.67, 561.71`
 
@@ -487,7 +488,7 @@
 
 **EN source:** Movement and Tokens
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 88.97, 237.54, 105.14`
 
@@ -498,7 +499,7 @@
 
 **EN source:** All tokens other than ObstructingTerrain tokens can be moved onto.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 182.64, 384.01, 194.58`
 
@@ -512,7 +513,7 @@
 
 **EN source:** Circular tokens, such as Exit tokens, Totems, Loot tokens, and Objective
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 193.64, 395.24, 205.58`
 
@@ -528,7 +529,7 @@
 
 **EN source:** Tokens do notblock Line of Sight and can all occupy the same space as
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 204.56, 397.89, 216.58`
 
@@ -541,7 +542,7 @@
 
 **EN source:** figures, other circular tokens, or Terrain tokens unless otherwise specified
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 215.64, 403.95, 227.58`
 
@@ -554,7 +555,7 @@
 
 **EN source:** in an Encounter.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 226.68, 159.52, 238.58`
 
@@ -565,7 +566,7 @@
 
 **EN source:** Terrain Tokens
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 246.83, 191.94, 263.00`
 
@@ -576,7 +577,7 @@
 
 **EN source:** Terrain tokens are used to place different Terrain types on Tiles. These
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 339.92, 385.10, 351.86`
 
@@ -588,7 +589,7 @@
 
 **EN source:** tokens can be moved on to and interacted with by Adventurers and
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 350.96, 377.97, 362.86`
 
@@ -599,7 +600,7 @@
 
 **EN source:** Combatants as if they were printed on the Tile.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 361.94, 287.54, 373.86`
 
@@ -612,7 +613,7 @@
 
 **EN source:** The different Terrain types and the rules associated with them are listed in the
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 378.63, 401.08, 390.53`
 
@@ -623,7 +624,7 @@
 
 **EN source:** Diagram below.
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.89, 389.63, 152.12, 401.53`
 
@@ -634,7 +635,7 @@
 
 **EN source:** Tiles and Terrain
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `86.17, 56.69, 259.68, 80.96`
 
@@ -645,7 +646,7 @@
 
 **EN source:** BLUE
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `218.02, 158.38, 229.45, 163.66`
 
@@ -656,7 +657,7 @@
 
 **EN source:** R
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `259.67, 157.47, 263.82, 162.27`
 
@@ -667,7 +668,7 @@
 
 **EN source:** E
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `262.23, 158.65, 265.45, 163.20`
 
@@ -678,7 +679,7 @@
 
 **EN source:** D
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `264.42, 159.33, 268.08, 164.06`
 
@@ -689,7 +690,7 @@
 
 **EN source:** L
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `268.98, 159.99, 270.74, 164.19`
 
@@ -700,7 +701,7 @@
 
 **EN source:** O
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `270.56, 159.55, 274.27, 164.17`
 
@@ -711,7 +712,7 @@
 
 **EN source:** O
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `273.29, 158.49, 277.66, 163.50`
 
@@ -722,7 +723,7 @@
 
 **EN source:** T
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `276.01, 157.44, 279.87, 162.03`
 
@@ -733,7 +734,7 @@
 
 **EN source:** EXIT
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `160.34, 139.63, 192.97, 157.07`
 
@@ -746,7 +747,7 @@
 
 **EN source:** GREEN
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `175.10, 152.63, 190.23, 157.91`
 
@@ -757,7 +758,7 @@
 
 **EN source:** Y
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `311.16, 159.14, 314.31, 163.84`
 
@@ -768,7 +769,7 @@
 
 **EN source:** E
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `309.18, 158.57, 312.31, 163.22`
 
@@ -779,7 +780,7 @@
 
 **EN source:** L
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `307.18, 157.77, 310.79, 162.41`
 
@@ -790,7 +791,7 @@
 
 **EN source:** L
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `305.44, 156.83, 309.33, 161.40`
 
@@ -801,7 +802,7 @@
 
 **EN source:** O
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `302.82, 154.85, 308.12, 160.14`
 
@@ -812,7 +813,7 @@
 
 **EN source:** W
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `300.54, 152.10, 306.07, 157.38`
 
@@ -823,7 +824,7 @@
 
 **EN source:** Y
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `317.68, 130.09, 320.84, 134.78`
 
@@ -834,7 +835,7 @@
 
 **EN source:** E
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `319.68, 130.70, 322.81, 135.36`
 
@@ -845,7 +846,7 @@
 
 **EN source:** L
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `321.20, 131.51, 324.81, 136.15`
 
@@ -856,7 +857,7 @@
 
 **EN source:** L
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `322.66, 132.53, 326.55, 137.10`
 
@@ -867,7 +868,7 @@
 
 **EN source:** O
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `323.87, 133.79, 329.17, 139.08`
 
@@ -878,7 +879,7 @@
 
 **EN source:** W
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `325.93, 136.54, 331.45, 141.82`
 
@@ -889,7 +890,7 @@
 
 **EN source:** Terrain Types
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `341.38, 440.11, 478.16, 464.38`
 
@@ -900,7 +901,7 @@
 
 **EN source:** 21
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `758.29, 775.72, 770.15, 787.98`
 
@@ -911,7 +912,7 @@
 
 **EN source:** 21
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** _(not stored in this raw transcript; see the live page review)_
 
 **Line bbox:** `758.29, 775.72, 770.15, 787.98`
 

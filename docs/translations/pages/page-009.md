@@ -40,7 +40,7 @@
 
 **EN:** Begin playing the first Encounter in the Scenario. As you progress through each Encounter you will Gain Gold, Items, and XP through Defeating opponents, looting treasure, completing Achievements, and through other Special Encounter Rules.
 
-**PT-BR (salvo):** Comece jogando o primeiro Encontro do Cenário. Ao avançar pelos Encontros, os jogadores Ganharão Ouro, Itens e **XP** ao Derrotar oponentes, saquear tesouros, completar Conquistas e cumprir outras Regras Especiais de Encontro.
+**PT-BR (salvo):** Jogue o primeiro Encontro do Cenário. Ao avançar pelos Encontros, os jogadores Ganharão Ouro, Itens e **XP** ao Derrotar oponentes, saquear tesouros, completar Conquistas e cumprir outras Regras Especiais de Encontro.
 
 ## Encounter Rewards
 
@@ -84,7 +84,7 @@ Four fixed bullet items follow. The bullet dots are decorative/static page eleme
 
 **EN:** The players win a Scenario when they reach the end Scene of the Scenario, typically by successfully completing a number of Encounters. If the players ever Lose an Encounter, they Lose the Scenario and all Gold, Items, Disciplines, and XP Gained during the Scenario are lost.
 
-**PT-BR (salvo):** Os jogadores vencem um Cenário ao alcançar sua Cena final, normalmente após concluir com sucesso uma série de Encontros. Se os jogadores perderem um Encontro, perdem o Cenário, e todo o Ouro, Itens, Disciplinas e **XP** obtidos durante ele são perdidos.
+**PT-BR (salvo):** Os jogadores vencem um Cenário ao chegar à Cena final, em geral após concluir uma série de Encontros. Se perderem um Encontro, perdem o Cenário e todas as recompensas: Ouro, Itens, Disciplinas e **XP** obtidos durante o Cenário.
 
 ## Epic Dungeon Crawl
 
@@ -92,7 +92,7 @@ Four fixed bullet items follow. The bullet dots are decorative/static page eleme
 
 **EN:** If players would like to make the Crawl Mode provide a more in-depth experience, you can try playing the Epic Crawl Mode. In this mode, players will start a Rank 1 Scenario as a novice, and eventually end at the highest Rank Scenario you own in your Middara collection. To play the Epic Crawl Mode, start a Rank 1 Scenario of your choice. After completing it, keep all your Gold, Items, and XP. Then, perform a Buy Round where you purchase new items at the next Loot Level (Common for Rank 2) and spend XP to purchase new Disciplines. After spending XP and Gold, choose a Scenario from the next Rank up. Meaning, players may never play a Scenario of the same or lower Rank twice. Players will never Gain XP or Gold listed in the corresponding Crawl Scenarios after the first Rank. If you’d like to pause your Epic Crawl run, you can do so between Ranks. Use the normal rules from the Adventure Mode by storing your characters, Items, and Disciplines in a Tuck Bag. You can also use an Adventure Sheet to keep track of the current party’s Gold and XP. If players are ever Defeated, they lose the Epic Crawl. If they win a Rank 4 Scenario (or a Rank 7 if you have expansions) you’ve won this Epic Crawl run!
 
-**PT-BR (salvo):** Se os jogadores quiserem uma experiência mais aprofundada no Modo Exploração, podem experimentar o Modo Exploração Épica. Nesse modo, começam como novatos em um Cenário de Nível **1** e avançam até o Cenário de maior Nível disponível em sua coleção de Middara. Para jogar o Modo Exploração Épica, escolha um Cenário de Nível **1**. Após concluí-lo, mantenha todo o Ouro, Itens e **XP** obtidos. Em seguida, faça uma Rodada de Compra, na qual poderá comprar novos Itens do próximo Nível de Saque (Comum para o Nível **2**) e gastar **XP** para adquirir novas Disciplinas. Depois de gastar **XP** e Ouro, escolha um Cenário do Nível seguinte. Os jogadores nunca podem jogar duas vezes um Cenário do mesmo Nível ou de um Nível inferior. Após o primeiro Nível, os jogadores não Ganham o **XP** ou Ouro indicados nos Cenários correspondentes do Modo Exploração. Caso queira pausar sua Exploração Épica, isso pode ser feito entre os Níveis. Use as regras normais do Modo Aventura, guardando seus Aventureiros, Itens e Disciplinas nas Bolsas de Aventureiro. A Ficha de Aventura também pode ser usada para registrar o Ouro e **XP** atuais do grupo. Se os jogadores forem Derrotados, perdem a Exploração Épica. Se vencerem um Cenário de Nível **4**, ou de Nível **7** caso possuam expansões, terão vencido essa Exploração Épica!
+**PT-BR (salvo):** Se os jogadores quiserem uma experiência mais aprofundada no Modo Exploração, podem experimentar o Modo Exploração Épica. Nesse modo, começam como novatos em um Cenário de Nível **1** e avançam até o Cenário de maior Nível disponível em sua coleção de Middara. Para jogar o Modo Exploração Épica, escolha um Cenário de Nível **1**. Após concluí-lo, mantenha todo o Ouro, Itens e **XP** obtidos. Em seguida, faça uma Rodada de Compra, na qual poderá comprar novos Itens do próximo Nível de Saque (Comum para o Nível **2**) e gastar **XP** para adquirir novas Disciplinas. Depois de gastar **XP** e Ouro, escolha um Cenário do Nível seguinte. Os jogadores nunca podem jogar duas vezes um Cenário do mesmo Nível ou de um Nível inferior. Após o primeiro Nível, os jogadores não Ganham o **XP** ou Ouro indicados nos Cenários correspondentes do Modo Exploração. Caso queira pausar sua Exploração Épica, isso pode ser feito entre os Níveis. Use as regras normais do Modo Aventura, guardando seus Aventureiros, Itens e Disciplinas nas Bolsas de Aventureiro. A Folha da Aventura também pode registrar o Ouro e **XP** atuais do grupo. Se os jogadores forem Derrotados, perdem a Exploração Épica. Se vencerem um Cenário de Nível **4**, ou de Nível **7** caso possuam expansões, terão vencido essa Exploração Épica!
 
 **DTP:** heading Cinzel 12 pt; corpo Optima 10 pt. Os números e `XP` em negrito seguem os runs da fonte. A unidade legada do corpo foi restaurada mantendo suas 36 referências de span em ordem.
 
@@ -101,7 +101,7 @@ Four fixed bullet items follow. The bullet dots are decorative/static page eleme
 - Comparação visual em Fit to Screen com o PDF: imagem, duas colunas, headings, filete, adornos, quatro bullets fixos e fólio permanecem nos lugares. O bloco PT mais longo da direita termina acima da regra do rodapé.
 - Após restaurar Optima 10 pt nos corpos dos bullets, o texto inicial de `SHOP AND TRAIN` colidia com `CONTINUE`. O texto foi condensado de 274 para 242 caracteres sem perder as duas instruções, salvo com backup e conferido novamente no Payload. A captura pós-gravação mostra quatro linhas do corpo mais a referência, sem colisão com `CONTINUE`.
 - A hierarquia dos quatro itens agora acompanha a fonte: rótulos 9 pt negrito; corpo/referências 10 pt; `XP` internos de 9 pt negrito onde a fonte os reduz. Pontos fixos continuam fora do Rich Span.
-- O termo de modo ainda precisa ser padronizado entre páginas antes da aprovação editorial do pacote PT-BR. A captura atual verifica layout; não transforma o draft em aprovação editorial global.
+- Os nomes `Crawl Mode` e `Epic Crawl Mode` já foram decididos pelo usuário. `Rank → Nível`, `Loot Level → Nível de Saque` e `Tuck Bag → Bolsas de Aventureiro` são usos locais desta página, ainda sem promoção a equivalências globais; a página de candidatos registra o escopo.
 
 ## Revalidação integral do estado atual (2026-10-16)
 
@@ -110,3 +110,10 @@ Four fixed bullet items follow. The bullet dots are decorative/static page eleme
 - Abri os 18 alvos no Rich Block Editor: identidade e texto coincidiram em 18/18. Fechei cada editor por Cancel; os hashes dos 18 registros ficaram idênticos antes/depois, e a automação bloqueou todas as tentativas de escrita. Não alterei o Payload.
 - O conteúdo está traduzido e tecnicamente validado para revisão humana. `Crawl Mode` e `Epic Crawl Mode` foram decididos pelo usuário em 24/10/2026; a aprovação editorial ainda depende das pendências `Rank`, `Loot Level` e `Tuck Bag`.
 - Evidência reproduzível: `page-009-validation-receipt-v1.json`, `snapshot/snapshot.json`, `payload-baseline-v1.json`, `editor-readonly-receipt-v2.json`, PDF exportado e rasters Viewer/PDF/fonte no diretório acima.
+
+## Revisão de copyfit salva e exportada (2026-11-21)
+
+- Corrigi o copyfit de `Começar a Jogar` para “Jogue o primeiro Encontro...” e simplifiquei a condição de vitória sem remover a lista de recompensas; o run de **XP** continua em negrito.
+- A unidade `Epic Dungeon Crawl` agora registra **A Folha da Aventura**, conforme `Adventure Sheet → Folha da Aventura` no glossário oficial. O Payload já continha essa forma; o sidecar estava desatualizado.
+- Os 18 registros PT-BR foram relidos e aparecem no Viewer e no print. O export persistido confirmou `verifiedTranslationRecords=true`, `pdfVerification=true` e página de 820.346 × 820.346 pt. Viewer e print foram comparados visualmente ao OG; os corpos de `Começar a Jogar` e `Vitória e Derrota` mantêm 4 linhas. A unidade direita de 17 linhas teve sua moldura local ampliada em 0.891 pt, mantendo 17 linhas. Todos os 18 alvos têm excesso direito/inferior medido igual a zero.
+- Evidência final e snapshot do Payload: `engineering-decisions/evidence/2026-11-21-page9/` (workspace privado). O PDF final tem SHA-256 `11ef20b803d1e220287f3dac47dc7c7b121f7ac70c40f9a50af0213fe8883f58`.

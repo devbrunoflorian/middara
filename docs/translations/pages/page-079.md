@@ -1,0 +1,6 @@
+# Página 079 — Alternativas, Variações e Nível de Saque
+
+- **Harmonização local:** o título da p.79, o título de continuação da p.80 e as referências nas pp.91 e 93 agora correspondem ao índice da p.3: “Alternativas, Variações e Nível de Saque”. O rótulo `LOOT LVL` impresso nas cartas segue em inglês; esta escolha não expande globalmente a sigla `LVL`.
+- **Conferência visual:** OG e PT-BR foram comparados nas pp.79, 80, 91 e 93. O título principal da p.79 e a continuação da p.80 cabem em uma linha; as referências das pp.91 e 93 permanecem dentro das molduras. Os exports por página passaram `verifiedTranslationRecords=true` e `pdfVerification=true`.
+- **Releitura do export integral (2026-11-22):** comparei a p.79 inteira do OG e do Viewer em raster 1094×1094. As caixas e imagens de cartas mantêm seus rótulos em inglês; a prosa de regras visível está em PT-BR, com o conteúdo e as quebras dentro da página. Não encontrei clipping nem colisão. Isso fecha a checagem visual rápida, sem fechar a revisão de terminologia nem a certificação global.
+- **Evidências temporárias:** capturas OG/Viewer e exports ficam em `tmp/quick-fix/`. Esta é uma harmonização pontual, não certifica o restante dessas páginas.

@@ -1,0 +1,12 @@
+# Página 64 — Turno do Combatente Inteligente
+
+- **Estado:** prosa PT-BR e símbolos conferidos contra o OG em 18/11/2026; revisão localizada dos dados e pesos tipográficos concluída em 23/11. A página ainda não está certificada por inteiro.
+- **Símbolos na prosa:** 22 objetos semânticos estão no fluxo do texto, incluindo dados, ícones de combate e marcadores A–I. Viewer e print não mostram cópias fixas sobrando nas posições antigas. A arte das cartas permanece em inglês.
+- **Título:** texto editável em frame centralizado de 570 pt (x=125 pt, eixo x=410 pt); ocupa uma linha. `BACKSTAB` permanece no título porque é o nome da Tag impressa na carta, conforme a decisão editorial já registrada. O arquivo SVG PT-BR antigo não está no sidecar ativo.
+- **Dados (23/11):** na prosa, `WHITE/PURPLE/BLACK` agora são `BRANCO/ROXO/PRETO`, alinhados ao uso da p.45. Os símbolos dos dados continuam inline. Também restaurei o negrito dos rótulos e dos resultados numéricos como no OG. A frase do exemplo foi ajustada sem perder conteúdo.
+- **Copyfit:** blocos 4 e 5 medidos com Copyfit V3 contra o PDF OG e o PageRenderer: EXACT 5/5 e 2/2 linhas em 100% e 200%. Read-after-write confirmou a tradução e a publicação; as versões vivas anteriores foram guardadas no histórico sem inventar aprovação passada.
+- **Recibos:** 14 traduções PT-BR; 3 têm review aprovado e 11 ainda são registros legados sem recibo. As duas revisões desta correção têm estado técnico verificado e classificação EXACT.
+- **Exportação:** uma comparação anterior de OG, Viewer e print passou `verifiedTranslationRecords=true` e `pdfVerification=true`. O PDF final atual foi exportado antes da correção de 23/11 e precisa ser regenerado depois que a revisão integral do livro terminar.
+- **Pendências:** a certificação integral da p.64 e do livro continua aberta. O texto regular parece mais pesado que o OG em EN e PT-BR; isso não foi atribuído a uma causa local nem corrigido aqui.
+- **Evidência privada:** `engineering-labs/planning/engineering-decisions/evidence/2026-11-18-p064-review/` e o registro de decisão de 23/11.
+- **Fonte:** [transcrição bruta do PDF](../source-pages/page-064.md). A transcrição não substitui a conferência visual e semântica.

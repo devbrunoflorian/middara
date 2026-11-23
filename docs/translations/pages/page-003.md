@@ -2,7 +2,8 @@
 
 - **Origem EN:** extraída diretamente do PDF oficial, página impressa 3.
 - **Fidelidade EN:** verificada em comparação de página inteira PDF↔app após o tracer tipográfico da p. 3; evidência e método em `docs/project-progress/2026-10-01-book-wide-typographic-units.md` e imagens locais `tmp/page3-{app,pdf}-after.png`.
-- **PT-BR:** há um rascunho editorial dos 40 itens; ele ainda não foi importado como página completa nem aprovado no preview. O override de título `Índice` já existente no Payload é preservado e está em conflito com o rascunho `Sumário`.
+- **PT-BR (rechecado em 2026-11-23):** há 40 registros PT-BR no Payload: o título “Sumário” e 39 das 40 linhas do sumário. A linha `TAGS` não tem overlay porque “Tag” é a forma emprestada usada em português; ela permanece visualmente igual à fonte e está classificada como forma idêntica, não como lacuna. `Skill Checks` aparece como “Testes de Perícia”, conforme o glossário. Os 40 destinos numéricos e o fólio coincidem com o OG. Ainda faltam recibos de revisão/aprovação e a revisão contextual dos alertas antigos de copyfit.
+- **Rechecagem do PDF final em 2026-11-23:** os 40 registros PT-BR (título + 39 linhas) aparecem no PDF refinado; a linha `TAGS` permanece em sua forma idêntica aprovada para o termo. Os 40 destinos numéricos do sumário e o fólio coincidem com o OG. `Tiers`, `Pontos de Stamina` e `Ícones de Escala` seguem as decisões documentadas; os recibos unitários continuam abertos.
 - **Rechecagem da fonte (2026-10-04):** PDF original p. 3 tem os mesmos 40 títulos na mesma ordem e 40 números de destino; pareamento por linha/baseline confirmou 0 divergências.
 - **Hierarquia:** o título usa EsmeraldaPro 30 pt com alternates no PDF; primeiro nível usa Cinzel-Regular 12 pt com peso visual 700 validado por override local; segundo nível usa OptimaLTStd-Bold 9 pt. Não colapsar níveis.
 - **Texto não traduzível:** referências de páginas e líderes pontilhados são preservados como estrutura. O “3” do rodapé é número da página, não item do sumário.
@@ -11,9 +12,9 @@
 
 **EN:** Contents
 
-**PT-BR (rascunho):** Sumário
+**PT-BR (salvo no Payload em 2026-11-21):** Sumário
 
-**Conflito de estado existente:** o Payload já contém `page_3_block_0`/PT-BR = “Índice”. Esse registro foi preservado e não foi sobrescrito. “Sumário” é o rascunho editorial para `Contents`; o título precisa ser reconciliado antes de salvar a tradução completa ou aprovar o preview PT.
+**Correção semântica:** `Contents` é o sumário do livro; “Sumário” o distingue do índice remissivo (`Index`) da p.101. A tradução foi atualizada no registro de título existente, preservando o alinhamento central e a fonte EsmeraldaPro de 30 pt.
 
 **Layout/DTP:** EsmeraldaPro 30 pt. O PDF usa alternates nos caracteres `n` do original; ao renderizar `Sumário`, selecionar alternates adequados ao texto PT se disponíveis. Preservar o tamanho e a hierarquia do título; não reduzir para caber.
 
@@ -25,7 +26,7 @@
 
 **EN:** **Summary of Components**
 
-**PT-BR (rascunho):** **Resumo dos Componentes**
+**PT-BR (salvo no Payload; revisão aberta):** **Sumário de Componentes**
 
 **Estilo fonte:** Cinzel-Regular 12 pt; peso visual 700 confirmado localmente; small-caps do PDF.
 
@@ -37,7 +38,7 @@
 
 **EN:** **Choosing a Game Mode**
 
-**PT-BR (rascunho):** **Escolher um Modo de Jogo**
+**PT-BR (salvo no Payload; revisão aberta):** **Escolhendo um Modo de Jogo**
 
 **Estilo fonte:** Cinzel-Regular 12 pt; peso visual 700 confirmado localmente; small-caps do PDF.
 
@@ -49,7 +50,7 @@
 
 **EN:** **CRAWL MODE**
 
-**PT-BR (rascunho):** **MODO CRAWL**
+**PT-BR (salvo no Payload; revisão aberta):** **MODO EXPLORAÇÃO**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -73,7 +74,7 @@
 
 **EN:** **Playing Encounters**
 
-**PT-BR (rascunho):** **Jogar Encontros**
+**PT-BR (salvo no Payload; revisão aberta):** **Jogando Encontros**
 
 **Estilo fonte:** Cinzel-Regular 12 pt; peso visual 700 confirmado localmente; small-caps do PDF.
 
@@ -121,7 +122,7 @@
 
 **EN:** **PLAYING ADVENTURERS**
 
-**PT-BR (rascunho):** **JOGAR COM AVENTUREIROS**
+**PT-BR (salvo no Payload; revisão aberta):** **JOGANDO COM AVENTUREIROS**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -133,7 +134,7 @@
 
 **EN:** **ITEM TIERS AND TYPES**
 
-**PT-BR (rascunho):** **TIERS E TIPOS DE ITEM**
+**PT-BR (publicado):** **TIERS E TIPOS DE ITENS**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -145,7 +146,7 @@
 
 **EN:** **SELLING ITEMS**
 
-**PT-BR (rascunho):** **VENDER ITENS**
+**PT-BR (salvo no Payload; revisão aberta):** **VENDENDO ITENS**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -163,7 +164,7 @@
 
 **Expansão por caracteres:** +69% (EN 13 → PT 22).
 
-**Sinal de copyfit:** acima de 20%; manter esta tradução por enquanto e conferir a largura real até os líderes pontilhados no preview PT. O número sozinho não prova overflow; preservar a hierarquia/tamanho.
+**Copyfit (23/11/2026):** 1 linha no Viewer a 100% e 200%; distância de 3,00 pt até o líder adaptável, que conserva 355,53 pt de extensão. O alerta por expansão de caracteres não corresponde a overflow.
 
 ---
 
@@ -183,7 +184,7 @@
 
 **EN:** **TAGS**
 
-**PT-BR (rascunho):** **TAGS**
+**PT-BR (forma idêntica em português; preservada na fonte):** **TAGS**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt; nome de mecânica sem entrada oficial no glossário.
 
@@ -201,7 +202,7 @@
 
 **Expansão por caracteres:** +31% (EN 16 → PT 21).
 
-**Sinal de copyfit:** acima de 20%; manter esta tradução por enquanto e conferir a largura real até os líderes pontilhados no preview PT. O número sozinho não prova overflow; preservar a hierarquia/tamanho.
+**Copyfit (23/11/2026):** 1 linha no Viewer a 100% e 200%; distância de 3,00 pt até o líder adaptável, que conserva 371,20 pt de extensão. O alerta por expansão de caracteres não corresponde a overflow.
 
 ---
 
@@ -221,7 +222,7 @@
 
 **EN:** **An Adventurer's Turn**
 
-**PT-BR (rascunho):** **Turno do Aventureiro**
+**PT-BR (salvo no Payload; revisão aberta):** **O Turno de um Aventureiro**
 
 **Estilo fonte:** Cinzel-Regular 12 pt; peso visual 700 confirmado localmente; small-caps do PDF.
 
@@ -233,7 +234,7 @@
 
 **EN:** **THE INITIATIVE TRACK**
 
-**PT-BR (rascunho):** **TRILHA DE INICIATIVA**
+**PT-BR (salvo no Payload; revisão aberta):** **A TRILHA DE INICIATIVA**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -245,7 +246,7 @@
 
 **EN:** **PHASES OF AN ADVENTURER'S TURN**
 
-**PT-BR (rascunho):** **FASES DO TURNO DO AVENTUREIRO**
+**PT-BR (salvo no Payload; revisão aberta):** **FASES DO TURNO DE UM AVENTUREIRO**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -257,11 +258,11 @@
 
 **EN:** **SPENDING STAMINA POINTS**
 
-**PT-BR (rascunho):** **GASTAR PONTOS DE VIGOR**
+**PT-BR (publicado):** **GASTANDO PONTOS DE STAMINA**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
-**Expansão por caracteres:** -4% (EN 23 → PT 22).
+**Expansão por caracteres:** +13% (EN 23 → PT 26).
 
 ---
 
@@ -269,7 +270,7 @@
 
 **EN:** **STANDARD ACTIONS AND ABILITIES**
 
-**PT-BR (rascunho):** **AÇÕES PADRÃO E HABILIDADES**
+**PT-BR (salvo no Payload; revisão aberta):** **AÇÕES E HABILIDADES PADRÃO**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -293,7 +294,7 @@
 
 **EN:** **THE MOVE ACTION**
 
-**PT-BR (rascunho):** **AÇÃO DE MOVIMENTO**
+**PT-BR (salvo no Payload; revisão aberta):** **A AÇÃO DE MOVIMENTO**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -305,7 +306,7 @@
 
 **EN:** **THE ATTACK ACTION**
 
-**PT-BR (rascunho):** **AÇÃO DE ATAQUE**
+**PT-BR (salvo no Payload; revisão aberta):** **A AÇÃO DE ATAQUE**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -317,7 +318,7 @@
 
 **EN:** **THE RE-EQUIP ACTION**
 
-**PT-BR (rascunho):** **AÇÃO DE REEQUIPAR**
+**PT-BR (salvo no Payload; revisão aberta):** **A AÇÃO DE REEQUIPAR**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -329,7 +330,7 @@
 
 **EN:** **USING ABILITIES**
 
-**PT-BR (rascunho):** **USAR HABILIDADES**
+**PT-BR (salvo no Payload; revisão aberta):** **USANDO HABILIDADES**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -347,7 +348,7 @@
 
 **Expansão por caracteres:** +25% (EN 12 → PT 15).
 
-**Sinal de copyfit:** acima de 20%; manter esta tradução por enquanto e conferir a largura real até os líderes pontilhados no preview PT. O número sozinho não prova overflow; preservar a hierarquia/tamanho.
+**Copyfit (23/11/2026):** 1 linha no Viewer a 100% e 200%; distância de 3,00 pt até o líder adaptável, que conserva 401,12 pt de extensão. O alerta por expansão de caracteres não corresponde a overflow.
 
 ---
 
@@ -367,7 +368,7 @@
 
 **EN:** **COMMAND COMBATANTS**
 
-**PT-BR (rascunho):** **COMANDAR COMBATENTES**
+**PT-BR (salvo no Payload; revisão aberta):** **COMBATENTES DE COMANDO**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -403,13 +404,13 @@
 
 **EN:** **SKILL CHECKS**
 
-**PT-BR (rascunho):** **TESTES DE HABILIDADE**
+**PT-BR (salvo no Payload):** **TESTES DE PERÍCIA**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt; `Skill Check` conforme glossário.
 
 **Expansão por caracteres:** +67% (EN 12 → PT 20).
 
-**Sinal de copyfit:** acima de 20%; manter esta tradução por enquanto e conferir a largura real até os líderes pontilhados no preview PT. O número sozinho não prova overflow; preservar a hierarquia/tamanho.
+**Copyfit (23/11/2026):** 1 linha no Viewer a 100% e 200%; distância de 3,00 pt até o líder adaptável, que conserva 396,93 pt de extensão. O alerta por expansão de caracteres não corresponde a overflow.
 
 ---
 
@@ -417,7 +418,7 @@
 
 **EN:** **BEING DEFEATED**
 
-**PT-BR (rascunho):** **SER DERROTADO**
+**PT-BR (salvo no Payload; revisão aberta):** **SENDO DERROTADO**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt.
 
@@ -429,13 +430,13 @@
 
 **EN:** **SCALING ICONS**
 
-**PT-BR (rascunho):** **ÍCONES ESCALÁVEIS**
+**PT-BR (publicado):** **ÍCONES DE ESCALA**
 
-**Estilo fonte:** OptimaLTStd-Bold 9 pt; termo de mecânica ainda candidato.
+**Estilo fonte:** OptimaLTStd-Bold 9 pt; segue o nome publicado da seção na p.72. Uso local, sem criar decisão global para `Scaling Icons`.
 
-**Expansão por caracteres:** +31% (EN 13 → PT 17).
+**Expansão por caracteres:** +23% (EN 13 → PT 16).
 
-**Sinal de copyfit:** acima de 20%; manter esta tradução por enquanto e conferir a largura real até os líderes pontilhados no preview PT. O número sozinho não prova overflow; preservar a hierarquia/tamanho.
+**Copyfit (23/11/2026):** 1 linha no Viewer a 100% e 200%; distância de 3,00 pt até o líder adaptável, que conserva 394,86 pt de extensão. O alerta por expansão de caracteres não corresponde a overflow.
 
 ---
 
@@ -467,7 +468,7 @@
 
 **EN:** **ALTERNATE, VARIATIONS, AND LOOT LVL**
 
-**PT-BR (rascunho):** **ALTERNATIVOS, VARIAÇÕES E NÍVEL DE SAQUE**
+**PT-BR (salvo no Payload; revisão aberta):** **ALTERNATIVAS, VARIAÇÕES E NÍVEL DE SAQUE**
 
 **Estilo fonte:** OptimaLTStd-Bold 9 pt; `Loot` conforme glossário.
 
@@ -485,7 +486,7 @@
 
 **Expansão por caracteres:** +42% (EN 19 → PT 27).
 
-**Sinal de copyfit:** acima de 20%; manter esta tradução por enquanto e conferir a largura real até os líderes pontilhados no preview PT. O número sozinho não prova overflow; preservar a hierarquia/tamanho.
+**Copyfit (23/11/2026):** 1 linha no Viewer a 100% e 200%; distância de 3,00 pt até o líder adaptável, que conserva 318,92 pt de extensão. O alerta por expansão de caracteres não corresponde a overflow.
 
 ---
 
@@ -505,7 +506,7 @@
 
 **EN:** **Index**
 
-**PT-BR (rascunho):** **Índice**
+**PT-BR (salvo no Payload; revisão aberta):** **Índice Remissivo**
 
 **Estilo fonte:** Cinzel-Regular 12 pt; peso visual 700 confirmado localmente; small-caps do PDF.
 
@@ -516,14 +517,15 @@
 ## Termos sem entrada oficial
 
 - **Tags:** mantido como empréstimo para o conceito formal do livro; revisar consistência quando páginas 91–92 forem auditadas.
-- **Scaling Icons → Ícones Escaláveis:** candidato contextual; p. 72 descreve ícones cujo valor depende de outra carta/personagem.
+- **Scaling Icons → Ícones de Escala:** forma local usada no título da p.72 e na legenda da p.89; não é uma decisão global de glossário.
 - **Assemblage:** preservado sem tradução como nome próprio da árvore de disciplinas.
-- **Alternate → Alternativos:** tradução provisória do tipo/tag de Combatant descrito na p. 79.
+- **Alternate → Alternativas:** forma local do título da p.79, harmonizada com as pp.80, 91 e 93; não canonizar como equivalência global sem revisão terminológica.
 
 ## QA PT pendente
 
-- Resolver o conflito entre o título de origem `Contents`, o rascunho `Sumário` e o override já salvo `Índice` sem apagar conteúdo existente.
-- Renderizar a coluna PT e conferir todos os títulos longos junto aos líderes/page refs, com foco em `ITEM UPGRADES`, `DISCIPLINE TREES`, `SPELL ACTION`, `SKILL CHECKS`, `SCALING ICONS` e `ABRAXIS BATTLE DICE`.
+- **Tipografia dos seis títulos longos (23/11/2026):** a leitura do DOM em 100% e 200% confirmou OptimaLTStd 9 pt, peso 700 e `#231f20` nos cinco subtítulos; “Dados de Batalha de Abraxis” usa CinzelLocal 12 pt, peso 700 e a mesma cor. O tamanho normalizado permaneceu igual nos dois zooms. Esta medição cobre esses seis rótulos, não todos os textos da página.
+- Registrar recibos de revisão para as correções semânticas antes de certificar esta página.
+- Revalidar a paridade de todos os rótulos, líderes pontilhados e números de destino na próxima exportação integral. Os seis alertas antigos de expansão foram verificados: cada título conserva uma linha nos dois zooms e há de 318,92 a 401,12 pt de líder restante, sem colisão.
 - Confirmar alternates Esmeralda para “Sumário” e se o render PT consegue preservar o mesmo tratamento do título.
 - Conferir os candidatos de terminologia ainda pendentes com o restante do livro; esta lista não altera o glossário oficial.
-- Validar no preview os caracteres acentuados e o peso bold sem usar o limite de 20% como teste de encaixe.
+- Revisar formalmente as unidades ativas e os alternates Esmeralda no título; os recibos de aprovação permanecem abertos.

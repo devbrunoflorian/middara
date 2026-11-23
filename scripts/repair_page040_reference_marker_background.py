@@ -151,6 +151,7 @@ def repair(*, apply: bool) -> dict:
                 'bbox':[bounds[0]/sx,bounds[1]/sy,bounds[2]/sx,bounds[3]/sy],
                 'widthPx':patch_crop.width,'heightPx':patch_crop.height,
                 'languageInvariant':True,'zIndex':2,
+                'maskInlineElements':False,
                 'category':'component-reference-marker-background-repair',
                 'sourcePdfPage':40,
                 'region':'Paper patches beneath ten semantic A-D reference markers',

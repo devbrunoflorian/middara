@@ -1,0 +1,10 @@
+# Página 017 — Reading Encounters (continued)
+
+- **OG:** a página inteira do PDF oficial foi comparada ao Viewer PT-BR e ao print em 21/11/2026.
+- **Cobertura:** 22 alvos PT-BR estão publicados e aprovados no Payload; as 22 reviews ativas estão aprovadas e não há pendentes. Os rótulos e nomes impressos dentro das fichas de Totem, Saque e Objetivo continuam em inglês, preservando a arte dos componentes.
+- **Copyfit:** o catálogo registra 22/22 unidades como EXACT. As quatro unidades com molduras corrigidas foram reavaliadas em 100% e 200%: bloco 35 `4/4`, bloco 49 `5/5`, bloco 50 `4/4`, bloco 55 `3/3`. Título e demais parágrafos preservam a medição aprovada existente.
+- **Molduras PT-BR:** criadas para `page_17_block_35`, `49`, `50` e `55`; larguras 306,928, 319,5, 322,94 e 302,569 pt. A moldura do bloco 49 também ganhou 0,561 pt de altura. Texto, versões aprovadas e molduras EN não foram alterados.
+- **Exceção de geometria:** 320 pt no bloco 49 faz o Viewer refluír para quatro linhas, então ficou em 319,5 pt para manter o copyfit do OG. No PDF final, o bbox extraído da primeira linha alcança 1,694 pt além da moldura; a tinta aparece completa e sem colisão no print. É uma folga/seleção da caixa ainda imperfeita, não clipping resolvido, e fica registrada para uma solução que preserve as cinco linhas.
+- **Terminologia:** `Tier` permanece `Tier`, distinto de `Level/LVL`. A página usa localmente `Alcance`, `Ação de Encontro` e `LVL de Saque`; não altera as pendências globais de `Range` nem canoniza `Ação de Encontro` ou o composto `Loot LVL` no glossário. `Skill Check → Teste de Perícia` não ocorre como termo nesta página.
+- **Exportação:** PDF de uma página, MediaBox 820,346 × 820,346 pt, `verifiedTranslationRecords=true`, `pdfVerification=true`, 4.759 caracteres extraíveis, sem U+FFFD ou caracteres de uso privado. SHA-256: `655A285C3C57A01331128E5A94F6425AD1F93431AC5D15C8D48B2D6C96D1E4E0`.
+- **Evidências privadas:** `engineering-decisions/evidence/2026-11-21-page17/` contém OG, Viewer, print, PDF, log, métricas, geometria textual e molduras Payload antes/depois.

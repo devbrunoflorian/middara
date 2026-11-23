@@ -312,7 +312,10 @@ for (const record of ptRecords) {
 const translationTokens = record => new Set((record.data?.segments ?? [])
   .filter(segment => !segment.symbolId)
   .map(segment => String(segment.text ?? ''))
-  .join(' ')
+  // Rich-text segment boundaries often split a single word (for example,
+  // a font/style run inside “Importantes”). Preserve the saved text exactly
+  // before tokenizing so those boundaries do not create false invisibility.
+  .join('')
   .normalize('NFC')
   .match(/[\p{L}\p{N}]{4,}/gu)?.map(token => token.toLocaleLowerCase('pt-BR')) ?? []);
 

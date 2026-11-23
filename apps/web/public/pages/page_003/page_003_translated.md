@@ -280,7 +280,7 @@ Outras Regras Chave
 SKILL CHECKS
 
 **[PT-BR]:** [EN: 12 chars | PT: 19 chars | Exp: +58%]
-TESTES DE HABILIDADE
+TESTES DE PERÍCIA
 
 ---
 

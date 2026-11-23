@@ -7,12 +7,14 @@ This is a review queue, **not an approval list**. Payload collection `translatio
 | Adventure Mode | `Modo Aventura`; `Modo Aventureiro` | 4–6, 10, 13, 85 | Inconsistent between drafts. **Recommendation:** standardize on `Modo Aventura`; the other wording changes the sense from a game mode to a person. |
 | Tier | `Tier` | 3, 4, 13, 17, 26, 27, 28, 57, 85, 94, 101 | **Decidido canonicamente (18/10/2026; Payload id 58):** `Tier → Tier` para classificação de itens e premiações em faixa. É distinto de `Level` por extenso e da sigla preservada `LVL` (Payload id 73). |
 | Bounty / Reward | `Recompensa(s)`; `prêmio`; `Caçada` contextualmente | 4, 7, 13 | **Decisão humana retomada (26/10/2026; conversas de 12/10 e 18/10):** ambos podem ser “Recompensa(s)”/“prêmio” em contextos distintos; no contexto de Aventura, usar “Recompensas” com inicial maiúscula. “Caçada” depende do sentido local de `Bounty`, não é substituição global. `Great Bounty` permanece nome próprio. Preservar as identidades EN separadas na busca e decidir a redação por contexto. Payload id 12 mantém o termo aprovado `Bounty → Recompensa`. |
-| Adventurer Card | `Ficha de Aventureiro` (proposta preferencial); `Cartão de Aventureiro`; `Carta de Aventureiro` | 10, 24 | The Component Summary and base `glossary.md` propose **Ficha de Aventureiro**. Payload id 67 records it as **HIPÓTESE**, reaffirmed by the user on 25/10/2026 but not approved as canonical terminology. `Cartão de Aventureiro` remains an alternative/hypothesis. Keep distinct from `Adventure Sheet → Ficha de Aventura` (id 7); the p. 24 draft is updated in the normal FIFO and remains pending. |
+| Adventurer Card | `Ficha de Aventureiro` (proposta preferencial); `Cartão de Aventureiro`; `Carta de Aventureiro` | 10, 24 | The Component Summary and base `glossary.md` propose **Ficha de Aventureiro**. Payload id 67 records it as **HIPÓTESE**, reaffirmed by the user on 25/10/2026 but not approved as canonical terminology. `Cartão de Aventureiro` remains an alternative/hypothesis. Keep distinct from the approved `Adventure Sheet → Folha da Aventura` (id 7); the p. 24 draft remains pending. |
 | Rank | `Nível` | 9 | Not in the official glossary. Keep distinct from `Tier`/`Loot Level`; confirm whether `Rank` is best rendered as `Nível`, `Patamar`, or another rules term. |
+| Loot Level | `Nível de Saque`; abbreviated `LVL de Saque` | 9, 17, 19, 79–80, 91, 93–94 | Local renderings following `Loot → Saque`; the rulebook section heading and references use `Nível de Saque` for consistency with the p.3 contents. Printed card labels `LOOT LVL` remain unchanged. This local heading choice does not canonize a global expansion of `LVL`; keep distinct from `Rank` and `Tier`. |
+| Tuck Bag | `Bolsas de Aventureiro` | 9 | Local rendering in the Epic Crawl Mode passage; do not generalize to `Party Tuck Bag` or the separate `Party Stash`. Confirm whether this is a named component before canonizing. |
 | Familiar | `Familiar`; `Carta de Familiar` | 4, 7 | Preserved as a game term; absent from the provided official glossary. |
 | Discipline Tree | `Árvore de Disciplinas` | 4 | Proposed label for the system structure; confirm capitalization and plural form. |
 | Terrain Tokens | `Fichas de Terreno` | 5, 21, 23 | Payload id 69 marks this as **PADRÃO OBSERVADO**, not globally approved; distinguish from `Tiles → Peças` and keep linked page reviews pending. |
-| Range | `Alcance` | 17 | Payload id 70 records a **HIPÓTESE** for the general concept only; it is not the `REACH` Tag or `SOI`. |
+| Range | `Alcance` | 17 | Payload id 70 records a **HIPÓTESE** for the general concept only. The active p.17 translation is approved with local `Alcance`; this does not make the general equivalence canonical or apply it to the `REACH` Tag or `SOI`. |
 | `Range` (numeric distance) / `Reach` (weapon property) | `Distância` / `Alcance`; `Range Icon` → `ícone de tipo de Ataque` | 78 | **Decisão local da p.78, não global:** a própria regra contrasta `Range 4` e `Reach 2`, então as medidas ficam distintas. `Range Icon` identifica as categorias dos ícones de ataque (Melee, Ranged, Melee/Ranged), não uma distância numérica. A hipótese geral `Range → Alcance` (Payload id 70) permanece pendente e sem alteração. |
 | Atributos da legenda de Ícones (`Health`, `Defense`, `Movement`, `Armor`, `Presence`, `Lore`, `Agility`, `Perception`, `Strength`) | Saúde, Defesa, Movimento, Armadura, Presença, Conhecimento, Agilidade, Percepção, Força | 89 | Formas locais da prosa de regras, conferidas contra o OG e o glossário atual; não promovidas globalmente. Os rótulos curvos impressos nos pictogramas e texto de cartas/componentes permanecem em inglês. |
 | `Melee/Ranged Icon` / `Scaling Icons` | Ícone Corpo a Corpo/à Distância / Ícones de Escala | 89 | Formas locais desta legenda. A distância numérica `Range` permanece distinta do identificador `REACH`, conforme decisão contextual da p.78. Não altera equivalências globais nem traduz o nome impresso da Tag. |
@@ -32,7 +34,7 @@ This is a review queue, **not an approval list**. Payload collection `translatio
 | Lock In / Locked In | `Travar` / `Travado` | 85 | Par usado na p.85 para distinguir a ação do estado do dado; manter em aberto para revisão global. |
 | Damage token / SP token | `Ficha(s) de Dano` / `Ficha(s) de SP` | 85 | Formas usadas na p.85; SP permanece sigla e as escolhas ficam locais. |
 | Adventure Book | `Livro de Aventura` | 85 | Forma usada na referência cruzada da p.85; não altera por si só o título canônico do outro livro. |
-| Adventure Sheet / Adventurer Sheet | `Adventure Sheet → Ficha de Aventura` (approved, Payload id 7); `Adventurer Sheet → Ficha de Aventureiro` (approved, Payload id 75); `Ficha da Aventura` remains an alternative | 10, 11, 13, 28 | Keep the two source forms distinct. The p. 28 user decision also leaves `Adventurer Card → Ficha de Aventureiro` (Payload id 67) as a hypothesis; it does not promote that separate term or its alternatives. |
+| Adventure Sheet / Adventurer Sheet | `Adventure Sheet → Folha da Aventura` (approved, Payload id 7); `Adventurer Sheet → Ficha de Aventureiro` (approved, Payload id 75); older `Ficha de Aventura` forms are not canonical | 10, 11, 13, 28 | Keep the two source forms distinct. The p. 28 user decision also leaves `Adventurer Card → Ficha de Aventureiro` (Payload id 67) as a hypothesis; it does not promote that separate term or its alternatives. |
 | Unselectable / Selectable / Injured | `Não Selecionável`; `Selecionável`; `Ferido` | 11 | Proposed status labels; absent from the official glossary. Confirm these before using them as global terms. |
 | Party Tuck Bag | `Bolsa do Grupo` | 10 | Proposed name for the shared storage bag. Keep distinct from official `Party Stash → Estoque do Grupo` until the compound term is confirmed. |
 
@@ -52,7 +54,7 @@ O usuário confirmou **Crawl Book → Livro de Masmorras** (Payload `translation
 
 ## Preferência do usuário — Adventurer Card (25/10/2026)
 
-O Sumário de Componentes e o documento-base `glossary.md` propõem **Ficha de Aventureiro** para `Adventurer Card`; o usuário reafirmou essa preferência em 25/10/2026. Payload id **67** continua **HIPÓTESE**; **Cartão de Aventureiro** permanece alternativa/hipótese, e **Carta de Aventureiro** permanece alternativa. Em 26/10/2026, o usuário confirmou separadamente **Adventurer Sheet → Ficha de Aventureiro** (Payload id 75), distinto de **Adventure Sheet → Ficha de Aventura** (id 7). Essa decisão não promove nem altera o id 67.
+O Sumário de Componentes e o documento-base `glossary.md` propõem **Ficha de Aventureiro** para `Adventurer Card`; o usuário reafirmou essa preferência em 25/10/2026. Payload id **67** continua **HIPÓTESE**; **Cartão de Aventureiro** permanece alternativa/hipótese, e **Carta de Aventureiro** permanece alternativa. Em 26/10/2026, o usuário confirmou **Adventurer Sheet → Ficha de Aventureiro** (Payload id 75). Em 05/11/2026, atualizou **Adventure Sheet → Folha da Aventura** (id 7); as duas formas continuam distintas. Essas decisões não promovem nem alteram a hipótese `Adventurer Card` (id 67).
 
 ## Cross-project terminology evidence — chapters 1–3 audit (2026-10-22)
 
@@ -60,12 +62,12 @@ Source: `C:\Users\bruno\Downloads\Auditoria_terminologica_Middara_capitulos_1_a_
 
 | Rulebook term / issue | Evidence and current handling |
 |---|---|
-| `Adventure Sheet` / `Adventurer Sheet` | The audit reports `Ficha de Aventura` in 8 files, `Ficha de Aventureiro` in 16, plus `Folha de Aventura` in 8; C3/73 reportedly uses both `Ficha de Aventura` and `Folha de Aventura` for related labels. Resolution on 2026-10-26: preserve the source distinction, with `Adventure Sheet → Ficha de Aventura` (Payload id 7) and `Adventurer Sheet → Ficha de Aventureiro` (id 75). The `Adventurer Card` hypothesis (id 67) remains unchanged; no mass replacement. |
+| `Adventure Sheet` / `Adventurer Sheet` | The audit reports historical variants `Ficha de Aventura`, `Ficha de Aventureiro`, and `Folha de Aventura`. The 05/11/2026 user decision supersedes the earlier audit proposal: current forms are `Adventure Sheet → Folha da Aventura` (Payload id 7) and `Adventurer Sheet → Ficha de Aventureiro` (id 75). Do not mass-replace older human-approved prose without page review. The `Adventurer Card` hypothesis (id 67) remains separate. |
 | `Special Encounter Rules` | The audit finds `Regras Especiais do Encontro` in 30 files, while the official glossary says `Regras Especiais de Encontro`. The glossary remains authoritative until an explicit terminology decision; do not silently replace either the glossary or existing human text. |
 | `End Conditions` | The audit finds `Condições Finais` in 37 files and considers `Condições de Encerramento` semantically more explicit. This is a tradeoff, not a confirmed error. Keep the official `Condições Finais`; any change needs a coordinated human decision because of broad existing usage. |
-| `Range` / `REACH` / `SOI` | Preserve the mechanical distinction: general `Range` is not the `REACH` tag, and SOI is a special spell range that also requires Line of Sight. `Range → Alcance` remains an unresolved p.17 unit term; do not infer a project-wide translation for the printed `REACH` tag or rename `SOI`. |
+| `Range` / `REACH` / `SOI` | Preserve the mechanical distinction: general `Range` is not the `REACH` tag, and SOI is a special spell range that also requires Line of Sight. The active p.17 use of `Alcance` is approved locally; the general `Range → Alcance` hypothesis remains unresolved. Do not infer a project-wide translation for the printed `REACH` tag or rename `SOI`. |
 | Cross-reference style | The audit reports source `Pg.` in 153 Adventure Book files. The existing user-approved Rulebook convention `See → Veja` remains in force. This evidence supports checking reference contexts and localized page suffixes, but does not authorize broad changes to narrative uses of `Consulte` or to Adventure Book files. |
-| Confirmed matches with existing decisions | The audit's usage supports `Line of Sight → Linha de Visão`, `Party Stash → Estoque do Grupo`, `Spawn → Faça Surgir` in imperatives, `Skill Check → Teste de Habilidade`, and `Initiative Track → Trilha de Iniciativa`. The user's Line of Sight decision is already recorded in the official glossary and Payload decision 59; the other matches do not create new approvals. |
+| Confirmed matches with existing decisions | The audit's usage supports `Line of Sight → Linha de Visão`, `Party Stash → Estoque do Grupo`, `Spawn → Faça Surgir` in imperatives, `Skill Check → Teste de Perícia`, and `Initiative Track → Trilha de Iniciativa`. The user's Line of Sight decision is already recorded in the official glossary and Payload decision 59; the Skill Check form was explicitly confirmed by the user on 2026-11-21 and is recorded in the official glossary and Payload. |
 
 The audit also suggests `Exaurir / Preparar` for the Exhaust pair. This conflicts with the user-approved `Exhaust → Exaustar` decision; keep the approved glossary term and do not use the audit suggestion to revise it. Derived forms and `Un-Exhaust` remain context-specific unless separately decided.
 
@@ -76,13 +78,13 @@ Source: `C:\Users\bruno\Downloads\Auditoria_Middara_capitulos_4_e_5_comparacao_1
 | Issue | Evidence recorded | Current handling |
 |---|---|---|
 | `Story Flag` | `Marcador de História` is in 103 DOCX across C1–C5; `Marcador da História` in 22 earlier files. The official glossary already selects the former. | Treat the latter as a scoped consistency candidate when it denotes the mechanic; do not rename proper Flag identifiers or perform a blind replacement. |
-| `Adventure Sheet` | `Ficha de Aventura` appears in 63 DOCX; `Folha de Aventura` in 6. Some earlier passages use both forms in related labels. | Retain `Ficha de Aventura` for the Rulebook component as a provisional candidate and review context/source distinction before editing. No global change. |
+| `Adventure Sheet` | The old audit reports `Ficha de Aventura` in 63 DOCX and `Folha de Aventura` in 6; those are historical corpus counts. | Superseded by the 05/11/2026 user decision and official glossary: use `Folha da Aventura` for `Adventure Sheet`, distinct from `Adventurer Sheet → Ficha de Aventureiro`. Review legacy occurrences in context; no blind replacement. |
 | `Special Encounter Rules` | 49 DOCX use `Regras Especiais do Encontro`; 5 use `Regras Especiais de Encontro`. The existing official glossary selects `de Encontro`. | Conflict requires an explicit human terminology decision; glossary remains authoritative until then. Do not alter approved text. |
 | `Unselectable` | 19 DOCX use `Inselecionável`; 3 use `Indisponível`. The Rulebook p.11 distinguishes this mechanical state from `Injured`. | Preserve the proposed distinction as a candidate only. The Adventure Book English is absent, so do not harmonize these forms until equivalence is verified. Do not change ordinary narrative `indisponível`. |
 | `Restore Adventurers` | 31 DOCX use `Restaurar Aventureiros`; C4/16 uses `Recupere os Aventureiros` in two reward instructions. The glossary maps `Restore → Restaurar`. | Keep the two instructions flagged for source comparison; no correction without their English text. |
 | `End Conditions` | `Condições Finais` occurs in 57 DOCX and is already the official glossary form. | Keep it. `Condições de Encerramento` is a proposed broad editorial revision, not a demonstrated error; any change requires coordinated approval and copyfit. |
 | Cross-references | `Pg.` occurs in 321 DOCX across C1–C5; `Consulte` in 25. | For the Rulebook, the existing approved `See → Veja` convention remains. Audit contexts before changing any text, and keep Adventure Book references outside this Rulebook task. |
-| `Encounter Action` | `Ação de Encontro` appears in 17 C4–C5 documents and corresponds to a formal Rulebook mechanic. | Add as a glossary decision candidate; not canonized from corpus frequency alone. |
+| `Encounter Action` | `Ação de Encontro` appears in 17 C4–C5 documents and corresponds to a formal Rulebook mechanic. | P.17 uses the form in an approved local translation. Keep it as a glossary decision candidate; corpus frequency and a page-local approval do not canonize the global compound. |
 | `SYMBIOTIC` and `Double Encounter` | C4 uses `SIMBIÓTICO` for the rule tag and `Encontro Duplo` for a separate encounter structure. | Keep semantic scopes separate; do not treat “Duplo” as the printed `DOUBLE` tag or translate physical component identifiers without policy. |
 | `SOI`, `REACH`, status adjectives, and proper names | Absence/presence in C4–C5 alone does not establish missing translation or approved terminology. Narrative `Exausto/exaurido` does not decide the card mechanics `EXHAUST/UN-EXHAUST`. | Keep existing human decisions (`Exhaust → Exaustar`) and avoid new global inferences. |
 
@@ -98,7 +100,7 @@ Este registro complementa as auditorias C1–C5 e tem precedência sobre descri�
 | Story Round | Rodada de História | Glossário oficial; uso consistente observado nas auditorias dos capítulos consultados | **Confirmado:** manter Rodada de História; a auditoria corrobora a decisão vigente, sem criar uma nova. | Baixo, mas validar cabeçalhos e nomes de fase em seus frames reais. |
 | Line of Sight | Linha de Visão | Glossário oficial e decisão humana persistida no Payload (id 59); uso consistente nas auditorias C1–C5 | **Confirmado:** manter Linha de Visão; não renomear SOI/REACH nem IDs semânticos relacionados. | Pode alongar rótulos; nunca reduzir fonte ou ampliar frame automaticamente para acomodar a expressão. |
 | End Conditions | Condições Finais; alternativa editorial: Condições de Encerramento | Glossário oficial; 57 DOCX da auditoria C1–C5 usam Condições Finais | **Confirmado:** Condições Finais permanece vigente. A alternativa é somente proposta editorial e exigiria decisão coordenada antes de qualquer uso amplo. | A alternativa é mais longa e pode alterar quebras de título; testar localmente se uma unidade existente for revisada. |
-| Adventure Sheet / Adventurer Sheet | Ficha de Aventura / Folha de Aventura / Ficha da Aventura; a forma Ficha de Aventureiro também aparece para Adventurer Sheet | Auditorias C1–C5; exemplos anotados em C1/56 e C3/73, além de C4–C5 | **Pendente:** manter as formas por unidade e conferir a distinção da fonte; não escolher pela frequência nem harmonizar em lote. | Variantes têm comprimentos diferentes; validar títulos, células e referências no frame real. |
+| Adventure Sheet / Adventurer Sheet | `Folha da Aventura` / `Ficha de Aventureiro` | Decisões do usuário de 26/10 e 05/11/2026; glossário oficial | **Decidido:** manter as duas formas distintas. Revisar ocorrências legadas caso a caso; não aplicar substituição em lote. | As formas têm comprimentos diferentes; validar títulos, células e referências no frame real. |
 | Special Encounter Rules | Regras Especiais de Encontro / Regras Especiais do Encontro | Glossário oficial; auditoria C1–C5 relata 49 DOCX com “do Encontro” e 5 com “de Encontro” | **Pendente conflito externo:** o glossário vigente continua autoritativo no Rulebook enquanto não houver decisão coordenada. Não sobrescrever texto humano aprovado. | A inclusão de artigo amplia o rótulo; verificar copyfit apenas nas ocorrências do Rulebook efetivamente revisadas. |
 | Unselectable | Inselecionável / Indisponível; distinguir de Injured | Rulebook p.11 distingue estados; auditorias C1–C5 relatam 19 arquivos com Inselecionável e 3 com Indisponível, mas EN do Livro de Aventura não foi fornecido | **Pendente:** determinar equivalência mecânica no EN do Adventure Book antes de harmonizar. Não alterar usos narrativos comuns de “indisponível”. | “Inselecionável” pode ocupar mais largura; manter termos e geometria atuais até revisão contextual e medição. |
 
@@ -137,18 +139,18 @@ Estes termos ocorrem nas 22 propostas locais de Regras de Movimento. Sua mediç�
 
 ### Vocabulário local observado na p.68 (2026-11-16)
 
-O glossário foi consultado antes de revisar os Testes de Habilidade e Saltos. `Skill Check → Teste de Habilidade`, `Adventure Mechanic → Mecânica de Aventura`, `Terrain → Terrenos`, `Obstructing Terrain → Terreno Obstruído`, `Figures → Miniaturas`, `Adventurer Card → Ficha de Aventureiro`, `Move Action → Ação de Movimento`, `Free Movement → Movimento Livre` e `Movement Point(s) → Ponto(s) de Movimento` já têm formas oficiais e foram reutilizadas.
+O glossário foi consultado antes de revisar os Testes de Perícia e Saltos. `Skill Check → Teste de Perícia`, `Adventure Mechanic → Mecânica de Aventura`, `Terrain → Terrenos`, `Obstructing Terrain → Terreno Obstruído`, `Figures → Miniaturas`, `Adventurer Card → Ficha de Aventureiro`, `Move Action → Ação de Movimento`, `Free Movement → Movimento Livre` e `Movement Point(s) → Ponto(s) de Movimento` já têm formas oficiais e foram reutilizadas.
 
 As formas abaixo foram usadas apenas no contexto desta página; não foram aprovadas globalmente. Rever no glossário quando esses termos voltarem a aparecer:
 
 | Termo EN | Forma contextual usada | Evidência/contexto | Estado |
 |---|---|---|---|
-| `Skill Value` | Valor de Habilidade | Estatística que entra na rolagem do Teste de Habilidade do Aventureiro | Candidata local; sem decisão global identificada |
+| `Skill Value` | Valor de Habilidade | Estatística que entra na rolagem do Teste de Perícia do Aventureiro | Candidata local; sem decisão global identificada |
 | `Lore` | Conhecimento | Exemplo de Valor de Habilidade na p.68 | Candidata local; confirmar o termo mecânico antes de canonizar |
 | `Active Party` | Grupo Ativo | Condição para modificar Testes fora de Encontros | Candidata local; sem decisão global identificada |
 | `Jump / Jumping` | Salto / Saltar | Nome da regra e verbo de movimento da seção | Candidata local; conferir distinção entre nome e verbo |
 | `Agility / Strength / Perception` | Agilidade / Força / Percepção | Valores usados nos Testes de Salto e em tentativas de segurar um aliado | Formas contextuais; sem decisão global identificada nesta revisão |
-| `Loyal Espers / Conduits` | preservados em inglês | Classes citadas como Combatentes que fazem Testes de Habilidade; nomes de classes/componentes continuam no idioma-fonte conforme o escopo atual | Preservar; não são traduções pendentes de prosa comum |
+| `Loyal Espers / Conduits` | preservados em inglês | Classes citadas como Combatentes que fazem Testes de Perícia; nomes de classes/componentes continuam no idioma-fonte conforme o escopo atual | Preservar; não são traduções pendentes de prosa comum |
 
 `INTELLIGENT` e `COMMAND` também permanecem em inglês com as cores e o estilo do OG por serem rótulos impressos de classes. Os símbolos de dados e a caveira são objetos gráficos semânticos, não palavras do glossário.
 
@@ -173,14 +175,13 @@ O glossário foi conferido antes da revisão. As formas oficiais existentes (`Lo
 
 | Termo EN | Forma contextual usada | Evidência/contexto | Estado |
 |---|---|---|---|
-| `Draw` *(ação de tirar carta de um baralho)* | tirar/retirar carta(s) | 57, 70, 81, 84 | A decisão do usuário para preservar o contraste entre comprar e tirar cartas continua pendente globalmente. Nas pp.57 e 70, usa-se “tirar cartas” no contexto de retirar cartas do baralho; na p.81, “retire uma Carta de Combatente ao acaso”, e na p.84, “retirem uma ao acaso”, descrevem a seleção de uma carta já embaralhada. `Draw → Compre` permanece no glossário oficial e não é aplicado mecanicamente a esses contextos. |
+| `Draw` *(ação de tirar carta de um baralho)* | tirar/retirar carta(s) | 4, 57, 70, 81, 84 | A decisão do usuário para preservar o contraste entre comprar e tirar cartas continua pendente globalmente. Na p.4, “draw these cards” acontece ao derrotar Combatentes e significa retirar uma carta do baralho de Saque de Combatente. Nas pp.57 e 70, usa-se “tirar cartas” no contexto de retirar cartas do baralho; na p.81, “retire uma Carta de Combatente ao acaso”, e na p.84, “retirem uma ao acaso”, descrevem a seleção de uma carta já embaralhada. `Draw → Compre` permanece no glossário oficial e não é aplicado mecanicamente a esses contextos. |
 | `Pack` | Mochila | 70 | Nome da área onde se guardam Itens; manter distinto de `Party Stash → Estoque do Grupo`. |
 | `Store Items` | Itens de Loja | 70 | Forma usada em prosa de regras; confirmar antes de canonizar como categoria de componente. |
 | `Wandering Items` | Itens Errantes | 70 | Forma usada em prosa; confirmar o composto como nome de categoria. |
 | `Unique Items` | Itens Únicos | 70 | Forma em prosa de regras; não traduzir rótulos impressos em cartas. |
 | `Variation` | Variação | 70 | Forma em prosa para versão alternativa de uma Miniatura; confirmar se é um termo de componente. |
 | `Ability Token / Effect Token` | Ficha de Habilidade / Ficha de Efeito | 70 | Compostos formados com `Token → Ficha`; uso contextual, sem decisão global específica para os compostos. |
-| `Re-Equip Action` | Ação de Reequipar | 70 | Forma local para a ação; não promover sem conferir as demais ocorrências. |
 
 
 ### Vocabulário local observado na p.71 (2026-11-16)
@@ -191,7 +192,7 @@ O glossário oficial foi conferido; equivalências já aprovadas foram reutiliza
 
 ### Vocabulário local observado nas pp.72–73 (2026-11-17)
 
-O glossário foi consultado durante as duas revisões. Formas oficiais como `Stamina Points → Pontos de Stamina`, `Token → Ficha`, `Skill Check → Teste de Habilidade`, `Special Encounter Rules → Regras Especiais de Encontro` e `Combatant → Combatente` foram reutilizadas. As decisões abaixo são contextuais e não criam equivalências globais:
+O glossário foi consultado durante as duas revisões. Formas oficiais como `Stamina Points → Pontos de Stamina`, `Token → Ficha`, `Skill Check → Teste de Perícia`, `Special Encounter Rules → Regras Especiais de Encontro` e `Combatant → Combatente` foram reutilizadas. As decisões abaixo são contextuais e não criam equivalências globais:
 
 | Termo EN | Forma contextual usada | Evidência/contexto | Estado |
 |---|---|---|---|
@@ -206,7 +207,7 @@ O glossário foi consultado durante as duas revisões. Formas oficiais como `Sta
 
 ### Vocabulário local observado na p.75 (2026-11-17)
 
-O glossário oficial foi consultado. Os nomes impressos de Disciplina, ficha e classe — Summoning, Summon, LOYAL ESPER e SOI — foram preservados em inglês no texto de regras; cartas e arte de componentes continuam no idioma-fonte. Initiative Track → Trilha de Iniciativa foi usado localmente, sem promoção global nesta revisão. Non-Irreducible Damage permanece pendente de decisão editorial; a redação contextual preserva a condição de excluir dano Irredutível e não altera a entrada global de Irreducible Damage.
+O glossário oficial foi consultado. Os nomes impressos de Disciplina, ficha e classe — Summoning, Summon, LOYAL ESPER e SOI — foram preservados em inglês no texto de regras; cartas e arte de componentes continuam no idioma-fonte. Initiative Track → Trilha de Iniciativa foi usado localmente, sem promoção global nesta revisão. Na p.75, a frase foi resolvida no contexto como “reduza em 2 o Dano que o LOYAL ESPER sofreria, desde que não seja Irredutível”. Isso preserva a redução e a exceção da fonte sem criar uma decisão global nova para Irreducible Damage.
 
 
 ### Vocabulário local observado na p.53 (2026-11-19)
@@ -222,3 +223,15 @@ As formas aprovadas (Spell → Feitiço, cast → conjurar, Casting Die → Dado
 | Spell Action / Standard Action | Ação de Feitiço / Ação Padrão | Nomes de etapas/ações mecânicas na página | Uso contextual; sem canonização global |
 | Difference Hit / Sphere of Influence | Diferença do Acerto / Esfera de Influência; sigla SOI preservada | Instruções e referência cruzada da p.53 | Uso local; sigla e texto impresso em cartas permanecem no idioma-fonte |
 | Intelligent Combatants / Upgrade / Weapon Icon | Combatentes Inteligentes / Aprimoramento / Ícone de Arma | Descrições de regras da p.53 | Formas contextuais; sem canonização global |
+
+
+### Glossário reconferido na p.18 (2026-11-21)
+
+As entradas do banco de terminologia foram consultadas antes de fechar a página. `Skill Check → Teste de Perícia` (plural `Testes de Perícia`), `Adventure Sheet → Folha da Aventura`, `Adventure Mechanic → Mecânica de Aventura`, `Restore Adventurers → Restaurar Aventureiros`, `Hidden Cards → Cartas Ocultas`, `Hidden Card Decks → Baralhos Secretos`, `Actions → Ações`, `Re-Equip Action → Ação de Reequipar`, `Un-Flip → desvirar`, `Urgency → Urgência` e `Urgency Tokens → Fichas de Urgência` estão aprovados no Payload. A tabela oficial `glossary.md` foi sincronizada com essas decisões.
+
+`Red Reveal` foi preservado como nome de componente/mecânica na prosa (“Decodificador Red Reveal”); o rótulo impresso na arte continua em inglês. `HEAL` aparece como verbo flexionado (“CURAREM”) na prosa; não foi encontrada decisão global para essa forma e ela permanece contextual. Isso não altera nomes de Tag ou texto impresso nos componentes.
+
+
+### Precedente local confirmado na p.14 (2026-11-23)
+
+`Used tokens` → **Fichas de Usado** foi conferido na p.14 e mantém o precedente de uso aprovado no review 215, posteriormente reutilizado no review 1513 / translation 1228 da p.24. Tratar como precedente contextual para este termo mecânico, não como entrada global do glossário; nomes impressos em componentes continuam preservados no idioma-fonte.

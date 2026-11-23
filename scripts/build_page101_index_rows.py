@@ -324,6 +324,14 @@ def build(apply: bool, verify: bool = False) -> dict:
                                  max(char["bbox"][2] for char in reference_chars),
                                  reference_line["bbox"][3]]
             row["sourceReference"] = "Back"
+            # The destination is the book's back page. Keep the PDF text as
+            # source evidence and localize only this static reference in PT-BR.
+            row["sourceReferencePtBr"] = "Verso"
+            # PageRenderer/print QA measured the PT-BR text advancing 1.6 pt
+            # past the OG right edge. Reuse that right anchor and shorten the
+            # flexible leader by the same amount without changing font size.
+            row["sourceReferencePtBrShiftPt"] = -1.6
+            row["labelWidthPt"] = max(0, row["labelWidthPt"] - 1.6)
         rows.append(row)
         masks.append((row, mask_name, leader))
 
@@ -357,11 +365,32 @@ def build(apply: bool, verify: bool = False) -> dict:
                 for index, (old, new) in enumerate(zip(old_rows[189:], rows[189:]), start=189):
                     if old == new:
                         continue
-                    # Repair only the Values row produced by this run's first
-                    # extraction pass, before its separate “Back” line was mapped.
+                    # Repair only the Values row's PT-BR source-reference
+                    # localization. All geometry and the original reference
+                    # must still match exactly.
                     if (index == 192 and old.get("id") == "index-192" and old.get("lineId") == "line_9_214"
-                            and old.get("sourceReference") == "Back" and "numberLineId" not in old):
-                        continue
+                            and old.get("sourceReference") == "Back"):
+                        expected = dict(new)
+                        expected.pop("sourceReferencePtBr", None)
+                        expected.pop("sourceReferencePtBrShiftPt", None)
+                        expected_width = expected["labelWidthPt"] + 1.6
+                        expected["labelWidthPt"] = old.get("labelWidthPt")
+                        prior = dict(old)
+                        prior.pop("sourceReferencePtBr", None)
+                        prior.pop("sourceReferencePtBrShiftPt", None)
+                        same_width = math.isclose(float(old.get("labelWidthPt", 0)), expected_width, abs_tol=1e-6)
+                        if prior == expected and same_width:
+                            continue
+                        # Preserve compatibility with the original extraction
+                        # pass that omitted the separate reference line.
+                        legacy_without_number = dict(expected)
+                        legacy_without_number.pop("numberLineId", None)
+                        legacy_without_number.pop("numberBBox", None)
+                        prior_without_number = dict(prior)
+                        prior_without_number.pop("numberLineId", None)
+                        prior_without_number.pop("numberBBox", None)
+                        if prior_without_number == legacy_without_number and same_width:
+                            continue
                     raise AssertionError(f"Generated appended row {index} differs; refusing to overwrite it.")
             ROWS_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         else:

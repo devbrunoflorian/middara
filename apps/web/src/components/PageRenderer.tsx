@@ -320,6 +320,8 @@ export interface PageFidelityOverlay {
   hideInAdmin?: boolean;
   /** Optional paint layer for source shapes that belong between the page background and editable text. */
   zIndex?: number;
+  /** Keep a cleanup overlay intact beneath inline symbols instead of punching source-position holes into it. */
+  maskInlineElements?: boolean;
 }
 
 export interface PageData {
@@ -2832,6 +2834,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
         data-pdf-page-number={pageData.page_number}
         data-pdf-page-width={pageData.width}
         data-pdf-page-height={pageData.height}
+        data-translation-overrides-language={overridesReady ? language : 'loading'}
         data-diagnostic-blank-count={strictPtBrDiagnostic && language === 'pt-BR' && overridesReady
           ? strictPtBrDiagnosticBlankKeys.size : undefined}
         data-diagnostic-blank-keys={strictPtBrDiagnostic && language === 'pt-BR' && overridesReady
@@ -2877,6 +2880,31 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
             element => element.anchor.blockId === block.id,
           );
           const rows = pageData.contentsRows?.filter(row => row.blockId === block.id) ?? [];
+          const localizedReferenceLines = new Map(language === 'pt-BR'
+            ? rows.filter(row => row.numberLineId && row.sourceReference && row.sourceReferencePtBr)
+              .map(row => [row.numberLineId!, {
+                source: row.sourceReference!,
+                target: row.sourceReferencePtBr!,
+                shiftPt: row.sourceReferencePtBrShiftPt ?? 0,
+              }] as const)
+            : []);
+          const localizedBlock = localizedReferenceLines.size > 0 ? {
+            ...block,
+            lines: block.lines?.map(line => {
+              const reference = localizedReferenceLines.get(line.id);
+              if (!reference) return line;
+              let replaced = false;
+              return {
+                ...line,
+                renderTextOffsetPt: (line.renderTextOffsetPt ?? 0) + reference.shiftPt,
+                spans: line.spans.map(span => {
+                  if (replaced || span.renderOnlyStrokePass || !span.text.includes(reference.source)) return span;
+                  replaced = true;
+                  return { ...span, text: span.text.replace(reference.source, reference.target) };
+                }),
+              };
+            }),
+          } : block;
           const hasOverride = (key: string) => renderOverrides.has(key)
             || (selectedSpan?.spanKey === key && draftOverride !== null);
           const canRenderRows = rows.length && overridesReady && !layoutMode
@@ -2891,7 +2919,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           return (
             <React.Fragment key={block.id}>
               <SpanBlock
-                block={pageData.contentsRows?.some(row=>block.lines?.some(line=>line.id===row.numberLineId)) ? {...block,adminReadOnly:true} : block}
+                block={pageData.contentsRows?.some(row=>localizedBlock.lines?.some(line=>line.id===row.numberLineId)) ? {...localizedBlock,adminReadOnly:true} : localizedBlock}
                 hasSourceInlineSymbols={hasSourceInlineSymbols}
                 coveredSourceSymbols={coveredSourceSymbols}
                 allBlocks={companionBlocks}
@@ -3023,7 +3051,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
                 zIndex: overlay.zIndex ?? 10000,
                 pointerEvents: 'none',
                 userSelect: 'none',
-                maskImage: sourceOverlayMask(overlay.bbox,replacedInlineElements),
+                maskImage: overlay.maskInlineElements === false
+                  ? undefined
+                  : sourceOverlayMask(overlay.bbox,replacedInlineElements),
                 maskSize: '100% 100%',
               }}
             />

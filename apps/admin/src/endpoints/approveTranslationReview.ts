@@ -107,11 +107,11 @@ function preservesPostPublicationFormatting(
 }
 
 /**
- * Explicitly adopt a legacy editor payload only when its rich text is already
- * the exact live translation and the sole difference is the canonical
- * PageRenderer identity/frame metadata supplied by Copyfit V3. This opt-in is
- * used to reconcile known post-publication editor drift without discarding
- * that live text or rewriting the previous publication snapshot.
+ * Explicitly adopt a live translation only when its rich text is already the
+ * exact candidate and any persisted PageRenderer identity/frame metadata
+ * matches Copyfit V3. This opt-in reconciles known post-publication edits
+ * without discarding the live text or rewriting the previous publication
+ * snapshot.
  */
 function matchesLivePostPublicationRevision(
   currentValue: unknown,
@@ -124,7 +124,9 @@ function matchesLivePostPublicationRevision(
     || !Array.isArray(canonicalBbox) || canonicalBbox.length !== 4
     || canonicalBbox.some(value => typeof value !== 'number' || !Number.isFinite(value))) return false
   const current = currentValue as JsonRecord
-  if (current.spanKey != null || current.bbox != null) return false
+  if (current.spanKey != null
+    && normalizeSpanKeyForComparison(current.spanKey) !== normalizeSpanKeyForComparison(canonicalSpanKey)) return false
+  if (current.bbox != null && canonical(current.bbox) !== canonical(canonicalBbox)) return false
   const normalizedLive = { ...current, spanKey: canonicalSpanKey, bbox: canonicalBbox }
   return canonical(normalizedLive) === canonical(proposedValue)
 }
@@ -586,22 +588,23 @@ async function approve(req: PayloadRequest): Promise<Response> {
       ? renderedLines === sourceLines ? 'EXACT' : renderedLines < sourceLines ? 'UNDER' : 'OVER'
       : null
     const storedCopyfit = copyfitClassification(review?.copyfitClassification)
+    // A published approval is allowed to receive a freshly measured copyfit
+    // classification along with a revised translation. Its saved classification
+    // describes the previous publication and must not block that revision.
+    const revisingPublishedApproval = review?.approvalStatus === 'approved' && isRecord(review.publication)
     const approvedCopyfit: CopyfitClassification | null = emptyOverrideEvidence ? null : legacyApproval
       ? measuredCopyfit ?? storedCopyfit ?? requestedCopyfit
       : canonicalEvidence!.classification
     if (measuredCopyfit && ((requestedCopyfit && requestedCopyfit !== measuredCopyfit)
-      || (storedCopyfit && storedCopyfit !== measuredCopyfit))) {
+      || (storedCopyfit && storedCopyfit !== measuredCopyfit && !revisingPublishedApproval))) {
       throw Object.assign(new Error(`A classificação Copyfit V3 declarada diverge das linhas medidas (${sourceLines} EN / ${renderedLines} PT-BR).`), { status: 409 })
     }
     const storedFingerprint = typeof review?.copyfitMeasurementFingerprint === 'string'
       ? review.copyfitMeasurementFingerprint : null
     const requestedFingerprint = typeof body.copyfitMeasurementFingerprint === 'string'
       ? body.copyfitMeasurementFingerprint : null
-    // An already-published approval may be revised under the same review key
-    // after a fresh canonical measurement. The publication/translation pair is
-    // checked below before any write, so its old fingerprint must not block a
-    // measured correction to that same published unit.
-    const revisingPublishedApproval = review?.approvalStatus === 'approved' && isRecord(review.publication)
+    // Its old fingerprint must not block a measured correction to the same
+    // publication; the publication/translation pair is checked before any write.
     if (!legacyApproval && !emptyOverrideEvidence
       && ((storedFingerprint && storedFingerprint !== canonicalEvidence!.fingerprint && !revisingPublishedApproval)
         || (requestedFingerprint && requestedFingerprint !== canonicalEvidence!.fingerprint))) {

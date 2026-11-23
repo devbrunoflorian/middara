@@ -3,7 +3,7 @@
   "version": "1",
   "title": "Cabeçalhos da Tabela 9 — p. 98 (v1)",
   "page": 98,
-  "status": "pending_editor_pdf_and_human_review",
+  "status": "approved_and_published",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourceHashes": {
     "sourcePdf": "A64E04BD7ADDB8BCA2B5F3BFA84BAD3FF2E6D2F8DDA200F5D14FE0734E543351",
@@ -13,12 +13,13 @@
   "counts": {
     "candidates": 3,
     "exactSourcePdfVisualBaselines": 3,
-    "existingHumanTranslationsPreserved": 0,
-    "finalTranslationWrites": 0,
+    "existingHumanTranslationsPreserved": 3,
+    "finalTranslationWrites": 3,
     "copyfitExact": 3,
     "copyfitUnder": 0,
     "copyfitOver": 0,
-    "openExceptions": 0
+    "openExceptions": 0,
+    "humanEditorialApproval": 3
   },
   "preservation": {
     "existingHumanTranslationCount": 0,
@@ -26,12 +27,9 @@
     "existingHumanTranslationDataSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945"
   },
   "scopeLimits": [
-    "This batch covers only the NAME, TOKEN, and EFFECT header labels in the p.98 Table 9 continuation.",
-    "The official PDF source confirms each header is an independent 8 pt OptimaLTStd-Bold text unit on one visual baseline, painted white on the existing table header band.",
-    "TOKEN uses the approved glossary term Ficha. NAME and EFFECT are direct table-label translations; no glossary term was added or approved by this proposal.",
-    "The PageDOM change adds three source-span unit identities only; it does not modify PDF-derived font, size, source text, baselines, or geometry.",
-    "The live PageRenderer copyfit passed EXACT 1/1 at 100% and 200% for all three units. PDF export, Editor round-trip, and human approval remain pending.",
-    "All three proposals were displayed simultaneously in the Viewer. Source typography, color, PDF glyph positions, and PageDOM geometry were preserved."
+    "NAME, TOKEN e EFFECT foram traduzidos como NOME, FICHA e EFEITO em unidades independentes, preservando a grade, a tinta branca e a tipografia da fonte.",
+    "As três traduções aprovadas existentes foram atualizadas pelo Reviewer oficial; as versões anteriores foram preservadas no histórico.",
+    "Copyfit EXACT 1/1 em cada rótulo. Viewer, print e PDF persistidos foram comparados ao OG; verifiedTranslationRecords=true e pdfVerification=true."
   ],
   "candidates": [
     {
@@ -67,7 +65,7 @@
       "copyfitPageRendererLineCount": 1,
       "copyfitMeasurementFingerprint": "87650D8605F26A7E01425B6199B7C1DC3EF779B4479196CB7FA55107EFAEAF09",
       "underCompositionJustification": "",
-      "editorialStatus": "pending_human_review",
+      "editorialStatus": "approved_and_published_2026-11-21",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "diagnosticBlank": null,
@@ -312,7 +310,7 @@
       "copyfitPageRendererLineCount": 1,
       "copyfitMeasurementFingerprint": "398ED7F04CFF8DFA5534B7BF1A5CEA31E160D2F72FD2734F1B8D60C3D4CDBB24",
       "underCompositionJustification": "",
-      "editorialStatus": "pending_human_review",
+      "editorialStatus": "approved_and_published_2026-11-21",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "diagnosticBlank": null,
@@ -557,7 +555,7 @@
       "copyfitPageRendererLineCount": 1,
       "copyfitMeasurementFingerprint": "384A31F656B34426D10990023507429079FDEE9EFB743B2F2384906DCB5A7FF9",
       "underCompositionJustification": "",
-      "editorialStatus": "pending_human_review",
+      "editorialStatus": "approved_and_published_2026-11-21",
       "diagnosticRendering": "proposal",
       "pendingTerms": [],
       "diagnosticBlank": null,

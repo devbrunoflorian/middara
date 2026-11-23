@@ -1,6 +1,8 @@
 # p.21 — proposta PT-BR integral v2
 
-**Estado:** proposta isolada. A v1 foi exportada, mas a inspeção raster encontrou colisão no texto de Obstruído com Perigoso/Especial e dois títulos quebrando sobre filetes. Esta versão encurta três parágrafos e reduz os títulos localmente; precisa de nova inspeção visual. Revisão editorial humana permanece pendente.
+**Estado atual (2026-11-22):** este arquivo descreve a proposta isolada histórica e está supersedido pela página publicada e revisada em [`../pages/page-021.md`](../pages/page-021.md). As 22 unidades ativas estão aprovadas; quatro unidades tiveram formatação/glossário reconciliados e copyfit renovado. Não use a pendência histórica abaixo como status do Viewer atual.
+
+**Estado histórico da proposta:** a v1 foi exportada, mas a inspeção raster encontrou colisão no texto de Obstruído com Perigoso/Especial e dois títulos quebrando sobre filetes. A v2 encurtava três parágrafos e reduzia títulos localmente; precisava de nova inspeção visual. Esse snapshot isolado não foi escrito no Payload como proposta integral.
 
 ## Revisão de copyfit
 

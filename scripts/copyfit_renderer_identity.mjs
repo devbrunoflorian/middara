@@ -44,16 +44,17 @@ export function exposeRequestForCopyfitPreview(payload, { requestId, reviewKey, 
 }
 
 /** Remove only the catalog's stale diagnostic blank so a saved failed draft can be measured in-page. */
-export function exposeCandidateForCopyfitPreview(payload, { spanKey }) {
+export function exposeCandidateForCopyfitPreview(payload, { spanKey, proposalId = null }) {
   if (!Array.isArray(payload?.proposals)) throw new Error('Translation review catalog has no proposal list.');
   const matches = payload.proposals.flatMap(proposal => (proposal.candidates ?? [])
-    .filter(candidate => candidate.spanKey === spanKey));
+    .filter(candidate => candidate.spanKey === spanKey && (!proposalId || proposal.proposalId === proposalId)));
   if (matches.length !== 1) throw new Error(`Copyfit candidate ${spanKey} did not resolve uniquely in the catalog.`);
   return {
     ...payload,
     proposals: payload.proposals.map(proposal => ({
       ...proposal,
       candidates: (proposal.candidates ?? []).map(candidate => candidate.spanKey === spanKey
+        && (!proposalId || proposal.proposalId === proposalId)
         ? {
           ...candidate,
           diagnosticBlank: null,

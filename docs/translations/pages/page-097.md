@@ -1,7 +1,7 @@
 # Página 97 — Tabela 9: Fichas de Combatentes
 
-- **Estado:** conteúdo traduzido e publicado em 21/11/2026; correção da última frase de Plank publicada em 22/11/2026. 32/32 unidades ativas aprovadas no fluxo oficial.
-- **Cobertura:** 32 unidades por título, rótulo, célula, parágrafo e bullet, comparadas com o PDF OG. Dezesseis traduções existentes foram revisadas e preservadas no histórico; dezesseis unidades novas foram publicadas.
+- **Estado:** conteúdo traduzido e publicado; 32/32 alvos visíveis têm revisão ativa aprovada. O Payload conserva 34 registros/aprovações ativos porque duas traduções-pai antigas continuam como fallback e não são renderizadas; 1 recibo substituído está arquivado.
+- **Cobertura:** 32 alvos visíveis por título, rótulo, célula, parágrafo e bullet, comparados com o PDF OG. Dezesseis traduções existentes foram revisadas e preservadas no histórico; dezesseis unidades novas foram publicadas.
 - **Nomes de componentes:** Bulb, Dynamite, Font of Renewal e Plank permanecem em inglês, conforme o escopo editorial. Cartas, fichas e nomes impressos continuam como arte/fonte; apenas as regras ao redor foram traduzidas.
 - **Recuo:** o bullet de exceção da Dynamite está numa linha-fonte separada. O marcador fica em X=173,294 pt e o corpo em X=191,294 pt. A moldura PT-BR local usa o X do corpo e largura de 578,100 pt, preservando a borda direita do OG em X=769,394 pt. A redação cabe em uma linha, como na fonte.
 - **Símbolos:** `dice.purple` permanece inline na regra da Dynamite e `terrain.elevation-box` foi inserido como `[[symbol:terrain.elevation-box]]` na regra de Plank. Viewer, print e PDF mostram os dois símbolos semânticos, sem duplicatas presas à posição original.
@@ -11,4 +11,5 @@
 - **Correção de completude (22/11):** o último bullet de Plank terminava em “permitir expressamente”, omitindo “mover Planks.”. A frase foi completada; na fonte Optima LT Std a 10 pt, mede 542,2 pt dentro da moldura de 560,56 pt e permanece em uma linha, como no OG. A aprovação nova preservou a versão anterior no histórico do Payload.
 - **Aprovação:** as 32 unidades foram gravadas pelo Reviewer oficial e relidas do Payload; versões publicadas anteriormente foram preservadas no histórico. A correção final foi publicada na revisão #2082 e tradução #2449.
 - **Evidência de QA:** OG, Viewer, print e PDF final foram comparados. A medição confirma 32 alvos no Viewer e no print, sem divergência de contagem de linhas.
+- **Correção do último bullet de Burrow (22/11):** a renderização persistida ocupava 3 linhas e invadia a linha seguinte em aproximadamente 10 pt, apesar de o recibo #2092 registrar 2/2. A redação foi condensada sem alterar os termos de jogo nem a moldura; Copyfit V3 confirmou 2/2 no OG e no Viewer em 100% e 200%. A revisão #2125 foi aprovada, o recibo #2092 foi arquivado e a redação anterior ficou no histórico da publicação. A exportação atual tem 32 alvos Viewer/print, duas imagens e dois símbolos; `verifiedTranslationRecords=true` e `pdfVerification=true`.
 - **Fonte:** [transcrição do PDF OG](../source-pages/page-097.md). A transcrição não substitui a comparação visual.

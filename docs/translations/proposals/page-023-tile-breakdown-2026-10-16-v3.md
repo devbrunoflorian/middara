@@ -1,6 +1,6 @@
 # p.23 — proposta PT-BR “Detalhamento da Peça” v3
 
-**Estado atual:** 17 unidades rastreadas; 16 aprovadas e publicadas pelo Reviewer oficial, e uma pendente (review 1376). O alvo `NÚMERO DA PEÇA` permanece pending porque a identidade selecionada pelo PageRenderer expôs 0 dos 239 caracteres esperados, sem prova EXACT registrável. `ELEVATION 2/1` está incorporado ao diagrama e permanece preservado como exceção de arte. O diagnóstico estático v3 é histórico; as medições posteriores estão nos recibos por unidade e no Payload.
+**Estado atual (2026-11-21):** 17/17 unidades traduzidas e aprovadas. Review 1376 → translation 1854 foi confirmada no Payload com Copyfit EXACT 1/1. Export PT-BR fresco comparado ao OG passou `verifiedTranslationRecords=true` e `pdfVerification=true`. `ELEVATION 2/1` permanece em inglês dentro do diagrama, conforme decisão do usuário. As notas datadas abaixo sobre a antiga pendência de identidade são históricas e estão superadas.
 
 ## Validação técnica
 

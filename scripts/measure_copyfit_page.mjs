@@ -4,6 +4,7 @@
  *
  *   node scripts/measure_copyfit_page.mjs <page> [--write] [--zoom 200]
  *   node scripts/measure_copyfit_page.mjs <page> --refresh-span-key <key> [--write]
+ *   node scripts/measure_copyfit_page.mjs <page> --proposal-id <id> --refresh-span-key <key> [--write]
  *   Repeat --refresh-span-key to batch selected units in one Viewer session.
  *
  * PDF side:  PyMuPDF text spans inside the candidate's canonical bbox, grouped by visual text-line box.
@@ -29,6 +30,9 @@ const write = args.includes('--write');
 const previewDrafts = args.includes('--preview-drafts');
 const refreshSpanKeys = args.flatMap((arg, index) => arg === '--refresh-span-key' ? [args[index + 1]] : []);
 if (refreshSpanKeys.some(key => !key)) throw new Error('--refresh-span-key requires a span key.');
+const proposalIdIdx = args.indexOf('--proposal-id');
+const selectedProposalId = proposalIdIdx >= 0 ? args[proposalIdIdx + 1] : null;
+if (proposalIdIdx >= 0 && !selectedProposalId) throw new Error('--proposal-id requires a proposal ID.');
 const requestIdIdx = args.indexOf('--request-id');
 const previewRequestId = requestIdIdx >= 0 ? args[requestIdIdx + 1] : null;
 if (requestIdIdx >= 0 && (!previewRequestId || !/^\d+$/u.test(previewRequestId))) {
@@ -94,7 +98,8 @@ const candidateTextForRenderer = (candidate, staticMarkerText = '', actualRender
 };
 
 const catalog = JSON.parse(readFileSync(resolve(root, 'apps/web/public/translation-review/catalog.json'), 'utf8'));
-const pageCandidates = catalog.proposals.flatMap(proposal => proposal.candidates).filter(candidate => candidate.pageNumber === pageNumber);
+const pageCandidates = catalog.proposals.flatMap(proposal => proposal.candidates).filter(candidate => candidate.pageNumber === pageNumber
+  && (!selectedProposalId || candidate.proposalId === selectedProposalId));
 const candidates = refreshSpanKeys.length
   ? pageCandidates.filter(candidate => refreshSpanKeys.includes(candidate.spanKey))
   : pageCandidates;
@@ -272,7 +277,7 @@ try {
         const payload = JSON.parse((await upstream.body()).toString('utf8'));
         let previewPayload = payload;
         for (const spanKey of refreshSpanKeys) {
-          previewPayload = exposeCandidateForCopyfitPreview(previewPayload, { spanKey });
+          previewPayload = exposeCandidateForCopyfitPreview(previewPayload, { spanKey, proposalId: selectedProposalId });
         }
         console.log(`Browser-only copyfit preview: cleared stale diagnostic blanks for ${refreshSpanKeys.join(', ')}; source catalog remains unchanged.`);
         await fulfillJsonPreview(route, upstream, previewPayload);
@@ -626,7 +631,13 @@ try {
       requiresReviewFrame: Boolean(candidate.reviewLayoutFrame && !previewDrafts && !savedReviewFrameMatches),
     });
     if (measurementPath.path === 'invalid' || measurementPath.path === 'unmatched') {
-      unmatchedRows.push({ index, spanKey: candidate.spanKey, reason: directIdentity?.reason ?? measurementPath.reason });
+      unmatchedRows.push({
+        index,
+        spanKey: candidate.spanKey,
+        reason: directIdentity?.reason ?? measurementPath.reason,
+        actualSample: normalize(directSnapshot.text).slice(0, 160),
+        expectedSample: directExpectedText?.slice(0, 160) ?? null,
+      });
       continue;
     }
     if (process.env.MIDDARA_COPYFIT_DEBUG === '1') {

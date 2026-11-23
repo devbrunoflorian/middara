@@ -1,11 +1,9 @@
-"""Build the PT-BR inset layers for source page 12 from the supplied PDF.
+"""Historical generator for the superseded PT-BR Adventure Book inset.
 
-The source-page overlay is deliberately language-specific. The English inset
-asset is preserved; PT-BR gets its own raster plus source-faithful callouts and
-the part of the green creature covered by the replacement page.
-
-Run without --apply to validate inputs and print the proposed geometry. Use
---apply to write PNG assets and update the page sidecar.
+Current project scope keeps game-component text in its source language. Page 12
+therefore uses the OG inset as a language-invariant layer; this generator must
+not be used to restore the translated component image unless that scope changes.
+The current sidecar has no PT-BR inset entry, so --apply refuses to run.
 """
 
 from __future__ import annotations
@@ -224,7 +222,7 @@ def main() -> None:
     if len(english) != 1 or english[0].get("url") != "/pages/page_012/fidelity-overlay-adventure-inset.png":
         raise SystemExit("Expected exactly one existing English adventure inset overlay; refusing to alter EN")
     if not any(entry.get("language") == "pt-BR" for entry in entries):
-        raise SystemExit("Expected the current PT-BR inset entry to replace")
+        raise SystemExit("PT-BR Adventure Book inset is retired to preserve component text; refusing to regenerate it")
 
     source_doc = pymupdf.open(args.source_pdf)
     translation_doc = pymupdf.open(args.translation_pdf)

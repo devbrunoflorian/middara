@@ -1,10 +1,10 @@
 # Página 10 — Modo Aventura
 
-- **Fonte inglesa:** página 10 do PDF oficial; conferida visualmente contra a captura inglesa do viewer.
-- **Fidelidade inglesa:** aprovada nesta passagem; ver [registro visual](../../project-progress/2026-10-04-page10-visual-review.md).
-- **PT-BR:** 22 unidades existentes foram lidas do Payload e reconciliadas com o PDF. Cinco registros receberam correções locais de texto/estilo com snapshots recuperáveis e read-back; nenhuma outra unidade foi reescrita.
-- **Prévia:** captura PT-BR isolada após salvar, com Admin desligado e só requisições GET ao Payload. A página inteira foi conferida; sem sobreposição, corte ou colisão com a arte/rodapé.
-- **Decisões de termos:** `Adventure Sheet` está como “Ficha de Aventura” nesta página; confirmar “Ficha de Aventura” vs “Ficha da Aventura” no glossário compartilhado. `Party Stash` agora segue o glossário oficial como “Estoque do Grupo”; `Party Tuck Bag` aparece como “Bolsa do Grupo” e fica registrado como termo composto candidato.
+- **Fonte inglesa:** página 10 do PDF oficial (OG), renderizada para comparação visual.
+- **Fidelidade/layout:** OG, Viewer PT-BR e PDF impresso comparados visualmente em 2026-11-21.
+- **PT-BR:** 22/22 traduções foram lidas do Payload, salvas e conferidas no Viewer e no PDF impresso. Nesta passagem, `Skill Check` foi alinhado ao glossário como “Teste de Perícia”; a instrução do Grupo Ativo recebeu copyfit local.
+- **Exportação:** `verifiedTranslationRecords=true` e `pdfVerification=true`; MediaBox 820,346 × 820,346 pt. Os 22 alvos não têm excesso medido à direita ou embaixo no Viewer nem no PDF impresso.
+- **Termos:** `Adventure Sheet → Folha da Aventura` e `Skill Check → Teste de Perícia` seguem o glossário. `Party Stash → Estoque do Grupo`; `Party Tuck Bag → Bolsa do Grupo` permanece uma escolha local deste texto, ainda candidata como termo composto.
 
 > O inglês abaixo reproduz o conteúdo impresso, inclusive construções editoriais do original. A notação Markdown de negrito/itálico registra a ênfase a manter; a observação de DTP no fim de cada unidade conserva a hierarquia tipográfica.
 
@@ -50,7 +50,7 @@
 
 **EN:** Occasionally, while reading through a Scene, players will be asked to perform various tasks. These are called Adventure Mechanics. These can be Skill Checks, Gaining new party members, adding Story Flags to the Adventure sheet, or instructing players to continue to the next Scene or Encounter. In short, Adventure Mechanics are special rules that players must perform when instructed to. Adventure Mechanics are always listed in a box so that players can easily identify them. Players must finish performing a listed Adventure Mechanic before proceeding.
 
-**PT-BR (salvo):** Ocasionalmente, ao ler uma Cena, os jogadores serão instruídos a realizar diferentes tarefas. Essas tarefas são chamadas de Mecânicas de Aventura e podem incluir Testes de Habilidade, Ganhar novos membros para o grupo, adicionar Marcadores de História à Ficha de Aventura ou seguir para a próxima Cena ou Encontro. Em resumo, as Mecânicas de Aventura são regras especiais que devem ser cumpridas quando indicado. Elas sempre aparecem dentro de uma caixa para facilitar sua identificação, e os jogadores devem concluir a Mecânica indicada antes de prosseguir.
+**PT-BR (salvo):** Ocasionalmente, ao ler uma Cena, os jogadores serão instruídos a realizar diferentes tarefas. Essas tarefas são chamadas de Mecânicas de Aventura e podem incluir Testes de Perícia, Ganhar novos membros para o grupo, adicionar Marcadores de História à Folha da Aventura ou seguir para a próxima Cena ou Encontro. Em resumo, as Mecânicas de Aventura são regras especiais que devem ser cumpridas quando indicado. Elas sempre aparecem dentro de uma caixa para facilitar sua identificação, e os jogadores devem concluir a Mecânica indicada antes de prosseguir.
 
 **DTP:** título Cinzel 12 pt; corpo Optima 10 pt. O PDF tem apenas espaços isolados em itálico após “Adventure Mechanics” e “Adventure Mechanic”; não aplicar itálico ao termo traduzido.
 
@@ -70,7 +70,7 @@
 
 **EN:** The Adventure Mode is not intended to be played in a single session. Instead, it is intended to be played in **1-4** hour sessions over a long period of time. When stopping between Encounters, players must keep track of many variables. Players will be required to use the Adventure Sheet to keep track of these variables. A Pack of Adventure Sheets are included in the game. Players can also download a printable copy of the Adventure Sheet for free at **www.Middara.com**.
 
-**PT-BR (salvo):** O Modo Aventura não foi feito para ser jogado em uma única sessão. Em vez disso, foi pensado para sessões de **1 a 4** horas ao longo de um período maior. Quando a partida for interrompida entre Encontros, os jogadores deverão acompanhar diversas informações. Para isso, será necessário usar a Ficha de Aventura. O jogo inclui um bloco de Fichas de Aventura. Os jogadores também podem baixar gratuitamente uma cópia para impressão da Ficha de Aventura em **www.Middara.com**.
+**PT-BR (salvo):** O Modo Aventura não foi feito para ser jogado em uma única sessão. Em vez disso, foi pensado para sessões de **1 a 4** horas ao longo de um período maior. Quando a partida for interrompida entre Encontros, os jogadores deverão acompanhar diversas informações. Para isso, será necessário usar a Folha da Aventura. O jogo inclui um bloco de Folhas da Aventura. Os jogadores também podem baixar gratuitamente uma cópia para impressão da Folha da Aventura em **www.Middara.com**.
 
 **DTP:** título Cinzel 12 pt; corpo Optima 10 pt; intervalo `1-4` em negrito 9 pt; endereço em negrito 10 pt.
 
@@ -78,15 +78,15 @@
 
 **EN:** The Adventure Sheet is intended to keep track of all information between play sessions. There is a spot for the name of the Scenario or Adventure being played, the amount of Gold and **XP** the party currently has, the Flags and Achievements the party has Gained, as well as slots for information on each Adventurer.
 
-**PT-BR (salvo):** A Ficha de Aventura serve para registrar todas as informações entre as sessões de jogo. Há um espaço para o nome do Cenário ou Aventura em andamento, a quantidade de Ouro e **XP** que o grupo possui, os Marcadores de História e Conquistas que o grupo Ganhou, além de campos para as informações de cada Aventureiro.
+**PT-BR (salvo):** A Folha da Aventura serve para registrar todas as informações entre as sessões de jogo. Há um espaço para o nome do Cenário ou Aventura em andamento, a quantidade de Ouro e **XP** que o grupo possui, os Marcadores de História e Conquistas que o grupo Ganhou, além de campos para as informações de cada Aventureiro.
 
 **DTP:** corpo Optima 10 pt; `XP` em negrito 10 pt.
 
-## Atualização da Ficha de Aventura
+## Atualização da Folha da Aventura
 
 **EN:** The Adventure Sheet is used to record information for players to continue the Adventure at a later date. Updating the Adventure Sheet at the end of every gaming session is recommended.
 
-**PT-BR (corrigido):** A Ficha de Aventura é usada para registrar as informações necessárias para que os jogadores continuem a Aventura em outro momento. Recomenda-se atualizar a Ficha de Aventura **ao** fim da sessão de cada jogo.
+**PT-BR (corrigido):** A Folha da Aventura é usada para registrar as informações necessárias para que os jogadores continuem a Aventura em outro momento. Recomenda-se atualizar a Folha da Aventura **ao** fim da sessão de cada jogo.
 
 **Copyedit:** foi inserida a preposição “ao”, ausente no texto salvo, para corrigir a frase sem alterar seu sentido.
 
@@ -94,9 +94,9 @@
 
 **EN:** In addition to the Adventure Sheet, separate Adventurer Tuck Bags are also included in the game. Players will be able to store the Adventurer Card, Items, and Disciplines their Adventurer currently has in one easy-to-use baggy. These Tuck Bags will be used to supplement the Adventure Sheet as there is not a space to record this information. There is also a general Party Tuck Bag (referred to in the game as the “party stash”) for Items that are not equipped by any Adventurer in the party.
 
-**PT-BR (corrigido):** Além da Ficha de Aventura, o jogo também inclui Bolsas de Aventureiro individuais. Nelas, os jogadores podem guardar a Carta de Aventureiro, os Itens e as Disciplinas que seu Aventureiro possui atualmente.
+**PT-BR (corrigido):** Além da Folha da Aventura, o jogo também inclui Bolsas de Aventureiro individuais. Nelas, os jogadores podem guardar a Carta de Aventureiro, os Itens e as Disciplinas que seu Aventureiro possui atualmente.
 
-Essas Bolsas complementam a Ficha de Aventura, pois não há espaço nela para registrar essas informações.
+Essas Bolsas complementam a Folha da Aventura, pois não há espaço nela para registrar essas informações.
 
 Há também uma Bolsa do Grupo, chamada no jogo de “Estoque do Grupo”, para guardar Itens que não estejam equipados por nenhum Aventureiro.
 
@@ -120,7 +120,7 @@ Há também uma Bolsa do Grupo, chamada no jogo de “Estoque do Grupo”, para 
 
 **EN:** Whenever players are instructed to, they must choose **4** Adventurers from their party that form the Active Group.
 
-**PT-BR (salvo):** Sempre que forem instruídos, os jogadores devem escolher **4** Aventureiros do grupo para formar o Grupo Ativo.
+**PT-BR (salvo):** Quando instruídos, os jogadores devem escolher **4** Aventureiros do grupo para formar o Grupo Ativo.
 
 **DTP:** heading Cinzel 12 pt; instrução Optima 10 pt; `4` em negrito 10 pt. Título e instrução são duas unidades editáveis distintas, mesmo compartilhando o bloco-fonte.
 
@@ -148,10 +148,11 @@ Há também uma Bolsa do Grupo, chamada no jogo de “Estoque do Grupo”, para 
 
 **DTP:** corpo Optima 10 pt; nome da Ação em negrito e itálico; referência à página em itálico.
 
-## Revisão visual, cópia e próximos passos
+## Revisão visual e exportação — 2026-11-21
 
-- Os 22 registros existentes foram mapeados sem substituir as unidades novas por chaves legadas. Os dois grupos tipográficos mistos (“Como Começar”/prosa e “O Grupo Ativo”/instrução) continuam com unidades independentes.
-- O script [`repair_page010_saved_translation.py`](../../../scripts/repair_page010_saved_translation.py) é dry-run por padrão, cria snapshot antes de escrever e verifica o read-back. Ele corrigiu cinco registros no total: `ao`, `Estoque do Grupo`, o itálico de `pág. 14`, o negrito 9 pt de `1 a 4` e o itálico de `pág. 46`. As cópias recuperáveis estão em `tmp/translation-style-backups/`.
-- A captura pós-correção está em `tmp/visual-followup/page-by-page-010/payload-saved-ptbr-final.png`; ela foi aberta em tamanho integral e comparada ao enquadramento original. Todo o texto cabe acima do filete inferior e não invade a ilustração.
-- “Ficha de Aventura” vs “Ficha da Aventura” continua como decisão de glossário, sem alterar o termo oficial.
-- A prosa traduzida permanece editável em Payload; este Markdown registra e audita o estado, não é uma ordem para reimportação global.
+- Os 22 registros de tradução foram lidos de volta do Payload. Viewer e PDF impresso foram comparados ao OG; não há corte ou colisão visível, e os 22 alvos têm excesso direito/inferior zero nas métricas de ambos.
+- A instrução do Grupo Ativo foi ajustada para “Quando instruídos, os jogadores devem escolher 4 Aventureiros do grupo para formar o Grupo Ativo.” O destaque do número `4` foi preservado; o texto ocupa duas linhas, como no OG.
+- Três molduras locais PT-BR foram ampliadas somente na largura para evitar clipping: `page_10_block_2` +3,131 pt; `page_10_block_6` +0,214 pt; `page_10_block_10` +1,015 pt. Os corpos mantiveram as contagens de linha observadas no OG.
+- A exportação de uma página confirmou `verifiedTranslationRecords=true`, `pdfVerification=true` e MediaBox 820,346 × 820,346 pt. SHA-256 do PDF final: `3E4251175A6BB4100F826DD2C29F9B0B17EF5EABDA77776E28782A8FF8C4D253`.
+- Evidências completas (snapshot do Payload, OG, Viewer, PDF impresso, métricas e PDF) ficam no workspace privado em `engineering-decisions/evidence/2026-11-21-page10/`.
+- A prosa traduzida continua editável no Payload; este Markdown audita o estado, não instrui uma reimportação global.

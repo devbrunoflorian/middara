@@ -1,6 +1,6 @@
 {
   "proposalId": "page-023-tile-breakdown-2026-10-16-v3",
-  "status": "p23_partial_16_approved_1_pending_review",
+  "status": "p23_all_17_translations_approved_exact_export_verified",
   "page": 23,
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "sourcePdfSha256": "a64e04bd7addb8bca2b5f3bfa84bad3ff2e6d2f8dda200f5d14fe0734e543351",
@@ -34,8 +34,8 @@
     "snapshotOnlyCompositionChanges": [
       "block_13 combined into one rich text field"
     ],
-    "currentApprovedTranslations": 16,
-    "currentPendingDrafts": 1,
+    "currentApprovedTranslations": 17,
+    "currentPendingDrafts": 0,
     "payloadWrites": 6,
     "editorialApprovedByAuthorizedAgent": 6
   },
@@ -2135,8 +2135,8 @@
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "status": "draft_pending_human_review",
-      "technicalStatus": "copyfit_renderer_identity_mismatch",
+      "status": "approved_and_published_via_official_reviewer",
+      "technicalStatus": "copyfit_v3_exact_and_payload_persisted_export_verified",
       "editorialStatus": "Pending: PageRenderer did not expose the selected unit text; EXACT is unverified.",
       "diagnosticRendering": "proposal",
       "sourceLineCount": 5,
@@ -2175,8 +2175,11 @@
       "pendingTerms": [],
       "notes": [
         "Composition exists only in the diagnostic snapshot. The four canonical source units (p23-block-13-font-size-9pt-unit-00, p23-block-13-font-size-10pt-unit-01, p23-block-13-font-size-9pt-unit-02, p23-block-13-font-size-10pt-unit-03) and the block ID remain unchanged.",
-        "A preservação de Unintentional Malum como nome próprio tem precedentes aprovados locais. Review 1376 permanece pending porque o medidor não encontrou o texto da unidade selecionada em 100%/200% (239 caracteres esperados, 0 caracteres no destaque); sem evidência EXACT persistível."
-      ]
+        "Read-back em 2026-11-21: review 1376 aprovada, translation 1854, Copyfit V3 EXACT 1/1. A pendência de identidade registrada anteriormente está superada; export PT-BR fresco comparado ao OG e verificado."
+      ],
+      "copyfitClassification": "EXACT",
+      "sourcePdfVisualLineCount": 1,
+      "pageRendererVisualLineCount": 1
     },
     {
       "sourceBlockId": "block_18",

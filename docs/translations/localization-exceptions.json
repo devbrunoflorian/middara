@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-11-20",
+  "updated": "2026-11-23",
   "sourceProposals": [
     "docs/translations/proposals/page-002-credit-labels-correction-proposal-2026-10-25-v1.json",
     "docs/translations/proposals/page-002-credit-labels-proposal-2026-10-22-v1.json",
@@ -185,7 +185,7 @@
     "docs/translations/proposals/page-097-token-rule-bodies-proposal-2026-10-25-v1.json",
     "docs/translations/proposals/page-097-token-rule-bodies-proposal-2026-10-25-v2.json",
     "docs/translations/proposals/page-098-root-rules-proposal-2026-11-19-v5.json",
-    "docs/translations/proposals/page-098-root-rules-proposal-2026-11-20-v6.json",
+    "docs/translations/proposals/page-098-root-rules-proposal-2026-11-20-v7.json",
     "docs/translations/proposals/page-098-table9-continuation-title-proposal-2026-10-16-v2.json",
     "docs/translations/proposals/page-098-table9-header-labels-proposal-2026-10-17-v1.json",
     "docs/translations/proposals/page-100-action-phase-description-proposal-2026-10-17-v1.json",
@@ -266,7 +266,21 @@
     "docs/translations/proposals/page-093-tag-definitions-full-page-proposal-2026-11-20-v3.json",
     "docs/translations/proposals/page-097-token-rule-bodies-proposal-2026-10-25-v3.json",
     "docs/translations/proposals/page-097-bulb-and-token-labels-proposal-2026-10-24-v4.json",
-    "docs/translations/proposals/page-098-poppet-tentacle-rules-proposal-2026-11-20-v4.json"
+    "docs/translations/proposals/page-098-poppet-tentacle-rules-proposal-2026-11-20-v5.json",
+    "docs/translations/proposals/page-097-bulb-and-token-labels-proposal-2026-10-24-v5.json",
+    "docs/translations/proposals/page-097-table9-header-proposal-2026-11-16-v6.json",
+    "docs/translations/proposals/page-097-token-rule-bodies-proposal-2026-10-25-v4.json",
+    "docs/translations/proposals/page-097-table9-header-proposal-2026-11-16-v7.json",
+    "docs/translations/proposals/page-018-live-text-reconciliation-2026-11-21-v1.json",
+    "docs/translations/proposals/page-019-live-publication-reconciliation-2026-11-21-v1.json",
+    "docs/translations/proposals/page-076-opposing-espers-familiars-proposal-2026-11-17-v2.json",
+    "docs/translations/proposals/page-078-equipped-weapons-label-proposal-2026-11-22-v1.json",
+    "docs/translations/proposals/p059-free-attack-terminology-reconciliation-2026-11-22-v1.json",
+    "docs/translations/proposals/p073-free-attack-terminology-reconciliation-2026-11-22-v1.json",
+    "docs/translations/proposals/p057-monster-loot-deck-draw-clarification-2026-11-22-v1.json",
+    "docs/translations/proposals/p057-residual-receipt-closure-2026-11-22-v1.json",
+    "docs/translations/proposals/page-097-burrow-final-bullet-copyfit-2026-11-22-v1.json",
+    "docs/translations/proposals/page-064-dice-color-labels-correction-2026-11-23-v1.json"
   ],
   "items": [
     {
@@ -915,7 +929,7 @@
       ],
       "category": "human_terminology_editorial_review",
       "status": "resolved",
-      "reason": "Dangerous → perigoso e Large Based Figures → Miniaturas de Base Grande seguem candidatos contextuais pendentes; a proposta atual (review1527, v3) é EXACT 4/4, mas conflita com a tradução humana já publicada #366, que usa “Consulte”. Preservar a publicação humana e não gravar por cima.",
+      "reason": "Pendência local resolvida em 21/11/2026: a tradução humana #366 foi preservada e sincronizada com a review aprovada #36. “Veja” segue a decisão editorial para referências cruzadas; dangerous → perigoso e Large Based Figures → Miniaturas de Base Grande ficam como escolhas contextuais desta unidade. A duplicata v3 #1527 foi arquivada. Copyfit V3 atual: EXACT 4/4 em 100% e 200%.",
       "sourceText": "IMPORTANT: If a player cannot Spawn a figure because the space is occupied by another figure, it will Spawn on the nearest unoccupied non-Dangerous space(s) instead. See Large Based Figures for exceptions, Pg. 71.",
       "proposedText": "IMPORTANTE: Se outra miniatura ocupar o espaço e impedir o surgimento de uma miniatura, faça-a surgir no espaço desocupado mais próximo que não seja perigoso. Veja Miniaturas de Base Grande para ver as exceções, pág. 71.",
       "evidence": [
@@ -928,8 +942,14 @@
         "Copyfit V3 da proposta atual: EXACT 4/4 em 100% e 200%; sem mudança de texto nem nova medição nesta triagem.",
         "Conflito registrado; nenhuma gravação, sobrescrita, arquivamento ou edição da tradução humana foi feita."
       ],
-      "resolutionNote": "Aprovado canonicamente no Payload CMS em 05/11/2026",
-      "resolvedAt": "2026-11-05T03:53:58.451000Z"
+      "resolutionNote": "Texto publicado preservado e reconciliado em 2026-11-21; sem substituição por proposta diferente.",
+      "resolvedAt": "2026-11-21T14:09:00.752Z",
+      "verifiedIn": [
+        "Payload: review #36 aprovada e sincronizada com translation #366; managed source icon tag.important.icon mantido.",
+        "Copyfit V3: PDF-fonte/PageRenderer 4/4 em 100% e 200%.",
+        "OG, Viewer, print e export PDF fresco comparados em 21/11/2026; export verifiedTranslationRecords=true e pdfVerification=true.",
+        "Review v3 duplicada #1527 arquivada; tradução publicada preservada."
+      ]
     },
     {
       "id": "page_19_block_5__pt-BR::human-review",
@@ -972,9 +992,9 @@
       ],
       "category": "human_terminology_editorial_review",
       "status": "resolved",
-      "reason": "Loot LVL e o título Alternate, Variations, and Loot LVL permanecem pendentes de conferência contra a p.79. A proposta atual (review1528, v3) é EXACT 5/5, mas conflita com a tradução humana já publicada #367, que usa “Consulte” e “Nível de Saque” no título. Preservar a publicação humana e não gravar por cima; a orientação explícita do usuário para preservar LVL se mantém registrada para uso futuro.",
+      "reason": "Pendência local resolvida em 21/11/2026: a tradução #367 foi atualizada e sincronizada com a review aprovada #37. O rótulo impresso e o título da p.79 permanecem “Loot LVL”; “Loot Level” na prosa desta regra fica “Nível de Saque”. A frase foi ajustada para “cartas cujo Nível de Saque corresponda...”. Esta é uma decisão contextual, sem canonizar globalmente o composto. A duplicata v3 #1528 foi arquivada.",
       "sourceText": "IMPORTANT: Combatants have a Loot LVL printed on the front and back of them. When instructed to Spawn Combatants during an Encounter, players always Spawn Combatants with the Loot Level listed on their cards that corresponds with the Loot Level of the current Encounter. See Alternate, Variations, and Loot LVL Pg. 79.",
-      "proposedText": "IMPORTANTE: Os Combatentes têm o LVL de Saque impresso na frente e no verso. Quando uma instrução mandar fazer surgir Combatentes durante um Encontro, use sempre o Nível de Saque indicado nas cartas que corresponder ao Nível de Saque do Encontro atual. Veja Alternativas, Variações e LVL de Saque, pág. 79.",
+      "proposedText": "IMPORTANTE: Os Combatentes têm o Loot LVL impresso na frente e no verso. Quando uma instrução mandar fazer surgir Combatentes durante um Encontro, use sempre cartas cujo Nível de Saque corresponda ao Nível de Saque do Encontro atual. Veja Alternativas, Variações e Loot LVL, pág. 79.",
       "evidence": [
         "docs/translations/proposals/page-019-full-page-proposal-2026-10-16-v2.json",
         "output/proofs/translation-readiness-2026-10-16/p019-full-page-proposal-v2/editor-readonly-receipt-v2.json",
@@ -985,8 +1005,15 @@
         "Copyfit V3 da proposta atual: EXACT 5/5 em 100% e 200%; sem mudança de texto nem nova medição nesta triagem.",
         "Conflito registrado; nenhuma gravação, sobrescrita, arquivamento ou edição da tradução humana foi feita."
       ],
-      "resolutionNote": "Aprovado canonicamente no Payload CMS em 05/11/2026",
-      "resolvedAt": "2026-11-05T03:53:58.451000Z"
+      "resolutionNote": "Redação local corrigida, medida e publicada em 2026-11-21; Loot LVL preservado conforme o rótulo impresso e o título da p.79.",
+      "resolvedAt": "2026-11-21T14:17:12.228Z",
+      "verifiedIn": [
+        "PDF oficial p.19 e p.79: o nome impresso e o título da referência são “Loot LVL”; a arte de cartas/componentes segue em inglês.",
+        "Payload: review #37 aprovada e sincronizada com translation #367; managed source icon tag.important.icon mantido.",
+        "Copyfit V3 da redação publicada: PDF-fonte/PageRenderer 5/5 em 100% e 200%.",
+        "OG, Viewer, print e export PDF fresco comparados em 21/11/2026; export verifiedTranslationRecords=true e pdfVerification=true.",
+        "Review v3 duplicada #1528 arquivada; nenhuma equivalência global Loot Level foi criada."
+      ]
     },
     {
       "id": "page_19_block_7__pt-BR::human-review",
@@ -1843,9 +1870,9 @@
       ],
       "category": "human_terminology_editorial_review",
       "status": "resolved",
-      "reason": "Historical diagnosis (2026-10-23): the then-current PT-BR had 3 lines vs. 2 in the source and overlapped the following paragraph by 5.75 pt; the 18 pt hanging indent itself was correct. Recheck (2026-11-15) of the current Payload translation #331, updated 2026-11-13: Viewer and print both show 2 lines; the continuation starts at X=104.16 pt vs. marker X=86.17 pt (18 pt), “38.” remains on the second line, and the next paragraph begins at Y=411.58 pt with no collision. The live layout issue is resolved in the current translation. Review #27 is still approved but predates this updated translation; review/translation synchronization remains open. Keep Re-Equip Action -> Ação de Reequipar and Actions -> Ações local to the saved wording pending glossary review.",
+      "reason": "Historical diagnosis (2026-10-23): the then-current PT-BR had 3 lines vs. 2 in the source and overlapped the following paragraph by 5.75 pt; the 18 pt hanging indent itself was correct. Recheck (2026-11-21) of the reconciled Payload translation #331: Copyfit V3 is EXACT 2/2 at 100% and 200%; Viewer and print show the 18 pt hanging indent (marker X=86.17 pt, body/continuation X=104.17 pt), “pág. 38” remains on line 2, and the next paragraph begins at Y=411.58 pt without collision. Approved review #27 was synchronized through the official reconciliation endpoint; the prior publication is preserved in history. OG, Viewer, print, and export PDF were compared. Range.getClientRects extends 1.781 pt and 1.441 pt beyond two other text frames; enlarged print crops show glyph ink inside the usable areas, so these bounds are not recorded as clipping. Glossary forms Actions → Ações and Re-Equip Action → Ação de Reequipar are approved in Payload.",
       "sourceText": "4. All Adventurers may trade Items as if they were adjacent and used a Re-Equip Action. See Action s Pg. 38.",
-      "proposedText": "4. Todos os Aventureiros podem trocar Itens como se estivessem adjacentes e tivessem feito uma Ação de Reequipar. Veja Ações, pág. 38.",
+      "proposedText": "4. Todos os Aventureiros podem trocar Itens como se estivessem adjacentes e usassem uma Ação de Reequipar. Veja Ações, pág. 38.",
       "evidence": [
         "docs/translations/proposals/page-018-full-editable-page-proposal-2026-10-16-v4.md",
         "output/proofs/translation-readiness-2026-10-16/p018-full-editable-page-v4-reconciled/proposal-candidates.json",
@@ -1855,15 +1882,18 @@
         "output/proofs/translation-readiness-2026-10-23/p018-viewer-ptbr-overlay.png",
         "output/proofs/translation-readiness-2026-10-23/p018-export-ptbr-overlay.png",
         "output/proofs/translation-readiness-2026-10-23/p018-overlay-pixel-compare.json",
-        "output/proofs/translation-readiness-2026-10-23/p018-payload-records-after-check.json"
+        "output/proofs/translation-readiness-2026-10-23/p018-payload-records-after-check.json",
+        "docs/translations/proposals/page-018-live-text-reconciliation-2026-11-21-v1.json",
+        "engineering-decisions/evidence/2026-11-21-page18/p018-ptBR.pdf",
+        "engineering-decisions/evidence/2026-11-21-page18/p018-ptBR-metrics.json",
+        "engineering-decisions/evidence/2026-11-21-page18/p018-ptBR-export.log"
       ],
-      "technicalStatus": "failed_after_source_hanging_indent_correction",
-      "copyfitClassification": "OVER",
+      "technicalStatus": "copyfit_v3_exact_viewer_100_200_export_pdf_verified",
+      "copyfitClassification": "EXACT",
       "sourcePdfVisualLineCount": 2,
-      "pageRendererVisualLineCount": 3,
-      "overlapPt": 5.75,
-      "resolutionNote": "Aprovado canonicamente no Payload CMS em 05/11/2026",
-      "resolvedAt": "2026-11-05T03:53:58.451000Z"
+      "pageRendererVisualLineCount": 2,
+      "resolutionNote": "Reconciliada pelo endpoint oficial e verificada em export em 21/11/2026; publicação anterior preservada no histórico.",
+      "resolvedAt": "2026-11-21T13:16:09.469Z"
     },
     {
       "id": "page_18_block_104__pt-BR::human-review",
@@ -2093,15 +2123,15 @@
         820.346
       ],
       "category": "artwork_text_localization",
-      "status": "open_human_review",
-      "reason": "A matriz de quatro níveis, os títulos Item/Monster/Unique Loot, a instrução e categorias da carta de Item estão impressos no background. As 127 linhas DOM relacionadas foram reconciliadas com a arte existente; as cópias HTML já suprimidas não criam texto localizado. Para substituir o inglês, é necessário reconstruir/overlay fielmente a tipografia de componentes sem apagar pixels adjacentes. “Nível de Saque” e “Mundano” seguem candidatos terminológicos; se o pictograma de dado branco for mantido, a palavra “dados” não deve ser repetida no texto adjacente.",
+      "status": "resolved",
+      "reason": "Resolvido pelo escopo editorial confirmado pelo usuário para as pp.19–21: preservar em inglês os nomes, rótulos e instruções impressos em cartas e componentes. A página 20 contém somente o título editável Combatant Loot Deck Setup; os demais rótulos pertencem à imagem de fundo. O Viewer/print/export mantêm a arte original, sem overlay nem máscara.",
       "sourceText": "The page artwork prints LVL: MUNDANE, LVL: COMMON, LVL: UNCOMMON, LVL: RARE; ITEM, MONSTER, UNIQUE; Item Loot, Monster Loot, Unique Loot; Roll 2 WHITE; 4 - 5: Accessory; 6 - 7: Armor; 8 - 10: Relic; 11 - 12: Core; 13 - 14: Weapon. Numeric card values, quantities x1/x3/x4/x5, and card serial numbers are language-invariant.",
       "proposedText": "NÍVEL DE SAQUE: MUNDANO / COMUM / INCOMUM / RARO; ITEM / MONSTRO / ÚNICO; Saque de Item; Saque de Monstro; Saque Único; Role 2 BRANCOS [pictograma de dado branco]; Acessório; Armadura; Relíquia; Núcleo; Arma. Numeric card values, quantities, and serial numbers remain unchanged.",
       "diagnosticRendering": "English text remains visible only in the source artwork; no PT-BR localized artwork is claimed",
       "verifiedIn": [
-        "source PDF page 20",
-        "viewer-pt-BR-live-v1.png",
-        "print-pt-BR-v1.png"
+        "PDF oficial p.20: a tabela de níveis, títulos ITEM/MONSTER/UNIQUE, rótulos Loot e instrução Roll 2 WHITE estão dentro da arte dos componentes.",
+        "Decisão explícita do usuário: componentes, cartas e arte impressa permanecem originais em inglês nas pp.19–21.",
+        "Export PT-BR fresco de 21/11/2026: uma imagem de página e duas linhas geométricas; Viewer/print comparados ao OG, sem substituição de pixels."
       ],
       "editor": "The artwork group is not editable through the current text Editor; no art mutation attempted.",
       "evidence": [
@@ -2110,7 +2140,9 @@
         "output/proofs/translation-readiness-2026-10-16/p020-loot-deck-title-v1/viewer-pt-BR-live-v1.png",
         "output/proofs/translation-readiness-2026-10-16/p020-loot-deck-title-v1/print-pt-BR-v1.png",
         "output/proofs/translation-readiness-2026-10-16/p020-loot-deck-title-v1/exported-pdf-raster-v1.png"
-      ]
+      ],
+      "resolutionNote": "Arte original preservada intencionalmente por decisão de escopo; nenhuma tradução/overlay do conteúdo dos componentes.",
+      "resolvedAt": "2026-11-21T14:35:33Z"
     },
     {
       "id": "page_23_unit_p23-block-10-remaining-size-10pt__pt-BR::human-review",
@@ -2231,16 +2263,15 @@
       ],
       "category": "copyfit_renderer_identity_mismatch",
       "status": "resolved",
-      "reason": "A review ativa 1376 não expõe o texto da unidade selecionada no PageRenderer: a proposta contém 239 caracteres, mas o destaque medido expôs 0, tanto em 100% quanto em 200%. Não há classificação, contagens ou fingerprint EXACT válidos para essa identidade; manter pending e avançar sem alterar texto, renderer ou script.",
+      "reason": "A antiga falha de identidade do medidor foi superada antes desta conferência: a review 1376 está aprovada e associada à translation 1854, com Copyfit V3 EXACT 1/1. Export PT-BR fresco confirmado no Viewer, print e PDF.",
       "sourceText": "TILE NUMBER Each Tile is identified by two letters followed by a number to indicate which game or expansion it is from, as well as to assist in setting up Encounters. For example, Tile UM1, for Unintentional Malum, Tile 1.",
       "proposedText": "NÚMERO DA PEÇA\nCada Peça é identificada por um código de duas letras seguido de um número, que indica o jogo ou a expansão de origem e ajuda na preparação dos Encontros. Por exemplo, o código UM1 identifica a Peça 1 de Unintentional Malum.",
       "verifiedIn": [
-        "official PDF and English Viewer",
-        "PT-BR Viewer v3 and existing isolated PDF (visual evidence only)",
-        "PageRenderer Copyfit V3 attempted at 100% and 200%; selected review identity returned 0/239 text characters",
-        "Payload review 1376 remains pending without a current EXACT classification/counts/fingerprint"
+        "Payload review 1376 → translation 1854, approved; Copyfit EXACT 1/1.",
+        "Official PDF, EN Viewer and PT-BR Viewer/print comparison on 2026-11-21.",
+        "Fresh export p023-pt-BR.pdf: verifiedTranslationRecords=true, pdfVerification=true, 820.346 pt square MediaBox."
       ],
-      "editor": "Proposal was confirmed in the text editor; no save was performed.",
+      "editor": "Nenhuma nova redação foi necessária; o bloqueio registrado anteriormente era histórico. ELEVATION 2/1 permanece em inglês na arte.",
       "evidence": [
         "docs/translations/proposals/page-023-tile-breakdown-2026-10-16-v3.json",
         "output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-v1/source-en-page-023.png",
@@ -2248,7 +2279,9 @@
         "output/proofs/translation-readiness-2026-10-16/p023-tile-breakdown-proposal-v3/page-023-pt-BR-v3.pdf",
         "scripts/measure_copyfit_page.mjs: 239 expected candidate characters, 0 characters in the selected review highlight at 100% and 200%."
       ],
-      "resolutionNote": "Aprovado como UNDER justificado em 2026-11-05T03:58:46.117Z"
+      "resolutionNote": "Read-back de 21/11/2026 confirmou publicação aprovada EXACT 1/1 e export verificado.",
+      "diagnosticRendering": "Translation 1854 and the publication on review 1376 match; current export is verified.",
+      "resolvedAt": "2026-11-21T16:00:00.000Z"
     },
     {
       "id": "page_23_elevation_labels_artwork_text__pt-BR",
@@ -9611,15 +9644,15 @@
       ],
       "category": "human_terminology_editorial_review",
       "status": "resolved",
-      "reason": "Conferência de glossário: Condition → Condição (Payload id 2) e Tag → Tag (id 54); Tag de Condição é composição local. Stamina Points não tem entrada canônica no glossário; Pontos de Vigor foi mantido como composição contextual, sem promover termo global. A prosa foi condensada para quatro linhas de corpo, igual à fonte, e a moldura PT-BR cresceu 2 pt para conter os limites medidos sem mover título ou remissão.",
+      "reason": "Registro histórico atualizado após a decisão do usuário de 2026-11-15: Stamina Points → Pontos de Stamina substitui a antiga forma local Pontos de Vigor nesta unidade. Condition → Condição (Payload id 2) e Tag → Tag (id 54); Tag de Condição continua composição local. A prosa foi condensada para quatro linhas de corpo, igual à fonte, e a moldura PT-BR cresceu 2 pt para conter os limites medidos sem mover título ou remissão.",
       "sourceText": "Conditions Every Ability has a Condition. Condition Tags let players know under what circumstances the Ability can be used. Stamina Points and Symbols required to perform an Ability are also Conditions. Any Conditions or costs must be met before an Ability can be used.",
-      "proposedText": "Toda Habilidade tem uma Condição. As Tags de Condição indicam quando ela pode ser usada. Pontos de Vigor e Símbolos necessários para isso também são Condições. Antes do uso, cumpra as Condições e pague os custos.",
+      "proposedText": "Toda Habilidade tem uma Condição. As Tags de Condição indicam quando ela pode ser usada. Pontos de Stamina e Símbolos necessários para isso também são Condições. Antes do uso, cumpra as Condições e pague os custos.",
       "verifiedIn": [
         "official PDF and English Viewer review",
         "PT-BR Viewer v2",
         "read-only Admin Editor v2; dialog cancelled",
         "one-page PDF v2 and Copyfit V3 metrics",
-        "Glossário Payload: Condition id 2; Tag id 54; Stamina Points e Condition Tag sem entrada canônica exata, usados apenas composicionalmente nesta regra.",
+        "Glossário Payload: Stamina Points → Pontos de Stamina aprovado em 2026-11-15; Condition id 2 e Tag id 54; Condition Tag permanece composição local.",
         "tmp/page-by-page-audit/page-030-review-pt-v6-viewer.png",
         "tmp/page-by-page-audit/page-030-review-pt-v6-print.png",
         "tmp/page-by-page-audit/page-030-review-pt-v6-metrics.json: body 4 linhas; sem excesso vertical ou horizontal em Viewer/print",
@@ -9639,7 +9672,7 @@
         "output/proofs/translation-readiness-2026-10-16/p030-icons-conditions-tags-symbols-proposal-v2/print-pt-BR-diagnostic-v2.png",
         "output/proofs/translation-readiness-2026-10-16/p030-icons-conditions-tags-symbols-proposal-v1/source-official-p030.png"
       ],
-      "resolutionNote": "Translation 1201 aprovada no Payload em 05/11/2026; redação e copyfit revalidados em 13/11/2026 contra o PDF-fonte, Viewer e print v6.",
+      "resolutionNote": "Translation 1201 aprovada no Payload em 05/11/2026; redação e copyfit revalidados em 13/11/2026 contra o PDF-fonte, Viewer e print v6. A forma terminológica foi alinhada à decisão Stamina Points → Pontos de Stamina em 15/11; o PDF final de 102 páginas foi conferido em 23/11 e contém essa forma.",
       "resolvedAt": "2026-11-13T20:45:59Z"
     },
     {
@@ -12881,9 +12914,9 @@
       "id": "p019-exit-token-labels-visual-final-pass",
       "page": 19,
       "category": "source_artwork_overlay_symbol_reconciliation",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "Quatro rótulos EXIT + cor têm uma pendência visual explícita: conferir no PDF original se são arte fixa, texto editável ou composição e como a letra colorida substitui o X decorativo. Deferir esta conferência à passada final de arte; manter os drafts pendentes e não mascarar tokens.",
+      "reason": "Resolvido pela conferência do PDF oficial p.19 e pela decisão do usuário de preservar a arte original dos componentes nas pp.19–21. Os quatro rótulos EXIT + cor fazem parte dos tokens ilustrados; a exportação PT-BR conserva a imagem original sem overlay ou máscara. Não são unidades de prosa de regras.",
       "sourceText": "EXIT BLUE; EXIT RED; EXIT GREEN; EXIT YELLOW",
       "proposedText": "SAÍDA / AZUL; SAÍDA / VERMELHO; SAÍDA / VERDE; SAÍDA / AMARELO",
       "evidence": [
@@ -12892,7 +12925,13 @@
         "page-019-full-page-proposal-2026-10-16-v3@3::page_19_block_18__pt-BR",
         "page-019-full-page-proposal-2026-10-16-v3@3::page_19_block_20__pt-BR",
         "Cada candidato já registra que a letra colorida que substitui o X decorativo depende de conferência do token."
-      ]
+      ],
+      "verifiedIn": [
+        "PDF oficial p.19: os quatro rótulos EXIT BLUE/RED/GREEN/YELLOW estão impressos nos tokens ilustrados.",
+        "Decisão explícita do usuário: preservar a arte original de componentes/cartas nas pp.19–21.",
+        "Export PT-BR fresco em 21/11/2026 mantém a arte dos tokens intacta; OG, Viewer e print comparados."
+      ],
+      "resolvedAt": "2026-11-21T14:26:30Z"
     },
     {
       "id": "p076-epic-dungeon-crawl-compound-not-yet-decided",
@@ -13003,13 +13042,14 @@
       "status": "resolved",
       "priority": 1,
       "reason": "A cor dos segmentos PT-BR diverge da fonte no PDF original; conferir e restaurar a cor correspondente antes de publicar.",
-      "sourceText": "STANDARD ATTACK: Every Command Combatant has an Attack they can use that costs 2 SP.",
-      "proposedText": "ATAQUE PADRÃO:\nTodo Combatente de Comando tem um Ataque que custa 2 SP. Se o Combatente de Comando realizar um Ataque Gratuito, ele usará este Ataque como referência. Veja Combatentes de Comando na Pág. 58.",
+      "sourceText": "STANDARD ATTACK: Every Command Combatant has an Attack they can use that costs 2 SP. If a Command Combatant makes a Free Attack they will reference this Attack. See Command Combatants Pg. 58.",
+      "proposedText": "ATAQUE PADRÃO:\nTodo Combatente de Comando tem um Ataque que pode usar e que custa 2 SP. Ao realizar um Ataque Livre, o Combatente consulta este Ataque como referência. Veja Combatentes de Comando, pág. 58.",
       "evidence": [
-        "page-073-command-combatant-example-2-proposal-2026-10-18-v1@1::page_73_block_45__pt-BR",
-        "PDF original p.73 conferido no lote descendente; manter identidade e não publicar até resolver esta ressalva."
+        "PDF original p.73 conferido; o recibo anterior #1078 foi arquivado após reconciliação.",
+        "Nova revisão oficial #2120: Ataque Livre; Copyfit V3 EXACT 6/6 em 100% e 200%; export verificado em 2026-11-22.",
+        "PDF original p.42 diferencia Break Attack, explicitamente sem custo de SP, de Free Attack."
       ],
-      "resolutionNote": "Aprovado no fechamento final das 102 páginas em 2026-11-05T03:59:33.734Z"
+      "resolutionNote": "Aprovado no fechamento final das 102 páginas em 2026-11-05T03:59:33.734Z Reconciliação terminológica concluída em 2026-11-22: revisão oficial #2120 publicada, revisão duplicada #1078 arquivada, texto com 6/6 linhas e export Viewer/PDF verificado."
     },
     {
       "id": "p073-block-46-terminology-decision",
@@ -14431,10 +14471,10 @@
       "category": "translated_block_overlap",
       "status": "resolved",
       "priority": 1,
-      "reason": "A colisão foi corrigida em 2026-11-13 por copyfit local, sem fundir ou reposicionar unidades: o corpo de Condições voltou a quatro linhas como na fonte e a moldura PT-BR ganhou 2 pt de altura para conter o range medido. O título, o corpo e a remissão continuam separados; Viewer e print v6 não mostram clipping nem colisão.",
+      "reason": "A colisão foi corrigida em 2026-11-13 por copyfit local, sem fundir ou reposicionar unidades: o corpo de Condições voltou a quatro linhas como na fonte e a moldura PT-BR ganhou 2 pt de altura para conter o range medido. O título, o corpo e a remissão continuam separados; Viewer e print v6 não mostram clipping nem colisão. Em 2026-11-15, a antiga forma contextual Pontos de Vigor foi substituída por Pontos de Stamina conforme decisão global do usuário; o PDF final de 23/11 confirma a forma atual.",
       "diagnosticRendering": "Viewer e print PT-BR v6 mostram espaço entre a última linha de Condições e “Veja Tags de Condição, pág. 90.”; a referência conserva sua posição fonte.",
       "sourceText": "Conditions Every Ability has a Condition. Condition Tags let players know under what circumstances the Ability can be used. Stamina Points and Symbols required to perform an Ability are also Conditions. Any Conditions or costs must be met before an Ability can be used. See Condition Tags Pg. 90.",
-      "proposedText": "Condições. Toda Habilidade tem uma Condição. As Tags de Condição indicam quando ela pode ser usada. Pontos de Vigor e Símbolos necessários para isso também são Condições. Antes do uso, cumpra as Condições e pague os custos. Veja Tags de Condição, pág. 90.",
+      "proposedText": "Condições. Toda Habilidade tem uma Condição. As Tags de Condição indicam quando ela pode ser usada. Pontos de Stamina e Símbolos necessários para isso também são Condições. Antes do uso, cumpra as Condições e pague os custos. Veja Tags de Condição, pág. 90.",
       "evidence": [
         "PDF original, p.30: a remissão “See Condition Tags Pg. 90.” aparece como linha independente abaixo do parágrafo Conditions.",
         "Viewer localhost PT-BR, p.30 a 200%: a remissão “Veja Tags de Condição, pág. 90.” colide visualmente com o fim do parágrafo Condições.",
@@ -14475,18 +14515,18 @@
       "category": "terminology_decision",
       "status": "resolved",
       "priority": 2,
-      "reason": "O índice propõe “Away” → “Afastar-se”, mas o uso relacionado já aprovado na p.40 traduz “Towards & Away” como “Em Direção e Para Longe” (review 731). Manter o draft pending até alinhar a subentrada do índice à forma aprovada; preservar a tradução existente da p.40.",
+      "reason": "A ocorrência p101-index-021 é a subentrada de um rótulo literal de Etapas de IA impresso nas Cartas de Combatente. A p.62 confirma que Away é esse identificador de carta; pela decisão de preservar texto impresso em componentes, o índice mantém “Away”. A tradução “Em Direção e Para Longe” da review 731 na p.40 é uma referência editorial em prosa, não uma tradução global do identificador impresso.",
       "diagnosticRendering": "A linha do índice permanece visível, sem overflow. Nenhum texto ou bloco foi alterado nesta exceção.",
       "sourceText": "Away",
-      "proposedText": "Afastar-se",
+      "proposedText": "Away",
       "evidence": [
-        "Payload review 393: pending, sem publication ou tradução PT-BR conflitante.",
-        "Payload review 731, p.40, aprovado: “Towards & Away” → “Em Direção e Para Longe”.",
-        "PDF p.101: entrada de índice “Away”; PageRenderer mediu 1/1 linhas EXACT a 100% e 200%, com fonte OptimaLTStd carregada.",
-        "Rich span do draft: OptimaLTStd 8 pt, regular, #231f20; proposta preservada sem edição."
+        "Payload review 393 está aprovada e publicada como “Away”; a tradução PT-BR mantém o mesmo texto.",
+        "Payload review 731, p.40, aprovada: “Towards & Away” → “Em Direção e Para Longe” no contexto de referência editorial.",
+        "PDF-fonte oficial, p.62: Towards/Away são rótulos literais das Etapas de IA nas Cartas de Combatente.",
+        "PDF-fonte e PDF PT-BR, p.101: entrada “Away” permanece em uma linha; fonte OptimaLTStd 8 pt, regular, #231f20."
       ],
-      "resolutionNote": "Aprovado canonicamente no Payload CMS em 05/11/2026",
-      "resolvedAt": "2026-11-05T03:53:58.451000Z"
+      "resolutionNote": "Reconciliado em 23/11/2026: manter o identificador literal impresso “Away”; a tradução da referência da p.40 permanece contextual.",
+      "resolvedAt": "2026-11-23T03:01:22.000Z"
     },
     {
       "id": "p059-page-59-block-51-pt-BR-blocker",
@@ -14602,17 +14642,19 @@
       ],
       "category": "human_terminology_editorial_review",
       "status": "resolved",
-      "reason": "Copyfit V3 já está EXACT (32/32). A decisão terminológica ainda não foi fechada para Elevation → Elevação, Adjacent → Adjacente, REACH → ALCANCE, Melee/Ranged → Corpo a Corpo/à Distância e capitalização dos termos mecânicos. Preservar os rich spans/símbolos atuais e manter a review 1512 pendente até harmonização.",
+      "reason": "Review 1512 foi reconciliada após conferência do glossário. REACH foi mantida em inglês como Tag; os IDs de ataque seguem inline; a introdução foi condensada para duas linhas. A forma UNDER (32/31) está justificada pela moldura e confirmada no export. Não há decisão global nova para os usos contextuais desta página.",
       "sourceText": "Elevation is a change in height on the game board. When there is an Elevation change, it is denoted with a dashed purple line and Elevation box. The following rules apply:• A figure who is at a higher Elevation than a target they are Attacking Gains +1 to all Attack rolls made against that target. • Line of Sight can only be drawn between two figures on different Elevations so long as Line of Sight is drawn through spaces with lower Elevation than the highest of the two Elevations occupied. Meaning, the figure occupying the space on the higher Elevation must be on the edge of that Elevation. When drawing Line of Sight between two figures that occupy different Elevations, ignore all other figures who occupy Elevations that are lower than the highest Elevation occupied by either figure. Example 1: Nightingale wants to Attack the Cave Sickle that is at Elevation 1. Since she’s on the edge of the higher Elevation (3), she has Line of Sight and can make the Attack. The Animate is also on Elevation 1, but Nightingale’s Line of Sight is blocked since another space of the same Elevation is in the way.• Figures may draw Line of Sight to a target that occupies the same Elevation. When doing so, they may draw this Line of Sight through lower Elevation but not higher Elevation.• There are 4 levels of Elevation. 4 is the highest and 1 is the lowest. Figures may move between an Elevation change of 1 without penalty. For an Elevation change of 2, figures may move to the lower Elevation normally, but may not move back up to the higher Elevation. An Elevation change of 3 prevents a figure from moving to the higher Elevation, and a figure moving to the lower Elevation is Defeated. • Figures on spaces next to each other that have an Elevation change of 1 or less are considered 'Adjacent', meaning, they can be Attacked by Melee () Attacks. • Figures with REACH may target figures on different Elevations. When drawing Line of Sight to a target that occupies a different Elevation, for each elevation change beyond 1, reduce the distance you can attack with REACH by 1. Meaning, figures with REACH may target other figures at an Elevation change of up to X or less, where X is equal to their Reach. Example: A figure with REACH 2 could target another figure at two spaces away so long as the Elevation difference between them was only 1. • Ranged () Attacks may be made at any Elevation change as long as the requirements of Line of Sight are met.",
-      "proposedText": "Elevação é uma mudança de altura no tabuleiro. Quando há uma mudança de Elevação, ela é indicada por uma linha roxa tracejada e um quadrado de Elevação. Aplicam-se as regras a seguir:\n• Uma Miniatura em Elevação mais alta que o alvo que está Atacando recebe +1 em todas as rolagens de Ataque contra esse alvo.\n• Só é possível traçar Linha de Visão entre duas Miniaturas em Elevações diferentes se a Linha de Visão passar por espaços com Elevação inferior à mais alta das duas ocupadas. Ou seja, a Miniatura que ocupa o espaço na Elevação mais alta precisa estar na borda dessa Elevação. Ao traçar Linha de Visão entre Miniaturas em Elevações diferentes, ignore todas as outras Miniaturas que ocupem Elevações abaixo da mais alta ocupada por uma delas.\nExemplo 1: Nightingale quer Atacar a Cave Sickle, que está na Elevação 1. Como ela está na borda da Elevação mais alta (3), tem Linha de Visão e pode fazer o Ataque. O Animate também está na Elevação 1, mas a Linha de Visão de Nightingale fica bloqueada porque outro espaço da mesma Elevação está no caminho.\n• Miniaturas podem traçar Linha de Visão até um alvo que ocupe a mesma Elevação. Nesse caso, a Linha de Visão pode passar por Elevações mais baixas, mas não mais altas.\n• Há 4 níveis de Elevação: 4 é o mais alto e 1, o mais baixo. Miniaturas podem se mover entre Elevações com diferença de 1 sem penalidade. Com diferença de 2, podem descer normalmente, mas não podem voltar à Elevação mais alta. Uma diferença de 3 impede a Miniatura de se mover para a Elevação mais alta; se ela se mover para a mais baixa, será Derrotada.\n• Miniaturas em espaços adjacentes com diferença de Elevação igual ou inferior a 1 são consideradas Adjacentes e podem ser alvos de Ataques Corpo a Corpo .\n• Miniaturas com ALCANCE podem escolher como alvo Miniaturas em Elevações diferentes. Ao traçar Linha de Visão até um alvo em outra Elevação, reduza em 1 a distância de Ataque permitida por ALCANCE para cada nível de diferença além de 1. Assim, Miniaturas com ALCANCE podem escolher como alvo outras Miniaturas cuja diferença de Elevação seja igual ou inferior ao seu valor de ALCANCE.\nExemplo: uma Miniatura com ALCANCE 2 poderia escolher como alvo outra Miniatura a dois espaços de distância, desde que a diferença entre as Elevações fosse apenas 1.\n• Ataques à Distância  podem ser feitos em qualquer diferença de Elevação, desde que os requisitos de Linha de Visão sejam atendidos.",
-      "diagnosticRendering": "proposal remains pending; source symbols retained",
+      "proposedText": "Elevação é uma mudança de altura no tabuleiro, indicada por uma linha roxa tracejada e uma caixa de Elevação. Aplicam-se as regras a seguir:\n• Uma Miniatura em Elevação mais alta que o alvo que está Atacando recebe +1 em todas as rolagens de Ataque contra esse alvo.\n• Só é possível traçar Linha de Visão entre duas Miniaturas em Elevações diferentes se a Linha de Visão passar por espaços com Elevação inferior à mais alta das duas ocupadas. Ou seja, a Miniatura que ocupa o espaço na Elevação mais alta precisa estar na borda dessa Elevação. Ao traçar Linha de Visão entre Miniaturas em Elevações diferentes, ignore todas as outras Miniaturas que ocupem Elevações abaixo da mais alta ocupada por uma delas.\nExemplo 1: Nightingale quer Atacar a Cave Sickle, que está na Elevação 1. Como ela está na borda da Elevação mais alta (3), tem Linha de Visão e pode fazer o Ataque. O Animate também está na Elevação 1, mas a Linha de Visão de Nightingale fica bloqueada porque outro espaço da mesma Elevação está no caminho.\n• Miniaturas podem traçar Linha de Visão até um alvo que ocupe a mesma Elevação. Nesse caso, a Linha de Visão pode passar por Elevações mais baixas, mas não mais altas.\n• Há 4 níveis de Elevação: 4 é o mais alto e 1, o mais baixo. Miniaturas podem se mover entre Elevações com diferença de 1 sem penalidade. Com diferença de 2, podem descer normalmente, mas não podem voltar à Elevação mais alta. Uma diferença de 3 impede a Miniatura de se mover para a Elevação mais alta; se ela se mover para a mais baixa, será Derrotada.\n• Miniaturas em espaços adjacentes com diferença de Elevação igual ou inferior a 1 são consideradas Adjacentes e podem ser alvos de Ataques Corpo a Corpo [[attack.melee]].\n• Miniaturas com REACH podem escolher como alvo Miniaturas em Elevações diferentes. Ao traçar Linha de Visão até um alvo em outra Elevação, reduza em 1 a distância de Ataque permitida por REACH para cada nível de diferença além de 1. Assim, Miniaturas com REACH podem escolher como alvo outras Miniaturas cuja diferença de Elevação seja igual ou inferior ao seu valor de REACH.\nExemplo: uma Miniatura com REACH 2 poderia escolher como alvo outra Miniatura a dois espaços de distância, desde que a diferença entre as Elevações fosse apenas 1.\n• Ataques à Distância [[attack.ranged]] podem ser feitos em qualquer diferença de Elevação, desde que os requisitos de Linha de Visão sejam atendidos.",
+      "diagnosticRendering": "Translation 1333 and publication on review 1512 match; page export verified after publication.",
       "verifiedIn": [
-        "Payload review 1512; existing source/Viewer/PDF verification record",
-        "Copyfit V3 EXACT 32/32 in the current review"
+        "Glossário oficial e glossary-candidates.md: REACH permanece distinta de Range e como nome de Tag.",
+        "Copyfit V3 de page_22_block_1__pt-BR: 32/31 em 100% e 200%, UNDER com justificativa registrada.",
+        "Review 1512 reconciliada via endpoint oficial; publicação anterior preservada no histórico.",
+        "Export p022-pt-BR-final.pdf: verifiedTranslationRecords=true e pdfVerification=true; comparação OG/Viewer/print."
       ],
-      "editor": "No text or style edits made in this batch; terminology remains pending.",
-      "resolutionNote": "Aprovado canonicamente no Payload CMS em 05/11/2026",
-      "resolvedAt": "2026-11-05T03:53:58.451000Z"
+      "editor": "Correção de redação e terminologia local verificada contra o OG. ELEVATION 1/3 preservada em inglês na arte; sem alteração de decisões globais.",
+      "resolutionNote": "Revisão 1512 publicada em 21/11/2026; REACH preservada como Tag e todos os termos locais conferidos. A publicação anterior permanece no histórico.",
+      "resolvedAt": "2026-11-21T15:41:09.068Z"
     },
     {
       "id": "page_2_credit_item-art_label__pt-BR::human-translation-conflict",
@@ -14645,21 +14687,51 @@
       "category": "dtp_copyfit_zoom_discrepancy",
       "status": "resolved",
       "priority": 1,
-      "reason": "Copyfit V3 diverge entre as escalas: PDF-fonte 26 linhas; PageRenderer 25/26 (UNDER) a 100% e 26/26 (EXACT) a 200%, após restauração dos rich spans. Texto sem alteração nesta rodada e sem aprovação. Manter pending; não forçar encaixe nem reabrir aprovações válidas.",
+      "reason": "A medição antiga do bloco pai foi substituída pela proposta v2, que separa o texto em 18 unidades ativas. As 18/18 mantêm as linhas do PDF-fonte em 100% e 200%; o parágrafo de Familiars foi refeito para 7/7 linhas. O bloco pai legado não é a unidade ativa de publicação.",
       "sourceText": "Opposing Espers\n\n \nOPPOSING ESPERS represent the ESPERS controlled by adversarial \nsummoners. \nOpposing Espers follow all the normal rules of an Intelligent Combatant \nCard with the following differences: \n•\t\nOpposing Espers will start on the board during setup, or might also \nbe summoned using the AI printed on the corresponding summoner's \nIntelligent Combatant Card. Encounters with a summoner who might \nsummon an Opposing Esper will have the Opposing Esper they will \nsummon (if instructed to) listed in the Encounter's Special Rules as an \nEncounter Esper.\n•\t\nOpposing Espers use Scaling Icons just like Loyal Espers. These \nScaling Icons are calculated by using the maximum stats on their \ncorresponding summoner's Intelligent Combatant Card. When \nmaking an Attack, an Opposing Esper will use Symbol Abilities \nprinted on their corresponding summoner if the summoner's Symbol \nAbilities are better for the Attack in question. \n•\t\nOpposing Espers are not subject to any special rules associated \nwith Loyal Espers. Instead, Opposing Espers function like any other \nIntelligent Combatant. \n•\t\nSince Opposing Espers and their summoner do not have Disciplines \nto reference, Opposing Espers calculate their Scaling Force Value \ndifferently than Combatant Cards. To determine Force *, these Espers \nwill always use the value printed on the SUMMONER X Tag on their \ncorresponding summoner's card. See Scaling Icons Pg. 72.",
       "proposedText": "Espers Oponentes\n\nOPPOSING ESPERS representam os ESPERS controlados por invocadores adversários.\nEspers Oponentes seguem todas as regras normais de uma Carta de Combatente Inteligente, com as seguintes diferenças:\n• Espers Oponentes começam no tabuleiro durante a preparação, ou também podem ser invocados usando a IA impressa na Carta de Combatente Inteligente do respectivo invocador. Encontros com um invocador capaz de invocar um Esper Oponente terão o Esper Oponente que ele invocará listado nas Regras Especiais do Encontro como um Encounter Esper.\n• Espers Oponentes utilizam Ícones de Escala exatamente da mesma forma que os Loyal Espers. Esses Ícones de Escala são calculados utilizando os atributos máximos presentes na Carta de Combatente Inteligente do seu invocador correspondente. Ao desferir um Ataque, o Esper Oponente utilizará as Habilidades de Símbolo impressas em seu invocador correspondente, desde que as Habilidades de Símbolo do invocador se mostrem melhores para o Ataque em questão.\n• Espers Oponentes não estão sujeitos a regras especiais associadas aos Loyal Espers. Em vez disso, funcionam plenamente como qualquer outro Combatente Inteligente.\n• Uma vez que Espers Oponentes e seus invocadores não possuem Disciplinas para consulta, eles calculam seu Valor de Força de Escala de maneira distinta das Cartas de Combatente normais. Para determinar a Força *, estes Espers sempre utilizarão o valor impresso na Tag SUMMONER X da carta do seu invocador correspondente. Veja as regras de Ícones de Escala na Pág. 72.",
       "verifiedIn": [
-        "PageRenderer p.76, review1043, 100%: source 26 / PT-BR 25 (UNDER).",
-        "PageRenderer p.76, review1043, 200%: source 26 / PT-BR 26 (EXACT).",
-        "docs/translations/proposals/page-076-opposing-espers-familiars-proposal-2026-10-18-v1.json"
+        "Payload: 18/18 reviews v2 approved; publication.data confere com translation.data e com a proposta.",
+        "Copyfit V3 p.76: 18/18 EXACT a 100% e 200%.",
+        "Export p.76 PT-BR: verifiedTranslationRecords=true; pdfVerification=true; MediaBox 820.346 × 820.346 pt.",
+        "OG, Viewer e print revisados; cartas e rótulos impressos em componentes mantidos em inglês."
       ],
       "evidence": [
-        "scripts/measure_copyfit_page.mjs 76 --refresh-span-key page_76_block_0__pt-BR --write --zoom 100",
-        "scripts/measure_copyfit_page.mjs 76 --refresh-span-key page_76_block_0__pt-BR --write --zoom 200"
+        "scripts/measure_copyfit_page.mjs 76 --all --write --zoom 100 --preview-drafts",
+        "scripts/measure_copyfit_page.mjs 76 --all --write --zoom 200 --preview-drafts",
+        "scripts/export_page_pdf.mjs --page 76 --language pt-BR"
       ],
       "attempts": 0,
       "diagnosticRendering": "Live PageRenderer measurement after rich-span restoration; no new text candidate was applied.",
-      "resolutionNote": "Aprovado como UNDER justificado em 2026-11-05T03:58:46.117Z"
+      "resolutionNote": "A proposta v2 publicada substitui a medição antiga do bloco pai; a exceção está resolvida no fluxo ativo.",
+      "resolvedAt": "2026-11-21T22:00:00.000Z"
+    },
+    {
+      "id": "P097-BURROW-LAST-BULLET-OVERFLOW-2026-11-22",
+      "page": 97,
+      "spanKey": "page_97_block_2__item-8-line_5_25__pt-BR",
+      "sourceBlockId": "block_5",
+      "bboxPt": [
+        191.29379272460938,
+        293.6042175292969,
+        765.5831909179688,
+        316.5442199707031
+      ],
+      "category": "dtp_copyfit_line_count_over",
+      "status": "resolved",
+      "priority": 1,
+      "reason": "Resolvido em 2026-11-22: tradução condensada sem alterar geometria; Copyfit V3 2/2 em 100% e 200%, Viewer/print/PDF sem invasão da linha Bulb.",
+      "diagnosticRendering": "O último bullet de Burrow invade visualmente a linha seguinte Bulbo na tabela.",
+      "sourceText": "If a figure with Symbiotic Burrows or Un-burrows, both figures will Burrow or Un-Burrow. If a Burrowed figure with Symbiotic is ever Defeated while Burrowed, It's paired Symbiotic figure will immediately Un-Burrow.",
+      "proposedText": "Miniaturas com Symbiotic Burrows ou Un-burrows usam Burrow ou Un-Burrow juntas. Se uma miniatura com Symbiotic for Derrotada enquanto estiver Burrowed, sua parceira usará Un-Burrow imediatamente.",
+      "evidence": [
+        "tmp/qa-p097-2026-11-21/p097-og.png",
+        "tmp/qa-p097-2026-11-21/p097-current-print.png",
+        "tmp/qa-p097-2026-11-21/p097-current-metrics.json",
+        "Copyfit V3 proposal review #2125; prior review #2092 archived with its publication history preserved.",
+        "tmp/qa-p097-2026-11-21/p097-current-metrics.json: 32 Viewer and 32 print targets; 2/2 lines for the repaired list-flow unit.",
+        "tmp/qa-p097-2026-11-21/p097-current-persisted-ptbr.pdf: verifiedTranslationRecords=true; pdfVerification=true; OG raster compared."
+      ]
     }
   ]
 }

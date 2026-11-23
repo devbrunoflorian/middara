@@ -1368,7 +1368,7 @@
 
 **EN source:** EQUIPPED WEAPONS
 
-**PT-BR draft:** _(pending semantic review and EN fidelity gate)_
+**PT-BR draft:** ARMAS EQUIPADAS (approved review 2105; rules heading, not card print).
 
 **Line bbox:** `525.75, 554.73, 617.99, 565.46`
 

@@ -41,6 +41,8 @@ def main() -> None:
         sx, sy = background_rgba.width/page.rect.width, background_rgba.height/page.rect.height
         overlay = next(item for item in json.loads((PAGE_DIR / 'fidelity_overlays.json').read_text(encoding='utf8'))['overlays']
             if item.get('region') == 'Paper patches beneath ten semantic A-D reference markers')
+        if overlay.get('maskInlineElements') is not False:
+            raise ValueError('Marker cleanup overlay must remain intact beneath semantic inline markers.')
         dest = (round(overlay['bbox'][0]*sx), round(overlay['bbox'][1]*sy))
         background_rgba.alpha_composite(patch_file.convert('RGBA'), dest=dest)
         background = background_rgba.convert('RGB')

@@ -15,6 +15,9 @@ export interface ContentsRowDefinition {
   overlaySource?: boolean;
   sourceText?: string;
   sourceReference?: string;
+  sourceReferencePtBr?: string;
+  /** PT-BR-only horizontal adjustment for the source reference's measured text anchor. */
+  sourceReferencePtBrShiftPt?: number;
   leader: { bbox: number[]; yPt: number; periodPt: number; widthPt: number; style?: 'dotted' | 'solid' | 'none' };
   mask: { url: string; bbox: number[] };
 }
