@@ -316,12 +316,20 @@ try {
         const docs = [...sourceDocs];
         for (const candidate of pending) {
           if (!candidate.data || !candidate.spanKey) continue;
-          const index = docs.findIndex(doc => doc.spanKey === candidate.spanKey);
+          // Persisted PageRenderer unit keys (for example, page_N_unit_*__pt-BR)
+          // are locale-qualified. A proposal's display spanKey is usually the
+          // stem, so injecting it verbatim leaves new typographic units
+          // invisible and can make the legacy whole-block override keep winning.
+          const translationSpanKey = candidate.copyfitCanonicalSpanKey
+            || candidate.data.spanKey
+            || candidate.spanKey;
+          const index = docs.findIndex(doc => doc.spanKey === translationSpanKey
+            || doc.spanKey === candidate.spanKey);
           const existing = index >= 0 ? docs[index] : null;
           const replacement = {
             ...(existing ?? {}),
-            id: existing?.id ?? `copyfit-preview-${encodeURIComponent(candidate.spanKey)}`,
-            spanKey: candidate.spanKey,
+            id: existing?.id ?? `copyfit-preview-${encodeURIComponent(translationSpanKey)}`,
+            spanKey: translationSpanKey,
             language: 'pt-BR',
             data: candidate.data,
           };

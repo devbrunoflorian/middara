@@ -280,7 +280,9 @@
     "docs/translations/proposals/p057-monster-loot-deck-draw-clarification-2026-11-22-v1.json",
     "docs/translations/proposals/p057-residual-receipt-closure-2026-11-22-v1.json",
     "docs/translations/proposals/page-097-burrow-final-bullet-copyfit-2026-11-22-v1.json",
-    "docs/translations/proposals/page-064-dice-color-labels-correction-2026-11-23-v1.json"
+    "docs/translations/proposals/page-064-dice-color-labels-correction-2026-11-23-v1.json",
+    "docs/translations/proposals/page-029-category-labels-proposal-2026-11-23-v1.json",
+    "docs/translations/proposals/page-029-category-labels-proposal-2026-11-23-v1.md"
   ],
   "items": [
     {
@@ -8883,7 +8885,7 @@
         "output/proofs/translation-readiness-2026-10-16/p029-item-upgrades-proposal-v2/editor-readonly-v2.png",
         "output/proofs/translation-readiness-2026-10-16/p029-item-upgrades-proposal-v2/print-pt-BR-diagnostic-v2.png"
       ],
-      "resolutionNote": "Aprovado canonicamente no Payload CMS em 05/11/2026",
+      "resolutionNote": "A publicação agrupada antiga (translation 1200/review 1449) foi preservada como fallback e histórico. Em 2026-11-23, três unidades-filhas específicas por rótulo passaram a controlar o render PT-BR; veja page-029-category-labels-proposal-2026-11-23-v1.md.",
       "resolvedAt": "2026-11-05T03:53:58.451000Z"
     },
     {
@@ -14732,6 +14734,99 @@
         "tmp/qa-p097-2026-11-21/p097-current-metrics.json: 32 Viewer and 32 print targets; 2/2 lines for the repaired list-flow unit.",
         "tmp/qa-p097-2026-11-21/p097-current-persisted-ptbr.pdf: verifiedTranslationRecords=true; pdfVerification=true; OG raster compared."
       ]
+    },
+    {
+      "id": "p29-item-upgrade-category-weapon::layout-structure",
+      "page": 29,
+      "sourceBlockId": "block_38",
+      "sourceUnitIds": [
+        "p29-item-upgrade-category-weapon"
+      ],
+      "spanKey": "page_29_unit_p29-item-upgrade-category-weapon",
+      "bboxPt": [
+        225.27310180664062,
+        614.4813842773438,
+        265.40411376953125,
+        625.2094116210938
+      ],
+      "category": "layout_structure",
+      "status": "resolved",
+      "reason": "A fonte separa este rótulo em linha e posição próprias; a tradução agora também tem unidade e moldura centrada próprias.",
+      "sourceText": "WEAPON",
+      "proposedText": "ARMA",
+      "evidence": [
+        "apps/web/public/pages/page_029/page_029_dom.json",
+        "docs/translations/proposals/page-029-category-labels-proposal-2026-11-23-v1.json"
+      ],
+      "verifiedIn": [
+        "PDF OG, p.29",
+        "PageRenderer PT-BR e Copyfit V3 em 100% e 200%",
+        "export persistido da p.29 com pdfVerification=true"
+      ],
+      "resolutionNote": "Unidade-filha publicada e validada; veja docs/translations/proposals/page-029-category-labels-proposal-2026-11-23-v1.md.",
+      "resolvedAt": "2026-11-23"
+    },
+    {
+      "id": "p29-item-upgrade-category-armor::layout-structure",
+      "page": 29,
+      "sourceBlockId": "block_38",
+      "sourceUnitIds": [
+        "p29-item-upgrade-category-armor"
+      ],
+      "spanKey": "page_29_unit_p29-item-upgrade-category-armor",
+      "bboxPt": [
+        340.4847106933594,
+        614.4813842773438,
+        373.8836975097656,
+        625.2094116210938
+      ],
+      "category": "layout_structure",
+      "status": "resolved",
+      "reason": "A fonte separa este rótulo em linha e posição próprias; a tradução agora também tem unidade e moldura centrada próprias.",
+      "sourceText": "ARMOR",
+      "proposedText": "ARMADURA",
+      "evidence": [
+        "apps/web/public/pages/page_029/page_029_dom.json",
+        "docs/translations/proposals/page-029-category-labels-proposal-2026-11-23-v1.json"
+      ],
+      "verifiedIn": [
+        "PDF OG, p.29",
+        "PageRenderer PT-BR e Copyfit V3 em 100% e 200%",
+        "export persistido da p.29 com pdfVerification=true"
+      ],
+      "resolutionNote": "Unidade-filha publicada e validada; veja docs/translations/proposals/page-029-category-labels-proposal-2026-11-23-v1.md.",
+      "resolvedAt": "2026-11-23"
+    },
+    {
+      "id": "p29-item-upgrade-category-core::layout-structure",
+      "page": 29,
+      "sourceBlockId": "block_38",
+      "sourceUnitIds": [
+        "p29-item-upgrade-category-core"
+      ],
+      "spanKey": "page_29_unit_p29-item-upgrade-category-core",
+      "bboxPt": [
+        456.4767150878906,
+        614.4813842773438,
+        480.65069580078125,
+        625.2094116210938
+      ],
+      "category": "layout_structure",
+      "status": "resolved",
+      "reason": "A fonte separa este rótulo em linha e posição próprias; a tradução agora também tem unidade e moldura centrada próprias.",
+      "sourceText": "CORE",
+      "proposedText": "NÚCLEO",
+      "evidence": [
+        "apps/web/public/pages/page_029/page_029_dom.json",
+        "docs/translations/proposals/page-029-category-labels-proposal-2026-11-23-v1.json"
+      ],
+      "verifiedIn": [
+        "PDF OG, p.29",
+        "PageRenderer PT-BR e Copyfit V3 em 100% e 200%",
+        "export persistido da p.29 com pdfVerification=true"
+      ],
+      "resolutionNote": "Unidade-filha publicada e validada; veja docs/translations/proposals/page-029-category-labels-proposal-2026-11-23-v1.md.",
+      "resolvedAt": "2026-11-23"
     }
   ]
 }
