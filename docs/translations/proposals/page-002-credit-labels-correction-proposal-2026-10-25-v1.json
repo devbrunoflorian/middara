@@ -3,8 +3,8 @@
   "version": "1",
   "page": 2,
   "title": "Correção de rótulos de créditos legados",
-  "status": "full-editable-text-proposal-v1-human-review-pending",
-  "scope": "Duas labels de crédito já traduzidas no Payload, com erros terminológicos evidentes; registrar propostas sem substituir os valores humanos existentes.",
+  "status": "approved_and_published_via_official_reviewer_verified_2026-11-23",
+  "scope": "Correção de dois rótulos de créditos legados publicada via Reviewer oficial em 2026-11-05; ambos os candidatos mantêm Copyfit V3 EXACT 1/1 em 100% e 200%.",
   "candidates": [
     {
       "page": 2,
@@ -16,7 +16,7 @@
       "sourceBlockId": "block_37",
       "sourceText": "Tile and Token Art:",
       "proposalText": "Arte das Peças e Fichas:",
-      "status": "blocked_by_preexisting_human_translation",
+      "status": "approved_and_published_via_official_reviewer",
       "pendingTerms": [],
       "semanticSymbols": [],
       "sourcePdfVisualLineCount": 1,
@@ -225,11 +225,22 @@
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
-      "technicalStatus": "verified_page_renderer_copyfit_v3_exact_100_200",
-      "editorialStatus": "blocked_by_preexisting_human_translation",
+      "technicalStatus": "copyfit_v3_exact_and_payload_persisted",
+      "editorialStatus": "Approved and persisted through the official Reviewer on 2026-11-05.",
       "notes": [
-        "Translation 15 já contém a tradução humana “Arte dos Tiles e Tokens:”. A rota oficial recusou sobrescrita; preservar sem alteração. Copyfit da proposta continua EXACT, mas não publicar."
-      ]
+        "Tentativa em 2026-10-25: a rota oficial recusou a sobrescrita da tradução humana 15; nenhum conteúdo foi alterado nessa tentativa.",
+        "Resolução: review 1533 publicou a tradução 15 em 2026-11-05. O valor atual coincide com a proposta; Copyfit V3 EXACT 1/1 em 100% e 200%."
+      ],
+      "approvalEvidence": {
+        "reviewId": 1533,
+        "translationId": 15,
+        "approvalStatus": "approved",
+        "technicalStatus": "copyfit_v3_exact_and_payload_persisted",
+        "copyfitClassification": "EXACT",
+        "sourcePdfLineCount": 1,
+        "pageRendererLineCount": 1,
+        "approvedAt": "2026-11-05T03:59:33.734Z"
+      }
     },
     {
       "page": 2,
@@ -241,10 +252,8 @@
       "sourceBlockId": "block_38",
       "sourceText": "Item Art:",
       "proposalText": "Arte dos Itens:",
-      "status": "proposal_pending_human_editorial_review",
-      "pendingTerms": [
-        "Item Art → Arte dos Itens: proposta contextual; o termo de categoria Item ainda não consta como entrada explícita do glossário."
-      ],
+      "status": "approved_and_published_via_official_reviewer",
+      "pendingTerms": [],
       "semanticSymbols": [],
       "sourcePdfVisualLineCount": 1,
       "data": {
@@ -451,7 +460,22 @@
           "frameHeightCssPx": 9.7
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+      },
+      "technicalStatus": "copyfit_v3_exact_and_payload_persisted",
+      "editorialStatus": "Approved and persisted through the official Reviewer on 2026-11-05 as a local credit-label translation; it does not establish a global glossary rule for Item.",
+      "approvalEvidence": {
+        "reviewId": 1534,
+        "translationId": 16,
+        "approvalStatus": "approved",
+        "technicalStatus": "copyfit_v3_exact_and_payload_persisted",
+        "copyfitClassification": "EXACT",
+        "sourcePdfLineCount": 1,
+        "pageRendererLineCount": 1,
+        "approvedAt": "2026-11-05T03:59:33.734Z"
+      },
+      "notes": [
+        "Review 1534 publicou a tradução 16 em 2026-11-05. Copyfit V3 EXACT 1/1 em 100% e 200%; “Arte dos Itens” fica como tradução local do rótulo de créditos."
+      ]
     }
   ]
 }
