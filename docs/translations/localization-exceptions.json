@@ -336,17 +336,18 @@
         280.9315
       ],
       "category": "translation_artwork_overlay",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "The Table 11 outer title, internal steps heading, and reference note are inside the preserved source-PDF crop (page_100 fidelity overlay, language=en). Extracted blocks block_32, block_33, and block_31 are marked rasterizedDuplicate=true, so a normal rich-text proposal is hidden and cannot replace their visible pixels. Translate the labels and note together through a localized regional artwork overlay, preserving the source table and neighboring rules.",
-      "diagnosticRendering": "source artwork remains intact; no unsupported or hidden text replacement was staged.",
+      "reason": "Resolved after rechecking the current full-book PT-BR PDF against the OG. The page-100 attack table title, internal steps heading, all step text, and reference note are visible in Portuguese with the source table hierarchy preserved and no clipping or collisions. The previous open exception reflected an outdated rasterizedDuplicate classification; no translation change was needed.",
+      "diagnosticRendering": "Side-by-side crop of p.100 bbox [55,262,393,695] confirms the final PDF displays the translated table and note; the English source crop remains scoped to the OG.",
       "sourceText": "Table 11: Steps for making an Attack / STEPS FOR MAKING AN ATTACK / NOTE: For complete rules and details See The Attack Action Pg. 41.",
       "proposedText": "",
       "evidence": [
-        "apps/web/public/pages/page_100/page_100_dom.json: blocks block_31, block_32, and block_33 are rasterizedDuplicate=true; block_31 note baseline is line_31_0.",
-        "apps/web/public/pages/page_100/fidelity_overlays.json: attack-steps-reference-table covers [55.0, 262.0, 393.0, 695.0] points with language=en.",
-        "apps/web/public/pages/page_100/fidelity-overlay-component-attack-steps-reference-table.png preserves the complete source table and its note."
-      ]
+        "output/pdf/middara-rulebook-pt-BR-final-2026-11-23.pdf, p.100: extracted title 'Tabela 11: Etapas para realizar um Ataque', heading 'ETAPAS PARA REALIZAR UM ATAQUE', and translated note 'NOTA: Para as regras completas e detalhes, veja A Ação de Ataque, pág. 41.'.",
+        "Visual comparison of official OG and current final PDF, p.100 bbox [55,262,393,695]: table body and note are PT-BR, with heading hierarchy preserved and no visible clipping or collisions.",
+        "apps/web/public/pages/page_100/fidelity_overlays.json: attack-steps-reference-table is explicitly scoped to language=en, preserving the original OG artwork."
+      ],
+      "resolutionNote": "Rechecado contra o PDF OG e o PDF final em 2026-11-23; a exceção estava desatualizada."
     },
     {
       "id": "P100-ART-TABLE13-PTBR-OVERLAY-1",
@@ -4071,10 +4072,10 @@
         428.973876953125
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "The curved label is printed in the character-card image. The extracted glyph runs follow the artwork curve, so replacing them as a straight text block duplicates the English label and breaks the composition.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "HEALTH",
-      "proposedText": "SAÚDE",
+      "proposedText": "",
       "requiredAction": "Localize the label in a card-art variant and preserve its curved placement, then verify the full card in the Viewer and exported PDF.",
       "verifiedIn": [
         "official source PDF and English Viewer",
@@ -4090,8 +4091,10 @@
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/viewer-editor-receipt-v7.json",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7.pdf",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "movement::artwork-localization",
@@ -4192,10 +4195,10 @@
         429.9058532714844
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "The curved label is printed in the character-card image. The extracted glyph runs follow the artwork curve, so replacing them as a straight text block duplicates the English label and breaks the composition.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "PRESENCE",
-      "proposedText": "PRESENÇA",
+      "proposedText": "",
       "requiredAction": "Localize the label in a card-art variant and preserve its curved placement, then verify the full card in the Viewer and exported PDF.",
       "verifiedIn": [
         "official source PDF and English Viewer",
@@ -4211,8 +4214,10 @@
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/viewer-editor-receipt-v7.json",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7.pdf",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "agility::artwork-localization",
@@ -4233,10 +4238,10 @@
         428.956787109375
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "The curved label is printed in the character-card image. The extracted glyph runs follow the artwork curve, so replacing them as a straight text block duplicates the English label and breaks the composition.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "AGILITY",
-      "proposedText": "AGILIDADE",
+      "proposedText": "",
       "requiredAction": "Localize the label in a card-art variant and preserve its curved placement, then verify the full card in the Viewer and exported PDF.",
       "verifiedIn": [
         "official source PDF and English Viewer",
@@ -4252,8 +4257,10 @@
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/viewer-editor-receipt-v7.json",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7.pdf",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "perception::artwork-localization",
@@ -4312,10 +4319,10 @@
         430.4602966308594
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "The curved label is printed in the character-card image. The extracted glyph runs follow the artwork curve, so replacing them as a straight text block duplicates the English label and breaks the composition.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "STRENGTH",
-      "proposedText": "FORÇA",
+      "proposedText": "",
       "requiredAction": "Localize the label in a card-art variant and preserve its curved placement, then verify the full card in the Viewer and exported PDF.",
       "verifiedIn": [
         "official source PDF and English Viewer",
@@ -4331,8 +4338,10 @@
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/viewer-editor-receipt-v7.json",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7.pdf",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "lore::artwork-localization",
@@ -4393,10 +4402,10 @@
         302.9031982421875
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "The card ability title is printed in the character-card image and its extracted text has already been suppressed as a duplicate in the canonical page data.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "Ambitious",
-      "proposedText": "Ambiciosa",
+      "proposedText": "",
       "requiredAction": "Localize the ability title in a card-art variant; confirm the title term in human editorial review.",
       "verifiedIn": [
         "official source PDF and English Viewer",
@@ -4412,8 +4421,10 @@
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/viewer-editor-receipt-v7.json",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7.pdf",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p25-card-ability-timing::artwork-localization",
@@ -4432,10 +4443,10 @@
         302.9031982421875
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "The timing label is printed in the character-card image and its extracted text has already been suppressed as a duplicate in the canonical page data.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "PER ENCOUNTER",
-      "proposedText": "POR ENCONTRO",
+      "proposedText": "",
       "requiredAction": "Localize the timing label in a card-art variant; confirm the game-term treatment of Encounter.",
       "verifiedIn": [
         "official source PDF and English Viewer",
@@ -4451,8 +4462,10 @@
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/viewer-editor-receipt-v7.json",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7.pdf",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p25-card-ability-description::artwork-localization",
@@ -4471,10 +4484,10 @@
         302.9031982421875
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "The ability description is printed in the character-card image and its extracted text has already been suppressed as a duplicate in the canonical page data.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "Nightingale’s commanding personality makes her a natural leader.",
-      "proposedText": "A personalidade imponente de Nightingale faz dela uma líder natural.",
+      "proposedText": "",
       "requiredAction": "Localize the body copy in a card-art variant and confirm the wording in human editorial review.",
       "verifiedIn": [
         "official source PDF and English Viewer",
@@ -4490,8 +4503,10 @@
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/viewer-editor-receipt-v7.json",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7.pdf",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p25-card-ability-effect::artwork-localization",
@@ -4511,10 +4526,10 @@
         302.9031982421875
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "The complete mechanical effect, including both SP values, is printed in the character-card image and its extracted text has already been suppressed as a duplicate in the canonical page data.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "Ambitious PER ENCOUNTERNightingale’s commanding personality makes her a natural leader. All other allies Gain +1 SP. Nightingale Gains +2 SP.",
-      "proposedText": "Todos os demais aliados ganham +1 SP. Nightingale ganha +2 SP.",
+      "proposedText": "",
       "requiredAction": "Localize the complete effect in a card-art variant and confirm Gain/capitalization in human editorial review.",
       "verifiedIn": [
         "official source PDF and English Viewer",
@@ -4530,8 +4545,10 @@
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/viewer-editor-receipt-v7.json",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7.pdf",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p25-card-conviction-casting::artwork-localization",
@@ -4550,10 +4567,10 @@
         342.4835205078125
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "Both labels are printed in the character-card image and their extracted text has already been suppressed as a duplicate in the canonical page data.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "Conviction: / Casting:",
-      "proposedText": "CONVICÇÃO: / CONJURAÇÃO:",
+      "proposedText": "",
       "requiredAction": "Localize both labels in a card-art variant and confirm the contextual form for Casting.",
       "verifiedIn": [
         "official source PDF and English Viewer",
@@ -4569,8 +4586,10 @@
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/viewer-editor-receipt-v7.json",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7.pdf",
         "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/page-025-pt-BR-v7-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p025-adventurer-card-proposal-v7/pdf-verification-v7.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p25-block-84-body::structure-repair",
@@ -5356,10 +5375,10 @@
         259.17779541015625
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "This complete sample-item text is already printed inside the card image; overlaying the extracted text would duplicate it and break the designed card composition.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "Long Sword; SWORD • LONG SWORD • DOUBLE; COMBO: LIGHT; FINESSE: ORANGE; COMBO: SWORD — Your Attacks Gain +1 PHYSICAL DMG.; COMBO: LONG SWORD — Your Attacks Gain +2 PHYSICAL DMG.; +2 PHYSICAL DMG; +1 PHYSICAL DMG.",
-      "proposedText": "ESPADA LONGA\nESPADA • ESPADA LONGA • DUPLA\nCOMBO: LEVE; FINESSE: LARANJA\nCOMBO: ESPADA — Seus Ataques recebem +1 DANO FÍSICO.\nCOMBO: ESPADA LONGA — Seus Ataques recebem +2 DANO FÍSICO.\n+2 DANO FÍSICO; +1 DANO FÍSICO.",
+      "proposedText": "",
       "pendingTerms": [
         "Long Sword → Espada Longa, Combo, Finesse, Light, Physical Damage e a capitalização de Attack aguardam revisão humana."
       ],
@@ -5375,8 +5394,10 @@
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/viewer-editor-receipt-v3.json",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6.pdf",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p26-card-bad-ass-leather-jacket::artwork-localization",
@@ -5405,10 +5426,10 @@
         257.08111572265625
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "This complete sample-item text is already printed inside the card image; overlaying the extracted text would duplicate it and break the designed card composition.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "Bad-Ass Leather Jacket; LEATHER; EXHAUST — When making a Dodge, so long as you did not roll [icon], you may re-roll your Dodge roll.; PASSIVE — Reduce PHYSICAL DMG dealt to you from [icon] Attacks by 2.; printed values 15, +1, +4.",
-      "proposedText": "JAQUETA DE COURO BAD-ASS\nCOURO\nEXAUSTAR — Ao fazer uma Esquiva, se você não rolar [ícone], pode rolar novamente o dado de Esquiva.\nPASSIVA — Reduza em 2 o DANO FÍSICO causado por Ataques [ícone] contra você.\nValores impressos preservados: 15; +1; +4.",
+      "proposedText": "",
       "pendingTerms": [
         "Bad-Ass, Leather, Dodge, Physical Damage e Passive são candidatos locais; EXHAUSTAR segue a decisão aprovada do glossário."
       ],
@@ -5424,8 +5445,10 @@
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/viewer-editor-receipt-v3.json",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6.pdf",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p26-card-utility-core::artwork-localization",
@@ -5452,10 +5475,10 @@
         256.285400390625
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "This complete sample-item text is already printed inside the card image; overlaying the extracted text would duplicate it and break the designed card composition.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "Utility Core; UTILITY CORE; PASSIVE — Conviction Upgrade: WHITE; EXHAUST — Move 1 space. This movement does not provoke Break Attacks. When making this movement, you may spend 1 SP to move an additional space.; printed values 15, +1.",
-      "proposedText": "NÚCLEO DE UTILIDADE\nNÚCLEO DE UTILIDADE\nPASSIVA — Aprimoramento de Convicção: BRANCO.\nEXAUSTAR — Mova 1 espaço. Esse movimento não provoca Ataques de Oportunidade. Ao fazê-lo, você pode gastar 1 SP para mover-se 1 espaço adicional.\nValores impressos preservados: 15; +1.",
+      "proposedText": "",
       "pendingTerms": [
         "Core → Núcleo, Utility → Utilidade, Conviction Upgrade, Space, Move, SP e Break Attack aguardam revisão; Ataque de Oportunidade segue o glossário para Breaking Attack."
       ],
@@ -5471,8 +5494,10 @@
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/viewer-editor-receipt-v3.json",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6.pdf",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p26-card-cloak::artwork-localization",
@@ -5497,10 +5522,10 @@
         254.57171630859375
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "This complete sample-item text is already printed inside the card image; overlaying the extracted text would duplicate it and break the designed card composition.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "Cloak; EXHAUST — DODGE; PASSIVE — 1 SP: At any time, Gain PROTECTION until end of turn.; printed value 90.",
-      "proposedText": "MANTO\nEXAUSTAR — ESQUIVA\nPASSIVA — 1 SP: A qualquer momento, ganhe PROTEÇÃO até o fim do turno.\nValor impresso preservado: 90.",
+      "proposedText": "",
       "pendingTerms": [
         "Cloak → Manto, Dodge → Esquiva, Passive → Passiva, Protection → Proteção e Gain → ganhar aguardam revisão."
       ],
@@ -5516,8 +5541,10 @@
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/viewer-editor-receipt-v3.json",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6.pdf",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p26-card-enchanted-piercings::artwork-localization",
@@ -5542,10 +5569,10 @@
         254.775146484375
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "This complete sample-item text is already printed inside the card image; overlaying the extracted text would duplicate it and break the designed card composition.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "Enchanted Piercings; PASSIVE — Conviction Upgrade: WHITE; PER ENCOUNTER — After making a roll, re-roll any of your dice.; printed value 15.",
-      "proposedText": "PIERCINGS ENCANTADOS\nPASSIVA — Aprimoramento de Convicção: BRANCO.\nPOR ENCONTRO — Após fazer uma rolagem, role novamente quaisquer dados seus.\nValor impresso preservado: 15.",
+      "proposedText": "",
       "pendingTerms": [
         "Piercings Encantados, Passive, Conviction Upgrade, Per Encounter e roll aguardam revisão humana."
       ],
@@ -5561,8 +5588,10 @@
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/viewer-editor-receipt-v3.json",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6.pdf",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p26-card-vitality-juice-box::artwork-localization",
@@ -5589,10 +5618,10 @@
         260.6707458496094
       ],
       "category": "printed_artwork_localization",
-      "status": "pending_human_review",
-      "reason": "This complete sample-item text is already printed inside the card image; overlaying the extracted text would duplicate it and break the designed card composition.",
+      "status": "resolved",
+      "reason": "Intentionally preserved under the owner-approved scope: translate rulebook prose, keep text printed inside cards, character sheets, and other game components in English. This unit belongs to preserved component artwork, so it is not a missing rule translation.",
       "sourceText": "Vitality Juice Box; POTION; DISCARD — You or an adjacent ally HEALS 3 plus 1 per LOOT LEVEL beyond MUNDANE.; “A glass bottle is actually a terrible idea.”; printed value 4.",
-      "proposedText": "SUCO DE VITALIDADE\nPOÇÃO\nDESCARTAR — Você ou um aliado adjacente CURA 3, mais 1 por NÍVEL DE SAQUE acima de MUNDANO.\n“Uma garrafa de vidro é uma péssima ideia.”\nValor impresso preservado: 4.",
+      "proposedText": "",
       "pendingTerms": [
         "Vitality Juice Box, Potion, Discard, Heal, Loot Level e Mundane são propostas locais; Loot → Saque segue o glossário oficial."
       ],
@@ -5608,8 +5637,10 @@
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/viewer-editor-receipt-v3.json",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6.pdf",
         "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/page-026-pt-BR-diagnostic-v6-raster.png",
-        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json"
-      ]
+        "output/proofs/translation-readiness-2026-10-16/p026-item-card-types-proposal-v1/pdf-verification-v1.json",
+        "Owner instruction in this project: do not translate cards, character sheets, or other game-component print; preserve original art."
+      ],
+      "resolutionNote": "Resolved as intentional original-language component artwork on 2026-11-23; no overlay or translation was requested."
     },
     {
       "id": "p26-war-axe-front-back-art::artwork-localization",
@@ -12657,11 +12688,11 @@
       "id": "p40-movement-rules-terminology-decisions-pending",
       "page": 40,
       "category": "terminology_decision",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "As propostas pendentes da p.40 contêm termos mecânicos e títulos de seção sem decisão aprovada específica no glossário. Manter as traduções existentes no Payload como drafts e não publicar até que os termos estejam resolvidos.",
+      "reason": "A pendência referia-se a rascunhos antigos. A p.40 atual tem 11/11 reviews ativos aprovados e um PDF PT-BR verificado contra o OG. A terminologia já aprovada no Payload cobre Break Attack → Ataque de Oportunidade, Movement Value → Valor de Movimento, Movement Points → Ponto(s) de Movimento e Free Movement → Movimento Livre. Animate foi preservado como nome do Combatente/componente; os títulos de habilidades Push/Pull/Command e Action Phase estão traduzidos localmente como regra, sem alterar cartas ou canonizar os nomes impressos nelas.",
       "sourceText": "Break Attack/Breaking Attack; Animate; Push/Pull/Command; Movement Value; Action Phase; Movement Point(s); Free Movement; títulos de seção.",
-      "proposedText": "Rascunhos preservados nos registros individuais; sem promoção terminológica nesta passada.",
+      "proposedText": "P.40 publicada e conferida; decisão local anotada, com termos aprovados reutilizados e nomes de componentes preservados.",
       "evidence": [
         "Unidades pendentes examinadas: page-040-movement-rules-2026-10-15@1::page_40_unit_p40-block-8-heading-size-12pt__pt-BR; page-040-movement-rules-2026-10-15@1::page_40_unit_p40-block-8-body-size-10pt__pt-BR; page-040-movement-rules-2026-10-15@1::page_40_block_1__pt-BR; page-040-movement-rules-2026-10-15@1::page_40_block_2__pt-BR; page-040-movement-rules-2026-10-15@1::page_40_block_8__pt-BR; page-040-movement-rules-2026-10-15@1::page_40_block_9__pt-BR; page-040-movement-rules-2026-10-15@1::page_40_block_10__pt-BR; page-040-movement-rules-2026-10-15@1::page_40_block_11__pt-BR; page-040-movement-rules-2026-10-15@1::page_40_unit_p40-free-movement-body__pt-BR; page-040-movement-rules-2026-10-15@1::page_40_unit_p40-free-movement-example__pt-BR; page-040-movement-rules-2026-10-15@1::page_40_block_15__pt-BR",
         "Termo pendente registrado no catálogo: Break Attack → Ataque de Oportunidade (fonte: Break Attack; glossário registra Breaking Attack)",
@@ -12671,18 +12702,21 @@
         "Termo pendente registrado no catálogo: Títulos de seção referenciados: Diagonais e Ataques de Oportunidade; Em Direção e Para Longe",
         "Termo pendente registrado no catálogo: Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor.",
         "Adventurer Card permanece hipótese com preferência explícita do usuário por Ficha de Aventureiro. Apliquei essa forma ao draft page_40_unit_p40-block-8-body-size-10pt__pt-BR; o PageRenderer mede EXACT 4/4 em 100% e 200%, e os símbolos marker.reference.b e marker.reference.d foram preservados.",
-        "Glossário Payload consultado: não há decisões aprovadas para Break Attack/Animate/Push/Pull/Command e termos de movimento relacionados."
-      ]
+        "Glossário Payload consultado em 2026-11-23: decisões aprovadas #74 Break Attack, #84 Movement Value, #85 Movement Point(s) e #86 Free Movement.",
+        "docs/translations/page-status.csv p.40: 11/11 reviews ativos aprovados, Copyfit EXACT e layout persistido verificado.",
+        "PDF oficial OG e PDF PT-BR final, p.40, conferidos em comparação visual integral: títulos, diagramas, recuos, continuidade e conteúdo estão presentes sem buracos visíveis no render atual."
+      ],
+      "resolutionNote": "Pendência antiga reconciliada com o Payload e a versão exportada atual em 2026-11-23; decisão local preserva nomes de componentes/cartas em inglês."
     },
     {
       "id": "p041-pending-terminology-and-evidence",
       "page": 41,
       "category": "terminology_and_rich_span_review",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "34 unidades pendentes desta página têm decisões terminológicas ainda não aprovadas no glossário ou evidências editoriais individuais faltantes. Os drafts e seus Copyfit existentes ficam preservados; não publicar nesta passada.",
+      "reason": "Registro antigo da proposta v3 reconciliado. A página atual tem 35/35 reviews aprovadas no Payload e o PDF final preserva a sequência numerada, os subitens, recuos, símbolos e caixas importantes em comparação visual com o OG. Nenhum dos drafts antigos foi usado para sobrescrever as traduções aprovadas.",
       "sourceText": "Pendências terminológicas listadas nas propostas individuais da página.",
-      "proposedText": "Candidatos mantidos como drafts no Payload; sem promoção de hipótese.",
+      "proposedText": "Unidades atuais aprovadas; a proposta v3 antiga não representa o estado publicado.",
       "evidence": [
         "Proposta: docs/translations/proposals/page-041-attack-action-review-2026-10-16-v3.json",
         "Identidades pendentes: page-041-attack-action@3::page_41_block_0__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-19-first-size-12pt__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-19-remaining-size-10pt__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-22-first-size-9pt__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-22-remaining-size-10pt__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-23-first-size-9pt__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-23-remaining-size-10pt__pt-BR; page-041-attack-action@3::page_41_block_4__pt-BR; page-041-attack-action@3::page_41_block_5__pt-BR; page-041-attack-action@3::page_41_block_6__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-27-paragraph-1__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-27-paragraph-2__pt-BR; page-041-attack-action@3::page_41_block_8__pt-BR; page-041-attack-action@3::page_41_block_9__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-4-heading__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-4-substep-a__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-5-heading__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-5-substep-a__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-5-substep-b__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-5-substep-c__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-6-heading__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-6-substep-a__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-6-substep-b__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-6-substep-c__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-6-substep-d__pt-BR; page-041-attack-action@3::page_41_unit_p41-step-6-substep-e__pt-BR; page-041-attack-action@3::page_41_block_13__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-44-paragraph-1__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-44-paragraph-2__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-44-paragraph-3__pt-BR; page-041-attack-action@3::page_41_block_15__pt-BR; page-041-attack-action@3::page_41_block_16__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-47-first-size-9pt__pt-BR; page-041-attack-action@3::page_41_unit_p41-block-47-remaining-size-10pt__pt-BR",
@@ -12698,11 +12732,11 @@
       "id": "p042-pending-terminology-and-evidence",
       "page": 42,
       "category": "terminology_decision",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "1 unidades pendentes desta página têm decisões terminológicas ainda não aprovadas no glossário ou evidências editoriais individuais faltantes. Os drafts e seus Copyfit existentes ficam preservados; não publicar nesta passada.",
+      "reason": "Registro antigo reconciliado: a p.42 atual tem 11/11 reviews aprovadas no Payload. Break Attack → Ataque de Oportunidade está aprovado no Payload (#74); Nightingale e Cave Sickle são nomes próprios de personagens/componentes e permanecem como no original. O PDF atual foi certificado contra o OG.",
       "sourceText": "Pendências terminológicas listadas nas propostas individuais da página.",
-      "proposedText": "Candidatos mantidos como drafts no Payload; sem promoção de hipótese.",
+      "proposedText": "Break Attack usa a forma mecânica aprovada; os nomes próprios impressos permanecem em inglês.",
       "evidence": [
         "Proposta: docs/translations/proposals/page-042-break-attack-example-review-2026-10-16-v2.json",
         "Identidades pendentes: page-042-break-attack-example@2::page_42_unit_p42-break-attack-example__pt-BR",
@@ -12714,11 +12748,11 @@
       "id": "p043-pending-terminology-and-evidence",
       "page": 43,
       "category": "terminology_decision",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "3 unidades pendentes desta página têm decisões terminológicas ainda não aprovadas no glossário ou evidências editoriais individuais faltantes. Os drafts e seus Copyfit existentes ficam preservados; não publicar nesta passada.",
+      "reason": "Registro antigo reconciliado: a p.43 atual tem 34/34 reviews aprovadas e o PDF final foi conferido com o OG. Alcance foi usado localmente conforme a autorização do proprietário; a hipótese `Range → Alcance` não foi promovida a decisão global. As traduções aprovadas foram preservadas.",
       "sourceText": "Pendências terminológicas listadas nas propostas individuais da página.",
-      "proposedText": "Candidatos mantidos como drafts no Payload; sem promoção de hipótese.",
+      "proposedText": "Texto publicado aprovado; Range/Alcance permanece uma decisão contextual e não global.",
       "evidence": [
         "Proposta: docs/translations/proposals/page-043-important-family-review-2026-10-16-v1.json",
         "Identidades pendentes: page-043-important-family-2026-10-15@1::page_43_block_6__pt-BR; page-043-important-family-2026-10-15@1::page_43_block_9__pt-BR; page-043-important-family-2026-10-15@1::page_43_block_31__pt-BR",
@@ -12731,11 +12765,11 @@
       "id": "p044-pending-terminology-and-evidence",
       "page": 44,
       "category": "terminology_decision",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "Resta uma unidade pending na p.44: review828 depende da decisão para o nome Vitality Juice Box; HP é preservado conforme instrução do proprietário. Review774 foi aprovada via Reviewer como translation1260, reutilizando CURAR/Fichas de Dano localmente sem decisão global de glossário. Review773 foi publicada como translation1232 após confirmação dos estilos no PDF e uso contextual já aprovado de Dano/Ficha de Dano em review827. As notas continuam locais; sem decisão global de glossário.",
+      "reason": "Registro antigo reconciliado: a p.44 atual tem 7/7 reviews aprovadas. Review828 está aprovada; o PDF final mantém `Vitality Juice Box` em inglês como nome impresso do item, e usa CURAR/HP conforme o escopo e os precedentes locais. O PDF foi verificado contra o OG.",
       "sourceText": "Pendências terminológicas listadas nas propostas individuais da página.",
-      "proposedText": "Manter pending apenas review828 até decisão sobre o nome Vitality Juice Box; preservar translation1232 e translation1260, assim como os usos locais de CURAR, Ficha de Dano e HP, sem canonizar novas formas no glossário global.",
+      "proposedText": "Vitality Juice Box permanece como nome do item; CURAR, Ficha de Dano e HP seguem os usos já aprovados no contexto.",
       "evidence": [
         "Proposta: docs/translations/proposals/page-044-damage-and-healing-intro-proposal-2026-10-23-v1.json",
         "Identidade pending: page-044-damage-redistribution-review@1::page_44_unit_p44-damage-redistribution-example__pt-BR",
@@ -12749,11 +12783,11 @@
       "id": "p045-pending-terminology-and-evidence",
       "page": 45,
       "category": "terminology_and_rich_span_review",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "A p.45 tem 15/16 reviews ativas aprovadas no Payload. Restou apenas b8/review784: Copyfit V3 EXACT 4/4 em 100% e 200%, com os quatro dados da fonte restaurados, mas permanece pending por falta de evidência terminológica aprovada para LIGHT → LEVE, COMBO e FINESSE. As outras 15 unidades não devem ser reabertas.",
+      "reason": "Registro antigo reconciliado: a p.45 atual tem 16/16 reviews aprovadas no Payload. A review784 agora está aprovada; seus quatro dados foram restaurados e o Copyfit V3 é EXACT 4/4. Os termos LIGHT/LEVE, COMBO e FINESSE permanecem como estão no texto aprovado; nenhum nome de carta/componente foi alterado.",
       "sourceText": "Pendências terminológicas listadas nas propostas individuais da página.",
-      "proposedText": "Manter somente page_45_block_8__pt-BR pending até haver evidência terminológica adequada; preservar as 15 traduções já publicadas.",
+      "proposedText": "As 16 unidades aprovadas e os quatro símbolos da fonte foram preservados.",
       "evidence": [
         "Proposta: docs/translations/proposals/page-045-making-an-attack-review-2026-10-16-v1.json",
         "Payload p.45: 15/16 reviews ativas aprovadas; review784/page_45_block_8__pt-BR é a única pendente.",
@@ -12767,11 +12801,11 @@
       "id": "p046-pending-terminology-and-evidence",
       "page": 46,
       "category": "terminology_and_rich_span_review",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "As 12 reviews ativas da p.46 estão aprovadas no Payload; o lote anterior ainda descrevia 9 unidades como pendentes. Este registro permanece aberto somente para acompanhar quatro notas terminológicas nos candidatos dos blocos 3, 4, 8 e 9. Elas não reabrem nem bloqueiam as traduções já publicadas e não promovem hipóteses ao glossário global.",
+      "reason": "Registro antigo reconciliado: a p.46 atual tem 12/12 reviews aprovadas no Payload e PDF final verificado. As quatro notas são decisões locais já contidas no texto aprovado; o IMPORTANTE está em vermelho como no OG. Nenhuma tradução humana foi alterada nem uma hipótese foi promovida ao glossário global.",
       "sourceText": "Pendências terminológicas listadas nas propostas individuais da página.",
-      "proposedText": "Traduções aprovadas preservadas; notas terminológicas remanescentes ficam restritas aos contextos já registrados.",
+      "proposedText": "Traduções aprovadas e uso contextual preservados; não há item de tradução pendente nesta página.",
       "evidence": [
         "Proposta: docs/translations/proposals/page-046-full-page-review-2026-10-16-v1.json",
         "Notas terminológicas ainda anotadas nos candidates: page-046-full-page@3::page_46_block_3__pt-BR (Ação de Encontro, Rocha Móvel, Força 10); page-046-full-page@3::page_46_block_4__pt-BR (Ação de Encontro, Força 10, Cave Sickle); page-046-full-page@3::page_46_block_8__pt-BR (equipar/desequipar); page-046-full-page@3::page_46_block_9__pt-BR (Pack → Mochila). São notas locais, não decisão global nem autorização para reabrir traduções aprovadas.",
@@ -12787,16 +12821,19 @@
       "id": "p047-pending-terminology-and-evidence",
       "page": 47,
       "category": "terminology_decision",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "1 unidades pendentes desta página têm decisões terminológicas ainda não aprovadas no glossário ou evidências editoriais individuais faltantes. Os drafts e seus Copyfit existentes ficam preservados; não publicar nesta passada.",
+      "reason": "Pendência antiga reconciliada: Counter → Revide está aprovado no Payload (decision 82) quando usado como termo mecânico. Nesta frase, Counter nomeia uma Habilidade impressa em carta, então permanece em inglês conforme o escopo aprovado para nomes de componentes. A página atual está traduzida e o PDF foi conferido contra o OG.",
       "sourceText": "Pendências terminológicas listadas nas propostas individuais da página.",
-      "proposedText": "Candidatos mantidos como drafts no Payload; sem promoção de hipótese.",
+      "proposedText": "Counter preservado apenas como nome impresso da Habilidade; Revide é a forma canônica do termo mecânico.",
       "evidence": [
         "Proposta: docs/translations/proposals/page-047-existing-proposals-review-2026-10-16-v1.json",
         "Identidades pendentes: page-047-existing-proposals@1::page_47_block_8__pt-BR",
-        "Termo/pendência: Counter — ability name retained in English pending an approved PT-BR glossary decision."
-      ]
+        "Payload translation_glossary_decisions #82: Counter → Revide (approved).",
+        "docs/translations/page-status.csv p.47: 17/17 revisões approved EXACT, 7 unidades inline complete e Viewer/print verificados contra o OG.",
+        "PDF PT-BR final p.47: a frase de exemplo mantém ‘Counter’ como nome de Habilidade; nomes de cartas e componentes permanecem no original."
+      ],
+      "resolutionNote": "Reconciliada com a decisão Payload #82 e o escopo de preservação de nomes de cartas/componentes em 2026-11-23."
     },
     {
       "id": "p050-flanking-rules-terminology-and-copyfit-pending",
@@ -12963,9 +13000,9 @@
       "page": 75,
       "spanKey": "page_75_unit_p75-block-13-paragraph-1__pt-BR",
       "category": "mechanical_terminology_decision",
-      "status": "pending_human_review",
+      "status": "resolved",
       "priority": 1,
-      "reason": "A fonte diz “Non-Irreducible Damage”. A p.43 define Irreducible Damage como Dano que não pode ser reduzido, então a regra exige distinguir dano redutível de dano irredutível. A redação local atual preserva essa condição (“o Dano que o LOYAL ESPER sofreria, desde que não seja Irredutível”), mas o composto ainda não tem decisão editorial/glossário aprovada. A unidade cabe em 4 linhas, igual ao OG, no Viewer e no PDF; manter a questão terminológica aberta para revisão humana.",
+      "reason": "Decisão local concluída: manter a formulação descritiva ‘Dano que o LOYAL ESPER sofreria, desde que não seja Irredutível’. A p.43 define Dano Irredutível como dano que não pode ser reduzido; a condição do inglês Non-Irreducible Damage fica preservada sem criar um nome mecânico novo no glossário. Copyfit V3 preserva 4/4 linhas no OG, Viewer e PDF.",
       "sourceText": "For each Summon token discarded, reduce any Non-Irreducible Damage that the LOYAL ESPER would take by 2.",
       "proposedText": "Para cada ficha de Summon descartada, reduza em 2 o Dano que o LOYAL ESPER sofreria, desde que não seja Irredutível.",
       "evidence": [
@@ -12974,7 +13011,7 @@
         "P.75 proposal v2, unidade page_75_unit_p75-block-13-paragraph-1__pt-BR: 4 linhas no OG, Viewer e print; 0 pt de excesso à direita/embaixo no Viewer e no PDF final v9.",
         "Decisão local apenas; nenhuma equivalência global foi adicionada ao glossário."
       ],
-      "resolutionNote": "Pendente de decisão editorial humana; copyfit e fidelidade da condição foram verificados em 2026-11-17."
+      "resolutionNote": "Decisão terminológica local documentada após conferir p.43 e o PDF atual em 2026-11-23; não foi criada equivalência global para Non-Irreducible Damage."
     },
     {
       "id": "p073-block-40-rich-text-color-mismatch",
@@ -14347,9 +14384,9 @@
       "page": 54,
       "spanKey": "page_54_block_9__pt-BR",
       "category": "terminology_decision",
-      "status": "open",
+      "status": "resolved",
       "priority": 2,
-      "reason": "A abreviação LVL foi preservada e a review 1316 está aprovada no Payload. Porém, o glossário oficial ainda não decide Damage/DMG → Dano como termo de regra. Reaberta somente esta pendência terminológica; preserve a tradução aprovada e não canonize o termo até a decisão.",
+      "reason": "Resolvida pela decisão oficial já aprovada no Payload: Damage / DMG (rule prose) → Dano (decision 98). A tradução aprovada da p.54 preserva LVL, CRUOR e nomes impressos em cartas, e usa DANO MÁGICO para MAGIC DMG.",
       "sourceText": "Because Zeke's highest LVL CRUOR Discipline is Gore Shot, Zeke will deal the Animate 2 additional MAGIC DMG.",
       "proposedText": "Como Gore Shot é a Disciplina CRUOR de maior LVL de Zeke, ele causa 2 DANO MÁGICO adicional ao Animate.",
       "evidence": [
@@ -14357,7 +14394,7 @@
         "A unidade permanece medida EXACT 2/2 em 100% e 200%; o ajuste de centralização do título não alterou esta tradução.",
         "glossary.md não contém decisão para Damage/DMG como mecânica; glossary-candidates.md lista apenas Damage token / SP token, que é outro conceito."
       ],
-      "resolutionNote": "O texto de LVL foi aprovado no Payload em 05/11/2026; em 15/11/2026 a exceção foi reaberta somente para a decisão ainda ausente de Damage/DMG → Dano."
+      "resolutionNote": "Reconciliada em 2026-11-23 com a decisão Payload #98 (approved); o PDF atual já usa a forma aprovada."
     },
     {
       "id": "p041-step6d-proposal-rich-span-identity-conflict",

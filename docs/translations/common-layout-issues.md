@@ -146,6 +146,8 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 
 **Caso verificado:** na p.61, o `tag.passive.icon` da legenda é uma ocorrência semântica inline em texto de 9 pt. A comparação da tinta com o PDF OG mediu cerca de 1,58 pt de espaço à direita (aprox. 0,175 em); dimensões e baseline também foram preservadas. Esse valor pertence à ocorrência p.61 e não deve ser aplicado aos outros usos de `tag.passive`.
 
+**Caso verificado na p.83 (2026-11-23):** `token.blue-totem` ocupa uma caixa inline de 21 × 21 pt entre “o” e “Totem Azul.”. Os dois fragmentos de texto têm o mesmo bbox vertical (`y=149,468–159,725 pt`); a imagem ocupa `y=144,266–165,266 pt`, centrada nessa linha. A extração divide o texto em fragmentos ao redor da imagem, mas Viewer/PDF continuam em uma única linha visual; o Copyfit V3 aprovado é EXACT 4/4 em 100% e 200%. Os bboxes de texto incluem espaços ricos e podem tocar ou se sobrepor à caixa do objeto por menos de 0,32 pt sem colisão de tinta. Compare o raster e a baseline com o OG antes de concluir que o símbolo caiu para a linha seguinte. O respiro percebido é específico da ocorrência e não justifica margem global.
+
 ## Símbolo inline some porque o asset local não existe ou não foi publicado
 
 **Sintoma:** a página mostra um espaço vazio, um símbolo fallback ou uma imagem quebrada, embora o rich-text e `inline_elements.json` contenham o `symbolId` correto. Um `sourceAssetUrl` pode apontar para um nome temporário de auditoria, para a página errada ou para um arquivo que o Git ignora.
