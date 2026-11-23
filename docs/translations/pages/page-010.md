@@ -4,7 +4,8 @@
 - **Fidelidade/layout:** OG, Viewer PT-BR e PDF impresso comparados visualmente em 2026-11-21.
 - **PT-BR:** 22/22 traduções foram lidas do Payload, salvas e conferidas no Viewer e no PDF impresso. Nesta passagem, `Skill Check` foi alinhado ao glossário como “Teste de Perícia”; a instrução do Grupo Ativo recebeu copyfit local.
 - **Exportação:** `verifiedTranslationRecords=true` e `pdfVerification=true`; MediaBox 820,346 × 820,346 pt. Os 22 alvos não têm excesso medido à direita ou embaixo no Viewer nem no PDF impresso.
-- **Termos:** `Adventure Sheet → Folha da Aventura` e `Skill Check → Teste de Perícia` seguem o glossário. `Party Stash → Estoque do Grupo`; `Party Tuck Bag → Bolsa do Grupo` permanece uma escolha local deste texto, ainda candidata como termo composto.
+- **Termos:** `Adventure Sheet → Folha da Aventura`, `Skill Check → Teste de Perícia` e `Party Stash → Estoque do Grupo` seguem o glossário. `Adventurer Tuck Bags` e `Party Tuck Bag` permanecem em inglês como nomes de componentes.
+- **Revisão de escopo (23/11/2026):** as duas unidades corrigidas foram aprovadas pelo fluxo Payload (reviews 2134 e 2135). Copyfit V3 EXACT: 7/7 e 4/4 linhas. Viewer/print em modo de captura confirmou as traduções salvas e as caixas de página; o PDF de uma página será coberto pela próxima exportação final para evitar duplicar arquivos pesados.
 
 > O inglês abaixo reproduz o conteúdo impresso, inclusive construções editoriais do original. A notação Markdown de negrito/itálico registra a ênfase a manter; a observação de DTP no fim de cada unidade conserva a hierarquia tipográfica.
 
@@ -94,15 +95,15 @@
 
 **EN:** In addition to the Adventure Sheet, separate Adventurer Tuck Bags are also included in the game. Players will be able to store the Adventurer Card, Items, and Disciplines their Adventurer currently has in one easy-to-use baggy. These Tuck Bags will be used to supplement the Adventure Sheet as there is not a space to record this information. There is also a general Party Tuck Bag (referred to in the game as the “party stash”) for Items that are not equipped by any Adventurer in the party.
 
-**PT-BR (corrigido):** Além da Folha da Aventura, o jogo também inclui Bolsas de Aventureiro individuais. Nelas, os jogadores podem guardar a Carta de Aventureiro, os Itens e as Disciplinas que seu Aventureiro possui atualmente.
+**PT-BR (corrigido):** Além da Folha da Aventura, o jogo inclui bolsas individuais chamadas Adventurer Tuck Bags. Nelas, os jogadores guardam a Carta de Aventureiro, os Itens e as Disciplinas que cada Aventureiro possui.
 
-Essas Bolsas complementam a Folha da Aventura, pois não há espaço nela para registrar essas informações.
+Essas bolsas complementam a Folha da Aventura, que não tem espaço para essas informações.
 
-Há também uma Bolsa do Grupo, chamada no jogo de “Estoque do Grupo”, para guardar Itens que não estejam equipados por nenhum Aventureiro.
+Há também um Party Tuck Bag de uso coletivo (o “Estoque do Grupo”), para guardar Itens não equipados por nenhum Aventureiro do grupo.
 
-**Copyedit:** `party stash` agora usa o termo oficial do glossário, “Estoque do Grupo”. “Party Tuck Bag” permanece como “Bolsa do Grupo” neste draft e foi adicionado à fila de termos compostos.
+**Copyedit:** `Adventurer Tuck Bags` e `Party Tuck Bag` ficam em inglês como nomes dos componentes. `Party Stash` continua como “Estoque do Grupo”, conforme o glossário.
 
-**DTP:** corpo Optima 10 pt; as três quebras internas de parágrafo do registro são mantidas.
+**DTP:** corpo Optima 10 pt; as três quebras internas de parágrafo são mantidas. Copyfit V3 EXACT 7/7 nesta unidade e 4/4 na regra de troca de Itens; reviews 2134 e 2135.
 
 ## The Party
 
@@ -136,7 +137,7 @@ Há também uma Bolsa do Grupo, chamada no jogo de “Estoque do Grupo”, para 
 
 **EN:** While not playing an Encounter, players may only exchange Items between Adventurers during Story Rounds or when specifically instructed to do so. When exchanging Items in this way, players may also exchange Items in the Party Tuck Bag.
 
-**PT-BR (salvo):** Enquanto não estiverem jogando um Encontro, os jogadores só podem trocar Itens entre os Aventureiros durante Rodadas de História ou quando forem especificamente instruídos a fazê-lo. Ao trocar Itens dessa forma, os jogadores também podem trocar Itens que estejam na Bolsa do Grupo.
+**PT-BR (salvo):** Enquanto não estiverem jogando um Encontro, os jogadores só podem trocar Itens entre Aventureiros durante as Rodadas de História ou quando receberem instruções específicas para fazê-lo. Ao trocar Itens dessa forma, também podem trocar os que estiverem no Party Tuck Bag.
 
 **DTP:** corpo Optima 10 pt; parágrafo não contém ênfase especial na fonte.
 

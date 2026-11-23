@@ -236,6 +236,8 @@ Não implemente um inventário prévio de todas as 102 páginas. Migre apenas re
 
 **Exemplos de prova:** `Master Work` deve ser identificável como nome de uma Carta de Aprimoramento de Item; `Great Hammer`, como nome de uma Carta de Arma. Na etapa atual de localização, o nome impresso e o texto das duas cartas permanecem em inglês, enquanto a prosa de regra ao redor é traduzida. Esses exemplos validam a modelagem e a política; não autorizam traduzir as cartas.
 
+**Caso registrado (23/11/2026):** `Adventurer Tuck Bags` e `Party Tuck Bag` são nomes de componentes e permanecem em inglês também quando citados na prosa de regras; `Party Stash → Estoque do Grupo` é uma forma distinta já aprovada. O localizador futuro deve encontrar as ocorrências nas unidades reais, mostrar o contexto EN/PT-BR e propor a correção por unidade com rich spans e copyfit preservados. Uma decisão central não deve disparar substituição cega no livro.
+
 **Critérios de aceite:**
 
 - O Admin apresenta opções validadas para as dimensões tipadas e rejeita valores fora do catálogo.

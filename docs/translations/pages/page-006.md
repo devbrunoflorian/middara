@@ -52,7 +52,7 @@
 
 ### 06 — Adventurer Tuck Bags
 
-**PT-BR (título):** Bolsas de Armazenamento dos Aventureiros
+**PT-BR (título):** Adventurer Tuck Bags
 
 **EN:** These bags are used during both Adventurer Mode and Crawl Mode to help keep track of what Items an Adventurer currently has equipped or Stored in their Pack as well as any Disciplines the Adventurer may have learned.
 
@@ -80,5 +80,6 @@
 - **Frames:** as caixas PT-BR dos blocos 103, 105, 107 e 109 foram ampliadas somente à direita para acomodar o texto; o maior ajuste foi de 6,6 pt. A revisão confirmou zero excesso horizontal ou inferior em todos os alvos medidos e espaço livre antes da arte adjacente.
 - **Exportação:** Viewer e PDF exportado foram conferidos contra o OG. `verifiedTranslationRecords=true`, `pdfVerification=true`, MediaBox 820,346 × 820,346 pt.
 - **Termos:** `Stamina Points → Pontos de Stamina`, `Refresh Phase → Fase de Manutenção` e `Crawl Book → Livro de Masmorras` seguem as decisões aprovadas no glossário.
+- **Escopo de componentes (23/11/2026):** o título `Adventurer Tuck Bags` permanece em inglês, igual ao OG. Copyfit V3 EXACT 1/1; revisão 2133 publicada.
 - **Anomalias preservadas:** o PDF chama o modo de `Adventurer Mode` (não `Adventure Mode`) e traz `Red Reveal Recoder` no corpo, embora o título seja `Red Reveal Decoder`. A tradução não corrige silenciosamente essas anomalias do original.
 - **Arte:** instruções e nomes impressos nos baralhos, cartas, tokens e miniaturas desenhados continuam na arte original; esta página traduz apenas as unidades editoriais.

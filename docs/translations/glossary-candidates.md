@@ -10,7 +10,7 @@ This is a review queue, **not an approval list**. Payload collection `translatio
 | Adventurer Card | `Ficha de Aventureiro` (proposta preferencial); `Cartão de Aventureiro`; `Carta de Aventureiro` | 10, 24 | The Component Summary and base `glossary.md` propose **Ficha de Aventureiro**. Payload id 67 records it as **HIPÓTESE**, reaffirmed by the user on 25/10/2026 but not approved as canonical terminology. `Cartão de Aventureiro` remains an alternative/hypothesis. Keep distinct from the approved `Adventure Sheet → Folha da Aventura` (id 7); the p. 24 draft remains pending. |
 | Rank | `Nível` | 9 | Not in the official glossary. Keep distinct from `Tier`/`Loot Level`; confirm whether `Rank` is best rendered as `Nível`, `Patamar`, or another rules term. |
 | Loot Level | `Nível de Saque`; abbreviated `LVL de Saque` | 9, 17, 19, 79–80, 91, 93–94 | Local renderings following `Loot → Saque`; the rulebook section heading and references use `Nível de Saque` for consistency with the p.3 contents. Printed card labels `LOOT LVL` remain unchanged. This local heading choice does not canonize a global expansion of `LVL`; keep distinct from `Rank` and `Tier`. |
-| Tuck Bag | `Bolsas de Aventureiro` | 9 | Local rendering in the Epic Crawl Mode passage; do not generalize to `Party Tuck Bag` or the separate `Party Stash`. Confirm whether this is a named component before canonizing. |
+| Tuck Bag / Adventurer Tuck Bags | preservados em inglês | 6, 9, 10 | Nomes de componentes; usuário confirmou que componentes, cartas, folhas e texto impresso permanecem no idioma-fonte. A p.9 foi corrigida; p.6 e p.10 mantêm os nomes exatos. |
 | Familiar | `Familiar`; `Carta de Familiar` | 4, 7 | Preserved as a game term; absent from the provided official glossary. |
 | Discipline Tree | `Árvore de Disciplinas` | 4 | Proposed label for the system structure; confirm capitalization and plural form. |
 | Terrain Tokens | `Fichas de Terreno` | 5, 21, 23 | Payload id 69 marks this as **PADRÃO OBSERVADO**, not globally approved; distinguish from `Tiles → Peças` and keep linked page reviews pending. |
@@ -36,7 +36,7 @@ This is a review queue, **not an approval list**. Payload collection `translatio
 | Adventure Book | `Livro de Aventura` | 85 | Forma usada na referência cruzada da p.85; não altera por si só o título canônico do outro livro. |
 | Adventure Sheet / Adventurer Sheet | `Adventure Sheet → Folha da Aventura` (approved, Payload id 7); `Adventurer Sheet → Ficha de Aventureiro` (approved, Payload id 75); older `Ficha de Aventura` forms are not canonical | 10, 11, 13, 28 | Keep the two source forms distinct. The p. 28 user decision also leaves `Adventurer Card → Ficha de Aventureiro` (Payload id 67) as a hypothesis; it does not promote that separate term or its alternatives. |
 | Unselectable / Selectable / Injured | `Não Selecionável`; `Selecionável`; `Ferido` | 11 | Proposed status labels; absent from the official glossary. Confirm these before using them as global terms. |
-| Party Tuck Bag | `Bolsa do Grupo` | 10 | Proposed name for the shared storage bag. Keep distinct from official `Party Stash → Estoque do Grupo` until the compound term is confirmed. |
+| Party Tuck Bag | preservado em inglês | 10, 101 | Nome de componente preservado. Não confundir com `Party Stash → Estoque do Grupo`, que é a forma aprovada para o nome referido em regras. As unidades da p.10 e do índice da p.101 foram corrigidas. |
 
 ## Already governed by the official glossary
 
