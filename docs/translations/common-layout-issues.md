@@ -140,6 +140,9 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 
 **Caso verificado na p.83 (2026-11-24; `token.blue-totem` inline):** o rótulo `Totem Azul.` começava a 1,890 pt da tinta do símbolo, enquanto o OG deixa 3,274 pt até `Blue Totem.`. Mantive o tamanho e o avanço do token e registrei `trailingGapEm=0,13844` na ocorrência de texto a 10 pt; o novo vão mede 3,272 pt. Copyfit V3 permaneceu EXACT 4/4 em 100% e 200%. Exportação fresca da p.83 preservou 2 símbolos, 13 imagens e a caixa 820,346 × 820,346 pt; `verifiedTranslationRecords=true` e `pdfVerification=true`. É uma medida local da ocorrência, não uma margem global.
 
+**Casos verificados em 2026-11-24 (pp.52 e 61):** ao auditar `verticalAlignEm`, use a convenção do renderer: distância da linha de base até a borda inferior da imagem, dividida pelo tamanho tipográfico. Não use a distância do topo da imagem até a linha de base. Na p.52, duas ocorrências `dice.black` estavam com `0,0268/0,0272` em vez de `0,2978/0,2982`; o alinhamento foi corrigido no sidecar e no Payload 1357. Na p.61, a cápsula inteira `tag.passive` foi reunida em um símbolo-fonte único e sua métrica corrigida para `0,222249` a 9 pt; o recorte da cápsula foi comparado ao OG e o Payload 2211 teve readback confirmado. A checagem final no Viewer/PDF dessas alterações ainda está pendente.
+
+
 ### O próprio patch de limpeza repinta o símbolo antigo (p.93)
 
 **Sintoma:** a tradução contém o símbolo semântico no lugar certo, mas ainda aparece um contorno ou uma sobra do mesmo símbolo na posição impressa original. A imagem de limpeza pode estar desenhando o glifo antigo de novo; também pode deixar pixels antialiasados se a área coberta terminar exatamente no bbox nominal do vetor.
@@ -173,6 +176,9 @@ Compare esquerda e direita separadamente com a mesma ocorrência no PDF-fonte. N
 **Correção aprovada:** aponte sidecar e rich-text para o SVG-fonte correspondente à página e à ocorrência, preservando dimensões, avanço, recuo, `gapEm` e identidade visual medidos. Renomeie SVGs e máscaras temporários para nomes duráveis de asset de página; mantenha os nomes de auditoria e evidências privados. Confirme que os arquivos de produto não estão ignorados pelo Git e que todos os destinos referenciados existem antes de salvar ou publicar. Reabra Viewer e PDF exportado para conferir o símbolo no fluxo e a paridade com o OG.
 
 **Caso verificado em 2026-11-16:** a p.64 tinha cinco referências SVG quebradas: dois símbolos `combat.shield` apontavam para um arquivo de auditoria da p.45, e três `stat.armor` apontavam para outro arquivo da p.45. As URLs foram corrigidas no sidecar e nas três traduções salvas correspondentes; o readback confirmou os caminhos da p.64. Na p.65, onze SVGs/máscaras de auditoria foram renomeados para assets duráveis e todos os 14 placements do sidecar agora apontam para arquivos existentes. A rechecagem visual Viewer/PDF dessas páginas continua pendente.
+
+**Caso verificado em 2026-11-24 (p.58):** os assets `source-symbol-atk-melee.svg` e `source-symbol-atk-ranged.svg` existiam e respondiam HTTP 200, mas ambos tinham `xmlns:xlink` duplicado e eram rejeitados pelo parser XML do navegador. A declaração duplicada foi removida; os dois arquivos agora passam `xml.etree.ElementTree` e continuam respondendo `200 image/svg+xml`. Para SVG, validar existência/HTTP não basta: fazer parse do XML antes de culpar o renderer.
+
 
 ## Tamanho ou cor de uma fonte diverge do PDF OG
 
@@ -404,6 +410,9 @@ Quando o número e o início do texto compartilham a primeira linha-fonte, mas a
 
 **Copyfit obrigatório:** conferir cada unidade no Viewer e no PDF. Rótulos curtos também podem ficar desalinhados ou colidir quando são centralizados em relação à coluna inteira em vez do componente individual.
 
+**Também verificado na p.66 (2026-11-24):** `block_26` contém `DARKNESS`, a tag `PASSIVE` e o efeito impressos no card, portanto não é prosa editável. O bloco foi marcado `artworkOnly` e o card-fonte foi preservado como overlay de arte física com recorte alfa; as cartas continuam em inglês conforme a decisão do usuário. A página ainda precisa de recarga e checagem Viewer/print depois desta alteração.
+
+
 **Caso verificado:** na p.26, `WEAPON / ARMOR / CORE / ACCESSORY / RELIC / CONSUMABLE` e `FRONT / BACK` estavam fora dos recortes das cartas. Viraram unidades PT-BR centralizadas acima de cada carta (`ARMA / ARMADURA / NÚCLEO / ACESSÓRIO / RELÍQUIA / CONSUMÍVEL`, `FRENTE / VERSO`). O conteúdo impresso nas cartas foi preservado em inglês.
 
 **Também verificado na p.51:** o overlay amplo dos dez diagramas havia achatado junto as legendas editáveis `Example 5–10`; por isso essas seis legendas continuavam aparecendo em inglês apesar de serem unidades de texto. A comparação dos bboxes extraídos do PDF OG com o recorte comprovou que as legendas ficam sobre a arte, mas não são parte dela. Uma máscara alfa local foi aplicada somente às seis caixas de tinta medidas e a supressão de duplicata foi removida apenas desses seis spans. As legendas voltaram à camada de texto como `Exemplo 5–10`, mantendo moldura e tipografia fonte. `FLANKING`, `NOT FLANKING` e os demais textos realmente impressos nas setas permaneceram intactos. OG e Viewer EN conferem; Viewer e print PT-BR mostram as dez legendas em uma linha, sem clipping. O export PT-BR passou `pdfVerification=true`.
@@ -522,6 +531,16 @@ Quando o número e o início do texto compartilham a primeira linha-fonte, mas a
 **Correção aprovada:** marque a passagem dourada como `renderOnlyStrokePass` para não pintá-la como preenchimento e aplique sua cor/espessura ao span escuro (`renderTextStrokeColor`, `renderTextStrokeWidthPt`) com ordem `stroke fill`. Preserve passagens duplicadas somente quando a própria fonte confirmar múltiplas pinturas. Faça comparação local no Viewer e no PDF; não aplique a outros textos sem evidência de traço equivalente.
 
 **Caso verificado:** números 44, 45 e 46 usam Optima ExtraBlack 10 pt, traço `#fff574` de 1,5 pt e preenchimento `#231f20`. A p.44 contém duas passagens sobrepostas confirmadas na fonte; as pp.45–46 contêm uma cada. A reconstrução local preserva cada empilhamento, e os números voltaram a exibir o contorno no Viewer e nos PDFs EN/PT-BR.
+
+## Contorno branco de rótulo `IMPORTANTE` some no rich-text
+
+**Sintoma:** o rótulo aparece vermelho, mas sem o filete branco usado no PDF-fonte.
+
+**Como confirmar:** confira o segmento salvo no registro de tradução e o estilo que o PageRenderer lê. O DOM-fonte nomeia os campos `renderTextStrokeWidthPt` e `renderTextStrokeColor`; segmentos rich-text usam `textStrokeWidthPt` e `textStrokeColor`. Copiar os nomes do DOM-fonte para o Payload deixa propriedades desconhecidas que o renderer ignora.
+
+**Correção aprovada:** grave os campos rich-text `textStrokeWidthPt`/`textStrokeColor` com largura e cor medidas no OG. Leia o registro salvo e confira o rótulo no Viewer e no PDF exportado; não altere a família inteira por um caso.
+
+**Caso verificado em 2026-11-24 (p.80):** o Payload 2288 tinha os nomes de campo do DOM-fonte. Foi corrigido para `textStrokeWidthPt: 2` e `textStrokeColor: #ffffff`; o readback confirmou os valores. A conferência após recarga do Viewer/PDF ainda está pendente.
 
 ## Título e corpo compartilham um bloco com campos tipográficos diferentes
 
