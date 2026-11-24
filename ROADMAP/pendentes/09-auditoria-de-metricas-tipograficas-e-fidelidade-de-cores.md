@@ -6,6 +6,12 @@
 - **Área:** Engenharia Tipográfica / Gestão de Cores / QA Visual / Copyfit
 - **Diretriz:** *Uma amostra local não autoriza mudança global de renderer, fontes ou perfis de cor. Quando a comparação direta com o PDF OG comprovar um desvio local, corrija a unidade ou moldura afetada, repita Copyfit e valide Viewer/PDF. Registre separadamente hipóteses de alcance global.*
 
+## Evidência recente — p.64 (24/11/2026)
+
+- Um recorte correspondente do OG e do PDF PT-BR, renderizado com PyMuPDF na mesma escala de 1,5×, confirma que a prosa PT-BR parece visualmente mais pesada. O peso dos segmentos permanece 400, a fonte é Optima Roman, e cor/tamanho conferidos são branco e 9,9975 pt no PT-BR contra 10 pt no OG.
+- A comparação do CFF embutido no OG com o Optima Roman local encontrou os mesmos contornos e avanços em 91/91 glifos compartilhados. O Type3 do export PT-BR também coincide com o OG em 50/50 glifos compartilhados. Isso descarta outra versão do desenho-base como causa para esses glifos, sem explicar hinting ou rasterização.
+- No trecho medido, o OG usa passos de baseline de 12 e 11 pt; o PT-BR usa 10,5 e 9,75 pt. O tracking PT-BR comprime cerca de 0,15 pt por caractere. Leading e tracking podem contribuir para a densidade percebida; causa global ainda não comprovada. Não aumentar o peso local para mascarar o sintoma. Próxima verificação: comparar OG, Viewer EN/PT-BR e print em várias escalas e fases de pixel, depois testar tracking e leading em amostras representativas antes de alterar a regra compartilhada.
+
 ---
 
 ## 1. Contexto e Motivação
