@@ -1,4 +1,4 @@
-"""Preview or clean source tag capsules left in page background rasters.
+"""Preview or clean source composite symbols left in page background rasters.
 
 The configured capsules already have semantic compound elements, so the
 Viewer redraws them inline. The source vector can still be baked into the
@@ -43,6 +43,14 @@ PAGES = {
         (218, (583.6747436523438, 127.44598388671875, 628.3257446289062, 136.6309814453125)),
     ],
 }
+COMPOSITE_GROUPS = {
+    52: [
+        ([111, 112], [
+            (264.3368225097656, 175.5431365966797, 272.6728210449219, 184.59213256835938),
+            (265.9496765136719, 183.35569763183594, 271.2176818847656, 187.09669494628906),
+        ]),
+    ],
+}
 BACKGROUND_DIR = ROOT / "apps/web/public/pages"
 PREVIEW = ROOT / "tmp/compound-tag-background-preview.png"
 
@@ -51,7 +59,7 @@ def build_page_plan(document: fitz.Document, page_number: int) -> dict:
     page = document[page_number - 1]
     drawings = page.get_drawings()
     targets = []
-    for drawing_index, expected_rect in PAGES[page_number]:
+    for drawing_index, expected_rect in PAGES.get(page_number, []):
         if len(drawings) <= drawing_index:
             raise ValueError(f"PDF page {page_number} has no drawing {drawing_index}")
         drawing = drawings[drawing_index]
@@ -62,7 +70,28 @@ def build_page_plan(document: fitz.Document, page_number: int) -> dict:
             raise ValueError(
                 f"Refusing unexpected page-{page_number} drawing {drawing_index}: {rect}"
             )
-        targets.append((drawing_index, rect))
+        targets.append({"drawingIndexes": [drawing_index], "sourceRects": [rect], "rect": rect})
+
+    for drawing_indexes, expected_rects in COMPOSITE_GROUPS.get(page_number, []):
+        if len(drawing_indexes) != len(expected_rects):
+            raise ValueError(f"Page {page_number}: composite source map is incomplete")
+        source_rects = []
+        for drawing_index, expected_rect in zip(drawing_indexes, expected_rects):
+            if len(drawings) <= drawing_index:
+                raise ValueError(f"PDF page {page_number} has no drawing {drawing_index}")
+            drawing = drawings[drawing_index]
+            rect = fitz.Rect(drawing["rect"])
+            if drawing["type"] != "f" or max(
+                abs(a - b) for a, b in zip(rect, expected_rect)
+            ) > 0.002:
+                raise ValueError(
+                    f"Refusing unexpected page-{page_number} drawing {drawing_index}: {rect}"
+                )
+            source_rects.append(rect)
+        union_rect = fitz.Rect(source_rects[0])
+        for rect in source_rects[1:]:
+            union_rect |= rect
+        targets.append({"drawingIndexes": drawing_indexes, "sourceRects": source_rects, "rect": union_rect})
 
     # Redact source text only in the in-memory PDF copy. Its raster is used as
     # a local texture donor, never as a replacement for the product page.
@@ -70,19 +99,16 @@ def build_page_plan(document: fitz.Document, page_number: int) -> dict:
         if len(block) >= 5 and block[4].strip():
             page.add_redact_annot(fitz.Rect(block[:4]), fill=None)
     page.apply_redactions(images=0, graphics=0, text=0)
-    for _, rect in targets:
+    for target in targets:
+        rect = target["rect"]
         page.add_redact_annot(rect + (-0.02, -0.02, 0.02, 0.02), fill=None)
     page.apply_redactions(images=0, graphics=1, text=0)
 
-    for drawing_index, rect in targets:
-        remains = any(
-            max(abs(a - b) for a, b in zip(item["rect"], rect)) < 0.002
-            for item in page.get_drawings()
-        )
-        if remains:
-            raise ValueError(
-                f"Page {page_number} drawing {drawing_index} remains after local removal"
-            )
+    remaining_rects = [fitz.Rect(item["rect"]) for item in page.get_drawings()]
+    for target in targets:
+        for drawing_index, source_rect in zip(target["drawingIndexes"], target["sourceRects"]):
+            if any(max(abs(a - b) for a, b in zip(item, source_rect)) < 0.002 for item in remaining_rects):
+                raise ValueError(f"Page {page_number} drawing {drawing_index} remains after local removal")
 
     background_path = BACKGROUND_DIR / f"page_{page_number:03d}" / "background.webp"
     with Image.open(background_path) as image:
@@ -97,7 +123,8 @@ def build_page_plan(document: fitz.Document, page_number: int) -> dict:
 
     clean = old.copy()
     boxes = []
-    for _, rect in targets:
+    for target in targets:
+        rect = target["rect"]
         pad = 0.5
         box = (
             max(0, round((rect.x0 - pad) * sx)),
@@ -132,8 +159,9 @@ def build_page_plan(document: fitz.Document, page_number: int) -> dict:
 
     return {
         "page": page_number,
-        "drawingIndexes": [index for index, _ in targets],
-        "drawingBboxesPt": [list(rect) for _, rect in targets],
+        "drawingIndexes": [index for target in targets for index in target["drawingIndexes"]],
+        "drawingBboxesPt": [list(rect) for target in targets for rect in target["sourceRects"]],
+        "patchBboxesPt": [list(target["rect"]) for target in targets],
         "patchPixelBoxes": boxes,
         "outsideCropMeanAbsoluteChannelChange": round(outside_mae, 6),
         "capsuleCropsMeanAbsoluteChannelChange": round(inside_mae, 6),
@@ -164,7 +192,7 @@ def write_preview(crops: list[tuple[int, int, Image.Image, Image.Image]]) -> Non
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-pdf", required=True, type=Path)
-    parser.add_argument("--pages", type=int, nargs="+", choices=sorted(PAGES), default=[90, 95])
+    parser.add_argument("--pages", type=int, nargs="+", choices=sorted(set(PAGES) | set(COMPOSITE_GROUPS)), default=[90, 95])
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
 
