@@ -32,6 +32,7 @@ if (!config.sourcePdf) {
 config.sourcePdf = resolve(config.sourcePdf);
 const betaMode = !!config.betaCatalog;
 const VIEWER_NAVIGATION_TIMEOUT_MS = 5 * 60 * 1000;
+const VIEWER_PAGE_READY_TIMEOUT_MS = 5 * 60 * 1000;
 if (config.betaReader && !betaMode) throw new Error('--beta-reader requires --beta-catalog.');
 const viewerUrl = new URL(config.baseUrl);
 const requestedStrictDiagnostic = viewerUrl.searchParams.get('diagnosticBlankUntranslated') === '1';
@@ -454,9 +455,9 @@ try {
         && !document.querySelector('.loading-spinner')
         && image?.getAttribute('src')?.includes(`/page_${String(expected).padStart(3, '0')}/background.webp`)
         && image.naturalWidth > 0;
-    }, pageNo, { timeout: 60000 });
+    }, pageNo, { timeout: VIEWER_PAGE_READY_TIMEOUT_MS });
     await page.waitForFunction(() => document.querySelector('.page-container')
-      ?.getAttribute('data-translation-overrides-language') === 'pt-BR', undefined, { timeout: 60000 });
+      ?.getAttribute('data-translation-overrides-language') === 'pt-BR', undefined, { timeout: VIEWER_PAGE_READY_TIMEOUT_MS });
     if (strictDiagnosticMode) {
       await page.waitForFunction(() => {
         const page = document.querySelector('.page-container');
