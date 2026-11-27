@@ -167,7 +167,8 @@ As áreas prioritárias de investigação são:
    - Avaliar se o Viewer e o exportador estão aplicando essa cor de forma consistente em todos os spans ou se há trechos herdando `#000` padrão ou cores opacas não intencionais.
 
 2. **Perfis de Cor e Espaços Cromáticos (sRGB vs CMYK):**
-   - O manual original impresso utiliza perfis CMYK profissionais (FOGRA39, US Web Coated SWOP v2).
+   - Hipótese antiga: associar o manual original a FOGRA39 ou US Web Coated SWOP v2. A inspeção do PDF OG em 27/11/2026 não encontrou OutputIntent; esses perfis não estão comprovados como condição de saída do livro e não devem ser usados como destino sem confirmação da gráfica.
+   - O OG contém principalmente objetos/imagens `DeviceCMYK` e uma parcela pequena de conteúdo com ICC, mas isso não identifica sozinho o perfil de impressão ou a aparência física pretendida.
    - Os navegadores web trabalham no espaço de cor sRGB ou Display P3.
    - Na exportação (Puppeteer/PyMuPDF), a rasterização de páginas ou conversão de cores pode causar perda de saturação em tons vermelhos (habilidades/dano) e dourados (títulos).
 

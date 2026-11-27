@@ -26,6 +26,13 @@
 4. Gerar o formato PDF/X solicitado e validar conformidade/preflight no Acrobat Pro ou ferramenta equivalente. O OutputIntent precisa descrever a condição de saída; sozinho ele não converte o conteúdo.
 5. Só então gerar o pacote final para a gráfica, sem sobrescrever o PDF digital pesquisável.
 
+### Escolha do padrão PDF/X
+
+- Não escolher PDF/X só pelo rótulo “CMYK”. Se a gráfica aceitar PDF/X-4, ele mantém transparências vivas e permite fluxo gerenciado por ICC; a conversão de cor continua dependendo das opções de saída e do perfil escolhido.
+- Usar PDF/X-1a apenas quando a gráfica pedir/aceitar esse fluxo CMYK fechado. Ele requer cores de processo em CMYK/cinza/cores especiais e achata transparências, então a prova deve revisar gradientes, sombras, caixas e fundos antes da conversão do livro todo.
+- Confirmar se a gráfica aceita RGB com conversão no RIP. Se aceitar, pedir que informe o perfil de simulação/prova e a política de conversão; não converter para um CMYK genérico só para que o arquivo “pareça CMYK”.
+- No Acrobat Pro, fazer a prova com Output Preview e a conversão com Convert Colors/Preflight usando o perfil aprovado. Checar Preserve Black para texto pequeno quando apropriado e validar as separações; não presumir que o OutputIntent realizou a conversão.
+
 ## Critérios de aceite
 
 - O perfil, preset, PDF/X, TAC, marcas e sangria correspondem às instruções da gráfica escolhida; nenhum perfil genérico é presumido.
@@ -45,3 +52,5 @@
 - Adobe, [Output intents in PDFs](https://helpx.adobe.com/acrobat/using/output-intents-pdfs-acrobat-pro.html): OutputIntent descreve o destino e, por si só, não converte as cores.
 - Adobe, [Adobe PDF export options in InDesign](https://helpx.adobe.com/indesign/desktop/save-export-and-publish/save-and-export/adobe-pdf-export-options.html): conversão de cores, perfil de destino, marcas, sangria e OutputIntent são configurações distintas.
 - Adobe, [Produce print-ready PDF files](https://helpx.adobe.com/be_en/indesign/desktop/print/print-production-and-file-creation/produce-print-ready-pdf-files.html): usar o perfil fornecido pelo prestador e validar fontes, resolução e sangria.
+- Adobe, [Adobe PDF presets in Illustrator](https://helpx.adobe.com/illustrator/desktop/save-and-export/export-files-to-different-formats/adobe-pdf-presets.html): PDF/X-4 mantém transparência viva; PDF/X-1a usa CMYK e achata transparências.
+- Adobe, [Color conversion and ink management in Acrobat Pro](https://helpx.adobe.com/in/acrobat/using/color-conversion-ink-management-acrobat.html): converter para perfil de destino e preservar preto pode ser configurado separadamente do OutputIntent.
