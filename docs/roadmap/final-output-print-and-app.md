@@ -28,6 +28,17 @@ O perfil deve ser aplicado na exportação para aquela condição, mantendo o ma
 - **PDF/X-4:** mantém transparência e recursos mais modernos, trabalha com fluxo gerenciado por ICC e exige output intent incorporado. É a opção inicial a avaliar para o exportador, desde que a gráfica confirme compatibilidade.
 - O padrão escolhido, o perfil e a política de conversão serão parâmetros da exportação, nunca valores escondidos no código.
 
+### Estado medido dos PDFs locais — 27/11/2026
+
+Foi feita uma inspeção estrutural leve do OG configurado e do PDF PT-BR local existente, sem gerar outro arquivo pesado. O PDF PT-BR verificado foi gerado às 01:07 de 27/11, antes das correções locais mais recentes das pp. 83–84; ele não representa ainda o estado atual completo da tradução.
+
+- Ambos têm 102 páginas. Na p. 47, OG e PT-BR usam as mesmas caixas: MediaBox/CropBox/BleedBox de 820,346 × 820,346 pt e TrimBox de 792 × 792 pt, recuado 14,173 pt de cada lado. O preset deve preservar essa geometria do OG e só acrescentar marcas/sangria se a gráfica pedir.
+- O catálogo dos dois arquivos não tem `/OutputIntents`. Nas páginas amostradas do OG, imagens usam `/DeviceCMYK`; no PT-BR, imagens usam `/ICCBased` com perfil RGB de 3 canais. Assim, a exportação atual é uma prova visual RGB, não um PDF CMYK/PDF/X pronto para gráfica. A ausência de OutputIntent no OG também significa que não se deve presumir qual perfil CMYK descreve seus valores.
+- Na p. 47, uma imagem do OG de 3235 × 2481 px é colocada a cerca de 216,7 ppi; no PDF PT-BR há uma imagem de página de 1710 × 1710 px a cerca de 150,1 ppi e uma textura de página a cerca de 79 ppi. Estes números descrevem só essa amostra, não o livro inteiro. O preflight precisa medir cada imagem no tamanho colocado; não se deve “corrigir” resolução por upsampling.
+- A prova PT-BR continua com texto vetorial Type3 e composição do Viewer. A próxima saída de gráfica precisa preservar os objetos CMYK do OG quando forem reutilizados, converter cores RGB novas para a condição de saída acordada e verificar substituições de fundo, texto, transparências e sobreimpressão. Um simples “salvar como CMYK” não resolve a origem dos elementos nem a compatibilidade PDF/X.
+
+**Decisão:** não converter o PDF atual nem escolher perfil/padrão por conta própria. Depois da revisão final do conteúdo, obter da gráfica o perfil ICC/output intent, processo/papel, PDF/X, limite de tinta, resolução mínima, sangria e marcas; então fazer um piloto pequeno e um preflight completo. Se a gráfica confirmar PDF/X-4, começar por esse preset e validar a conversão e a prova de cor. Se exigir PDF/X-1a, a etapa deve achatar transparências de forma controlada e comparar o resultado visual.
+
 ### Preflight precisa fazer parte do produto
 
 Antes de entregar um arquivo, o sistema deve verificar fontes ausentes ou não incorporadas, texto estourado, imagens abaixo da resolução mínima definida para o tamanho final, sangria e marcas, espaços de cor misturados, output intent, transparência, sobreimpressão e limite de tinta. O resultado deve ser um relatório com erro, aviso ou aprovado por página e para o PDF completo.

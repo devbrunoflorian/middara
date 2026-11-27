@@ -11,3 +11,4 @@
 - **Arte:** nomes e rótulos impressos nas cartas/baralhos ilustrados continuam em inglês, conforme o escopo de regras-only.
 - **Export:** PDF de uma página, MediaBox 820,346 × 820,346 pt; `verifiedTranslationRecords=true`, `pdfVerification=true`; extração com 4.522 caracteres, zero U+FFFD e zero caracteres de uso privado. SHA-256 `533438E06A79122847574B750845BB41211239048D5D7D2BEF5C1FF6880C8B2C`.
 - **Evidências privadas:** OG, Viewer, print, PDF, log, métricas, crops ampliados e medições Copyfit ficam em `engineering-decisions/evidence/2026-11-21-page18/`.
+- **Reexportação (27/11/2026):** a página 18 do PDF completo foi comparada novamente com o OG. Os itens numerados mantêm recuo francês; o item 4 ocupa duas linhas e mantém `pág. 38` na segunda, sem cortar. O exemplo depois da lista volta à margem da coluna. Nenhuma colisão ou símbolo fantasma foi observado.
