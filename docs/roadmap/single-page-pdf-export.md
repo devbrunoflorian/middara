@@ -28,11 +28,15 @@ Pré-requisitos:
 Com os serviços locais ativos:
 
 ```powershell
-node scripts/export_page_pdf.mjs --page 2 --language pt-BR --output output/pdf/page-002-pt-BR-editavel.pdf
+$sourceLine = Get-Content apps/admin/.env | Where-Object { $_ -match '^MIDDARA_SOURCE_PDF_PATH=' } | Select-Object -First 1
+$sourcePdf = $sourceLine.Substring('MIDDARA_SOURCE_PDF_PATH='.Length).Trim().Trim('"')
+node scripts/export_page_pdf.mjs --page 2 --language pt-BR --source-pdf $sourcePdf --output output/pdf/page-002-pt-BR-editavel.pdf
 python scripts/verify_page_pdf_export.py output/pdf/page-002-pt-BR-editavel.pdf --page 2 --contains "As árvores estavam nuas" --reject "The trees were barren"
 ```
 
 O exportador lê largura e altura em pontos de `page_NNN_dom.json`, consulta as traduções persistidas em PT-BR, abre a página e o idioma no viewer, espera uma frase traduzida e as fontes, oculta a interface de navegação e usa o Chromium para imprimir somente a página. O verificador exige uma única página, tamanho próximo ao da geometria-fonte, texto selecionável, ausência de U+FFFD e as frases esperadas para o idioma.
+
+Ao executar o script Node diretamente, passe `--source-pdf` com o caminho configurado em `apps/admin/.env`: esse processo não carrega o `.env` do Next automaticamente. A API de exportação executada pelo admin continua usando a configuração carregada pelo servidor.
 
 Para outra página, troque `--page` e o nome de saída. `--language` aceita `en` ou `pt-BR`; `--base-url`, `--api-url` e `--browser` permitem apontar para outros serviços/instalações locais. Em PT-BR, o exportador interrompe a operação se a API não tiver traduções salvas para a página ou se não encontrar o texto traduzido visível no viewer; não deve gerar silenciosamente um PDF inglês como se fosse português.
 
@@ -67,7 +71,13 @@ Para uma execução local em modo `next start`, configure `MIDDARA_SOURCE_PDF_PA
 
 Em 27/11, confirmei que o Next local estava servindo um build de 03:20, apesar de o código de exportação ter sido atualizado às 08:25–08:27; por isso, as proteções existiam no código-fonte mas não estavam ativas no servidor. Recompilei e reiniciei o admin às 11:42, depois validei a checagem de fonte (5/5 casos) e fiz um smoke export da p.34, que passou a validação interna. O job completo existente continua em 102/102, download HTTP 200; não gerei outra cópia do PDF de 504 MB. Jobs em andamento não são retomados após reinício do backend, então evite reiniciá-lo durante uma exportação.
 
-**Bloqueio local separado do backend:** o diálogo do Viewer bloqueia uma nova exportação se houver registros locais divergentes do Payload, pois o job usa o snapshot do servidor. O recovery mais recente disponível (27/11 06:28Z) registra 4 divergências PT-BR na p.64; o backup de 24/11 com 140 divergências é anterior e não descreve o último snapshot. Revise essas quatro entradas pelo controle existente antes de tratar um novo PDF como reflexo de todo o estado local; não contorne o bloqueio.
+Rechecagem do processo em execução, 27/11: `GET http://localhost:3000/api/source-page?page=1` respondeu 200 e renderizou um PNG válido de 5.324.376 bytes. Essa rota e o endpoint de exportação usam `pdfExportSourcePdfPath()` no mesmo processo Next; a fonte configurada em `apps/admin/.env` está disponível e o caminho antigo em Downloads não é mais o caminho ativo. O script isolado `scripts/export_page_pdf.mjs` é separado do Next: nele, passe `--source-pdf` explicitamente, como no comando reproduzível acima.
+
+Também comparei os rasters p.83 e p.84 do PDF completo atual com exports isolados frescos: ambos são idênticos byte a byte em 821×821 px. Isso confirma que a remoção do token azul fantasma na p.83 e a correção do peso do título da p.84 já estão no PDF completo; não foi necessária outra exportação multipágina.
+
+**Bloqueio local separado do backend — resolvido em 27/11:** o diálogo do Viewer bloqueava uma nova exportação quando havia registros locais divergentes do Payload, pois o job usa o snapshot do servidor. Salvei um backup recuperável individual de cada divergência da p.64 e substituí somente as quatro cópias locais pelas versões atuais do Payload. As três diferenças de texto em `page_64_block_4`, `_5` e `_7` foram reconciliadas com as versões em português (`BRANCO/ROXO`, `DANO FÍSICO`); o bloco 8 tinha texto igual e referências diferentes para os mesmos símbolos de armadura. A comparação final do Viewer mostrou `Payload confirmado · nenhuma pendência local`. O backup antigo de 24/11 com 140 divergências não descreve esse snapshot.
+
+O PDF completo existente já tem 102 páginas, usa o snapshot do Payload e foi verificado tecnicamente. Resolver as cópias locais não alterou o Payload nem o conteúdo desse PDF; não gerei outra cópia de 504 MB. Uma nova exportação integral só é necessária depois de alguma alteração salva no Payload que ainda não esteja no arquivo existente.
 
 ## Trabalho ainda aberto
 
