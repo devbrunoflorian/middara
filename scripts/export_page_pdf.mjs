@@ -215,6 +215,7 @@ function normalizedOrigin(value) {
 }
 
 const config = argsFrom(process.argv.slice(2));
+const VIEWER_NAVIGATION_TIMEOUT_MS = 5 * 60 * 1000;
 const immutableSnapshot = config.snapshot
   ? JSON.parse(await readFile(config.snapshot, 'utf8'))
   : null;
@@ -410,7 +411,10 @@ try {
   });
   const viewerUrl = new URL(config.baseUrl);
   if (config.betaDiagnostic) viewerUrl.searchParams.set('diagnosticBlankUntranslated', '1');
-  const appResponse = await page.goto(viewerUrl.toString(), { waitUntil: 'domcontentloaded' });
+  const appResponse = await page.goto(viewerUrl.toString(), {
+    waitUntil: 'domcontentloaded',
+    timeout: VIEWER_NAVIGATION_TIMEOUT_MS,
+  });
   if (!appResponse?.ok()) throw new Error(`Viewer returned ${appResponse?.status() ?? 'no response'} at ${config.baseUrl}`);
   await page.waitForFunction(() => !!document.querySelector('input.page-input') && !!document.querySelector('.page-container img'));
 

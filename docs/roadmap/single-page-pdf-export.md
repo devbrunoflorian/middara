@@ -1,8 +1,8 @@
 # Exportação de uma página em PDF
 
-**Status:** prova visual representativa concluída; ainda não é exportação de produção.
+**Status:** a prova visual representativa foi concluída e a rotina de página única agora é usada pelo job de exportação completa; a reexportação PT-BR atual ainda depende de verificação das 102 páginas.
 **Prova mais recente:** 11/10/2026 — p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN.
-**API:** não implementada; este documento prepara o fluxo para uma API futura.
+**API:** `POST /api/exports` cria um job assíncrono; `GET /api/exports/:id` acompanha o progresso e `GET /api/exports/:id/download` entrega o PDF concluído.
 
 ## Paridade visual representativa — 11/10/2026
 
@@ -57,17 +57,18 @@ Na investigação futura:
 
 O app agora tem uma prova auditável de cinco páginas em [`middara-representative-export-visual-parity-2026-10-11.pdf`](../../output/pdf/middara-representative-export-visual-parity-2026-10-11.pdf), além do piloto p. 2 e do artefato de 10/10 reprovados, mantidos como histórico. A extração/estrutura não substitui uma prova de edição no Acrobat e não autoriza modificar ou achatar PDFs-fonte.
 
-## Preparação para a futura API
+## Fluxo de produção atual
 
-A API ainda não deve existir como parte deste piloto. Quando for criada, ela deverá chamar a mesma rotina de exportação isolada (em processo/worker Chromium), recebendo pelo menos número da página e idioma. Deve usar uma revisão persistida das traduções, validar que o idioma pedido foi aplicado, guardar o PDF com identificação dessa revisão e retornar falhas explícitas de tradução, fonte ou renderização. Não deve aceitar uma captura de tela do browser como substituto do PDF.
+O job completo captura um snapshot imutável das traduções salvas, revisões, frames, aliases de símbolos, geometria do PDF-fonte e assets das páginas. Depois renderiza cada página por um processo Chromium isolado usando `scripts/export_page_pdf.mjs`, monta o PDF multipágina e verifica página, texto, geometria e raster antes de disponibilizar o download. O registro do job e seu log permitem localizar a página e a fase de uma falha; partes e snapshot incompletos são removidos pelo pipeline.
 
-Antes de implementar a API:
+Para uma execução local em modo `next start`, configure `MIDDARA_SOURCE_PDF_PATH` e permita a origem do Viewer em `MIDDARA_EXPORT_ALLOWED_ORIGINS` (por exemplo, `http://127.0.0.1:8080,http://localhost:8080`). A configuração de exemplo está em [`apps/admin/.env.example`](../../apps/admin/.env.example). Sem a origem permitida, o endpoint responde 403 antes de criar o job; sem o caminho da fonte, o snapshot falha com `ENOENT`.
 
-1. validar seleção e pequenas edições no Acrobat Pro e delimitar fontes instaladas/Type3/PUA;
-2. aumentar resolução efetiva de artwork de página onde o briefing de saída exigir;
-3. decidir semântica de cópia para glifos PUA e comportamento dos símbolos inline;
-4. conferir links internos e sua navegação no PDF;
-5. manter validação visual por página separada do preflight de gráfica; definir autenticação/fila/armazenamento somente se a API for aprovada.
+## Trabalho ainda aberto
+
+1. concluir e conferir a reexportação PT-BR de 102 páginas; a verificação técnica não substitui a comparação visual OG/Viewer/PDF;
+2. validar seleção e pequenas edições no Acrobat Pro, delimitando fontes instaladas, Type3 e PUA; a extração de texto não prova edição tipográfica confiável;
+3. conferir links internos e navegação no PDF;
+4. manter a validação visual por página separada do preflight de gráfica, conforme [`final-output-print-and-app.md`](final-output-print-and-app.md).
 
 ## Critérios para aceitar a exportação individual
 

@@ -31,6 +31,7 @@ if (!config.sourcePdf) {
 }
 config.sourcePdf = resolve(config.sourcePdf);
 const betaMode = !!config.betaCatalog;
+const VIEWER_NAVIGATION_TIMEOUT_MS = 5 * 60 * 1000;
 if (config.betaReader && !betaMode) throw new Error('--beta-reader requires --beta-catalog.');
 const viewerUrl = new URL(config.baseUrl);
 const requestedStrictDiagnostic = viewerUrl.searchParams.get('diagnosticBlankUntranslated') === '1';
@@ -419,7 +420,10 @@ try {
     } catch {}
   });
 
-  const appResponse = await page.goto(viewerUrl.toString(), { waitUntil: 'domcontentloaded' });
+  const appResponse = await page.goto(viewerUrl.toString(), {
+    waitUntil: 'domcontentloaded',
+    timeout: VIEWER_NAVIGATION_TIMEOUT_MS,
+  });
   if (!appResponse?.ok()) throw new Error(`Viewer returned ${appResponse?.status() ?? 'no response'} at ${config.baseUrl}.`);
   await page.waitForFunction(() => !!document.querySelector('input.page-input') && !!document.querySelector('.page-container img'));
   await page.waitForFunction(expected => {
