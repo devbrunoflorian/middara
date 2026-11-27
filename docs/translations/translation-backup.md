@@ -1,5 +1,26 @@
 # Backup portátil dos dados de tradução
 
+## Banco do Payload no Git
+
+As traduções publicadas, revisões, molduras e decisões ficam no SQLite do Payload; os sidecars de página no Git não substituem esses registros. O banco ativo `apps/admin/apps-admin.db` continua local e ignorado. Para manter o conteúdo restaurável junto com o projeto, o repositório versiona o snapshot filtrado `apps/admin/apps-admin-snapshot.sqlite`.
+
+Gere ou atualize o snapshot antes de publicar mudanças no conteúdo:
+
+```powershell
+python scripts/snapshot_payload_db.py --force
+```
+
+O script copia o estado consistente do SQLite local e limpa contas/sessões, preferências locais, locks e registros de exportação (que podem conter caminhos da máquina). Ele preserva as coleções editoriais, traduções, revisões, pedidos de revisão, decisões do glossário, molduras e aliases. Não inclui alterações ainda não sincronizadas no localStorage do navegador.
+
+Para usar o snapshot em um clone Windows, copie-o para o caminho ativo do Payload e configure o segredo local:
+
+```powershell
+Copy-Item apps/admin/apps-admin-snapshot.sqlite apps/admin/apps-admin.db
+Copy-Item apps/admin/.env.example apps/admin/.env
+```
+
+Defina `PAYLOAD_SECRET` em `apps/admin/.env` antes de iniciar a API. O `.env` e o banco ativo continuam fora do Git; o snapshot é a cópia do estado compartilhável.
+
 O backup CLI é uma cópia somente leitura dos registros de tradução confirmados pelo Payload. Ele não altera o editor, Payload, SQLite, localStorage, frames ou arquivos-fonte. Não é um importador nem um pacote para aplicar em outro projeto.
 
 ## Gerar

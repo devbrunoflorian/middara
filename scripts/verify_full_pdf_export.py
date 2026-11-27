@@ -53,6 +53,8 @@ def main() -> int:
 
     document = pymupdf.open(pdf_path)
     rows: list[dict[str, object]] = []
+    bookmarks_count = 0
+    bookmarks_source_page: int | None = None
     try:
         if document.page_count != len(expected_pages):
             raise ValueError(f"Expected {len(expected_pages)} pages, got {document.page_count}.")
@@ -132,6 +134,18 @@ def main() -> int:
                 "images": image_count,
                 "fonts": len(pdf_page.get_fonts(full=True)),
             })
+
+        if expected_pages == list(range(1, 103)):
+            bookmarks = document.get_toc()
+            if len(bookmarks) < 30:
+                raise ValueError(f"Expected at least 30 bookmarks, found {len(bookmarks)}.")
+            for level, title, target in bookmarks:
+                if level not in (1, 2) or not title.strip() or "\ufffd" in title:
+                    raise ValueError("The PDF contains an invalid bookmark title or hierarchy.")
+                if not 1 <= target <= len(expected_pages):
+                    raise ValueError(f"Bookmark destination {target} is outside the exported book.")
+            bookmarks_count = len(bookmarks)
+            bookmarks_source_page = 3
     finally:
         document.close()
 
@@ -142,6 +156,8 @@ def main() -> int:
         "renderedAndVerifiedPages": len(rows),
         "pagesWithSelectableText": sum(bool(row["selectableCharacters"]) for row in rows),
         "sourcePagesExpectedToContainText": sum(bool(row["textExpected"]) for row in rows),
+        "bookmarksCount": bookmarks_count,
+        "bookmarksSourcePage": bookmarks_source_page,
         "pageSizeTolerancePt": 0.5,
         "pages": rows,
         "technicalVerificationOnly": True,

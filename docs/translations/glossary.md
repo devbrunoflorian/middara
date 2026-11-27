@@ -28,7 +28,7 @@
 | **Explore** | Explorar |
 | **Venture Forth** | Aventurar-se |
 | **Story Round** | Rodada de História |
-| **Stamina Points** | Pontos de Stamina |
+| **Stamina Points** | Pontos de Vigor |
 | **Damage / DMG** *(prosa de regras)* | Dano *(expandir `DMG` na tradução)* |
 | **Magic Damage / MAGIC DMG** | Dano Mágico |
 | **Physical Damage / PHYSICAL DMG** | Dano Físico |
@@ -128,7 +128,7 @@ Esta equivalência aprovada vale para o nome da fase do jogo. Não traduzir auto
 
 **Decisões Payload preservadas no glossário oficial (22/10/2026):** `Gain` → **obter** (decision id 4; manter inflexão gramatical natural, como “obtém/obtido”) e `Adventure Mechanic` → **Mecânica de Aventura** (decision id 8). As decisões já estavam aprovadas no Payload e foram apenas sincronizadas com esta tabela; não publicam unidades nem autorizam alterar texto humano salvo.
 
-**Decisão do usuário (15/11/2026; Payload `translation-glossary-decisions`):** `Stamina Points` → **Pontos de Stamina**; manter a abreviação impressa `SP`. A escolha vale para prosa de regras e não traduz rótulos impressos em cartas/arte. Na p.59, o usuário manteve “o Combatente ganha a cada turno” como formulação contextual para acumulação recorrente; isso não substitui a decisão geral `Gain` → **obter** nem autoriza “ganhar” como tradução mecânica global. Traduções humanas anteriores com outra forma ficam preservadas até reconciliação contextual.
+**Decisão do usuário (15 e 27/11/2026; Payload `translation-glossary-decisions`, id 95):** em 15/11, `Stamina Points` foi aprovado como **Pontos de Stamina**; em 27/11, o usuário escolheu **Pontos de Vigor** para a prosa de regras, supersedendo a forma anterior. Manter `SP`. Nomes e rótulos impressos em cartas, fichas e outros componentes ficam no original. Após a revisão da p.100, restam 21 traduções salvas com a forma anterior em 19 páginas; 14 têm revisão ativa aprovada e 7 não têm revisão correspondente. Reconciliar com revisão/copyfit antes do próximo PDF completo. Na p.59, “o Combatente ganha a cada turno” continua sendo uma formulação contextual para acumulação recorrente; isso não substitui a decisão geral `Gain` → **obter**.
 
 **Nota contextual das pp.4 e 57 (22/11/2026):** ao derrotar um Combatente, `draw these cards` na p.4 e `draw`/`pull` no callout de Item Único e nas regras de Saque de Monstro da p.57 descrevem retirar uma carta do baralho, em contraste com comprar um Item na loja. Nesses contextos, usar **retirar do baralho**; manter **Draw → Compre** na tabela global para ocorrências de compra e não generalizar a exceção.
 

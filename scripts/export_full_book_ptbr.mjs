@@ -19,15 +19,20 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((items, value, inde
 const config = {
   baseUrl: args['base-url'] ?? 'http://localhost:8080',
   apiUrl: args['api-url'] ?? process.env.VITE_PAYLOAD_API_URL ?? 'http://localhost:3000',
-  sourcePdf: resolve(args['source-pdf'] ?? process.env.MIDDARA_SOURCE_PDF_PATH ??
-    'C:/Users/bruno/Downloads/Rulebook 1p2 Final Version 05-19-23 Optimized.pdf'),
+  sourcePdf: args['source-pdf'] ?? process.env.MIDDARA_SOURCE_PDF_PATH,
   output: resolve(args.output ?? 'output/pdf/middara-rulebook-pt-BR-full.pdf'),
   workDir: resolve(args['work-dir'] ?? 'tmp/document-wide-editorial-rollout/full-book-export'),
   betaCatalog: args['beta-catalog'] ? resolve(args['beta-catalog']) : null,
   betaHolds: args['beta-hold-keys'] ? resolve(args['beta-hold-keys']) : null,
   betaReader: args['beta-reader'] === 'true',
 };
+if (!config.sourcePdf) {
+  throw new Error('PDF-fonte não configurado. Defina MIDDARA_SOURCE_PDF_PATH ou passe --source-pdf com o PDF oficial em inglês.');
+}
+config.sourcePdf = resolve(config.sourcePdf);
 const betaMode = !!config.betaCatalog;
+const VIEWER_NAVIGATION_TIMEOUT_MS = 5 * 60 * 1000;
+const VIEWER_PAGE_READY_TIMEOUT_MS = 5 * 60 * 1000;
 if (config.betaReader && !betaMode) throw new Error('--beta-reader requires --beta-catalog.');
 const viewerUrl = new URL(config.baseUrl);
 const requestedStrictDiagnostic = viewerUrl.searchParams.get('diagnosticBlankUntranslated') === '1';
@@ -416,7 +421,10 @@ try {
     } catch {}
   });
 
-  const appResponse = await page.goto(viewerUrl.toString(), { waitUntil: 'domcontentloaded' });
+  const appResponse = await page.goto(viewerUrl.toString(), {
+    waitUntil: 'domcontentloaded',
+    timeout: VIEWER_NAVIGATION_TIMEOUT_MS,
+  });
   if (!appResponse?.ok()) throw new Error(`Viewer returned ${appResponse?.status() ?? 'no response'} at ${config.baseUrl}.`);
   await page.waitForFunction(() => !!document.querySelector('input.page-input') && !!document.querySelector('.page-container img'));
   await page.waitForFunction(expected => {
@@ -447,9 +455,9 @@ try {
         && !document.querySelector('.loading-spinner')
         && image?.getAttribute('src')?.includes(`/page_${String(expected).padStart(3, '0')}/background.webp`)
         && image.naturalWidth > 0;
-    }, pageNo, { timeout: 60000 });
+    }, pageNo, { timeout: VIEWER_PAGE_READY_TIMEOUT_MS });
     await page.waitForFunction(() => document.querySelector('.page-container')
-      ?.getAttribute('data-translation-overrides-language') === 'pt-BR', undefined, { timeout: 60000 });
+      ?.getAttribute('data-translation-overrides-language') === 'pt-BR', undefined, { timeout: VIEWER_PAGE_READY_TIMEOUT_MS });
     if (strictDiagnosticMode) {
       await page.waitForFunction(() => {
         const page = document.querySelector('.page-container');

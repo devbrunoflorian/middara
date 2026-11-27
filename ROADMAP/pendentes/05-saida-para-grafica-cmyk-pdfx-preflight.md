@@ -1,37 +1,58 @@
-# Projeto Pendente: Saída para Gráfica (CMYK, PDF/X e Preflight)
+# Projeto Pendente: Saída para Gráfica e Preflight
 
-- **Status:** PENDENTE
-- **Prioridade:** MÉDIA
-- **Escopo:** Preparação dos Arquivos para Impressão Gráfica Comercial Profissional
-- **Área:** Engenharia de Impressão / Pré-Impressão / Gráfica
+- **Status:** PENDENTE; levantamento inicial concluído em 27/11/2026
+- **Prioridade:** depois da revisão visual integral e do recebimento do preset da gráfica
+- **Escopo:** Produzir um PDF de impressão a partir do livro PT-BR, preservando a paginação e comparando cor e geometria com o OG
+- **Área:** Exportação / Pré-impressão
 
----
+## Evidência já levantada
 
-## 1. Visão Geral
+- O OG tem 102 páginas, PDF 1.6, e não declara OutputIntent nem identificação PDF/X.
+- O OG usa majoritariamente imagens `DeviceCMYK`, além de uma parcela pequena de imagens com perfil ICC. Sem o perfil de origem do conteúdo CMYK, os valores não identificam uma condição de impressão única.
+- O PDF digital PT-BR exportado em 27/11/2026 tem 102 páginas, 504.004.016 bytes após a atualização localizada do fundo da p.61, texto selecionável nas 102 páginas e 40 bookmarks. As caixas das 102 páginas coincidem com o OG.
+- A inspeção integral desse PDF encontrou 0 tokens `/DeviceCMYK`, 243 `/DeviceRGB`, 1.034 `/ICCBased` e nenhum OutputIntent ou declaração PDF/X. Não deve ser enviado à gráfica como se já fosse CMYK/PDF/X.
+- A geometria do OG reserva aproximadamente 5 mm entre TrimBox e a borda externa (BleedBox/MediaBox). CropBox e BleedBox ocupam a página externa. Não adicionar outra sangria ou marcas automaticamente; confirmar se a gráfica quer marcas e como interpreta essas caixas.
+- A exportação Chromium não escolhe uma condição CMYK de impressão. A conversão precisa ser uma etapa posterior com perfil e parâmetros explícitos, seguida de inspeção das separações e comparação visual.
+- **Resolução das imagens de fundo (27/11):** medi as 102 `background.webp` usados pelas páginas. 98 têm 1710×1710 px (~150 dpi no tamanho físico do livro), p.1 tem 1709×1709 (~150 dpi), p.12 tem 1024×1024 (~90 dpi), p.53 tem 3282×3282 (~288 dpi) e p.67 tem 3419×3419 (~300 dpi). Nenhum WebP tem perfil ICC embutido. Na p.47, o OG contém uma imagem `DeviceCMYK` de 3235×2481 px colocada em ~808,8×824,4 pt (~288×217 dpi); o fundo usado no Viewer é 1710×1710 (~150 dpi). Isso sinaliza possível perda de detalhe na camada de fundo e precisa de comparação em escala real no piloto, sem declarar defeito de impressão antes da inspeção visual.
+- Consequência: converter o PDF digital inteiro para CMYK não recupera canais CMYK do OG nem detalhe reduzido no raster. Antes do PDF/X, o piloto deve comparar a composição atual com uma saída de impressão que mantenha a arte OG no tamanho efetivo original ou recrie os fundos limpos a partir da fonte em resolução adequada; texto PT-BR continua vetorial.
+- Na comparação OG × PDF completo da p.12 (27/11), o fundo decorativo do export coincide com `background.webp` RGB sem ICC, mas diverge do OG `DeviceCMYK` renderizado pelo mesmo MuPDF. Em uma amostra 11×11 px a 72 dpi, na coordenada (810,80), OG = RGB (102,4; 57,7; 13,3) e export = (83,3; 69,2; 34,6). Isso confirma uma diferença visual neste caminho de renderização, não a cor física de impressão: o OG não declara perfil/OutputIntent. Não corrigir a matiz localmente por tentativa; tratar no piloto global com o ICC/preset da gráfica.
+- **Falha de exportação resolvida (27/11):** o `ENOENT` apontava para o caminho antigo do PDF em Downloads, embora o arquivo-fonte já tivesse sido movido. `MIDDARA_SOURCE_PDF_PATH` agora aponta para a cópia disponível; a pré-validação introduzida no commit `d42dd9ae` recusa iniciar jobs se a origem estiver ausente, vazia ou não for PDF. Um job posterior concluiu 102/102 páginas, com texto selecionável em 102/102 e 40 bookmarks; o `verification.json` marcou a verificação como técnica, não visual. O PDF digital atual está em `output/pdf/middara-rulebook-pt-BR.pdf`.
+- **Estado local de edição (27/11):** o snapshot mais recente aponta quatro divergências não confirmadas, todas na p.64. Elas não estão no PDF completo atual: a cópia do Payload coincide com as decisões documentadas para a página, enquanto as versões locais de três blocos revertem essas correções. O PDF atual representa a versão salva no servidor. O Viewer pode bloquear uma nova exportação até que essas quatro cópias locais sejam resolvidas para a versão do Payload; não as sincronizar para o servidor.
+- **Editabilidade no Acrobat:** o PDF tem texto selecionável em todas as páginas, mas a inspeção estrutural encontrou 804 fontes Type3 e 34 Type0. Isso comprova texto/forma vetorial selecionável, não edição de prosa como texto normal no Acrobat. A edição no Acrobat Pro ainda não foi testada; validar “Editar PDF” em uma página representativa antes de chamar o arquivo de totalmente editável.
 
-Para permitir que a comunidade ou a editora imprima o livro de regras em gráficas profissionais (offset ou digital sob demanda), não basta um PDF digital RGB de tela. É necessário preparar um arquivo dentro dos rigorosos padrões industriais de pré-impressão: espaço de cores CMYK calibrado, sangria (*bleed*), marcas de corte e conformidade com a norma ISO PDF/X.
+## Próximo fluxo
 
----
+1. Obter da gráfica o preset ou especificação: perfil ICC de saída, PDF/X aceito, tamanho de corte, sangria/caixas, marcas, limite total de tinta (TAC), resolução mínima e regras de preto/transparência.
+2. Fazer uma prova de cor com páginas que combinem ilustração, áreas escuras, texto pequeno, símbolos e caixas. Comparar OG, PDF digital, prova convertida e soft proof no perfil informado.
+3. Converter o PDF completo para a condição indicada, preservando texto vetorial e fontes quando o fluxo permitir. Verificar preto de texto pequeno em K, TAC, transparências, sobreimpressão, perfis, fontes, imagens em resolução efetiva e todas as caixas de página.
+4. Gerar o formato PDF/X solicitado e validar conformidade/preflight no Acrobat Pro ou ferramenta equivalente. O OutputIntent precisa descrever a condição de saída; sozinho ele não converte o conteúdo.
+5. Só então gerar o pacote final para a gráfica, sem sobrescrever o PDF digital pesquisável.
 
-## 2. Funcionalidades Planejadas
+### Escolha do padrão PDF/X
 
-1. **Margem de Sangria (*Bleed*) e Marcas de Corte:**
-   - Adição configurável de sangria (3mm a 5mm além da borda de corte) para evitar bordas brancas após o refile na gráfica.
-   - Geração de marcas de corte (*crop marks*) e marcas de registro centralizadas.
+- Não escolher PDF/X só pelo rótulo “CMYK”. Se a gráfica aceitar PDF/X-4, ele mantém transparências vivas e permite fluxo gerenciado por ICC; a conversão de cor continua dependendo das opções de saída e do perfil escolhido.
+- Usar PDF/X-1a apenas quando a gráfica pedir/aceitar esse fluxo CMYK fechado. Ele requer cores de processo em CMYK/cinza/cores especiais e achata transparências, então a prova deve revisar gradientes, sombras, caixas e fundos antes da conversão do livro todo.
+- Confirmar se a gráfica aceita RGB com conversão no RIP. Se aceitar, pedir que informe o perfil de simulação/prova e a política de conversão; não converter para um CMYK genérico só para que o arquivo “pareça CMYK”.
+- No Acrobat Pro, fazer a prova com Output Preview e a conversão com Convert Colors/Preflight usando o perfil aprovado. Checar Preserve Black para texto pequeno quando apropriado e validar as separações; não presumir que o OutputIntent realizou a conversão.
 
-2. **Conversão de Cores e Perfis ICC (CMYK):**
-   - Pipeline de conversão de imagens e vetores de sRGB para perfis gráficos padrão (ex: ISO Coated v2 / FOGRA39 para gráficas brasileiras/europeias ou GRACoL para gráficas americanas).
-   - Conversão de textos em preto para Preto Puro (`K: 100%`, `C:0% M:0% Y:0%`) para evitar efeitos de fantasma (*registration black mismatch*) na impressão de pequenos corpos de texto.
+## Critérios de aceite
 
-3. **Conformidade PDF/X-1a e PDF/X-4:**
-   - Validação de transparências, fontes 100% incorporadas e remoção de scripts ou anotações interativas incompatíveis com RIPs gráficos.
+- O perfil, preset, PDF/X, TAC, marcas e sangria correspondem às instruções da gráfica escolhida; nenhum perfil genérico é presumido.
+- Páginas finais preservam TrimBox e BleedBox previstos pelo OG, sem sangria dupla nem corte de conteúdo.
+- Preflight não encontra fontes não incorporadas, imagens abaixo do limite acordado, caixas inválidas, OutputIntent ausente ou violações PDF/X/TAC.
+- Separações confirmam preto de texto pequeno e áreas compostas conforme a especificação da gráfica.
+- Uma prova representativa foi comparada visualmente com OG e export digital antes da conversão completa.
 
-4. **Relatório Automatizado de Pré-Voo (*Preflight Report*):**
-   - Verificação de TAC (*Total Area Coverage* / Cobertura Máxima de Tinta <= 300%).
-   - Alerta para imagens com resolução inferior a 300 DPI na escala final de corte.
+## Limites conhecidos
 
----
+- Ainda não há gráfica, preset nem perfil de saída definidos. ISO Coated/FOGRA39, GRACoL e limites fixos de TAC não são defaults aprovados para este livro.
+- O OG não informa OutputIntent; portanto, a aparência impressa de seus valores `DeviceCMYK` não pode ser reconstruída com precisão sem perfil ou orientação do fornecedor.
+- Não foi feita conversão CMYK nesta etapa para evitar assumir uma condição de impressão e alterar cores às cegas.
 
-## 3. Critérios de Aceite
+## Referências técnicas
 
-- Gerar um arquivo `Middara_Rulebook_1.2_GRAFICA_CMYK.pdf` aceito sem ressalvas em bureaus de impressão e gráficas de jogos de tabuleiro (Ludens Spirit, Copag, MakePlayingCards, etc.).
+- Adobe, [Output intents in PDFs](https://helpx.adobe.com/acrobat/using/output-intents-pdfs-acrobat-pro.html): OutputIntent descreve o destino e, por si só, não converte as cores.
+- Adobe, [Adobe PDF export options in InDesign](https://helpx.adobe.com/indesign/desktop/save-export-and-publish/save-and-export/adobe-pdf-export-options.html): conversão de cores, perfil de destino, marcas, sangria e OutputIntent são configurações distintas.
+- Adobe, [Produce print-ready PDF files](https://helpx.adobe.com/be_en/indesign/desktop/print/print-production-and-file-creation/produce-print-ready-pdf-files.html): usar o perfil fornecido pelo prestador e validar fontes, resolução e sangria.
+- Adobe, [Adobe PDF presets in Illustrator](https://helpx.adobe.com/illustrator/desktop/save-and-export/export-files-to-different-formats/adobe-pdf-presets.html): PDF/X-4 mantém transparência viva; PDF/X-1a usa CMYK e achata transparências.
+- Adobe, [Color conversion and ink management in Acrobat Pro](https://helpx.adobe.com/in/acrobat/using/color-conversion-ink-management-acrobat.html): converter para perfil de destino e preservar preto pode ser configurado separadamente do OutputIntent.

@@ -1,8 +1,8 @@
 # Exportação de uma página em PDF
 
-**Status:** prova visual representativa concluída; ainda não é exportação de produção.
-**Prova mais recente:** 11/10/2026 — p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN.
-**API:** não implementada; este documento prepara o fluxo para uma API futura.
+**Status:** a exportação digital completa PT-BR foi concluída e verificada tecnicamente em 27/11/2026; a revisão visual integral e validação no Acrobat seguem abertas.
+**Prova representativa:** 11/10/2026 — p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN. **Amostra do PDF completo:** 27/11/2026 — comparação OG/PT-BR nas pp. 47, 52, 58, 84 e 100.
+**API:** `POST /api/exports` cria um job assíncrono; `GET /api/exports/:id` acompanha o progresso e `GET /api/exports/:id/download` entrega o PDF concluído.
 
 ## Paridade visual representativa — 11/10/2026
 
@@ -28,11 +28,15 @@ Pré-requisitos:
 Com os serviços locais ativos:
 
 ```powershell
-node scripts/export_page_pdf.mjs --page 2 --language pt-BR --output output/pdf/page-002-pt-BR-editavel.pdf
+$sourceLine = Get-Content apps/admin/.env | Where-Object { $_ -match '^MIDDARA_SOURCE_PDF_PATH=' } | Select-Object -First 1
+$sourcePdf = $sourceLine.Substring('MIDDARA_SOURCE_PDF_PATH='.Length).Trim().Trim('"')
+node scripts/export_page_pdf.mjs --page 2 --language pt-BR --source-pdf $sourcePdf --output output/pdf/page-002-pt-BR-editavel.pdf
 python scripts/verify_page_pdf_export.py output/pdf/page-002-pt-BR-editavel.pdf --page 2 --contains "As árvores estavam nuas" --reject "The trees were barren"
 ```
 
 O exportador lê largura e altura em pontos de `page_NNN_dom.json`, consulta as traduções persistidas em PT-BR, abre a página e o idioma no viewer, espera uma frase traduzida e as fontes, oculta a interface de navegação e usa o Chromium para imprimir somente a página. O verificador exige uma única página, tamanho próximo ao da geometria-fonte, texto selecionável, ausência de U+FFFD e as frases esperadas para o idioma.
+
+Ao executar o script Node diretamente, passe `--source-pdf` com o caminho configurado em `apps/admin/.env`: esse processo não carrega o `.env` do Next automaticamente. A API de exportação executada pelo admin continua usando a configuração carregada pelo servidor.
 
 Para outra página, troque `--page` e o nome de saída. `--language` aceita `en` ou `pt-BR`; `--base-url`, `--api-url` e `--browser` permitem apontar para outros serviços/instalações locais. Em PT-BR, o exportador interrompe a operação se a API não tiver traduções salvas para a página ou se não encontrar o texto traduzido visível no viewer; não deve gerar silenciosamente um PDF inglês como se fosse português.
 
@@ -57,17 +61,30 @@ Na investigação futura:
 
 O app agora tem uma prova auditável de cinco páginas em [`middara-representative-export-visual-parity-2026-10-11.pdf`](../../output/pdf/middara-representative-export-visual-parity-2026-10-11.pdf), além do piloto p. 2 e do artefato de 10/10 reprovados, mantidos como histórico. A extração/estrutura não substitui uma prova de edição no Acrobat e não autoriza modificar ou achatar PDFs-fonte.
 
-## Preparação para a futura API
+## Fluxo de produção atual
 
-A API ainda não deve existir como parte deste piloto. Quando for criada, ela deverá chamar a mesma rotina de exportação isolada (em processo/worker Chromium), recebendo pelo menos número da página e idioma. Deve usar uma revisão persistida das traduções, validar que o idioma pedido foi aplicado, guardar o PDF com identificação dessa revisão e retornar falhas explícitas de tradução, fonte ou renderização. Não deve aceitar uma captura de tela do browser como substituto do PDF.
+O job completo captura um snapshot imutável das traduções salvas, revisões, frames, aliases de símbolos, geometria do PDF-fonte e assets das páginas. Depois renderiza cada página por um processo Chromium isolado usando `scripts/export_page_pdf.mjs`, monta o PDF multipágina e verifica página, texto, geometria e raster antes de disponibilizar o download. O registro do job e seu log permitem localizar a página e a fase de uma falha; partes e snapshot incompletos são removidos pelo pipeline.
 
-Antes de implementar a API:
+Para uma execução local em modo `next start`, configure `MIDDARA_SOURCE_PDF_PATH` e permita a origem do Viewer em `MIDDARA_EXPORT_ALLOWED_ORIGINS` (por exemplo, `http://127.0.0.1:8080,http://localhost:8080`). A configuração de exemplo está em [`apps/admin/.env.example`](../../apps/admin/.env.example). Sem a origem permitida, o endpoint responde 403 antes de criar o job. O endpoint valida se a fonte está legível, não vazia e tem assinatura `%PDF-` antes de enfileirar; se não estiver, retorna 503 sem criar um job com `0/102`. A captura do snapshot valida novamente a fonte e compara o hash antes e depois de ler a geometria. Mantenha o arquivo no mesmo caminho até o snapshot ser capturado.
 
-1. validar seleção e pequenas edições no Acrobat Pro e delimitar fontes instaladas/Type3/PUA;
-2. aumentar resolução efetiva de artwork de página onde o briefing de saída exigir;
-3. decidir semântica de cópia para glifos PUA e comportamento dos símbolos inline;
-4. conferir links internos e sua navegação no PDF;
-5. manter validação visual por página separada do preflight de gráfica; definir autenticação/fila/armazenamento somente se a API for aprovada.
+**Falhas observadas e comportamento atual (2026-11-27):** o banco local registra 23 jobs completos e 8 falhos. Os dois mais recentes, em 24/11, foram um caminho antigo do PDF-fonte (`0/102`) e fechamento do Chromium na p.34 (`33/102`). Os seis anteriores incluem timeout ao selecionar idioma, reinício do backend durante job, falhas antigas de layout/print e perda do log do worker; esses artefatos expiraram, então os registros do job são a evidência restante. O código atual valida a fonte antes de criar o job e repete uma vez somente a página que recebe `Target page, context or browser has been closed`.
+
+Em 27/11, confirmei que o Next local estava servindo um build de 03:20, apesar de o código de exportação ter sido atualizado às 08:25–08:27; por isso, as proteções existiam no código-fonte mas não estavam ativas no servidor. Recompilei e reiniciei o admin às 11:42, depois validei a checagem de fonte (5/5 casos) e fiz um smoke export da p.34, que passou a validação interna. O job completo existente continua em 102/102, download HTTP 200; não gerei outra cópia do PDF de 504 MB. Jobs em andamento não são retomados após reinício do backend, então evite reiniciá-lo durante uma exportação.
+
+Rechecagem do processo em execução, 27/11: `GET http://localhost:3000/api/source-page?page=1` respondeu 200 e renderizou um PNG válido de 5.324.376 bytes. Essa rota e o endpoint de exportação usam `pdfExportSourcePdfPath()` no mesmo processo Next; a fonte configurada em `apps/admin/.env` está disponível e o caminho antigo em Downloads não é mais o caminho ativo. O script isolado `scripts/export_page_pdf.mjs` é separado do Next: nele, passe `--source-pdf` explicitamente, como no comando reproduzível acima.
+
+Também comparei os rasters p.83 e p.84 do PDF completo atual com exports isolados frescos: ambos são idênticos byte a byte em 821×821 px. Isso confirma que a remoção do token azul fantasma na p.83 e a correção do peso do título da p.84 já estão no PDF completo; não foi necessária outra exportação multipágina.
+
+**Bloqueio local separado do backend — resolvido em 27/11:** o diálogo do Viewer bloqueava uma nova exportação quando havia registros locais divergentes do Payload, pois o job usa o snapshot do servidor. Salvei um backup recuperável individual de cada divergência da p.64 e substituí somente as quatro cópias locais pelas versões atuais do Payload. As três diferenças de texto em `page_64_block_4`, `_5` e `_7` foram reconciliadas com as versões em português (`BRANCO/ROXO`, `DANO FÍSICO`); o bloco 8 tinha texto igual e referências diferentes para os mesmos símbolos de armadura. A comparação final do Viewer mostrou `Payload confirmado · nenhuma pendência local`. O backup antigo de 24/11 com 140 divergências não descreve esse snapshot.
+
+O PDF completo existente já tem 102 páginas, usa o snapshot do Payload e foi verificado tecnicamente. Resolver as cópias locais não alterou o Payload nem o conteúdo desse PDF; não gerei outra cópia de 504 MB. Uma nova exportação integral só é necessária depois de alguma alteração salva no Payload que ainda não esteja no arquivo existente.
+
+## Trabalho ainda aberto
+
+1. concluir a revisão visual OG/Viewer/PDF de todas as páginas; a verificação técnica da exportação não certifica copyfit, símbolos ou alinhamento;
+2. validar seleção e pequenas edições no Acrobat Pro, delimitando fontes instaladas, Type3 e PUA; a extração de texto não prova edição tipográfica confiável;
+3. validar hyperlinks internos em um leitor de PDF; a exportação atual contém 40 bookmarks estruturais derivados do Sumário da p. 3;
+4. manter a validação visual por página separada do preflight de gráfica, conforme [`final-output-print-and-app.md`](final-output-print-and-app.md).
 
 ## Critérios para aceitar a exportação individual
 

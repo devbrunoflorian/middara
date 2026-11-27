@@ -2,36 +2,47 @@
   "schemaVersion": 1,
   "elements": [
     {
-      "symbolId": "tag.passive.icon",
+      "symbolId": "tag.passive",
       "bbox": [
-        194.24349975585938,
-        696.7806396484375,
-        201.3354949951172,
-        705.7806396484375
+        189.89111,
+        695.43738,
+        242.95711,
+        706.85437
       ],
-      "drawingIndices": [],
       "anchor": {
         "blockId": "block_62",
         "blockIndex": 32,
         "lineId": "line_62_1",
         "spanIndex": 1,
-        "side": "replace",
-        "sizePt": 9.0
-      },
-      "mask": {
-        "url": "/pages/page_061/inline-element-mask-000.png",
-        "bbox": [
-          193.75,
-          696.25,
-          201.75,
-          706.25
-        ]
+        "side": "before",
+        "sizePt": 9.0,
+        "gapPt": 0,
+        "trailingGapPt": 0
       },
       "metrics": {
-        "widthEm": 0.7879994710286459,
-        "heightEm": 1.0,
-        "verticalAlignEm": 0.1484917534722222
-      }
+        "widthEm": 5.896222222222223,
+        "heightEm": 1.2685544444444505,
+        "verticalAlignEm": 0.2222493359375019,
+        "advanceEm": 5.896222222222223,
+        "renderLanguage": "en",
+        "sourceAssetUrl": "/pages/page_061/source-symbol-tag-passive-en.png",
+        "sourceAppearanceKey": "p061-tag-passive-en-v1"
+      },
+      "sourceRendering": "semantic-inline",
+      "coveredSourceTexts": [
+        {
+          "blockId": "block_62",
+          "lineId": "line_62_1",
+          "spanIndex": 1,
+          "text": "✤"
+        },
+        {
+          "blockId": "block_62",
+          "lineId": "line_62_1",
+          "spanIndex": 2,
+          "text": "PASSIVE"
+        }
+      ]
     }
   ]
 }

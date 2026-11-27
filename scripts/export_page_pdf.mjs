@@ -16,7 +16,7 @@ function argsFrom(argv) {
     output: undefined,
     baseUrl: 'http://127.0.0.1:8080',
     apiUrl: process.env.VITE_PAYLOAD_API_URL ?? 'http://localhost:3000',
-    sourcePdf: process.env.MIDDARA_SOURCE_PDF_PATH ?? 'C:/Users/bruno/Downloads/Rulebook 1p2 Final Version 05-19-23 Optimized.pdf',
+    sourcePdf: process.env.MIDDARA_SOURCE_PDF_PATH,
     executablePath: undefined,
     debugScreenshot: undefined,
     viewerScreenshot: undefined,
@@ -50,6 +50,7 @@ function argsFrom(argv) {
   if (result.profile !== 'visual') throw new Error('Only the visual PDF profile is currently available.');
   if (!result.output) result.output = `output/pdf/page-${String(result.page).padStart(3, '0')}-${result.language}-visual.pdf`;
   result.output = resolve(result.output);
+  if (result.sourcePdf) result.sourcePdf = resolve(result.sourcePdf);
   if (result.snapshot) result.snapshot = resolve(result.snapshot);
   return result;
 }
@@ -214,6 +215,7 @@ function normalizedOrigin(value) {
 }
 
 const config = argsFrom(process.argv.slice(2));
+const VIEWER_NAVIGATION_TIMEOUT_MS = 5 * 60 * 1000;
 const immutableSnapshot = config.snapshot
   ? JSON.parse(await readFile(config.snapshot, 'utf8'))
   : null;
@@ -409,7 +411,10 @@ try {
   });
   const viewerUrl = new URL(config.baseUrl);
   if (config.betaDiagnostic) viewerUrl.searchParams.set('diagnosticBlankUntranslated', '1');
-  const appResponse = await page.goto(viewerUrl.toString(), { waitUntil: 'domcontentloaded' });
+  const appResponse = await page.goto(viewerUrl.toString(), {
+    waitUntil: 'domcontentloaded',
+    timeout: VIEWER_NAVIGATION_TIMEOUT_MS,
+  });
   if (!appResponse?.ok()) throw new Error(`Viewer returned ${appResponse?.status() ?? 'no response'} at ${config.baseUrl}`);
   await page.waitForFunction(() => !!document.querySelector('input.page-input') && !!document.querySelector('.page-container img'));
 
@@ -908,6 +913,9 @@ try {
   if (immutableSnapshot) {
     normalizeArgs.push('--source-page-boxes-json', config.snapshot, '--source-page', String(config.page));
   } else {
+    if (!config.sourcePdf) {
+      throw new Error('PDF-fonte não configurado. Defina MIDDARA_SOURCE_PDF_PATH ou passe --source-pdf com o PDF oficial em inglês.');
+    }
     normalizeArgs.push(config.sourcePdf, String(config.page));
   }
   const normalizePageBox = spawnSync('python', normalizeArgs, { encoding: 'utf8' });
