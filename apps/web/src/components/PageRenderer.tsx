@@ -3234,10 +3234,14 @@ function ContentsLabelBlock({
             select();
           }
         }}>
-        {override ? <ContentsRowFlow row={row} scale={scale} sourceFontSize={line.spans.find(span => span.text.trim())?.size ?? override.segments[0]?.size ?? 12}
+        {override ? <ContentsRowFlow row={row} scale={scale} fontScale={language === 'pt-BR' ? row.ptBrFontScale ?? 1 : 1}
+          sourceFontSize={line.spans.find(span => span.text.trim())?.size ?? override.segments[0]?.size ?? 12}
           isAdmin={isAdmin} text={override.segments.map(run => run.text).join('')}
           referenceText={row.dynamicReferenceLayout ? row.referenceTextPtBr : undefined}>
-          {renderCreditSegments(override.segments.map(run => ({ ...run, text: run.text.replace(/[\r\n]+/g, ' ') })), undefined, language, scale, isAdmin, 'nowrap')}
+          {renderCreditSegments(override.segments.map(run => ({ ...run,
+            size: run.size * (language === 'pt-BR' ? row.ptBrFontScale ?? 1 : 1),
+            text: run.text.replace(/[\r\n]+/g, ' '),
+          })), undefined, language, scale, isAdmin, 'nowrap')}
         </ContentsRowFlow> : diagnosticBlank ? null : overlaySource ? null : <div style={{ pointerEvents: 'none' }}><LineRenderer line={line} scale={scale} blockOriginX={x} blockOriginY={y}
           isAdmin={false} isSelected={false} language={language} onClick={() => {}} /></div>}
       </div>

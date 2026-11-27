@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 import pymupdf
+from contents_pdf_links import add_contents_links, page_number_for_part, verify_contents_links
 
 
 def bookmarks_from_contents_page(page: pymupdf.Page, page_count: int) -> list[list[object]]:
@@ -56,8 +57,12 @@ def main() -> int:
     args = parser.parse_args()
     if not args.pages:
         raise ValueError('At least one verified page is required.')
+    rulebook_pages = [page_number_for_part(path) for path in args.pages]
+    if rulebook_pages != sorted(set(rulebook_pages)):
+        raise ValueError('PDF parts must contain unique Rulebook pages in increasing order.')
 
     merged = pymupdf.open()
+    contents_link_specs: list[dict[str, object]] = []
     try:
         for page_path in args.pages:
             if not page_path.is_file():
@@ -72,6 +77,7 @@ def main() -> int:
         if len(args.pages) == 102 and args.pages[2].stem == "page-003":
             bookmarks = bookmarks_from_contents_page(merged[2], len(args.pages))
             merged.set_toc(bookmarks)
+        contents_link_specs = add_contents_links(merged, rulebook_pages)
         args.output.parent.mkdir(parents=True, exist_ok=True)
         merged.save(args.output, garbage=3, deflate=True)
     finally:
@@ -91,11 +97,16 @@ def main() -> int:
             finally:
                 page_source.close()
         bookmark_count = len(result.get_toc())
+        verify_contents_links(result, contents_link_specs)
+        contents_links_count = len(contents_link_specs)
         if len(args.pages) == 102 and bookmark_count < 30:
             raise ValueError(f"Expected at least 30 bookmarks in the merged PDF, found {bookmark_count}.")
     finally:
         result.close()
-    print(f'Merged {len(args.pages)} verified pages and {bookmark_count} bookmarks into {args.output.name}.')
+    print(
+        f'Merged {len(args.pages)} verified pages, {bookmark_count} bookmarks, '
+        f'and {contents_links_count} contents/index links into {args.output.name}.'
+    )
     return 0
 
 

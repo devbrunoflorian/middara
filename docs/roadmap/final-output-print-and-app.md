@@ -1,6 +1,6 @@
 # Roadmap: saída final para impressão e aplicativos
 
-**Status:** PDF digital PT-BR de 102 páginas exportado e verificado tecnicamente em 27/11/2026; certificação visual integral, edição no Acrobat e saída para gráfica continuam abertas.
+**Status:** o PDF digital PT-BR atual está em `output/pdf/middara-rulebook-pt-BR.pdf` (348.756.164 bytes; 102 páginas). A montagem inclui 40 bookmarks e 232 links internos no Sumário/Índice. A certificação visual integral, edição no Acrobat e saída para gráfica continuam abertas.
 **Decisão de produto:** manter uma base de conteúdo e gerar saídas diferentes a partir dela: viewer interativo e PDF pronto para impressão.
 
 ## Objetivo
@@ -31,7 +31,7 @@ O perfil deve ser aplicado na exportação para aquela condição, mantendo o ma
 
 ### Estado medido do PDF digital — 27/11/2026
 
-O job `e373dc13-053f-4473-9252-e85e7bcf735a` exportou o snapshot salvo no Payload e concluiu em 2h38m35s, incluindo snapshot, renderização das páginas, mesclagem e verificação. A saída inicial teve 102 páginas e 486.455.474 bytes; depois, o fundo corrigido da p.61 foi incorporado por atualização incremental do XObject, sem reexportar as outras páginas. O PDF final tem 504.004.016 bytes. O endpoint correto do job é `/api/exports/{id}` e o download final respondeu HTTP 200. O relatório técnico conferiu cada página renderizada contra sua parte individual, confirmou texto selecionável nas 102 páginas e nenhuma página em branco. A leitura do Sumário da p. 3 gerou 40 bookmarks hierárquicos. A checagem incremental comparou todas as caixas/textos do PDF final e conferiu o raster da p.61; uma amostra visual de p. 47, 52, 58, 84 e 100 foi comparada lado a lado com o OG. Isso não substitui a revisão visual integral. Em 27/11, salvei backups recuperáveis dos quatro conflitos locais da p.64 e apliquei as versões atuais do Payload somente ao navegador; a comparação final confirmou zero pendências. O PDF continua refletindo o snapshot do Payload já exportado.
+O job histórico `e373dc13-053f-4473-9252-e85e7bcf735a` exportou o snapshot salvo no Payload em 2h38m35s. O PDF canônico atual foi montado em 27/11 a partir das 102 partes da execução integral anterior. As pp.33, 38 e 41 foram atualizadas, e a p.101 foi reexportada com tipografia PT-BR de 9 pt e líderes pontilhados no estilo do Sumário. O arquivo `output/pdf/middara-rulebook-pt-BR.pdf` tem 348.756.164 bytes e SHA-256 `e658dbf75a2c49722abff50d62800fdd974bb9bf5d6955f347a0aed55399a80e`; contém 102 páginas, 40 bookmarks e 232 links internos (40 do Sumário e 192 referências numéricas do Índice). Os destinos e retângulos clicáveis foram verificados contra as linhas geradas; a p.101 do PDF completo corresponde pixel a pixel à exportação fresca. O recibo final está em `output/pdf/jobs/final-2026-11-27/final-pdf-verification.json`. A exportação estrutural anterior registrou 2.443 traduções PT-BR, zero propostas provisórias, zero falhas de rede, 52 alertas geométricos em 17 páginas e zero elementos fora da página. A folha de contato das 102 páginas e amostras foram comparadas com o OG, mas 20 páginas seguem `not_certified` em `english_fidelity`, e a p.62 também permanece `not_certified` na coluna `pt_br`.
 
 - Todas as 102 páginas têm as mesmas caixas do OG: MediaBox/CropBox/BleedBox de 820,346 × 820,346 pt e TrimBox/ArtBox de 792 × 792 pt, recuado 14,173 pt de cada lado. A medição foi feita página por página.
 - O PDF PT-BR tem 325.059 caracteres selecionáveis; nenhum `U+FFFD` foi encontrado no texto. Isso comprova extração/seleção, não edição com refluxo no Acrobat Pro. A amostra de páginas 2, 38, 49 e 100 identificou fontes Type3 associadas a spans de texto (nas pp.38, 49 e 100, só Type3; na p.2, Type0 e Type3). Portanto, a afirmação anterior de que o corpo usa subconjuntos TTF não está confirmada e é contrariada por essas páginas. No par OG/PDF da p.49, o OG usa Optima CFF/Type1 e Cinzel TrueType, enquanto o PDF final usa recursos Type3 com ToUnicode. A editabilidade externa continua sem teste no Acrobat.
@@ -50,7 +50,7 @@ Antes de entregar um arquivo, o sistema deve verificar fontes ausentes ou não i
 
 ### App e impressão têm requisitos diferentes
 
-Hyperlinks, busca, áudio, leitura em voz alta e animações pertencem ao viewer. O PDF fechado precisa manter aparência estável mesmo sem JavaScript, rede ou fontes instaladas na máquina da gráfica. A mesma tradução e a mesma geometria de página alimentam os dois, mas cada saída tem seu próprio validador.
+Busca, áudio, leitura em voz alta e animações pertencem ao viewer. O exportador de PDF cria links internos de navegação a partir das linhas com destino no Sumário da p.3 e no Índice da p.101; o PDF fechado funciona sem JavaScript ou rede. Em uma exportação completa, são 40 links do Sumário e 192 do Índice; numa seleção parcial, só são criados links cujo destino também esteja no arquivo. O verificador final confere o retângulo clicável e a página de destino. A mesma tradução e a mesma geometria de página alimentam as duas saídas, com validadores próprios.
 
 ## Arquitetura planejada
 

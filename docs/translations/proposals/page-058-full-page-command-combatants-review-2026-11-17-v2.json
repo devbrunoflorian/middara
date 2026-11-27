@@ -4209,7 +4209,7 @@
       "spanKey": "page_58_block_10__pt-BR",
       "language": "pt-BR",
       "sourceText": "•\t\nIntelligent Combatants do not use Stamina Points. Instead, during \ntheir turns they are instructed by AI Steps to perform a certain amount \nof Actions or Abilities.",
-      "proposalText": "• Combatentes Inteligentes não usam Pontos de Stamina. Em seus turnos, seguem as Etapas de IA para realizar uma quantidade específica de Ações ou Habilidades.",
+      "proposalText": "• Combatentes Inteligentes não usam Pontos de Vigor. Em seus turnos, seguem as Etapas de IA para realizar uma quantidade específica de Ações ou Habilidades.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_58_block_10__pt-BR",
@@ -4224,7 +4224,7 @@
         "lineHeightMode": "custom",
         "segments": [
           {
-            "text": "• Combatentes Inteligentes não usam Pontos de Stamina. Em seus turnos, seguem as Etapas de IA para realizar uma quantidade específica de Ações ou Habilidades.",
+            "text": "• Combatentes Inteligentes não usam Pontos de Vigor. Em seus turnos, seguem as Etapas de IA para realizar uma quantidade específica de Ações ou Habilidades.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -4235,21 +4235,25 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "approved_copyfit_v3_exact_and_full_page_export_verified",
-      "editorialStatus": "Approved and published through the authorized official review flow; no separate human approval is implied.",
+      "technicalStatus": "pending_copyfit_v3_user_approved_vigor_term_reconciliation_2026-11-27",
+      "editorialStatus": "User-approved global term: use Pontos de Vigor in rule prose; retain SP and original printed component labels. Existing approved wording and rich styles preserved; remeasure before republication.",
       "reviewDisposition": "active",
       "reviewId": 1751,
       "translationId": 2010,
       "sourcePdfVisualLineCount": 3,
       "pageRendererVisualLineCount": 3,
       "copyfitClassification": "EXACT",
+      "copyfitSourcePdfLineCount": null,
+      "copyfitPageRendererLineCount": null,
+      "copyfitMeasurementFingerprint": null,
+      "underCompositionJustification": "",
       "copyfitMeasurementsByZoom": {
         "100%": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 3,
           "pageRendererVisualLineCount": 3,
           "classification": "EXACT",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
           "environment": {
             "pageNumber": 58,
             "pdfDocumentPageIndex": 57,
@@ -4266,6 +4270,7 @@
               735.6231689453125,
               332.4253234863281
             ],
+            "extractedPdfTextVisualRows": 3,
             "visualRowBaselinesPt": [
               307.715,
               318.715,
@@ -4273,6 +4278,8 @@
             ],
             "spans": 4,
             "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
             "visualRows": 3
           },
           "pageRendererEvidence": {
@@ -4310,14 +4317,14 @@
             "frameHeightCssPx": 24.9,
             "frameWidthCssPx": 228.4
           },
-          "editorialStatus": "Copyfit V3 measurement evidence; publication approval and full-page visual verification are recorded separately."
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         },
         "200%": {
           "status": "measured_copyfit_v3_script_visual_rows",
           "sourcePdfVisualLineCount": 3,
           "pageRendererVisualLineCount": 3,
           "classification": "EXACT",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
           "environment": {
             "pageNumber": 58,
             "pdfDocumentPageIndex": 57,
@@ -4334,6 +4341,7 @@
               735.6231689453125,
               332.4253234863281
             ],
+            "extractedPdfTextVisualRows": 3,
             "visualRowBaselinesPt": [
               307.715,
               318.715,
@@ -4341,6 +4349,8 @@
             ],
             "spans": 4,
             "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
             "visualRows": 3
           },
           "pageRendererEvidence": {
@@ -4378,7 +4388,7 @@
             "frameHeightCssPx": 49.9,
             "frameWidthCssPx": 456.8
           },
-          "editorialStatus": "Copyfit V3 measurement evidence; publication approval and full-page visual verification are recorded separately."
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         }
       },
       "copyfitMeasurement": {
@@ -4386,7 +4396,7 @@
         "sourcePdfVisualLineCount": 3,
         "pageRendererVisualLineCount": 3,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance), so rich runs in one line object with differing baselines remain one visual row and inline objects emitted separately can rejoin that row; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 58,
           "pdfDocumentPageIndex": 57,
@@ -4403,6 +4413,7 @@
             735.6231689453125,
             332.4253234863281
           ],
+          "extractedPdfTextVisualRows": 3,
           "visualRowBaselinesPt": [
             307.715,
             318.715,
@@ -4410,6 +4421,8 @@
           ],
           "spans": 4,
           "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
           "visualRows": 3
         },
         "pageRendererEvidence": {
@@ -4447,7 +4460,7 @@
           "frameHeightCssPx": 49.9,
           "frameWidthCssPx": 456.8
         },
-        "editorialStatus": "Copyfit V3 measurement evidence; publication approval and full-page visual verification are recorded separately."
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       }
     },
     {

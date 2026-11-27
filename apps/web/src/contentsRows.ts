@@ -21,6 +21,8 @@ export interface ContentsRowDefinition {
   /** Page-local indexes can reflow labels, leaders, and references as one editable row. */
   dynamicReferenceLayout?: boolean;
   referenceTextPtBr?: string;
+  /** Page-local PT-BR typography adjustment; source EN geometry stays unchanged. */
+  ptBrFontScale?: number;
   leader: { bbox: number[]; yPt: number; periodPt: number; widthPt: number; style?: 'dotted' | 'solid' | 'none' };
   mask: { url: string; bbox: number[] };
 }

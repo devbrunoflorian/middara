@@ -100,12 +100,13 @@ for (const column of columns) {
       targetPage: source.sourceReference && /^\d/.test(source.sourceReference)
         ? Number(source.sourceReference.match(/^\d+/)[0]) : undefined,
       dynamicReferenceLayout: true,
+      ptBrFontScale: 1.125,
       referenceTextPtBr: reference,
       leader: {
         bbox: [x, y + column.leaderOffset - 0.2, column.rightX, y + column.leaderOffset + 0.2],
-        style: reference ? 'solid' : 'none',
-        periodPt: 0,
-        widthPt: 0.4,
+        style: reference ? 'dotted' : 'none',
+        periodPt: reference ? 2 : 0,
+        widthPt: reference ? 1.5 : 0.4,
         yPt: y + column.leaderOffset,
       },
       mask: {

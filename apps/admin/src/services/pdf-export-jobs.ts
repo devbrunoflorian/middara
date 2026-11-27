@@ -898,7 +898,8 @@ async function executePdfExportJob(payload: Payload, jobId: string) {
   const verification = JSON.parse(await readFile(verificationPath, 'utf8')) as Record<string, unknown>
   const verificationSummary = Object.fromEntries([
     'pageCount', 'renderedAndVerifiedPages', 'pagesWithSelectableText',
-    'sourcePagesExpectedToContainText', 'technicalVerificationOnly',
+    'sourcePagesExpectedToContainText', 'contentsLinksExpected', 'contentsLinksVerified',
+    'technicalVerificationOnly',
   ].filter(key => key in verification).map(key => [key, verification[key]]))
   const afterVerify = await findJob(payload, jobId)
   if (!afterVerify) throw new Error('Job removido após a verificação final.')

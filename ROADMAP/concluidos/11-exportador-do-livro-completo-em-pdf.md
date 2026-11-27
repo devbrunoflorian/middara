@@ -1,23 +1,25 @@
 # Projeto Concluído: Exportação do Livro Completo em PDF
 
-- **Status:** PDF digital PT-BR entregue e verificado tecnicamente em 27/11/2026; revisão visual integral continua aberta.
+- **Status:** o PDF completo atual foi montado e verificado tecnicamente em 27/11/2026. A revisão visual integral continua aberta; exportação técnica concluída não equivale à certificação visual das 102 páginas.
 - **Escopo:** exportar as 102 páginas PT-BR em um PDF pesquisável com a geometria do OG.
 - **Área:** Exportação / PDF.
 
 ## Entrega
 
-- PDF final local: `output/pdf/middara-rulebook-pt-BR.pdf` (102 páginas; 504.004.016 bytes após atualização incremental da imagem de fundo da p.61; 40 bookmarks).
+- O PDF final está em `output/pdf/middara-rulebook-pt-BR.pdf` (348.756.164 bytes; SHA-256 `e658dbf75a2c49722abff50d62800fdd974bb9bf5d6955f347a0aed55399a80e`). A p.101 foi reexportada com tipografia PT-BR de 9 pt e líderes pontilhados; a montagem confirmou novamente os 232 links internos. O recibo da montagem final é `output/pdf/jobs/final-2026-11-27/final-pdf-verification.json`.
+- Relatório da exportação atual: `output/pdf/jobs/final-2026-11-27/viewer-export-report.json` (Payload salvo, 2.443 traduções PT-BR, zero propostas provisórias; 102 páginas e caixas verificadas, 40 bookmarks, zero falhas de rede e zero mutações bloqueadas). O relatório aponta 52 alertas geométricos em 17 páginas e zero elementos fora da página; os alertas ainda precisam de classificação visual.
 - O job `e373dc13-053f-4473-9252-e85e7bcf735a` exportou um snapshot imutável do Payload. Do início à conclusão, levou 2h38m35s, incluindo snapshot, render das 102 páginas, mesclagem e verificação.
-- A verificação final confirmou 102/102 páginas, ordem correta, render de cada página igual à sua parte individual, 102 páginas com texto selecionável, texto visível esperado nas 102 páginas e nenhuma página em branco.
+- As 102 partes vieram da execução integral verificada. A montagem atual confirmou 102 páginas e caixas; comparação de raster confirmou igualdade com as partes nas pp.3, 33, 41 e 101. As pp.33 e 41 foram exportadas de novo após as correções desta rodada.
 - As cinco caixas de página foram comparadas contra o OG nas 102 páginas: nenhuma diferença. MediaBox/CropBox/BleedBox são 820,346 × 820,346 pt; TrimBox/ArtBox são 792 × 792 pt, recuados 14,173 pt.
 - A extração contém 325.059 caracteres selecionáveis e nenhum `U+FFFD`.
 - Quarenta bookmarks hierárquicos foram gerados a partir do Sumário da p. 3. A primeira mesclagem omitiu os bookmarks; foram adicionados ao PDF atual e o exportador/verificador foram corrigidos para preservá-los e validá-los nas próximas exportações.
+- Em 27/11, o PDF-fonte OG não possui anotações de link. O Viewer navegava por handlers React em elementos `div`, que não viram links ao imprimir; o montador também não criava anotações, apenas bookmarks. O montador agora adiciona links PDF internos a partir de `contents_rows.json` das pp.3 e 101, e o verificador valida geometria e destino. O livro completo confirmou 232 links (40 do Sumário e 192 referências numéricas do Índice), com todas as áreas/destinos validados. Cinco itens sem destino numérico não são links: quatro títulos de agrupamento e “Valores — Verso”.
 - O endpoint local do PDF OG respondeu com a imagem da p. 1 (HTTP 200) em 27/11. O caminho atual de `MIDDARA_SOURCE_PDF_PATH` aponta para o original existente em `Middara/Rulebook 1.2`.
 - O exportador agora valida antes de criar o job se o caminho configurado existe, pode ser aberto como arquivo regular e contém cabeçalho PDF. Um caminho antigo/inválido retorna erro 503 com instrução de configuração, sem criar job parcial. A validação isolada passou em cinco casos.
 - Uma comparação visual reduzida lado a lado com o OG foi feita nas pp. 47, 52, 58, 84 e 100. Ela não substitui uma revisão visual integral.
 - Em 27/11, o XObject de fundo da p.61 foi atualizado diretamente no PDF completo a partir do asset revisado, evitando repetir a renderização de 102 páginas. A checagem da saída confirmou raster idêntico ao patch esperado, texto preservado e nenhuma mudança fora da caixa local; a rechecagem estrutural confirmou caixas, texto e bookmarks nas 102 páginas. Evidência complementar: `output/pdf/jobs/e373dc13-053f-4473-9252-e85e7bcf735a/post-export-localized-patch-verification.json`.
 - Em 27/11, o estado do job foi relido pelo endpoint `/api/exports/{id}` e o download `/api/exports/{id}/download` respondeu HTTP 200.
-- A recuperação local mais recente disponível registra quatro conflitos de sincronização na p.64. A extração do PDF final corresponde às versões do Payload exportadas; as variantes divergentes do backup local não foram aplicadas.
+- O snapshot de recuperação mais recente disponível (27/11, 15:55Z) registra uma divergência local na p.64, bloco 5: o rascunho local antigo usa WHITE/PURPLE e o Payload salvo usa BRANCO/ROXO. O PDF atual usa o Payload salvo. O snapshot não confirma o estado vivo do navegador; o botão do editor ainda pode exigir resolver esse registro. A exportação local do PDF completo, porém, foi concluída.
 
 ## Limites e continuidade
 

@@ -9,6 +9,7 @@ import math
 from pathlib import Path
 
 import pymupdf
+from contents_pdf_links import contents_link_specs, verify_contents_links
 
 
 def source_visible_text_character_count(value: object) -> int:
@@ -55,6 +56,8 @@ def main() -> int:
     rows: list[dict[str, object]] = []
     bookmarks_count = 0
     bookmarks_source_page: int | None = None
+    contents_links_expected = 0
+    contents_links_verified = 0
     try:
         if document.page_count != len(expected_pages):
             raise ValueError(f"Expected {len(expected_pages)} pages, got {document.page_count}.")
@@ -146,6 +149,10 @@ def main() -> int:
                     raise ValueError(f"Bookmark destination {target} is outside the exported book.")
             bookmarks_count = len(bookmarks)
             bookmarks_source_page = 3
+        expected_link_specs = contents_link_specs(expected_pages)
+        verify_contents_links(document, expected_link_specs)
+        contents_links_expected = len(expected_link_specs)
+        contents_links_verified = contents_links_expected
     finally:
         document.close()
 
@@ -158,6 +165,8 @@ def main() -> int:
         "sourcePagesExpectedToContainText": sum(bool(row["textExpected"]) for row in rows),
         "bookmarksCount": bookmarks_count,
         "bookmarksSourcePage": bookmarks_source_page,
+        "contentsLinksExpected": contents_links_expected,
+        "contentsLinksVerified": contents_links_verified,
         "pageSizeTolerancePt": 0.5,
         "pages": rows,
         "technicalVerificationOnly": True,

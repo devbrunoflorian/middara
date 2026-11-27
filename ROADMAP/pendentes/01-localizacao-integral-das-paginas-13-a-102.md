@@ -1,6 +1,6 @@
 # Projeto Pendente: Localização Integral das Páginas 13 a 102
 
-- **Status:** PENDENTE / EM ANDAMENTO
+- **Status:** TRADUÇÃO PT-BR DAS 102 PÁGINAS EXPORTADA; REVISÃO VISUAL FINAL EM ANDAMENTO
 - **Prioridade:** ALTA (Caminho Crítico)
 - **Escopo:** Páginas 13 a 102 do Livro de Regras Oficial Middara 1.2
 - **Área:** Tradução / Revisão Editorial / Copyfit QA
@@ -9,7 +9,9 @@
 
 ## 1. Visão Geral
 
-Com a infraestrutura de engenharia e as páginas 1 a 12 concluídas e aprovadas, o objetivo deste projeto é traduzir, revisar, diagramar e aprovar as 90 páginas restantes do manual. Isso engloba o núcleo denso das regras de combate, inteligência artificial dos monstros, fases da rodada, equipamentos e apêndices.
+Em 27/11/2026, o Payload contém 2.443 traduções PT-BR persistidas, sem propostas provisórias na exportação. As páginas 31, 88 e 99 não têm prosa editável e são arte/fólio. O PDF digital completo de 102 páginas foi exportado para `output/pdf/middara-rulebook-pt-BR.pdf`. A tradução de regras está preenchida no livro; o trabalho pendente deste projeto é revisar o PDF contra o OG, resolver os alertas reais de geometria e fechar a certificação página a página. A lista de páginas ainda sem certificação está em [`docs/translations/page-status.csv`](../../docs/translations/page-status.csv).
+
+Os três lotes abaixo registram o plano original de cobertura e servem como contexto. Eles não representam páginas ainda sem tradução.
 
 ---
 

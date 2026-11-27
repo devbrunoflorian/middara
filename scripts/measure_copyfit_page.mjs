@@ -62,6 +62,15 @@ const rendererKeyForCandidate = candidate => {
   if (key.endsWith('__en')) return `${key.slice(0, -4)}__pt-BR`;
   return `${key}__pt-BR`;
 };
+const rendererKeyOptionsForCandidate = candidate => {
+  const key = rendererKeyForCandidate(candidate);
+  // Legacy simple blocks can be emitted with their client-side key (without
+  // the locale suffix), while typographic units and review overlays use the
+  // persisted Payload key. Resolve the key against the live page below.
+  return /^page_\d+_block_\d+__pt-BR$/u.test(key)
+    ? [key, key.replace(/__pt-BR$/u, '')]
+    : [key];
+};
 const normalize = value => String(value ?? '')
   .replace(/\[\[[^\]]+\]\]/gu, ' ')
   // Proposal text describes these source-backed inline glyphs by semantic key,
@@ -266,6 +275,7 @@ const viewport = { width: 1280, height: 720 };
 const dpr = 1.25;
 const measurements = new Map();
 const unmatchedRows = [];
+const resolvedRendererKeys = new Map();
 try {
   const context = await browser.newContext({ viewport, deviceScaleFactor: dpr });
   const page = await context.newPage();
@@ -410,11 +420,11 @@ try {
   }
   await page.evaluate(async () => { await document.fonts.ready; });
   if (previewDrafts) {
-    const expectedRendererKeys = pending.map(rendererKeyForCandidate);
-    await page.waitForFunction(keys => {
+    const expectedRendererKeys = pending.map(rendererKeyOptionsForCandidate);
+    await page.waitForFunction(keyOptions => {
       const present = new Set(Array.from(document.querySelectorAll('[data-rendered-translation-key]'))
         .map(element => element.getAttribute('data-rendered-translation-key')));
-      return keys.every(key => present.has(key));
+      return keyOptions.every(keys => keys.some(key => present.has(key)));
     }, expectedRendererKeys, { timeout: 20000 });
   }
   const rowCount = previewDrafts ? 0 : await page.locator('.translation-review-row-wrap .translation-review-row').count();
@@ -440,11 +450,22 @@ try {
     }
     return clustered;
   };
-  const pageRendererSnapshot = async spanKey => page.evaluate(({ key, pageWidth }) => {
+  const pageRendererSnapshot = async (spanKey, bbox = null) => page.evaluate(({ key, pageWidth, bbox: box }) => {
     const matches = Array.from(document.querySelectorAll('[data-rendered-translation-key]'))
       .filter(element => element.getAttribute('data-rendered-translation-key') === key);
     if (matches.length !== 1) return { count: matches.length };
     const target = matches[0];
+    const pageImage = document.querySelector('.page-container img');
+    const pageRect = pageImage?.getBoundingClientRect();
+    const pageScaleCssPxPerPt = pageRect && pageWidth ? pageRect.width / pageWidth : null;
+    const bounds = box && pageRect && pageScaleCssPxPerPt
+      ? {
+        left: pageRect.left + box[0] * pageScaleCssPxPerPt - 2,
+        right: pageRect.left + box[2] * pageScaleCssPxPerPt + 2,
+        top: pageRect.top + box[1] * pageScaleCssPxPerPt - 2,
+        bottom: pageRect.top + box[3] * pageScaleCssPxPerPt + 2,
+      }
+      : null;
     const rects = [];
     const fontSamples = new Map();
     let text = '';
@@ -455,7 +476,12 @@ try {
       const parent = node.parentElement;
       const style = parent && getComputedStyle(parent);
       if (!style || style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) === 0) continue;
-      if (node.textContent.trim()) {
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      const visibleRects = Array.from(range.getClientRects()).filter(rect => rect.width > 0.5 && rect.height > 1
+        && (!bounds || (rect.left + rect.width / 2 >= bounds.left && rect.left + rect.width / 2 <= bounds.right
+          && rect.top + rect.height / 2 >= bounds.top && rect.top + rect.height / 2 <= bounds.bottom)));
+      if (node.textContent.trim() && visibleRects.length) {
         const fontSample = {
           fontFamily: style.fontFamily,
           fontSize: style.fontSize,
@@ -478,13 +504,13 @@ try {
       // Keep the block boundary across whitespace-only text nodes without a
       // paragraph wrapper so adjacent rich paragraphs retain their separator.
       if (paragraph) previousParagraph = paragraph;
-      if (!node.textContent.trim()) { text += node.textContent; continue; }
-      text += node.textContent;
-      const range = document.createRange();
-      range.selectNodeContents(node);
-      for (const rect of range.getClientRects()) {
-        if (rect.width > 0.5 && rect.height > 1) rects.push({ top: rect.top, height: rect.height, left: rect.left });
+      if (!node.textContent.trim()) {
+        if (!bounds || previousParagraph || text) text += node.textContent;
+        continue;
       }
+      if (!visibleRects.length) continue;
+      text += node.textContent;
+      for (const rect of visibleRects) rects.push({ top: rect.top, height: rect.height, left: rect.left });
     }
     const symbolIds = [];
     let symbolOnlyRows = 0;
@@ -508,8 +534,6 @@ try {
       }
     }
     const frame = target.getBoundingClientRect();
-    const pageImage = document.querySelector('.page-container img');
-    const pageScaleCssPxPerPt = pageImage && pageWidth ? pageImage.getBoundingClientRect().width / pageWidth : null;
     const marker = target.querySelector('[data-list-marker-line]')?.textContent ?? '';
     return {
       count: 1,
@@ -524,7 +548,7 @@ try {
       fontSamples: [...fontSamples.values()],
       pageScaleCssPxPerPt,
     };
-  }, { key: spanKey, pageWidth: pdfPageWidth });
+  }, { key: spanKey, pageWidth: pdfPageWidth, bbox });
   const expectedSymbolIdsFor = candidate => (candidate.data?.segments ?? []).flatMap(segment => {
     if (!segment.symbolId) return [];
     const count = (String(segment.text ?? '').match(/\uFFFC/gu) ?? []).length || 1;
@@ -607,7 +631,26 @@ try {
     const index = pageCandidates.indexOf(candidate);
     const rowSelector = `.translation-review-row-wrap[data-review-key=${JSON.stringify(candidate.reviewKey)}] .translation-review-row`;
     const candidateRow = page.locator(rowSelector);
-    const directSnapshot = await pageRendererSnapshot(rendererKeyForCandidate(candidate));
+    const directSnapshots = await Promise.all(rendererKeyOptionsForCandidate(candidate)
+      .map(key => pageRendererSnapshot(key, candidate.copyfitCanonicalBbox)));
+    const validDirectSnapshots = directSnapshots.filter(snapshot => {
+      if (snapshot.count !== 1) return false;
+      const expectedText = candidateTextForRenderer(candidate, snapshot.staticMarkerText, snapshot.text);
+      return validatePageRendererIdentity({
+        expectedText,
+        actualText: normalize(snapshot.text),
+        expectedSymbolIds: expectedSymbolIdsFor(candidate),
+        actualSymbolIds: snapshot.symbolIds ?? [],
+      }).valid;
+    });
+    const directSnapshot = validDirectSnapshots.length === 1
+      ? validDirectSnapshots[0]
+      : validDirectSnapshots.length > 1
+        ? { count: validDirectSnapshots.length }
+        : directSnapshots.find(snapshot => snapshot.count === 1) ?? { count: 0 };
+    if (directSnapshot.count === 1 && directSnapshot.key) {
+      resolvedRendererKeys.set(candidate.reviewKey, directSnapshot.key);
+    }
     const rowCountForCandidate = await candidateRow.count();
     const directExpectedText = directSnapshot.count === 1
       ? candidateTextForRenderer(candidate, directSnapshot.staticMarkerText, directSnapshot.text)
@@ -650,7 +693,7 @@ try {
     }
     if (process.env.MIDDARA_COPYFIT_DEBUG === '1') {
       console.log('copyfit candidate:', candidate.spanKey, candidate.reviewKey,
-        'rendererKey=', rendererKeyForCandidate(candidate), 'snapshotCount=', directSnapshot.count,
+        'rendererKey=', directSnapshot.key ?? rendererKeyForCandidate(candidate), 'snapshotCount=', directSnapshot.count,
         'rowCount=', rowCountForCandidate, 'directIdentity=', directIdentity?.reason ?? (directIdentity ? 'valid' : 'not checked'),
         'savedReviewFrameMatches=', savedReviewFrameMatches,
         'actual=', normalize(directSnapshot.text).slice(0, 180), 'expected=', directExpectedText?.slice(0, 180));
@@ -689,7 +732,7 @@ try {
       });
       continue;
     }
-    const expectedRendererKey = rendererKeyForCandidate(candidate);
+    const expectedRendererKey = directSnapshot.key ?? rendererKeyForCandidate(candidate);
     try {
       await candidateRow.click({ timeout: 3000 });
     } catch {
@@ -842,7 +885,7 @@ try {
     let matches;
     let data = snapshot;
     if (snapshot && !snapshot.empty && snapshot.rects.length) {
-      const highlightedCandidate = pending.find(candidate => rendererKeyForCandidate(candidate) === snapshot.key);
+      const highlightedCandidate = pending.find(candidate => resolvedRendererKeys.get(candidate.reviewKey) === snapshot.key);
       matches = highlightedCandidate
         ? [highlightedCandidate]
         : byText.get(normalize(snapshot.text));

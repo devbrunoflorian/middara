@@ -4,6 +4,7 @@ import { CONTENTS_LEADER_GAP_PT, type ContentsRowDefinition } from '../contentsR
 interface ContentsRowFlowProps {
   row: ContentsRowDefinition;
   scale: number;
+  fontScale?: number;
   sourceFontSize: number;
   isAdmin: boolean;
   text: string;
@@ -12,7 +13,7 @@ interface ContentsRowFlowProps {
 }
 
 /** Text, leader, and an optional page reference share one bounded line. */
-export function ContentsRowFlow({ row, scale, sourceFontSize, isAdmin, text, referenceText, children }: ContentsRowFlowProps) {
+export function ContentsRowFlow({ row, scale, fontScale = 1, sourceFontSize, isAdmin, text, referenceText, children }: ContentsRowFlowProps) {
   const textRef = useRef<HTMLSpanElement>(null);
   const [overflow, setOverflow] = useState(false);
   useEffect(() => {
@@ -40,7 +41,7 @@ export function ContentsRowFlow({ row, scale, sourceFontSize, isAdmin, text, ref
   // The wrapper creates the inline formatting context; keep its inherited font
   // metrics at the source row size so small TOC labels don't fall on edit.
   return <div className="contents-row-flow" data-overflow={overflow || undefined}
-    style={{ fontSize: `${sourceFontSize * scale}px` }}>
+    style={{ fontSize: `${sourceFontSize * fontScale * scale}px` }}>
     <span ref={textRef} className="contents-row-text" title={text}>{children}</span>
     {row.leader.style !== 'none' && <svg className="contents-row-leader" aria-hidden="true"
       style={{ height, marginInlineStart: CONTENTS_LEADER_GAP_PT * scale,

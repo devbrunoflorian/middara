@@ -77,13 +77,13 @@ Também comparei os rasters p.83 e p.84 do PDF completo atual com exports isolad
 
 **Bloqueio local separado do backend — resolvido em 27/11:** o diálogo do Viewer bloqueava uma nova exportação quando havia registros locais divergentes do Payload, pois o job usa o snapshot do servidor. Salvei um backup recuperável individual de cada divergência da p.64 e substituí somente as quatro cópias locais pelas versões atuais do Payload. As três diferenças de texto em `page_64_block_4`, `_5` e `_7` foram reconciliadas com as versões em português (`BRANCO/ROXO`, `DANO FÍSICO`); o bloco 8 tinha texto igual e referências diferentes para os mesmos símbolos de armadura. A comparação final do Viewer mostrou `Payload confirmado · nenhuma pendência local`. O backup antigo de 24/11 com 140 divergências não descreve esse snapshot.
 
-O PDF completo existente já tem 102 páginas, usa o snapshot do Payload e foi verificado tecnicamente. Resolver as cópias locais não alterou o Payload nem o conteúdo desse PDF; não gerei outra cópia de 504 MB. Uma nova exportação integral só é necessária depois de alguma alteração salva no Payload que ainda não esteja no arquivo existente.
+O PDF canônico atual está em `output/pdf/middara-rulebook-pt-BR.pdf` (348.756.164 bytes). Ele foi montado em 27/11 a partir das partes verificadas já disponíveis, com exportação nova das pp.33, 38, 41 e 101. A montagem confirmou 102 páginas e caixas, 40 bookmarks e 232 links internos. A p.101 PT-BR agora usa 9 pt e líderes pontilhados no estilo do Sumário; sua rasterização no PDF completo corresponde à exportação fresca. O recibo atualizado está em `output/pdf/jobs/final-2026-11-27/final-pdf-verification.json`; a exportação completa permanece separada da revisão visual integral do livro.
 
 ## Trabalho ainda aberto
 
 1. concluir a revisão visual OG/Viewer/PDF de todas as páginas; a verificação técnica da exportação não certifica copyfit, símbolos ou alinhamento;
 2. validar seleção e pequenas edições no Acrobat Pro, delimitando fontes instaladas, Type3 e PUA; a extração de texto não prova edição tipográfica confiável;
-3. validar hyperlinks internos em um leitor de PDF; a exportação atual contém 40 bookmarks estruturais derivados do Sumário da p. 3;
+3. abrir o PDF canônico num leitor e conferir por clique amostras do Sumário (p.3) e do Índice (p.101). A montagem completa confirmou 232/232 anotações internas (40 do Sumário e 192 referências numéricas do Índice), além de 40 bookmarks; cinco linhas de índice sem destino numérico não são links: quatro são títulos de agrupamento e “Valores — Verso” não aponta para uma página numerada;
 4. manter a validação visual por página separada do preflight de gráfica, conforme [`final-output-print-and-app.md`](final-output-print-and-app.md).
 
 ## Critérios para aceitar a exportação individual
