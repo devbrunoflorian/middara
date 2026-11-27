@@ -6,7 +6,7 @@
 
 ## Entrega
 
-- PDF final local: `output/pdf/middara-rulebook-pt-BR.pdf` (102 páginas; 486.455.474 bytes; 40 bookmarks).
+- PDF final local: `output/pdf/middara-rulebook-pt-BR.pdf` (102 páginas; 504.004.016 bytes após atualização incremental da imagem de fundo da p.61; 40 bookmarks).
 - O job `e373dc13-053f-4473-9252-e85e7bcf735a` exportou um snapshot imutável do Payload. Do início à conclusão, levou 2h38m35s, incluindo snapshot, render das 102 páginas, mesclagem e verificação.
 - A verificação final confirmou 102/102 páginas, ordem correta, render de cada página igual à sua parte individual, 102 páginas com texto selecionável, texto visível esperado nas 102 páginas e nenhuma página em branco.
 - As cinco caixas de página foram comparadas contra o OG nas 102 páginas: nenhuma diferença. MediaBox/CropBox/BleedBox são 820,346 × 820,346 pt; TrimBox/ArtBox são 792 × 792 pt, recuados 14,173 pt.
@@ -15,6 +15,9 @@
 - O endpoint local do PDF OG respondeu com a imagem da p. 1 (HTTP 200) em 27/11. O caminho atual de `MIDDARA_SOURCE_PDF_PATH` aponta para o original existente em `Middara/Rulebook 1.2`.
 - O exportador agora valida antes de criar o job se o caminho configurado existe, pode ser aberto como arquivo regular e contém cabeçalho PDF. Um caminho antigo/inválido retorna erro 503 com instrução de configuração, sem criar job parcial. A validação isolada passou em cinco casos.
 - Uma comparação visual reduzida lado a lado com o OG foi feita nas pp. 47, 52, 58, 84 e 100. Ela não substitui uma revisão visual integral.
+- Em 27/11, o XObject de fundo da p.61 foi atualizado diretamente no PDF completo a partir do asset revisado, evitando repetir a renderização de 102 páginas. A checagem da saída confirmou raster idêntico ao patch esperado, texto preservado e nenhuma mudança fora da caixa local; a rechecagem estrutural confirmou caixas, texto e bookmarks nas 102 páginas. Evidência complementar: `output/pdf/jobs/e373dc13-053f-4473-9252-e85e7bcf735a/post-export-localized-patch-verification.json`.
+- Em 27/11, o estado do job foi relido pelo endpoint `/api/exports/{id}` e o download `/api/exports/{id}/download` respondeu HTTP 200.
+- A recuperação local mais recente disponível registra quatro conflitos de sincronização na p.64. A extração do PDF final corresponde às versões do Payload exportadas; as variantes divergentes do backup local não foram aplicadas.
 
 ## Limites e continuidade
 

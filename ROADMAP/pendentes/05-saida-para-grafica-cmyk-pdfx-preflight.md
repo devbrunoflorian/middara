@@ -9,7 +9,7 @@
 
 - O OG tem 102 páginas, PDF 1.6, e não declara OutputIntent nem identificação PDF/X.
 - O OG usa majoritariamente imagens `DeviceCMYK`, além de uma parcela pequena de imagens com perfil ICC. Sem o perfil de origem do conteúdo CMYK, os valores não identificam uma condição de impressão única.
-- O PDF digital PT-BR exportado em 27/11/2026 tem 102 páginas, 486.455.474 bytes, texto selecionável nas 102 páginas e 40 bookmarks. As caixas das 102 páginas coincidem com o OG.
+- O PDF digital PT-BR exportado em 27/11/2026 tem 102 páginas, 504.004.016 bytes após a atualização localizada do fundo da p.61, texto selecionável nas 102 páginas e 40 bookmarks. As caixas das 102 páginas coincidem com o OG.
 - A inspeção integral desse PDF encontrou 0 tokens `/DeviceCMYK`, 243 `/DeviceRGB`, 1.034 `/ICCBased` e nenhum OutputIntent ou declaração PDF/X. Não deve ser enviado à gráfica como se já fosse CMYK/PDF/X.
 - A geometria do OG reserva aproximadamente 5 mm entre TrimBox e a borda externa (BleedBox/MediaBox). CropBox e BleedBox ocupam a página externa. Não adicionar outra sangria ou marcas automaticamente; confirmar se a gráfica quer marcas e como interpreta essas caixas.
 - A exportação Chromium não escolhe uma condição CMYK de impressão. A conversão precisa ser uma etapa posterior com perfil e parâmetros explícitos, seguida de inspeção das separações e comparação visual.
