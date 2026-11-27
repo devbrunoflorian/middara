@@ -142,8 +142,11 @@ export function pdfExportApiUrl() {
 }
 
 export function pdfExportSourcePdfPath() {
-  return path.resolve(process.env.MIDDARA_SOURCE_PDF_PATH
-    ?? 'C:/Users/bruno/Downloads/Rulebook 1p2 Final Version 05-19-23 Optimized.pdf')
+  const configuredPath = process.env.MIDDARA_SOURCE_PDF_PATH?.trim()
+  if (!configuredPath) {
+    throw new Error('PDF-fonte não configurado. Defina MIDDARA_SOURCE_PDF_PATH no ambiente local para o PDF oficial em inglês.')
+  }
+  return path.resolve(configuredPath)
 }
 
 function allowedOrigins() {
@@ -490,7 +493,11 @@ async function createImmutableSnapshot(
   const canonicalPagesRoot = path.join(root, 'apps/web/public/pages')
   const source = pdfExportSourcePdfPath()
 
-  await access(source)
+  try {
+    await access(source)
+  } catch {
+    throw new Error(`PDF-fonte configurado não encontrado: ${source}. Corrija MIDDARA_SOURCE_PDF_PATH no ambiente local.`)
+  }
   const sourcePdfSha256 = await hashFile(source)
   const [translationDocs, frameDocs, aliasDocs, reviewDocs, reviewRequestDocs, glossaryDecisionDocs, reviewCatalog, sourcePageBoxes] = await Promise.all([
     readAll(payload, 'translations'),
@@ -797,12 +804,7 @@ async function executePdfExportJob(payload: Payload, jobId: string) {
 
     const pageNumber = job.pages[index]
     const pageOutput = path.join(jobDirectory, 'parts', `page-${String(pageNumber).padStart(3, '0')}.pdf`)
-    await updateJob(payload, refreshed, {
-      phase: 'rendering',
-      currentPage: pageNumber,
-      stage: `Renderizando lote ${index + 1} de ${job.pages.length} (Rulebook p. ${pageNumber})`,
-    })
-    await runWorkerProcess(payload, jobId, process.execPath, [
+    const pageArgs = [
       pageExporter,
       '--page', String(pageNumber),
       '--language', job.language,
@@ -811,7 +813,29 @@ async function executePdfExportJob(payload: Payload, jobId: string) {
       '--base-url', pdfExportBaseUrl(),
       '--api-url', pdfExportApiUrl(),
       '--snapshot', snapshotPath,
-    ], logPath, pdfExportPageTimeoutMs())
+    ]
+    await updateJob(payload, refreshed, {
+      phase: 'rendering',
+      currentPage: pageNumber,
+      stage: `Renderizando lote ${index + 1} de ${job.pages.length} (Rulebook p. ${pageNumber})`,
+    })
+    try {
+      await runWorkerProcess(payload, jobId, process.execPath, pageArgs, logPath, pdfExportPageTimeoutMs())
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : String(error)
+      const current = await findJob(payload, jobId)
+      const retryableBrowserExit = detail.includes('Target page, context or browser has been closed')
+      if (!retryableBrowserExit || !current || current.cancelRequested) throw error
+
+      await rm(pageOutput, { force: true })
+      await appendFile(logPath, `\n[page-export-retry] Chromium encerrou durante a p. ${pageNumber}; repetindo somente esta página uma vez.\n`)
+      await updateJob(payload, current, {
+        phase: 'rendering',
+        currentPage: pageNumber,
+        stage: `Chromium encerrou na p. ${pageNumber}; repetindo esta página (1/1)`,
+      })
+      await runWorkerProcess(payload, jobId, process.execPath, pageArgs, logPath, pdfExportPageTimeoutMs())
+    }
 
     const afterPage = await findJob(payload, jobId)
     if (!afterPage) throw new Error('Job removido durante a exportação.')

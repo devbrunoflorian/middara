@@ -1,37 +1,42 @@
-# Projeto Pendente: Saída para Gráfica (CMYK, PDF/X e Preflight)
+# Projeto Pendente: Saída para Gráfica e Preflight
 
-- **Status:** PENDENTE
-- **Prioridade:** MÉDIA
-- **Escopo:** Preparação dos Arquivos para Impressão Gráfica Comercial Profissional
-- **Área:** Engenharia de Impressão / Pré-Impressão / Gráfica
+- **Status:** PENDENTE; levantamento inicial concluído em 27/11/2026
+- **Prioridade:** MÉDIA, depois de estabilizar e fechar a revisão do conteúdo
+- **Escopo:** Produzir um PDF de impressão a partir do livro PT-BR, preservando a paginação e comparando cor e geometria com o OG
+- **Área:** Exportação / Pré-impressão
 
----
+## Evidência já levantada
 
-## 1. Visão Geral
+- O OG tem 102 páginas, PDF 1.6, e não declara OutputIntent nem identificação PDF/X.
+- O OG usa majoritariamente imagens `DeviceCMYK`, além de uma parcela pequena de imagens com perfil ICC. Sem o perfil de origem do conteúdo CMYK, os valores não identificam uma condição de impressão única.
+- O PDF PT-BR atual é uma exportação digital. As imagens raster encontradas são ICCBased de três canais; o arquivo não tem OutputIntent nem declaração PDF/X. Não deve ser enviado à gráfica como se já fosse CMYK/PDF/X.
+- A geometria do OG reserva aproximadamente 5 mm entre TrimBox e a borda externa (BleedBox/MediaBox). CropBox e BleedBox ocupam a página externa. Não adicionar outra sangria ou marcas automaticamente; confirmar se a gráfica quer marcas e como interpreta essas caixas.
+- A exportação Chromium não escolhe uma condição CMYK de impressão. A conversão precisa ser uma etapa posterior com perfil e parâmetros explícitos, seguida de inspeção das separações e comparação visual.
 
-Para permitir que a comunidade ou a editora imprima o livro de regras em gráficas profissionais (offset ou digital sob demanda), não basta um PDF digital RGB de tela. É necessário preparar um arquivo dentro dos rigorosos padrões industriais de pré-impressão: espaço de cores CMYK calibrado, sangria (*bleed*), marcas de corte e conformidade com a norma ISO PDF/X.
+## Próximo fluxo
 
----
+1. Obter da gráfica o preset ou especificação: perfil ICC de saída, PDF/X aceito, tamanho de corte, sangria/caixas, marcas, limite total de tinta (TAC), resolução mínima e regras de preto/transparência.
+2. Fazer uma prova de cor com páginas que combinem ilustração, áreas escuras, texto pequeno, símbolos e caixas. Comparar OG, PDF digital, prova convertida e soft proof no perfil informado.
+3. Converter o PDF completo para a condição indicada, preservando texto vetorial e fontes quando o fluxo permitir. Verificar preto de texto pequeno em K, TAC, transparências, sobreimpressão, perfis, fontes, imagens em resolução efetiva e todas as caixas de página.
+4. Gerar o formato PDF/X solicitado e validar conformidade/preflight no Acrobat Pro ou ferramenta equivalente. O OutputIntent precisa descrever a condição de saída; sozinho ele não converte o conteúdo.
+5. Só então gerar o pacote final para a gráfica, sem sobrescrever o PDF digital pesquisável.
 
-## 2. Funcionalidades Planejadas
+## Critérios de aceite
 
-1. **Margem de Sangria (*Bleed*) e Marcas de Corte:**
-   - Adição configurável de sangria (3mm a 5mm além da borda de corte) para evitar bordas brancas após o refile na gráfica.
-   - Geração de marcas de corte (*crop marks*) e marcas de registro centralizadas.
+- O perfil, preset, PDF/X, TAC, marcas e sangria correspondem às instruções da gráfica escolhida; nenhum perfil genérico é presumido.
+- Páginas finais preservam TrimBox e BleedBox previstos pelo OG, sem sangria dupla nem corte de conteúdo.
+- Preflight não encontra fontes não incorporadas, imagens abaixo do limite acordado, caixas inválidas, OutputIntent ausente ou violações PDF/X/TAC.
+- Separações confirmam preto de texto pequeno e áreas compostas conforme a especificação da gráfica.
+- Uma prova representativa foi comparada visualmente com OG e export digital antes da conversão completa.
 
-2. **Conversão de Cores e Perfis ICC (CMYK):**
-   - Pipeline de conversão de imagens e vetores de sRGB para perfis gráficos padrão (ex: ISO Coated v2 / FOGRA39 para gráficas brasileiras/europeias ou GRACoL para gráficas americanas).
-   - Conversão de textos em preto para Preto Puro (`K: 100%`, `C:0% M:0% Y:0%`) para evitar efeitos de fantasma (*registration black mismatch*) na impressão de pequenos corpos de texto.
+## Limites conhecidos
 
-3. **Conformidade PDF/X-1a e PDF/X-4:**
-   - Validação de transparências, fontes 100% incorporadas e remoção de scripts ou anotações interativas incompatíveis com RIPs gráficos.
+- Ainda não há gráfica, preset nem perfil de saída definidos. ISO Coated/FOGRA39, GRACoL e limites fixos de TAC não são defaults aprovados para este livro.
+- O OG não informa OutputIntent; portanto, a aparência impressa de seus valores `DeviceCMYK` não pode ser reconstruída com precisão sem perfil ou orientação do fornecedor.
+- Não foi feita conversão CMYK nesta etapa para evitar assumir uma condição de impressão e alterar cores às cegas.
 
-4. **Relatório Automatizado de Pré-Voo (*Preflight Report*):**
-   - Verificação de TAC (*Total Area Coverage* / Cobertura Máxima de Tinta <= 300%).
-   - Alerta para imagens com resolução inferior a 300 DPI na escala final de corte.
+## Referências técnicas
 
----
-
-## 3. Critérios de Aceite
-
-- Gerar um arquivo `Middara_Rulebook_1.2_GRAFICA_CMYK.pdf` aceito sem ressalvas em bureaus de impressão e gráficas de jogos de tabuleiro (Ludens Spirit, Copag, MakePlayingCards, etc.).
+- Adobe, [Output intents in PDFs](https://helpx.adobe.com/acrobat/using/output-intents-pdfs-acrobat-pro.html): OutputIntent descreve o destino e, por si só, não converte as cores.
+- Adobe, [Adobe PDF export options in InDesign](https://helpx.adobe.com/indesign/desktop/save-export-and-publish/save-and-export/adobe-pdf-export-options.html): conversão de cores, perfil de destino, marcas, sangria e OutputIntent são configurações distintas.
+- Adobe, [Produce print-ready PDF files](https://helpx.adobe.com/be_en/indesign/desktop/print/print-production-and-file-creation/produce-print-ready-pdf-files.html): usar o perfil fornecido pelo prestador e validar fontes, resolução e sangria.

@@ -19,14 +19,17 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((items, value, inde
 const config = {
   baseUrl: args['base-url'] ?? 'http://localhost:8080',
   apiUrl: args['api-url'] ?? process.env.VITE_PAYLOAD_API_URL ?? 'http://localhost:3000',
-  sourcePdf: resolve(args['source-pdf'] ?? process.env.MIDDARA_SOURCE_PDF_PATH ??
-    'C:/Users/bruno/Downloads/Rulebook 1p2 Final Version 05-19-23 Optimized.pdf'),
+  sourcePdf: args['source-pdf'] ?? process.env.MIDDARA_SOURCE_PDF_PATH,
   output: resolve(args.output ?? 'output/pdf/middara-rulebook-pt-BR-full.pdf'),
   workDir: resolve(args['work-dir'] ?? 'tmp/document-wide-editorial-rollout/full-book-export'),
   betaCatalog: args['beta-catalog'] ? resolve(args['beta-catalog']) : null,
   betaHolds: args['beta-hold-keys'] ? resolve(args['beta-hold-keys']) : null,
   betaReader: args['beta-reader'] === 'true',
 };
+if (!config.sourcePdf) {
+  throw new Error('PDF-fonte não configurado. Defina MIDDARA_SOURCE_PDF_PATH ou passe --source-pdf com o PDF oficial em inglês.');
+}
+config.sourcePdf = resolve(config.sourcePdf);
 const betaMode = !!config.betaCatalog;
 if (config.betaReader && !betaMode) throw new Error('--beta-reader requires --beta-catalog.');
 const viewerUrl = new URL(config.baseUrl);
