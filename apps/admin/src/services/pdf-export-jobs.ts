@@ -1,6 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto'
 import { createReadStream } from 'node:fs'
-import { access, appendFile, cp, lstat, mkdir, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises'
+import { access, appendFile, cp, lstat, mkdir, open, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { spawn, type ChildProcess } from 'node:child_process'
 import type { Payload } from 'payload'
@@ -147,6 +147,35 @@ export function pdfExportSourcePdfPath() {
     throw new Error('PDF-fonte não configurado. Defina MIDDARA_SOURCE_PDF_PATH no ambiente local para o PDF oficial em inglês.')
   }
   return path.resolve(configuredPath)
+}
+
+export class PdfExportSourceUnavailableError extends Error {
+  readonly statusCode = 503
+
+  constructor() {
+    super('PDF original não encontrado, sem acesso ou inválido. Confira MIDDARA_SOURCE_PDF_PATH em apps/admin/.env. Nenhuma exportação foi iniciada.')
+    this.name = 'PdfExportSourceUnavailableError'
+  }
+}
+
+export async function assertPdfExportSourceAvailable() {
+  let sourcePath: string
+  try {
+    sourcePath = pdfExportSourcePdfPath()
+    const sourceHandle = await open(sourcePath, 'r')
+    try {
+      const sourceInfo = await sourceHandle.stat()
+      if (!sourceInfo.isFile() || sourceInfo.size === 0) throw new Error('Configured source is not a non-empty file.')
+      const header = Buffer.alloc(1024)
+      const { bytesRead } = await sourceHandle.read(header, 0, header.length, 0)
+      if (header.subarray(0, bytesRead).indexOf(Buffer.from('%PDF-')) === -1) throw new Error('Configured source is not a PDF.')
+    } finally {
+      await sourceHandle.close()
+    }
+  } catch {
+    throw new PdfExportSourceUnavailableError()
+  }
+  return sourcePath
 }
 
 function allowedOrigins() {
@@ -491,13 +520,7 @@ async function createImmutableSnapshot(
   const snapshotPages = path.join(snapshotDirectory, 'pages')
   const assetPages = [...new Set([1, ...request.pages])].sort((a, b) => a - b)
   const canonicalPagesRoot = path.join(root, 'apps/web/public/pages')
-  const source = pdfExportSourcePdfPath()
-
-  try {
-    await access(source)
-  } catch {
-    throw new Error(`PDF-fonte configurado não encontrado: ${source}. Corrija MIDDARA_SOURCE_PDF_PATH no ambiente local.`)
-  }
+  const source = await assertPdfExportSourceAvailable()
   const sourcePdfSha256 = await hashFile(source)
   const [translationDocs, frameDocs, aliasDocs, reviewDocs, reviewRequestDocs, glossaryDecisionDocs, reviewCatalog, sourcePageBoxes] = await Promise.all([
     readAll(payload, 'translations'),
@@ -564,6 +587,7 @@ export async function createPdfExportJob(
   value: unknown,
 ) {
   const input = validatePdfExportRequest(value)
+  await assertPdfExportSourceAvailable()
   await initializePdfExportMaintenance(payload)
   if (globalCoordinator.__middaraPdfExportReservation || globalCoordinator.__middaraPdfExportWorker) {
     const error = new Error('Já existe uma exportação em andamento. Aguarde ou cancele esse job.')

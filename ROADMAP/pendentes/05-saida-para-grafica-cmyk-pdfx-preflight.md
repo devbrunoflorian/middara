@@ -1,7 +1,7 @@
 # Projeto Pendente: Saída para Gráfica e Preflight
 
 - **Status:** PENDENTE; levantamento inicial concluído em 27/11/2026
-- **Prioridade:** MÉDIA, depois de estabilizar e fechar a revisão do conteúdo
+- **Prioridade:** depois da revisão visual integral e do recebimento do preset da gráfica
 - **Escopo:** Produzir um PDF de impressão a partir do livro PT-BR, preservando a paginação e comparando cor e geometria com o OG
 - **Área:** Exportação / Pré-impressão
 

@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 
 import {
   authenticatePdfExportRequest,
+  PdfExportSourceUnavailableError,
   createPdfExportJob,
   isAllowedPdfExportOrigin,
   pdfExportCorsHeaders,
@@ -43,7 +44,7 @@ export async function POST(request: Request) {
     const status = error instanceof PdfExportInputError
       ? error.statusCode
       : Number((error as { statusCode?: unknown })?.statusCode) || 500
-    const message = status < 500 && error instanceof Error
+    const message = (status < 500 || error instanceof PdfExportSourceUnavailableError) && error instanceof Error
       ? error.message
       : 'Não foi possível preparar a exportação. Confira se o PDF-fonte e o Payload estão disponíveis.'
     return Response.json({ error: message }, { status, headers })

@@ -12,6 +12,8 @@
 - As cinco caixas de página foram comparadas contra o OG nas 102 páginas: nenhuma diferença. MediaBox/CropBox/BleedBox são 820,346 × 820,346 pt; TrimBox/ArtBox são 792 × 792 pt, recuados 14,173 pt.
 - A extração contém 325.059 caracteres selecionáveis e nenhum `U+FFFD`.
 - Quarenta bookmarks hierárquicos foram gerados a partir do Sumário da p. 3. A primeira mesclagem omitiu os bookmarks; foram adicionados ao PDF atual e o exportador/verificador foram corrigidos para preservá-los e validá-los nas próximas exportações.
+- O endpoint local do PDF OG respondeu com a imagem da p. 1 (HTTP 200) em 27/11. O caminho atual de `MIDDARA_SOURCE_PDF_PATH` aponta para o original existente em `Middara/Rulebook 1.2`.
+- O exportador agora valida antes de criar o job se o caminho configurado existe, pode ser aberto como arquivo regular e contém cabeçalho PDF. Um caminho antigo/inválido retorna erro 503 com instrução de configuração, sem criar job parcial. A validação isolada passou em cinco casos.
 - Uma comparação visual reduzida lado a lado com o OG foi feita nas pp. 47, 52, 58, 84 e 100. Ela não substitui uma revisão visual integral.
 
 ## Limites e continuidade
