@@ -21,6 +21,13 @@
 - A inspeção encontrou 836 objetos de fonte únicos: 802 `Type3` e 34 `Type0`; todos têm `/ToUnicode`. Nenhuma página tem widget de formulário.
 - O texto continua selecionável e pesquisável. Esses dados não provam que o Acrobat consegue editar as palavras e refluir as caixas; o teste no Acrobat Pro ainda está pendente.
 
+## Rechecagem do PDF digital atualizado (27/11/2026)
+
+- Exportação atual: `output/pdf/middara-rulebook-pt-BR.pdf` — 102 páginas, 40 bookmarks, 325.059 caracteres selecionáveis, nenhum `U+FFFD`, e texto selecionável nas 102 páginas.
+- A inspeção encontrou recursos Type3 para símbolos e subconjuntos TTF incorporados para texto. Isso confirma a existência de texto e fontes no PDF, mas **não** confirma que o Acrobat Pro edita palavras, mantém estilos ou reflui parágrafos corretamente.
+- O PDF não contém widgets de formulário. O teste prático no Acrobat Pro segue pendente; este ambiente não tem o Acrobat instalado.
+- Uma amostra visual em p. 47, 52, 58, 84 e 100 foi comparada com o OG depois da exportação. Essa amostra é útil para detectar erros grandes, mas não certifica editabilidade nem substitui a auditoria visual integral.
+
 ---
 
 ## 1. Problema Observado

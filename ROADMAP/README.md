@@ -29,7 +29,7 @@ O roadmap é dividido em duas pastas principais, com cada iniciativa documentada
 | **08** | **Padronização Terminológica e Glossário Canônico** | Editorial | Glossário consolidado, diretriz obrigatória de referências ("Veja", nunca "Consulte") e scripts de verificação regex. | [Ver Projeto](concluidos/08-padronizacao-terminologica-e-glossario-canonico.md) |
 | **09** | **Prova Representativa de Exportação de PDF Página Única** | Engenharia PDF | Script `export_page_pdf.mjs` e verificador PyMuPDF com prova de conceito em páginas complexas (2, 13, 24, 42, 78). | [Ver Projeto](concluidos/09-prova-representativa-exportacao-pdf-pagina-unica.md) |
 | **10** | **Primeiro lote de tradução (páginas 1 a 12)** | Tradução / Conteúdo | As traduções e decisões desse lote foram preservadas no estado local. A cobertura e a revisão visual atuais devem ser conferidas por página no arquivo de acompanhamento. | [Ver Projeto](concluidos/10-localizacao-e-aprovacao-paginas-1-a-12.md) |
-| **11** | **Exportação do livro completo em PDF** | Exportação / PDF | PDF digital PT-BR de 102 páginas, caixas conferidas contra o OG e 40 bookmarks hierárquicos. Caminho do PDF-fonte e repetição de falha transitória estão sendo corrigidos; arquivo de gráfica segue no item 05. | [Ver Projeto](concluidos/11-exportador-do-livro-completo-em-pdf.md) |
+| **11** | **Exportação do livro completo em PDF** | Exportação / PDF | PDF digital PT-BR entregue e verificado em 27/11: 102 páginas, caixas iguais ao OG, texto selecionável e 40 bookmarks. Acrobat segue no item 10; impressão CMYK/PDF/X segue no item 05. | [Ver Projeto](concluidos/11-exportador-do-livro-completo-em-pdf.md) |
 
 ---
 

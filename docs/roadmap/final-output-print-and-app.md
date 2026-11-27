@@ -1,6 +1,6 @@
 # Roadmap: saída final para impressão e aplicativos
 
-**Status:** objetivo final documentado; implementação adiada até a tradução PT-BR e a certificação visual do livro estarem concluídas.  
+**Status:** PDF digital PT-BR de 102 páginas exportado e verificado tecnicamente em 27/11/2026; certificação visual integral, edição no Acrobat e saída para gráfica continuam abertas.
 **Decisão de produto:** manter uma base de conteúdo e gerar saídas diferentes a partir dela: viewer interativo e PDF pronto para impressão.
 
 ## Objetivo
@@ -10,7 +10,7 @@ O Rulebook App deve conseguir entregar dois produtos coerentes:
 1. um viewer web que preserve edição, hyperlinks, busca, áudio, voz e futuras animações;
 2. um PDF fechado, previsível e validado para uma gráfica.
 
-Uma prova representativa de cinco páginas já exercitou o caminho técnico (EN/PT-BR, conteúdo enriquecido, símbolos e artwork) e seus limites estão em [`single-page-pdf-export.md`](single-page-pdf-export.md). Ela não altera a ordem do roadmap: terminar tradução e fidelidade vem antes da API de exportação ou da saída de gráfica.
+Uma prova representativa de cinco páginas exercitou o caminho técnico; desde então, o endpoint de exportação do livro completo foi implementado. O estado atual e os limites da exportação digital estão em [`single-page-pdf-export.md`](single-page-pdf-export.md) e no [Projeto 11 concluído](../../ROADMAP/concluidos/11-exportador-do-livro-completo-em-pdf.md). A revisão visual ainda precede qualquer conversão para gráfica.
 
 O PDF de impressão não será uma captura de tela do browser. Ele deve ser composto a partir do mesmo modelo de página, com texto vetorial, fontes incorporadas, imagens rasterizadas na resolução final e regiões de componentes preservadas como imagens completas do PDF original. As cartas, tokens e outros componentes físicos continuam em inglês; a tradução PT-BR se aplica ao texto explicativo editável ao redor deles.
 
@@ -28,14 +28,15 @@ O perfil deve ser aplicado na exportação para aquela condição, mantendo o ma
 - **PDF/X-4:** mantém transparência e recursos mais modernos, trabalha com fluxo gerenciado por ICC e exige output intent incorporado. É a opção inicial a avaliar para o exportador, desde que a gráfica confirme compatibilidade.
 - O padrão escolhido, o perfil e a política de conversão serão parâmetros da exportação, nunca valores escondidos no código.
 
-### Estado medido dos PDFs locais — 27/11/2026
+### Estado medido do PDF digital — 27/11/2026
 
-Foi feita uma inspeção estrutural leve do OG configurado e do PDF PT-BR local existente, sem gerar outro arquivo pesado. O PDF PT-BR verificado foi gerado às 01:07 de 27/11, antes das correções locais mais recentes das pp. 83–84; ele não representa ainda o estado atual completo da tradução.
+O job `e373dc13-053f-4473-9252-e85e7bcf735a` exportou o snapshot salvo no Payload e concluiu em 2h38m35s, incluindo snapshot, renderização das páginas, mesclagem e verificação. A saída tem 102 páginas e 486.455.474 bytes; o relatório técnico conferiu cada página renderizada contra sua parte individual, confirmou texto selecionável nas 102 páginas e nenhuma página em branco. A leitura do Sumário da p. 3 gerou 40 bookmarks hierárquicos. Uma amostra visual de p. 47, 52, 58, 84 e 100 foi comparada lado a lado com o OG; isso não substitui a revisão visual integral.
 
-- Ambos têm 102 páginas. Na p. 47, OG e PT-BR usam as mesmas caixas: MediaBox/CropBox/BleedBox de 820,346 × 820,346 pt e TrimBox de 792 × 792 pt, recuado 14,173 pt de cada lado. O preset deve preservar essa geometria do OG e só acrescentar marcas/sangria se a gráfica pedir.
-- O catálogo dos dois arquivos não tem `/OutputIntents`. Nas páginas amostradas do OG, imagens usam `/DeviceCMYK`; no PT-BR, imagens usam `/ICCBased` com perfil RGB de 3 canais. Assim, a exportação atual é uma prova visual RGB, não um PDF CMYK/PDF/X pronto para gráfica. A ausência de OutputIntent no OG também significa que não se deve presumir qual perfil CMYK descreve seus valores.
-- Na p. 47, uma imagem do OG de 3235 × 2481 px é colocada a cerca de 216,7 ppi; no PDF PT-BR há uma imagem de página de 1710 × 1710 px a cerca de 150,1 ppi e uma textura de página a cerca de 79 ppi. Estes números descrevem só essa amostra, não o livro inteiro. O preflight precisa medir cada imagem no tamanho colocado; não se deve “corrigir” resolução por upsampling.
-- A prova PT-BR continua com texto vetorial Type3 e composição do Viewer. A próxima saída de gráfica precisa preservar os objetos CMYK do OG quando forem reutilizados, converter cores RGB novas para a condição de saída acordada e verificar substituições de fundo, texto, transparências e sobreimpressão. Um simples “salvar como CMYK” não resolve a origem dos elementos nem a compatibilidade PDF/X.
+- Todas as 102 páginas têm as mesmas caixas do OG: MediaBox/CropBox/BleedBox de 820,346 × 820,346 pt e TrimBox/ArtBox de 792 × 792 pt, recuado 14,173 pt de cada lado. A medição foi feita página por página.
+- O PDF PT-BR tem 325.059 caracteres selecionáveis; nenhum `U+FFFD` foi encontrado no texto. A camada de texto continua vetorial. Há recursos de fonte Type3 para símbolos e subconjuntos TTF incorporados para texto; isso não demonstra edição com refluxo no Acrobat Pro.
+- O catálogo do OG e o export PT-BR não declaram `/OutputIntents` nem PDF/X. A inspeção integral do PT-BR encontrou 0 tokens `/DeviceCMYK`, 243 `/DeviceRGB` e 1.034 `/ICCBased`; a exportação atual é RGB e não é arquivo pronto para gráfica. O OG usa majoritariamente imagens `/DeviceCMYK`, mas não declara o perfil que explica esses valores.
+- A amostra de p. 47 continua indicativa, não global: o preflight de gráfica deve medir cada imagem no tamanho colocado. Não se deve “corrigir” resolução por upsampling.
+- A saída de gráfica precisa converter os novos elementos RGB para a condição acordada, revisar transparências e sobreimpressão e preservar a geometria original. Um simples “salvar como CMYK” não determina perfil nem garante PDF/X.
 
 **Decisão:** não converter o PDF atual nem escolher perfil/padrão por conta própria. Depois da revisão final do conteúdo, obter da gráfica o perfil ICC/output intent, processo/papel, PDF/X, limite de tinta, resolução mínima, sangria e marcas; então fazer um piloto pequeno e um preflight completo. Se a gráfica confirmar PDF/X-4, começar por esse preset e validar a conversão e a prova de cor. Se exigir PDF/X-1a, a etapa deve achatar transparências de forma controlada e comparar o resultado visual.
 
@@ -87,12 +88,12 @@ Nenhum exportador deve reextrair o PDF nem inferir novamente quais cartas são i
 - PDF/X, perfil ICC/output intent e conversão de cor escolhidos por preset de gráfica;
 - relatório de preflight e prova rasterizada para comparação visual.
 
-**Prova representativa no viewer (não é saída final)**
+**Exportação digital entregue; não é saída de gráfica**
 
-- usa o viewer e traduções persistidas para imprimir cinco páginas selecionadas como PDF com texto e imagens;
-- é uma prova técnica; não há endpoint nem exportação de livro completo;
-- a composição das amostras e as caixas de página passaram verificação, mas fontes Type3/PUA, Acrobat e resolução raster ainda limitam o aceite;
-- concluir validação de edição no Acrobat e especificação de saída antes de transformar o processo em API ou gráfica.
+- o endpoint atual exporta o livro completo a partir de um snapshot imutável do Payload;
+- páginas e mesclagem passam por verificação técnica; o verificador compara o raster final com cada parte, valida caixa, texto extraível e páginas não vazias;
+- a exportação digital não é CMYK/PDF/X, e a edição externa no Acrobat Pro não foi verificada;
+- revisar visualmente todas as páginas e obter as especificações da gráfica antes de tratar o PDF como arquivo de impressão.
 
 ## Fases
 
@@ -102,7 +103,7 @@ Nenhum exportador deve reextrair o PDF nem inferir novamente quais cartas são i
 - concluir a tradução PT-BR e o copyfit sem alterar componentes físicos;
 - estabilizar o banco, salvamento local e sincronização;
 - manter cada correção visual documentada por página, região e evidência;
-- não iniciar conversão CMYK nem gerar um “PDF final” antes de existir uma especificação da gráfica.
+- manter o PDF digital pesquisável; não converter para CMYK nem gerar saída PDF/X antes de existir uma especificação da gráfica.
 
 ### Fase 1 — congelamento da tradução
 
@@ -123,9 +124,9 @@ Critério de entrada: uma gráfica ou fornecedor informa o briefing de produçã
 - executar preflight e comparar a rasterização do PDF exportado com o viewer e o PDF de origem;
 - pedir prova física quando cor, preto, sobreimpressão ou detalhe fino não puderem ser validados apenas na tela.
 
-### Fase 3 — exportação para gráfica
+### Fase 3 — preflight e exportação para gráfica
 
-- exportar PDF por página e PDF completo com metadados de versão;
+- preparar uma saída de gráfica separada do PDF digital pesquisável, com metadados de versão;
 - incorporar fontes, output intent e informações de produção exigidas;
 - registrar o preset, perfil, ferramenta, commit e relatório de preflight;
 - bloquear a entrega se houver erro de preflight ou divergência visual conhecida;
@@ -166,7 +167,7 @@ Depois da tradução e da entrega impressa estarem estáveis:
 - A conversão de RGB para CMYK pode reduzir saturação e alterar pretos; a decisão deve ser validada por prova.
 - Transparências e blends podem exigir PDF/X-4 ou flattening controlado para X-1a.
 - Componentes em alta resolução têm custo de arquivo; a resolução será verificada no tamanho físico, não pela dimensão em pixels isolada.
-- A arquitetura atual atende ao viewer e à restauração visual. O exportador de produção será uma fase posterior e deve ser construído como pipeline separado, com preflight próprio.
+- A exportação digital completa está implementada. O trabalho de produção para gráfica deve permanecer como pipeline separado, com perfil, preset e preflight próprios.
 
 ## Fontes consultadas
 

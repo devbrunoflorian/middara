@@ -1,7 +1,7 @@
 # Exportação de uma página em PDF
 
-**Status:** a prova visual representativa foi concluída e a rotina de página única agora é usada pelo job de exportação completa; a reexportação PT-BR atual ainda depende de verificação das 102 páginas.
-**Prova mais recente:** 11/10/2026 — p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN.
+**Status:** a exportação digital completa PT-BR foi concluída e verificada tecnicamente em 27/11/2026; a revisão visual integral e validação no Acrobat seguem abertas.
+**Prova representativa:** 11/10/2026 — p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN. **Amostra do PDF completo:** 27/11/2026 — comparação OG/PT-BR nas pp. 47, 52, 58, 84 e 100.
 **API:** `POST /api/exports` cria um job assíncrono; `GET /api/exports/:id` acompanha o progresso e `GET /api/exports/:id/download` entrega o PDF concluído.
 
 ## Paridade visual representativa — 11/10/2026
@@ -65,9 +65,9 @@ Para uma execução local em modo `next start`, configure `MIDDARA_SOURCE_PDF_PA
 
 ## Trabalho ainda aberto
 
-1. concluir e conferir a reexportação PT-BR de 102 páginas; a verificação técnica não substitui a comparação visual OG/Viewer/PDF;
+1. concluir a revisão visual OG/Viewer/PDF de todas as páginas; a verificação técnica da exportação não certifica copyfit, símbolos ou alinhamento;
 2. validar seleção e pequenas edições no Acrobat Pro, delimitando fontes instaladas, Type3 e PUA; a extração de texto não prova edição tipográfica confiável;
-3. conferir links internos e navegação no PDF;
+3. validar hyperlinks internos em um leitor de PDF; a exportação atual contém 40 bookmarks estruturais derivados do Sumário da p. 3;
 4. manter a validação visual por página separada do preflight de gráfica, conforme [`final-output-print-and-app.md`](final-output-print-and-app.md).
 
 ## Critérios para aceitar a exportação individual
