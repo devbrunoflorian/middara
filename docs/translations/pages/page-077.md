@@ -17,3 +17,8 @@
 ## Em aberto
 
 A p.77 permanece sem certificação integral: o transcript inglês bruto ainda precisa de revisão e os sete recibos ativos da proposta v1 não correspondem às unidades estruturadas atuais (seis textos divergem e um recibo cobre um fallback não renderizado). Não usar esses recibos como prova de aprovação das unidades atuais.
+
+## Rechecagem do PDF canônico (28/11/2026)
+
+- Comparação rasterizada de página inteira entre o OG e o PDF PT-BR atual: colunas, bullets, exemplos, diagramas, cartas e fólio presentes; sem clipping ou colisões visíveis. Texto impresso nas cartas continua intencionalmente em inglês.
+- Esta rechecagem confirma composição visual da p.77; não aprova transcript inglês nem substitui os recibos editoriais atuais. A pendência de reconciliação acima permanece explícita.
