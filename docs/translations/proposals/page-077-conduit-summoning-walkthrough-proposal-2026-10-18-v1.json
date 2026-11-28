@@ -1,5 +1,5 @@
 {
-  "status": "page-077-proposal-v1-copyfit-verified-human-review-pending",
+  "status": "approved_live_state_reconciled_copyfit_v3_exact",
   "page": 77,
   "scope": "7 editorial text units covering Conduit Summoning rules and Rook Lars Gevaudan transformation walkthrough. Character sheets and card components remain as source artwork.",
   "verification": {
@@ -8,7 +8,9 @@
     "pdf": "Export verified without mutations.",
     "payloadMutations": 0,
     "canonicalPageAssetChanges": 0,
-    "humanEditorialApproval": "pending"
+    "humanEditorialApproval": "Previously approved PT-BR text preserved; five stale approval receipts reconciled after Copyfit V3 EXACT.",
+    "reviewReceiptUpdates": 5,
+    "translationWrites": 0
   },
   "candidates": [
     {
@@ -20,13 +22,29 @@
       "language": "pt-BR",
       "data": {
         "schemaVersion": 2,
+        "spanKey": "page_77_block_74__pt-BR",
+        "bbox": [
+          85.88189697265625,
+          31.69243621826172,
+          385.7720642089844,
+          55.95643615722656
+        ],
         "segments": [
           {
-            "text": "Disciplinas Especiais de Assemblage (Continuação)",
+            "text": "Disciplinas Especiais de Assemblage",
             "font": "Cinzel-Regular",
-            "size": 13.5,
+            "size": 14,
             "color": "#231f20",
-            "weight": 400,
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " (cont.)",
+            "font": "Cinzel-Regular",
+            "size": 10,
+            "color": "#231f20",
+            "weight": 700,
             "style": "normal",
             "disableLigatures": true
           }
@@ -36,9 +54,9 @@
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "proposalText": "Disciplinas Especiais de Assemblage (Continuação)",
+      "proposalText": "Disciplinas Especiais de Assemblage (cont.)",
       "sourceText": "Special Assemblage Disciplines Continued",
-      "status": "proposal_pending_human_editorial_review",
+      "status": "approved_published_reconciled_2026-11-28",
       "pendingTerms": [
         "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
       ],
@@ -52,14 +70,15 @@
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 77,
           "pdfDocumentPageIndex": 76,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -68,23 +87,148 @@
             385.7720642089844,
             55.95643615722656
           ],
-          "visualBaselinesPt": [
+          "extractedPdfTextVisualRows": 1,
+          "visualRowBaselinesPt": [
             49.26
           ],
           "spans": 2,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
           "visualRows": 1
         },
         "pageRendererEvidence": {
           "spanKey": "page_77_block_74__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
           "rangeRectFragments": 2,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            55.27
+            71.55
           ],
-          "frameHeightCssPx": 19.7
+          "visualRowIntervalsPt": [],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "CinzelLocal, Cinzel, serif",
+              "fontSize": "21.1895px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "21.1895px",
+              "letterSpacing": "-0.317843px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "CinzelLocal, Cinzel, serif",
+              "fontSize": "15.1354px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(35, 31, 32)",
+              "lineHeight": "15.1354px",
+              "letterSpacing": "-0.227031px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 21.2,
+          "frameWidthCssPx": 522
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "reviewLayoutFrame": {
+        "x": 85.88189697265625,
+        "y": 31.69243621826172,
+        "width": 299.8901672363281,
+        "height": 24.263999938964844,
+        "total": 299.8901672363281,
+        "totalHeight": 24.263999938964844,
+        "textAlign": "left"
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 1,
+          "pageRendererVisualLineCount": 1,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 77,
+            "pdfDocumentPageIndex": 76,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              85.88189697265625,
+              31.69243621826172,
+              385.7720642089844,
+              55.95643615722656
+            ],
+            "extractedPdfTextVisualRows": 1,
+            "visualRowBaselinesPt": [
+              49.26
+            ],
+            "spans": 2,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 1
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_77_block_74__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 2,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 1,
+            "visualRowTopsCssPx": [
+              71.55
+            ],
+            "visualRowIntervalsPt": [],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "21.1895px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "21.1895px",
+                "letterSpacing": "-0.317843px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "CinzelLocal, Cinzel, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(35, 31, 32)",
+                "lineHeight": "15.1354px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 21.2,
+            "frameWidthCssPx": 522
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     },
     {
@@ -96,25 +240,32 @@
       "language": "pt-BR",
       "data": {
         "schemaVersion": 2,
+        "spanKey": "page_77_block_71__pt-BR",
+        "bbox": [
+          503.4507141113281,
+          29.90508270263672,
+          673.640625,
+          54.16908264160156
+        ],
         "segments": [
           {
-            "text": "Exemplo de Canalização",
+            "text": "Exemplo de CONDUIT",
             "font": "Cinzel-Regular",
             "size": 18,
-            "color": "#231f20",
+            "color": "#ffffff",
             "weight": 700,
             "style": "normal",
             "disableLigatures": true
           }
         ],
-        "textAlign": "left",
+        "textAlign": "center",
         "lineHeight": 1,
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "proposalText": "Exemplo de Canalização",
+      "proposalText": "Exemplo de CONDUIT",
       "sourceText": "Conduit Example",
-      "status": "proposal_pending_human_editorial_review",
+      "status": "approved_published_reconciled_2026-11-28",
       "pendingTerms": [],
       "semanticSymbols": [],
       "sourceBlockId": "block_195",
@@ -126,12 +277,12 @@
         "sourcePdfVisualLineCount": 1,
         "pageRendererVisualLineCount": 1,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 77,
           "pdfDocumentPageIndex": 76,
           "language": "pt-BR",
-          "viewerZoom": "100%",
+          "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
           "devicePixelRatio": 1.25,
           "fontLoaded": true
@@ -143,40 +294,45 @@
             673.640625,
             54.16908264160156
           ],
+          "extractedPdfTextVisualRows": 1,
           "visualRowBaselinesPt": [
             47.473
           ],
           "spans": 1,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
           "visualRows": 1
         },
         "pageRendererEvidence": {
           "spanKey": "page_77_block_71__pt-BR",
           "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
-          "rangeRectFragments": 1,
+          "rangeRectFragments": 2,
           "renderedSymbolIds": [],
           "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 1,
           "visualRowTopsCssPx": [
-            306
+            67.84
           ],
           "visualRowIntervalsPt": [],
-          "pageScaleCssPxPerPt": 0.40520249582066925,
+          "pageScaleCssPxPerPt": 1.5135381746683116,
           "renderedFontSamples": [
             {
               "fontFamily": "CinzelLocal, Cinzel, serif",
-              "fontSize": "7.29364px",
+              "fontSize": "27.2437px",
               "fontWeight": "700",
               "fontStyle": "normal",
-              "color": "rgb(35, 31, 32)",
-              "lineHeight": "7.29364px",
-              "letterSpacing": "-0.109405px",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "27.2437px",
+              "letterSpacing": "-0.408655px",
               "fontKerning": "auto",
               "fontVariantLigatures": "none",
               "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
               "fontLoaded": true
             }
           ],
-          "frameHeightCssPx": 7.3
+          "frameHeightCssPx": 54.5,
+          "frameWidthCssPx": 257.6
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
       },
@@ -186,7 +342,7 @@
           "sourcePdfVisualLineCount": 1,
           "pageRendererVisualLineCount": 1,
           "classification": "EXACT",
-          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF text spans grouped by actual span baseline (1 pt tolerance), so one visual row split around an inline object remains one row even when per-run bbox centres differ; live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height). Inline symbols overlapping a text row are counted with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. No character count, string newline count or frame-height estimate was used.",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
           "environment": {
             "pageNumber": 77,
             "pdfDocumentPageIndex": 76,
@@ -203,40 +359,45 @@
               673.640625,
               54.16908264160156
             ],
+            "extractedPdfTextVisualRows": 1,
             "visualRowBaselinesPt": [
               47.473
             ],
             "spans": 1,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
             "visualRows": 1
           },
           "pageRendererEvidence": {
             "spanKey": "page_77_block_71__pt-BR",
             "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
-            "rangeRectFragments": 1,
+            "rangeRectFragments": 2,
             "renderedSymbolIds": [],
             "semanticSymbolOnlyRows": 0,
             "distinctVisualRows": 1,
             "visualRowTopsCssPx": [
-              49.83
+              67.84
             ],
             "visualRowIntervalsPt": [],
-            "pageScaleCssPxPerPt": 0.8104049916413385,
+            "pageScaleCssPxPerPt": 1.5135381746683116,
             "renderedFontSamples": [
               {
                 "fontFamily": "CinzelLocal, Cinzel, serif",
-                "fontSize": "14.5873px",
+                "fontSize": "27.2437px",
                 "fontWeight": "700",
                 "fontStyle": "normal",
-                "color": "rgb(35, 31, 32)",
-                "lineHeight": "14.5873px",
-                "letterSpacing": "-0.218809px",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "27.2437px",
+                "letterSpacing": "-0.408655px",
                 "fontKerning": "auto",
                 "fontVariantLigatures": "none",
                 "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
                 "fontLoaded": true
               }
             ],
-            "frameHeightCssPx": 14.6
+            "frameHeightCssPx": 54.5,
+            "frameWidthCssPx": 257.6
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         },
@@ -299,6 +460,15 @@
           },
           "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
         }
+      },
+      "reviewLayoutFrame": {
+        "x": 503.4507141113281,
+        "y": 29.90508270263672,
+        "width": 170.18991088867188,
+        "height": 24.263999938964844,
+        "total": 170.18991088867188,
+        "totalHeight": 24.263999938964844,
+        "textAlign": "center"
       }
     },
     {
@@ -328,7 +498,7 @@
       },
       "proposalText": "Invocação de Canalização\n\nA Disciplina de Invocação de Canalização permite a um Aventureiro assumir fisicamente os aspectos de outra criatura fundindo suas almas por um breve instante. Isso concede acesso a muitas Habilidades novas e variadas, em detrimento da perda das suas próprias.\nMiddara contém Cartas de Combatente de Comando com a Tag CONDUIT. Enquanto possuir a Disciplina de Invocação de Canalização, o Aventureiro Ganhará passivamente essas Cartas de Comando CONDUIT. Para Ganhar uma Carta CONDUIT, um Aventureiro deve estar dentro da EdI de um oponente quando este for Derrotado. Como tematicamente a Canalização funciona apenas com animais selvagens e criaturas menos inteligentes, nem todos os oponentes possuem Cartas CONDUIT para Ganhar. Se o oponente Derrotado estiver dentro da EdI e possuir uma Carta CONDUIT correspondente, o Aventureiro coloca a carta ao lado de seu equipamento para indicar que agora pode canalizar a alma daquela criatura.\nAo utilizar a Invocação de Canalização, reserve a Carta de Aventureiro e substitua-a pela Carta de Combatente de Comando CONDUIT escolhida pelo jogador (desde que cumprido o requisito de ter sido Ganha). Enquanto estiver na Forma de Canalização, o Aventureiro usará a Carta CONDUIT ao Ganhar PE, realizar Ações, usar Habilidades ou fazer Testes de Perícia.\nIsto significa que se aplicam as seguintes regras:\n• Você não pode usar nem receber benefícios de Disciplinas aprendidas além de Invocação de Canalização.\n• Companheiros, Familiares, Espers e outras cartas especiais concedidas permanentemente por Disciplinas ou Itens permanecem em jogo e podem ser usados na Forma de Canalização.\n• Você não pode usar nem se beneficiar de Itens ou Habilidades em Itens equipados anteriormente. (Contudo, você ainda os consultará para determinar os Ícones de Escala *",
       "sourceText": "Conduit Summoning\n \nThe Conduit Summoning Discipline allows an Adventurer to physically \ntake on the aspects of another creature by melding their souls for a brief \nmoment. This grants the Adventurer access to many new and varied \nAbilities at the detriment of losing their own.\nMiddara contains Command Combatant Cards with the CONDUIT Tag. \nWhile an Adventurer has the Conduit Summoning Discipline, they will \npassively Earn these CONDUIT Command Cards. To Earn a CONDUIT \nCommand Card, an Adventurer with the Conduit Summoning Discipline \nmust be within SOI of an opponent when they are Defeated. Since \nthematically Conduit Summoning only works on wildlife and less \nintelligent creatures; not all opponents have CONDUIT Command Cards \nto Earn. If the Defeated opponent is within SOI and they also have a \ncorresponding CONDUIT Command Card, the Adventurer would put the \nCONDUIT Command Card beside the rest of their gear to signify that they \ncan now use Conduit Summoning to channel this creature's soul.\nWhen Conduit Summoning is used, set aside the Adventurer Card and \nreplace it with the CONDUIT Command Combatant Card of the player's \nchoosing (meeting the requirement of being Earned). While in Conduit \nForm, the Adventurer now uses the CONDUIT Command Combatant Card \nwhen Gaining SP, taking Actions, using Abilities, or making Skill Checks. \nMeaning, the following rules apply:\n•\t\nYou may not use or gain the benefit of Disciplines you have learned \nother than Conduit Summoning.\n•\t\nCompanions, Familiars, Espers, and other special cards persistently  \ngranted by Disciplines or Items you've already used stay in play and \nmay be used while in your Conduit Form.\n•\t\nYou may not use or gain the benefit of Items or Abilities on Items \nthat your Adventurer previously had equipped. (However, you'll still \nreference them to determine the Scaling Icons * ",
-      "status": "proposal_pending_human_editorial_review",
+      "status": "approved_published_reconciled_2026-11-28",
       "pendingTerms": [
         "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
       ],
@@ -461,7 +631,7 @@
       },
       "proposalText": "impressos na Carta CONDUIT escolhida).\n• Você não pode usar Habilidades, Perícias ou a Recuperação de Pontos de Vigor impressos na sua Carta de Aventureiro até retornar à sua Forma original.\n• Quaisquer fichas de Efeito, Habilidade ou Dano que estavam na Carta de Aventureiro transferem-se automaticamente para a nova Carta CONDUIT. Isso significa que você pode usufruir das fichas de Efeito e Habilidade que estiverem em sua Carta CONDUIT.\n• Você pode realizar normalmente todas as Ações e Habilidades Padrão.\n• Ao realizar Testes de Perícia, você deve utilizar obrigatoriamente as Perícias listadas no seu novo Conduit.\n• Nesta nova Forma assumida, você ainda conta como Aventureiro para fins de Habilidades ou Regras Especiais e textos listados nos Encontros. Contudo, qualquer Habilidade que faça referência à Forma específica em que você se encontra também se aplica a você. Se uma Habilidade conflitar com outra, decida sempre a favor da Forma em que se encontra (por exemplo: na forma de Fragor, você não é afetado por fichas de Bulbo).\n• O Aventureiro pode Ganhar Itens normalmente. Se for Derrotado sob os efeitos de Invocação de Canalização, é considerado Derrotado normalmente.\n• O Aventureiro pode permanecer como o CONDUIT escolhido até utilizar a Disciplina para destrocar as cartas, for instruído a Restaurar ou for Derrotado.\n• Um Aventureiro pode alternar livremente de uma Forma CONDUIT para outra Forma CONDUIT disponível.\n• Ao retornar para a sua Carta de Aventureiro, fichas de Efeito, Habilidade ou Dano na Carta CONDUIT transferem-se de volta para a sua Forma de Aventureiro.\n• Cartas de Combatente de Comando com a Tag CONDUIT, de resto, seguem todas as regras normais de um Combatente de Comando.\n• A Carta de Iniciativa do Aventureiro não é alterada ao utilizar a Invocação de Canalização. Em vez disso, continuará usando a sua carta original.",
       "sourceText": "printed on your \nchosen CONDUIT Command Card.) \n•\t\nYou may not use Abilities, Skills, or the Stamina Point Recovery value \nprinted on your Adventurer Card until you return to your original \nForm.\n•\t\nAny Effect, Ability,or Damage tokens that were on the Adventurer \ncarry over to their new CONDUIT Command Card. This means that \nyou may use Effect and Ability tokens that are on your CONDUIT \nCommand Card.\n•\t\nYou may use Standard Actions and Abilities. \n•\t\nWhen making Skill Checks, you must use your new Conduit's listed \nSkills.\n•\t\nWhile in this new Form, you still count as an Adventurer for the \npurposes of Abilities or Special Rules and text listed in Encounters. \nHowever, any Ability that references the specific Form you are in also \napplies to you. If one Ability would conflict with another, rule in favor \nof the Form you are in. (For Example: As a Fragor, you are not affected \nby Bulb tokens.)\n•\t\nThe Adventurer may Gain Items as normal. If an Adventurer is \nDefeated while under the effects of Conduit Summoning, they are \nDefeated as normal.\n•\t\nThe Adventurer may stay as the chosen CONDUIT until they use the \nDiscipline to swap their cards back, they are instructed to Restore, or \nthey are Defeated. \n•\t\nAn Adventurer may swap from one CONDUIT Form into another \nCONDUIT Form.\n•\t\nWhen swapping back to their Adventurer Card, any Effect, Ability,or \nDamage tokens that were on their CONDUIT Command Card carry \nover back to their Adventurer Form.\n•\t\nCommand Combatant Cards with the CONDUIT Tag otherwise follow \nall the normal rules of a Command Combatant.\n•\t\nThe Adventurer's Initiative Card does not change when using Conduit \nSummoning. Instead, they will continue to use their original card. ",
-      "status": "proposal_pending_human_editorial_review",
+      "status": "approved_published_reconciled_2026-11-28",
       "pendingTerms": [
         "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
       ],
@@ -585,25 +755,104 @@
       "language": "pt-BR",
       "data": {
         "schemaVersion": 2,
+        "spanKey": "page_77_block_62__pt-BR",
+        "bbox": [
+          430.86859130859375,
+          240.4434814453125,
+          744.6793823242188,
+          296.3434753417969
+        ],
         "segments": [
           {
-            "text": "Rook quer Saltar o vão e fazer um Ataque contra o Animate. Para Saltar o vão a seguir, Rook normalmente precisaria fazer um Teste de Agilidade 12 (10 + 2 para cada espaço adicional além do primeiro). A Perícia de Agilidade de Rook possui valor 1, o que significa que ele precisaria rolar 11 ou mais para ter sucesso no Teste de Salto.",
+            "text": "Rook quer Saltar o vão e fazer um Ataque contra o Animate. Para Saltar o vão seguinte, Rook normalmente precisaria fazer um Teste de Agilidade ",
             "font": "OptimaLTStd",
             "size": 10,
-            "color": "#231f20",
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "12",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ". (",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "10 + 2",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " para cada espaço adicional além do primeiro.) A Perícia de Agilidade de Rook vale ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", então ele precisaria tirar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "11",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ou mais para passar no Teste de Salto.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
             "weight": 400,
             "style": "normal",
             "disableLigatures": true
           }
         ],
         "textAlign": "left",
-        "lineHeight": 1,
+        "lineHeight": 1.1,
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "proposalText": "Rook quer Saltar o vão e fazer um Ataque contra o Animate. Para Saltar o vão a seguir, Rook normalmente precisaria fazer um Teste de Agilidade 12 (10 + 2 para cada espaço adicional além do primeiro). A Perícia de Agilidade de Rook possui valor 1, o que significa que ele precisaria rolar 11 ou mais para ter sucesso no Teste de Salto.",
+      "proposalText": "Rook quer Saltar o vão e fazer um Ataque contra o Animate. Para Saltar o vão seguinte, Rook normalmente precisaria fazer um Teste de Agilidade 12. (10 + 2 para cada espaço adicional além do primeiro.) A Perícia de Agilidade de Rook vale 1, então ele precisaria tirar 11 ou mais para passar no Teste de Salto.",
       "sourceText": "Rook wants to Jump the gap and make an Attack against the Animate. To \nJump the following gap, Rook would normally need to make an Agility \n12 Check. (10 + 2 for every additional space after the first.) Rook's Agility \nSkill has a value of 1, meaning that he'd need to roll an 11 or better to \nsucceed at the Jump Check. ",
-      "status": "proposal_pending_human_editorial_review",
+      "status": "approved_published_reconciled_2026-11-28",
       "pendingTerms": [
         "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
       ],
@@ -617,14 +866,15 @@
         "sourcePdfVisualLineCount": 5,
         "pageRendererVisualLineCount": 5,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 77,
           "pdfDocumentPageIndex": 76,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -633,7 +883,8 @@
             744.6793823242188,
             296.3434753417969
           ],
-          "visualBaselinesPt": [
+          "extractedPdfTextVisualRows": 5,
+          "visualRowBaselinesPt": [
             249.633,
             260.633,
             271.633,
@@ -641,23 +892,165 @@
             293.633
           ],
           "spans": 12,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
           "visualRows": 5
         },
         "pageRendererEvidence": {
           "spanKey": "page_77_block_62__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 9,
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 17,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 5,
           "visualRowTopsCssPx": [
-            221.44,
-            229.55,
-            237.66,
-            245.77,
-            253.88
+            388.5,
+            405.14,
+            421.78,
+            438.42,
+            455.06
           ],
-          "frameHeightCssPx": 45.3
+          "visualRowIntervalsPt": [
+            11.08,
+            10.99,
+            11.02,
+            10.88
+          ],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "15.1354px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "16.6489px",
+              "letterSpacing": "-0.227031px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "13.6218px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "14.984px",
+              "letterSpacing": "-0.204328px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 83.2,
+          "frameWidthCssPx": 475
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "reviewLayoutFrame": {
+        "x": 430.86859130859375,
+        "y": 240.4434814453125,
+        "width": 313.810791015625,
+        "height": 55.899993896484375,
+        "total": 313.810791015625,
+        "totalHeight": 55.899993896484375,
+        "textAlign": "left"
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 5,
+          "pageRendererVisualLineCount": 5,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 77,
+            "pdfDocumentPageIndex": 76,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              430.86859130859375,
+              240.4434814453125,
+              744.6793823242188,
+              296.3434753417969
+            ],
+            "extractedPdfTextVisualRows": 5,
+            "visualRowBaselinesPt": [
+              249.633,
+              260.633,
+              271.633,
+              282.633,
+              293.633
+            ],
+            "spans": 12,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 5
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_77_block_62__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 17,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 5,
+            "visualRowTopsCssPx": [
+              388.5,
+              405.14,
+              421.78,
+              438.42,
+              455.06
+            ],
+            "visualRowIntervalsPt": [
+              11.08,
+              10.99,
+              11.02,
+              10.88
+            ],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "13.6218px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "14.984px",
+                "letterSpacing": "-0.204328px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 83.2,
+            "frameWidthCssPx": 475
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     },
     {
@@ -669,25 +1062,140 @@
       "language": "pt-BR",
       "data": {
         "schemaVersion": 2,
+        "spanKey": "page_77_block_63__pt-BR",
+        "bbox": [
+          430.8699951171875,
+          434.343505859375,
+          745.6202392578125,
+          523.3671264648438
+        ],
         "segments": [
           {
-            "text": "No entanto, Rook tem a sorte de possuir a Disciplina Invocação de Canalização! Usando-a, Rook pode gastar 1 PE para trocar sua Carta de Aventureiro por qualquer Carta de Comando Conduit que tenha Ganho. Rook esteve anteriormente dentro da EdI de um Gevaudan sendo morto, o que significa que ganhou o Comando Conduit do Gevaudan. Rook decide que ser um filhote assassino e ágil é uma ideia melhor do que o brutamontes que ele é. Rook gasta 1 PE e substitui sua carta pela Carta Conduit do Gevaudan.",
+            "text": "Por sorte, Rook tem a Disciplina ",
             "font": "OptimaLTStd",
             "size": 10,
-            "color": "#231f20",
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Conduit Summoning",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": "! Usando ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Conduit Summoning",
+            "font": "OptimaLTStd-BoldItalic",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "italic",
+            "disableLigatures": true
+          },
+          {
+            "text": ", Rook pode gastar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " para trocar sua Ficha de Aventureiro por qualquer Carta de Combatente de Comando ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "CONDUIT",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " que tenha conquistado. Rook já esteve dentro da ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "SOI",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " de um Gevaudan quando ele foi Derrotado, então conquistou a Carta de Combatente de Comando do Gevaudan. Rook prefere ser um filhote assassino e ágil a continuar sendo o brutamontes que é. Ele gasta ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " e substitui sua ficha pela Carta do Gevaudan.",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
             "weight": 400,
             "style": "normal",
             "disableLigatures": true
           }
         ],
         "textAlign": "left",
-        "lineHeight": 1,
+        "lineHeight": 1.1,
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "proposalText": "No entanto, Rook tem a sorte de possuir a Disciplina Invocação de Canalização! Usando-a, Rook pode gastar 1 PE para trocar sua Carta de Aventureiro por qualquer Carta de Comando Conduit que tenha Ganho. Rook esteve anteriormente dentro da EdI de um Gevaudan sendo morto, o que significa que ganhou o Comando Conduit do Gevaudan. Rook decide que ser um filhote assassino e ágil é uma ideia melhor do que o brutamontes que ele é. Rook gasta 1 PE e substitui sua carta pela Carta Conduit do Gevaudan.",
+      "proposalText": "Por sorte, Rook tem a Disciplina Conduit Summoning! Usando Conduit Summoning, Rook pode gastar 1 SP para trocar sua Ficha de Aventureiro por qualquer Carta de Combatente de Comando CONDUIT que tenha conquistado. Rook já esteve dentro da SOI de um Gevaudan quando ele foi Derrotado, então conquistou a Carta de Combatente de Comando do Gevaudan. Rook prefere ser um filhote assassino e ágil a continuar sendo o brutamontes que é. Ele gasta 1 SP e substitui sua ficha pela Carta do Gevaudan.",
       "sourceText": "However, Rook is lucky enough to have the Conduit Summoning \nDiscipline! Using Conduit Summoning Rook may spend 1 SP to swap his \nAdventurer Card for any Conduit Command Card that he has Earned. \nRook has previously been within SOI of a Gevaudan being killed, \nmeaning that Rook has earned the Gevaudan Command Conduit. Rook \ndecides that being an agile murder-puppy is a better idea than the oaf \nthat he is. Rook spends 1 SP and replaces his card with the Gevaudan \nConduit Card. ",
-      "status": "proposal_pending_human_editorial_review",
+      "status": "approved_published_reconciled_2026-11-28",
       "pendingTerms": [
         "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
       ],
@@ -701,14 +1209,15 @@
         "sourcePdfVisualLineCount": 8,
         "pageRendererVisualLineCount": 8,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 77,
           "pdfDocumentPageIndex": 76,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -717,9 +1226,10 @@
             745.6202392578125,
             523.3671264648438
           ],
-          "visualBaselinesPt": [
+          "extractedPdfTextVisualRows": 8,
+          "visualRowBaselinesPt": [
             443.654,
-            454.654,
+            454.655,
             465.657,
             476.657,
             487.657,
@@ -728,26 +1238,206 @@
             520.657
           ],
           "spans": 17,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
           "visualRows": 8
         },
         "pageRendererEvidence": {
           "spanKey": "page_77_block_63__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 15,
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 27,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 8,
           "visualRowTopsCssPx": [
-            378.58,
-            386.69,
-            394.8,
-            402.91,
-            411.02,
-            419.13,
-            427.23,
-            435.34
+            681.98,
+            698.63,
+            715.27,
+            731.91,
+            748.55,
+            765.19,
+            781.83,
+            798.47
           ],
-          "frameHeightCssPx": 72.1
+          "visualRowIntervalsPt": [
+            11.06,
+            11.01,
+            10.99,
+            10.91,
+            10.99,
+            11.08,
+            10.91
+          ],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "15.1354px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "16.6489px",
+              "letterSpacing": "-0.227031px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "15.1354px",
+              "fontWeight": "700",
+              "fontStyle": "italic",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "16.6489px",
+              "letterSpacing": "-0.227031px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "13.6218px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "14.984px",
+              "letterSpacing": "-0.204328px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 133.1,
+          "frameWidthCssPx": 476.4
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "reviewLayoutFrame": {
+        "x": 430.8699951171875,
+        "y": 434.343505859375,
+        "width": 314.750244140625,
+        "height": 89.02362060546875,
+        "total": 314.750244140625,
+        "totalHeight": 89.02362060546875,
+        "textAlign": "left"
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 8,
+          "pageRendererVisualLineCount": 8,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 77,
+            "pdfDocumentPageIndex": 76,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              430.8699951171875,
+              434.343505859375,
+              745.6202392578125,
+              523.3671264648438
+            ],
+            "extractedPdfTextVisualRows": 8,
+            "visualRowBaselinesPt": [
+              443.654,
+              454.655,
+              465.657,
+              476.657,
+              487.657,
+              498.657,
+              509.657,
+              520.657
+            ],
+            "spans": 17,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 8
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_77_block_63__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 27,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 8,
+            "visualRowTopsCssPx": [
+              681.98,
+              698.63,
+              715.27,
+              731.91,
+              748.55,
+              765.19,
+              781.83,
+              798.47
+            ],
+            "visualRowIntervalsPt": [
+              11.06,
+              11.01,
+              10.99,
+              10.91,
+              10.99,
+              11.08,
+              10.91
+            ],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "700",
+                "fontStyle": "italic",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "13.6218px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "14.984px",
+                "letterSpacing": "-0.204328px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 133.1,
+            "frameWidthCssPx": 476.4
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     },
     {
@@ -759,25 +1449,104 @@
       "language": "pt-BR",
       "data": {
         "schemaVersion": 2,
+        "spanKey": "page_77_block_64__pt-BR",
+        "bbox": [
+          430.87060546875,
+          711.4971313476562,
+          744.88134765625,
+          789.3987426757812
+        ],
         "segments": [
           {
-            "text": "Com seu novo atributo de Agilidade 6, Rook agora precisa apenas de um 6 ou mais para passar no Teste de Salto. Após Saltar o vão com sucesso, Rook pode querer Atacar o Animate. No entanto, por estar em sua nova Forma Gevaudan, ele só poderá usar Ações e Habilidades Padrão, ou as Habilidades impressas no Gevaudan. Se Rook quisesse usar as Habilidades impressas em suas Cartas de Item ou Disciplinas além de Invocação de Canalização, teria que gastar 1 PE para destrocar!",
+            "text": "Com Agilidade ",
             "font": "OptimaLTStd",
             "size": 10,
-            "color": "#231f20",
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "6",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", Rook agora precisa tirar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "6",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " ou mais para passar no Teste de Salto. Depois de Saltar o vão com sucesso, ele pode querer Atacar o Animate. Na Forma Gevaudan, porém, só pode usar Ações e Habilidades Padrão ou as Habilidades impressas na carta do Gevaudan. Se quiser usar as Habilidades impressas nas Cartas de Item ou em outras Disciplinas que aprendeu, além de ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "Conduit Summoning",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": ", terá de gastar ",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
+            "weight": 400,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": "1 SP",
+            "font": "OptimaLTStd-Bold",
+            "size": 9,
+            "color": "#ffffff",
+            "weight": 700,
+            "style": "normal",
+            "disableLigatures": true
+          },
+          {
+            "text": " para voltar à Forma original!",
+            "font": "OptimaLTStd",
+            "size": 10,
+            "color": "#ffffff",
             "weight": 400,
             "style": "normal",
             "disableLigatures": true
           }
         ],
         "textAlign": "left",
-        "lineHeight": 1,
+        "lineHeight": 1.1,
         "lineHeightMode": "source",
         "managedSourceSymbols": []
       },
-      "proposalText": "Com seu novo atributo de Agilidade 6, Rook agora precisa apenas de um 6 ou mais para passar no Teste de Salto. Após Saltar o vão com sucesso, Rook pode querer Atacar o Animate. No entanto, por estar em sua nova Forma Gevaudan, ele só poderá usar Ações e Habilidades Padrão, ou as Habilidades impressas no Gevaudan. Se Rook quisesse usar as Habilidades impressas em suas Cartas de Item ou Disciplinas além de Invocação de Canalização, teria que gastar 1 PE para destrocar!",
+      "proposalText": "Com Agilidade 6, Rook agora precisa tirar 6 ou mais para passar no Teste de Salto. Depois de Saltar o vão com sucesso, ele pode querer Atacar o Animate. Na Forma Gevaudan, porém, só pode usar Ações e Habilidades Padrão ou as Habilidades impressas na carta do Gevaudan. Se quiser usar as Habilidades impressas nas Cartas de Item ou em outras Disciplinas que aprendeu, além de Conduit Summoning, terá de gastar 1 SP para voltar à Forma original!",
       "sourceText": "With his new Agility stat of 6, Rook now only needs a 6 or better to pass \nthe Jump Check. After successfully Jumping the gap, Rook might want to \nAttack the Animate. However, since he is in his new Gevaudan Form, he \nwould only be able to use Standard Actions and Abilities, or the Abilities \nprinted on the Gevaudan. If Rook wanted to use the Abilities printed on \nhis Item Cards or any Disciplines he's learned besides Conduit \nSummoning, he'd have to spend 1 SP to swap back!",
-      "status": "proposal_pending_human_editorial_review",
+      "status": "approved_published_reconciled_2026-11-28",
       "pendingTerms": [
         "Pendência tipográfica: original EN possui formatação mista (negrito/itálico parcial) que requer conferência visual humana no editor."
       ],
@@ -791,14 +1560,15 @@
         "sourcePdfVisualLineCount": 7,
         "pageRendererVisualLineCount": 7,
         "classification": "EXACT",
-        "method": "scripts/measure_copyfit_all.mjs: PyMuPDF text spans inside canonical bbox clustered by baseline (1 pt); live PT-BR PageRenderer Range client rects inside review highlight clustered by vertical centre. No character count, string newline count or frame-height estimate was used.",
+        "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
         "environment": {
           "pageNumber": 77,
           "pdfDocumentPageIndex": 76,
           "language": "pt-BR",
           "viewerZoom": "200%",
           "viewportCssPixels": "1280x720",
-          "devicePixelRatio": 1.25
+          "devicePixelRatio": 1.25,
+          "fontLoaded": true
         },
         "sourceEvidence": {
           "bboxPt": [
@@ -807,8 +1577,9 @@
             744.88134765625,
             789.3987426757812
           ],
-          "visualBaselinesPt": [
-            720.687,
+          "extractedPdfTextVisualRows": 7,
+          "visualRowBaselinesPt": [
+            720.688,
             731.689,
             742.689,
             753.689,
@@ -817,26 +1588,177 @@
             786.689
           ],
           "spans": 13,
+          "inlineMarkersFoldedIntoTextRows": 0,
+          "sourceVisualLineCountOverride": null,
+          "sourceVisualLineCountEvidence": null,
           "visualRows": 7
         },
         "pageRendererEvidence": {
           "spanKey": "page_77_block_64__pt-BR",
-          "readingMethod": "text rects of review-highlighted unit",
-          "rangeRectFragments": 13,
+          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+          "rangeRectFragments": 21,
+          "renderedSymbolIds": [],
+          "semanticSymbolOnlyRows": 0,
           "distinctVisualRows": 7,
           "visualRowTopsCssPx": [
-            603.19,
-            611.3,
-            619.41,
-            627.52,
-            635.63,
-            643.73,
-            651.84
+            1101.47,
+            1118.11,
+            1134.75,
+            1151.39,
+            1168.03,
+            1184.67,
+            1201.31
           ],
-          "frameHeightCssPx": 63.1
+          "visualRowIntervalsPt": [
+            10.88,
+            10.99,
+            10.99,
+            10.99,
+            11.05,
+            10.94
+          ],
+          "pageScaleCssPxPerPt": 1.5135381746683116,
+          "renderedFontSamples": [
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "15.1354px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "16.6489px",
+              "letterSpacing": "-0.227031px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            },
+            {
+              "fontFamily": "OptimaLTStd, serif",
+              "fontSize": "13.6218px",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "color": "rgb(255, 255, 255)",
+              "lineHeight": "14.984px",
+              "letterSpacing": "-0.204328px",
+              "fontKerning": "auto",
+              "fontVariantLigatures": "none",
+              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+              "fontLoaded": true
+            }
+          ],
+          "frameHeightCssPx": 116.5,
+          "frameWidthCssPx": 475.3
         },
         "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+      },
+      "reviewLayoutFrame": {
+        "x": 430.87060546875,
+        "y": 711.4971313476562,
+        "width": 314.0107421875,
+        "height": 77.901611328125,
+        "total": 314.0107421875,
+        "totalHeight": 77.901611328125,
+        "textAlign": "left"
+      },
+      "copyfitMeasurementsByZoom": {
+        "200%": {
+          "status": "measured_copyfit_v3_script_visual_rows",
+          "sourcePdfVisualLineCount": 7,
+          "pageRendererVisualLineCount": 7,
+          "classification": "EXACT",
+          "method": "scripts/measure_copyfit_page.mjs: PyMuPDF spans are first grouped by their source line object, then distinct source lines are grouped by representative baseline (1 pt tolerance). Rich runs in one line object remain one visual row. Inline uppercase callout markers and a separate Cinzel quantity glyph beside a declared weapon-hand symbol are folded into the adjacent prose row only when their ink boxes overlap. Live PT-BR PageRenderer text rects plus visible semantic-symbol rects for symbol-only rows are clustered by vertical centre (0.5 x median rect height); inline symbols overlapping a text row count with that row, not as extra lines. Candidate text and symbol IDs must match the selected renderer unit. For image-backed/raster-restored source text whose PDF extraction is incomplete, a candidate-scoped sourceVisualLineCountOverride may be used only with documented visual evidence. No character count, string newline count or frame-height estimate was used.",
+          "environment": {
+            "pageNumber": 77,
+            "pdfDocumentPageIndex": 76,
+            "language": "pt-BR",
+            "viewerZoom": "200%",
+            "viewportCssPixels": "1280x720",
+            "devicePixelRatio": 1.25,
+            "fontLoaded": true
+          },
+          "sourceEvidence": {
+            "bboxPt": [
+              430.87060546875,
+              711.4971313476562,
+              744.88134765625,
+              789.3987426757812
+            ],
+            "extractedPdfTextVisualRows": 7,
+            "visualRowBaselinesPt": [
+              720.688,
+              731.689,
+              742.689,
+              753.689,
+              764.689,
+              775.689,
+              786.689
+            ],
+            "spans": 13,
+            "inlineMarkersFoldedIntoTextRows": 0,
+            "sourceVisualLineCountOverride": null,
+            "sourceVisualLineCountEvidence": null,
+            "visualRows": 7
+          },
+          "pageRendererEvidence": {
+            "spanKey": "page_77_block_64__pt-BR",
+            "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
+            "rangeRectFragments": 21,
+            "renderedSymbolIds": [],
+            "semanticSymbolOnlyRows": 0,
+            "distinctVisualRows": 7,
+            "visualRowTopsCssPx": [
+              1101.47,
+              1118.11,
+              1134.75,
+              1151.39,
+              1168.03,
+              1184.67,
+              1201.31
+            ],
+            "visualRowIntervalsPt": [
+              10.88,
+              10.99,
+              10.99,
+              10.99,
+              11.05,
+              10.94
+            ],
+            "pageScaleCssPxPerPt": 1.5135381746683116,
+            "renderedFontSamples": [
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "15.1354px",
+                "fontWeight": "400",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "16.6489px",
+                "letterSpacing": "-0.227031px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              },
+              {
+                "fontFamily": "OptimaLTStd, serif",
+                "fontSize": "13.6218px",
+                "fontWeight": "700",
+                "fontStyle": "normal",
+                "color": "rgb(255, 255, 255)",
+                "lineHeight": "14.984px",
+                "letterSpacing": "-0.204328px",
+                "fontKerning": "auto",
+                "fontVariantLigatures": "none",
+                "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
+                "fontLoaded": true
+              }
+            ],
+            "frameHeightCssPx": 116.5,
+            "frameWidthCssPx": 475.3
+          },
+          "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
+        }
       }
     }
-  ]
+  ],
+  "updated": "2026-11-28"
 }
