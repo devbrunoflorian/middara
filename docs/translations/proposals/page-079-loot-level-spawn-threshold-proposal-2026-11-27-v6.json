@@ -3,7 +3,7 @@
   "version": 6,
   "page": 79,
   "title": "Página 79 — ênfase de pré-requisito antes do surgimento",
-  "status": "approved_published_copyfit_under_justified_pdf_verified_2026-11-27",
+  "status": "approved_published_semantic_fallback_fixed_copyfit_exact_pdf_verified_2026-11-28",
   "sourcePdf": "Rulebook 1p2 Final Version 05-19-23 Optimized.pdf",
   "candidates": [
     {
@@ -13,7 +13,7 @@
       "spanKey": "page_79_block_7__pt-BR",
       "language": "pt-BR",
       "sourceText": "Some Combatants have Additional Prerequisites that must be met before Spawning them. These will be listed on the back of their card under their Loot Level requirement. If any required Prerequisites has not been met and players are instructed to Spawn a Combatant of their type, players should use the card with the next lowest Loot Level if available. Otherwise, do not Spawn the Combatant.",
-      "proposalText": "Alguns Combatentes têm Pré-requisitos Adicionais a cumprir antes do Surgimento, listados no verso da carta abaixo do Nível de Saque. Se faltar algum quando os jogadores forem instruídos a fazer surgir esse tipo, usem a carta disponível do próximo Nível de Saque mais baixo; caso contrário, não façam surgir o Combatente.",
+      "proposalText": "Alguns Combatentes têm Pré-requisitos Adicionais a cumprir antes do Surgimento. Eles são listados no verso da carta, abaixo do requisito de Nível de Saque. Se algum deles não tiver sido cumprido quando os jogadores forem instruídos a fazer surgir esse tipo, usem, se disponível, a carta do próximo Nível de Saque mais baixo. Se não houver uma carta disponível, não façam surgir o Combatente.",
       "data": {
         "schemaVersion": 2,
         "spanKey": "page_79_block_7__pt-BR",
@@ -46,7 +46,7 @@
             "disableLigatures": true
           },
           {
-            "text": " a cumprir antes do Surgimento, listados no verso da carta abaixo do Nível de Saque. Se faltar ",
+            "text": " a cumprir antes do Surgimento. Eles são listados no verso da carta, abaixo do requisito de Nível de Saque. Se ",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -64,7 +64,7 @@
             "disableLigatures": true
           },
           {
-            "text": " quando os jogadores forem instruídos a fazer surgir esse tipo, usem a carta disponível do próximo Nível de Saque mais baixo; caso contrário, não façam surgir o Combatente.",
+            "text": " deles não tiver sido cumprido quando os jogadores forem instruídos a fazer surgir esse tipo, usem, se disponível, a carta do próximo Nível de Saque mais baixo. Se não houver uma carta disponível, não façam surgir o Combatente.",
             "font": "OptimaLTStd",
             "size": 10,
             "color": "#231f20",
@@ -75,20 +75,30 @@
         ],
         "managedSourceSymbols": []
       },
-      "technicalStatus": "copyfit_v3_under_justified_and_payload_persisted",
-      "copyfitClassification": "UNDER",
+      "technicalStatus": "copyfit_v3_exact_100_200_payload_reconciled_approved_export_verified_2026-11-28",
+      "copyfitClassification": "EXACT",
       "copyfitSourcePdfLineCount": 6,
-      "copyfitPageRendererLineCount": 5,
-      "underCompositionJustification": "Tradução concisa em português acomodada na caixa tipográfica com folga vertical natural; a correção altera apenas o peso do segmento correspondente a “any”, sem mudar palavras nem geometria.",
+      "copyfitPageRendererLineCount": 6,
+      "underCompositionJustification": "",
       "editorialStatus": "approved_published",
-      "diagnosticRendering": "A palavra “algum”, correspondente a “any” em negrito no OG, agora usa negrito PT-BR. Texto e geometria foram preservados; export de uma página confirmado no PDF final.",
+      "diagnosticRendering": "The “Otherwise” fallback now explicitly means there is no card available at the next lowest Loot Level. Approved publication preserves six OG-matched lines at 100% and 200%.",
       "sourcePdfVisualLineCount": 6,
-      "pageRendererVisualLineCount": 5,
+      "pageRendererVisualLineCount": 6,
       "copyfitMeasurement": {
         "sourcePdfVisualLineCount": 6,
-        "pageRendererVisualLineCount": 5,
-        "method": "Existing approved Copyfit V3 measurement for this exact source text and bbox; rich-text-only emphasis correction preserves all characters and geometry.",
-        "verifiedAt": "2026-11-27"
+        "pageRendererVisualLineCount": 6,
+        "method": "Copyfit V3 PageRenderer preview versus OG, separately measured at 100% and 200% after explicit fallback wording.",
+        "verifiedAt": "2026-11-28"
+      },
+      "copyfitMeasurementsByZoom": {
+        "100": {
+          "sourcePdfVisualLineCount": 6,
+          "pageRendererVisualLineCount": 6
+        },
+        "200": {
+          "sourcePdfVisualLineCount": 6,
+          "pageRendererVisualLineCount": 6
+        }
       }
     }
   ]
