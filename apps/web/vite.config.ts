@@ -4,6 +4,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { defineConfig, type Plugin } from 'vite'
+import { pageSkeletonPlugin } from './pageSkeletonPlugin.js'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const reviewQueuePath = path.join(projectRoot, 'docs/translations/localization-exceptions.json')
@@ -88,7 +89,7 @@ function translationReviewCatalogDevMiddleware(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), translationReviewCatalogDevMiddleware()],
+  plugins: [react(), translationReviewCatalogDevMiddleware(), pageSkeletonPlugin(path.join(projectRoot, 'apps/web/public'))],
   server: {
     port: 8080,
     strictPort: true

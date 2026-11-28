@@ -23,6 +23,8 @@ import './PageRenderer.css';
 import './Toast.css';
 import { payloadApiUrl } from '../config/payloadApi';
 import { pageBackgroundUrl } from '../pageBackground';
+import { buildSkeletonLayout } from '../skeletonGeometry';
+import { PageSkeletonRegions } from './PageSkeletonRegions';
 import {
   dispatchLocalPersistenceChanged,
   loadLocalOverrides,
@@ -1691,7 +1693,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   const editorIsOpenRef = useRef(false);
   const updateScaleRef = useRef<() => void>(() => {});
   const [pageElement, setPageElement] = useState<HTMLDivElement | null>(null);
-  const [scale, setScale] = useState(1);
+  const [scale, setScale] = useState(() => continuousScroll ? zoomLevel : 1);
   const [focalPanOffset, setFocalPanOffset] = useState({ x: 0, y: 0 });
   const appliedFocalZoomIdRef = useRef<number | null>(null);
   const resetPanRequestIdRef = useRef<number | null>(null);
@@ -1730,6 +1732,12 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
   const [layoutStatus, setLayoutStatus] = useState<string | null>(null);
   const [alignmentGuides, setAlignmentGuides] = useState<LayoutAlignmentGuide[]>([]);
   const overridesReady = overridesLoadedLanguage === language;
+  const backgroundUrl = pageData.backgroundUrl && pageBackgroundUrl(pageData.page_number, language, pageData.backgroundUrl);
+  const [loadedBackground, setLoadedBackground] = useState<string>();
+  const setBackgroundElement = useCallback((image: HTMLImageElement | null) => {
+    if (image?.complete) setLoadedBackground(backgroundUrl);
+  }, [backgroundUrl]);
+  const waitingForPagePaint = !overridesReady || Boolean(backgroundUrl && loadedBackground !== backgroundUrl);
 
   const strictPtBrDiagnosticBlankKeys = useMemo(() => {
     if (!strictPtBrDiagnostic || language !== 'pt-BR' || !overridesReady) return new Set<string>();
@@ -2209,6 +2217,23 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
       ?? sourceFrame);
   }, [renderLayoutFrames, inheritedLayoutFrames, language]);
 
+  const skeletonLayout = useMemo(() => {
+    if (!waitingForPagePaint || showOriginalSource) return undefined;
+    return buildSkeletonLayout({
+      ...pageData,
+      imageBoxes: pageData.layoutObstacles,
+      language,
+      isAdmin,
+      frameFor: (_, index) => {
+        const block = pageData.blocks[index];
+        const key = frameUnitKey(pageData.page_number, block, index);
+        return renderLayoutFrames.get(key)
+          ?? (language === 'pt-BR' ? inheritedLayoutFrames.get(key) : undefined)
+          ?? block.layoutFrame;
+      },
+    });
+  }, [waitingForPagePaint, pageData, language, isAdmin, renderLayoutFrames, inheritedLayoutFrames, showOriginalSource]);
+
   const layoutSnapTargets = useMemo<SnapFrameRect[]>(() => pageData.blocks.flatMap((block, index) => {
     if (block.hiddenFromPage || block.adminReadOnly || block.creditUnits?.length || block.creditUnit) return [];
     if (block.typographicUnits?.length) {
@@ -2393,6 +2418,11 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     const stage = containerRef.current;
     if (!stage || !pageData) return;
 
+    if (continuousScroll) {
+      setScale(zoomLevel);
+      return;
+    }
+
     const updateScale = () => {
       // Measure the stage's outer box. clientWidth/clientHeight shrink when
       // scrollbars appear, which can feed back into the scale and oscillate.
@@ -2413,7 +2443,7 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     return () => {
       window.removeEventListener('resize', updateScale);
     };
-  }, [focalZoomEnabled, pageData, zoomLevel, selectedSpan]);
+  }, [continuousScroll, focalZoomEnabled, pageData, zoomLevel, selectedSpan]);
 
   useEffect(() => {
     if (!focalZoomEnabled || typeof ResizeObserver === 'undefined') return;
@@ -2897,9 +2927,12 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
             {toast.message}
           </div>
         )}
-        {pageData.backgroundUrl && (
+        {backgroundUrl && (
           <img
-            src={pageBackgroundUrl(pageData.page_number, language, pageData.backgroundUrl)}
+            src={backgroundUrl}
+            ref={setBackgroundElement}
+            onLoad={() => setLoadedBackground(backgroundUrl)}
+            onError={() => setLoadedBackground(backgroundUrl)}
             alt=""
             fetchPriority={continuousScroll ? undefined : 'high'}
             draggable={false}
@@ -2911,10 +2944,10 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
           />
         )}
 
-        {!overridesReady && (
+        {waitingForPagePaint && (
           <div className="page-translation-skeleton" aria-busy="true" role="status">
-            <span className="page-skeleton-sr-only">{language === 'pt-BR' ? 'Preparando a tradução da página' : 'Preparing page content'}</span>
-            {Array.from({ length: 18 }, (_, index) => <i key={index} style={{ width: `${39 + ((index * 19) % 49)}%` }} />)}
+            <span className="page-skeleton-sr-only">{language === 'pt-BR' ? `Carregando página ${pageData.page_number}` : `Loading page ${pageData.page_number}`}</span>
+            <PageSkeletonRegions layout={skeletonLayout} />
           </div>
         )}
 

@@ -24,6 +24,7 @@ import { attachSourceInlineElements, type SourceInlineElement } from './symbols/
 import { attachSourceCompoundElements, type SourceCompoundElement } from './symbols/sourceCompounds';
 import type { ContentsRowDefinition } from './contentsRows';
 import { pageBackgroundUrl } from './pageBackground';
+import { DeferredPageSkeletonRegions, PageSkeletonRegions, useSkeletonLayout } from './components/PageSkeletonRegions';
 import { getDefaultSymbolAliasPreferences, getEditorAliasConflicts, getSemanticSymbol, normalizeEditorAlias, type SymbolAliasPreferences } from './symbols/semanticSymbols';
 import { loadSymbolAliasSettings, saveSymbolAliasSettings } from './symbols/symbolAliasSettings';
 import { migrateLocalLayoutFrames } from './layoutFrames';
@@ -548,21 +549,20 @@ function preloadPageBackground(pageNum: number, language: string, priority: 'hig
 
 function PageSkeleton({
   pageNumber,
-  pageWidth = 820.35,
-  pageHeight = 820.35,
   zoomLevel,
   language,
   error,
   onRetry,
 }: {
   pageNumber: number;
-  pageWidth?: number;
-  pageHeight?: number;
   zoomLevel: number;
   language: 'en' | 'pt-BR';
   error?: string | null;
   onRetry?: () => void;
 }) {
+  const layout = useSkeletonLayout(pageNumber, language, !error);
+  const pageWidth = layout?.width ?? 820.346;
+  const pageHeight = layout?.height ?? 820.346;
   const viewportRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   useLayoutEffect(() => {
@@ -597,11 +597,7 @@ function PageSkeleton({
         ) : (
           <>
             <span className="page-skeleton-sr-only">{language === 'pt-BR' ? `Carregando página ${pageNumber}` : `Loading page ${pageNumber}`}</span>
-            <div className="page-skeleton-title" />
-            <div className="page-skeleton-columns">
-              <div>{Array.from({ length: 13 }, (_, index) => <i key={index} style={{ width: `${58 + ((index * 17) % 40)}%` }} />)}</div>
-              <div>{Array.from({ length: 11 }, (_, index) => <i key={index} style={{ width: `${55 + ((index * 23) % 43)}%` }} />)}</div>
-            </div>
+            <PageSkeletonRegions layout={layout} />
           </>
         )}
       </div>
@@ -2724,8 +2720,6 @@ function App() {
             {isLoading || !pageData || pageData.page_number !== currentPage ? (
               <PageSkeleton
                 pageNumber={currentPage}
-                pageWidth={pageData?.page_number === currentPage ? pageData.width : undefined}
-                pageHeight={pageData?.page_number === currentPage ? pageData.height : undefined}
                 zoomLevel={zoomLevel}
                 language={rendererLanguage}
                 error={pageLoadError}
@@ -2842,6 +2836,7 @@ function App() {
                   ) : (
                     <div className="placeholder-page scroll-page-skeleton" aria-busy="true" style={{ height: 820.346 * zoomLevel, width: 820.346 * zoomLevel }}>
                       <span className="page-skeleton-sr-only">{rendererLanguage === 'pt-BR' ? `Carregando página ${num}` : `Loading page ${num}`}</span>
+                      <DeferredPageSkeletonRegions pageNumber={num} language={rendererLanguage} />
                     </div>
                   )
                 )}

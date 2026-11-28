@@ -8,7 +8,7 @@
 ## Escopo
 
 1. Pré-carregar e manter preparadas em cache as **10 páginas seguintes** no idioma atualmente selecionado. Ao avançar, a página deve aparecer já no idioma ativo sempre que estiver dentro da janela de cache.
-2. Em uma falta de cache, renderizar um **skeleton loader de página** — preservar proporção e estrutura visual aproximada enquanto o conteúdo é preparado. Não mostrar spinner nem trocar temporariamente para EN quando PT-BR está selecionado.
+2. Em uma falta de cache, usar as posições reais das linhas, molduras de texto e regiões de imagem no **skeleton da página**. Aplicar um brilho suave da esquerda para a direita, em ciclos de 1,2 s, com versão estática para movimento reduzido. Manter o idioma selecionado enquanto o conteúdo é preparado.
 3. Manter editáveis texto, símbolos, seleção e ferramentas administrativas; o cache não pode achatar o Viewer em uma imagem sem interação.
 4. Invalidar ou atualizar a entrada correspondente quando tradução, moldura de layout, símbolo ou arte mudar. Evitar servir uma versão antiga após salvar e manter um limite de memória previsível com descarte das páginas mais distantes.
 5. Tratar troca de idioma explicitamente: preparar dados e recursos do idioma de destino antes de substituir a página visível; em caso de cache miss, manter o skeleton até a página desse idioma estar pronta.
