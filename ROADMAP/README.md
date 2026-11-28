@@ -29,7 +29,7 @@ O roadmap é dividido em duas pastas principais, com cada iniciativa documentada
 | **08** | **Padronização Terminológica e Glossário Canônico** | Editorial | Glossário consolidado, diretriz obrigatória de referências ("Veja", nunca "Consulte") e scripts de verificação regex. | [Ver Projeto](concluidos/08-padronizacao-terminologica-e-glossario-canonico.md) |
 | **09** | **Prova Representativa de Exportação de PDF Página Única** | Engenharia PDF | Script `export_page_pdf.mjs` e verificador PyMuPDF com prova de conceito em páginas complexas (2, 13, 24, 42, 78). | [Ver Projeto](concluidos/09-prova-representativa-exportacao-pdf-pagina-unica.md) |
 | **10** | **Primeiro lote de tradução (páginas 1 a 12)** | Tradução / Conteúdo | As traduções e decisões desse lote foram preservadas no estado local. A cobertura e a revisão visual atuais devem ser conferidas por página no arquivo de acompanhamento. | [Ver Projeto](concluidos/10-localizacao-e-aprovacao-paginas-1-a-12.md) |
-| **11** | **Exportação do livro completo em PDF** | Exportação / PDF | PDF digital PT-BR entregue e verificado em 27/11: 102 páginas, caixas iguais ao OG, texto selecionável e 40 bookmarks. Acrobat segue no item 10; impressão CMYK/PDF/X segue no item 05. | [Ver Projeto](concluidos/11-exportador-do-livro-completo-em-pdf.md) |
+| **11** | **Exportação do livro completo em PDF** | Exportação / PDF | PDF digital PT-BR entregue e rechecado em 28/11: 102 páginas, caixas iguais ao OG, texto selecionável, 40 bookmarks e 232 links internos válidos. Editabilidade no Acrobat segue no item 10; impressão CMYK/PDF/X segue no item 05. | [Ver Projeto](concluidos/11-exportador-do-livro-completo-em-pdf.md) |
 
 ---
 
@@ -37,7 +37,7 @@ O roadmap é dividido em duas pastas principais, com cada iniciativa documentada
 
 | # | Projeto | Prioridade | Escopo Principal | Documentação |
 |---|---------|------------|------------------|--------------|
-| **01** | **Localização Integral das Páginas 13 a 102** | ALTA | Tradução, revisão e aprovação dos 3 lotes restantes (Lote 1: Combate 13-35, Lote 2: IA/Monstros 36-65, Lote 3: Campanha 66-102). | [Ver Projeto](pendentes/01-localizacao-integral-das-paginas-13-a-102.md) |
+| **01** | **Revisão Final do Livro PT-BR (Páginas 1 a 102)** | ALTA | Tradução das regras e exportação completa entregues; fechar as pendências reais de comparação visual e certificação no controle por página. Os três lotes são histórico, não tradução restante. | [Ver Projeto](pendentes/01-localizacao-integral-das-paginas-13-a-102.md) |
 | **02** | **Editor Visual de Molduras de Layout** | MÉDIA-ALTA | Manipuladores visuais interativos (*drag-and-drop / resize handles*) para ajuste não-destrutivo de caixas de texto com margens apertadas. | [Ver Projeto](pendentes/02-editor-visual-de-molduras-de-layout.md) |
 | **03** | **Paleta Lateral Dedicada de Símbolos Admin** | MÉDIA | Gaveta lateral categorizada com busca rápida e inserção com 1 clique de todos os 111+ símbolos no cursor do editor. | [Ver Projeto](pendentes/03-paleta-lateral-dedicada-de-simbolos-admin.md) |
 | **05** | **Saída para Gráfica (CMYK, PDF/X e Preflight)** | MÉDIA | Comparar OG e PDF digital; preservar a sangria já existente; converter e validar com o perfil, preset e especificações fornecidos pela gráfica. | [Ver Projeto](pendentes/05-saida-para-grafica-cmyk-pdfx-preflight.md) |

@@ -9,7 +9,7 @@
 
 ## 1. Visão Geral
 
-Em 27/11/2026, o Payload contém 2.443 traduções PT-BR persistidas, sem propostas provisórias na exportação. As páginas 31, 88 e 99 não têm prosa editável e são arte/fólio. O PDF digital completo de 102 páginas foi exportado para `output/pdf/middara-rulebook-pt-BR.pdf`. A tradução de regras está preenchida no livro; o trabalho pendente deste projeto é revisar o PDF contra o OG, resolver os alertas reais de geometria e fechar a certificação página a página. A lista de páginas ainda sem certificação está em [`docs/translations/page-status.csv`](../../docs/translations/page-status.csv).
+Em 28/11/2026, a tradução das regras está preenchida e o PDF digital completo de 102 páginas foi rechecado: 40 bookmarks, 232 links internos válidos e caixas iguais ao OG. A última versão está em `output/pdf/middara-rulebook-pt-BR.pdf`; o recibo é `output/pdf/jobs/final-2026-11-28/final-pdf-verification.json`. O trabalho pendente deste projeto é revisar o PDF contra o OG e fechar as pendências reais de certificação por página. A lista está em [`docs/translations/page-status.csv`](../../docs/translations/page-status.csv). As páginas 31, 88 e 99 não têm prosa editável e são arte/fólio.
 
 Os três lotes abaixo registram o plano original de cobertura e servem como contexto. Eles não representam páginas ainda sem tradução.
 

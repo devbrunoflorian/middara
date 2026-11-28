@@ -1,17 +1,17 @@
 # Projeto Concluído: Exportação do Livro Completo em PDF
 
-- **Status:** o PDF completo atual foi montado e verificado tecnicamente em 27/11/2026. A revisão visual integral continua aberta; exportação técnica concluída não equivale à certificação visual das 102 páginas.
+- **Status:** o PDF completo atual foi montado e verificado tecnicamente em 28/11/2026. A revisão visual integral continua aberta; exportação técnica concluída não equivale à certificação visual das 102 páginas.
 - **Escopo:** exportar as 102 páginas PT-BR em um PDF pesquisável com a geometria do OG.
 - **Área:** Exportação / PDF.
 
 ## Entrega
 
-- O PDF final está em `output/pdf/middara-rulebook-pt-BR.pdf` (348.756.164 bytes; SHA-256 `e658dbf75a2c49722abff50d62800fdd974bb9bf5d6955f347a0aed55399a80e`). A p.101 foi reexportada com tipografia PT-BR de 9 pt e líderes pontilhados; a montagem confirmou novamente os 232 links internos. O recibo da montagem final é `output/pdf/jobs/final-2026-11-27/final-pdf-verification.json`.
+- O PDF final está em `output/pdf/middara-rulebook-pt-BR.pdf` (351.566.784 bytes; SHA-256 `b5f2e2563a7ceda0ebef9d66184505d669b451d8cbdde40365b4af7b17c15333`). A versão atual inclui a correção semântica da p.79. A montagem confirma 102 páginas, 40 bookmarks e 232 links internos válidos. Recibo atual: `output/pdf/jobs/final-2026-11-28/final-pdf-verification.json`.
 - Relatório da exportação atual: `output/pdf/jobs/final-2026-11-27/viewer-export-report.json` (Payload salvo, 2.443 traduções PT-BR, zero propostas provisórias; 102 páginas e caixas verificadas, 40 bookmarks, zero falhas de rede e zero mutações bloqueadas). O relatório aponta 52 alertas geométricos em 17 páginas e zero elementos fora da página; os alertas ainda precisam de classificação visual.
 - O job `e373dc13-053f-4473-9252-e85e7bcf735a` exportou um snapshot imutável do Payload. Do início à conclusão, levou 2h38m35s, incluindo snapshot, render das 102 páginas, mesclagem e verificação.
 - As 102 partes vieram da execução integral verificada. A montagem atual confirmou 102 páginas e caixas; comparação de raster confirmou igualdade com as partes nas pp.3, 33, 41 e 101. As pp.33 e 41 foram exportadas de novo após as correções desta rodada.
 - As cinco caixas de página foram comparadas contra o OG nas 102 páginas: nenhuma diferença. MediaBox/CropBox/BleedBox são 820,346 × 820,346 pt; TrimBox/ArtBox são 792 × 792 pt, recuados 14,173 pt.
-- A extração contém 325.059 caracteres selecionáveis e nenhum `U+FFFD`.
+- A extração atual contém 325.015 caracteres selecionáveis e nenhum `U+FFFD`.
 - Quarenta bookmarks hierárquicos foram gerados a partir do Sumário da p. 3. A primeira mesclagem omitiu os bookmarks; foram adicionados ao PDF atual e o exportador/verificador foram corrigidos para preservá-los e validá-los nas próximas exportações.
 - Em 27/11, o PDF-fonte OG não possui anotações de link. O Viewer navegava por handlers React em elementos `div`, que não viram links ao imprimir; o montador também não criava anotações, apenas bookmarks. O montador agora adiciona links PDF internos a partir de `contents_rows.json` das pp.3 e 101, e o verificador valida geometria e destino. O livro completo confirmou 232 links (40 do Sumário e 192 referências numéricas do Índice), com todas as áreas/destinos validados. Cinco itens sem destino numérico não são links: quatro títulos de agrupamento e “Valores — Verso”.
 - O endpoint local do PDF OG respondeu com a imagem da p. 1 (HTTP 200) em 27/11. O caminho atual de `MIDDARA_SOURCE_PDF_PATH` aponta para o original existente em `Middara/Rulebook 1.2`.

@@ -21,12 +21,12 @@
 - A inspeção encontrou 836 objetos de fonte únicos: 802 `Type3` e 34 `Type0`; todos têm `/ToUnicode`. Nenhuma página tem widget de formulário.
 - O texto continua selecionável e pesquisável. Esses dados não provam que o Acrobat consegue editar as palavras e refluir as caixas; o teste no Acrobat Pro ainda está pendente.
 
-## Rechecagem do PDF digital atualizado (27/11/2026)
+## Rechecagem do PDF digital atualizado (28/11/2026)
 
-- Exportação atual: `output/pdf/middara-rulebook-pt-BR.pdf` — 102 páginas, 40 bookmarks, 325.059 caracteres selecionáveis, nenhum `U+FFFD`, e texto selecionável nas 102 páginas.
-- A inspeção encontrou recursos Type3 para símbolos e subconjuntos TTF incorporados para texto. Isso confirma a existência de texto e fontes no PDF, mas **não** confirma que o Acrobat Pro edita palavras, mantém estilos ou reflui parágrafos corretamente.
-- O PDF não contém widgets de formulário. O teste prático no Acrobat Pro segue pendente; este ambiente não tem o Acrobat instalado.
-- Uma amostra visual em p. 47, 52, 58, 84 e 100 foi comparada com o OG depois da exportação. Essa amostra é útil para detectar erros grandes, mas não certifica editabilidade nem substitui a auditoria visual integral.
+- Exportação atual: `output/pdf/middara-rulebook-pt-BR.pdf` — 102 páginas, 40 bookmarks, 232 links internos válidos, 325.015 caracteres selecionáveis, nenhum `U+FFFD` e texto extraível nas 102 páginas. SHA-256: `b5f2e2563a7ceda0ebef9d66184505d669b451d8cbdde40365b4af7b17c15333`.
+- A leitura dos recursos encontrou 709 objetos de fonte referenciados: 677 `Type3` e 32 `Type0`; todos os 709 têm `/ToUnicode`. Isso confirma mapeamento para extração, mas **não** confirma que o Acrobat Pro edita palavras, mantém estilos ou reflui parágrafos corretamente.
+- O PDF não contém widgets de formulário. Acrobat Pro não está instalado neste ambiente; o teste prático dos casos 1–6 permanece pendente. O arquivo é pesquisável e selecionável, mas não certificamos edição de texto no Acrobat.
+- Comparações visuais reduzidas nas pp. 33, 41 e 101 foram repetidas em 28/11; os problemas reportados não aparecem no PDF atual. Isso não substitui o teste de edição no Acrobat nem a revisão visual integral.
 
 ---
 
