@@ -1,6 +1,6 @@
 # Exportação de uma página em PDF
 
-**Status:** a exportação digital PT-BR completa tem 102 páginas, 40 bookmarks e 232 links internos verificados. Em 27/11/2026, a p.63 foi reexportada após restaurar os nomes impressos de Disciplinas em inglês e substituída no PDF canônico; a revisão visual integral e validação no Acrobat seguem abertas. SHA-256 atual: `2b07d64d8f647b3b3e844ad5bbd9195712d1c4489cb08ec030ff2b80dff37d9e`.
+**Status:** a exportação digital PT-BR completa tem 102 páginas, 40 bookmarks e 232 links internos verificados. Em 27/11/2026, as pp.62–63 foram reexportadas e substituídas no PDF canônico após corrigir o espaço ausente em “Exemplo: a” e restaurar os nomes impressos de Disciplinas em inglês. Os seis destinos da p.101 para a p.62 foram preservados; a revisão visual integral e validação no Acrobat seguem abertas. SHA-256 atual: `ed9a3b4150da1d7c127d20242a9e8caa4abcda6653665c1bd988bdc4a823f07a`.
 **Prova representativa:** 11/10/2026 — p. 13/24/42 em PT-BR e p. 78 em PT-BR/EN. **Amostra do PDF completo:** 27/11/2026 — comparação OG/PT-BR nas pp. 47, 52, 58, 84 e 100.
 **API:** `POST /api/exports` cria um job assíncrono; `GET /api/exports/:id` acompanha o progresso e `GET /api/exports/:id/download` entrega o PDF concluído.
 
