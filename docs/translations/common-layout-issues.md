@@ -16,6 +16,16 @@ Este guia reúne padrões recorrentes que já foram comparados ao PDF-fonte e co
 
 **Triagem visual da p.47 (2026-11-22):** as formas roxas atrás do exemplo são parte da ilustração impressa no OG; o mesmo desenho aparece no Viewer/PT-BR. Não é texto-fantasma nem exige máscara.
 
+## Entrelinha local aferida pelas baselines do OG
+
+**Sintoma:** o bloco traduzido mantém o conteúdo, mas as linhas ficam comprimidas em relação ao PDF de referência, mesmo quando o número de linhas parece correto.
+
+**Como confirmar:** meça no OG a distância entre as baselines de cada linha da unidade e compare com `visualLineBoundsPt` do Viewer e do print. Confira também a última linha contra o fim da moldura e o início da próxima unidade. Uma média isolada ou a altura total do bloco não substitui a comparação linha a linha.
+
+**Correção:** ajuste `lineHeight` apenas na unidade divergente, em valor derivado das baselines da fonte. Depois repita Copyfit em 100% e 200%, compare Viewer e print/PDF e confirme que a moldura não encosta no bloco seguinte. Não transforme um valor de página em regra global do renderer.
+
+**Casos verificados em 27/11/2026:** p.54 `page_54_block_1` (OG 11 pt, Viewer/print 4/4); p.67 `page_67_block_16` (OG 12 pt, Viewer/print 5/5); p.68 `page_68_block_3` (OG ~11,19 pt, Viewer/print 10/10). Os três receberam `lineHeight` custom local e foram incorporados ao PDF canônico; consulte o recibo `output/pdf/jobs/final-2026-11-27/final-pdf-verification.json`.
+
 ## Contagem de linhas exata, mas parágrafos ainda avançam sobre o bloco seguinte
 
 **Sintoma:** a tradução tem o mesmo número de linhas visíveis do OG, mas um parágrafo final invade ou encosta no próximo título. Quebras vazias (`\n\n`) podem acrescentar espaço vertical sem criar linhas de texto, então a igualdade de linhas não detecta o problema.

@@ -3,14 +3,45 @@
   "version": "5",
   "title": "Página 67 — fidelidade do texto do exemplo",
   "page": 67,
-  "status": "two-source-fidelity-edits-copyfit-pending",
+  "status": "local_line_height_correction_approved_viewer_print_verified",
   "scope": "As 18 unidades editoriais ativas do exemplo. Corrige somente a pontuação no limite entre flow-03 e o valor do dado; cartas, mapa e nomes de componentes impressos permanecem originais.",
   "verification": {
     "viewer": "18 units remain in the active page set; two short phrases are being remeasured at 100% and 200%.",
     "editor": "Adds “agora” from “now”; clarifies that Remi is offered the Dodge choice but Darkness prevents the action.",
     "pdf": "Current v4 print and OG comparison informed the edits; new v5 print will be captured after publication.",
     "payloadMutations": 0,
-    "humanEditorialApproval": "Current v4 publication remains the baseline for revision history."
+    "humanEditorialApproval": "Current v4 publication remains the baseline for revision history.",
+    "layoutCorrection": {
+      "spanKey": "page_67_block_16__pt-BR",
+      "targetLineHeight": 1.2,
+      "targetLineHeightMode": "custom",
+      "ogBaselineIntervalsPt": [
+        12.0,
+        12.0,
+        12.0,
+        12.0
+      ],
+      "previousRendererIntervalsPt": [
+        9.75,
+        10.5,
+        9.75,
+        9.75
+      ],
+      "verifiedViewerIntervalsPt": [
+        12.061,
+        12.062,
+        12.061,
+        12.002
+      ],
+      "verifiedPrintIntervalsPt": [
+        11.989,
+        11.988,
+        11.988,
+        11.989
+      ],
+      "lineCount": 5,
+      "status": "approved_viewer_print_pdf_verified"
+    }
   },
   "candidates": [
     {
@@ -7869,8 +7900,8 @@
           }
         ],
         "textAlign": "left",
-        "lineHeight": 1,
-        "lineHeightMode": "source",
+        "lineHeight": 1.2,
+        "lineHeightMode": "custom",
         "managedSourceSymbols": [
           "marker.reference.e"
         ],
@@ -7882,7 +7913,7 @@
           763.708740234375
         ]
       },
-      "proposalText": "As Etapas de IA continuam sendo avaliadas até que se encontre uma que seja verdadeira e não liste “CONTINUE DOWN”. Como a Etapa de IA ( [[marker.reference.e]] ) foi verdadeira, mas não tinha “CONTINUE DOWN”, o Animate encerra seu turno. Se houvesse outro Animate no tabuleiro, ele iniciaria o turno no topo das Etapas de IA da sua Carta de Combatente Inteligente.",
+      "proposalText": "As Etapas de IA continuam sendo avaliadas até que se encontre uma que seja verdadeira e não liste “CONTINUE DOWN”. Como a Etapa de IA ( [[symbol:marker.reference.e]] ) foi verdadeira, mas não tinha “CONTINUE DOWN”, o Animate encerra seu turno. Se houvesse outro Animate no tabuleiro, ele iniciaria o turno no topo das Etapas de IA da sua Carta de Combatente Inteligente.",
       "sourceText": "AI steps continue to be considered until there is a step that is true that does not have \"CONTINUE DOWN\" listed. Since this AI step (E) was true, but does not have \"CONTINUE DOWN\" listed, the Animate concludes his turn. If there was another Animate on the board it would now take its turn starting from the top of its Intelligent Combatant Card's AI steps.",
       "status": "proposal_pending_human_editorial_review",
       "pendingTerms": [],
@@ -7890,7 +7921,7 @@
         "marker.reference.e"
       ],
       "sourceBlockId": "block_25",
-      "editorialStatus": "Current live PT-BR translation re-based to a new review receipt; Copyfit V3 refreshed against OG and Viewer.",
+      "editorialStatus": "Existing approved wording preserved; local line-height correction remeasured and verified against the OG.",
       "sourcePdfVisualLineCount": 5,
       "pageRendererVisualLineCount": 5,
       "copyfitClassification": "EXACT",
@@ -8107,7 +8138,7 @@
         }
       },
       "copyfitMeasurement": {
-        "status": "measured_copyfit_v3_script_visual_rows",
+        "status": "copyfit_v3_exact_baseline_remeasured_viewer_print_verified",
         "sourcePdfVisualLineCount": 5,
         "pageRendererVisualLineCount": 5,
         "classification": "EXACT",
@@ -8140,77 +8171,111 @@
           "inlineMarkersFoldedIntoTextRows": 1,
           "sourceVisualLineCountOverride": null,
           "sourceVisualLineCountEvidence": null,
-          "visualRows": 5
+          "visualRows": 5,
+          "visualRowBaselineIntervalsPt": [
+            12.0,
+            12.0,
+            12.0,
+            12.0
+          ]
         },
         "pageRendererEvidence": {
           "spanKey": "page_67_block_16__pt-BR",
-          "readingMethod": "text rects of the unique PageRenderer data-rendered-translation-key unit plus its visible semantic-symbol rects",
-          "rangeRectFragments": 26,
-          "renderedSymbolIds": [
-            "marker.reference.e"
-          ],
-          "semanticSymbolOnlyRows": 0,
-          "distinctVisualRows": 5,
-          "visualRowTopsCssPx": [
-            581.19,
-            589,
-            596.81,
-            604.63,
-            612.19
-          ],
-          "visualRowIntervalsPt": [
-            10.31,
-            10.29,
-            10.21,
-            10.21
-          ],
-          "pageScaleCssPxPerPt": 0.7567690873341558,
-          "renderedFontSamples": [
-            {
-              "fontFamily": "OptimaLTStd, serif",
-              "fontSize": "7.56769px",
-              "fontWeight": "400",
-              "fontStyle": "normal",
-              "color": "rgb(255, 255, 255)",
-              "lineHeight": "7.56769px",
-              "letterSpacing": "-0.113515px",
-              "fontKerning": "auto",
-              "fontVariantLigatures": "none",
-              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
-              "fontLoaded": true
+          "readingMethod": "scripts/export_page_pdf.mjs fresh saved-state Viewer and print export; PageRenderer visualLineBoundsPt converted to PDF points.",
+          "viewer": {
+            "lineCount": 5,
+            "lineTopsPt": [
+              703.781,
+              715.842,
+              727.904,
+              739.965,
+              751.967
+            ],
+            "lineIntervalsPt": [
+              12.061,
+              12.062,
+              12.061,
+              12.002
+            ],
+            "frameRectPt": {
+              "x": 416.164,
+              "y": 703.781,
+              "width": 320.468,
+              "height": 59.92
             },
-            {
-              "fontFamily": "OptimaLTStd, serif",
-              "fontSize": "6.81092px",
-              "fontWeight": "700",
-              "fontStyle": "normal",
-              "color": "rgb(255, 255, 255)",
-              "lineHeight": "6.81092px",
-              "letterSpacing": "-0.102164px",
-              "fontKerning": "auto",
-              "fontVariantLigatures": "none",
-              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
-              "fontLoaded": true
-            },
-            {
-              "fontFamily": "OptimaLTStd, serif",
-              "fontSize": "7.56769px",
-              "fontWeight": "700",
-              "fontStyle": "normal",
-              "color": "rgb(255, 255, 255)",
-              "lineHeight": "7.56769px",
-              "letterSpacing": "-0.113515px",
-              "fontKerning": "auto",
-              "fontVariantLigatures": "none",
-              "fontFeatureSettings": "\"clig\" 0, \"dlig\" 0, \"hlig\" 0, \"liga\" 0",
-              "fontLoaded": true
+            "widestLinePt": 317.95,
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
             }
-          ],
-          "frameHeightCssPx": 38.8,
-          "frameWidthCssPx": 242.5
+          },
+          "print": {
+            "lineCount": 5,
+            "lineTopsPt": [
+              703.778,
+              715.767,
+              727.755,
+              739.743,
+              751.732
+            ],
+            "lineIntervalsPt": [
+              11.989,
+              11.988,
+              11.988,
+              11.989
+            ],
+            "frameRectPt": {
+              "x": 416.173,
+              "y": 703.778,
+              "width": 320.465,
+              "height": 59.919
+            },
+            "widestLinePt": 317.887,
+            "edgeExcessPt": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0.035
+            }
+          },
+          "viewerPrintLineCountsMatch": true
         },
-        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human."
-      }
+        "editorialStatus": "Pending human editorial approval; Copyfit V3 measurement does not approve or publish the translation. Not visually reviewed by a human.",
+        "lineHeightCorrection": {
+          "previousLineHeight": 1,
+          "previousLineHeightMode": "source",
+          "targetLineHeight": 1.2,
+          "targetLineHeightMode": "custom",
+          "ogBaselineIntervalsPt": [
+            12.0,
+            12.0,
+            12.0,
+            12.0
+          ],
+          "previousRendererIntervalsPt": [
+            9.75,
+            10.5,
+            9.75,
+            9.75
+          ],
+          "verifiedViewerIntervalsPt": [
+            12.061,
+            12.062,
+            12.061,
+            12.002
+          ],
+          "verifiedPrintIntervalsPt": [
+            11.989,
+            11.988,
+            11.988,
+            11.989
+          ],
+          "status": "accepted_viewer_print_verified"
+        }
+      },
+      "technicalStatus": "copyfit_v3_exact_og_baseline_spacing_viewer_print_verified"
     },
     {
       "page": 67,

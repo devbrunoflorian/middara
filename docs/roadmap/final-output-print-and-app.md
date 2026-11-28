@@ -1,6 +1,6 @@
 # Roadmap: saída final para impressão e aplicativos
 
-**Status:** o PDF digital PT-BR atual está em `output/pdf/middara-rulebook-pt-BR.pdf` (346.075.800 bytes; 102 páginas; SHA-256 `ed9a3b4150da1d7c127d20242a9e8caa4abcda6653665c1bd988bdc4a823f07a`). A montagem inclui 40 bookmarks e 232 links internos no Sumário/Índice. As pp.62–63 foram atualizadas isoladamente e verificadas contra exportações frescas; os seis links da p.101 para a p.62 foram preservados. A revisão visual integral, edição no Acrobat e saída para gráfica continuam abertas.
+**Status:** o PDF digital PT-BR atual está em `output/pdf/middara-rulebook-pt-BR.pdf` (350.375.866 bytes; 102 páginas; SHA-256 `24bc48faeb6a24122cd4867c21bc7979853ab061eda7d90e631dc2547335d8ba`). A montagem inclui 40 bookmarks e 232 links internos no Sumário/Índice. As pp.62–63 foram atualizadas isoladamente e verificadas contra exportações frescas; os seis links da p.101 para a p.62 foram preservados. Em 27/11/2026, as pp.54, 67 e 68 também foram substituídas por exportações aprovadas após ajustes locais de entrelinha medidos contra as baselines do OG (4/4, 5/5 e 10/10 linhas); as outras 99 páginas permaneceram raster-idênticas à montagem anterior. O PDF final foi renderizado e verificado nas 102 páginas. A revisão visual integral, edição no Acrobat e saída para gráfica continuam abertas.
 **Decisão de produto:** manter uma base de conteúdo e gerar saídas diferentes a partir dela: viewer interativo e PDF pronto para impressão.
 
 ## Objetivo
