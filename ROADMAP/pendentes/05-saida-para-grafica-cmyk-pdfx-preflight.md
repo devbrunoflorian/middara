@@ -20,6 +20,12 @@
 - **Estado local de edição (27/11):** snapshots sucessivos na pasta Downloads caíram de quatro divergências para uma. A mais recente é `page_64_block_5`: o rascunho do navegador usa `WHITE/PURPLE`, enquanto o Payload já contém `BRANCO/ROXO` e texto traduzido completo. O PDF usa o Payload salvo; não substituir esse texto pelo rascunho antigo. Como o snapshot não prova o estado atual do navegador, o botão pode continuar exigindo resolução local.
 - **Editabilidade no Acrobat:** o PDF tem texto selecionável em todas as páginas, mas a inspeção estrutural encontrou 804 fontes Type3 e 34 Type0. Isso comprova texto/forma vetorial selecionável, não edição de prosa como texto normal no Acrobat. A edição no Acrobat Pro ainda não foi testada; validar “Editar PDF” em uma página representativa antes de chamar o arquivo de totalmente editável.
 
+## Preflight da montagem atual — 28/11/2026
+
+O PDF digital atual tem 102 páginas, 352.886.495 bytes, SHA-256 `6a7e81fc54c4eccfde147a4855c8c8e025384cb95d6d3c5604e904ecd9cf1c40`, 40 marcadores e 232 destinos internos válidos. As cinco caixas de todas as páginas coincidem com as do OG. Foi confirmado o corte de 279,4 mm e a sangria de 5 mm nas pp.1, 54 e 101.
+
+O PDF segue sem OutputIntent. No arquivo montado, os rasters de fundo amostrados têm cerca de 90 dpi na p.12, 150 dpi nas pp.47/54/68 e 300 dpi na p.67. A p.101 contém camadas de página inteira com cerca de 79 e 150 dpi. Compare essas amostras à resolução mínima que a gráfica fornecer. A prova CMYK depende dessa especificação e do preset/ICC de destino.
+
 ## Próximo fluxo
 
 1. Obter da gráfica o preset ou especificação: perfil ICC de saída, PDF/X aceito, tamanho de corte, sangria/caixas, marcas, limite total de tinta (TAC), resolução mínima e regras de preto/transparência.

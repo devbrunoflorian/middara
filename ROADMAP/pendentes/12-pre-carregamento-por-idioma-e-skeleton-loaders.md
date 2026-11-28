@@ -1,6 +1,6 @@
 # Projeto Pendente: Pré-carregamento por idioma e skeleton loaders
 
-- **Status:** PRIMEIRA FATIA IMPLEMENTADA; validação visual e medição de desempenho pendentes.
+- **Status:** caminho de leitura validado em Chrome desktop e viewport móvel emulado. Medição em aparelho físico e revisão das invalidações permanecem abertas.
 - **Prioridade:** ALTA após estabilizar a localização das páginas.
 - **Área:** Performance do Viewer / experiência de navegação.
 - **Objetivo:** evitar que cada navegação renderize a página do zero ou mostre primeiro o inglês enquanto a tradução PT-BR ainda carrega.
@@ -34,6 +34,12 @@ O PDF digital completo foi montado e os problemas imediatos das pp.33, 41 e 101 
 - A rolagem contínua substitui os blocos pretos por skeletons e revela cada página conforme termina de carregar. Ao sair desse modo, a fila para de atualizar o estado da tela.
 - Uma alteração de moldura invalida somente a entrada da página atual; outras páginas permanecem no cache. Texto, símbolos, ferramentas Admin e layout editável continuam no PageRenderer.
 - **Validação feita:** `npm run build -w apps/web` passou em 2026-11-28. Nenhuma suíte de testes nem comparação visual/runtime foi executada nesta fatia. O build manteve o aviso existente de `/texture.png` e do bundle principal acima de 500 kB.
+
+## Verificação no navegador — 28/11/2026
+
+- A abertura da p.14 sem cache com atraso injetado de 520 ms mostrou o skeleton PT-BR. A tradução ficou visível em 1,05 s. As pp.15–24 foram requisitadas adiantadas. Três avanços com cache levaram 202, 328 e 631 ms até o primeiro texto PT-BR visível, numa execução local.
+- O pré-carregamento usa o mesmo fundo que o Viewer exibe no idioma ativo. A p.101 solicitou `background-pt-BR.webp` ainda na p.100, tanto no desktop quanto no viewport emulado de 412 × 839. Atrasar os overrides PT-BR em 500 ms mostrou o skeleton durante a troca de idioma nos dois.
+- O heap JS observado foi de 29 para 77 MiB no desktop e de 41 para 81 MiB no viewport emulado. A amostra inclui o render do Índice. Memória de imagens e GPU requer medição à parte.
 
 ## Trabalho restante
 

@@ -22,6 +22,7 @@ import { sourceElementIsReplaced, sourceMaskClipPath, sourceOverlayMask, previou
 import './PageRenderer.css';
 import './Toast.css';
 import { payloadApiUrl } from '../config/payloadApi';
+import { pageBackgroundUrl } from '../pageBackground';
 import {
   dispatchLocalPersistenceChanged,
   loadLocalOverrides,
@@ -2898,10 +2899,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
         )}
         {pageData.backgroundUrl && (
           <img
-            src={language === 'pt-BR' && pageData.page_number === 101
-              ? '/pages/page_101/background-pt-BR.webp'
-              : pageData.backgroundUrl}
+            src={pageBackgroundUrl(pageData.page_number, language, pageData.backgroundUrl)}
             alt=""
+            fetchPriority={continuousScroll ? undefined : 'high'}
             draggable={false}
             style={{
               position: 'absolute', top: 0, left: 0,

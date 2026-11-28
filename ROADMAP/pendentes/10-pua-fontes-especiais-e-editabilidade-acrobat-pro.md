@@ -21,7 +21,12 @@
 - A inspeção encontrou 836 objetos de fonte únicos: 802 `Type3` e 34 `Type0`; todos têm `/ToUnicode`. Nenhuma página tem widget de formulário.
 - O texto continua selecionável e pesquisável. Esses dados não provam que o Acrobat consegue editar as palavras e refluir as caixas; o teste no Acrobat Pro ainda está pendente.
 
-## Rechecagem do PDF digital atualizado (28/11/2026)
+## Rechecagem da montagem atual (28/11/2026)
+
+- O arquivo atual em `output/pdf/middara-rulebook-pt-BR.pdf` tem SHA-256 `6a7e81fc54c4eccfde147a4855c8c8e025384cb95d6d3c5604e904ecd9cf1c40`. Abriu sem reparo, com texto extraível nas 102 páginas e zero `U+FFFD`. Os 804 recursos Type3 e 33 Type0 têm `/ToUnicode`.
+- O teste de editar, salvar e reabrir continua pendente. O Acrobat Pro não está instalado neste ambiente.
+
+## Verificação da montagem anterior (28/11/2026)
 
 - Exportação atual: `output/pdf/middara-rulebook-pt-BR.pdf` — 102 páginas, 40 bookmarks, 232 links internos válidos, 325.015 caracteres selecionáveis, nenhum `U+FFFD` e texto extraível nas 102 páginas. SHA-256: `b5f2e2563a7ceda0ebef9d66184505d669b451d8cbdde40365b4af7b17c15333`.
 - A leitura dos recursos encontrou 709 objetos de fonte referenciados: 677 `Type3` e 32 `Type0`; todos os 709 têm `/ToUnicode`. Isso confirma mapeamento para extração, mas **não** confirma que o Acrobat Pro edita palavras, mantém estilos ou reflui parágrafos corretamente.

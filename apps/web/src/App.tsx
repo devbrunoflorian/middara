@@ -23,6 +23,7 @@ import './AdminWorkspace.css';
 import { attachSourceInlineElements, type SourceInlineElement } from './symbols/sourceInlineElements';
 import { attachSourceCompoundElements, type SourceCompoundElement } from './symbols/sourceCompounds';
 import type { ContentsRowDefinition } from './contentsRows';
+import { pageBackgroundUrl } from './pageBackground';
 import { getDefaultSymbolAliasPreferences, getEditorAliasConflicts, getSemanticSymbol, normalizeEditorAlias, type SymbolAliasPreferences } from './symbols/semanticSymbols';
 import { loadSymbolAliasSettings, saveSymbolAliasSettings } from './symbols/symbolAliasSettings';
 import { migrateLocalLayoutFrames } from './layoutFrames';
@@ -537,12 +538,12 @@ async function loadPageData(pageNum: number): Promise<PageData> {
   return request;
 }
 
-function preloadPageBackground(pageNum: number): void {
+function preloadPageBackground(pageNum: number, language: string, priority: 'high' | 'low'): void {
   const pageStr = pageNum.toString().padStart(3, '0');
   const image = new Image();
   image.decoding = 'async';
-  image.fetchPriority = 'low';
-  image.src = `/pages/page_${pageStr}/background.webp`;
+  image.fetchPriority = priority;
+  image.src = pageBackgroundUrl(pageNum, language, `/pages/page_${pageStr}/background.webp`);
 }
 
 function PageSkeleton({
@@ -2252,7 +2253,6 @@ function App() {
     setPageData(cached);
     setPageLoadError(null);
     setIsLoading(!cached);
-    preloadPageBackground(currentPage);
     if (cached) return;
 
     let active = true;
@@ -2267,6 +2267,10 @@ function App() {
     });
     return () => { active = false; };
   }, [currentPage, viewMode, pageLoadAttempt]);
+
+  useEffect(() => {
+    if (viewMode === 'single' && !showOriginalSource) preloadPageBackground(currentPage, rendererLanguage, 'high');
+  }, [currentPage, rendererLanguage, showOriginalSource, viewMode]);
 
   // Keep the current page and up to ten following pages warm in memory. Fetch
   // only two at a time and start after the browser has painted the visible page.
@@ -2285,7 +2289,7 @@ function App() {
         const pageNumber = targets[nextIndex++];
         activeRequests += 1;
         void loadPageData(pageNumber).then(() => {
-          if (!cancelled) preloadPageBackground(pageNumber);
+          if (!cancelled) preloadPageBackground(pageNumber, rendererLanguage, 'low');
         }).catch(() => undefined).finally(() => {
           activeRequests -= 1;
           pump();
@@ -2301,7 +2305,7 @@ function App() {
       if (idleWindow.cancelIdleCallback && idleWindow.requestIdleCallback) idleWindow.cancelIdleCallback(idleId);
       else window.clearTimeout(idleId);
     };
-  }, [currentPage, isLayoutDirty, isLoading, pageData, viewMode]);
+  }, [currentPage, isLayoutDirty, isLoading, pageData, rendererLanguage, viewMode]);
 
   // Scroll mode: load all pages
   useEffect(() => {

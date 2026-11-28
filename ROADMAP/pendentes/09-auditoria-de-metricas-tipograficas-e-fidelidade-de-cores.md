@@ -1,6 +1,6 @@
 # Projeto Pendente: Auditoria de Métricas Tipográficas e Fidelidade de Cores
 
-- **Status:** INVESTIGAÇÃO EM CURSO POR AMOSTRAS LOCAIS; auditoria global de conversão CMYK/sRGB permanece em backlog.
+- **Status:** efeito da composição confirmado nas pp.54/67/68. A implantação depende de preservar as cores da arte.
 - **Prioridade:** MÉDIA (Elevar para ALTA se comprovado impacto no Copyfit V3 ou em páginas em certificação)
 - **Escopo:** Investigação técnica comparativa entre PDF oficial, Viewer (EN/PT-BR) e PDF exportado nas frentes de microtipografia e fidelidade cromática
 - **Área:** Engenharia Tipográfica / Gestão de Cores / QA Visual / Copyfit
@@ -13,6 +13,14 @@
 - No trecho medido, o OG usa passos de baseline de 12 e 11 pt; o PT-BR usa 10,5 e 9,75 pt. O tracking PT-BR comprime cerca de 0,15 pt por caractere. Leading e tracking podem contribuir para a densidade percebida; causa global ainda não comprovada. Não aumentar o peso local para mascarar o sintoma. Próxima verificação: comparar OG, Viewer EN/PT-BR e print em várias escalas e fases de pixel, depois testar tracking e leading em amostras representativas antes de alterar a regra compartilhada.
 
 ---
+
+## Composição da tinta na exportação — 28/11/2026
+
+O PDF-fonte usa um grupo de transparência DeviceCMYK nas 102 páginas. O export digital compõe em RGB. A troca de Type3 por CFF nativo manteve praticamente a mesma cobertura aparente de tinta na p.54.
+
+No MuPDF a 1,5×, um grupo CMYK reduziu o excesso mediano de cobertura do texto branco de cerca de 21% para 3% nas pp.54 e 67. Na p.68 o grupo isolado piorou o texto escuro. A combinação com o preto CMYK do OG reduziu o excesso de 13% para 1%. A métrica considera trechos EN correspondentes e cobertura aparente por pixel.
+
+A prova também alterou a arte. Num ponto da p.54, OG e export digital tinham RGB (98, 55, 13), enquanto a prova passou para (99, 56, 21). O próximo piloto deve conservar a cor da arte e conferir separadamente texto branco, texto escuro e símbolos coloridos. A alteração permanece restrita à prova.
 
 ## 1. Contexto e Motivação
 
