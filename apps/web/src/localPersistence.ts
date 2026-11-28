@@ -1,6 +1,7 @@
 import type { SpanOverride } from './components/RichSpanEditor';
 import type { LayoutFrame } from './components/PageRenderer';
 import { saveLocalLayoutFrame } from './layoutFrames';
+import { canonicalizeLayoutFrame } from './layoutFrameGeometry';
 import { decodeOverrideData, encodeOverrideData } from './symbols/overrideData';
 import { payloadApiUrl } from './config/payloadApi';
 
@@ -94,6 +95,17 @@ function sortObjectKeys(value: unknown): unknown {
 
 function stableJson(value: unknown): string {
   return JSON.stringify(sortObjectKeys(value));
+}
+
+function comparableFrame(data: unknown): unknown {
+  if (!data || typeof data !== 'object') return data;
+  const frame = data as LayoutFrame;
+  if (!Number.isFinite(frame.x) || !Number.isFinite(frame.width)) return data;
+  return canonicalizeLayoutFrame(frame);
+}
+
+function persistedFramesEqual(left: unknown, right: unknown): boolean {
+  return stableJson(comparableFrame(left)) === stableJson(comparableFrame(right));
 }
 
 function clientSpanKey(spanKey: string, language: string): string {
@@ -258,7 +270,7 @@ export async function inspectLocalPersistence(
           pageNumber: record.pageNumber,
           unitKey: record.unitKey,
           syncState: !remoteRecord ? 'missing_remote' as const
-            : stableJson(record.data) === stableJson(remoteRecord.data) ? 'confirmed' as const : 'diverged' as const,
+            : persistedFramesEqual(record.data, remoteRecord.data) ? 'confirmed' as const : 'diverged' as const,
           payloadId: remoteRecord?.id,
           payloadUpdatedAt: remoteRecord?.updatedAt ?? null,
           payloadData: remoteRecord?.rawData,
@@ -517,8 +529,12 @@ export async function resolveDivergedLocalRecord(
     });
     if (!patched.ok) return 'failed';
     const verified = await readCounterpart(entry, fetcher);
-    if (!verified || String(verified.id) !== String(entry.payloadId)
-      || stableJson(normalizedRemoteData(entry, verified)) !== stableJson(entry.data)) return 'failed';
+    if (!verified || String(verified.id) !== String(entry.payloadId)) return 'failed';
+    const savedData = normalizedRemoteData(entry, verified);
+    const matches = entry.kind === 'frame'
+      ? persistedFramesEqual(savedData, entry.data)
+      : stableJson(savedData) === stableJson(entry.data);
+    if (!matches) return 'failed';
     dispatchLocalPersistenceChanged({
       kind: entry.kind, language: entry.language, spanKey: entry.spanKey, unitKey: entry.unitKey,
       pageNumber: entry.pageNumber, data: entry.data, confirmed: true,
