@@ -2678,6 +2678,20 @@ function App() {
       style={{ '--rich-editor-panel-width': `${richEditorPanelWidth}px` } as CSSProperties}
     >
       <ArcaneGlassDefinitions />
+      <svg width="0" height="0" aria-hidden="true" style={{ position: 'absolute' }}>
+        <defs>
+          <filter id="viewer-optima-ink" colorInterpolationFilters="sRGB">
+            <feComponentTransfer>
+              <feFuncA type="gamma" amplitude={1} exponent={1.6} offset={0} />
+            </feComponentTransfer>
+          </filter>
+          <filter id="viewer-optima-ink-light" colorInterpolationFilters="sRGB">
+            <feComponentTransfer>
+              <feFuncA type="gamma" amplitude={1} exponent={3.2} offset={0} />
+            </feComponentTransfer>
+          </filter>
+        </defs>
+      </svg>
       <AtmosphericParticles />
       <ShellNavigation
         active={isFaqOpen ? faqActiveType === 'editorial' ? 'editorial-faq' : faqActiveType : currentPage === 3 ? 'contents' : 'rulebook'}

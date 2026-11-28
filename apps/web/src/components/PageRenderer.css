@@ -25,6 +25,17 @@
   font-feature-settings: "liga" 1, "dlig" 1, "calt" 1;
 }
 
+/* Correct edge coverage at screen sizes. Printing keeps native text paint. */
+@media screen and (forced-colors: none) {
+  .page-container [data-optima-ink] {
+    filter: url("#viewer-optima-ink");
+  }
+
+  .page-container [data-optima-ink="light"] {
+    filter: url("#viewer-optima-ink-light");
+  }
+}
+
 .pdf-image-element {
   position: absolute;
   pointer-events: none;

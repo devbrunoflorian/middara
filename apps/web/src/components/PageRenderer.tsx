@@ -423,6 +423,22 @@ export function segFontToCSS(f: string): string {
   return `'${f}', serif`;
 }
 
+function usesRegularOptimaInk(font: string, weight: number, style?: string, strokeWidth?: number) {
+  return weight === 400 && (!style || style === 'normal') && !strokeWidth && font.includes('Optima');
+}
+
+function regularOptimaInkTone(color?: string) {
+  // White Optima on dark artwork differs more from the source PDF at screen sizes.
+  return /^(?:#fff|#ffffff|white)$/i.test(color ?? '') ? 'light' : 'default';
+}
+
+function segmentOptimaInkTone(segment: Segment) {
+  if (usesRegularOptimaInk(segment.font, segment.weight, segment.style, segment.textStrokeWidthPt)
+    && !hasInlineSemanticSymbol(segment) && !/[\uE000-\uF8FF]/u.test(segment.text)) {
+    return regularOptimaInkTone(segment.color);
+  }
+}
+
 export function splitSegmentsIntoParagraphs(segments: SpanOverride['segments']): SpanOverride['segments'][] {
   const paragraphs: SpanOverride['segments'][] = [];
   let current: SpanOverride['segments'] = [];
@@ -513,7 +529,7 @@ function renderCreditSegments(
   }
 
   const renderPiece = (piece: typeof pieces[number], key: string) => (
-    <span key={key} style={{
+    <span key={key} data-optima-ink={segmentOptimaInkTone(piece.segment)} style={{
       fontFamily: segFontToCSS(piece.segment.font),
       fontSize: `${piece.segment.size * scale}px`,
       fontWeight: piece.segment.weight,
@@ -1598,6 +1614,9 @@ function SourceGeometryBlock({ block, scale, blockOriginX, blockOriginY }: {
               const sharedTextProps = {
                 'data-source-span': `${line.id}:${span.sourceSpanIndex ?? spanIndex}`,
                 'data-source-bbox': span.bbox.join(','),
+                'data-optima-ink': !span.pictogramFontOverride && !span.pictogramDisplayOverride && !span.displayOverride
+                  && usesRegularOptimaInk(span.font, textStyle.fontWeight, textStyle.fontStyle, span.renderTextStrokeWidthPt)
+                  ? regularOptimaInkTone(span.color) : undefined,
                 lengthAdjust: 'spacingAndGlyphs' as const,
                 xmlSpace: 'preserve' as const,
                 fill: isOutlinedImportantGlyph ? '#b91d23' : (span.color || '#231f20'),
@@ -3918,10 +3937,10 @@ const SpanBlock: React.FC<SpanBlockProps> = ({
           whiteSpace: 'pre',
           verticalAlign: 'baseline',
         }}>
-          <span style={segmentStyle}>{renderSegmentContent(markerSegment, scale, language, 'translatedFlow')}</span>
+          <span data-optima-ink={segmentOptimaInkTone(markerSegment)} style={segmentStyle}>{renderSegmentContent(markerSegment, scale, language, 'translatedFlow')}</span>
         </span>;
       }
-      return <span key={absoluteSegmentIndex} style={segmentStyle}>
+      return <span key={absoluteSegmentIndex} data-optima-ink={segmentOptimaInkTone(seg)} style={segmentStyle}>
         {seg.symbolId || resolveLegacySymbol(seg.font, seg.text)
           ? renderSegmentContent(seg, scale, language, 'translatedFlow')
           : block.noWrap
@@ -5234,6 +5253,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
         {previewSegments.map((seg, segIdx) => (
           <span
             key={segIdx}
+            data-optima-ink={segmentOptimaInkTone(seg)}
             style={{
               fontFamily: Array.from(seg.text).some(char => {
                 const codepoint = char.codePointAt(0) ?? 0;
@@ -5503,6 +5523,7 @@ const LineRenderer: React.FC<LineRendererProps> = ({
             return (
             <span
               key={segmentIndex}
+              data-optima-ink={segmentOptimaInkTone(segment)}
               style={{
                 fontFamily: Array.from(segment.text).some(char => {
                   const codepoint = char.codePointAt(0) ?? 0;
@@ -5552,6 +5573,10 @@ const LineRenderer: React.FC<LineRendererProps> = ({
             data-editable-unit-key={inlineUnitInteractive && isAdmin && segmentsContainEditableText(inlineUnit?.info.sourceSegments)
               ? inlineUnit!.spanKey : undefined}
             data-inline-unit-flow-key={inlineUnitOwnsThisPaint ? inlineUnit!.spanKey : undefined}
+            data-optima-ink={!inlineUnit?.override && !isPUA && !span.pictogramFontOverride
+              && !span.pictogramDisplayOverride && !span.pictogramSvgPath
+              && usesRegularOptimaInk(span.font, span.renderWeightOverride ?? mapped.weight, mapped.style, span.renderTextStrokeWidthPt)
+              ? regularOptimaInkTone(span.color) : undefined}
             data-translation-review-highlight={inlineUnit && proposalReviewHighlightKey && inlineUnit.spanKey === proposalReviewHighlightKey ? inlineUnit.spanKey : undefined}
             data-inline-unit-flow-bottom-pt={inlineUnitOwnsThisPaint ? inlineUnit!.sourceFlowBottomPt : undefined}
             title={inlineUnitOverflowed ? 'O texto ultrapassa a margem ou invade o próximo item.' : undefined}
