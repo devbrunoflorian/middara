@@ -12,7 +12,7 @@
 
 - Exportação PT-BR isolada: `verifiedTranslationRecords=true`, `pdfVerification=true`, 217 linhas no Viewer e no print, 1 símbolo semântico e 6 imagens. Comparação visual OG/PT-BR em página inteira, sem colisões ou clipping aparentes.
 - Exportação EN isolada: `pdfVerification=true`.
-- Conferência terminológica no banco ativo: zero “Pontos de Vigor”; “Ponto(s) de Stamina” segue a decisão do glossário.
+- **Glossário conferido em 27/11:** `Stamina Points` → **Pontos de Vigor** (decisão Payload id 95); a unidade 2234 usa essa forma. `Adventurer Card` → **Ficha de Aventureiro** (decisão aprovada id 67), enquanto `Adventure Sheet` → **Folha da Aventura** (decisão do usuário id 7); manter essas distinções conforme o glossário.
 
 ## Em aberto
 
