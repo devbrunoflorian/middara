@@ -205,6 +205,15 @@ export function getSemanticSymbol(id: string | undefined): SemanticSymbolDefinit
   return id ? SEMANTIC_SYMBOLS.find(symbol => symbol.id === id) : undefined;
 }
 
+/** Resolve audited per-occurrence artwork before falling back to the semantic default. */
+export function resolveSymbolRenderForMetrics(
+  symbol: SemanticSymbolDefinition,
+  metrics?: InlineSymbolMetrics,
+): SemanticSymbolDefinition['render'] | NonNullable<SemanticSymbolDefinition['render']['variants']>[string] {
+  const variantKey = metrics?.renderVariant ?? metrics?.sourceAppearanceKey;
+  return variantKey ? symbol.render.variants?.[variantKey] ?? symbol.render : symbol.render;
+}
+
 export function normalizeSymbolSearch(value: string): string {
   return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 }

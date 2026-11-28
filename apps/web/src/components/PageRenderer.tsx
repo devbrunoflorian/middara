@@ -7,7 +7,7 @@ import { AdminLayoutFrameEditor } from './AdminLayoutFrameEditor';
 import type { LayoutAlignmentGuide, SnapFrameRect } from '../layoutFrameSnapping';
 import { canonicalizeLayoutFrame, layoutFrameRight, layoutFrameTotal, layoutFrameTotalHeight } from '../layoutFrameGeometry';
 import { deleteLayoutFrame, fetchLayoutFrames, loadLocalLayoutFrames, removeLocalLayoutFrame, saveLayoutFrame, saveLocalLayoutFrame, type LayoutLanguage } from '../layoutFrames';
-import { getSemanticSymbol, resolveLegacySymbol, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences } from '../symbols/semanticSymbols';
+import { getSemanticSymbol, resolveLegacySymbol, resolveSymbolRenderForMetrics, type InlineEditorContext, type InlineSymbolMetrics, type SymbolAliasPreferences } from '../symbols/semanticSymbols';
 import { SemanticSymbol } from '../symbols/SemanticSymbol';
 import { sourceSpanRuns } from '../symbols/sourceRuns';
 import { compoundElementIsReplaced, type SourceCompoundElement } from '../symbols/sourceCompounds';
@@ -1551,12 +1551,16 @@ function SourceGeometryBlock({ block, scale, blockOriginX, blockOriginY }: {
               if (span.semanticSymbolId) {
                 const symbol = getSemanticSymbol(span.semanticSymbolId);
                 if (!symbol) return null;
-                const sourceRender = span.sourceSymbolMetrics?.renderVariant
-                  ? symbol.render.variants?.[span.sourceSymbolMetrics.renderVariant] ?? symbol.render
-                  : symbol.render;
+                const sourceAppearanceRender = span.sourceSymbolMetrics?.sourceAppearanceKey
+                  ? symbol.render.variants?.[span.sourceSymbolMetrics.sourceAppearanceKey]
+                  : undefined;
+                const sourceRender = resolveSymbolRenderForMetrics(symbol, span.sourceSymbolMetrics);
                 const visual = sourceRender.localized?.en ?? sourceRender;
                 const visualAssetUrl = 'assetUrl' in visual ? visual.assetUrl : undefined;
-                const sourceAsset = span.sourceSymbolMetrics?.sourceAssetUrl ?? visualAssetUrl ?? symbol.assetUrl;
+                const useAuditedSourceVector = sourceRender === sourceAppearanceRender
+                  && !!sourceRender.paths && !!sourceRender.viewBox;
+                const sourceAsset = useAuditedSourceVector ? undefined
+                  : span.sourceSymbolMetrics?.sourceAssetUrl ?? visualAssetUrl ?? symbol.assetUrl;
                 if (!sourceAsset && (!visual.paths || !visual.viewBox)) return null;
                 const [x0, y0, x1, y1] = span.bbox;
                 return (
@@ -2894,7 +2898,9 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
         )}
         {pageData.backgroundUrl && (
           <img
-            src={pageData.backgroundUrl}
+            src={language === 'pt-BR' && pageData.page_number === 101
+              ? '/pages/page_101/background-pt-BR.webp'
+              : pageData.backgroundUrl}
             alt=""
             draggable={false}
             style={{

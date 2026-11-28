@@ -77,7 +77,7 @@ function sourcePurpleSvg() {
   // One of the p.33 PDF vector dice, normalized to its measured ink bbox.
   return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.488006592 13.259002686">
 <path d="M 10.71800293 10.50500488 C 11.14300537 10.2519989 11.488006592 9.645996094 11.488006592 9.150985718 L 11.488006592 4.10798645 C 11.488006592 3.612991333 11.14300537 3.006988525 10.71800293 2.753982544 L 6.514007568 0.2519989 C 6.089004517 0 5.399002075 0 4.974000931 0.2519989 L 0.770004272 2.753982544 C 0.345001221 3.006988525 0 3.612991333 0 4.10798645 L 0 9.150985718 C 0 9.645996094 0.345001221 10.2519989 0.770004272 10.50500488 L 4.974000931 13.00698853 C 5.399002075 13.25898743 6.089004517 13.25898743 6.514007568 13.00698853 L 10.71800293 10.50500488 Z" fill="rgb(98.2646,63.1868,152.6770)" stroke="#fff" stroke-width="1.264" stroke-linecap="butt" stroke-linejoin="miter"/>
-<path d="M 1.3152 3.7842 L 5.5482 6.0902 M 6.0452 3.7842 L 10.2782 6.0902 M 5.8043 6.5395 L 5.8043 11.4775" fill="none" stroke="#fff" stroke-width="0.663" stroke-linecap="round" stroke-linejoin="miter"/>
+<path d="M 1.3152 3.7842 L 5.5482 6.0902 M 10.2782 3.7842 L 6.0452 6.0902 M 5.8043 6.5395 L 5.8043 11.4775" fill="none" stroke="#fff" stroke-width="0.663" stroke-linecap="round" stroke-linejoin="miter"/>
 </svg>\n`, 'utf8');
 }
 const text = (value, size = 10, color = '#231f20', extra = {}) => ({

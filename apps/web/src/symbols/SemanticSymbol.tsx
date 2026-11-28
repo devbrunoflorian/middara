@@ -1,4 +1,4 @@
-import { getSemanticSymbol, type SymbolLanguage, type InlineSymbolMetrics } from './semanticSymbols';
+import { getSemanticSymbol, resolveSymbolRenderForMetrics, type SymbolLanguage, type InlineSymbolMetrics } from './semanticSymbols';
 
 /** Shared inline visual for the page, palette and editor character grid. */
 export function SemanticSymbol({ id, language, size, color = 'currentColor', preview = false, alignToTop = false,
@@ -7,11 +7,14 @@ export function SemanticSymbol({ id, language, size, color = 'currentColor', pre
     geometryMode?: 'translatedFlow' | 'inline'; metrics?: InlineSymbolMetrics }) {
   const symbol=getSemanticSymbol(id);
   if (!symbol) return <span className="inline-symbol-unknown" role="img" aria-label={`Unknown symbol: ${id}`} title={id}>⟦{id}⟧</span>;
-  const sourceRender = metrics?.renderVariant
-    ? symbol.render.variants?.[metrics.renderVariant] ?? symbol.render
-    : symbol.render;
+  const sourceAppearanceRender = metrics?.sourceAppearanceKey
+    ? symbol.render.variants?.[metrics.sourceAppearanceKey]
+    : undefined;
+  const sourceRender = resolveSymbolRenderForMetrics(symbol, metrics);
   const visualLanguage = metrics?.renderLanguage ?? language;
   const visual = sourceRender.localized?.[visualLanguage] ?? sourceRender;
+  const useAuditedSourceVector = sourceRender === sourceAppearanceRender
+    && !!sourceRender.paths && !!sourceRender.viewBox;
   const inkWidthEm=(metrics?.widthEm ?? sourceRender.widthEm)*(metrics?.sourceAssetUrl ? 1 : visual.widthEm/sourceRender.widthEm);
   const inkWidth=size*inkWidthEm;
   const sourceHeight = sourceRender.heightEm ?? sourceRender.widthEm;
@@ -43,7 +46,7 @@ export function SemanticSymbol({ id, language, size, color = 'currentColor', pre
       top:inkTopFromTextBaseline,
       width:inkWidth,height:inkHeight,overflow:'visible',
     };
-    if (!metrics?.sourceAssetUrl && visual.paths && visual.viewBox) return (
+    if ((useAuditedSourceVector || !metrics?.sourceAssetUrl) && visual.paths && visual.viewBox) return (
       <span className="inline-semantic-symbol-slot" data-geometry-mode={geometryMode} style={slotStyle}>
         <svg className="inline-semantic-symbol" viewBox={visual.viewBox.join(' ')} style={inkStyle}
           role="img" aria-label={symbol.labels[visualLanguage]} data-symbol-id={id}>
@@ -62,7 +65,7 @@ export function SemanticSymbol({ id, language, size, color = 'currentColor', pre
     ...margins,display:alignToTop?'block':'inline-block',width:inkWidth,height:inkHeight,
     verticalAlign:alignToTop?'top':preview ? 'middle' : `${-baselineOffset}px`,
   };
-  if (!metrics?.sourceAssetUrl && visual.paths && visual.viewBox) return (
+  if ((useAuditedSourceVector || !metrics?.sourceAssetUrl) && visual.paths && visual.viewBox) return (
     <svg className="inline-semantic-symbol" viewBox={visual.viewBox.join(' ')} style={{...style,overflow:'visible'}}
       role="img" aria-label={symbol.labels[visualLanguage]} data-symbol-id={id}>
       {visual.paths.map((path,i)=><path key={i} {...path} />)}
