@@ -1,6 +1,6 @@
 # Projeto Pendente: Auditoria de Métricas Tipográficas e Fidelidade de Cores
 
-- **Status:** efeito da composição confirmado nas pp.54/67/68. A implantação depende de preservar as cores da arte.
+- **Status:** peso da Optima regular ajustado no PDF digital. A composição do OG, a paridade do Viewer e o preflight de gráfica continuam em avaliação.
 - **Prioridade:** MÉDIA (Elevar para ALTA se comprovado impacto no Copyfit V3 ou em páginas em certificação)
 - **Escopo:** Investigação técnica comparativa entre PDF oficial, Viewer (EN/PT-BR) e PDF exportado nas frentes de microtipografia e fidelidade cromática
 - **Área:** Engenharia Tipográfica / Gestão de Cores / QA Visual / Copyfit
@@ -21,6 +21,14 @@ O PDF-fonte usa um grupo de transparência DeviceCMYK nas 102 páginas. O export
 No MuPDF a 1,5×, um grupo CMYK reduziu o excesso mediano de cobertura do texto branco de cerca de 21% para 3% nas pp.54 e 67. Na p.68 o grupo isolado piorou o texto escuro. A combinação com o preto CMYK do OG reduziu o excesso de 13% para 1%. A métrica considera trechos EN correspondentes e cobertura aparente por pixel.
 
 A prova também alterou a arte. Num ponto da p.54, OG e export digital tinham RGB (98, 55, 13), enquanto a prova passou para (99, 56, 21). O próximo piloto deve conservar a cor da arte e conferir separadamente texto branco, texto escuro e símbolos coloridos. A alteração permanece restrita à prova.
+
+### Correção aplicada ao PDF digital — 28/11/2026
+
+O PDF digital usa um ajuste óptico de 0,004 em por borda nos contornos Type3 da Optima regular. O ajuste mantém o espaço de composição, os avanços, o mapeamento de texto e os recursos gráficos. Nas pp.54/67/68, a cobertura aparente se aproximou do OG no MuPDF a 1,5× e 3×. Na escala menor, as diferenças passaram de +21% para +5% nas pp.54 e 67 e de +13% para −2% na p.68. Na escala maior, passaram de +12% para −3%, +12% para −2% e +8% para −6%, respectivamente.
+
+Verificados texto, posições de palavras, referências de imagens, caixas, 40 marcadores e 232 links nas 102 páginas. A diferença de pixels ficou restrita às regiões de texto nas pp.3, 54, 67, 68, 79 e 101. O ajuste atua no PDF digital. A edição externa, a paridade no localhost e a saída para gráfica permanecem separadas.
+
+Para reproduzir após uma nova exportação, use `scripts/adjust_optima_pdf_ink.py` com o PDF original e um novo caminho de saída. O script usa PyMuPDF e `skia-pathops==0.9.2`. Ele preserva a revisão anterior no arquivo e rejeita reaplicação ao mesmo PDF.
 
 ## 1. Contexto e Motivação
 
