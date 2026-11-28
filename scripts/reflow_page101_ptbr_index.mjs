@@ -100,7 +100,8 @@ for (const column of columns) {
       targetPage: source.sourceReference && /^\d/.test(source.sourceReference)
         ? Number(source.sourceReference.match(/^\d+/)[0]) : undefined,
       dynamicReferenceLayout: true,
-      ptBrFontScale: 1.125,
+      // 8.5 pt keeps all translated glyphs inside the fixed 9 pt row pitch.
+      ptBrFontScale: 1.0625,
       referenceTextPtBr: reference,
       leader: {
         bbox: [x, y + column.leaderOffset - 0.2, column.rightX, y + column.leaderOffset + 0.2],

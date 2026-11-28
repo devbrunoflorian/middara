@@ -6,7 +6,7 @@
 
 ## Entrega
 
-- O PDF final está em `output/pdf/middara-rulebook-pt-BR.pdf` (351.566.784 bytes; SHA-256 `b5f2e2563a7ceda0ebef9d66184505d669b451d8cbdde40365b4af7b17c15333`). A versão atual inclui a correção semântica da p.79. A montagem confirma 102 páginas, 40 bookmarks e 232 links internos válidos. Recibo atual: `output/pdf/jobs/final-2026-11-28/final-pdf-verification.json`.
+- O PDF digital atual está em `output/pdf/middara-rulebook-pt-BR.pdf` (351.553.189 bytes; SHA-256 `5731c3a997e543114426b5cc424c2aae03fce59d1eec796891bbb16685294266`). Contém 102 páginas, 40 bookmarks e 232 links internos. A p.101 usa 8,5 pt com folga inferior de 1,25 pt para glifos descendentes; exportação fresca validada e incorporada, com raster da página igual à exportação e as outras 101 páginas inalteradas a 0,16×. Recibo atual: `output/pdf/jobs/final-2026-11-28/final-pdf-verification.json`.
 - Relatório da exportação atual: `output/pdf/jobs/final-2026-11-27/viewer-export-report.json` (Payload salvo, 2.443 traduções PT-BR, zero propostas provisórias; 102 páginas e caixas verificadas, 40 bookmarks, zero falhas de rede e zero mutações bloqueadas). O relatório aponta 52 alertas geométricos em 17 páginas e zero elementos fora da página; os alertas ainda precisam de classificação visual.
 - O job `e373dc13-053f-4473-9252-e85e7bcf735a` exportou um snapshot imutável do Payload. Do início à conclusão, levou 2h38m35s, incluindo snapshot, render das 102 páginas, mesclagem e verificação.
 - As 102 partes vieram da execução integral verificada. A montagem atual confirmou 102 páginas e caixas; comparação de raster confirmou igualdade com as partes nas pp.3, 33, 41 e 101. As pp.33 e 41 foram exportadas de novo após as correções desta rodada.

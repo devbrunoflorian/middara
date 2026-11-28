@@ -9,11 +9,13 @@ interface ContentsRowFlowProps {
   isAdmin: boolean;
   text: string;
   referenceText?: string;
+  descenderClearancePt?: number;
   children?: ReactNode;
 }
 
 /** Text, leader, and an optional page reference share one bounded line. */
-export function ContentsRowFlow({ row, scale, fontScale = 1, sourceFontSize, isAdmin, text, referenceText, children }: ContentsRowFlowProps) {
+export function ContentsRowFlow({ row, scale, fontScale = 1, sourceFontSize, isAdmin, text, referenceText,
+  descenderClearancePt = 0, children }: ContentsRowFlowProps) {
   const textRef = useRef<HTMLSpanElement>(null);
   const [overflow, setOverflow] = useState(false);
   useEffect(() => {
@@ -38,11 +40,15 @@ export function ContentsRowFlow({ row, scale, fontScale = 1, sourceFontSize, isA
 
   const height = (row.labelBBox[3] - row.labelBBox[1]) * scale;
   const leaderY = (row.leader.yPt - row.labelBBox[1]) * scale;
+  const descenderClearance = Math.max(0, descenderClearancePt) * scale;
   // The wrapper creates the inline formatting context; keep its inherited font
   // metrics at the source row size so small TOC labels don't fall on edit.
   return <div className="contents-row-flow" data-overflow={overflow || undefined}
     style={{ fontSize: `${sourceFontSize * fontScale * scale}px` }}>
-    <span ref={textRef} className="contents-row-text" title={text}>{children}</span>
+    <span ref={textRef} className="contents-row-text" title={text}
+      style={descenderClearance ? { paddingBlockEnd: descenderClearance, marginBlockEnd: -descenderClearance } : undefined}>
+      {children}
+    </span>
     {row.leader.style !== 'none' && <svg className="contents-row-leader" aria-hidden="true"
       style={{ height, marginInlineStart: CONTENTS_LEADER_GAP_PT * scale,
         marginInlineEnd: referenceText ? CONTENTS_LEADER_GAP_PT * scale : 0 }}>

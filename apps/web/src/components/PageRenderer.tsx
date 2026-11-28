@@ -2971,7 +2971,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
             && !contentsRowUsesLegacy(rows, language, hasOverride);
           const overlaySourceRows = !!canRenderRows && rows.some(row => row.overlaySource);
           if (canRenderRows && !overlaySourceRows) return (
-            <ContentsLabelBlock key={block.id} block={block} rows={rows} scale={scale} isAdmin={isAdmin}
+            <ContentsLabelBlock key={block.id} block={block} rows={rows} scale={scale}
+              descenderClearancePt={pageData.page_number === 101 && language === 'pt-BR' ? 1.25 : 0} isAdmin={isAdmin}
               language={language} overrides={renderOverrides} selectedKey={selectedSpan?.spanKey ?? null} draft={draftOverride}
               onBlockClick={handleSpanClick} onNavigate={onNavigate} proposalReviewHighlightKey={proposalReviewHighlightKey}
               diagnosticBlankKeys={effectiveDiagnosticBlankKeys} />
@@ -3012,7 +3013,8 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
                 proposalReviewDiagnosticBlankKeys={overridesReady ? effectiveDiagnosticBlankKeys : undefined}
                 proposalReviewHighlightKey={proposalReviewHighlightKey}
               />
-              {overlaySourceRows && <ContentsLabelBlock block={block} rows={rows} scale={scale} isAdmin={isAdmin}
+              {overlaySourceRows && <ContentsLabelBlock block={block} rows={rows} scale={scale}
+                descenderClearancePt={pageData.page_number === 101 && language === 'pt-BR' ? 1.25 : 0} isAdmin={isAdmin}
                 language={language} overrides={renderOverrides} selectedKey={selectedSpan?.spanKey ?? null} draft={draftOverride}
                 onBlockClick={handleSpanClick} onNavigate={onNavigate} proposalReviewHighlightKey={proposalReviewHighlightKey}
                 diagnosticBlankKeys={effectiveDiagnosticBlankKeys} />}
@@ -3220,6 +3222,7 @@ interface ContentsLabelBlockProps {
   block: Block;
   rows: ContentsRowDefinition[];
   scale: number;
+  descenderClearancePt?: number;
   isAdmin: boolean;
   language: 'en' | 'pt-BR';
   overrides: Map<string, SpanOverride>;
@@ -3231,7 +3234,7 @@ interface ContentsLabelBlockProps {
   diagnosticBlankKeys?: ReadonlySet<string>;
 }
 function ContentsLabelBlock({
-  block, rows, scale, isAdmin, language, overrides, selectedKey, draft, onBlockClick, onNavigate, proposalReviewHighlightKey, diagnosticBlankKeys,
+  block, rows, scale, descenderClearancePt = 0, isAdmin, language, overrides, selectedKey, draft, onBlockClick, onNavigate, proposalReviewHighlightKey, diagnosticBlankKeys,
 }: ContentsLabelBlockProps) {
   return <>{rows.map(row => {
     const line = contentsRowLine(block, row);
@@ -3296,6 +3299,7 @@ function ContentsLabelBlock({
         }}>
         {override ? <ContentsRowFlow row={row} scale={scale} fontScale={language === 'pt-BR' ? row.ptBrFontScale ?? 1 : 1}
           sourceFontSize={line.spans.find(span => span.text.trim())?.size ?? override.segments[0]?.size ?? 12}
+          descenderClearancePt={descenderClearancePt}
           isAdmin={isAdmin} text={override.segments.map(run => run.text).join('')}
           referenceText={row.dynamicReferenceLayout ? row.referenceTextPtBr : undefined}>
           {renderCreditSegments(override.segments.map(run => ({ ...run,
