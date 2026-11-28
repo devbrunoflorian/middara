@@ -1,6 +1,6 @@
 # Projeto Pendente: Pré-carregamento por idioma e skeleton loaders
 
-- **Status:** BACKLOG PÓS-TRADUÇÃO.
+- **Status:** PRIMEIRA FATIA IMPLEMENTADA; validação visual e medição de desempenho pendentes.
 - **Prioridade:** ALTA após estabilizar a localização das páginas.
 - **Área:** Performance do Viewer / experiência de navegação.
 - **Objetivo:** evitar que cada navegação renderize a página do zero ou mostre primeiro o inglês enquanto a tradução PT-BR ainda carrega.
@@ -21,6 +21,22 @@
 - Medir latência de navegação antes/depois e memória usada em desktop e dispositivos móveis; ajustar a janela se os dados mostrarem pressão de memória.
 - Verificar que zoom, navegação contínua, leitura de texto, acessibilidade e ferramentas Admin continuam funcionando.
 
+
 ## Dependência
 
-Implementar depois da estabilização da tradução e das geometrias PT-BR. O cache precisa acompanhar o idioma e as revisões de conteúdo existentes; não deve esconder traduções ou molduras recém-salvas.
+O PDF digital completo foi montado e os problemas imediatos das pp.33, 41 e 101 foram corrigidos. A revisão visual integral e a saída para gráfica continuam como trilhas separadas; esta otimização não altera o PDF entregue.
+
+## Implementação inicial — 2026-11-28
+
+- `PageData` usa cache LRU de 12 páginas; a página ativa prepara até 10 páginas seguintes, em lotes concorrentes de no máximo duas páginas, depois que o conteúdo visível aparece. Requisições duplicadas compartilham a mesma promessa e os sidecars de cada página são lidos em paralelo.
+- Os backgrounds seguintes são requisitados com prioridade baixa. Dados de página são independentes de idioma; os overrides do servidor ficam em cache separado por idioma por 30 segundos e são invalidados quando chega um evento de persistência local.
+- Cache miss mostra skeleton com a mesma proporção e escala calculada pelo viewport. Durante uma troca de idioma, o PageRenderer cobre a página até os overrides daquela língua estarem prontos; isso evita exibir brevemente os overrides da língua anterior. Falha de carregamento da página oferece nova tentativa.
+- A rolagem contínua substitui os blocos pretos por skeletons e revela cada página conforme termina de carregar. Ao sair desse modo, a fila para de atualizar o estado da tela.
+- Uma alteração de moldura invalida somente a entrada da página atual; outras páginas permanecem no cache. Texto, símbolos, ferramentas Admin e layout editável continuam no PageRenderer.
+- **Validação feita:** `npm run build -w apps/web` passou em 2026-11-28. Nenhuma suíte de testes nem comparação visual/runtime foi executada nesta fatia. O build manteve o aviso existente de `/texture.png` e do bundle principal acima de 500 kB.
+
+## Trabalho restante
+
+- Abrir o Viewer e confirmar navegação sequencial EN/PT-BR sem flash, skeleton em cache miss, links, zoom, edição de texto/símbolos, molduras e modo contínuo.
+- Medir navegação e memória em desktop e dispositivo móvel. O limite de 12 entradas e a concorrência 2 são valores iniciais, ainda sem medição.
+- Confirmar que mudanças de arte e símbolos em runtime invalidam o recurso correto. Até aqui, backgrounds usam o cache HTTP do navegador e a página antecessora prepara o asset; não há cache de DOM renderizado.

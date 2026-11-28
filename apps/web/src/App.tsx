@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, useMemo, type CSSProperties } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo, type CSSProperties } from 'react';
 import { PageRenderer, type Block, type CreditUnitDefinition, type LayoutFrame, type PageData, type PageFidelityOverlay } from './components/PageRenderer';
 import type { SpanOverride } from './components/RichSpanEditor';
 import { AdminSymbolPalette, type AdminSymbolPaletteEditorState } from './components/AdminSymbolPalette';
@@ -433,92 +433,179 @@ function measurePage14V3Unit(
   };
 }
 
-async function loadPageData(pageNum: number): Promise<PageData> {
-  const pageStr = pageNum.toString().padStart(3, '0');
+const PAGE_DATA_CACHE_LIMIT = 12;
+const PAGE_PREFETCH_AHEAD = 10;
+const PAGE_PREFETCH_CONCURRENCY = 2;
+const pageDataCache = new Map<number, PageData>();
+const pageDataRequests = new Map<number, Promise<PageData>>();
+const pageDataRevisions = new Map<number, number>();
+
+function getCachedPageData(pageNum: number): PageData | null {
+  const data = pageDataCache.get(pageNum);
+  if (!data) return null;
+  pageDataCache.delete(pageNum);
+  pageDataCache.set(pageNum, data);
+  return data;
+}
+
+function cachePageData(pageNum: number, data: PageData, revision: number): void {
+  if ((pageDataRevisions.get(pageNum) ?? 0) !== revision) return;
+  pageDataCache.delete(pageNum);
+  pageDataCache.set(pageNum, data);
+  while (pageDataCache.size > PAGE_DATA_CACHE_LIMIT) {
+    const oldestPage = pageDataCache.keys().next().value;
+    if (oldestPage === undefined) break;
+    pageDataCache.delete(oldestPage);
+  }
+}
+
+function invalidatePageDataCache(pageNum: number): void {
+  pageDataRevisions.set(pageNum, (pageDataRevisions.get(pageNum) ?? 0) + 1);
+  pageDataCache.delete(pageNum);
+  pageDataRequests.delete(pageNum);
+}
+
+async function loadOptionalJson<T>(url: string, fallback: T): Promise<T> {
   try {
-    const res = await fetch(`/pages/page_${pageStr}/page_${pageStr}_dom.json`);
-    if (res.ok) {
-      const data = await res.json();
-      let pageFrames: Record<string, LayoutFrame> = {};
-      let pageCreditUnits: Record<string, CreditUnitDefinition | CreditUnitDefinition[]> = {};
-      // Layout frames are page-local geometry sidecars. Load them for every
-      // page that has one, not only the original page-2 pilot, so the viewer,
-      // Admin outlines, and translated text all share the same frame.
-      try {
-        const frameResponse = await fetch(`/pages/page_${pageStr}/layout_frames.json`);
-        if (frameResponse.ok) pageFrames = await frameResponse.json();
-      } catch {}
-      if (pageNum === 2) {
-        try {
-          const creditResponse = await fetch(`/pages/page_${pageStr}/credit_units.json`);
-          if (creditResponse.ok) pageCreditUnits = await creditResponse.json();
-        } catch {}
-      }
-      // Overlay sidecars are page-local and optional.  Always probe for one so
-      // newly audited component/diagram pages are rendered without maintaining
-      // a stale hard-coded page allowlist here.
-      let fidelityOverlays: PageFidelityOverlay[] = [];
-      let inlineElements: SourceInlineElement[] = [];
-      let sourceCompounds: SourceCompoundElement[] = [];
-      let contentsRows:ContentsRowDefinition[]|undefined;
-      if(pageNum===3 || pageNum===101) {
-        try {
-          const rowsResponse=await fetch(`/pages/page_${pageStr}/contents_rows.json`);
-          if(rowsResponse.ok)contentsRows=(await rowsResponse.json()).rows;
-        } catch {}
-      }
-      try {
-        const inlineResponse = await fetch(`/pages/page_${pageStr}/inline_elements.json`);
-        if (inlineResponse.ok) inlineElements = (await inlineResponse.json()).elements ?? [];
-      } catch {}
-      try {
-        const compoundsResponse = await fetch(`/pages/page_${pageStr}/compound_elements.json`);
-        if (compoundsResponse.ok) sourceCompounds = (await compoundsResponse.json()).elements ?? [];
-      } catch {}
-      try {
-        const overlayResponse = await fetch(`/pages/page_${pageStr}/fidelity_overlays.json`);
-        if (overlayResponse.ok) {
-          const overlayData = await overlayResponse.json();
-          fidelityOverlays = overlayData.overlays || [];
-        }
-      } catch {}
-      return {
-        page_number: pageNum,
-        width: data.width || 820.35,
-        height: data.height || 820.35,
-        images: [],
-        layoutObstacles: (data.images || [])
-          .filter((image: { role?: string }) => image.role === 'content')
-          .map((image: { bbox: [number, number, number, number] }) => image.bbox),
-        fidelityOverlays,
-        inlineElements,
-        sourceCompounds,
-        contentsRows,
-        blocks: attachSourceInlineElements(attachSourceCompoundElements((data.blocks || []).map((block: Block) => {
-          const sidecarUnits = pageCreditUnits[block.id];
-          const creditUnits = Array.isArray(sidecarUnits)
-            ? sidecarUnits
-            : sidecarUnits
-              ? [sidecarUnits]
-              : block.creditUnits ?? (block.creditUnit ? [block.creditUnit] : undefined);
-          return {
-            ...block,
-            layoutFrame: pageFrames[block.id] || block.layoutFrame,
-            creditUnits,
-          };
-        }), sourceCompounds), inlineElements),
-        backgroundUrl: `/pages/page_${pageStr}/background.webp`
-      };
-    }
-  } catch {}
-  return {
+    const response = await fetch(url);
+    return response.ok ? await response.json() as T : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+async function loadPageDataFromNetwork(pageNum: number, revision: number): Promise<PageData> {
+  const pageStr = pageNum.toString().padStart(3, '0');
+  const response = await fetch(`/pages/page_${pageStr}/page_${pageStr}_dom.json`);
+  if (!response.ok) throw new Error(`Não foi possível carregar a página ${pageNum} (HTTP ${response.status}).`);
+  const data = await response.json();
+  const [pageFrames, pageCreditUnits, inlineData, compoundsData, overlayData, contentsData] = await Promise.all([
+    loadOptionalJson<Record<string, LayoutFrame>>(`/pages/page_${pageStr}/layout_frames.json`, {}),
+    pageNum === 2
+      ? loadOptionalJson<Record<string, CreditUnitDefinition | CreditUnitDefinition[]>>(`/pages/page_${pageStr}/credit_units.json`, {})
+      : Promise.resolve({} as Record<string, CreditUnitDefinition | CreditUnitDefinition[]>),
+    loadOptionalJson<{ elements?: SourceInlineElement[] }>(`/pages/page_${pageStr}/inline_elements.json`, {}),
+    loadOptionalJson<{ elements?: SourceCompoundElement[] }>(`/pages/page_${pageStr}/compound_elements.json`, {}),
+    loadOptionalJson<{ overlays?: PageFidelityOverlay[] }>(`/pages/page_${pageStr}/fidelity_overlays.json`, {}),
+    pageNum === 3 || pageNum === 101
+      ? loadOptionalJson<{ rows?: ContentsRowDefinition[] }>(`/pages/page_${pageStr}/contents_rows.json`, {})
+      : Promise.resolve(undefined),
+  ]);
+  const inlineElements = inlineData.elements ?? [];
+  const sourceCompounds = compoundsData.elements ?? [];
+  const pageData: PageData = {
     page_number: pageNum,
-    width: 820.35,
-    height: 820.35,
+    width: data.width || 820.35,
+    height: data.height || 820.35,
     images: [],
-    blocks: [],
+    layoutObstacles: (data.images || [])
+      .filter((image: { role?: string }) => image.role === 'content')
+      .map((image: { bbox: [number, number, number, number] }) => image.bbox),
+    fidelityOverlays: overlayData.overlays ?? [],
+    inlineElements,
+    sourceCompounds,
+    contentsRows: contentsData?.rows,
+    blocks: attachSourceInlineElements(attachSourceCompoundElements((data.blocks || []).map((block: Block) => {
+      const sidecarUnits = pageCreditUnits[block.id];
+      const creditUnits = Array.isArray(sidecarUnits)
+        ? sidecarUnits
+        : sidecarUnits
+          ? [sidecarUnits]
+          : block.creditUnits ?? (block.creditUnit ? [block.creditUnit] : undefined);
+      return {
+        ...block,
+        layoutFrame: pageFrames[block.id] || block.layoutFrame,
+        creditUnits,
+      };
+    }), sourceCompounds), inlineElements),
     backgroundUrl: `/pages/page_${pageStr}/background.webp`
   };
+  cachePageData(pageNum, pageData, revision);
+  return pageData;
+}
+
+async function loadPageData(pageNum: number): Promise<PageData> {
+  const cached = getCachedPageData(pageNum);
+  if (cached) return cached;
+  const existing = pageDataRequests.get(pageNum);
+  if (existing) return existing;
+  const revision = pageDataRevisions.get(pageNum) ?? 0;
+  const request = loadPageDataFromNetwork(pageNum, revision).finally(() => {
+    if (pageDataRequests.get(pageNum) === request) pageDataRequests.delete(pageNum);
+  });
+  pageDataRequests.set(pageNum, request);
+  return request;
+}
+
+function preloadPageBackground(pageNum: number): void {
+  const pageStr = pageNum.toString().padStart(3, '0');
+  const image = new Image();
+  image.decoding = 'async';
+  image.fetchPriority = 'low';
+  image.src = `/pages/page_${pageStr}/background.webp`;
+}
+
+function PageSkeleton({
+  pageNumber,
+  pageWidth = 820.35,
+  pageHeight = 820.35,
+  zoomLevel,
+  language,
+  error,
+  onRetry,
+}: {
+  pageNumber: number;
+  pageWidth?: number;
+  pageHeight?: number;
+  zoomLevel: number;
+  language: 'en' | 'pt-BR';
+  error?: string | null;
+  onRetry?: () => void;
+}) {
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+  useLayoutEffect(() => {
+    const host = viewportRef.current;
+    if (!host) return;
+    const measure = () => {
+      const bounds = host.getBoundingClientRect();
+      const availableWidth = Math.max(1, bounds.width - 48);
+      const availableHeight = Math.max(1, bounds.height - 48);
+      const nextScale = Math.min(availableWidth / pageWidth, availableHeight / pageHeight) * zoomLevel;
+      setScale(current => Math.abs(current - nextScale) < 0.0001 ? current : nextScale);
+    };
+    measure();
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(measure);
+    observer?.observe(host);
+    window.addEventListener('resize', measure);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [pageWidth, pageHeight, zoomLevel]);
+
+  return (
+    <div ref={viewportRef} className="page-skeleton-viewport" aria-busy={!error} role={error ? undefined : 'status'}>
+      <div className="page-skeleton-sheet" style={{ width: pageWidth * scale, height: pageHeight * scale }}>
+        {error ? (
+          <div className="page-skeleton-error">
+            <strong>{language === 'pt-BR' ? `Não foi possível carregar a página ${pageNumber}.` : `Page ${pageNumber} could not be loaded.`}</strong>
+            <span>{error}</span>
+            {onRetry && <button type="button" onClick={onRetry}>{language === 'pt-BR' ? 'Tentar novamente' : 'Retry'}</button>}
+          </div>
+        ) : (
+          <>
+            <span className="page-skeleton-sr-only">{language === 'pt-BR' ? `Carregando página ${pageNumber}` : `Loading page ${pageNumber}`}</span>
+            <div className="page-skeleton-title" />
+            <div className="page-skeleton-columns">
+              <div>{Array.from({ length: 13 }, (_, index) => <i key={index} style={{ width: `${58 + ((index * 17) % 40)}%` }} />)}</div>
+              <div>{Array.from({ length: 11 }, (_, index) => <i key={index} style={{ width: `${55 + ((index * 23) % 43)}%` }} />)}</div>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
 }
 
 function App() {
@@ -608,11 +695,20 @@ function App() {
 
   // Single page mode: one page
   const [pageData, setPageData] = useState<PageData | null>(null);
+  const [pageLoadError, setPageLoadError] = useState<string | null>(null);
+  const [pageLoadAttempt, setPageLoadAttempt] = useState(0);
 
   // Scroll mode: map of loaded pages
   const [scrollPages, setScrollPages] = useState<Map<number, PageData>>(new Map());
+  const [scrollPageErrors, setScrollPageErrors] = useState<Map<number, string>>(new Map());
 
   const mainRef = useRef<HTMLDivElement>(null);
+  const singlePageWrapperRef = useRef<HTMLDivElement>(null);
+
+  const handleLayoutDirtyChange = useCallback((dirty: boolean) => {
+    if (dirty) invalidatePageDataCache(currentPage);
+    setIsLayoutDirty(dirty);
+  }, [currentPage]);
 
   useEffect(() => {
     migrateLocalLayoutFrames();
@@ -2146,32 +2242,91 @@ function App() {
     }
   }, [pendingEditableNavigation, viewMode]);
 
-  // Single page loader
-  useEffect(() => {
+  // Single page loader. A cached page swaps in before paint; a cache miss uses
+  // the same sized skeleton instead of showing the previous page meanwhile.
+  useLayoutEffect(() => {
     if (viewMode !== 'single') return;
     setPageInput(currentPage.toString());
-    
-    setIsLoading(true);
-    loadPageData(currentPage).then(data => {
+
+    const cached = getCachedPageData(currentPage);
+    setPageData(cached);
+    setPageLoadError(null);
+    setIsLoading(!cached);
+    preloadPageBackground(currentPage);
+    if (cached) return;
+
+    let active = true;
+    void loadPageData(currentPage).then(data => {
+      if (!active) return;
       setPageData(data);
       setIsLoading(false);
+    }).catch(error => {
+      if (!active) return;
+      setPageLoadError(error instanceof Error ? error.message : 'Falha ao carregar a página.');
+      setIsLoading(false);
     });
-  }, [currentPage, viewMode]);
+    return () => { active = false; };
+  }, [currentPage, viewMode, pageLoadAttempt]);
+
+  // Keep the current page and up to ten following pages warm in memory. Fetch
+  // only two at a time and start after the browser has painted the visible page.
+  useEffect(() => {
+    if (viewMode !== 'single' || isLoading || !pageData || pageData.page_number !== currentPage || isLayoutDirty) return;
+    const targets = Array.from({ length: PAGE_PREFETCH_AHEAD }, (_, index) => currentPage + index + 1)
+      .filter(pageNumber => pageNumber <= TOTAL_PAGES);
+    if (targets.length === 0) return;
+
+    let cancelled = false;
+    let nextIndex = 0;
+    let activeRequests = 0;
+    const pump = () => {
+      if (cancelled) return;
+      while (activeRequests < PAGE_PREFETCH_CONCURRENCY && nextIndex < targets.length) {
+        const pageNumber = targets[nextIndex++];
+        activeRequests += 1;
+        void loadPageData(pageNumber).then(() => {
+          if (!cancelled) preloadPageBackground(pageNumber);
+        }).catch(() => undefined).finally(() => {
+          activeRequests -= 1;
+          pump();
+        });
+      }
+    };
+    const idleWindow = window as unknown as { requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
+    const idleId = idleWindow.requestIdleCallback
+      ? idleWindow.requestIdleCallback(pump, { timeout: 800 })
+      : window.setTimeout(pump, 120);
+    return () => {
+      cancelled = true;
+      if (idleWindow.cancelIdleCallback && idleWindow.requestIdleCallback) idleWindow.cancelIdleCallback(idleId);
+      else window.clearTimeout(idleId);
+    };
+  }, [currentPage, isLayoutDirty, isLoading, pageData, viewMode]);
 
   // Scroll mode: load all pages
   useEffect(() => {
     if (viewMode !== 'scroll') return;
     setIsLoading(true);
+    setScrollPageErrors(new Map());
 
+    let active = true;
     const loadAll = async () => {
       const pages = new Map<number, PageData>();
       for (let i = 1; i <= TOTAL_PAGES; i++) {
-        pages.set(i, await loadPageData(i));
+        if (!active) return;
+        try {
+          pages.set(i, await loadPageData(i));
+          if (active) setScrollPages(new Map(pages));
+        } catch (error) {
+          if (!active) return;
+          const message = error instanceof Error ? error.message : 'Falha ao carregar a página.';
+          setScrollPageErrors(current => new Map(current).set(i, message));
+        }
       }
-      setScrollPages(pages);
-      setIsLoading(false);
+      if (active) setIsLoading(false);
     };
-    loadAll();
+    void loadAll();
+    return () => { active = false; };
   }, [viewMode]);
 
   // Keyboard navigation
@@ -2561,12 +2716,17 @@ function App() {
         {!isRichEditorOpen && !experimentUsesReservedRail && page14ExperimentSwitcher}
         {viewMode === 'single' ? (
           /* ── Single Page Mode ── */
-          <div className="page-wrapper">
-            {isLoading ? (
-              <div className="loading-spinner">
-                <div className="spinner"></div>
-                <p>Rendering Page...</p>
-              </div>
+          <div className="page-wrapper" ref={singlePageWrapperRef}>
+            {isLoading || !pageData || pageData.page_number !== currentPage ? (
+              <PageSkeleton
+                pageNumber={currentPage}
+                pageWidth={pageData?.page_number === currentPage ? pageData.width : undefined}
+                pageHeight={pageData?.page_number === currentPage ? pageData.height : undefined}
+                zoomLevel={zoomLevel}
+                language={rendererLanguage}
+                error={pageLoadError}
+                onRetry={() => setPageLoadAttempt(attempt => attempt + 1)}
+              />
             ) : pageData ? (
               <PageRenderer 
                 key={`single-${currentPage}-${readOnlyExperiment ? 'preview-only' : 'editable'}-${reviewEditorItemKey ?? 'view'}`}
@@ -2577,7 +2737,7 @@ function App() {
                 isAdmin={isAdmin}
                 showRuler={isAdmin && isRulerVisible}
                 layoutMode={isAdmin && isLayoutMode && !readOnlyExperiment}
-                onLayoutDirtyChange={setIsLayoutDirty}
+                onLayoutDirtyChange={handleLayoutDirtyChange}
                 zoomLevel={zoomLevel}
                 focalZoomEnabled
                 focalZoomAnchor={focalZoomAnchor}
@@ -2636,10 +2796,7 @@ function App() {
           /* ── Continuous Scroll Mode ── */
           <div className="scroll-container">
             {isLoading ? (
-              <div className="loading-spinner">
-                <div className="spinner"></div>
-                <p>Loading all pages...</p>
-              </div>
+              <span className="page-skeleton-sr-only" role="status">{rendererLanguage === 'pt-BR' ? 'Carregando páginas' : 'Loading pages'}</span>
             ) : null}
             {Array.from({ length: TOTAL_PAGES }, (_, i) => i + 1).map(num => (
               <div id={`page-${num}`} key={num} className="scroll-page-wrapper">
@@ -2668,7 +2825,21 @@ function App() {
                     onEditorOpenChange={handleEditorOpenChange}
                   />
                 ) : (
-                  <div className="placeholder-page" style={{ height: 1100 * zoomLevel, width: 820 * zoomLevel, background: '#111' }}></div>
+                  scrollPageErrors.has(num) ? (
+                    <div className="scroll-page-error" style={{ height: 820.346 * zoomLevel, width: 820.346 * zoomLevel }}>
+                      <span>{rendererLanguage === 'pt-BR' ? `Falha ao carregar a página ${num}.` : `Page ${num} failed to load.`}</span>
+                      <button type="button" onClick={() => {
+                        setScrollPageErrors(errors => { const next = new Map(errors); next.delete(num); return next; });
+                        void loadPageData(num).then(data => setScrollPages(pages => new Map(pages).set(num, data))).catch(error => {
+                          setScrollPageErrors(errors => new Map(errors).set(num, error instanceof Error ? error.message : 'Falha ao carregar a página.'));
+                        });
+                      }}>{rendererLanguage === 'pt-BR' ? 'Tentar novamente' : 'Retry'}</button>
+                    </div>
+                  ) : (
+                    <div className="placeholder-page scroll-page-skeleton" aria-busy="true" style={{ height: 820.346 * zoomLevel, width: 820.346 * zoomLevel }}>
+                      <span className="page-skeleton-sr-only">{rendererLanguage === 'pt-BR' ? `Carregando página ${num}` : `Loading page ${num}`}</span>
+                    </div>
+                  )
                 )}
               </div>
             ))}

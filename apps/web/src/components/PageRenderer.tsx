@@ -1018,14 +1018,40 @@ async function findPayloadTranslation(spanKey: string, lang: string): Promise<an
   return null;
 }
 
+const payloadOverridesCache = new Map<string, { data: Map<string, SpanOverride> | null; expiresAt: number }>();
+const payloadOverridesRequests = new Map<string, Promise<Map<string, SpanOverride> | null>>();
+const payloadOverridesRevisions = new Map<string, number>();
+let payloadOverridesInvalidationSubscribed = false;
+
+function subscribePayloadOverrideInvalidation(): void {
+  if (payloadOverridesInvalidationSubscribed || typeof window === 'undefined') return;
+  payloadOverridesInvalidationSubscribed = true;
+  window.addEventListener(LOCAL_PERSISTENCE_CHANGED_EVENT, (event: Event) => {
+    const detail = (event as CustomEvent<{ language?: string }>).detail;
+    if (!detail?.language) return;
+    payloadOverridesRevisions.set(detail.language, (payloadOverridesRevisions.get(detail.language) ?? 0) + 1);
+    payloadOverridesCache.delete(detail.language);
+    payloadOverridesRequests.delete(detail.language);
+  });
+}
+
 async function fetchOverridesFromPayload(lang: string): Promise<Map<string, SpanOverride> | null> {
-  try {
-    const res = await fetch(`${payloadApiUrl('translations')}?where[language][equals]=${lang}&limit=5000`);
-    if (res.ok) {
+  subscribePayloadOverrideInvalidation();
+  const cached = payloadOverridesCache.get(lang);
+  if (cached && cached.expiresAt > Date.now()) return cached.data ? new Map(cached.data) : null;
+  if (cached) payloadOverridesCache.delete(lang);
+  const existing = payloadOverridesRequests.get(lang);
+  if (existing) return existing.then(data => data ? new Map(data) : null);
+
+  const revision = payloadOverridesRevisions.get(lang) ?? 0;
+  const request = (async () => {
+    try {
+      const res = await fetch(`${payloadApiUrl('translations')}?where[language][equals]=${lang}&limit=5000`);
+      if (!res.ok) throw new Error(`Override request failed with HTTP ${res.status}`);
       const data = await res.json();
       const map = new Map<string, SpanOverride>();
       data.docs.forEach((doc: any) => {
-        const decoded=decodeOverrideData(doc.data);
+        const decoded = decodeOverrideData(doc.data);
         if (!decoded) return;
         const uiSpanKey = clientSpanKey(doc.spanKey, lang);
         map.set(uiSpanKey, {
@@ -1034,12 +1060,22 @@ async function fetchOverridesFromPayload(lang: string): Promise<Map<string, Span
           bbox: [0, 0, 0, 0],
         });
       });
+      if ((payloadOverridesRevisions.get(lang) ?? 0) === revision) {
+        payloadOverridesCache.set(lang, { data: map, expiresAt: Date.now() + 30_000 });
+      }
       return map;
+    } catch (err) {
+      console.warn('Failed to fetch from payload:', err);
+      if ((payloadOverridesRevisions.get(lang) ?? 0) === revision) {
+        payloadOverridesCache.set(lang, { data: null, expiresAt: Date.now() + 3000 });
+      }
+      return null;
     }
-  } catch (err) {
-    console.warn('Failed to fetch from payload:', err);
-  }
-  return null;
+  })().finally(() => {
+    if (payloadOverridesRequests.get(lang) === request) payloadOverridesRequests.delete(lang);
+  });
+  payloadOverridesRequests.set(lang, request);
+  return request.then(data => data ? new Map(data) : null);
 }
 
 async function deleteOverrideFromPayload(spanKey: string, lang: string): Promise<boolean> {
@@ -1659,8 +1695,19 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
     onExperimentalUnitSelect?.(selectedSpan?.spanKey ?? null);
   }, [onExperimentalUnitSelect, selectedSpan?.spanKey]);
 
-  const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => isolatedSnapshot ? new Map() : loadLocalOverrides(language));
-  const [overridesLoadedLanguage, setOverridesLoadedLanguage] = useState<string | null>(null);
+  const [overrides, setOverrides] = useState<Map<string, SpanOverride>>(() => {
+    if (isolatedSnapshot) return new Map();
+    const local = loadLocalOverrides(language);
+    const cached = payloadOverridesCache.get(language);
+    if (cached && cached.expiresAt > Date.now() && cached.data) {
+      cached.data.forEach((override, key) => local.set(key, override));
+    }
+    return local;
+  });
+  const [overridesLoadedLanguage, setOverridesLoadedLanguage] = useState<string | null>(() => {
+    const cached = payloadOverridesCache.get(language);
+    return isolatedSnapshot || (cached && cached.expiresAt > Date.now()) ? language : null;
+  });
   const [payloadOverrides, setPayloadOverrides] = useState<Map<string, SpanOverride> | null>(null);
   const [payloadOverrideReadState, setPayloadOverrideReadState] = useState<'loading' | 'available' | 'unavailable'>('loading');
   const [overrideSyncStates, setOverrideSyncStates] = useState<Map<string, LocalSyncState | 'sync_error'>>(new Map());
@@ -2856,6 +2903,13 @@ export const PageRenderer: React.FC<PageRendererProps> = ({
               zIndex: 1, pointerEvents: 'none', userSelect: 'none',
             }}
           />
+        )}
+
+        {!overridesReady && (
+          <div className="page-translation-skeleton" aria-busy="true" role="status">
+            <span className="page-skeleton-sr-only">{language === 'pt-BR' ? 'Preparando a tradução da página' : 'Preparing page content'}</span>
+            {Array.from({ length: 18 }, (_, index) => <i key={index} style={{ width: `${39 + ((index * 19) % 49)}%` }} />)}
+          </div>
         )}
 
 
