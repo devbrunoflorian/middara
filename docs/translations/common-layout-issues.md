@@ -1047,3 +1047,12 @@ Quando o número e o início do texto compartilham a primeira linha-fonte, mas a
 **Correção:** quando a fonte comprovar rótulos independentes, crie uma unidade-filha editável para cada rótulo, vinculada à linha e caixa-fonte correspondentes. Centralize cada moldura local no eixo do rótulo-fonte/card, preserve tipografia e cores, e mantenha a tradução-pai antiga como fallback recuperável até todas as filhas estarem salvas. Não aplique a separação quando o OG mostrar uma frase contínua ou quando as palavras pertencerem a uma única legenda. Meça cada filha e compare a página inteira no Viewer e no PDF.
 
 **Caso verificado na p.29 (2026-11-23):** `WEAPON`, `ARMOR` e `CORE` estavam em três caixas-fonte acima de três cards, mas a tradução `ARMA / ARMADURA / NÚCLEO` era uma unidade única. Três unidades-filhas foram publicadas (`ARMA`, `ARMADURA`, `NÚCLEO`), mantendo OptimaLTStd-Bold 9 pt branca; `UNIVERSAL` permaneceu em sua unidade própria. Copyfit V3 mediu 1/1 linha por rótulo em 100% e 200%. A exportação persistida passou `pdfVerification=true`; OG, Viewer e PDF confirmaram centralização independente sem clipping ou colisão. A aprovação agrupada anterior permaneceu salva como fallback.
+
+
+## Ênfase em negrito perdida em uma tradução rica
+
+**Sintoma:** uma palavra ou expressão que está em negrito no OG aparece regular no PT-BR, mesmo quando o sentido foi traduzido corretamente. Uma unidade rica longa pode esconder a diferença quando o texto é revisado apenas como prosa simples.
+
+**Correção:** compare cada trecho enfatizado no PDF OG com o equivalente semântico no PT-BR e confira os segmentos ricos do Payload. Aplique o peso de fonte somente ao trecho correspondente; preserve o texto, a caixa e os pesos dos trechos vizinhos. Reexporte a página e confirme Copyfit, Viewer/print e PDF. Não transforme o destaque local em negrito global para a unidade.
+
+**Caso verificado na p.79 (2026-11-27):** `any` aparecia em negrito na frase-fonte sobre Pré-requisitos Adicionais, mas “algum” estava regular. O segmento foi dividido e “algum” passou a `OptimaLTStd-Bold` 10 pt. O texto e a geometria ficaram iguais; Copyfit permaneceu UNDER 6/5, Viewer e print mantiveram 259 linhas, e a página fresca foi incorporada pixel a pixel. A revisão global da p.79 permanece aberta até reconciliar o transcript bruto do OG.
